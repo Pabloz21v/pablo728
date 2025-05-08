@@ -1,0 +1,87 @@
+body {
+    background-color: #000000; /* Fondo negro */
+    color: #00FF00; /* Texto verde */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #00FF00; /* Fondo verde */
+    color: #000000; /* Texto negro */
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+a:hover {
+    background-color: #008000; /* Fondo verde oscuro al pasar el mouse */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1, h2 {
+    color: #00FF00; /* Títulos en verde */
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-light {
+    background-color: #007bff;
+    color: white;
+}
+
+.button-light:hover {
+    background-color: #0056b3;
+}
+
+.button-dark {
+    background-color: #343a40;
+    color: white;
+}
+
+.button-dark:hover {
+    background-color: #23272b;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark-mode .button-light {
+    background-color: #6c757d;
+}
+
+.dark-mode .button-light:hover {
+    background-color: #5a6268;
+}
+
+.dark-mode .button-dark {
+    background-color: #495057;
+}
+
+.dark-mode .button-dark:hover {
+    background-color: #343a40;
+}
