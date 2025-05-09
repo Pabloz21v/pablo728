@@ -11,9 +11,6 @@
       <h1 class="text-2xl font-bold">
         Teoría de Manipulación y Preservación de Datos - Sesión 2
       </h1>
-      <p class="mt-4">
-        Aquí va el contenido de la teoría de la sesión 2 de la materia.
-      </p>
 
       <div class="mt-6">
         <a
@@ -25,6 +22,375 @@
           >Ir a Sesión 1</a
         >
         <a href="../index.html" class="btn btn-secondary">Volver al Índice</a>
+      </div>
+      <h1>Sesión 2: "Almacenamiento Moderno y Gestión Segura de Datos"</h1>
+
+      <div class="seccion">
+        <p>
+          <strong>Objetivo:</strong> Profundizar en tecnologías de
+          almacenamiento, sistemas de archivos, compresión de datos y seguridad.
+        </p>
+      </div>
+
+      <div class="seccion">
+        <h2>Contenido Teórico</h2>
+
+        <div class="subseccion">
+          <h3>1. Tipos de Almacenamiento Moderno</h3>
+
+          <h4>a) Almacenamiento físico</h4>
+          <ul>
+            <li>
+              <strong>HDD (Disco Duro Mecánico):</strong>
+              <ul>
+                <li>
+                  Funcionamiento: Platos magnéticos giratorios y cabezales de
+                  lectura/escritura.
+                </li>
+                <li>
+                  Ventajas: Bajo costo por GB, ideal para almacenamiento masivo
+                  (ejemplo: servidores de respaldo).
+                </li>
+                <li>
+                  Desventajas: Vulnerable a golpes, menor velocidad (promedio:
+                  120 MB/s), consumo de energía elevado.
+                </li>
+                <li>Ejemplo: Discos externos para respaldos domésticos.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>SSD (Disco de Estado Sólido):</strong>
+              <ul>
+                <li>
+                  Funcionamiento: Chips de memoria flash (NAND) sin partes
+                  móviles
+                </li>
+                <li>
+                  Ventajas: Velocidad superior (hasta 550 MB/s en SATA, 3500
+                  MB/s en NVMe), resistencia a impactos.
+                </li>
+                <li>
+                  Desventajas: Costo más alto (son más caros), vida útil
+                  limitada por ciclos de escritura.
+                </li>
+                <li>
+                  Ejemplo: Laptops portátiles (ejemplo: PC gamer ACER i5 con SSD
+                  NVMe).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Memorias USB y tarjetas SD:</strong>
+              <ul>
+                <li>
+                  Usos comunes: Transferencia de archivos pequeños (documentos,
+                  fotos).
+                </li>
+                <li>
+                  Limitaciones: Baja durabilidad (soportan ~10,000 ciclos de
+                  escritura).
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <h4>b) Almacenamiento en la nube</h4>
+          <ul>
+            <ul>
+              <li>
+                Funcionamiento: Datos guardados en servidores remotos
+                gestionados por terceros (ejemplo: Google, Amazon).
+              </li>
+            </ul>
+            <li>
+              Tipos de nube:
+              <ul>
+                <li>
+                  Pública: Servicios compartidos (ejemplo: Google Drive,
+                  Dropbox).
+                </li>
+                <li>
+                  Privada: Infraestructura dedicada (ejemplo: servidores
+                  empresariales).
+                </li>
+                <li>
+                  Híbrida: Combinación de ambas (ejemplo: Microsoft Azure).
+                </li>
+              </ul>
+            </li>
+            <li>
+              Ventajas:
+              <ul>
+                <li>
+                  Acceso multiplataforma (ejemplo: editar un documento en el
+                  celular y continuar en la PC).
+                </li>
+                <li>
+                  Respaldos: Copias automáticas en múltiples servidores
+                  (ejemplo: AWS S3).
+                </li>
+              </ul>
+            </li>
+            <li>
+              Riesgos:
+              <ul>
+                <li>
+                  Cifrado: Los datos deben cifrarse en tránsito (HTTPS) y en
+                  reposo (AES-256).
+                </li>
+                <li>
+                  Ejemplo de vulnerabilidad: Filtración de fotos de iCloud
+                  (2014) por contraseñas débiles.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="subseccion">
+          <h2>Sistemas de Archivos y Organización</h2>
+          <h3>a) Sistemas de archivos:</h3>
+          <ul>
+            <li>
+              <strong> FAT32:</strong>
+              <ul>
+                <li>
+                  Usos: Dispositivos portátiles (USB), compatible con todos los
+                  sistemas operativos, más adecuado para dispositivos de menor
+                  capacidad.
+                </li>
+                <li>
+                  Limitaciones: Tamaño máximo de archivo: 4 GB (no apto para
+                  videos 4K).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong> NTFS (Windows):</strong>
+              <ul>
+                <li>
+                  Ventajas: Soporta archivos grandes (hasta 16 TB), permisos de
+                  seguridad, más apropiado para discos de mayor capacidad.
+                </li>
+                <li>Ejemplo: Discos duros internos de PC con Windows.</li>
+              </ul>
+            </li>
+            <li>
+              <strong> exFAT:</strong>
+              <ul>
+                <li>
+                  Usos: Dispositivos externos modernos (ejemplo: SSD portátil).
+                </li>
+                <li>
+                  Ventajas: Sin límite de tamaño de archivo, compatible con
+                  Windows y macOS.
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <p>
+            Video explicativo:
+            <a href="https://www.youtube.com/watch?v=mVLlPIyvxkY"
+              >"Rendimiento HDD Vs. SSD SATA Vs. SSD NVMe y otras
+              diferencias"</a
+            >
+          </p>
+        </div>
+
+        <div class="subseccion">
+          <h3>3. Compresión de Archivos</h3>
+          <ul>
+            <li>
+              <strong>Sin pérdida:</strong>
+              <h4>
+                Algoritmos: Eliminan redundancias sin perder calidad (ejemplo:
+                ZIP, 7-Zip).
+              </h4>
+              <ul>
+                <li>ZIP: Usado para documentos y carpetas.</li>
+                <li>
+                  FLAC: Audio sin pérdida (ejemplo: archivos de música de alta
+                  fidelidad).
+                </li>
+              </ul>
+              <h4>Herramientas modernas:</h4>
+              <ul>
+                <li>7-Zip: Mayor tasa de compresión que ZIP (formato .7z).</li>
+                <li>WinRAR: Soporta cifrado AES-256.</li>
+              </ul>
+            </li>
+            
+            
+          </ul>
+          <ul>
+<li>
+<strong>Compresión con pérdida:</strong>
+           
+            <li>
+              
+              <ul>
+                <li>Algoritmos: Reducen calidad para minimizar tamaño (ejemplo:
+                JPEG, MP3).</li>
+                <li>JPEG: Ideal para fotos web (balance calidad-tamaño).</li>
+                <li>
+                  MP3: Elimina frecuencias inaudibles para el oído humano.
+                </li>
+              </ul>
+              <h4>• Casos prácticos:</h4>
+              <ul>
+                <li> Subir una foto a Instagram (JPEG comprimido).</li>
+                <li>
+                   Streaming de música en Spotify (calidad ajustada según
+                  conexión).
+                </li>
+              </ul>
+            </li>
+            </li>
+          </ul>
+        </div>
+
+        <div class="subseccion">
+          <h3>4. Seguridad en la Gestión de Datos</h3>
+          <ul>
+            <li>
+              <strong>a) Contraseñas fuertes:</strong>
+              <ul>
+                <li>
+                  Requisitos: Mínimo 12 caracteres, combinando mayúsculas,
+                  minusculas, números y símbolos (ejemplo: "T3cN0$2024!").
+                </li>
+                <li>
+                  Herramientas: Gestores de contraseñas (ejemplo: 1Password,
+                  Lastpass, Bitwarden). Video de ejemplo:
+                </li>
+                <p>
+                  Video Proteger datos:
+                  <a href="https://www.youtube.com/watch?v=IdCeB1e6K_w"
+                    >"1Password vs Lastpass"</a
+                  >
+                </p>
+              </ul>
+            </li>
+            <li>
+              <strong>b) Cifrado de archivos:</strong>
+              <ul>
+                <li>
+                  Cifrado simétrico: Misma clave para cifrar y descifrar
+                  (ejemplo: AES-256 en VeraCrypt).
+                </li>
+                <li>
+                  Cifrado asimétrico: Clave pública y privada (ejemplo: PGP para
+                  correos electrónicos).
+                </li>
+
+                <li>
+                  Ejemplo práctico: Crear un contenedor cifrado con VeraCrypt
+                  para guardar documentos sensibles.
+                </li>
+                <p>
+                  Video cifrado:
+                  <a href="https://www.youtube.com/watch?v=Q7HPRUlRrQw"
+                    >"Veracrypt: Encripta tus pendrive o discos externos GRATIS"
+                  </a>
+                </p>
+              </ul>
+              
+            </li>
+            <li><strong>c) Copias de seguridad (Backup):</strong>
+              <ul>
+                <li>3 copias totales.</li>
+                <li>2 medios diferentes (ejemplo: HDD + nube).</li>
+                <li>
+                  1 copia fuera del sitio (ejemplo: en casa de un familiar).
+                </li>
+              </ul></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>Cierre y Reflexión</h2>
+        <blockquote>
+          "¿Es ético que las empresas guarden nuestros datos en la nube sin
+          consentimiento explícito?"
+        </blockquote>
+        <p>Ejemplo: El uso de datos de Facebook.</p>
+        <p>
+          Reflexiona sobre la importancia de la privacidad y la seguridad en la
+          era digital. ¿Qué medidas tomas para proteger tus datos personales?
+        </p>
+      </div>
+
+      <div class="seccion">
+        <h2>Actividades Prácticas</h2>
+
+        <div class="subseccion">
+          <h3>Actividad 1: "Organización y Compresión en la Nube"</h3>
+          <h3><strong>Tarea</strong></h3>
+          <p>
+            1) Crear una cuenta en Google Drive, crear carpetas y subcarpetas
+            para tener organizada tu información, guardar algunos archivos en
+            forma de práctica, documentos de texto, excel, imágenes, etc.
+          </p>
+          <h3><strong>Ejemplo de organización jerárquica:</strong></h3>
+          <div class="estructura-carpetas">
+            /Proyectos<br />
+            ├── /Trabajos Escolares<br />
+            │ ├── /Matemáticas<br />
+            │ └── /Historia<br />
+            └── /Multimedia<br />
+            ├── /Fotos<br />
+            └── /Videos
+          </div>
+          <h3>Consejos:</h3>
+          <ul>
+            <li>Nombres claros (evitar "Documento1.docx").</li>
+            <li>
+              Usar fechas en formatos estandarizados (ejemplo:
+              "2024-08-30_Informe.pdf").
+            </li>
+          </ul>
+
+          <p>
+            2) Comprimir una carpeta con 5 archivos (mix de JPEG y PDF) usando
+            7-Zip, winzip o winrar, subir el archivo comprimido a Drive.
+            Comparar tamaños antes y después de la compresión.
+          </p>
+          <p>
+            3) Volver a descargar alguno de los archivos que guardaste en Google
+            Drive e identificar donde se guardaron en tu pc o dispositivo móvil.
+          </p>
+        </div>
+
+        <div class="subseccion">
+          <h3>Actividad 2: "Simulación de Ataque y Recuperación"</h3>
+          <ul>
+            <li>
+              Escenario: Un "hacker" borra archivos críticos de una carpeta
+              compartida.
+            </li>
+            <li>
+              Objetivo: Usar la papelera de Google Drive para restaurar los
+              datos.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>Materiales Adicionales</h2>
+        <ul>
+          <br>
+          <li><a href="https://www.7-zip.org/">Descargar 7-Zip</a></li>
+          <br>
+          <li><a href="https://winrar.es/descargas">Descargar WinRAR</a></li>
+          <br>
+          <li>
+            <a href="https://www.winzip.com/es/download/winzip/"
+              >Descargar WinZip</a
+            >
+          </li>
+        </ul>
       </div>
     </div>
   </body>
