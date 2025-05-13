@@ -1,32 +1,343 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/styles.css" rel="stylesheet">
-    <title>Materia 4 - Sesión 1</title>
-</head>
-<body class="bg-white text-black dark:bg-gray-800 dark:text-white">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <title>7° Mantenimiento de Hardware - Sesión 1</title>
+  </head>
+  <body class="bg-white text-black">
     <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold">Teoría de la Materia 4 - Sesión 1</h1>
-        <p class="mt-4">Aquí va el contenido de la teoría de la sesión 1 de la materia 4.</p>
-        
-        <div class="mt-6">
-            <h2 class="text-xl font-semibold">Contenido Adicional</h2>
-            <p>Descripción o detalles adicionales sobre la sesión.</p>
+      <h1 class="text-2xl font-bold">
+        Teoría de Mantenimiento de Hardware - Sesión 1
+      </h1>
+
+      
+
+      <div class="mt-6">
+        <a href="materia4-sesion2.html" class="btn btn-primary"
+          >Ir a Sesión 2</a
+        >
+        <a href="../materias/mantenimiento-de-hardware.html" class="btn btn-secondary"
+          >Volver a Materia</a
+        >
+      </div>
+      <h1>Sesión 1: "Introducción al Hardware y Componentes Básicos"</h1>
+<div class="seccion">
+        <p>
+          <strong>Objetivo:</strong> Identificar componentes básicos de una computadora y comprender su función.
+        </p>
+      </div>
+
+      <!-- Componentes Principales -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4 text-green-400">💻 Componentes Principales</h2>
+
+            <!-- CPU -->
+            <div class="mb-6 p-4 bg-gray-800 rounded-lg">
+                <h3 class="text-xl font-medium mb-3">1. CPU (Unidad Central de Procesamiento)</h3>
+                <div class="space-y-2">
+                    <p><strong class="text-green-300">Funcionalidad:</strong> Ejecuta instrucciones de programas y coordina operaciones del sistema</p>
+                    <p><strong class="text-green-300">Ejemplo práctico:</strong> Realiza cálculos matemáticos para abrir un programa o renderizar un video.</p>
+                    <div class="bg-gray-900 p-3 rounded">
+                        <p class="text-green-400">🧠 Analogía: Es el "cerebro" de la computadora</p>
+                    </div>
+                </div>
+            </div>
+<br>
+
+            <!-- RAM -->
+            <div class="mb-6 p-4 bg-gray-800 rounded-lg">
+                <h3 class="text-xl font-medium mb-3">2. RAM (Memoria de Acceso Aleatorio)</h3>
+                <div class="space-y-2">
+                    <p><strong class="text-green-300">Funcionalidad:</strong> Almacenamiento temporal: Guarda datos en uso para acceso rápido (ej: archivos abiertos, aplicaciones en ejecución).</p>
+                    <p><strong class="text-green-300">Ejemplo práctico:</strong>  Si abres Chrome con 20 pestañas, la RAM mantiene esos datos activos para evitar lentitud.</p>
+                    <div class="bg-gray-900 p-3 rounded">
+                        <p class="text-green-400"> Analogía: "Memoria a corto plazo" del sistema</p>
+                    </div>
+                </div>
+            </div>
+<br>
+            <!-- Placa Madre (Motherboard) -->
+            <div class="mb-6 p-4 bg-gray-800 rounded-lg">
+                <h3 class="text-xl font-medium mb-3">3. Placa Madre (Motherboard)</h3>
+                <div class="space-y-2">
+                    <p><strong class="text-green-300">Funcionalidad:</strong> Conexión de componentes: Alberga CPU, RAM, GPU y otros dispositivos mediante puertos (USB, PCIe, SATA).</p>
+                    <p><strong class="text-green-300"></strong>  Gestión de energía y comunicación: Distribuye energía y permite que los componentes interactúen.</p>
+                    <div class="bg-gray-900 p-3 rounded">
+                        <p class="text-green-400">  Analogía: Es el "sistema nervioso" que conecta todas las partes del cuerpo.</p>
+                    </div>
+                </div>
+            </div>
+<br>
+            <!-- GPU (Unidad de Procesamiento Gráfico) -->
+            <div class="mb-6 p-4 bg-gray-800 rounded-lg">
+                <h3 class="text-xl font-medium mb-3">4. GPU (Unidad de Procesamiento Gráfico)</h3>
+                <div class="space-y-2">
+                    <p><strong class="text-green-300">Funcionalidad:</strong> Procesamiento gráfico: Renderiza imágenes, videos y juegos.</p>
+                    <p><strong class="text-green-300">Tipos:</strong>
+</p>            <ul class="list-disc pl-6">
+                  <li>	Integrada: en laptops básicas.
+</li>
+                  <li>Dedicada: para alto rendimiento.</li>
+                </ul>
+                    <div class="bg-gray-900 p-3 rounded">
+                        <p class="text-green-400"> Analogía: Es el "artista" que pinta todo lo que ves en pantalla.</p>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+          <!-- 5. Almacenamiento (SSD vs HDD) -->
+            <div class="mb-6 p-4 bg-gray-800 rounded-lg">
+                <h3 class="text-xl font-medium mb-3">5. Almacenamiento (SSD vs HDD)</h3>
+                <div class="space-y-2">
+                    <p><strong class="text-green-300">Funcionalidad:</strong> •	Almacenamiento permanente: Guarda datos a largo plazo (SO, archivos, programas).</p>
+                    <p><strong class="text-green-300"></strong> Diferencias clave:
+                    
+                    </p>
+                    <ul class="list-disc pl-6">
+                  <li>	SSD: Sin partes móviles, rápido, resistente a golpes.
+</li>
+                  <li>HDD: Discos magnéticos giratorios, mayor capacidad por menor precio.</li>
+                </ul>
+                    <p><strong class="text-green-300">Ejemplo práctico:</strong> Un SSD carga Windows en 10 segundos; un HDD tarda 1 minuto.</p>
+                                        
+                    
+                    <div class="bg-gray-900 p-3 rounded">
+                        <p class="text-green-400">  Analogía: 
+                      </p>
+                       <ul class="list-disc pl-6">
+                  <li>	SSD: Como un archivador digital ultrarrápido.
+</li>
+                  <li>HDD: Como una biblioteca grande pero más lenta.</li>
+                </ul>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <!-- Fuente de Alimentación (PSU) -->
+            <div class="mb-6 p-4 bg-gray-800 rounded-lg">
+              <h3 class="text-xl font-medium mb-3">6. Fuente de Alimentación (PSU)</h3>
+              <div class="space-y-2">
+                <p><strong class="text-green-300">Funcionalidad:</strong></p>
+                <ul class="list-disc pl-6">
+                  <li>Conversión de energía: Transforma la corriente alterna (AC) en corriente continua (DC) para alimentar componentes.</li>
+                  <li>Distribución segura: Proporciona voltajes estables (+12V, +5V, +3.3V) a la placa madre, GPU, y otros dispositivos.</li>
+                </ul>
+                <p><strong class="text-green-300">Ejemplo práctico:</strong> Una GPU como la RTX 4070 necesita un cable PCIe de 12V dedicado para funcionar.</p>
+                <div class="bg-gray-900 p-3 rounded">
+                  <p class="text-green-400">Analogía: Es el "corazón" que bombea energía a todo el sistema.</p>
+                </div>
+                <p><strong class="text-green-300">Confusión común:</strong></p>
+                <ul class="list-disc pl-6">
+                  <li>"¿Más vatios = mejor rendimiento?" No. Una fuente debe ajustarse al consumo total de los componentes (ej: 500W para PCs básicas, 850W para gaming).</li>
+                </ul>
+              </div>
+            </div>
+            <br>
+
+            <!-- Refrigeración -->
+            <div class="mb-6 p-4 bg-gray-800 rounded-lg">
+              <h3 class="text-xl font-medium mb-3">7. Refrigeración</h3>
+              <div class="space-y-2">
+                <p><strong class="text-green-300">Tipos:</strong></p>
+                <ul class="list-disc pl-6">
+                  <li>Refrigeración por aire</li>
+                  <li>Refrigeración líquida</li>
+                </ul>
+                <p><strong class="text-green-300">Funcionalidad:</strong> Control térmico: Disipa el calor generado por la CPU/GPU para evitar thermal throttling (reducción de rendimiento por sobrecalentamiento).</p>
+                <p><strong class="text-green-300">Ejemplo práctico:</strong> Un procesador como el Ryzen 9 7950X requiere refrigeración líquida para mantener temperaturas óptimas.</p>
+                <div class="bg-gray-900 p-3 rounded">
+                  <p class="text-green-400">Analogía: Es el "sistema de aire acondicionado" de la computadora.</p>
+                </div>
+                <p><strong class="text-green-300">Confusión común:</strong></p>
+                <ul class="list-disc pl-6">
+                  <li>"¿La refrigeración líquida es siempre mejor que la de aire?" No. Depende del uso: líquida para overclocking extremo; aire para la mayoría de usuarios.</li>
+                </ul>
+              </div>
+            </div>
+            <br>
+
+            <!-- Gabinete (Case) -->
+            <div class="mb-6 p-4 bg-gray-800 rounded-lg">
+              <h3 class="text-xl font-medium mb-3">8. Gabinete (Case)</h3>
+              <div class="space-y-2">
+                <p><strong class="text-green-300">Funcionalidad:</strong></p>
+                <ul class="list-disc pl-6">
+                  <li>Protección física: Alberga componentes y los protege de polvo/golpes.</li>
+                  <li>Gestión térmica: Diseño con ventiladores y flujo de aire para mantener temperaturas bajas.</li>
+                </ul>
+                <p><strong class="text-green-300">Ejemplo práctico:</strong> Un gabinete con frente mallado permite mayor entrada de aire para refrigeración.</p>
+                <div class="bg-gray-900 p-3 rounded">
+                  <p class="text-green-400">Analogía: Es la "casa" donde viven todos los componentes.</p>
+                </div>
+                <p><strong class="text-green-300">Confusión común:</strong></p>
+                <ul class="list-disc pl-6">
+                  <li>"¿Un gabinete grande siempre es mejor?" No. Debe priorizar compatibilidad (ej: placas madre ATX vs ITX) y flujo de aire.</li>
+                </ul>
+              </div>
+            </div>
+            <br>
+
+            <!-- 9. Periféricos -->
+            <div class="mb-6 p-4 bg-gray-800 rounded-lg">
+              <h3 class="text-xl font-medium mb-3">9. Periféricos</h3>
+              <div class="space-y-2">
+                <p><strong class="text-green-300">Tipos :</strong></p>
+                <ul class="list-disc pl-6">
+                  <li>•	Teclado</li>
+                  <li>•	Teclado</li>
+                <li>•	Monitor</li>
+                <li>•	Casco / Auriculares</li>
+                </ul>
+                <p><strong class="text-green-300">Funcionalidad:</strong> •	Interacción humano-PC: Permiten entrada/salida de datos (ej: escribir, navegar, ver contenido).</p>
+                <div class="bg-gray-900 p-3 rounded">
+                  <p class="text-green-400">Analogía:: Son los "sentidos" que conectan al usuario con la máquina.</p>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <!-- 10. Tarjetas de Expansión -->
+            <div class="mb-6 p-4 bg-gray-800 rounded-lg">
+              <h3 class="text-xl font-medium mb-3">10. Tarjetas de Expansión</h3>
+              <div class="space-y-2">
+                <ul class="list-disc pl-6">
+                  <li>Tarjeta de Sonido</li>
+                  <li>Tarjeta de Red: o	TP-Link TX301: WiFi 6 y Ethernet 2.5G para conexiones rápidas.</li>
+                  <li>	Capturadora de Video</li>
+                </ul>
+                <p><strong class="text-green-300">Funcionalidad:</strong></p>
+                <ul class="list-disc pl-6">
+                  <li>	Añadir funcionalidades específicas: Mejorar audio, conectividad, o capacidad de transmisión.</li>
+                </ul>
+                <p><strong class="text-green-300">Ejemplo práctico:</strong> Una tarjeta WiFi 6 permite velocidades de hasta 2400 Mbps en redes inalámbricas.</p>
+                <div class="bg-gray-900 p-3 rounded">
+                  <p class="text-green-400">Analogía: Son los "accesorios especializados" que potencian habilidades específicas.</p>
+                </div>
+                
+                
+              </div>
+            </div>
+            <br>
+
+            <!-- Tabla 1 Resumen Funcional -->
+            <div class="overflow-x-auto mb-8">
+                <table class="min-w-full bg-gray-900">
+                    <thead class="bg-green-800">
+                        <tr>
+                            <th class="p-3 text-left">Componente</th>
+                            <th class="p-3 text-left">Procesamiento</th>
+                            <th class="p-3 text-left">Almacenamiento</th>
+                            <th class="p-3 text-left">Gráficos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-green-900">
+                            <td class="p-3">CPU</td>
+                            <td>✔️ (Cálculos generales)</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                        </tr>
+                        <tr class="border-b border-green-900">
+                            <td class="p-3">RAM</td>
+                            <td>❌</td>
+                            <td>✔️ (Temporal)</td>
+                            <td>❌</td>
+                        </tr>
+                        <tr class="border-b border-green-900">
+                            <td class="p-3">GPU</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>✔️ (Renderizado)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+<br>
+            <!-- Tabla 2 Resumen Funcional -->
+            <div class="overflow-x-auto mb-8">
+              <table class="min-w-full bg-gray-900">
+                <thead class="bg-green-800">
+                  <tr>
+                    <th class="p-3 text-left">Componente</th>
+                    <th class="p-3 text-left">Función Principal</th>
+                    <th class="p-3 text-left">Ejemplo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-green-900">
+                    <td class="p-3">Fuente de Alimentación</td>
+                    <td>Distribuir energía estable y segura</td>
+                    <td>Corsair RM850x para PCs gaming</td>
+                  </tr>
+                  <tr class="border-b border-green-900">
+                    <td class="p-3">Refrigeración</td>
+                    <td>Controlar temperatura del sistema</td>
+                    <td>NZXT Kraken X63 para overclocking</td>
+                  </tr>
+                  <tr class="border-b border-green-900">
+                    <td class="p-3">Gabinete</td>
+                    <td>Proteger y organizar componentes</td>
+                    <td>NZXT H7 Flow para flujo de aire óptimo</td>
+                  </tr>
+                  <tr class="border-b border-green-900">
+                    <td class="p-3">Periféricos</td>
+                    <td>Facilitar interacción usuario-PC</td>
+                    <td>LG UltraGear para gaming fluido</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3">Tarjetas de Expansión</td>
+                    <td>Añadir funciones especializadas</td>
+                    <td>Elgato HD60 X para streaming</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
         </div>
 
-        <div class="mt-6">
-            <a href="materia4-sesion2.html" class="bg-blue-500 text-white px-4 py-2 rounded">Ir a Sesión 2</a>
-            <a href="../materias/materia4.html" class="bg-green-500 text-white px-4 py-2 rounded ml-2">Volver a Materia 4</a>
+        <!-- Material Didáctico -->
+        <div class="mb-8 p-4 bg-gray-800 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4">📚 Material Didáctico</h2>
+            <ul class="list-disc pl-6 space-y-2">
+                <li><a href="https://www.youtube.com/watch?v=XfOV1Q6rGwA" class="text-green-400 hover:underline">Video: Ensamblaje de una PC</a></li>
+                <li><a href="https://pcpartpicker.com/" class="text-green-400 hover:underline">Web PCPartPicker</a></li>
+              <li><a href="https://www.youtube.com/watch?v=iLskLwZCk-8" class="text-green-400 hover:underline">•	Video: Guía armado de pc con PCPartPicker</a></li>
+            </ul>
         </div>
+
+        <!-- Actividades -->
+        <div class="mb-8 p-4 bg-gray-800 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4">🔨 Actividades</h2>
+            <div class="space-y-4">
+                <div class="p-4 bg-gray-900 rounded">
+                    <h3 class="font-medium text-green-400">Ensamblaje simulado</h3>
+                    <ul class="list-decimal pl-6 mt-2">
+                      <li>Clasificar componentes físicos en categorías (procesamiento, almacenamiento, gráficos).</li>
+                        <li>Usar PCPartPicker para simular armado de PC</li>
+                        <li>Comparar SSD NVMe vs HDD en velocidad y costo usando hojas técnicas</li>
+                        <li>	Debate: ¿Es viable reemplazar todos los HDD por SSD en empresas grandes?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarea y Reflexión -->
+        <div class="grid gap-4 md:grid-cols-2">
+            <div class="p-4 bg-gray-800 rounded-lg border border-green-800">
+                <h3 class="text-lg font-semibold mb-2">📝 Tarea</h3>
+                <p>¿Qué es WiFi 6?</p>
+            </div>
+            <div class="p-4 bg-gray-800 rounded-lg border border-green-800">
+                <h3 class="text-lg font-semibold mb-2">💡 Para Pensar</h3>
+                <p>"¿Por qué la RAM no puede reemplazar al almacenamiento SSD/HDD?"</p>
+            </div>
+        </div>
+
     </div>
-
-    <script>
-        // Script para el modo oscuro
-        const toggleDarkMode = () => {
-            document.body.classList.toggle('dark');
-        };
-    </script>
-</body>
+    </div>
+  </body>
 </html>
