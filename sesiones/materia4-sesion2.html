@@ -8,18 +8,461 @@
   </head>
   <body class="bg-white text-black">
     <div class="container mx-auto p-4">
-      <h1 class="text-2xl font-bold">Teoría de Mantenimiento de Hardware - Sesión 2</h1>
-     
+      <h1 class="text-2xl font-bold">
+        Teoría de Mantenimiento de Hardware - Sesión 2
+      </h1>
 
       <div class="mt-6">
-        <a href="../materias/mantenimiento-de-hardware.html" class="btn btn-primary"
-          >Volver a Materia </a
-        >
+        <a
+          href="../materias/mantenimiento-de-hardware.html"
+          class="btn btn-primary"
+          >Volver a Materia
+        </a>
         <a href="../sesiones/materia4-sesion1.html" class="btn btn-secondary"
           >Ir a Sesión 1</a
         >
       </div>
-       <h1>Sesión 2 "Tipos de fallas comunes"</h1>
+
+      <h1 class="text-3xl font-bold text-blue-600 mt-8">
+        Sesión 2: Tipos de fallas comunes y Diagnóstico Inicial
+      </h1>
+
+      <p class="text-lg mt-4">
+        Objetivo:
+        <span class="font-semibold"
+          >Reconocer fallas comunes en hardware y aplicar técnicas básicas de
+          diagnóstico.</span
+        >
+      </p>
+
+      <!-- <hr class="my-6 border-gray-300" /> -->
+      <!-- 1. Tipos de fallas: -->
+      <div class="mt-6">
+        <h2 class="text-2xl font-semibold text-gray-700">
+          1. Tipos de fallas:
+        </h2>
+
+        <div class="mt-4">
+          <h3 class="text-xl font-semibold text-gray-600">
+            a) Fallas Electrónicas
+          </h3>
+          <ul class="list-disc list-inside ml-4 text-gray-800">
+            <li>
+              <span class="font-semibold">Cortocircuitos:</span> Conexión
+              accidental entre dos puntos de un circuito (ej: cables pelados en
+              contacto).
+            </li>
+            <li>
+              <span class="font-semibold">Capacitores hinchados:</span>
+              Componentes electrolíticos que pierden líquido interno por
+              sobrecalentamiento o edad.
+            </li>
+          </ul>
+          <p class="mt-2 text-gray-700">
+            <span class="font-semibold">¿Cómo se producen?</span>
+          </p>
+          <ul class="list-disc list-inside ml-4 text-gray-800">
+            <li>
+              <span class="font-semibold">Cortocircuitos:</span> Mala
+              manipulación de componentes, polvo acumulado, o daños físicos en
+              la placa madre.
+            </li>
+            <li>
+              <span class="font-semibold">Capacitores hinchados:</span>
+              Exposición prolongada a altas temperaturas o voltajes inestables.
+            </li>
+          </ul>
+          <p class="mt-2 text-gray-700">
+            <span class="font-semibold">Síntomas:</span>
+          </p>
+          <ul class="list-disc list-inside ml-4 text-gray-800">
+            <li>
+              La PC no enciende o se apaga repentinamente (cortocircuito).
+            </li>
+            <li>
+              Reinicios aleatorios o errores de sistema (capacitores
+              defectuosos).
+            </li>
+          </ul>
+          <p class="mt-2 text-gray-700">
+            <span class="font-semibold">Herramientas de diagnóstico:</span>
+          </p>
+          <ul class="list-disc list-inside ml-4 text-gray-800">
+            <li>
+              Multímetro: Mide continuidad (para detectar cortos) y voltaje en
+              componentes.
+            </li>
+            <li>
+              Inspección visual: Buscar capacitores hinchados o quemaduras en la
+              placa madre.
+            </li>
+          </ul>
+          <p class="mt-2 text-gray-700">
+            <span class="font-semibold">Solución:</span>
+          </p>
+          <ul class="list-disc list-inside ml-4 text-gray-800">
+            <li>
+              Cortocircuito: Reemplazar el componente dañado (ej: Reemplazar la
+              fuente de alimentación).
+            </li>
+            <li>
+              Capacitores hinchados: Soldar nuevos capacitores o cambiar la
+              placa madre.
+            </li>
+          </ul>
+          <p class="mt-4 text-red-600 font-semibold">
+            ¡Importante! Siempre desconecta la PC de la corriente antes de
+            manipular componentes.
+          </p>
+        </div>
+      </div>
+
+      <!-- 2. Tipos de fallas: b) Fallas Mecánicas -->
+      <div class="mt-6">
+        <div class="mt-4">
+          <h3 class="text-xl font-semibold text-gray-600">
+            b) Fallas Mecánicas
+          </h3>
+          <ul class="list-disc list-inside ml-4 text-gray-800">
+            <li>
+              <span class="font-semibold">Ventiladores bloqueados:</span>
+              Acumulación de polvo o desgaste de rodamientos.
+            </li>
+            <li>
+              <span class="font-semibold">HDD con sectores dañados: </span>
+              Errores físicos en el disco magnético por golpes o uso prolongado.
+            </li>
+          </ul>
+          <p class="mt-2 text-gray-700">
+            <span class="font-semibold">¿Cómo se producen?</span>
+          </p>
+          <ul class="list-disc list-inside ml-4 text-gray-800">
+            <li>
+              <span class="font-semibold">Ventiladores:</span> Falta de limpieza
+              o lubricación.
+            </li>
+            <li>
+              <span class="font-semibold">Sectores dañados:</span>: Impactos
+              físicos, apagados bruscos, o edad del disco.
+            </li>
+          </ul>
+          <p class="mt-2 text-gray-700">
+            <span class="font-semibold">Síntomas:</span>
+          </p>
+          <ul class="list-disc list-inside ml-4 text-gray-800">
+            <li>
+              Ruidos fuertes (ventiladores) o "clics" repetitivos (HDD dañado).
+            </li>
+            <li>
+              Lentitud extrema o errores al acceder a archivos (sectores
+              defectuosos).
+            </li>
+          </ul>
+          <p class="mt-2 text-gray-700">
+            <span class="font-semibold">Herramientas de diagnóstico:</span>
+          </p>
+          <ul class="list-disc list-inside ml-4 text-gray-800">
+            <li>
+              CrystalDiskInfo: Software que muestra el estado del HDD/SSD (ej:
+              sectores dañados).
+            </li>
+            <li>
+              Prueba auditiva: Escuchar ruidos anormales en ventiladores o HDD.
+            </li>
+          </ul>
+          <p class="mt-2 text-gray-700">
+            <span class="font-semibold">Solución:</span>
+          </p>
+          <ul class="list-disc list-inside ml-4 text-gray-800">
+            <li>
+              Ventiladores: Limpiar con aire comprimido o reemplazar si están
+              rotos.
+            </li>
+            <li>
+              • HDD dañado: Usar herramientas como HDD Regenerator para reparar
+              sectores o reemplazar el disco.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- c) Fallas Térmicas -->
+      <div class="mt-6">
+        <div class="mt-4">
+          <h3 class="text-xl font-semibold text-gray-600">
+            c) Fallas Térmicas
+          </h3>
+          <ul class="list-disc list-inside ml-4 text-gray-800">
+            <li>
+              <span class="font-semibold"> Overheating:</span> Temperaturas
+              críticas en CPU/GPU (ej: >90°C).
+            </li>
+            <li>
+              <span class="font-semibold"> Thermal throttling:</span>
+              Reducción automática del rendimiento para evitar daños.
+            </li>
+          </ul>
+          <p class="mt-2 text-gray-700">
+            <span class="font-semibold">¿Cómo se producen?</span>
+          </p>
+          <ul class="list-disc list-inside ml-4 text-gray-800">
+            <li>
+              <span class="font-semibold">Ventilación insuficiente:</span>
+              gabinete mal diseñado, polvo acumulado.
+            </li>
+            <li>
+              <span class="font-semibold">Desgaste o mala praxis:</span> Pasta
+              térmica seca o mal aplicada.
+            </li>
+          </ul>
+          <p class="mt-2 text-gray-700">
+            <span class="font-semibold">Síntomas:</span>
+          </p>
+          <ul class="list-disc list-inside ml-4 text-gray-800">
+            <li>Apagados repentinos o pantallas azules (overheating).</li>
+            <li>
+              Bajo rendimiento en juegos o aplicaciones (thermal throttling).
+            </li>
+          </ul>
+          <p class="mt-2 text-gray-700">
+            <span class="font-semibold">Herramientas de diagnóstico:</span>
+          </p>
+          <ul class="list-disc list-inside ml-4 text-gray-800">
+            <li>HWMonitor: Monitorea temperaturas en tiempo real.</li>
+            <li>
+              Cámara térmica: Detecta puntos calientes en componentes
+              (opcional).
+            </li>
+          </ul>
+          <p class="mt-2 text-gray-700">
+            <span class="font-semibold">Solución:</span>
+          </p>
+          <ul class="list-disc list-inside ml-4 text-gray-800">
+            <li>Limpiar ventiladores y disipadores.</li>
+            <li>Reaplicar pasta térmica en CPU/GPU.</li>
+            <li>
+              Mejorar el flujo de aire del gabinete (añadir ventiladores o
+              cambiar a refrigeración líquida).
+            </li>
+          </ul>
+
+          <p class="mt-2 text-gray-700">
+            <span class="font-semibold">Las temperaturas ideales:</span>
+          </p>
+          <ul class="list-disc list-inside ml-4 text-gray-800">
+            <li>CPU: 40-70°C (en carga).</li>
+            <li>GPU: 50-85°C (en carga).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Sección 2: Herramientas de Diagnóstico -->
+      <h2>2. Herramientas de Diagnóstico</h2>
+
+      <h3>a) Software</h3>
+
+      <div class="herramienta">
+        <h4><span class="badge"></span> HWMonitor</h4>
+        <div class="detalle">
+          <strong>Uso:</strong> Monitorear temperaturas, voltajes y velocidades
+          de ventiladores en tiempo real.<br />
+          <div class="ejemplo">
+            <strong>Ejemplo práctico:</strong> Detectar si la CPU alcanza los
+            95°C bajo carga, lo que indica problemas de refrigeración.
+          </div>
+        </div>
+      </div>
+
+      <div class="herramienta">
+        <h4><span class="badge"></span> CrystalDiskInfo</h4>
+        <div class="detalle">
+          <strong>Uso:</strong> Evaluar la salud de discos duros (HDD) y
+          unidades de estado sólido (SSD). Muestra datos SMART (Self-Monitoring,
+          Analysis and Reporting Technology).<br />
+          <div class="ejemplo">
+            <strong>Ejemplo práctico:</strong> Identificar un HDD con 1,200
+            sectores dañados, lo que sugiere reemplazo inmediato.
+          </div>
+        </div>
+      </div>
+
+      <div class="herramienta">
+        <h4><span class="badge"></span> MemTest86:</h4>
+        <div class="detalle">
+          <strong>Uso:</strong> Detectar errores en módulos de memoria RAM
+          mediante pruebas exhaustivas.<br />
+          <div class="ejemplo">
+            <strong>Ejemplo práctico:</strong> Encontrar un módulo de RAM
+            defectuoso que causa pantallas azules en Windows.
+          </div>
+        </div>
+      </div>
+
+      <div class="herramienta">
+        <h4><span class="badge"></span> FurMark:</h4>
+        <div class="detalle">
+          <strong>Uso:</strong> Evaluar el rendimiento y estabilidad térmica de
+          la GPU mediante estrés controlado.<br />
+          <div class="ejemplo">
+            <strong>Ejemplo práctico:</strong>Verificar si una tarjeta gráfica
+            alcanza temperaturas peligrosas (>90°C) al renderizar gráficos
+            intensivos.
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección Hardware -->
+      <h3>b) Hardware</h3>
+
+      <div class="herramienta">
+        <h4><span class="badge"></span> Multímetro</h4>
+        <div class="detalle">
+          <strong>Uso:</strong> Medir voltajes, continuidad y resistencia en
+          componentes electrónicos.<br />
+          <div class="ejemplo">
+            <strong>Ejemplo práctico:</strong> Verificar si la fuente de
+            alimentación entrega 12V estables en el conector de la placa madre.
+          </div>
+        </div>
+      </div>
+
+      <div class="herramienta">
+        <h4><span class="badge"></span> Cámara Térmica</h4>
+        <div class="detalle">
+          <strong>Uso:</strong>Detectar puntos calientes en componentes como
+          CPU, GPU o circuitos de la placa madre.<br />
+          <div class="ejemplo">
+            <strong>Ejemplo práctico:</strong> Identificar el foco de
+            sobrecalentado en la zona de regulación de voltaje de la placa
+            madre.
+          </div>
+        </div>
+      </div>
+
+      <div class="herramienta">
+        <h4><span class="badge"></span> Tester de fuente (PSU tester):</h4>
+        <div class="detalle">
+          <strong>Uso:</strong>Evaluar el funcionamiento de la fuente de
+          alimentación midiendo los voltajes en sus conectores.<br />
+          <div class="ejemplo">
+            <strong>Ejemplo práctico:</strong> Diagnosticar una fuente que no
+            enciende debido a un cortocircuito en el cable de 12V.
+          </div>
+        </div>
+      </div>
+
+      <div class="herramienta">
+        <h4><span class="badge"></span> Kit de herramientas de precisión:</h4>
+        <div class="detalle">
+          <strong>Uso:</strong>Destornilladores magnéticos, pinzas y extractores
+          para manipular componentes pequeños.<br />
+          <div class="ejemplo">
+            <strong>Ejemplo práctico:</strong>Retirar tornillos de fijación de
+            un SSD M.2 sin dañar la placa madre.
+          </div>
+        </div>
+      </div>
+
+      <div class="herramienta">
+        <h4><span class="badge"></span> Lupa con luz LED:</h4>
+        <div class="detalle">
+          <strong>Uso:</strong> Inspeccionar componentes en busca de soldaduras
+          frías, pistas dañadas o corrosión.<br />
+          <div class="ejemplo">
+            <strong>Ejemplo práctico:</strong>Detectar un capacitor hinchado en
+            una placa madre que causa reinicios aleatorios.
+          </div>
+        </div>
+      </div>
+
+      <!-- Repetir patrón para otras herramientas de hardware -->
+
+      <!-- Sección de Proceso -->
+      <h3>Cómo usar estas herramientas en conjunto</h3>
+      <ol class="proceso">
+        <li>
+          <strong>Diagnóstico inicial:</strong><br />
+          Usar HWMonitor para temperaturas + cámara térmica para localización
+        </li>
+        <li>
+          <strong>Verificación de energía:</strong><br />
+          Combinar tester de fuente con multímetro para mediciones precisas
+          <br />
+          Con un tester de fuente, comprueba que la PSU entregue voltajes
+          correctos, si hay irregularidades, usa un multímetro para medir
+          directamente en la placa madre.
+        </li>
+        <li>
+          <strong>Pruebas de hardware:</strong><br />
+          MemTest86 para RAM + inspección física con lupa LED.
+          <br />
+          Ejecuta MemTest86 para descartar fallas en la RAM. Si el problema
+          persiste, inspecciona físicamente la placa madre con una lupa LED.
+        </li>
+        <li>
+          <strong>Solución final:</strong><br />
+          o Reemplaza componentes defectuosos (ej: fuente de alimentación, disco
+          dañado) y verifica con CrystalDiskInfo o FurMark.
+        </li>
+      </ol>
+
+      <!-- Resolución de Problemas Paso a Paso -->
+
+      <h2 class="text-2xl font-bold text-blue-600 mt-8">
+        Resolución de Problemas Paso a Paso
+      </h2>
+      <ol class="list-decimal list-inside ml-6 mt-4 text-gray-800">
+        <li>
+          <strong>Identificar síntomas:</strong> Ej: pantallas azules, ruidos
+          anormales, PC no enciende, ruidos extraños
+        </li>
+        <li>
+          <strong>Usar herramientas:</strong> Seleccionar según el tipo de falla
+          sospechada.
+        </li>
+        <li>
+          <strong>Aislar componente:</strong> Pruebas de hardware intercambiable
+          (ej: probar RAM en otra ranura).
+        </li>
+        <li>
+          <strong>Aplicar solución:</strong> Limpieza, reemplazo o reparación
+        </li>
+        <li>
+          <strong>Verificar resultados:</strong> Post-intervención pruebas de
+          estrés y monitoreo
+        </li>
+      </ol>
+
+      <div class="bg-gray-100 p-4 mt-6 rounded-lg shadow-md">
+        <h4 class="text-xl font-semibold text-gray-700">🛠️ Caso de Estudio</h4>
+        <p class="mt-2 text-gray-800">
+          <strong>Problema:</strong> Reinicios aleatorios durante juegos<br />
+          <strong>Diagnóstico:</strong> Temperatura GPU alcanza 98°C
+          (HWMonitor)<br />
+          <strong>Solución:</strong> Reemplazar pasta térmica y agregar
+          ventilación adicional
+        </p>
+      </div>
+
+      <h2 class="text-2xl font-bold text-blue-600 mt-8">
+        Actividades Prácticas
+      </h2>
+      <ul class="list-disc list-inside ml-6 mt-4 text-gray-800">
+        <li>
+          Análisis de imágenes: Identificar capacitores hinchados en placas
+          madre
+        </li>
+        <li>Usar checklist para inspeccionar una PC simulada.</li>
+        <li>
+          Role-play: Resolver caso de <em>thermal throttling</em> en equipo
+          gaming
+        </li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-blue-600 mt-8">💡 Para Reflexionar</h2>
+      <p class="mt-4 text-gray-700 italic">
+        "¿Cómo impacta el polvo acumulado en los componentes electrónicos a
+        largo plazo?"
+      </p>
     </div>
   </body>
 </html>
