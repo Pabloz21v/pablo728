@@ -6,16 +6,244 @@
     <link rel="stylesheet" href="../css/styles.css" />
     <title>Desarrollo III - Sesión 2</title>
   </head>
-  <body class="bg-white text-black">
+  <body class="bg-black text-green-100">
     <div class="container mx-auto p-4">
-      <h1 class="text-2xl font-bold">Teoría de Desarrollo III - Sesión 2</h1>
-      
-
-      <div class="mt-6">
-        <a href="../materias/desarrollo-3.html" class="btn btn-primary">Volver a Desarrollo III</a>
-        <a href="materia3-sesion1.html" class="btn btn-secondary"
+      <h1 class="text-3xl font-bold text-green-400 mb-6">
+        Teoría de Desarrollo III - Sesión 2
+      </h1>
+      <div class="flex flex-wrap gap-4 mb-8">
+        <a
+          href="../materias/desarrollo-3.html"
+          class="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg font-semibold shadow"
+          >Volver a Desarrollo III</a
+        >
+        <a
+          href="materia3-sesion1.html"
+          class="px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-lg font-semibold shadow"
           >Ir a Sesión 1</a
         >
+      </div>
+      <div class="bg-gray-900 rounded-lg p-6 mb-6 shadow-md">
+        <h2 class="text-xl font-bold text-green-300 mb-2">
+          Sesión 2: Tipos de Datos y Operadores de Comparación
+        </h2>
+        <p class="mb-2">
+          <span class="font-semibold text-green-200">Objetivo:</span> Aplicar
+          conversión de tipos y operadores de comparación en problemas
+          prácticos.
+        </p>
+      </div>
+      <div class="bg-gray-900 rounded-lg p-6 mb-6 shadow-md">
+        <h3 class="text-lg font-semibold text-green-300 mb-2">
+          Contenido a Enseñar
+        </h3>
+        <ol class="list-decimal ml-6 mb-2">
+          <li>
+            <span class="font-semibold">Conversión de Tipos:</span>
+            <span class="text-green-200">int(), float(), str(), bool().</span>
+            <br /><span class="italic"
+              >Ejemplo: edad = int(&quot;16&quot;).</span
+            >
+          </li>
+          <li>
+            <span class="font-semibold">Operadores de Comparación:</span>
+            <span class="text-green-200">==, !=, &gt;, &lt;, &gt;=, &lt;=</span
+            >. Devuelve un booleano. <br /><span class="italic"
+              >Uso en condicionales (preparación para la próxima sesión).</span
+            >
+          </li>
+        </ol>
+      </div>
+      <div class="bg-gray-900 rounded-lg p-6 mb-6 shadow-md">
+        <h3 class="text-lg font-semibold text-green-300 mb-2">
+          Material Didáctico: Contenido y Ejemplos
+        </h3>
+        <div class="mb-4">
+          <h4 class="font-semibold text-green-200 mb-1">
+            1. Conversión de Tipos
+          </h4>
+          <p>
+            Python permite convertir un tipo de dato a otro usando funciones
+            como
+            <span class="font-mono bg-gray-800 px-2 py-1 rounded">int()</span>,
+            <span class="font-mono bg-gray-800 px-2 py-1 rounded">float()</span
+            >,
+            <span class="font-mono bg-gray-800 px-2 py-1 rounded">str()</span> y
+            <span class="font-mono bg-gray-800 px-2 py-1 rounded">bool()</span>.
+          </p>
+          <div
+            class="bg-gray-800 rounded p-4 my-2 text-green-100 text-sm font-mono overflow-x-auto"
+          >
+            # De cadena (str) a entero (int)<br />
+            edad = "25"<br />
+            edad_entero = int(edad)<br />
+            print(edad_entero) # Output: 25 (int)<br />
+            print(type(edad_entero)) # Output: &lt;class 'int'&gt;
+          </div>
+          <p class="mb-2">
+            La función incorporada <span class="font-mono">print()</span>: su
+            propósito es mostrar información en la salida estándar (generalmente
+            la consola).
+          </p>
+          <p class="mb-2">
+            La función incorporada <span class="font-mono">type()</span>: Se usa
+            para obtener el tipo de dato de un objeto (int, boolean, string,
+            float). Esto ayuda a identificar el tipo del objeto que se encuentra
+            guardado en la variable (<span class="font-mono">edad_entero</span
+            >).
+          </p>
+          <div
+            class="bg-gray-800 rounded p-4 my-2 text-green-100 text-sm font-mono overflow-x-auto"
+          >
+            # De entero (int) a cadena (str)<br />
+            puntaje = 100<br />
+            puntaje_str = str(puntaje)<br />
+            print("Tu puntaje es: " + puntaje_str) # Output: "Tu puntaje es:
+            100"
+          </div>
+          <div
+            class="bg-gray-800 rounded p-4 my-2 text-green-100 text-sm font-mono overflow-x-auto"
+          >
+            # De flotante (float) a entero (int)<br />
+            precio = 99.99<br />
+            precio_entero = int(precio) # Trunca los decimales<br />
+            print(precio_entero) # Output: 99 (int)
+          </div>
+          <h4 class="font-semibold text-green-200 mt-4 mb-1">
+            b) Conversiones con input()
+          </h4>
+          <div
+            class="bg-gray-800 rounded p-4 my-2 text-green-100 text-sm font-mono overflow-x-auto"
+          >
+            # Entrada de usuario (siempre es str)<br />
+            anio_nacimiento = input("Ingresa tu año de nacimiento: ") # Ejemplo:
+            "2005"<br />
+            anio_actual = 2024<br />
+            <p class="mb-2">
+              La función incorporada <span class="font-mono">input()</span>: Su
+              propósito es capturar entradas del usuario desde la consola y
+              devolverlas como una cadena de texto (<span class="font-mono"
+                >str</span
+              >).
+            </p>
+
+            # Convertir a int para operar<br />
+            edad = anio_actual - int(anio_nacimiento)<br />
+            print(f"Tienes {edad} años") # Output: "Tienes 19 años"<br />
+            <br />
+            La f luego de print se llama f-string y permite formatear cadenas de
+            texto. Se usa para insertar variables dentro de cadenas de texto de
+            forma más legible. Por ejemplo, en lugar de concatenar
+            <span class="font-mono">"Hola, " + nombre + "!"</span>, se puede
+            usar <span class="font-mono">f"Hola, {nombre}!"</span>. Esto hace
+            que el código sea más limpio y fácil de entender.
+          </div>
+
+          <div
+            class="bg-gray-800 rounded p-4 my-2 text-green-100 text-sm font-mono overflow-x-auto"
+          >
+            nombre = "Ana"<br />
+            edad = 25<br />
+            print(f"Hola, {nombre}. Tienes {edad} años.") <br />
+            # Output: Hola, Ana. Tienes 25 años.
+          </div>
+          <a
+            href="https://www.freecodecamp.org/espanol/news/tutorial-de-f-strings-en-python-formato-de-cadenas-en-python-explicado-con-ejemplos/"
+            target="_blank"
+            class="text-green-400 underline hover:text-green-200"
+            >Más información sobre f-Strings</a
+          >
+        </div>
+        <div class="mb-4">
+          <h4 class="font-semibold text-green-200 mb-1">
+            2. Operadores de Comparación
+          </h4>
+          <p>
+            Comparan dos valores y devuelven
+            <span class="font-mono">True</span> o
+            <span class="font-mono">False</span>.
+          </p>
+          <ul class="list-disc ml-6 mb-2">
+            <li>
+              Operadores: <span class="font-mono">==</span>,
+              <span class="font-mono">!=</span>,
+              <span class="font-mono">&gt;</span>,
+              <span class="font-mono">&lt;</span>,
+              <span class="font-mono">&gt;=</span>,
+              <span class="font-mono">&lt;=</span>.
+            </li>
+          </ul>
+          <div
+            class="bg-gray-800 rounded p-4 my-2 text-green-100 text-sm font-mono overflow-x-auto"
+          >
+            a) Comparaciones numéricas<br />
+            a = 10<br />
+            b = 5<br />
+            print(a == b) # False<br />
+            print(a != b) # True<br />
+            print(a > b) # True<br />
+            print(a <= 10) # True
+          </div>
+          <br />
+          <div
+            class="bg-gray-800 rounded p-4 my-2 text-green-100 text-sm font-mono overflow-x-auto"
+          >
+            b) Comparaciones con cadenas (str)<br />
+            # Comparación lexicográfica (orden alfabético)<br />
+            print("Python" == "python") # False (diferencia
+            mayúsculas/minúsculas)<br />
+            print("apple" < "banana") # True ("a" viene antes que "b")
+          </div>
+          <br />
+          <div
+            class="bg-gray-800 rounded p-4 my-2 text-green-100 text-sm font-mono overflow-x-auto"
+          >
+            c) Comparaciones mixtas<br />
+            # Entero vs Flotante<br />
+            print(5 == 5.0) # True (Python ignora el tipo en comparaciones
+            numéricas)<br />
+            print(10 == "10") # False (int vs str)
+          </div>
+        </div>
+        <div class="mb-4">
+          <h4 class="font-semibold text-green-200 mb-1">Para Pensar</h4>
+          <ul class="list-disc ml-6 mb-2">
+            <li>
+              ¿Por qué en una app bancaria es crucial usar
+              <span class="font-mono">float</span> para el saldo y no
+              <span class="font-mono">int</span>?
+            </li>
+            <li>
+              ¿Por qué <span class="font-mono">"10" == 10</span> en Python
+              devuelve False? ¿Cómo harías para compararlos correctamente?
+            </li>
+          </ul>
+          <div
+            class="bg-gray-800 rounded p-4 my-2 text-green-100 text-sm font-mono"
+          >
+            Respuesta:<br />
+            • "10" es una cadena y 10 es un entero.<br />
+            • Para compararlos, convierte uno de los tipos: int("10") == 10 →
+            True.
+          </div>
+        </div>
+        <div class="mb-4">
+          <h4 class="font-semibold text-green-200 mb-1">Actividad</h4>
+          <ul class="list-disc ml-6 mb-2">
+            <li>Convertir "15" a int y 25 a str, luego concatenarlos.</li>
+            <li>Verificar si un número es positivo, negativo o cero.</li>
+          </ul>
+        </div>
+        <div class="mb-4">
+          <h4 class="font-semibold text-green-200 mb-1">Tarea</h4>
+          <ul class="list-disc ml-6 mb-2">
+            <li>
+              Ejercicio: Programar un conversor de grados Celsius a Fahrenheit:
+              <span class="font-mono">F = (C × 9/5) + 32</span>.
+            </li>
+          </ul>
+        </div>
+        
       </div>
     </div>
   </body>
