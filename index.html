@@ -42,8 +42,21 @@
       wifi. Los links agregados redireccionan a páginas web comunes, por lo que
       se recomienda acceder cuando tengan wifi.
     </p>
-    <p class="block p-2 bg-green-300 text-black rounded text-center mx-7 my-2">
-      Consultas o dudas al Gmail: <strong>docentepabloz36v@gmail.com</strong> 
-    </p>
+    <div
+      class="mx-7 my-2 p-4 bg-green-300 text-black rounded text-center flex flex-col items-center"
+    >
+      <ul class="list-none space-y-1">
+        <li class="font-semibold text-lg">Docente: Pablo Acevedo</li>
+        <li>
+          Consultas o dudas al Gmail:
+          <span
+            class="underline cursor-pointer select-all"
+            onclick="navigator.clipboard.writeText('docentepabloz36v@gmail.com'); alert('¡Correo copiado!');"
+          >
+            docentepabloz36v@gmail.com
+          </span>
+        </li>
+      </ul>
+    </div>
   </body>
 </html>
