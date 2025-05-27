@@ -11,6 +11,7 @@
       <h1 class="text-3xl font-bold text-green-400 mb-6 text-center">
         Mantenimiento de Hardware - Sesión 3
       </h1>
+      <!-- Barra de navegación con enlaces a otras sesiones y materias -->
       <div class="flex flex-wrap gap-4 mb-8">
         <a
           href="../materias/mantenimiento-de-hardware.html"
@@ -21,6 +22,11 @@
           href="materia4-sesion2.html"
           class="px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-lg font-semibold shadow"
           >Ir a Sesión 2</a
+        >
+        <a
+          href="materia4-sesion4.html"
+          class="px-4 py-2 bg-green-500 hover:bg-green-600 text-black rounded-lg font-semibold shadow"
+          >Ir a Sesión 4</a
         >
       </div>
       <div class="bg-gray-900 rounded-lg p-6 mb-6 shadow-md">
@@ -34,306 +40,569 @@
             relevancia de herramientas de software y hardware para diagnóstico.
           </p>
           <hr class="my-4 border-green-700" />
-        
-            
         </div>
-           <h1>1. Desfragmentación en HDD</h1>
-    
-    <h2>¿Qué es la fragmentación?</h2>
-    <p>Cuando se guardan, modifican o eliminan archivos en un disco duro mecánico (HDD), el sistema operativo los divide en bloques ("clusters") que se distribuyen en sectores físicos del disco. Con el tiempo, estos clusters pueden dispersarse en ubicaciones no contiguas, lo que se conoce como fragmentación. Esto hace que el cabezal magnético del HDD se mueva más para leer un archivo completo, ralentizando el rendimiento.</p>
-    
-    <h2>¿Qué es la desfragmentación?</h2>
-    <p>Es un proceso que reorganiza los clusters fragmentados de los archivos, colocándolos en sectores contiguos. Esto minimiza el movimiento del cabezal del HDD y acelera el acceso a los datos.</p>
-    
-    <h2>¿Para qué sirve la desfragmentación?</h2>
-    <ul>
-        <li><strong>Mejorar el rendimiento:</strong> Reduce el tiempo de acceso a los archivos y acelera operaciones como abrir programas o iniciar el sistema.</li>
-        <li><strong>Optimizar el espacio:</strong> Agrupa el espacio libre, facilitando la escritura eficiente de nuevos archivos.</li>
-        <li><strong>Extender la vida útil del HDD:</strong> Disminuye el desgaste físico al reducir el movimiento mecánico del cabezal.</li>
-    </ul>
-    
-    <h2>¿Cuándo es necesaria?</h2>
-    <ul>
-        <li>En HDDs tradicionales (no en SSDs).</li>
-        <li>En sistemas operativos antiguos que no desfragmentan automáticamente.</li>
-        <li>Si se nota lentitud en la lectura/escritura de datos en el disco.</li>
-    </ul>
-    
-    <div class="nota">
-        <p><strong>Nota importante:</strong> Los SSDs no necesitan desfragmentación, ya que no tienen partes móviles y este proceso no beneficia su tecnología. Desfragmentar un SSD puede reducir su vida útil debido al límite de ciclos de escritura.</p>
-    </div>
+        <h1>1. Desfragmentación en HDD</h1>
 
-    <h1>Salud del Disco HDD</h1>
-    <p>La salud de un HDD depende de factores físicos y lógicos.</p>
-    
-    <h2>Indicadores de salud física:</h2>
-    <ul>
-        <li><strong>Sectores defectuosos (Bad Sectors):</strong> Sectores del disco que no pueden leerse o escribirse. Se pueden usar herramientas como chkdsk (Windows) o badblocks (Linux) para marcarlos y evitar su uso.</li>
-        <li><strong>Tiempo de giro (Spin-Up Time):</strong> Si el disco tarda mucho en arrancar, podría indicar fallos en el motor.</li>
-        <li><strong>Temperatura:</strong> Un HDD sobrecalentado (más de 50∘C) puede dañarse. Se puede monitorear con programas como CrystalDiskInfo.</li>
-        <li><strong>Horas de uso (Power-On Hours):</strong> Los HDDs tienen una vida útil estimada (ej: 5-7 años o 20,000-50,000 horas de uso).</li>
-    </ul>
+        <h2>¿Qué es la fragmentación?</h2>
+        <p>
+          Cuando se guardan, modifican o eliminan archivos en un disco duro
+          mecánico (HDD), el sistema operativo los divide en bloques
+          ("clusters") que se distribuyen en sectores físicos del disco. Con el
+          tiempo, estos clusters pueden dispersarse en ubicaciones no contiguas,
+          lo que se conoce como fragmentación. Esto hace que el cabezal
+          magnético del HDD se mueva más para leer un archivo completo,
+          ralentizando el rendimiento.
+        </p>
 
-    <h2>Ruidos Extraños (Señales Físicas de Fallo):</h2>
-    <p>Ciertos ruidos indican problemas graves en los HDDs debido a sus partes móviles.</p>
-    <ul>
-        <li><strong>Clics repetitivos:</strong> Pueden indicar un cabezal dañado intentando recalibrarse o fallo en el motor o platos desalineados.</li>
-        <li><strong>Grinding/Rechinido:</strong> Ruido metálico fuerte y continuo, puede ser por platos rayados por el cabezal o motor/cojinetes desgastados.</li>
-        <li><strong>Zumbido o vibración excesiva:</strong> Podría ser el motor con problemas para girar los platos o desbalance interno.</li>
-        <li><strong>Silbidos agudos:</strong> Pueden indicar fallo en el firmware o componentes electrónicos.</li>
-    </ul>
+        <h2>¿Qué es la desfragmentación?</h2>
+        <p>
+          Es un proceso que reorganiza los clusters fragmentados de los
+          archivos, colocándolos en sectores contiguos. Esto minimiza el
+          movimiento del cabezal del HDD y acelera el acceso a los datos.
+        </p>
 
-    <h2>Herramientas para monitorear la salud del HDD:</h2>
-    <ul>
-        <li><strong>S.M.A.R.T. (Self-Monitoring, Analysis, and Reporting Technology):</strong> Tecnología integrada en los HDDs que alerta sobre fallos inminentes. Atributos clave a revisar incluyen "Reallocated Sectors Count", "Current Pending Sector Count" y "Uncorrectable Sector Count".</li>
-        <li><strong>Programas recomendados:</strong> CrystalDiskInfo (Windows), HDDScan (Windows/Linux), smartctl (Linux).</li>
-    </ul>
+        <h2>¿Para qué sirve la desfragmentación?</h2>
+        <ul>
+          <li>
+            <strong>Mejorar el rendimiento:</strong> Reduce el tiempo de acceso
+            a los archivos y acelera operaciones como abrir programas o iniciar
+            el sistema.
+          </li>
+          <li>
+            <strong>Optimizar el espacio:</strong> Agrupa el espacio libre,
+            facilitando la escritura eficiente de nuevos archivos.
+          </li>
+          <li>
+            <strong>Extender la vida útil del HDD:</strong> Disminuye el
+            desgaste físico al reducir el movimiento mecánico del cabezal.
+          </li>
+        </ul>
 
-    <h2>Consejos para mantener la salud del HDD:</h2>
-    <ol>
-        <li>Desfragmentar periódicamente (solo HDDs).</li>
-        <li>Evitar golpes y vibraciones.</li>
-        <li>Mantener una buena ventilación.</li>
-        <li>Realizar copias de seguridad (backups).</li>
-        <li>No llenar el disco al 100%, dejar al menos un 10-15% de espacio libre.</li>
-    </ol>
+        <h2>¿Cuándo es necesaria?</h2>
+        <ul>
+          <li>En HDDs tradicionales (no en SSDs).</li>
+          <li>
+            En sistemas operativos antiguos que no desfragmentan
+            automáticamente.
+          </li>
+          <li>
+            Si se nota lentitud en la lectura/escritura de datos en el disco.
+          </li>
+        </ul>
 
-    <h1>S.M.A.R.T. en HDD y SSD</h1>
-    
-    <p>S.M.A.R.T. es un sistema de monitoreo integrado en HDDs y SSDs que analiza y reporta el estado de salud del dispositivo para predecir posibles fallos. Su objetivo es alertar al usuario antes de un fallo completo.</p>
+        <div class="nota">
+          <p>
+            <strong>Nota importante:</strong> Los SSDs no necesitan
+            desfragmentación, ya que no tienen partes móviles y este proceso no
+            beneficia su tecnología. Desfragmentar un SSD puede reducir su vida
+            útil debido al límite de ciclos de escritura.
+          </p>
+        </div>
 
-    <h2>¿Cómo funciona S.M.A.R.T.?</h2>
-    <ol>
-        <li>Recopila datos: Registra parámetros clave del disco.</li>
-        <li>Analiza tendencias: Compara valores actuales con umbrales predefinidos.</li>
-        <li>Genera alertas: Envía advertencias si detecta riesgos.</li>
-    </ol>
+        <h1>Salud del Disco HDD</h1>
+        <p>La salud de un HDD depende de factores físicos y lógicos.</p>
 
-    <h2>Parámetros clave monitoreados por S.M.A.R.T.:</h2>
-    <ul>
-        <li>En HDDs:
+        <h2>Indicadores de salud física:</h2>
+        <ul>
+          <li>
+            <strong>Sectores defectuosos (Bad Sectors):</strong> Sectores del
+            disco que no pueden leerse o escribirse. Se pueden usar herramientas
+            como chkdsk (Windows) o badblocks (Linux) para marcarlos y evitar su
+            uso.
+          </li>
+          <li>
+            <strong>Tiempo de giro (Spin-Up Time):</strong> Si el disco tarda
+            mucho en arrancar, podría indicar fallos en el motor.
+          </li>
+          <li>
+            <strong>Temperatura:</strong> Un HDD sobrecalentado (más de 50∘C)
+            puede dañarse. Se puede monitorear con programas como
+            CrystalDiskInfo.
+          </li>
+          <li>
+            <strong>Horas de uso (Power-On Hours):</strong> Los HDDs tienen una
+            vida útil estimada (ej: 5-7 años o 20,000-50,000 horas de uso).
+          </li>
+        </ul>
+
+        <h2>Ruidos Extraños (Señales Físicas de Fallo):</h2>
+        <p>
+          Ciertos ruidos indican problemas graves en los HDDs debido a sus
+          partes móviles.
+        </p>
+        <ul>
+          <li>
+            <strong>Clics repetitivos:</strong> Pueden indicar un cabezal dañado
+            intentando recalibrarse o fallo en el motor o platos desalineados.
+          </li>
+          <li>
+            <strong>Grinding/Rechinido:</strong> Ruido metálico fuerte y
+            continuo, puede ser por platos rayados por el cabezal o
+            motor/cojinetes desgastados.
+          </li>
+          <li>
+            <strong>Zumbido o vibración excesiva:</strong> Podría ser el motor
+            con problemas para girar los platos o desbalance interno.
+          </li>
+          <li>
+            <strong>Silbidos agudos:</strong> Pueden indicar fallo en el
+            firmware o componentes electrónicos.
+          </li>
+        </ul>
+
+        <h2>Herramientas para monitorear la salud del HDD:</h2>
+        <ul>
+          <li>
+            <strong
+              >S.M.A.R.T. (Self-Monitoring, Analysis, and Reporting
+              Technology):</strong
+            >
+            Tecnología integrada en los HDDs que alerta sobre fallos inminentes.
+            Atributos clave a revisar incluyen "Reallocated Sectors Count",
+            "Current Pending Sector Count" y "Uncorrectable Sector Count".
+          </li>
+          <li>
+            <strong>Programas recomendados:</strong> CrystalDiskInfo (Windows),
+            HDDScan (Windows/Linux), smartctl (Linux).
+          </li>
+        </ul>
+
+        <h2>Consejos para mantener la salud del HDD:</h2>
+        <ol>
+          <li>Desfragmentar periódicamente (solo HDDs).</li>
+          <li>Evitar golpes y vibraciones.</li>
+          <li>Mantener una buena ventilación.</li>
+          <li>Realizar copias de seguridad (backups).</li>
+          <li>
+            No llenar el disco al 100%, dejar al menos un 10-15% de espacio
+            libre.
+          </li>
+        </ol>
+
+        <h1>S.M.A.R.T. en HDD y SSD</h1>
+
+        <p>
+          S.M.A.R.T. es un sistema de monitoreo integrado en HDDs y SSDs que
+          analiza y reporta el estado de salud del dispositivo para predecir
+          posibles fallos. Su objetivo es alertar al usuario antes de un fallo
+          completo.
+        </p>
+
+        <h2>¿Cómo funciona S.M.A.R.T.?</h2>
+        <ol>
+          <li>Recopila datos: Registra parámetros clave del disco.</li>
+          <li>
+            Analiza tendencias: Compara valores actuales con umbrales
+            predefinidos.
+          </li>
+          <li>Genera alertas: Envía advertencias si detecta riesgos.</li>
+        </ol>
+
+        <h2>Parámetros clave monitoreados por S.M.A.R.T.:</h2>
+        <ul>
+          <li>
+            En HDDs:
             <ul>
-                <li>"Reallocated Sectors Count" (sectores defectuosos reemplazados)</li>
-                <li>"Spin-Up Time" (tiempo de arranque del motor)</li>
-                <li>"Seek Error Rate" (errores al posicionar el cabezal)</li>
-                <li>"Current Pending Sector Count" (sectores inestables)</li>
-                <li>"Temperature" (temperatura del disco)</li>
+              <li>
+                "Reallocated Sectors Count" (sectores defectuosos reemplazados)
+              </li>
+              <li>"Spin-Up Time" (tiempo de arranque del motor)</li>
+              <li>"Seek Error Rate" (errores al posicionar el cabezal)</li>
+              <li>"Current Pending Sector Count" (sectores inestables)</li>
+              <li>"Temperature" (temperatura del disco)</li>
             </ul>
-        </li>
-        <li>En SSDs:
+          </li>
+          <li>
+            En SSDs:
             <ul>
-                <li>"Wear Leveling Count" (desgaste de celdas NAND)</li>
-                <li>"Available Spare" (bloques de reserva)</li>
-                <li>"Media Wearout Indicator" (ciclos de escritura/borrado)</li>
-                <li>"Uncorrectable Error Count" (errores no corregibles)</li>
-                <li>"Power-On Hours" (horas de uso)</li>
+              <li>"Wear Leveling Count" (desgaste de celdas NAND)</li>
+              <li>"Available Spare" (bloques de reserva)</li>
+              <li>"Media Wearout Indicator" (ciclos de escritura/borrado)</li>
+              <li>"Uncorrectable Error Count" (errores no corregibles)</li>
+              <li>"Power-On Hours" (horas de uso)</li>
             </ul>
-        </li>
-    </ul>
+          </li>
+        </ul>
 
-    <h2>Diferencias entre S.M.A.R.T. en HDD vs. SSD:</h2>
-    <ul>
-        <li><strong>Enfoque principal:</strong> Fallos mecánicos en HDD; desgaste de celdas NAND en SSD</li>
-        <li><strong>Atributos críticos:</strong> Sectores reasignados y errores de búsqueda en HDD; "Wear Leveling", bloques de reserva y TBW (Terabytes Written) en SSD</li>
-        <li><strong>Fallas comunes:</strong> Sectores defectuosos y motor dañado en HDD; celdas NAND desgastadas y controlador muerto en SSD</li>
-        <li><strong>Impacto de TRIM:</strong> No aplica a HDD; optimiza rendimiento y vida útil en SSD</li>
-    </ul>
+        <h2>Diferencias entre S.M.A.R.T. en HDD vs. SSD:</h2>
+        <ul>
+          <li>
+            <strong>Enfoque principal:</strong> Fallos mecánicos en HDD;
+            desgaste de celdas NAND en SSD
+          </li>
+          <li>
+            <strong>Atributos críticos:</strong> Sectores reasignados y errores
+            de búsqueda en HDD; "Wear Leveling", bloques de reserva y TBW
+            (Terabytes Written) en SSD
+          </li>
+          <li>
+            <strong>Fallas comunes:</strong> Sectores defectuosos y motor dañado
+            en HDD; celdas NAND desgastadas y controlador muerto en SSD
+          </li>
+          <li>
+            <strong>Impacto de TRIM:</strong> No aplica a HDD; optimiza
+            rendimiento y vida útil en SSD
+          </li>
+        </ul>
 
-    <h2>¿Para qué sirve S.M.A.R.T.?</h2>
-    <ol>
-        <li>Predecir fallos</li>
-        <li>Evitar pérdida de datos al alertar para hacer copias de seguridad</li>
-        <li>Optimizar mantenimiento, ayudando a programar reemplazos</li>
-        <li>Diagnóstico profesional para identificar causas de fallos</li>
-    </ol>
+        <h2>¿Para qué sirve S.M.A.R.T.?</h2>
+        <ol>
+          <li>Predecir fallos</li>
+          <li>
+            Evitar pérdida de datos al alertar para hacer copias de seguridad
+          </li>
+          <li>Optimizar mantenimiento, ayudando a programar reemplazos</li>
+          <li>Diagnóstico profesional para identificar causas de fallos</li>
+        </ol>
 
-    <h2>Herramientas para leer datos S.M.A.R.T.:</h2>
-    <ul>
-        <li>CrystalDiskInfo (Windows)</li>
-        <li>smartctl (Linux/Windows)</li>
-        <li>HDDScan (Windows)</li>
-        <li>Disk Utility (macOS)</li>
-    </ul>
+        <h2>Herramientas para leer datos S.M.A.R.T.:</h2>
+        <ul>
+          <li>CrystalDiskInfo (Windows)</li>
+          <li>smartctl (Linux/Windows)</li>
+          <li>HDDScan (Windows)</li>
+          <li>Disk Utility (macOS)</li>
+        </ul>
 
-    <h2>Limitaciones de S.M.A.R.T.:</h2>
-    <ul>
-        <li>No es infalible; algunos fallos ocurren sin aviso</li>
-        <li>Depende del fabricante; atributos y umbrales varían</li>
-        <li>Solo informa, no repara fallos</li>
-    </ul>
+        <h2>Limitaciones de S.M.A.R.T.:</h2>
+        <ul>
+          <li>No es infalible; algunos fallos ocurren sin aviso</li>
+          <li>Depende del fabricante; atributos y umbrales varían</li>
+          <li>Solo informa, no repara fallos</li>
+        </ul>
 
-    <h2>¿Cómo interpretar los resultados?</h2>
-    <ul>
-        <li><strong>"Good":</strong> El disco está dentro de parámetros normales</li>
-        <li><strong>"Caution":</strong> Algunos atributos superan umbrales críticos</li>
-        <li><strong>"Bad":</strong> Fallo inminente; reemplazar el disco urgentemente</li>
-    </ul>
+        <h2>¿Cómo interpretar los resultados?</h2>
+        <ul>
+          <li>
+            <strong>"Good":</strong> El disco está dentro de parámetros normales
+          </li>
+          <li>
+            <strong>"Caution":</strong> Algunos atributos superan umbrales
+            críticos
+          </li>
+          <li>
+            <strong>"Bad":</strong> Fallo inminente; reemplazar el disco
+            urgentemente
+          </li>
+        </ul>
 
-     <h1>TRIM en SSD</h1>
-    <h2>¿Qué es y para qué sirve?</h2>
-    <p>El comando TRIM es una función esencial para el funcionamiento óptimo de los SSDs. Gestiona eficientemente el espacio liberado al eliminar archivos, mejorando el rendimiento y prolongando la vida útil del SSD.</p>
-    <h2>¿Qué es el comando TRIM?</h2>
-    <p>Es una instrucción que el sistema operativo envía al SSD para indicarle qué bloques de datos ya no contienen información útil después de borrar archivos o formatear. Los SSDs no pueden sobrescribir datos directamente; primero deben borrar bloques para escribir nuevos datos. Sin TRIM, el SSD no sabría qué bloques están disponibles, ralentizando la escritura.</p>
-    <h2>¿Por qué es necesario el TRIM en SSDs?</h2>
-    <p>Sin TRIM, al eliminar un archivo, el sistema operativo marca el espacio como libre, pero no notifica al SSD. El SSD trataría esos bloques como si tuvieran datos válidos, realizando operaciones adicionales (leer, borrar, escribir) al escribir nueva información, lo que reduce rendimiento y desgasta las celdas NAND. Con TRIM, el SSD sabe qué bloques están libres y puede borrarlos en segundo plano, optimizando la velocidad de escritura y reduciendo el desgaste.</p>
-    <h2>¿Cómo funciona el TRIM?</h2>
-    <ol>
-        <li><strong>Eliminación de un archivo:</strong> El sistema operativo marca el archivo como eliminado y envía un comando TRIM al SSD con las direcciones de los bloques liberados.</li>
-        <li><strong>Proceso en el SSD:</strong> El controlador del SSD programa el borrado físico de esos bloques durante períodos de inactividad. Los bloques se marcan como "listos para escritura" en la FTL (Flash Translation Layer).</li>
-        <li><strong>Beneficio inmediato:</strong> Las siguientes escrituras son más rápidas.</li>
-    </ol>
-    <h2>Beneficios del TRIM:</h2>
-    <ul>
-        <li><strong>Mejor rendimiento:</strong> Reduce la latencia en operaciones de escritura.</li>
-        <li><strong>Mayor vida útil del SSD:</strong> Minimiza los ciclos de escritura/borrado.</li>
-        <li><strong>Gestión eficiente del espacio:</strong> Agiliza la recolección de basura del SSD.</li>
-        <li><strong>Prevención de slowdowns:</strong> Evita la degradación gradual del rendimiento.</li>
-    </ul>
-    <p>TRIM solo aplica a SSDs, no a pendrives o tarjetas micro SD.</p>
+        <h1>TRIM en SSD</h1>
+        <h2>¿Qué es y para qué sirve?</h2>
+        <p>
+          El comando TRIM es una función esencial para el funcionamiento óptimo
+          de los SSDs. Gestiona eficientemente el espacio liberado al eliminar
+          archivos, mejorando el rendimiento y prolongando la vida útil del SSD.
+        </p>
+        <h2>¿Qué es el comando TRIM?</h2>
+        <p>
+          Es una instrucción que el sistema operativo envía al SSD para
+          indicarle qué bloques de datos ya no contienen información útil
+          después de borrar archivos o formatear. Los SSDs no pueden
+          sobrescribir datos directamente; primero deben borrar bloques para
+          escribir nuevos datos. Sin TRIM, el SSD no sabría qué bloques están
+          disponibles, ralentizando la escritura.
+        </p>
+        <h2>¿Por qué es necesario el TRIM en SSDs?</h2>
+        <p>
+          Sin TRIM, al eliminar un archivo, el sistema operativo marca el
+          espacio como libre, pero no notifica al SSD. El SSD trataría esos
+          bloques como si tuvieran datos válidos, realizando operaciones
+          adicionales (leer, borrar, escribir) al escribir nueva información, lo
+          que reduce rendimiento y desgasta las celdas NAND. Con TRIM, el SSD
+          sabe qué bloques están libres y puede borrarlos en segundo plano,
+          optimizando la velocidad de escritura y reduciendo el desgaste.
+        </p>
+        <h2>¿Cómo funciona el TRIM?</h2>
+        <ol>
+          <li>
+            <strong>Eliminación de un archivo:</strong> El sistema operativo
+            marca el archivo como eliminado y envía un comando TRIM al SSD con
+            las direcciones de los bloques liberados.
+          </li>
+          <li>
+            <strong>Proceso en el SSD:</strong> El controlador del SSD programa
+            el borrado físico de esos bloques durante períodos de inactividad.
+            Los bloques se marcan como "listos para escritura" en la FTL (Flash
+            Translation Layer).
+          </li>
+          <li>
+            <strong>Beneficio inmediato:</strong> Las siguientes escrituras son
+            más rápidas.
+          </li>
+        </ol>
+        <h2>Beneficios del TRIM:</h2>
+        <ul>
+          <li>
+            <strong>Mejor rendimiento:</strong> Reduce la latencia en
+            operaciones de escritura.
+          </li>
+          <li>
+            <strong>Mayor vida útil del SSD:</strong> Minimiza los ciclos de
+            escritura/borrado.
+          </li>
+          <li>
+            <strong>Gestión eficiente del espacio:</strong> Agiliza la
+            recolección de basura del SSD.
+          </li>
+          <li>
+            <strong>Prevención de slowdowns:</strong> Evita la degradación
+            gradual del rendimiento.
+          </li>
+        </ul>
+        <p>TRIM solo aplica a SSDs, no a pendrives o tarjetas micro SD.</p>
 
-    <h1>Imagen de Disco vs. Punto de Restauración</h1>
-    <h2>1. Imagen de Disco (Imagen ISO)</h2>
-    <ul>
-        <li><strong>¿Qué es?</strong> Una copia exacta y completa de un disco duro o partición, incluyendo sistema operativo, programas, archivos personales, configuraciones y sector de arranque.</li>
-        <li><strong>¿Para qué sirve?</strong> Para restaurar el sistema a un estado exacto anterior (útil tras fallos graves) o migrar contenido a otro disco.</li>
-        <li><strong>Ventajas:</strong> Recuperación completa; protección contra fallos catastróficos.</li>
-        <li><strong>Desventajas:</strong> Ocupa mucho espacio; la creación/restauración puede tardar horas.</li>
-    </ul>
-    <h2>2. Punto de Restauración</h2>
-    <ul>
-        <li><strong>¿Qué es?</strong> Un "snapshot" parcial del sistema que guarda configuraciones del sistema (registro, drivers) y archivos de sistema y programas instalados, pero no archivos personales.</li>
-        <li><strong>¿Para qué sirve?</strong> Para revertir cambios recientes que causaron problemas (ej: actualización fallida, instalación de software problemático). No recupera archivos borrados.</li>
-        <li><strong>Ventajas:</strong> Rápido de crear/restaurar; ocupa poco espacio.</li>
-        <li><strong>Desventajas:</strong> Alcance limitado (no protege archivos personales); depende de que el sistema operativo pueda iniciar.</li>
-    </ul>
-    <h2>Tabla Comparativa:</h2>
-    <table border="1">
-        <tr>
+        <h1>Imagen de Disco vs. Punto de Restauración</h1>
+        <h2>1. Imagen de Disco (Imagen ISO)</h2>
+        <ul>
+          <li>
+            <strong>¿Qué es?</strong> Una copia exacta y completa de un disco
+            duro o partición, incluyendo sistema operativo, programas, archivos
+            personales, configuraciones y sector de arranque.
+          </li>
+          <li>
+            <strong>¿Para qué sirve?</strong> Para restaurar el sistema a un
+            estado exacto anterior (útil tras fallos graves) o migrar contenido
+            a otro disco.
+          </li>
+          <li>
+            <strong>Ventajas:</strong> Recuperación completa; protección contra
+            fallos catastróficos.
+          </li>
+          <li>
+            <strong>Desventajas:</strong> Ocupa mucho espacio; la
+            creación/restauración puede tardar horas.
+          </li>
+        </ul>
+        <h2>2. Punto de Restauración</h2>
+        <ul>
+          <li>
+            <strong>¿Qué es?</strong> Un "snapshot" parcial del sistema que
+            guarda configuraciones del sistema (registro, drivers) y archivos de
+            sistema y programas instalados, pero no archivos personales.
+          </li>
+          <li>
+            <strong>¿Para qué sirve?</strong> Para revertir cambios recientes
+            que causaron problemas (ej: actualización fallida, instalación de
+            software problemático). No recupera archivos borrados.
+          </li>
+          <li>
+            <strong>Ventajas:</strong> Rápido de crear/restaurar; ocupa poco
+            espacio.
+          </li>
+          <li>
+            <strong>Desventajas:</strong> Alcance limitado (no protege archivos
+            personales); depende de que el sistema operativo pueda iniciar.
+          </li>
+        </ul>
+        <h2>Tabla Comparativa:</h2>
+        <table border="1">
+          <tr>
             <th>Característica</th>
             <th>Imagen de Disco</th>
             <th>Punto de Restauración</th>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>Alcance</td>
             <td>Copia completa del disco.</td>
             <td>Solo configuraciones y archivos de sistema.</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>Archivos personales</td>
             <td>Sí (incluye todo).</td>
             <td>No.</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>Espacio requerido</td>
             <td>Alto (igual al tamaño del disco).</td>
             <td>Bajo (1-10% del espacio del disco).</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>Tiempo de creación</td>
             <td>Largo (horas).</td>
             <td>Corto (minutos).</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>Recuperación ante fallos</td>
             <td>Ideal para fallos graves (disco muerto).</td>
             <td>Útil para errores de software recientes.</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>Dependencia del SO</td>
             <td>No requiere Windows funcional.</td>
             <td>Requiere que Windows pueda iniciar.</td>
-        </tr>
-    </table>
-    <h2>¿Cuándo usar cada una?</h2>
-    <ul>
-        <li><strong>Imagen de Disco:</strong> Si se desea una copia de seguridad completa para desastres, migrar sistema o proteger archivos personales junto con el SO.</li>
-        <li><strong>Punto de Restauración:</strong> Si se instaló software problemático, Windows falla tras una actualización, o no hay espacio para una imagen completa.</li>
-    </ul>
+          </tr>
+        </table>
+        <h2>¿Cuándo usar cada una?</h2>
+        <ul>
+          <li>
+            <strong>Imagen de Disco:</strong> Si se desea una copia de seguridad
+            completa para desastres, migrar sistema o proteger archivos
+            personales junto con el SO.
+          </li>
+          <li>
+            <strong>Punto de Restauración:</strong> Si se instaló software
+            problemático, Windows falla tras una actualización, o no hay espacio
+            para una imagen completa.
+          </li>
+        </ul>
 
+        <h1>Firmware en HDD/SSD</h1>
+        <p>
+          El firmware es un software especializado integrado en el
+          almacenamiento de un HDD o SSD que controla su funcionamiento interno.
+          Es esencial para el correcto funcionamiento del hardware, optimizando
+          rendimiento, seguridad y vida útil.
+        </p>
 
-    <h1>Firmware en HDD/SSD</h1>
-    <p>El firmware es un software especializado integrado en el almacenamiento de un HDD o SSD que controla su funcionamiento interno. Es esencial para el correcto funcionamiento del hardware, optimizando rendimiento, seguridad y vida útil.</p>
+        <h2>¿Por qué es importante el firmware?</h2>
+        <ul>
+          <li>
+            <strong>Rendimiento:</strong> Optimiza la velocidad y acceso en
+            HDDs; mejora la gestión de celdas y reduce latencia en SSDs.
+          </li>
+          <li>
+            <strong>Durabilidad:</strong> Reduce errores mecánicos y sectores
+            defectuosos en HDDs; prolonga la vida útil mediante "wear leveling"
+            en SSDs.
+          </li>
+          <li><strong>Seguridad:</strong> Habilita cifrado de datos.</li>
+          <li>
+            <strong>Compatibilidad:</strong> Asegura el funcionamiento con
+            sistemas operativos y controladores; soporta nuevos protocolos.
+          </li>
+          <li>
+            <strong>Corrección de errores:</strong> Soluciona bugs críticos y
+            parchea vulnerabilidades.
+          </li>
+        </ul>
 
-    <h2>¿Por qué es importante el firmware?</h2>
-    <ul>
-        <li><strong>Rendimiento:</strong> Optimiza la velocidad y acceso en HDDs; mejora la gestión de celdas y reduce latencia en SSDs.</li>
-        <li><strong>Durabilidad:</strong> Reduce errores mecánicos y sectores defectuosos en HDDs; prolonga la vida útil mediante "wear leveling" en SSDs.</li>
-        <li><strong>Seguridad:</strong> Habilita cifrado de datos.</li>
-        <li><strong>Compatibilidad:</strong> Asegura el funcionamiento con sistemas operativos y controladores; soporta nuevos protocolos.</li>
-        <li><strong>Corrección de errores:</strong> Soluciona bugs críticos y parchea vulnerabilidades.</li>
-    </ul>
+        <h2>Importancia de las actualizaciones de firmware:</h2>
+        <ol>
+          <li>
+            <strong>Mejoras de rendimiento:</strong> Aumento de velocidad de
+            escritura o mejor gestión de caché en SSDs; optimización del tiempo
+            de búsqueda en HDDs.
+          </li>
+          <li>
+            <strong>Corrección de bugs:</strong> Soluciona errores de corrupción
+            de datos o fallos de compatibilidad.
+          </li>
+          <li>
+            <strong>Seguridad:</strong> Parches para vulnerabilidades críticas.
+          </li>
+          <li>
+            <strong>Soporte para nuevas tecnologías:</strong> Habilita funciones
+            como encriptación automática o seguridad mejorada.
+          </li>
+        </ol>
 
-    <h2>Importancia de las actualizaciones de firmware:</h2>
-    <ol>
-        <li><strong>Mejoras de rendimiento:</strong> Aumento de velocidad de escritura o mejor gestión de caché en SSDs; optimización del tiempo de búsqueda en HDDs.</li>
-        <li><strong>Corrección de bugs:</strong> Soluciona errores de corrupción de datos o fallos de compatibilidad.</li>
-        <li><strong>Seguridad:</strong> Parches para vulnerabilidades críticas.</li>
-        <li><strong>Soporte para nuevas tecnologías:</strong> Habilita funciones como encriptación automática o seguridad mejorada.</li>
-    </ol>
+        <h2>Riesgos de un firmware desactualizado:</h2>
+        <ul>
+          <li>Inestabilidad (fallos, bloqueos, pérdida de datos).</li>
+          <li>
+            Baja eficiencia (mayor desgaste en SSDs, errores de lectura en
+            HDDs).
+          </li>
+          <li>Vulnerabilidades a ataques cibernéticos.</li>
+        </ul>
 
-    <h2>Riesgos de un firmware desactualizado:</h2>
-    <ul>
-        <li>Inestabilidad (fallos, bloqueos, pérdida de datos).</li>
-        <li>Baja eficiencia (mayor desgaste en SSDs, errores de lectura en HDDs).</li>
-        <li>Vulnerabilidades a ataques cibernéticos.</li>
-    </ul>
+        <h2>Cómo actualizar el firmware:</h2>
+        <ol>
+          <li>Identificar el modelo del disco (ej: con CrystalDiskInfo).</li>
+          <li>
+            Descargar la utilidad del fabricante (ej: WD Dashboard, Seagate
+            SeaTools, Samsung Magician, Crucial Storage Executive).
+          </li>
+          <li>
+            Seguir las instrucciones cuidadosamente, ya que una actualización
+            fallida puede inutilizar el disco. Se recomienda hacer backup antes
+            de actualizar.
+          </li>
+        </ol>
 
-    <h2>Cómo actualizar el firmware:</h2>
-    <ol>
-        <li>Identificar el modelo del disco (ej: con CrystalDiskInfo).</li>
-        <li>Descargar la utilidad del fabricante (ej: WD Dashboard, Seagate SeaTools, Samsung Magician, Crucial Storage Executive).</li>
-        <li>Seguir las instrucciones cuidadosamente, ya que una actualización fallida puede inutilizar el disco. Se recomienda hacer backup antes de actualizar.</li>
-    </ol>
-
-
-    <p><strong>Herramientas:</strong> (Descargar)</p>
-    <div class="flex flex-col md:flex-row gap-4 my-4">
-      <a href="https://www.cleverfiles.com/es/data-recovery-software.html" target="_blank" rel="noopener" class="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg font-semibold shadow text-center w-full md:w-auto">Cleverfiles</a>
-      <a href="https://www.r-studio.com/es/" target="_blank" rel="noopener" class="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg font-semibold shadow text-center w-full md:w-auto">R-Studio</a>
-      <a href="https://apps.microsoft.com/detail/xp8k4rgx25g3gm?hl=es-ES&gl=AR" target="_blank" rel="noopener" class="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg font-semibold shadow text-center w-full md:w-auto">CrystalDiskInfo</a>
-    </div>
-    <hr>
-    <h3>3. Práctica</h3>
-    <p><strong>Estación 1: CrystalDiskInfo y SMART</strong></p>
-    <p><strong>Actividad:</strong></p>
-    <ol>
-        <li>Analizar un SSD/HDD con sectores dañados.</li>
-        <li>Identificar atributos SMART:
+        <p><strong>Herramientas:</strong> (Descargar)</p>
+        <div class="flex flex-col md:flex-row gap-4 my-4">
+          <a
+            href="https://www.cleverfiles.com/es/data-recovery-software.html"
+            target="_blank"
+            rel="noopener"
+            class="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg font-semibold shadow text-center w-full md:w-auto"
+            >Cleverfiles</a
+          >
+          <a
+            href="https://www.r-studio.com/es/"
+            target="_blank"
+            rel="noopener"
+            class="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg font-semibold shadow text-center w-full md:w-auto"
+            >R-Studio</a
+          >
+          <a
+            href="https://apps.microsoft.com/detail/xp8k4rgx25g3gm?hl=es-ES&gl=AR"
+            target="_blank"
+            rel="noopener"
+            class="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg font-semibold shadow text-center w-full md:w-auto"
+            >CrystalDiskInfo</a
+          >
+        </div>
+        <hr />
+        <h3>3. Práctica</h3>
+        <p><strong>Estación 1: CrystalDiskInfo y SMART</strong></p>
+        <p><strong>Actividad:</strong></p>
+        <ol>
+          <li>Analizar un SSD/HDD con sectores dañados.</li>
+          <li>
+            Identificar atributos SMART:
             <ul>
-                <li>Buscar "Reallocated Sectors" y "Power-On Hours".</li>
-                <li>Interpretar un estado "CRITICAL" (ejemplo: alto número de sectores reasignados).</li>
+              <li>Buscar "Reallocated Sectors" y "Power-On Hours".</li>
+              <li>
+                Interpretar un estado "CRITICAL" (ejemplo: alto número de
+                sectores reasignados).
+              </li>
             </ul>
-        </li>
-    </ol>
-    <p><strong>Estación 3: Recuperación de Datos</strong></p>
-    <p><strong>Demostración:</strong></p>
-    <ol>
-        <li>Usar algún software para recuperar un archivo borrado.</li>
-        <li>Crear una imagen ISO de un disco con R-Studio.</li>
-    </ol>
-    <hr>
-    <h3>4. Discusión Grupal</h3>
-    <p><strong>Preguntas:</strong></p>
-    <ul>
-        <li>¿Qué acciones tomarías si CrystalDiskInfo muestra un estado "CRITICAL"?
+          </li>
+        </ol>
+        <p><strong>Estación 3: Recuperación de Datos</strong></p>
+        <p><strong>Demostración:</strong></p>
+        <ol>
+          <li>Usar algún software para recuperar un archivo borrado.</li>
+          <li>Crear una imagen ISO de un disco con R-Studio.</li>
+        </ol>
+        <hr />
+        <h3>4. Discusión Grupal</h3>
+        <p><strong>Preguntas:</strong></p>
+        <ul>
+          <li>
+            ¿Qué acciones tomarías si CrystalDiskInfo muestra un estado
+            "CRITICAL"?
             <ul>
-                <li>Posibles respuestas: Hacer backup inmediato, reemplazar disco.</li>
+              <li>
+                Posibles respuestas: Hacer backup inmediato, reemplazar disco.
+              </li>
             </ul>
-        </li>
-        <li>¿Por qué es crucial actualizar el firmware de un SSD?
+          </li>
+          <li>
+            ¿Por qué es crucial actualizar el firmware de un SSD?
             <p><strong>Razones clave:</strong></p>
             <ol>
-                <li>Corrección de errores: Parches para fallas de escritura/lectura.</li>
-                <li>Mejora de rendimiento: Optimización del controlador.</li>
-                <li>Compatibilidad: Soporte para nuevos sistemas operativos.</li>
-                <li>Seguridad: Parches contra vulnerabilidades (ej: ataques de canal lateral).</li>
+              <li>
+                Corrección de errores: Parches para fallas de escritura/lectura.
+              </li>
+              <li>Mejora de rendimiento: Optimización del controlador.</li>
+              <li>Compatibilidad: Soporte para nuevos sistemas operativos.</li>
+              <li>
+                Seguridad: Parches contra vulnerabilidades (ej: ataques de canal
+                lateral).
+              </li>
             </ol>
-        </li>
-    </ul>
-<p><strong>5. Tarea:</strong></p>
-    <ol><li>Crear un solo check list para el monitoreo y mantenimiento de un disco HDD o SSD.
-      </li></ol>
-    </div>
+          </li>
+        </ul>
+        <p><strong>5. Tarea:</strong></p>
+        <ol>
+          <li>
+            Crear un solo check list para el monitoreo y mantenimiento de un
+            disco HDD o SSD.
+          </li>
+        </ol>
+      </div>
     </div>
   </body>
 </html>

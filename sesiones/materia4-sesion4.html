@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <title>Mantenimiento de Hardware - Sesión 4</title>
+  </head>
+  <body class="bg-black text-green-100">
+    <div class="container mx-auto p-4 max-w-3xl">
+      <h1 class="text-3xl font-bold text-green-400 mb-6 text-center">
+        Mantenimiento de Hardware - Sesión 4
+      </h1>
+      <!-- Botones de navegación al inicio del archivo -->
+      <div class="flex flex-wrap gap-4 mb-8">
+        <a
+          href="../materias/mantenimiento-de-hardware.html"
+          class="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg font-semibold shadow"
+          >Volver a Materia</a
+        >
+        <a
+          href="materia4-sesion3.html"
+          class="px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-lg font-semibold shadow"
+          >Ir a Sesión 3</a
+        >
+      </div>
+      <div class="bg-gray-900 rounded-lg p-6 mb-6 shadow-md">
+        <h2 class="text-xl font-bold text-green-300 mb-2">
+          Sesión 4: Herramientas de Diagnóstico para discos y mantenimiento de discos
+        </h2>
+        <div class="prose prose-invert max-w-none text-green-100">
+          <p>
+            <span class="font-bold">Objetivo:</span> Comprender el uso y
+            relevancia de herramientas de software y hardware para diagnóstico, identificar las fallas y aplicar las posibles soluciones
+          </p>
+        <div class="prose prose-invert max-w-none text-green-100">
+          <h1>1. "Mi PC no identifica el disco, creo que está roto": causas</h1>
+          <h2>Causas comunes:</h2>
+          <ul>
+            <li><strong>Conexiones defectuosas:</strong>
+              <ul>
+                <li>Cables SATA/PCIe mal insertados o dañados.</li>
+                <li>Fuente de alimentación no suministra energía al disco.</li>
+              </ul>
+            </li>
+            <li><strong>Formato incompatible:</strong>
+              <ul>
+                <li>Disco formateado para macOS (APFS/HFS+) o Linux (ext4) y no reconocido por Windows.</li>
+              </ul>
+            </li>
+            <li><strong>Controladores desactualizados:</strong>
+              <ul>
+                <li>Drivers obsoletos en Windows impiden la detección del disco.</li>
+              </ul>
+            </li>
+          </ul>
+          <h1>2. Formatos de formateo: usos y elección</h1>
+          <h2>Tipos de sistemas de archivos:</h2>
+          <div class="overflow-x-auto mb-4">
+            <table class="min-w-full text-sm text-left text-green-100 border border-green-700 my-2">
+              <thead class="bg-green-800 text-white">
+                <tr>
+                  <th class="px-2 py-1 border border-green-700">Formato</th>
+                  <th class="px-2 py-1 border border-green-700">Uso recomendado</th>
+                  <th class="px-2 py-1 border border-green-700">Ventajas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="border border-green-700 px-2 py-1">NTFS</td><td class="border border-green-700 px-2 py-1">Windows (almacenamiento interno).</td><td class="border border-green-700 px-2 py-1">Soporta archivos &gt;4GB, permisos avanzados.</td></tr>
+                <tr><td class="border border-green-700 px-2 py-1">FAT32</td><td class="border border-green-700 px-2 py-1">Discos externos/USB (compatibilidad multiplataforma).</td><td class="border border-green-700 px-2 py-1">Funciona en consolas, TVs, etc.</td></tr>
+                <tr><td class="border border-green-700 px-2 py-1">exFAT</td><td class="border border-green-700 px-2 py-1">Discos externos grandes (&gt;4GB por archivo).</td><td class="border border-green-700 px-2 py-1">Ideal para transferir archivos grandes entre Windows y macOS.</td></tr>
+                <tr><td class="border border-green-700 px-2 py-1">APFS/ext4</td><td class="border border-green-700 px-2 py-1">macOS/Linux respectivamente.</td><td class="border border-green-700 px-2 py-1">Optimizados para sus sistemas.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h2>¿Qué ocurre durante el formateo? Formateo rápido VS extensivo:</h2>
+          <h3>1. Eliminación de datos</h3>
+          <ul>
+            <li><strong>Formateo rápido:</strong>
+              <ul>
+                <li>Solo borra la <strong>tabla de asignación de archivos</strong> (como la FAT, NTFS o MBR/GPT), que actúa como un "índice" para acceder a los datos.</li>
+                <li><strong>Los archivos no se eliminan físicamente:</strong> quedan en el disco hasta que se sobrescriben con nuevos datos.</li>
+                <li>Es posible recuperar datos con herramientas especializadas.</li>
+              </ul>
+            </li>
+            <li><strong>Formateo extensivo (completo):</strong>
+              <ul>
+                <li>En sistemas antiguos (ej. Windows XP), solía sobrescribir todo el disco con ceros (o patrones aleatorios), eliminando los datos permanentemente.</li>
+                <li><strong>En sistemas modernos (Windows 10/11, etc.):</strong>
+                  <ul>
+                    <li>Por defecto, <strong>no sobrescribe los datos</strong>, solo realiza una verificación de sectores defectuosos.</li>
+                    <li>La opción de sobrescritura (para eliminar datos de forma segura) suele requerir herramientas externas o comandos específicos (ej. cipher /w: en Windows).</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h3>2. Verificación de sectores defectuosos</h3>
+          <ul>
+            <li><strong>Formateo rápido:</strong>
+              <ul>
+                <li><strong>No verifica</strong> la integridad física del disco.</li>
+                <li>Ignora sectores dañados o problemas físicos.</li>
+              </ul>
+            </li>
+            <li><strong>Formateo extensivo:</strong>
+              <ul>
+                <li><strong>Escanea el disco en busca de sectores defectuosos</strong> y los marca para evitar su uso futuro.</li>
+                <li>Aumenta la confiabilidad del dispositivo al detectar fallas físicas.</li>
+              </ul>
+            </li>
+          </ul>
+          <h3>3. Tiempo requerido</h3>
+          <ul>
+            <li><strong>Formateo rápido:</strong>
+              <ul>
+                <li>Es casi instantáneo (segundos o minutos), ya que solo restaura la estructura del sistema de archivos.</li>
+              </ul>
+            </li>
+            <li><strong>Formateo extensivo:</strong>
+              <ul>
+                <li>Puede tardar <strong>horas</strong> en discos grandes, debido al escaneo completo del dispositivo.</li>
+              </ul>
+            </li>
+          </ul>
+          <h3>4. Casos de uso recomendados</h3>
+          <ul>
+            <li><strong>Formateo rápido:</strong>
+              <ul>
+                <li>Cuando se reinstala un sistema operativo o se reutiliza un disco en buen estado.</li>
+                <li>Si no hay sospecha de errores físicos en el disco.</li>
+              </ul>
+            </li>
+            <li><strong>Formateo extensivo:</strong>
+              <ul>
+                <li>Si se sospecha de sectores defectuosos (ej.: errores de lectura/escritura).</li>
+                <li>Al donar o vender un dispositivo, aunque para seguridad real se requiere sobrescritura con herramientas especializadas.</li>
+              </ul>
+            </li>
+          </ul>
+          <h3>5. Seguridad de los datos</h3>
+          <ul>
+            <li><strong>Formateo rápido:</strong>
+              <ul>
+                <li><strong>Datos recuperables</strong> con software de recuperación.</li>
+                <li>No es seguro para dispositivos que se van a desechar o transferir.</li>
+              </ul>
+            </li>
+            <li><strong>Formateo extensivo:</strong>
+              <ul>
+                <li>En sistemas modernos, <strong>los datos siguen recuperables</strong> si no se activa la sobrescritura.</li>
+                <li>Para eliminación segura, se necesitan herramientas como <strong>DBAN</strong>, <strong>BitLocker</strong> (cifrado + borrado), o comandos de bajo nivel.</li>
+              </ul>
+            </li>
+          </ul>
+          <h1>3. "Mi disco está formateado para macOS/Linux y quiero leerlo en Windows"</h1>
+          <h2>Soluciones:</h2>
+          <ol>
+            <li><strong>Usar software de terceros:</strong>
+              <ul>
+                <li><strong>Paragon HFS+</strong> (para leer discos macOS en Windows).</li>
+                <li><strong>Ext2Fsd</strong> (para leer discos Linux ext4 en Windows).</li>
+              </ul>
+            </li>
+            <li><strong>Reformatear el disco</strong> (pérdida de datos):
+              <ul>
+                <li>Usar NTFS/exFAT para compatibilidad.</li>
+              </ul>
+            </li>
+          </ol>
+          <h1>4. Particiones en HDD y SSD</h1>
+          <h2>¿Para qué sirven?</h2>
+          <ul>
+            <li>Organizar datos (ej: una partición para el sistema operativo, otra para archivos).</li>
+            <li>Instalar múltiples sistemas operativos.</li>
+          </ul>
+          <h2>Cómo hacerlo:</h2>
+          <ol>
+            <li><strong>Windows:</strong>
+              <ul>
+                <li>Herramienta <strong>Administración de discos</strong> (diskmgmt.msc).</li>
+              </ul>
+            </li>
+            <li><strong>Software gratuito:</strong>
+              <ul>
+                <li><strong>GParted</strong> (Linux) o <strong>EaseUS Partition Master</strong> (Windows).</li>
+              </ul>
+            </li>
+            <li> <a href="https://www.youtube.com/watch?v=gDGPFtZRxk4"><strong>Video particion de disco</strong></a></li>
+          </ol>
+          <h1>5. Controlador del disco desactualizado</h1>
+          <h2>Cómo verificarlo:</h2>
+          <ol>
+            <li>Abrir <strong>Administrador de dispositivos</strong> (devmgmt.msc desde el cmd).</li>
+            <li>Buscar el disco en <strong>Unidades de disco</strong>.</li>
+            <li>Si hay un icono de advertencia (❗), el controlador está desactualizado.</li>
+          </ol>
+          <h2>Actualización:</h2>
+          <ol>
+            <li>Click derecho en el disco → <strong>Actualizar controlador</strong>.</li>
+            <li>Descargar drivers desde el sitio del fabricante (ej: Seagate, WD).</li>
+          </ol>
+          <h1>6. Reparar disco duro dañado con Victoria HDD</h1>
+          <h2>Pasos básicos:</h2>
+          <ol>
+            <li><strong>Descargar Victoria HDD (gratuito).</strong></li>
+            <li><strong>Ejecutar como administrador.</strong></li>
+            <li><strong>Seleccionar el disco dañado.</strong></li>
+            <li><strong>Realizar pruebas:</strong>
+              <ul>
+                <li><strong>SMART Check:</strong> Ver salud del disco.</li>
+                <li><strong>Surface Test:</strong> Buscar sectores dañados.</li>
+              </ul>
+            </li>
+            <li><strong>Reparar sectores dañados (opción Remap / Reubicar).</strong></li>
+                        <li> <a href="https://www.youtube.com/watch?v=bZOU_m3CX8A" target="_blank" rel="noopener" class="px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-lg font-semibold shadow text-center w-full md:w-auto"><strong>Tutorial uso de victoria 1</strong></a></li>
+            <li> <a href="https://www.youtube.com/watch?v=Hdi7kDspEvE" target="_blank" rel="noopener" class="px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-lg font-semibold shadow text-center w-full md:w-auto"><strong>Tutorial uso de victoria 2</strong></a></li>
+
+            <li> <a href="https://www.mediafire.com/file/ml5e4cprg57xwmb/Victoria537.rar/file" target="_blank" rel="noopener" class="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg font-semibold shadow text-center w-full md:w-auto"><strong>Descargar Victoria</strong></a></li>
+          </ol>
+          <h1>7. Tipos de cables y fallas comunes</h1>
+          <div class="overflow-x-auto mb-4">
+            <table class="min-w-full text-sm text-left text-green-100 border border-green-700 my-2">
+              <thead class="bg-green-800 text-white">
+                <tr>
+                  <th class="px-2 py-1 border border-green-700">Cable</th>
+                  <th class="px-2 py-1 border border-green-700">Uso</th>
+                  <th class="px-2 py-1 border border-green-700">Problemas comunes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="border border-green-700 px-2 py-1">SATA</td><td class="border border-green-700 px-2 py-1">Conexión de discos internos.</td><td class="border border-green-700 px-2 py-1">Desconexión frecuente, pines doblados.</td></tr>
+                <tr><td class="border border-green-700 px-2 py-1">USB</td><td class="border border-green-700 px-2 py-1">Discos externos.</td><td class="border border-green-700 px-2 py-1">Fallas en el conector o cable suelto.</td></tr>
+                <tr><td class="border border-green-700 px-2 py-1">NVMe</td><td class="border border-green-700 px-2 py-1">Discos M.2 SSD.</td><td class="border border-green-700 px-2 py-1">Incompatibilidad con la ranura PCIe.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p> <a href="https://www.youtube.com/watch?v=wZcRbH802ps" target="_blank" rel="noopener" class="px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-lg font-semibold shadow text-center w-full md:w-auto">Cable SATA</a></p>
+          <h1>8. Limpieza de discos y pines de contacto</h1>
+          <ol>
+            <li><strong>Discos HDD:</strong>
+              <ul>
+                <li>Usar aire comprimido para eliminar polvo (nunca abrir el disco).</li>
+              </ul>
+            </li>
+            <li><strong>Contactos SATA/USB:</strong>
+              <ul>
+                <li>Limpiar con alcohol isopropílico (70%) y paño de microfibra.</li>
+              </ul>
+            </li>
+            <li><strong>Verificar estado de pines</strong>
+              <ul>
+                <li> <a href="https://www.youtube.com/watch?v=hYb6bua4a6s" target="_blank" rel="noopener" class="px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-lg font-semibold shadow text-center w-full md:w-auto">Reparar Pines</a></li>
+              </ul>
+            </li>
+          </ol>
+          <h1>9. Circuitos en corto o defectuosos</h1>
+          <ol>
+            <li>Usan un <strong>multímetro</strong> y una <strong>cámara térmica</strong> para identificar componentes dañados
+              <ul>
+                <li>Reemplazar los componentes defectuosos</li>
+              </ul>
+            </li>
+            <li> <a href="https://www.youtube.com/watch?v=1edfjWPlO0c" target="_blank" rel="noopener" class="px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-lg font-semibold shadow text-center w-full md:w-auto">Reparación de diodos y condensador en disco HDD</a></li>
+          </ol>
+          <h1>Actividad Práctica</h1>
+          <h2>Simulación de problemas:</h2>
+          <ol>
+            <li>Corroborar la detección del disco y su formato.</li>
+            <li>Usar Victoria para analizar un disco con sectores dañados (simulado).</li>
+            <li>Verificar estado de las conexiones.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
