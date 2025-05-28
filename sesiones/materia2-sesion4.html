@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <title>Conversión y Reparación de Datos - Sesión 4</title>
+</head>
+<body class="bg-black text-green-100">
+    <div class="container mx-auto p-4 max-w-3xl">
+        <h1 class="text-3xl font-bold text-green-400 mb-6 text-center">Conversión y Reparación de Datos - Sesión 4</h1>
+        <!-- Botones de navegación al inicio del archivo -->
+        <div class="flex flex-wrap gap-4 mb-8">
+            <a href="../materias/conversion-y-reparacion-de-datos.html" class="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg font-semibold shadow">Volver a Materia</a>
+            <a href="materia2-sesion3.html" class="px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-lg font-semibold shadow">Ir a Sesión 3</a>
+        </div>
+        <div class="bg-gray-900 rounded-lg p-6 mb-6 shadow-md">
+            <h2 class="text-xl font-bold text-green-300 mb-2">Sesión 4: Análisis Hexadecimal</h2>
+            <div class="prose prose-invert max-w-none text-green-100">
+                <h3>1. Introducción</h3>
+                <h4>¿Qué es el sistema hexadecimal?</h4>
+                <ul>
+                    <li><strong>Sistema numérico base-16:</strong> dígitos del 0 al 9 y letras de la A (10) a la F (15).</li>
+                </ul>
+                <div class="overflow-x-auto my-4">
+                    <table class="min-w-full text-sm text-left text-green-100 border border-green-700 my-2">
+                        <thead class="bg-green-800 text-white">
+                            <tr>
+                                <th class="px-2 py-1 border border-green-700">Decimal</th>
+                                <th class="px-2 py-1 border border-green-700">Binario (4 bits)</th>
+                                <th class="px-2 py-1 border border-green-700">Hexadecimal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="border border-green-700 px-2 py-1">0</td><td class="border border-green-700 px-2 py-1">0000</td><td class="border border-green-700 px-2 py-1">0</td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1">1</td><td class="border border-green-700 px-2 py-1">0001</td><td class="border border-green-700 px-2 py-1">1</td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1">2</td><td class="border border-green-700 px-2 py-1">0010</td><td class="border border-green-700 px-2 py-1">2</td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1">3</td><td class="border border-green-700 px-2 py-1">0011</td><td class="border border-green-700 px-2 py-1">3</td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1">4</td><td class="border border-green-700 px-2 py-1">0100</td><td class="border border-green-700 px-2 py-1">4</td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1">5</td><td class="border border-green-700 px-2 py-1">0101</td><td class="border border-green-700 px-2 py-1">5</td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1">6</td><td class="border border-green-700 px-2 py-1">0110</td><td class="border border-green-700 px-2 py-1">6</td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1">7</td><td class="border border-green-700 px-2 py-1">0111</td><td class="border border-green-700 px-2 py-1">7</td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1">8</td><td class="border border-green-700 px-2 py-1">1000</td><td class="border border-green-700 px-2 py-1">8</td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1">9</td><td class="border border-green-700 px-2 py-1">1001</td><td class="border border-green-700 px-2 py-1">9</td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1">10</td><td class="border border-green-700 px-2 py-1">1010</td><td class="border border-green-700 px-2 py-1">A</td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1">11</td><td class="border border-green-700 px-2 py-1">1011</td><td class="border border-green-700 px-2 py-1">B</td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1">12</td><td class="border border-green-700 px-2 py-1">1100</td><td class="border border-green-700 px-2 py-1">C</td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1">13</td><td class="border border-green-700 px-2 py-1">1101</td><td class="border border-green-700 px-2 py-1">D</td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1">14</td><td class="border border-green-700 px-2 py-1">1110</td><td class="border border-green-700 px-2 py-1">E</td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1">15</td><td class="border border-green-700 px-2 py-1">1111</td><td class="border border-green-700 px-2 py-1">F</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ul>
+                    <li><strong>Relación con binario:</strong> Cada byte (8 bits) se representa con 2 dígitos hexadecimales.
+                        <ul>
+                            <li><strong>Ejemplo:</strong> 1101 1010 (binario) = DA (hexadecimal).</li>
+                            <li>1111 1000 1010 (binario) = F8 (hexadecimal).</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="my-4">
+                    <a href="https://www.youtube.com/watch?v=Qz0R2rP6b5I" target="_blank" class="px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-lg font-semibold shadow">Video: Sistema binario y hexadecimal</a>
+                </div>
+                <h4>¿Por qué es importante?</h4>
+                <ul>
+                    <li><strong>Informática:</strong>
+                        <ul>
+                            <li>Direcciones de memoria (ej: 0x7FFFFFFF).</li>
+                            <li>Representación de colores (HTML/CSS: #FF5733).</li>
+                            <li>Análisis forense y recuperación de datos.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Ventajas:</strong> Simplifica la lectura de datos binarios.</li>
+                </ul>
+                <div class="bg-gray-700/60 rounded-lg p-4 my-4">
+                    <p><strong>Ejemplo cotidiano:</strong> Los colores en una página web usan códigos hexadecimales. Por ejemplo, el rojo puro es #FF0000.</p>
+                </div>
+                <h3>2. Fundamentos</h3>
+                <h4>Conversiones básicas:</h4>
+                <div class="overflow-x-auto my-4">
+                    <table class="min-w-full text-sm text-left text-green-100 border border-green-700 my-2">
+                        <thead class="bg-green-800 text-white">
+                            <tr>
+                                <th class="px-2 py-1 border border-green-700">Decimal</th>
+                                <th class="px-2 py-1 border border-green-700">Binario (8 bits)</th>
+                                <th class="px-2 py-1 border border-green-700">Hexadecimal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="border border-green-700 px-2 py-1"><strong>0</strong></td><td class="border border-green-700 px-2 py-1"><strong>0000 0000</strong></td><td class="border border-green-700 px-2 py-1"><strong>0x00</strong></td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1"><strong>15</strong></td><td class="border border-green-700 px-2 py-1"><strong>0000 1111</strong></td><td class="border border-green-700 px-2 py-1"><strong>0x0F</strong></td></tr>
+                            <tr><td class="border border-green-700 px-2 py-1"><strong>255</strong></td><td class="border border-green-700 px-2 py-1"><strong>1111 1111</strong></td><td class="border border-green-700 px-2 py-1"><strong>0xFF</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h4>Pasos para convertir:</h4>
+                <ol>
+                    <li><strong>Binario a hexadecimal:</strong>
+                        <ul>
+                            <li>Divide el binario en grupos de 4 bits (nibbles).</li>
+                            <li><strong>Ejemplo:</strong> 1101 1010 → 1101 (D) + 1010 (A) = DA.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Decimal a hexadecimal:</strong>
+                        <ul>
+                            <li>Divide el número entre 16 y el resto de la división es el segundo dígito.</li>
+                            <li><strong>Ejemplo:</strong> 255 ÷ 16 = 15 (F) con residuo 15 (F) → FF.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <div class="bg-gray-700/60 rounded-lg p-4 my-4">
+                    <h4>Ejercicio rápido:</h4>
+                    <ul>
+                        <li>Convertir el número 172 a hexadecimal.
+                            <ul>
+                                <li><strong>Solución:</strong> 172 ÷ 16 = 10 (A) con residuo 12 (C) → AC.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <h4>Aplicaciones clave:</h4>
+                <ul>
+                    <li>Cabeceras de archivos: Identifican el tipo de archivo (ej: PNG = 89 50 4E 47 en hex).</li>
+                    <li>Edición de juegos: Modificar valores como vidas o puntuaciones en archivos guardados.</li>
+                </ul>
+                <h3>3. Herramientas y Práctica</h3>
+                <h4>Editores hexadecimales:</h4>
+                <ol>
+                    <li><strong>HxD (Windows):</strong> Gratuito, interfaz intuitiva.</li>
+                    <a href="https://mh-nexus.de/en/hxd/" target="_blank" class="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg font-semibold shadow">Descargar HxD (Editor hexadecimal para Windows)</a>
+                    <li><strong>Bless (Linux):</strong> Open-source, ideal para análisis avanzado.</li>
+                    <li><strong>Hex Fiend (macOS):</strong> Rápido y liviano.</li>
+                </ol>
+                <div class="bg-gray-700/60 rounded-lg p-4 my-4">
+                    <h4>Actividad 1: Análisis de un archivo de texto</h4>
+                    <ol>
+                        <li>Crea un archivo .txt con el texto: Hola, 5°1°!.</li>
+                        <li>Ábrelo con HxD y observa:
+                            <ul>
+                                <li>Representación hexadecimal:  48 6F 6C 61 2C 20 35 B0 31 B0 21.</li>
+                                <li>Correlación con ASCII: H (48), o (6F), l (6C), etc.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p>Copiar el siguiente código hexadecimal y pasarlo a ASCII (desde la web sugerida a continuación):<br>
+                    <span class="break-words text-xs bg-gray-800 rounded p-2 inline-block select-all">42 75 65 6E 20 64 69 61 20 63 68 69 63 6F 73 21 20 45 73 70 65 72 6F 20 71 75 65 20 73 65 20 76 61 79 61 20 65 6E 74 65 6E 64 69 65 6E 64 6F 20 65 6C 20 74 65 6D 61 2C 20 63 75 61 6C 71 75 69 65 72 20 64 75 64 61 20 70 72 65 67 75 6E 74 65 6E 2E 20 45 73 74 61 20 70 61 67 69 6E 61 20 70 65 72 6D 69 74 65 20 63 6F 6E 76 65 72 74 69 72 20 74 65 78 74 6F 20 6F 20 63 6F 64 69 67 6F 20 65 6E 74 72 65 20 62 69 6E 61 72 69 6F 2C 20 64 65 63 69 6D 61 6C 2C 20 6F 63 74 61 6C 2C 20 68 65 78 61 64 65 63 69 6D 61 6C 2C 20 74 65 78 74 6F 2E 20 4C 6F 73 20 64 6F 73 20 75 6C 74 69 6D 6F 73 20 73 6F 6E 20 6C 6F 73 20 64 65 20 6E 75 65 73 74 72 6F 20 69 6E 74 65 72 65 73 2E</span></p>
+                    <div class="my-2">
+                        <a href="https://www.rapidtables.com/convert/number/hex-to-ascii.html" target="_blank" class="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg font-semibold shadow">Herramienta: Convertir Hex a ASCII</a>
+                    </div>
+                </div>
+                <h4>ASCII a Hexadecimal</h4>
+                <div class="my-2">
+                    <a href="https://www.rapidtables.com/convert/number/ascii-to-hex.html" target="_blank" class="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg font-semibold shadow">Herramienta: Convertir ASCII a Hex</a>
+                </div>
+                <div class="bg-gray-700/60 rounded-lg p-4 my-4">
+                    <h4>Actividad 2: Identificar cabeceras de archivos</h4>
+                    <ol>
+                        <li>Descarga archivos de ejemplo: imagen.jpg, documento.pdf, ejecutable.exe.</li>
+                        <li>Busca sus cabeceras en hexadecimal:
+                            <ul>
+                                <li>JPG: FF D8 FF.</li>
+                                <li>PDF: 25 50 44 46 (%PDF).</li>
+                                <li>EXE: 4D 5A (MZ).</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p><strong>Consejo:</strong> Usa la lista de magic numbers para reconocer tipos de archivos.</p>
+                    <a href="https://en.wikipedia.org/wiki/List_of_file_signatures" target="_blank" class="px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-lg font-semibold shadow mt-2 inline-block">Lista de Magic Numbers (Firmas de archivos)</a>
+                </div>
+                <h3>4. Proyecto Grupal</h3>
+                <h4>"El archivo misterioso"</h4>
+                <ul>
+                    <li><strong>Objetivo:</strong> Determinar el tipo y contenido de un archivo desconocido usando análisis hexadecimal.</li>
+                </ul>
+                <h4>Pasos:</h4>
+                <ol>
+                    <li>El docente proporciona un archivo sin extensión. <a href="../descargas/5°1°%20session%204%20-%20A%20ver%20que%20soy.zip" download class="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg font-semibold shadow ml-2">Descargar archivo misterioso</a></li>
+                    <li>Los equipos abren el archivo con HxD:
+                        <ul>
+                            <li>Identifican la cabecera hexadecimal.</li>
+                            <li>Buscan texto legible (ej: cadenas ASCII).</li>
+                            <li>Correlacionan con magic numbers.</li>
+                        </ul>
+                    </li>
+                    <li>Presentan sus hallazgos:
+                        <ul>
+                            <li>Tipo de archivo.</li>
+                            <li>Posible contenido (ej: texto oculto, imagen).</li>
+                        </ul>
+                    </li>
+                </ol>
+                <div class="bg-gray-700/60 rounded-lg p-4 my-4">
+                    <p><strong>Ejemplo de archivo misterioso:</strong></p>
+                    <ul>
+                        <li>Cabecera: 89 50 4E 47 → PNG.</li>
+                    </ul>
+                </div>
+                <h4>Preguntas finales:</h4>
+                <ol>
+                    <li>¿Cómo ayudarías a un amigo a recuperar un archivo dañado usando análisis hexadecimal?</li>
+                </ol>
+                <h4>Consejos</h4>
+                <ul>
+                    <li>Seguridad: no editar archivos críticos del sistema sin conocimiento.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
