@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link href="../css/styles.css" rel="stylesheet" />
+  <title>Sesión 0 Calculadora - Desarrollo III</title>
+  <style>
+    /* Ajustes para responsividad real en móviles */
+    .prose, .prose-invert, .container, .bg-gray-900, .bg-gray-800 {
+      box-sizing: border-box;
+      width: 100% !important;
+      max-width: 100vw !important;
+      word-break: break-word;
+    }
+    pre, code {
+      white-space: pre-wrap !important;
+      word-break: break-word !important;
+      font-size: 0.95em;
+    }
+    table {
+      display: block;
+      overflow-x: auto;
+      width: 100% !important;
+      max-width: 100vw !important;
+    }
+    th, td {
+      word-break: break-word;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+    }
+    @media (max-width: 600px) {
+      h1, h2, h3, h4 {
+        font-size: 1.1em !important;
+      }
+      .text-3xl { font-size: 1.5em !important; }
+      .text-xl { font-size: 1.1em !important; }
+      .p-4, .p-6 { padding: 0.7em !important; }
+      .mb-6, .mb-8 { margin-bottom: 1em !important; }
+    }
+  </style>
+</head>
+<body class="bg-black text-green-100">
+  <div class="container mx-auto p-4 max-w-3xl w-full">
+    <h1 class="text-3xl font-bold text-green-400 mb-6 text-center">
+      Desarrollo III - Sesión 0: Calculadora
+    </h1>
+    <div class="flex flex-wrap gap-4 mb-8">
+      <a href="../materias/desarrollo-3.html" class="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg font-semibold shadow">Volver a la Materia</a>
+    </div>
+    <div class="bg-gray-900 rounded-lg p-6 mb-6 shadow-md w-full">
+      <div class="prose prose-invert max-w-none text-green-100">
+        <h2 class="text-xl font-bold text-green-300 mb-4">¿Qué debo saber para hacer una calculadora básica?</h2>
+        <ol class="list-decimal list-inside mb-6">
+          <li><strong>Entrada y Salida Básicas:</strong>
+            <ul class="list-disc list-inside ml-4">
+              <li>Saber cómo recibir entrada del usuario usando <code>input()</code>.</li>
+              <li>Saber cómo mostrar resultados usando <code>print()</code>.</li>
+            </ul>
+          </li>
+          <li><strong>Variables y Tipos de Datos:</strong>
+            <ul class="list-disc list-inside ml-4">
+              <li>Conocer los tipos de datos básicos como <code>int</code> (enteros) y <code>float</code> (números decimales).</li>
+              <li>Saber cómo convertir entre tipos de datos usando <code>int()</code> y <code>float()</code>.</li>
+            </ul>
+          </li>
+          <li><strong>Operadores Aritméticos:</strong>
+            <ul class="list-disc list-inside ml-4">
+              <li>Conocer los operadores básicos: <code>+</code> (suma), <code>-</code> (resta), <code>*</code> (multiplicación), <code>/</code> (división).</li>
+            </ul>
+          </li>
+          <li><strong>Condicionales:</strong>
+            <ul class="list-disc list-inside ml-4">
+              <li>Saber cómo usar la declaración <code>if</code> para tomar decisiones en el código.</li>
+            </ul>
+          </li>
+        </ol>
+        <div class="bg-gray-800 rounded-lg p-4 mb-6 shadow">
+          <h3 class="text-lg font-bold text-green-300 mb-2">Ejemplo 1: Suma de dos números</h3>
+          <pre class="bg-black text-green-200 rounded p-3 overflow-x-auto text-xs md:text-sm lg:text-base w-full max-w-full whitespace-pre-wrap break-words"><code># Pedir al usuario que ingrese dos números
+num1 = float(input("Ingresa el primer número: "))
+num2 = float(input("Ingresa el segundo número: "))
+
+# Sumar los dos números
+suma = num1 + num2
+
+# Mostrar el resultado
+print("La suma es:", suma)</code></pre>
+        </div>
+        <div class="bg-gray-800 rounded-lg p-4 mb-6 shadow">
+          <h3 class="text-lg font-bold text-green-300 mb-2">Ejemplo 2: Uso del condicional if para decidir una operación</h3>
+          <pre class="bg-black text-green-200 rounded p-3 overflow-x-auto text-xs md:text-sm lg:text-base w-full max-w-full whitespace-pre-wrap break-words"><code># Pedir al usuario que ingrese dos números
+num1 = float(input("Ingresa el primer número: "))
+num2 = float(input("Ingresa el segundo número: "))
+
+# Pedir al usuario que elija una operación
+operacion = input("¿Qué operación deseas realizar? (A si es una suma, B si es una resta): ")
+
+# Realizar la operación basada en la entrada del usuario
+if operacion == "A":
+    resultado = num1 + num2
+elif operacion == "B":
+    resultado = num1 - num2
+else:
+    resultado = "Operación no válida"
+
+# Mostrar el resultado
+print("El resultado es:", resultado)</code></pre>
+        </div>
+        <div class="bg-gray-800 rounded-lg p-4 mb-6 shadow">
+          <h3 class="text-lg font-bold text-green-300 mb-2">Ejemplo 3: Calculadora con múltiples operaciones</h3>
+          <pre class="bg-black text-green-200 rounded p-3 overflow-x-auto text-xs md:text-sm lg:text-base w-full max-w-full whitespace-pre-wrap break-words"><code># Pedir al usuario que ingrese dos números
+num1 = float(input("Ingresa el primer número: "))
+num2 = float(input("Ingresa el segundo número: "))
+
+# Pedir al usuario que elija una operación
+print("""
+MENÚ DE OPERACIONES:
+A. Suma (+)
+B. Resta (-)
+C. Multiplicación (*)
+D. División (/)
+""")
+
+operacion = input("Elija una operación (A, B, C, D): ")
+
+# Realizar la operación basada en la entrada del usuario
+if operacion == "A":
+    resultado = num1 + num2
+elif operacion == "B":
+    resultado = num1 - num2
+elif operacion == "C":
+    resultado = num1 * num2
+elif operacion == "D":
+    if num2 != 0:
+        resultado = num1 / num2
+    else:
+        resultado = "Error: División por cero"
+else:
+    resultado = "Operación no válida"
+
+# Mostrar el resultado
+print("El resultado es:", resultado)</code></pre>
+        </div>
+        <div class="bg-gray-800 rounded-lg p-4 mb-6 shadow">
+          <h3 class="text-lg font-bold text-green-300 mb-2">¿Cuándo SÍ necesitas <code>math</code>?</h3>
+          <p>Para realizar cálculos más complejos como el uso de Pi (3.14), necesitaremos escribir en la parte superior del fichero lo siguiente:</p>
+          <pre class="bg-black text-green-200 rounded p-3 overflow-x-auto"><code>import math</code></pre>
+          <table class="min-w-full text-xs md:text-sm text-left text-green-100 border border-green-700 my-2 mb-4 overflow-x-auto block">
+            <thead class="bg-green-800 text-white">
+              <tr>
+                <th class="px-2 py-1 border border-green-700">Operación</th>
+                <th class="px-2 py-1 border border-green-700">Función en math</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="border border-green-700 px-2 py-1">Logaritmos</td><td class="border border-green-700 px-2 py-1">log(), log10()</td></tr>
+              <tr><td class="border border-green-700 px-2 py-1">Trigonometría</td><td class="border border-green-700 px-2 py-1">sin(), cos()</td></tr>
+              <tr><td class="border border-green-700 px-2 py-1">Constantes (π, e)</td><td class="border border-green-700 px-2 py-1">math.pi, math.e</td></tr>
+              <tr><td class="border border-green-700 px-2 py-1">Raíz cuadrada exacta</td><td class="border border-green-700 px-2 py-1">math.sqrt()</td></tr>
+              <tr><td class="border border-green-700 px-2 py-1">Factoriales</td><td class="border border-green-700 px-2 py-1">math.factorial()</td></tr>
+            </tbody>
+          </table>
+          <pre class="bg-black text-green-200 rounded p-3 overflow-x-auto text-xs md:text-sm lg:text-base w-full max-w-full whitespace-pre-wrap break-words"><code>import math # Importar módulo para operaciones avanzadas
+
+print("Calculadora Científica")
+opcion = input("Ingrese “A” para calcular una raiz: ")
+
+# Raíz cuadrada
+if opcion == "A":
+    num = float(input("Número para raíz cuadrada: "))
+    if num < 0:
+        resultado = "¡Error! Número negativo."
+    else:
+        resultado = math.sqrt(num)
+else:
+    resultado = "Operación no soportada."
+
+print("Resultado:", resultado)</code></pre>
+        </div>
+        <div class="bg-gray-800 rounded-lg p-4 mb-6 shadow">
+          <h3 class="text-lg font-bold text-green-300 mb-2">Para el caso de Pi</h3>
+          <pre class="bg-black text-green-200 rounded p-3 overflow-x-auto text-xs md:text-sm lg:text-base w-full max-w-full whitespace-pre-wrap break-words"><code>import math
+
+radio = float(input("Ingrese el radio de la esfera: "))
+volumen = (4/3) * math.pi * (radio ** 3)
+print(f"Volumen: {volumen:.2f} de un radio de {radio}")</code></pre>
+          <ul class="list-disc list-inside ml-4">
+            <li><code>f</code> permite agregar una variable dentro de las comillas de forma más fácil.</li>
+            <li><code>.2f</code> permite redondear el número con 2 decimales.</li>
+            <li>Ejemplo de salida: <span class="bg-gray-700 px-2 py-1 rounded">2599.85</span></li>
+          </ul>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+</body>
+</html>
