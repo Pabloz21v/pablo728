@@ -5,6 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="../css/styles.css" rel="stylesheet" />
     <title>Conversión y Reparación de Datos Sesión 1</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1.5em;
+        background: #18181b;
+        color: #e5e7eb;
+        font-size: 1em;
+      }
+      th,
+      td {
+        border: 1px solid #333;
+        padding: 0.5em 0.7em;
+        text-align: left;
+        vertical-align: top;
+        word-break: break-word;
+      }
+      th {
+        background: #047857;
+        color: #fff;
+      }
+      @media (max-width: 800px) {
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+          display: block;
+        }
+        thead tr {
+          display: none;
+        }
+        tr {
+          margin-bottom: 1.2em;
+          border-bottom: 2px solid #047857;
+        }
+        td {
+          border: none;
+          border-bottom: 1px solid #333;
+          position: relative;
+          padding-left: 50%;
+          min-height: 2.5em;
+        }
+        td:before {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 48%;
+          padding-left: 0.7em;
+          white-space: pre-wrap;
+          font-weight: bold;
+          color: #10b981;
+        }
+        /* Etiquetas para la primera tabla */
+        table:nth-of-type(1) tr td:nth-child(1):before {
+          content: "Tipo de Archivo";
+        }
+        table:nth-of-type(1) tr td:nth-child(2):before {
+          content: "Extensión";
+        }
+        table:nth-of-type(1) tr td:nth-child(3):before {
+          content: "¿Para qué sirve?";
+        }
+        table:nth-of-type(1) tr td:nth-child(4):before {
+          content: "Ejemplo de Uso";
+        }
+        table:nth-of-type(1) tr td:nth-child(5):before {
+          content: "Características Únicas";
+        }
+        /* Etiquetas para la segunda tabla */
+        table:nth-of-type(2) tr td:nth-child(1):before {
+          content: "Aspecto";
+        }
+        table:nth-of-type(2) tr td:nth-child(2):before {
+          content: ".odt (OpenDocument)";
+        }
+        table:nth-of-type(2) tr td:nth-child(3):before {
+          content: ".docx (Microsoft Word)";
+        }
+      }
+    </style>
   </head>
   <body class="bg-white text-black">
     <div class="container mx-auto p-4">
@@ -223,8 +305,10 @@
 
       <p>
         <strong>Ejercicio:</strong> el profesor les administra un archivo .rar
-         con varios archivos sin extensión, descomprimirlo en una carpeta, cada archivo otorga
-        pistas de cuál es su posible extensión, darle la extensión  y ejecutarlo, si logran acceder y visualizar su contenido es que se ha realizado correctamente.
+        con varios archivos sin extensión, descomprimirlo en una carpeta, cada
+        archivo otorga pistas de cuál es su posible extensión, darle la
+        extensión y ejecutarlo, si logran acceder y visualizar su contenido es
+        que se ha realizado correctamente.
       </p>
 
       <div class="my-4">
