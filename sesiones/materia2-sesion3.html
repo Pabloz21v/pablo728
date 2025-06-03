@@ -23,6 +23,11 @@
           >Ir a Sesión 2</a
         >
         <a
+          href="materia2-sesion4.html"
+          class="px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-lg font-semibold shadow"
+          >Ir a Sesión 4</a
+        >
+        <a
           href="../index.html"
           class="px-4 py-2 bg-green-500 hover:bg-green-600 text-black rounded-lg font-semibold shadow"
           >Volver al índice</a
@@ -32,55 +37,161 @@
         <h2 class="text-xl font-bold text-green-700 mb-2">
           Sesión 3: Recuperación de Datos
         </h2>
-        <div class="prose max-w-none">
-          <p>
-            <span class="font-bold">Objetivo:</span> Comprender los conceptos y
-            herramientas básicas para la recuperación de datos en dispositivos
-            de almacenamiento.
-          </p>
-          <hr class="my-4 border-green-400" />
-          <h3 class="font-bold text-green-700 mt-4 mb-2">
-            ¿Qué es la recuperación de datos?
-          </h3>
-          <p>
-            La recuperación de datos es el proceso de restaurar información que
-            ha sido eliminada, dañada o inaccesible en un dispositivo de
-            almacenamiento, como discos duros, SSD, USB o tarjetas de memoria.
-          </p>
-          <h4 class="font-semibold mt-4 mb-1">
-            Causas comunes de pérdida de datos:
-          </h4>
-          <ul class="list-disc ml-6">
-            <li>Borrado accidental de archivos.</li>
-            <li>Formateo del dispositivo.</li>
-            <li>Fallas físicas (golpes, caídas, desgaste).</li>
-            <li>Errores lógicos (corrupción de archivos, virus).</li>
-          </ul>
-          <h4 class="font-semibold mt-4 mb-1">
-            Herramientas y métodos básicos:
-          </h4>
-          <ul class="list-disc ml-6">
-            <li>Software de recuperación (ej: Recuva, R-Studio, TestDisk).</li>
-            <li>Uso de copias de seguridad previas.</li>
-            <li>Recuperación desde la papelera de reciclaje.</li>
-            <li>Servicios profesionales para fallas graves.</li>
-          </ul>
-          <div class="bg-green-100 text-green-900 rounded p-3 my-3">
-            <span class="font-bold">Consejo:</span> ¡Evita usar el dispositivo
-            tras la pérdida de datos para no sobrescribir la información
-            recuperable!
-          </div>
-          <h4 class="font-semibold mt-4 mb-1">Ejemplo práctico:</h4>
-          <ol class="list-decimal ml-6">
-            <li>
-              Descargar e instalar un software de recuperación (por ejemplo,
-              Recuva).
-            </li>
-            <li>Seleccionar la unidad donde se perdieron los datos.</li>
-            <li>Escanear y previsualizar los archivos recuperables.</li>
-            <li>Guardar los archivos recuperados en otro dispositivo.</li>
-          </ol>
-        </div>
+        <p>
+          <strong>Objetivo:</strong> Aprender técnicas y herramientas para
+          recuperar archivos eliminados o dañados, y comprender las limitaciones
+          y buenas prácticas para prevenir la pérdida de datos.
+        </p>
+
+        <h2>Contenido Teórico</h2>
+
+        <h3>1. Principios de la Recuperación de Datos</h3>
+        <h4>¿Cómo funciona?</h4>
+        <ul>
+          <li>
+            Los archivos eliminados no se borran inmediatamente; el sistema
+            marca el espacio como disponible.
+          </li>
+          <li>
+            Herramientas escanean el disco en busca de estos datos "invisibles".
+          </li>
+        </ul>
+
+        <h4>Diferencias HDD vs SSD</h4>
+        <ul>
+          <li>En HDD, los datos persisten hasta ser sobrescritos.</li>
+          <li>
+            En SSD, el comando TRIM prepara celdas en memoria para ser
+            sobrescritas.
+          </li>
+        </ul>
+
+        <h4>Tipos de pérdida de datos</h4>
+        <ul>
+          <li>
+            <strong>Eliminación accidental:</strong> Recuperación desde la
+            Papelera de Reciclaje o con software.
+          </li>
+          <li>
+            <strong>Daño lógico:</strong> Corrupción de archivos por virus o
+            errores del sistema.
+          </li>
+          <li>
+            <strong>Daño físico:</strong> Fallos en discos duros o USBs
+            (requiere profesionales).
+          </li>
+        </ul>
+
+        <h3>2. Límites y Precauciones</h3>
+        <ul>
+          <li>
+            Archivos sobrescritos: Si se guardan nuevos datos, la recuperación
+            es imposible ya que se está sobrescribiendo sobre el archivo
+            previamente borrado.
+          </li>
+          <li>
+            Cuanto antes se traten de recuperar los datos, aumentan las chances
+            de lograrlo.
+          </li>
+          <li>
+            Tratar de instalar en otro disco (HDD o SSD) un programa para
+            recuperar datos para evitar sobrescribir datos producto de la
+            instalación del programa de recuperación.
+          </li>
+        </ul>
+
+        <h3>3. Herramientas Modernas de Recuperación</h3>
+        <h4>Software gratuito</h4>
+        <ul>
+          <li>
+            <strong>Disk Drill (PC):</strong>
+            <ol>
+              <li>
+                <a
+                  href="https://www.cleverfiles.com/es/data-recovery-software.html"
+                  >Descargar Disk-Drill</a
+                >
+              </li>
+            </ol>
+          </li>
+          <li>
+            <strong
+              >Recuperar Fotos – All Recovery (Celular desde la app store, autor
+              AnviGame).</strong
+            >
+          </li>
+        </ul>
+
+        <h4>Servicios en la nube</h4>
+        <ul>
+          <li>
+            Restauración de versiones anteriores (Google Drive (Vault): Es un
+            servicio pago de Google Drive para recuperar datos borrados).
+          </li>
+        </ul>
+
+        <h2>Actividades Prácticas</h2>
+
+        <h3>Actividad 1: "Rescate de Archivos Borrados"</h3>
+        <ul>
+          <li>
+            <strong>Objetivo:</strong> Recuperar archivos eliminados usando
+            <strong>Disk Drill</strong> y
+            <strong>Recuperar Fotos – All Recovery</strong>.
+          </li>
+          <li>
+            <strong>Pasos:</strong>
+            <ol>
+              <li>
+                USBs y/o celulares con archivos borrados (documentos, fotos).
+              </li>
+              <li>
+                Los estudiantes usan <strong>Disk Drill (PC)</strong> o
+                <strong>Recuperar Fotos – All Recovery (Móvil)</strong> para
+                escanear el dispositivo.
+              </li>
+              <li>
+                Clasifican los archivos recuperables por tipo y prioridad (ej:
+                fotos vs documentos).
+              </li>
+              <li>Observar el estado de los archivos recuperados.</li>
+              <li>
+                ¿Qué factores afectan la recuperación (tiempo, uso del
+                dispositivo)?
+              </li>
+            </ol>
+          </li>
+        </ul>
+
+        <h2>Contenido Complementario</h2>
+
+        <h3>1. Copias de Seguridad (Backup)</h3>
+        <ul>
+          <li>
+            <strong>Herramientas:</strong> <strong>Windows Backup</strong>,
+            <strong>Time Machine</strong> (macOS).
+          </li>
+          <li>
+            <strong>Regla del 3-2-1:</strong> 3 copias, 2 medios diferentes, 1
+            fuera del sitio.
+          </li>
+        </ul>
+
+        <h2>Ejemplos Cotidianos</h2>
+        <ul>
+          <li>
+            <strong>Caso 1:</strong> Recuperar fotos borradas del celular usando
+            una app móvil o conectarlo al PC y desde ahí hacer el rescate.
+          </li>
+          <li>
+            <strong>Caso 2:</strong> Restaurar un trabajo escolar guardado por
+            error en un USB formateado.
+          </li>
+          <li>
+            <strong>Caso 3:</strong> Recuperar una carpeta con documentos
+            importantes en tu PC.
+          </li>
+        </ul>
       </div>
     </div>
   </body>
