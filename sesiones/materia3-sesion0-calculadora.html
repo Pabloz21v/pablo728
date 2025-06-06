@@ -89,29 +89,35 @@ print("La suma es:", suma)</code></pre>
         </div>
         <div class="bg-gray-800 rounded-lg p-4 mb-6 shadow">
           <h3 class="text-lg font-bold text-green-300 mb-2">Ejemplo 2: Uso del condicional if para decidir una operación</h3>
-          <pre class="bg-black text-green-200 rounded p-3 overflow-x-auto text-xs md:text-sm lg:text-base w-full max-w-full whitespace-pre-wrap break-words"><code># Pedir al usuario que ingrese dos números
-num1 = float(input("Ingresa el primer número: "))
-num2 = float(input("Ingresa el segundo número: "))
+          <pre class="bg-black text-green-200 rounded p-3 overflow-x-auto text-xs md:text-sm lg:text-base w-full max-w-full whitespace-pre-wrap break-words"><code>
+
 
 # Pedir al usuario que elija una operación
 operacion = input("¿Qué operación deseas realizar? (A si es una suma, B si es una resta): ")
 
 # Realizar la operación basada en la entrada del usuario
 if operacion == "A":
-    resultado = num1 + num2
+    # Pedir al usuario que ingrese dos números para la suma
+    num1 = float(input("Ingresa el primer número de la suma: "))
+    num2 = float(input("Ingresa el segundo número de la suma: "))
+    num3 = float(input("Ingresa el tercer número de la suma: "))
+    num4 = float(input("Ingresa el cuarto número de la suma: "))
+    resultado = num1 + num2 + num3 + num4
 elif operacion == "B":
+    # Pedir al usuario que ingrese dos números para la suma
+    num1 = float(input("Ingresa el primer número de la resta: "))
+    num2 = float(input("Ingresa el segundo número de la resta: "))
     resultado = num1 - num2
 else:
     resultado = "Operación no válida"
 
 # Mostrar el resultado
-print("El resultado es:", resultado)</code></pre>
+print("El resultado es: ", resultado)</code></pre>
         </div>
         <div class="bg-gray-800 rounded-lg p-4 mb-6 shadow">
           <h3 class="text-lg font-bold text-green-300 mb-2">Ejemplo 3: Calculadora con múltiples operaciones</h3>
-          <pre class="bg-black text-green-200 rounded p-3 overflow-x-auto text-xs md:text-sm lg:text-base w-full max-w-full whitespace-pre-wrap break-words"><code># Pedir al usuario que ingrese dos números
-num1 = float(input("Ingresa el primer número: "))
-num2 = float(input("Ingresa el segundo número: "))
+          <pre class="bg-black text-green-200 rounded p-3 overflow-x-auto text-xs md:text-sm lg:text-base w-full max-w-full whitespace-pre-wrap break-words"><code>
+
 
 # Pedir al usuario que elija una operación
 print("""
@@ -126,12 +132,28 @@ operacion = input("Elija una operación (A, B, C, D): ")
 
 # Realizar la operación basada en la entrada del usuario
 if operacion == "A":
+    print("Operación seleccionada: Suma")
+    # Pedir al usuario que ingrese dos números
+    num1 = float(input("Ingresa el primer número: "))
+    num2 = float(input("Ingresa el segundo número: "))
     resultado = num1 + num2
 elif operacion == "B":
+    print("Operación seleccionada: Resta")
+    # Pedir al usuario que ingrese dos números
+    num1 = float(input("Ingresa el primer número: "))
+    num2 = float(input("Ingresa el segundo número: "))
     resultado = num1 - num2
 elif operacion == "C":
+    print("Operación seleccionada: Multiplicación")
+    # Pedir al usuario que ingrese dos números
+    num1 = float(input("Ingresa el primer número: "))
+    num2 = float(input("Ingresa el segundo número: "))
     resultado = num1 * num2
 elif operacion == "D":
+    print("Operación seleccionada: División")
+    # Pedir al usuario que ingrese dos números
+    num1 = float(input("Ingresa el primer número: "))
+    num2 = float(input("Ingresa el segundo número: "))
     if num2 != 0:
         resultado = num1 / num2
     else:
