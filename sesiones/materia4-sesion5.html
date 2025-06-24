@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 1: Anatomía de la Placa Madre y Fallas Básicas</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        background: #f8fafc;
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 24px 16px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+        font-size: 1rem;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      a {
+        color: #0066cc;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .flex {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      .rounded-xl {
+        border-radius: 1rem;
+      }
+      .shadow {
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+      }
+      .bg-green-700 {
+        background: #15803d;
+      }
+      .bg-green-800 {
+        background: #166534;
+      }
+      .bg-gray-700 {
+        background: #374151;
+      }
+      .bg-gray-800 {
+        background: #1f2937;
+      }
+      .text-white {
+        color: #fff;
+      }
+      .font-semibold {
+        font-weight: 600;
+      }
+      .px-6 {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+      .py-3 {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+      }
+      .text-lg {
+        font-size: 1.125rem;
+      }
+      @media (max-width: 700px) {
+        .container {
+          padding: 12px 4px;
+        }
+        h1 {
+          font-size: 1.5rem;
+        }
+        h2 {
+          font-size: 1.15rem;
+        }
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+          display: block;
+          width: 100%;
+        }
+        th,
+        td {
+          box-sizing: border-box;
+          width: 100%;
+          display: block;
+        }
+        th {
+          background: #e5e7eb;
+        }
+        tr {
+          margin-bottom: 1rem;
+          border-radius: 8px;
+          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.04);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="flex flex-wrap gap-4 mb-8">
+        <a
+          href="../materias/mantenimiento-de-hardware.html"
+          class="px-6 py-3 text-lg bg-green-700 hover:bg-green-800 text-white rounded-xl font-semibold shadow"
+          >Volver a Materia</a
+        >
+        <a
+          href="materia4-sesion4.html"
+          class="px-6 py-3 text-lg bg-gray-700 hover:bg-gray-800 text-white rounded-xl font-semibold shadow"
+          >Ir a Sesión 4</a
+        >
+      </div>
+      <h1>CLASE 1: ANATOMÍA DE LA PLACA MADRE Y FALLAS BÁSICAS</h1>
+      <p>
+        <strong>Objetivo:</strong> Comprender estructura física, componentes
+        críticos y fallas más frecuentes.
+      </p>
+
+      <h2>1. Arquitectura de la Placa Madre</h2>
+
+      <table>
+        <tr>
+          <th>Componente</th>
+          <th>Función</th>
+          <th>Ejemplos en PC/Notebook</th>
+        </tr>
+        <tr>
+          <td>Socket CPU</td>
+          <td>Conexión física para el procesador</td>
+          <td>LGA 1700 (Intel Desktop), FP7 (AMD Notebook)</td>
+        </tr>
+        <tr>
+          <td>VRM</td>
+          <td>Convierte 12V de la PSU a voltaje CPU (ej: 1.2V)</td>
+          <td>Fases VRM: 8+2 (gama media), 16+2 (gama alta)</td>
+        </tr>
+        <tr>
+          <td>Chipset</td>
+          <td>"Tráfico de datos" entre CPU, RAM, PCIe y periféricos</td>
+          <td>Intel Z790 (Desktop), AMD Promontory (Notebook)</td>
+        </tr>
+        <tr>
+          <td>BIOS/UEFI Chip</td>
+          <td>Almacena firmware para iniciar hardware</td>
+          <td>Winbond 25Q128 (128Mb SPI Flash)</td>
+        </tr>
+        <tr>
+          <td>Conectores SATA/M.2</td>
+          <td>Interfaz para almacenamiento</td>
+          <td>SATA III (6Gbps), M.2 NVMe (PCIe 4.0 x4 - 64Gbps)</td>
+        </tr>
+      </table>
+
+      <h2>
+        2. VRM (Módulo de Regulación de Voltaje o Voltage Regulator Module)
+      </h2>
+      <p>
+        Es un circuito electrónico que regula el voltaje de la energía que llega
+        a componentes como la CPU y la GPU en una computadora. Su función
+        principal es convertir el voltaje de la fuente de alimentación a un
+        nivel adecuado para los componentes, evitando daños por sobrevoltaje y
+        asegurando un funcionamiento estable.
+      </p>
+
+      <p>
+        <a href="https://www.youtube.com/watch?v=vJoIUpMHT6w"
+          >Video: ¿Qué son y cómo funcionan las VRM?</a
+        >
+      </p>
+
+      <h2>CHIPSET</h2>
+      <p>
+        El chipset "conjunto de chips" de una placa base es un conjunto de
+        circuitos integrados que actúan como el "cerebro" de la placa,
+        gestionando la comunicación entre todos los componentes del ordenador
+        como la CPU, la memoria RAM, el almacenamiento y los periféricos. Es
+        como el centro de tráfico que dirige el flujo de datos entre ellos.
+      </p>
+
+      <p>
+        <a href="https://www.youtube.com/watch?v=eJn-qPHtfzI"
+          >Video chipset, southbridge y northbridge</a
+        >
+        (pueden activar los subtítulos en castellano).
+      </p>
+
+      <h2>BIOS vs UEFI: Diferencias Clave</h2>
+
+      <table>
+        <tr>
+          <th>Característica</th>
+          <th>BIOS (Legacy)</th>
+          <th>UEFI (Moderno)</th>
+        </tr>
+        <tr>
+          <td>Interfaz</td>
+          <td>Texto monocromático (teclado)</td>
+          <td>Gráfica (ratón compatible)</td>
+        </tr>
+        <tr>
+          <td>Tamaño disco soportado</td>
+          <td>Máx 2.2 TB</td>
+          <td>Exabytes (teóricamente ilimitado)</td>
+        </tr>
+        <tr>
+          <td>Secure Boot</td>
+          <td>No</td>
+          <td>Sí (bloquea malware pre-OS)</td>
+        </tr>
+        <tr>
+          <td>Tiempo arranque</td>
+          <td>30-40 segundos</td>
+          <td>5-15 segundos</td>
+        </tr>
+        <tr>
+          <td>Actualización</td>
+          <td>Riesgosa (puede "brickear" placa)</td>
+          <td>Dual BIOS en gama alta (copia de respaldo)</td>
+        </tr>
+      </table>
+
+      <p>
+        "Brickear" (del inglés *brick*, "ladrillo"): se refiere a dejar la placa
+        madre inutilizable tras una actualización fallida del firmware
+        BIOS/UEFI. La placa se vuelve tan útil como un ladrillo: no enciende, no
+        muestra imagen y no responde.
+      </p>
+
+      <h2>CAUSAS TÉCNICAS en BIOS vs UEFI</h2>
+
+      <table>
+        <tr>
+          <th>Causa</th>
+          <th>Mecanismo de fallo</th>
+        </tr>
+        <tr>
+          <td>Interrupción de energía</td>
+          <td>
+            Apagado durante la escritura del chip SPI (corrompe el firmware).
+          </td>
+        </tr>
+        <tr>
+          <td>Firmware incorrecto</td>
+          <td>
+            Usar archivo para otro modelo de placa (ej: BIOS de ASUS B450 en una
+            B550).
+          </td>
+        </tr>
+        <tr>
+          <td>USB defectuoso</td>
+          <td>Fallo en la transferencia de datos desde el USB al chip.</td>
+        </tr>
+        <tr>
+          <td>Incompatibilidad</td>
+          <td>
+            Actualizar BIOS muy nuevo para CPU antigua (ej: BIOS AM5 en CPU
+            AM4).
+          </td>
+        </tr>
+      </table>
+
+      <h2>Fallas comunes y soluciones</h2>
+
+      <table>
+        <tr>
+          <th>Problema</th>
+          <th>BIOS</th>
+          <th>UEFI</th>
+        </tr>
+        <tr>
+          <td>No arranca desde USB</td>
+          <td>Habilitar "USB Legacy Support"</td>
+          <td>Desactivar "Secure Boot"</td>
+        </tr>
+        <tr>
+          <td>No detecta disco grande</td>
+          <td>Incompatible (usar disco <2TB)</td>
+          <td>Convertir MBR a GPT con diskpart</td>
+        </tr>
+        <tr>
+          <td>Pantalla negra post-actualización</td>
+          <td>Reprogramar chip con hardware (CH341A)</td>
+          <td>Usar función "Flashback" *Recovery Mode* (USB con firmware).</td>
+        </tr>
+        <tr>
+          <td>Error "Operating System not found"</td>
+          <td>Verificar orden de boot en Setup</td>
+          <td>Reparar EFI Bootloader con USB Live (Linux) o USB (Windows)</td>
+        </tr>
+      </table>
+
+      <h2>¿Qué son MBR y GPT?</h2>
+
+      <table>
+        <tr>
+          <th>Característica</th>
+          <th>MBR (Master Boot Record)</th>
+          <th>GPT (GUID Partition Table)</th>
+        </tr>
+        <tr>
+          <td>Año de lanzamiento</td>
+          <td>1983 (IBM PC DOS 2.0)</td>
+          <td>2000 (parte del estándar UEFI)</td>
+        </tr>
+        <tr>
+          <td>Máximo tamaño disco</td>
+          <td>2 TB</td>
+          <td>9.4 ZB (zettabytes, ≈9.4 billones de TB)</td>
+        </tr>
+        <tr>
+          <td>Máx. particiones</td>
+          <td>4 primarias (o 3 primarias + 1 extendida con lógicas)</td>
+          <td>128 primarias</td>
+        </tr>
+        <tr>
+          <td>Arranque</td>
+          <td>Solo BIOS Legacy</td>
+          <td>UEFI o BIOS con CSM (Compatibility Support Module)</td>
+        </tr>
+        <tr>
+          <td>Resistencia a fallos</td>
+          <td>Copia única del sector de arranque (vulnerable)</td>
+          <td>Múltiples copias + CRC32 para verificación</td>
+        </tr>
+        <tr>
+          <td>Sistemas soportados</td>
+          <td>Windows XP-10 (32-bit), Linux Legacy</td>
+          <td>Windows 8+ (64-bit), Linux moderno, macOS</td>
+        </tr>
+      </table>
+
+      <h2>Conversión de Disco MBR a GPT / GPT a MBR</h2>
+
+      <h3>BIOS Legacy + disco GPT: En el cmd</h3>
+      <pre>
+mbr2gpt /validate /disk:0
+mbr2gpt /convert /disk:0
+</pre
+      >
+
+      <h3>UEFI + disco MBR: En el cmd</h3>
+      <p>Usar diskpart para convertir a GPT:</p>
+      <pre>
+select disk 0
+clean
+convert gpt
+</pre
+      >
+
+      <p>
+        <a href="https://www.youtube.com/watch?v=inD_xJCauqo"
+          >Video MBR vs GPT</a
+        >
+      </p>
+
+      <h2>¿Qué es la BIOS y la UEFI?</h2>
+      <p>
+        <a href="https://www.youtube.com/watch?v=ibGkd69mlJY"
+          >Video Diferencias, Ventajas y Desventajas</a
+        >
+      </p>
+
+      <h2>¿Qué es el CMOS?</h2>
+      <p>
+        El CMOS (Complementary Metal-Oxide-Semiconductor) de la placa base es
+        una pequeña memoria que almacena la configuración del BIOS, incluyendo
+        la fecha, hora, y configuración del hardware del sistema. Esta memoria
+        es alimentada por una batería en la placa base, conocida como batería
+        CMOS.
+      </p>
+
+      <h2>Problemas de CMOS</h2>
+
+      <table>
+        <tr>
+          <th>Falla</th>
+          <th>Síntoma</th>
+          <th>Solución</th>
+        </tr>
+        <tr>
+          <td>Batería agotada</td>
+          <td>Fecha/hora se resetea</td>
+          <td>Reemplazar batería CR2032</td>
+        </tr>
+        <tr>
+          <td>Corrupción de datos</td>
+          <td>Configuraciones no se guardan</td>
+          <td>Resetear CMOS + actualizar BIOS</td>
+        </tr>
+      </table>
+      <h2>Restablecer BIOS borrando CMOS con jumper</h2>
+      <p>
+        <a href="https://www.youtube.com/shorts/Q7RGeptqEL8"
+          >Video: Reset CMOS</a
+        >
+      </p>
+
+      <h2>DIFERENCIAS ENTRE BIOS Y CMOS</h2>
+
+      <table>
+        <tr>
+          <th>Característica</th>
+          <th>BIOS</th>
+          <th>CMOS</th>
+        </tr>
+        <tr>
+          <td>Naturaleza</td>
+          <td>Software (firmware)</td>
+          <td>Hardware (chip de memoria)</td>
+        </tr>
+        <tr>
+          <td>Almacenamiento</td>
+          <td>Chip de memoria flash (no volátil)</td>
+          <td>Chip RAM estática volátil</td>
+        </tr>
+        <tr>
+          <td>Energía requerida</td>
+          <td>No necesita batería</td>
+          <td>Batería CR2032 (3V)</td>
+        </tr>
+        <tr>
+          <td>Contenido</td>
+          <td>Código de arranque y pruebas POST</td>
+          <td>Configuraciones de usuario (fecha, boot)</td>
+        </tr>
+        <tr>
+          <td>¿Se borra al apagar?</td>
+          <td>No</td>
+          <td>Solo si falla la batería</td>
+        </tr>
+        <tr>
+          <td>Ubicación física</td>
+          <td>Chip SPI cerca del socket CPU o Southbridge</td>
+          <td>Integrado en el chipset o cerca de la batería</td>
+        </tr>
+      </table>
+      <h2>¿Qué es el BIOS?</h2>
+      <p>
+        <a href="https://www.youtube.com/watch?v=IFGjwDZHmK4"
+          >Video: diferencias entre BIOS, UEFI y CMOS explicadas.</a
+        >
+      </p>
+
+      <h2>3. Slots y Compatibilidad</h2>
+
+      <table>
+        <tr>
+          <th>Slot</th>
+          <th>Identificación Visual</th>
+          <th>Componentes Compatibles</th>
+          <th>Errores Comunes</th>
+        </tr>
+        <tr>
+          <td>PCIe x16</td>
+          <td>Ranura larga con clip de seguridad</td>
+          <td>GPU, tarjetas RAID, capturadoras</td>
+          <td>GPU no detectada (slot sucio o dañado)</td>
+        </tr>
+        <tr>
+          <td>PCIe x1</td>
+          <td>Ranura corta (2-3 cm)</td>
+          <td>Tarjetas WiFi, sonido, USB</td>
+          <td>Componente no reconocido (drivers faltantes)</td>
+        </tr>
+        <tr>
+          <td>M.2 Key M</td>
+          <td>Ranura horizontal con tornillo</td>
+          <td>SSD NVMe (PCIe x4)</td>
+          <td>SSD no detectado (incompatibilidad Key B/M)</td>
+        </tr>
+        <tr>
+          <td>DIMM DDR</td>
+          <td>288 pines, muesca descentrada</td>
+          <td>Módulos RAM DDR4</td>
+          <td>PC no enciende (RAM mal insertada)</td>
+        </tr>
+      </table>
+
+      <table>
+        <tr>
+          <th>Característica</th>
+          <th>SATA 1</th>
+          <th>SATA 2</th>
+          <th>SATA 3</th>
+        </tr>
+        <tr>
+          <td>Velocidad de transferencia</td>
+          <td>1.5 Gbps</td>
+          <td>3 Gbps</td>
+          <td>6 Gbps</td>
+        </tr>
+        <tr>
+          <td>Ancho de banda</td>
+          <td>150 MB/s</td>
+          <td>300 MB/s</td>
+          <td>600 MB/s</td>
+        </tr>
+        <tr>
+          <td>Compatibilidad hacia atrás</td>
+          <td>No compatible con SATA 2 y 3</td>
+          <td>Compatible con SATA 1</td>
+          <td>Compatible con SATA 1 y 2</td>
+        </tr>
+        <tr>
+          <td>Voltaje</td>
+          <td>5V, 3.3V, 1.5V</td>
+          <td>5V, 3.3V, 1.5V</td>
+          <td>5V, 3.3V</td>
+        </tr>
+        <tr>
+          <td>Conector</td>
+          <td>Mismo conector físico</td>
+          <td>Mismo conector físico</td>
+          <td>Mismo conector físico</td>
+        </tr>
+      </table>
+
+      <table>
+        <tr>
+          <th>Característica</th>
+          <th>PCIe x1</th>
+          <th>PCIe x4</th>
+          <th>PCIe x8</th>
+          <th>PCIe x16</th>
+        </tr>
+        <tr>
+          <td>Número de carriles</td>
+          <td>1</td>
+          <td>4</td>
+          <td>8</td>
+          <td>16</td>
+        </tr>
+        <tr>
+          <td>Ancho de banda (PCIe 1.0)</td>
+          <td>250 MB/s</td>
+          <td>1 GB/s</td>
+          <td>2 GB/s</td>
+          <td>4 GB/s</td>
+        </tr>
+        <tr>
+          <td>Ancho de banda (PCIe 2.0)</td>
+          <td>500 MB/s</td>
+          <td>2 GB/s</td>
+          <td>4 GB/s</td>
+          <td>8 GB/s</td>
+        </tr>
+        <tr>
+          <td>Ancho de banda (PCIe 3.0)</td>
+          <td>984.6 MB/s</td>
+          <td>~4 GB/s</td>
+          <td>~8 GB/s</td>
+          <td>~16 GB/s</td>
+        </tr>
+        <tr>
+          <td>Ancho de banda (PCIe 4.0)</td>
+          <td>~2 GB/s</td>
+          <td>~8 GB/s</td>
+          <td>~16 GB/s</td>
+          <td>~32 GB/s</td>
+        </tr>
+        <tr>
+          <td>Ancho de banda (PCIe 5.0)</td>
+          <td>~4 GB/s</td>
+          <td>~16 GB/s</td>
+          <td>~32 GB/s</td>
+          <td>~64 GB/s</td>
+        </tr>
+        <tr>
+          <td>Uso común</td>
+          <td>
+            <ul>
+              <li>Tarjetas de sonido</li>
+              <li>Wi-Fi/Bluetooth</li>
+              <li>Capturadoras HD</li>
+              <li>Expansores USB/SATA</li>
+              <li>Tarjetas de red 1GbE</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>SSD NVMe M.2</li>
+              <li>Tarjetas 10GbE</li>
+              <li>Controladores RAID</li>
+              <li>GPU profesionales básicas</li>
+              <li>Capturadoras 4K</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>GPU gaming/media gama</li>
+              <li>Tarjetas 25-40GbE</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>GPU gaming alta gama</li>
+              <li>GPU profesionales</li>
+              <li>Aceleradores GPU</li>
+              <li>Tarjetas de virtualización</li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+
+      <p>
+        <a href="https://www.youtube.com/watch?v=Fj7F7Qs9-us"
+          >Video: PCI Express - explicado (PCIe)</a
+        >
+      </p>
+
+      <p>
+        <a
+          href="https://achotech.com/conectores-pci-express-x16-x8-x4-y-x1-diferencias/#Diferencias_entre_PCIe_x16_x8_x4_y_x1"
+          >Web ejemplo de ranuras</a
+        >
+      </p>
+
+      <h3>Slot PCIe dañado</h3>
+      <ul>
+        <li>Síntoma: GPU no detectada.</li>
+        <li>Solución: Limpieza de contactos con alcohol isopropílico.</li>
+      </ul>
+
+      <h2>4. Fallas Básicas y Diagnóstico</h2>
+
+      <table>
+        <tr>
+          <th>Falla</th>
+          <th>Síntomas</th>
+          <th>Herramientas Diagnóstico</th>
+          <th>Solución</th>
+        </tr>
+        <tr>
+          <td>Capacitores hinchados</td>
+          <td>PC reinicia al azar, olor a quemado</td>
+          <td>Inspección visual (topes abultados)</td>
+          <td>Reemplazar capacitores (requiere soldadura)</td>
+        </tr>
+        <tr>
+          <td>Slot RAM dañado</td>
+          <td>Pitido largo al encender</td>
+          <td>Probar módulos en otras ranuras</td>
+          <td>Limpiar contactos con alcohol isopropílico</td>
+        </tr>
+        <tr>
+          <td>Sobrecalentamiento VRM</td>
+          <td>Apagado bajo carga de trabajo</td>
+          <td>HWiNFO (monitoreo térmico)</td>
+          <td>Mejorar refrigeración (ventilador adicional)</td>
+        </tr>
+        <tr>
+          <td>Corrosión</td>
+          <td>Manchas verdes/blancas cerca de puertos</td>
+          <td>Inspección visual con lupa</td>
+          <td>Limpiar con alcohol isopropílico</td>
+        </tr>
+      </table>
+
+      <h2>Identificar capacitores dañados</h2>
+
+      <table>
+        <tr>
+          <th>Síntoma</th>
+          <th>Descripción</th>
+          <th>Posible Causa</th>
+        </tr>
+        <tr>
+          <td>Capacitores hinchados</td>
+          <td>La parte superior del capacitor está hinchada o abultada.</td>
+          <td>
+            Sobrecalentamiento, sobretensión, o envejecimiento del capacitor.
+          </td>
+        </tr>
+        <tr>
+          <td>Fuga de electrolito</td>
+          <td>
+            Presencia de líquido o residuos alrededor de la base del capacitor.
+          </td>
+          <td>
+            Falla en el sello del capacitor, lo que lleva a la fuga del
+            electrolito.
+          </td>
+        </tr>
+        <tr>
+          <td>Capacitores con ventilación</td>
+          <td>
+            El capacitor tiene una ventilación visible en la parte superior, a
+            menudo acompañada de residuos.
+          </td>
+          <td>Presión interna excesiva debido a fallas internas.</td>
+        </tr>
+        <tr>
+          <td>Deformación</td>
+          <td>El capacitor está físicamente deformado o inclinado.</td>
+          <td>Calor excesivo o daño físico.</td>
+        </tr>
+        <tr>
+          <td>Olor a quemado</td>
+          <td>Hay un olor a quemado alrededor del capacitor o la placa.</td>
+          <td>Sobrecalentamiento o falla eléctrica.</td>
+        </tr>
+        <tr>
+          <td>Fallas en el funcionamiento</td>
+          <td>La placa madre no funciona correctamente o no enciende.</td>
+          <td>
+            Capacitores defectuosos que no pueden regular correctamente la
+            tensión.
+          </td>
+        </tr>
+        <tr>
+          <td>Marcas de quemaduras</td>
+          <td>
+            Hay marcas de quemaduras visibles en la placa alrededor del
+            capacitor.
+          </td>
+          <td>Cortocircuitos o sobretensiones.</td>
+        </tr>
+        <tr>
+          <td>Lecturas incorrectas con multímetro</td>
+          <td>
+            Las lecturas de capacidad o ESR (Resistencia Serie Equivalente)
+            están fuera de los valores esperados.
+          </td>
+          <td>Degradación interna del capacitor.</td>
+        </tr>
+      </table>
+
+      <p>
+        <a href="https://www.youtube.com/watch?v=zP7X7zHSR_s"
+          >Video: Cambio de capacitores en motherboard Teoría + práctica
+          (condensadores - placa madre)</a
+        >
+      </p>
+
+      <p>
+        <a href="https://www.youtube.com/watch?v=NHU0h_ukqSo"
+          >Video: Cómo probar un CAPACITOR con multímetro. 3 ejemplos</a
+        >
+      </p>
+
+      <h2>¿QUÉ ES EL SPEAKER POST?</h2>
+      <p>
+        Pequeño altavoz interno (o "buzzer") que emite secuencias de pitidos
+        durante el Power-On Self-Test (POST). Indica el estado del hardware
+        antes de que la PC muestre imagen.
+      </p>
+
+      <p>
+        Cada fabricante de BIOS tiene sus pitidos para indicar defectos o
+        fallas, por lo que es deber del técnico buscar los pitidos
+        correspondientes a la BIOS/modelo de placa madre.
+      </p>
+
+      <h2>Fallas Comunes y Diagnóstico</h2>
+      <ul>
+        <li>
+          Síntomas de falla:
+          <ul>
+            <li>Reinicios aleatorios (sobrecalentamiento chipset).</li>
+            <li>USB/audio no funcionan (controladores dañados).</li>
+          </ul>
+        </li>
+        <li>
+          Herramientas de Diagnóstico:
+          <ul>
+            <li>Multímetro: Medir voltajes en VRM (debe ser estable: ±5%).</li>
+            <li>
+              Speaker POST: Escuchar pitidos de error (ej: 1 largo = falla RAM).
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <h2>Guía Completa: Instalación de Drivers en 5 Formas</h2>
+
+      <h3>1. Instalación desde Páginas Oficiales</h3>
+      <h4>Pasos:</h4>
+      <ol>
+        <li>
+          Identificar hardware:
+          <ul>
+            <li>
+              Abrir Administrador de dispositivos (Win + X > Administrador de
+              dispositivos).
+            </li>
+            <li>
+              Buscar dispositivos con signo ❗ (problema) o modelo exacto (ej:
+              "Realtek PCIe GbE Family Controller").
+            </li>
+          </ul>
+        </li>
+        <li>
+          Descargar driver:
+          <ul>
+            <li>
+              Ir al sitio oficial del fabricante:
+              <ul>
+                <li>Placa madre: ASUS/MSI/Gigabyte > Soporte > Drivers.</li>
+                <li>Componentes: Intel.com, AMD.com, Nvidia.com.</li>
+              </ul>
+            </li>
+            <li>Seleccionar modelo exacto y versión de Windows.</li>
+          </ul>
+        </li>
+        <li>
+          Instalar:
+          <ul>
+            <li>Ejecutar el .exe descargado como administrador.</li>
+            <li>Seguir asistente y reiniciar.</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3>2. Instalación con Programas de Terceros</h3>
+      <h4>Herramientas recomendadas:</h4>
+
+      <table>
+        <tr>
+          <th>Programa</th>
+          <th>Ventajas</th>
+          <th>Precauciones</th>
+        </tr>
+        <tr>
+          <td><a href="sdi-tool.org">Snappy Driver Installer</a></td>
+          <td>"Full" (44GB para offline). versión "Lite" (pocos MB)</td>
+          <td>
+            Descargar solo de sdi-tool.org (ofrece drivers sin firma,
+            ¡precaución!)
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="https://www.iobit.com/es/driver-booster.php"
+              >IObit Driver Booster
+            </a>
+          </td>
+          <td>Interfaz amigable</td>
+          <td>Evitar versiones "Pro" piratas</td>
+        </tr>
+      </table>
+      <h4>IObit Driver Booster:</h4>
+      <p>
+        Si bien la versión gratuita no te permite instalar todos los drivers,
+        ofrece la información para poder buscarlo manualmente y descargarlo.
+      </p>
+
+      <h4>Pasos con Snappy Driver:</h4>
+      <ol>
+        <li>Descargar versión "Lite" (500MB) o "Full" (44GB para offline).</li>
+        <li>Ejecutar > Escanear > Seleccionar drivers faltantes.</li>
+        <li>Instalar > Reiniciar.</li>
+      </ol>
+
+      <h3>3. Webs de Soporte para Identificar Drivers</h3>
+      <p>Plataformas confiables:</p>
+      <ol>
+        <li>
+          Existen páginas web que ofrecen instalar programas que analizan tus
+          dispositivos para que posteriormente desde la web te ofrezca los
+          drivers correspondientes.
+        </li>
+        <li>
+          Drivers:
+          <ul>
+            <li><a href="https://driverpack.io/es">driverpack.io/es</a></li>
+            <li><a href="https://www.driverscape.com/">driverscape.com</a></li>
+            <li>
+              <a href="https://www.driveridentifier.com/welcome.php"
+                >driveridentifier.com</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3>4. Recuperación de Drivers antes de Formatear</h3>
+      <h4>Backup y Restauración:</h4>
+      <ol>
+        <li>Respaldar drivers existentes.</li>
+        <li>Crear una carpeta dentro de disco C llamada "DriversBackup".</li>
+        <li>
+          Ejecutar el siguiente comando desde el CMD en una sola linea:
+          
+          <p>dism /online /export-driver /destination:C:\DriversBackup</p>
+        </li>
+        <li>Guardar este backup de drivers en otra memoria.</li>
+        <li>Formatear PC e instalar Windows.</li>
+        <li>Volver a colocar la carpeta backup dentro de la unidad C.</li>
+        <li>
+          Restaurar drivers:
+          <ul>
+            <li>
+              Abrir Administrador de dispositivos > Dispositivo con error >
+              Actualizar controlador.
+            </li>
+            <li>"Buscar controlador en el equipo" > Ruta C:\DriversBackup.</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3>5. Instalación Manual desde Administrador de Dispositivos</h3>
+      <p>Para dispositivos sin .exe:</p>
+      <ol>
+        <li>Descargar driver (.inf, .sys, .cat).</li>
+        <li>
+          Abrir Administrador de dispositivos > Dispositivo con ❗ > Actualizar
+          controlador.
+        </li>
+        <li>
+          Seleccionar:
+          <ul>
+            <li>
+              "Buscar software de controlador en mi equipo" > "Permitirme elegir
+              de una lista".
+            </li>
+          </ul>
+        </li>
+        <li>Hacer clic en "Tengo disco" y navegar al archivo .inf.</li>
+        <li>Seleccionar modelo exacto e instalar.</li>
+      </ol>
+
+      <p>
+        <a href="https://www.youtube.com/watch?v=0VyqMbg71Rs"
+          >Video para los puntos 4 y 5 de instalación de drivers</a
+        >
+      </p>
+
+      <h2>Métodos vs Escenarios</h2>
+
+      <table>
+        <tr>
+          <th>Método</th>
+          <th>Mejor para</th>
+          <th>Riesgo</th>
+        </tr>
+        <tr>
+          <td>Páginas oficiales</td>
+          <td>Componentes críticos (GPU, chipset)</td>
+          <td>Bajo</td>
+        </tr>
+        <tr>
+          <td>Programas de terceros</td>
+          <td>Usuarios novatos o múltiples drivers</td>
+          <td>Medio</td>
+        </tr>
+        <tr>
+          <td>Webs de soporte</td>
+          <td>Identificar hardware desconocido</td>
+          <td>Bajo</td>
+        </tr>
+        <tr>
+          <td>Recuperación con DISM</td>
+          <td>Mantener drivers personalizados</td>
+          <td>Bajo</td>
+        </tr>
+        <tr>
+          <td>Instalación manual (.inf)</td>
+          <td>Dispositivos antiguos o sin instalador</td>
+          <td>Alto</td>
+        </tr>
+      </table>
+
+      <h2>Errores Comunes y Soluciones</h2>
+
+      <table>
+        <tr>
+          <th>Error</th>
+          <th>Causa</th>
+          <th>Solución</th>
+        </tr>
+        <tr>
+          <td>BSOD (Blue Screen of Death) después de instalar</td>
+          <td>Driver incompatible</td>
+          <td>Iniciar en Modo Seguro > Desinstalar</td>
+        </tr>
+        <tr>
+          <td>Dispositivo no reconocido</td>
+          <td>Driver incorrecto</td>
+          <td>Restaurar punto anterior del sistema</td>
+        </tr>
+      </table>
+
+      <h2>Consejos de Seguridad</h2>
+      <ol>
+        <li>Verificar la firma del driver.</li>
+        <li>
+          Evitar sitios no oficiales:
+          <ul>
+            <li>
+              NUNCA descargar desde "driverhub.ru" o "driverscollection.com".
+            </li>
+          </ul>
+        </li>
+        <li>Crear punto de restauración antes de instalar drivers críticos.</li>
+      </ol>
+
+      <h2>
+        Actividad: "Recuperación de controlador de entrada y salida de audio"
+      </h2>
+      <ol>
+        <li>Simular falla: Desinstalar algún driver de esta sección.</li>
+        <li>Usar alguno método para recuperarlo.</li>
+      </ol>
+
+      <h2>Actividad</h2>
+      <ul>
+        <li>
+          Reconocimiento de slots: Usar placas madre reales (PC/notebook) para
+          identificar componentes.
+        </li>
+        <li>
+          Diagnóstico visual: Con lupa, buscar daños en capacitores cerca del
+          socket CPU.
+        </li>
+      </ul>
+
+      <h2>Tarea</h2>
+      <ul>
+        <li>
+          Investigar el manual de una placa madre ASUS e identificar sus slots.
+        </li>
+      </ul>
+
+      <h2>Programas</h2>
+      <ul>
+        <li>
+          Web drivers y herramientas:
+          <a href="https://www.techpowerup.com/download/">techpowerup.com</a>
+        </li>
+        <li>
+          Professional System Information and Diagnostics:
+          <a href="https://www.hwinfo.com/">hwinfo.com</a>
+        </li>
+        <li>
+          GPU:
+          <a href="https://www.techpowerup.com/download/techpowerup-gpu-z/"
+            >techpowerup.com/download/techpowerup-gpu-z/</a
+          >
+        </li>
+        <li>
+          CPU:
+          <a href="https://www.cpuid.com/softwares/cpu-z.html"
+            >cpuid.com/softwares/cpu-z.html</a
+          >
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

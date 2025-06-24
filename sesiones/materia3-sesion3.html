@@ -22,12 +22,16 @@
           class="px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-lg font-semibold shadow"
           >Ir a Sesión 2</a
         >
+        <a
+          href="materia3-sesion4.html"
+          class="px-4 py-2 bg-sky-400 hover:bg-sky-500 text-black rounded-lg font-semibold shadow"
+          >Ir a Sesión 4</a
+        >
       </div>
       <!-- sesion -->
       <div class="bg-gray-900 rounded-lg p-6 mb-6 shadow-md">
         <h2 class="text-xl font-bold text-green-300 mb-2">
-          Sesión 3:  Operadores Lógicos, de Identidad y Pertenencia
-          en Python
+          Sesión 3: Operadores Lógicos, de Identidad y Pertenencia en Python
         </h2>
         <div class="mb-4">
           <h3 class="text-lg font-semibold text-green-200 mb-1">
@@ -49,26 +53,32 @@
           >
             # and<br />
             <ul>
+              <li>Devuelve True si ambos operandos son verdaderos.</li>
               <li>
-                Devuelve True si ambos operandos son verdaderos.
+                Si el primer operando es False, retorna el primer operando sin
+                evaluar el segundo (cortocircuito).
               </li>
-              <li>Si el primer operando es False, retorna el primer operando sin evaluar el segundo (cortocircuito).</li>
             </ul>
             print(5 &gt; 3 and 2 &lt; 4) # True (ambas condiciones son True)<br />
             print(0 and 10) # 0 (primer operando "falsy")<br />
-            <br>
-            
+            <br />
+
             # or<br />
-            <ul><li>	Devuelve True si al menos un operando es verdadero.
-o	
-</li>
-            <li>Si el primer operando es True, retorna el primer operando sin evaluar el segundo.</li></ul>
+            <ul>
+              <li>Devuelve True si al menos un operando es verdadero. o</li>
+              <li>
+                Si el primer operando es True, retorna el primer operando sin
+                evaluar el segundo.
+              </li>
+            </ul>
 
             print(5 &lt; 3 or 2 &lt; 4) # True (segunda condición es True)<br />
             print("Hola" or 0) # "Hola" (primer operando "truthy")<br />
-            <br>
+            <br />
             # not<br />
-            <ul><li>Invierte el valor booleano de un operando.</li></ul>
+            <ul>
+              <li>Invierte el valor booleano de un operando.</li>
+            </ul>
             print(not True) # False<br />
             print(not 0) # True (0 es "falsy")
           </div>
@@ -101,25 +111,21 @@ o
           <div
             class="bg-gray-800 rounded p-4 my-2 text-green-100 text-sm font-mono overflow-x-auto"
           >
-          <h4>1.	is</h4>
-          <ul>
-            <li>
-              
-	True si ambos operandos son el mismo objeto.
-
-            </li>
-          </ul>
+            <h4>1. is</h4>
+            <ul>
+              <li>True si ambos operandos son el mismo objeto.</li>
+            </ul>
             a = [1, 2]<br />
             b = a<br />
             c = [1, 2]<br />
-            <br>
+            <br />
             print(a is b) # True (b referencia a la misma lista que a)<br />
             print(a is c) # False (listas diferentes en memoria)<br />
-            <br>
+            <br />
             <h4>2. is not</h4>
-            <ul><li>
-              True si los operandos no son el mismo objeto.
-            </li></ul>
+            <ul>
+              <li>True si los operandos no son el mismo objeto.</li>
+            </ul>
             x = 5<br />
             y = 5<br />
             print(x is not y) # False (enteros inmutables pueden compartir
@@ -178,27 +184,26 @@ o
           <div
             class="bg-gray-800 rounded p-4 my-2 text-green-100 text-sm font-mono overflow-x-auto"
           >
-          <h4>1.	in</h4><ul><li>
-            
-	True si el valor está presente en la secuencia.
-
-          </li></ul>
+            <h4>1. in</h4>
+            <ul>
+              <li>True si el valor está presente en la secuencia.</li>
+            </ul>
             numeros = [1, 2, 3]<br />
-            print(2 in numeros) # True<br/>
-            <br>
+            print(2 in numeros) # True<br />
+            <br />
             texto = "Python"<br />
             print("th" in texto) # True<br />
-            <br>
-            <h4>2.	not in</h4>
-            <ul><li>
-o	True si el valor no está en la secuencia.
-</li></ul>
+            <br />
+            <h4>2. not in</h4>
+            <ul>
+              <li>o True si el valor no está en la secuencia.</li>
+            </ul>
             vocales = {"a", "e", "i"}<br />
             print("u" not in vocales) # True
           </div>
           <div class="bg-green-900 rounded p-4 my-2 text-green-100">
             <h4 class="font-semibold text-green-100 mb-1">
-              Ejercicios Prácticos 
+              Ejercicios Prácticos
             </h4>
             <ul class="list-disc ml-6">
               <li>
@@ -206,7 +211,7 @@ o	True si el valor no está en la secuencia.
                 ¿qué devuelve <span class="font-mono">"a" in dicc</span>?<br />
                 <span class="italic">Solución: True (busca en las claves)</span>
               </li>
-              <br>
+              <br />
               <li>
                 Evalúa: <span class="font-mono">10 not in range(5, 15)</span
                 ><br />
@@ -249,22 +254,20 @@ o	True si el valor no está en la secuencia.
           <div
             class="bg-gray-800 rounded p-4 my-2 text-green-100 text-sm font-mono overflow-x-auto"
           >
-            # Operadores Lógicos 
-            <br>print(not (False or 0)) # True (False or 0 → 0,
-            not 0 → True)
-            <br><br>
-            # Operadores de Identidad 
-            <br>a = 256<br />
+            # Operadores Lógicos
+            <br />print(not (False or 0)) # True (False or 0 → 0, not 0 → True)
+            <br /><br />
+            # Operadores de Identidad
+            <br />a = 256<br />
             b = 256<br />
             print(a is b) # True (optimización de enteros pequeños en
-            Python).<br /><br>
+            Python).<br /><br />
             a = 257<br />
             b = 257<br />
             print(a is b) # False (no aplica optimización, objetos
-            distintos).<br /><br>
-            # Operadores de Pertenencia 
-            <br>frutas = ["manzana", "banana",
-            "naranja"]<br />
+            distintos).<br /><br />
+            # Operadores de Pertenencia
+            <br />frutas = ["manzana", "banana", "naranja"]<br />
             print("pera" not in frutas) # True
           </div>
         </div>
@@ -272,23 +275,28 @@ o	True si el valor no está en la secuencia.
           <h3 class="text-lg font-semibold text-green-200 mb-1">
             Errores Comunes
           </h3>
-          <h4>Confundir <span class="font-mono">is</span> con
-              <span class="font-mono">==</span>:</h4>
+          <h4>
+            Confundir <span class="font-mono">is</span> con
+            <span class="font-mono">==</span>:
+          </h4>
           <ul class="list-disc ml-6 mb-2">
             <li>
-              
               <span class="italic"
-                >is compara identidad (mismo objeto en memoria), 
-                </span
+                >is compara identidad (mismo objeto en memoria),
+              </span>
+            </li>
+            <li>== compara igualdad de valores.</li>
+          </ul>
+          <h4>
+            Usar <span class="font-mono">in</span> con tipos no iterables:
+          </h4>
+          <ul>
+            <li>
+              <span class="font-mono"
+                >print(5 in 10) # Error: los enteros no son iterables.</span
               >
             </li>
-            <li>== compara
-                igualdad de valores.</li>
           </ul>
-          <h4> Usar <span class="font-mono">in</span> con tipos no iterables:</h4>
-        <ul><li><span class="font-mono"
-                >print(5 in 10) # Error: los enteros no son iterables.</span
-              ></li></ul>
         </div>
       </div>
     </div>
