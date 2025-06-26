@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 1: Fundamentos del Sistema Binario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .button-container {
+            margin-bottom: 24px;
+        }
+        .button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 10px;
+            display: inline-block;
+        }
+        .button-materia {
+            background: #4ade80;
+            color: #222;
+        }
+        .button-sesion {
+            background: #60a5fa;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <a href="../materias/manipulacion-preservacion-datos.html" class="button button-materia">Volver a la Materia</a>
+        <a href="materia1-sesion3.html" class="button button-sesion">Ir a Sesión 3</a>
+    </div>
+
+    <h1>Clase 1: Fundamentos del Sistema Binario</h1>
+
+    <h2>Contenido Teórico</h2>
+
+    <h3>1. ¿Qué es el sistema binario?</h3>
+    <ul>
+        <li>Base 2 (dígitos: 0 y 1).</li>
+        <li>Comparación con sistema decimal (Base 10: 0-9).</li>
+        <li><strong>Ejemplo:</strong>
+            <ul>
+                <li>Decimal: 13 = (1×10^1) + (3×10^0).</li>
+                <li>Binario: 1101 = (1×2^3) + (1×2^2) + (0×2^1) + (1×2^0).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>2. Bits y bytes:</h3>
+    <ul>
+        <li>1 bit = 0 ó 1.</li>
+        <li>1 byte = 8 bits (ejemplo: 01101011).</li>
+        <li><strong>Importancia:</strong> Cómo las computadoras procesan todo como bits (ejemplo: texto, imágenes).</li>
+    </ul>
+
+    <table>
+        <tr>
+            <th>Decimal</th>
+            <th>Binario</th>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0000</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>0001</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>0010</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>0011</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>0100</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>0101</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>0110</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>0111</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>1000</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>1001</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>1010</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>1011</td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>1100</td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>1101</td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>1110</td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td>1111</td>
+        </tr>
+    </table>
+
+    <h2>Actividades Prácticas</h2>
+
+    <h3>1. Conversión Decimal → Binario:</h3>
+    <ul>
+        <li><strong>Método:</strong> División sucesiva entre 2 (restos como bits).</li>
+        <li>Para convertir un número decimal a binario, divide el número entre 2 y anota el residuo. Repite este proceso con el cociente hasta que obtengas un cociente de 0. Los residuos, leídos de abajo hacia arriba, forman el número binario.</li>
+        <li><strong>Ejemplo:</strong>
+            <pre>
+25:
+25 ÷ 2 = 12 (resto 1)
+12 ÷ 2 = 6 (resto 0)
+6 ÷ 2 = 3 (resto 0)
+3 ÷ 2 = 1 (resto 1)
+1 ÷ 2 = 0 (resto 1) → 11001₂.
+            </pre>
+        </li>
+        <li><strong>Práctica:</strong> Convertir 30, 85, 99, 103, 155, 232, 255 a binario.</li>
+    </ul>
+
+    <h3>2. Conversión Binario → Decimal:</h3>
+    <ul>
+        <li><strong>Método:</strong> binario por 2 elevado a la potencia de su posición.</li>
+        <li>Para convertir un número binario a decimal, multiplica cada dígito binario por 2 elevado a la potencia de su posición (empezando desde 0 desde la derecha) y suma los resultados.</li>
+        <li><strong>Ejemplo:</strong>
+            <pre>
+1011:
+1×2³ = 8
+0×2² = 0
+1×2¹ = 2
+1×2⁰ = 1
+           </pre>
+           <li>Sumando estos resultados, 8+0+2+1=11, por lo que 1011 en binario es 11 en decimal.
+ </li>
+        </li>
+        <li><strong>Práctica:</strong> Convertir 010010, 010001, 0100100, 010100111, 010111101, 011010010, 011111110 a decimal.</li>
+    </ul>
+</body>
+</html>
