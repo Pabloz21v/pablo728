@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suma en Sistema Binario</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      .button-container {
+        margin-bottom: 24px;
+      }
+      .button {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+      .button-volver {
+        background: #4ade80;
+        color: #222;
+      }
+      .button-siguiente {
+        background: #60a5fa;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="button-container">
+      <a
+        href="../materias/manipulacion-preservacion-datos.html"
+        class="button button-volver"
+        >Volver a la Materia</a
+      >
+      <a href="materia1-sesion4.html" class="button button-siguiente"
+        >Ir a Sesión 4</a
+      >
+    </div>
+
+    <h1>Suma en Sistema Binario</h1>
+
+    <h2>Reglas Básicas</h2>
+    <p>
+      La suma binaria sigue las mismas reglas que la suma decimal, pero con solo
+      dos dígitos (0 y 1):
+    </p>
+    <pre>
+0 + 0 = 0
+0 + 1 = 1
+1 + 0 = 1
+1 + 1 = 10 → Escribe 0, lleva 1 (acarreo)
+1 + 1 + 1 = 11 → Escribe 1, lleva 1
+    </pre>
+
+    <h2>Proceso Paso a Paso</h2>
+
+    <h3>Ejemplo 1: Sumar 1011₂ (11) y 1101₂ (13):</h3>
+    <pre>
+  1011 → 11
++ 1101 → 13
+----------
+11000 → 24
+    </pre>
+
+    <h4>Desglose:</h4>
+    <ol>
+      <li>
+        <strong>Columna 1 (derecha):</strong> 1+1=10 → Escribe
+        <strong>0</strong>, lleva <strong>1</strong>.
+      </li>
+      <li>
+        <strong>Columna 2:</strong> 1+0+1=10 → Escribe <strong>0</strong>, lleva
+        <strong>1</strong>.
+      </li>
+      <li>
+        <strong>Columna 3:</strong> 1+1+1=11 → Escribe <strong>1</strong>, lleva
+        <strong>1</strong>.
+      </li>
+      <li>
+        <strong>Columna 4:</strong> 1+0+1=10 → Escribe <strong>0</strong>, lleva
+        <strong>1</strong>.
+      </li>
+      <li><strong>Columna 5:</strong> 1 → Escribe <strong>1</strong>.</li>
+    </ol>
+    <p><strong>Resultado:</strong> 11000₂ (24).</p>
+
+    <h2>Casos Especiales y Consejos</h2>
+
+    <h3>Suma con Múltiples Acarreos</h3>
+
+    <h4>Ejemplo: 1111₂ (15) + 0001₂ (1):</h4>
+    <pre>
+  1111
++ 0001
+----------
+10000 → 16
+    </pre>
+    <ul>
+      <li>
+        <strong>Columna 1:</strong> 1+1=10 → Escribe <strong>0</strong>, lleva
+        <strong>1</strong>.
+      </li>
+      <li>
+        <strong>Columnas 2, 3, y 4:</strong> Repite 1+0+1=10 → Escribe
+        <strong>0</strong>, lleva <strong>1</strong>.
+      </li>
+      <li><strong>Columna 5:</strong> Escribe el <strong>1</strong> final.</li>
+    </ul>
+
+    <h2>Calcular</h2>
+    <ul>
+      <li>101 + 1001</li>
+      <li>100110 + 11111</li>
+      <li>110100 + 100010</li>
+      <li>101110 + 11100111</li>
+      <li>110100 + 100010 + 110111</li>
+      <li>100001 + 1010 + 10111</li>
+      <li>11101 + 101010 + 1100011 + 11010111</li>
+      <li>111 + 10101 + 100001 + 1111111</li>
+    </ul>
+  </body>
+</html>
