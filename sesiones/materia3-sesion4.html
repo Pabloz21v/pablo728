@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Qué Debemos Saber Hasta Este Punto</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      ul {
+        margin: 10px 0;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      .button-container {
+        margin-bottom: 24px;
+      }
+      .button {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 10px;
+        display: inline-block;
+      }
+      .button-sesion3 {
+        background: #60a5fa;
+        color: #fff;
+      }
+      .button-materia {
+        background: #4ade80;
+        color: #222;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="button-container">
+      <h1 class="text-3xl font-bold text-green-400 mb-6">
+        Teoría de Desarrollo III - Sesión 3
+      </h1>
+      <a href="../materias/desarrollo-3.html" class="button button-materia"
+        >Volver a la Desarrollo III</a
+      >
+      <a href="materia3-sesion3.html" class="button button-sesion3"
+        >Ir a Sesión 3</a
+      >
+    </div>
+
+    <h1>Qué Debemos Saber Hasta Este Punto</h1>
+
+    <h2>Cómo Nombrar las Variables:</h2>
+
+    <ol>
+      <li>
+        <strong>Nombres Descriptivos:</strong>
+        <ul>
+          <li>
+            Usa nombres que describan claramente el propósito o contenido de la
+            variable. Esto hace que el código sea más legible y comprensible.
+          </li>
+          <li>
+            <strong>Ejemplo:</strong> <code>nombre_usuario</code> en lugar de
+            <code>nu</code>.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Convención de Nombres:</strong>
+        <ul>
+          <li>
+            <strong>snake_case:</strong> En Python, es común usar "snake case"
+            para nombrar variables, es decir, palabras en minúsculas separadas
+            por guiones bajos.
+          </li>
+          <li>
+            <strong>Ejemplo:</strong> <code>precio_producto</code>,
+            <code>cantidad_estudiantes</code>.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Evitar Nombres Genéricos:</strong>
+        <ul>
+          <li>
+            Evita nombres como <code>lista</code>, <code>dato</code>,
+            <code>valor</code>, etc., a menos que su propósito sea absolutamente
+            claro en el contexto.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>No Usar Palabras Reservadas:</strong>
+        <ul>
+          <li>
+            No uses palabras reservadas de Python como nombres de variables (por
+            ejemplo, <code>if</code>, <code>else</code>, <code>for</code>,
+            <code>while</code>, etc.).
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Sensibilidad a Mayúsculas y Minúsculas:</strong>
+        <ul>
+          <li>
+            Los nombres de variables en Python son sensibles a mayúsculas y
+            minúsculas, por lo que <code>edad</code> y <code>EDAD</code> son
+            variables diferentes.
+          </li>
+          <li>
+            Evitar usar <code>Edad</code> (empezar con una letra mayúscula y
+            continuar con minúscula) esto se usa para las "clases" tema que
+            veremos más adelante.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Constantes:</strong>
+        <ul>
+          <li>
+            Para constantes, se suele usar nombres en mayúsculas con guiones
+            bajos separando las palabras.
+          </li>
+          <li>
+            <strong>Ejemplo:</strong> <code>PI = 3.14159</code>,
+            <code>VELOCIDAD_LUZ</code>.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Evitar Caracteres Especiales:</strong>
+        <ul>
+          <li>
+            No uses caracteres especiales como <code>@</code>, <code>#</code>,
+            <code>$</code>, etc., en los nombres de variables.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Longitud del Nombre:</strong>
+        <ul>
+          <li>
+            No temas usar nombres largos si son descriptivos. Es mejor tener un
+            nombre largo y descriptivo que uno corto y ambiguo.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Nombres Únicos y Significativos:</strong>
+        <ul>
+          <li>
+            Asegúrate de que cada variable tenga un nombre único y significativo
+            dentro del ámbito en el que se utiliza.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Evitar Nombres Engañosos:</strong>
+        <ul>
+          <li>
+            No uses nombres que puedan inducir a error sobre el tipo de dato o
+            el propósito de la variable.
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>Formas Correctas</h3>
+    <pre>
+myvar = "Pablo"
+my_var = "Pablo"
+_my_var = "Pablo"
+myVar = "Pablo"
+MYVAR = "Pablo"
+myvar2 = "Pablo"
+    </pre>
+
+    <h3>Formas Incorrectas</h3>
+    <pre>
+2myvar = "Pablo"
+my-var = "Pablo"
+my var = "Pablo"
+    </pre>
+
+    <h2>Cuando Comparamos:</h2>
+    <ul>
+      <li>Es igual a: <code>a == b</code></li>
+      <li>No es igual a: <code>a != b</code></li>
+      <li>Menor que: <code>a &lt; b</code></li>
+      <li>Menor o igual a: <code>a &lt;= b</code></li>
+      <li>Mayor que: <code>a &gt; b</code></li>
+      <li>Mayor o igual que: <code>a &gt;= b</code></li>
+    </ul>
+
+    <p>
+      Incluso dentro de un condicional como <code>IF</code>, <code>ELIF</code>,
+      lo que devuelve esa comparación es un booleano <code>TRUE</code> o
+      <code>FALSE</code>.
+    </p>
+    <p>
+      En el caso de estar en un condicional, si el resultado de la comparación
+      es <code>TRUE</code>, ingresará a las líneas pertenecientes a ese
+      <code>if</code> / <code>elif</code>; de ser <code>FALSE</code>, continuará
+      con el siguiente <code>if</code> / <code>elif</code> hasta finalizar en
+      <code>else</code> por no haber encontrado un <code>TRUE</code> en todo el
+      recorrido de comparaciones. Recordar que en <code>else</code> no compara,
+      esto ocurre ya que nada de lo anterior fue <code>TRUE</code>.
+    </p>
+
+    <h2>Uso de las Triples Comillas:</h2>
+    <ul>
+      <li>
+        Las triples comillas permiten escribir con saltos de línea, esto
+        facilita y reduce la cantidad de <code>print()</code> que podríamos
+        usar.
+      </li>
+    </ul>
+
+    <h3>Ejemplo con Comillas Simples:</h3>
+    <pre>
+    print("hola")
+    print("espero que")
+    print("sus vacaciones")
+    print("fueran buenas")
+    </pre>
+
+    <h3>Ejemplo con Comillas Triples:</h3>
+    <pre>
+    print("""hola
+        espero que
+        sus vacaciones
+        fueran buenas""")
+    </pre>
+  </body>
+</html>
