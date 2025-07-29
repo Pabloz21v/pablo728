@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 5: Listas</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      .button-container {
+        margin-bottom: 24px;
+      }
+      .button {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 10px;
+        display: inline-block;
+      }
+      .button-sesion4 {
+        background: #60a5fa;
+        color: #fff;
+      }
+      .button-materia {
+        background: #4ade80;
+        color: #222;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="button-container">
+      <a href="../materias/desarrollo-3.html" class="button button-materia"
+        >Volver a la Desarrollo III</a
+      >
+      <a href="materia3-sesion4.html" class="button button-sesion4"
+        >Ir a Sesión 4</a
+      >
+    </div>
+    <h1>Sesión 5: Listas</h1>
+    <p>
+      <strong>Objetivo Profundizado:</strong> Dominar operaciones usando listas.
+    </p>
+
+    <h2>1. Listas</h2>
+    <p>
+      <strong>Definición:</strong> Colecciones <strong>ordenadas</strong> y
+      <strong>mutables</strong> (pueden modificarse). Permite valores duplicados
+      y mezcla de tipos de datos.
+    </p>
+    <p>
+      Se inicia abriendo corchetes [] y dentro del mismo agregar valores
+      separados por el uso de una coma “,”. Cada valor tiene una posición
+      (índice) partiendo de la posición 0.
+    </p>
+
+    <h3>Operaciones Básicas</h3>
+
+    <table>
+      <tr>
+        <th>Acción</th>
+        <th>Sintaxis</th>
+        <th>Ejemplo</th>
+      </tr>
+      <tr>
+        <td>Crear lista</td>
+        <td>lista = [elementos]</td>
+        <td>numeros = [1, 2, 3]</td>
+      </tr>
+      <tr>
+        <td>Acceder por índice</td>
+        <td>lista[índice]</td>
+        <td>numeros[0] → 1</td>
+      </tr>
+      <tr>
+        <td>Modificar elemento</td>
+        <td>lista[índice] = nuevo_valor</td>
+        <td>numeros[1] = 20 → [1, 20, 3]</td>
+      </tr>
+      <tr>
+        <td>Añadir elemento</td>
+        <td>lista.append(elemento)</td>
+        <td>numeros.append(4) → [1, 20, 3, 4]</td>
+      </tr>
+      <tr>
+        <td>Eliminar elemento</td>
+        <td>lista.remove(elemento)</td>
+        <td>numeros.remove(20) → [1, 3, 4]</td>
+      </tr>
+      <tr>
+        <td>Longitud</td>
+        <td>len(lista)</td>
+        <td>len(numeros) → 3</td>
+      </tr>
+    </table>
+
+    <h3>Ejemplos</h3>
+    <pre>
+# Crear lista de nombres
+nombres = ["Ana", "Luis", "Carlos"]
+
+print(nombres[1]) # Output: "Luis"
+
+# Añadir elementos
+nombres.append("María")
+
+print(nombres) # Output: ["Ana", "Luis", "Carlos", "María"]
+
+# Eliminar elementos
+nombres.remove("Luis")
+
+print(nombres) # Output: ["Ana", "Carlos", "María"]
+    </pre>
+
+    <h3>Verificar si el valor existe</h3>
+    <p>
+      Para determinar si un valor específico existe en la lista se usa la
+      palabra clave <code>in</code>:
+    </p>
+    <pre>
+# Verifica si "apple" existe en la lista:
+canasta_de_frutas = ["apple", "banana", "cherry"]
+if "apple" in canasta_de_frutas:
+    print("Yes, 'apple' is in the fruits list")
+    </pre>
+
+    <h3>Insertar valores</h3>
+    <p>
+      Para insertar un nuevo valor, sin reemplazar otros valores existentes,
+      podemos usar el método <code>insert()</code> para insertarlo en una
+      posición específica.
+    </p>
+    <pre>
+# Insertar "orange" en la posición/index 1:
+canasta_de_frutas = ["apple", "banana", "cherry"]
+canasta_de_frutas.insert(1, "orange")
+print(canasta_de_frutas) # Output: ['apple', 'orange', 'banana', 'cherry']
+    </pre>
+
+    <h3>Extender Listas</h3>
+    <p>
+      Para unir listas usar el método <code>extend()</code> (permite añadir
+      tuplas, sets, diccionarios).
+    </p>
+    <pre>
+# Agregar canasta_tropical a canasta_de_frutas:
+canasta_de_frutas = ["apple", "banana", "cherry"]
+canasta_tropical = ["mango", "pineapple", "papaya"]
+canasta_de_frutas.extend(canasta_tropical)
+print(canasta_de_frutas) # Output: ['apple', 'banana', 'cherry', 'mango', 'pineapple', 'papaya']
+
+# Ejemplo: Agregar una tupla a una lista:
+canasta_de_frutas = ["apple", "banana", "cherry"]
+canasta_de_frutas_tupla = ("kiwi", "orange")
+canasta_de_frutas.extend(canasta_de_frutas_tupla)
+print(canasta_de_frutas) # Output: ['apple', 'banana', 'cherry', 'kiwi', 'orange']
+    </pre>
+
+    <h3>Eliminar un valor en una posición (índice) específica</h3>
+    <p>
+      El método <code>pop()</code> elimina un valor en una posición específica.
+    </p>
+    <pre>
+# Remove the second item: Elimina el segundo valor (índice = 1)
+canasta_de_frutas = ["apple", "banana", "cherry"]
+canasta_de_frutas.pop(1)
+print(canasta_de_frutas) # Output: ['apple', 'cherry']
+
+# Si no se especifica la posición, borra el último elemento
+    </pre>
+
+    <h3>Limpiar la lista</h3>
+    <p>Vacía la lista con el método <code>clear()</code>.</p>
+    <pre>
+canasta_de_frutas = ["apple", "banana", "cherry"]
+canasta_de_frutas.clear()
+print(canasta_de_frutas) # Output: []
+    </pre>
+
+    <h3>Bucles en Listas</h3>
+    <p>
+      Se puede recorrer los valores de una lista usando el método
+      <code>for</code>:
+    </p>
+    <pre>
+# El recorrido y el uso de print() posteriormente imprime los valores que va recorriendo, uno a uno.
+canasta_de_frutas = ["apple", "banana", "cherry"]
+for fruta in canasta_de_frutas:
+    print(fruta) # Output: apple banana cherry
+    </pre>
+
+    <h3>Recorriendo por número de índice</h3>
+    <p>
+      Se puede recorrer por la cantidad de índices usando el método
+      <code>range()</code> y <code>len()</code> para crear una iteración
+      controlable.
+    </p>
+    <pre>
+# Imprime todos los valores basado en el rango determinado.
+canasta_de_frutas = ["apple", "banana", "cherry"]
+for fruta in range(len(canasta_de_frutas)):
+    print(canasta_de_frutas[fruta]) # Output: apple banana cherry
+    </pre>
+
+    <h3>Usando el loop While</h3>
+    <p>
+      Usando el método <code>len()</code> determinamos la longitud de la lista.
+      Nunca olvidar agregar una variable que se vaya incrementando en 1 unidad
+      por cada iteración, esto permite cortar el bucle una vez llegue al valor
+      de la longitud de la lista.
+    </p>
+    <pre>
+# Imprime todos los valores usando while, basándose en la posición (índice)
+canasta_de_frutas = ["apple", "banana", "cherry"]
+posicion_index = 0
+while posicion_index < len(canasta_de_frutas):
+    print(canasta_de_frutas[posicion_index])
+    posicion_index = posicion_index + 1 # Output: apple banana cherry
+    </pre>
+
+    <h3>Recorriendo usando Compresión de listas / List Comprehension</h3>
+    <p>
+      La comprensión de listas ofrece una sintaxis más corta para recorrer las
+      listas:
+    </p>
+    <pre>
+# La forma acortada del bucle for imprimirá todos los ítems de la lista:
+canasta_de_frutas = ["apple", "banana", "cherry"]
+
+for fruta in canasta_de_frutas:
+    print(fruta) # Output: apple banana cherry
+    </pre>
+
+    <p>
+      Crear nuevas listas a partir de una anterior y aplicando un filtro, en
+      este caso la letra “a”, recorre la lista <code>canasta_de_frutas</code>,
+      verifica en cada posición del índice su valor, a ese valor analiza si
+      contiene la letra “a” y de ser así, esta se guarda en la nueva lista
+      <code>canasta_de_frutas_con_letra_a</code>.
+    </p>
+    <pre>
+canasta_de_frutas = ["apple", "banana", "cherry", "kiwi", "mango"]
+canasta_de_frutas_con_letra_a = []
+
+for fruta in canasta_de_frutas:
+    if "a" in fruta:
+        canasta_de_frutas_con_letra_a.append(fruta)
+
+print(canasta_de_frutas_con_letra_a) # Output: ['apple', 'banana', 'mango']
+    </pre>
+
+    <p>Una forma aún más comprimida:</p>
+    <pre>
+# La lectura del código [fruta for fruta in canasta_de_frutas if "a" in fruta] se realizaría de la siguiente forma:
+# La primera variable “fruta” es donde se guarda la lógica final, el resto se lee así: por cada (for) fruta en (in) canasta_de_frutas si (if) la letra “a” se encuentra en el valor dentro de la variable fruta, usar la variable fruta (hace referencia a la primera variable fruta) y guardar su valor en la nueva lista canasta_de_frutas_con_letra_a.
+
+canasta_de_frutas = ["apple", "banana", "cherry", "kiwi", "mango"]
+
+canasta_de_frutas_con_letra_a = [fruta for fruta in canasta_de_frutas if "a" in fruta]
+
+print(canasta_de_frutas_con_letra_a) # Output: ['apple', 'banana', 'mango']
+    </pre>
+
+    <p>La sintaxis:</p>
+    <pre>
+lista_nueva = [expression for item in iterable if condition == True]
+    </pre>
+
+    <p>Cambia los valores en una nueva lista, pasándolos a mayúscula.</p>
+    <pre>
+canasta_de_frutas = ["apple", "banana", "cherry", "kiwi", "mango"]
+
+nuevo_canasta = [fruta.upper() for fruta in canasta_de_frutas]
+
+print(nuevo_canasta) # Output: ['APPLE', 'BANANA', 'CHERRY', 'KIWI', 'MANGO']
+    </pre>
+
+    <p><code>upper()</code> convierte todo a mayúscula.</p>
+    <p><code>lower()</code> convierte todo a minúscula.</p>
+    <p><code>sort()</code> ordena alfabéticamente y ascendente (números).</p>
+    <p>
+      <code>sort(reverse = True)</code> para que ordene en sentido opuesto y
+      descendente.
+    </p>
+    <pre>
+# Otro ejemplo con sort(reverse = True)
+canasta_de_frutas = ["orange", "mango", "kiwi", "pineapple", "banana"]
+
+canasta_de_frutas.sort(reverse = True)
+
+canasta_de_frutas = [fruta.upper() for fruta in canasta_de_frutas]
+
+print(canasta_de_frutas) # Output: ['PINEAPPLE', 'ORANGE', 'MANGO', 'KIWI', 'BANANA']
+    </pre>
+
+    <h3>Usar el método copy()</h3>
+    <p>
+      Para crear una copia de una lista usamos el método <code>copy()</code>,
+      <code>list()</code>, <code>[:]</code>. Esto permite que la nueva copia
+      ocupe un espacio en memoria totalmente distinto al de la original.
+    </p>
+    <pre>
+canasta_de_frutas = ["apple", "banana", "cherry"]
+canasta_nueva = canasta_de_frutas.copy()
+print(canasta_nueva)
+
+# o
+
+canasta_de_frutas = ["apple", "banana", "cherry"]
+canasta_nueva = list(canasta_de_frutas)
+print(canasta_nueva)
+
+# o
+
+canasta_de_frutas = ["apple", "banana", "cherry"]
+canasta_nueva = canasta_de_frutas[:]
+print(canasta_nueva)
+    </pre>
+
+    <h3>Unir 2 listas</h3>
+    <p>Se puede sumar una lista con la otra “+”:</p>
+    <pre>
+list1 = ["a", "b", "c"]
+list2 = [1, 2, 3]
+
+list3 = list1 + list2
+print(list3) # Output: ['a', 'b', 'c', 1, 2, 3]
+    </pre>
+
+    <p>
+      O usar el método <code>append()</code> recorriendo los valores de la
+      segunda lista y agregando uno a uno a la primera lista:
+    </p>
+    <pre>
+list1 = ["a", "b", "c"]
+list2 = [1, 2, 3]
+
+for x in list2:
+    list1.append(x)
+
+print(list1)
+    </pre>
+
+    <p>
+      O usar el método <code>extend()</code> para agregar una lista al final de
+      la primera:
+    </p>
+    <pre>
+list1 = ["a", "b", "c"]
+list2 = [1, 2, 3]
+
+list1.extend(list2)
+print(list1)
+    </pre>
+
+    <h3>Métodos para las listas</h3>
+    <table>
+      <tr>
+        <th>Método</th>
+        <th>Descripción</th>
+      </tr>
+      <tr>
+        <td>append()</td>
+        <td>Agregar un elemento/valor al final de la lista.</td>
+      </tr>
+      <tr>
+        <td>clear()</td>
+        <td>Vacía la lista.</td>
+      </tr>
+      <tr>
+        <td>copy()</td>
+        <td>Copia la lista y la nueva tendrá otro espacio en memoria.</td>
+      </tr>
+      <tr>
+        <td>extend()</td>
+        <td>
+          Agregar los elementos de una lista/tupla/etc al final de la lista
+          actual.
+        </td>
+      </tr>
+      <tr>
+        <td>insert()</td>
+        <td>Agrega un elemento a una posición específica.</td>
+      </tr>
+      <tr>
+        <td>pop()</td>
+        <td>Remueve un elemento en una posición específica.</td>
+      </tr>
+      <tr>
+        <td>remove()</td>
+        <td>Remueve un valor específico en la lista.</td>
+      </tr>
+      <tr>
+        <td>reverse()</td>
+        <td>Invierte el orden de la lista.</td>
+      </tr>
+      <tr>
+        <td>sort()</td>
+        <td>Ordena la lista.</td>
+      </tr>
+    </table>
+  </body>
+</html>
