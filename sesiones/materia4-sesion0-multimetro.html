@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multímetro y Lectura de Componentes</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      ul {
+        margin: 10px 0;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/mantenimiento-de-hardware.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Mantenimiento de Hardware
+      </a>
+    </div>
+    <h1>Multímetro y Lectura de Componentes</h1>
+
+    <h2>Medición de Corriente (A)</h2>
+    <ul>
+      <li>
+        <strong>Definición:</strong> La corriente eléctrica se mide en amperios
+        (A) y representa el flujo de carga eléctrica a través de un conductor
+        por unidad de tiempo.
+      </li>
+      <li>
+        <strong>Tipos de Corriente:</strong>
+        <ul>
+          <li>
+            <strong>Corriente Continua (DC ~):</strong> Es el tipo de corriente
+            que fluye en una sola dirección. Es común en baterías y circuitos
+            electrónicos.
+          </li>
+          <li>
+            <strong>Corriente Alterna (AC -):</strong> Es el tipo de corriente
+            que cambia de dirección periódicamente. Es común en hogares y
+            empresas, proporcionada por la red eléctrica.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Cómo Medir:</strong>
+        <ul>
+          <li>
+            Para medir la corriente, el multímetro debe conectarse en serie con
+            el circuito. Esto significa que el circuito debe abrirse y el
+            multímetro colocarse en medio, de manera que la corriente fluya a
+            través del medidor.
+          </li>
+          <li>
+            Asegúrate de seleccionar el tipo correcto de corriente (AC o DC) y
+            el rango adecuado en el multímetro.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Precauciones:</strong>
+        <ul>
+          <li>
+            Conectar el multímetro en paralelo al medir corriente puede causar
+            daños al instrumento debido a la alta corriente que podría fluir a
+            través de él.
+          </li>
+          <li>
+            Siempre comienza con el rango más alto y ajusta hacia abajo si es
+            necesario para evitar sobrecargar el multímetro.
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>Medición de Voltaje (V)</h2>
+    <ul>
+      <li>
+        <strong>Definición:</strong> El voltaje, medido en voltios (V), es la
+        diferencia de potencial eléctrico entre dos puntos de un circuito.
+        Representa la "fuerza" o "presión" que impulsa a los electrones a través
+        de un conductor.
+      </li>
+      <li>
+        <strong>Tipos de Voltaje:</strong>
+        <ul>
+          <li>
+            <strong>Voltaje Continuo (DC -):</strong> Voltaje constante en el
+            tiempo, como el proporcionado por baterías.
+          </li>
+          <li>
+            <strong>Voltaje Alterna (AC ~):</strong> Voltaje que varía con el
+            tiempo, como el proporcionado por la red eléctrica doméstica.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Cómo Medir:</strong>
+        <ul>
+          <li>
+            Para medir el voltaje, el multímetro debe conectarse en paralelo con
+            el componente o circuito. Esto significa que las sondas del
+            multímetro se colocan a través de los dos puntos donde deseas medir
+            la diferencia de potencial.
+          </li>
+          <li>
+            Selecciona el tipo correcto de voltaje (AC o DC) y el rango adecuado
+            en el multímetro.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Precauciones:</strong>
+        <ul>
+          <li>
+            Asegúrate de que las sondas estén conectadas correctamente a los
+            terminales del multímetro (COM y V).
+          </li>
+          <li>
+            Al medir voltajes altos, ten cuidado de no tocar las partes
+            conductoras de las sondas para evitar descargas eléctricas.
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>Funciones del Multímetro</h2>
+    <ol>
+      <li>
+        <strong>Resistencia (Ω):</strong> Mide la resistencia eléctrica en
+        ohmios. Se utiliza para verificar la continuidad de los circuitos y el
+        valor de las resistencias.
+      </li>
+      <li>
+        <strong>Continuidad:</strong> Esta función emite un pitido cuando hay
+        una conexión continua entre dos puntos, lo que es útil para verificar
+        cables y conexiones.
+      </li>
+      <li>
+        <strong>Diodo:</strong> Permite probar diodos y verificar su
+        funcionamiento. Mide la caída de voltaje a través del diodo cuando está
+        polarizado directamente.
+      </li>
+      <li>
+        <strong>Capacitancia (F):</strong> Mide la capacitancia de los
+        capacitores en faradios. Es útil para verificar el valor de los
+        capacitores y detectar fallos.
+      </li>
+      <li>
+        <strong>Frecuencia (Hz):</strong> Mide la frecuencia de una señal en
+        hercios. Es útil en aplicaciones de electrónica y comunicaciones.
+      </li>
+      <li>
+        <strong>Temperatura (°C/°F):</strong> Algunos multímetros tienen la
+        capacidad de medir la temperatura utilizando un termopar.
+      </li>
+      <li>
+        <strong>Ciclo de Trabajo (%):</strong> Mide el ciclo de trabajo de una
+        señal, que es el porcentaje de tiempo que una señal está activa en un
+        período dado.
+      </li>
+      <li>
+        <strong>Transistores (hFE):</strong> Algunos multímetros tienen una
+        función para probar transistores y medir su ganancia de corriente (hFE).
+      </li>
+      <li>
+        <strong>Prueba de Baterías:</strong> Permite probar el estado de carga
+        de las baterías comunes, como las de 1.5V, 9V, etc.
+      </li>
+      <li>
+        <strong>Modo Relativo (ΔREL):</strong> Esta función permite establecer
+        un valor de referencia y medir valores relativos a este, lo cual es útil
+        para comparar mediciones.
+      </li>
+      <li>
+        <strong>Prueba de Condensadores en Circuito:</strong> Algunos
+        multímetros avanzados permiten probar condensadores sin necesidad de
+        desoldarlos del circuito.
+      </li>
+      <li>
+        <strong>Medición de Inductancia (H):</strong> Mide la inductancia de los
+        inductores en henrios.
+      </li>
+      <li>
+        <strong>Prueba de Transistores y Diodos:</strong> Algunos multímetros
+        pueden probar transistores y diodos para verificar su funcionamiento y
+        polaridad.
+      </li>
+    </ol>
+
+    <h2>Precauciones al Medir Componentes Electrónicos</h2>
+    <ol>
+      <li>
+        Desconectar la Alimentación: Siempre desconecta la alimentación de la
+        placa o circuito antes de medir cualquier componente. Esto ayuda a
+        prevenir cortocircuitos y protege tanto al usuario como al multímetro.
+      </li>
+      <li>
+        Selección Correcta del Modo y Rango: Asegúrate de que el multímetro esté
+        configurado en el modo correcto (voltaje, corriente, resistencia, etc.)
+        y en el rango adecuado para la medición que vas a realizar. Usar un
+        rango incorrecto puede dar lugar a lecturas inexactas o dañar el
+        multímetro.
+      </li>
+      <li>
+        Conexión Correcta de las Sondas: Conecta las sondas en los terminales
+        correctos del multímetro. La sonda negra generalmente va al terminal COM
+        (común), y la sonda roja va al terminal correspondiente a lo que estás
+        midiendo (V, A, Ω).
+      </li>
+      <li>
+        Polaridad: Al medir voltaje en corriente continua (DC), asegúrate de
+        conectar las sondas con la polaridad correcta (rojo a positivo y negro a
+        negativo). Conectar las sondas al revés puede dar una lectura negativa
+        y, en algunos casos, dañar el circuito.
+      </li>
+      <li>
+        Inspección Visual: Antes de medir, realiza una inspección visual del
+        componente y del área circundante para detectar cualquier signo de daño,
+        como quemaduras, decoloración o componentes hinchados.
+      </li>
+      <li>
+        Uso de Equipos de Protección: Utiliza equipos de protección personal,
+        como gafas de seguridad, especialmente si estás trabajando con circuitos
+        de alta tensión o componentes que podrían explotar.
+      </li>
+      <li>
+        Manipulación Cuidadosa: Manipula los componentes y el multímetro con
+        cuidado para evitar daños físicos. Evita tocar las puntas metálicas de
+        las sondas mientras estén conectadas a un circuito energizado.
+      </li>
+      <li>
+        Entorno de Trabajo Seguro: Trabaja en un área limpia y bien iluminada.
+        Asegúrate de que no haya materiales conductivos cerca que puedan causar
+        cortocircuitos.
+      </li>
+      <li>
+        Verificación del Multímetro: Antes de usarlo, verifica que el multímetro
+        esté en buenas condiciones y que las sondas no estén dañadas.
+      </li>
+      <li>
+        Capacitores: Ten especial cuidado con los capacitores, ya que pueden
+        almacenar carga incluso después de desconectar la alimentación. Descarga
+        los capacitores antes de medirlos.
+      </li>
+    </ol>
+
+    <h2>Componentes</h2>
+
+    <h3>Capacitores</h3>
+    <ul>
+      <li>
+        <strong>Valor Correcto:</strong> Depende del valor nominal, por ejemplo,
+        100μF, 1000μF.
+      </li>
+      <li>
+        <strong>Valor en Falla:</strong> Cortocircuito o circuito abierto.
+      </li>
+      <li><strong>Ajuste del Multímetro:</strong> Modo capacitancia (F).</li>
+      <li><strong>Aspecto Dañado:</strong> Hinchado, con fugas.</li>
+      <li><strong>Desoldar:</strong> Sí es recomendable.</li>
+      <li><strong>Lectura de Valores:</strong> Valor impreso directamente.</li>
+      <li>
+        <strong>Polo Positivo/Negativo:</strong> Marca en el cuerpo,
+        generalmente indica el negativo.
+      </li>
+    </ul>
+
+    <h3>Resistencias</h3>
+    <ul>
+      <li>
+        <strong>Valor Correcto:</strong> Depende del valor nominal, por ejemplo,
+        100Ω, 1kΩ.
+      </li>
+      <li><strong>Valor en Falla:</strong> Fuera de tolerancia o infinito.</li>
+      <li><strong>Ajuste del Multímetro:</strong> Modo resistencia (Ω).</li>
+      <li><strong>Aspecto Dañado:</strong> Quemado, decolorado.</li>
+      <li><strong>Desoldar:</strong> No es necesario.</li>
+      <li>
+        <strong>Lectura de Valores:</strong> Se lee mediante código de colores o
+        valor impreso directamente.
+      </li>
+      <li><strong>Polo Positivo/Negativo:</strong> No aplica.</li>
+    </ul>
+
+    <h3>Diodos</h3>
+    <ul>
+      <li>
+        <strong>Valor Correcto:</strong> Caída de voltaje típica, por ejemplo,
+        0.6V-0.7V para silicio.
+      </li>
+      <li>
+        <strong>Valor en Falla:</strong> Sin caída de voltaje o circuito
+        abierto.
+      </li>
+      <li><strong>Ajuste del Multímetro:</strong> Modo diodo.</li>
+      <li><strong>Aspecto Dañado:</strong> Quemado, roto.</li>
+      <li><strong>Desoldar:</strong> Sí es recomendable.</li>
+      <li><strong>Lectura de Valores:</strong> Modelo impreso directamente.</li>
+      <li>
+        <strong>Polo Positivo/Negativo:</strong> Anillo en un extremo indica el
+        cátodo (negativo).
+      </li>
+    </ul>
+
+    <h3>Inductores</h3>
+    <ul>
+      <li>
+        <strong>Valor Correcto:</strong> Depende del valor nominal, por ejemplo,
+        10μH, 100μH.
+      </li>
+      <li>
+        <strong>Valor en Falla:</strong> Fuera de rango o circuito abierto.
+      </li>
+      <li><strong>Ajuste del Multímetro:</strong> Modo inductancia (H).</li>
+      <li><strong>Aspecto Dañado:</strong> Quemado, decolorado.</li>
+      <li><strong>Desoldar:</strong> No es necesario.</li>
+      <li><strong>Lectura de Valores:</strong> Valor impreso directamente.</li>
+      <li><strong>Polo Positivo/Negativo:</strong> No aplica.</li>
+    </ul>
+
+    <h3>Transistores</h3>
+    <ul>
+      <li><strong>Valor Correcto:</strong> Depende del tipo y aplicación.</li>
+      <li>
+        <strong>Valor en Falla:</strong> Sin respuesta o valores incorrectos en
+        las uniones.
+      </li>
+      <li><strong>Ajuste del Multímetro:</strong> Modo diodo o hFE.</li>
+      <li><strong>Aspecto Dañado:</strong> Quemado, roto.</li>
+      <li><strong>Desoldar:</strong> Sí es recomendable.</li>
+      <li><strong>Lectura de Valores:</strong> Modelo impreso directamente.</li>
+      <li>
+        <strong>Polo Positivo/Negativo:</strong> Depende del tipo, consultar la
+        hoja de datos (datasheet).
+      </li>
+    </ul>
+
+    <h3>Circuitos Integrados</h3>
+    <ul>
+      <li><strong>Valor Correcto:</strong> Depende del tipo y aplicación.</li>
+      <li>
+        <strong>Valor en Falla:</strong> Sin voltaje o valores incorrectos en
+        las patillas.
+      </li>
+      <li>
+        <strong>Ajuste del Multímetro:</strong> Modo voltaje (V) o resistencia
+        (Ω).
+      </li>
+      <li><strong>Aspecto Dañado:</strong> Quemado, patillas rotas.</li>
+      <li><strong>Desoldar:</strong> Sí es recomendable.</li>
+      <li><strong>Lectura de Valores:</strong> Modelo impreso directamente.</li>
+      <li>
+        <strong>Polo Positivo/Negativo:</strong> Depende del tipo, consultar la
+        hoja de datos (datasheet).
+      </li>
+    </ul>
+
+    <h2>Lectura de Códigos de Colores para Resistencias</h2>
+    <p>
+      Las resistencias suelen tener bandas de colores que indican su valor y
+      tolerancia. Aquí tienes una guía rápida para interpretarlos:
+    </p>
+    <ol>
+      <li>
+        <strong>Bandas de colores:</strong> Normalmente hay 4 o 5 bandas.
+        <ul>
+          <li>
+            <strong>4 bandas:</strong> Las dos primeras son dígitos, la tercera
+            es el multiplicador, y la cuarta es la tolerancia.
+          </li>
+          <li>
+            <strong>5 bandas:</strong> Las tres primeras son dígitos, la cuarta
+            es el multiplicador, y la quinta es la tolerancia.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Código de colores:</strong>
+        <ul>
+          <li>Negro: 0</li>
+          <li>Marrón: 1</li>
+          <li>Rojo: 2</li>
+          <li>Naranja: 3</li>
+          <li>Amarillo: 4</li>
+          <li>Verde: 5</li>
+          <li>Azul: 6</li>
+          <li>Violeta: 7</li>
+          <li>Gris: 8</li>
+          <li>Blanco: 9</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Tolerancia:</strong>
+        <ul>
+          <li>Dorado: ±5%</li>
+          <li>Plateado: ±10%</li>
+          <li>Sin color: ±20%</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>Razón y Síntoma de Componentes Dañados</h2>
+    <ol>
+      <li>
+        <strong>Capacitores:</strong>
+        <ul>
+          <li>
+            <strong>Razón:</strong> Los capacitores electrolíticos son conocidos
+            por fallar, especialmente en placas madre más antiguas. Pueden
+            hincharse o gotear, lo que es una señal clara de que necesitan ser
+            reemplazados.
+          </li>
+          <li>
+            <strong>Síntomas:</strong> Hinchazón, fugas, fallos de encendido o
+            reinicios aleatorios.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Resistencias:</strong>
+        <ul>
+          <li>
+            <strong>Razón:</strong> Aunque no fallan tan frecuentemente como los
+            capacitores, las resistencias pueden quemarse debido a picos de
+            voltaje o sobrecalentamiento.
+          </li>
+          <li>
+            <strong>Síntomas:</strong> Quemaduras visibles, decoloración,
+            circuitos abiertos.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Transistores y MOSFETs:</strong>
+        <ul>
+          <li>
+            <strong>Razón:</strong> Estos componentes son cruciales para la
+            regulación de voltaje y pueden fallar debido a sobrecargas o
+            cortocircuitos.
+          </li>
+          <li>
+            <strong>Síntomas:</strong> Sobrecalentamiento, fallos en la
+            regulación de voltaje, computadora que no enciende.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Circuitos Integrados (Chips):</strong>
+        <ul>
+          <li>
+            <strong>Razón:</strong> Los chips pueden fallar debido a
+            sobretensiones, calor excesivo o defectos de fabricación.
+          </li>
+          <li>
+            <strong>Síntomas:</strong> Fallos en el funcionamiento de
+            dispositivos conectados, errores de arranque, falta de salida de
+            video.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Conectores y Puertos:</strong>
+        <ul>
+          <li>
+            <strong>Razón:</strong> Los conectores y puertos pueden desgastarse
+            o dañarse debido al uso frecuente o a la inserción incorrecta de
+            dispositivos.
+          </li>
+          <li>
+            <strong>Síntomas:</strong> Conexiones intermitentes, falta de
+            reconocimiento de dispositivos conectados.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Batería CMOS:</strong>
+        <ul>
+          <li>
+            <strong>Razón:</strong> La batería CMOS puede agotarse con el
+            tiempo, lo que lleva a la pérdida de configuraciones de la BIOS.
+          </li>
+          <li>
+            <strong>Síntomas:</strong> Pérdida de la hora y fecha,
+            configuraciones de BIOS que se restablecen.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Fusibles:</strong>
+        <ul>
+          <li>
+            <strong>Razón:</strong> Los fusibles pueden quemarse debido a
+            sobrecargas eléctricas, protegiendo otros componentes de daños.
+          </li>
+          <li>
+            <strong>Síntomas:</strong> Placa madre sin alimentación, falta de
+            respuesta al encender.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Inductores:</strong>
+        <ul>
+          <li>
+            <strong>Razón:</strong> Aunque no son tan comunes como otros
+            componentes, los inductores pueden fallar debido a sobrecorrientes.
+          </li>
+          <li>
+            <strong>Síntomas:</strong> Fallos en la regulación de voltaje,
+            sobrecalentamiento.
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>Medición del Voltaje de una Pila CMOS</h2>
+    <ol>
+      <li>
+        <strong>Preparación del Multímetro:</strong> Asegúrate de que tu
+        multímetro esté configurado para medir voltaje en corriente continua
+        (DC). Normalmente, esto se indica con un símbolo V-- o VDC.
+      </li>
+      <li>
+        <strong>Selección del Rango:</strong> Selecciona un rango de voltaje que
+        sea ligeramente superior al voltaje nominal de la pila CMOS. Las pilas
+        CMOS suelen ser de 3V, por lo que un rango de 2V a 20V en DC es
+        adecuado.
+      </li>
+      <li>
+        <strong>Conexión de las Sondas:</strong> Conecta la sonda negra al
+        terminal negativo (GND) y la sonda roja al terminal positivo de la pila.
+        La pila CMOS suele estar en un zócalo en la placa madre, lo que facilita
+        la medición directa en los contactos de la pila.
+      </li>
+      <li>
+        <strong>Lectura del Voltaje:</strong> Lee el valor del voltaje en la
+        pantalla del multímetro. Una pila CMOS en buen estado debería leer cerca
+        de 3V. Si el voltaje es significativamente menor (por ejemplo, menos de
+        2.5V), es probable que la pila necesite ser reemplazada.
+      </li>
+    </ol>
+
+    <h2>Tipos de Pilas Usadas en CMOS</h2>
+    <ul>
+      <li>
+        <strong>Tipo Común:</strong> La pila más comúnmente utilizada para la
+        CMOS es la pila de litio CR2032. Es una pila de botón de 3V.
+      </li>
+      <li>
+        <strong>Otros Tipos:</strong> También se pueden encontrar otros tipos de
+        pilas de botón, como CR2025 o CR2016, aunque son menos comunes en las
+        placas madre.
+      </li>
+    </ul>
+
+    <h2>Interpretación de los Códigos en la Pila</h2>
+    <p>
+      Las pilas de litio de botón, como la CR2032, tienen códigos que indican su
+      tipo y especificaciones:
+    </p>
+    <ul>
+      <li>
+        <strong>CR:</strong> Indica que la pila es de litio y utiliza dióxido de
+        manganeso como cátodo.
+      </li>
+      <li>
+        <strong>2032:</strong> Los dos primeros dígitos (20) indican el diámetro
+        en milímetros, y los dos últimos dígitos (32) indican el grosor en
+        décimas de milímetro. Por lo tanto, una CR2032 tiene un diámetro de 20
+        mm y un grosor de 3.2 mm.
+      </li>
+    </ul>
+
+    <h2>Reemplazo de la Pila CMOS</h2>
+    <ul>
+      <li>
+        <strong>Extracción:</strong> Para reemplazar la pila, primero apaga la
+        computadora y desconéctala de la fuente de alimentación. Usa un
+        destornillador pequeño para sacar cuidadosamente la pila del zócalo.
+      </li>
+      <li>
+        <strong>Inserción de la Nueva Pila:</strong> Inserta la nueva pila
+        asegurándote de que la polaridad sea correcta. El lado positivo (+) debe
+        estar hacia arriba, según la indicación en el zócalo de la pila.
+      </li>
+    </ul>
+    <p>
+      Al reemplazar la pila CMOS, es posible que necesites restablecer la
+      configuración de la BIOS, ya que la pila es responsable de mantener estas
+      configuraciones cuando la computadora está apagada.
+    </p>
+  </body>
+</html>
