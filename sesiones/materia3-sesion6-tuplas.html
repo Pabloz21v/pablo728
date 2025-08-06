@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 6: Tuplas</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      .button-container {
+        margin-bottom: 24px;
+      }
+      .button {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 10px;
+        display: inline-block;
+      }
+      .button-materia {
+        background: #4ade80;
+        color: #222;
+      }
+      .button-sesion5 {
+        background: #60a5fa;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="button-container">
+      <a href="../materias/desarrollo-3.html" class="button button-materia"
+        >Volver a Materia</a
+      >
+      <a href="materia3-sesion5.html" class="button button-sesion5"
+        >Ir a Sesión 5</a
+      >
+    </div>
+    <h1>Sesión 6: Tuplas</h1>
+
+    <h2>1.1 Definición y características</h2>
+    <ul>
+      <li>
+        Las tuplas son estructuras de datos inmutables (no se pueden modificar
+        después de su creación).
+      </li>
+      <li>
+        Se definen con paréntesis <code>()</code> o simplemente separando
+        elementos por comas.
+      </li>
+      <li>Pueden contener elementos de diferentes tipos.</li>
+      <li>Son más eficientes en memoria que las listas.</li>
+    </ul>
+
+    <h3>Ejemplos:</h3>
+    <pre>
+# Diferentes formas de crear tuplas
+tupla_vacia = () 
+tupla_con_un_elemento = (42,) # ¡Importante la coma!
+tupla_numeros = (1, 2, 3, 4, 5)
+tupla_mixta = (1, "hola", 3.14, True)
+tupla_sin_parentesis = 10, 20, 30 # También es una tupla
+
+print(type(tupla_sin_parentesis)) # output: <class 'tuple'>
+    </pre>
+
+    <h2>1.2 Inmutabilidad</h2>
+    <pre>
+tupla = (1, 2, 3)
+# Ahora queremos modificar en la posición 0 el valor 1 por el valor 10
+tupla[0] = 10 # TypeError: 'tuple' object does not support item assignment
+# En las tuplas no será posible modificar un valor en una posición específica. Esto las hace inmutables.
+    </pre>
+
+    <h3>Ventajas de la inmutabilidad:</h3>
+    <ul>
+      <li>Más seguras (no pueden ser modificadas accidentalmente).</li>
+      <li>Más eficientes en términos de rendimiento.</li>
+    </ul>
+
+    <h2>2. Métodos y operaciones con tuplas</h2>
+
+    <h3>2.1 Métodos disponibles</h3>
+
+    <h4>count():</h4>
+    <p>Cuenta las ocurrencias de un elemento.</p>
+    <pre>
+tupla = (1, 2, 2, 3, 4, 2, 5)
+print(tupla.count(2)) # 3
+# Se puede observar que al solicitar cuántas veces el número 2 está presente en la tupla, dando como resultado 3 veces encontró el valor 2.
+    </pre>
+
+    <h4>index():</h4>
+    <p>Devuelve el índice de la primera aparición de un elemento.</p>
+    <pre>
+tupla = ('a', 'b', 'c', 'b', 'a')
+print(tupla.index('b')) # 1
+print(tupla.index('b', 2)) # 3 (búsqueda a partir del índice 2)
+# Al darle un segundo valor dentro del método index() este cumple la función de indicar el punto de partida, en este caso partiendo del índice 2, es decir, parte de la letra c y encuentra la letra b en la posición 3.
+    </pre>
+
+    <h3>2.2 Otras operaciones</h3>
+
+    <h4>Concatenación:</h4>
+    <p>Unir tuplas.</p>
+    <pre>
+tupla1 = (1, 2, 3)
+tupla2 = ('a', 'b', 'c')
+tupla_concatenada = tupla1 + tupla2
+print(tupla_concatenada) # (1, 2, 3, 'a', 'b', 'c')
+    </pre>
+
+    <h4>Acceso:</h4>
+    <p>Al igual que las listas podemos indicar el punto de partida.</p>
+    <pre>
+valor_index_inicio = 1
+valor_index_fin = 3
+
+canasta_de_frutas = ("apple", "banana", "cherry", "orange", "kiwi", "melon", "mango")
+print(canasta_de_frutas[2:5]) # output: "cherry", "orange", "kiwi"
+    </pre>
+
+    <h4>Recorrido condicional if:</h4>
+    <pre>
+canasta_de_frutas = ("apple", "banana", "cherry")
+if "apple" in canasta_de_frutas:
+    print("Yes, 'apple' is in the fruits tuple")
+# En este ejemplo recorremos uno a uno los valores dentro de la tupla, usamos un condicional if para verificar si el valor "apple" está presente, de ser TRUE que ocurra lo siguiente, en este caso imprimimos un mensaje.
+    </pre>
+
+    <h4>Recorrido/loop usando for:</h4>
+    <p>
+      Al usar el loop for, recorre cada posición de la tupla de forma ordenada,
+      va guardando en cada ocasión en la variable fruta un valor de la tupla que
+      está siendo recorrida y en este caso imprime el valor de la variable
+      almacenada en "fruta". Pasando a la siguiente posición y volviendo a
+      realizar la misma acción.
+    </p>
+    <pre>
+tupla_de_frutas = ("apple", "banana", "cherry")
+for fruta in tupla_de_frutas:
+    print(fruta)
+    </pre>
+
+    <h4>Recorrido/loop usando for:</h4>
+    <p>A diferencia del loop anterior, este recorre por posición del índice.</p>
+    <pre>
+frutas = ("apple", "banana", "cherry")
+for fruta in range(len(frutas)):
+    print(frutas[fruta])
+# Usa el método len() para calcular el largo de la tupla, luego el método range() usa ese valor para determinar cuánto irá a recorrer. El resto de la lógica es la misma que en el ejemplo anterior. Guarda en fruta el valor basado en la posición y posteriormente la imprime.
+    </pre>
+
+    <h4>Recorrido/loop usando while:</h4>
+    <p>
+      Al usar while siempre hay que poner un contador para detener el recorrido,
+      en este ejemplo nombramos la variable como index igualándola a 0 como
+      punto de partida. El método len() calcula el largo de la tupla, y la
+      compara con el valor de index, dando TRUE (0 es menor a 3) imprimiendo así
+      la fruta en la posición indicada [0], posteriormente incrementa el valor
+      de la variable index a 1, volviendo a repetir el proceso pero con el valor
+      de index como 1, una vez terminado ese recorrido vuelve a incrementar a 2,
+      y luego a 3, llegando a comparar (3 menor que 3) FALSE cortando el bucle.
+    </p>
+    <pre>
+frutas = ("apple", "banana", "cherry")
+index = 0
+while index < len(frutas):
+    print(frutas[index])
+    index = index + 1
+    </pre>
+
+    <h4>Comprehension:</h4>
+    <p>Una combinación de bucle for y condicional if:</p>
+    <p>
+      En este ejemplo queremos obtener los valores pares contenidos en la tupla.
+    </p>
+    <pre>
+numeros = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+pares = tuple(numero for numero in numeros if numero % 2 == 0)
+print(pares) # output (2, 4, 6, 8, 10)
+# El primer numero irá guardando el valor de lo que se vaya recorriendo cumpliendo con la lógica ingresada, pasamos al for, empieza el recorrido de la tupla números guardando en numero (el segundo) el valor 1, busca en cada numero (tercer numero) si al dividir por 2 el valor (en este caso 1) da de resto 0, de ser TRUE se guarda en la variable pares como tupla debido al método tuple(), "1 no da de resto 0 por lo que es FALSE y pasa al siguiente valor de la tupla 'numeros' que está recorriendo". Ahora numero contiene el valor 2, 2 dividido 2, da de resto 0 por lo que es TRUE, el valor 2 se guardará en la nueva tupla llamada "pares". La lógica continúa hasta finalizar el recorrido.
+    </pre>
+
+    <h4>Repetición:</h4>
+    <pre>
+tupla = ('hola',)
+print(tupla * 3) # ('hola', 'hola', 'hola')
+    </pre>
+
+    <h4>Membership (pertenencia):</h4>
+    <pre>
+tupla = (1, 2, 3, 4, 5)
+print(3 in tupla) # True
+print(10 in tupla) # False
+# Si existe el valor indicado, dando true de ser existir, y false si no existe en la tupla.
+    </pre>
+
+    <h4>Desempaquetado:</h4>
+    <pre>
+tupla = (10, 20, 30)
+x, y, z = tupla
+print(x, y, z) # 10 20 30
+# Creamos 3 variables y guardamos cada valor en cada variable.
+    </pre>
+
+    <h4>Desempaquetado con asterisco (*):</h4>
+    <pre>
+frutas = ("apple", "banana", "cherry", "strawberry", "raspberry")
+(green, yellow, *red) = frutas
+print(green) # output: apple
+print(yellow) # output: banana
+print(red) # output: ['cherry', 'strawberry', 'raspberry']
+# La variable con el * guardará el resto del contenido como una lista.
+    </pre>
+
+    <h4>Vaciar la tupla:</h4>
+    <pre>
+tupla = ("apple", "banana", "cherry")
+del tupla
+print(tupla) # this will raise an error because the tuple no longer exists
+# La vacía y devuelve error por estar vacía.
+    </pre>
+
+    <h2>3: Comparación con listas y casos de uso</h2>
+
+    <h3>3.1 Diferencias con listas</h3>
+
+    <table>
+      <tr>
+        <th>Característica</th>
+        <th>Tuplas</th>
+        <th>Listas</th>
+      </tr>
+      <tr>
+        <td>Mutabilidad</td>
+        <td>Inmutable</td>
+        <td>Mutable</td>
+      </tr>
+      <tr>
+        <td>Sintaxis</td>
+        <td>() o elementos separados por comas</td>
+        <td>[]</td>
+      </tr>
+      <tr>
+        <td>Rendimiento</td>
+        <td>Más rápido</td>
+        <td>Más lento</td>
+      </tr>
+    </table>
+
+    <h3>
+      Si bien las tuplas son inmutables y no se pueden modificar, existen
+      trampas para poder hacerlo de todas formas:
+    </h3>
+    <pre>
+tupla = ("apple", "banana", "cherry")
+lista = list(tupla)
+lista[1] = "kiwi"
+tupla = tuple(lista)
+
+print(tupla)
+# La trampa es convertir la tupla a una lista por medio del método list(), cambiar algún valor y volver a convertirlo a tupla con el método tuple().
+    </pre>
+
+    <h3>Otra forma es adicionar una tupla a otra tupla:</h3>
+    <pre>
+tupla_de_frutas = ("apple", "banana", "cherry")
+tupla_fruta_solitaria = ("orange",)
+tupla_de_frutas += tupla_fruta_solitaria
+
+print(tupla_de_frutas) # output: ('apple', 'banana', 'cherry', 'orange')
+    </pre>
+
+    <h3>Ejemplo de uso como clave en diccionario:</h3>
+    <p>
+      (En las próximas clases veremos diccionarios, solo observen un uso
+      posterior que puede tener, en este caso para guardar como "claves/keys"
+      las coordenadas).
+    </p>
+    <pre>
+coordenadas = {
+    (40.7128, -74.0060): "Nueva York",
+    (34.0522, -118.2437): "Los Ángeles"
+}
+
+print(coordenadas[(40.7128, -74.0060)]) # "Nueva York"
+# Otro ejemplo: guardar una configuración de base de datos:
+
+configuracion = ("localhost", 8080, "admin", "secret")
+# No queremos que estos datos sean modificados accidentalmente
+    </pre>
+
+    <h2>4: Ejercicios prácticos</h2>
+
+    <ol>
+      <li>
+        Crear una tupla con los meses del año y:
+        <ul>
+          <li>Mostrar los primeros 6 meses.</li>
+          <li>Contar cuántas veces aparece "Julio".</li>
+          <li>Encontrar el índice de "Diciembre".</li>
+        </ul>
+      </li>
+    </ol>
+    <pre>
+meses = ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
+
+print(meses[:6])
+
+print(meses.count("Julio"))
+
+print(meses.index("Diciembre"))
+    </pre>
+  </body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introducción a Bases de Datos (DDBB)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      ul {
+        margin: 10px 0;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      .button {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #22c55e;
+        color: #fff !important;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        text-align: center;
+        transition: background 0.2s;
+      }
+      .button:hover {
+        background: #16a34a;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Botones de navegación agregados -->
+    <div style="margin-bottom: 20px">
+      <a
+        href="../materias/conversion-y-reparacion-de-datos.html"
+        class="button"
+      >
+        Volver a Materia
+      </a>
+      <a href="materia2-sesion4.html" class="button"> Ir a Sesión 4 </a>
+    </div>
+
+    <h1>Introducción a Bases de Datos (DDBB)</h1>
+
+    <h2>¿Qué es una base de datos?</h2>
+    <p>
+      Una base de datos es una colección organizada de información o datos
+      almacenados de manera estructurada para que sea fácilmente accesible,
+      gestionable y actualizable. Las bases de datos se utilizan para almacenar
+      grandes cantidades de información de manera eficiente y para permitir que
+      los usuarios accedan y manipulen esa información de manera rápida y
+      sencilla.
+    </p>
+
+    <h2>Tipos de Bases de Datos (DDBB)</h2>
+    <ul>
+      <li>
+        <strong>Bases de Datos Relacionales:</strong> Utilizan tablas para
+        almacenar datos y relaciones entre esas tablas. Son las más comunes y
+        utilizan SQL para las consultas.
+      </li>
+      <li>
+        <strong>Bases de Datos NoSQL:</strong> Diseñadas para manejar datos no
+        estructurados o semiestructurados. Incluyen bases de datos de
+        documentos, clave-valor, columnas anchas y grafos.
+      </li>
+    </ul>
+
+    <p>
+      Usaremos para bases de datos relacionales
+      <strong>MySQL Workbench</strong> (interfaz gráfica).
+    </p>
+
+    <h3>CREATE DATABASE</h3>
+    <p>
+      Para que el comando funcione en
+      <strong>MySQL Workbench</strong> escribiremos lo siguiente:
+    </p>
+    <pre>CREATE DATABASE nombre_que_le_quiero_dar_a_la_DDBB;</pre>
+
+    <h3>DROP DATABASE</h3>
+    <p>De forma inversa para eliminar la DDBB creada:</p>
+    <pre>DROP DATABASE nombre_que_le_quiero_dar_a_la_DDBB;</pre>
+
+    <p>Nunca olvidar cerrar la línea de código usando “punto y coma (;)”.</p>
+
+    <h3>Posicionarnos</h3>
+    <p>
+      Usamos el comando <code>USE</code> para posicionarnos en la DDBB creada.
+    </p>
+    <pre>USE nombre_que_le_quiero_dar_a_la_DDBB;</pre>
+
+    <p>
+      Para insertar este código es necesario ubicar el botón "create new SQL
+      queries", este se encuentra en la parte superior izquierda justo debajo
+      del botón "File".
+    </p>
+
+    <p>
+      Insertamos en el cuadro de SQL el código anteriormente presentado y damos
+      clic al botón en forma de rayo. Si todo salió bien veremos mensajes en el
+      output (cuadro inferior) indicando que realizó las acciones y mostrando
+      una tilde verde de éxito, sino veremos uno rojo con una cruz dentro.
+    </p>
+
+    <p>
+      También podés visualizar dónde están las DDBB que creamos y sus tablas,
+      esto lo podemos hacer ubicando otro botón "Schemas" que se encuentra en la
+      parte inferior del cuadro llamado "Navigator" a su izquierda tenemos otro
+      botón "Administration". Una vez presionado "Schemas" veremos las DDBB
+      instaladas por defecto y las que crearemos.
+    </p>
+
+    <h3>CREATE TABLE</h3>
+    <p>Crear tabla:</p>
+    <pre>
+CREATE TABLE alumnos (
+    nombre VARCHAR(25),
+    apellido VARCHAR(25),
+    edad INT,
+    domicilio VARCHAR(80)
+);
+    </pre>
+
+    <p>
+      La estructura para crear la tabla necesita de asignarle un nombre, abrir
+      paréntesis () y dentro de él poner el nombre de la columna seguido del
+      tipo de dato que irá en esa columna, cerrando con una coma “,”, excepto la
+      última columna, como se puede ver en el ejemplo, y no olvidar terminar la
+      línea de código con el punto y coma “;”.
+    </p>
+
+    <p>
+      En este ejemplo a la columna le pusimos <code>VARCHAR(50)</code>,
+      <code>VARCHAR()</code> indica que el tipo de dato que se ingresará en
+      dicha columna será un dato de tipo texto, y el número dentro del
+      paréntesis (50) la cantidad de caracteres permitidos.
+    </p>
+
+    <p>
+      Si usamos <code>INT</code>, indicaremos que el tipo de dato a ingresar en
+      esa columna será numérico.
+    </p>
+
+    <h3>DROP TABLE</h3>
+    <p>Elimina la tabla:</p>
+    <pre>DROP TABLE alumnos;</pre>
+
+    <p>
+      Si no logramos ver los cambios en la pestaña SCHEMAS, siempre veremos un
+      botón celeste de 2 flechitas formando una ruedita, este botón actualiza la
+      vista de SCHEMAS. Si lo hicimos bien podrán ver las DDBB, tablas y todo
+      cambio actualizado.
+    </p>
+
+    <h3>Insertar datos a la tabla</h3>
+    <p>
+      Ahora vamos a agregar datos a la tabla creada con
+      <code>INSERT INTO</code> y <code>VALUES</code>:
+    </p>
+    <pre>
+INSERT INTO alumnos (nombre, apellido, edad, domicilio)
+VALUES ('Tony', 'Stark', 1967, 'Avenida siempre viva 123');
+    </pre>
+
+    <p>
+      Podrán observar que primero usamos <code>INSERT INTO</code> seguido del
+      nombre de la tabla, abrimos paréntesis e ingresamos los nombres de las
+      columnas que queremos llenar con datos (exactamente escritos),
+      posteriormente usamos <code>VALUES</code>, abrimos paréntesis e ingresamos
+      los datos. Si la columna tenía una configuración <code>VARCHAR</code>,
+      esto se guardará como texto, por lo que hay que escribir el nombre rodeado
+      de comillas (apretar el botón de signo de pregunta al lado del 0,
+      generalmente ese botón contiene la comilla indicada). En el ejemplo verán
+      el nombre, apellido y dirección rodeados por dicha comilla.
+    </p>
+
+    <p>
+      Cada nombre de tabla como los datos a ingresar siempre separarlos con coma
+      “,”.
+    </p>
+
+    <p>No olvidar cerrar la línea de código con punto y coma “;”.</p>
+
+    <p>
+      Respetar el orden ingresado de las columnas con el dato a ingresar, si
+      ingresan un tipo de dato que no corresponde al designado en esa columna
+      saldrá error y no registrará los cambios.
+    </p>
+
+    <h3>Ejercicio</h3>
+    <ul>
+      <li>Crear una DDBB con tu nombre.</li>
+      <li>
+        Crear 3 tablas, cada una con alguna temática de cosas que te gusta
+        (deportistas, videojuegos, moda, autos, aviones, etc).
+      </li>
+      <li>
+        Asignarle nombre a las tablas y el tipo de dato que debería contener
+        <code>VARCHAR(cant caract permit)</code> para texto,
+        <code>INT</code> para números.
+      </li>
+      <li>Agregar por lo menos 3 datos en cada tabla.</li>
+    </ul>
+  </body>
+</html>
