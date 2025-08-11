@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Funciones en Python</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      ul {
+        margin: 10px 0;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      .button-container {
+        margin-bottom: 24px;
+      }
+      .button {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 10px;
+        display: inline-block;
+      }
+      .button-materia {
+        background: #4ade80;
+        color: #222;
+      }
+      .button-sesion6 {
+        background: #60a5fa;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="button-container">
+      <a href="../materias/desarrollo-3.html" class="button button-materia"
+        >Volver a Materia</a
+      >
+      <a href="materia3-sesion6-tuplas.html" class="button button-sesion6"
+        >Ir a Sesión 6</a
+      >
+    </div>
+    <h1>Sesión 7: Funciones</h1>
+    <h2>¿Qué es una función?</h2>
+    <ul>
+      <li>Bloque de código reutilizable.</li>
+      <li>
+        Evita repetir código (principio DRY: <em>Don't Repeat Yourself</em>).
+      </li>
+      <li>Mejora la organización y legibilidad.</li>
+    </ul>
+
+    <h2>Sintaxis básica de def</h2>
+    <pre>
+def nombre_funcion(parametros):
+    # código a ejecutar
+    return valor
+</pre
+    >
+    <p>
+      Declaramos que será una función al escribir "def" luego le damos un nombre
+      a la función y abrimos paréntesis (), dentro de los paréntesis () puede ir
+      vacío o con parámetros dentro.
+    </p>
+    <p>
+      Escribimos la lógica / código que nos interese. Usamos return si queremos
+      que algo dentro del código / lógica que escribimos se "imprima", veremos
+      en consola como si hubiéramos escrito print(valor).
+    </p>
+    <p>
+      Para que el código de una función se ejecute necesitamos llamar a la
+      función, esto se hace escribiendo el nombre de la función creada más
+      paréntesis.
+    </p>
+
+    <h3>Ejemplo básico:</h3>
+    <pre>
+def saludar():
+    print("Hola, humano!")
+
+saludar()
+</pre
+    >
+
+    <h3>Mini-ejercicio:</h3>
+    <ul>
+      <li>Crear una función que imprima tu nombre y ciudad.</li>
+    </ul>
+
+    <h2>Parámetros y argumentos</h2>
+
+    <h3>Teoría:</h3>
+    <ul>
+      <li><strong>Parámetros</strong> → variables definidas en la función.</li>
+      <li><strong>Argumentos</strong> → valores reales que pasamos.</li>
+      <li>
+        Tipos de parámetros:
+        <ul>
+          <li>Posicionales</li>
+          <li>Con valor por defecto</li>
+          <li>Keyword arguments</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Ejemplos:</h3>
+    <pre>
+# Parámetro posicional
+def saludar_persona(nombre): # parámetro = nombre
+    print(f"Hola, {nombre}!")
+
+saludar_persona("Ana") # argumento = "Ana"
+
+# Parámetro con valor por defecto
+def saludar_persona(nombre="Mundo"):
+    print(f"Hola, {nombre}!")
+
+saludar_persona()
+</pre
+    >
+
+    <h2>Valores de retorno (return)</h2>
+
+    <h3>Teoría:</h3>
+    <ul>
+      <li>
+        <code>return</code> envía un resultado al lugar donde se llamó la
+        función.
+      </li>
+      <li>
+        Si no hay <code>return</code>, la función devuelve <code>None</code>.
+      </li>
+    </ul>
+
+    <h3>Ejemplo:</h3>
+    <pre>
+def suma(valor_uno, valor_dos): # parámetros
+    return valor_uno + valor_dos
+
+resultado = suma(5, 3) # argumentos
+
+print(resultado) # 8
+</pre
+    >
+    <p>
+      En este ejemplo se ingresan dos parámetros a la función suma: valor_uno y
+      valor_dos.
+    </p>
+    <p>
+      Posteriormente se llama a la función y dentro de los paréntesis se
+      ingresaron 2 valores (argumentos), cada valor se guarda en un parámetro
+      valor_uno, valor_dos respetando el orden de posición, tener mucho cuidado
+      al introducir argumentos en la posición incorrecta, esto puede dar
+      resultados no deseables.
+    </p>
+    <p>
+      El argumento 5 se guarda en valor_uno y 3 en valor_dos, se suman y
+      <code>return</code> devuelve "8", este número 8 se guarda en la variable
+      resultado y posteriormente se imprime.
+    </p>
+
+    <h3>Ejercicio rápido:</h3>
+    <ul>
+      <li>
+        Escribir una función que reciba dos números y devuelva su promedio.
+      </li>
+    </ul>
+
+    <h2>Alcance de variables (Scope)</h2>
+
+    <h3>Teoría:</h3>
+    <ul>
+      <li>Variables locales: existen solo dentro de la función.</li>
+      <li>Variables globales: existen en todo el programa.</li>
+      <li>No abusar de globales.</li>
+    </ul>
+
+    <h3>Ejemplo:</h3>
+    <pre>
+x = 10
+def mostrar():
+    y = 5
+    print(x) # Accede a variable global
+    print(y) # Variable local
+
+mostrar()
+
+# print(y) # Error: no existe fuera de la función
+</pre
+    >
+
+    <h2>Ejercicios prácticos</h2>
+
+    <h3>Objetivo:</h3>
+    Aplicar todo lo visto.
+
+    <ol>
+      <li>
+        <strong>Conversor de temperaturas</strong>
+        <ul>
+          <li>
+            Crear una función que reciba grados Celsius y retorne Fahrenheit.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Calculadora simple</strong>
+        <ul>
+          <li>
+            Funciones: sumar, restar, multiplicar, dividir. (pueden usar la que
+            crearon y mejorarla usando funciones).
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Verificador de par/impar</strong>
+        <ul>
+          <li>
+            Función que reciba un número y devuelva True si es par, False si es
+            impar.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Contador de vocales</strong>
+        <ul>
+          <li>
+            Función que reciba un string y devuelva cuántas vocales tiene.
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>Cierre y repaso</h2>
+
+    <h3>Resumen de conceptos clave.</h3>
+
+    <h3>Preguntas rápidas:</h3>
+    <ol>
+      <li>¿Cuál es la diferencia entre parámetros y argumentos?</li>
+      <li>¿Qué pasa si una función no tiene return?</li>
+      <li>¿Por qué es importante el scope?</li>
+    </ol>
+  </body>
+</html>
