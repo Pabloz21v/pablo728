@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 8: Bucles (for y while)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      ul {
+        margin: 10px 0;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      /* Estilos para los botones */
+      .button {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 10px;
+        display: inline-block;
+      }
+      .button-volver {
+        background: #4ade80;
+        color: #222;
+      }
+      .button-siguiente {
+        background: #60a5fa;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Botones de navegación -->
+    <div style="margin-bottom: 24px">
+      <a href="../materias/desarrollo-3.html" class="button button-volver">
+        Volver a Materia
+      </a>
+      <a href="materia3-sesion7-funciones.html" class="button button-siguiente">
+        Ir a Sesión 7
+      </a>
+    </div>
+
+    <h1>Sesión 8: Bucles (for y while) en Python</h1>
+
+    <h2>1️ Introducción</h2>
+
+    <h3>Teoría:</h3>
+    <ul>
+      <li>Un bucle permite repetir un bloque de código varias veces.</li>
+      <li>
+        Ventajas:
+        <ul>
+          <li>Ahorra código.</li>
+          <li>Automatiza tareas repetitivas.</li>
+          <li>Facilita el manejo de colecciones de datos.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>2️ Bucle for</h2>
+
+    <h3>Teoría:</h3>
+    <ul>
+      <li>
+        Recorre una <strong>secuencia</strong> (lista, tupla, string, rango,
+        etc.).
+      </li>
+      <li>
+        Sintaxis:
+        <pre>
+for variable in secuencia:
+    # código a ejecutar</pre
+        >
+      </li>
+    </ul>
+
+    <h3>Ejemplos:</h3>
+    <pre>
+# Recorrer un rango de números
+# El valor ingresado en range() será la cantidad de posiciones que recorrerá
+for i in range(5):
+    print(i) # 0, 1, 2, 3, 4
+
+for x in range(2, 6):
+    print(x) # 2 3 4 5
+
+# range(inicio, fin, paso) para generar secuencias numéricas.
+for x in range(2, 30, 3):
+    print(x) # 2 5 8 11 14 17 20 23 26 29
+
+# Recorrer una lista
+frutas = ["manzana", "banana", "pera"]
+for fruta in frutas:
+    print(fruta)
+
+# Recorrer un string
+for letra in "Python":
+    print(letra)
+    </pre>
+
+    <h3>ELSE en FOR:</h3>
+    <p>
+      Se puede usar <code>else</code> para que ejecute una acción luego de
+      concretar un recorrido.
+    </p>
+    <pre>
+for x in range(6):
+    print(x)
+else:
+    print("Fin de bucle recorrido!")
+    </pre>
+
+    <h3>BREAK en FOR:</h3>
+    <p>
+      Al usar <code>break</code> dentro de un bucle este interrumpirá toda
+      acción (corta el bloque en ejecución).
+    </p>
+    <pre>
+for x in range(6):
+    if x == 4: break
+    print(x)
+else:
+    print("Fin de bucle recorrido!") # 0 1 2 3
+    </pre>
+
+    <h3>CONTINUE en FOR:</h3>
+    <pre>
+for i in range(10):
+    if i % 2 == 0:
+        continue
+    print(i) # 1 3 5 7 9
+# Cada valor por posición divisible por 2 que dé resto 0, es decir, los números pares cumplen la igualdad del if i % 2, es decir, 0 == 0, ingresando a continue, saltando el recorrido en acción y pasando a la siguiente iteración, por esto nunca se imprimen los valores pares.
+    </pre>
+
+    <h3>Ejercicio:</h3>
+    <ul>
+      <li>Imprimir todos los números pares del 0 al 20.</li>
+    </ul>
+
+    <h2>3️ Bucle while</h2>
+
+    <h3>Teoría:</h3>
+    <ul>
+      <li>
+        Ejecuta un bloque mientras la condición sea <strong>True</strong>.
+      </li>
+      <li>
+        Sintaxis:
+        <pre>
+while condicion:
+    # código a ejecutar</pre
+        >
+      </li>
+      <li>Riesgo: bucles infinitos si la condición nunca cambia.</li>
+    </ul>
+
+    <h3>Ejemplos:</h3>
+    <pre>
+# Contador
+contador = 0
+while contador < 5:
+    print(contador)
+    contador += 1
+# El final de cada recorrido incrementa en uno a contador, una vez llegue a 5 comparará 5 < 5 dando FALSE interrumpiendo el bucle.
+
+# Adivinar contraseña
+clave = "python123"
+entrada = ""
+while entrada != clave:
+    entrada = input("Introduce la contraseña: ")
+print("Acceso concedido")
+# Hasta no ingresar la clave, de forma infinita solicitará la password.
+    </pre>
+
+    <h3>Ejercicio:</h3>
+    <ul>
+      <li>Pedir un número al usuario hasta que ingrese uno mayor que 10.</li>
+      <li>
+        Adivinar un número del 1 al 15. 2 input, uno para que tu compañero
+        ingrese el número y otro dentro del bucle para que adivine el número.
+      </li>
+    </ul>
+
+    <h2>4️ Control del flujo: break y continue</h2>
+
+    <h3>Teoría:</h3>
+    <ul>
+      <li><code>break</code>: termina el bucle.</li>
+      <li><code>continue</code>: salta a la siguiente iteración.</li>
+    </ul>
+
+    <h3>Ejemplos:</h3>
+    <pre>
+# BREAK en WHILE:
+i = 1
+while i < 6:
+    print(i)
+    if i == 3:
+        break
+    i += 1 # 1 2 3
+
+# CONTINUE en WHILE
+# Saltea el recorrido en acción y pasa al siguiente (en este ejemplo cuando i = 3 cumple la condición de 3 = 3 dando TRUE ingresando a continue, saltando el print() de i = 3)
+i = 0
+while i < 6:
+    i += 1
+    if i == 3:
+        continue
+    print(i) # 1 2 4 5 6
+    </pre>
+
+    <h3>Ejercicio rápido:</h3>
+    <ul>
+      <li>Recorrer una lista y dejar de imprimir si aparece "stop".</li>
+    </ul>
+
+    <h2>5️ Ejercicios prácticos</h2>
+
+    <h3>Objetivo:</h3>
+    Aplicar for, while, break y continue.
+
+    <ol>
+      <li>
+        <strong>Tabla de multiplicar</strong>
+        <ul>
+          <li>Pedir un número y mostrar su tabla usando for.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Cuenta regresiva</strong>
+        <ul>
+          <li>Desde un número ingresado hasta 0 usando while.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Suma acumulada</strong>
+        <ul>
+          <li>
+            Pedir números al usuario y sumarlos hasta que ingrese 0 (usar while
+            y break).
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Filtrar positivos</strong>
+        <ul>
+          <li>
+            Recorrer una lista y mostrar solo números positivos (continue para
+            saltar los negativos).
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Juego de adivinanza</strong>
+        <ul>
+          <li>
+            El programa genera un número aleatorio (1–20) y el usuario intenta
+            adivinarlo usando while. Indicar si es mayor o menor.
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>6️ Desafío final</h2>
+
+    <h3>Problema:</h3>
+    <ul>
+      <li>
+        Escribir un programa que:
+        <ol>
+          <li>Pida un texto.</li>
+          <li>Cuente cuántas vocales hay usando un for.</li>
+          <li>Muestre el resultado.</li>
+        </ol>
+      </li>
+    </ul>
+
+    <h2>7️ Cierre</h2>
+
+    <h3>Resumen:</h3>
+    <ul>
+      <li><code>for</code> → recorrer secuencias.</li>
+      <li><code>while</code> → repetir mientras la condición sea verdadera.</li>
+      <li>
+        <code>break</code> y <code>continue</code> → controlan el flujo interno.
+      </li>
+      <li>
+        Elegir <code>for</code> cuando se conoce cuántas veces se repite,
+        <code>while</code> cuando depende de una condición.
+      </li>
+    </ul>
+  </body>
+</html>

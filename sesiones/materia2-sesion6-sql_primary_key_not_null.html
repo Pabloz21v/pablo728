@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 6: PRIMARY KEY, NOT NULL, INSERT, UPDATE, WHERE, IF</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      ul {
+        margin: 10px 0;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      /* Estilos para los botones */
+      .button {
+        padding: 12px 24px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+      }
+      .button-green {
+        background-color: #4ade80;
+        color: #222;
+      }
+      .button-blue {
+        background-color: #2563eb;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Botones de navegación -->
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/conversion-y-reparacion-de-datos.html"
+        class="button button-green"
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="materia2-sesion5-introduccion_bases_datos.html"
+        class="button button-blue"
+      >
+        Ir a Sesión 5
+      </a>
+    </div>
+
+    <h1>Sesión 6: PRIMARY KEY, NOT NULL, INSERT, UPDATE, WHERE, IF</h1>
+
+    <h2>1️ Introducción y entorno</h2>
+
+    <h3>Contenido:</h3>
+    <ul>
+      <li>MySQL Workbench: interfaz, conexión y ejecución de consultas.</li>
+      <li>
+        Recordatorio: <code>CREATE DATABASE</code>, <code>USE</code> y consultas
+        básicas.
+      </li>
+      <li>
+        ¿Qué es una tabla? → conjunto de registros (filas) y campos (columnas).
+      </li>
+    </ul>
+
+    <h3>Práctica:</h3>
+    <pre>
+CREATE DATABASE escuela;
+USE escuela;
+    </pre>
+
+    <h2>2️ PRIMARY KEY y NOT NULL</h2>
+
+    <h3>Teoría:</h3>
+    <ul>
+      <li>
+        <strong>PRIMARY KEY:</strong>
+        <ul>
+          <li>Identifica de forma única cada registro de una tabla.</li>
+          <li>No se puede repetir.</li>
+          <li>No puede ser NULL.</li>
+          <li>Generalmente usado en el campo id.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>NOT NULL:</strong>
+        <ul>
+          <li>
+            Indica que el campo <strong>debe tener un valor</strong> siempre.
+          </li>
+          <li>Previene inserciones sin valor en esa columna.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Ejemplo:</h3>
+    <pre>
+CREATE TABLE deportista (
+    id INT PRIMARY KEY NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
+    goles INT NOT NULL
+);
+    </pre>
+
+    <h3>Práctica:</h3>
+    <ol>
+      <li>
+        Crear tabla alumnos con:
+        <ul>
+          <li>id (entero, clave primaria)</li>
+          <li>nombre (texto, NOT NULL)</li>
+          <li>edad (entero, NOT NULL)</li>
+        </ul>
+      </li>
+      <li>Ver estructura.</li>
+      <li>Insertar alumnos: id, nombre y edad.</li>
+    </ol>
+
+    <h2>3️ INSERTAR VALORES</h2>
+
+    <h3>Teoría:</h3>
+    <ul>
+      <li><code>INSERT INTO</code> agrega registros a la tabla.</li>
+      <li>
+        Sintaxis:
+        <pre>
+INSERT INTO tabla (col1, col2, col3)
+VALUES (valor1, valor2, valor3);</pre
+        >
+      </li>
+      <li>
+        Se puede insertar varias filas en una sola sentencia:
+        <pre>
+INSERT INTO tabla (col1, col2, col3)
+VALUES
+(valor1, valor2, valor3),
+(valor4, valor5, valor6);</pre
+        >
+      </li>
+    </ul>
+
+    <h3>Demostración:</h3>
+    <pre>
+INSERT INTO alumnos (id, nombre, edad)
+VALUES
+(1, 'Ana', 20),
+(2, 'Luis', 22),
+(3, 'María', 21);
+    </pre>
+
+    <h3>Práctica:</h3>
+    <ul>
+      <li>Insertar 3 alumnos distintos en la tabla alumnos.</li>
+      <li>
+        Mostrar datos con:
+        <pre>SELECT * FROM alumnos;</pre>
+        <p>
+          El uso del asterisco indica que tome “todo”. En este caso la
+          interpretación es “Selecciona todo de la tabla alumnos”.
+        </p>
+      </li>
+    </ul>
+
+    <h2>4️ UPDATE y SET</h2>
+
+    <h3>Teoría:</h3>
+    <ul>
+      <li><code>UPDATE</code> modifica registros existentes.</li>
+      <li><code>SET</code> define qué valores cambiar.</li>
+      <li>
+        Se debe usar <code>WHERE</code> para evitar modificar todos los
+        registros.
+      </li>
+    </ul>
+
+    <h3>Ejemplo:</h3>
+    <pre>
+UPDATE alumnos
+SET edad = 23
+WHERE id = 2;
+# Interpretación: Actualiza en la tabla alumnos en la columna edad por el valor 23 donde el id sea igual a 2.
+    </pre>
+
+    <h3>Práctica:</h3>
+    <ul>
+      <li>Cambiar la edad de un alumno.</li>
+      <li>Cambiar el nombre de un alumno.</li>
+    </ul>
+
+    <h2>5️ WHERE</h2>
+
+    <h3>Teoría:</h3>
+    <ul>
+      <li>Filtra registros en <code>SELECT</code> y <code>UPDATE</code>.</li>
+      <li>
+        Operadores comunes:
+        <ul>
+          <li>= igual</li>
+          <li>&gt; mayor que</li>
+          <li>&lt; menor que</li>
+          <li>
+            &gt;=, &lt;=, &lt;&gt; (mayor o igual que, menor o igual que,
+            distinto de)
+          </li>
+          <li>
+            AND, OR, NOT (AND = y / OR = ó, NOT invierte el valor lógico: si es
+            verdadero, pasa a falso; si es falso, pasa a verdadero.)
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Ejemplo:</h3>
+    <pre>
+SELECT * FROM alumnos WHERE edad > 21;
+# Interpretación: “selecciona todo de la tabla alumnos donde la edad sea mayor a 21”
+
+UPDATE alumnos SET nombre = 'Juan' WHERE id = 1;
+# Interpretación: “Actualiza de la tabla alumnos el valor de la columna nombre por JUAN donde el id sea igual a 1”
+
+SELECT * FROM alumnos
+WHERE NOT edad = 20;
+-- Muestra todos los alumnos cuya edad NO sea 20
+# Interpretación: “Selecciona todo de la tabla alumnos donde la columna edad tenga un valor distinto a 20”.
+
+SELECT * FROM alumnos
+WHERE (edad > 18 AND promedio >= 6) OR nombre = 'Ana';
+# Interpretación: “selecciona todo de la tabla alumnos donde (los valores de cada fila sean en la columna edad mayores a 18 y la columna promedio sea mayor o igual a 6) o en la columna nombre sea igual a ANA”
+    </pre>
+
+    <h3>Práctica:</h3>
+    <ul>
+      <li>Mostrar alumnos con edad mayor a 21.</li>
+      <li>Cambiar edad solo de los que tienen nombre 'María'.</li>
+    </ul>
+
+    <h2>6️ Ejercicios prácticos integradores</h2>
+    <ol>
+      <li>
+        Crear tabla cursos con:
+        <ul>
+          <li>id PRIMARY KEY</li>
+          <li>nombre NOT NULL</li>
+          <li>duracion_meses NOT NULL</li>
+        </ul>
+        <p>(no olvidar poner si es <code>varchar()</code>, <code>int</code>)</p>
+      </li>
+      <li>Insertar 3 cursos distintos.</li>
+      <li>
+        Cambiar la duración de uno de los cursos usando <code>UPDATE</code> y
+        <code>WHERE</code>.
+      </li>
+      <li>Mostrar solo los cursos con duración mayor a 6 meses.</li>
+    </ol>
+
+    <h2>Cierre y repaso</h2>
+
+    <h3>Resumen de la clase:</h3>
+    <ul>
+      <li>
+        <strong>PRIMARY KEY</strong> y <strong>NOT NULL</strong> para integridad
+        de datos.
+      </li>
+      <li><code>INSERT INTO</code> para agregar registros.</li>
+      <li><code>UPDATE SET</code> para modificar registros.</li>
+      <li><code>WHERE</code> para filtrar.</li>
+      <li>
+        Siempre usar <code>WHERE</code> en <code>UPDATE</code> para evitar
+        errores graves.
+      </li>
+    </ul>
+  </body>
+</html>
