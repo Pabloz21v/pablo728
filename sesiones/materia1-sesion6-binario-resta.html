@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 6: Resta en Binario</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+        min-width: 400px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      /* Responsividad para tablas */
+      .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+      }
+      @media (max-width: 600px) {
+        table {
+          font-size: 0.95em;
+          min-width: 320px;
+        }
+        th,
+        td {
+          padding: 6px;
+        }
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      /* Estilos para los botones */
+      .btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+      }
+      .btn-primary {
+        background-color: #4ade80;
+        color: #222;
+      }
+      .btn-secondary {
+        background-color: #60a5fa;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Botones de navegación -->
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/manipulacion-preservacion-datos.html"
+        class="btn btn-primary"
+      >
+        Ir a Materia
+      </a>
+      <a href="materia1-sesion5.html" class="btn btn-secondary">
+        Ir a Sesión 5
+      </a>
+    </div>
+
+    <h1>Sesión 6: Resta en Binario</h1>
+
+    <h2>Objetivos</h2>
+    <ul>
+      <li>Comprender las reglas de la resta binaria.</li>
+      <li>Aplicar correctamente el concepto de préstamo en binario.</li>
+      <li>Conocer y usar el método de complemento a 2 para restas.</li>
+      <li>
+        Resolver ejercicios prácticos de resta binaria directa y con
+        complemento.
+      </li>
+    </ul>
+
+    <h2>1 – Introducción teórica</h2>
+
+    <h3>1. Recordatorio: sistema binario</h3>
+    <ul>
+      <li>Base 2: solo dígitos 0 y 1.</li>
+      <li>
+        Ya sabemos sumar:
+        <ul>
+          <li>0 + 0 = 0</li>
+          <li>0 + 1 = 1</li>
+          <li>1 + 0 = 1</li>
+          <li>1 + 1 = 0 (llevo 1)</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>2. Reglas básicas de la resta binaria</h3>
+    <p>Solo hay 4 casos posibles:</p>
+
+    <div class="table-responsive">
+      <table>
+        <tr>
+          <th>Minuendo</th>
+          <th>Sustraendo</th>
+          <th>Resultado</th>
+          <th>Préstamo</th>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>0</td>
+          <td>1</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>0</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>1</td>
+          <td>1</td>
+          <td>Sí (se pide prestado 1, que vale 2 en binario)</td>
+        </tr>
+      </table>
+    </div>
+
+    <p>
+      <strong>Importante:</strong> Cuando pedimos prestado 1 en binario,
+      equivale a 2 en decimal, pero en binario lo representamos como 10₂.
+    </p>
+
+    <h2>2 – Procedimiento con préstamo</h2>
+
+    <h3>Ejemplo paso a paso:</h3>
+    <p>Resta:</p>
+    <pre>
+1010₂ -> minuendo
+- 0011₂ -> sustraendo
+    </pre>
+    <ol>
+      <li>Colocamos las cifras alineadas.</li>
+      <li>Vamos de derecha a izquierda.</li>
+      <li>
+        Si el dígito superior es menor que el inferior, pedimos prestado del bit
+        inmediato superior (que se convierte en 0 y el bit actual recibe 2 en
+        binario).
+      </li>
+    </ol>
+
+    <h3>Resolución:</h3>
+    <pre>
+  1 0 1 0 -> minuendo
+- 0 0 1 1 -> sustraendo
+-----------
+  0 0 1 1 -> diferencia
+    </pre>
+
+    <h3>Observaciones para los alumnos:</h3>
+    <ul>
+      <li>
+        El préstamo en binario funciona igual que en decimal, pero solo con 0 y
+        1.
+      </li>
+      <li>Se pueden encadenar préstamos.</li>
+    </ul>
+
+    <h2>3 – Complemento a 2</h2>
+
+    <h3>¿Por qué usar complemento a 2?</h3>
+    <ul>
+      <li>
+        En computación, la resta se hace como una suma con el negativo del
+        sustraendo.
+      </li>
+      <li>
+        Complemento a 2 de un número binario:
+        <ol>
+          <li>Invertir todos los bits (0→1, 1→0) del sustraendo.</li>
+          <li>Sumar 1 al sustraendo luego de invertir.</li>
+        </ol>
+      </li>
+    </ul>
+
+    <h3>
+      Ejemplo: Restar 0101₂ (sustraendo) a 1010₂ (minuendo) usando complemento a
+      2.
+    </h3>
+    <ol>
+      <li>
+        Complemento a 2 de 0101₂:
+        <ol>
+          <li>Invertir: 1010₂</li>
+          <li>Sumar 1: 1011₂</li>
+        </ol>
+      </li>
+      <li>
+        Sumar a 1010₂:
+        <ol>
+          <li>
+            1010 + 1011 = 1 0101 (descartar acarreo/carry final, es decir, al
+            resultado 10101₂ solo queda 0101₂)
+          </li>
+        </ol>
+      </li>
+      <li>Resultado: 0101₂</li>
+    </ol>
+
+    <p>
+      <strong>Ventaja:</strong> No hay que preocuparse por préstamos manuales.
+    </p>
+
+    <h2>4 – Práctica</h2>
+
+    <h3>Ejercicios:</h3>
+    <ol>
+      <li>1101₂ − 1010₂</li>
+      <li>10100₂ - 1101₂</li>
+      <li>1000₂ - 0001₂</li>
+    </ol>
+
+    <h3>Ejercicios individuales</h3>
+
+    <h4>Nivel básico:</h4>
+    <ol>
+      <li>1011₂ - 0011₂</li>
+      <li>1000₂ - 0101₂</li>
+    </ol>
+
+    <h4>Nivel intermedio:</h4>
+    <ol>
+      <li>110101₂ - 101110₂</li>
+      <li>10000₂ - 00011₂</li>
+    </ol>
+
+    <h4>Nivel avanzado (con números negativos en complemento a 2):</h4>
+    <ol>
+      <li>Restar 111001₂ - 110101₂</li>
+      <li>Restar 010110₂ - 101001₂</li>
+    </ol>
+
+    <h3>Preguntas y repaso rápido de:</h3>
+    <ul>
+      <li>Reglas básicas.</li>
+      <li>Cuándo conviene préstamo y cuándo complemento a 2.</li>
+      <li>Relación con hardware (cómo lo hacen los procesadores).</li>
+    </ul>
+  </body>
+</html>
