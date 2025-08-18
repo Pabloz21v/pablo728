@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 2: Discos Duros (HDD) – Funcionamiento y Tipos</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      ul {
+        margin: 10px 0;
+      }
+      /* Responsividad para tablas */
+      .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+        min-width: 400px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      /* Responsive body */
+      @media (max-width: 600px) {
+        body {
+          margin: 8px;
+          font-size: 15px;
+        }
+        h1 {
+          font-size: 1.3em;
+        }
+        h2 {
+          font-size: 1.1em;
+        }
+        h3 {
+          font-size: 1em;
+        }
+        .container,
+        .table-responsive {
+          padding: 0;
+        }
+        table {
+          font-size: 13px;
+          min-width: 300px;
+        }
+        th,
+        td {
+          padding: 6px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion1-intro-almacenamiento.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 1
+      </a>
+    </div>
+    <h1>Clase 2: Discos Duros (HDD) – Funcionamiento y Tipos</h1>
+
+    <h2>1. Componentes Principales</h2>
+    <ul>
+      <li>
+        <strong>Platos (Platters):</strong> Discos magnéticos donde se almacenan
+        los datos. Pueden ser de aluminio, vidrio o cerámica, recubiertos de
+        material magnético.
+      </li>
+      <li>
+        <strong>Cabezales de Lectura/Escritura (Heads):</strong> Dispositivos
+        electromagnéticos que leen y escriben datos en los platos.
+        <strong>No tocan el plato</strong>, sino que flotan a una altura de
+        <strong>3-6 nanómetros</strong> gracias a un colchón de aire generado
+        por la rotación.
+      </li>
+      <li>
+        <strong>Motor de Giro (Spindle Motor):</strong> Hace girar los platos a
+        velocidades constantes (RPM).
+      </li>
+      <li>
+        <strong>Brazo Actuador (Actuator Arm):</strong> Mueve los cabezales
+        radialmente sobre los platos para acceder a los datos.
+      </li>
+      <li>
+        <strong>Circuito Lógico (Logic Board):</strong> Gestiona la comunicación
+        con la PC, controla el motor y los cabezales, incluye la
+        <strong>memoria caché</strong> y gestiona la lectura/escritura.
+      </li>
+      <li>
+        <strong>Memoria Caché (Buffer):</strong> Memoria volátil (DRAM)
+        integrada en el HDD para almacenar temporalmente datos frecuentes y
+        mejorar el rendimiento.
+      </li>
+    </ul>
+
+    <h2>2. Funcionamiento Interno de un HDD</h2>
+
+    <h3>Proceso de Lectura/Escritura</h3>
+    <ul>
+      <li>
+        <strong>Escritura:</strong> El cabezal genera un campo magnético que
+        alinea partículas en el plato, representando bits (0 o 1).
+      </li>
+      <li>
+        <strong>Lectura:</strong> El cabezal detecta los cambios en el campo
+        magnético y los convierte en señales eléctricas.
+      </li>
+      <li>
+        <strong>Tiempo de Acceso:</strong> Tiempo que tarda el cabezal en
+        posicionarse sobre el dato (depende de la velocidad de rotación y la
+        densidad de datos).
+      </li>
+      <li>
+        <strong>Latencia:</strong> Tiempo promedio para que el plato gire hasta
+        que el dato esté bajo el cabezal.
+      </li>
+    </ul>
+
+    <h3>Memoria Caché (Buffer)</h3>
+    <ul>
+      <li>
+        <strong>Definición:</strong> Memoria RAM integrada en el HDD (8 MB, 16
+        MB, 64 MB, 256 MB en modelos avanzados).
+      </li>
+      <li>
+        <strong>Función:</strong>
+        <ul>
+          <li>Almacena temporalmente datos de lectura/escritura frecuentes.</li>
+          <li>Reduce la latencia al evitar accesos repetidos al plato.</li>
+          <li>
+            En escritura, acumula datos para optimizar el flujo hacia los platos
+            ("write caching").
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Impacto en el rendimiento:</strong>
+        <ul>
+          <li>
+            Una caché mayor (ej: 256 MB) mejora el rendimiento en operaciones
+            aleatorias y multitarea.
+          </li>
+          <li>
+            En servidores, una caché grande es crítica para manejar múltiples
+            solicitudes simultáneas.
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>3. HDD 2.5" vs 3.5": Diferencias Clave</h2>
+
+    <div class="table-responsive">
+      <table>
+        <tr>
+          <th>Característica</th>
+          <th>HDD 2.5"</th>
+          <th>HDD 3.5"</th>
+        </tr>
+        <tr>
+          <td>Tamaño Físico</td>
+          <td>2.5 pulgadas (6.35 cm)</td>
+          <td>3.5 pulgadas (8.89 cm)</td>
+        </tr>
+        <tr>
+          <td>Uso Típico</td>
+          <td>Laptops, consolas, dispositivos portátiles</td>
+          <td>Desktops, servidores, NAS (Network Attached Storage)</td>
+        </tr>
+        <tr>
+          <td>Capacidades</td>
+          <td>Hasta 6 TB (2025)</td>
+          <td>Hasta 36 TB (2025)</td>
+        </tr>
+        <tr>
+          <td>Velocidad de Rotación</td>
+          <td>5400 RPM (común), 7200 RPM</td>
+          <td>5400 RPM, 7200 RPM, 10000 RPM</td>
+        </tr>
+        <tr>
+          <td>Resistencia a Golpes</td>
+          <td>Mayor (diseñados para portátiles)</td>
+          <td>Menor (más sensibles)</td>
+        </tr>
+        <tr>
+          <td>Rendimiento</td>
+          <td>Limitado por tamaño y RPM</td>
+          <td>Mayor RPM y más platos = mayor velocidad y capacidad.</td>
+        </tr>
+        <tr>
+          <td>Caché Típica</td>
+          <td>8–128 MB</td>
+          <td>64–256 MB</td>
+        </tr>
+      </table>
+    </div>
+    <p>
+      <strong>Nota:</strong> Los HDD de 3.5" pueden alcanzar RPM más altas
+      debido a su mayor tamaño y consumo de energía, lo que permite mayor
+      velocidad de transferencia y capacidad.
+    </p>
+
+    <h2>4. Tecnologías de Grabación Magnética</h2>
+
+    <h3>CMR (Conventional Magnetic Recording)</h3>
+    <ul>
+      <li>
+        <strong>Definición:</strong> Cada pista magnética está separada,
+        evitando solapamientos.
+      </li>
+      <li>
+        <strong>Ventajas:</strong>
+        <ul>
+          <li>
+            Mayor rendimiento en operaciones aleatorias (ej: bases de datos).
+          </li>
+          <li>Menor latencia y mayor durabilidad.</li>
+        </ul>
+      </li>
+      <li><strong>Uso:</strong> HDD de alto rendimiento, servidores, NAS.</li>
+    </ul>
+
+    <h3>SMR (Shingled Magnetic Recording)</h3>
+    <ul>
+      <li>
+        <strong>Definición:</strong> Las pistas se solapan como "tejas",
+        aumentando la densidad de datos.
+      </li>
+      <li>
+        <strong>Ventajas:</strong>
+        <ul>
+          <li>Hasta un 25% más de capacidad en el mismo espacio físico.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Desventajas:</strong>
+        <ul>
+          <li>
+            Rendimiento inferior en escrituras aleatorias (requiere reescribir
+            pistas adyacentes).
+          </li>
+          <li>
+            Ideal para almacenamiento secuencial (ej: respaldos, archivado).
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Aplicaciones:</strong> HDD de alta capacidad (ej: 18–36 TB) para
+        centros de datos y archivado en frío.
+      </li>
+    </ul>
+
+    <h3>Comparación:</h3>
+    <div class="table-responsive">
+      <table>
+        <tr>
+          <th>Aspecto</th>
+          <th>CMR</th>
+          <th>SMR</th>
+        </tr>
+        <tr>
+          <td>Rendimiento</td>
+          <td>Alto (aleatorio)</td>
+          <td>Bajo (secuencial)</td>
+        </tr>
+        <tr>
+          <td>Capacidad</td>
+          <td>Menor (ej: 18 TB max)</td>
+          <td>Mayor (ej: 36 TB)</td>
+        </tr>
+        <tr>
+          <td>Costo</td>
+          <td>Más caro</td>
+          <td>Más económico</td>
+        </tr>
+        <tr>
+          <td>Uso Recomendado</td>
+          <td>Sistemas operativos, bases de datos</td>
+          <td>Respaldos, archivado</td>
+        </tr>
+      </table>
+    </div>
+
+    <h2>5. Interfaces: IDE vs SATA</h2>
+
+    <p>Permiten conectar el disco duro (HDD) a la placa madre.</p>
+
+    <h3>IDE (Integrated Drive Electronics)</h3>
+    <ul>
+      <li>
+        <strong>Conector:</strong> 40 pines (80 conductores para reducir
+        interferencia).
+      </li>
+      <li><strong>Velocidad Máxima:</strong> 133 MB/s.</li>
+      <li>
+        <strong>Configuración:</strong> Requiere jumpers para definir
+        Master/Slave/Cable Select.
+      </li>
+      <li><strong>Alimentación:</strong> Molex (5V y 12V).</li>
+      <li>
+        <strong>Limitaciones:</strong> Cable ancho (40/80 hilos), limitaciones
+        de longitud y ancho de banda compartida.
+      </li>
+    </ul>
+
+    <h3>SATA (Serial Advanced Technology Attachment)</h3>
+    <ul>
+      <li><strong>Conector:</strong> 7 pines (datos).</li>
+      <li>
+        <strong>Velocidades:</strong>
+        <ul>
+          <li>SATA I: 1.5 Gbps (150 MB/s).</li>
+          <li>SATA II: 3 Gbps (300 MB/s).</li>
+          <li>SATA III: 6 Gbps (600 MB/s).</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Ventajas:</strong> Cable delgado, no requiere jumpers, mayor
+        ancho de banda.
+      </li>
+      <li>
+        <strong>Alimentación:</strong> Usa un conector de
+        <strong>15 pines</strong> (más ancho que el conector de datos SATA).
+      </li>
+    </ul>
+
+    <h2>6. Voltajes y Alimentación</h2>
+    <ul>
+      <li><strong>HDD 2.5":</strong> Generalmente solo 5V (motor y lógica).</li>
+      <li>
+        <strong>HDD 3.5":</strong>
+        <ul>
+          <li><strong>5V:</strong> Circuito lógico y actuador.</li>
+          <li><strong>12V:</strong> Motor de giro (spindle motor).</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Consumo Típico:</strong>
+        <ul>
+          <li><strong>HDD 2.5":</strong> 1-2.5W (inactivo), 2-5W (activo).</li>
+          <li>
+            <strong>HDD 3.5":</strong> 6-10W (inactivo), 10W (activo), 30W
+            Spin-up (arranque).
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      <strong>Nota:</strong> La fuente de poder debe proveer suficiente
+      corriente en ambos voltajes para evitar fallos, especialmente durante el
+      spin-up (arranque).
+    </p>
+
+    <h2>7. Configuración de Jumpers en IDE</h2>
+    <p>Los jumpers definen el rol del disco en el canal IDE:</p>
+    <ul>
+      <li><strong>Master:</strong> Disco principal en el canal.</li>
+      <li><strong>Slave:</strong> Disco secundario.</li>
+      <li>
+        <strong>Cable Select:</strong> El rol se define por la posición en el
+        cable.
+      </li>
+      <li>
+        <strong>Conflictos:</strong> Dos discos configurados como Master en el
+        mismo canal <strong>no serán reconocidos</strong> por la BIOS.
+      </li>
+    </ul>
+    <p>
+      <strong>Importante:</strong> Una configuración incorrecta puede impedir el
+      reconocimiento del disco o causar conflictos.
+    </p>
+
+    <h2>Cuestionario</h2>
+    <ol>
+      <li>¿Qué componentes internos tiene un HDD?</li>
+      <li>¿Qué significa "RPM" en un HDD?</li>
+      <li>¿Qué función cumple la memoria caché?</li>
+      <li>¿Cuál es la velocidad máxima de transferencia de SATA III?</li>
+      <li>¿Para qué sirven los jumpers en un HDD IDE?</li>
+      <li>¿Qué voltajes necesita un HDD de 3.5"?</li>
+      <li>¿Qué interfaz es más rápida, IDE o SATA III?</li>
+      <li>¿Por qué los HDD de 3.5 pulgadas no se usan en laptops?</li>
+      <li>
+        ¿Por qué los cabezales de un HDD no tocan los platos durante su
+        operación normal?
+      </li>
+      <li>
+        Explica la diferencia entre latencia y tiempo de acceso en un HDD.
+      </li>
+      <li>
+        ¿Qué ventajas tiene SATA sobre IDE en términos de cableado y
+        rendimiento?
+      </li>
+      <li>
+        ¿Qué pasa si configuras dos discos IDE como Master en el mismo canal?
+      </li>
+      <li>Investiga: ¿Qué es el "Click of Death" en un HDD y qué lo causa?</li>
+    </ol>
+  </body>
+</html>

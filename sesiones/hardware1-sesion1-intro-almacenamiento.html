@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 1: Introducción a los Dispositivos de Almacenamiento</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      /* Responsividad para tablas */
+      .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+        min-width: 400px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      /* Responsive body */
+      @media (max-width: 600px) {
+        body {
+          margin: 8px;
+          font-size: 15px;
+        }
+        h1 {
+          font-size: 1.3em;
+        }
+        h2 {
+          font-size: 1.1em;
+        }
+        h3 {
+          font-size: 1em;
+        }
+        .container,
+        .table-responsive {
+          padding: 0;
+        }
+        table {
+          font-size: 13px;
+          min-width: 300px;
+        }
+        th,
+        td {
+          padding: 6px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion2-discos_duros_hdd.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 2
+      </a>
+    </div>
+    <h1>Sesión 1: Introducción a los Dispositivos de Almacenamiento</h1>
+
+    <h2>Definición y Clasificación</h2>
+    <ul>
+      <li>Almacenamiento magnético (HDD).</li>
+      <li>Almacenamiento flash (SSD, USB, SD, etc.).</li>
+      <li>Almacenamiento óptico (CD, DVD, Blu-ray).</li>
+      <li>Diferencias entre almacenamiento interno y externo.</li>
+    </ul>
+
+    <h2>Teoría</h2>
+
+    <h3>a) Almacenamiento Magnético (HDD)</h3>
+    <ul>
+      <li>
+        <strong>Definición:</strong> Usa discos giratorios recubiertos de
+        material magnético para almacenar datos. Un cabezal lee/escribe la
+        información mientras el disco gira.
+      </li>
+      <li><strong>Ejemplo:</strong> Discos duros (HDD).</li>
+      <li>
+        <strong>Características:</strong>
+        <ul>
+          <li>
+            <strong>Capacidad:</strong> Alta (desde cientos de GB hasta varios
+            TB).
+          </li>
+          <li>
+            <strong>Velocidad de lectura:</strong> Más lenta que SSD (debido a
+            partes mecánicas).
+          </li>
+          <li>
+            <strong>Durabilidad:</strong> Sensible a golpes y vibraciones.
+          </li>
+          <li>
+            <strong>Uso común:</strong> Almacenamiento masivo en PCs, servidores
+            y respaldos.
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>b) Almacenamiento Flash (Memoria No Volátil)</h3>
+    <ul>
+      <li>
+        <strong>Definición:</strong> Utiliza chips de memoria flash
+        (transistores) para guardar datos sin necesidad de energía constante.
+      </li>
+      <li>
+        <strong>Ejemplos:</strong> SSD, memorias USB, tarjetas SD, microSD.
+      </li>
+      <li>
+        <strong>Características:</strong>
+        <ul>
+          <li>
+            <strong>Capacidad:</strong> Variable (desde GB en USB hasta TB en
+            SSD).
+          </li>
+          <li>
+            <strong>Velocidad de lectura:</strong> Más rápida que HDD (sin
+            partes móviles).
+          </li>
+          <li>
+            <strong>Durabilidad:</strong> Resistente a golpes, pero con ciclos
+            limitados de escritura.
+          </li>
+          <li>
+            <strong>Uso común:</strong> Dispositivos portátiles, teléfonos,
+            cámaras, y reemplazo de HDD en computadoras.
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>c) Almacenamiento Óptico</h3>
+    <ul>
+      <li>
+        <strong>Definición:</strong> Almacena datos en discos que se leen con
+        láser.
+      </li>
+      <li><strong>Ejemplos:</strong> CD, DVD, Blu-ray.</li>
+      <li>
+        <strong>Características:</strong>
+        <ul>
+          <li>
+            <strong>Capacidad:</strong> Limitada (desde MB en CD, hasta GB en
+            Blu-ray).
+          </li>
+          <li>
+            <strong>Velocidad de lectura:</strong> Lenta en comparación con
+            HDD/SSD.
+          </li>
+          <li>
+            <strong>Durabilidad:</strong> Resistente a campos magnéticos, pero
+            sensible a rayones y luz UV.
+          </li>
+          <li>
+            <strong>Uso común:</strong> Distribución de software, películas y
+            respaldos antiguos.
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>2. Diferencias entre Almacenamiento Interno y Externo</h2>
+
+    <div class="table-responsive">
+      <table>
+        <tr>
+          <th>Aspecto</th>
+          <th>Almacenamiento Interno</th>
+          <th>Almacenamiento Externo</th>
+        </tr>
+        <tr>
+          <td>Ubicación</td>
+          <td>Dentro del dispositivo (ej: HDD/SSD en PC).</td>
+          <td>Fuera del dispositivo (ej: USB, disco externo).</td>
+        </tr>
+        <tr>
+          <td>Portabilidad</td>
+          <td>No portátil (fijo al dispositivo).</td>
+          <td>Portátil (se conecta vía USB A, USB C, etc.).</td>
+        </tr>
+        <tr>
+          <td>Capacidad</td>
+          <td>Generalmente mayor (ej: 256GB, 512GB, 1TB+ en HDD/SSD).</td>
+          <td>Variable (desde GB en USB hasta TB en discos externos).</td>
+        </tr>
+        <tr>
+          <td>Velocidad</td>
+          <td>Más rápida (especialmente SSD interno).</td>
+          <td>
+            Depende de la interfaz (USB 3.0/3.1 es rápido, pero puede ser más
+            lento que interno).
+          </td>
+        </tr>
+        <tr>
+          <td>Uso típico</td>
+          <td>Sistema operativo, programas, archivos fijos.</td>
+          <td>Respaldos, transferencia de archivos, expansión de capacidad.</td>
+        </tr>
+        <tr>
+          <td>Ejemplos</td>
+          <td>HDD, SSD.</td>
+          <td>Discos duros externos, SSD externos, USB.</td>
+        </tr>
+      </table>
+    </div>
+
+    <h2>Cuestionario</h2>
+    <ol>
+      <li>¿Qué diferencia hay entre almacenamiento magnético y flash?</li>
+      <li>
+        Nombra tres dispositivos de almacenamiento interno y tres externos.
+      </li>
+      <li>
+        ¿Cuál es la capacidad de almacenamiento de un pendrive, tarjetas SD y
+        microSD?
+      </li>
+      <li>Menciona dos ejemplos de almacenamiento óptico.</li>
+      <li>¿Cuál es la capacidad de almacenamiento de un CD, DVD, Blu-ray?</li>
+      <li>
+        ¿Qué son los discos doble capa y cuál es su diferencia con un disco
+        normal?
+      </li>
+      <li>¿Qué es un <strong>Blu-ray Ultra HD</strong>?</li>
+      <li>¿Qué son los CD-RW, DVD-RW, BD-RE?</li>
+      <li>
+        ¿Qué tipo de almacenamiento usa un pendrive y cuánto pueden almacenar
+        actualmente?
+      </li>
+      <li>¿Qué es un <strong>Disquete de 3 ½ o de 5 1/4</strong>?</li>
+    </ol>
+  </body>
+</html>

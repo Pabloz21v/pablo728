@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 9: Match</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      ul {
+        margin: 10px 0;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Botones de navegación -->
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/desarrollo-3.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          margin-right: 10px;
+          display: inline-block;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="materia3-sesion8-bucles_for_while_python.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 8
+      </a>
+    </div>
+
+    <h1>Sesión 9: Match</h1>
+
+    <p>
+      La sentencia <strong>Match</strong> sirve como otra opción de
+      <strong>if-elif-else</strong>.
+    </p>
+
+    <h2>1. Introducción</h2>
+
+    <h3>¿Qué es Match?</h3>
+    <ul>
+      <li>Permite devolver un resultado al encontrar una coincidencia.</li>
+    </ul>
+
+    <h3>¿Por qué usar match?</h3>
+    <ul>
+      <li>Código más legible y conciso.</li>
+      <li>Manejo de estructuras complejas (listas, diccionarios, clases).</li>
+    </ul>
+
+    <h3>Diferencias con if-elif-else:</h3>
+    <ul>
+      <li>
+        match permite desestructurar datos y comparar patrones directamente.
+      </li>
+    </ul>
+
+    <h2>2. Sintaxis Básica</h2>
+
+    <pre>
+match expresion:
+    case x:
+        code block
+    case y:
+        code block
+    case z:
+        code block
+    case _:
+        code block
+    </pre>
+
+    <p>
+      x, y, z son el valor que busca coincidir con lo contenido dentro de la
+      variable "expresion".
+    </p>
+
+    <p>
+      El valor guardado dentro de "expresion" buscará una coincidencia entre las
+      opciones, al encontrarla ejecuta su bloque de código correspondiente.
+    </p>
+
+    <p>
+      Al igual que en if-else, podemos usar un tipo de else usando el guion bajo
+      "_" este actúa como else, es decir, si no se encuentran coincidencias hará
+      lo contenido en su bloque de código.
+    </p>
+
+    <h3>Ejemplo:</h3>
+    <pre>
+def describir_estacion(estacion):
+    match estacion:
+        case "primavera":
+            return "Flores y colores"
+        case "verano":
+            return "Calor y playa"
+        case "otoño":
+            return "Hojas caídas"
+        case "invierno":
+            return "Frío y nieve"
+        case _:
+            return "Estación desconocida"
+
+aspecto_estacion = describir_estacion("invierno")
+print(aspecto_estacion)  # Salida: Frío y nieve
+# Si cambiamos el texto del argumento en la función describir_estacion(), print() imprimirá otro resultado debido a que hará match con otro valor.
+    </pre>
+
+    <h2>3. Más de un valor por case</h2>
+
+    <pre>
+day = 4
+match day:
+    case 1 | 2 | 3 | 4 | 5:
+        print("Es un día de semana")
+    case 6 | 7:
+        print("VAMOSSS es findeeee!")
+# Podemos dar más de una opción de coincidencia por caso (case), en este ejemplo la variable day guarda un día específico, se declara match y la variable, empieza la búsqueda de coincidencias, en el primer case se indican 5 valores separados por una barra vertical "|", y en el segundo case 2 valores separados por la barra vertical.
+    </pre>
+
+    <h2>4. Agregar if a match:</h2>
+
+    <h3>Ejemplo: Match con listas y guards</h3>
+    <pre>
+def describir_lista_avanzado(lista):
+    match lista:
+        case []:
+            return "Lista vacía"
+        case [x] if x > 10:
+            return f"Lista con un elemento mayor a 10: {x}"
+        case [x, y] if x == y:
+            return f"Lista con dos elementos iguales: {x}"
+        case [x, *rest] if len(rest) > 0:
+            return f"Lista con más de un elemento, primero: {x}"
+        case _:
+            return "Lista no reconocida"
+
+que_contiene_la_lista = []
+conclusion = describir_lista_avanzado(que_contiene_la_lista)
+print(conclusion)
+# Este ejemplo aplica muchos contenidos, funciones, listas, match, if dentro de match.
+# Si agregan y cambian los valores dentro de la lista que se guarda en "que_contiene_la_lista", podrán ver los distintos comportamientos. Intenten ejecutar todos los case.
+# Vean la lógica de cada case para poder agregar los valores correctos.
+    </pre>
+
+    <h2>5. Práctica</h2>
+
+    <h3>Objetivo:</h3>
+    Aplicar lo aprendido en problemas reales.
+
+    <h3>Ejercicio 1: Procesar comandos de texto</h3>
+    <p>Escribir una función que use match para procesar comandos como:</p>
+    <ul>
+      <li>Use inputs para recibir valores.</li>
+      <li>
+        Usar los inputs para usarlos como argumentos en la función invocada.
+      </li>
+      <li>
+        Recibir correctamente los argumentos al escribir la función con sus
+        parámetros.
+      </li>
+      <li>Usar los parámetros recibidos para usar match.</li>
+      <li>
+        Usar return en cada match e imprimir el valor devuelto del match que
+        coincida.
+      </li>
+    </ul>
+  </body>
+</html>
