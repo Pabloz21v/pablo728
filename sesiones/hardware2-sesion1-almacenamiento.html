@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 1 – Almacenamiento</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      ul {
+        margin: 10px 0;
+      }
+      a {
+        color: #0066cc;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+      }
+      .button-link {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        background: #60a5fa;
+        color: #fff;
+        display: inline-block;
+        margin-right: 10px;
+        margin-bottom: 8px;
+        border: none;
+        cursor: pointer;
+        min-width: 220px;
+        text-align: center;
+      }
+      .button-link:hover {
+        background: #2563eb;
+      }
+      @media (max-width: 600px) {
+        body {
+          margin: 8px;
+          font-size: 15px;
+        }
+        h1 {
+          font-size: 1.3em;
+        }
+        h2 {
+          font-size: 1.1em;
+        }
+        h3 {
+          font-size: 1em;
+        }
+        .container,
+        .table-responsive {
+          padding: 0;
+        }
+        table {
+          font-size: 13px;
+          min-width: 300px;
+        }
+        th,
+        td {
+          padding: 6px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Volver a Materia
+      </a>
+    </div>
+    <h1>Clase 1 – Almacenamiento</h1>
+
+    <h2>1. Tipos de almacenamiento</h2>
+
+    <h3>HDD (Hard Disk Drive – Disco duro mecánico)</h3>
+    <ul>
+      <li>
+        <strong>Funcionamiento:</strong> discos magnéticos que giran a 5400/7200
+        rpm (algunos 10.000 rpm).
+      </li>
+      <li><strong>Velocidad:</strong> 80–260 MB/s según modelo.</li>
+      <li><strong>Capacidad:</strong> hasta 20 TB en discos actuales.</li>
+      <li>
+        <strong>Durabilidad:</strong> mecánico, sensible a golpes y vibraciones.
+      </li>
+      <li><strong>Costo:</strong> más barato por GB.</li>
+    </ul>
+    <h4>Ventajas</h4>
+    <ul>
+      <li>Bajo costo/GB.</li>
+      <li>Gran capacidad para archivos y copias de seguridad.</li>
+      <li>Vida útil prolongada si se mantiene estable.</li>
+    </ul>
+    <h4>Desventajas</h4>
+    <ul>
+      <li>Lentos para SO y programas.</li>
+      <li>Más consumo energético.</li>
+      <li>Ruidosos y generan calor.</li>
+    </ul>
+    <h4>Otros conceptos en HDD</h4>
+    <ul>
+      <li>
+        <strong>RPM y densidad areal:</strong> más RPM y/o mayor densidad ⇒
+        menor tiempo de búsqueda y mayor caudal secuencial.
+      </li>
+      <li>
+        <strong>Buffer (32–256 MB):</strong> ayuda en ráfagas, no cambia el
+        rendimiento sostenido.
+      </li>
+      <li>
+        <strong>CMR vs SMR:</strong>
+        <ul>
+          <li>
+            <strong>CMR:</strong> escritura aleatoria estable, ideal para
+            NAS/RAID.
+          </li>
+          <li>
+            <strong>SMR:</strong> pistas solapadas, escritura aleatoria muy
+            lenta.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Bottlenecks:</strong>
+        <ul>
+          <li>
+            <strong>SATA III 6 Gbit/s</strong> ⇒
+            <strong>600 MB/s teóricos</strong> (<strong>550 MB/s</strong>
+            efectivos). Un HDD <strong>no llega</strong> a saturarlo (tope
+            ~100–260 MB/s según modelo). Por lo que no llegan a aprovechar el
+            ancho de banda completo.
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>SSD SATA</h3>
+    <ul>
+      <li>
+        <strong>Funcionamiento:</strong> memoria NAND, sin partes móviles.
+      </li>
+      <li>
+        <strong>Velocidad:</strong> 500–600 MB/s (limitados por SATA III).
+      </li>
+      <li><strong>Capacidad:</strong> 120 GB – 4 TB.</li>
+      <li>
+        <strong>Durabilidad:</strong> desgaste por ciclos, pero muy resistentes.
+      </li>
+      <li><strong>Costo:</strong> intermedio.</li>
+    </ul>
+    <h4>Ventajas</h4>
+    <ul>
+      <li>Muy rápidos en arranque y programas.</li>
+      <li>Silenciosos, frescos y de bajo consumo.</li>
+    </ul>
+    <h4>Desventajas</h4>
+    <ul>
+      <li>Más caros por GB que un HDD.</li>
+      <li>Capacidad limitada en relación precio.</li>
+    </ul>
+    <h4>Otros conceptos en SSD SATA</h4>
+    <ul>
+      <li>
+        <strong>Controlador/Firmware:</strong>
+        <ul>
+          <li>
+            Rendimiento: Un buen controlador y firmware pueden marcar la
+            diferencia entre un SSD lento y uno rápido, incluso con el mismo
+            tipo de memoria NAND.
+          </li>
+          <li>
+            Durabilidad: La gestión eficiente de las celdas NAND prolonga la
+            vida útil del SSD.
+          </li>
+          <li>
+            Estabilidad: Evita errores, corrupción de datos y fallos prematuros.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Tipos de NAND:</strong>
+        <ul>
+          <li>
+            <strong>SLC (1 bit/celda):</strong> muy rápida y muy durable
+            (carísima, hoy como “SLC cache”).
+          </li>
+          <li>
+            <strong>MLC (2 b/celda):</strong> rápida y durable (cada vez más
+            rara en consumo).
+          </li>
+          <li>
+            <strong>TLC (3 b/celda):</strong> <strong>estándar actual</strong>;
+            buen equilibrio costo/rendimiento.
+          </li>
+          <li>
+            <strong>QLC (4 b/celda):</strong> más barata por GB,
+            <strong>menor endurance</strong> y rendimiento sostenido; buena para
+            lectura mayoritaria/archivado.
+          </li>
+          <li>
+            <strong>PLC (5 b/celda):</strong> emergente, foco en costo/GB;
+            endurance aún menor (más de nicho).
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>DRAM vs DRAM-less (y HMB):</strong>
+        <ul>
+          <li>
+            <strong>Con DRAM:</strong> mantiene la “tabla de mapeo” (FTL) local
+            ⇒ <strong>mejor aleatorio</strong> y latencia. Recomendado para
+            <strong>disco del SO</strong>.
+          </li>
+          <li>
+            <strong>DRAM-less:</strong> más baratos; en
+            <strong>NVMe</strong> pueden usar <strong>HMB</strong> (Host Memory
+            Buffer) para apoyarse en la RAM del sistema (mitiga, pero no iguala
+            a DRAM).
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>SLC cache dinámica y rendimiento sostenido:</strong>
+        <ul>
+          <li>
+            Muchos SSD TLC/QLC escriben primero en
+            <strong>SLC cache</strong> (muy rápida). Cuando se
+            <strong>agota</strong>, la escritura cae al
+            <strong>rendimiento “nativo”</strong> de TLC/QLC (mucho menor),
+            clave en <strong>copias largas</strong> y edición de video.
+          </li>
+          <li>
+            SSD “mejores” tienen <strong>cachés más grandes</strong> y
+            <strong>garbage collection</strong> más agresivo.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Over-Provisioning (OP):</strong>
+        <ul>
+          <li>
+            <strong>Espacio reservado</strong> extra (p. ej., dejar 7–10% sin
+            particionar) ⇒ mejora <strong>rendimiento sostenido</strong> y
+            <strong>durabilidad</strong>.
+          </li>
+          <li>
+            En <strong>workstations/NAS</strong> con escrituras pesadas,
+            <strong>12–20%</strong> de OP <strong>rinde frutos</strong>.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Endurance (resistencia):</strong>
+        <ul>
+          <li>
+            <strong>TBW</strong> (Terabytes Written): cuántos TB se pueden
+            escribir durante la garantía.
+          </li>
+          <li>
+            <strong>DWPD</strong>: <strong>Writes por Día</strong> (sobre la
+            <strong>capacidad nominal</strong>) durante la garantía.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h4>Térmicas en NVMe</h4>
+    <ul>
+      <li>NVMe rinde más ⇒ <strong>más calor</strong>.</li>
+      <ul>
+        <li>Usar <strong>disipador</strong> en M.2, buen flujo de aire.</li>
+        <li>
+          El <strong>throttling térmico</strong> reduce velocidad para proteger
+          la NAND.
+        </li>
+      </ul>
+    </ul>
+    <h4>Bottlenecks de interfaz y plataforma</h4>
+    <ul>
+      <li><strong>SATA</strong> topea ~550 MB/s.</li>
+      <li>
+        <strong>NVMe</strong> en <strong>PCIe 3.0/4.0/5.0</strong>, y
+        <strong>x2 vs x4 lanes</strong>: un M.2 en <strong>x2</strong> rinde la
+        mitad.
+      </li>
+    </ul>
+
+    <h3>SSD NVMe (M.2 PCIe)</h3>
+    <ul>
+      <li>
+        <strong>Velocidad:</strong>
+        <ul>
+          <li>PCIe 3.0: 1500–3500 MB/s.</li>
+          <li>PCIe 4.0: 5000–7000 MB/s.</li>
+          <li>PCIe 5.0: +10.000 MB/s.</li>
+        </ul>
+      </li>
+      <li><strong>Capacidad:</strong> 250 GB – 8 TB.</li>
+      <li><strong>Durabilidad:</strong> similar a SSD SATA.</li>
+    </ul>
+    <h4>Ventajas:</h4>
+    <ul>
+      <li>Máxima velocidad de transferencia.</li>
+      <li>Ideal para gaming, edición de video, bases de datos.</li>
+      <li>Reduce mucho los tiempos de carga en juegos y programas pesados.</li>
+    </ul>
+    <h4>Desventajas:</h4>
+    <ul>
+      <li>Caros en relación capacidad.</li>
+      <li>Calientan más (algunos requieren disipadores).</li>
+      <li>
+        No siempre el usuario común nota la diferencia con un SSD SATA en tareas
+        básicas.
+      </li>
+    </ul>
+
+    <h2>2. Comparación general</h2>
+
+    <div class="table-responsive">
+      <table>
+        <tr>
+          <th>Tipo</th>
+          <th>Velocidad (MB/s)</th>
+          <th>Precio/GB</th>
+          <th>Durabilidad</th>
+          <th>Uso típico</th>
+        </tr>
+        <tr>
+          <td>HDD</td>
+          <td>100–260</td>
+          <td>Muy bajo</td>
+          <td>Bajo</td>
+          <td>Archivos masivos</td>
+        </tr>
+        <tr>
+          <td>SSD SATA</td>
+          <td>~550</td>
+          <td>Medio</td>
+          <td>Medio/Alto</td>
+          <td>SO y apps</td>
+        </tr>
+        <tr>
+          <td>SSD NVMe</td>
+          <td>3000–10000</td>
+          <td>Alto</td>
+          <td>Medio/Alto</td>
+          <td>Gaming, edición, servidores</td>
+        </tr>
+      </table>
+    </div>
+
+    <h2>3. Métricas que importan</h2>
+    <ul>
+      <li><strong>Secuencial (MB/s):</strong> copias grandes.</li>
+      <li><strong>Rendimiento sostenido:</strong> tras agotar SLC cache.</li>
+      <li>
+        <strong>Endurance (TBW/DWPD):</strong> ciclos de escritura soportados.
+      </li>
+      <li><strong>Temperatura:</strong> impacto en throttling y vida útil.</li>
+    </ul>
+
+    <h2>4. Compatibilidad por conexión</h2>
+    <ul>
+      <li><strong>Interfaz ≠ conector ≠ factor de forma.</strong></li>
+      <li><strong>IDE/PATA:</strong> legado.</li>
+      <li><strong>SATA:</strong> datos + energía (7 + 15 pines).</li>
+      <li><strong>NVMe/PCIe:</strong> M.2.</li>
+      <li>
+        <strong>M.2 Keys:</strong>
+        <ul>
+          <li>Key B: PCIe x2 y/o SATA.</li>
+          <li>Key M: PCIe x4 (NVMe típico).</li>
+          <li>Key B+M: físicamente encaja en ambos, pero depende de ranura.</li>
+          <li>
+            Siempre se recomienda ver la compatibilidad con la placa madre para
+            asegurarse de comprar/colocar la memoria correcta.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Form factors M.2:</strong> 2242/2260/2280.
+        <ul>
+          <li>
+            Los 2 primeros números indican el ancho en milímetros, es decir,
+            22mm = 2.2cm y los dígitos restantes indican el largo 42mm = 4.2cm,
+            80mm = 8cm.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Compatibilidad práctica:</strong>
+        <ul>
+          <li>M.2 SATA solo en ranuras con soporte SATA.</li>
+          <li>M.2 NVMe requiere soporte BIOS/chipset.</li>
+          <li>Verificar que no deshabilite otros puertos.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>Práctica:</h2>
+    <ol>
+      <li>
+        Comparación de discos reales:
+        <ul>
+          <li>HDD 2TB (ej: Seagate Barracuda).</li>
+          <li>SSD SATA 1TB (ej: Kingston A400).</li>
+          <li>SSD NVMe 1TB (ej: Samsung 980 Pro).</li>
+        </ul>
+        <p>Analizar: velocidad, costo, garantía, durabilidad.</p>
+      </li>
+      <li>
+        Simulación de configuraciones:
+        <ul>
+          <li>
+            Recomendar qué combinación de HDD, SSD, M2 ofrecerían para los
+            siguientes usos:
+            <ul>
+              <li>Oficina.</li>
+              <li>Gamer.</li>
+              <li>Edición de video.</li>
+            </ul>
+          </li>
+          <li>
+            Tener en cuenta (velocidad, costo/GB, capacidad de almacenamiento,
+            etc).
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>Preguntas:</h2>
+    <ol>
+      <li>¿Conviene un SSD pequeño y rápido o un HDD grande?</li>
+      <li>¿Los SSD NVMe necesitan <strong>disipador</strong>?</li>
+      <li>
+        ¿Para qué recomienda un HDD <strong>CMR</strong> o <strong>SMR</strong>?
+      </li>
+      <li>
+        ¿Puedo colocar un SSD NVMe 4.0 x4 en un PCIe 3.0 x4? ¿Ofrece el mismo
+        rendimiento?
+      </li>
+      <li>
+        ¿Puedo colocar un SSD NVMe 3.0 x4 en un PCIe 4.0 x4? ¿Ofrece el mismo
+        rendimiento?
+      </li>
+      <li>
+        ¿Puedo colocar un SSD NVMe 4.0 x4 en un PCIe 4.0 x16? ¿Ofrece el mismo
+        rendimiento?
+      </li>
+      <li>
+        ¿Puedo colocar un SSD NVMe 4.0 x4 en un PCIe 4.0 x8? ¿Ofrece el mismo
+        rendimiento?
+      </li>
+      <li>
+        ¿Cuánto OP (<strong>Over-Provisioning</strong>) recomendaría a los
+        clientes que dejen disponible para preservar la vida útil de su memoria?
+      </li>
+      <li>¿Qué es TBW y DWPD?, ¿en qué se relacionan?</li>
+      <li>¿Cómo saber si un HDD es SMR?</li>
+    </ol>
+
+    <h2>
+      Web con explicación e imágenes de distintos dispositivos de almacenamiento
+      y conexiones:
+    </h2>
+    <div>
+      <button
+        class="button-link"
+        onclick="window.open('https://www.ufsexplorer.com/es/articles/how-to/connect-drive/', '_blank')"
+      >
+        Distintos dispositivos de almacenamiento WEB 1
+      </button>
+      <button
+        class="button-link"
+        onclick="window.open('https://dgtrabada.github.io/hardware/buses.html', '_blank')"
+      >
+        Distintos dispositivos de almacenamiento WEB 2
+      </button>
+    </div>
+  </body>
+</html>

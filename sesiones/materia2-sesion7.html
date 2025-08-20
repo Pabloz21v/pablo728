@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 7: Filtrado y borrado</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      ul {
+        margin: 10px 0;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      /* Responsividad para tablas */
+      .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+        min-width: 400px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      /* Responsive body */
+      @media (max-width: 600px) {
+        body {
+          margin: 8px;
+          font-size: 15px;
+        }
+        h1 {
+          font-size: 1.3em;
+        }
+        h2 {
+          font-size: 1.1em;
+        }
+        h3 {
+          font-size: 1em;
+        }
+        .container,
+        .table-responsive {
+          padding: 0;
+        }
+        table {
+          font-size: 13px;
+          min-width: 300px;
+        }
+        th,
+        td {
+          padding: 6px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/conversion-y-reparacion-de-datos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="materia2-sesion6-sql_primary_key_not_null.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 6
+      </a>
+    </div>
+
+    <h1>Sesión 7: Filtrado y borrado</h1>
+
+    <h2>
+      📍 Ver bases de datos, tablas y posicionarse en la base de datos deseada
+    </h2>
+
+    <h3>Teoría</h3>
+    <ul>
+      <li>
+        <strong>Comandos básicos:</strong>
+        <ul>
+          <li>
+            <code>SHOW DATABASES;</code> → muestra todas las bases de datos.
+          </li>
+          <li>
+            <code>SHOW TABLES;</code> → muestra las tablas de la BD activa.
+          </li>
+          <li><code>USE nombreBD;</code> → seleccionar una base de datos.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Práctica</h3>
+    <ol>
+      <li>Escribir y ejecutar:</li>
+      <li><code>SHOW DATABASES;</code></li>
+      <li><code>SHOW TABLES;</code></li>
+      <li>
+        <code>USE tu_database_para_continuar</code>
+      </li>
+    </ol>
+
+    <h2>📍 Crear tablas y tipos de datos</h2>
+
+    <h3>Teoría</h3>
+    <p><strong>Crear tabla:</strong></p>
+    <pre>
+CREATE TABLE alumnos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50),
+    edad INT,
+    promedio DOUBLE
+);
+    </pre>
+    <p>
+      <strong>AUTO_INCREMENT:</strong> genera automáticamente valores
+      consecutivos.
+    </p>
+    <p>
+      En desarrollo 2 ustedes crean un id_nombre_tabla los valores de los ID
+      (números) no deben repetirse dentro de la tabla. Ejemplo el DNI, son
+      únicos, o las patentes de los autos. Al ser únicos permiten identificar
+      algo de forma precisa.
+    </p>
+    <p>
+      Bueno para asegurar que cada vez que ingresen un nuevo alumno (para este
+      ejemplo) al usar
+      <code>INSERT INTO alumnos (nombre,edad,promedio)</code> no deben escribir
+      la primer columna que crearon con <code>CREATE TABLE alumnos</code>, ya
+      que esa columna aumentará de a 1 (+1) cada vez que ingresen un nuevo
+      alumno, asegurando así que cada ID sea único.
+    </p>
+    <p><strong>DOUBLE:</strong> se usa para números con decimales.</p>
+    <p>
+      En clases previas para indicar que se debe escribir un número en una
+      columna, ejemplo: la columna EDAD, usaron INT. Bueno para indicar que el
+      número puede llevar coma se usa DOUBLE. Por ejemplo, para un promedio, la
+      cuenta bancaria o la plata en “mercado pago”, o sus calificaciones 9,5.
+    </p>
+
+    <h3>Práctica</h3>
+    <ol>
+      <li>Crear la tabla alumnos.</li>
+      <li>
+        Insertar datos:
+        <pre>
+INSERT INTO alumnos (nombre, edad, promedio)
+VALUES
+('Juan', 20, 8.5),
+('Ana', 22, 9.3),
+('Pedro', 19, 7.2);
+            </pre
+        >
+      </li>
+      <li>
+        Verificar con:
+        <pre>SELECT * FROM alumnos;</pre>
+      </li>
+    </ol>
+
+    <h2>📍 Consultas y filtros</h2>
+
+    <h3>Teoría</h3>
+    <p>
+      Usar operadores permite filtrar datos de la tabla dependiendo las
+      condiciones que establezcan. (pueden ver más operadores en la clase
+      anterior)
+    </p>
+    <p><strong>SELECT ... FROM ... WHERE</strong></p>
+    <pre>
+SELECT nombre, promedio
+FROM alumnos
+WHERE promedio > 6;
+    </pre>
+    <ul>
+      <li><strong>AND</strong> → ambas condiciones deben cumplirse.</li>
+      <li><strong>OR</strong> → al menos una condición debe cumplirse.</li>
+      <li><strong>NOT</strong> → niega una condición.</li>
+    </ul>
+
+    <h3>Práctica</h3>
+    <p>
+      <strong
+        >Crear varios alumnos e insertar los códigos para observar su
+        comportamiento</strong
+      >
+    </p>
+    <p>
+      Recuerden que han creado otras tablas llamadas alumnos, estas tablas
+      viejas serán distintas a la sugerida en esta clase, la pueden dropear, o
+      crear una nueva con otro nombre.
+    </p>
+    <p>
+      También pueden renombrar las viejas tablas usando la siguiente sentencia:
+    </p>
+    <p><strong>RENAME (renombrar tabla):</strong></p>
+    <pre>RENAME TABLE alumnos TO estudiantes;</pre>
+    <ol>
+      <li>
+        Seleccionar alumnos mayores de 20 años <strong>y</strong> con promedio >
+        8.
+        <pre>SELECT * FROM alumnos WHERE edad > 20 AND promedio > 8;</pre>
+      </li>
+      <li>
+        Seleccionar alumnos con promedio > 9 <strong>o</strong> edad < 20.
+        <pre>SELECT * FROM alumnos WHERE promedio > 9 OR edad < 20;</pre>
+      </li>
+      <li>
+        Seleccionar alumnos que <strong>no</strong> tengan promedio mayor a 8.
+        <pre>SELECT * FROM alumnos WHERE NOT promedio > 8;</pre>
+      </li>
+    </ol>
+
+    <h2>📍 Operaciones con tablas y registros</h2>
+
+    <h3>Teoría + Ejemplos</h3>
+    <ul>
+      <li>
+        <strong>DELETE (borra registros):</strong>
+        <pre>DELETE FROM alumnos WHERE nombre = 'Pedro';</pre>
+        <p>
+          Usar DELETE permite borrar la fila dentro de la tabla que cumpla lo
+          indicado. En este ejemplo si encuentra en la columna nombre de la
+          tabla alumnos con el valor = 'Pedro'; Borrará esa fila.
+        </p>
+      </li>
+      <li>
+        <strong
+          >TRUNCATE (vacía toda la tabla, pero mantiene estructura):</strong
+        >
+        <pre>TRUNCATE TABLE alumnos;</pre>
+        <p>
+          En vez de DELETE que borra solo la fila indicada, TRUNCATE borra todos
+          los datos dentro de la tabla, dejándola vacía.
+        </p>
+      </li>
+      <li>
+        <strong>DROP TABLE IF EXISTS (elimina la tabla si existe):</strong>
+        <pre>DROP TABLE IF EXISTS alumnos;</pre>
+        <p>
+          Ya vieron como usar DROP, nada más que aquí se agrega la sentencia “IF
+          EXISTS”, es decir, si existe.
+        </p>
+      </li>
+    </ul>
+
+    <h3>Práctica</h3>
+    <ol>
+      <li>Insertar de nuevo algunos datos.</li>
+      <li>Borrar un alumno específico.</li>
+      <li>Truncar la tabla.</li>
+      <li>Insertar de nuevo datos y renombrar la tabla a estudiantes.</li>
+      <li>Dropear la tabla definitivamente.</li>
+    </ol>
+
+    <h2>📍 Ejercicios final</h2>
+    <p>Crear una BD llamada cursoDB y seleccionarla con <code>USE</code>.</p>
+    <ol>
+      <li>
+        Crear la tabla productos con:
+        <ul>
+          <li>id (INT AUTO_INCREMENT, PRIMARY KEY)</li>
+          <li>nombre (VARCHAR 40)</li>
+          <li>precio (DOUBLE)</li>
+          <li>stock (INT)</li>
+        </ul>
+        <p>Stock significa cantidad del producto disponible.</p>
+      </li>
+      <li>Insertar al menos 4 productos distintos.</li>
+      <li>
+        Usar <code>SELECT ... WHERE</code> para:
+        <ul>
+          <li>Filtrar productos con precio > 100.</li>
+          <li>Filtrar productos con stock < 50 AND precio < 500.</li>
+          <li>
+            Filtrar productos que <strong>no</strong> tengan stock mayor a 20.
+          </li>
+        </ul>
+      </li>
+      <li>Borrar un producto con <code>DELETE</code>.</li>
+      <li>Vaciar la tabla con <code>TRUNCATE</code>.</li>
+      <li>Renombrar la tabla productos a inventario.</li>
+      <li>Eliminar la tabla con <code>DROP TABLE IF EXISTS</code>.</li>
+    </ol>
+  </body>
+</html>

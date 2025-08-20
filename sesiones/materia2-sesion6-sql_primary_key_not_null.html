@@ -26,12 +26,14 @@
       }
       /* Estilos para los botones */
       .button {
-        padding: 12px 24px;
+        padding: 10px 20px;
         border-radius: 8px;
         text-decoration: none;
         font-weight: bold;
-        display: inline-block;
         margin-right: 10px;
+        display: inline-block;
+        min-width: 160px;
+        text-align: center;
       }
       .button-green {
         background-color: #4ade80;
@@ -39,6 +41,10 @@
       }
       .button-blue {
         background-color: #2563eb;
+        color: #fff;
+      }
+      .button-siguiente {
+        background: #60a5fa;
         color: #fff;
       }
     </style>
@@ -57,6 +63,12 @@
         class="button button-blue"
       >
         Ir a Sesión 5
+      </a>
+      <a
+        href="materia2-sesion7.html"
+        class="button button-siguiente"
+      >
+        Ir a Sesión 7
       </a>
     </div>
 
@@ -282,5 +294,7 @@ WHERE (edad > 18 AND promedio >= 6) OR nombre = 'Ana';
         errores graves.
       </li>
     </ul>
+  </body>
+</html>
   </body>
 </html>
