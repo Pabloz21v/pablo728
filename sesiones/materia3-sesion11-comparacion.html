@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Cuadro Comparativo: Listas, Tuplas, Sets y Diccionarios en Python
+    </title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+
+      /* --- Responsividad --- */
+      @media (max-width: 700px) {
+        body {
+          margin: 8px;
+          font-size: 1em;
+        }
+        h1 {
+          font-size: 1.3em;
+        }
+        h2 {
+          font-size: 1.1em;
+        }
+        h3 {
+          font-size: 1em;
+        }
+        table,
+        th,
+        td {
+          font-size: 0.95em;
+        }
+        table {
+          display: block;
+          width: 100%;
+          overflow-x: auto;
+        }
+        pre {
+          font-size: 0.95em;
+          padding: 7px;
+        }
+        ul,
+        ol {
+          padding-left: 18px;
+        }
+      }
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 1em;
+        }
+        h2 {
+          font-size: 0.95em;
+        }
+        h3 {
+          font-size: 0.9em;
+        }
+        table,
+        th,
+        td {
+          font-size: 0.9em;
+        }
+        pre {
+          font-size: 0.9em;
+          padding: 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div style="margin-bottom: 18px">
+      <button
+        onclick="location.href='../materias/desarrollo-3.html'"
+        style="
+          margin-right: 10px;
+          padding: 8px 16px;
+          border-radius: 5px;
+          border: 1px solid #20529c;
+          background: #92e282;
+          cursor: pointer;
+        "
+      >
+        Volver a Desarrollo III
+      </button>
+      <button
+        onclick="location.href='materia3-sesion10-sets-diccionarios.html'"
+        style="
+          padding: 8px 16px;
+          border-radius: 5px;
+          border: 1px solid #20529c;
+          background: #a3e1fa;
+          cursor: pointer;
+        "
+      >
+        Ir a Sesión 10
+      </button>
+    </div>
+
+    <h1>
+      Cuadro Comparativo Completo: Listas, Tuplas, Sets y Diccionarios en Python
+    </h1>
+
+    <h2>📊 Comparativa General</h2>
+
+    <table>
+      <tr>
+        <th>Característica</th>
+        <th>Listas</th>
+        <th>Tuplas</th>
+        <th>Sets</th>
+        <th>Diccionarios</th>
+      </tr>
+      <tr>
+        <td>Sintaxis</td>
+        <td>[1, 2, 3]</td>
+        <td>(1, 2, 3)</td>
+        <td>{1, 2, 3}</td>
+        <td>{'a': 1, 'b': 2}</td>
+      </tr>
+      <tr>
+        <td>Mutabilidad</td>
+        <td>✅ Mutable</td>
+        <td>❌ Inmutable</td>
+        <td>✅ Mutable</td>
+        <td>✅ Mutable</td>
+      </tr>
+      <tr>
+        <td>Orden</td>
+        <td>✅ Ordenado</td>
+        <td>✅ Ordenado</td>
+        <td>❌ No ordenado</td>
+        <td>✅ Ordenado (Python 3.7+)</td>
+      </tr>
+      <tr>
+        <td>Elementos duplicados</td>
+        <td>✅ Permite</td>
+        <td>✅ Permite</td>
+        <td>❌ No permite</td>
+        <td>❌ Claves únicas, valores pueden duplicarse</td>
+      </tr>
+      <tr>
+        <td>Indexación</td>
+        <td>✅ Por índice numérico</td>
+        <td>✅ Por índice numérico</td>
+        <td>❌ No indexable</td>
+        <td>✅ Por clave</td>
+      </tr>
+    </table>
+
+    <h2>📋 Métodos de Listas</h2>
+
+    <table>
+      <tr>
+        <th>Método</th>
+        <th>Descripción</th>
+        <th>Ejemplo</th>
+      </tr>
+      <tr>
+        <td>append(x)</td>
+        <td>Agrega un elemento al final</td>
+        <td>lista.append(4)</td>
+      </tr>
+      <tr>
+        <td>extend(iterable)</td>
+        <td>Extiende la lista con elementos de un iterable</td>
+        <td>lista.extend([4,5])</td>
+      </tr>
+      <tr>
+        <td>insert(i, x)</td>
+        <td>Inserta elemento en posición específica</td>
+        <td>lista.insert(1, 10)</td>
+      </tr>
+      <tr>
+        <td>remove(x)</td>
+        <td>Elimina la primera ocurrencia del elemento</td>
+        <td>lista.remove(2)</td>
+      </tr>
+      <tr>
+        <td>pop([i])</td>
+        <td>
+          Elimina y retorna elemento en posición (último si no se especifica)
+        </td>
+        <td>lista.pop()</td>
+      </tr>
+      <tr>
+        <td>clear()</td>
+        <td>Elimina todos los elementos</td>
+        <td>lista.clear()</td>
+      </tr>
+      <tr>
+        <td>index(x[, start[, end]])</td>
+        <td>Retorna índice de la primera ocurrencia</td>
+        <td>lista.index(3)</td>
+      </tr>
+      <tr>
+        <td>count(x)</td>
+        <td>Cuenta ocurrencias de un elemento</td>
+        <td>lista.count(2)</td>
+      </tr>
+      <tr>
+        <td>sort(key=None, reverse=False)</td>
+        <td>Ordena la lista in-place</td>
+        <td>lista.sort()</td>
+      </tr>
+      <tr>
+        <td>reverse()</td>
+        <td>Invierte el orden de elementos</td>
+        <td>lista.reverse()</td>
+      </tr>
+      <tr>
+        <td>copy()</td>
+        <td>Retorna una copia superficial de la lista</td>
+        <td>nueva = lista.copy()</td>
+      </tr>
+    </table>
+
+    <h2>📋 Métodos de Tuplas</h2>
+
+    <table>
+      <tr>
+        <th>Método</th>
+        <th>Descripción</th>
+        <th>Ejemplo</th>
+      </tr>
+      <tr>
+        <td>count(x)</td>
+        <td>Cuenta ocurrencias de un elemento</td>
+        <td>tupla.count(2)</td>
+      </tr>
+      <tr>
+        <td>index(x[, start[, end]])</td>
+        <td>Retorna índice de la primera ocurrencia</td>
+        <td>tupla.index(3)</td>
+      </tr>
+    </table>
+    <p><em>Las tuplas son inmutables, por lo que tienen menos métodos.</em></p>
+
+    <h2>📋 Métodos de Sets</h2>
+
+    <table>
+      <tr>
+        <th>Método</th>
+        <th>Descripción</th>
+        <th>Ejemplo</th>
+      </tr>
+      <tr>
+        <td>add(x)</td>
+        <td>Agrega un elemento al set</td>
+        <td>conjunto.add(4)</td>
+      </tr>
+      <tr>
+        <td>remove(x)</td>
+        <td>Elimina elemento, error si no existe</td>
+        <td>conjunto.remove(2)</td>
+      </tr>
+      <tr>
+        <td>discard(x)</td>
+        <td>Elimina elemento si existe, sin error</td>
+        <td>conjunto.discard(2)</td>
+      </tr>
+      <tr>
+        <td>pop()</td>
+        <td>Elimina y retorna un elemento aleatorio</td>
+        <td>conjunto.pop()</td>
+      </tr>
+      <tr>
+        <td>clear()</td>
+        <td>Elimina todos los elementos</td>
+        <td>conjunto.clear()</td>
+      </tr>
+      <tr>
+        <td>update(iterable)</td>
+        <td>Actualiza set con elementos de iterable</td>
+        <td>conjunto.update([4,5])</td>
+      </tr>
+      <tr>
+        <td>union(*others)</td>
+        <td>Retorna unión de sets</td>
+        <td>set1.union(set2)</td>
+      </tr>
+      <tr>
+        <td>intersection(*others)</td>
+        <td>Retorna intersección de sets</td>
+        <td>set1.intersection(set2)</td>
+      </tr>
+      <tr>
+        <td>difference(*others)</td>
+        <td>Retorna diferencia de sets</td>
+        <td>set1.difference(set2)</td>
+      </tr>
+      <tr>
+        <td>symmetric_difference(other)</td>
+        <td>Retorna diferencia simétrica</td>
+        <td>set1.symmetric_difference(set2)</td>
+      </tr>
+      <tr>
+        <td>issubset(other)</td>
+        <td>Verifica si es subconjunto</td>
+        <td>set1.issubset(set2)</td>
+      </tr>
+      <tr>
+        <td>issuperset(other)</td>
+        <td>Verifica si es superconjunto</td>
+        <td>set1.issuperset(set2)</td>
+      </tr>
+      <tr>
+        <td>isdisjoint(other)</td>
+        <td>Verifica si no hay elementos comunes</td>
+        <td>set1.isdisjoint(set2)</td>
+      </tr>
+      <tr>
+        <td>copy()</td>
+        <td>Retorna copia superficial del set</td>
+        <td>nuevo = conjunto.copy()</td>
+      </tr>
+    </table>
+
+    <h2>📋 Métodos de Diccionarios</h2>
+
+    <table>
+      <tr>
+        <th>Método</th>
+        <th>Descripción</th>
+        <th>Ejemplo</th>
+      </tr>
+      <tr>
+        <td>get(key[, default])</td>
+        <td>Retorna valor de clave, default si no existe</td>
+        <td>dic.get('a')</td>
+      </tr>
+      <tr>
+        <td>setdefault(key[, default])</td>
+        <td>Retorna valor, si no existe lo crea con default</td>
+        <td>dic.setdefault('d', 4)</td>
+      </tr>
+      <tr>
+        <td>update([other])</td>
+        <td>Actualiza diccionario con pares clave-valor</td>
+        <td>dic.update({'d':4})</td>
+      </tr>
+      <tr>
+        <td>keys()</td>
+        <td>Retorna vista de las claves</td>
+        <td>dic.keys()</td>
+      </tr>
+      <tr>
+        <td>values()</td>
+        <td>Retorna vista de los valores</td>
+        <td>dic.values()</td>
+      </tr>
+      <tr>
+        <td>items()</td>
+        <td>Retorna vista de pares (clave, valor)</td>
+        <td>dic.items()</td>
+      </tr>
+      <tr>
+        <td>pop(key[, default])</td>
+        <td>Elimina clave y retorna valor, error/default si no existe</td>
+        <td>dic.pop('a')</td>
+      </tr>
+      <tr>
+        <td>popitem()</td>
+        <td>Elimina y retorna último par (clave, valor)</td>
+        <td>dic.popitem()</td>
+      </tr>
+      <tr>
+        <td>clear()</td>
+        <td>Elimina todos los elementos</td>
+        <td>dic.clear()</td>
+      </tr>
+      <tr>
+        <td>copy()</td>
+        <td>Retorna copia superficial del diccionario</td>
+        <td>nuevo = dic.copy()</td>
+      </tr>
+      <tr>
+        <td>fromkeys(seq[, value])</td>
+        <td>Crea nuevo diccionario con claves de seq y valor value</td>
+        <td>dict.fromkeys(['a','b'], 0)</td>
+      </tr>
+    </table>
+
+    <h2>🎯 Casos de Uso Recomendados</h2>
+
+    <h3>Listas</h3>
+    <ul>
+      <li>
+        <strong>Cuando usar:</strong> Colecciones ordenadas que necesitan
+        modificación frecuente.
+      </li>
+      <li>
+        <strong>Ejemplo:</strong> Lista de tareas, historial de navegación,
+        datos procesados.
+      </li>
+    </ul>
+
+    <h3>Tuplas</h3>
+    <ul>
+      <li>
+        <strong>Cuando usar:</strong> Datos inmutables, constantes, o como
+        claves en diccionarios.
+      </li>
+      <li>
+        <strong>Ejemplo:</strong> Coordenadas (x, y), configuraciones fijas,
+        registros de base de datos.
+      </li>
+    </ul>
+
+    <h3>Sets</h3>
+    <ul>
+      <li>
+        <strong>Cuando usar:</strong> Eliminar duplicados, pruebas de membresía
+        rápidas, operaciones de conjuntos.
+      </li>
+      <li>
+        <strong>Ejemplo:</strong> Lista de usuarios únicos, tags de artículos,
+        filtrado de elementos.
+      </li>
+    </ul>
+
+    <h3>Diccionarios</h3>
+    <ul>
+      <li>
+        <strong>Cuando usar:</strong> Datos asociativos, mapeos clave-valor,
+        JSON-like structures.
+      </li>
+      <li>
+        <strong>Ejemplo:</strong> Configuraciones, datos de usuario, caché,
+        contadores.
+      </li>
+    </ul>
+
+    <h2>⚡ Ejemplo Integrado</h2>
+    <pre>
+# Lista - métodos de modificación
+numeros = [1, 2, 3]
+numeros.append(4) # [1, 2, 3, 4]
+numeros.insert(1, 10) # [1, 10, 2, 3, 4]
+
+# Tupla - métodos de consulta
+coordenadas = (10, 20)
+print(coordenadas.index(10)) # 0
+print(coordenadas.count(20)) # 1
+
+# Set - métodos de conjuntos
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+print(set1.union(set2)) # {1, 2, 3, 4, 5}
+
+# Diccionario - métodos clave-valor
+usuario = {'nombre': 'Ana', 'edad': 25}
+print(usuario.get('edad')) # 25
+usuario.setdefault('ciudad', 'Madrid')
+    </pre>
+  </body>
+</html>

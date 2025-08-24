@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 10: Sets y Diccionarios</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+
+      /* --- Responsividad --- */
+      @media (max-width: 700px) {
+        body {
+          margin: 8px;
+          font-size: 1em;
+        }
+        h1 {
+          font-size: 1.3em;
+        }
+        h2 {
+          font-size: 1.1em;
+        }
+        h3 {
+          font-size: 1em;
+        }
+        table,
+        th,
+        td {
+          font-size: 0.95em;
+        }
+        table {
+          display: block;
+          width: 100%;
+          overflow-x: auto;
+        }
+        pre {
+          font-size: 0.95em;
+          padding: 7px;
+        }
+        ul,
+        ol {
+          padding-left: 18px;
+        }
+      }
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 1em;
+        }
+        h2 {
+          font-size: 0.95em;
+        }
+        h3 {
+          font-size: 0.9em;
+        }
+        table,
+        th,
+        td {
+          font-size: 0.9em;
+        }
+        pre {
+          font-size: 0.9em;
+          padding: 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div style="margin-bottom: 18px">
+      <button
+        onclick="location.href='../materias/desarrollo-3.html'"
+        style="
+          margin-right: 10px;
+          padding: 8px 16px;
+          border-radius: 5px;
+          border: 1px solid #20529c;
+          background: #92e282;
+          cursor: pointer;
+        "
+      >
+        Volver a Desarrollo III
+      </button>
+      <button
+        onclick="location.href='materia3-sesion9-match.html'"
+        style="
+          margin-right: 10px;
+          padding: 8px 16px;
+          border-radius: 5px;
+          border: 1px solid #20529c;
+          background: #a3e1fa;
+          cursor: pointer;
+        "
+      >
+        Ir a Sesión 9
+      </button>
+      <button
+        onclick="location.href='materia3-sesion11-comparacion.html'"
+        style="
+          padding: 8px 16px;
+          border-radius: 5px;
+          border: 1px solid #20529c;
+          background: #f9e282;
+          cursor: pointer;
+        "
+      >
+        Ir a Sesión 11
+      </button>
+    </div>
+
+    <h1>Sesión 10: Sets y Diccionarios</h1>
+
+    <h2>Parte 1: Sets (Conjuntos)</h2>
+
+    <h3>Teoría</h3>
+    <ul>
+      <li>
+        <strong>¿Qué es un set?</strong> Colección <strong>no ordenada</strong>,
+        <strong>mutable</strong> y de elementos <strong>únicos</strong> (sin
+        duplicados).
+      </li>
+      <li>
+        <strong>Usos comunes:</strong>
+        <ul>
+          <li>Eliminar duplicados de una lista.</li>
+          <li>Operaciones de conjuntos (unión, intersección, diferencia).</li>
+          <li>Verificar pertenencia de forma eficiente.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Sintaxis Básica</h3>
+    <pre>
+# Crear un set
+mi_set = {1, 2, 3}
+otro_set = set([4, 5, 6]) # Desde una lista
+# Como pueden ver un set se declara usando llaves {}
+# Para que recuerden una lista usa corchetes [] y una tupla paréntesis ()
+    </pre>
+
+    <h3>Operaciones Principales</h3>
+
+    <table>
+      <tr>
+        <th>Operación</th>
+        <th>Sintaxis</th>
+        <th>Ejemplo</th>
+      </tr>
+      <tr>
+        <td>Añadir elemento</td>
+        <td>set.add(elemento)</td>
+        <td>mi_set.add(4)</td>
+      </tr>
+      <tr>
+        <td>Eliminar</td>
+        <td>set.remove(elemento)</td>
+        <td>mi_set.remove(2)</td>
+      </tr>
+      <tr>
+        <td>Unión</td>
+        <td>set1.union(set2) ó set1 | set2</td>
+        <td>{1, 2} {3, 4} → {1, 2, 3, 4}</td>
+      </tr>
+      <tr>
+        <td>Intersección</td>
+        <td>set1 & set2</td>
+        <td>{1, 2} & {2, 3} → {2}</td>
+      </tr>
+      <tr>
+        <td>Diferencia</td>
+        <td>set1 - set2</td>
+        <td>{1, 2} - {2} → {1}</td>
+      </tr>
+    </table>
+
+    <h3>Ejemplos Prácticos</h3>
+    <pre>
+# Eliminar duplicados de una lista
+numeros = [1, 2, 2, 3, 4, 4]
+sin_duplicados = set(numeros)
+print(sin_duplicados) # Output: {1, 2, 3, 4}
+# Convierte una lista a un set, el cual elimina los valores repetidos.
+
+# Verificar pertenencia
+vocales = {"a", "e", "i", "o", "u"}
+print("a" in vocales) # Output: True
+    </pre>
+
+    <h3>Intersection / Intersección</h3>
+    <p>
+      Cuando usamos este método <code>intersection()</code> o el signo ampersand
+      <code>&</code>, los valores dentro de los sets que persistirán en el nuevo
+      set creado serán los valores que existen en los sets involucrados.
+    </p>
+    <pre>
+# Unimos set1 y set2 con intersection():
+set1 = {"apple", "banana", "cherry"}
+set2 = {"google", "microsoft", "apple"}
+
+set3 = set1.intersection(set2)
+# ó
+set3 = set1 & set2
+print(set3) # "apple"
+# En el nuevo set solo veremos el valor "apple"
+    </pre>
+
+    <h3>Difference / Diferencia</h3>
+    <p>
+      El método <code>difference()</code> o el signo menos
+      <code>-</code> devuelve los valores dentro del primer set que no se
+      repitan en el segundo.
+    </p>
+    <pre>
+set1 = {"apple", "banana", "cherry"}
+set2 = {"google", "microsoft", "apple"}
+
+set3 = set1.difference(set2)
+# ó
+set3 = set1 - set2
+
+print(set3) # {'banana', 'cherry'}
+    </pre>
+
+    <h3>Symmetric Difference / Diferencia Simétrica</h3>
+    <p>
+      El método <code>symmetric_difference()</code> o el símbolo careta
+      <code>^</code> devuelve los valores de los sets que no se repiten en
+      ambos.
+    </p>
+    <pre>
+set1 = {"apple", "banana", "cherry"}
+set2 = {"google", "microsoft", "apple"}
+
+set3 = set1.symmetric_difference(set2)
+# ó
+set3 = set1 ^ set2
+
+print(set3) # {'google', 'banana', 'microsoft', 'cherry'}
+    </pre>
+
+    <h3>Ejercicios</h3>
+    <ol>
+      <li>
+        Crea un set “colores” con "rojo", "verde", "azul" y añade "amarillo".
+      </li>
+      <li>
+        Dados <code>set_a = {1, 2, 3}</code> y <code>set_b = {3, 4, 5}</code>,
+        calcula su unión e intersección.
+      </li>
+      <li>
+        Elimina los duplicados de la lista <code>[5, 5, 10, 10, 15]</code> y
+        convierte el resultado en una lista ordenada.
+      </li>
+    </ol>
+
+    <h2>Parte 2: Diccionarios</h2>
+
+    <h3>Teoría</h3>
+    <ul>
+      <li>
+        <strong>¿Qué es un diccionario?</strong> Colección de pares
+        <strong>clave-valor</strong>. Las claves son únicas e inmutables.
+      </li>
+      <li>
+        <strong>Usos comunes:</strong>
+        <ul>
+          <li>Almacenar datos estructurados (ej: información de usuarios).</li>
+          <li>Contadores (ej: frecuencia de palabras).</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Sintaxis Básica</h3>
+    <pre>
+# Crear un diccionario
+estudiante = {
+    "nombre": "Ana",
+    "edad": 16,
+    "curso": "Python"
+}
+# Se declara el diccionario, en este caso lo llamamos “estudiante” usamos el signo igual “=” como siempre para declarar que se guardará algo en esta variable “estudiante” y abrimos llave, a diferencia del set lo que irá dentro es la lógica de clave-valor. En este ejemplo las claves son “nombre”, “edad” y “curso”, y los valores respectivos a continuación de los dos puntos “:”.
+    </pre>
+
+    <h3>Operaciones Principales</h3>
+
+    <table>
+      <tr>
+        <th>Operación</th>
+        <th>Sintaxis</th>
+        <th>Ejemplo</th>
+      </tr>
+      <tr>
+        <td>Acceder a valor</td>
+        <td>dic["clave"]</td>
+        <td>estudiante["nombre"] → "Ana"</td>
+      </tr>
+      <tr>
+        <td>Añadir/Modificar</td>
+        <td>dic["clave"] = valor</td>
+        <td>estudiante["edad"] = 17</td>
+      </tr>
+      <tr>
+        <td>Eliminar</td>
+        <td>del dic["clave"]</td>
+        <td>del estudiante["curso"]</td>
+      </tr>
+      <tr>
+        <td>Obtener claves</td>
+        <td>dic.keys()</td>
+        <td>list(estudiante.keys())</td>
+      </tr>
+      <tr>
+        <td>Obtener valores</td>
+        <td>dic.values()</td>
+        <td>list(estudiante.values())</td>
+      </tr>
+    </table>
+
+    <h3>Ejemplos Prácticos</h3>
+    <pre>
+# Contador de palabras
+texto = "hola hola mundo"
+palabras = texto.split() # ['hola', 'hola', 'mundo']
+contador = {} # diccionario declarado y vacío
+
+for palabra in palabras:
+    contador[palabra] = contador.get(palabra, 0) + 1
+
+print(contador) # Output: {"hola": 2, "mundo": 1}
+# El método Split() separa una oración y la guarda en una lista separándolas por una coma “,”.
+# En la primera iteración el bucle for palabra = hola esta sería una de las claves que se guardan dentro del diccionario contador y el valor como 0, luego suma 1 al valor.
+# Segunda iteración, palabra = hola, como ya existe esta clave no se creará de nuevo dentro del diccionario, pero sí se suma 1 al valor, ahora siendo 2.
+# Tercer iteración palabra = mundo, como no existe en el dicc. crea esta clave = mundo y su valor = 0, y luego suma 1 a valor, ahora siendo 1. # Output: {"hola": 2, "mundo": 1}
+
+# Diccionarios anidados
+usuarios = {
+    "ana123": {"edad": 16, "email": "ana@example.com"},
+    "luis456": {"edad": 17, "email": "luis@example.com"}
+}
+
+print(usuarios["ana123"]["edad"]) # Output: 16
+# Dentro de un diccionario se anida otro diccionario.
+# Primero podemos ver el diccionario principal “usuarios” y su clave – valor.
+# Las claves del diccionario usuarios son: ana123 y luis345, pero a su vez estos se vuelven los diccionarios de otras clave-valor
+# ana123 es el diccionario de {"edad": 16, "email": "ana@example.com"}
+# Y luis456 es el diccionario de: {"edad": 17, "email": "luis@example.com"}
+# Si queremos acceder al valor del email de luis456:
+print(usuarios["luis456"]["email"]) # Output: luis@example.com
+    </pre>
+
+    <h3>Recorrer un diccionario anidado:</h3>
+    <pre>
+myfamily = {
+    "hijo1": {
+        "name": "Emil",
+        "year": 2004
+    },
+    "hijo2": {
+        "name": "Tobias",
+        "year": 2007
+    },
+    "hijo3": {
+        "name": "Linus",
+        "year": 2011
+    }
+}
+
+for clave, valor in myfamily.items():
+    print(clave)
+    for clave_del_dicc_anidado in valor:
+        print(clave_del_dicc_anidado + ':', valor[clave_del_dicc_anidado])
+# Como pueden ver en este ejemplo, existe el diccionario “myfamily” el cual contiene 3 diccionarios “hijo1”, “hijo2” y “hijo3”.
+# Para recorrer todos los valores de cada clave se usa un bucle for dentro de otro for.
+# El primer bucle for recorre el diccionario “myfamily”, guardando en la variable "clave" = hijo1 y en "valor" = {"name": "Emil", "year": 2004} para la primera iteración, hijo2 para la segunda iteración e hijo3 para la tercera iteración respectivamente.
+# Esto se puede realizar gracias al método items() el cual devuelve la clave:valor como tupla “()” dentro de una lista “[]”:
+# Ej: dict_items([(hijo1, {'name': 'Emil', 'year': 2004}), (hijo2, {'name': 'Tobias', 'year': 2007}), (hijo3, {'name': 'Linus', 'year': 2011})])
+# Vamos a analizar la primera iteración "clave" = hijo1 y "valor" = {"name": "Emil", "year": 2004}
+# Como podrán ver se guardó la clave y el valor en cada variable.
+# Ahora pasamos al segundo bucle for. Utilizamos los datos guardados dentro de valor "valor" = {"name": "Emil", "year": 2004}. Para la primera iteración guardará en "clave_del_dicc_anidado" solo la clave, en este caso "name".
+# Luego pasamos al print() aquí se imprimirá clave_del_dicc_anidado = name ":", valor(clave_del_dicc_anidado) = el valor correspondiente a "name" es decir, Emil.
+# Para la segunda iteración del for será clave_del_dicc_anidado = year ":", valor(clave_del_dicc_anidado) = el valor correspondiente a "year" es decir, 2004.
+# Los bucles for anidados son algo difícil de comprender, si ingresan el código pueden visualizar mejor lo que ocurre en cada recorrido.
+    </pre>
+
+    <h3>Ejercicios</h3>
+    <ol>
+      <li>
+        Crea un diccionario producto con las claves "nombre", "precio" y
+        "stock".
+      </li>
+      <li>
+        Dado el diccionario
+        <code>notas = {"Matemáticas": 8, "Historia": 7}</code>, añade la nota
+        "Biología": 9.
+      </li>
+      <li>
+        Crea un diccionario agenda que almacene contactos (nombre: teléfono).
+        Añade 3 contactos y luego elimina uno.
+      </li>
+    </ol>
+
+    <h2>Tarea</h2>
+    <ol>
+      <li>
+        <strong>Sets:</strong>
+        <ul>
+          <li>
+            Dada la lista <code>[10, 20, 30, 20, 40, 10]</code>, conviértela en
+            un set y calcula cuántos elementos únicos tiene.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Diccionarios:</strong>
+        <ul>
+          <li>
+            Crea un diccionario estudiante con tu información (nombre, edad,
+            ciudad).
+          </li>
+          <li>Modifica la edad y añade una nueva clave "hobbie".</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>Cierre</h2>
+    <ul>
+      <li>
+        <strong>Sets:</strong> Ideales para eliminar duplicados y operaciones de
+        conjuntos.
+      </li>
+      <li>
+        <strong>Diccionarios:</strong> Perfectos para almacenar datos
+        estructurados y relaciones clave-valor.
+      </li>
+    </ul>
+
+    <h2>Soluciones a Ejercicios</h2>
+
+    <h3>Sets</h3>
+    <ol>
+      <li>
+        <pre>
+colores = {"rojo", "verde", "azul"}
+colores.add("amarillo")
+            </pre
+        >
+      </li>
+      <li>
+        <pre>
+set_a = {1, 2, 3}
+set_b = {3, 4, 5}
+print(set_a | set_b) # Unión: {1, 2, 3, 4, 5}
+print(set_a & set_b) # Intersección: {3}
+            </pre
+        >
+      </li>
+      <li>
+        <pre>
+lista = [5, 5, 10, 10, 15]
+sin_duplicados = sorted(list(set(lista))) # [5, 10, 15]
+            </pre
+        >
+      </li>
+    </ol>
+
+    <h3>Diccionarios</h3>
+    <ol>
+      <li>
+        <pre>
+producto = {"nombre": "Laptop", "precio": 1000, "stock": 5}
+            </pre
+        >
+      </li>
+      <li>
+        <pre>
+notas = {"Matemáticas": 8, "Historia": 7}
+notas["Biología"] = 9
+            </pre
+        >
+      </li>
+      <li>
+        <pre>
+agenda = {}
+agenda["Ana"] = "123-456"
+agenda["Luis"] = "789-012"
+agenda["Carlos"] = "345-678"
+del agenda["Luis"]
+            </pre
+        >
+      </li>
+    </ol>
+
+    <h3>Respuestas a Tareas</h3>
+    <ol>
+      <li>
+        <pre>
+# Lista original
+lista = [10, 20, 30, 20, 40, 10]
+
+# Convertir la lista a un set
+set_unico = set(lista)
+
+# Calcular cuántos elementos únicos tiene
+cantidad_unicos = len(set_unico)
+
+print("Set:", set_unico)
+print("Cantidad de elementos únicos:", cantidad_unicos)
+            </pre
+        >
+      </li>
+      <li>
+        <pre>
+# Crear el diccionario 'estudiante' con tu información
+estudiante = {
+    "nombre": "Pablo Acevedo",
+    "edad": 25,
+    "ciudad": "Buenos Aires"
+}
+
+# Modificar la edad
+estudiante["edad"] = 36
+
+# Añadir una nueva clave "hobbie"
+estudiante["hobbie"] = "Programar"
+
+# Mostrar el diccionario actualizado
+print(estudiante)
+            </pre
+        >
+      </li>
+    </ol>
+  </body>
+</html>
