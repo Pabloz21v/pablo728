@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplos de random() en Python</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .ejemplo {
+            background-color: #f9f9f9;
+            border-left: 4px solid #3498db;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-bottom: 18px">
+      <button
+        onclick="location.href='../materias/desarrollo-3.html'"
+        style="
+          margin-right: 10px;
+          padding: 8px 16px;
+          border-radius: 5px;
+          border: 1px solid #20529c;
+          background: #92e282;
+          cursor: pointer;
+        "
+      >
+        Volver a Desarrollo III
+      </button>
+      <button
+        onclick="location.href='materia3-sesion11-comparacion.html'"
+        style="
+          padding: 8px 16px;
+          border-radius: 5px;
+          border: 1px solid #20529c;
+          background: #a3e1fa;
+          cursor: pointer;
+        "
+      >
+        Ir a Sesión 11
+      </button>
+    </div>
+    <h1>Ejemplos de uso del método <code>random()</code> en Python</h1>
+<h3>Este método  les permite generar un numero aleatorio entre 0 y 1</h3>
+   <h3>También  les presento usos para que puedan aplicar en sus proyectos</h3>
+<div>No olvidar colocar import random arriba de todo el codigo, alguno para la calculadora ya lo hicieron con import math</div>
+   <div class="ejemplo">
+        <h3>1. Generar un número aleatorio entre 0 y 1</h3>
+        <pre><code>
+import random
+numero_aleatorio = random.random()
+print(numero_aleatorio)  # Ejemplo de salida: 0.5488135039273248
+        </code></pre>
+    </div>
+
+    <div class="ejemplo">
+        <h3>2. Simular el lanzamiento de una moneda</h3>
+        <pre><code>
+import random
+resultado = "Cara" if random.random() &lt; 0.5 else "Cruz"
+print(resultado)  # Ejemplo de salida: "Cara" o "Cruz"
+        </code></pre>
+    </div>
+
+    <div class="ejemplo">
+        <h3>3. Generar un número aleatorio en un rango específico</h3>
+        <pre><code>
+import random
+minimo = 5
+maximo = 10
+numero_aleatorio = minimo + (maximo - minimo) * random.random()
+print(numero_aleatorio)  # Ejemplo de salida: 7.3456789
+        </code></pre>
+    </div>
+
+    <div class="ejemplo">
+        <h3>4. Seleccionar un elemento aleatorio de una lista</h3>
+        <pre><code>
+import random
+colores = ["rojo", "verde", "azul", "amarillo"]
+color_aleatorio = colores[int(random.random() * len(colores))]
+print(color_aleatorio)  # Ejemplo de salida: "azul"
+        </code></pre>
+    </div>
+
+    <div class="ejemplo">
+        <h3>5. Simular una probabilidad (ejemplo: 30% de éxito)</h3>
+        <pre><code>
+import random
+probabilidad_exito = 0.3
+if random.random() &lt; probabilidad_exito:
+    print("¡Éxito!")
+else:
+    print("Fracaso.")
+        </code></pre>
+    </div>
+
+    <div class="ejemplo">
+        <h3>6. Generar un retraso aleatorio en un programa</h3>
+        <pre><code>
+import random
+import time
+tiempo_espera = 1 + 4 * random.random()  # Entre 1 y 5 segundos
+time.sleep(tiempo_espera)
+print("Espera terminada.")
+        </code></pre>
+    </div>
+
+    <div class="ejemplo">
+        <h3>7. Simular un dado de 6 caras</h3>
+        <pre><code>
+import random
+resultado_dado = int(random.random() * 6) + 1
+print(resultado_dado)  # Ejemplo de salida: 3
+        </code></pre>
+    </div>
+</body>
+</html>
