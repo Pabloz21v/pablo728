@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Clase 3: SSD SATA – Tecnología, Funcionamiento y Características
+    </title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+      }
+      h2 {
+        color: #3498db;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+      }
+      h3 {
+        color: #2980b9;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      ul,
+      ol {
+        margin-left: 20px;
+      }
+      .highlight {
+        background-color: #e3f2fd;
+        padding: 10px;
+        border-left: 4px solid #3498db;
+      }
+      .question {
+        font-weight: bold;
+        color: #e74c3c;
+      }
+      footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 0.9em;
+        color: #7f8c8d;
+      }
+
+      /* --- Responsividad --- */
+      @media (max-width: 700px) {
+        body {
+          padding: 8px;
+          font-size: 1em;
+        }
+        h1 {
+          font-size: 1.3em;
+          padding-bottom: 7px;
+        }
+        h2 {
+          font-size: 1.1em;
+          padding-bottom: 3px;
+        }
+        h3 {
+          font-size: 1em;
+        }
+        table,
+        th,
+        td {
+          font-size: 0.95em;
+        }
+        table {
+          display: block;
+          width: 100%;
+          overflow-x: auto;
+        }
+        ul,
+        ol {
+          margin-left: 12px;
+          padding-left: 12px;
+        }
+        .highlight {
+          padding: 7px;
+          border-left-width: 3px;
+        }
+      }
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 1em;
+          padding-bottom: 5px;
+        }
+        h2 {
+          font-size: 0.95em;
+          padding-bottom: 2px;
+        }
+        h3 {
+          font-size: 0.9em;
+        }
+        table,
+        th,
+        td {
+          font-size: 0.9em;
+        }
+        .highlight {
+          padding: 5px;
+          border-left-width: 2px;
+        }
+        ul,
+        ol {
+          margin-left: 8px;
+          padding-left: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion2-discos_duros_hdd.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 2 
+      </a>
+      <a
+        href="hardware1-sesion4-ssd-m2.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 4
+      </a>
+    </div>
+    <h1>Sesión 3: SSD SATA – Tecnología, Funcionamiento y Características</h1>
+
+    <h2>1. Introducción</h2>
+
+    <div class="highlight">
+      <p>
+        <strong>Contexto histórico:</strong> Los SSD (Solid State Drive)
+        surgieron como alternativa a los HDD para superar las limitaciones
+        mecánicas (velocidad, fragilidad, consumo energético).
+      </p>
+      <p>
+        Los SSD SATA fueron los primeros en popularizarse por su compatibilidad
+        con puertos y cables existentes.
+      </p>
+    </div>
+
+    <h2>2. Tecnología Flash NAND</h2>
+    <h3>¿Qué es la memoria NAND?</h3>
+    <ul>
+      <li>
+        <strong>Definición:</strong> Tipo de memoria no volátil que almacena
+        datos en celdas de transistores. No requiere energía para mantener la
+        información.
+      </li>
+      <li>
+        <strong>Estructura básica:</strong>
+        <ul>
+          <li>
+            <strong>Celdas:</strong> Unidades mínimas que almacenan bits (1 o
+            0).
+          </li>
+          <li>
+            <strong>Páginas:</strong> Un conjunto de celdas que se leen o
+            escriben juntas como una sola unidad. Es la unidad mínima que el
+            controlador puede leer o escribir en una sola operación.
+            <ul>
+              Características:
+              <li>Lectura: Puedes leer una página individualmente.</li>
+              <li>
+                Escritura: Solo puedes escribir en una página si está vacía
+                (borrada previamente).
+              </li>
+              <li>
+                Limitación: No puedes modificar solo una celda dentro de una
+                página; debes reescribir toda la página.
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <strong>Bloques:</strong> Un conjunto de páginas (por ejemplo, 128
+            páginas = 512 KB por bloque).
+            <ul>
+              Características:
+              <li>
+                Borrado: Solo puedes borrar datos a nivel de bloque completo, no
+                de páginas individuales. Esto significa que, aunque solo quieras
+                actualizar una página, el controlador debe:
+                <ol>
+                  1) Leer todas las páginas válidas del bloque.
+                </ol>
+                <ol>
+                  2) Borrar el bloque entero.
+                </ol>
+                <ol>
+                  3) Reescribir las páginas válidas (incluyendo la modificada)
+                  en un nuevo bloque.
+                </ol>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Controlador:</strong> Gestiona la lectura/escritura, el
+            desgaste y el mapeo de datos.
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Tipos de memoria NAND</h3>
+    <table>
+      <tr>
+        <th>Tipo</th>
+        <th>Significado</th>
+        <th>Bits por Celda</th>
+        <th>Ventajas</th>
+        <th>Desventajas</th>
+        <th>Uso Típico</th>
+      </tr>
+      <tr>
+        <td>SLC</td>
+        <td>Single-Level Cell</td>
+        <td>1 bit</td>
+        <td>Mayor velocidad y durabilidad</td>
+        <td>Alto costo, menor capacidad</td>
+        <td>Empresarial, servidores</td>
+      </tr>
+      <tr>
+        <td>MLC</td>
+        <td>Multi-Level Cell</td>
+        <td>2 bits</td>
+        <td>Equilibrio entre costo y rendimiento</td>
+        <td>Menor durabilidad que SLC</td>
+        <td>Consumidor (gama media-alta)</td>
+      </tr>
+      <tr>
+        <td>TLC</td>
+        <td>Triple-Level Cell</td>
+        <td>3 bits</td>
+        <td>Mayor capacidad, costo reducido</td>
+        <td>Menor velocidad y durabilidad</td>
+        <td>Consumidor (gama media)</td>
+      </tr>
+      <tr>
+        <td>QLC</td>
+        <td>Quad-Level Cell</td>
+        <td>4 bits</td>
+        <td>Máxima capacidad, bajo costo</td>
+        <td>Menor velocidad y durabilidad</td>
+        <td>Consumidor (gama baja)</td>
+      </tr>
+    </table>
+    <p><strong>Comparación práctica:</strong></p>
+    <ul>
+      <li>
+        <strong>SLC:</strong> Hasta 100,000 ciclos de escritura, ideal para
+        entornos críticos.
+      </li>
+      <li>
+        <strong>TLC/QLC:</strong> 300–1,000 ciclos, común en SSD económicos para
+        uso general.
+      </li>
+    </ul>
+
+    <h3>¿Cómo funciona la escritura y lectura en NAND?</h3>
+    <ul>
+      <li>
+        <strong>Escritura:</strong> El controlador aplica voltaje a las celdas
+        para cambiar su estado (carga eléctrica = bit).
+      </li>
+      <li>
+        <strong>Lectura:</strong> El controlador detecta la carga en las celdas
+        para interpretar los bits.
+      </li>
+      <li>
+        <strong>Borrado:</strong> Se realiza por bloques completos (no por
+        celdas individuales), lo que afecta el rendimiento en operaciones
+        pequeñas.
+      </li>
+    </ul>
+
+    <h2>3. SSD SATA: Características Técnicas</h2>
+    <h3>Componentes de un SSD SATA</h3>
+    <ol>
+      <li>
+        <strong>Memoria NAND flash:</strong> Almacena los datos (ej: TLC o QLC
+        en modelos económicos).
+      </li>
+      <li>
+        <strong>Controlador:</strong> Cerebro del SSD. Gestiona:
+        <ul>
+          <li>Operaciones de lectura/escritura.</li>
+          <li>
+            Algoritmos de nivelación de desgaste (<em>wear leveling</em>).
+          </li>
+          <li>Corrección de errores (ECC).</li>
+          <li>Caché DRAM (en algunos modelos para mejorar rendimiento).</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Caché DRAM (opcional):</strong> Memoria volátil que acelera
+        operaciones frecuentes.
+      </li>
+      <li>
+        <strong>Interfaz SATA:</strong> Conector de 7 pines para datos y 15
+        pines para alimentación (3.3V).
+      </li>
+      <li>
+        <strong>Firmware:</strong> Software interno que optimiza el rendimiento
+        y la vida útil.
+      </li>
+    </ol>
+
+    <h3>Interfaz y Generaciones de SATA</h3>
+    <table>
+      <tr>
+        <th>Generación</th>
+        <th>Nombre</th>
+        <th>Velocidad Teórica</th>
+        <th>Velocidad Real (MB/s)</th>
+        <th>Año de Lanzamiento</th>
+      </tr>
+      <tr>
+        <td>SATA I</td>
+        <td>SATA 1.5 Gbps</td>
+        <td>1.5 Gbps (150 MB/s)</td>
+        <td>~130 MB/s</td>
+        <td>2003</td>
+      </tr>
+      <tr>
+        <td>SATA II</td>
+        <td>SATA 3.0 Gbps</td>
+        <td>3.0 Gbps (300 MB/s)</td>
+        <td>~270 MB/s</td>
+        <td>2004</td>
+      </tr>
+      <tr>
+        <td>SATA III</td>
+        <td>SATA 6.0 Gbps</td>
+        <td>6.0 Gbps (600 MB/s)</td>
+        <td>~550 MB/s</td>
+        <td>2009</td>
+      </tr>
+    </table>
+    <p>
+      <strong>Nota:</strong> SATA III es el estándar actual (2025) y es
+      retrocompatible con SATA I/II (pero limitado a su velocidad máxima).
+    </p>
+
+    <h3>Velocidades Reales vs. Teóricas</h3>
+    <ul>
+      <li>
+        Diferencia entre el rendimiento que promete el fabricante en condiciones
+        ideales (teorico) y el que realmente experimentas en el uso cotidiano
+        (real)
+      </li>
+    </ul>
+    <p><strong>Comparación con HDD:</strong></p>
+    <ul>
+      <li>
+        Un SSD SATA es <strong>3–5 veces más rápido</strong> que un HDD en
+        lectura/escritura secuencial.
+      </li>
+      <li>
+        Hasta <strong>100 veces más rápido</strong> en operaciones aleatorias
+        (ej: abrir programas).
+      </li>
+    </ul>
+
+    <h3>Voltaje y Consumo Energético</h3>
+    <ul>
+      <li>
+        <strong>Voltaje:</strong> 3.3V (alimentación) y 5V (opcional en algunos
+        modelos).
+      </li>
+      <li>
+        <strong>Consumo:</strong>
+        <ul>
+          <li><strong>Activo:</strong> 2–4W (vs. 6–10W de un HDD 3.5").</li>
+          <li><strong>Inactivo:</strong> <0.5W (ideal para laptops).</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>4. Resistencia, Desgaste y Durabilidad</h2>
+    <h3>Concepto de Desgaste en NAND</h3>
+    <ul>
+      <li>
+        <strong>Ciclos de escritura:</strong> Número de veces que una celda
+        puede ser borrada y reescrita antes de fallar.
+        <ul>
+          <li><strong>SLC:</strong> 100,000 ciclos.</li>
+          <li><strong>MLC:</strong> 30,000–50,000 ciclos.</li>
+          <li><strong>TLC:</strong> 500–3,000 ciclos.</li>
+          <li><strong>QLC:</strong> 300–1,000 ciclos.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>TeraBytes Written (TBW):</strong> Indica cuántos datos pueden
+        escribirse antes de que el SSD falle (ej: 150 TBW para un SSD de 500
+        GB).
+      </li>
+    </ul>
+
+    <h3>Técnicas para Prolongar la Vida Útil</h3>
+    <ol>
+      <li>
+        <strong>Wear Leveling (Nivelación de Desgaste):</strong> Distribuye los
+        datos uniformemente en las celdas para evitar desgaste desigual.
+      </li>
+      <li>
+        <strong>Over-Provisioning:</strong> Reserva un porcentaje de capacidad
+        (ej: 7–10%) para reemplazar celdas dañadas.
+      </li>
+      <li>
+        <strong>TRIM:</strong> Comando que permite al sistema operativo informar
+        al SSD qué bloques pueden borrarse (mejora rendimiento y durabilidad).
+      </li>
+      <li>
+        <strong>Caché SLC (en SSD TLC/QLC):</strong> Algunos SSD usan una
+        porción de la memoria como SLC para acelerar escrituras y reducir
+        desgaste.
+      </li>
+    </ol>
+
+    <h2>5. Conexión y Compatibilidad</h2>
+    <h3>Cómo Conectar un SSD SATA</h3>
+    <ol>
+      <li>
+        <strong>Conector de datos:</strong> Cable SATA de 7 pines a la placa
+        madre.
+      </li>
+      <li>
+        <strong>Conector de alimentación:</strong> Cable SATA de 15 pines desde
+        la fuente de poder.
+      </li>
+    </ol>
+
+    <h3>Compatibilidad</h3>
+    <ul>
+      <li>
+        <strong>Formato físico:</strong> 2.5" (estándar para laptops y
+        desktops).
+      </li>
+      <li>
+        <strong>Adaptadores:</strong> Pueden usarse en bahías de 3.5" con
+        adaptadores mecánicos.
+      </li>
+      <li>
+        <strong>Sistemas operativos:</strong> Compatibles con Windows, Linux y
+        macOS.
+      </li>
+    </ul>
+
+    <h2>6. Ventajas y Desventajas de SSD SATA</h2>
+    <table>
+      <tr>
+        <th>Ventajas</th>
+        <th>Desventajas</th>
+      </tr>
+      <tr>
+        <td>Velocidad superior a HDD.</td>
+        <td>Limitados por la interfaz SATA (600 MB/s).</td>
+      </tr>
+      <tr>
+        <td>Sin partes móviles (resistente a golpes).</td>
+        <td>Precio por GB más alto que HDD.</td>
+      </tr>
+      <tr>
+        <td>Bajo consumo energético y calor.</td>
+        <td>Capacidad máxima menor que HDD hasta 4 TB en 2025.</td>
+      </tr>
+      <tr>
+        <td>Silencioso.</td>
+        <td>
+          Desgaste por ciclos de escritura (aunque mitigado por técnicas como
+          wear leveling).
+        </td>
+      </tr>
+    </table>
+
+    <h2>7. Cuestionario de Tarea</h2>
+    <ol>
+      <li>¿Qué significa "NAND" en un SSD y cómo almacena los datos?</li>
+      <!-- <li>
+        Explica la diferencia entre SLC, MLC, TLC y QLC en términos de
+        velocidad, durabilidad y costo.
+      </li> -->
+      <li>
+        ¿Por qué un SSD SATA es más rápido que un HDD aunque use la misma
+        interfaz?
+      </li>
+      <li>¿Qué es el controlador en un SSD y qué funciones cumple?</li>
+      <li>Describe las tres generaciones de SATA y sus velocidades máximas.</li>
+      <li>¿Qué es el "wear leveling" y por qué es importante en un SSD?</li>
+      <li>¿Qué significa TBW en un SSD?</li>
+      <li>
+        ¿Qué es el comando TRIM y cómo beneficia al rendimiento de un SSD?
+      </li>
+      <li>¿Por qué algunos SSD incluyen caché DRAM y otros no?</li>
+      <li>
+        Investiga qué es el "over-provisioning" y cómo afecta al rendimiento y
+        durabilidad.
+      </li>
+      <li>
+        ¿Qué diferencias hay entre un SSD SATA de 2.5" y un HDD de 2.5" en
+        términos de conexión y consumo energético?
+      </li>
+    </ol>
+  </body>
+</html>

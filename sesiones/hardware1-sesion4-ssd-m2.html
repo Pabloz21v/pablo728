@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 4: SSD M.2 y NVMe – Tecnología, Velocidades y Compatibilidad</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #2980b9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        ul, ol {
+            margin-left: 20px;
+        }
+        .highlight {
+            background-color: #e3f2fd;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+        }
+        .question {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .code {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+
+        /* --- Responsividad --- */
+        @media (max-width: 700px) {
+            body {
+                padding: 8px;
+                font-size: 1em;
+            }
+            h1 {
+                font-size: 1.3em;
+                padding-bottom: 7px;
+            }
+            h2 {
+                font-size: 1.1em;
+                padding-bottom: 3px;
+            }
+            h3 {
+                font-size: 1em;
+            }
+            table, th, td {
+                font-size: 0.95em;
+            }
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+            }
+            ul, ol {
+                margin-left: 12px;
+                padding-left: 12px;
+            }
+            .highlight, .code {
+                padding: 7px;
+                border-left-width: 3px;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1em;
+                padding-bottom: 5px;
+            }
+            h2 {
+                font-size: 0.95em;
+                padding-bottom: 2px;
+            }
+            h3 {
+                font-size: 0.9em;
+            }
+            table, th, td {
+                font-size: 0.9em;
+            }
+            .highlight, .code {
+                padding: 5px;
+                border-left-width: 2px;
+            }
+            ul, ol {
+                margin-left: 8px;
+                padding-left: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion3-ssd.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 3
+      </a>
+     
+    </div>
+    <h1>Sesión 4: SSD M.2 y NVMe – Tecnología, Velocidades y Compatibilidad</h1>
+    
+    <h2>1. Introducción</h2>
+    <div class="highlight">
+        <p><strong>Contexto histórico:</strong> Los SSD M.2 surgieron como una evolución de los SSD SATA para ofrecer mayor velocidad y menor tamaño físico. NVMe (Non-Volatile Memory Express) es un protocolo diseñado específicamente para SSD, aprovechando el bus PCIe para alcanzar velocidades superiores a SATA.</p>
+    </div>
+    
+    <h2>2. Tecnología M.2</h2>
+    <h3>¿Qué es M.2?</h3>
+    <ul>
+        <li><strong>Definición:</strong> Formato de SSD que utiliza un conector directo a la placa madre, eliminando la necesidad de cables.</li>
+        <li>Slot donde se coloca la memoria de almacenamiento SSD M.2</li>
+        <li><strong>Ventajas:</strong>
+            <ul>
+                <li>Tamaño compacto (ideal para laptops y sistemas mini-ITX).</li>
+                <li>Mayor velocidad (especialmente con NVMe).</li>
+                <li>Menor consumo energético en comparación con SSD SATA.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Claves y Longitudes</h3>
+    <table>
+        <tr>
+            <th>Clave</th>
+            <th>Descripción</th>
+            <th>Protocolos Soportados</th>
+        </tr>
+        <tr>
+            <td>B</td>
+            <td>Muesca en el lado derecho del conector.</td>
+            <td>SATA y PCIe x2</td>
+        </tr>
+        <tr>
+            <td>M</td>
+            <td>Muesca en el lado izquierdo del conector.</td>
+            <td>SATA y PCIe x4</td>
+        </tr>
+        <tr>
+            <td>B+M</td>
+            <td>Muescas en ambos lados.</td>
+            <td>SATA y PCIe x2</td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th>Longitud</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>2230</td>
+            <td>22 mm de ancho x 30 mm de largo.</td>
+        </tr>
+        <tr>
+            <td>2242</td>
+            <td>22 mm de ancho x 42 mm de largo.</td>
+        </tr>
+        <tr>
+            <td>2260</td>
+            <td>22 mm de ancho x 60 mm de largo.</td>
+        </tr>
+        <tr>
+            <td>2280</td>
+            <td>22 mm de ancho x 80 mm de largo.</td>
+        </tr>
+        <tr>
+            <td>22110</td>
+            <td>22 mm de ancho x 110 mm de largo.</td>
+        </tr>
+    </table>
+
+    <h3>Compatibilidad con Placas Madre</h3>
+    <p><strong>Chipsets comunes y su soporte:</strong></p>
+    <ul>
+        <li><strong>Intel:</strong>
+            <ul>
+                <li>Z390, Z490, Z590: Soportan NVMe en slots M.2.</li>
+                <li>H370, B360: Soportan NVMe, pero pueden tener limitaciones en el número de slots.</li>
+            </ul>
+        </li>
+        <li><strong>AMD:</strong>
+            <ul>
+                <li>B550, X570: Soportan NVMe en slots M.2.</li>
+                <li>A520: Soporta NVMe, pero puede compartir ancho de banda con otros dispositivos.</li>
+            </ul>
+        </li>
+    </ul>
+    <p><strong>Limitaciones:</strong></p>
+    <ul>
+        <li>Algunos slots M.2 solo soportan SATA, no NVMe.</li>
+        <li>En placas con múltiples slots M.2, usar uno puede deshabilitar puertos SATA o PCIe.</li>
+    </ul>
+ <p><strong>Recomendación:</strong></p>
+ <ul>
+        <li>Verificar los slots M.2 de la placa madre y que componente admiten para evitar comparar una ssd incompatible </li>
+        
+    </ul>
+    <h2>3. Tecnología NVMe </h2>
+    <h3>¿Qué es NVMe?</h3>
+    <ul>
+        <li><strong>Definición:</strong> Protocolo de comunicación diseñado específicamente para unidades de estado sólido (SSD), que utiliza el bus PCIe para alcanzar velocidades superiores a las de SATA.</li>
+        <li><strong>Ventajas sobre el protocolo AHCI (usado en SATA):</strong>
+            <ul>
+                <li>Menor latencia.</li>
+                <li>Mayor paralelismo (miles de colas de comandos vs. una sola en AHCI).</li>
+                <li>Optimizado para memoria flash.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Generaciones de PCIe y Velocidades</h3>
+    <table>
+        <tr>
+            <th>Generación PCIe</th>
+            <th>Ancho de Banda por Lane</th>
+            <th>Velocidad Máxima (x4)</th>
+        </tr>
+        <tr>
+            <td>PCIe 3.0</td>
+            <td>1 GB/s</td>
+            <td>~3.9 GB/s (3940 MB/s)</td>
+        </tr>
+        <tr>
+            <td>PCIe 4.0</td>
+            <td>2 GB/s</td>
+            <td>~7.9 GB/s (7880 MB/s)</td>
+        </tr>
+        <tr>
+            <td>PCIe 5.0</td>
+            <td>4 GB/s</td>
+            <td>~15.8 GB/s (15,760 MB/s)</td>
+        </tr>
+    </table>
+    <p><strong>Velocidades reales de SSD NVMe:</strong></p>
+    <ul>
+        <li><strong>PCIe 3.0 x4:</strong> Hasta 3500 MB/s.</li>
+        <li><strong>PCIe 4.0 x4:</strong> Hasta 7000 MB/s.</li>
+        <li><strong>PCIe 5.0 x4:</strong> Hasta 12000 MB/s (en desarrollo).</li>
+    </ul>
+
+    <h3>Comparación de Rendimiento</h3>
+    <table>
+        <tr>
+            <th>Tipo de SSD</th>
+            <th>Interfaz</th>
+            <th>Velocidad Máxima</th>
+            <th>Latencia</th>
+        </tr>
+        <tr>
+            <td>SATA</td>
+            <td>SATA III</td>
+            <td>600 MB/s</td>
+            <td>Alta</td>
+        </tr>
+        <tr>
+            <td>M.2 SATA</td>
+            <td>SATA III</td>
+            <td>600 MB/s</td>
+            <td>Alta</td>
+        </tr>
+        <tr>
+            <td>M.2 NVMe (PCIe 3.0 x4)</td>
+            <td>PCIe 3.0 x4</td>
+            <td>3500 MB/s</td>
+            <td>Muy baja</td>
+        </tr>
+        <tr>
+            <td>M.2 NVMe (PCIe 4.0 x4)</td>
+            <td>PCIe 4.0 x4</td>
+            <td>7000 MB/s</td>
+            <td>Muy baja</td>
+        </tr>
+    </table>
+
+    <h2>4. Componentes de un SSD M.2 NVMe </h2>
+    <h3>Componentes Principales</h3>
+    <ol>
+        <li><strong>Memoria NAND Flash:</strong> Similar a los SSD SATA, pero optimizada para mayor velocidad. Tipos: TLC o QLC en modelos de consumo, MLC en modelos empresariales.</li>
+        <li><strong>Controlador NVMe:</strong> Gestiona la comunicación con el sistema a través del protocolo NVMe. Optimiza el acceso paralelo a la memoria NAND.</li>
+        <li><strong>Caché DRAM (opcional):</strong> Mejora el rendimiento en operaciones intensivas. Algunos modelos económicos prescinden de ella.</li>
+        <li><strong>Interfaz PCIe:</strong> Conector M.2 con clave M o B+M para NVMe.</li>
+        <li><strong>Firmware:</strong>Software interno que controla el comportamiento del SSD</li>
+
+
+
+    </ol>
+
+    <h3>Resistencia y Desgaste</h3>
+    <ul>
+        <li><strong>Ciclos de escritura:</strong> Similar a los SSD SATA, pero con mayor durabilidad en modelos de gama alta. 
+            </li>
+        <li><strong>TBW (Terabytes Written):</strong> Indica la cantidad de datos que pueden escribirse antes de que el SSD falle. </li>
+        <li><strong>Técnicas para Prolongar la Vida Útil:</strong>
+            <ul>
+                <li>Wear Leveling.</li>
+                <li>Over-Provisioning.</li>
+                <li>TRIM (también aplicable a NVMe).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>5. Conexión y Compatibilidad </h2>
+    <h3>Cómo Instalar un SSD M.2 NVMe</h3>
+    <ol>
+        <li>Localizar el slot M.2 en la placa madre.</li>
+        <li>Insertar el SSD en el slot (en un ángulo de 30 grados).</li>
+        <li>Asegurarlo con el tornillo incluido.</li>
+        <li>Verificar en la BIOS que el SSD sea detectado.</li>
+    </ol>
+
+    <h3>Incompatibilidades Comunes</h3>
+    <ul>
+        <li><strong>Slots M.2 que solo soportan SATA:</strong> Un SSD NVMe no funcionará en un slot M.2 que solo soporte SATA.</li>
+        <li><strong>Limitaciones de chipset:</strong> Algunas placas madre desactivan puertos SATA al usar ciertos slots M.2.</li>
+        <li><strong>Ancho de banda compartido:</strong> En placas con múltiples slots M.2, usar uno puede reducir el ancho de banda disponible para tarjetas gráficas.</li>
+    </ul>
+
+    
+
+    <h2>6. Cuestionario de Tarea </h2>
+    <ol>
+        <li>¿Qué significa M.2 y cómo se diferencia de los SSD SATA tradicionales?</li>
+        <!-- <li>Explica las diferencias entre las claves B y M en los slots M.2.</li> -->
+        <li>¿Qué es NVMe y por qué es más rápido que AHCI?</li>
+        <li>¿Cuáles son las velocidades máximas teóricas de NVMe en PCIe 3.0 x4 y PCIe 4.0 x4?</li>
+        <li>¿Qué componentes principales tiene un SSD M.2 NVMe y qué función cumple cada uno?</li>
+        <li>¿Qué es el TBW en un SSD NVMe y cómo se relaciona con su durabilidad?</li>
+        <li>¿Qué técnicas se utilizan para prolongar la vida útil de un SSD NVMe?</li>
+        <li>¿Cómo se instala físicamente un SSD M.2 NVMe en una placa madre?</li>
+        <!-- <li>¿Qué incompatibilidades comunes pueden surgir al usar un SSD M.2 NVMe?</li> -->
+        <!-- <li>¿Qué es un cuello de botella en el contexto de los SSD M.2 NVMe y cómo puede afectar al rendimiento?</li> -->
+        <!-- <li> Investiga qué es el "PCIe bifurcation" y cómo puede afectar al uso de múltiples SSD M.2.</li> -->
+        <li> ¿Qué diferencias hay entre un SSD M.2 SATA y un SSD M.2 NVMe en términos de rendimiento y compatibilidad?</li>
+    <li> ¿Por qué un SSD NVMe es significativamente más rápido que un SSD SATA, aunque ambos usen memoria NAND?</l>
+    <li>Investigar cómo verificar si una placa madre soporta NVMe y qué generaciones de PCIe admite.</li>
+    </ol>
+
+
+</body>
+</html>
