@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 8: Tabla Productos - SQL</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+      }
+      h2 {
+        color: #3498db;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+      }
+      h3 {
+        color: #2980b9;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      code {
+        font-family: monospace;
+        background-color: #f4f4f4;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      .highlight {
+        background-color: #e3f2fd;
+        padding: 10px;
+        border-left: 4px solid #3498db;
+      }
+      .question {
+        font-weight: bold;
+        color: #e74c3c;
+      }
+      .note {
+        background-color: #fffde7;
+        padding: 10px;
+        border-left: 4px solid #ffd600;
+      }
+      footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 0.9em;
+        color: #7f8c8d;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Botones de navegación agregados -->
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/conversion-y-reparacion-de-datos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="materia2-sesion7.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 7
+      </a>
+    </div>
+
+    <h1>Sesión 8: Tabla Productos - SQL</h1>
+
+    <h2>1. Creación de la tabla productos</h2>
+    <h3>Tipos de datos que usaremos:</h3>
+    <ul>
+      <li><code>INT</code> → números enteros (ej. stock, cantidad).</li>
+      <li><code>DOUBLE</code> → números con decimales (ej. precio, peso).</li>
+      <li>
+        <code>VARCHAR(n)</code> → cadenas de texto variables (ej. nombre,
+        descripción).
+      </li>
+      <li><code>BOOLEAN</code> → verdadero/falso (ej. en_stock).</li>
+      <li>
+        <code>TEXT</code> → texto más largo (permite aproximadamente
+        <strong>21845 caracteres</strong>).
+      </li>
+    </ul>
+
+    <h3>Crear la base de datos si es que todavía no existe:</h3>
+    <pre><code>CREATE DATABASE IF NOT EXISTS tienda;</code></pre>
+    <div class="note">
+      Crea la base de datos si no existe y llámala <code>tienda</code>.
+    </div>
+
+    <pre><code>USE tienda;</code></pre>
+    <div class="note">Posiciónate en la base de datos <code>tienda</code>.</div>
+
+    <pre><code>CREATE TABLE IF NOT EXISTS productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    precio DOUBLE NOT NULL,
+    stock INT NOT NULL,
+    en_stock BOOLEAN DEFAULT TRUE,
+    descripcion TEXT
+);</code></pre>
+
+    <div class="highlight">
+      <p>
+        Verán en la columna <code>en_stock</code> que, aparte de
+        <code>BOOLEAN</code> para indicar si existe el stock o no, el comando
+        <code>DEFAULT TRUE</code> lo que hace es indicarle a la columna el valor
+        que tendrá de forma automática al momento de su creación. En este caso
+        será con <code>TRUE</code> (verdadero), es decir, hay stock del
+        producto.
+      </p>
+      <p>
+        Recordemos que <code>NOT NULL</code> indica que al ingresar los datos de
+        un producto es obligatorio llenar con un dato dicha columna. Podrán
+        observar que <code>nombre</code>, <code>precio</code> y
+        <code>stock</code> sí o sí, al insertar el producto, tendrán que
+        ingresarle datos.
+      </p>
+      <p>
+        La columna <code>en_stock</code>, si no indican <code>true</code> o
+        <code>false</code>, se llenará con <code>true</code>.
+      </p>
+      <p>
+        Y para finalizar, en la columna <code>descripción</code>, al ser de tipo
+        <code>TEXT</code>, permite textos más grandes. (21000 caracteres aprox.)
+      </p>
+      <p>
+        Por otro lado, no olvidar la primera columna <code>id</code>, el cual,
+        al ser <code>INT</code>, solo permite números enteros. Cada
+        <code>INSERT</code> que usen asignará el <code>id</code> de forma
+        automática, siempre sumando 1 al <code>id</code> respecto al id
+        anterior, y al ser <code>PRIMARY KEY</code>, se le asigna a la columna
+        el carácter de que su valor será único (ejemplo: DNI, una patente de un
+        auto, o ustedes en mi lista de alumnos).
+      </p>
+    </div>
+
+    <h2>2. Insertar varios productos</h2>
+    <div class="note">
+      Observen cómo se respeta la posición de las columnas con el orden de
+      inserción de los valores.
+    </div>
+    <pre><code>INSERT INTO productos (nombre, precio, stock, en_stock, descripcion) VALUES
+('Teclado Mecánico', 120.50, 15, TRUE, 'Teclado retroiluminado RGB'),
+('Mouse Gamer', 75.99, 30, TRUE, 'Mouse con 7 botones programables'),
+('Monitor 24"', 220.00, 10, TRUE, 'Full HD 144Hz'),
+('Notebook Lenovo', 850.75, 5, TRUE, 'Ryzen 5, 16GB RAM, 512SSD'),
+('Auriculares Bluetooth', 65.30, 0, FALSE, 'Cancelación de ruido'),
+('Impresora HP', 199.99, 7, TRUE, 'Impresora multifunción');</code></pre>
+    <div class="note">
+      A partir de este punto “3”, cambiar los valores de los ejemplos para
+      experimentar su comportamiento.
+    </div>
+
+    <h2>3. UPDATE y LIMIT</h2>
+    <h3>Teoría:</h3>
+    <ul>
+      <li><code>UPDATE</code> → modifica valores en filas específicas.</li>
+      <li><code>LIMIT</code> → restringe cuántas filas se ven afectadas.</li>
+    </ul>
+
+    <h3>Ejemplos:</h3>
+    <pre><code>-- Actualizar el stock de un producto
+UPDATE productos SET stock = 20 WHERE nombre = 'Mouse Gamer';</code></pre>
+    <div class="note">
+      Actualiza en la tabla productos el valor en la columna
+      <code>stock</code> a 20 donde se encuentre en la columna
+      <code>nombre</code> el valor igual a <code>Mouse Gamer</code>.
+    </div>
+
+    <pre><code>-- Cambiar el precio solo de 1 producto (aunque la condición coincida con varios)
+UPDATE productos SET precio = 123.5 WHERE stock = 10 LIMIT 1;</code></pre>
+    <div class="note">
+      Actualiza en la tabla productos el valor en la columna
+      <code>precio</code> a 123.5 donde se encuentre en la columna
+      <code>stock</code> el valor igual a 10, solo actualizar 1 fila (<code
+        >LIMIT 1</code
+      >) que cumpla dicha condición.
+    </div>
+
+    <h2>4. Error Code: 1175</h2>
+    <h3>Explicación:</h3>
+    <ul>
+      <li>
+        En MySQL Workbench, cuando el <strong>modo seguro</strong> está
+        activado, no se permite un <code>UPDATE</code> o <code>DELETE</code> sin
+        <code>WHERE</code> con una <strong>clave primaria o índice</strong>.
+      </li>
+      <li>Ejemplo que genera error:</li>
+    </ul>
+    <pre><code>UPDATE productos SET precio = 200; -- ERROR 1175</code></pre>
+
+    <h3>Solución rápida:</h3>
+    <pre><code>-- Desactivar modo seguro solo por esta sesión:
+SET SQL_SAFE_UPDATES = 0;</code></pre>
+    <pre><code>-- Luego volver a activarlo si se quiere:
+SET SQL_SAFE_UPDATES = 1;</code></pre>
+
+    <h2>5. DELETE</h2>
+    <ul>
+      <li>Eliminar una o más filas según el criterio indicado.</li>
+    </ul>
+
+    <h3>Ejemplos:</h3>
+    <pre><code>-- Borrar todos los productos sin stock
+DELETE FROM productos WHERE stock = 0;</code></pre>
+    <div class="note">
+      Elimina de productos donde en la columna <code>stock</code> sea igual a 0.
+    </div>
+    <pre><code>-- Borrar un producto específico (ejemplo)
+DELETE FROM productos WHERE id = 3;</code></pre>
+    <div class="note">
+      Elimina de productos donde en la columna <code>id</code> sea igual a 3.
+    </div>
+
+    <pre><code>-- Con operadores
+DELETE FROM productos WHERE precio > 500 AND stock < 5;</code></pre>
+    <div class="note">
+      Elimina de la tabla productos donde en la columna <code>precio</code> sea
+      mayor a 500 y la columna <code>stock</code> menor a 5.
+      <code>AND</code> exige que se cumplan las dos condiciones. De cumplirse,
+      borrará lo solicitado.
+    </div>
+
+    <h2>6. ORDER BY - ASC y DESC</h2>
+    <ul>
+      <li>
+        Ordenar las filas según una columna por orden creciente o decreciente.
+      </li>
+    </ul>
+
+    <pre><code>-- Ordenar por precio ascendente
+SELECT * FROM productos ORDER BY precio ASC;</code></pre>
+    <div class="note">
+      Selecciona todo de la tabla productos y ordénalo en orden ascendente según
+      la columna <code>precio</code>. Ordenará las filas basadas en el precio de
+      los productos, del menor precio al mayor.
+    </div>
+
+    <pre><code>-- Ordenar por stock descendente
+SELECT * FROM productos ORDER BY stock DESC;</code></pre>
+    <div class="note">
+      Selecciona todo de la tabla productos y ordénalo en orden descendente
+      según la columna <code>stock</code>. Ordenará las filas basadas en el
+      stock de los productos, del mayor al menor.
+    </div>
+
+    <h2>7. IS NULL – IS NOT NULL</h2>
+    <ul>
+      <li><code>IS NULL</code>: la celda está vacía.</li>
+      <li><code>IS NOT NULL</code>: la celda no está vacía.</li>
+    </ul>
+
+    <pre><code>-- Buscar productos sin descripción
+SELECT * FROM productos WHERE descripcion IS NULL;</code></pre>
+    <div class="note">
+      Selecciona todos los productos donde la columna
+      <code>descripción</code> está vacía (es decir, no le agregaron nada).
+    </div>
+
+    <pre><code>-- Buscar productos con descripción cargada
+SELECT * FROM productos WHERE descripcion IS NOT NULL;</code></pre>
+    <div class="note">
+      Selecciona todos los productos donde la columna
+      <code>descripción</code> no está vacía (es decir, tiene agregado un
+      texto).
+    </div>
+
+    <h2>8. DISTINCT</h2>
+    <ul>
+      <li>Muestra los valores que no se repiten en una columna indicada.</li>
+    </ul>
+
+    <pre><code>-- Ver precios únicos en la tabla
+SELECT DISTINCT precio FROM productos;</code></pre>
+    <div class="note">
+      Selecciona en la columna <code>precio</code> los valores únicos en la
+      tabla productos.
+    </div>
+
+    <pre><code>-- Ver solo nombres de productos distintos
+SELECT DISTINCT nombre FROM productos;</code></pre>
+    <div class="note">
+      Selecciona en la columna <code>nombre</code> los valores únicos en la
+      tabla productos.
+    </div>
+
+    <h2>9. Ejercicios prácticos</h2>
+    <ol>
+      <li>
+        <strong>A) Ejercicios prácticos:</strong>
+        <ol>
+          <li>Aumentar en 10% el precio de todos los productos.</li>
+          <li>Desactivar todos los productos con stock menor a 20.</li>
+          <li>Mostrar los 5 productos más caros.</li>
+          <li>Encontrar productos que no tengan descripción.</li>
+          <li>
+            Eliminar los 2 productos más baratos segun su <code>precio</code>).
+          </li>
+        </ol>
+      </li>
+      <li>
+        <strong>B) Extras:</strong>
+        <ol>
+          <li>
+            Insertar 2 productos nuevos y verificar con <code>SELECT</code>.
+          </li>
+          <li>Cambiar el precio de la <code>Impresora HP</code> a 210.99.</li>
+          <li>Borrar los productos con precio menor a 70.</li>
+          <li>
+            Ordenar los productos por <code>stock</code> de mayor a menor
+            cantidad.
+          </li>
+          <li>
+            Listar los nombres de productos distintos que tengan stock mayor a
+            5.
+          </li>
+          <li>
+            Probar qué ocurre al hacer un <code>UPDATE</code> sin
+            <code>WHERE</code> y resolver el <strong>Error 1175</strong>.
+          </li>
+        </ol>
+      </li>
+    </ol>
+    <br />
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <h3>Soluciones ejercicios de "A":</h3>
+    <pre><code>UPDATE productos SET precio = precio * 1.1;</code></pre>
+
+    <pre><code>UPDATE productos SET en_stock = FALSE WHERE stock < 20;</code></pre>
+
+    <pre><code>SELECT * FROM productos ORDER BY precio DESC LIMIT 5;</code></pre>
+
+    <pre><code>SELECT * FROM productos WHERE descripcion IS NULL;</code></pre>
+
+    <pre><code>DELETE FROM productos ORDER BY precio ASC LIMIT 2;</code></pre>
+  </body>
+</html>
