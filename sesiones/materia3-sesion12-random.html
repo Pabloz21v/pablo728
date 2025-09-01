@@ -169,5 +169,46 @@ resultado_dado = int(random.random() * 6) + 1
 print(resultado_dado)  # Ejemplo de salida: 3
         </code></pre>
     </div>
+
+    <div class="ejemplo">
+      <h3>
+        8. Generar un número entero aleatorio en un rango con paso usando
+        <code>random.randrange()</code>
+      </h3>
+      <pre><code>
+import random
+# Número entre 0 y 9 (sin incluir 10)
+numero = random.randrange(0, 10)
+print(numero)  # Ejemplo de salida: 7
+
+# Número entre 10 y 20, solo pares
+numero_par = random.randrange(10, 21, 2)
+print(numero_par)  # Ejemplo de salida: 16
+
+# Número entre 5 y 30, múltiplos de 5
+multiplo_cinco = random.randrange(5, 31, 5)
+print(multiplo_cinco)  # Ejemplo de salida: 25
+      </code></pre>
+      <div>
+        <strong>random.randrange(start, stop, step)</strong> permite elegir un
+        número entero dentro del rango <code>[start, stop)</code> avanzando de a
+        <code>step</code> en cada valor ( el valor colocado en "step" sus multiplos son los que se tendrá en cuenta para devolver un numero aleatorio).
+      </div>
+    </div>
+
+    <!-- Reemplazar la etiqueta <a> por un botón -->
+    <button
+      onclick="window.open('https://www.w3schools.com/python/module_random.asp', '_blank')"
+      style="
+        margin-top: 10px;
+        padding: 8px 16px;
+        border-radius: 5px;
+        border: 1px solid #20529c;
+        background: #f7d774;
+        cursor: pointer;
+      "
+    >
+      Todos los métodos de random
+    </button>
   </body>
 </html>
