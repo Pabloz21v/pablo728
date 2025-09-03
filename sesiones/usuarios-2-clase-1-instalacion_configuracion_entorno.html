@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 1 – Instalación y Configuración del Entorno</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      ul {
+        margin: 10px 0;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="margin-top: 32px">
+      <a
+        href="../materias/usuarios-2.html"
+        style="
+          display: inline-block;
+          padding: 12px 24px;
+          background: #38bdf8;
+          color: #fff;
+          border-radius: 6px;
+          text-align: center;
+          font-weight: bold;
+          text-decoration: none;
+          margin-top: 10px;
+        "
+      >
+        Volver a Usuarios II
+      </a>
+    </div>
+    <h1>Clase 1 – Instalación y Configuración del Entorno</h1>
+
+    <ol>
+      <li>
+        Objetivos:
+        <ol>
+          <li>
+            Crear un proyecto que conecte frontend, backend y base de datos
+            (ddbb).
+          </li>
+          <li>
+            Este proyecto debe incluir las funciones de un CRUD
+            <ul>
+              <li>Create / crear</li>
+              <li>Read / leer</li>
+              <li>Update / actualizar</li>
+              <li>Delete / eliminar.</li>
+            </ul>
+          </li>
+          <li>
+            Nos ayudaremos con diferentes IA y aprenderemos a enfocar su uso en
+            la creación de programas.
+          </li>
+        </ol>
+      </li>
+      <li>
+        Introducción:
+        <ol>
+          <li>
+            Qué es un stack de desarrollo (Backend, Frontend, Base de Datos).
+          </li>
+          <li>Introducción a Python + Flask como servidor web.</li>
+          <li>Introducción a MySQL como sistema gestor de BD.</li>
+          <li>
+            Introducción a HTML, CSS, JS y frameworks CSS (Bootstrap/Tailwind).
+          </li>
+          <li>Introducción a GIT, GITHUB y GITHUB desktop.</li>
+          <li>Introducción al uso de IA para programar.</li>
+        </ol>
+      </li>
+      <li>
+        Práctica:
+        <ol>
+          <li>
+            Instalación de:
+            <ul>
+              <li>Python 3 y pip.</li>
+              <li>MySQL + MySQL Workbench.</li>
+              <li>Editor de código / IDE (Visual Studio Code).</li>
+              <li>Instalación de Git.</li>
+              <li>Crear cuenta en Github.</li>
+              <li>Instalación GitHub Desktop.</li>
+              <li>Creación de entorno virtual en Python.</li>
+              <li>
+                Instalación de Flask y librerías necesarias (flask,
+                mysql-connector-python).
+              </li>
+            </ul>
+          </li>
+          <li>
+            Testear:
+            <ul>
+              <li>Servidor Flask funcional.</li>
+            </ul>
+          </li>
+        </ol>
+      </li>
+      <li>
+        Instalación Python & virtualenv
+        <ol>
+          <li>
+            Verificar Python en consola:
+            <ul>
+              <li>python --version o python3 --version.</li>
+            </ul>
+          </li>
+          <li>
+            Crear venv:
+            <ul>
+              <li>
+                Windows:
+                <ol>
+                  <li>python -m venv venv</li>
+                  <li>venv\Scriptsctivate</li>
+                </ol>
+              </li>
+              <li>
+                macOS/Linux:
+                <ol>
+                  <li>python3 -m venv venv</li>
+                  <li>source venv/bin/activate</li>
+                </ol>
+              </li>
+            </ul>
+          </li>
+        </ol>
+        <p>Instalar paquetes iniciales:</p>
+        <pre>
+pip install --upgrade pip
+pip install flask
+pip install python-dotenv
+pip install mysql-connector-python
+            </pre
+        >
+        <p>
+          Crear requirements.txt al final con pip freeze > requirements.txt.
+        </p>
+        <pre>
+pip freeze > requirements.txt
+            </pre
+        >
+      </li>
+      <li>
+        Instalación MySQL + Workbench
+        <ol>
+          <li>Donde descargar MySQL Community y Workbench.</li>
+          <li>
+            Crear base de datos y usuario Workbench
+            <p>Ejecutar en Workbench:</p>
+            <p>
+              El siguiente comando permite establecer desde la ddbb
+              configuraciones para que se pueda conectar el backend con esta
+              base de datos.
+            </p>
+            <pre>
+CREATE DATABASE stock_db;
+CREATE USER 'stock_user'@'localhost' IDENTIFIED BY 'tu_password';
+GRANT ALL PRIVILEGES ON stock_db.* TO 'stock_user'@'localhost';
+FLUSH PRIVILEGES;
+                    </pre
+            >
+            <p>En stock_db nombre que le darán a su base de datos.</p>
+            <p>En 'stock_user' su usuario para esta ddbb.</p>
+            <p>En ‘tu_password' inventar una contraseña y anotarla.</p>
+          </li>
+        </ol>
+      </li>
+      <li>
+        Prueba de conexión desde Python
+        <p>Crear un fichero .env en el proyecto con:</p>
+        <p>
+          Acá deberán reemplazar “stock_user”, “tu_contraseña” y “stock_db” por
+          los valores que inventaron en la anterior unidad.
+        </p>
+        <pre>
+DB_HOST=localhost
+DB_USER=stock_user
+DB_PASS=tu_contraseña
+DB_NAME=stock_db
+            </pre
+        >
+        <p>
+          Crear un fichero llamado test_db.py e insertar el siguiente código:
+        </p>
+        <pre>
+from dotenv import load_dotenv
+import os, mysql.connector
+
+load_dotenv()
+
+# Depuración: imprime las variables de entorno
+print("DB_HOST:", os.getenv("DB_HOST"))
+print("DB_USER:", os.getenv("DB_USER"))
+print("DB_PASS:", os.getenv("DB_PASS"))
+print("DB_NAME:", os.getenv("DB_NAME"))
+
+try:
+    conn = mysql.connector.connect(
+        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASS"),
+        database=os.getenv("DB_NAME")
+    )
+    if conn.is_connected():
+        print(" Conectado. Backend con ddbb, ahora continuemos con el frontend")
+    else:
+        print("No conectado")
+    conn.close()
+except mysql.connector.Error as err:
+    print("Error al conectar a la base de datos:", err)
+
+            </pre
+        >
+        <p>
+          Ejecutar python test_db.py -> mostrar “Conectado backend con ddbb,
+          ahora continuemos con el frontend”.
+        </p>
+      </li>
+      <li>
+        Hello Flask
+        <p>Crear un fichero llamado app.py e insertar el siguiente código:</p>
+        <pre>
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return 'Servidor Flask funcionando, buen trabajo terminaste con la clase 1: Instalación y Configuración del Entorno. Llamá a tu profesor para presumir que lo lograste. '
+
+if __name__ == '__main__':
+    app.run(debug=True)
+            </pre
+        >
+        <p>
+          Ejecutar python app.py desde la consola y abrir
+          http://127.0.0.1:5000/.
+        </p>
+        <p>De ser exitoso se abrirá el explorador con un mensaje.</p>
+      </li>
+      <li>
+        Cierre & comprobaciones
+        <ol>
+          <li>
+            Cada alumno debe mostrar: venv activado, test_db.py ok y app.py
+            respondiendo.
+          </li>
+        </ol>
+      </li>
+    </ol>
+
+    <h2>Errores comunes y soluciones rápidas</h2>
+    <ul>
+      <li><em>pip no encontrado:</em> usar python -m pip install ....</li>
+      <li>
+        <em>MySQL: Access denied:</em> revisar user/password y que el servidor
+        MySQL esté en ejecución.
+      </li>
+      <li>
+        <em>Puerto 5000 en uso:</em> detener el proceso o ejecutar
+        app.run(port=5001).
+      </li>
+    </ul>
+    
+  </body>
+</html>
