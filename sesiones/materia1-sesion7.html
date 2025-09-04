@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase: Multiplicación en Binario</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 8px;
+        }
+        h1, h2, h3 {
+            color: #007BFF;
+        }
+        section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .ejemplo, .ejercicio {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-left: 4px solid #007BFF;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+            
+        }
+        /* Estilos para los botones */
+      .btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+      }
+      .btn-primary {
+        background-color: #4ade80;
+        color: #222;
+      }
+      .btn-secondary {
+        background-color: #60a5fa;
+        color: #fff;
+      }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            section {
+                padding: 15px;
+            }
+            table {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Botones de navegación -->
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/manipulacion-preservacion-datos.html"
+        class="btn btn-primary"
+      >
+        Ir a Materia
+      </a>
+      <a href="materia1-sesion6-binario-resta.html" class="btn btn-secondary">
+        Ir a Sesión 6
+      </a>
+    </div>
+    <h1>Sesión 7: Multiplicación en Binario</h1>
+
+<!-- 
+    <section>
+        <h2>Objetivos de la Clase</h2>
+        <ul>
+            <li>Comprender el concepto de multiplicación en binario.</li>
+            <li>Relacionar la multiplicación binaria con la decimal.</li>
+            <li>Practicar la multiplicación binaria mediante ejercicios guiados.</li>
+            <li>Resolver problemas aplicados.</li>
+        </ul>
+    </section> -->
+
+    <section>
+        <!-- <h2>Estructura de la Clase</h2> -->
+
+
+        <h3>1. Multiplicación Binaria: </h3>
+        
+        <p>Reglas básicas de multiplicación:</p>
+        <table>
+            <tr>
+                <th>0 × 0</th>
+                <th>0 × 1</th>
+                <th>1 × 0</th>
+                <th>1 × 1</th>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+            </tr>
+        </table>
+        <!-- <p><strong>Método:</strong> Multiplicar y desplazar resultados parciales, luego sumar en binario.</p>
+        <div class="ejemplo">
+            <p><strong>Ejemplo:</strong> Multiplicar 1011 (11) × 101 (5).</p>
+        </div> -->
+
+        <div> Pasos
+            <ul>
+                <li>1) Multiplicar cada valor del multiplicador por cada multiplicando</li>
+                <li>110₂ multiplicando</li>
+                <li>x11₂ multiplicador</li>
+                <li>110₂ + 1100₂ productos.</li>
+                <li>2) Sumar los productos 110₂ + 1100₂ = ?.</li>
+                <li>3) Al sumar los productos obtenemos el resultado. 110₂ + 1100₂ = 10010₂</li>
+            </ul>
+        </div>
+        <h3>2. Ejemplo Guiado </h3>
+        <p>Multiplicar 110₂ (6) × 11₂ (3) = 10010 (18)</p>
+        
+        <table>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>1</th>
+                <th>1</th>
+                <th>0</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>x</th>
+                <th>1</th>
+                <th>1</th>
+            </tr>
+            <tr>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>1</th>
+                <th>1</th>
+                <th>0</th>
+            </tr>
+            <tr>
+                <th>+</th>
+                <th>1</th>
+                <th>1</th>
+                <th>0</th>
+                <th>0</th>
+            </tr>
+            <tr>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+            </tr>
+            <tr>
+                <th>1</th>
+                <th>0</th>
+                <th>0</th>
+                <th>1</th>
+                <th>0</th>
+            </tr>
+        </table>
+
+        <p>Multiplicar 1111₂ (15) × 110₂ (2) = 11110 (30)</p>
+        
+        <table>
+            <tr>
+                <th></th>
+                <th>1</th>
+                <th>1</th>
+                <th>1</th>
+                <th>1</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>x</th>
+                <th>1</th>
+                <th>0</th>
+            </tr>
+            <tr>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+            </tr>
+            <tr>
+                <th>+</th>
+                <th>0</th>
+                <th>0</th>
+                <th>0</th>
+                <th>0</th>
+            </tr>
+            <tr>
+                <th>1</th>
+                <th>1</th>
+                <th>1</th>
+                <th>1</th>
+                <th>0</th>
+            </tr>
+            <tr>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+            </tr>
+            <tr>
+                <th>1</th>
+                <th>1</th>
+                <th>1</th>
+                <th>1</th>
+                <th>0</th>
+            </tr>
+        </table>
+
+        <h3>3. Práctica  </h3>
+        <p>Ejercicios para resolver:</p>
+        <div class="ejercicio">
+            <ol>
+                <li>111 × 10</li>
+                <li>101 × 11</li>
+                <li>1001 × 11</li>
+                <li>1010 × 110</li>
+                <li>1101 × 111</li>
+                <li>1001 × 101</li>
+                <li>10110 × 110</li>
+                <li>11101 × 111</li>
+                <li>10101 × 101</li>
+            </ol>
+        </div>
+
+
+</body>
+</html>
