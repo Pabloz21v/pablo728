@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 5: Introducción a la CPU y sus Fundamentos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        @media (max-width: 600px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion4-ssd-m2.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 4
+      </a>
+      <!-- <a
+        href="hardware1-sesion4-ssd-m2.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 6
+      </a> -->
+    </div>
+    <div class="container">
+        <h1>Sesión 5: Introducción a la CPU y sus Fundamentos</h1>
+
+        <h2>1. Introducción</h2>
+        <p><strong>Objetivo:</strong> Comprendan qué es una CPU y su importancia en un sistema informático.</p>
+
+        <h3>Definición de CPU:</h3>
+        <p>
+            La <strong>CPU (Central Processing Unit o Unidad Central de Procesamiento)</strong> es el componente principal de un sistema informático, encargado de interpretar y ejecutar la mayoría de las instrucciones de los programas. Actúa como el "cerebro" de la computadora, ya que realiza cálculos, procesa datos y coordina las operaciones entre los diferentes componentes de hardware. Su función principal es ejecutar instrucciones aritméticas, lógicas, de control y de entrada/salida que permiten el funcionamiento del sistema operativo y las aplicaciones.
+        </p>
+
+        <h3>Sinónimos de CPU</h3>
+        <p>
+            Aunque "CPU" es el término más utilizado, también se pueden emplear los siguientes sinónimos o términos relacionados:
+        </p>
+        <ol>
+            <li><strong>Procesador</strong></li>
+            <li><strong>Microprocesador</strong></li>
+            <li><strong>Unidad central de proceso</strong></li>
+            <li><strong>Chip de procesamiento</strong></li>
+            <li><strong>Núcleo de procesamiento</strong> (en contextos específicos)</li>
+            <li><strong>Cerebro del computador</strong> (analogía coloquial)</li>
+        </ol>
+
+        <h2>2. Funciones de la CPU</h2>
+
+        <h3>Funciones Básicas de la CPU Antiguas</h3>
+
+        <h4>Ciclo de Instrucción Clásico</h4>
+        <p>
+            Las primeras CPU ejecutaban instrucciones de forma secuencial y lineal, siguiendo siempre el mismo ciclo:
+        </p>
+
+        <table>
+            <tr>
+                <th><strong>Etapa</strong></th>
+                <th><strong>Descripción</strong></th>
+                <th><strong>Ejemplo (Receta de Cocina)</strong></th>
+            </tr>
+            <tr>
+                <td>Decode</td>
+                <td>Interpreta la instrucción para determinar qué operación realizar.</td>
+                <td>Entender qué ingredientes y utensilios se necesitan.</td>
+            </tr>
+            <tr>
+                <td>Execute</td>
+                <td>Realiza la operación (cálculo, movimiento de datos, etc.) en la ALU o unidad correspondiente.</td>
+                <td>Batir los huevos o mezclar la harina.</td>
+            </tr>
+            <tr>
+                <td>Fetch</td>
+                <td>Obtiene la instrucción de la memoria RAM usando el contador de programa (PC).</td>
+                <td>Leer el siguiente paso de la receta.</td>
+            </tr>
+            <tr>
+                <td>Store</td>
+                <td>Guarda el resultado en un registro o memoria.</td>
+                <td>Dejar la mezcla en el bol o verterla en el molde.</td>
+            </tr>
+        </table>
+
+        <p><strong>Características:</strong></p>
+        <ul>
+            <li>Ejecución secuencial: Una instrucción a la vez.</li>
+            <li>Sin paralelismo: El siguiente paso solo comienza cuando termina el anterior.</li>
+            <li>Dependencia estricta: Si una instrucción tarda (ej: acceso a RAM), la CPU espera.</li>
+        </ul>
+
+        <h3>Funciones Básicas en CPU Modernas</h3>
+
+        <h4>A. Pipelining (Segmentación)</h4>
+        <ul>
+            <li><strong>Qué hace:</strong> Divide el ciclo en etapas más pequeñas para procesar varias instrucciones en paralelo, cada una en una fase distinta.</li>
+            <li><strong>Beneficio:</strong> Aumenta el throughput (instrucciones por segundo).</li>
+            <li><strong>Limitación:</strong> Las dependencias entre instrucciones pueden causar retrasos (stalls).</li>
+            <li><strong>Ejemplo:</strong> Línea de ensamblaje de autos, donde cada etapa trabaja en un auto diferente.</li>
+        </ul>
+
+        <h4>B. Ejecución Fuera de Orden (Out-of-Order Execution)</h4>
+        <ul>
+            <li><strong>Qué hace:</strong> Reordena la ejecución de instrucciones para evitar tiempos muertos (ej: mientras se espera un dato de la RAM, ejecuta otras instrucciones independientes).</li>
+            <li><strong>Beneficio:</strong> Maximiza el uso de los recursos de la CPU.</li>
+            <li><strong>Ejemplo:</strong> Precalentar el horno mientras se baten los huevos.</li>
+        </ul>
+
+        <h4>C. Núcleos Múltiples (Multicore)</h4>
+        <ul>
+            <li><strong>Qué hace:</strong> Incluye varios núcleos físicos que trabajan en paralelo, cada uno ejecutando hilos de instrucciones independientes.</li>
+            <li><strong>Beneficio:</strong> Permite multitarea real (ej: un núcleo para gráficos, otro para física en un juego).</li>
+            <li><strong>Ejemplo:</strong> Cocina industrial con varios chefs trabajando en platos distintos.</li>
+        </ul>
+
+        <h4>D. Hiperprocesamiento (Hyper-Threading / SMT = Simultaneous Multithreading)</h4>
+        <ul>
+            <li><strong>Qué hace:</strong> Un núcleo físico simula dos núcleos lógicos, compartiendo recursos, pero con registros independientes.</li>
+            <li><strong>Beneficio:</strong> Mejora el rendimiento en tareas que no saturan un núcleo completo.</li>
+            <li><strong>Ejemplo:</strong> Un chef alterna entre dos recetas simples mientras espera pasos lentos.</li>
+        </ul>
+
+        <h4>E. Predicción de Saltos (Branch Prediction)</h4>
+        <ul>
+            <li><strong>Qué hace:</strong> "Adivina" el resultado de saltos condicionales (ej: if-else) para ejecutar instrucciones especulativamente.</li>
+            <li><strong>Beneficio:</strong> Reduce retrasos en código con muchas condiciones.</li>
+            <li><strong>Ejemplo:</strong> Empezar a hornear asumiendo que la mezcla está lista, y retroceder si no lo está.</li>
+        </ul>
+
+        <h4>F. Ejecución Especulativa</h4>
+        <ul>
+            <li><strong>Qué hace:</strong> Ejecuta instrucciones antes de confirmar si son necesarias, basándose en predicciones.</li>
+            <li><strong>Riesgo:</strong> Vulnerabilidades de seguridad (ej: Spectre).</li>
+            <li><strong>Ejemplo:</strong> Picar nueces por si acaso la receta las requiere.</li>
+        </ul>
+
+        <h4>G. Caché Multinivel (L1, L2, L3)</h4>
+        <ul>
+            <li><strong>Qué hace:</strong> Almacena datos e instrucciones frecuentes en memorias ultra rápidas (caché) para reducir el acceso a la RAM.</li>
+            <li><strong>Beneficio:</strong> Acorta el tiempo de espera para datos críticos.</li>
+            <li><strong>Ejemplo:</strong>
+                <ul>
+                    <li>L1: Ingredientes en la mesa de trabajo.</li>
+                    <li>L2: Ingredientes en la alacena cercana.</li>
+                    <li>RAM: Ingredientes en la despensa principal.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>Comparación Directa: Antiguas vs. Modernas</h3>
+
+        <table>
+            <tr>
+                <th><strong>Aspecto</strong></th>
+                <th><strong>CPU Antiguas</strong></th>
+                <th><strong>CPU Modernas</strong></th>
+            </tr>
+            <tr>
+                <td>Ejecución</td>
+                <td>Secuencial (una instrucción a la vez).</td>
+                <td>Paralela (múltiples instrucciones en etapas diferentes).</td>
+            </tr>
+            <tr>
+                <td>Orden de Instrucciones</td>
+                <td>Siempre en orden.</td>
+                <td>Reordenamiento dinámico (Out-of-Order).</td>
+            </tr>
+            <tr>
+                <td>Núcleos</td>
+                <td>1 núcleo físico.</td>
+                <td>Múltiples núcleos físicos (2, 4, 8, 16, etc.) + Hyper-Threading.</td>
+            </tr>
+            <tr>
+                <td>Manejo de Saltos</td>
+                <td>Espera a resolver la condición.</td>
+                <td>Predice el resultado y ejecuta especulativamente.</td>
+            </tr>
+            <tr>
+                <td>Acceso a Datos</td>
+                <td>Depende directamente de la RAM (lento).</td>
+                <td>Usa caché multinivel para acceso rápido.</td>
+            </tr>
+            <tr>
+                <td>Consumo de Energía</td>
+                <td>Menos eficiente (más tiempo en espera).</td>
+                <td>Más eficiente (menos tiempos muertos).</td>
+            </tr>
+        </table>
+
+        <h2>3. Componentes Internos de la CPU</h2>
+
+        <h3>Componentes Internos en CPU Antiguas (ej: Intel 4004, 8086, Pentium I)</h3>
+
+        <table>
+            <tr>
+                <th><strong>Componente</strong></th>
+                <th><strong>Función</strong></th>
+            </tr>
+            <tr>
+                <td>Unidad de Control (CU)</td>
+                <td>Dirige la ejecución de instrucciones, coordina el flujo de datos entre componentes.</td>
+            </tr>
+            <tr>
+                <td>Unidad Aritmético-Lógica (ALU)</td>
+                <td>Realiza operaciones matemáticas (suma, resta) y lógicas (AND, OR, NOT).</td>
+            </tr>
+            <tr>
+                <td>Registros</td>
+                <td>Almacenan temporalmente datos e instrucciones (ej: AX, BX, CX en x86).</td>
+            </tr>
+            <tr>
+                <td>Unidad de Punto Flotante (FPU)</td>
+                <td>Opcional en CPU antiguas; manejaba cálculos con decimales (aparece en el 8087 y posteriores).</td>
+            </tr>
+            <tr>
+                <td>Bus de Datos</td>
+                <td>Transfiere datos entre la CPU, memoria RAM y otros dispositivos (8/16 bits en CPU tempranas).</td>
+            </tr>
+            <tr>
+                <td>Reloj (Clock)</td>
+                <td>Sincroniza las operaciones (ej: 740 kHz en el 4004, 16 MHz en el 8086).</td>
+            </tr>
+            <tr>
+                <td>Cache L1</td>
+                <td>Pequeña memoria ultrarrápida (aparece en los 80s, ej: 8 KB en el Pentium).</td>
+            </tr>
+        </table>
+
+        <h3>Componentes Internos en CPU Modernas (ej: Intel Core i9, AMD Ryzen 9)</h3>
+
+        <table>
+            <tr>
+                <th><strong>Componente</strong></th>
+                <th><strong>Función</strong></th>
+            </tr>
+            <tr>
+                <td>Múltiples Núcleos (Cores)</td>
+                <td>Cada núcleo actúa como una CPU independiente, permitiendo multitarea real.</td>
+            </tr>
+            <tr>
+                <td>Unidad de Control Avanzada</td>
+                <td>Gestiona pipelines profundos, predicción de saltos y ejecución fuera de orden.</td>
+            </tr>
+            <tr>
+                <td>Múltiples ALUs (Unidades Aritmético-Lógicas)</td>
+                <td>Varios módulos para operaciones matemáticas y lógicas al mismo tiempo en paralelo (ej: 4-8 ALUs por núcleo).</td>
+            </tr>
+            <tr>
+                <td>FPU/SIMD (AVX, SSE)</td>
+                <td>Unidades especializadas para cálculos en coma flotante y operaciones vectoriales.</td>
+            </tr>
+            <tr>
+                <td>Cache Multinivel (L1, L2, L3)</td>
+                <td>Memoria rápida integrada (ej: 32 KB L1, 256 KB L2, 32 MB L3 en Ryzen 9).</td>
+            </tr>
+            <tr>
+                <td>Controlador de Memoria</td>
+                <td>Gestiona el acceso a la RAM (integrado en el chip desde los 2000s).</td>
+            </tr>
+            <tr>
+                <td>Unidad de Ejecución Especulativa</td>
+                <td>Ejecuta instrucciones antes de confirmar si son necesarias (mejora velocidad).</td>
+            </tr>
+            <tr>
+                <td>Hyper-Threading/SMT</td>
+                <td>Permite que un núcleo ejecute múltiples hilos simultáneamente.</td>
+            </tr>
+            <tr>
+                <td>Unidad de Gestión de Energía</td>
+                <td>Optimiza el consumo según la carga (ej: Turbo Boost en Intel).</td>
+            </tr>
+            <tr>
+                <td>Unidad de Gráficos Integrada (iGPU)</td>
+                <td>En APUs/CPU modernas, maneja gráficos básicos sin necesidad de GPU dedicada.</td>
+            </tr>
+            <tr>
+                <td>Unidad de Seguridad (SGX, TPM)</td>
+                <td>Protege datos sensibles (ej: cifrado, autenticación).</td>
+            </tr>
+        </table>
+
+        <h3>1. Núcleo Físico (Core)</h3>
+        <ul>
+            <li><strong>Definición:</strong> Es una unidad de procesamiento independiente dentro de la CPU. Cada núcleo puede ejecutar instrucciones de manera autónoma, como si fuera una "mini-CPU" dentro del procesador.</li>
+            <li><strong>Función:</strong> Realiza cálculos, maneja datos y ejecuta programas. Cuantos más núcleos tenga una CPU, más tareas puede realizar simultáneamente (ej: un Core i7 de 8 núcleos puede manejar 8 procesos pesados a la vez).</li>
+            <li><strong>Ejemplo:</strong> Una CPU de 4 núcleos tiene 4 unidades físicas para procesar información.</li>
+        </ul>
+
+        <h3>2. Hilo (Thread)</h3>
+        <ul>
+            <li><strong>Definición:</strong> Es una secuencia de instrucciones que un núcleo puede ejecutar. Un hilo representa una tarea individual dentro de un proceso (ej: un programa con múltiples pestañas abiertas).</li>
+            <li><strong>Función:</strong> Permite dividir el trabajo de un núcleo en partes más pequeñas para mejorar la eficiencia.</li>
+            <li><strong>Tipos:</strong>
+                <ul>
+                    <li>Hilo físico: Asociado directamente a un núcleo (1 hilo = 1 secuencia de trabajo).</li>
+                    <li>Hilo lógico (virtual): Tecnología como Hyper-Threading (Intel) o Simultaneous Multithreading (AMD) permite que un núcleo maneje 2 hilos al mismo tiempo, simulando tener más núcleos de los que realmente hay.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h2>6. Preguntas</h2>
+        <ol>
+            <li>¿Qué significa CPU y cuál es su función principal?</li>
+            <li>Nombra los 4 pasos del ciclo de la CPU antiguos.</li>
+            <li>¿Qué es un núcleo físico y un núcleo lógico?</li>
+            <li>¿En qué se diferencia un núcleo lógico y uno físico?</li>
+            <li>¿Cuándo importa más un núcleo físico por sobre uno lógico?</li>
+            <li>¿Qué componente de la CPU se encarga de las operaciones matemáticas?</li>
+            <li>¿Cuál es la ventaja de tener muchos núcleos?</li>
+            <li>¿Qué función cumple un hilo?</li>
+            <li>¿Qué es el Hyper-Threading o SMT?</li>
+            <li>¿Por qué es importante la caché en una CPU?</li>
+        </ol>
+    </div>
+</body>
+</html>
