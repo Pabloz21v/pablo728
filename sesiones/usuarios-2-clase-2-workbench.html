@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 2 — Diseño de la base de datos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .btn {
+        display: inline-block;
+        padding: 12px 28px;
+        background: #1976d2;
+        color: #fff;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: bold;
+        text-decoration: none;
+        margin-top: 18px;
+        box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+        transition: background 0.2s;
+      }
+      .btn:hover {
+        background: #1565c0;
+      }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../materias/usuarios-2.html" class="btn">Volver a Usuarios II</a>
+      <a href="usuarios-2-clase-1-instalacion_configuracion_entorno.html" class="btn">Ir a Sesión 1</a>
+      <!-- <a href="usuarios-2-clase-3.html" class="btn">Ir a Sesión 3</a> -->
+        <h1>Sesión 2 — Diseño de la base de datos</h1>
+
+        <p><strong>Objetivo:</strong> Diseñar y crear la tabla productos, poblarla y practicar consultas básicas.</p>
+
+        <h2>Preparación</h2>
+
+        <ul>
+            <li>MySQL Workbench abierto por cada alumno.</li>
+            <li>Breve explicación del uso de la herramienta.</li>
+        </ul>
+
+        <h2>Paso a paso</h2>
+
+        <ol>
+            <li>
+                <strong>Teoría rápida</strong>
+                <ul>
+                    <li>Repasar conceptos previos de SQL.</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Crear tabla productos</strong>
+                <p>SQL sugerido:</p>
+                <code>
+                    CREATE TABLE productos (<br>
+                    &nbsp;&nbsp;id INT AUTO_INCREMENT PRIMARY KEY,<br>
+                    &nbsp;&nbsp;codigo VARCHAR(30) UNIQUE,<br>
+                    &nbsp;&nbsp;nombre VARCHAR(120) NOT NULL,<br>
+                    &nbsp;&nbsp;descripcion TEXT,<br>
+                    &nbsp;&nbsp;categoria VARCHAR(60),<br>
+                    &nbsp;&nbsp;cantidad INT NOT NULL DEFAULT 0,<br>
+                    &nbsp;&nbsp;precio DECIMAL(10,2) NOT NULL DEFAULT 0.00,<br>
+                    &nbsp;&nbsp;fecha_ingreso DATE NOT NULL<br>
+                    );
+                </code>
+                <p>Ejecutar en Workbench.</p>
+            </li>
+            <li>
+                <strong>Insertar datos de prueba</strong>
+                <p>Insertar 2 filas (ejemplo):</p>
+                <code>
+                    INSERT INTO productos (codigo, nombre, descripcion, categoria, cantidad, precio, fecha_ingreso)<br>
+                    VALUES<br>
+                    &nbsp;&nbsp;('SKU001','Tornillo M4','Paquete 100','Ferreteria',200,0.05,'2025-09-01'),<br>
+                    &nbsp;&nbsp;('SKU002','Monitor 24"','LED 1080p','Electronica',10,129.99,'2025-07-15');
+                </code>
+                <p>Este código es de ejemplo.</p>
+            </li>
+            <li>
+                <strong>Práctica</strong>
+                <ul>
+                    <li>Inventar su propia tabla, aplicar conocimientos de SQL para insertar valores.</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h2>Ejercicios prácticos</h2>
+
+        <ul>
+            <li>Hacer backup exportando la tabla SQL que personalizaron y guardarla en sus correos, pendrive, etc.</li>
+        </ul>
+
+        <h2>Errores comunes</h2>
+
+        <ul>
+            <li>Tipos DECIMAL: usar <code>DECIMAL(10,2)</code> para evitar redondeos inesperados.</li>
+            <li>Fecha: formato <code>YYYY-MM-DD</code>.</li>
+        </ul>
+    </div>
+</body>
+</html>
