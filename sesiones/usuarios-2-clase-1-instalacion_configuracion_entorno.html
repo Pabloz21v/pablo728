@@ -202,23 +202,46 @@
             </ul>
           </li>
           <li>
+            Abrir Visual Studio Code (VSC):
+            <ul>Crear una carpeta en el escritorio con el nombre de su proyecto.</ul>
+            <ul>Abrir el cmd y escribir CD seguido de un espacio y desplazar desde el escritorio la carpeta al cmd ( si lo hicieron bien, verán la ruta de su carpeta en el cmd), apretar enter.</ul>
+            <ul>Escribir: code . (code seguido de un espacio y un punto) dar a enter nuevamente, si está instalado VSC se abrirá con su carpeta.</ul>
+          </li>
+          <li>
             Crear venv:
             <ul>
+              En VSC abrir consola con ctrl + ñ e insertar el siguiente código:
               <li>
-                Windows:
+                Para Windows:
                 <ol>
                   <li>python -m venv venv</li>
                   <li>venv\Scripts\activate</li>
                 </ol>
               </li>
               <li>
-                macOS/Linux:
+                Para macOS/Linux:
                 <ol>
                   <li>python3 -m venv venv</li>
                   <li>source venv/bin/activate</li>
                 </ol>
               </li>
             </ul>
+          </li>
+          <li>
+            Posibles errores
+            <ul>Si no se crea una carpeta con el nombre venv y salen en consola cancelaciones en rojo</ul>
+            <ul>Abrimos WINDOWS PowerShell con rango de administrador y ejecutamos:</ul>
+            <ul>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</ul>
+            <ul>seleccionar S y apretar enter</ul>
+            <ul>ó</ul>
+            <ul>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process</ul>
+          <ul>Si esto no soluciona el error, posiblemente es una falla en la instalación de python</ul>
+          <ul>Procedemos a ir a agregar y quitar programas y eliminamos lo que encontremos en el buscador al escribir python</ul>
+          <ul>Reiniciamos el PC y procedemos a instalar python</ul>
+          <ul>Durante la instalación prestar atención a las opciones que aparece</ul>
+          <ul>Verán 2 opciones para tildar, una de ellas menciona el PATH, tildar ambas opciones e instalar</ul>
+          <ul>Puede que aparezca otra opción hablando de la longitud del PATH, pidiendo deshabilitar  la limitación de longitud de ruta, aceptar esa opción.</ul>
+          <ul></ul>
           </li>
         </ol>
         <p>Instalar paquetes iniciales:</p>
