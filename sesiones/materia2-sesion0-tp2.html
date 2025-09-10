@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP 2° MySQL Parte uno</title>
+    <link href="../css/styles.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text-3xl font-bold text-green-400 mb-6 text-center">
+        Conversión y Reparación de Datos 
+      </h1>
+      <div style="margin-bottom: 24px">
+      <a
+        href="../materias/conversion-y-reparacion-de-datos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      
+    </div>
+    <div class="container">
+        
+        <h1>TP 2° MySQL Parte uno</h1>
+
+        <p>
+            En grupos de entre 2-4 integrantes deberán realizar las siguientes actividades. Se dedicarán 2 clases para dicho trabajo.
+        </p>
+
+        <p>
+            Ir guardando los códigos que vayan creando y usando en un archivo Word, ya que será el material que me enviarán para testearlo posteriormente y/o evaluarlos.
+        </p>
+
+        <ul>
+            <li>La entrega del TP se realiza por <strong>EMAIL</strong>.</li>
+            <li>Debe incluir los nombres y apellidos de los integrantes.</li>
+        </ul>
+
+        <h2>Actividades por Tema</h2>
+
+        <h3>1. Creación y Gestión de Bases de Datos y Tablas</h3>
+
+        <p><strong>Objetivo:</strong> Evaluar el uso de CREATE DATABASE, DROP DATABASE, USE, CREATE TABLE IF NOT EXISTS, DROP TABLE, y tipos de datos.</p>
+
+        <ul>
+            <li>Si el grupo es de 2 integrantes crearán <strong>1 tabla</strong>.</li>
+            <li>Si son 3 o 4 crearán <strong>2 tablas</strong>.</li>
+            <li>Las tablas pueden ser de la temática que más les guste.</li>
+        </ul>
+
+        <ol>
+            <li>
+                TABLA: dicha tabla debe contener como mínimo 6 columnas aplicando los tipos de datos aprendidos.
+                <ul>
+                    <li>Primera columna llamada <strong>id</strong> (no olvidar asignarla como clave primaria y auto incremental, teoría de la sesión 8).</li>
+                    <li>VARCHAR</li>
+                    <li>INT</li>
+                    <li>DOUBLE</li>
+                    <li>BOOLEAN</li>
+                    <li>TEXT</li>
+                    <li>Usar NOT NULL en alguna/s columna/s (que tenga sentido por qué no debe estar vacía dicha o dichas columnas).</li>
+                </ul>
+            </li>
+            <li>Aplicar “IF NOT EXISTS” al crear tablas o DDBB.</li>
+            <li>Incluir código para eliminar tanto las tablas como las DDBB.</li>
+            <li>No olvidar usar “USE” para posicionarse en la DDBB donde trabajen.</li>
+        </ol>
+
+        <h3>2. Inserción y Consulta de Datos</h3>
+
+        <p><strong>Objetivo:</strong> Evaluar el uso de INSERT INTO, SELECT * FROM, y LIMIT.</p>
+
+        <ol>
+            <li>Insertar 4 registros por tabla (ósea 4 filas “VALUES”).</li>
+            <li>Insertar 2 registros más por tabla repitiendo algunos datos de los 4 primeros registros y dejando algunos espacios vacíos (precaución con dejar valores vacíos en la columna/s que designaron con NOT NULL).</li>
+            <li>Mostrar los primeros 3 registros.</li>
+        </ol>
+
+        <h3>3. Actualización y Eliminación de Datos</h3>
+
+        <p><strong>Objetivo:</strong> Evaluar el uso de UPDATE, SET, WHERE, DELETE, y TRUNCATE.</p>
+
+        <ol>
+            <li>Actualizar el valor de algún registro basado en la columna con tipo de dato VARCHAR.</li>
+            <li>Actualizar el valor de algún registro basado en la columna con tipo de dato INT.</li>
+            <li>Eliminar una fila/registro basado en su id.</li>
+            <li>Vaciar la tabla.</li>
+            <li>Volver a insertar los registros a la tabla.</li>
+        </ol>
+
+        <h3>4. Consultas con Condiciones</h3>
+
+        <p><strong>Objetivo:</strong> Evaluar el uso de WHERE, AND, OR, NOT, >=, <=, <>, =, >, <, IS NULL, IS NOT NULL.</p>
+
+        <ol>
+            <li>Crear un filtro usando AND.</li>
+            <li>Crear un filtro usando OR.</li>
+            <li>Crear un filtro usando NOT.</li>
+            <li>Crear un filtro usando alguno de los 3 “>=, <=, <>”.</li>
+            <li>Crear un filtro usando alguno de los 3 “=, >, <,”.</li>
+            <li>Crear un filtro usando IS NULL o IS NOT NULL.</li>
+        </ol>
+
+        <h3>5. Ordenamiento y Valores Distintos</h3>
+
+        <p><strong>Objetivo:</strong> Evaluar el uso de ORDER BY (ASC/DESC) y DISTINCT.</p>
+
+        <ol>
+            <li>Ordenar los registros de mayor a menor por la columna que contenga el tipo de dato VARCHAR.</li>
+            <li>Ordenar los registros de menor a mayor por la columna que contenga el tipo de dato DOUBLE.</li>
+            <li>Mostrar los registros basado en la columna con tipo de dato INT.</li>
+        </ol>
+    </div>
+</body>
+</html>
