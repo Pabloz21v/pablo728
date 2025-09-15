@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 6: Generaciones, Compatibilidad y Selección de CPU</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        @media (max-width: 600px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion5-cpu.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 5
+      </a>
+      <!-- <a
+        href="hardware1-sesion6-cpu.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 7
+      </a> -->
+    </div>
+    <div class="container">
+        <h1>Sesión 6: Generaciones, Compatibilidad y Selección de CPU</h1>
+
+        <h2>1. Marcas y Fabricantes</h2>
+
+        <table>
+            <tr>
+                <th><strong>Fabricante/Marca</strong></th>
+                <th><strong>Público Principal</strong></th>
+                <th><strong>En qué Destacan</strong></th>
+            </tr>
+            <tr>
+                <td><strong>Intel</strong></td>
+                <td>Consumidores, gamers, profesionales y empresas</td>
+                <td>Líder en rendimiento por núcleo en gaming (Core i9), tecnología Hyper-Threading, y soluciones empresariales (Xeon). Ideal para quienes buscan compatibilidad y soporte a largo plazo.</td>
+            </tr>
+            <tr>
+                <td><strong>AMD</strong></td>
+                <td>Gamers, creadores de contenido, servidores</td>
+                <td>Mejor relación calidad-precio, más núcleos/hilos (Ryzen 9, Threadripper, EPYC), y eficiencia energética. Destaca en multitarea y carga de trabajo profesional.</td>
+            </tr>
+            <tr>
+                <td><strong>ARM</strong></td>
+                <td>Dispositivos móviles, IoT, y computación embebida</td>
+                <td>Arquitectura de bajo consumo, usada en smartphones y dispositivos embebidos. Dominio en eficiencia y portabilidad.</td>
+            </tr>
+            <tr>
+                <td><strong>Qualcomm</strong></td>
+                <td>Móviles, PCs siempre conectados</td>
+                <td>Procesadores para dispositivos móviles y PCs con conectividad 5G integrada. Enfoque en eficiencia y movilidad.</td>
+            </tr>
+            <tr>
+                <td><strong>IBM</strong></td>
+                <td>Empresas, mainframes, supercomputación</td>
+                <td>Arquitectura Power para servidores de alta gama y supercomputadoras. Usada en entornos críticos como banca y ciencia.</td>
+            </tr>
+            <tr>
+                <td><strong>Apple (Silicon)</strong></td>
+                <td>Usuarios de Apple (Mac, iPad)</td>
+                <td>Chips M-series (ARM personalizados) con alta eficiencia y rendimiento en dispositivos Apple. Ideal para creativos y profesionales que usan ecosistema Apple.</td>
+            </tr>
+            <tr>
+                <td><strong>NVIDIA</strong></td>
+                <td>IA, centros de datos, gráficos</td>
+                <td>CPUs para IA y aceleración de carga de trabajo (Grace Hopper). Enfoque en computación de alto rendimiento y gráficos.</td>
+            </tr>
+        </table>
+
+        <h2>2. Velocidad, Rendimiento y Overclocking</h2>
+
+        <p>Si bien los núcleos e hilos juegan una parte importante en el rendimiento de un PC, también entran en juego otras características importantes involucradas en el rendimiento del CPU.</p>
+
+        <h3>Frecuencia de reloj (Hz, GHz):</h3>
+
+        <p>La frecuencia de reloj, medida en <strong>Hertz (Hz)</strong>, <strong>Megahertz (MHz)</strong> o <strong>Gigahertz (GHz)</strong>, indica <strong>cuántos ciclos de trabajo puede realizar el procesador en un segundo</strong>.</p>
+
+        <ul>
+            <li><strong>1 Hz</strong> = 1 ciclo por segundo.</li>
+            <li><strong>1 MHz</strong> = 1 millón de ciclos por segundo.</li>
+            <li><strong>1 GHz</strong> = 1.000 MHz = 1.000 millones de ciclos por segundo.</li>
+        </ul>
+
+        <p>Un ciclo de reloj es la unidad básica de tiempo para una operación del CPU. En cada ciclo, el procesador puede ejecutar instrucciones básicas (fetch, decode, execute, write-back). Una tarea compleja (como abrir un programa o renderizar un video) requiere millones o miles de millones de estos ciclos.</p>
+
+        <p><strong>Arquitectura (IPC):</strong> Es el diseño interno del CPU. Una arquitectura más nueva y eficiente (ej: Intel Core de 12ª/13ª gen o AMD Ryzen 5000/7000) puede hacer <strong>más trabajo en cada ciclo (mayor IPC - Instrucciones Por Ciclo)</strong> que una arquitectura antigua. Por ejemplo: Un CPU moderno a <strong>4.0 GHz</strong> puede ser <strong>muchísimo más rápido</strong> que un CPU viejo a <strong>4.5 GHz</strong> porque en cada ciclo hace más cosas útiles.</p>
+
+        <p><strong>ANALOGÍA:</strong></p>
+
+        <p>Imaginemos que el CPU es el <strong>cerebro</strong> de la computadora. La <strong>frecuencia de reloj (Hz o GHz)</strong> es como el <strong>pulso</strong> o los <strong>latidos del corazón</strong> de ese cerebro.</p>
+
+        <p>Cada "latido" (ciclo de reloj) es un momento en el que el cerebro puede realizar una acción pequeña (como un cálculo simple o mover un dato).</p>
+
+        <p>Cuantos más latidos por segundo, más acciones puede realizar el cerebro en ese mismo segundo, y por lo tanto, <strong>más rápido "piensa"</strong> y completa las tareas que le pides.</p>
+
+        <h3>Overclocking:</h3>
+
+        <p><strong>¿Qué es y cómo afecta a la CPU?</strong></p>
+
+        <p>Aumentar manualmente la <strong>frecuencia de reloj</strong> o el <strong>voltaje</strong> de la CPU para obtener más rendimiento elevando la frecuencia del CPU bajo el riesgo de inestabilidad en el sistema, sobrecalentamiento, mayor consumo de energía y reducir la vida útil de CPU si no se logra controlar las temperaturas alcanzadas durante el overclock.</p>
+
+        <h3>TDP (Thermal Design Power):</h3>
+
+        <p>Indica el <strong>calor máximo</strong> que debe disipar el sistema de refrigeración (en vatios).</p>
+
+        <ul>
+            <li>Ejemplo: Un <strong>Core i7-14700K</strong> tiene un TDP de <strong>125W</strong>, pero puede consumir <strong>250W</strong> bajo overclocking.</li>
+        </ul>
+
+        <p><strong>Relación con el rendimiento:</strong></p>
+
+        <ul>
+            <li>CPUs con TDP alto (ej: 150W+) suelen ser más potentes, pero requieren mejor refrigeración.</li>
+            <li>CPUs con TDP bajo (ej: 65W) son ideales para equipos compactos o de bajo consumo.</li>
+        </ul>
+
+        <table>
+            <tr>
+                <th><strong>TDP (W)</strong></th>
+                <th><strong>Tipo de CPU</strong></th>
+                <th><strong>Uso Recomendado</strong></th>
+            </tr>
+            <tr>
+                <td>65W</td>
+                <td>Eficiencia energética</td>
+                <td>Oficinas, HTPC.</td>
+            </tr>
+            <tr>
+                <td>105W</td>
+                <td>Equilibrio</td>
+                <td>Gaming y productividad.</td>
+            </tr>
+            <tr>
+                <td>125W+</td>
+                <td>Alto rendimiento</td>
+                <td>Overclocking y workstations.</td>
+            </tr>
+        </table>
+
+        <h2>3. Generaciones, Nivel y Sufijo de CPU</h2>
+
+        <p>El nivel indica la categoría de rendimiento del procesador dentro de la línea de productos de un fabricante.</p>
+
+        <p>La generación de una CPU indica su edad, arquitectura y compatibilidad, y suele estar relacionada con mejoras significativas en rendimiento, eficiencia energética y características técnicas.</p>
+
+        <p>El <strong>SKU</strong> (<strong>Stock Keeping Unit</strong>) es el <strong>código específico del modelo</strong> dentro de una generación y nivel. Es la parte numérica que sigue al nivel y la generación en el nombre de la CPU.</p>
+
+        <h3>Formato en AMD:</h3>
+
+        <p><strong>Formato del nombre:</strong> Ryzen [Nivel] [Generación + SKU] [Sufijo]</p>
+
+        <ul>
+            <li>Ejemplo: Ryzen 7 5800X</li>
+            <li>7 = Nivel (Ryzen 7).</li>
+            <li>5 = 5ta generación (Zen 3).</li>
+            <li>800 = SKU (modelo dentro de la generación).</li>
+            <li>X = <strong>Sufijo</strong></li>
+        </ul>
+
+        <h3>Formato en Intel:</h3>
+
+        <p><strong>Formato del nombre:</strong> Core i[Nivel]-[Generación][SKU][Sufijo]</p>
+
+        <ul>
+            <li>Ejemplo: Core i7-13700K</li>
+            <li>7 = Nivel (Intel Core i7)</li>
+            <li>13 = 13va generación (Raptor Lake, 2022).</li>
+            <li>700 = SKU (modelo dentro de la generación).</li>
+            <li>K = <strong>Sufijo</strong></li>
+        </ul>
+
+        <h3>Los sufijos en los nombres de las CPUs de Intel y AMD indican características especiales del procesador</h3>
+
+        <table>
+            <tr>
+                <th><strong>Sufijo</strong></th>
+                <th><strong>AMD</strong></th>
+                <th><strong>Intel</strong></th>
+                <th><strong>Significado</strong></th>
+            </tr>
+            <tr>
+                <td><strong>K</strong></td>
+                <td>-</td>
+                <td>i7-13700K</td>
+                <td>Desbloqueado para overclocking.</td>
+            </tr>
+            <tr>
+                <td><strong>X</strong></td>
+                <td>Ryzen 7 7800X</td>
+                <td>-</td>
+                <td>Mayor frecuencia y TDP (AMD).</td>
+            </tr>
+            <tr>
+                <td><strong>G</strong></td>
+                <td>Ryzen 5 7600G</td>
+                <td>-</td>
+                <td>Gráficos integrados (AMD).</td>
+            </tr>
+            <tr>
+                <td><strong>F</strong></td>
+                <td>-</td>
+                <td>i5-13600F</td>
+                <td>Sin gráficos integrados (Intel).</td>
+            </tr>
+            <tr>
+                <td><strong>X3D</strong></td>
+                <td>Ryzen 7 7800X3D</td>
+                <td>-</td>
+                <td>Con caché 3D V-Cache (mejor rendimiento en gaming).</td>
+            </tr>
+            <tr>
+                <td><strong>T</strong></td>
+                <td>-</td>
+                <td>i7-13700T</td>
+                <td>Bajo consumo (menor TDP).</td>
+            </tr>
+            <tr>
+                <td><strong>H</strong></td>
+                <td>Ryzen 9 7940H</td>
+                <td>i9-13900H</td>
+                <td>Alto rendimiento para portátiles.</td>
+            </tr>
+            <tr>
+                <td><strong>U</strong></td>
+                <td>Ryzen 7 7840U</td>
+                <td>i7-1365U</td>
+                <td>Ultra bajo consumo (portátiles delgados).</td>
+            </tr>
+            <tr>
+                <td><strong>P</strong></td>
+                <td>-</td>
+                <td>i7-1360P</td>
+                <td>Rendimiento equilibrado para portátiles.</td>
+            </tr>
+            <tr>
+                <td><strong>S</strong></td>
+                <td>-</td>
+                <td>i9-13900KS</td>
+                <td>Optimizado para rendimiento especial (ej: mayor frecuencia).</td>
+            </tr>
+        </table>
+
+        <h2>4. Compatibilidad</h2>
+
+        <h3>Tipo de socket compatible con el CPU.</h3>
+
+        <table>
+            <tr>
+                <th><strong>Tipo</strong></th>
+                <th><strong>Significado</strong></th>
+                <th><strong>Descripción</strong></th>
+                <th><strong>Ventajas</strong></th>
+                <th><strong>Desventajas</strong></th>
+            </tr>
+            <tr>
+                <td><strong>LGA</strong></td>
+                <td>Land Grid Array</td>
+                <td>Los pines están en la <strong>placa base</strong>, y la CPU tiene contactos planos que se apoyan sobre ellos.</td>
+                <td>Mayor durabilidad (los pines no están en la CPU).</td>
+                <td>Requiere más precisión al instalar.</td>
+            </tr>
+            <tr>
+                <td><strong>PGA</strong></td>
+                <td>Pin Grid Array</td>
+                <td>Los pines están en la <strong>CPU</strong>, que se inserta en un socket con agujeros en la placa base.</td>
+                <td>Más fácil de instalar/reemplazar.</td>
+                <td>Riesgo de doblar pines al manipular la CPU.</td>
+            </tr>
+            <tr>
+                <td><strong>BGA</strong></td>
+                <td>Ball Grid Array</td>
+                <td>La CPU se <strong>solda directamente</strong> a la placa base (sin socket removible).</td>
+                <td>Más compacto y estable (ideal para portátiles).</td>
+                <td>No es reemplazable o actualizable.</td>
+            </tr>
+        </table>
+
+        <h3>Chipset y placa base: ¿Cómo afectan la compatibilidad?</h3>
+
+        <p>El chipset define <strong>qué características y tecnologías soporta la placa base</strong>.</p>
+
+        <table>
+            <tr>
+                <th><strong>Marca</strong></th>
+                <th><strong>Chipset</strong></th>
+                <th><strong>Socket</strong></th>
+                <th><strong>Generación de CPU Compatible</strong></th>
+                <th><strong>Memoria</strong></th>
+            </tr>
+            <tr>
+                <td><strong>Intel</strong></td>
+                <td>Z790</td>
+                <td>LGA 1700</td>
+                <td>12va/13va/14va gen</td>
+                <td>DDR4/DDR5</td>
+            </tr>
+            <tr>
+                <td><strong>Intel</strong></td>
+                <td>B760</td>
+                <td>LGA 1700</td>
+                <td>12va/13va/14va gen</td>
+                <td>DDR4/DDR5</td>
+            </tr>
+            <tr>
+                <td><strong>Intel</strong></td>
+                <td>H670</td>
+                <td>LGA 1700</td>
+                <td>12va/13va/14va gen</td>
+                <td>DDR4/DDR5</td>
+            </tr>
+            <tr>
+                <td><strong>AMD</strong></td>
+                <td>X670E</td>
+                <td>AM5</td>
+                <td>Ryzen 7000/8000</td>
+                <td>DDR5</td>
+            </tr>
+            <tr>
+                <td><strong>AMD</strong></td>
+                <td>B650</td>
+                <td>AM5</td>
+                <td>Ryzen 7000/8000</td>
+                <td>DDR5</td>
+            </tr>
+            <tr>
+                <td><strong>AMD</strong></td>
+                <td>X570</td>
+                <td>AM4</td>
+                <td>Ryzen 5000/3000</td>
+                <td>DDR4</td>
+            </tr>
+            <tr>
+                <td><strong>AMD</strong></td>
+                <td>B550</td>
+                <td>AM4</td>
+                <td>Ryzen 5000/3000</td>
+                <td>DDR4</td>
+            </tr>
+        </table>
+
+        <h2>5. Preguntas</h2>
+
+        <ol>
+            <li>¿Qué es una generación de CPU y por qué es importante?</li>
+            <li>¿Qué es un socket y cómo afecta la compatibilidad?</li>
+            <li>¿Qué es el TDP y por qué es relevante al elegir una CPU?</li>
+            <li>¿Qué es el overclocking y qué riesgos tiene?</li>
+            <li>¿Cuáles son las dos marcas más fuertes en el mercado actualmente?</li>
+            <li>¿Que beneficios aporta la Arquitectura (IPC)?</li>
+            <li>¿Qué es un chipset y cómo influye en la elección de una CPU?</li>
+            <li>Menciona una CPU de Intel y una de AMD de última generación.</li>
+            <li>¿Por qué es importante la refrigeración en una CPU?</li>
+            <li>¿Cómo diferencias los sockets para un CPU por su forma física?</li>
+        </ol>
+    </div>
+</body>
+</html>
