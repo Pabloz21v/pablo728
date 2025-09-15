@@ -1,0 +1,471 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 7: Memorias RAM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        @media (max-width: 600px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion6-cpu.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 6
+      </a>
+      <!-- <a
+        href="hardware1-sesion8.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 8
+      </a> -->
+    </div>
+    <div class="container">
+        <h1>Sesión 7: Memorias RAM</h1>
+
+        <h2>1. Introducción</h2>
+
+        <h3>¿Qué es la RAM?</h3>
+
+        <p>
+            La RAM (Random Access Memory, o Memoria de Acceso Aleatorio) es un tipo de memoria temporal que utiliza tu computadora para almacenar datos y programas mientras están en uso. Es un componente esencial para el rendimiento del sistema, ya que permite que el procesador (CPU) acceda rápidamente a la información necesaria para ejecutar tareas.
+        </p>
+
+        <p>
+            <strong>Analogía:</strong> "Es como el escritorio de tu oficina: cuanto más grande, más documentos podés tener abiertos al mismo tiempo sin perder tiempo buscándolos."
+        </p>
+
+        <p>
+            La RAM influye directamente en la <strong>velocidad, fluidez y capacidad de respuesta</strong> del sistema.
+        </p>
+
+        <h3>a. Multitarea</h3>
+
+        <p>
+            La RAM permite que el sistema <strong>ejecute múltiples programas al mismo tiempo</strong> sin ralentizarse.
+        </p>
+
+        <p>
+            <strong>Ejemplo:</strong> Si abres un navegador con 20 pestañas, un editor de video y un juego, la RAM almacena los datos activos de cada aplicación. Si no hay suficiente RAM, el sistema usará el disco duro (mucho más lento) como "memoria virtual", lo que provoca <strong>lentitud y tirones</strong>.
+        </p>
+
+        <h3>b. Velocidad de procesamiento</h3>
+
+        <p>
+            La CPU accede a los datos en la RAM <strong>miles de veces más rápido</strong> que en un disco duro o SSD.
+        </p>
+
+        <p>
+            <strong>Ejemplo:</strong> Al abrir un programa (como Photoshop o un juego), la RAM carga los archivos necesarios para que la CPU los procese sin demoras. Si la RAM es lenta o insuficiente, el sistema se ralentiza.
+        </p>
+
+        <h3>c. Rendimiento en aplicaciones exigentes</h3>
+
+        <p>
+            Programas como <strong>editores de video (Premiere Pro, After Effects), juegos (Call of Duty, Cyberpunk), o software de diseño (AutoCAD, Blender)</strong> requieren grandes cantidades de RAM para funcionar sin problemas.
+        </p>
+
+        <p>
+            <strong>Ejemplo:</strong> Renderizar un video en 4K o ejecutar un juego con gráficos avanzados consume mucha RAM. Si no hay suficiente, el sistema se congela o cierra aplicaciones.
+        </p>
+
+        <h3>d. Latencia y fluidez del sistema</h3>
+
+        <p>
+            La <strong>latencia de la RAM</strong> (CL) y su <strong>frecuencia (MHz)</strong> determinan qué tan rápido responde el sistema a tus acciones.
+        </p>
+
+        <p>
+            <strong>Ejemplo:</strong> Al cambiar entre pestañas del navegador o abrir archivos, una RAM rápida (baja latencia y alta frecuencia) hace que todo se sienta <strong>instantáneo</strong>.
+        </p>
+
+        <h2>2. Almacenamiento y Administración de Datos en la RAM</h2>
+
+        <h3>A. ¿Cómo se almacenan los datos?</h3>
+
+        <ul>
+            <li><strong>Direcciones de memoria:</strong> La RAM se divide en celdas, cada una con una dirección única (ej: 0x00000000).</li>
+            <li><strong>Volatilidad:</strong> Los datos se pierden al apagar el equipo (a diferencia del almacenamiento en disco).</li>
+        </ul>
+
+        <h3>B. ¿Qué pasa si se supera la capacidad de la RAM?</h3>
+
+        <ul>
+            <li>
+                <strong>Paginación (Swap):</strong> El sistema operativo usa parte del disco duro (archivo de paginación en Windows, swap en Linux) como "RAM virtual".
+                <ul>
+                    <li><strong>Lentitud extrema:</strong> Mucho más lento (el disco es 1000x más lento que la RAM).</li>
+                    <li><strong>Cierres forzados de aplicaciones</strong> (el sistema "mata" procesos para liberar memoria).</li>
+                    <li>"<strong>Cuellos de botella</strong>" en juegos o programas profesionales.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <p>
+            <strong>Ejemplo:</strong>
+        </p>
+
+        <p>
+            Si tienes 8GB de RAM y abres Chrome (2GB), Photoshop (3GB) y un juego (4GB), el sistema usará 1GB de swap/paginación, ralentizando todo.
+        </p>
+
+        <p>
+            Una solución sería cerrar programas innecesarios o aumentar la RAM física.
+        </p>
+
+        <h2>3. Tipos y Características de la RAM</h2>
+
+        <h3>A. Tipos de RAM:</h3>
+
+        <p>
+            <strong>SRAM vs. DRAM:</strong> Ambos tipos de memoria son <strong>volátiles</strong> (pierden datos al apagarse), pero tienen diseños, usos y características muy distintas.
+        </p>
+
+        <table>
+            <tr>
+                <th><strong>Característica</strong></th>
+                <th><strong>SRAM (Static RAM)</strong></th>
+                <th><strong>DRAM (Dynamic RAM)</strong></th>
+            </tr>
+            <tr>
+                <td><strong>Tecnología</strong></td>
+                <td>Usa <strong>4-6 transistores por bit</strong>.</td>
+                <td>Usa <strong>1 transistor + 1 capacitor por bit</strong>.</td>
+            </tr>
+            <tr>
+                <td><strong>Refresco de datos</strong></td>
+                <td><strong>No requiere refresco</strong>.</td>
+                <td><strong>Requiere refresco constante</strong> (cientos de veces por segundo).</td>
+            </tr>
+            <tr>
+                <td><strong>Velocidad</strong></td>
+                <td><strong>1-10 ns</strong> (ultrarrápida).</td>
+                <td><strong>50-100 ns</strong> (más lenta que SRAM).</td>
+            </tr>
+            <tr>
+                <td><strong>Latencia</strong></td>
+                <td>Muy baja.</td>
+                <td>Moderada.</td>
+            </tr>
+            <tr>
+                <td><strong>Costo por GB</strong></td>
+                <td><strong>Muy caro</strong> (hasta 100x más que DRAM).</td>
+                <td><strong>Económico</strong> (usado en módulos estándar).</td>
+            </tr>
+            <tr>
+                <td><strong>Densidad</strong></td>
+                <td>Baja (ocupa más espacio físico).</td>
+                <td>Alta (permite módulos de 8GB, 16GB, etc.).</td>
+            </tr>
+            <tr>
+                <td><strong>Consumo de energía</strong></td>
+                <td>Bajo.</td>
+                <td>Moderado/alto (por el refresco).</td>
+            </tr>
+            <tr>
+                <td><strong>Generación de calor</strong></td>
+                <td>Mínima.</td>
+                <td>Mayor (especialmente en alta frecuencia).</td>
+            </tr>
+            <tr>
+                <td><strong>Aplicaciones típicas</strong></td>
+                <td>
+                    <ul>
+                        <li>Caché L1/L2/L3 del procesador.</li>
+                        <li>Registros internos de la CPU.</li>
+                        <li>Routers de alta gama.</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Memoria RAM principal (DDR4, DDR5).</li>
+                        <li>Memoria gráfica (GDDR en tarjetas de video).</li>
+                        <li>Servidores y dispositivos móviles (LPDDR).</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Ejemplo en una PC</strong></td>
+                <td>1-2MB en la caché del procesador.</td>
+                <td>16-32GB en módulos de RAM.</td>
+            </tr>
+        </table>
+
+        <h3>B. Especificaciones clave:</h3>
+
+        <ul>
+            <li><strong>Capacidad:</strong> GB (ej: 4GB, 8GB, 16GB).</li>
+            <li><strong>Velocidad:</strong> MHz (ej: 2400MHz, 3200MHz).</li>
+            <li><strong>Latencia:</strong> CL (ej: CL16, CL18).</li>
+            <li><strong>Formato físico:</strong> DIMM (escritorio), SO-DIMM (portátiles).</li>
+        </ul>
+
+        <h2>4. Generaciones de DDR: Capacidades, Velocidades y Formatos</h2>
+
+        <h3>A. Tabla comparativa de generaciones DDR</h3>
+
+        <table>
+            <tr>
+                <th><strong>Generación</strong></th>
+                <th><strong>Capacidad (por módulo)</strong></th>
+                <th><strong>Velocidad (MT/s) o (MHz)</strong></th>
+                <th><strong>Latencia (CL)</strong></th>
+                <th><strong>Voltaje (V)</strong></th>
+                <th><strong>Formato físico</strong></th>
+                <th><strong>Año de lanzamiento</strong></th>
+            </tr>
+            <tr>
+                <td>DDR</td>
+                <td>128MB - 1GB</td>
+                <td>200 - 400</td>
+                <td>CL2 - CL3</td>
+                <td>2.5</td>
+                <td>DIMM (184 pines) / 200 pines (SO-DIMM)</td>
+                <td>2000</td>
+            </tr>
+            <tr>
+                <td>DDR2</td>
+                <td>256MB - 4GB</td>
+                <td>400 - 1066</td>
+                <td>CL3 - CL6</td>
+                <td>1.8</td>
+                <td>DIMM (240 pines) / 200 pines (SO-DIMM)</td>
+                <td>2003</td>
+            </tr>
+            <tr>
+                <td>DDR3</td>
+                <td>1GB - 16GB</td>
+                <td>800 - 2133</td>
+                <td>CL5 - CL11</td>
+                <td>1.5</td>
+                <td>DIMM (240 pines) / 204 pines (SO-DIMM)</td>
+                <td>2007</td>
+            </tr>
+            <tr>
+                <td>DDR4</td>
+                <td>2GB - 128GB</td>
+                <td>1600 - 3200</td>
+                <td>CL11 - CL19</td>
+                <td>1.2</td>
+                <td>DIMM (288 pines) / 260 pines (SO-DIMM)</td>
+                <td>2014</td>
+            </tr>
+            <tr>
+                <td>DDR5</td>
+                <td>8GB - 256GB</td>
+                <td>3200 - 6400</td>
+                <td>CL22 - CL40</td>
+                <td>1.1</td>
+                <td>DIMM (288 pines) / 262 pines (SO-DIMM)</td>
+                <td>2020</td>
+            </tr>
+        </table>
+
+        <p><strong>Notas:</strong></p>
+
+        <ul>
+            <li><strong>Formato físico:</strong> DIMM (escritorio), SO-DIMM (portátiles).</li>
+            <li>Las memorias SO-DIMM son de un tamaño particularmente inferior a la DIMM, por lo que se vuelve imposible colocar en el socket de la placa madre una memoria que corresponde a otro modelo.</li>
+            <li><strong>Capacidad máxima por motherboard/placa madre:</strong> Depende del chipset (ej: hasta 128GB en DDR4 con 4 ranuras). Dicho de otra forma 4 memorias RAM de 32GB, 1 por socket presente en la motherboard.</li>
+            <li><strong>Velocidad real:</strong> Se mide en MT/s (MegaTransferencias por segundo), no en MHz (aunque se usa coloquialmente).</li>
+            <li><strong>Latencia:</strong> Menor CL = mejor rendimiento (ej: CL16 es mejor que CL19 a la misma velocidad). La latencia indica la velocidad de respuesta, mientras menor sea el valor, indica que la respuesta a una solicitud de datos en la memoria RAM será más rápida. Este valor siempre se relaciona con los MHz.</li>
+            <li><strong>Relación MHz y CL:</strong> a mayor MHz y menor CL, una memoria RAM es más rápida.</li>
+        </ul>
+
+        <h2>5. Dual Channel: ¿Qué es y cómo saber si mi PC lo tiene?</h2>
+
+        <h3>A. Definición y funcionamiento</h3>
+
+        <p>
+            <strong>Dual Channel:</strong> Tecnología que permite al procesador acceder a dos módulos de RAM simultáneamente, duplicando el ancho de banda teórico.
+        </p>
+
+        <p>
+            <strong>Requisitos:</strong>
+        </p>
+
+        <ul>
+            <li>Motherboard con soporte, esta información se obtiene consultando la ficha técnica de la motherboard o en las especificaciones del producto (manual).</li>
+            <li>Es recomendable usar módulos idénticos en capacidad, velocidad y latencia.</li>
+            <li>Si buscan en Mercado Libre podrán observar que se venden de a 2 módulos idénticos con el fin de ser usados en dual channel.</li>
+            <li>Instalados en ranuras del mismo color (ej: ranuras 1 y 3 o 2 y 4).</li>
+        </ul>
+
+        <h3>B. ¿Cómo verificar si está activo?</h3>
+
+        <p>
+            <strong>Windows:</strong>
+        </p>
+
+        <ul>
+            <li>Abrir "Administrador de tareas" > Pestaña "Rendimiento" > "Memoria".</li>
+            <li>Buscar "Ranuras utilizadas: 2 de 4" y "Formato: Dual".</li>
+        </ul>
+
+        <h2>6. Compatibilidad: RAM, Motherboard y Procesador.</h2>
+
+        <h3>A. Factores críticos de compatibilidad</h3>
+
+        <ul>
+            <li>
+                <strong>Motherboard:</strong>
+                <ul>
+                    <li>Verificar que Tipo de ranura soporta (DDR4, DDR5, etc).</li>
+                    <li>La Capacidad máxima soportada (ej: 128GB).</li>
+                    <li>La frecuencia máxima soportada (MHz).</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Procesador:</strong>
+                <ul>
+                    <li>Controlador de memoria integrado: Limita el tipo y velocidad.</li>
+                    <li>Indica que módulo de RAM soporta.</li>
+                    <li>La capacidad máxima soportada.</li>
+                    <li>La frecuencia máxima soportada.</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Motherboard y Procesador:</strong>
+                <ul>
+                    <li>El menor valor soportado sobre la capacidad, velocidad y latencia por alguno de los 2 componentes establece cual es el máximo soportado en cada uno de estos atributos.</li>
+                    <li>Ej: Mother soporta 128GB y CPU 192GB, el resultado es que soporta hasta 128GB máximo. Siendo la Motherboard el cuello de botella.</li>
+                    <li>Ej: Mother soporta 3200MHz y CPU 2400Mhz, el cuello de botella lo impone el CPU permitiendo una velocidad máxima de 2400Mhz.</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Sistema operativo:</strong>
+                <ul>
+                    <li>32-bit: Máximo 4GB (3.2GB útiles).</li>
+                    <li>64-bit: Sin límite práctico (depende del hardware).</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>B. ¿Cómo verificar la compatibilidad?</h3>
+
+        <ul>
+            <li>Manual de la motherboard: Buscar sección "Lista de memorias soportadas".</li>
+            <li>Manual del CPU: Buscar la memoria soportada, frecuencia y capacidad.</li>
+            <li>Basado en CPU y motherboard: Buscar en internet sus fichas técnicas para ver que RAM soportan.</li>
+            <li>Herramientas online: PCPartPicker, Crucial System Scanner.</li>
+            <li>Regla general: Usar módulos con la misma capacidad, velocidad y latencia para evitar conflictos.</li>
+        </ul>
+
+        <p>
+            <strong>Ejemplo práctico:</strong>
+        </p>
+
+        <p>
+            "Si tengo una motherboard con soporte para DDR4 hasta 3200MHz y un Ryzen 5 5600, ¿qué RAM debo comprar?"
+        </p>
+
+        <p>
+            <strong>Respuesta:</strong> DDR4-3200 CL16, 2x8GB (para Dual Channel).
+        </p>
+
+        <h2>Preguntas</h2>
+
+        <ol>
+            <li>¿Qué función cumple un módulo de memoria RAM?</li>
+            <li>¿Cuál es la principal diferencia entre DDR4 y DDR5 en términos de voltaje y velocidad?</li>
+            <li>Si un módulo DDR4 tiene una etiqueta que dice "8GB 3200MHz CL16", ¿qué información nos da?</li>
+            <li>¿Por qué la latencia (CL) es importante si la velocidad (MHz) es alta?</li>
+            <li>¿Qué es el Dual Channel y qué requisitos debe cumplir mi PC para usarlo?</li>
+            <li>Si mi motherboard soporta hasta 256GB de DDR4 y su CPU soporta 128GB, ¿puedo instalar 4 módulos de 64GB cada uno?</li>
+            <li>Si mi motherboard soporta hasta 128GB de DDR4 y su CPU soporta 192GB, ¿puedo instalar 4 módulos de 48GB cada uno?</li>
+            <li>¿Qué pasa si mezclo módulos de RAM de diferente capacidad o velocidad?</li>
+            <li>¿Cómo verifica un procesador como el Intel i7-12700K qué tipo de RAM soporta?</li>
+            <li>Si mi PC tiene 16GB de RAM y abro un programa que requiere 20GB, ¿qué hace el sistema operativo?</li>
+        </ol>
+    </div>
+</body>
+</html>
