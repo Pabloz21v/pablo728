@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Clase 3 – Backend con Flask: conexión a MySQL y endpoints básicos
+    </title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: #2c3e50;
+      }
+.btn {
+        display: inline-block;
+        padding: 12px 28px;
+        background: #1976d2;
+        color: #fff;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: bold;
+        text-decoration: none;
+        margin-top: 18px;
+        box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+        transition: background 0.2s;
+      }
+      .btn:hover {
+        background: #1565c0;
+    }
+      code {
+        background-color: #f4f4f4;
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-family: monospace;
+      }
+
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+
+      @media (max-width: 600px) {
+        pre {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="../materias/usuarios-2.html" class="btn">Volver a Usuarios II</a>
+      <a href="usuarios-2-clase-2-workbench.html" class="btn">Ir a Sesión 2</a>
+      <!-- <a href="usuarios-2-clase-4.html" class="btn">Ir a Sesión 4</a> -->
+      <h1>Sesión 3 – Backend con Flask: conexión a MySQL y endpoints básicos</h1>
+
+      <p>
+        <strong>Objetivo:</strong> Conectar Flask con MySQL y obtener datos.
+      </p>
+
+      <h2>Teoría:</h2>
+
+      <ul>
+        <li>Estructura básica de una app Flask.</li>
+        <li>Rutas (<code>@app.route</code>).</li>
+        <li>Conexión a base de datos con <code>mysql.connector</code>.</li>
+      </ul>
+
+      <h2>Práctica:</h2>
+
+      <ul>
+        <li>Crear <code>app.py</code>.</li>
+        <li>Configurar conexión con <code>stock_db</code>.</li>
+        <li>Ruta inicial <code>/</code> que muestre "Servidor funcionando".</li>
+        <li>
+          Crear ruta <code>/productos</code> que devuelva los productos en
+          formato JSON.
+        </li>
+        <li>
+          Crear ruta <code>/productos/ID</code> que devuelva los productos en
+          formato JSON.
+        </li>
+        <li>
+          Crear ruta <code>/productos/SKU</code> que devuelva los productos en
+          formato JSON.
+        </li>
+        <li>
+          Controlar el filtrado de datos (prevenir que lleguen al Front-end
+          datos no deseados) EJ: password.
+        </li>
+      </ul>
+
+      <h2>Paso a paso</h2>
+
+      <h3>1. Conexión reutilizable (db.py)</h3>
+
+      <p>Implementar pool de conexiones:</p>
+
+      <p>
+        Creamos un fichero <code>db.py</code> y descartamos
+        <code>test_db.py</code>.
+      </p>
+
+      <pre>
+# db.py
+
+import os
+from dotenv import load_dotenv
+import mysql.connector
+from mysql.connector import pooling
+
+load_dotenv()
+
+dbconfig = {
+    "host": os.getenv("DB_HOST"),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PASS"),
+    "database": os.getenv("DB_NAME")
+}
+
+pool = mysql.connector.pooling.MySQLConnectionPool(pool_name="mypool", pool_size=5, **dbconfig)
+
+def get_connection():
+    return pool.get_connection()
+        </pre
+      >
+
+      <h3>2. Endpoints en app.py</h3>
+
+      <p>
+        Reemplazamos el código antiguo por uno nuevo, creando nuevas rutas
+        (endpoints) para acceder a distintos datos.
+      </p>
+
+      <pre>
+from flask import Flask, jsonify
+from db import get_connection
+
+app = Flask(__name__)
+
+@app.route('/')
+# Ruta de prueba y principal
+def home():
+    return 'Servidor Flask funcionando jeje'
+
+@app.route('/productos')
+def productos():
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    # Obtener todos los productos
+    cursor.execute("SELECT * FROM productos")
+    items = cursor.fetchall()
+    
+    cursor.close()
+    conn.close()
+    
+    return jsonify(items)
+
+@app.route('/productos/&lt;int:id&gt;')
+def producto_por_id(id):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    # Buscar producto por ID
+    cursor.execute("SELECT * FROM productos WHERE id = %s", (id,))
+    item = cursor.fetchone()
+    
+    cursor.close()
+    conn.close()
+    
+    if item is None:
+        return jsonify({"error": "Producto no encontrado"}), 404
+    
+    return jsonify(item)
+
+@app.route('/productos/sku/&lt;sku&gt;')
+def producto_por_sku(sku):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    # Buscar producto por SKU + filtrado de campos específicos
+    cursor.execute("SELECT id, nombre, descripcion, precio, sku, categoria, cantidad FROM productos WHERE sku = %s", (sku,))
+    item = cursor.fetchone()
+    
+    cursor.close()
+    conn.close()
+    
+    if item is None:
+        return jsonify({"error": "Producto no encontrado"}), 404
+    
+    # Devolver solo los campos que queremos mostrar
+    producto_filtrado = {
+        "id": item["id"],
+        "nombre": item["nombre"],
+        "descripcion": item["descripcion"],
+        "precio": item["precio"],
+        "sku": item["sku"],
+        "categoria": item["categoria"],
+        "cantidad": item["cantidad"]
+    }
+    
+    return jsonify(producto_filtrado)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+        </pre
+      >
+
+      <h2>Ejercicios prácticos</h2>
+
+      <ul>
+        <li>
+          Crear endpoint <code>/productos/categoria/&lt;categoria&gt;</code> que
+          busque por Categoría.
+        </li>
+        <li>
+          Mejorar respuesta: devolver sólo campos que queremos (decidir que
+          datos del backend llegan al frontend).
+        </li>
+      </ul>
+      <div class="my-4">
+        <h3>Codigo del proyecto</h3>
+        <a
+          href="descargas/U2-S3.rar"
+          download
+          class="inline-block px-4 py-2 bg-green-700 hover:bg-green-800 text-white font-bold rounded-lg shadow-md transition-colors duration-200"
+        >
+          Descargar proyecto base hasta S2 (falta configuración con la ddbb, revisar sesión 2)
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
