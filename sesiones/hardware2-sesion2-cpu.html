@@ -1,0 +1,623 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sesión 2 – Procesador (CPU)</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			line-height: 1.6;
+			margin: 0;
+			padding: 20px;
+			color: #333;
+			background-color: #f9f9f9;
+		}
+		
+		.container {
+			max-width: 1200px;
+			margin: auto;
+			padding: 20px;
+			background-color: white;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+		
+		h1, h2, h3 {
+			color: #2c3e50;
+		}
+		
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin: 15px 0;
+		}
+		
+		th, td {
+			border: 1px solid #ddd;
+			padding: 8px;
+			text-align: left;
+		}
+		
+		th {
+			background-color: #f2f2f2;
+		}
+		
+		tr:nth-child(even) {
+			background-color: #f9f9f9;
+		}
+		
+		code {
+			background-color: #f4f4f4;
+			padding: 2px 5px;
+			border-radius: 3px;
+			font-family: monospace;
+		}
+		
+		pre {
+			background-color: #f4f4f4;
+			padding: 10px;
+			border-radius: 5px;
+			overflow-x: auto;
+		}
+		
+		@media (max-width: 600px) {
+			table {
+				display: block;
+				overflow-x: auto;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div style="margin-bottom: 24px">
+	  <a
+		href="../materias/hardware-dos.html"
+		style="
+		  padding: 10px 20px;
+		  border-radius: 8px;
+		  text-decoration: none;
+		  font-weight: bold;
+		  background: #4ade80;
+		  color: #222;
+		  display: inline-block;
+		"
+	  >
+		Volver a Materia
+	  </a>
+	   <a
+		href="../sesiones/hardware2-sesion1-almacenamiento.html"
+		style="
+		  padding: 10px 20px;
+		  border-radius: 8px;
+		  text-decoration: none;
+		  font-weight: bold;
+		  background: #a9c8e2;
+		  color: #222;
+		  display: inline-block;
+		"
+	  >
+	   Ir a Sesión 1
+	  </a>
+	  <!-- <a
+		href="../materias/hardware-dos.html"
+		style="
+		  padding: 10px 20px;
+		  border-radius: 8px;
+		  text-decoration: none;
+		  font-weight: bold;
+		  background: #a9c8e2;
+		  color: #222;
+		  display: inline-block;
+		"
+	  >
+	   Ir a Sesión 3
+	  </a> -->
+	</div>
+	<div class="container">
+		<h1>Sesión 2 – Procesador (CPU)</h1>
+
+		<h2>1. Objetivos de la clase</h2>
+
+		<ul>
+			<li>Analizar cuándo conviene elegir más núcleos, mayor frecuencia, distintas marcas o gamas.</li>
+			<li>Evaluar opciones de CPU según presupuesto y uso final del cliente.</li>
+			<li>Identificar qué elementos encarecen un procesador.</li>
+			<li>Aplicar el análisis en casos prácticos para recomendar una compra.</li>
+		</ul>
+
+		<h2>2. Factores que encarecen un CPU</h2>
+
+		<ul>
+			<li><strong>Cantidad de núcleos e hilos</strong>.</li>
+			<li><strong>Frecuencia base y turbo</strong>.</li>
+			<li><strong>Caché L3</strong> más grande.</li>
+			<li><strong>Proceso de fabricación avanzado (menor nm)</strong>.</li>
+			<li><strong>Tecnologías extra:</strong> overclocking, iGPU potente, instrucciones AVX512, etc.</li>
+			<li><strong>Demanda del mercado</strong> y disponibilidad.</li>
+		</ul>
+
+		<h2>3. Resumen Visual: ¿Qué Pagas Extra?</h2>
+
+		<pre>
+Precio Base (ej. Ryzen 3 3200G) → $100 USD
+│
+├── +$50 USD → Más núcleos (ej. Ryzen 5 3600, 6C/12T)
+│ │
+│ ├── +$100 USD → Arquitectura más nueva (ej. Ryzen 5 5600, Zen 3)
+│ │ │
+│ │ ├── +$150 USD → Cache 3D (ej. Ryzen 7 5800X3D)
+│ │ │
+│ │ └── +$200 USD → Soporte DDR5/PCIe 5.0 (ej. Ryzen 7 7700X)
+│ │
+│ └── +$300 USD → Tecnologías profesionales (ej. Threadripper PRO, AVX-512)
+│
+└── +$500 USD → Extreme Edition (ej. Intel i9-13900KS, 6GHz boost)
+		</pre>
+
+		<h2>4. Conceptos Clave</h2>
+
+		<p><strong>Términos técnicos que debes considerar al elegir un CPU.</strong></p>
+
+		<h3>A. TDP (Thermal Design Power) y Refrigeración</h3>
+
+		<ul>
+			<li><strong>Qué es:</strong> Máxima energía térmica que el sistema de refrigeración debe disipar (medida en vatios).</li>
+			<li><strong>Por qué importa:</strong>
+				<ul>
+					<li>Un TDP bajo (ej. 35W) significa menos calor y consumo eléctrico.</li>
+					<li>Un TDP alto (ej. 125W+) requiere refrigeración avanzada (cooler líquido) y fuentes de poder robustas.</li>
+				</ul>
+			</li>
+			<li><strong>Observación:</strong> CPUs con <strong>TDP alto</strong> (ej. 125W+) suelen ser más caros y también requieren:
+				<ul>
+					<li><strong>Refrigeración líquida</strong> (ej. $100 USD extra).</li>
+					<li><strong>Fuentes de poder premium</strong> (ej. 850W 80+ Gold: ~$150 USD).</li>
+				</ul>
+			</li>
+			<li><strong>Ejemplo:</strong> Un Athlon 3000G (TDP 35W) es ideal para PCs silenciosas, mientras un i9-13900K (TDP 125W) necesita un cooler de alta gama.</li>
+			<li><strong>Ejemplo 2:</strong> Un i9-13900K (TDP 125W) puede terminar costando <strong>$200 USD más</strong> en componentes refrigeración líquida vs. un Ryzen 7 5700X (TDP 65W) que solo necesita un disipador genérico.</li>
+		</ul>
+
+		<h3>B. IPC (Instrucciones Por Ciclo) y Arquitectura</h3>
+
+		<ul>
+			<li><strong>Qué es:</strong> Cantidad de trabajo que el CPU realiza en cada ciclo de reloj.</li>
+			<li><strong>Por qué importa:</strong> Un IPC alto significa más rendimiento sin aumentar la frecuencia.</li>
+			<li><strong>Impacto:</strong>
+				<ul>
+					<li>Arquitecturas nuevas (ej. Zen 4 vs. Zen 3) pueden costar hasta un <strong>30% más</strong> por el mismo número de núcleos.</li>
+				</ul>
+			</li>
+			<li><strong>Ejemplo:</strong> Un Ryzen 5000 (Zen 3) tiene un 19% más de IPC que un Ryzen 3000 (Zen 2), lo que se traduce en mejor rendimiento en juegos y aplicaciones.</li>
+			<li><strong>Ejemplo 2:</strong> Ryzen 7 7700X (Zen 4) vs. Ryzen 7 5700X (Zen 3): +$150 USD por un 13% más de IPC.</li>
+		</ul>
+
+		<h3>C. Multi-thread y Núcleos/Hilos</h3>
+
+		<ul>
+			<li><strong>Qué es:</strong>
+				<ul>
+					<li>Núcleos: Unidades físicas que ejecutan tareas.</li>
+					<li>Hilos: Tareas virtuales que un núcleo puede manejar (ej. Hyper-Threading en Intel o SMT en AMD).</li>
+				</ul>
+			</li>
+			<li><strong>Por qué importa:</strong> Más núcleos/hilos mejoran el rendimiento en multitarea (edición de video, streaming, servidores).</li>
+			<li><strong>Regla general:</strong> Más núcleos/hilos = más caro.
+				<ul>
+					<li><strong>Gama baja:</strong> 4C/8T (ej. Ryzen 3 3200G: ~$100 USD).</li>
+					<li><strong>Gama alta:</strong> 16C/32T (ej. Ryzen 9 7950X: ~$600 USD).</li>
+				</ul>
+			</li>
+			<li><strong>Matiz:</strong> No siempre vale la pena. Ejemplo:
+				<ul>
+					<li>Un <strong>i9-13900K (24C/32T)</strong> es un 40% más caro que un <strong>i7-13700K (16C/24T)</strong>, pero solo ofrece ~15% más rendimiento en gaming.</li>
+				</ul>
+			</li>
+		</ul>
+
+		<h3>D. Soporte ECC (Error-Correcting Code)</h3>
+
+		<ul>
+			<li><strong>Qué es:</strong> Tecnología que detecta y corrige errores en la memoria RAM.</li>
+			<li><strong>Por qué importa:</strong> Crítico para servidores o workstations donde la estabilidad es clave (ej. bases de datos).</li>
+		</ul>
+
+		<h3>E. Ancho de Banda de RAM</h3>
+
+		<ul>
+			<li><strong>Qué es:</strong> Velocidad a la que el CPU puede acceder a la memoria RAM (medido en GB/s).</li>
+			<li><strong>Por qué importa:</strong> Afecta el rendimiento en aplicaciones que usan mucha memoria (edición de video, IA).</li>
+		</ul>
+
+		<h3>F. Socket y Arquitectura</h3>
+
+		<ul>
+			<li>Socket: Conector físico en la motherboard (ej. AM4, AM5, LGA 1700).</li>
+			<li>Arquitectura: Diseño interno del CPU (ej. Zen 3, Zen 4, Raptor Lake).</li>
+		</ul>
+
+		<h3>G. GPU Integrada (iGPU)</h3>
+
+		<ul>
+			<li><strong>Qué es:</strong> Gráficos integrados en el CPU (útil para PCs sin tarjeta gráfica dedicada).</li>
+			<li><strong>Ejemplos:</strong>
+				<ul>
+					<li>AMD: Vega (ej. Ryzen 5 5600G con Vega 7).</li>
+					<li>Intel: UHD Graphics (ej. i5-12400 con UHD 730).</li>
+				</ul>
+			</li>
+		</ul>
+
+		<h3>H. Overclocking</h3>
+
+		<ul>
+			<li><strong>Qué es:</strong> Aumentar la frecuencia del CPU más allá de su especificación.</li>
+			<li><strong>Por qué importa:</strong> Puede mejorar el rendimiento, pero requiere refrigeración y motherboard adecuadas (ej. placas con chipset Z en Intel o X en AMD).</li>
+		</ul>
+
+		<h3>I. Instrucciones AVX-512</h3>
+
+		<ul>
+			<li><strong>Qué es:</strong> Conjunto de instrucciones para acelerar cálculos complejos (IA, renderizado 3D).</li>
+			<li><strong>Por qué importa:</strong> Solo presente en CPUs profesionales (ej. Xeon, Threadripper Pro).</li>
+		</ul>
+
+		<h3>J. Proceso de Fabricación (nm)</h3>
+
+		<ul>
+			<li><strong>Qué es:</strong> El tamaño de los transistores en el CPU (ej. 5nm vs. 12nm). Menor número = más avanzado y caro.</li>
+			<li><strong>Impacto en precio:</strong>
+				<ul>
+					<li><strong>Ejemplo:</strong> Un Ryzen 9 7950X (5nm, Zen 4) cuesta ~$600 USD, mientras un Ryzen 7 5800X (7nm, Zen 3) ronda los ~$300 USD.</li>
+					<li><strong>Por qué:</strong> Procesos más pequeños requieren tecnología más costosa (ej. litografía EUV de ASML).</li>
+				</ul>
+			</li>
+			<li><strong>Excepción:</strong> Intel suele cobrar más por sus nodos "optimizados" (ej. Intel 7 vs. TSMC 5nm).</li>
+		</ul>
+
+		<h3>K. Cache (L2/L3)</h3>
+
+		<ul>
+			<li><strong>Qué es:</strong> Memoria ultrarrápida dentro del CPU.</li>
+			<li><strong>Impacto en precio:</strong>
+				<ul>
+					<li>CPUs con <strong>cache 3D</strong> (ej. Ryzen 7 5800X3D) pueden costar un <strong>20% más</strong> que versiones sin ella.</li>
+					<li><strong>Ejemplo:</strong> El 5800X3D (96MB L3) cuesta ~$350 USD vs. $300 USD del 5800X (32MB L3).</li>
+				</ul>
+			</li>
+		</ul>
+
+		<h2>5. Tipos de CPU y características esenciales.</h2>
+
+		<h3>1. Ofimática Básica</h3>
+
+		<p><strong>Objetivo:</strong> Navegación, documentos, correos y tareas ligeras. <strong>CPUs recomendados (gama baja/media):</strong></p>
+
+		<ul>
+			<li><strong>AMD Athlon 3000G</strong> / <strong>Intel Celeron G6900</strong> (baja).</li>
+			<li><strong>AMD Ryzen 3 5300G</strong> / <strong>Intel i3-12100</strong> (media).</li>
+		</ul>
+
+		<p><strong>Características críticas (🟢):</strong></p>
+
+		<ul>
+			<li><strong>Consumo eléctrico (TDP):</strong> 35W–65W (bajo consumo = menos calor y costo de energía).</li>
+			<li><strong>iGPU integrada:</strong> Vega 3 (AMD) o UHD 610 (Intel) para monitores 1080p sin GPU dedicada.</li>
+			<li><strong>Socket/Arquitectura:</strong> AM4 (AMD) o LGA 1200/1700 (Intel) para compatibilidad con motherboards económicas.</li>
+			<li><strong>Disponibilidad en Argentina:</strong> Alta (fácil de encontrar en MercadoLibre).</li>
+		</ul>
+
+		<p><strong>Características útiles (🟡):</strong></p>
+
+		<ul>
+			<li><strong>Núcleos/Hilos:</strong> 2C/4T–4C/8T (suficiente para multitarea ligera).</li>
+			<li><strong>RAM soportada:</strong> 8GB–16GB DDR4-2400/3200.</li>
+			<li><strong>Motherboard:</strong> A320/B450 (AMD) o H610/B660 (Intel).</li>
+		</ul>
+
+		<p><strong>Irrelevantes (🔴):</strong></p>
+
+		<ul>
+			<li>IPC, multi-thread avanzado, ECC, overclocking, AVX-512.</li>
+		</ul>
+
+		<p><strong>Notas clave:</strong></p>
+
+		<ul>
+			<li>Prioriza <strong>bajo TDP</strong> para PCs silenciosas y económicas.</li>
+			<li><strong>Ejemplo de configuración:</strong>
+				<ul>
+					<li>CPU: <strong>Ryzen 3 5300G</strong> (~$200,000 ARS).</li>
+					<li>Motherboard: <strong>ASRock B450M</strong> (~$50,000 ARS).</li>
+					<li>RAM: 8GB DDR4-3200 (~$30,000 ARS).</li>
+				</ul>
+			</li>
+		</ul>
+
+		<h3>2. Gaming (1080p/1440p/4K)</h3>
+
+		<p><strong>Objetivo:</strong> Maximizar FPS en juegos (ej. Fortnite, Cyberpunk 2077). <strong>CPUs recomendados (gama media/alta):</strong></p>
+
+		<ul>
+			<li><strong>Gama media:</strong> <strong>AMD Ryzen 5 5600</strong> / <strong>Intel i5-12400F</strong>.</li>
+			<li><strong>Gama alta:</strong> <strong>AMD Ryzen 7 7800X3D</strong> / <strong>Intel i7-13700K</strong>.</li>
+		</ul>
+
+		<p><strong>Características críticas (🟢):</strong></p>
+
+		<ul>
+			<li><strong>IPC:</strong> Alto (ej. Zen 3/4 o Intel 12ª/13ª gen) para evitar cuellos de botella con la GPU.</li>
+			<li><strong>Frecuencia (MHz):</strong> 4.5GHz+ en boost (mejora FPS en juegos single-thread).</li>
+			<li><strong>Caché L3:</strong> 32MB+ (ej. Ryzen 7 5800X3D con 96MB para +30% FPS en 4K).</li>
+			<li><strong>Socket:</strong> AM5 (AMD) o LGA 1700 (Intel) para upgrade futuro.</li>
+			<li><strong>VRM:</strong> Motherboard con 8+2 fases (ej. B550/X570 o Z690/Z790).</li>
+		</ul>
+
+		<p><strong>Características útiles (🟡):</strong></p>
+
+		<ul>
+			<li><strong>Núcleos/Hilos:</strong> 6C/12T–8C/16T (para gaming + streaming simultáneo).</li>
+			<li><strong>Ancho de banda RAM:</strong> DDR4-3600 o DDR5-5600 (CL16 o menor).</li>
+			<li><strong>TDP:</strong> 65W–125W (refrigeración líquida recomendada para gama alta).</li>
+		</ul>
+
+		<p><strong>Irrelevantes (🔴):</strong></p>
+
+		<ul>
+			<li>iGPU, ECC, AVX-512.</li>
+		</ul>
+
+		<p><strong>Notas clave:</strong></p>
+
+		<ul>
+			<li><strong>Relación con GPU:</strong>
+				<ul>
+					<li><strong>1080p:</strong> Ryzen 5 5600 + RTX 3060.</li>
+					<li><strong>4K:</strong> Ryzen 7 7800X3D + RTX 4080.</li>
+				</ul>
+			</li>
+			<li>Evita CPUs con iGPU si tienes tarjeta gráfica dedicada (ej. elige el <strong>5600X</strong> en lugar del <strong>5600G</strong>).</li>
+		</ul>
+
+		<h3>3. Edición de Video (1080p/4K)</h3>
+
+		<p><strong>Objetivo:</strong> Renderizado rápido en Premiere Pro, After Effects, Blender. <strong>CPUs recomendados:</strong></p>
+
+		<ul>
+			<li><strong>Gama media:</strong> <strong>AMD Ryzen 7 5700X</strong> / <strong>Intel i7-12700K</strong>.</li>
+			<li><strong>Gama alta:</strong> <strong>AMD Ryzen 9 5950X</strong> / <strong>Intel i9-13900K</strong>.</li>
+		</ul>
+
+		<p><strong>Características críticas (🟢):</strong></p>
+
+		<ul>
+			<li><strong>Multi-thread:</strong> 8C/16T+ para renderizado paralelo.</li>
+			<li><strong>Ancho de banda RAM:</strong> DDR4-3600+ o DDR5-5600 (64GB+ para proyectos 4K).</li>
+			<li><strong>Caché L3:</strong> 32MB–64MB (reduce tiempos de exportación).</li>
+			<li><strong>Motherboard:</strong> X570 (AMD) o Z690/Z790 (Intel) para PCIe 4.0/5.0 (SSD NVMe rápidos).</li>
+		</ul>
+
+		<p><strong>Características útiles (🟡):</strong></p>
+
+		<ul>
+			<li><strong>IPC:</strong> Zen 3/4 o Intel 12ª/13ª gen.</li>
+			<li><strong>TDP:</strong> 95W–125W (refrigeración de torre o líquida).</li>
+			<li><strong>Socket:</strong> AM5 (futuro) o LGA 1700.</li>
+		</ul>
+
+		<p><strong>Irrelevantes (🔴):</strong></p>
+
+		<ul>
+			<li>iGPU, ECC (a menos que trabajes con datos críticos).</li>
+		</ul>
+
+		<p><strong>Notas clave:</strong></p>
+
+		<ul>
+			<li><strong>Ejemplo para 4K:</strong>
+				<ul>
+					<li>CPU: <strong>Ryzen 9 5950X</strong> (~$800,000 ARS).</li>
+					<li>RAM: 64GB DDR4-3600 CL16 (~$200,000 ARS).</li>
+					<li>Almacenamiento: 2TB NVMe PCIe 4.0 (~$150,000 ARS).</li>
+				</ul>
+			</li>
+		</ul>
+
+		<h3>4. Workstation (IA/Datos/Cálculo Científico)</h3>
+
+		<p><strong>Objetivo:</strong> Entrenamiento de modelos de IA, simulación 3D, bases de datos. <strong>CPUs recomendados:</strong></p>
+
+		<ul>
+			<li><strong>Gama media:</strong> <strong>AMD Ryzen 9 5900X</strong>.</li>
+			<li><strong>Gama alta:</strong> <strong>AMD Threadripper PRO 5955WX</strong> / <strong>Intel Xeon W-3375</strong>.</li>
+		</ul>
+
+		<p><strong>Características críticas (🟢):</strong></p>
+
+		<ul>
+			<li><strong>Núcleos/Hilos:</strong> 16C/32T+ (para tareas paralelas).</li>
+			<li><strong>Soporte ECC:</strong> Sí (evita errores en cálculos).</li>
+			<li><strong>AVX-512:</strong> Acelera bibliotecas como TensorFlow/PyTorch.</li>
+			<li><strong>Ancho de banda RAM:</strong> DDR4-3200 ECC de 8 canales (256GB+).</li>
+			<li><strong>Motherboard:</strong> WRX80 (AMD) o LGA 2066 (Intel).</li>
+			<li><strong>VRM:</strong> 16+ fases (ej. ASUS WRX80E-SAGE).</li>
+		</ul>
+
+		<p><strong>Características útiles (🟡):</strong></p>
+
+		<ul>
+			<li><strong>IPC:</strong> Zen 3/4 o Intel Xeon (prioriza núcleos sobre frecuencia).</li>
+			<li><strong>Caché L3:</strong> 64MB+ (ej. Threadripper PRO).</li>
+		</ul>
+
+		<p><strong>Irrelevantes (🔴):</strong></p>
+
+		<ul>
+			<li>iGPU, overclocking.</li>
+		</ul>
+
+		<p><strong>Notas clave:</strong></p>
+
+		<ul>
+			<li><strong>Ejemplo para IA:</strong>
+				<ul>
+					<li>CPU: <strong>Threadripper PRO 5955WX</strong> (~$3,000 USD / ~$3,600,000 ARS).</li>
+					<li>RAM: 128GB DDR4-3200 ECC (~$600,000 ARS).</li>
+				</ul>
+			</li>
+			<li><strong>Alternativa económica:</strong> Ryzen 9 5950X + motherboard TRX40 (sin ECC).</li>
+		</ul>
+
+		<h3>5. Servidor Doméstico (NAS/Plex)</h3>
+
+		<p><strong>Objetivo:</strong> Almacenamiento en red, transcodificación de video, virtualización. <strong>CPUs recomendados:</strong></p>
+
+		<ul>
+			<li><strong>Gama baja/media:</strong> <strong>AMD Ryzen 5 5600GE</strong> / <strong>Intel Xeon E-2336</strong>.</li>
+			<li><strong>Gama alta:</strong> <strong>AMD Ryzen 7 5700G</strong> (si necesitas iGPU potente).</li>
+		</ul>
+
+		<p><strong>Características críticas (🟢):</strong></p>
+
+		<ul>
+			<li><strong>TDP:</strong> 35W–65W (bajo consumo para 24/7).</li>
+			<li><strong>iGPU:</strong> Vega 7+ (AMD) o UHD 730+ (Intel) para transcodificación Plex.</li>
+			<li><strong>Soporte ECC:</strong> Opcional (recomendado para datos críticos).</li>
+			<li><strong>Motherboard:</strong> B450/X470 (AMD) o C252 (Intel) con múltiples puertos SATA.</li>
+		</ul>
+
+		<p><strong>Características útiles (🟡):</strong></p>
+
+		<ul>
+			<li><strong>Núcleos/Hilos:</strong> 4C/8T–6C/12T (para múltiples usuarios).</li>
+			<li><strong>Garantía:</strong> 3–5 años (ej. Xeon o Ryzen PRO).</li>
+		</ul>
+
+		<p><strong>Irrelevantes (🔴):</strong></p>
+
+		<ul>
+			<li>Alta frecuencia, overclocking, AVX-512.</li>
+		</ul>
+
+		<p><strong>Notas clave:</strong></p>
+
+		<ul>
+			<li><strong>Ejemplo económico:</strong>
+				<ul>
+					<li>CPU: <strong>Ryzen 5 5600GE</strong> (~$350,000 ARS).</li>
+					<li>Motherboard: <strong>ASRock B450M</strong> (~$50,000 ARS).</li>
+					<li>Almacenamiento: 4x HDD 4TB en RAID 5 (~$400,000 ARS).</li>
+				</ul>
+			</li>
+		</ul>
+
+		<h3>6. HTPC/Streaming</h3>
+
+		<p><strong>Objetivo:</strong> Reproducción 4K, streaming en Twitch/YouTube. <strong>CPUs recomendados:</strong></p>
+
+		<ul>
+			<li><strong>Gama media:</strong> <strong>AMD Ryzen 5 5600G</strong> / <strong>Intel i5-12600</strong>.</li>
+		</ul>
+
+		<p><strong>Características críticas (🟢):</strong></p>
+
+		<ul>
+			<li><strong>iGPU potente:</strong> Vega 8 (AMD) o UHD 770 (Intel) para transcodificación.</li>
+			<li><strong>TDP:</strong> 35W–65W (PCs silenciosas y compactas).</li>
+			<li><strong>Socket:</strong> AM4 (mini-ITX) o LGA 1700.</li>
+		</ul>
+
+		<p><strong>Características útiles (🟡):</strong></p>
+
+		<ul>
+			<li><strong>Núcleos/Hilos:</strong> 6C/12T (para streaming + gaming ligero).</li>
+			<li><strong>Frecuencia:</strong> 3.5GHz+ (mejora rendimiento en OBS).</li>
+		</ul>
+
+		<p><strong>Irrelevantes (🔴):</strong></p>
+
+		<ul>
+			<li>ECC, AVX-512, multi-thread extremo.</li>
+		</ul>
+
+		<p><strong>Notas clave:</strong></p>
+
+		<ul>
+			<li><strong>Ejemplo para streaming 1080p:</strong>
+				<ul>
+					<li>CPU: <strong>Ryzen 5 5600G</strong> (~$400,000 ARS).</li>
+					<li>Motherboard: <strong>ASUS ROG Strix B550-I</strong> (mini-ITX, ~$120,000 ARS).</li>
+				</ul>
+			</li>
+			<li><strong>Alternativa sin GPU:</strong> El iGPU Vega 8 del 5600G reemplaza una GTX 1650 en transcodificación.</li>
+		</ul>
+
+		<h2>6. Resumen de Prioridades por Tipo de PC</h2>
+
+		<table>
+			<tr>
+				<th><strong>Tipo de PC</strong></th>
+				<th><strong>Prioridad 1</strong></th>
+				<th><strong>Prioridad 2</strong></th>
+				<th><strong>Prioridad 3</strong></th>
+			</tr>
+			<tr>
+				<td><strong>Ofimática</strong></td>
+				<td>Bajo TDP + iGPU</td>
+				<td>Socket compatible</td>
+				<td>Precio</td>
+			</tr>
+			<tr>
+				<td><strong>Gaming</strong></td>
+				<td>Alto IPC + frecuencia</td>
+				<td>Caché L3</td>
+				<td>VRM/motherboard</td>
+			</tr>
+			<tr>
+				<td><strong>Edición de Video</strong></td>
+				<td>Multi-thread + ancho de banda RAM</td>
+				<td>Caché L3</td>
+				<td>Socket (AM5/LGA 1700)</td>
+			</tr>
+			<tr>
+				<td><strong>Workstation</strong></td>
+				<td>Núcleos + ECC + AVX-512</td>
+				<td>Ancho de banda RAM</td>
+				<td>Motherboard (WRX80)</td>
+			</tr>
+			<tr>
+				<td><strong>Servidor</strong></td>
+				<td>Bajo TDP + iGPU + ECC</td>
+				<td>Núcleos</td>
+				<td>Garantía</td>
+			</tr>
+			<tr>
+				<td><strong>HTPC/Streaming</strong></td>
+				<td>iGPU potente + bajo TDP</td>
+				<td>Núcleos (6C/12T)</td>
+				<td>Form factor (mini-ITX)</td>
+			</tr>
+		</table>
+
+		<h2>7. Preguntas:</h2>
+
+		<ol>
+			<li>¿Qué es el TDP de un procesador y por qué es importante al elegir una CPU? <em>Incluye un ejemplo comparando un CPU de 35W y otro de 125W.</em></li>
+			<li>¿Qué diferencia hay entre núcleos e hilos en un procesador? <em>¿Por qué un Ryzen 9 7950X (16C/32T) es más caro que un Ryzen 5 5600 (6C/12T)?</em></li>
+			<li>Describe qué es la caché L3 y cómo influye en el precio de un procesador. <em>Usa el ejemplo del Ryzen 7 5800X3D vs. Ryzen 7 5800X.</em></li>
+			<li>Para un servidor doméstico (NAS/Plex) que estará encendido 24/7: <em>¿Qué características priorizarías en la CPU (TDP, iGPU, ECC, etc.)?</em></li>
+			<li>Un diseñador gráfico trabaja con renderizado 4K en After Effects (diseño gráfico). <em>¿Qué CPU le recomendarías (gama media/alta), por qué el multi-thread y el ancho de banda de RAM son críticos.</em></li>
+			<li>Un usuario tiene un presupuesto limitado para una PC de ofimática básica. <em>Justifica por qué no son relevantes características como AVX-512 o overclocking.</em></li>
+			<li>Comparar dos procesadores:
+				<ol>
+					<li>Intel i9-13900K (24C/32T, 125W, ~$600 USD)</li>
+					<li>AMD Ryzen 9 7950X (16C/32T, 125W, ~$600 USD)</li>
+				</ol>
+				<em>¿Cuál elegirías para una workstation de IA y por qué? ¿Y para gaming en 4K? Considera factores como IPC, caché, soporte ECC y AVX-512.</em>
+			</li>
+			<li>¿Por qué un procesador con un proceso de fabricación más pequeño (ej. 5nm vs. 7nm) suele ser más caro? <em>Menciona un ejemplo real y explica cómo afecta esto al rendimiento y consumo energético.</em></li>
+		</ol>
+	</div>
+</body>
+</html>
