@@ -1,0 +1,404 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLASE 2: DIAGNÓSTICO AVANZADO Y REPARACIÓN</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        background: #f8fafc;
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 24px 16px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+        font-size: 1rem;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      a {
+        color: #0066cc;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .flex {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      .rounded-xl {
+        border-radius: 1rem;
+      }
+      .shadow {
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+      }
+      .bg-green-700 {
+        background: #15803d;
+      }
+      .bg-green-800 {
+        background: #166534;
+      }
+      .bg-gray-700 {
+        background: #374151;
+      }
+      .bg-gray-800 {
+        background: #1f2937;
+      }
+      .text-white {
+        color: #fff;
+      }
+      .font-semibold {
+        font-weight: 600;
+      }
+      .px-6 {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+      .py-3 {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+      }
+      .text-lg {
+        font-size: 1.125rem;
+      }
+      @media (max-width: 600px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="flex flex-wrap gap-4 mb-8">
+        <a
+          href="../materias/mantenimiento-de-hardware.html"
+          class="px-6 py-3 text-lg bg-green-700 hover:bg-green-800 text-white rounded-xl font-semibold shadow"
+          >Volver a Materia</a
+        >
+        <a
+          href="materia4-sesion5.html"
+          class="px-6 py-3 text-lg bg-gray-700 hover:bg-gray-800 text-white rounded-xl font-semibold shadow"
+          >Ir a Sesión 5</a
+        >
+        <!-- <a
+          href="materia4-sesion6.html"
+          class="px-6 py-3 text-lg bg-gray-700 hover:bg-gray-800 text-white rounded-xl font-semibold shadow"
+          >Ir a Sesión 6</a
+        > -->
+      </div>
+        <h1>CLASE 2: DIAGNÓSTICO AVANZADO Y REPARACIÓN</h1>
+
+        <p><strong>Objetivo:</strong> Dominar herramientas profesionales y técnicas de reparación física.</p>
+
+        <h2>1. Software de Diagnóstico Profesional</h2>
+
+        <table>
+            <tr>
+                <th><strong>Programa</strong></th>
+                <th><strong>Uso Específico</strong></th>
+                <th><strong>Ejemplo Práctico</strong></th>
+            </tr>
+            <tr>
+                <td><strong>HWiNFO</strong></td>
+                <td>Monitoreo en tiempo real: temp VRM, voltajes CPU</td>
+                <td>Detectar sobrecalentamiento en chipset (>95°C)</td>
+            </tr>
+            <tr>
+                <td><strong>MemTest86</strong></td>
+                <td>Prueba RAM avanzada (12 pases)</td>
+                <td>Identificar módulo defectuoso en slot específico</td>
+            </tr>
+            <tr>
+                <td><strong>UEFI Tool</strong></td>
+                <td>Editar/actualizar firmware BIOS/UEFI</td>
+                <td>Reparar BIOS corrupto mediante reprogramación</td>
+            </tr>
+            <tr>
+                <td><strong>OpenBoardView</strong></td>
+                <td>Visualizar esquemáticos de placas</td>
+                <td>Localizar pista rota en placa de notebook (ej: Lenovo G480)</td>
+            </tr>
+            <tr>
+                <td><strong>AsProgrammer</strong></td>
+                <td>Software para programadores SPI</td>
+                <td>Flashear chips BIOS con programador CH341A</td>
+            </tr>
+            <tr>
+                <td><strong>FurMark</strong></td>
+                <td>Stress test de GPU y VRM</td>
+                <td>Provocar fallas térmicas bajo carga extrema</td>
+            </tr>
+            <tr>
+                <td><strong>Prime95</strong></td>
+                <td>Stress test de CPU y sistema de alimentación</td>
+                <td>Detectar inestabilidades en VRM bajo carga</td>
+            </tr>
+        </table>
+
+        <h2>Caso 1: Recuperación de BIOS Corrupta</h2>
+
+        <p><strong>Problema:</strong> Notebook no enciende, no da video o muestra errores tras una actualización de BIOS fallida o interrumpida. El equipo puede mostrar luces de encendido, pero no completa el proceso de arranque (boot).</p>
+
+        <p><strong>Materiales:</strong> Programador SPI (CH341A), soldador de aire caliente (hot air), firmware oficial o dump de BIOS conocido bueno, software para el programador (AsProgrammer, NeoProgrammer, etc.).</p>
+
+        <p><strong>Solución:</strong></p>
+
+        <ol>
+            <li>Localizar y extraer cuidadosamente el chip de memoria BIOS de la placa base utilizando el soldador de aire caliente.</li>
+            <li>Conectar el chip al programador CH341A usando un clip o zócalo de adaptación.</li>
+            <li>Leer el contenido actual del chip (para hacer un respaldo) y luego borrarlo.</li>
+            <li>Programar (flashear) el nuevo firmware oficial en el chip.</li>
+            <li>Verificar que la escritura fue exitosa.</li>
+            <li>Soldar de nuevo el chip BIOS en su lugar en la placa base con cuidado de no puentear pines.</li>
+        </ol>
+
+        <p><strong>Link a ch341a:</strong> <a href="https://articulo.mercadolibre.com.ar/MLA-798579414-programador-usb-ch341a-pinza-soic-8-bgm-taiwan-archivos-_JM?variation=184938949725#polycard_client=cart_list">Programador USB CH341A</a></p>
+
+        <h2>Caso 2: Reemplazo de Componentes SMD (Resistencia / Condensador)</h2>
+
+        <p><strong>Problema:</strong> Componente superficial (SMD) dañado (ej: resistencia, condensador, diodo) en la placa base, identificado visualmente (quemado, agrietado) o mediante diagnóstico con esquemáticos y multímetro. Esto causa fallas como falta de alimentación, cortocircuitos o malfuncionamiento de una sección específica.</p>
+
+        <p><strong>Materiales:</strong> Multímetro, soldador de precisión (punta fina) o estación de aire caliente, pasta de soldar, flux líquido o en pasta, pinzas antiestéticas, lupa o microscopio.</p>
+
+        <p><strong>Solución:</strong></p>
+
+        <ol>
+            <li>Identificar el componente a reemplazar y su valor correcto (usando esquemáticos o comparación en boardview).</li>
+            <li>Aplicar flux alrededor del componente dañado.</li>
+            <li>Calentar uniformemente los terminales del componente con el soldador de precisión o aire caliente hasta que la soldadura se funda.</li>
+            <li>Retirar con cuidado el componente dañado usando las pinzas.</li>
+            <li>Limpiar la zona de soldadura con flux y soldadura nueva si es necesario.</li>
+            <li>Colocar el nuevo componente en su posición, asegurando la orientación correcta.</li>
+            <li>Aplicar flux y soldar los terminales con el soldador de precisión.</li>
+            <li>Limpiar el exceso de flux con alcohol isopropílico.</li>
+            <li>Verificar con el multímetro que no haya cortos y que la soldadura sea correcta.</li>
+        </ol>
+
+        <h2>Caso 3: Reemplazo de Condensadores en el VRM</h2>
+
+        <p><strong>Problema:</strong> Síntomas de inestabilidad del sistema (reinicios, apagados, pantallazos azules) bajo carga, o equipo que no enciende. Diagnóstico previo con multímetro identifica condensadores en el módulo de regulación de voltaje (VRM) con fugas, cortos o pérdida de capacitancia.</p>
+
+        <p><strong>Materiales:</strong> Multímetro, soldador, chupaestaño o desoldador de succión, pasta de soldar, flux, pinzas, condensadores de reemplazo de igual o mayor especificación (voltaje y capacitancia).</p>
+
+        <p><strong>Procedimiento:</strong></p>
+
+        <ol>
+            <li>Diagnóstico inicial: Confirmar que el condensador está dañado midiendo en circuito o fuera de él (debe mostrar una resistencia infinita o muy alta en modo Ohm, faradios o voltaje y no tener corto).</li>
+            <li>Desoldaje: Aplicar flux en las soldaduras del condensador dañado. Calentar un pin a la vez con el soldador a ~350°C (2-3 segundos por pin) y usar el chupa estaño para remover la soldadura.</li>
+            <li>Extracción: Una vez fundida la soldadura de ambos pines, extraer con cuidado el componente dañado usando las pinzas.</li>
+            <li>Verificación (opcional pero recomendada): Testear el componente extraído con el multímetro para confirmar el fallo.</li>
+            <li>De ser necesario su reemplazo siempre elegir un componente idéntico en faradios y voltaje, de no conseguir uno idéntico optar siempre por uno con mayor capacidad, ósea de un voltaje y faradios superior.</li>
+            <li>Preparación: Limpiar los pads de soldadura en la placa. Aplicar flux en los pads.</li>
+            <li>Instalación: Colocar el nuevo condensador respetando estrictamente la polaridad (el lado negativo (-) está marcado con una franja clara en el condensador y el positivo (+) en la placa).</li>
+            <li>Soldadura: Soldar cada pin con cuidado, evitando exceso de calor que pueda dañar el nuevo componente o los pads de la placa.</li>
+        </ol>
+
+        <h2>Caso 4: Reparación de Pistas en Placa Base</h2>
+
+        <p><strong>Problema:</strong> El equipo presenta fallas intermitentes o falta de funcionalidad en puertos, teclado, carga, etc., debido a roturas físicas, corrosión o cortes en las pistas de cobre de la placa base. Confirmado con multímetro en modo continuidad.</p>
+
+        <p><strong>Materiales:</strong> Multímetro en modo continuidad, lupa o microscopio, cautín (soldador), cable esmaltado (magnet wire) o hilo de cobre fino, flux, pinzas.</p>
+
+        <p><strong>Procedimiento:</strong></p>
+
+        <ol>
+            <li>Localización: Usar el multímetro en modo continuidad (beeper) para encontrar y delimitar con precisión la zona de la pista rota. Raspar suavemente la capa de soldermask (pintura verde) en ambos extremos de la rotura para exponer el cobre.</li>
+            <li>Preparación: Cortar un trozo de cable esmaltado ligeramente más largo que la rotura. Quitar el esmalte aislante de los extremos del cable con un cutter o con la punta del soldador caliente.</li>
+            <li>Puente: Aplicar una pequeña cantidad de flux en los puntos de contacto (cobre expuesto de la placa y extremos del cable).</li>
+            <li>Soldadura: Soldar un extremo del cable al primer punto de cobre expuesto. Estirar el cable sobre la rotura y soldar el otro extremo al segundo punto. El cable debe quedar firme y sin tensionar.</li>
+            <li>Verificación: Comprobar con el multímetro que existe continuidad y que el puente no genera un cortocircuito con pistas adyacentes.</li>
+            <li>Protección (Opcional): Aplicar una gota de barniz o esmalte de uñas para aislar y fijar el puente reparado.</li>
+        </ol>
+
+        <h2>Caso 5: Reparación de Pines Torcidos en Zócalo LGA (CPU)</h2>
+
+        <p><strong>Problema:</strong> La computadora no enciende (no da video, no POSTea) o presenta inestabilidades después de una instalación o mantenimiento incorrecto del procesador. Inspección visual revela uno o más pines dentro del zócalo LGA de la placa base doblados, torcidos o aplastados.</p>
+
+        <p><strong>Materiales:</strong> Lupa o microscopio de taller, pinzas de precisión (finas y de punta plana), aguja hipodérmica o herramienta específica para enderezar pines (picking tool), tarjeta de crédito o plástico rígido fino.</p>
+
+        <p><strong>Solución:</strong></p>
+
+        <ol>
+            <li>Retirar el procesador y cualquier obstrucción del zócalo.</li>
+            <li>Bajo una excelente fuente de luz y aumento (lupa/microscopio), identificar los pines afectados y la alineación correcta comparando con los pines vecinos.</li>
+            <li>Con mucho cuidado, usar la aguja hipodérmica o la pinza de precisión para enderezar suavemente el pin, guiándolo lentamente a su posición original.</li>
+            <li>No usar herramientas metálicas gruesas para evitar romper el pin.</li>
+            <li>Verificar la alineación pasando suavemente una tarjeta plástica fina sobre las filas de pines; debe deslizarse sin obstrucciones.</li>
+            <li>Una vez rectificados todos los pines, instalar el procesador con extrema precaución.</li>
+        </ol>
+
+        <h2>Caso 6: Limpieza y Reparación por Infestación de Insectos (Cucarachas)</h2>
+
+        <p><strong>Problema:</strong> Equipo falla o no enciende, con presencia de residuos secos, patas o restos de insectos en la placa base. Suele causar cortocircuitos, corrosión en las pistas y componentes, y malos olores.</p>
+
+        <p><strong>Materiales:</strong> Destornilladores, alcohol isopropílico 99%, brocha de cerdas suaves, hisopos, lupa, multímetro, pasta para limpieza de contactos (opcional), removedor de óxido (como WD-40 Contact Cleaner).</p>
+
+        <p><strong>Solución:</strong></p>
+
+        <ol>
+            <li>Desarmar completamente el equipo y extraer la placa base.</li>
+            <li>Retir manualmente con cuidado los restos grandes de insectos usando pinzas y una brocha.</li>
+            <li>Limpiar toda la placa a fondo con alcohol isopropílico y hisopos, frotando suavemente las áreas afectadas.</li>
+            <li>En zonas con corrosión persistente, aplicar un removedor de óxido específico para electrónica.</li>
+            <li>Dejar secar completamente por varias horas.</li>
+            <li>Realizar una inspección visual minuciosa bajo lupa en busca de pistas corroídas o componentes dañados.</li>
+            <li>Usar el multímetro para verificar continuidad en las pistas sospechosas y buscar cortocircuitos en áreas de alimentación.</li>
+            <li>Reparar pistas rotas o reemplazar componentes dañados según se necesite.</li>
+        </ol>
+
+        <h2>Caso 7: Reparación de Pines Dañados en Zócalo de Memoria RAM</h2>
+
+        <p><strong>Problema:</strong> Una ranura de memoria RAM específica no es detectada por el sistema, o el equipo presenta errores de memoria (BSOD) cuando se usa dicha ranura. Inspección visual revela pines sucios, oxidados, doblados o retraídos dentro del zócalo.</p>
+
+        <p><strong>Materiales:</strong> Lupa, aire comprimido, alcohol isopropílico, pinza de precisión, aguja hipodérmica, borrador de lápiz (vulcanizado blanco).</p>
+
+        <p><strong>Solución:</strong></p>
+
+        <ol>
+            <li>Sopletear el zócalo con aire comprimido para remover polvo.</li>
+            <li>Para pines sucios u oxidados: limpiar los contactos con un hisopo embebido en alcohol isopropílico. Para óxido más fuerte, frotar suavemente con un borrador de lápiz nuevo.</li>
+            <li>Para pines doblados: usar una aguja o pinza de precisión para enderezarlos con el mismo método que en los zócalos LGA.</li>
+            <li>Para pines retraídos (que no hacen contacto): con mucho cuidado, usar la herramienta para "jalar" ligeramente el pin hacia arriba, restaurando su altura y tensión.</li>
+            <li>Realizar una limpieza final con alcohol y verificar visualmente que todos los pines estén alineados.</li>
+            <li>Probar la funcionalidad con un módulo de memoria conocido en buen estado.</li>
+        </ol>
+
+        <h2>Caso 8: Reflow y Resoldado de Conectores SMD Desprendidos (HDMI, USB, Jack)</h2>
+
+        <p><strong>Problema:</strong> Conectores de E/S (HDMI, USB, conector de audio) se encuentran flojos, movedizos o parcialmente desoldados de la placa base. Causa fallas intermitentes (el dispositivo funciona solo si el cable se sostiene en una posición) o no funciona en absoluto.</p>
+
+        <p><strong>Materiales:</strong> Estación de aire caliente, soldador de precisión, flux en pasta o líquido, soldadura sin plomo, pinzas, pasta desmoldeante (opcional).</p>
+
+        <p><strong>Solución:</strong></p>
+
+        <ol>
+            <li>Aplicar flux generosamente alrededor de las pestañas de soldadura del conector.</li>
+            <li>Usar el soldador de precisión y añadir una pequeña cantidad de soldadura nueva a cada pin de contacto para mejorar la transferencia de calor.</li>
+            <li>Con la estación de aire caliente a ~300-350°C y un flujo de aire medio, calentar uniformemente toda el área del conector (incluyendo sus pestañas de anclaje) en movimientos circulares.</li>
+            <li>Una vez que la soldadura se vea brillante y líquida (lo que usualmente toma 20-60 segundos), presionar ligeramente hacia abajo el conector con las pinzas para asegurar que quede plano y bien asentado contra la placa.</li>
+            <li>Dejar que se enfríe naturalmente sin moverlo.</li>
+            <li>Realizar una limpieza con alcohol isopropílico para remover el flux residual.</li>
+            <li>Verificar con multímetro la continuidad de los pines y la ausencia de cortos.</li>
+        </ol>
+
+        <h2>Caso 9: Eliminación de Virus de BIOS/Bootkits</h2>
+
+        <p><strong>Problema:</strong> Comportamiento errático del sistema que persiste después de formatear el disco duro y reinstalar el sistema operativo. Redirecciones en el navegador, fallos al arrancar, o software de seguridad que detecta infecciones en el proceso de boot.</p>
+
+        <p><strong>Materiales:</strong> Programador SPI (CH341A), clip SOIC8 (opcional para no desoldar), firmware oficial de BIOS.</p>
+
+        <p><strong>Solución:</strong></p>
+
+        <ol>
+            <li>Descargar la versión más reciente y limpia del firmware de BIOS desde el sitio web del fabricante de la placa base.</li>
+            <li>Con el programador y el clip (o desoldando el chip), hacer un volcado (backup) completo de la BIOS actual.</li>
+            <li>Borrar el chip y flashear la nueva BIOS limpia.</li>
+            <li>Reiniciar y entrar a la BIOS Setup para cargar los valores por defecto (Load Optimized Defaults).</li>
+            <li>Realizar un formateo completo del disco duro/SSD y reinstalar el sistema operativo.</li>
+        </ol>
+
+        <h2>Caso 10: Problemas con el Puente Sur (PCH/Southbridge) o Puente Norte (NB)</h2>
+
+        <p><strong>Problema:</strong></p>
+
+        <ul>
+            <li><strong>Puente Sur:</strong> Fallas en puertos SATA, USB, audio (periféricos no detectados). Calentamiento excesivo del chip.</li>
+            <li><strong>Puente Norte (en placas viejas):</strong> Fallas de video integrado o memoria RAM.</li>
+        </ul>
+
+        <p><strong>Materiales:</strong> Estación de aire caliente, pasta térmica, multímetro.</p>
+
+        <p><strong>Solución:</strong></p>
+
+        <ol>
+            <li>Verificar si el chip se sobrecalienta al conectar la energía (se quema al tocarlo).</li>
+            <li>Aplicar <strong>reflow</strong> (recalentamiento controlado) para resoldar bolas BGA internas. <strong>Nota:</strong> Esto es una solución temporal.</li>
+            <li>La solución definitiva es el <strong>reballing</strong> (reemplazo total de las bolas de soldadura) o el reemplazo del chip.</li>
+        </ol>
+
+        <h2>Caso 11: Corrosión de Pistas y Componentes por Líquidos</h2>
+
+        <p><strong>Problema:</strong> Derrame de líquidos (agua, refrescos, café) que causa cortos, corrosión y fallos intermitentes o totales.</p>
+
+        <p><strong>Materiales:</strong> Alcohol isopropílico 99%, brochas, hisopos, lupa, removedor de óxido, multímetro.</p>
+
+        <p><strong>Solución:</strong></p>
+
+        <ol>
+            <li>Desarmar y limpiar profundamente la placa con alcohol.</li>
+            <li>Remover todo rastro de corrosión con un cepillo suave.</li>
+            <li>Inspeccionar con lupa para identificar pistas y componentes corroídos.</li>
+            <li>Reparar pistas comidas con cable magneto y reemplazar componentes dañados.</li>
+        </ol>
+
+        <h2>Caso 12: BIOS Block (Problema de Configuración o Boot Block)</h2>
+
+        <p><strong>Problema:</strong> La placa enciende (fans giran) pero <strong>no da video ni emite pitidos</strong>. Ocurre tras una actualización fallida o configuración incorrecta en la BIOS.</p>
+
+        <p><strong>Materiales:</strong> Programador SPI (CH341A), clip SOIC8.</p>
+
+        <p><strong>Solución:</strong></p>
+
+        <ol>
+            <li>Intentar <strong>clear CMOS</strong> (puentear pines JBAT1 o quitar pila).</li>
+            <li>Si no funciona, usar el programador para flashear un BIOS conocido como bueno.</li>
+        </ol>
+
+        <h2>Caso 13: Daño por Rayos o Sobretensión en Puertos de Red (ETH) o USB</h2>
+
+        <p><strong>Problema:</strong> La placa no enciende o specific ports (USB, Ethernet) no funcionan tras una tormenta eléctrica o pico de voltaje.</p>
+
+        <p><strong>Materiales:</strong> Multímetro, lupa, estación de soldadura.</p>
+
+        <p><strong>Solución:</strong></p>
+
+        <ol>
+            <li>Inspeccionar visualmente el <strong>controlador de red (LAN chip)</strong> y los <strong>filtros de señal (IC de puertos USB)</strong>; suelen presentar fracturas o quemaduras.</li>
+            <li>Medir en corto estos componentes. Si están en corto, deben ser removidos.</li>
+            <li><strong>Nota:</strong> A veces, remover el chip dañado es suficiente para que el resto de la placa funcione, aunque se pierda la funcionalidad de ese puerto.</li>
+        </ol>
+
+        <h2>Caso 14: Falla en la Pila CMOS (Batería AGP)</h2>
+
+        <p><strong>Problema:</strong> La placa <strong>no guarda la configuración de la BIOS</strong> (fecha, hora, settings) o no enciende porque la batería está completamente muerta.</p>
+
+        <p><strong>Materiales:</strong> Multímetro, pila CR2032 nueva.</p>
+
+        <p><strong>Solución:</strong></p>
+
+        <ol>
+            <li>Medir el voltaje de la pila. Si está por debajo de <strong>2.5V - 2.8V</strong>, debe ser reemplazada.</li>
+            <li>Si el voltaje es correcto pero el problema persiste, verificar el circuito de la pila (diodos, resistencias) en la placa.</li>
+        </ol>
+    </div>
+</body>
+</html>

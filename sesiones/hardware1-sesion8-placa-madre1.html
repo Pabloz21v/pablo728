@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 8: Fundamentos de la Placa Madre</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            table {
+                font-size: 14px;
+                display: block;
+                overflow-x: auto;
+            }
+            th, td {
+                padding: 8px;
+            }
+        }
+       
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion7-ram.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 6
+      </a>
+      <a
+        href="hardware1-sesion9-placa-madre2.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 9
+      </a>
+    </div>
+        <h1>Sesión 8: Fundamentos de la Placa Madre</h1>
+
+        <h2>Introducción y Conceptos Básicos</h2>
+
+        <h3>¿Qué es la Placa Madre?</h3>
+        <p>La placa madre (motherboard o mainboard) es el componente principal de una computadora que actúa como la columna vertebral del sistema. Es una placa de circuito impreso (PCB) que conecta y permite la comunicación entre todos los componentes del equipo: procesador, memoria RAM, tarjetas de expansión, dispositivos de almacenamiento y periféricos.</p>
+
+        <h3>Funciones Principales</h3>
+        <ul>
+            <li>Conexión física: Proporciona conectores y slots para todos los componentes.</li>
+            <li>Distribución de energía: Distribuye la alimentación eléctrica a todos los componentes (proporcionada por la fuente de poder).</li>
+            <li>Comunicación de datos: Facilita el intercambio de información entre componentes mediante la comunicación de buses y controladores.</li>
+            <li>Control del sistema: Aloja el firmware (BIOS/UEFI) que controla el arranque.</li>
+            <li>Expansión: Permite agregar nuevos componentes mediante slots de expansión.</li>
+        </ul>
+
+        <h3>Evolución Histórica</h3>
+
+        <table>
+            <tr>
+                <th>Época</th>
+                <th>Características</th>
+                <th>Tecnologías Principales</th>
+            </tr>
+            <tr>
+                <td>1980s-1990s</td>
+                <td>Placas simples, pocos componentes integrados</td>
+                <td>ISA, EISA, slots de memoria SIMM</td>
+            </tr>
+            <tr>
+                <td>1990s-2000s</td>
+                <td>Mayor integración, aparición del PCI</td>
+                <td>PCI, AGP, DIMM, IDE/PATA</td>
+            </tr>
+            <tr>
+                <td>2000s-2010s</td>
+                <td>Integración masiva de funciones</td>
+                <td>PCIe, SATA, DDR2/DDR3, USB 2.0/3.0</td>
+            </tr>
+            <tr>
+                <td>2010s-Actualidad</td>
+                <td>Alto nivel de integración, soporte para nuevas tecnologías</td>
+                <td>M.2, DDR4/DDR5, USB-C, Wi-Fi integrado</td>
+            </tr>
+        </table>
+
+        <h2>Componentes Principales de las Placas Madre</h2>
+
+        <h3>Componentes en Placas Madre Antiguas</h3>
+        <ul>
+            <li>Socket del procesador: Slot 1, Socket 7, Socket A</li>
+            <li>Chipset separado: Northbridge y Southbridge claramente diferenciados</li>
+            <li>Slots de expansión: ISA, EISA, VESA Local Bus</li>
+            <li>Memoria: SIMM de 30 y 72 pines</li>
+            <li>Conectores: IDE/PATA, puerto serie, puerto paralelo</li>
+            <li>BIOS: Chip ROM/EPROM básico</li>
+        </ul>
+
+        <h3>Componentes en Placas Madre Modernas</h3>
+        <ul>
+            <li>Socket del procesador: LGA, PGA, BGA (Intel: LGA1700, AMD: AM5)</li>
+            <li>Chipset integrado: Funciones del Northbridge integradas en el CPU</li>
+            <li>Slots de expansión: PCIe de múltiples generaciones y anchos</li>
+            <li>Memoria: DIMM DDR4/DDR5 con soporte para altas frecuencias</li>
+            <li>Conectores: SATA III, M.2 NVMe, USB 3.0/3.1/3.2, USB-C</li>
+            <li>UEFI: Firmware avanzado con interfaz gráfica</li>
+        </ul>
+
+        <h2>Slots PCI y PCIe: Evolución y Diferencias</h2>
+
+        <h3>Slot PCI (Peripheral Component Interconnect)</h3>
+        <p>Introducido en 1992, el PCI fue el estándar de expansión durante más de una década.</p>
+
+        <h4>Características del PCI:</h4>
+        <ul>
+            <li>Ancho de banda: 32 bits a 33 MHz = 133 MB/s</li>
+            <li>Voltaje: 5V y 3.3V</li>
+            <li>Longitud: 85 mm (PCI estándar)</li>
+            <li>Bus compartido: Todos los slots PCI comparten el ancho de banda total</li>
+            <li>Plug and Play: Configuración automática de dispositivos</li>
+        </ul>
+
+        <h4>Variantes del PCI:</h4>
+        <ul>
+            <li>PCI-X: Extensión de 64 bits, velocidades hasta 533 MHz</li>
+            <li>Mini PCI: Versión compacta para laptops</li>
+            <li>PCI Express: Sucesor basado en comunicación serie</li>
+        </ul>
+
+        <h3>Slot PCIe (PCI Express)</h3>
+        <p>Introducido en 2003, PCIe reemplazó gradualmente al PCI tradicional ofreciendo mayor velocidad y eficiencia.</p>
+
+        <h4>Características del PCIe:</h4>
+        <ul>
+            <li>Comunicación serie: Lanes (carriles) dedicados por slot</li>
+            <li>Escalabilidad: x1, x4, x8, x16 lanes</li>
+            <li>Comunicación bidireccional: Envío y recepción simultáneos</li>
+            <li>Hot-plug: Conexión en caliente en algunos casos</li>
+        </ul>
+
+        <table>
+            <tr>
+                <th>Generación PCIe</th>
+                <th>Año</th>
+                <th>Velocidad por Lane</th>
+                <th>PCIe x16 Total</th>
+            </tr>
+            <tr>
+                <td>PCIe 1.0</td>
+                <td>2003</td>
+                <td>250 MB/s</td>
+                <td>4 GB/s</td>
+            </tr>
+            <tr>
+                <td>PCIe 2.0</td>
+                <td>2007</td>
+                <td>500 MB/s</td>
+                <td>8 GB/s</td>
+            </tr>
+            <tr>
+                <td>PCIe 3.0</td>
+                <td>2010</td>
+                <td>1 GB/s</td>
+                <td>16 GB/s</td>
+            </tr>
+            <tr>
+                <td>PCIe 4.0</td>
+                <td>2017</td>
+                <td>2 GB/s</td>
+                <td>32 GB/s</td>
+            </tr>
+            <tr>
+                <td>PCIe 5.0</td>
+                <td>2019</td>
+                <td>4 GB/s</td>
+                <td>64 GB/s</td>
+            </tr>
+        </table>
+
+        <h2>Slots de RAM: Tipos y Evolución</h2>
+
+        <p>Ranuras donde se instalan los módulos de memoria.</p>
+
+        <h3>Memoria en Sistemas Antiguos</h3>
+
+        <h4>SIMM (Single In-line Memory Module):</h4>
+        <ul>
+            <li>SIMM 30 pines: 8 bits de ancho, hasta 4 MB por módulo</li>
+            <li>SIMM 72 pines: 32 bits de ancho, hasta 32 MB por módulo</li>
+            <li>Instalación: En pares o grupos de 4 para completar el bus de datos</li>
+        </ul>
+
+        <h4>DIMM temprano:</h4>
+        <ul>
+            <li>DIMM 168 pines: SDR SDRAM, 64 bits de ancho</li>
+            <li>Velocidades: PC66, PC100, PC133</li>
+        </ul>
+
+        <h3>Memoria en Sistemas Modernos</h3>
+
+        <table>
+            <tr>
+                <th>Tipo de RAM</th>
+                <th>Pines</th>
+                <th>Voltaje</th>
+                <th>Velocidades Típicas</th>
+                <th>Capacidad Máxima</th>
+            </tr>
+            <tr>
+                <td>DDR SDRAM</td>
+                <td>184</td>
+                <td>2.5V</td>
+                <td>200-400 MHz</td>
+                <td>1 GB</td>
+            </tr>
+            <tr>
+                <td>DDR2 SDRAM</td>
+                <td>240</td>
+                <td>1.8V</td>
+                <td>400-1066 MHz</td>
+                <td>4 GB</td>
+            </tr>
+            <tr>
+                <td>DDR3 SDRAM</td>
+                <td>240</td>
+                <td>1.5V</td>
+                <td>800-2133 MHz</td>
+                <td>16 GB</td>
+            </tr>
+            <tr>
+                <td>DDR4 SDRAM</td>
+                <td>288</td>
+                <td>1.2V</td>
+                <td>1600-4800 MHz</td>
+                <td>128 GB</td>
+            </tr>
+            <tr>
+                <td>DDR5 SDRAM</td>
+                <td>288</td>
+                <td>1.1V</td>
+                <td>3200-8000 MHz</td>
+                <td>256 GB</td>
+            </tr>
+        </table>
+
+        <h4>Características de los Slots de RAM Modernos</h4>
+        <ul>
+            <li>Dual Channel: Utilización de dos canales para duplicar el ancho de banda</li>
+            <li>Quad Channel: Cuatro canales en plataformas de alto rendimiento</li>
+            <li>ECC Support: Corrección de errores en memorias de servidor</li>
+            <li>XMP/DOCP: Perfiles de overclocking automático</li>
+            <li>Registro y buffering: En memorias de servidor para mayor capacidad</li>
+        </ul>
+
+        <h2>Conectores de Almacenamiento</h2>
+
+        <h3>Conector IDE/PATA (Parallel ATA)</h3>
+        <p>Estándar principal de almacenamiento desde finales de los 80 hasta mediados de los 2000.</p>
+
+        <h4>Características IDE/PATA:</h4>
+        <ul>
+            <li>Cable: 40 u 80 hilos, ancho y plano</li>
+            <li>Dispositivos por cable: 2 (Master y Slave)</li>
+            <li>Velocidades: ATA-1 (8.3 MB/s) hasta ATA-7 (133 MB/s)</li>
+            <li>Longitud máxima: 45 cm</li>
+            <li>Configuración: Mediante jumpers (Master/Slave/Cable Select)</li>
+        </ul>
+
+        <h3>Conector SATA (Serial ATA)</h3>
+        <p>Sucesor del IDE, introducido en 2003, sigue siendo el estándar actual para discos duros y SSDs SATA.</p>
+
+        <h4>Ventajas del SATA:</h4>
+        <ul>
+            <li>Cables más delgados: Mejor flujo de aire en el gabinete</li>
+            <li>Hot-swap: Conexión en caliente</li>
+            <li>Un dispositivo por cable: No hay configuración Master/Slave</li>
+            <li>Mayor velocidad: Hasta 600 MB/s en SATA III</li>
+        </ul>
+
+        <table>
+            <tr>
+                <th>Versión SATA</th>
+                <th>Año</th>
+                <th>Velocidad</th>
+                <th>Características Principales</th>
+            </tr>
+            <tr>
+                <td>SATA I</td>
+                <td>2003</td>
+                <td>150 MB/s</td>
+                <td>Primera generación, reemplaza IDE</td>
+            </tr>
+            <tr>
+                <td>SATA II</td>
+                <td>2004</td>
+                <td>300 MB/s</td>
+                <td>NCQ (Native Command Queuing)</td>
+            </tr>
+            <tr>
+                <td>SATA III</td>
+                <td>2009</td>
+                <td>600 MB/s</td>
+                <td>Estándar actual, compatibilidad total</td>
+            </tr>
+        </table>
+
+        <h3>Conector M.2</h3>
+        <p>Estándar moderno para SSDs de alta velocidad, introducido en 2013.</p>
+
+        <h4>Características del M.2:</h4>
+        <ul>
+            <li>Factor de forma: Tarjeta pequeña que se conecta directamente a la placa madre</li>
+            <li>Interfaces soportadas: SATA III y PCIe NVMe</li>
+            <li>Tamaños comunes: 2242, 2260, 2280 (ancho x largo en mm)</li>
+            <li>Keys (muescas): B, M, B+M para diferentes tipos de conexión</li>
+        </ul>
+
+        <table>
+            <tr>
+                <th>Tipo M.2</th>
+                <th>Interfaz</th>
+                <th>Velocidad Máxima</th>
+                <th>Key</th>
+            </tr>
+            <tr>
+                <td>M.2 SATA</td>
+                <td>SATA III</td>
+                <td>600 MB/s</td>
+                <td>B+M</td>
+            </tr>
+            <tr>
+                <td>M.2 NVMe PCIe 3.0</td>
+                <td>PCIe 3.0 x4</td>
+                <td>3,500 MB/s</td>
+                <td>M</td>
+            </tr>
+            <tr>
+                <td>M.2 NVMe PCIe 4.0</td>
+                <td>PCIe 4.0 x4</td>
+                <td>7,000 MB/s</td>
+                <td>M</td>
+            </tr>
+        </table>
+
+        <h2>Conectores de Alimentación y Panel Frontal</h2>
+
+        <h3>Conectores de Alimentación</h3>
+
+        <h4>Conector Principal (24 pines):</h4>
+        <ul>
+            <li>Evolución: 20 pines (AT) → 24 pines (ATX)</li>
+            <li>Voltajes: +12V, +5V, +3.3V, -12V, +5VSB (standby)</li>
+            <li>Función: Alimentación principal de la placa madre</li>
+            <li>Características: Conector polarizado, imposible conexión incorrecta</li>
+        </ul>
+
+        <h4>Conector de CPU (4/8 pines) (EPS):</h4>
+        <ul>
+            <li>Alimentación dedicada al procesador.</li>
+            <li>4 pines: Para procesadores de menor consumo</li>
+            <li>8 pines: Para procesadores de alto rendimiento</li>
+            <li>12 pines: En placas madre de gama alta (4+8 o 8+4)</li>
+            <li>Voltaje: +12V exclusivamente</li>
+        </ul>
+
+        <h3>Conectores del Panel Frontal</h3>
+        <p>Conjunto de conectores pequeños que conectan los controles y LEDs del gabinete.</p>
+
+        <table>
+            <tr>
+                <th>Conector</th>
+                <th>Función</th>
+                <th>Pines</th>
+                <th>Tipo</th>
+            </tr>
+            <tr>
+                <td>Power SW</td>
+                <td>Botón de encendido</td>
+                <td>2</td>
+                <td>Momentáneo</td>
+            </tr>
+            <tr>
+                <td>Reset SW</td>
+                <td>Botón de reinicio</td>
+                <td>2</td>
+                <td>Momentáneo</td>
+            </tr>
+            <tr>
+                <td>Power LED</td>
+                <td>LED de encendido</td>
+                <td>2</td>
+                <td>Polarizado</td>
+            </tr>
+            <tr>
+                <td>HDD LED</td>
+                <td>LED de actividad de disco</td>
+                <td>2</td>
+                <td>Polarizado</td>
+            </tr>
+            <tr>
+                <td>Speaker</td>
+                <td>Altavoz interno (beeps)</td>
+                <td>4</td>
+                <td>Polarizado</td>
+            </tr>
+        </table>
+
+        <p>Ubicación: generalmente abajo a la derecha de la placa.</p>
+        <p>La conexión incorrecta de los conectores del panel frontal puede provocar que los botones y LEDs no funcionen, pero generalmente no causa daños al hardware. Siempre consultar el manual de la placa madre para la disposición correcta.</p>
+
+        <h4>Otros Conectores Importantes</h4>
+        <ul>
+            <li>USB Headers: Conectores internos para puertos USB frontales</li>
+            <li>Audio Headers: Para jacks de audio del panel frontal</li>
+            <li>RGB Headers: Para iluminación LED RGB</li>
+            <li>Fan Headers: Para ventiladores (3 o 4 pines)</li>
+            <li>TPM Header: Para módulo de seguridad TPM</li>
+        </ul>
+
+        <h2>Preguntas</h2>
+        <ol>
+            <li>¿Qué es una placa madre y cuál es su función principal en una computadora?</li>
+            <li>¿Cuáles son las diferencias principales entre una placa madre antigua y una moderna?</li>
+            <li>¿Qué es el chipset y cuál es su función en una placa madre?</li>
+            <li>¿Cuál es la diferencia entre PCI y PCIe?</li>
+            <li>¿Qué ventajas ofrece el conector SATA sobre el IDE?</li>
+            <li>¿Qué es el Dual Channel en la memoria RAM y cómo mejora el rendimiento?</li>
+            <li>¿Qué tipos de memoria RAM se utilizan en las placas madre modernas?</li>
+            <li>¿Cuál es la función del conector de alimentación de 24 pines en una placa madre?</li>
+            <li>¿Qué precauciones se deben tomar al conectar los conectores del panel frontal?</li>
+        </ol>
+    </div>
+</body>
+</html>

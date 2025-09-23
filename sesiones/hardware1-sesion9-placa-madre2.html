@@ -1,0 +1,647 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 9: Arquitectura Avanzada y Componentes Especializados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            table {
+                font-size: 14px;
+                display: block;
+                overflow-x: auto;
+            }
+            th, td {
+                padding: 8px;
+            }
+        }
+    
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion8-placa-madre1.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 8
+      </a>
+      <!-- <a
+        href="hardware1-sesion10.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 10
+      </a> -->
+    </div>
+        <h1>Sesión 9: Arquitectura Avanzada y Componentes Especializados</h1>
+
+        <h2>BIOS/UEFI y CMOS</h2>
+
+        <h3>BIOS (Basic Input/Output System)</h3>
+        <p>El BIOS es el firmware que se ejecuta cuando se enciende la computadora, responsable de inicializar el hardware y cargar el sistema operativo.</p>
+
+        <h4>Funciones del BIOS:</h4>
+        <ul>
+            <li>POST (Power-On Self Test): Verifica el funcionamiento del hardware.</li>
+            <li>Inicialización del hardware: Configura componentes básicos.</li>
+            <li>Bootloader: Localiza y carga el sistema operativo.</li>
+            <li>Interfaz de configuración: Setup para modificar parámetros del sistema.</li>
+            <li>Servicios de tiempo real: Funciones básicas de entrada/salida.</li>
+        </ul>
+
+        <h4>Limitaciones del BIOS tradicional:</h4>
+        <ul>
+            <li>Modo real de 16 bits: Acceso limitado a memoria.</li>
+            <li>Interfaz de texto: Solo teclado, sin mouse.</li>
+            <li>Tamaño de disco: Limitado a 2.2 TB (MBR).</li>
+            <li>Velocidad de arranque: Proceso más lento.</li>
+            <li>Seguridad limitada: Vulnerable a ataques de rootkit.</li>
+        </ul>
+
+        <h3>UEFI (Unified Extensible Firmware Interface)</h3>
+        <p>Sucesor moderno del BIOS, introducido para superar las limitaciones del firmware tradicional.</p>
+
+        <h4>Ventajas del UEFI:</h4>
+        <ul>
+            <li>Interfaz gráfica: Soporte para mouse y elementos visuales.</li>
+            <li>Arranque rápido: Secure Boot y Fast Boot.</li>
+            <li>Soporte GPT: Discos de más de 2.2 TB.</li>
+            <li>Arquitectura modular: Drivers y aplicaciones UEFI.</li>
+            <li>Seguridad mejorada: Secure Boot contra malware.</li>
+            <li>Networking: Capacidad de red desde el firmware.</li>
+        </ul>
+
+        <table>
+            <tr>
+                <th>Característica</th>
+                <th>BIOS Legacy</th>
+                <th>UEFI</th>
+            </tr>
+            <tr>
+                <td>Arquitectura</td>
+                <td>16 bits</td>
+                <td>32/64 bits</td>
+            </tr>
+            <tr>
+                <td>Interfaz</td>
+                <td>Texto</td>
+                <td>Gráfica</td>
+            </tr>
+            <tr>
+                <td>Tamaño de disco</td>
+                <td>2.2 TB (MBR)</td>
+                <td>9.4 ZB (GPT)</td>
+            </tr>
+            <tr>
+                <td>Particiones primarias</td>
+                <td>4</td>
+                <td>128</td>
+            </tr>
+            <tr>
+                <td>Tiempo de arranque</td>
+                <td>Lento</td>
+                <td>Rápido</td>
+            </tr>
+            <tr>
+                <td>Seguridad</td>
+                <td>Básica</td>
+                <td>Secure Boot</td>
+            </tr>
+        </table>
+
+        <h4>Funciones avanzadas del UEFI:</h4>
+        <ul>
+            <li>Overclocking: ajuste de voltaje, frecuencia de CPU/RAM.</li>
+            <li>XMP/EXPO: perfiles para memoria RAM de alto rendimiento.</li>
+            <li>Monitorización: temperaturas, voltajes, RPM de ventiladores.</li>
+            <li>Boot Priority: orden de arranque (SSD, USB, red).</li>
+            <li>Secure Boot: bloquea sistemas no firmados (útil para Windows 11).</li>
+            <li>Fast Boot: omite chequeos para arranque rápido.</li>
+        </ul>
+
+        <h3>CMOS (Complementary Metal-Oxide Semiconductor)</h3>
+        <p>Memoria no volátil que almacena la configuración del BIOS/UEFI y mantiene el reloj en tiempo real.</p>
+
+        <h4>Características del CMOS:</h4>
+        <ul>
+            <li>Alimentación: Batería de litio CR2032 (3V).</li>
+            <li>Consumo: Muy bajo, batería dura 3-5 años.</li>
+            <li>Contenido: Configuración de hardware, fecha, hora.</li>
+            <li>Tamaño: Típicamente 256 bytes.</li>
+            <li>Acceso: Solo a través del setup del BIOS/UEFI.</li>
+        </ul>
+
+        <h4>Problemas comunes relacionados con CMOS:</h4>
+        <ul>
+            <li>Batería agotada: Pérdida de configuración y hora.</li>
+            <li>Configuración corrupta: Fallos de arranque.</li>
+            <li>Clear CMOS: Procedimiento para resetear configuración.</li>
+        </ul>
+
+        <h2>Northbridge y Southbridge: Evolución de la Arquitectura</h2>
+
+        <h3>Arquitectura Tradicional (1990s-2000s)</h3>
+        <p>El chipset tradicional se dividía en dos chips principales que manejaban diferentes funciones del sistema.</p>
+
+        <h4>Northbridge (MCH - Memory Controller Hub):</h4>
+        <ul>
+            <li>Funciones principales:
+                <ul>
+                    <li>Controlador de memoria RAM.</li>
+                    <li>Interfaz con el procesador (FSB).</li>
+                    <li>Slot AGP para tarjeta gráfica.</li>
+                    <li>Comunicación con el Southbridge.</li>
+                </ul>
+            </li>
+            <li>Características:
+                <ul>
+                    <li>Chip de alta velocidad y temperatura.</li>
+                    <li>Requería disipador de calor.</li>
+                    <li>Determinaba el tipo de RAM soportada.</li>
+                    <li>Bus del sistema (FSB) pasaba por aquí.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>Southbridge (ICH - I/O Controller Hub):</h4>
+        <ul>
+            <li>Funciones principales:
+                <ul>
+                    <li>Controlador de dispositivos de E/S.</li>
+                    <li>Puertos USB, SATA, IDE.</li>
+                    <li>Slots PCI.</li>
+                    <li>Audio integrado.</li>
+                    <li>Controlador de red.</li>
+                    <li>BIOS/UEFI.</li>
+                </ul>
+            </li>
+            <li>Características:
+                <ul>
+                    <li>Menor velocidad que Northbridge.</li>
+                    <li>Mayor cantidad de funciones integradas.</li>
+                    <li>Comunicación con Northbridge vía bus dedicado.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>Arquitectura Moderna (2008-Actualidad)</h3>
+        <p>La integración de funciones en el procesador cambió radicalmente la arquitectura del chipset.</p>
+
+        <h4>Integración en el CPU:</h4>
+        <ul>
+            <li>Controlador de memoria: Integrado en el procesador desde 2003 (AMD) y 2008 (Intel).</li>
+            <li>Controlador PCIe: Lanes PCIe principales manejadas por el CPU.</li>
+            <li>Controlador gráfico: GPU integrada en muchos procesadores.</li>
+            <li>QPI/HyperTransport: Reemplazo del FSB tradicional.</li>
+        </ul>
+
+        <h4>Chipset Moderno (PCH - Platform Controller Hub):</h4>
+        <p>El chipset moderno es esencialmente un Southbridge mejorado que se comunica directamente con el CPU.</p>
+
+        <ul>
+            <li>Funciones actuales:
+                <ul>
+                    <li>Gestiona PCIe lanes adicionales (para tarjetas secundarias, NVMe, Wi-Fi).</li>
+                    <li>Controladores SATA y USB.</li>
+                    <li>Controla red Ethernet, Wi-Fi/Bluetooth integrados.</li>
+                    <li>Audio de alta definición (HD).</li>
+                    <li>Administra puertos USB (cantidad, versión 2.0/3.2/4.0).</li>
+                    <li>Soporte para overclocking.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <table>
+            <tr>
+                <th>Aspecto</th>
+                <th>Arquitectura Tradicional</th>
+                <th>Arquitectura Moderna</th>
+            </tr>
+            <tr>
+                <td>Controlador de memoria</td>
+                <td>Northbridge</td>
+                <td>CPU integrado</td>
+            </tr>
+            <tr>
+                <td>PCIe principal</td>
+                <td>Northbridge</td>
+                <td>CPU directo</td>
+            </tr>
+            <tr>
+                <td>Comunicación CPU</td>
+                <td>FSB</td>
+                <td>QPI/Infinity Fabric</td>
+            </tr>
+            <tr>
+                <td>Latencia de memoria</td>
+                <td>Alta</td>
+                <td>Baja</td>
+            </tr>
+            <tr>
+                <td>Ancho de banda</td>
+                <td>Limitado por FSB</td>
+                <td>Acceso directo</td>
+            </tr>
+        </table>
+
+        <h2>Socket de CPU: Tipos y Compatibilidad</h2>
+        <p>Lugar donde se instala el microprocesador. Debe coincidir exactamente con el modelo de CPU.</p>
+
+        <h3>Tipos de Socket</h3>
+
+        <h4>PGA (Pin Grid Array):</h4>
+        <ul>
+            <li>Diseño: Pines en el procesador, agujeros en el socket.</li>
+            <li>Ventajas: Socket más barato de fabricar.</li>
+            <li>Desventajas: Pines frágiles en el CPU.</li>
+            <li>Ejemplos: Socket AM4, AM5 (AMD).</li>
+        </ul>
+
+        <h4>LGA (Land Grid Array):</h4>
+        <ul>
+            <li>Diseño: Pines en el socket, contactos planos en el CPU.</li>
+            <li>Ventajas: CPU más resistente, mejor transferencia térmica.</li>
+            <li>Desventajas: Socket más costoso y frágil.</li>
+            <li>Ejemplos: LGA1700, LGA1200 (Intel).</li>
+        </ul>
+
+        <h4>BGA (Ball Grid Array):</h4>
+        <ul>
+            <li>Diseño: CPU soldado permanentemente.</li>
+            <li>Uso: Laptops, dispositivos móviles.</li>
+            <li>Ventajas: Compacto, eficiente térmicamente.</li>
+            <li>Desventajas: No es removible ni actualizable.</li>
+        </ul>
+
+        <h4>Sockets Intel Modernos</h4>
+
+        <table>
+            <tr>
+                <th>Socket</th>
+                <th>Pines</th>
+                <th>Generaciones CPU</th>
+                <th>Años</th>
+                <th>Características</th>
+            </tr>
+            <tr>
+                <td>LGA1151</td>
+                <td>1151</td>
+                <td>6th-9th Gen</td>
+                <td>2015-2019</td>
+                <td>DDR4, PCIe 3.0</td>
+            </tr>
+            <tr>
+                <td>LGA1200</td>
+                <td>1200</td>
+                <td>10th-11th Gen</td>
+                <td>2020-2021</td>
+                <td>DDR4, PCIe 4.0</td>
+            </tr>
+            <tr>
+                <td>LGA1700</td>
+                <td>1700</td>
+                <td>12th-14th Gen</td>
+                <td>2021-Actual</td>
+                <td>DDR4/DDR5, PCIe 5.0</td>
+            </tr>
+        </table>
+
+        <h4>Sockets AMD Modernos</h4>
+
+        <table>
+            <tr>
+                <th>Socket</th>
+                <th>Pines</th>
+                <th>Arquitecturas</th>
+                <th>Años</th>
+                <th>Características</th>
+            </tr>
+            <tr>
+                <td>AM4</td>
+                <td>1331</td>
+                <td>Zen, Zen+, Zen2, Zen3</td>
+                <td>2016-2022</td>
+                <td>DDR4, PCIe 4.0</td>
+            </tr>
+            <tr>
+                <td>AM5</td>
+                <td>1718</td>
+                <td>Zen4, Zen5</td>
+                <td>2022-Actual</td>
+                <td>DDR5, PCIe 5.0</td>
+            </tr>
+            <tr>
+                <td>sTRX4</td>
+                <td>4094</td>
+                <td>Threadripper 3000</td>
+                <td>2019-2020</td>
+                <td>Workstation, Quad Channel DDR4</td>
+            </tr>
+        </table>
+
+        <h2>Chipsets y su Evolución</h2>
+
+        <h3>Función del Chipset</h3>
+        <p>El chipset determina las capacidades y características de la placa madre, incluyendo qué procesadores soporta, tipos de memoria, conectividad y funciones de overclocking.</p>
+
+        <h3>Chipsets Intel Modernos</h3>
+
+        <h4>Serie 600 (LGA1700):</h4>
+
+        <table>
+            <tr>
+                <th>Chipset</th>
+                <th>Segmento</th>
+                <th>PCIe Lanes</th>
+                <th>SATA</th>
+                <th>USB</th>
+                <th>Overclocking</th>
+            </tr>
+            <tr>
+                <td>Z690/Z790</td>
+                <td>Entusiasta</td>
+                <td>20x PCIe 4.0</td>
+                <td>8</td>
+                <td>12x USB 3.2</td>
+                <td>Completo</td>
+            </tr>
+            <tr>
+                <td>B660/B760</td>
+                <td>Mainstream</td>
+                <td>12x PCIe 4.0</td>
+                <td>6</td>
+                <td>10x USB 3.2</td>
+                <td>Memoria solo</td>
+            </tr>
+            <tr>
+                <td>H610</td>
+                <td>Básico</td>
+                <td>8x PCIe 3.0</td>
+                <td>4</td>
+                <td>8x USB 3.2</td>
+                <td>No</td>
+            </tr>
+        </table>
+
+        <h3>Chipsets AMD Modernos</h3>
+
+        <h4>Serie 600 (AM5):</h4>
+
+        <table>
+            <tr>
+                <th>Chipset</th>
+                <th>Segmento</th>
+                <th>PCIe Lanes</th>
+                <th>SATA</th>
+                <th>USB</th>
+                <th>Overclocking</th>
+            </tr>
+            <tr>
+                <td>X670E</td>
+                <td>Entusiasta</td>
+                <td>24x PCIe 4.0</td>
+                <td>8</td>
+                <td>12x USB 3.2</td>
+                <td>Completo</td>
+            </tr>
+            <tr>
+                <td>B650E</td>
+                <td>Mainstream+</td>
+                <td>12x PCIe 4.0</td>
+                <td>6</td>
+                <td>10x USB 3.2</td>
+                <td>Completo</td>
+            </tr>
+            <tr>
+                <td>A620</td>
+                <td>Básico</td>
+                <td>8x PCIe 3.0</td>
+                <td>4</td>
+                <td>8x USB 3.2</td>
+                <td>No</td>
+            </tr>
+        </table>
+
+        <h2>Factores de Forma</h2>
+
+        <h3>Estándares de Tamaño</h3>
+        <p>Los factores de forma definen las dimensiones físicas, ubicación de componentes y puntos de montaje de las placas madre.</p>
+
+        <table>
+            <tr>
+                <th>Factor de Forma</th>
+                <th>Dimensiones (mm)</th>
+                <th>Slots PCIe</th>
+                <th>Slots RAM</th>
+                <th>Uso Típico</th>
+            </tr>
+            <tr>
+                <td>ATX</td>
+                <td>305 × 244</td>
+                <td>7</td>
+                <td>4</td>
+                <td>Desktop completo</td>
+            </tr>
+            <tr>
+                <td>Micro-ATX</td>
+                <td>244 × 244</td>
+                <td>4</td>
+                <td>4</td>
+                <td>Desktop compacto</td>
+            </tr>
+            <tr>
+                <td>Mini-ITX</td>
+                <td>170 × 170</td>
+                <td>1</td>
+                <td>2</td>
+                <td>HTPC, SFF</td>
+            </tr>
+            <tr>
+                <td>E-ATX</td>
+                <td>305 × 330</td>
+                <td>8+</td>
+                <td>8</td>
+                <td>Workstation/Gaming</td>
+            </tr>
+            <tr>
+                <td>XL-ATX</td>
+                <td>345 × 262</td>
+                <td>8+</td>
+                <td>8</td>
+                <td>Enthusiast</td>
+            </tr>
+        </table>
+
+        <h3>Consideraciones por Factor de Forma</h3>
+
+        <h4>ATX (Advanced Technology eXtended):</h4>
+        <ul>
+            <li>Ventajas: Máxima expansión, mejor refrigeración, más conectores.</li>
+            <li>Desventajas: Requiere gabinete grande, mayor costo.</li>
+            <li>Ideal para: Gaming, workstations, sistemas con múltiples tarjetas.</li>
+        </ul>
+
+        <h4>Micro-ATX:</h4>
+        <ul>
+            <li>Ventajas: Buen equilibrio tamaño/características, precio moderado.</li>
+            <li>Desventajas: Limitaciones de expansión.</li>
+            <li>Ideal para: Oficina, gaming básico, sistemas de propósito general.</li>
+        </ul>
+
+        <h4>Mini-ITX:</h4>
+        <ul>
+            <li>Ventajas: Muy compacto, bajo consumo, silencioso.</li>
+            <li>Desventajas: Expansión muy limitada, mayor costo por características.</li>
+            <li>Ideal para: HTPC, sistemas portátiles, espacios reducidos.</li>
+        </ul>
+
+        <p>La elección del factor de forma afecta:</p>
+        <ol>
+            <li>Cantidad de slots PCIe y RAM.</li>
+            <li>Número de puertos SATA/USB.</li>
+            <li>Compatibilidad con gabinetes y fuentes de poder.</li>
+        </ol>
+
+        <h2>Componentes Adicionales y Buffers</h2>
+
+        <h3>Componentes de Soporte</h3>
+
+        <h4>Capacitores:</h4>
+        <ul>
+            <li>Función: Filtrado y estabilización de voltaje.</li>
+            <li>Tipos: Electrolíticos, cerámicos, tantalio.</li>
+            <li>Problemas: Capacitores hinchados indican fallas.</li>
+            <li>Calidad: Capacitores japoneses considerados superiores.</li>
+        </ul>
+
+        <h4>Reguladores de Voltaje (VRM):</h4>
+        <ul>
+            <li>Función: Conversión de 12V a voltajes específicos del CPU.</li>
+            <li>Fases: Más fases = mejor estabilidad y eficiencia.</li>
+            <li>Componentes: MOSFETs, inductores, capacitores.</li>
+            <li>Importancia: Crítico para overclocking y estabilidad.</li>
+        </ul>
+
+        <h3>Buffers y Controladores</h3>
+
+        <h4>Buffer de datos:</h4>
+        <ul>
+            <li>Función: Amplificación y estabilización de señales.</li>
+            <li>Ubicación: Entre chipset y slots de expansión.</li>
+            <li>Importancia: Previene interferencias y pérdida de señal.</li>
+        </ul>
+
+        <h4>Controladores de Bus:</h4>
+        <ul>
+            <li>USB Controllers: Manejo de múltiples puertos USB.</li>
+            <li>SATA Controllers: Gestión de dispositivos SATA.</li>
+            <li>Network Controllers: Conectividad Ethernet/Wi-Fi.</li>
+            <li>Audio Codecs: Procesamiento de audio integrado.</li>
+        </ul>
+
+        <h3>Tecnologías de Protección</h3>
+        <ul>
+            <li>ESD Protection: Protección contra descargas electrostáticas.</li>
+            <li>Over-voltage Protection: Protección contra sobrevoltajes.</li>
+            <li>Thermal Protection: Monitoreo y protección térmica.</li>
+            <li>Short Circuit Protection: Protección contra cortocircuitos.</li>
+        </ul>
+
+        <p>La calidad de los componentes de soporte (VRM, capacitores, reguladores) es tan importante como las características principales de la placa madre. Una VRM deficiente puede limitar el rendimiento del procesador y la estabilidad del sistema, especialmente en aplicaciones exigentes o overclocking.</p>
+
+        <h2>Preguntas</h2>
+        <ol>
+            <li>¿Qué es el BIOS y cuál es su función principal en una computadora?</li>
+            <li>¿Cuáles son las principales diferencias entre BIOS y UEFI?</li>
+            <li>¿Qué es el CMOS y qué función cumple en la placa madre?</li>
+            <li>¿Qué son el Northbridge y el Southbridge, y cómo han evolucionado en las placas madre modernas?</li>
+            <li>¿Qué ventajas ofrece la integración del controlador de memoria en el procesador?</li>
+            <li>¿Qué tipos de sockets de CPU existen y cuáles son sus diferencias?</li>
+            <li>¿Qué es el chipset y cómo influye en las capacidades de una placa madre?</li>
+            <li>¿Cuáles son los factores de forma más comunes en placas madre y para qué tipo de sistemas son ideales?</li>
+            <li>¿Qué función cumplen los reguladores de voltaje (VRM) en una placa madre?</li>
+            <li>¿Qué tecnologías de protección suelen incluir las placas madre modernas?</li>
+        </ol>
+    </div>
+</body>
+</html>

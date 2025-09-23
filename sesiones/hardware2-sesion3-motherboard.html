@@ -1,0 +1,680 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 3 – Placas Madre (Motherboard)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        @media (max-width: 600px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="../sesiones/hardware2-sesion2-cpu.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #a9c8e2;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 2
+      </a>
+      <!-- <a
+        href="../sesiones/hardware2-sesion3-motherboard.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #a9c8e2;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 3
+      </a> -->
+    </div>
+    <div class="container">
+        <h1>Sesión 3 – Placas Madre (Motherboard)</h1>
+
+        <h2>Objetivos de la clase</h2>
+
+        <ul>
+            <li>Analizar cuándo conviene elegir diferentes chipsets, formatos, y características según el CPU y uso final.</li>
+            <li>Evaluar opciones de placas madre según presupuesto, compatibilidad y necesidades del cliente.</li>
+            <li>Identificar qué elementos encarecen una placa madre y cuándo vale la pena pagarlos.</li>
+            <li>Aplicar el análisis en casos prácticos para recomendar la mejor motherboard para cada configuración.</li>
+        </ul>
+
+        <h2>Observación</h2>
+
+        <ul>
+            <li>Tener presente la relación entre CPU y motherboard, si partimos de un CPU en base a un requisito específico nos vemos sujetos a elegir una motherboard que sea compatible con el CPU.</li>
+            <li>De igual forma si partimos de una motherboard tendremos que elegir los CPU compatibles y acorde al requisito del cliente.</li>
+            <li>No se hace mucha referencia a los CPU ya que los trabajamos anteriormente.</li>
+        </ul>
+
+        <h2>Factores que encarecen una Placa Madre</h2>
+
+        <ul>
+            <li><strong>Chipset de gama alta:</strong> Z790, X670E vs. B660, B550</li>
+            <li><strong>Factor de forma premium:</strong> E-ATX vs. micro-ATX</li>
+            <li><strong>Circuito de alimentación (VRM):</strong> 16+2 fases vs. 4+2 fases</li>
+            <li><strong>Conectividad avanzada:</strong> PCIe 5.0, USB 3.2 Gen 2x2, Thunderbolt 4</li>
+            <li><strong>Soporte para overclocking:</strong> BIOS avanzada, refrigeración VRM</li>
+            <li><strong>Características premium:</strong> WiFi 6E, Ethernet 2.5Gb, RGB, audio de alta calidad</li>
+            <li><strong>Marca y línea de producto:</strong> ROG Strix, MSI Gaming vs. líneas básicas</li>
+        </ul>
+
+        <h2>Resumen Visual: ¿Qué Pagas Extra?</h2>
+
+        <pre>
+Precio Base (ej. ASRock A320M-HDV) → $80 USD
+│
+├── +$40 USD → Chipset B450/B550 (ej. MSI B450M PRO- VDH MAX)
+│ │
+│ ├── +$60 USD → Factor ATX PLUS WiFi (ej. ASUS TUF B550-)
+│ │ │
+│ │ ├── +$100 USD → Chipset X570 + PCIe 4.0 (ej. MSI X570-A PRO)
+│ │ │ │
+│ │ │ ├── +$150 USD → Línea Gaming (ej. ASUS ROG STRIX X570-E)
+│ │ │ │ │
+│ │ │ │ └── +$200 USD → AM5 + DDR5 (ej. ASUS ROG X670E- E)
+│ │ │ │
+│ │ │ └── +$80 USD → Intel Z690 (ej. MSI MAG Z690 TOMAHAWK)
+│ │ │
+│ │ └── +$180 USD → Z790 + DDR5 (ej. ASUS ROG Z790-E)
+│
+└── +$400 USD → Workstation (ej. ASUS WRX80E-SAGE, TRX40)
+        </pre>
+
+        <h2>Conceptos Clave</h2>
+
+        <p><strong>Términos técnicos que debes considerar al elegir una placa madre.</strong></p>
+
+        <h3>Chipset y Compatibilidad</h3>
+
+        <ul>
+            <li><strong>Qué es:</strong> Circuito que controla la comunicación entre CPU, RAM, almacenamiento y periféricos.</li>
+            <li><strong>Por qué importa:</strong> Define características, overclocking, soporte para ECC, y precio de la placa.</li>
+        </ul>
+
+        <h4>Ejemplos AMD:</h4>
+
+        <ul>
+            <li>A320: Básico, sin overclocking (~$80 USD)</li>
+            <li>B450/B550: Overclocking limitado (~$120 USD)</li>
+            <li>X570/X670E: Gama alta, PCIe 4.0/5.0 (~$200+ USD)</li>
+        </ul>
+
+        <h4>Ejemplos Intel:</h4>
+
+        <ul>
+            <li>H610: Básico (~$90 USD)</li>
+            <li>B660/B760: Medio (~$130 USD)</li>
+            <li>Z690/Z790: Overclocking + características premium (~$180+ USD)</li>
+        </ul>
+
+        <h3>VRM (Voltage Regulator Module) y Fases de Alimentación</h3>
+
+        <ul>
+            <li><strong>Qué es:</strong> Circuitería que regula el voltaje del CPU desde los 12V de la fuente.</li>
+            <li><strong>Por qué importa:</strong> Más fases = alimentación más estable para CPUs potentes y overclocking.</li>
+        </ul>
+
+        <h4>Ejemplos:</h4>
+
+        <ul>
+            <li>4+2 fases: Suficiente para Ryzen 5 3600 sin OC</li>
+            <li>8+2 fases: Ideal para Ryzen 7 5800X con OC ligero</li>
+            <li>16+2 fases: Necesario para i9-13900K con OC extremo</li>
+        </ul>
+
+        <p><strong>Impacto en precio:</strong> Una placa con VRM robusto puede costar $100+ USD más.</p>
+
+        <h3>Factor de Forma (Form Factor)</h3>
+
+        <ul>
+            <li><strong>Qué es:</strong> Tamaño físico de la placa madre.</li>
+        </ul>
+
+        <h4>Tipos principales:</h4>
+
+        <ul>
+            <li><strong>Mini-ITX:</strong> 170x170mm - Ideal para PCs compactos (~$150+ USD)</li>
+            <li><strong>Micro-ATX:</strong> 244x244mm - Balance precio/características (~$80-150 USD)</li>
+            <li><strong>ATX:</strong> 305x244mm - Más slots y conectores (~$120-250 USD)</li>
+            <li><strong>E-ATX:</strong> 305x330mm+ - Workstations y gaming extremo (~$300+ USD)</li>
+        </ul>
+
+        <p><strong>Por qué importa:</strong> Determina cantidad de slots PCIe, RAM, conectores disponibles, y posteriormente el gabinete en el que se colocará.</p>
+
+        <h3>Slots de Expansión (PCIe)</h3>
+
+        <ul>
+            <li><strong>Qué es:</strong> Conectores para tarjetas gráficas, de sonido, red, etc.</li>
+            <li><strong>Dependiendo las necesidades es relevante la cantidad de slots para tarjetas de expansión.</strong></li>
+        </ul>
+
+        <h4>Versiones:</h4>
+
+        <ul>
+            <li>PCIe 3.0: Estándar actual (16GB/s en x16)</li>
+            <li>PCIe 4.0: Doble velocidad (32GB/s en x16)</li>
+            <li>PCIe 5.0: Cuádruple velocidad (64GB/s en x16)</li>
+        </ul>
+
+        <h4>Configuraciones típicas:</h4>
+
+        <ul>
+            <li>Gaming: 1x PCIe x16 para GPU</li>
+            <li>Workstation: 2x PCIe x16 para multi-GPU</li>
+        </ul>
+
+        <h3>Soporte de Memoria RAM</h3>
+
+        <h4>Aspectos clave:</h4>
+
+        <ul>
+            <li><strong>Tipo:</strong> DDR4 vs. DDR5</li>
+            <li><strong>Velocidad máxima:</strong> DDR4-3200 vs. DDR5-5600+</li>
+            <li><strong>Capacidad:</strong> 64GB, 128GB, o más</li>
+            <li><strong>Cantidad de slots</strong></li>
+            <li><strong>Canales:</strong> Dual channel (2 slots) vs. Quad channel (4+ slots)</li>
+        </ul>
+
+        <p><strong>Ejemplo:</strong> Una placa B450 soporta DDR4-3200, mientras X570 puede manejar DDR4-4000+</p>
+
+        <h3>Conectividad de Almacenamiento</h3>
+
+        <ul>
+            <li><strong>SATA 3.0:</strong> Para HDDs y SSDs tradicionales (6Gbps)</li>
+        </ul>
+
+        <h4>M.2 NVMe:</h4>
+
+        <ul>
+            <li>PCIe 3.0: Hasta 3,500 MB/s</li>
+            <li>PCIe 4.0: Hasta 7,000 MB/s</li>
+            <li>PCIe 5.0: Hasta 14,000 MB/s</li>
+        </ul>
+
+        <p><strong>Por qué importa:</strong></p>
+
+        <ul>
+            <li>Tanto en conectores SATA como en M.2 dependiendo las necesidades importa la cantidad de slots disponibles.</li>
+            <li>Más slots M.2 = menos cables y mejor rendimiento.</li>
+        </ul>
+
+        <p><strong>Ejemplo:</strong> Una X570 tiene 2+ slots M.2, vs. 1 slot en placas básicas.</p>
+
+        <h3>Conectividad USB y Puertos Traseros</h3>
+
+        <ul>
+            <li>USB 2.0: Básico para mouse/teclado</li>
+            <li>USB 3.2 Gen 1: 5Gbps (azul)</li>
+            <li>USB 3.2 Gen 2: 10Gbps</li>
+            <li>USB 3.2 Gen 2x2: 20Gbps</li>
+            <li>USB-C/Thunderbolt 4: 40Gbps + video</li>
+        </ul>
+
+        <p><strong>Impacto en precio:</strong> Más puertos USB-C y Thunderbolt pueden añadir $50-100 USD.</p>
+
+        <h3>Audio Integrado</h3>
+
+        <ul>
+            <li>Básico: Realtek ALC887 (placas económicas)</li>
+            <li>Medio: Realtek ALC1200 con condensadores premium</li>
+            <li>Premium: ESS Sabre DAC, amplificadores dedicados</li>
+        </ul>
+
+        <p><strong>Por qué importa:</strong> Audio de calidad puede añadir $30-80 USD al precio de la placa.</p>
+
+        <h3>Conectividad de Red</h3>
+
+        <ul>
+            <li><strong>Por qué importa:</strong>
+                <ul>
+                    <li>Según la necesidad una mejor conectividad es valorada.</li>
+                    <li>Se presenta WiFi 6 y 7 que proporcionan una conexión casi tan robusta como si nos encontráramos conectados por medio del cable Ethernet (WiFi 7 es el que más se acerca a una conexión por cable).</li>
+                </ul>
+            </li>
+        </ul>
+
+        <ul>
+            <li>Ethernet básico: 1Gbps (Realtek RTL8111H)</li>
+            <li>Ethernet premium: 2.5Gbps (Intel I225-V)</li>
+            <li>WiFi 6 (802.11ax): Hasta 1.2Gbps</li>
+            <li>WiFi 6E: Banda de 6GHz adicional</li>
+            <li>WiFi 7 (IEEE 802.11be o Wi-Fi de Alto Rendimiento (EHT)): Utiliza también la banda de 6 GHz (además de 2,4 GHz y 5 GHz)</li>
+            <li>Bluetooth: 5.0+ integrado con WiFi</li>
+        </ul>
+
+        <p><strong>Costo adicional:</strong> WiFi 6E puede añadir $40-60 USD.</p>
+
+        <h3>BIOS/UEFI y Características de Overclocking</h3>
+
+        <ul>
+            <li>BIOS básica: Configuración mínima</li>
+            <li>UEFI avanzada: Interfaz gráfica, perfiles de OC</li>
+        </ul>
+
+        <h4>Características premium:</h4>
+
+        <ul>
+            <li>Botones físicos de OC (Overclock)</li>
+            <li>Display LED de códigos de error</li>
+            <li>BIOS flashback sin CPU</li>
+            <li>Perfiles automáticos de memoria</li>
+        </ul>
+
+        <h3>Refrigeración y Conectores de Ventiladores</h3>
+
+        <ul>
+            <li>Conectores básicos: 3-4 headers de ventiladores</li>
+            <li>Control avanzado: 6+ headers con control PWM</li>
+            <li>Refrigeración líquida: Headers dedicados para bombas AIO</li>
+            <li>Sensores térmicos: Múltiples puntos de monitoreo</li>
+        </ul>
+
+        <h3>Iluminación RGB y Estética</h3>
+
+        <ul>
+            <li>RGB básico: Zonas limitadas de iluminación</li>
+            <li>RGB avanzado: Sincronización con ecosistema (ASUS Aura, MSI Mystic Light)</li>
+            <li>Headers RGB: Para tiras LED adicionales</li>
+        </ul>
+
+        <p><strong>Costo adicional:</strong> RGB premium puede añadir $20-50 USD.</p>
+
+        <h2>Tipos de Uso y Características Esenciales</h2>
+
+        <h3>Ofimática Básica</h3>
+
+        <p><strong>Objetivo:</strong> Navegación, documentos, correos y tareas ligeras. <strong>Placas recomendadas (gama baja/media):</strong></p>
+
+        <ul>
+            <li>ASRock A320M-HDV / MSI H610M-A (básica)</li>
+            <li>MSI B450M PRO-VDH MAX / ASUS PRIME B660M-A (media)</li>
+        </ul>
+
+        <p><strong>Características críticas (🟢):</strong></p>
+
+        <ul>
+            <li><strong>Precio bajo:</strong> $80-120 USD máximo</li>
+            <li><strong>Factor forma:</strong> Micro-ATX para gabinetes compactos</li>
+            <li><strong>Conectividad básica:</strong> 4+ puertos USB, Ethernet 1Gb</li>
+            <li><strong>Compatibilidad:</strong> Socket correcto para CPU elegido (AM4, LGA 1700)</li>
+        </ul>
+
+        <p><strong>Características útiles (🟡):</strong></p>
+
+        <ul>
+            <li><strong>VRM:</strong> 4+2 fases (suficiente para CPUs básicos)</li>
+            <li><strong>RAM:</strong> 2 slots DDR4, hasta 64GB</li>
+            <li><strong>Audio integrado:</strong> Realtek ALC887</li>
+            <li><strong>WiFi:</strong> Opcional si hay conectividad por cable</li>
+        </ul>
+
+        <p><strong>Irrelevantes (🔴):</strong></p>
+
+        <ul>
+            <li>Overclocking, RGB, múltiples PCIe x16, Ethernet 2.5Gb</li>
+        </ul>
+
+        <p><strong>Ejemplo de configuración:</strong></p>
+
+        <ul>
+            <li>Placa: MSI A320M-A PRO (~$95,000 ARS)</li>
+            <li>CPU: AMD Athlon 3000G</li>
+            <li>Factor: Micro-ATX</li>
+            <li>Conectores: 4x USB 3.0, 2x USB 2.0, 1x Ethernet</li>
+        </ul>
+
+        <h3>Gaming (1080p/1440p/4K)</h3>
+
+        <p><strong>Objetivo:</strong> Maximizar rendimiento en juegos y minimizar cuellos de botella. <strong>Placas recomendadas:</strong></p>
+
+        <ul>
+            <li>Gama media: MSI B550M PRO-VDH WiFi / ASUS TUF B660M-PLUS</li>
+            <li>Gama alta: ASUS ROG STRIX X570-E / MSI MAG Z690 TOMAHAWK</li>
+        </ul>
+
+        <p><strong>Características críticas (🟢):</strong></p>
+
+        <ul>
+            <li><strong>VRM robusto:</strong> 8+2 fases mínimo para CPUs gaming</li>
+            <li><strong>PCIe 4.0 o 5.0:</strong> Para GPUs RTX 40XX/RX 7000 series</li>
+            <li><strong>RAM rápida:</strong> Soporte DDR4-3600+ o DDR5-5200+</li>
+            <li><strong>M.2 slots:</strong> 2+ para SSD principal + juegos</li>
+        </ul>
+
+        <p><strong>Características útiles (🟡):</strong></p>
+
+        <ul>
+            <li><strong>WiFi 6 o 7:</strong> Para gaming online estable</li>
+            <li><strong>Audio premium:</strong> Realtek ALC1200 con amplificador</li>
+            <li><strong>USB 3.2:</strong> Para periféricos gaming</li>
+            <li><strong>RGB:</strong> Estética gaming</li>
+        </ul>
+
+        <p><strong>Irrelevantes (🔴):</strong></p>
+
+        <ul>
+            <li>Múltiples PCIe x16, Thunderbolt, características Workstation</li>
+        </ul>
+
+        <p><strong>Ejemplo para gaming 1440p:</strong></p>
+
+        <ul>
+            <li>Placa: ASUS TUF GAMING B550-PLUS WiFi (~$190,000 ARS)</li>
+            <li>CPU: AMD Ryzen 5 5600X</li>
+            <li>GPU: RTX 3070/4060 Ti</li>
+            <li>VRM: 8+2 fases</li>
+            <li>PCIe: 4.0 x16 + 4.0 x4</li>
+        </ul>
+
+        <h3>Edición de Video (1080p/4K)</h3>
+
+        <p><strong>Objetivo:</strong> Renderizado rápido y manejo de archivos grandes. <strong>Placas recomendadas:</strong></p>
+
+        <ul>
+            <li>Gama media: MSI X570-A PRO / ASUS PRIME Z690-P</li>
+            <li>Gama alta: ASUS ROG X570-E / MSI MEG Z690 ACE</li>
+        </ul>
+
+        <p><strong>Características críticas (🟢):</strong></p>
+
+        <ul>
+            <li><strong>Multi-thread:</strong> 8C/16T+ para renderizado paralelo</li>
+            <li><strong>Ancho de banda RAM:</strong> DDR4-3600+ o DDR5-5600 (64GB+ para proyectos 4K)</li>
+            <li><strong>Caché L3:</strong> 32MB–64MB (reduce tiempos de exportación)</li>
+            <li><strong>Motherboard:</strong> X570 (AMD) o Z690/Z790 (Intel) para PCIe 4.0/5.0 (SSD NVMe rápidos)</li>
+        </ul>
+
+        <p><strong>Características útiles (🟡):</strong></p>
+
+        <ul>
+            <li><strong>IPC:</strong> Zen 3/4 o Intel 12ª/13ª gen</li>
+            <li><strong>TDP:</strong> 95W–125W (refrigeración de torre o líquida)</li>
+            <li><strong>Socket:</strong> AM5 (futuro) o LGA 1700</li>
+        </ul>
+
+        <p><strong>Irrelevantes (🔴):</strong></p>
+
+        <ul>
+            <li>iGPU, ECC (a menos que trabajes con datos críticos)</li>
+        </ul>
+
+        <p><strong>Ejemplo para edición 4K:</strong></p>
+
+        <ul>
+            <li>Placa: ASUS ProArt X570-CREATOR WiFi (~$420,000 ARS)</li>
+            <li>CPU: AMD Ryzen 9 5950X</li>
+            <li>RAM: 64GB DDR4-3600 CL16</li>
+            <li>Almacenamiento: 2TB NVMe PCIe 4.0</li>
+            <li>Conectividad: Thunderbolt 4, Ethernet 2.5Gb</li>
+        </ul>
+
+        <h3>Workstation (IA/Datos/Cálculo Científico)</h3>
+
+        <p><strong>Objetivo:</strong> Máxima estabilidad y capacidad de expansión. <strong>Placas recomendadas:</strong></p>
+
+        <ul>
+            <li>Gama media: ASUS PRO WS X570-ACE</li>
+            <li>Gama alta: ASUS WRX80E-SAGE / MSI Creator TRX40</li>
+        </ul>
+
+        <p><strong>Características críticas (🟢):</strong></p>
+
+        <ul>
+            <li><strong>Núcleos/Hilos:</strong> 16C/32T+ (para tareas paralelas)</li>
+            <li><strong>Soporte ECC:</strong> Sí (evita errores en cálculos)</li>
+            <li><strong>AVX-512:</strong> Acelera bibliotecas como TensorFlow/PyTorch</li>
+            <li><strong>Ancho de banda RAM:</strong> DDR4-3200 ECC de 8 canales (256GB+)</li>
+            <li><strong>Motherboard:</strong> WRX80 (AMD) o LGA 2066 (Intel)</li>
+            <li><strong>VRM:</strong> 16+ fases (ej. ASUS WRX80E-SAGE)</li>
+        </ul>
+
+        <p><strong>Características útiles (🟡):</strong></p>
+
+        <ul>
+            <li><strong>IPC:</strong> Zen 3/4 o Intel Xeon (prioriza núcleos sobre frecuencia)</li>
+            <li><strong>Caché L3:</strong> 64MB+ (ej. Threadripper PRO)</li>
+        </ul>
+
+        <p><strong>Irrelevantes (🔴):</strong></p>
+
+        <ul>
+            <li>iGPU, overclocking</li>
+        </ul>
+
+        <p><strong>Ejemplo para IA/Machine Learning:</strong></p>
+
+        <ul>
+            <li>Placa: ASUS WRX80E-SAGE (~$1,200,000 ARS)</li>
+            <li>CPU: Threadripper PRO 5955WX</li>
+            <li>RAM: 128GB DDR4-3200 ECC</li>
+            <li>Socket: sWRX8</li>
+        </ul>
+
+        <h3>Servidor Doméstico (NAS/Plex)</h3>
+
+        <p><strong>Objetivo:</strong> Operación 24/7 con bajo consumo y alta confiabilidad. <strong>Placas recomendadas:</strong></p>
+
+        <ul>
+            <li>ASUS PRIME B450M-A / MSI PRO B660M-A</li>
+            <li>ASRock Rack X570D4I-2T (con IPMI)</li>
+        </ul>
+
+        <p><strong>Características críticas (🟢):</strong></p>
+
+        <ul>
+            <li><strong>Múltiples SATA:</strong> 6+ puertos para HDDs</li>
+            <li><strong>Eficiencia energética:</strong> Componentes de bajo consumo</li>
+            <li><strong>Conectividad de red:</strong> Ethernet confiable</li>
+            <li><strong>Factor compacto:</strong> Mini-ITX o Micro-ATX</li>
+        </ul>
+
+        <p><strong>Características útiles (🟡):</strong></p>
+
+        <ul>
+            <li><strong>ECC opcional:</strong> Para datos críticos</li>
+            <li><strong>IPMI:</strong> Gestión remota</li>
+            <li><strong>Ventiladores PWM:</strong> Control de ruido</li>
+        </ul>
+
+        <p><strong>Ejemplo para NAS doméstico:</strong></p>
+
+        <ul>
+            <li>Placa: ASRock B450M Pro4 (~$120,000 ARS)</li>
+            <li>CPU: Ryzen 5 5600GE (bajo TDP)</li>
+            <li>Almacenamiento: 6x SATA para RAID</li>
+            <li>Factor: Micro-ATX</li>
+        </ul>
+
+        <h3>HTPC/Streaming</h3>
+
+        <p><strong>Objetivo:</strong> Reproducción multimedia y streaming compacto y silencioso. <strong>Placas recomendadas:</strong></p>
+
+        <ul>
+            <li>ASUS ROG STRIX B550-I / MSI MAG B660I DDR4</li>
+            <li>ASRock Fatal1ty B450 Gaming-ITX/ac</li>
+        </ul>
+
+        <p><strong>Características críticas (🟢):</strong></p>
+
+        <ul>
+            <li><strong>Factor Mini-ITX:</strong> Para gabinetes compactos</li>
+            <li><strong>WiFi integrado:</strong> Conectividad inalámbrica</li>
+            <li><strong>Audio premium:</strong> Para experiencia multimedia</li>
+            <li><strong>HDMI 2.1:</strong> Para output 4K a 60fps</li>
+        </ul>
+
+        <p><strong>Características útiles (🟡):</strong></p>
+
+        <ul>
+            <li><strong>Bluetooth:</strong> Para periféricos inalámbricos</li>
+            <li><strong>Control de ventiladores:</strong> Para operación silenciosa</li>
+            <li><strong>USB-C:</strong> Conectividad moderna</li>
+        </ul>
+
+        <p><strong>Ejemplo para HTPC 4K:</strong></p>
+
+        <ul>
+            <li>Placa: ASUS ROG Strix B550-I (~$270,000 ARS)</li>
+            <li>CPU: AMD Ryzen 5 5600G</li>
+            <li>Factor: Mini-ITX</li>
+            <li>Conectividad: WiFi 6, Bluetooth 5.0</li>
+            <li>Audio: SupremeFX con amplificador</li>
+        </ul>
+
+        <h2>Resumen de Prioridades por Tipo de PC</h2>
+
+        <table>
+            <tr>
+                <th><strong>Tipo de PC</strong></th>
+                <th><strong>Prioridad 1</strong></th>
+                <th><strong>Prioridad 2</strong></th>
+                <th><strong>Prioridad 3</strong></th>
+            </tr>
+            <tr>
+                <td><strong>Ofimática</strong></td>
+                <td>Precio bajo + compatibilidad</td>
+                <td>Factor Micro-ATX</td>
+                <td>Conectividad básica</td>
+            </tr>
+            <tr>
+                <td><strong>Gaming</strong></td>
+                <td>VRM robusto + PCIe 4.0 / 5.0</td>
+                <td>RAM rápida + M.2</td>
+                <td>WiFi 6 o 7 + Audio premium</td>
+            </tr>
+            <tr>
+                <td><strong>Edición de Video</strong></td>
+                <td>VRM premium + RAM alta capacidad</td>
+                <td>PCIe múltiple + M.2 rápido</td>
+                <td>Ethernet 2.5Gb + USB-C</td>
+            </tr>
+            <tr>
+                <td><strong>Workstation</strong></td>
+                <td>ECC + VRM profesional</td>
+                <td>PCIe múltiple + E-ATX</td>
+                <td>IPMI + Garantía extendida</td>
+            </tr>
+            <tr>
+                <td><strong>Servidor</strong></td>
+                <td>SATA múltiple + eficiencia</td>
+                <td>ECC opcional + IPMI</td>
+                <td>Factor compacto</td>
+            </tr>
+            <tr>
+                <td><strong>HTPC/Streaming</strong></td>
+                <td>Mini-ITX + WiFi</td>
+                <td>Audio premium + HDMI 2.1</td>
+                <td>Bluetooth + operación silenciosa</td>
+            </tr>
+        </table>
+
+        <h2>Preguntas</h2>
+
+        <ol>
+            <li>¿Qué es el VRM de una placa madre y por qué es importante para CPUs de alto rendimiento? Compara una placa con VRM 4+2 fases vs. una con 16+2 fases, incluyendo ejemplos de CPUs compatibles.</li>
+            <li>Explica las diferencias entre los chipsets AMD B450, B550 y X570. ¿Cuándo justifica el costo extra cada uno? Incluye ejemplos de precios y características.</li>
+            <li>Un cliente quiere armar una PC gaming 1440p con un Ryzen 7 5800X. ¿Qué características priorizarías en la placa madre y por qué? Recomienda una placa específica con precio.</li>
+            <li>¿Por qué una placa Mini-ITX suele ser más cara que una Micro-ATX equivalente? Describe las limitaciones y ventajas de cada factor de forma.</li>
+            <li>Para un editor de video 4K que usa un i9-13900K, ¿qué diferencias críticas hay entre una placa Z690 básica (~$180 USD) y una Z790 premium (~$350 USD)? ¿Vale la pena el costo extra?</li>
+            <li>Un cliente tiene presupuesto limitado para una PC de ofimática con Athlon 3000G. Justifica por qué características como overclocking, PCIe 4.0 y RGB no son relevantes para este uso.</li>
+            <li>Compara estas dos placas para Workstation:
+                <ul>
+                    <li>ASUS PRO WS X570-ACE (~$400 USD)</li>
+                    <li>ASUS WRX80E-SAGE (~$1,200 USD)</li>
+                </ul>
+                ¿Cuál elegirías para una estación de IA con Threadripper PRO y por qué? Considera ECC, PCIe, y VRM.
+            </li>
+            <li>Investiga cómo el soporte de memoria RAM (velocidad, capacidad, canales) varía entre chipsets de gama baja y alta. Usa ejemplos comparando A320 vs. X570 para AMD, y H610 vs. Z790 para Intel.</li>
+            <li>Identificar placas madre que contengan los chipsets del ítem anterior (A320 vs. X570 para AMD, y H610 vs. Z790 para Intel). Y verificar que cumplen con las características que aportan dichos chipsets. A su vez observar si el nombre del chip está incluido en el modelo de la placa madre.</li>
+        </ol>
+    </div>
+</body>
+</html>
