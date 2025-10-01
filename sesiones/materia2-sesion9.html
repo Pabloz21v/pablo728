@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" style="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Relaciones 1 a 1, Tipos de Datos y Modificación de Tablas en MySQL
+    </title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@400;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 32px 80px;
+        position: relative;
+        box-sizing: border-box;
+        font-family: "Times New Roman", serif;
+        line-height: 1.6;
+        color: #333;
+        background: white;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Times New Roman", serif;
+        color: #2c3e50;
+        margin-top: 1.5em;
+        margin-bottom: 0.8em;
+      }
+
+      h1 {
+        text-align: center;
+        border-bottom: 2px solid #2c3e50;
+        padding-bottom: 0.5em;
+      }
+
+      h2 {
+        color: #34495e;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+      }
+
+      h3 {
+        color: #555;
+        font-weight: bold;
+      }
+
+      .info-box {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 3px;
+      }
+
+      .command-explanation {
+        background: #e8f4fd;
+        border-left: 4px solid #3498db;
+        padding: 15px;
+        margin: 15px 0;
+      }
+
+      .command-title {
+        font-weight: bold;
+        color: #2980b9;
+        margin-bottom: 8px;
+      }
+
+      code {
+        background: #f4f4f4;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: "Courier New", monospace;
+        color: #c7254e;
+      }
+
+      pre {
+        background: #f8f8f8;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 15px;
+        overflow-x: auto;
+        font-family: "Courier New", monospace;
+        font-size: 14px;
+        line-height: 1.4;
+        margin: 15px 0;
+      }
+
+      .sql-comment {
+        color: #008000;
+        font-style: italic;
+      }
+
+      .interpretation {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 3px;
+        font-style: italic;
+      }
+
+      .objective-list {
+        background: #f1f8ff;
+        border: 1px solid #c1d9f0;
+        padding: 15px;
+        margin: 20px 0;
+      }
+
+      ul,
+      ol {
+        padding-left: 30px;
+      }
+
+      li {
+        margin-bottom: 8px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+
+      th {
+        background: #f2f2f2;
+        font-weight: bold;
+      }
+
+      /* --- INICIO: Responsividad para móvil --- */
+      @media (max-width: 600px) {
+        body {
+          padding: 16px 6px;
+          max-width: 100vw;
+          font-size: 16px;
+        }
+        h1 {
+          font-size: 1.4em;
+          padding-bottom: 0.3em;
+        }
+        h2 {
+          font-size: 1.1em;
+          padding-left: 8px;
+        }
+        h3 {
+          font-size: 1em;
+        }
+        .info-box,
+        .command-explanation,
+        .objective-list,
+        .interpretation {
+          padding: 10px;
+          margin: 10px 0;
+        }
+        ul,
+        ol {
+          padding-left: 18px;
+        }
+        li {
+          margin-bottom: 6px;
+        }
+        table,
+        pre {
+          font-size: 13px;
+        }
+        table,
+        pre {
+          display: block;
+          overflow-x: auto;
+          width: 100%;
+        }
+        th,
+        td {
+          padding: 7px;
+        }
+        .command-title {
+          font-size: 1em;
+        }
+      }
+      /* --- FIN: Responsividad para móvil --- */
+    </style>
+  </head>
+  <body style="">
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/conversion-y-reparacion-de-datos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="materia2-sesion7.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 7
+      </a>
+      <!-- <a
+        href="materia2-sesion10.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f59e42;
+          color: #fff;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 10
+      </a> -->
+    </div>
+    <h1>Sesión 9: Relaciones 1 a 1 y Modificación de Tablas</h1>
+    <div class="info-box">
+      <div class="objective-list">
+        <p><strong>Objetivos:</strong></p>
+        <ul>
+          <li>
+            Comprender y aplicar relaciones <strong>1 a 1</strong> usando
+            <code>FOREIGN KEY</code>.
+          </li>
+          <li>Aprender a insertar valores <code>NULL</code> en registros.</li>
+          <li>
+            Usar los tipos de datos <code>DECIMAL</code> y <code>DATE</code>.
+          </li>
+          <li>
+            Modificar el nombre y tipo de dato de una columna en una tabla
+            existente.
+          </li>
+          <li>Practicar con ejemplos y ejercicios</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>2. Relaciones 1 a 1 con FOREIGN KEY</h2>
+
+    <h3>Concepto:</h3>
+    <p>
+      Una relación <strong>1 a 1</strong> significa que cada registro en una
+      tabla tiene <strong>un solo registro relacionado</strong> en otra tabla.
+    </p>
+
+    <p><strong>Ejemplo práctico:</strong></p>
+    <ul>
+      <li>Tabla <code>clientes</code> y tabla <code>direcciones</code>.</li>
+      <li>
+        Cada cliente tiene <strong>una sola dirección</strong>, y cada dirección
+        pertenece a <strong>un solo cliente</strong>.
+      </li>
+    </ul>
+
+    <h3>
+      <div
+        class="command-explanation"
+        style="color: rgb(51, 51, 51); font-size: 17px; font-weight: 400"
+      >
+        <div class="command-title">FOREIGN KEY (Clave Foránea)</div>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          Establece una relación entre dos tablas, garantizando la integridad
+          referencial.
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Función:</span>&nbsp;Asegura que el
+          valor en una columna de una tabla corresponda a un valor existente en
+          la tabla referenciada.
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 14px;
+          "
+        >
+          <span style="font-weight: bolder">Sintaxis básica:</span>&nbsp;<code
+            style="font-weight: 350"
+            >FOREIGN KEY (columna_local) REFERENCES
+            tabla_referencia(columna_referencia)</code
+          >
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Interpretación :</span>&nbsp;<em
+            >"Esta columna debe contener valores que existan en otra tabla
+            específica."</em
+          >
+        </p>
+      </div>
+      <div
+        class="command-explanation"
+        style="color: rgb(51, 51, 51); font-size: 17px; font-weight: 400"
+      >
+        <div class="command-title">REFERENCES (Referencias)</div>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          Especifica qué tabla y columna son referenciadas por la clave foránea.
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Función:</span>&nbsp;Define el
+          destino de la relación, indicando la tabla padre y su columna primary
+          key.
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Sintaxis:</span>&nbsp;<code
+            style="font-weight: 400"
+            >REFERENCES nombre_tabla(nombre_columna)</code
+          >
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Interpretación :</span>&nbsp;<em
+            >"Los valores de esta columna deben existir en la columna
+            especificada de la tabla indicada."</em
+          >
+        </p>
+      </div>
+      <div
+        class="command-explanation"
+        style="color: rgb(51, 51, 51); font-size: 17px; font-weight: 400"
+      >
+        <div class="command-title">
+          ON DELETE CASCADE (Eliminación en Cascada)
+        </div>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          Define qué sucede con los registros relacionados cuando se elimina el
+          registro padre.
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Función:</span>&nbsp;Elimina
+          automáticamente todos los registros hijos cuando se elimina el
+          registro padre.
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Alternativas:</span>
+        </p>
+        <ul
+          style="
+            padding-inline-start: 17px;
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <li>
+            <code style="font-weight: 400">ON DELETE SET NULL</code>: Establece
+            NULL en la clave foránea
+          </li>
+          <li>
+            <code style="font-weight: 400">ON DELETE RESTRICT</code>: Impide la
+            eliminación si existen registros relacionados
+          </li>
+          <li>
+            <code style="font-weight: 400">ON DELETE NO ACTION</code>: Similar a
+            RESTRICT
+          </li>
+        </ul>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Interpretación :</span>&nbsp;<em
+            >"Si elimino un cliente, también elimina automáticamente su
+            dirección."</em
+          >
+        </p>
+      </div>
+    </h3>
+    <h3>Script para crear las tablas:</h3>
+    <pre><code><span class="sql-comment">-- Tabla principal: clientes</span>
+CREATE TABLE clientes (
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    fecha_registro DATE NOT NULL
+);
+
+<span class="sql-comment">-- Tabla relacionada: direcciones</span>
+CREATE TABLE direcciones (
+    id_direccion INT AUTO_INCREMENT PRIMARY KEY,
+    calle VARCHAR(100) NOT NULL,
+    ciudad VARCHAR(50) NOT NULL,
+    codigo_postal VARCHAR(20),
+    id_cliente INT UNIQUE,
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente) ON DELETE CASCADE
+);</code><code>#INTERPRETACION DE:
+#FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente) ON DELETE CASCADE
+#establecer como clave foranea la columna id_cliente de la tabla direcciones
+referenciandola con la columna id_cliente de la tabla clientes y ante la eliminacion
+de un cliente se borran los registros en la tabla direcciones relacionados al id_cliente..</code></pre>
+
+    <div class="interpretation">
+      <strong>Interpretación :</strong>
+      <em
+        >"Cada cliente tiene una dirección única, y si se elimina un cliente, su
+        dirección también se elimina automáticamente (ON DELETE CASCADE)."</em
+      >
+    </div>
+
+    <h2>3. Tipos de Datos: DECIMAL y DATE</h2>
+
+    <h3>DECIMAL(p,s)</h3>
+    <ul>
+      <li><strong>Uso:</strong> Números exactos, como precios o medidas.</li>
+      <li><strong>p:</strong> Número total de dígitos.</li>
+      <li><strong>s:</strong> Número de decimales.</li>
+      <li>
+        <strong>Ejemplo:</strong> <code>DECIMAL(10,2)</code> →
+        <code>12345678.90</code> (8 dígitos enteros y 2 decimales).
+      </li>
+    </ul>
+
+    <h3>DATE</h3>
+    <ul>
+      <li>
+        <strong>Uso:</strong> Almacena fechas en formato
+        <code>YYYY-MM-DD</code>.
+      </li>
+      <li>YYYY = año.&nbsp;</li>
+      <li>MM = mes.</li>
+      <li>DD = dia.</li>
+      <li><strong>Ejemplo:</strong> <code>'2025-10-27'</code>.</li>
+      <li>
+        <span style="font-weight: bolder">Ejemplo:</span>&nbsp;<code
+          style="font-weight: 400"
+          >'2000-07-30'</code
+        >.
+      </li>
+      <li>
+        <span style="font-weight: bolder">Ejemplo:</span>&nbsp;<code
+          style="font-weight: 400"
+          >'1989-02-15'</code
+        >.
+      </li>
+    </ul>
+
+    <h3>
+      <div
+        class="command-explanation"
+        style="color: rgb(51, 51, 51); font-size: 17px; font-weight: 400"
+      >
+        <div class="command-title">ALTER TABLE (Alterar Tabla)</div>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          Modifica la estructura de una tabla existente.
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Función:</span>&nbsp;Permite
+          agregar, eliminar o modificar columnas y restricciones.
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Sintaxis básica:</span>&nbsp;<code
+            style="font-weight: 400"
+            >ALTER TABLE nombre_tabla [ADD|DROP|MODIFY|CHANGE] ...</code
+          >
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Interpretación :</span>&nbsp;<em
+            >"Quiero cambiar algo en la estructura de esta tabla que ya
+            existe."</em
+          >
+        </p>
+      </div>
+      <div
+        class="command-explanation"
+        style="color: rgb(51, 51, 51); font-size: 17px; font-weight: 400"
+      >
+        <div class="command-title">ADD COLUMN (Agregar Columna)</div>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          Agrega una nueva columna a una tabla existente.
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Función:</span>&nbsp;Permite
+          expandir la estructura de datos sin perder información existente.
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Sintaxis:</span>&nbsp;<code
+            style="font-weight: 400"
+            >ALTER TABLE tabla ADD COLUMN nombre_columna tipo_dato
+            [restricciones]</code
+          >
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Interpretación :</span>&nbsp;<em
+            >"Agregar un nuevo campo a esta tabla para almacenar información
+            adicional."</em
+          >
+        </p>
+      </div>
+      <div
+        class="command-explanation"
+        style="color: rgb(51, 51, 51); font-size: 17px; font-weight: 400"
+      >
+        <div class="command-title">DEFAULT (Valor por Defecto)</div>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          Establece un valor automático para una columna cuando no se
+          proporciona un valor explícito.
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Función:</span>&nbsp;Garantiza que
+          la columna tenga un valor incluso si no se especifica durante la
+          inserción.
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Sintaxis:</span>&nbsp;<code
+            style="font-weight: 400"
+            >nombre_columna tipo_dato DEFAULT valor_por_defecto</code
+          >
+        </p>
+        <p
+          style="
+            margin-bottom: 25.5px;
+            color: rgb(65, 84, 98);
+            font-weight: 400;
+            font-size: 17px;
+          "
+        >
+          <span style="font-weight: bolder">Interpretación :</span>&nbsp;<em
+            >"Si no especifico un valor para este campo, usa automáticamente
+            este valor predeterminado."</em
+          >
+        </p>
+      </div>
+    </h3>
+    <h3>Modificación de la tabla clientes para incluir DECIMAL:</h3>
+    <pre><code>ALTER TABLE clientes
+ADD COLUMN saldo DECIMAL(10,2) DEFAULT 0.00;</code><code>#modificar la tabla clientes agregando una columna llamada saldo con
+el tipo de dato DECIMAL(10,2) y un valor por defecto automatico 0.00</code></pre>
+
+    <div class="interpretation">
+      <strong>Interpretación :</strong>
+      <em
+        >"Ahora cada cliente tendrá un campo /columna `saldo` que almacena
+        valores monetarios con 2 decimales, como $100.50."</em
+      >
+    </div>
+
+    <h2>4. Insertar Valores NULL</h2>
+
+    <h3>Formas de insertar NULL:</h3>
+
+    <h4>1. Omitir la columna (si permite NULL):</h4>
+    <pre><code>INSERT INTO clientes (nombre, email, fecha_registro)
+VALUES ('Juan Pérez', 'juan@example.com', '2025-09-01');</code></pre>
+    <p>
+      <em>(El campo `saldo` se llenará con el valor por defecto: `0.00`)</em>
+    </p>
+
+    <h4>2. Insertar explícitamente NULL:</h4>
+    <pre><code>INSERT INTO clientes (nombre, email, fecha_registro, saldo)
+VALUES ('Ana Gómez', 'ana@example.com', '2025-09-02', NULL);</code></pre>
+
+    <!-- <h4>3. Dejar espacios vacíos en el INSERT:</h4>
+    <pre><code>INSERT INTO clientes (nombre, email, fecha_registro, saldo)
+VALUES ('Luis Martínez', 'luis@example.com', '2025-09-03', ); -->
+
+#Suele dar errores por lo que no lo recomiendo</code></pre>
+    <p>
+      <em
+        >(El campo `saldo` quedará como `NULL` si no tiene valor por
+        defecto)</em
+      >
+    </p>
+
+    <h2>5. Modificar el Nombre y Tipo de Dato de una Columna</h2>
+    <p
+      style="
+        margin-bottom: 25.5px;
+        color: rgb(65, 84, 98);
+        font-weight: 400;
+        font-size: 17px;
+      "
+    >
+      <em><br /></em>
+    </p>
+    <div class="command-explanation">
+      <div class="command-title">CHANGE COLUMN (Cambiar Columna)</div>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        Cambia tanto el nombre como el tipo de dato de una columna existente.
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Función:</span>&nbsp;Permite renombrar
+        una columna y modificar su definición completamente.
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Sintaxis:</span>&nbsp;<code
+          style="font-weight: 400"
+          >ALTER TABLE tabla CHANGE COLUMN nombre_actual nombre_nuevo
+          tipo_dato</code
+        >
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Interpretación :</span>&nbsp;<em
+          >"Quiero cambiar el nombre de esta columna y posiblemente también su
+          tipo de dato."</em
+        >
+      </p>
+    </div>
+    <div class="command-explanation">
+      <div class="command-title">MODIFY COLUMN (Modificar Columna)</div>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        Cambia únicamente el tipo de dato de una columna, manteniendo su nombre.
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Función:</span>&nbsp;Permite alterar
+        las características de una columna sin cambiar su nombre.
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Sintaxis:</span>&nbsp;<code
+          style="font-weight: 400"
+          >ALTER TABLE tabla MODIFY COLUMN nombre_columna nuevo_tipo_dato</code
+        >
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Interpretación :</span>&nbsp;<em
+          >"Mantener el nombre de la columna, pero cambiar su tipo de dato o
+          restricciones."</em
+        >
+      </p>
+    </div>
+
+    <h3>Cambiar el nombre de una columna:</h3>
+    <pre><code>ALTER TABLE clientes
+CHANGE COLUMN email correo_electronico VARCHAR(100);</code><code>#modificar en la tabla clientes el nombre de la columna email por 
+correo_electronico y varchar de 100 caracteres.</code></pre>
+
+    <div class="interpretation">
+      <strong>Interpretación :</strong>
+      <em>"La columna `email` ahora se llamará `correo_electronico`."</em>
+    </div>
+
+    <h3>Cambiar el tipo de dato de una columna:</h3>
+    <pre><code>ALTER TABLE clientes
+MODIFY COLUMN fecha_registro DATETIME;</code><code>#cambiar en la tabla clientes el tipo de dato de la 
+columna fecha_registro a DATETIME </code></pre>
+
+    <div class="interpretation">
+      <strong>Interpretación :</strong>
+      <em
+        >"El campo `fecha_registro` ahora almacenará fecha
+        <strong>y hora</strong> (ej: `2025-09-01 14:30:00`)."</em
+      >
+    </div>
+
+    <h2>6. Inserción de Datos para Practicar</h2>
+
+    <h3>Tabla clientes:</h3>
+    <pre><code>INSERT INTO clientes (nombre, correo_electronico, fecha_registro, saldo)
+VALUES
+    ('Juan Pérez', 'juan@example.com', '2025-09-01', 150.75),
+    ('Ana Gómez', 'ana@example.com', '2025-09-02', NULL), 
+    ('Luis Martínez', 'luis@example.com', '2025-09-03', 250.00), 
+    ('María López', 'maria@example.com', '2025-09-04', NULL),
+    ('Carlos Ruiz', 'carlos@example.com', '2025-09-05', 0.00),
+    ('Elena Sánchez', 'elena@example.com', '2025-09-06', 99.99);
+</code></pre>
+
+    <h3>Tabla direcciones:</h3>
+    <pre><code>INSERT INTO direcciones (calle, ciudad, codigo_postal, id_cliente)
+VALUES
+    ('Calle 123', 'Buenos Aires', '12345', 1),
+    ('Av. Principal', 'Córdoba', '67890', 3),
+    ('Calle Falsa', 'Rosario', '54321', 5),
+<span style="white-space:pre">	</span>('Calle Verdadera', 'Córdoba', null, 2);</code></pre>
+
+    <h2>7. Ejemplos Prácticos&nbsp;</h2>
+    <div class="command-explanation">
+      <div class="command-title">LEFT JOIN (Unión Izquierda)</div>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Propósito:</span>&nbsp;Combina
+        registros de dos tablas, incluyendo todos los registros de la tabla
+        izquierda.
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Función:</span>&nbsp;Muestra todos los
+        registros de la primera tabla, incluso si no tienen coincidencias en la
+        segunda tabla.
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Sintaxis:</span>&nbsp;<code
+          style="font-weight: 400"
+          >SELECT ... FROM tabla1 LEFT JOIN tabla2 ON tabla1.columna =
+          tabla2.columna</code
+        >
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: 700">Ejemplo:&nbsp;</span
+        ><span
+          style="
+            background-color: rgb(244, 244, 244);
+            color: rgb(199, 37, 78);
+            font-family: 'Courier New', monospace;
+            font-size: 14.875px;
+          "
+          >SELECT * FROM clientes LEFT JOIN direcciones ON&nbsp;</span
+        ><span
+          style="
+            color: rgb(199, 37, 78);
+            font-family: 'Courier New', monospace;
+            font-size: 14.875px;
+            background-color: rgb(244, 244, 244);
+          "
+          >clientes</span
+        ><span
+          style="
+            background-color: rgb(244, 244, 244);
+            color: rgb(199, 37, 78);
+            font-family: 'Courier New', monospace;
+            font-size: 14.875px;
+          "
+          >.id_clientes=&nbsp;</span
+        ><span
+          style="
+            color: rgb(199, 37, 78);
+            font-family: 'Courier New', monospace;
+            font-size: 14.875px;
+            background-color: rgb(244, 244, 244);
+          "
+          >direcciones</span
+        ><span
+          style="
+            background-color: rgb(244, 244, 244);
+            color: rgb(199, 37, 78);
+            font-family: 'Courier New', monospace;
+            font-size: 14.875px;
+          "
+          >.</span
+        ><span
+          style="
+            background-color: rgb(244, 244, 244);
+            color: rgb(199, 37, 78);
+            font-family: 'Courier New', monospace;
+            font-size: 14.875px;
+          "
+          >id_clientes</span
+        >
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Interpretación :</span>&nbsp;<em
+          >"Muestra todos los clientes, incluso aquellos que no tienen dirección
+          registrada."</em
+        >
+      </p>
+    </div>
+    <div class="command-explanation">
+      <div class="command-title">Abreviación de Nombres de Tabla (Alias)</div>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        Crear nombres cortos para las tablas dentro de una consulta.
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Función:</span>&nbsp;Simplifica la
+        escritura de consultas complejas y mejora la legibilidad.
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Sintaxis:</span>&nbsp;<code
+          style="font-weight: 400"
+          >FROM tabla_nombre AS alias</code
+        >&nbsp;o simplemente&nbsp;<code style="font-weight: 400"
+          >FROM tabla_nombre alias</code
+        >
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Ejemplo:</span>&nbsp;<code
+          style="font-weight: 400"
+          >FROM clientes c</code
+        >&nbsp;donde 'c' es el alias para 'clientes'
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Ejemplo2:</span>&nbsp;<code
+          style="font-weight: 400"
+          >FROM direcciones d</code
+        >&nbsp;donde 'd' es el alias para 'direcciones'
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Interpretación :</span>&nbsp;<em
+          >"En lugar de escribir 'clientes' cada vez, usaré simplemente
+          'c'."</em
+        >
+      </p>
+    </div>
+    <div class="command-explanation">
+      <div class="command-title">SELECT FROM WHERE con Funciones de Fecha</div>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">YEAR():</span>&nbsp;Extrae el año de
+        una fecha
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">MONTH():</span>&nbsp;Extrae el mes de
+        una fecha (1-12)
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">DAY():</span>&nbsp;Extrae el día del
+        mes de una fecha (1-31)
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        Filtrar y analizar datos basándose en componentes específicos de fechas.
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Sintaxis:</span>&nbsp;<code
+          style="font-weight: 400"
+          >WHERE YEAR(fecha_columna) = 2025</code
+        >
+      </p>
+      <p
+        style="
+          margin-bottom: 25.5px;
+          color: rgb(65, 84, 98);
+          font-weight: 400;
+          font-size: 17px;
+        "
+      >
+        <span style="font-weight: bolder">Interpretación :</span>&nbsp;<em
+          >"Mostrar solo los registros del año 2025" o "Filtrar por mes de
+          septiembre"</em
+        >
+      </p>
+    </div>
+
+    <h3><br /></h3>
+    <h3>Ejemplo 1: Relación 1 a 1 usando LEFT JOIN y alias</h3>
+    <pre><code><span class="sql-comment">-- Mostrar el cliente y su dirección</span>
+SELECT c.nombre, d.calle, d.ciudad
+FROM clientes c
+LEFT JOIN direcciones d ON c.id_cliente = d.id_cliente;</code><code>#selecciona la columna nombre de la tabla clientes y,
+calle y ciudad de la tabla direcciones donde la tabla clientes
+(alias de clientes con la letra c) relacionandolo con la tabla direcciones
+(alias de direcciones con <span style="background-color: initial;">la letra d) en donde la columa 
+id_clientes de la tabla </span><span style="background-color: initial;">clientes sea igual a la columna 
+clientes de la tabla direcciones</span></code></pre>
+
+    <div class="interpretation">
+      <strong>Interpretación :</strong>
+      <em
+        >"Muestra el nombre de cada cliente junto a su calle y ciudad. Si no
+        tiene dirección, aparecerá `NULL`. Uso 'c' como alias para 'clientes' y
+        'd' para 'direcciones' para simplificar la escritura."</em
+      >
+    </div>
+
+    <h3>Ejemplo 2: Filtrar por NULL</h3>
+    <pre><code><span class="sql-comment">-- Clientes sin dirección</span>
+SELECT c.nombre
+FROM clientes c
+LEFT JOIN direcciones d ON c.id_cliente = d.id_cliente
+WHERE d.calle IS NULL;</code><code>#selecciona la columna nombre de la tabla clientes(abreviando clientes como c)
+relacionandolo con la tabla direcciones (abreviando direcciones como d)
+en donde la columna id_cliente de la tabla cliente sea igual a 
+la columna id_cliente de la tabla direcciones donde en la tabla direciones 
+la columna calle es null</code></pre>
+
+    <div class="interpretation">
+      <strong>Interpretación :</strong>
+      <em>"Lista los clientes que no tienen una calle registrada."</em>
+    </div>
+
+    <h3>Ejemplo 3: Usar DECIMAL</h3>
+    <pre><code><span class="sql-comment">-- Clientes con saldo mayor a 100</span>
+SELECT nombre, saldo
+FROM clientes
+WHERE saldo &gt; 100;</code><code>#selecciona la columna nombre y saldo de la tabla clientes donde el saldo sea mayor a 100</code></pre>
+
+    <div class="interpretation">
+      <strong>Interpretación :</strong>
+      <em>"Muestra los clientes que tienen un saldo superior a $100.00."</em>
+    </div>
+
+    <h3>Ejemplo 4: Usar DATE con funciones YEAR, MONTH, DAY</h3>
+    <pre><code><span class="sql-comment">-- Clientes registrados en septiembre de 2025</span>
+SELECT nombre, fecha_registro
+FROM clientes
+WHERE YEAR(fecha_registro) = 2025 AND MONTH(fecha_registro) = 9;</code><code>#seleciona las columnas nombre y fecha_registro de la tabla clientes donde
+el año en la columna fecha_registro sea igual a 2025 y el mes 
+en la columa fecha_registro sea igual a 9</code></pre>
+
+    <div class="interpretation">
+      <strong>Interpretación :</strong>
+      <em>"Lista los clientes que se registraron en septiembre de 2025."</em>
+    </div>
+
+    <h3>Ejemplo 5: Combinando funciones de fecha</h3>
+    <pre><code><span class="sql-comment">-- Clientes registrados el día 1 de cualquier mes</span>
+SELECT nombre, fecha_registro
+FROM clientes c
+WHERE DAY(c.fecha_registro) = 1;</code><code>#seleciona las columnas nombre y fecha_registro de la tabla clientes
+<span style="background-color: initial;">(abreviado con la letra c) donde 
+</span><span style="background-color: initial;">el dia en la columna fecha_registro de la tabla clientes 
+sea igual a 1</span></code></pre>
+
+    <div class="interpretation">
+      <strong>Interpretación :</strong>
+      <em
+        >"Muestra los clientes que se registraron el primer día de cualquier
+        mes."</em
+      >
+    </div>
+
+    <h2>8. Ejercicios para el Alumno</h2>
+
+    <ol>
+      <li>
+        <strong>Relaciones 1 a 1:</strong>
+        <ul>
+          <li>
+            Crea una tabla <code>clientes</code> con al menos 5
+            <code>clientes</code>. Dicha tabla debe tener las sig columnas: id_cliente, nombre, saldo, direccion, saldo.
+          </li>
+          <li>
+            Crea una tabla <code>pasaportes</code> relacionada 1 a 1
+             Dicha tabla debe tener las sig columnas: id_pasaporte, fecha, pais, id_cliente.
+          </li>
+          <li>
+            La tabla debe tener los siguientes tipos de datos 
+            <code>DECIMAL</code> 
+            <code>DATE</code>.
+          </li>
+          <li>
+            Inserta 3 pasaportes para los clientes con
+            <code>id_cliente</code> 1, 3 y 5.
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Valores NULL:</strong>
+        <ul>
+          <li>Inserta un cliente sin saldo y sin dirección.</li>
+          <li>
+            Actualiza el saldo de un cliente a <code>NULL</code>.
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Modificar columnas:</strong>
+        <ul>
+          <li>
+            Cambia el nombre de la columna.
+          </li>
+          <li>
+            Modifica el tipo de dato de de una columna.
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Consultas con alias y LEFT JOIN:</strong>
+        <ul>
+          <li>
+            Lista los clientes con saldo <code>NULL</code> usando alias para las
+            tablas.
+          </li>
+          <li>
+            Muestra los clientes registrados después del
+            <code>2020-05-15</code> usando funciones de fecha.
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Práctica con DECIMAL:</strong>
+        <ul>
+          <li>Actualiza el saldo de un registro a <code>125.30.</code></li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Consultas avanzadas con fechas:</strong>
+        <ul>
+          <li>
+            Lista los clientes registrados en el año 2025 usando
+            <code>YEAR()</code>.
+          </li>
+          <li>
+            Encuentra clientes registrados el dia 15 usando
+            <code>DAY()</code> .
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>9. Resumen y Cierre</h2>
+
+    <div class="info-box">
+      <h3>Conceptos Clave Aprendidos:</h3>
+      <ul>
+        <li>
+          <strong>Relaciones 1 a 1:</strong> Usan <code>FOREIGN KEY</code>,
+          <code>REFERENCES</code> y <code>UNIQUE</code>.
+        </li>
+        <li>
+          <strong>NULL:</strong> Se inserta omitiendo el valor, usando
+          <code>NULL</code> explícitamente, o dejando campos vacíos.
+        </li>
+        <li>
+          <strong>DECIMAL:</strong> Ideal para valores monetarios y números
+          exactos.
+        </li>
+        <li>
+          <strong>DATE:</strong> Almacena fechas sin hora en formato YYYY-MM-DD.
+        </li>
+        <li>
+          <strong>Modificar tablas:</strong> <code>ALTER TABLE</code> +
+          <code>CHANGE</code> o <code>MODIFY</code>.
+        </li>
+        <li>
+          <strong>LEFT JOIN:</strong> Combina tablas mostrando todos los
+          registros de la tabla izquierda.&nbsp;
+        </li>
+        <li>
+          <strong>Alias:</strong> Simplifican las consultas usando nombres
+          cortos para las tablas.
+        </li>
+        <li>
+          <strong>Funciones de fecha:</strong> <code>YEAR()</code>,
+          <code>MONTH()</code>, <code>DAY()</code> para filtrar por componentes
+          de fecha.
+        </li>
+      </ul>
+    </div>
+
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+  </body>
+</html>
