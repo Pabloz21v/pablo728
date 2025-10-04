@@ -1,0 +1,857 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 12: FUENTES DE ALIMENTACIÓN (PSU)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f4;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        @media (max-width: 600px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-uno.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="hardware1-sesion11.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 11
+        </a>
+        <!-- <a
+        href="hardware1-sesion13.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 13 -->
+      </a>
+      </div>
+        <h1>Sesión 12: FUENTES DE ALIMENTACIÓN (PSU)</h1>
+
+        <h2>Fundamentos y Tipos de Fuentes de Alimentación</h2>
+
+        <h3>Introducción y Conceptos Básicos</h3>
+
+        <h4>¿Qué es una Fuente de Alimentación (PSU)?</h4>
+
+        <p>La Fuente de Alimentación (PSU - Power Supply Unit) es el componente responsable de convertir la corriente alterna (AC) de la red eléctrica en corriente continua (DC) de múltiples voltajes que requieren los componentes del sistema. Es uno de los componentes más críticos ya que de su calidad depende la estabilidad, longevidad y seguridad de todo el sistema.</p>
+
+        <h4>Funciones Principales</h4>
+
+        <ul>
+            <li><strong>Conversión AC/DC:</strong> Transforma 110-240V AC en voltajes DC específicos (+3.3V, +5V, +12V, -12V)</li>
+            <li><strong>Regulación de voltaje:</strong> Mantiene voltajes estables bajo diferentes cargas</li>
+            <li><strong>Distribución de energía:</strong> Proporciona conectores específicos para cada componente</li>
+            <li><strong>Protección del sistema:</strong> Incluye múltiples protecciones contra fallos eléctricos</li>
+            <li><strong>Gestión térmica:</strong> Control de temperatura mediante ventiladores y sensores</li>
+        </ul>
+
+        <h4>Voltajes de Salida y sus Usos</h4>
+
+        <table>
+            <tr>
+                <th><strong>Voltaje</strong></th>
+                <th><strong>Componentes que Alimenta</strong></th>
+                <th><strong>Importancia</strong></th>
+                <th><strong>Tolerancia</strong></th>
+            </tr>
+            <tr>
+                <td>+12V</td>
+                <td>CPU, GPU, ventiladores, motores</td>
+                <td>Crítico - Mayor consumo</td>
+                <td>±5%</td>
+            </tr>
+            <tr>
+                <td>+5V</td>
+                <td>Dispositivos SATA, USB, algunos chips</td>
+                <td>Moderado</td>
+                <td>±5%</td>
+            </tr>
+            <tr>
+                <td>+3.3V</td>
+                <td>RAM, chipsets, componentes digitales</td>
+                <td>Crítico para estabilidad</td>
+                <td>±5%</td>
+            </tr>
+            <tr>
+                <td>-12V</td>
+                <td>Algunos controladores serie (legacy)</td>
+                <td>Mínimo en sistemas modernos</td>
+                <td>±10%</td>
+            </tr>
+            <tr>
+                <td>+5VSB</td>
+                <td>Standby (USB, Wake-on-LAN)</td>
+                <td>Funciones en modo suspendido</td>
+                <td>±5%</td>
+            </tr>
+        </table>
+
+        <h3>Evolución Histórica de las Fuentes de Alimentación</h3>
+
+        <h4>Fuentes AT (Advanced Technology)</h4>
+
+        <p>Las primeras fuentes estandarizadas para PCs, utilizadas desde los años 80 hasta mediados de los 90.</p>
+
+        <h4>Características de las Fuentes AT:</h4>
+
+        <ul>
+            <li>Conector principal: 12 pines dividido en dos conectores de 6 pines (P8 y P9)</li>
+            <li>Interruptor físico en línea AC</li>
+            <li>No tenían standby power</li>
+            <li>Voltajes principales: +5V y +12V</li>
+            <li>Potencias típicas: 150W-300W</li>
+            <li>Factor de forma: Definido por IBM</li>
+        </ul>
+
+        <h4>Fuentes ATX (Advanced Technology eXtended)</h4>
+
+        <p>Introducidas en 1995 por Intel, siguen siendo el estándar actual con múltiples revisiones.</p>
+
+        <table>
+            <tr>
+                <th><strong>Versión ATX</strong></th>
+                <th><strong>Año</strong></th>
+                <th><strong>Conector Principal</strong></th>
+                <th><strong>Características Principales</strong></th>
+            </tr>
+            <tr>
+                <td>ATX 1.0-1.3</td>
+                <td>1995-1998</td>
+                <td>20 pines</td>
+                <td>Soft power, +3.3V añadido</td>
+            </tr>
+            <tr>
+                <td>ATX 2.0-2.2</td>
+                <td>2000-2003</td>
+                <td>20 pines + 4 pines CPU</td>
+                <td>Conector auxiliar para CPU</td>
+            </tr>
+            <tr>
+                <td>ATX 2.3-2.4</td>
+                <td>2007-2013</td>
+                <td>24 pines + 4/8 pines CPU</td>
+                <td>Conectores PCIe, SATA</td>
+            </tr>
+            <tr>
+                <td>ATX 3.0</td>
+                <td>2022</td>
+                <td>24 pines + 12VHPWR</td>
+                <td>Conector 12VHPWR para GPUs</td>
+            </tr>
+        </table>
+
+        <h3>Tipos y Factores de Forma de Fuentes</h3>
+
+        <h4>ATX Estándar</h4>
+
+        <h4>Especificaciones ATX:</h4>
+
+        <ul>
+            <li>Dimensiones: 150mm × 86mm × 140mm (Ancho × Alto × Profundo)</li>
+            <li>Ventilador: 120mm trasero o superior</li>
+            <li>Potencia: 300W - 1600W+</li>
+            <li>Uso: Torres ATX y Micro-ATX</li>
+            <li>Conectores: Completa variedad de conectores</li>
+        </ul>
+
+        <h4>SFX (Small Form Factor)</h4>
+
+        <h4>Características SFX:</h4>
+
+        <ul>
+            <li>Dimensiones: 125mm × 63.5mm × 100mm</li>
+            <li>Ventilador: 80mm o 92mm</li>
+            <li>Potencia: 300W - 750W</li>
+            <li>Uso: Sistemas compactos Mini-ITX</li>
+            <li>Eficiencia: Generalmente superior por tamaño</li>
+        </ul>
+
+        <h4>TFX (Thin Form Factor)</h4>
+
+        <h4>Especificaciones TFX:</h4>
+
+        <ul>
+            <li>Dimensiones: 175mm × 65mm × 85mm</li>
+            <li>Diseño: Muy delgado, ventilador pequeño</li>
+            <li>Potencia: 180W - 500W</li>
+            <li>Uso: Sistemas de escritorio delgados</li>
+            <li>Ventilación: Flujo de aire longitudinal</li>
+        </ul>
+
+        <table>
+            <tr>
+                <th><strong>Factor de Forma</strong></th>
+                <th><strong>Dimensiones (mm)</strong></th>
+                <th><strong>Ventilador</strong></th>
+                <th><strong>Potencia Máxima Típica</strong></th>
+                <th><strong>Aplicación</strong></th>
+            </tr>
+            <tr>
+                <td>ATX</td>
+                <td>150×86×140</td>
+                <td>120mm</td>
+                <td>1600W+</td>
+                <td>Desktop completo</td>
+            </tr>
+            <tr>
+                <td>ATX flex</td>
+                <td>150x40.5x81.5</td>
+                <td>40-60mm</td>
+                <td>400W</td>
+                <td>Servidores y NAS</td>
+            </tr>
+            <tr>
+                <td>SFX</td>
+                <td>125×63.5×100</td>
+                <td>80-92mm</td>
+                <td>750W</td>
+                <td>Sistemas compactos</td>
+            </tr>
+            <tr>
+                <td>SFX-L</td>
+                <td>125×63.5×130</td>
+                <td>120mm</td>
+                <td>1000W</td>
+                <td>SFF con más potencia</td>
+            </tr>
+            <tr>
+                <td>TFX</td>
+                <td>175×65×85</td>
+                <td>60-80mm</td>
+                <td>500W</td>
+                <td>Perfil bajo</td>
+            </tr>
+        </table>
+
+        <h3>Conectores de Alimentación Detallado</h3>
+
+        <h4>Conector Principal ATX (24 pines)</h4>
+
+        <p>El conector más importante que alimenta la placa madre y distribuye energía a los componentes básicos.</p>
+
+        <table>
+            <tr>
+                <th><strong>Pin</strong></th>
+                <th><strong>Color</strong></th>
+                <th><strong>Voltaje</strong></th>
+                <th><strong>Pin</strong></th>
+                <th><strong>Color</strong></th>
+                <th><strong>Voltaje</strong></th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Naranja</td>
+                <td>+3.3V</td>
+                <td>13</td>
+                <td>Naranja</td>
+                <td>+3.3V</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Naranja</td>
+                <td>+3.3V</td>
+                <td>14</td>
+                <td>Azul</td>
+                <td>-12V</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Negro</td>
+                <td>GND</td>
+                <td>15</td>
+                <td>Negro</td>
+                <td>GND</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Rojo</td>
+                <td>+5V</td>
+                <td>16</td>
+                <td>Verde</td>
+                <td>PS_ON</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>Amarillo</td>
+                <td>+12V</td>
+                <td>23</td>
+                <td>Rojo</td>
+                <td>+5V</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Amarillo</td>
+                <td>+12V</td>
+                <td>24</td>
+                <td>Negro</td>
+                <td>GND</td>
+            </tr>
+        </table>
+
+        <h4>Conectores de CPU</h4>
+
+        <h4>Conector EPS 4 pines (P4):</h4>
+
+        <ul>
+            <li>Voltaje: +12V exclusivamente</li>
+            <li>Uso: CPUs de consumo básico-medio</li>
+            <li>Capacidad: Hasta ~95W</li>
+            <li>Colores: 2 amarillos (+12V), 2 negros (GND)</li>
+        </ul>
+
+        <h4>Conector EPS 8 pines (4+4):</h4>
+
+        <ul>
+            <li>Voltaje: +12V con mayor amperaje</li>
+            <li>Uso: CPUs de alto rendimiento</li>
+            <li>Capacidad: Hasta ~150W</li>
+            <li>Compatibilidad: Divisible en 4+4 para retrocompatibilidad</li>
+        </ul>
+
+        <h4>Conectores PCIe para Tarjetas Gráficas</h4>
+
+        <table>
+            <tr>
+                <th><strong>Tipo de Conector</strong></th>
+                <th><strong>Pines</strong></th>
+                <th><strong>Potencia Máxima</strong></th>
+                <th><strong>Uso Típico</strong></th>
+            </tr>
+            <tr>
+                <td>PCIe 6 pines</td>
+                <td>6</td>
+                <td>75W</td>
+                <td>GPUs gama media-baja</td>
+            </tr>
+            <tr>
+                <td>PCIe 8 pines (6+2)</td>
+                <td>8</td>
+                <td>150W</td>
+                <td>GPUs gama media-alta</td>
+            </tr>
+            <tr>
+                <td>PCIe Dual 8 pines</td>
+                <td>16</td>
+                <td>300W</td>
+                <td>GPUs gama alta</td>
+            </tr>
+            <tr>
+                <td>12VHPWR (ATX 3.0)</td>
+                <td>16</td>
+                <td>600W</td>
+                <td>RTX 4080/4090 y futuras</td>
+            </tr>
+        </table>
+
+        <h4>Conectores SATA y Molex</h4>
+
+        <h4>Conector SATA:</h4>
+
+        <ul>
+            <li>Pines: 15 pines en forma de L</li>
+            <li>Voltajes: +3.3V, +5V, +12V</li>
+            <li>Uso: Discos duros, SSDs, unidades ópticas</li>
+            <li>Ventaja: Conexión en caliente, mejor flujo de aire</li>
+        </ul>
+
+        <h4>Conector Molex (4 pines):</h4>
+
+        <ul>
+            <li>Voltajes: +5V y +12V</li>
+            <li>Uso: Ventiladores, dispositivos legacy</li>
+            <li>Características: Robusto, alta corriente</li>
+            <li>Estado: En desuso, reemplazado por SATA</li>
+        </ul>
+
+        <h3>Certificaciones de Eficiencia 80 Plus</h3>
+
+        <h4>Importancia de la Eficiencia Energética</h4>
+
+        <p>La eficiencia energética indica qué porcentaje de la energía consumida de la red se convierte en energía útil para los componentes, mientras que el resto se disipa como calor.</p>
+
+        <h4>Niveles de Certificación 80 Plus</h4>
+
+        <table>
+            <tr>
+                <th><strong>Certificación</strong></th>
+                <th><strong>20% Carga</strong></th>
+                <th><strong>50% Carga</strong></th>
+                <th><strong>100% Carga</strong></th>
+                <th><strong>Año Introducción</strong></th>
+            </tr>
+            <tr>
+                <td>80 Plus</td>
+                <td>80%</td>
+                <td>80%</td>
+                <td>80%</td>
+                <td>2004</td>
+            </tr>
+            <tr>
+                <td>80 Plus Bronze</td>
+                <td>82%</td>
+                <td>85%</td>
+                <td>82%</td>
+                <td>2008</td>
+            </tr>
+            <tr>
+                <td>80 Plus Silver</td>
+                <td>85%</td>
+                <td>88%</td>
+                <td>85%</td>
+                <td>2008</td>
+            </tr>
+            <tr>
+                <td>80 Plus Gold</td>
+                <td>87%</td>
+                <td>90%</td>
+                <td>87%</td>
+                <td>2008</td>
+            </tr>
+            <tr>
+                <td>80 Plus Platinum</td>
+                <td>90%</td>
+                <td>92%</td>
+                <td>89%</td>
+                <td>2009</td>
+            </tr>
+            <tr>
+                <td>80 Plus Titanium</td>
+                <td>92%</td>
+                <td>94%</td>
+                <td>90%</td>
+                <td>2012</td>
+            </tr>
+        </table>
+
+        <h4>Beneficios de Alta Eficiencia</h4>
+
+        <ul>
+            <li>Menor consumo eléctrico: Reducción en la factura energética</li>
+            <li>Menos calor generado: Menores temperaturas del sistema</li>
+            <li>Menor ruido: Ventiladores funcionan a menor velocidad</li>
+            <li>Mayor vida útil: Componentes operan en mejores condiciones</li>
+            <li>Menor impacto ambiental: Reducción de emisiones CO2</li>
+        </ul>
+
+        <h3>Modularidad en Fuentes de Alimentación</h3>
+
+        <h4>Tipos de Modularidad</h4>
+
+        <h4>Fuentes No Modulares:</h4>
+
+        <ul>
+            <li>Todos los cables fijos permanentemente</li>
+            <li>Ventajas: Menor costo, mayor confiabilidad</li>
+            <li>Desventajas: Cables no utilizados, peor gestión</li>
+            <li>Uso ideal: Sistemas básicos, presupuesto limitado</li>
+        </ul>
+
+        <h4>Fuentes Semi-Modulares:</h4>
+
+        <ul>
+            <li>Cables principales fijos, auxiliares desmontables</li>
+            <li>Fijos: 24 pines ATX, 4/8 pines CPU</li>
+            <li>Modulares: PCIe, SATA, Molex</li>
+            <li>Equilibrio: Costo vs funcionalidad</li>
+        </ul>
+
+        <h4>Fuentes Totalmente Modulares:</h4>
+
+        <ul>
+            <li>Todos los cables desmontables</li>
+            <li>Ventajas: Gestión óptima, estética limpia</li>
+            <li>Desventajas: Mayor costo, riesgo de pérdida de cables</li>
+            <li>Uso ideal: Sistemas enthusiast, gaming</li>
+        </ul>
+
+        <table>
+            <tr>
+                <th><strong>Tipo de Modularidad</strong></th>
+                <th><strong>Costo</strong></th>
+                <th><strong>Gestión de Cables</strong></th>
+                <th><strong>Flujo de Aire</strong></th>
+                <th><strong>Recomendado Para</strong></th>
+            </tr>
+            <tr>
+                <td>No Modular</td>
+                <td>Bajo</td>
+                <td>Limitada</td>
+                <td>Bueno</td>
+                <td>Oficina, básico</td>
+            </tr>
+            <tr>
+                <td>Semi-Modular</td>
+                <td>Medio</td>
+                <td>Buena</td>
+                <td>Muy bueno</td>
+                <td>Gaming medio</td>
+            </tr>
+            <tr>
+                <td>Totalmente Modular</td>
+                <td>Alto</td>
+                <td>Excelente</td>
+                <td>Excelente</td>
+                <td>Enthusiast</td>
+            </tr>
+        </table>
+
+        <h3>Protecciones Eléctricas y Seguridad</h3>
+
+        <h4>Protecciones Fundamentales</h4>
+
+        <h4>OVP (Over Voltage Protection):</h4>
+
+        <ul>
+            <li>Función: Protege contra sobrevoltajes</li>
+            <li>Activación: Voltajes superiores al 120% nominal</li>
+            <li>Respuesta: Apagado inmediato del sistema</li>
+            <li>Importancia: Crítica para componentes sensibles</li>
+        </ul>
+
+        <h4>UVP (Under Voltage Protection):</h4>
+
+        <ul>
+            <li>Función: Protege contra bajadas de voltaje</li>
+            <li>Activación: Voltajes inferiores al 85% nominal</li>
+            <li>Previene: Funcionamiento inestable</li>
+            <li>Comportamiento: Apagado controlado</li>
+        </ul>
+
+        <h4>OCP (Over Current Protection):</h4>
+
+        <ul>
+            <li>Función: Limita corriente en cada línea</li>
+            <li>Aplicación: Por línea de voltaje (+12V, +5V, +3.3V)</li>
+            <li>Beneficio: Previene daños por cortocircuitos</li>
+            <li>Tipo: Limitación o apagado</li>
+        </ul>
+
+        <h4>OPP (Over Power Protection):</h4>
+
+        <ul>
+            <li>Función: Limita potencia total de salida</li>
+            <li>Activación: 110-150% de potencia nominal</li>
+            <li>Protege: Transformador y circuitos primarios</li>
+            <li>Prevención: Sobrecarga y sobrecalentamiento</li>
+        </ul>
+
+        <h4>Protecciones Adicionales</h4>
+
+        <table>
+            <tr>
+                <th><strong>Protección</strong></th>
+                <th><strong>Función</strong></th>
+                <th><strong>Importancia</strong></th>
+                <th><strong>Activación Típica</strong></th>
+            </tr>
+            <tr>
+                <td>SCP (Short Circuit)</td>
+                <td>Cortocircuitos</td>
+                <td>Crítica</td>
+                <td>Inmediata</td>
+            </tr>
+            <tr>
+                <td>OTP (Over Temperature)</td>
+                <td>Sobrecalentamiento</td>
+                <td>Alta</td>
+                <td>60-70°C</td>
+            </tr>
+            <tr>
+                <td>SIP (Surge/Inrush Protection)</td>
+                <td>Picos de corriente</td>
+                <td>Moderada</td>
+                <td>Encendido</td>
+            </tr>
+            <tr>
+                <td>NLO (No Load Operation)</td>
+                <td>Funcionamiento sin carga</td>
+                <td>Baja</td>
+                <td>0% carga</td>
+            </tr>
+        </table>
+
+        <h3>Cálculo de Potencia y Dimensionamiento</h3>
+
+        <h4>Consumos Típicos por Componente</h4>
+
+        <table>
+            <tr>
+                <th><strong>Componente</strong></th>
+                <th><strong>Consumo Mínimo</strong></th>
+                <th><strong>Consumo Típico</strong></th>
+                <th><strong>Consumo Máximo</strong></th>
+                <th><strong>Línea Principal</strong></th>
+            </tr>
+            <tr>
+                <td>CPU</td>
+                <td>35W</td>
+                <td>65W</td>
+                <td>125W</td>
+                <td>+12V</td>
+            </tr>
+            <tr>
+                <td>GPU Gama Media</td>
+                <td>75W</td>
+                <td>180W</td>
+                <td>220W</td>
+                <td>+12V</td>
+            </tr>
+            <tr>
+                <td>GPU Gama Alta</td>
+                <td>150W</td>
+                <td>300W</td>
+                <td>500W</td>
+                <td>+12V</td>
+            </tr>
+            <tr>
+                <td>RAM DDR4 (por módulo)</td>
+                <td>3W</td>
+                <td>5W</td>
+                <td>8W</td>
+                <td>+3.3V</td>
+            </tr>
+            <tr>
+                <td>SSD SATA</td>
+                <td>2W</td>
+                <td>4W</td>
+                <td>7W</td>
+                <td>+5V</td>
+            </tr>
+            <tr>
+                <td>HDD 3.5"</td>
+                <td>5W</td>
+                <td>8W</td>
+                <td>15W</td>
+                <td>+12V</td>
+            </tr>
+            <tr>
+                <td>Placa Madre</td>
+                <td>15W</td>
+                <td>25W</td>
+                <td>50W</td>
+                <td>Múltiples</td>
+            </tr>
+        </table>
+
+        <h4>Metodología de Cálculo</h4>
+
+        <h4>Paso 1 - Identificar Componentes:</h4>
+
+        <ul>
+            <li>CPU y su TDP específico</li>
+            <li>GPU y su consumo máximo</li>
+            <li>Cantidad de memoria RAM</li>
+            <li>Dispositivos de almacenamiento</li>
+            <li>Ventiladores y periféricos</li>
+        </ul>
+
+        <h4>Paso 2 - Sumar Consumos Máximos:</h4>
+
+        <ul>
+            <li>Usar especificaciones del fabricante</li>
+            <li>Considerar overclocking si aplica</li>
+            <li>Incluir márgenes de seguridad</li>
+        </ul>
+
+        <h4>Paso 3 - Aplicar Factores de Seguridad:</h4>
+
+        <ul>
+            <li>Margen básico: +20% sobre consumo calculado</li>
+            <li>Sistemas gaming: +30-40%</li>
+            <li>Sistemas con overclocking: +50%</li>
+            <li>Expansiones futuras: +20% adicional</li>
+        </ul>
+
+        <h4>Ejemplo de Dimensionamiento</h4>
+
+        <h4>Sistema Gaming Medio:</h4>
+
+        <ul>
+            <li>CPU: Intel i5-12400 (65W)</li>
+            <li>GPU: RTX 4060 Ti (165W)</li>
+            <li>RAM: 16GB DDR4 (16W)</li>
+            <li>Almacenamiento: 1 SSD + 1 HDD (12W)</li>
+            <li>Placa madre y otros: 30W</li>
+            <li><strong>Total base:</strong> 288W</li>
+            <li><strong>Con margen 30%:</strong> 375W</li>
+            <li><strong>PSU recomendada:</strong> 550W</li>
+        </ul>
+
+        <h3>Tecnologías Modernas y Tendencias</h3>
+
+        <h4>ATX 3.0 y Conector 12VHPWR</h4>
+
+        <h4>Características del ATX 3.0:</h4>
+
+        <ul>
+            <li>Nuevo conector 12VHPWR de 16 pines</li>
+            <li>Soporte para picos de potencia de hasta 600W</li>
+            <li>Mejor comunicación entre PSU y GPU</li>
+            <li>Diseño específico para GPUs modernas</li>
+        </ul>
+
+        <h4>Ventajas del 12VHPWR:</h4>
+
+        <ul>
+            <li>Single connector para GPUs de alta potencia</li>
+            <li>Menor cantidad de cables necesarios</li>
+            <li>Comunicación bidireccional con la GPU</li>
+            <li>Soporte para diferentes perfiles de potencia</li>
+        </ul>
+
+        <h4>Tecnologías de Eficiencia Avanzada</h4>
+
+        <h4>LLC Resonant Topology:</h4>
+
+        <ul>
+            <li>Conmutación suave para mayor eficiencia</li>
+            <li>Menor generación de ruido eléctrico</li>
+            <li>Mejor regulación de voltaje</li>
+            <li>Uso en fuentes premium</li>
+        </ul>
+
+        <h4>DC-DC Conversion:</h4>
+
+        <ul>
+            <li>Regulación independiente por línea</li>
+            <li>Mayor precisión en voltajes menores</li>
+            <li>Mejor eficiencia en cargas parciales</li>
+            <li>Estándar en fuentes de calidad</li>
+        </ul>
+
+        <p><strong>GaN (Nitruro de Galio):</strong> Usado en fuentes compactas (ej: Cooler Master V SFX Gold) para <strong>mayor eficiencia en tamaños reducidos</strong>.</p>
+
+        <p><strong>Modo "Eco" en ventiladores:</strong> Muchas PSUs ahora tienen <strong>modo híbrido</strong> (ventilador apagado en cargas <30%).</p>
+
+        <p><strong>Compatibilidad con PCIe 5.0:</strong> Algunas fuentes incluyen <strong>conectores PCIe 5.0 de 12V</strong> (para GPUs futuras).</p>
+
+        <h4>Control Térmico Inteligente</h4>
+
+        <h4>Fan Control Avanzado:</h4>
+
+        <ul>
+            <li>Modo semi-pasivo (0 RPM en baja carga)</li>
+            <li>Curvas de temperatura personalizables</li>
+            <li>Sensores múltiples de temperatura</li>
+            <li>Control PWM preciso</li>
+        </ul>
+
+        <h4>Tendencias Futuras</h4>
+
+        <ul>
+            <li><strong>ATX12VO:</strong> Eliminación de +5V y +3.3V del conector principal</li>
+            <li><strong>Fuentes digitales:</strong> Monitoreo y control vía software</li>
+            <li><strong>Mayor eficiencia:</strong> Certificaciones superiores a Titanium</li>
+            <li><strong>Factores de forma compactos:</strong> SFX-L y nuevos estándares</li>
+            <li><strong>Conectores USB-C PD:</strong> Para dispositivos de bajo consumo</li>
+        </ul>
+
+        <h3>Preguntas Teóricas - Evaluación</h3>
+
+        <ol>
+            <li>Explique las principales diferencias entre fuentes AT y ATX. ¿Qué ventajas introdujo el estándar ATX que lo mantiene vigente hasta hoy?</li>
+            <li>Describa los voltajes de salida de una fuente ATX moderna y especifique qué componentes alimenta cada línea. ¿Por qué el +12V se ha vuelto la línea más crítica?</li>
+            <li>Compare los diferentes factores de forma de fuentes (ATX, SFX, TFX) incluyendo dimensiones, aplicaciones típicas y limitaciones de cada uno.</li>
+            <li>Analice las certificaciones 80 Plus desde Bronze hasta Titanium. ¿Qué beneficios reales aporta una mayor eficiencia energética en un sistema doméstico y empresarial?</li>
+            <li>Explique las ventajas y desventajas de cada tipo de modularidad en fuentes de alimentación. ¿En qué escenarios recomendaría cada tipo?</li>
+            <li>Describa las principales protecciones eléctricas que debe incluir una fuente de calidad (OVP, UVP, OCP, OPP, SCP, OTP). ¿Cómo protege cada una al sistema?</li>
+            <li>Desarrolle el proceso completo de dimensionamiento de una fuente para un sistema gaming de gama alta con overclocking. Incluya márgenes de seguridad y justifique la metodología.</li>
+            <li>¿Qué características introdujo el estándar ATX 3.0 y el conector 12VHPWR? Analice las ventajas y problemas reportados de esta nueva tecnología.</li>
+            <li>Compare las topologías LLC Resonant y DC-DC conversion versus diseños tradicionales. ¿Qué beneficios aportan estas tecnologías avanzadas?</li>
+            <li>Analice las tendencias futuras en fuentes de alimentación, incluyendo ATX12VO, fuentes digitales y nuevos factores de forma. ¿Qué impacto tendrán en el diseño de sistemas?</li>
+        </ol>
+    </div>
+</body>
+</html>

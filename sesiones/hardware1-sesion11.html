@@ -1,0 +1,602 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 11: PLACAS DE VIDEO: TECNOLOGÍAS AVANZADAS Y SELECCIÓN DE GPU</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f4;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        @media (max-width: 600px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-uno.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="hardware1-sesion10.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 10
+        </a>
+        <a
+        href="hardware1-sesion12.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 12
+      </a>
+      </div>
+        <h1>Sesión 11: PLACAS DE VIDEO: TECNOLOGÍAS AVANZADAS Y SELECCIÓN DE GPU</h1>
+
+        <h2>Tecnologías Avanzadas en GPUs</h2>
+
+        <h3>Ray Tracing en Tiempo Real</h3>
+
+        <p>El ray tracing es una técnica de renderizado que simula físicamente el comportamiento de la luz, creando reflejos, sombras y efectos de iluminación más realistas.</p>
+
+        <h4>Implementaciones por Fabricante:</h4>
+
+        <ul>
+            <li><strong>NVIDIA RTX:</strong> RT Cores dedicados desde Turing</li>
+            <li><strong>AMD RDNA 2/3:</strong> Ray Accelerators integrados</li>
+            <li><strong>Intel Arc:</strong> Ray Tracing Units desde primera generación</li>
+        </ul>
+
+        <h4>Características del Ray Tracing:</h4>
+
+        <table>
+            <tr>
+                <th><strong>Efecto</strong></th>
+                <th><strong>Descripción</strong></th>
+                <th><strong>Impacto en Rendimiento</strong></th>
+            </tr>
+            <tr>
+                <td>Reflejos</td>
+                <td>Reflejos precisos en superficies</td>
+                <td>Alto</td>
+            </tr>
+            <tr>
+                <td>Sombras</td>
+                <td>Sombras suaves y realistas</td>
+                <td>Moderado</td>
+            </tr>
+            <tr>
+                <td>Iluminación Global</td>
+                <td>Iluminación indirecta realista</td>
+                <td>Muy Alto</td>
+            </tr>
+            <tr>
+                <td>Oclusión Ambiental</td>
+                <td>Sombras de contacto</td>
+                <td>Bajo</td>
+            </tr>
+        </table>
+
+        <h3>DLSS (Deep Learning Super Sampling) - NVIDIA</h3>
+
+        <p>Tecnología de escalado de imagen basada en inteligencia artificial que mejora el rendimiento manteniendo calidad visual.</p>
+
+        <h4>Evolución del DLSS:</h4>
+
+        <table>
+            <tr>
+                <th><strong>Versión</strong></th>
+                <th><strong>Año</strong></th>
+                <th><strong>Características</strong></th>
+                <th><strong>Mejoras</strong></th>
+            </tr>
+            <tr>
+                <td>DLSS 1.0</td>
+                <td>2019</td>
+                <td>Entrenamiento por juego</td>
+                <td>Primera implementación</td>
+            </tr>
+            <tr>
+                <td>DLSS 2.0</td>
+                <td>2020</td>
+                <td>Modelo generalizado</td>
+                <td>Mejor calidad, más juegos</td>
+            </tr>
+            <tr>
+                <td>DLSS 3.0</td>
+                <td>2022</td>
+                <td>Frame Generation</td>
+                <td>Generación de frames intermedios</td>
+            </tr>
+        </table>
+
+        <h4>Modos de DLSS:</h4>
+
+        <ul>
+            <li><strong>Quality:</strong> 66.7% de resolución nativa (mejor calidad)</li>
+            <li><strong>Balanced:</strong> 58% de resolución nativa (equilibrio)</li>
+            <li><strong>Performance:</strong> 50% de resolución nativa (mejor rendimiento)</li>
+            <li><strong>Ultra Performance:</strong> 33% de resolución nativa (máximo rendimiento)</li>
+        </ul>
+
+        <h3>FSR (FidelityFX Super Resolution) - AMD</h3>
+
+        <p>Tecnología de escalado de imagen de código abierto que no requiere hardware especializado.</p>
+
+        <h4>Comparación FSR vs DLSS:</h4>
+
+        <table>
+            <tr>
+                <th><strong>Característica</strong></th>
+                <th><strong>FSR</strong></th>
+                <th><strong>DLSS</strong></th>
+            </tr>
+            <tr>
+                <td>Tecnología</td>
+                <td>Escalado espacial</td>
+                <td>Machine Learning</td>
+            </tr>
+            <tr>
+                <td>Hardware Requerido</td>
+                <td>Cualquier GPU</td>
+                <td>RTX series</td>
+            </tr>
+            <tr>
+                <td>Calidad</td>
+                <td>Buena</td>
+                <td>Excelente</td>
+            </tr>
+            <tr>
+                <td>Compatibilidad</td>
+                <td>Amplia</td>
+                <td>Limitada</td>
+            </tr>
+        </table>
+
+        <h3>Variable Rate Shading (VRS)</h3>
+
+        <p>Técnica que permite reducir la calidad de sombreado en áreas menos importantes de la imagen.</p>
+
+        <ul>
+            <li><strong>Beneficio:</strong> Mejor rendimiento sin pérdida visual notable</li>
+            <li><strong>Implementación:</strong> NVIDIA, AMD e Intel</li>
+            <li><strong>Aplicación:</strong> VR, áreas periféricas, objetos en movimiento</li>
+        </ul>
+
+        <h2>Sistemas de Refrigeración de GPU</h2>
+
+        <h3>Refrigeración por Aire</h3>
+
+        <h4>Diseños de Coolers:</h4>
+
+        <ul>
+            <li><strong>Single Fan:</strong> GPUs básicas y de perfil bajo</li>
+            <li><strong>Dual Fan:</strong> Gama media, equilibrio ruido/rendimiento</li>
+            <li><strong>Triple Fan:</strong> Gama alta, máximo rendimiento térmico</li>
+            <li><strong>Axial vs Centrífugo:</strong> Diferentes patrones de flujo de aire</li>
+        </ul>
+
+        <h4>Componentes del Sistema de Refrigeración:</h4>
+
+        <table>
+            <tr>
+                <th><strong>Componente</strong></th>
+                <th><strong>Función</strong></th>
+                <th><strong>Materiales</strong></th>
+            </tr>
+            <tr>
+                <td>Heatsink</td>
+                <td>Disipación de calor del GPU</td>
+                <td>Aluminio, cobre</td>
+            </tr>
+            <tr>
+                <td>Heat Pipes</td>
+                <td>Transferencia eficiente de calor</td>
+                <td>Cobre con fluido interno</td>
+            </tr>
+            <tr>
+                <td>Thermal Pads</td>
+                <td>Contacto térmico con VRAM</td>
+                <td>Silicona térmica</td>
+            </tr>
+            <tr>
+                <td>Backplate</td>
+                <td>Protección y disipación adicional</td>
+                <td>Metal o plástico</td>
+            </tr>
+        </table>
+
+        <h3>Refrigeración Líquida</h3>
+
+        <h4>Tipos de Refrigeración Líquida:</h4>
+
+        <ul>
+            <li><strong>AIO Híbrido:</strong> GPU con radiador separado</li>
+            <li><strong>Custom Loop:</strong> Sistema personalizado completo</li>
+            <li><strong>All-in-One:</strong> Solución integrada del fabricante</li>
+        </ul>
+
+        <h4>Ventajas y Desventajas:</h4>
+
+        <table>
+            <tr>
+                <th><strong>Aspecto</strong></th>
+                <th><strong>Refrigeración por Aire</strong></th>
+                <th><strong>Refrigeración Líquida</strong></th>
+            </tr>
+            <tr>
+                <td>Costo</td>
+                <td>Menor</td>
+                <td>Mayor</td>
+            </tr>
+            <tr>
+                <td>Rendimiento Térmico</td>
+                <td>Bueno</td>
+                <td>Excelente</td>
+            </tr>
+            <tr>
+                <td>Ruido</td>
+                <td>Variable</td>
+                <td>Generalmente menor</td>
+            </tr>
+            <tr>
+                <td>Mantenimiento</td>
+                <td>Mínimo</td>
+                <td>Regular</td>
+            </tr>
+            <tr>
+                <td>Riesgo</td>
+                <td>Muy bajo</td>
+                <td>Potencial fuga</td>
+            </tr>
+        </table>
+
+        <p>Refrigeración por inmersión: Para minería y data centers.</p>
+
+        <h2>Overclocking de GPU</h2>
+
+        <h3>Conceptos Básicos</h3>
+
+        <p>El overclocking consiste en aumentar las frecuencias de funcionamiento por encima de las especificaciones de fábrica.</p>
+
+        <h4>Parámetros Principales:</h4>
+
+        <ul>
+            <li><strong>Core Clock:</strong> Frecuencia del procesador gráfico</li>
+            <li><strong>Memory Clock:</strong> Frecuencia de la memoria de video</li>
+            <li><strong>Power Limit:</strong> Límite de consumo energético</li>
+            <li><strong>Temperature Limit:</strong> Límite térmico de protección</li>
+            <li><strong>Voltage:</strong> Voltaje del núcleo (en algunos modelos)</li>
+        </ul>
+
+        <h3>Herramientas de Overclocking</h3>
+
+        <table>
+            <tr>
+                <th><strong>Software</strong></th>
+                <th><strong>Fabricante</strong></th>
+                <th><strong>Características</strong></th>
+            </tr>
+            <tr>
+                <td>MSI Afterburner</td>
+                <td>MSI</td>
+                <td>Universal, más popular</td>
+            </tr>
+            <tr>
+                <td>EVGA Precision X1</td>
+                <td>EVGA</td>
+                <td>Específico NVIDIA</td>
+            </tr>
+            <tr>
+                <td>AMD Adrenalin</td>
+                <td>AMD</td>
+                <td>Software oficial AMD</td>
+            </tr>
+            <tr>
+                <td>GPU Tweak III</td>
+                <td>ASUS</td>
+                <td>Tarjetas ASUS</td>
+            </tr>
+        </table>
+
+        <h3>Proceso de Overclocking Seguro</h3>
+
+        <ol>
+            <li>Benchmarking inicial: Establecer valores de referencia</li>
+            <li>Incrementos graduales: +25MHz en core, +100MHz en memoria</li>
+            <li>Pruebas de estabilidad: Stress tests y gaming</li>
+            <li>Monitoreo térmico: Temperaturas bajo 83°C</li>
+            <li>Validación prolongada: Varias horas de funcionamiento</li>
+        </ol>
+
+        <h2>Criterios de Selección de GPU</h2>
+
+        <h3>Selección por Resolución</h3>
+
+        <table>
+            <tr>
+                <th><strong>Resolución</strong></th>
+                <th><strong>Segmento GPU</strong></th>
+                <th><strong>VRAM Recomendada</strong></th>
+                <th><strong>Ejemplos</strong></th>
+            </tr>
+            <tr>
+                <td>1080p</td>
+                <td>Gama baja-media</td>
+                <td>6-8 GB</td>
+                <td>RTX 4060, RX 7600</td>
+            </tr>
+            <tr>
+                <td>1440p</td>
+                <td>Gama media-alta</td>
+                <td>8-12 GB</td>
+                <td>RTX 4070, RX 7700 XT</td>
+            </tr>
+            <tr>
+                <td>4K</td>
+                <td>Gama alta</td>
+                <td>12-16 GB</td>
+                <td>RTX 4080, RX 7900 XTX</td>
+            </tr>
+            <tr>
+                <td>8K/VR</td>
+                <td>Tope de gama</td>
+                <td>16-24 GB</td>
+                <td>RTX 4090</td>
+            </tr>
+        </table>
+
+        <h3>Selección por Tipo de Uso</h3>
+
+        <table>
+            <tr>
+                <th><strong>Uso</strong></th>
+                <th><strong>GPU Recomendada</strong></th>
+                <th><strong>VRAM</strong></th>
+                <th><strong>Tecnologías Clave</strong></th>
+                <th><strong>Software Compatible</strong></th>
+            </tr>
+            <tr>
+                <td>Gaming Casual</td>
+                <td>RTX 5060 / RX 7600</td>
+                <td>8GB</td>
+                <td>DLSS/FSR, AV1 decoding</td>
+                <td>GeForce Experience, Adrenalin</td>
+            </tr>
+            <tr>
+                <td>Gaming Enthusiast</td>
+                <td>RTX 5080 / RX 8900 XT</td>
+                <td>16GB</td>
+                <td>DLSS 4.0, Ray Tracing, Reflex</td>
+                <td>NVIDIA Broadcast, Radeon Super Res</td>
+            </tr>
+            <tr>
+                <td>3D Rendering</td>
+                <td>RTX 6000 Ada / W8100</td>
+                <td>24-48GB</td>
+                <td>CUDA, OptiX, ECC memory</td>
+                <td>Blender, Maya, Cinema 4D</td>
+            </tr>
+            <tr>
+                <td>Video Editing</td>
+                <td>RTX 5090 / RX 8950 XT</td>
+                <td>24GB</td>
+                <td>NVENC/AV1, 10-bit HDR</td>
+                <td>Premiere Pro, DaVinci Resolve</td>
+            </tr>
+            <tr>
+                <td>IA/Machine Learning</td>
+                <td>NVIDIA H200 / Instinct MI400</td>
+                <td>80-94GB</td>
+                <td>Tensor Cores, FP8 acceleration</td>
+                <td>PyTorch, TensorFlow</td>
+            </tr>
+        </table>
+
+        <h3>Consideraciones de Compatibilidad</h3>
+
+        <p><strong>Requerimientos del Sistema:</strong> Según la GPU, el fabricante sugiere una PSU recomendada, indica el tamaño de gabinete mínimo requerido para que dicha GPU pueda instalarse, como también la ranura PCIe recomendada (ej. PCIe 4.0 x16 ó 5.0 x16).</p>
+
+        <h2>Conectores de Alimentación</h2>
+
+        <h3>Conectores</h3>
+
+        <table>
+            <tr>
+                <th><strong>Conector</strong></th>
+                <th><strong>Potencia Máxima</strong></th>
+                <th><strong>Uso</strong></th>
+                <th><strong>Riesgos</strong></th>
+            </tr>
+            <tr>
+                <td>6-pin PCIe</td>
+                <td>75W</td>
+                <td>GPUs de oficina</td>
+                <td>Obsoleto</td>
+            </tr>
+            <tr>
+                <td>8-pin PCIe</td>
+                <td>150W</td>
+                <td>GPUs de gama baja</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>12V-2x6</td>
+                <td>1000W</td>
+                <td>RTX 5090, RX 8900 XTX</td>
+                <td>Requiere PSU certificada</td>
+            </tr>
+            <tr>
+                <td>Dual 8-pin</td>
+                <td>300W</td>
+                <td>GPUs antiguas (ej. RTX 3080)</td>
+                <td>Riesgo de sobrecalentamiento</td>
+            </tr>
+        </table>
+
+        <h3>Problemas Comunes</h3>
+
+        <ul>
+            <li><strong>Conectores mal insertados:</strong> Causa arcing y derretimiento</li>
+            <li><strong>Cables no certificados:</strong> Riesgo de sobrecalentamiento</li>
+            <li><strong>Doblado excesivo:</strong> Daño en el conector</li>
+            <li><strong>PSU insuficiente:</strong> Shutdowns y inestabilidad</li>
+        </ul>
+
+        <h2>Troubleshooting y Mantenimiento</h2>
+
+        <h3>Problemas Comunes</h3>
+
+        <table>
+            <tr>
+                <th><strong>Síntoma</strong></th>
+                <th><strong>Posibles Causas</strong></th>
+                <th><strong>Soluciones</strong></th>
+            </tr>
+            <tr>
+                <td>Pantalla negra</td>
+                <td>Drivers, conexión, alimentación</td>
+                <td>Reinstalar drivers, verificar cables</td>
+            </tr>
+            <tr>
+                <td>Artefactos visuales</td>
+                <td>Overheating, VRAM defectuosa</td>
+                <td>Limpiar, reducir overclock</td>
+            </tr>
+            <tr>
+                <td>Ruido excesivo</td>
+                <td>Ventiladores sucios/defectuosos</td>
+                <td>Limpiar, reemplazar térmicos</td>
+            </tr>
+            <tr>
+                <td>Temperaturas altas</td>
+                <td>Pasta térmica, ventiladores</td>
+                <td>Repaste, limpieza profunda</td>
+            </tr>
+        </table>
+
+        <h3>Mantenimiento Preventivo</h3>
+
+        <ul>
+            <li><strong>Limpieza regular:</strong>
+                <ul>
+                    <li>Cada 6 meses</li>
+                    <li><strong>Filtros anti-polvo</strong> en gabinetes</li>
+                </ul>
+            </li>
+            <li><strong>Monitoreo térmico:</strong>
+                <ul>
+                    <li><strong>HWInfo64</strong> para temperaturas y voltajes.</li>
+                    <li><strong>GPU-Z</strong> para verificar VRAM usada y ancho de banda.</li>
+                </ul>
+            </li>
+            <li><strong>Actualización de drivers:</strong> Mensual</li>
+            <li><strong>Verificación de conectores:</strong> Inspección visual</li>
+            <li><strong>Repaste térmico:</strong> Cada 2-3 años dependiendo el uso.</li>
+        </ul>
+
+        <p><strong>Recomendación Importante:</strong> Al seleccionar una GPU, considere no solo el rendimiento actual sino también la longevidad. Una GPU con más VRAM puede mantener rendimiento aceptable por más tiempo, especialmente en resoluciones altas donde las texturas de alta calidad requieren más memoria de video.</p>
+
+        <h2>Preguntas</h2>
+
+        <ol>
+            <li>¿Qué es el ray tracing y cómo mejora la calidad visual en los videojuegos?</li>
+            <li>¿Cuál es la diferencia entre DLSS y FSR en términos de tecnología y compatibilidad?</li>
+            <li>¿Qué es el Variable Rate Shading (VRS) y cómo mejora el rendimiento de una GPU?</li>
+            <li>¿Cuáles son los principales componentes de un sistema de refrigeración por aire en una GPU?</li>
+            <li>¿Qué ventajas y desventajas tiene la refrigeración líquida frente a la refrigeración por aire?</li>
+            <li>¿Qué parámetros se pueden ajustar al hacer overclocking en una GPU?</li>
+            <li>¿Qué herramientas de software se utilizan comúnmente para hacer overclocking en una GPU?</li>
+            <li>¿Cómo se selecciona una GPU según la resolución de pantalla?</li>
+            <li>¿Qué tipo de GPU se recomienda para tareas de edición de video y renderizado 3D?</li>
+            <li>¿Qué problemas comunes pueden surgir con los conectores de alimentación de una GPU y cómo se pueden evitar?</li>
+        </ol>
+    </div>
+</body>
+</html>
