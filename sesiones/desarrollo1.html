@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" style=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clases de Repaso - Python Básico</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 32px 80px;
+        position: relative;
+        box-sizing: border-box;
+        font-family: 'Times New Roman', Times, serif;
+        line-height: 1.6;
+      }
+
+      .code-block {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 4px;
+        padding: 15px;
+        margin: 10px 0;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+      }
+
+      .correct-code {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+      }
+
+      .incorrect-code {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+      }
+
+      .exercise-box {
+        background-color: #fff3cd;
+        border: 2px solid #ffeaa7;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 5px;
+      }
+
+      .time-indicator {
+        color: #6c757d;
+        font-style: italic;
+        font-size: 14px;
+      }
+
+      .section-header {
+        background-color: #e9ecef;
+        padding: 10px 15px;
+        margin: 20px 0 15px 0;
+        border-left: 4px solid #007bff;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      .highlight {
+        background-color: #fff3cd;
+        padding: 2px 4px;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body style="">
+    <h1>Clases de Repaso - Python Básico</h1>
+    <p style="text-align: center; font-style: italic">
+      Material para Visual Studio Code - 2 Clases de 80 minutos cada una
+    </p>
+
+    <hr>
+
+    <h1>CLASE 1: Variables, Tipos de Datos y Función Print</h1>
+    <p class="time-indicator">Duración: 80 minutos</p>
+
+    <div class="section-header">
+      <h2>1. Declaración de Variables (15 minutos)</h2>
+    </div>
+
+    <h3>¿Qué es una variable?</h3>
+    <p>
+      Una variable es un espacio de memoria que almacena un valor. En Python, las variables se crean automáticamente
+      cuando les asignamos un valor por primera vez.
+    </p>
+
+    <h4>Formas Correctas de Declarar Variables:</h4>
+
+    <div class="code-block correct-code">
+      <strong>Ejemplo 1:</strong><br>
+      nombre = "Juan"<br>
+      edad = 25<br>
+      altura = 1.75
+    </div>
+
+    <div class="code-block correct-code">
+      <strong>Ejemplo 2:</strong><br>
+      mi_nombre = "Ana"<br>
+      numero_favorito = 7<br>
+      es_estudiante = True
+    </div>
+
+    <div class="code-block correct-code">
+      <strong>Ejemplo 3:</strong><br>
+      precio_producto = 99.99<br>
+      cantidad_stock = 50<br>
+      producto_disponible = True
+    </div>
+
+    <h4>Formas Incorrectas de Declarar Variables:</h4>
+
+    <div class="code-block incorrect-code">
+      <strong>Ejemplo 1 (Incorrecto):</strong><br>
+      2nombre = "Juan" # No puede empezar con número<br>
+      mi-edad = 25 # No se permiten guiones<br>
+      class = "A" # 'class' es una palabra reservada
+    </div>
+
+    <div class="code-block incorrect-code">
+      <strong>Ejemplo 2 (Incorrecto):</strong><br>
+      mi nombre = "Ana" # No se permiten espacios<br>
+      $precio = 100 # No se permite el símbolo $<br>
+      for = 5 # 'for' es una palabra reservada
+    </div>
+
+    <div class="code-block incorrect-code">
+      <strong>Ejemplo 3 (Incorrecto):</strong><br>
+      9altura = 1.80 # No puede empezar con número<br>
+      mi@email = "..." # No se permite @<br>
+      if = True # 'if' es una palabra reservada
+    </div>
+
+    <div class="section-header">
+      <h2>2. Sensibilidad a Mayúsculas y Minúsculas (10 minutos)</h2>
+    </div>
+
+    <p>
+      Python es <span class="highlight">case sensitive</span>, lo que significa que distingue entre mayúsculas y
+      minúsculas.
+    </p>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br>
+      nombre = "Juan"<br>
+      Nombre = "Ana"<br>
+      NOMBRE = "Carlos"<br>
+      # Estas son 3 variables diferentes
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br>
+      edad = 20<br>
+      Edad = 30<br>
+      print(edad) # Imprime: 20<br>
+      print(Edad) # Imprime: 30
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br>
+      miVariable = 100<br>
+      mivariable = 200<br>
+      MIVARIABLE = 300<br>
+      # Son 3 variables completamente distintas
+    </div>
+
+    <div class="section-header">
+      <h2>3. Convenciones de Nomenclatura (10 minutos)</h2>
+    </div>
+
+    <table>
+      <tbody><tr>
+        <th>Convención</th>
+        <th>Descripción</th>
+        <th>Uso en Python</th>
+      </tr>
+      <tr>
+        <td>snake_case</td>
+        <td>Palabras separadas por guiones bajos</td>
+        <td>✅ Recomendado</td>
+      </tr>
+      <tr>
+        <td>camelCase</td>
+        <td>Primera palabra en minúscula, siguientes capitalizadas</td>
+        <td>❌ No recomendado</td>
+      </tr>
+    </tbody></table>
+
+    <h4>Ejemplos de snake_case (Recomendado en Python):</h4>
+
+    <div class="code-block correct-code">
+      <strong>Ejemplo 1:</strong><br>
+      nombre_completo = "Juan Pérez"<br>
+      fecha_nacimiento = "1990-05-15"<br>
+      numero_telefono = "123456789"
+    </div>
+
+    <div class="code-block correct-code">
+      <strong>Ejemplo 2:</strong><br>
+      precio_total = 150.50<br>
+      cantidad_productos = 3<br>
+      descuento_aplicado = 0.10
+    </div>
+
+    <div class="code-block correct-code">
+      <strong>Ejemplo 3:</strong><br>
+      es_mayor_edad = True<br>
+      tiene_licencia = False<br>
+      ciudad_residencia = "Madrid"
+    </div>
+
+    <h4>Ejemplos de camelCase (No recomendado en Python):</h4>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br>
+      nombreCompleto = "Juan Pérez"<br>
+      fechaNacimiento = "1990-05-15"<br>
+      numeroTelefono = "123456789"
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br>
+      precioTotal = 150.50<br>
+      cantidadProductos = 3<br>
+      descuentoAplicado = 0.10
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br>
+      esMayorEdad = True<br>
+      tieneLicencia = False<br>
+      ciudadResidencia = "Madrid"
+    </div>
+
+    <div class="section-header">
+      <h2>4. La Función print() (15 minutos)</h2>
+    </div>
+
+    <p>La función <code>print()</code> se utiliza para mostrar información en la pantalla.</p>
+
+    <div class="code-block">
+      <strong>Ejemplo 1 - Imprimir texto simple:</strong><br>
+      print("¡Hola, mundo!")<br>
+      print('Python es genial')<br>
+      print("Estoy aprendiendo programación")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2 - Imprimir variables:</strong><br>
+      nombre = "María"<br>
+      edad = 28<br>
+      print(nombre)<br>
+      print(edad)<br>
+      print("Mi nombre es", nombre, "y tengo", edad, "años")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3 - Diferentes formas de imprimir:</strong><br>
+      producto = "Laptop"<br>
+      precio = 899.99<br>
+      print("Producto:", producto)<br>
+      print(f"El precio de {producto} es ${precio}")<br>
+      print("Total: $" + str(precio))
+    </div>
+
+    <div class="section-header">
+      <h2>5. Tipos de Datos Básicos (25 minutos)</h2>
+    </div>
+
+    <h3>5.1 Números Enteros (int)</h3>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br>
+      edad = 25<br>
+      año_actual = 2024<br>
+      temperatura = -5<br>
+      print(type(edad)) # &lt;class 'int'&gt;
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br>
+      cantidad_estudiantes = 30<br>
+      numero_negativo = -100<br>
+      cero = 0<br>
+      print("Estudiantes:", cantidad_estudiantes)
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br>
+      puntos_juego = 1500<br>
+      nivel = 8<br>
+      vidas = 3<br>
+      print(f"Nivel {nivel}, Puntos: {puntos_juego}, Vidas: {vidas}")
+    </div>
+
+    <h3>5.2 Cadenas de Texto (str)</h3>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br>
+      nombre = "Ana García"<br>
+      apellido = 'Rodríguez'<br>
+      mensaje = "Bienvenido al curso de Python"<br>
+      print(type(nombre)) # &lt;class 'str'&gt;
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br>
+      ciudad = "Barcelona"<br>
+      pais = "España"<br>
+      codigo_postal = "08001"<br>
+      print(ciudad, pais, codigo_postal)
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br>
+      email = "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e297919783908b8da28788878f928e8dcc818d8f">[email&#160;protected]</a>"<br>
+      contraseña = "mi_contraseña_123"<br>
+      descripcion = "Esta es una descripción larga del producto"<br>
+      print("Email:", email)
+    </div>
+
+    <h3>5.3 Números Decimales (float)</h3>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br>
+      precio = 29.99<br>
+      altura = 1.75<br>
+      peso = 68.5<br>
+      print(type(precio)) # &lt;class 'float'&gt;
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br>
+      promedio_notas = 8.7<br>
+      temperatura = 23.5<br>
+      distancia = 15.25<br>
+      print(f"Promedio: {promedio_notas}")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br>
+      salario = 2500.50<br>
+      descuento = 0.15<br>
+      pi = 3.14159<br>
+      print("Salario:", salario, "Descuento:", descuento)
+    </div>
+
+    <h3>5.4 Valores Booleanos (bool)</h3>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br>
+      es_estudiante = True<br>
+      tiene_trabajo = False<br>
+      mayor_edad = True<br>
+      print(type(es_estudiante)) # &lt;class 'bool'&gt;
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br>
+      llueve = False<br>
+      hace_sol = True<br>
+      dia_laborable = True<br>
+      print("¿Llueve?", llueve)
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br>
+      juego_terminado = False<br>
+      usuario_conectado = True<br>
+      archivo_guardado = True<br>
+      print(f"Juego terminado: {juego_terminado}")
+    </div>
+
+    <div class="section-header">
+      <h2>Ejercicios Prácticos - Clase 1 (5 minutos)</h2>
+    </div>
+
+    <div class="exercise-box">
+      <h3>Ejercicio 1: Declaración de Variables</h3>
+      <p>Crea variables para almacenar la información de un estudiante:</p>
+      <ul>
+        <li>Nombre completo (string)</li>
+        <li>Edad (entero)</li>
+        <li>Promedio de calificaciones (decimal)</li>
+        <li>¿Es estudiante de tiempo completo? (booleano)</li>
+      </ul>
+      <p>Imprime toda la información usando print().</p>
+    </div>
+
+    <div class="exercise-box">
+      <h3>Ejercicio 2: Corrección de Errores</h3>
+      <p>Encuentra y corrige los errores en estas declaraciones de variables:</p>
+      <div class="code-block">
+        1mi_variable = "Hola"<br>
+        mi-edad = 20<br>
+        class = "Programación"<br>
+        mi nombre = "Juan"
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <h3>Ejercicio 3: Tipos de Datos</h3>
+      <p>
+        Crea variables de cada tipo de dato (int, str, float, bool) y usa la función type() para verificar el tipo de
+        cada una. Imprime tanto el valor como el tipo.
+      </p>
+    </div>
+
+    <div class="exercise-box">
+      <h3>Ejercicio 4: Case Sensitivity</h3>
+      <p>
+        Crea tres variables con nombres similares pero diferentes en mayúsculas/minúsculas, asígnales valores distintos
+        e imprime cada una para demostrar que Python las trata como variables diferentes.
+      </p>
+    </div>
+
+    <hr style="margin: 40px 0">
+
+    
+
+</body></html>

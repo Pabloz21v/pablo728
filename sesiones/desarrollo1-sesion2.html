@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" style="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clases de Repaso - Python Básico</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
+    <style>
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        /* padding: 32px 80px; */
+        position: relative;
+        box-sizing: border-box;
+        font-family: "Times New Roman", Times, serif;
+        line-height: 1.6;
+      }
+
+      .code-block {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 4px;
+        padding: 15px;
+        margin: 10px 0;
+        font-family: "Courier New", monospace;
+        font-size: 14px;
+      }
+
+      .correct-code {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+      }
+
+      .incorrect-code {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+      }
+
+      .exercise-box {
+        background-color: #fff3cd;
+        border: 2px solid #ffeaa7;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 5px;
+      }
+
+      .time-indicator {
+        color: #6c757d;
+        font-style: italic;
+        font-size: 14px;
+      }
+
+      .section-header {
+        background-color: #e9ecef;
+        padding: 10px 15px;
+        margin: 20px 0 15px 0;
+        border-left: 4px solid #007bff;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      .highlight {
+        background-color: #fff3cd;
+        padding: 2px 4px;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body style="">
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/desarrollo-1.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="desarrollo1-sesion1.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 1
+      </a>
+      <a
+        href="desarrollo1-sesion3.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 3
+      </a>
+    </div>
+    <h1>Sesión 2: Conversión de Tipos, Comentarios y Estructuras de Control</h1>
+
+    <div class="section-header">
+      <h2>1. Conversión de Tipos de Datos</h2>
+    </div>
+
+    <p>
+      La conversión de tipos (casting) permite cambiar un tipo de dato a otro.
+    </p>
+
+    <h3>1.1 Conversión a Entero (int)</h3>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br />
+      numero_texto = "123"<br />
+      numero_entero = int(numero_texto)<br />
+      decimal = 45.8<br />
+      entero_desde_decimal = int(decimal)<br />
+      print(numero_entero) # 123<br />
+      print(entero_desde_decimal) # 45
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br />
+      edad_str = "25"<br />
+      edad_int = int(edad_str)<br />
+      precio_float = 99.99<br />
+      precio_int = int(precio_float)<br />
+      print("Edad:", edad_int, type(edad_int))
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br />
+      verdadero = True<br />
+      falso = False<br />
+      bool_a_int_v = int(verdadero) # 1<br />
+      bool_a_int_f = int(falso) # 0<br />
+      print(bool_a_int_v, bool_a_int_f)
+    </div>
+
+    <h3>1.2 Conversión a Cadena (str)</h3>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br />
+      edad = 25<br />
+      edad_texto = str(edad)<br />
+      precio = 99.99<br />
+      precio_texto = str(precio)<br />
+      print("Tengo " + edad_texto + " años")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br />
+      activo = True<br />
+      numero = 42<br />
+      activo_str = str(activo)<br />
+      numero_str = str(numero)<br />
+      print("Estado: " + activo_str)
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br />
+      temperatura = 23.5<br />
+      nivel = 8<br />
+      temp_str = str(temperatura)<br />
+      nivel_str = str(nivel)<br />
+      mensaje = "Temperatura: " + temp_str + "°C, Nivel: " + nivel_str
+    </div>
+
+    <h3>1.3 Conversión a Decimal (float)</h3>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br />
+      numero = 42<br />
+      texto_decimal = "3.14"<br />
+      numero_float = float(numero)<br />
+      pi = float(texto_decimal)<br />
+      print(numero_float) # 42.0<br />
+      print(pi) # 3.14
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br />
+      edad = 25<br />
+      precio_str = "199.99"<br />
+      edad_float = float(edad)<br />
+      precio_float = float(precio_str)<br />
+      print(f"Edad: {edad_float}, Precio: {precio_float}")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br />
+      verdadero = True<br />
+      falso = False<br />
+      bool_a_float_v = float(verdadero) # 1.0<br />
+      bool_a_float_f = float(falso) # 0.0<br />
+      print(bool_a_float_v, bool_a_float_f)
+    </div>
+
+    <div class="section-header">
+      <h2>2. Comentarios en Python</h2>
+    </div>
+
+    <p>
+      Los comentarios son texto que Python ignora al ejecutar el código. Se usan
+      para explicar el código.
+    </p>
+
+    <h3>2.1 Comentarios de una línea (#)</h3>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br />
+      # Este es un comentario de una línea<br />
+      nombre = "Juan" # Comentario al final de la línea<br />
+      # La siguiente línea calcula la edad<br />
+      edad = 2024 - 1995
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br />
+      # Configuración inicial del programa<br />
+      precio_base = 100.0 # Precio sin descuentos<br />
+      descuento = 0.15 # 15% de descuento<br />
+      # precio_final = precio_base * (1 - descuento)
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br />
+      # Variables del juego<br />
+      vidas_jugador = 3 # Número de vidas inicial<br />
+      puntos = 0 # Puntos acumulados<br />
+      # nivel_actual = 1 # Esta línea está comentada
+    </div>
+
+    <h3>2.2 Comentarios de múltiples líneas (""" """)</h3>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br />
+      """<br />
+      Este es un comentario<br />
+      de múltiples líneas<br />
+      que explica el propósito del programa<br />
+      """<br />
+      print("Hola mundo")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br />
+      """<br />
+      Programa de cálculo de notas<br />
+      Autor: Estudiante<br />
+      Fecha: 2024<br />
+      """<br />
+      nota1 = 8.5<br />
+      nota2 = 9.0<br />
+      promedio = (nota1 + nota2) / 2
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br />
+      '''<br />
+      También se pueden usar comillas simples<br />
+      para comentarios de múltiples líneas<br />
+      '''<br />
+      usuario = "admin"<br />
+      contraseña = "123456"
+    </div>
+
+    <div class="section-header">
+      <h2>3. Operadores</h2>
+    </div>
+
+    <h3>3.1 Operadores Aritméticos</h3>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br />
+      a = 10<br />
+      b = 3<br />
+      suma = a + b # 13<br />
+      resta = a - b # 7<br />
+      multiplicacion = a * b # 30<br />
+      division = a / b # 3.333...<br />
+      print(f"Suma: {suma}, Resta: {resta}")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br />
+      x = 15<br />
+      y = 4<br />
+      division_entera = x // y # 3 (división sin decimales)<br />
+      modulo = x % y # 3 (resto de la división)<br />
+      potencia = x ** y # 50625 (15 elevado a la 4)<br />
+      print(f"División entera: {division_entera}, Módulo: {modulo}")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br />
+      precio = 100<br />
+      descuento = 0.20<br />
+      impuesto = 0.21<br />
+      precio_descuento = precio * (1 - descuento)<br />
+      precio_final = precio_descuento * (1 + impuesto)<br />
+      print(f"Precio final: ${precio_final}")
+    </div>
+
+    <h3>3.2 Operadores de Comparación</h3>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br />
+      edad = 18<br />
+      es_mayor = edad &gt;= 18 # True<br />
+      es_menor = edad &lt; 18 # False<br />
+      es_igual = edad == 18 # True<br />
+      es_diferente = edad != 20 # True<br />
+      print(f"¿Es mayor de edad? {es_mayor}")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br />
+      nota1 = 8.5<br />
+      nota2 = 7.0<br />
+      nota1_mayor = nota1 &gt; nota2 # True<br />
+      notas_iguales = nota1 == nota2 # False<br />
+      nota1_menor = nota1 &lt;= nota2 # False<br />
+      print(f"Nota1 es mayor: {nota1_mayor}")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br />
+      precio_producto = 50<br />
+      presupuesto = 75<br />
+      puede_comprar = precio_producto &lt;= presupuesto # True<br />
+      es_caro = precio_producto &gt; 100 # False<br />
+      precio_exacto = precio_producto == 50 # True<br />
+      print(f"¿Puede comprar? {puede_comprar}")
+    </div>
+
+    <h3>3.3 Operadores Lógicos</h3>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br />
+      edad = 20<br />
+      tiene_licencia = True<br />
+      puede_conducir = edad &gt;= 18 and tiene_licencia # True<br />
+      es_joven = edad &lt; 30 or edad &gt; 65 # True<br />
+      no_puede_votar = not (edad &gt;= 18) # False<br />
+      print(f"¿Puede conducir? {puede_conducir}")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br />
+      llueve = False<br />
+      hace_frio = True<br />
+      mal_tiempo = llueve or hace_frio # True<br />
+      buen_tiempo = not llueve and not hace_frio # False<br />
+      clima_mixto = llueve and hace_frio # False<br />
+      print(f"¿Mal tiempo? {mal_tiempo}")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br />
+      es_estudiante = True<br />
+      es_trabajador = False<br />
+      tiene_descuento = es_estudiante or es_trabajador # True<br />
+      trabaja_y_estudia = es_estudiante and es_trabajador # False<br />
+      no_trabaja = not es_trabajador # True<br />
+      print(f"¿Tiene descuento? {tiene_descuento}")
+    </div>
+
+    <div class="section-header">
+      <h2>4. Estructuras Condicionales if...else</h2>
+    </div>
+
+    <h3>4.1 Condicional Simple (if)</h3>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br />
+      edad = 20<br />
+      if edad &gt;= 18:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Eres mayor de edad")<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Puedes votar")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br />
+      temperatura = 30<br />
+      if temperatura &gt; 25:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Hace calor")<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Usa ropa ligera")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br />
+      nota = 8.5<br />
+      if nota &gt;= 7.0:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("¡Felicidades!")<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Has aprobado la materia")
+    </div>
+
+    <h3>4.2 Condicional if...else</h3>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br />
+      edad = 16<br />
+      if edad &gt;= 18:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Puedes votar")<br />
+      else:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Aún no puedes votar")<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print(f"Te faltan {18 - edad} años")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br />
+      numero = 7<br />
+      if numero % 2 == 0:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print(f"{numero} es par")<br />
+      else:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print(f"{numero} es impar")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br />
+      precio = 100<br />
+      dinero = 80<br />
+      if dinero &gt;= precio:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Puedes comprar el producto")<br />
+      else:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("No tienes suficiente dinero")<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print(f"Te faltan ${precio - dinero}")
+    </div>
+
+    <h3>4.3 Condicional if...elif...else</h3>
+
+    <div class="code-block">
+      <strong>Ejemplo 1:</strong><br />
+      nota = 8.5<br />
+      if nota &gt;= 9.0:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Excelente")<br />
+      elif nota &gt;= 7.0:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Bueno")<br />
+      elif nota &gt;= 5.0:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Aprobado")<br />
+      else:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Reprobado")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 2:</strong><br />
+      edad = 25<br />
+      if edad &lt; 13:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Eres un niño")<br />
+      elif edad &lt; 20:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Eres un adolescente")<br />
+      elif edad &lt; 60:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Eres un adulto")<br />
+      else:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Eres un adulto mayor")
+    </div>
+
+    <div class="code-block">
+      <strong>Ejemplo 3:</strong><br />
+      temperatura = 22<br />
+      if temperatura &lt; 0:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Está congelando")<br />
+      elif temperatura &lt; 15:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Hace frío")<br />
+      elif temperatura &lt; 25:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Temperatura agradable")<br />
+      elif temperatura &lt; 35:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Hace calor")<br />
+      else:<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;print("Hace mucho calor")
+    </div>
+
+    <div class="section-header">
+      <h2>Ejercicios</h2>
+    </div>
+
+    <div class="exercise-box">
+      <h3>Ejercicio 1: Conversión de Tipos</h3>
+      <p>Crea un programa que:</p>
+      <ul>
+        <li>Solicite al usuario su edad como texto</li>
+        <li>Convierta la edad a número entero</li>
+        <li>Calcule cuántos años tendrá en 10 años</li>
+        <li>Muestre el resultado convertido nuevamente a texto</li>
+      </ul>
+      <p>
+        <em
+          >Nota: Simula la entrada del usuario asignando el valor a una
+          variable.</em
+        >
+      </p>
+    </div>
+
+    <div class="exercise-box">
+      <h3>Ejercicio 2: Calculadora Simple</h3>
+      <p>Crea un programa que:</p>
+      <ul>
+        <li>Defina dos números</li>
+        <li>
+          Realice todas las operaciones aritméticas básicas (+, -, *, /, //, %,
+          **)
+        </li>
+        <li>Muestre los resultados con comentarios explicativos</li>
+        <li>Use operadores de comparación para comparar los números</li>
+      </ul>
+    </div>
+
+    <div class="exercise-box">
+      <h3>Ejercicio 3: Sistema de Calificaciones</h3>
+      <p>Crea un programa que:</p>
+      <ul>
+        <li>Defina una calificación numérica</li>
+        <li>Use if...elif...else para determinar la letra correspondiente:</li>
+        <li>90-100: A, 80-89: B, 70-79: C, 60-69: D, 0-59: F</li>
+        <li>Muestre también si el estudiante aprobó o reprobó</li>
+      </ul>
+    </div>
+
+    <div class="exercise-box">
+      <h3>Ejercicio 4: Verificador de Acceso</h3>
+      <p>Crea un programa que simule un sistema de acceso:</p>
+      <ul>
+        <li>Define variables para edad, tiene_id y es_empleado</li>
+        <li>Usa operadores lógicos para determinar si puede acceder:</li>
+        <li>Debe ser mayor de 18 Y tener ID, O ser empleado</li>
+        <li>Muestra un mensaje apropiado según el resultado</li>
+        <li>Incluye comentarios explicando la lógica</li>
+      </ul>
+    </div>
+
+    <hr style="margin: 40px 0" />
+  </body>
+</html>
