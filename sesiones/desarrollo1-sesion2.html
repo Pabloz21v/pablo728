@@ -505,6 +505,59 @@
       &nbsp;&nbsp;&nbsp;&nbsp;print("Hace mucho calor")
     </div>
 
+
+    <h1 id="seccion5">5. Entrada de Datos con <code>input()</code> </h1>
+    <p>
+        La función <code>input()</code> permite al programa recibir datos ingresados por el usuario durante la ejecución.
+        Siempre devuelve los datos como <strong>cadena de texto (str)</strong>, por lo que a menudo es necesario convertir el resultado a otros tipos (int, float, etc.).
+    </p>
+
+    <h2>Sintaxis básica</h2>
+    <pre><code>variable = input("Mensaje para el usuario: ")</code></pre>
+
+    <div class="ejemplo">
+        <h3>Ejemplo 1: Capturar un nombre</h3>
+        <pre><code>nombre = input("¿Cómo te llamas? ")
+print(f"Hola, {nombre}!")</code></pre>
+        <p><strong>Salida si el usuario ingresa "Ana":</strong></p>
+        <pre><code>Hola, Ana!</code></pre>
+    </div>
+
+    <h2>Conversión de tipos con <code>input()</code></h2>
+    <p>
+        Como <code>input()</code> siempre devuelve un <code>str</code>, es clave convertir el resultado si se necesitan operaciones numéricas.
+    </p>
+
+    <div class="ejemplo">
+        <h3>Ejemplo 2: Calcular el área de un cuadrado</h3>
+        <pre><code>lado = float(input("Ingresa la longitud del lado (en metros): "))
+area = lado ** 2
+print(f"El área es {area} m²")</code></pre>
+        <p class="nota">
+            <strong>Nota:</strong> Si el usuario ingresa <code>"5"</code>, <code>float()</code> convierte el texto a <code>5.0</code>.
+        </p>
+    </div>
+
+    <div class="ejemplo">
+        <h3>Ejemplo 3: Validar entrada numérica</h3>
+        <pre><code>try:
+    edad = int(input("¿Cuántos años tienes? "))
+    print(f"En 10 años tendrás {edad + 10} años.")
+except ValueError:
+    print("Error: Debes ingresar un número entero.")</code></pre>
+        <p class="nota">
+            <strong>Explicación:</strong> <code>try-except</code> evita errores si el usuario ingresa texto no numérico (ej: "veinte").
+        </p>
+    </div>
+
+    <h2>Entradas múltiples</h2>
+    <div class="ejemplo">
+        <h3>Ejemplo 4: Capturar dos números y operarlos</h3>
+        <pre><code>num1 = float(input("Primer número: "))
+num2 = float(input("Segundo número: "))
+print(f"Suma: {num1 + num2}, Producto: {num1 * num2}")</code></pre>
+    </div>
+
     <div class="section-header">
       <h2>Ejercicios</h2>
     </div>
@@ -514,20 +567,48 @@
       <p>Crea un programa que:</p>
       <ul>
         <li>Solicite al usuario su edad como texto</li>
-        <li>Convierta la edad a número entero</li>
+        <li>Convertir la edad a número entero</li>
         <li>Calcule cuántos años tendrá en 10 años</li>
         <li>Muestre el resultado convertido nuevamente a texto</li>
       </ul>
-      <p>
+      <!-- <p>
         <em
           >Nota: Simula la entrada del usuario asignando el valor a una
           variable.</em
         >
-      </p>
+      </p> -->
+
+
+
+    </div>
+    <div class="exercise-box">
+        <h3>Ejercicio 2: Conversor de unidades</h3>
+        <ul>
+            <li>Pide al usuario una temperatura en <strong>Celsius</strong> (como <code>float</code>).</li>
+            <li>Convierte a <strong>Fahrenheit</strong> (fórmula: <code>F = C * 9/5 + 32</code>).</li>
+            <!-- <li>Muestra el resultado con 2 decimales.</li> -->
+             <li>Mostrar el resultado.</li>
+        </ul>
     </div>
 
     <div class="exercise-box">
-      <h3>Ejercicio 2: Calculadora Simple</h3>
+        <h3>Ejercicio 3: Validador de contraseña</h3>
+        <ul>
+            <li>Declarar una variable "contraseña" e inventar una contraseña para que tu compañero adivine</li>
+            <li>Si vas a jugar con tu compañero que tu contraseña tenga relacion a tu compañero (podes darle pistas)</li>
+            <li>Pide al compañero que ingrese la contraseña.</li>
+            <li>Verificar si cumple:
+                <ul>
+                    <li>La contraseña ingresada por tu compañero es la correcta.</li>
+                    <!-- <li>Contiene al menos un número.</li> -->
+                <li>Imprimir un mensaje si acertó o no.</li>
+                  </ul>
+            </li>
+            <li>Usa <code>input()</code> y condicionales (<code>if</code>).</li>
+        </ul>
+    </div>
+    <div class="exercise-box">
+      <h3>Ejercicio 4: Calculadora Simple</h3>
       <p>Crea un programa que:</p>
       <ul>
         <li>Defina dos números</li>
@@ -540,7 +621,7 @@
       </ul>
     </div>
 
-    <div class="exercise-box">
+    <!-- <div class="exercise-box">
       <h3>Ejercicio 3: Sistema de Calificaciones</h3>
       <p>Crea un programa que:</p>
       <ul>
@@ -549,9 +630,9 @@
         <li>90-100: A, 80-89: B, 70-79: C, 60-69: D, 0-59: F</li>
         <li>Muestre también si el estudiante aprobó o reprobó</li>
       </ul>
-    </div>
+    </div> -->
 
-    <div class="exercise-box">
+    <!-- <div class="exercise-box">
       <h3>Ejercicio 4: Verificador de Acceso</h3>
       <p>Crea un programa que simule un sistema de acceso:</p>
       <ul>
@@ -561,7 +642,10 @@
         <li>Muestra un mensaje apropiado según el resultado</li>
         <li>Incluye comentarios explicando la lógica</li>
       </ul>
-    </div>
+    </div> -->
+
+
+
 
     <hr style="margin: 40px 0" />
   </body>
