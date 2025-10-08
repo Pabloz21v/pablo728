@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 4 — Frontend Base: HTML, Bootstrap y Plantillas Jinja2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        .btn {
+        display: inline-block;
+        padding: 12px 28px;
+        background: #1976d2;
+        color: #fff;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: bold;
+        text-decoration: none;
+        margin-top: 18px;
+        box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+        transition: background 0.2s;
+      }
+      .btn:hover {
+        background: #1565c0;
+    }
+        code {
+            font-family: monospace;
+            background-color: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../materias/usuarios-2.html" class="btn">Volver a Usuarios II</a>
+      <a href="usuarios-2-clase-3-rutas.html" class="btn">Ir a Sesión 3</a>
+      <!-- <a href="usuarios-2-clase-5.html" class="btn">Ir a Sesión 5</a> -->
+        <h1>Sesión 4 — Frontend Base: HTML, Bootstrap y Plantillas Jinja2</h1>
+
+        <h2>Objetivo</h2>
+        <p>Crear la estructura visual base (plantilla <code>base.html</code>) y las rutas para ingresar y consultar que aún muestren contenido estático.</p>
+
+        <h2>Paso a Paso</h2>
+
+        <h3>Creación de Carpetas y Ficheros</h3>
+        <p>Estructura del proyecto:</p>
+        <pre>
+tu_proyecto/
+│
+├─ app.py
+│
+├─ templates/
+│   ├─ base.html
+│   ├─ index.html
+│   ├─ ingresar.html
+│   └─ consultar.html
+│
+└─ static/
+    ├─ css/
+    └─ js/
+        </pre>
+
+        <h3>Fichero <code>base.html</code></h3>
+        <p>Insertar en el fichero <code>base.html</code> dentro de la carpeta <code>template</code>:</p>
+        <pre>
+&lt;!doctype html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;{% block title %}StockApp{% endblock %}&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
+        &lt;div class="container"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;StockApp&lt;/a&gt;
+            &lt;div class="collapse navbar-collapse"&gt;
+                &lt;ul class="navbar-nav me-auto"&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="/ingresar"&gt;Ingresar Stock&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="/consultar"&gt;Consultar Stock&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+    &lt;main class="container mt-4"&gt;
+        {% block content %}{% endblock %}
+    &lt;/main&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+
+        <h3>Fichero <code>index.html</code></h3>
+        <p>Insertar en el fichero <code>index.html</code> dentro de la carpeta <code>template</code>:</p>
+        <pre>
+{% extends 'base.html' %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+&lt;div class="text-center"&gt;
+    &lt;h1 class="mb-4"&gt;Bienvenido al Sistema de Gestión de Stock&lt;/h1&gt;
+    &lt;p&gt;Selecciona una opción en el menú para comenzar.&lt;/p&gt;
+&lt;/div&gt;
+{% endblock %}
+        </pre>
+
+        <h3>Fichero <code>consultar.html</code></h3>
+        <p>Insertar en el fichero <code>consultar.html</code> dentro de la carpeta <code>template</code>:</p>
+        <pre>
+{% extends 'base.html' %}
+{% block title %}Consultar Stock{% endblock %}
+{% block content %}
+&lt;h2&gt;Consultar productos existentes&lt;/h2&gt;
+&lt;p&gt;Más adelante mostraremos una tabla con los datos de la base.&lt;/p&gt;
+{% endblock %}
+        </pre>
+
+        <h3>Fichero <code>ingresar.html</code></h3>
+        <p>Insertar en el fichero <code>ingresar.html</code> dentro de la carpeta <code>template</code>:</p>
+        <pre>
+{% extends 'base.html' %}
+{% block title %}Ingresar Stock{% endblock %}
+{% block content %}
+&lt;h2&gt;Ingresar nuevo producto&lt;/h2&gt;
+&lt;p&gt;En esta vista luego pondremos el formulario.&lt;/p&gt;
+{% endblock %}
+        </pre>
+
+        <h3>Rutas en Flask</h3>
+        <p>Modificamos el fichero <code>app.py</code> para renderizar las páginas:</p>
+        <pre>
+from flask import render_template
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/ingresar')
+def ingresar_get():
+    return render_template('ingresar.html')
+
+@app.route('/consultar')
+def consultar_get():
+    return render_template('consultar.html')
+        </pre>
+
+        <h3>Ejecutar el Proyecto</h3>
+        <p>En la consola de VSC ejecutamos el siguiente comando dependiendo del S.O.:</p>
+        <pre>
+# en Windows
+venv\Scriptsctivate
+
+# en Linux/Mac
+source venv/bin/activate
+
+# Luego ejecutamos
+python app.py
+        </pre>
+
+        <p>Entramos en el navegador a ver las siguientes rutas:</p>
+        <ul>
+            <li><a href="http://127.0.0.1:5000/">http://127.0.0.1:5000/</a> → Página principal</li>
+            <li><a href="http://127.0.0.1:5000/ingresar">http://127.0.0.1:5000/ingresar</a> → “Ingresar producto”</li>
+            <li><a href="http://127.0.0.1:5000/consultar">http://127.0.0.1:5000/consultar</a> → “Consultar productos”</li>
+        </ul>
+
+        <h2>Ejercicios Prácticos</h2>
+        <ol>
+            <li>Personalizar la barra nav y el footer.</li>
+            <li>Hacer la página responsive verificando en móvil. (F12 en google chrome)</li>
+            <li>Aprender el uso de <a href="https://getbootstrap.com/">Bootstrap</a>.</li>
+            
+            <li>Implementar el formulario HTML completo (sin backend), guardar en <code>ingresar.html</code>.</li>
+        </ol>
+    </div>
+</body>
+</html>
