@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 4 – Memoria RAM</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #2c3e50;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      pre {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        border-left: 4px solid #3498db;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+        table {
+          font-size: 14px;
+        }
+        th,
+        td {
+          padding: 8px;
+        }
+        @media (max-width: 600px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-dos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="../sesiones/hardware2-sesion3-motherboard.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #a9c8e2;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 3
+        </a>
+        <!-- <a
+        href="../sesiones/hardware2-sesion5.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #a9c8e2;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 5
+      </a> -->
+      </div>
+      <h1>Sesión 4 – Memoria RAM</h1>
+
+      <h2>Objetivos de la Clase</h2>
+      <ul>
+        <li>
+          Comprender las tecnologías de memoria RAM (DDR4/DDR5), sus
+          características técnicas y diferencias de rendimiento.
+        </li>
+        <li>
+          Analizar la importancia de frecuencias, latencias, canales y
+          capacidades según el uso específico.
+        </li>
+        <li>
+          Evaluar opciones de memoria según presupuesto, compatibilidad con
+          CPU/motherboard y necesidades del cliente.
+        </li>
+        <li>
+          Identificar qué factores encarecen la memoria RAM y cuándo justifican
+          la inversión extra.
+        </li>
+        <li>
+          Aplicar criterios técnicos para recomendar configuraciones de memoria
+          en casos prácticos reales.
+        </li>
+      </ul>
+
+      <h2>Factores que Encarecen la Memoria RAM</h2>
+      <h3>Resumen Visual: ¿Qué Pagas Extra?</h3>
+      <pre>
+Precio base (ej. 16GB DDR4-3200) → $120,000 ARS
+├── +$30,000 → DDR5-6000 (vs DDR4-3200)
+├── +$50,000 → 32GB vs 16GB (mismo tipo)
+├── +$70,000 → Latencias CL14 (vs CL18)
+├── +$90,000 → Kit quad-channel certificado
+├── +$120,000 → RGB + disipadores premium (ej. Corsair Dominator Platinum)
+└── +$300,000+ → ECC Registered (ej. Samsung 128GB RDIMM)
+        </pre
+      >
+
+      <h2>Conceptos Clave</h2>
+
+      <h3>1. Tipos de Memoria (DDR4 vs DDR5)</h3>
+
+      <h4>DDR4:</h4>
+      <ul>
+        <li>
+          Estándar actual maduro, amplia compatibilidad, precios accesibles.
+        </li>
+        <li>Voltaje: 1.2V estándar.</li>
+        <li>Frecuencias: 2133-4800 MHz.</li>
+        <li>Densidad máxima por módulo: 32GB.</li>
+        <li>Prefetch: 8n.</li>
+      </ul>
+
+      <h4>DDR5:</h4>
+      <ul>
+        <li>
+          Nueva generación, mayor ancho de banda, menor latencia absoluta.
+        </li>
+        <li>Voltaje: 1.1V estándar.</li>
+        <li>Frecuencias: 4800-8000+ MHz.</li>
+        <li>Densidad máxima por módulo: 128GB.</li>
+        <li>Prefetch: 16n.</li>
+        <li>ECC integrado.</li>
+      </ul>
+
+      <h3>2. Frecuencia y Ancho de Banda</h3>
+
+      <h4>Qué es:</h4>
+      <p>
+        Velocidad a la que opera la memoria (MHz) y cantidad de datos
+        transferidos por segundo (GB/s).
+      </p>
+
+      <h4>Cálculo:</h4>
+      <p>Ancho de banda = (Frecuencia × 8 bytes × canales) ÷ 1000</p>
+
+      <h4>Ejemplo:</h4>
+      <p>DDR4-3200 dual channel = (3200 × 8 × 2) ÷ 1000 = 51.2 GB/s</p>
+
+      <h3>3. Latencias (Timings)</h3>
+
+      <h4>Principales timings:</h4>
+      <ul>
+        <li>
+          CL (CAS Latency): Ciclos/Tiempo para acceder a una columna específica.
+        </li>
+        <li>
+          tRCD: Tiempo RAS to CAS Delay: Ciclos/Tiempo que le toma en abrir el
+          dato.
+        </li>
+        <li>
+          tRP: Tiempo RAS Precharge: Ciclos/Tiempo que toma en cerrar el dato.
+        </li>
+        <li>
+          tRAS: Tiempo Active to Precharge: Ciclos/Tiempo que mantiene el dato
+          abierto antes del cierre para evitar errores.
+        </li>
+      </ul>
+
+      <h4>Notación:</h4>
+      <p>CL16-18-18-36 (CL-tRCD-tRP-tRAS)</p>
+
+      <h4>Latencia real:</h4>
+      <p>(CL ÷ frecuencia) × 2000 = nanosegundos</p>
+
+      <!-- <h3>4. Configuraciones de Canal</h3>
+
+      <h4>Single Channel:</h4>
+      <p>Un módulo, ancho de banda limitado.</p>
+
+      <h4>Dual Channel:</h4>
+      <p>Dos módulos, doble ancho de banda teórico.</p>
+
+      <h4>Quad Channel:</h4>
+      <p>Cuatro módulos, principalmente en plataformas HEDT/servidor.</p> -->
+
+      <h3>4. ECC vs No-ECC</h3>
+
+      <h4>ECC (Error Correcting Code):</h4>
+      <ul>
+        <li>Detecta y corrige errores de 1 bit.</li>
+        <li>Detecta errores de 2 bits.</li>
+        <li>Crítico para servidores y workstations.</li>
+        <li>Requiere CPU y motherboard compatibles.</li>
+        <li>Costo adicional: 20-40%.</li>
+      </ul>
+
+      <h3>Otras características:</h3>
+      <ul>
+        <li>PMIC en DDR5: mejora estabilidad en overclocking.</li>
+        <li>
+          Memorias "Low Latency": Hasta CL12 en DDR5-6000 (premium para gaming
+          competitivo).
+        </li>
+        <li>
+          Prefetch: Es un mecanismo por el cual la memoria RAM carga bloques de
+          datos adicionales (más allá de los solicitados inicialmente) en un
+          solo ciclo de acceso, reduciendo la latencia efectiva.
+        </li>
+        <li>
+          DDR5 supera a DDR4 en ancho de banda, pero DDR4 sigue siendo mejor en
+          latencia absoluta para gaming.
+        </li>
+      </ul>
+
+      <h2>Comparación Técnica DDR4 vs DDR5</h2>
+
+      <table>
+        <tr>
+          <th>Característica</th>
+          <th>DDR4</th>
+          <th>DDR5</th>
+          <th>Ventaja</th>
+        </tr>
+        <tr>
+          <td>Frecuencia estándar</td>
+          <td>2400-3200 MHz</td>
+          <td>4800-8400 MHz</td>
+          <td>DDR5</td>
+        </tr>
+        <tr>
+          <td>Voltaje</td>
+          <td>1.2V</td>
+          <td>1.1V (hasta 1.45V OC)</td>
+          <td>DDR5 (menor consumo)</td>
+        </tr>
+        <tr>
+          <td>Ancho de banda (dual channel)</td>
+          <td>51.2 GB/s (3200MHz)</td>
+          <td>134.4 GB/s (8400MHz)</td>
+          <td>DDR5</td>
+        </tr>
+        <tr>
+          <td>Latencia típica</td>
+          <td>CL16 (~10ns)</td>
+          <td>CL30-40 (~12-14ns)</td>
+          <td>DDR4 (menor latencia)</td>
+        </tr>
+        <tr>
+          <td>Capacidad máxima</td>
+          <td>32GB por módulo</td>
+          <td>128-256GB por módulo</td>
+          <td>DDR5</td>
+        </tr>
+        <tr>
+          <td>Precio (16GB kit)</td>
+          <td>$60-90 USD</td>
+          <td>$150,000-$250,000 ARS</td>
+          <td>DDR4 (más económica)</td>
+        </tr>
+        <tr>
+          <td>Disponibilidad</td>
+          <td>Amplia</td>
+          <td>Creciente</td>
+          <td>DDR4</td>
+        </tr>
+      </table>
+
+      <h2>Tipos de Uso y Características Esenciales</h2>
+
+      <h3>Ofimática Básica</h3>
+
+      <h4>Objetivo:</h4>
+      <p>Navegación web, documentos, correo electrónico, multitarea ligera.</p>
+
+      <h4>Características Críticas (🟢):</h4>
+      <ul>
+        <li>Capacidad: 8-16GB mínimo para Windows 11.</li>
+        <li>Tipo: DDR4 suficiente, no requiere DDR5.</li>
+        <li>Single-Rank (1R).</li>
+      </ul>
+
+      <h4>Características Útiles (🟡):</h4>
+      <ul>
+        <li>Dual channel: Mejora rendimiento gráfico integrado.</li>
+        <li>DDR4-3200: Ligera mejora en responsividad.</li>
+      </ul>
+
+      <h4>Irrelevantes (🔴):</h4>
+      <ul>
+        <li>RGB, disipadores premium.</li>
+        <li>Latencias ultra bajas.</li>
+        <li>Frecuencias extremas (+4000MHz).</li>
+        <li>Capacidades superiores a 32GB.</li>
+      </ul>
+
+      <h3>Gaming (1080p/1440p/4K)</h3>
+
+      <h4>Objetivo:</h4>
+      <p>Maximizar FPS y minimizar stuttering en juegos modernos.</p>
+
+      <h4>Características Críticas (🟢):</h4>
+      <ul>
+        <li>Capacidad: 16GB mínimo, 32GB recomendado para 2025+.</li>
+        <li>Configuración: Dual channel.</li>
+        <li>Dual-Rank (2R).</li>
+      </ul>
+
+      <h4>Características Útiles (🟡):</h4>
+      <ul>
+        <li>Frecuencia: DDR4-3600 o DDR5-5600+ para gaming competitivo.</li>
+        <li>Latencia: CL16 o mejor en DDR4, CL32-36 en DDR5.</li>
+        <li>XMP/DOCP profiles para overclocking fácil.</li>
+        <li>Disipadores para estética y temperaturas.</li>
+        <li>RGB si es importante la estética.</li>
+      </ul>
+
+      <h4>Ejemplo Gaming 1440p:</h4>
+      <ul>
+        <li>
+          Kit: Corsair Vengeance LPX 16GB DDR4-3600 CL18 (~$70 USD / $84,000
+          ARS).
+        </li>
+        <li>CPU: Ryzen 5 5600X + RTX 4060 Ti.</li>
+        <li>Ganancia de rendimiento: 5-15% vs DDR4-2400.</li>
+      </ul>
+
+      <h3>Edición de Video (1080p/4K/8K)</h3>
+
+      <h4>Objetivo:</h4>
+      <p>Renderizado rápido, scrubbing fluido, múltiples streams de video.</p>
+
+      <h4>Características Críticas (🟢):</h4>
+      <ul>
+        <li>Capacidad: 32GB mínimo para 4K, 64GB+ para 8K.</li>
+        <li>Ancho de banda alto: DDR4-3600+ o DDR5-5600+.</li>
+        <li>Dual/Quad channel según CPU (Threadripper = quad channel).</li>
+        <li>ECC opcional para proyectos críticos.</li>
+      </ul>
+
+      <h4>Características Útiles (🟡):</h4>
+      <ul>
+        <li>Latencias optimizadas para mejor responsividad timeline.</li>
+        <li>Modules de alta calidad para estabilidad 24/7.</li>
+      </ul>
+
+      <h4>Ejemplo Edición 4K:</h4>
+      <ul>
+        <li>
+          Kit: G.Skill Ripjaws V 32GB DDR4-3600 CL16 (~$140 USD / $168,000 ARS).
+        </li>
+        <li>CPU: Ryzen 9 5950X.</li>
+        <li>Beneficio: Reduce tiempos de rendering 15-25%.</li>
+      </ul>
+
+      <h3>Workstation (IA/Datos/Cálculo Científico)</h3>
+
+      <h4>Objetivo:</h4>
+      <p>Máxima estabilidad, capacidades masivas, ancho de banda extremo.</p>
+
+      <h4>Características Críticas (🟢):</h4>
+      <ul>
+        <li>Capacidad: 128GB-2TB.</li>
+        <li>ECC: Obligatorio para integridad de datos.</li>
+        <li>Registered/Load Reduced para altas capacidades.</li>
+        <li>Quad/Octa channel según plataforma.</li>
+        <li>Frecuencias validadas por CPU (no overclocking extremo).</li>
+      </ul>
+
+      <h4>Ejemplo Workstation IA:</h4>
+      <ul>
+        <li>
+          Kit: Samsung 256GB DDR4-3200 ECC Registered (~$1,200 USD / $1,440,000
+          ARS).
+        </li>
+        <li>CPU: Threadripper PRO 5995WX (8-channel).</li>
+        <li>Ancho de banda: 204.8 GB/s teórico.</li>
+      </ul>
+
+      <h3>Servidor Doméstico (NAS/Plex/Virtualización)</h3>
+
+      <h4>Objetivo:</h4>
+      <p>Operación 24/7, múltiples VMs, transcoding simultáneo.</p>
+
+      <h4>Características Críticas (🟢):</h4>
+      <ul>
+        <li>Capacidad: 16-32GB para NAS básico, 64GB+ para virtualización.</li>
+        <li>ECC recomendado para datos críticos.</li>
+        <li>Frecuencias JEDEC estándar para máxima compatibilidad.</li>
+        <li>Bajo consumo energético.</li>
+      </ul>
+
+      <h4>Ejemplo Servidor Doméstico:</h4>
+      <ul>
+        <li>
+          Kit: Kingston Server Premier 32GB DDR4-2666 ECC (~$180 USD / $216,000
+          ARS).
+        </li>
+        <li>CPU: Xeon E-2336 o Ryzen PRO.</li>
+        <li>
+          Beneficio ECC: Previene corrupción de datos en operación continua.
+        </li>
+      </ul>
+
+      <h2>Tabla de Rendimiento por Escenario</h2>
+
+      <table>
+        <tr>
+          <th>Escenario</th>
+          <th>Capacidad Recomendada</th>
+          <th>Frecuencia Óptima</th>
+          <th>Configuración</th>
+          <th>Precio Estimado (ARS)</th>
+        </tr>
+        <tr>
+          <td>Ofimática Básica</td>
+          <td>16GB</td>
+          <td>DDR4-2666</td>
+          <td>2×8GB</td>
+          <td>$48,000-60,000</td>
+        </tr>
+        <tr>
+          <td>Gaming 1080p</td>
+          <td>16GB</td>
+          <td>DDR4-3200/3600</td>
+          <td>2×8GB CL16</td>
+          <td>$72,000-84,000</td>
+        </tr>
+        <tr>
+          <td>Gaming 1440p/4K</td>
+          <td>32GB</td>
+          <td>DDR4-3600 o DDR5-5600</td>
+          <td>2×16GB</td>
+          <td>$120,000-180,000</td>
+        </tr>
+        <tr>
+          <td>Edición Video 4K</td>
+          <td>64GB</td>
+          <td>DDR4-3600+</td>
+          <td>4×16GB</td>
+          <td>$300,000-400,000</td>
+        </tr>
+        <tr>
+          <td>Workstation IA</td>
+          <td>128GB+</td>
+          <td>DDR4-3200 ECC</td>
+          <td>8×16GB ECC</td>
+          <td>$800,000+</td>
+        </tr>
+        <tr>
+          <td>Servidor NAS</td>
+          <td>32GB</td>
+          <td>DDR4-2666 ECC</td>
+          <td>2×16GB ECC</td>
+          <td>$216,000-250,000</td>
+        </tr>
+      </table>
+
+      <h2>Compatibilidad y Limitaciones</h2>
+
+      <h3>Compatibilidad por Plataforma</h3>
+
+      <table>
+        <tr>
+          <th>Socket/Chipset</th>
+          <th>Tipo Soportado</th>
+          <th>Frecuencia Máxima</th>
+          <th>Capacidad Máxima</th>
+          <th>Canales</th>
+        </tr>
+        <tr>
+          <td>AM4 (Ryzen 1000-5000)</td>
+          <td>DDR4</td>
+          <td>3200-3600 oficial</td>
+          <td>128GB</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>AM5 (Ryzen 7000+)</td>
+          <td>DDR5</td>
+          <td>5200+ oficial</td>
+          <td>128GB</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>LGA 1700 (Intel 12/13 gen)</td>
+          <td>DDR4/DDR5</td>
+          <td>3200/4800 oficial</td>
+          <td>128GB</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>sTRX4 (Threadripper)</td>
+          <td>DDR4</td>
+          <td>3200 oficial</td>
+          <td>256GB</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>sWRX8 (Threadripper PRO)</td>
+          <td>DDR4</td>
+          <td>3200 oficial</td>
+          <td>2TB</td>
+          <td>8</td>
+        </tr>
+      </table>
+
+      <h3>Limitaciones Importantes</h3>
+      <ul>
+        <li>
+          IMC (Integrated Memory Controller): El CPU limita frecuencias máximas
+          estables.
+        </li>
+      </ul>
+
+      <h2>¿Qué es un Rank?</h2>
+
+      <h4>
+        Un rank es un grupo de chips de memoria que actúa como una unidad lógica
+        independiente para el controlador de memoria (IMC) de la CPU.
+      </h4>
+      <ul>
+        <li>
+          1 rank = 64 bits de ancho (igual que el bus de memoria de un canal).
+        </li>
+        <li>Un módulo RAM puede tener 1, 2 o 4 ranks (común en servidores).</li>
+        <li>
+          Ejemplo visual: Un módulo DDR4 de 16GB típico puede ser:
+          <ul>
+            <li>
+              Single-rank (1R): 8 chips de 2GB cada uno (en un solo rank).
+            </li>
+            <li>
+              Dual-rank (2R): 16 chips de 1GB cada uno (divididos en 2 ranks de
+              8GB lógicos).
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <h4>Single-Rank (SR):</h4>
+      <ul>
+        <li>Ventajas: Menor latencia, mejor compatibilidad, bajo consumo.</li>
+        <li>
+          Usos ideales: Ofimática, NAS, sistemas con 1-2 módulos (ej: 1x8GB o
+          2x8GB).
+        </li>
+        <li>Ejemplo: 1x16GB SR o 2x8GB SR para gaming económico.</li>
+      </ul>
+
+      <h4>Dual-Rank (DR):</h4>
+      <ul>
+        <li>
+          Ventajas: +10-15% ancho de banda vs. SR (importante en gaming y
+          workstations), mejor escalabilidad.
+        </li>
+        <li>
+          Usos ideales: Gaming (especialmente con APUs o CPUs con iGPU), edición
+          de video, workstations hasta 128GB.
+        </li>
+        <li>
+          Ejemplo: 2x16GB DR (32GB total) para Ryzen 7/9 o Intel Core i7/i9.
+        </li>
+      </ul>
+
+      <h4>Quad-Rank (QR):</h4>
+      <ul>
+        <li>Ventajas: Máxima capacidad en menos slots (ej: 1x128GB QR).</li>
+        <li>
+          Desventajas: Mayor latencia, posible incompatibilidad con algunas
+          placas/memorias de alta velocidad.
+        </li>
+        <li>
+          Usos ideales: Servidores con >128GB, workstations con CPUs
+          profesionales (EPYC, Xeon).
+        </li>
+      </ul>
+
+      <h2>¿Qué es un Channel?</h2>
+
+      <h4>
+        Un canal de memoria es el "camino" por el que la CPU se comunica con la
+        RAM.
+      </h4>
+      <ul>
+        <li>Single-channel: 1 módulo (o 2 módulos no emparejados).</li>
+        <li>Dual-channel: 2 módulos idénticos (doble ancho de banda).</li>
+        <li>
+          Quad-channel: 4 módulos (en plataformas HEDT/servidores, ej.
+          Threadripper).
+        </li>
+      </ul>
+
+      <h4>¿Qué es "Rank per Channel"?</h4>
+      <p>Es la cantidad de ranks que la CPU "ve" por cada canal de memoria.</p>
+
+      <h4>Ejemplo 1 (Dual-channel, 2 módulos single-rank):</h4>
+      <ul>
+        <li>Configuración: 2×8GB (1R cada uno).</li>
+        <li>
+          Rank per Channel: 1 rank por canal (1R × 2 canales = 2 ranks totales).
+        </li>
+        <li>Rendimiento: Óptimo (baja latencia, alto ancho de banda).</li>
+      </ul>
+
+      <h4>Ejemplo 2 (Dual-channel, 2 módulos dual-rank):</h4>
+      <ul>
+        <li>Configuración: 2×16GB (2R cada uno).</li>
+        <li>
+          Rank per Channel: 2 ranks por canal (2R × 2 canales = 4 ranks
+          totales).
+        </li>
+        <li>
+          Rendimiento: Puede limitar la frecuencia máxima estable (ej. DDR4-3600
+          en lugar de DDR4-4000).
+        </li>
+      </ul>
+
+      <h2>Overclocking de Memoria</h2>
+
+      <h3>XMP/DOCP Profiles</h3>
+      <ul>
+        <li>
+          XMP (Intel): Perfiles predefinidos para overclocking automático.
+        </li>
+        <li>DOCP/A-XMP (AMD): Equivalente de AMD para perfiles de memoria.</li>
+      </ul>
+
+      <h2>Resumen de Prioridades por Tipo de PC (Memoria RAM)</h2>
+
+      <table>
+        <tr>
+          <th>Tipo de PC</th>
+          <th>Prioridad 1 (🟢 Crítica)</th>
+          <th>Prioridad 2 (🟡 Útil)</th>
+          <th>Prioridad 3 (🔴 Irrelevante)</th>
+        </tr>
+        <tr>
+          <td>Ofimática Básica</td>
+          <td>
+            Capacidad: 16GB mínimo (Windows 11). Tipo: DDR4 (compatibilidad
+            amplia). Single-Rank (1R).
+          </td>
+          <td>
+            Dual channel: Mejora gráfico integrado. Frecuencia: DDR4-2666/3200
+            aceptable.
+          </td>
+          <td>RGB, latencias ultra bajas, frecuencias >3200MHz.</td>
+        </tr>
+        <tr>
+          <td>Gaming (1080p)</td>
+          <td>
+            Capacidad: 16GB (32GB recomendado para 2026). Configuración: Dual
+            channel. Dual-Rank (2R).
+          </td>
+          <td>
+            Frecuencia: DDR4-3200/3600 CL16. Latencia: CL16 o mejor. XMP/DOCP:
+            Perfiles preconfigurados.
+          </td>
+          <td>Capacidad >32GB, RGB premium.</td>
+        </tr>
+        <tr>
+          <td>Gaming (1440p/4K)</td>
+          <td>
+            Capacidad: 32GB (para futuros juegos). Configuración: Dual channel.
+            Dual-Rank (2R).
+          </td>
+          <td>
+            Frecuencia: DDR4-3600 o DDR5-5600+. XMP/DOCP: Perfiles
+            preconfigurados.
+          </td>
+          <td>Frecuencias extremas (>4000MHz).</td>
+        </tr>
+        <tr>
+          <td>Edición de Video (4K/8K)</td>
+          <td>Capacidad: 32GB mínimo (64GB para 4K/8K). Dual-Rank (2R).</td>
+          <td>
+            Ancho de banda: DDR4-3600+ o DDR5-5600+. Latencia: CL16 (DDR4) o
+            CL32 (DDR5).
+          </td>
+          <td>RGB, disipadores estéticos.</td>
+        </tr>
+        <tr>
+          <td>Workstation (IA/Datos)</td>
+          <td>
+            Capacidad: 128GB+. Configuración: Quad/octa channel (HEDT).
+            Dual-Rank (2R) menor a 128GB de ram. Quad-Rank (4R) para superior a
+            128GB ram.
+          </td>
+          <td>
+            ECC: Obligatorio para integridad de datos. Registered/Load-Reduced
+            para altas capacidades.
+          </td>
+          <td>Frecuencias >3600MHz.</td>
+        </tr>
+        <tr>
+          <td>Servidor Doméstico (NAS/Plex)</td>
+          <td>
+            Capacidad: 32GB (64GB para virtualización). DDR con ECC. Single-Rank
+            (1R).
+          </td>
+          <td>
+            ECC: Recomendado para ZFS/RAID. Frecuencia JEDEC: Estabilidad >
+            velocidad.
+          </td>
+          <td>Frecuencias >2666MHz. RGB, kits gaming.</td>
+        </tr>
+      </table>
+
+      <h2>Preguntas</h2>
+      <ol>
+        <li>
+          ¿Qué diferencias técnicas clave distinguen DDR4 de DDR5? Incluye
+          voltaje, frecuencias, ancho de banda y latencias típicas.
+        </li>
+        <li>
+          Un cliente gamer quiere máximo rendimiento en 1440p con un Ryzen 7
+          5800X. ¿Recomendarías DDR4-3200 CL16 o DDR4-3600 CL18? Justifica
+          técnicamente.
+        </li>
+        <li>
+          ¿Por qué la configuración dual channel es crítica? Compara el
+          rendimiento teórico entre 1×16GB vs 2×8GB del mismo modelo.
+        </li>
+        <li>
+          Para un servidor NAS, ¿cuándo justifica pagar 40% extra por memoria
+          ECC?
+        </li>
+        <li>
+          Un editor de video 4K tiene presupuesto para 32GB. ¿Es mejor DDR4-3200
+          CL14 o DDR4-3600 CL16? Calcula latencia absoluta y ancho de banda.
+        </li>
+        <li>
+          Explica por qué las memorias con RGB y disipadores premium pueden
+          costar 50% más. ¿En qué escenarios se justifica esta inversión?
+        </li>
+        <li>
+          Un Threadripper PRO requiere 256GB de RAM. Compara las ventajas de
+          usar módulos de 32GB vs 64GB, considerando canales y costo.
+        </li>
+        <li>
+          Investigar: ¿Cómo afecta la temperatura al overclocking de memoria?
+          ¿Qué temperaturas son consideradas seguras para uso 24/7? ¿Necesita
+          disipadores?
+        </li>
+      </ol>
+    </div>
+  </body>
+</html>
