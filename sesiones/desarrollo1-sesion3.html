@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 3: Estructuras Match y Listas</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #2c3e50;
+      }
+      pre {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        border-left: 4px solid #3498db;
+      }
+      code {
+        font-family: monospace;
+        background-color: #f8f9fa;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion2.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 2
+        </a>
+        <a
+          href="desarrollo1-sesion4.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 4
+        </a>
+      </div>
+      <h1>Sesión 3: Estructuras Match y Listas</h1>
+
+      <h2>1. Estructura Match</h2>
+
+      <p>
+        La estructura <code>match</code> (disponible desde Python 3.10) es una
+        alternativa moderna y más legible a múltiples declaraciones
+        <code>if...elif</code>. Es similar al <code>switch</code> de otros
+        lenguajes pero más potente.
+      </p>
+
+      <h3>Match básico con valores</h3>
+
+      <h4>Ejemplo 1 - Días de la semana:</h4>
+      <pre>
+dia = 3
+match dia:
+    case 1:
+        print("Lunes")
+    case 2:
+        print("Martes")
+    case 3:
+        print("Miércoles")
+    case 4:
+        print("Jueves")
+    case 5:
+        print("Viernes")
+    case _:
+        print("Fin de semana")
+        </pre
+      >
+
+      <h4>Ejemplo 2 - Calificaciones:</h4>
+      <pre>
+letra = "B"
+match letra:
+    case "A":
+        print("Excelente - 90-100 puntos")
+    case "B":
+        print("Bueno - 80-89 puntos")
+    case "C":
+        print("Regular - 70-79 puntos")
+    case "D":
+        print("Deficiente - 60-69 puntos")
+    case "F":
+        print("Reprobado - 0-59 puntos")
+    case _:
+        print("Calificación no válida")
+        </pre
+      >
+
+      <h4>Ejemplo 3 - Operaciones matemáticas:</h4>
+      <pre>
+operacion = "+"
+num1 = 10
+num2 = 5
+
+match operacion:
+    case "+":
+        resultado = num1 + num2
+        print(f"{num1} + {num2} = {resultado}")
+    case "-":
+        resultado = num1 - num2
+        print(f"{num1} - {num2} = {resultado}")
+    case "*":
+        resultado = num1 * num2
+        print(f"{num1} * {num2} = {resultado}")
+    case "/":
+        if num2 != 0:
+            resultado = num1 / num2
+            print(f"{num1} / {num2} = {resultado}")
+        else:
+            print("Error: División por cero")
+    case _:
+        print("Operación no válida")
+        </pre
+      >
+
+      <h3>Match con múltiples valores</h3>
+
+      <h4>Ejemplo 1 - Categorías de edad:</h4>
+      <pre>
+edad = 25
+match edad:
+    case x if x < 13:
+        print("Niño")
+    case x if 13 <= x < 20:
+        print("Adolescente")
+    case x if 20 <= x < 65:
+        print("Adulto")
+    case x if x >= 65:
+        print("Adulto mayor")
+    case _:
+        print("Edad no válida")
+        </pre
+      >
+
+      <h4>Ejemplo 2 - Estados del clima:</h4>
+      <pre>
+clima = "soleado"
+match clima:
+    case "soleado" | "despejado":
+        print("¡Perfecto para salir!")
+        ropa = "ligera"
+    case "nublado" | "parcialmente nublado":
+        print("Día regular")
+        ropa = "normal"
+    case "lluvioso" | "tormenta":
+        print("Lleva paraguas")
+        ropa = "impermeable"
+    case _:
+        print("Clima desconocido")
+print(f"Ropa recomendada: {ropa}")
+        </pre
+      >
+
+      <h4>Ejemplo 3 - Sistema de menú:</h4>
+      <pre>
+opcion = 2
+match opcion:
+    case 1:
+        print("=== REGISTRAR USUARIO ===")
+        accion = "registro"
+    case 2:
+        print("=== INICIAR SESIÓN ===")
+        accion = "login"
+    case 3:
+        print("=== VER PERFIL ===")
+        accion = "perfil"
+    case 4 | 0:
+        print("=== SALIR ===")
+        accion = "salir"
+    case _ if opcion < 0:
+        print("Opción no válida (número negativo)")
+    case _:
+        print("Opción no disponible")
+        </pre
+      >
+
+      <h2>2. Listas en Python</h2>
+
+      <p>
+        Las listas son estructuras de datos que permiten almacenar múltiples
+        elementos en una sola variable. Son ordenadas, modificables y permiten
+        elementos duplicados. Se definen usando corchetes <code>[]</code>.
+      </p>
+
+      <h3>Creación y acceso a listas</h3>
+
+      <h4>Ejemplo 1 - Listas básicas:</h4>
+      <pre>
+# Crear listas
+numeros = [1, 2, 3, 4, 5]
+nombres = ["Ana", "Juan", "María", "Carlos"]
+mixta = [1, "Hola", 3.14, True]
+vacia = []
+
+# Acceder a elementos (índice comienza en 0)
+print(numeros[0])  # 1 (primer elemento)
+print(nombres[1])  # "Juan" (segundo elemento)
+print(mixta[-1])  # True (último elemento)
+print(nombres[-2]) # "María" (penúltimo elemento)
+        </pre
+      >
+
+      <h4>Ejemplo 2 - Información de estudiantes:</h4>
+      <pre>
+# Lista de calificaciones
+calificaciones = [8.5, 9.0, 7.5, 6.0, 10.0]
+estudiantes = ["Pedro", "Lucía", "Miguel", "Sofia", "Diego"]
+
+# Mostrar información
+print(f"Primer estudiante: {estudiantes[0]}")
+print(f"Su calificación: {calificaciones[0]}")
+print(f"Último estudiante: {estudiantes[-1]}")
+print(f"Su calificación: {calificaciones[-1]}")
+
+# Longitud de la lista
+total_estudiantes = len(estudiantes)
+print(f"Total de estudiantes: {total_estudiantes}")
+        </pre
+      >
+
+      <h4>Ejemplo 3 - Inventario de productos:</h4>
+      <pre>
+productos = ["Laptop", "Mouse", "Teclado", "Monitor", "Bocinas"]
+precios = [899.99, 25.50, 75.00, 199.99, 89.99]
+stock = [5, 20, 15, 8, 12]
+
+# Información del primer producto
+print(f"Producto: {productos[0]}")
+print(f"Precio: ${precios[0]}")
+print(f"Stock disponible: {stock[0]} unidades")
+
+# Información del producto más caro (supongamos que es el primero)
+indice_caro = 0
+print(f"Producto más caro: {productos[indice_caro]} - ${precios[indice_caro]}")
+        </pre
+      >
+
+      <h3>Modificación de listas</h3>
+
+      <h4>Ejemplo 1 - Métodos básicos:</h4>
+      <pre>
+frutas = ["manzana", "banana", "naranja"]
+print(f"Lista inicial: {frutas}")
+
+# Agregar elementos
+frutas.append("uva")  # Agregar al final
+print(f"Después de append: {frutas}")
+
+frutas.insert(1, "pera")  # Insertar en posición específica
+print(f"Después de insert: {frutas}")
+
+# Modificar elemento existente
+frutas[0] = "mango"
+print(f"Después de modificar: {frutas}")
+
+# Eliminar elementos
+frutas.remove("banana")  # Eliminar por valor
+eliminado = frutas.pop()  # Eliminar último y obtenerlo
+print(f"Lista final: {frutas}")
+print(f"Elemento eliminado: {eliminado}")
+        </pre
+      >
+
+      <h4>Ejemplo 2 - Lista de tareas:</h4>
+      <pre>
+tareas = ["Estudiar Python", "Hacer ejercicio"]
+print(f"Tareas iniciales: {tareas}")
+
+# Agregar nuevas tareas
+tareas.append("Leer libro")
+tareas.append("Llamar a mamá")
+tareas.insert(0, "Revisar correos")  # Insertar al inicio
+print(f"Todas las tareas: {tareas}")
+
+# Marcar tarea como completada (eliminarla)
+tarea_completada = tareas.pop(0)  # Completar primera tarea
+print(f"Tarea completada: {tarea_completada}")
+print(f"Tareas pendientes: {tareas}")
+
+# Modificar una tarea
+tareas[0] = "Estudiar Python avanzado"
+print(f"Tareas actualizadas: {tareas}")
+        </pre
+      >
+
+      <h4>Ejemplo 3 - Carrito de compras:</h4>
+      <pre>
+carrito = []
+precios_carrito = []
+
+# Agregar productos al carrito
+carrito.append("Camiseta")
+precios_carrito.append(29.99)
+
+carrito.append("Pantalón")
+precios_carrito.append(49.99)
+
+carrito.append("Zapatos")
+precios_carrito.append(89.99)
+
+print(f"Productos en carrito: {carrito}")
+print(f"Precios: {precios_carrito}")
+print(f"Total de productos: {len(carrito)}")
+
+# Cambiar de opinión sobre un producto
+carrito[1] = "Falda"
+precios_carrito[1] = 39.99
+
+# Eliminar último producto
+producto_eliminado = carrito.pop()
+precio_eliminado = precios_carrito.pop()
+
+print(f"Carrito final: {carrito}")
+print(f"Precios finales: {precios_carrito}")
+print(f"Producto eliminado: {producto_eliminado} - ${precio_eliminado}")
+        </pre
+      >
+
+      <h3>Operaciones útiles con listas</h3>
+
+      <h4>Ejemplo 1 - Búsqueda y verificación:</h4>
+      <pre>
+numeros = [10, 25, 5, 40, 15, 30]
+
+# Verificar si un elemento está en la lista
+if 25 in numeros:
+    print("El número 25 está en la lista")
+    posicion = numeros.index(25)
+    print(f"Está en la posición: {posicion}")
+
+if 100 not in numeros:
+    print("El número 100 NO está en la lista")
+
+# Contar ocurrencias
+numeros_repetidos = [1, 2, 2, 3, 2, 4, 2]
+cantidad_doses = numeros_repetidos.count(2)
+print(f"El número 2 aparece {cantidad_doses} veces")
+
+# Obtener valores máximo y mínimo
+print(f"Número mayor: {max(numeros)}")
+print(f"Número menor: {min(numeros)}")
+print(f"Suma total: {sum(numeros)}")
+        </pre
+      >
+
+      <h4>Ejemplo 2 - Ordenamiento y copia:</h4>
+      <pre>
+calificaciones = [8.5, 6.0, 9.5, 7.0, 10.0, 5.5]
+print(f"Calificaciones originales: {calificaciones}")
+
+# Crear una copia para no modificar la original
+calificaciones_ordenadas = calificaciones.copy()
+calificaciones_ordenadas.sort()  # Ordenar de menor a mayor
+print(f"Ordenadas (menor a mayor): {calificaciones_ordenadas}")
+
+calificaciones_desc = calificaciones.copy()
+calificaciones_desc.sort(reverse=True)  # Ordenar de mayor a menor
+print(f"Ordenadas (mayor a menor): {calificaciones_desc}")
+
+# La lista original no cambió
+print(f"Lista original: {calificaciones}")
+
+# Invertir orden
+calificaciones_invertidas = calificaciones.copy()
+calificaciones_invertidas.reverse()
+print(f"Orden invertido: {calificaciones_invertidas}")
+        </pre
+      >
+
+      <h4>Ejemplo 3 - Slicing (rebanadas):</h4>
+      <pre>
+dias_semana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+
+# Obtener primeros 3 días
+primeros_tres = dias_semana[0:3]
+print(f"Primeros 3 días: {primeros_tres}")
+
+# Obtener días laborables (lunes a viernes)
+dias_laborables = dias_semana[0:5]
+print(f"Días laborables: {dias_laborables}")
+
+# Obtener fin de semana
+fin_semana = dias_semana[5:7]
+# También se puede escribir como: dias_semana[-2:]
+print(f"Fin de semana: {fin_semana}")
+
+# Obtener días alternos (cada 2)
+dias_alternos = dias_semana[::2]
+print(f"Días alternos: {dias_alternos}")
+
+# Obtener los últimos 3 días
+ultimos_tres = dias_semana[-3:]
+print(f"Últimos 3 días: {ultimos_tres}")
+        </pre
+      >
+
+      <h2>Ejercicios</h2>
+
+      <h3>Ejercicio 1: Sistema de Menú con Match</h3>
+      <p>
+        Crea un programa que simule un menú de restaurante usando
+        <code>match</code>:
+      </p>
+      <ul>
+        <li>Define una variable con el número de opción del menú (1-5).</li>
+        <li>
+          Usa <code>match</code> para mostrar: 1=Hamburguesa, 2=Pizza,
+          3=Ensalada, 4=Sopa, 5=Postre.
+        </li>
+        <li>Para cada opción, muestra el nombre del platillo y su precio.</li>
+        <li>Incluye un caso por defecto para opciones inválidas.</li>
+        <li>Agrupa las opciones 4 y 5 como "Opciones especiales del día".</li>
+      </ul>
+
+      <h3>Ejercicio 2: Gestión de Lista de Estudiantes</h3>
+      <p>Crea un programa para manejar una lista de estudiantes:</p>
+      <ul>
+        <li>Crea una lista inicial con 5 nombres de estudiantes.</li>
+        <li>Muestra la lista completa y el total de estudiantes.</li>
+        <li>Agrega 2 estudiantes nuevos al final.</li>
+        <li>Inserta un estudiante en la segunda posición.</li>
+        <li>Cambia el nombre del primer estudiante.</li>
+        <li>Elimina el último estudiante y muestra quién fue eliminado.</li>
+        <li>Muestra la lista final.</li>
+      </ul>
+
+      <h3>Ejercicio 3: Análisis de Calificaciones</h3>
+      <p>Crea un programa que analice una lista de calificaciones:</p>
+      <ul>
+        <li>Define una lista con 8 calificaciones numéricas.</li>
+        <li>Encuentra la calificación más alta y más baja.</li>
+        <li>Calcula el promedio de todas las calificaciones.</li>
+        <li>Crea una copia de la lista ordenada de mayor a menor.</li>
+        <li>Muestra los primeros 3 lugares (mejores calificaciones).</li>
+      </ul>
+
+      <!-- <h3>Ejercicio 4: Tienda Virtual con Match y Listas</h3>
+        <p>Combina <code>match</code> y listas para crear una tienda virtual:</p>
+        <ul>
+            <li>Crea listas para productos, precios y stock.</li>
+            <li>Define una variable "categoria" (1=Electrónicos, 2=Ropa, 3=Hogar).</li>
+            <li>Usa <code>match</code> para mostrar productos según la categoría.</li>
+            <li>Para cada categoría, muestra productos disponibles (stock > 0).</li>
+            <li>Calcula el valor total del inventario por categoría.</li>
+            <li>Incluye un caso para categorías no válidas.</li>
+        </ul> -->
+    </div>
+  </body>
+</html>

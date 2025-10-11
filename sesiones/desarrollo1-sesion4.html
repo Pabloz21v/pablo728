@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 4: Bucles While</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        header {
+            text-align: center;
+            padding: 15px;
+            background-color: #4a6fa5;
+            color: white;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        h1, h2, h3 {
+            color: #4a6fa5;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-top: 25px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: #555;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            border-left: 4px solid #4a6fa5;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #4a6fa5;
+            color: white;
+        }
+        .warning {
+            background-color: #fff3cd;
+            padding: 10px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+        }
+        .note {
+            background-color: #e7f3fe;
+            padding: 10px;
+            border-left: 4px solid #2196F3;
+            margin: 15px 0;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            pre {
+                font-size: 0.8em;
+                padding: 10px;
+            }
+            table {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/desarrollo-1.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="desarrollo1-sesion3.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 3
+      </a>
+      <a
+        href="desarrollo1-sesion5.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 5
+      </a>
+    </div>
+    
+        <h1>Sesión 4: Bucles While</h1>
+    
+
+    <section>
+        <h2>1. Introducción a los Bucles While</h2>
+        <p>El bucle <code>while</code> ejecuta un bloque de código repetidamente mientras una condición sea verdadera (<code>True</code>). Es útil cuando no sabemos exactamente cuántas veces necesitamos repetir algo, pero sí sabemos cuándo debemos parar.</p>
+
+        <h3>1.1 Estructura básica del while</h3>
+
+        <h4>Ejemplo 1 - Contador simple:</h4>
+        <pre>
+contador = 0
+
+while contador < 5:
+    print(f"Contador: {contador}")
+    contador += 1  # Esto es igual a: contador = contador + 1
+
+print("Bucle terminado")
+        </pre>
+
+        <div class="warning">
+            <strong>⚠ IMPORTANTE:</strong> Siempre actualiza la variable de control para evitar bucles infinitos
+        </div>
+
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Salida:</th>
+            </tr>
+            <tr>
+                <td>#</td>
+                <td>Contador: 0</td>
+            </tr>
+            <tr>
+                <td>#</td>
+                <td>Contador: 1</td>
+            </tr>
+            <tr>
+                <td>#</td>
+                <td>Contador: 2</td>
+            </tr>
+            <tr>
+                <td>#</td>
+                <td>Contador: 3</td>
+            </tr>
+            <tr>
+                <td>#</td>
+                <td>Contador: 4</td>
+            </tr>
+        </table>
+
+        <h4>Ejemplo 2 - Suma acumulada:</h4>
+        <pre>
+numero = 1
+suma_total = 0
+
+while numero <= 10:
+    suma_total += numero
+    print(f"Sumando {numero}, total acumulado: {suma_total}")
+    numero += 1
+
+print(f"La suma de números del 1 al 10 es: {suma_total}")
+        </pre>
+
+        <h4>Ejemplo 3 - Validación de entrada:</h4>
+        <pre>
+# Simular validación de contraseña
+contraseña_correcta = "python123"
+intentos = 0
+max_intentos = 3
+
+while intentos < max_intentos:
+    # En la práctica, usarías input() para pedirle al usuario
+    contraseña_ingresada = "python12"  # Simular entrada incorrecta
+    intentos += 1
+
+    if contraseña_ingresada == contraseña_correcta:
+        print("¡Contraseña correcta! Acceso concedido.")
+        break  # Salir del bucle
+    else:
+        print(f"Contraseña incorrecta. Intento {intentos} de {max_intentos}")
+
+if intentos == max_intentos:
+    print("Máximo de intentos alcanzado. Acceso denegado.")
+        </pre>
+    </section>
+
+    <section>
+        <h2>2. Bucles While con Listas </h2>
+
+        <h3>2.1 Recorriendo listas con while</h3>
+
+        <h4>Ejemplo 1 - Recorrer lista de nombres:</h4>
+        <pre>
+nombres = ["Ana", "Juan", "María", "Carlos", "Sofía"]
+indice = 0
+
+print("Lista de estudiantes:")
+while indice < len(nombres):
+    print(f"{indice + 1}. {nombres[indice]}")
+    indice += 1
+
+print(f"Total de estudiantes procesados: {indice}")
+        </pre>
+
+        <h4>Ejemplo 2 - Procesamiento de calificaciones:</h4>
+        <pre>
+calificaciones = [8.5, 6.0, 9.5, 7.0, 5.5, 10.0, 8.0]
+estudiantes = ["Pedro", "Lucía", "Miguel", "Ana", "Carlos", "Sofía", "Diego"]
+
+indice = 0
+aprobados = 0
+suma_total = 0
+
+print("Reporte de calificaciones:")
+while indice < len(calificaciones):
+    estudiante = estudiantes[indice]
+    calificacion = calificaciones[indice]
+    suma_total += calificacion
+
+    if calificacion >= 7.0:
+        estado = "APROBADO"
+        aprobados += 1
+    else:
+        estado = "REPROBADO"
+
+    print(f"{estudiante}: {calificacion} - {estado}")
+    indice += 1
+
+promedio = suma_total / len(calificaciones)
+print(f"\nResumen:")
+print(f"Promedio general: {promedio:.2f}")
+print(f"Estudiantes aprobados: {aprobados}/{len(calificaciones)}")
+        </pre>
+
+        <h4>Ejemplo 3 - Búsqueda en lista:</h4>
+        <pre>
+productos = ["Laptop", "Mouse", "Teclado", "Monitor", "Bocinas", "Tablet"]
+precios = [899.99, 25.50, 75.00, 199.99, 89.99, 299.99]
+producto_buscado = "Monitor"
+
+indice = 0
+encontrado = False
+
+print(f"Buscando producto: {producto_buscado}")
+while indice < len(productos) and not encontrado:
+    if productos[indice] == producto_buscado:
+        print(f"¡Producto encontrado!")
+        print(f"Nombre: {productos[indice]}")
+        print(f"Precio: ${precios[indice]}")
+        print(f"Posición en inventario: {indice + 1}")
+        encontrado = True
+    else:
+        indice += 1
+
+if not encontrado:
+    print(f"Producto '{producto_buscado}' no encontrado en el inventario")
+        </pre>
+    </section>
+
+    <section>
+        <h2>3. Control de Flujo en While </h2>
+
+        <h3>3.1 Break y Continue</h3>
+
+        <h4>Ejemplo 1 - Uso de break:</h4>
+        <pre>
+numeros = [2, 4, 7, 8, 10, 12, 15, 18]
+indice = 0
+
+print("Buscando el primer número impar:")
+while indice < len(numeros):
+    numero_actual = numeros[indice]
+    print(f"Verificando: {numero_actual}")
+
+    if numero_actual % 2 != 0:  # Si es impar
+        print(f"¡Encontrado! {numero_actual} es impar")
+        break  # Salir del bucle inmediatamente
+
+    indice += 1
+
+print("Búsqueda completada")
+        </pre>
+
+        <h4>Ejemplo 2 - Uso de continue:</h4>
+        <pre>
+temperaturas = [18, 25, 32, 15, 28, 35, 12, 30]
+indice = 0
+dias_calor = 0
+
+print("Analizando temperaturas (solo días con más de 25°C):")
+while indice < len(temperaturas):
+    temp_actual = temperaturas[indice]
+
+    if temp_actual <= 25:
+        indice += 1
+        continue  # Saltar al siguiente ciclo
+
+    # Este código solo se ejecuta si temp_actual > 25
+    dias_calor += 1
+    print(f"Día {indice + 1}: {temp_actual}°C - ¡Día caluroso!")
+    indice += 1
+
+print(f"Total de días calurosos (>25°C): {dias_calor}")
+        </pre>
+
+        <h4>Ejemplo 3 - Sistema de menú interactivo:</h4>
+        <pre>
+# Simular un sistema de menú que se repite hasta que el usuario elija salir
+menu_activo = True
+opcion_usuario = 0  # Simular entrada del usuario
+operaciones_realizadas = []
+
+while menu_activo:
+    print("\n=== CALCULADORA SIMPLE ===")
+    print("1. Sumar")
+    print("2. Restar")
+    print("3. Multiplicar")
+    print("4. Ver historial")
+    print("5. Salir")
+
+    # Simular diferentes opciones del usuario
+    opciones_simuladas = [1, 2, 3, 4, 5]
+
+    if len(operaciones_realizadas) < len(opciones_simuladas):
+        opcion_usuario = opciones_simuladas[len(operaciones_realizadas)]
+    else:
+        opcion_usuario = 5
+
+    print(f"Opción seleccionada: {opcion_usuario}")
+
+    if opcion_usuario == 5:
+        print("¡Gracias por usar la calculadora!")
+        break
+    elif opcion_usuario == 1:
+        resultado = 10 + 5
+        operaciones_realizadas.append(f"10 + 5 = {resultado}")
+        print(f"Resultado: {resultado}")
+    elif opcion_usuario == 2:
+        resultado = 15 - 7
+        operaciones_realizadas.append(f"15 - 7 = {resultado}")
+        print(f"Resultado: {resultado}")
+    elif opcion_usuario == 3:
+        resultado = 6 * 4
+        operaciones_realizadas.append(f"6 * 4 = {resultado}")
+        print(f"Resultado: {resultado}")
+    elif opcion_usuario == 4:
+        print("Historial de operaciones:")
+        if operaciones_realizadas:
+            for operacion in operaciones_realizadas:
+                print(f"- {operacion}")
+        else:
+            print("No hay operaciones en el historial")
+    else:
+        print("Opción no válida, intenta de nuevo")
+        continue
+
+print("Programa terminado")
+        </pre>
+    </section>
+
+    <section>
+        <h2>4. Aplicaciones Prácticas del While </h2>
+
+        <h4>Ejemplo 1 - Simulador de cajero automático:</h4>
+        <pre>
+saldo_cuenta = 1000.00
+operaciones_realizadas = 0
+max_operaciones = 3  # Límite diario simulado
+
+print("=== CAJERO AUTOMÁTICO ===")
+print(f"Saldo inicial: ${saldo_cuenta}")
+
+# Simular diferentes operaciones
+operaciones_simuladas = [
+    {"tipo": "consulta"},
+    {"tipo": "retiro", "monto": 200},
+    {"tipo": "deposito", "monto": 150}
+]
+
+indice_operacion = 0
+
+while operaciones_realizadas < max_operaciones and indice_operacion < len(operaciones_simuladas):
+    operacion = operaciones_simuladas[indice_operacion]
+    print(f"\n--- Operación {operaciones_realizadas + 1} ---")
+
+    if operacion["tipo"] == "consulta":
+        print(f"Consultando saldo...")
+        print(f"Su saldo actual es: ${saldo_cuenta}")
+    elif operacion["tipo"] == "retiro":
+        monto = operacion["monto"]
+        if monto <= saldo_cuenta:
+            saldo_cuenta -= monto
+            print(f"Retiro exitoso: ${monto}")
+            print(f"Saldo restante: ${saldo_cuenta}")
+        else:
+            print(f"Fondos insuficientes. Saldo disponible: ${saldo_cuenta}")
+    elif operacion["tipo"] == "deposito":
+        monto = operacion["monto"]
+        saldo_cuenta += monto
+        print(f"Depósito exitoso: ${monto}")
+        print(f"Nuevo saldo: ${saldo_cuenta}")
+
+    operaciones_realizadas += 1
+    indice_operacion += 1
+
+print(f"\nSesión terminada. Operaciones realizadas: {operaciones_realizadas}")
+        </pre>
+
+        <h4>Ejemplo 2 - Juego de adivinanza:</h4>
+        <pre>
+import random
+
+numero_secreto = 42  # En un juego real sería: random.randint(1, 100)
+intentos_maximos = 5
+intentos_realizados = 0
+adivinado = False
+
+# Simular intentos del jugador
+intentos_simulados = [30, 50, 45, 42]  # El último intento es correcto
+
+print("=== JUEGO DE ADIVINANZA ===")
+print("Adivina el número entre 1 y 100")
+print(f"Tienes {intentos_maximos} intentos")
+
+while intentos_realizados < intentos_maximos and not adivinado:
+    # Simular entrada del usuario
+    if intentos_realizados < len(intentos_simulados):
+        intento = intentos_simulados[intentos_realizados]
+    else:
+        intento = numero_secreto  # Asegurar que termine
+
+    intentos_realizados += 1
+    print(f"\nIntento {intentos_realizados}: {intento}")
+
+    if intento == numero_secreto:
+        print("¡FELICIDADES! ¡Adivinaste el número!")
+        adivinado = True
+    elif intento < numero_secreto:
+        print("El número es mayor")
+    else:
+        print("El número es menor")
+
+    if not adivinado:
+        intentos_restantes = intentos_maximos - intentos_realizados
+        if intentos_restantes > 0:
+            print(f"Te quedan {intentos_restantes} intentos")
+
+if not adivinado:
+    print(f"\n¡Se acabaron los intentos! El número era: {numero_secreto}")
+
+print(f"Juego terminado. Intentos usados: {intentos_realizados}")
+        </pre>
+
+        <h4>Ejemplo 3 - Procesador de inventario:</h4>
+        <pre>
+productos = ["Laptop", "Mouse", "Teclado", "Monitor", "Bocinas"]
+stock = [3, 15, 8, 2, 10]
+precios = [899.99, 25.50, 75.00, 199.99, 89.99]
+
+# Procesar productos hasta encontrar uno con stock bajo
+indice = 0
+productos_revisados = []
+stock_bajo_encontrado = False
+limite_stock_bajo = 5
+
+print("=== REVISIÓN DE INVENTARIO ===")
+print(f"Buscando productos con stock menor a {limite_stock_bajo} unidades\n")
+
+while indice < len(productos) and not stock_bajo_encontrado:
+    producto_actual = productos[indice]
+    stock_actual = stock[indice]
+    precio_actual = precios[indice]
+
+    productos_revisados.append(producto_actual)
+
+    print(f"Revisando: {producto_actual}")
+    print(f"Stock actual: {stock_actual} unidades")
+    print(f"Precio: ${precio_actual}")
+
+    if stock_actual < limite_stock_bajo:
+        print("⚠ ¡ALERTA! Stock bajo detectado")
+        print("Se requiere reabastecimiento urgente")
+        stock_bajo_encontrado = True
+
+        # Calcular sugerencia de reabastecimiento
+        cantidad_sugerida = 20 - stock_actual
+        costo_reabastecimiento = cantidad_sugerida * precio_actual
+        print(f"Cantidad sugerida a comprar: {cantidad_sugerida} unidades")
+        print(f"Costo estimado: ${costo_reabastecimiento:.2f}")
+    else:
+        print("✅ Stock suficiente")
+
+    print("-" * 40)
+    indice += 1
+
+print(f"\nResumen de revisión:")
+print(f"Productos revisados: {len(productos_revisados)}")
+print(f"Lista de productos revisados: {productos_revisados}")
+
+if stock_bajo_encontrado:
+    print("⚠ Se requiere acción inmediata para reabastecimiento")
+else:
+    print("✅ Todos los productos revisados tienen stock adecuado")
+        </pre>
+    </section>
+
+    <section>
+        <h2>Ejercicios </h2>
+
+        <h4>Ejercicio 1: Contador Personalizado </h4>
+        <p>Crea un programa que:</p>
+        <ul>
+            <li>Use <code>while</code> para contar desde 1 hasta 20</li>
+            <li>Solo imprima los números pares</li>
+            <li>Use <code>continue</code> para saltar números impares</li>
+            <li>Al final, muestre cuántos números pares se encontraron</li>
+        </ul>
+
+        <h4>Ejercicio 2: Procesador de Lista de Compras </h4>
+        <p>Crea un programa que:</p>
+        <ul>
+            <li>Defina una lista de productos y otra de precios</li>
+            <li>Use <code>while</code> para recorrer las listas</li>
+            <li>Calcule el total de la compra</li>
+            <li>Cuente cuántos productos cuestan más de $50</li>
+            <li>Se detenga si encuentra un producto que cueste más de $200</li>
+        </ul>
+
+        <h4>Ejercicio 3: Simulador de Ahorro </h4>
+        <p>Crea un programa que simule ahorrar dinero:</p>
+        <ul>
+            <li>Comience con $0 en ahorros</li>
+            <li>Use <code>while</code> para simular ahorrar $50 cada mes</li>
+            <li>Imprima el progreso cada mes</li>
+            <li>Pare cuando alcance la meta de $500</li>
+            <li>Muestre cuántos meses tomó alcanzar la meta</li>
+        </ul>
+
+        <h4>Ejercicio 4: Validador de Datos </h4>
+        <p>Crea un programa que valide una lista de edades:</p>
+        <ul>
+            <li>Define una lista con varias edades (incluye algunas inválidas como números negativos)</li>
+            <li>Use <code>while</code> para revisar cada edad</li>
+            <li>Si encuentra una edad inválida (&lt; 0 o &gt; 120), use <code>break</code> para parar</li>
+            <li>Cuenta cuántas edades válidas procesó antes de encontrar la inválida</li>
+            <li>Muestre el resumen del procesamiento</li>
+        </ul>
+    </section>
+</body>
+</html>
