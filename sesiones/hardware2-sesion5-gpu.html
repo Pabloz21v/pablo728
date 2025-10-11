@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 13: Gabinetes y Sesión 5: GPU (Tarjetas Gráficas)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #2c3e50;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      pre {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        border-left: 4px solid #3498db;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+        table {
+          font-size: 14px;
+        }
+        th,
+        td {
+          padding: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-dos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="../sesiones/hardware2-sesion4-ram.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #a9c8e2;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 4
+        </a>
+        <!-- <a
+        href="../sesiones/hardware2-sesion6.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #a9c8e2;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 6
+      </a> -->
+      </div>
+
+      <h2>Sesión 5 – GPU (Tarjetas Gráficas)</h2>
+
+      <h3>Factores que Encarecen una GPU</h3>
+
+      <h4>Resumen Visual: ¿Qué Pagas Extra?</h4>
+      <pre>
+Precio Base (ej. RTX 4060/RX 7600) → $120 USD / ~$150,000 ARS
+│ ├── +$80 USD → Más VRAM (8GB → 12GB en gama media)
+│ │ ├── +$150 USD → Arquitectura actual (RTX 50XX vs RTX 40XX, RX 9000 vs RX 7000)
+│ │ │ ├── +$200 USD → Ray tracing avanzado + DLSS 4.0/FSR 4.0
+│ │ │ │ ├── +$300 USD → Frame Generation (DLSS 4.0/FSR 4.0)
+│ │ │ │ │ ├── +$500 USD → 4K gaming capaz (RTX 5080 vs RTX 5070)
+│ │ │ │ │ │ └── +$800 USD → Flagship (RTX 5090 vs RTX 5080)
+│ │ │ │ └── +$600 USD → Workstation features (RTX A5000 vs RTX 5070)
+│ │ └── +$50 USD → Cooling premium (triple fan, liquid cooling)
+└── +$100 USD → Marca premium (ASUS ROG, MSI Gaming X vs básicas)
+        </pre
+      >
+
+      <h3>Conceptos Clave</h3>
+
+      <h4>1. Arquitecturas Modernas</h4>
+
+      <h4>NVIDIA Blackwell (RTX 50XX Series):</h4>
+      <ul>
+        <li>Proceso: TSMC 3nm (N3).</li>
+        <li>Núcleos RT 4ta gen: +3x eficiencia ray tracing vs Ada Lovelace.</li>
+        <li>
+          Núcleos Tensor 5ta gen: +6x rendimiento AI vs Ada, soporte para DLSS
+          4.0.
+        </li>
+        <li>
+          DLSS 4.0: Frame Generation mejorada + Super Resolution con IA de
+          transformación.
+        </li>
+        <li>AV1 encoding: Hardware dedicado para streaming 8K.</li>
+        <li>Modelos: RTX 5060, 5070, 5080, 5090.</li>
+      </ul>
+
+      <h4>AMD RDNA 4 (RX 9000 Series):</h4>
+      <ul>
+        <li>Proceso: TSMC 4nm + 6nm chiplet.</li>
+        <li>Ray Accelerators 3ra gen: +2x eficiencia ray tracing vs RDNA 3.</li>
+        <li>
+          AI Accelerators: Mejorados para FSR 4.0 (IA acelerada por hardware).
+        </li>
+        <li>
+          FSR 4.0: Frame Generation con calidad indistinguible de DLSS 4.0,
+          compatible con cualquier GPU.
+        </li>
+        <li>AV1/H.264 dual encoders: Streaming y grabación mejorados.</li>
+        <li>Modelos: RX 9600, 9700 XT, 9800 XT, 9900 XTX.</li>
+      </ul>
+
+      <h4>Intel Arc (Battlemage):</h4>
+      <ul>
+        <li>Proceso: TSMC 6nm.</li>
+        <li>
+          XeSS 1.3: Upscaling con IA, compatible con GPUs Intel/AMD/NVIDIA.
+        </li>
+        <li>Modelos: Arc B580, B780 (gama media-baja).</li>
+      </ul>
+
+      <h4>2. Tipos y Capacidades de VRAM</h4>
+
+      <table>
+        <tr>
+          <th>Tipo VRAM</th>
+          <th>Ancho de Bus</th>
+          <th>Ancho de Banda</th>
+          <th>Uso Típico</th>
+        </tr>
+        <tr>
+          <td>GDDR6</td>
+          <td>128-256 bits</td>
+          <td>448-768 GB/s</td>
+          <td>Gaming mainstream</td>
+        </tr>
+        <tr>
+          <td>GDDR7</td>
+          <td>192-384 bits</td>
+          <td>1000-1500 GB/s</td>
+          <td>Gaming high-end 4K</td>
+        </tr>
+        <tr>
+          <td>HBM2e/HBM3</td>
+          <td>4096 bits</td>
+          <td>1600-3200 GB/s</td>
+          <td>Data center, AI, HPC</td>
+        </tr>
+      </table>
+
+      <h4>3. Ray Tracing y Tecnologías de Aceleración</h4>
+      <ul>
+        <li>
+          Ray Tracing: Simulación realista de luz mediante trazado de rayos.
+        </li>
+        <li>
+          RT Cores (NVIDIA 4ta gen): Hardware especializado para intersección
+          rayo-triángulo.
+        </li>
+        <li>Ray Accelerators (AMD 3ra gen): Unidades similares en RDNA 4.</li>
+        <li>
+          Performance Cost: 20-30% pérdida FPS sin upscaling (mejorado vs 2024).
+        </li>
+        <li>
+          Efectos: Reflecciones, sombras, iluminación global, oclusión
+          ambiental.
+        </li>
+      </ul>
+
+      <h4>4. DLSS 4.0 vs FSR 4.0 - Upscaling Technologies</h4>
+
+      <table>
+        <tr>
+          <th>Característica</th>
+          <th>DLSS 4.0 (NVIDIA)</th>
+          <th>FSR 4.0 (AMD)</th>
+        </tr>
+        <tr>
+          <td>Método</td>
+          <td>IA/ML (Tensor Cores 5ta gen)</td>
+          <td>Temporal + IA (AI Accelerators)</td>
+        </tr>
+        <tr>
+          <td>Frame Generation</td>
+          <td>Sí (hasta 3x frames generados)</td>
+          <td>Sí (calidad similar a DLSS 4.0)</td>
+        </tr>
+        <tr>
+          <td>Compatibilidad</td>
+          <td>Solo RTX 20XX+</td>
+          <td>Cualquier GPU (AMD/NVIDIA/Intel)</td>
+        </tr>
+        <tr>
+          <td>Calidad</td>
+          <td>Superior (especialmente 4K)</td>
+          <td>Paridad con DLSS 4.0</td>
+        </tr>
+        <tr>
+          <td>Latencia</td>
+          <td>NVIDIA Reflex integrado</td>
+          <td>AMD Anti-Lag+</td>
+        </tr>
+      </table>
+
+      <h4>5. Núcleos de Procesamiento</h4>
+
+      <h4>NVIDIA:</h4>
+      <ul>
+        <li>CUDA Cores: Procesadores de shaders estándar.</li>
+        <li>RT Cores 4ta gen: Ray tracing (Blackwell).</li>
+        <li>Tensor Cores 5ta gen: AI/ML y DLSS 4.0.</li>
+      </ul>
+
+      <h4>AMD:</h4>
+      <ul>
+        <li>Stream Processors: Equivalente a CUDA Cores.</li>
+        <li>Ray Accelerators 3ra gen: Ray tracing hardware.</li>
+        <li>AI Accelerators: Mejorados para FSR 4.0 y cómputo paralelo.</li>
+      </ul>
+
+      <h4>6. TDP y Eficiencia Energética</h4>
+
+      <table>
+        <tr>
+          <th>Gama</th>
+          <th>TGP Típico</th>
+          <th>PSU Recomendada</th>
+          <th>Conectores PCIe</th>
+        </tr>
+        <tr>
+          <td>Entry (RTX 5060, RX 9600)</td>
+          <td>100-140W</td>
+          <td>550W</td>
+          <td>1x 8-pin</td>
+        </tr>
+        <tr>
+          <td>Mainstream (RTX 5070, RX 9700 XT)</td>
+          <td>200-250W</td>
+          <td>650W</td>
+          <td>1x 12VHPWR o 2x 8-pin</td>
+        </tr>
+        <tr>
+          <td>High-end (RTX 5080, RX 9800 XT)</td>
+          <td>300-350W</td>
+          <td>750W</td>
+          <td>1x 16-pin (12VHPWR)</td>
+        </tr>
+        <tr>
+          <td>Enthusiast (RTX 5090)</td>
+          <td>450W+</td>
+          <td>850W+</td>
+          <td>1x 16-pin (600W)</td>
+        </tr>
+      </table>
+
+      <h4>7. Comparación Técnica NVIDIA vs AMD</h4>
+
+      <table>
+        <tr>
+          <th>Aspecto</th>
+          <th>NVIDIA (Blackwell)</th>
+          <th>AMD (RDNA 4)</th>
+          <th>Ventaja</th>
+        </tr>
+        <tr>
+          <td>Ray Tracing</td>
+          <td>RT Cores 4ta gen, superior</td>
+          <td>Ray Accelerators 3ra gen</td>
+          <td>NVIDIA</td>
+        </tr>
+        <tr>
+          <td>Upscaling</td>
+          <td>DLSS 4.0 + Frame Gen</td>
+          <td>FSR 4.0 + Frame Gen</td>
+          <td>Empate (FSR 4.0 compite en calidad)</td>
+        </tr>
+        <tr>
+          <td>Rasterización pura</td>
+          <td>Excelente</td>
+          <td>Excelente, competitivo</td>
+          <td>Empate</td>
+        </tr>
+        <tr>
+          <td>VRAM cantidad</td>
+          <td>12-24GB (gama alta)</td>
+          <td>12-24GB (más generosa en gama media)</td>
+          <td>AMD</td>
+        </tr>
+        <tr>
+          <td>Eficiencia energética</td>
+          <td>Muy buena (TSMC 3nm)</td>
+          <td>Buena (TSMC 4nm+6nm)</td>
+          <td>NVIDIA</td>
+        </tr>
+        <tr>
+          <td>Precio/rendimiento</td>
+          <td>Premium pricing</td>
+          <td>Mejor relación calidad-precio</td>
+          <td>AMD</td>
+        </tr>
+        <tr>
+          <td>Software/drivers</td>
+          <td>GeForce Experience, maduro</td>
+          <td>Adrenalin, mejorado</td>
+          <td>NVIDIA</td>
+        </tr>
+        <tr>
+          <td>Streaming/content creation</td>
+          <td>NVENC (AV1 8K)</td>
+          <td>AMF (mejorando)</td>
+          <td>NVIDIA</td>
+        </tr>
+      </table>
+
+      <h2>Tipos de Uso y Características Esenciales</h2>
+
+      <h3>Ofimática/Navegación (iGPU suficiente)</h3>
+
+      <h4>Objetivo:</h4>
+      <p>Display output básico, video playback, trabajo de oficina.</p>
+
+      <h4>Características Críticas (🟢):</h4>
+      <ul>
+        <li>GPU integrada suficiente (Intel UHD, AMD Vega, Apple M-series).</li>
+        <li>Soporte múltiples monitores si es necesario.</li>
+        <li>Decodificación H.264/H.265 hardware.</li>
+        <li>Bajo consumo energético.</li>
+      </ul>
+
+      <h4>Irrelevantes (🔴):</h4>
+      <ul>
+        <li>Ray tracing, DLSS/FSR.</li>
+        <li>Gaming performance.</li>
+        <li>VRAM alta capacidad.</li>
+        <li>Overclocking capabilities.</li>
+      </ul>
+
+      <h3>Gaming 1080p (Entry-Mainstream)</h3>
+
+      <h4>Objetivo:</h4>
+      <p>60+ FPS en títulos AAA, 120+ FPS en competitivos.</p>
+
+      <h4>Características Críticas (🟢):</h4>
+      <ul>
+        <li>GPU: GTX 1660 Super+ / RX 6500 XT+ mínimo.</li>
+        <li>VRAM: 6 (GB+ para títulos modernos.</li>
+        <li>Soporte DirectX 12 / Vulkan.</li>
+        <li>TGP: 100-180W (PSU 550W+).</li>
+      </ul>
+
+      <h4>Características Útiles (🟡):</h4>
+      <ul>
+        <li>DLSS/FSR para extended lifespan.</li>
+        <li>Ray tracing básico si soportado.</li>
+        <li>1-2 generaciones atrás para mejor valor.</li>
+      </ul>
+
+      <h4>Ejemplo Gaming 1080p:</h4>
+      <ul>
+        <li>GPU: RTX 5060 / RX 9600 (~$300 USD / $360,000 ARS).</li>
+        <li>VRAM: 8GB GDDR6.</li>
+        <li>Performance: 80+ FPS títulos AAA con high settings.</li>
+        <li>Ray tracing: Usable con DLSS/FSR.</li>
+      </ul>
+
+      <h3>Gaming 1440p (Mainstream-High End)</h3>
+
+      <h4>Objetivo:</h4>
+      <p>60+ FPS máximos settings, ray tracing selectivo.</p>
+
+      <h4>Características Críticas (🟢):</h4>
+      <ul>
+        <li>GPU: RTX 5070 + / RX 9700 XT+ recomendado.</li>
+        <li>VRAM: 12GB+ para futuro-proofing.</li>
+        <li>DLSS/FSR soporte para ray tracing.</li>
+        <li>TGP: 200-300W (PSU 650-750W).</li>
+      </ul>
+
+      <h4>Ejemplo Gaming 1440p:</h4>
+      <ul>
+        <li>GPU: RTX 5070 Super / RX 9700 XT.</li>
+        <li>VRAM: 12-16GB.</li>
+        <li>
+          Performance: 70+ FPS máximos settings, 90+ FPS con DLSS Quality.
+        </li>
+        <li>Ray tracing: Buena experience con upscaling.</li>
+      </ul>
+
+      <h3>Gaming 4K (High End-Enthusiast)</h3>
+
+      <h4>Objetivo:</h4>
+      <p>60+ FPS máximos settings con ray tracing.</p>
+
+      <h4>Características Críticas (🟢):</h4>
+      <ul>
+        <li>GPU: RTX 5080 + / RX 9800 XT+ mínimo.</li>
+        <li>VRAM: 16GB+ obligatorio.</li>
+        <li>DLSS/FSR crítico para performance.</li>
+        <li>TGP: 350W+ (PSU 850W+ recomendado).</li>
+      </ul>
+
+      <h4>Ejemplo Gaming 4K:</h4>
+      <ul>
+        <li>GPU: RTX 4090 (~$1600 USD / $1,920,000 ARS).</li>
+        <li>VRAM: 24GB GDDR6X.</li>
+        <li>Performance: 60+ FPS nativos, 100+ FPS con DLSS Performance.</li>
+        <li>Ray tracing: Máximos settings usable.</li>
+      </ul>
+
+      <h3>Edición de Video (4K/8K)</h3>
+
+      <h4>Objetivo:</h4>
+      <p>Encoding acelerado, timeline scrubbing fluido, effects rendering.</p>
+
+      <h4>Características Críticas (🟢):</h4>
+      <ul>
+        <li>VRAM: 8GB+ para 4K, 16GB+ para 8K.</li>
+        <li>Hardware encoders: NVENC (NVIDIA) o AMF (AMD).</li>
+        <li>CUDA Cores/Stream Processors para effects.</li>
+        <li>Soporte AV1 encoding para streaming moderno.</li>
+      </ul>
+      <h4>Características Útiles (🟡):</h4>
+        <ul>
+            <li>Multiple encoders simultáneos</li>
+            <li>10-bit pipeline support</li>
+            <li>OpenCL/CUDA acceleration</li>
+        </ul>
+      <h4>Ejemplo Edición 4K:</h4>
+      <ul>
+        <li>GPU: RTX 4070 / RX 7700 XT (~$500 USD / $600,000 ARS).</li>
+        <li>Software: Premiere Pro, DaVinci Resolve.</li>
+        <li>Beneficio: 3-5x faster export vs CPU-only.</li>
+      </ul>
+
+      <h3>Workstation IA/ML</h3>
+
+      <h4>Objetivo:</h4>
+      <p>Training de modelos, inference acelerado, compute workloads.</p>
+
+      <h4>Características Críticas (🟢):</h4>
+      <ul>
+        <li>VRAM: 16GB+ mínimo, 24GB+ recomendado.</li>
+        <li>Tensor Cores/AI Accelerators para ML frameworks.</li>
+        <li>CUDA/ROCm software stack maduro.</li>
+        <li>ECC memory en workstation cards.</li>
+        <li>Multi-GPU scaling capabilities.</li>
+      </ul>
+
+      <h4>Ejemplo Workstation IA:</h4>
+      <ul>
+        <li>GPU: RTX 4090 / RTX A6000 (~$1600-4000 USD).</li>
+        <li>Frameworks: PyTorch, TensorFlow, CUDA.</li>
+        <li>Models: Stable Diffusion, LLaMA, custom training.</li>
+      </ul>
+    <h3>Mining/Compute </h3>
+<p>Objetivo: Hash rate, eficiencia energética, ROI calculation.</p>
+<h4>Factores Clave:</h4>
+<ul>
+    <li>Hash rate por watt (efficiency)</li>
+    <li>Memoria bandwidth para memory-hard algorithms</li>
+    <li>Availability vs gaming market impact</li>
+    <li>LHR (Lite Hash Rate) limitations en gaming cards</li>
+</ul>
+      <h2>Compatibilidad y Requerimientos del Sistema</h2>
+
+      <h3>Bottlenecks CPU-GPU</h3>
+
+      <table>
+        <tr>
+          <th>GPU</th>
+          <th>CPU Mínimo 1080p</th>
+          <th>CPU Recomendado 1440p+</th>
+          <th>Bottleneck Risk</th>
+        </tr>
+        <tr>
+          <td>RTX 5060/RX 9600</td>
+          <td>Ryzen 5 5600 / i5-12400</td>
+          <td>Ryzen 5 7600 / i5-13600K</td>
+          <td>Bajo</td>
+        </tr>
+        <tr>
+          <td>RTX 5070/RX 9700 XT</td>
+          <td>Ryzen 5 7600 / i5-13600K</td>
+          <td>Ryzen 7 7700X / i7-13700K</td>
+          <td>Medio</td>
+        </tr>
+        <tr>
+          <td>RTX 5080/RX 9800 XT</td>
+          <td>Ryzen 7 7700X / i7-13700K</td>
+          <td>Ryzen 9 7900X / i9-14900K</td>
+          <td>Alto en 1080p</td>
+        </tr>
+        <tr>
+          <td>RTX 5090</td>
+          <td>Ryzen 9 7900X / i9-14900K</td>
+          <td>Ryzen 9 7950X3D / i9-14900KS</td>
+          <td>Muy alto en 1080p</td>
+        </tr>
+      </table>
+
+      <h3>Requerimientos de PSU</h3>
+
+      <h4>Cálculo recomendado:</h4>
+      <p>TGP GPU + TDP CPU + 150W overhead del sistema.</p>
+
+      <ul>
+        <li>
+          Conectores: Verificar 8-pin PCIe vs nuevo 12VHPWR high-end (16-pin).
+        </li>
+        <li>Eficiencia: 80+ Gold mínimo para GPUs high-end.</li>
+        <li>Calidad: Tier A/B en PSU tier list para componentes premium.</li>
+      </ul>
+
+      <h3>Dimensiones y Clearance</h3>
+
+      <table>
+        <tr>
+          <th>Categoría GPU</th>
+          <th>Longitud típica</th>
+          <th>Altura (slots)</th>
+          <th>Consideraciones</th>
+        </tr>
+        <tr>
+          <td>Compact (ITX)</td>
+          <td>200mm</td>
+          <td>2 slots</td>
+          <td>Refrigeración limitada, menores frecuencias</td>
+        </tr>
+        <tr>
+          <td>Standard</td>
+          <td>200-280mm</td>
+          <td>2-2.5 slots</td>
+          <td>La más común, buen equilibrio</td>
+        </tr>
+        <tr>
+          <td>Large (Gaming)</td>
+          <td>280-320mm</td>
+          <td>2.5-3 slots</td>
+          <td>Refrigeración premium, mayores frecuencias</td>
+        </tr>
+        <tr>
+          <td>Massive (4090)</td>
+          <td>320mm+</td>
+          <td>3+ slots</td>
+          <td>Requiere gabinete grande, soporte anti-flexión</td>
+        </tr>
+      </table>
+
+      <h3>PCIe Compatibilidad</h3>
+
+      <ul>
+        <li>PCIe 5.0 x16: Introduciendoce, backward compatible.</li>
+        <li>PCIe 4.0 x16: Estándar actual, backward compatible.</li>
+        <li>PCIe 3.0 x16: Compatible, pérdida mínima performance (<5%).</li>
+        <li>PCIe 4.0 x8: Posible bottleneck en GPUs high-end.</li>
+        <li>
+          Resizable BAR/Smart Access Memory: 2-8% ganancia en títulos
+          compatibles.
+        </li>
+      </ul>
+
+<h3>Resumen de Prioridades por Tipo de PC (GPU)</h3>
+      <table >
+  <thead>
+    <tr>
+      <th>Tipo de PC</th>
+      <th>Características Críticas (🟢)</th>
+      <th>Características Útiles (🟡)</th>
+      <th>Características Irrelevantes (🔴)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Ofimática/Navegación</td>
+      <td>GPU integrada suficiente (Intel UHD, AMD Vega, Apple M-series). Soporte múltiples monitores. Decodificación H.264/H.265. Bajo consumo.</td>
+      <td></td>
+      <td>Ray tracing, DLSS/FSR, Gaming performance, VRAM alta capacidad, Overclocking capabilities.</td>
+    </tr>
+    <tr>
+      <td>Gaming 1080p</td>
+      <td>GPU: GTX 1660 Super+ / RX 6500 XT+. VRAM: 6GB+. Soporte DirectX 12 / Vulkan. TGP: 100-180W (PSU 550W+).</td>
+      <td>DLSS/FSR para extended lifespan. Ray tracing básico si soportado. 1-2 generaciones atrás para mejor valor.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Gaming 1440p</td>
+      <td>GPU: RTX 5070 + / RX 9700 XT+. VRAM: 12GB+. DLSS/FSR soporte para ray tracing. TGP: 200-300W (PSU 650-750W).</td>
+      <td>Soporte para múltiples monitores. HDMI 2.1 para 1440p@144Hz.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Gaming 4K</td>
+      <td>GPU: RTX 5080 + / RX 9800 XT+. VRAM: 16GB+ obligatorio. DLSS/FSR crítico para performance. TGP: 350W+ (PSU 850W+).</td>
+      <td>HDMI 2.1 para 4K@120Hz. G-Sync/FreeSync para fluidez.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Edición de Video (4K/8K)</td>
+      <td>VRAM: 8GB+ para 4K, 16GB+ para 8K. Hardware encoders: NVENC (NVIDIA) o AMF (AMD). CUDA Cores/Stream Processors.</td>
+      <td>Soporte AV1 encoding para streaming moderno.</td>
+      <td>Ray tracing para gaming.</td>
+    </tr>
+    <tr>
+      <td>Workstation IA/ML</td>
+      <td>VRAM: 16GB+ mínimo, 24GB+ recomendado. Tensor Cores/AI Accelerators. CUDA/ROCm software stack. ECC memory.</td>
+      <td>Multi-GPU scaling capabilities.</td>
+      <td>Soporte para múltiples monitores (a menos que sea crítico).</td>
+    </tr>
+  </tbody>
+</table>
+
+      
+      <div>
+        <h2>Análisis de GPUs </h2>
+        <h3>Comparar y responder: </h3>
+          <h5>GPU A: Asus Rtx 5070 Ti 16gb Oc Gddr7</h5>
+            <h5>GPU B: Amd Radeon Rx 9070xt Gaming Edition Triple Fan 16g</h5>
+       
+            <ul>
+            <li> ¿Cuál ofrece mejor precio/FPS para gaming 1440p?</li>
+            <li>¿Qué GPU recomendarían para streaming en Twitch?</li>
+            <li>¿Cuál tiene mejor future-proofing considerando VRAM?</li>
+            <li>Costo por GB de VRAM</li>
+        </ul>
+      </div>
+        <h2>Preguntas</h2>
+      <ol>
+        <li>
+        	Un cliente quiere jugar Cyberpunk 2077 en 4K con ray tracing máximo. ¿Qué GPU mínima recomendarías y por qué? 
+        </li>
+        <li>
+            ¿Por qué AMD incluye más VRAM en sus GPUs de gama media comparado con NVIDIA? Analiza estrategias de mercado y costos de memoria.
+        </li>
+        <li>
+          Factores de costo: ¿Qué factores específicos incrementan el precio de
+          una GPU y cuánto aproxima cada uno en dólares?
+        </li>
+        <li>
+            	Para un streamer que juega en 1440p y transmite a 1080p60, ¿es más importante NVENC de calidad o más núcleos CUDA? Justifica técnicamente.
+        </li>
+        <li>
+            	Un sistema tiene Ryzen 5 3600 + RTX 4080 jugando a 1080p. ¿Dónde está el bottleneck y cómo se manifiesta? ¿Soluciones prácticas?
+        </li>
+        <li>
+          Arquitecturas modernas: ¿Cuáles son las principales diferencias entre
+          las arquitecturas Blackwell de NVIDIA y RDNA 4 de AMD en términos de
+          eficiencia y rendimiento?
+        </li>
+        <li>
+          Tecnologías de upscaling: ¿En qué se diferencian DLSS 4.0, FSR 4.0 y
+          XeSS 1.3, y cuál es compatible con más tarjetas gráficas?
+        </li>
+        
+      </ol>
+    </div>
+  </body>
+</html>
