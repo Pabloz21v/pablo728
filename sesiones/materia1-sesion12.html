@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" style=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 12
+
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+      body {
+        max-width: 95%;
+        margin: 0 auto;
+        padding: 1% 1%;
+        position: relative;
+        box-sizing: border-box;
+        font-family: 'Times New Roman', serif;
+        line-height: 1.6;
+        text-align: justify;
+      }
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        border-bottom: 2px solid #2c3e50;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+      }
+      h2 {
+        color: #34495e;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+      }
+      h3 {
+        color: #2c3e50;
+        margin-top: 25px;
+        margin-bottom: 15px;
+      }
+      .objetivos {
+        background-color: #ecf0f1;
+        padding: 20px;
+        margin: 20px 0;
+        border-left: 4px solid #3498db;
+      }
+      .cuestionario {
+        background-color: #fdf2e9;
+        padding: 20px;
+        margin: 30px 0;
+        border: 2px solid #e67e22;
+      }
+      .cuestionario h3 {
+        color: #d35400;
+        margin-top: 0;
+      }
+      .definicion {
+        background-color: #e8f5e8;
+        padding: 15px;
+        margin: 15px 0;
+        border-left: 4px solid #27ae60;
+      }
+      .importante {
+        background-color: #ffeaa7;
+        padding: 15px;
+        margin: 15px 0;
+        border-left: 4px solid #fdcb6e;
+      }
+      table {
+        margin: 20px 0;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid #bdc3c7;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #34495e;
+        color: white;
+      }
+      ol,
+      ul {
+        margin: 15px 0;
+        padding-left: 30px;
+      }
+      li {
+        margin: 8px 0;
+      }
+      .clase {
+        page-break-before: always;
+        margin-bottom: 50px;
+      }
+      .clase:first-child {
+        page-break-before: auto;
+      }
+      .btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+      }
+      .btn-primary {
+        background-color: #4ade80;
+        color: #222;
+      }
+      .btn-secondary {
+        background-color: #60a5fa;
+        color: #fff;
+      }
+      @media (max-width: 768px) {
+            table {
+                display: block;
+                overflow-x: auto;
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 1% 0%;
+            }
+            body{
+              max-width: 100%;
+                margin: 0 auto;
+                padding: 1% 1%;
+            }
+            h2 {
+                
+                padding-left: 0px;
+            }
+        }
+    </style>
+  </head>
+  <body style="">
+    <div style="margin-bottom: 24px">
+		   <a
+			 href="../materias/manipulacion-preservacion-datos.html"
+			 class="btn btn-primary"
+		   >
+			 Ir a Materia
+		   </a>
+		   <a href="materia1-sesion11.html" class="btn btn-secondary">
+			 Ir a Sesión 11
+		   </a>
+		   </a>
+		   <a href="materia1-sesion13.html" class="btn btn-secondary">
+			 Ir a Sesión 13
+		   </a>
+		 </div>
+    <div class="clase">
+      <h2>Sesión 12: Introducción a la Ciberseguridad y Protección de Datos</h2>
+
+      
+
+      <h3>1.1 ¿Qué es la Ciberseguridad y por qué es importante?</h3>
+
+      <div class="definicion">
+        <strong>Ciberseguridad</strong> es la práctica de proteger sistemas, redes y programas de ataques digitales.
+        Estos ciberataques generalmente apuntan a acceder, cambiar o destruir información confidencial, extorsionar
+        dinero a los usuarios o interrumpir procesos comerciales normales.
+      </div>
+
+      <p>La ciberseguridad se ha vuelto crítica en la era digital por las siguientes razones:</p>
+
+      <ul>
+        <li>
+          <strong>Dependencia tecnológica:</strong> Nuestra sociedad depende cada vez más de la tecnología digital para
+          operaciones críticas
+        </li>
+        <li><strong>Volumen de datos:</strong> Las organizaciones manejan cantidades masivas de datos sensibles</li>
+        <li>
+          <strong>Conectividad global:</strong> Los sistemas están interconectados, lo que amplifica el impacto de los
+          ataques
+        </li>
+        <li>
+          <strong>Sofisticación de amenazas:</strong> Los ciberdelincuentes utilizan técnicas cada vez más avanzadas
+        </li>
+        <li><strong>Impacto económico:</strong> Los ciberataques pueden causar pérdidas millonarias</li>
+      </ul>
+
+      <div class="importante">
+        <strong>Dato importante:</strong> Según estudios recientes, el costo promedio de una violación de datos en 2023
+        fue de 4.45 millones de dólares a nivel global.
+      </div>
+
+      <h3>1.2 Conceptos Básicos: La Triada CIA</h3>
+
+      <p>Los pilares fundamentales de la ciberseguridad se conocen como la triada CIA:</p>
+
+      <h4>Confidencialidad</h4>
+      <p>
+        Se refiere a la protección de la información contra el acceso no autorizado. Solo las personas autorizadas deben
+        poder acceder a datos específicos.
+      </p>
+      <ul>
+        <li>Cifrado de datos</li>
+        <li>Control de acceso basado en roles</li>
+        <li>Autenticación de usuarios</li>
+        <li>Clasificación de información</li>
+      </ul>
+
+      <h4>Integridad</h4>
+      <p>
+        Garantiza que la información no sea modificada de manera no autorizada o accidental. Los datos deben permanecer
+        exactos y completos.
+      </p>
+      <ul>
+        <li>Checksums y hashes</li>
+        <li>Firmas digitales</li>
+        <li>Control de versiones</li>
+        <li>Respaldos regulares</li>
+      </ul>
+
+      <h4>Disponibilidad</h4>
+      <p>Asegura que los sistemas y datos estén accesibles cuando se necesiten por usuarios autorizados.</p>
+      <ul>
+        <li>Redundancia de sistemas</li>
+        <li>Planes de continuidad del negocio</li>
+        <li>Mantenimiento preventivo</li>
+        <li>Protección contra ataques DDoS</li>
+      </ul>
+
+      <h3>1.3 Tipos de Amenazas</h3>
+
+      <h4>Malware</h4>
+      <p>
+        Software malicioso diseñado para dañar, interrumpir o obtener acceso no autorizado a sistemas informáticos.
+        Incluye virus, gusanos, troyanos, ransomware, spyware y adware.
+      </p>
+
+      <h4>Phishing</h4>
+      <p>
+        Técnica de ingeniería social que utiliza comunicaciones fraudulentas (generalmente correos electrónicos) para
+        engañar a las personas y obtener información confidencial como credenciales de acceso o datos financieros.
+      </p>
+
+      <div class="importante">
+        <strong>Características del Phishing:</strong>
+        <ul>
+          <li>Suplantación de identidad de organizaciones legítimas</li>
+          <li>Creación de urgencia o miedo</li>
+          <li>Enlaces a sitios web falsos</li>
+          <li>Solicitud de información confidencial</li>
+        </ul>
+      </div>
+
+      <h4>Ransomware</h4>
+      <p>
+        Tipo de malware que cifra los archivos de la víctima y exige un rescate (generalmente en criptomonedas) para
+        proporcionar la clave de descifrado.
+      </p>
+
+      <p><strong>Impacto del Ransomware:</strong></p>
+      <ul>
+        <li>Pérdida de acceso a datos críticos</li>
+        <li>Interrupción de operaciones comerciales</li>
+        <li>Costos de recuperación</li>
+        <li>Daño a la reputación</li>
+        <li>Posibles consecuencias legales</li>
+      </ul>
+
+      <h4>Ingeniería Social</h4>
+      <p>
+        Manipulación psicológica de personas para que divulguen información confidencial o realicen acciones que
+        comprometan la seguridad.
+      </p>
+
+      <table>
+        <tbody><tr>
+          <th>Técnica</th>
+          <th>Descripción</th>
+          <th>Objetivo</th>
+        </tr>
+        <tr>
+          <td>Pretexting</td>
+          <td>Crear un escenario falso para obtener información</td>
+          <td>Credenciales de acceso</td>
+        </tr>
+        <tr>
+          <td>Baiting</td>
+          <td>Ofrecer algo atractivo para infectar sistemas</td>
+          <td>Instalación de malware</td>
+        </tr>
+        <tr>
+          <td>Tailgating</td>
+          <td>Seguir a personas autorizadas para acceder a áreas restringidas</td>
+          <td>Acceso físico</td>
+        </tr>
+        <tr>
+          <td>Quid pro quo</td>
+          <td>Ofrecer un servicio a cambio de información</td>
+          <td>Datos confidenciales</td>
+        </tr>
+      </tbody></table>
+
+     
+
+      <div class="cuestionario">
+        <h3>Cuestionario</h3>
+        <ol>
+          <li>¿Cuáles son los tres pilares fundamentales de la ciberseguridad (triada CIA)?</li>
+          <li>Defina qué es el phishing y mencione dos características principales de este tipo de ataque.</li>
+          <li>Mencione tres tipos diferentes de amenazas informáticas y explique brevemente cada una.</li>
+          <li>¿Cuál es la diferencia entre confidencialidad e integridad en el contexto de la ciberseguridad?</li>
+          <li>Explique qué es la ingeniería social y proporcione un ejemplo de técnica utilizada.</li>
+          <li>¿Por qué es importante la disponibilidad en la triada CIA? Proporcione un ejemplo.</li>
+         </ol>
+      </div>
+    </div>
+
+    
+  
+
+</body></html>

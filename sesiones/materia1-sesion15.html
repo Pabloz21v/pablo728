@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" style=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 15
+
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+      body {
+        max-width: 95%;
+        margin: 0 auto;
+        padding: 1% 1%;
+        position: relative;
+        box-sizing: border-box;
+        font-family: 'Times New Roman', serif;
+        line-height: 1.6;
+        text-align: justify;
+      }
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        border-bottom: 2px solid #2c3e50;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+      }
+      h2 {
+        color: #34495e;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+      }
+      h3 {
+        color: #2c3e50;
+        margin-top: 25px;
+        margin-bottom: 15px;
+      }
+      .objetivos {
+        background-color: #ecf0f1;
+        padding: 20px;
+        margin: 20px 0;
+        border-left: 4px solid #3498db;
+      }
+      .cuestionario {
+        background-color: #fdf2e9;
+        padding: 20px;
+        margin: 30px 0;
+        border: 2px solid #e67e22;
+      }
+      .cuestionario h3 {
+        color: #d35400;
+        margin-top: 0;
+      }
+      .definicion {
+        background-color: #e8f5e8;
+        padding: 15px;
+        margin: 15px 0;
+        border-left: 4px solid #27ae60;
+      }
+      .importante {
+        background-color: #ffeaa7;
+        padding: 15px;
+        margin: 15px 0;
+        border-left: 4px solid #fdcb6e;
+      }
+      table {
+        margin: 20px 0;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid #bdc3c7;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #34495e;
+        color: white;
+      }
+      ol,
+      ul {
+        margin: 15px 0;
+        padding-left: 30px;
+      }
+      li {
+        margin: 8px 0;
+      }
+      .clase {
+        page-break-before: always;
+        margin-bottom: 50px;
+      }
+      .clase:first-child {
+        page-break-before: auto;
+      }
+      .btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+      }
+      .btn-primary {
+        background-color: #4ade80;
+        color: #222;
+      }
+      .btn-secondary {
+        background-color: #60a5fa;
+        color: #fff;}
+        @media (max-width: 768px) {
+            table {
+                display: block;
+                overflow-x: auto;
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 1% 0%;
+            }
+            body{
+              max-width: 100%;
+                margin: 0 auto;
+                padding: 1% 1%;
+            }
+            h2 {
+                
+                padding-left: 0px;
+            }
+        }
+    </style>
+  </head>
+  <body style="">
+   
+   
+<div style="margin-bottom: 24px">
+		   <a
+			 href="../materias/manipulacion-preservacion-datos.html"
+			 class="btn btn-primary"
+		   >
+			 Ir a Materia
+		   </a>
+		   <a href="materia1-sesion14.html" class="btn btn-secondary">
+			 Ir a Sesión 14
+		   </a>
+		   </a>
+		   <a href="materia1-sesion16.html" class="btn btn-secondary">
+			 Ir a Sesión 16
+		   </a>
+		 </div>
+    <div class="clase">
+      <h2>Sesión 15: Protección de Datos Personales y Empresariales</h2>
+
+      
+
+      <h3>4.1 ¿Qué son los Datos Personales y por qué Protegerlos?</h3>
+
+      <div class="definicion">
+        <strong>Datos Personales:</strong> Cualquier información relativa a una persona física identificada o
+        identificable. Una persona identificable es aquella cuya identidad puede determinarse, directa o indirectamente,
+        mediante un identificador como un nombre, un número de identificación, datos de localización, un identificador
+        en línea o uno o varios elementos propios de la identidad física, fisiológica, genética, psíquica, económica,
+        cultural o social de dicha persona.
+      </div>
+
+      <h4>4.1.1 Categorías de Datos Personales</h4>
+
+      <table>
+        <tbody><tr>
+          <th>Categoría</th>
+          <th>Ejemplos</th>
+          <th>Nivel de Protección</th>
+          <th>Regulaciones Aplicables</th>
+        </tr>
+        <tr>
+          <td>Datos de Identificación</td>
+          <td>Nombre, apellidos, DNI, dirección</td>
+          <td>Estándar</td>
+          <td>RGPD, LOPD</td>
+        </tr>
+        <tr>
+          <td>Datos Financieros</td>
+          <td>Número de tarjeta, cuentas bancarias</td>
+          <td>Alto</td>
+          <td>PCI DSS, RGPD</td>
+        </tr>
+        <tr>
+          <td>Datos de Salud</td>
+          <td>Historial médico, diagnósticos</td>
+          <td>Muy Alto</td>
+          <td>HIPAA, RGPD</td>
+        </tr>
+        <tr>
+          <td>Datos Biométricos</td>
+          <td>Huellas dactilares, reconocimiento facial</td>
+          <td>Muy Alto</td>
+          <td>RGPD, regulaciones locales</td>
+        </tr>
+        <tr>
+          <td>Datos de Comportamiento</td>
+          <td>Historial de navegación, compras</td>
+          <td>Medio</td>
+          <td>RGPD, CCPA</td>
+        </tr>
+      </tbody></table>
+
+      <h4>4.1.2 Importancia de la Protección de Datos</h4>
+
+      <p><strong>Riesgos para Individuos:</strong></p>
+      <ul>
+        <li><strong>Robo de identidad:</strong> Uso fraudulento de información personal para cometer delitos</li>
+        <li><strong>Fraude financiero:</strong> Acceso no autorizado a cuentas bancarias y tarjetas de crédito</li>
+        <li><strong>Chantaje y extorsión:</strong> Uso de información comprometedora para coaccionar</li>
+        <li><strong>Pérdida de privacidad:</strong> Exposición de información íntima o personal</li>
+        <li><strong>Discriminación:</strong> Uso de datos para tomar decisiones discriminatorias</li>
+        <li><strong>Acoso y stalking:</strong> Uso de información personal para acosar</li>
+      </ul>
+
+      <p><strong>Riesgos para Empresas:</strong></p>
+      <ul>
+        <li><strong>Multas regulatorias:</strong> Sanciones por incumplimiento de normativas</li>
+        <li><strong>Pérdida de confianza:</strong> Daño a la reputación y pérdida de clientes</li>
+        <li><strong>Costos de recuperación:</strong> Gastos en investigación, notificación y remediación</li>
+        <li><strong>Responsabilidad legal:</strong> Demandas y litigios por parte de afectados</li>
+        <li><strong>Pérdida competitiva:</strong> Exposición de secretos comerciales</li>
+        <li><strong>Interrupción operacional:</strong> Impacto en las operaciones comerciales</li>
+      </ul>
+
+      <div class="importante">
+        <strong>Estadísticas sobre violaciones de datos:</strong>
+        <ul>
+          <li>El 83% de las organizaciones han experimentado más de una violación de datos</li>
+          <li>Se necesitan en promedio 287 días para identificar y contener una violación</li>
+          <li>El costo promedio por registro perdido es de $150</li>
+          <li>El 95% de las violaciones exitosas se deben a error humano</li>
+        </ul>
+      </div>
+
+      <h3>4.2 Técnicas de Cifrado y Anonimización</h3>
+
+      <h4>4.2.1 Cifrado (Encryption)</h4>
+
+      <p>
+        El cifrado es el proceso de convertir información legible (texto plano) en información codificada (texto
+        cifrado) que solo puede ser decodificada por aquellos que poseen la clave correcta.
+      </p>
+
+      <p><strong>Tipos de Cifrado:</strong></p>
+
+      <h5>Cifrado Simétrico</h5>
+      <p>Utiliza la misma clave tanto para cifrar como para descifrar datos.</p>
+      <ul>
+        <li><strong>Ventajas:</strong> Rápido, eficiente para grandes volúmenes de datos</li>
+        <li><strong>Desventajas:</strong> Problema de distribución de claves</li>
+        <li><strong>Algoritmos comunes:</strong> AES, DES, 3DES, Blowfish</li>
+        <li><strong>Usos típicos:</strong> Cifrado de archivos, bases de datos, comunicaciones en tiempo real</li>
+      </ul>
+
+      <h5>Cifrado Asimétrico</h5>
+      <p>Utiliza un par de claves relacionadas matemáticamente: una pública y una privada.</p>
+      <ul>
+        <li><strong>Ventajas:</strong> Soluciona el problema de distribución de claves</li>
+        <li><strong>Desventajas:</strong> Más lento que el cifrado simétrico</li>
+        <li><strong>Algoritmos comunes:</strong> RSA, ECC, Diffie-Hellman</li>
+        <li><strong>Usos típicos:</strong> Intercambio de claves, firmas digitales, certificados</li>
+      </ul>
+
+      <table>
+        <tbody><tr>
+          <th>Algoritmo</th>
+          <th>Tipo</th>
+          <th>Tamaño de Clave</th>
+          <th>Seguridad</th>
+          <th>Rendimiento</th>
+        </tr>
+        <tr>
+          <td>AES</td>
+          <td>Simétrico</td>
+          <td>128, 192, 256 bits</td>
+          <td>Muy Alta</td>
+          <td>Excelente</td>
+        </tr>
+        <tr>
+          <td>RSA</td>
+          <td>Asimétrico</td>
+          <td>1024-4096 bits</td>
+          <td>Alta</td>
+          <td>Lento</td>
+        </tr>
+        <tr>
+          <td>ECC</td>
+          <td>Asimétrico</td>
+          <td>160-571 bits</td>
+          <td>Muy Alta</td>
+          <td>Moderado</td>
+        </tr>
+        <tr>
+          <td>ChaCha20</td>
+          <td>Simétrico</td>
+          <td>256 bits</td>
+          <td>Muy Alta</td>
+          <td>Excelente</td>
+        </tr>
+      </tbody></table>
+
+      <h4>4.2.2 Implementación de Cifrado</h4>
+
+      <p><strong>Cifrado en Tránsito:</strong></p>
+      <ul>
+        <li><strong>TLS/SSL:</strong> Protege datos durante transmisión web (HTTPS)</li>
+        <li><strong>VPN:</strong> Cifra todo el tráfico de red entre puntos</li>
+        <li><strong>SFTP/SCP:</strong> Transferencia segura de archivos</li>
+        <li><strong>Email encryption:</strong> S/MIME, PGP para correos electrónicos</li>
+      </ul>
+
+      <p><strong>Cifrado en Reposo:</strong></p>
+      <ul>
+        <li><strong>Cifrado de disco completo:</strong> BitLocker, FileVault, LUKS</li>
+        <li><strong>Cifrado de archivos:</strong> AxCrypt, 7-Zip con contraseña</li>
+        <li><strong>Cifrado de base de datos:</strong> TDE (Transparent Data Encryption)</li>
+        <li><strong>Cifrado de backups:</strong> Proteger copias de seguridad</li>
+      </ul>
+
+      <div class="importante">
+        <strong>Mejores Prácticas de Cifrado:</strong>
+        <ul>
+          <li>Usar algoritmos de cifrado estándar y actuales</li>
+          <li>Implementar gestión segura de claves</li>
+          <li>Cifrar datos tanto en tránsito como en reposo</li>
+          <li>Realizar rotación regular de claves</li>
+          <li>Mantener copias seguras de claves de recuperación</li>
+          <li>Usar longitudes de clave apropiadas</li>
+        </ul>
+      </div>
+
+      <h4>4.2.3 Anonimización de Datos</h4>
+
+      <p>
+        La anonimización es el proceso de eliminar o modificar información personal de manera que los individuos no
+        puedan ser identificados directa o indirectamente.
+      </p>
+
+      <p><strong>Técnicas de Anonimización:</strong></p>
+
+      <h5>Eliminación de Identificadores</h5>
+      <ul>
+        <li>Remover nombres, direcciones, números de identificación</li>
+        <li>Eliminar fechas específicas</li>
+        <li>Quitar información de contacto</li>
+      </ul>
+
+      <h5>Generalización</h5>
+      <ul>
+        <li>Reemplazar valores específicos con rangos (edad 25 → 20-30)</li>
+        <li>Usar categorías más amplias (código postal completo → ciudad)</li>
+        <li>Agrupar valores similares</li>
+      </ul>
+
+      <h5>Supresión</h5>
+      <ul>
+        <li>Eliminar completamente ciertos campos</li>
+        <li>Remover registros que son únicos o identificables</li>
+        <li>Suprimir valores atípicos</li>
+      </ul>
+
+      <h5>Perturbación</h5>
+      <ul>
+        <li>Agregar ruido estadístico a los datos</li>
+        <li>Redondear valores numéricos</li>
+        <li>Intercambiar valores entre registros similares</li>
+      </ul>
+
+      <table>
+        <tbody><tr>
+          <th>Técnica</th>
+          <th>Utilidad de Datos</th>
+          <th>Nivel de Protección</th>
+          <th>Casos de Uso</th>
+        </tr>
+        <tr>
+          <td>K-anonimity</td>
+          <td>Media</td>
+          <td>Medio</td>
+          <td>Investigación médica</td>
+        </tr>
+        <tr>
+          <td>L-diversity</td>
+          <td>Media-Baja</td>
+          <td>Alto</td>
+          <td>Datos sensibles</td>
+        </tr>
+        <tr>
+          <td>T-closeness</td>
+          <td>Baja</td>
+          <td>Muy Alto</td>
+          <td>Datos muy sensibles</td>
+        </tr>
+        <tr>
+          <td>Differential Privacy</td>
+          <td>Variable</td>
+          <td>Muy Alto</td>
+          <td>Análisis estadístico</td>
+        </tr>
+      </tbody></table>
+
+      <h3>4.3 Herramientas para Proteger Datos</h3>
+
+      <h4>4.3.1 VPN (Virtual Private Networks)</h4>
+
+      <p>
+        Una VPN crea una conexión segura y encriptada entre un dispositivo y una red privada a través de Internet.
+      </p>
+
+      <div class="definicion">
+        <strong>Funcionamiento de VPN:</strong> La VPN encripta el tráfico del usuario y lo enruta a través de un
+        servidor VPN antes de llegar a su destino final. Esto oculta la dirección IP real del usuario y cifra todos los
+        datos transmitidos.
+      </div>
+
+      <p><strong>Tipos de VPN:</strong></p>
+
+      <h5>VPN de Acceso Remoto</h5>
+      <ul>
+        <li>Permite a usuarios individuales conectarse a una red corporativa</li>
+        <li>Ideal para teletrabajo</li>
+        <li>Protocolos comunes: OpenVPN, IKEv2, WireGuard</li>
+      </ul>
+
+      <h5>VPN Site-to-Site</h5>
+      <ul>
+        <li>Conecta redes completas entre sí</li>
+        <li>Utilizada para conectar oficinas remotas</li>
+        <li>Más compleja de configurar pero más escalable</li>
+      </ul>
+
+      <h5>VPN de Consumidor</h5>
+      <ul>
+        <li>Servicios comerciales para usuarios individuales</li>
+        <li>Protege privacidad en redes públicas</li>
+        <li>Permite eludir restricciones geográficas</li>
+      </ul>
+
+      <p><strong>Beneficios de las VPN:</strong></p>
+      <ul>
+        <li>Cifrado de tráfico de red</li>
+        <li>Ocultación de dirección IP</li>
+        <li>Acceso seguro a recursos remotos</li>
+        <li>Protección en Wi-Fi públicos</li>
+        <li>Bypass de censura y restricciones</li>
+      </ul>
+
+      <h4>4.3.2 Gestores de Contraseñas</h4>
+
+      <p>Los gestores de contraseñas almacenan y generan contraseñas seguras para múltiples cuentas.</p>
+
+      <div class="importante">
+        <strong>Características de un buen gestor de contraseñas:</strong>
+        <ul>
+          <li>Cifrado fuerte de la base de datos de contraseñas</li>
+          <li>Generación de contraseñas aleatorias y seguras</li>
+          <li>Sincronización segura entre dispositivos</li>
+          <li>Autenticación de dos factores</li>
+          <li>Auditoría de seguridad de contraseñas</li>
+          <li>Autocompletado seguro en navegadores</li>
+        </ul>
+      </div>
+
+      <table>
+        <tbody><tr>
+          <th>Gestor</th>
+          <th>Tipo</th>
+          <th>Características Principales</th>
+          <th>Precio</th>
+        </tr>
+        <tr>
+          <td>Bitwarden</td>
+          <td>Multiplataforma</td>
+          <td>Código abierto, plan gratuito robusto</td>
+          <td>Freemium</td>
+        </tr>
+        <tr>
+          <td>1Password</td>
+          <td>Multiplataforma</td>
+          <td>Interfaz intuitiva, funciones empresariales</td>
+          <td>De pago</td>
+        </tr>
+        <tr>
+          <td>LastPass</td>
+          <td>Multiplataforma</td>
+          <td>Amplia compatibilidad, funciones de compartir</td>
+          <td>Freemium</td>
+        </tr>
+        <tr>
+          <td>KeePass</td>
+          <td>Local</td>
+          <td>Código abierto, control total del usuario</td>
+          <td>Gratuito</td>
+        </tr>
+      </tbody></table>
+
+      <h4>4.3.3 Autenticación Multifactor (MFA)</h4>
+
+      <p>
+        La autenticación multifactor requiere dos o más factores de verificación para conceder acceso a un recurso.
+      </p>
+
+      <p><strong>Factores de autenticación:</strong></p>
+      <ol>
+        <li><strong>Algo que sabes:</strong> Contraseñas, PINs, preguntas de seguridad</li>
+        <li><strong>Algo que tienes:</strong> Teléfonos móviles, tokens, tarjetas inteligentes</li>
+        <li><strong>Algo que eres:</strong> Biometría (huellas, rostro, voz, iris)</li>
+        <li><strong>Algo que haces:</strong> Patrones de comportamiento, firma</li>
+        <li><strong>Dónde estás:</strong> Geolocalización, direcciones IP</li>
+      </ol>
+
+      <p><strong>Métodos comunes de MFA:</strong></p>
+      <ul>
+        <li><strong>SMS:</strong> Códigos enviados por mensaje de texto</li>
+        <li><strong>Aplicaciones autenticadoras:</strong> Google Authenticator, Authy</li>
+        <li><strong>Tokens de hardware:</strong> YubiKey, RSA SecurID</li>
+        <li><strong>Notificaciones push:</strong> Aprobación a través de apps móviles</li>
+        <li><strong>Biometría:</strong> Huellas dactilares, reconocimiento facial</li>
+        <li><strong>Códigos de respaldo:</strong> Códigos únicos para recuperación</li>
+      </ul>
+
+      <div class="importante">
+        <strong>Mejores Prácticas para MFA:</strong>
+        <ul>
+          <li>Preferir aplicaciones autenticadoras sobre SMS</li>
+          <li>Mantener códigos de respaldo en lugar seguro</li>
+          <li>Usar tokens de hardware para cuentas críticas</li>
+          <li>Implementar MFA en todas las cuentas importantes</li>
+          <li>Educar a usuarios sobre la importancia de MFA</li>
+        </ul>
+      </div>
+
+      <h3>4.4 Seguridad en la Nube y Almacenamiento Seguro</h3>
+
+      <h4>4.4.1 Modelos de Servicio en la Nube</h4>
+
+      <table>
+        <tbody><tr>
+          <th>Modelo</th>
+          <th>Descripción</th>
+          <th>Responsabilidades del Cliente</th>
+          <th>Ejemplos</th>
+        </tr>
+        <tr>
+          <td>IaaS</td>
+          <td>Infraestructura como Servicio</td>
+          <td>OS, aplicaciones, datos, identidad</td>
+          <td>AWS EC2, Azure VMs</td>
+        </tr>
+        <tr>
+          <td>PaaS</td>
+          <td>Plataforma como Servicio</td>
+          <td>Aplicaciones, datos, identidad</td>
+          <td>Google App Engine, Heroku</td>
+        </tr>
+        <tr>
+          <td>SaaS</td>
+          <td>Software como Servicio</td>
+          <td>Datos, identidad, dispositivos</td>
+          <td>Office 365, Salesforce</td>
+        </tr>
+      </tbody></table>
+
+      <h4>4.4.2 Responsabilidades Compartidas en la Nube</h4>
+
+      <p>
+        El modelo de responsabilidad compartida define qué aspectos de la seguridad son responsabilidad del proveedor de
+        nube y cuáles del cliente.
+      </p>
+
+      <p><strong>Responsabilidades del Proveedor de Nube:</strong></p>
+      <ul>
+        <li>Seguridad física de los centros de datos</li>
+        <li>Seguridad de la infraestructura de red</li>
+        <li>Seguridad del hardware y software base</li>
+        <li>Disponibilidad y redundancia de servicios</li>
+        <li>Cumplimiento de certificaciones de seguridad</li>
+      </ul>
+
+      <p><strong>Responsabilidades del Cliente:</strong></p>
+      <ul>
+        <li>Gestión de identidades y accesos</li>
+        <li>Configuración segura de servicios</li>
+        <li>Cifrado de datos</li>
+        <li>Monitoreo y logging</li>
+        <li>Gestión de vulnerabilidades en aplicaciones</li>
+      </ul>
+
+      <h4>4.4.3 Mejores Prácticas para Seguridad en la Nube</h4>
+
+      <p><strong>Gestión de Identidades:</strong></p>
+      <ul>
+        <li>Implementar principio de menor privilegio</li>
+        <li>Usar autenticación multifactor para todos los usuarios</li>
+        <li>Revisar periódicamente permisos y accesos</li>
+        <li>Implementar single sign-on (SSO) cuando sea posible</li>
+        <li>Monitorear actividades de usuarios privilegiados</li>
+      </ul>
+
+      <p><strong>Cifrado de Datos:</strong></p>
+      <ul>
+        <li>Cifrar datos tanto en tránsito como en reposo</li>
+        <li>Usar claves de cifrado gestionadas por el cliente cuando sea posible</li>
+        <li>Implementar cifrado a nivel de aplicación para datos sensibles</li>
+        <li>Rotar claves de cifrado regularmente</li>
+      </ul>
+
+      <p><strong>Configuración Segura:</strong></p>
+      <ul>
+        <li>Deshabilitar servicios y puertos innecesarios</li>
+        <li>Configurar correctamente grupos de seguridad y firewalls</li>
+        <li>Implementar logging y monitoreo completo</li>
+        <li>Usar herramientas de escaneo de configuración</li>
+        <li>Mantener inventario actualizado de recursos</li>
+      </ul>
+
+      <div class="importante">
+        <strong>Herramientas de Seguridad en la Nube:</strong>
+        <ul>
+          <li><strong>CASB:</strong> Cloud Access Security Brokers para visibilidad y control</li>
+          <li><strong>CWPP:</strong> Cloud Workload Protection Platforms para servidores</li>
+          <li><strong>CSPM:</strong> Cloud Security Posture Management para configuración</li>
+          <li><strong>SIEM:</strong> Security Information and Event Management para monitoreo</li>
+        </ul>
+      </div>
+
+      <h4>4.4.4 Compliance y Certificaciones</h4>
+
+      <p><strong>Principales estándares de seguridad en la nube:</strong></p>
+      <ul>
+        <li><strong>SOC 2:</strong> Controles de seguridad, disponibilidad y confidencialidad</li>
+        <li><strong>ISO 27001:</strong> Sistema de gestión de seguridad de la información</li>
+        <li><strong>PCI DSS:</strong> Seguridad de datos de tarjetas de pago</li>
+        <li><strong>HIPAA:</strong> Protección de información de salud</li>
+        <li><strong>GDPR:</strong> Regulación general de protección de datos</li>
+      </ul>
+
+      <div class="cuestionario">
+        <h3>Cuestionario </h3>
+        <ol>
+          <li>¿Cuál es la diferencia entre cifrado simétrico y asimétrico? Mencione ventajas y desventajas de cada uno.</li>
+          <li>Explique qué es la anonimización de datos y mencione tres técnicas utilizadas.</li>
+          <li>¿Qué beneficios proporciona el uso de una VPN para la protección de datos?</li>
+          <li>¿Cuáles son los cinco factores de autenticación en MFA?</li>
+          <li>Explique el modelo de responsabilidad compartida en la seguridad en la nube.</li>
+          <li>¿Qué características debe tener un buen gestor de contraseñas?</li>
+          <li>Mencione las diferencias entre los modelos IaaS, PaaS y SaaS en términos de responsabilidades de seguridad.</li>
+          <li>¿Qué es el cifrado en tránsito y el cifrado en reposo? Proporcione ejemplos de cada uno.</li>
+          <li>¿Por qué son importantes las certificaciones de seguridad para los proveedores de servicios en la nube?</li>
+          <li>Explique la técnica de k-anonimity y cuándo se utilizaría.</li>
+        </ol>
+      </div>
+    </div>
+
+    
+  
+
+</body></html>

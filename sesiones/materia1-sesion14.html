@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" style=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 14
+
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+      body {
+        max-width: 95%;
+        margin: 0 auto;
+        padding: 1% 1%;
+        position: relative;
+        box-sizing: border-box;
+        font-family: 'Times New Roman', serif;
+        line-height: 1.6;
+        text-align: justify;
+      }
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        border-bottom: 2px solid #2c3e50;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+      }
+      h2 {
+        color: #34495e;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+      }
+      h3 {
+        color: #2c3e50;
+        margin-top: 25px;
+        margin-bottom: 15px;
+      }
+      .objetivos {
+        background-color: #ecf0f1;
+        padding: 20px;
+        margin: 20px 0;
+        border-left: 4px solid #3498db;
+      }
+      .cuestionario {
+        background-color: #fdf2e9;
+        padding: 20px;
+        margin: 30px 0;
+        border: 2px solid #e67e22;
+      }
+      .cuestionario h3 {
+        color: #d35400;
+        margin-top: 0;
+      }
+      .definicion {
+        background-color: #e8f5e8;
+        padding: 15px;
+        margin: 15px 0;
+        border-left: 4px solid #27ae60;
+      }
+      .importante {
+        background-color: #ffeaa7;
+        padding: 15px;
+        margin: 15px 0;
+        border-left: 4px solid #fdcb6e;
+      }
+      table {
+        margin: 20px 0;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid #bdc3c7;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #34495e;
+        color: white;
+      }
+      ol,
+      ul {
+        margin: 15px 0;
+        padding-left: 30px;
+      }
+      li {
+        margin: 8px 0;
+      }
+      .clase {
+        page-break-before: always;
+        margin-bottom: 50px;
+      }
+      .clase:first-child {
+        page-break-before: auto;
+      }
+      .btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+      }
+      .btn-primary {
+        background-color: #4ade80;
+        color: #222;
+      }
+      .btn-secondary {
+        background-color: #60a5fa;
+        color: #fff;}
+        @media (max-width: 768px) {
+            table {
+                display: block;
+                overflow-x: auto;
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 1% 0%;
+            }
+            body{
+              max-width: 100%;
+                margin: 0 auto;
+                padding: 1% 1%;
+            }
+            h2 {
+                
+                padding-left: 0px;
+            }
+        }
+    </style>
+  </head>
+  <body style="">
+   
+    
+<div style="margin-bottom: 24px">
+		   <a
+			 href="../materias/manipulacion-preservacion-datos.html"
+			 class="btn btn-primary"
+		   >
+			 Ir a Materia
+		   </a>
+		   <a href="materia1-sesion13.html" class="btn btn-secondary">
+			 Ir a Sesión 13
+		   </a>
+		   </a>
+		   <a href="materia1-sesion15.html" class="btn btn-secondary">
+			 Ir a Sesión 15
+		   </a>
+		 </div>
+    <div class="clase">
+      <h2>Sesión 14: Mecanismos de Infección y Prevención</h2>
+
+      
+
+      <h3>3.1 Vectores de Ataque</h3>
+
+      <p>
+        Los vectores de ataque son los métodos o rutas que utilizan los cibercriminales para acceder a sistemas, redes o
+        datos. Comprender estos vectores es fundamental para implementar defensas efectivas.
+      </p>
+
+      <h4>3.1.1 Correos Electrónicos</h4>
+
+      <p>
+        El correo electrónico sigue siendo el vector de ataque más común, utilizado en aproximadamente el 90% de los
+        ciberataques exitosos.
+      </p>
+
+      <div class="importante">
+        <strong>Tipos de ataques por correo electrónico:</strong>
+        <ul>
+          <li><strong>Phishing:</strong> Correos que suplantan identidades para robar credenciales</li>
+          <li><strong>Spear Phishing:</strong> Ataques dirigidos a individuos específicos</li>
+          <li><strong>Whaling:</strong> Ataques dirigidos a ejecutivos de alto nivel</li>
+          <li><strong>Business Email Compromise (BEC):</strong> Comprometimiento de cuentas corporativas</li>
+        </ul>
+      </div>
+
+      <p><strong>Técnicas comunes en ataques por correo:</strong></p>
+      <ul>
+        <li>
+          <strong>Archivos adjuntos maliciosos:</strong>
+          <ul>
+            <li>Documentos con macros (Word, Excel, PowerPoint)</li>
+            <li>Archivos ejecutables disfrazados</li>
+            <li>PDFs con JavaScript malicioso</li>
+            <li>Archivos comprimidos con malware</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Enlaces maliciosos:</strong>
+          <ul>
+            <li>Redirección a sitios de phishing</li>
+            <li>Descarga automática de malware</li>
+            <li>Explotación de vulnerabilidades del navegador</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Ingeniería social:</strong>
+          <ul>
+            <li>Creación de urgencia o miedo</li>
+            <li>Suplantación de autoridades</li>
+            <li>Ofertas demasiado buenas para ser verdad</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h4>3.1.2 Descargas de Internet</h4>
+
+      <p>Las descargas desde Internet representan otro vector crítico de infección.</p>
+
+      <table>
+        <tbody><tr>
+          <th>Tipo de Descarga</th>
+          <th>Riesgo</th>
+          <th>Ejemplos</th>
+          <th>Medidas Preventivas</th>
+        </tr>
+        <tr>
+          <td>Software pirata</td>
+          <td>Muy Alto</td>
+          <td>Cracks, keygens, versiones modificadas</td>
+          <td>Usar solo software legítimo</td>
+        </tr>
+        <tr>
+          <td>Freeware/Shareware</td>
+          <td>Medio</td>
+          <td>Software gratuito con adware</td>
+          <td>Descargar de fuentes oficiales</td>
+        </tr>
+        <tr>
+          <td>Actualizaciones falsas</td>
+          <td>Alto</td>
+          <td>Updates de Flash, Java, navegadores</td>
+          <td>Actualizar solo desde sitios oficiales</td>
+        </tr>
+        <tr>
+          <td>Torrents/P2P</td>
+          <td>Muy Alto</td>
+          <td>Archivos compartidos infectados</td>
+          <td>Evitar redes P2P para software</td>
+        </tr>
+      </tbody></table>
+
+      <p><strong>Drive-by Downloads:</strong></p>
+      <p>Descargas automáticas que ocurren sin conocimiento del usuario al visitar sitios web comprometidos:</p>
+      <ul>
+        <li>Explotación de vulnerabilidades del navegador</li>
+        <li>Plugins desactualizados (Flash, Java)</li>
+        <li>Scripts maliciosos en sitios legítimos comprometidos</li>
+        <li>Anuncios maliciosos (malvertising)</li>
+      </ul>
+
+      <h4>3.1.3 Dispositivos USB y Medios Removibles</h4>
+
+      <p>
+        Los dispositivos de almacenamiento removible siguen siendo un vector de ataque significativo, especialmente en
+        entornos corporativos.
+      </p>
+
+      <div class="importante">
+        <strong>Riesgos de dispositivos USB:</strong>
+        <ul>
+          <li><strong>Autorun malicioso:</strong> Ejecución automática de malware</li>
+          <li><strong>Archivos infectados:</strong> Propagación de virus tradicionales</li>
+          <li><strong>BadUSB:</strong> Firmware comprometido que simula otros dispositivos</li>
+          <li><strong>Rubber Ducky:</strong> Dispositivos que simulan teclados para ejecutar comandos</li>
+        </ul>
+      </div>
+
+      <p><strong>Técnicas de ataque USB:</strong></p>
+      <ol>
+        <li><strong>USB Drop Attack:</strong> Dejar USBs infectados en lugares públicos</li>
+        <li><strong>Regalos corporativos:</strong> USBs promocionales infectados</li>
+        <li><strong>Dispositivos perdidos:</strong> USBs "encontrados" que contienen malware</li>
+        <li><strong>Ingeniería social:</strong> Convencer a empleados de usar USBs específicos</li>
+      </ol>
+
+      <h4>3.1.4 Redes Sociales</h4>
+
+      <p>Las plataformas de redes sociales se han convertido en vectores de ataque cada vez más populares.</p>
+
+      <p><strong>Métodos de ataque en redes sociales:</strong></p>
+      <ul>
+        <li><strong>Perfiles falsos:</strong> Creación de identidades falsas para ganar confianza</li>
+        <li><strong>Enlaces maliciosos:</strong> Compartir links que redirigen a sitios peligrosos</li>
+        <li><strong>Aplicaciones maliciosas:</strong> Apps que solicitan permisos excesivos</li>
+        <li><strong>Información personal:</strong> Recopilación de datos para ataques dirigidos</li>
+        <li><strong>Catfishing:</strong> Creación de relaciones falsas para obtener información</li>
+      </ul>
+
+      <div class="importante">
+        <strong>Información valiosa para atacantes en redes sociales:</strong>
+        <ul>
+          <li>Fechas de nacimiento y lugares</li>
+          <li>Nombres de familiares y mascotas</li>
+          <li>Lugares de trabajo y posiciones</li>
+          <li>Ubicaciones frecuentadas</li>
+          <li>Intereses y aficiones</li>
+          <li>Contactos profesionales y personales</li>
+        </ul>
+      </div>
+
+      <h3>3.2 Técnicas de Prevención</h3>
+
+      <h4>3.2.1 Firewalls</h4>
+
+      <p>
+        Los firewalls actúan como una barrera entre redes confiables y no confiables, controlando el tráfico entrante y
+        saliente basándose en reglas de seguridad predeterminadas.
+      </p>
+
+      <p><strong>Tipos de Firewalls:</strong></p>
+
+      <table>
+        <tbody><tr>
+          <th>Tipo</th>
+          <th>Funcionamiento</th>
+          <th>Ventajas</th>
+          <th>Limitaciones</th>
+        </tr>
+        <tr>
+          <td>Packet Filtering</td>
+          <td>Examina paquetes individuales</td>
+          <td>Rápido, eficiente</td>
+          <td>No examina contenido</td>
+        </tr>
+        <tr>
+          <td>Stateful</td>
+          <td>Mantiene estado de conexiones</td>
+          <td>Más seguro que packet filtering</td>
+          <td>Mayor consumo de recursos</td>
+        </tr>
+        <tr>
+          <td>Application Layer</td>
+          <td>Examina contenido de aplicaciones</td>
+          <td>Control granular</td>
+          <td>Puede impactar rendimiento</td>
+        </tr>
+        <tr>
+          <td>Next Generation</td>
+          <td>Combina múltiples tecnologías</td>
+          <td>Protección integral</td>
+          <td>Complejo de configurar</td>
+        </tr>
+      </tbody></table>
+
+      <p><strong>Configuración básica de firewall:</strong></p>
+      <ul>
+        <li>Denegar todo por defecto (default deny)</li>
+        <li>Permitir solo tráfico necesario</li>
+        <li>Configurar reglas para tráfico entrante y saliente</li>
+        <li>Monitorear logs regularmente</li>
+        <li>Actualizar reglas según necesidades del negocio</li>
+      </ul>
+
+      <h4>3.2.2 Software Antivirus</h4>
+
+      <p>El software antivirus utiliza múltiples técnicas para detectar, prevenir y eliminar malware.</p>
+
+      <p><strong>Métodos de detección:</strong></p>
+      <ol>
+        <li>
+          <strong>Detección basada en firmas:</strong>
+          <ul>
+            <li>Compara archivos con base de datos de firmas conocidas</li>
+            <li>Efectivo contra malware conocido</li>
+            <li>Requiere actualizaciones constantes</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Detección heurística:</strong>
+          <ul>
+            <li>Analiza comportamiento sospechoso</li>
+            <li>Puede detectar variantes de malware conocido</li>
+            <li>Mayor tasa de falsos positivos</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Detección basada en comportamiento:</strong>
+          <ul>
+            <li>Monitorea acciones en tiempo real</li>
+            <li>Detecta malware zero-day</li>
+            <li>Puede impactar rendimiento del sistema</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Machine Learning:</strong>
+          <ul>
+            <li>Utiliza algoritmos de IA para detección</li>
+            <li>Mejora con el tiempo</li>
+            <li>Efectivo contra amenazas nuevas</li>
+          </ul>
+        </li>
+      </ol>
+
+      <div class="importante">
+        <strong>Mejores prácticas para antivirus:</strong>
+        <ul>
+          <li>Mantener definiciones de virus actualizadas</li>
+          <li>Realizar escaneos completos regularmente</li>
+          <li>Configurar protección en tiempo real</li>
+          <li>No instalar múltiples antivirus simultáneamente</li>
+          <li>Complementar con otras herramientas de seguridad</li>
+        </ul>
+      </div>
+
+      <h4>3.2.3 Actualizaciones de Software</h4>
+
+      <p>Mantener el software actualizado es una de las medidas de seguridad más importantes y efectivas.</p>
+
+      <p><strong>Tipos de actualizaciones:</strong></p>
+      <ul>
+        <li><strong>Parches de seguridad:</strong> Corrigen vulnerabilidades específicas</li>
+        <li><strong>Actualizaciones de funcionalidad:</strong> Añaden nuevas características</li>
+        <li><strong>Actualizaciones críticas:</strong> Solucionan problemas graves de seguridad</li>
+        <li><strong>Service Packs:</strong> Colecciones grandes de actualizaciones</li>
+      </ul>
+
+      <p><strong>Estrategia de actualización:</strong></p>
+      <ol>
+        <li><strong>Inventario de software:</strong> Mantener lista de todo el software instalado</li>
+        <li><strong>Priorización:</strong> Actualizar primero software crítico y expuesto</li>
+        <li><strong>Pruebas:</strong> Probar actualizaciones en entorno de desarrollo</li>
+        <li><strong>Automatización:</strong> Configurar actualizaciones automáticas cuando sea apropiado</li>
+        <li><strong>Monitoreo:</strong> Verificar que las actualizaciones se apliquen correctamente</li>
+      </ol>
+
+      <h4>3.2.4 Copias de Seguridad (Backups)</h4>
+
+      <p>
+        Las copias de seguridad son esenciales para la recuperación ante incidentes de seguridad, especialmente ataques
+        de ransomware.
+      </p>
+
+      <div class="importante">
+        <strong>Regla 3-2-1 para backups:</strong>
+        <ul>
+          <li><strong>3</strong> copias de datos importantes</li>
+          <li><strong>2</strong> en diferentes tipos de medios</li>
+          <li><strong>1</strong> fuera del sitio (offsite)</li>
+        </ul>
+      </div>
+
+      <p><strong>Tipos de backup:</strong></p>
+      <table>
+        <tbody><tr>
+          <th>Tipo</th>
+          <th>Descripción</th>
+          <th>Tiempo de Backup</th>
+          <th>Tiempo de Restauración</th>
+        </tr>
+        <tr>
+          <td>Completo</td>
+          <td>Copia todos los datos</td>
+          <td>Largo</td>
+          <td>Rápido</td>
+        </tr>
+        <tr>
+          <td>Incremental</td>
+          <td>Solo cambios desde último backup</td>
+          <td>Rápido</td>
+          <td>Lento</td>
+        </tr>
+        <tr>
+          <td>Diferencial</td>
+          <td>Cambios desde último backup completo</td>
+          <td>Medio</td>
+          <td>Medio</td>
+        </tr>
+        <tr>
+          <td>Snapshot</td>
+          <td>Imagen instantánea del sistema</td>
+          <td>Muy rápido</td>
+          <td>Muy rápido</td>
+        </tr>
+      </tbody></table>
+
+      <h3>3.3 Buenas Prácticas para Usuarios y Empresas</h3>
+
+      <h4>3.3.1 Buenas Prácticas para Usuarios</h4>
+
+      <p><strong>Gestión de Contraseñas:</strong></p>
+      <ul>
+        <li>Usar contraseñas únicas para cada cuenta</li>
+        <li>Crear contraseñas largas y complejas (mínimo 12 caracteres)</li>
+        <li>Utilizar gestores de contraseñas</li>
+        <li>Habilitar autenticación de dos factores (2FA) cuando esté disponible</li>
+        <li>Cambiar contraseñas predeterminadas inmediatamente</li>
+      </ul>
+
+      <p><strong>Navegación Segura:</strong></p>
+      <ul>
+        <li>Verificar la legitimidad de sitios web antes de ingresar información</li>
+        <li>Buscar el candado SSL (https://) en sitios que manejan información sensible</li>
+        <li>Evitar hacer clic en enlaces sospechosos</li>
+        <li>Usar navegadores actualizados con configuraciones de seguridad apropiadas</li>
+        <li>Instalar bloqueadores de anuncios para prevenir malvertising</li>
+      </ul>
+
+      <p><strong>Manejo de Correo Electrónico:</strong></p>
+      <ul>
+        <li>Verificar la identidad del remitente antes de abrir adjuntos</li>
+        <li>Sospechar de correos que crean urgencia o miedo</li>
+        <li>No proporcionar información personal por correo</li>
+        <li>Usar filtros de spam y phishing</li>
+        <li>Reportar correos sospechosos al departamento de IT</li>
+      </ul>
+
+      <div class="importante">
+        <strong>Señales de alerta en correos electrónicos:</strong>
+        <ul>
+          <li>Errores ortográficos y gramaticales</li>
+          <li>Saludos genéricos ("Estimado cliente")</li>
+          <li>Solicitudes urgentes de información personal</li>
+          <li>Enlaces que no coinciden con el dominio legítimo</li>
+          <li>Amenazas de cierre de cuenta</li>
+        </ul>
+      </div>
+
+      <h4>3.3.2 Buenas Prácticas para Empresas</h4>
+
+      <p><strong>Políticas de Seguridad:</strong></p>
+      <ul>
+        <li>Desarrollar y mantener políticas de seguridad claras</li>
+        <li>Realizar capacitaciones regulares de concienciación en seguridad</li>
+        <li>Implementar principios de menor privilegio</li>
+        <li>Establecer procedimientos de respuesta a incidentes</li>
+        <li>Realizar auditorías de seguridad periódicas</li>
+      </ul>
+
+      <p><strong>Gestión de Acceso:</strong></p>
+      <ul>
+        <li>Implementar control de acceso basado en roles (RBAC)</li>
+        <li>Revisar periódicamente permisos de usuarios</li>
+        <li>Deshabilitar cuentas de empleados que ya no trabajen en la empresa</li>
+        <li>Usar cuentas administrativas solo cuando sea necesario</li>
+        <li>Monitorear actividades de usuarios privilegiados</li>
+      </ul>
+
+      <p><strong>Segmentación de Red:</strong></p>
+      <ul>
+        <li>Separar redes críticas de redes de usuarios</li>
+        <li>Implementar VLANs para diferentes departamentos</li>
+        <li>Aislar sistemas de control industrial</li>
+        <li>Crear redes separadas para invitados</li>
+        <li>Monitorear tráfico entre segmentos</li>
+      </ul>
+
+      <p><strong>Gestión de Dispositivos:</strong></p>
+      <ul>
+        <li>Mantener inventario actualizado de todos los dispositivos</li>
+        <li>Implementar políticas de dispositivos móviles (MDM)</li>
+        <li>Configurar dispositivos con configuraciones de seguridad estándar</li>
+        <li>Encriptar datos en dispositivos móviles y laptops</li>
+        <li>Implementar capacidad de borrado remoto</li>
+      </ul>
+
+      <div class="importante">
+        <strong>Marco de Ciberseguridad NIST:</strong>
+        <ol>
+          <li><strong>Identificar:</strong> Comprender el entorno de ciberseguridad</li>
+          <li><strong>Proteger:</strong> Implementar salvaguardas apropiadas</li>
+          <li><strong>Detectar:</strong> Identificar ocurrencia de eventos de ciberseguridad</li>
+          <li><strong>Responder:</strong> Tomar acción ante incidentes detectados</li>
+          <li><strong>Recuperar:</strong> Restaurar servicios y capacidades</li>
+        </ol>
+      </div>
+
+      <div class="cuestionario">
+        <h3>Cuestionario </h3>
+        <ol>
+          <li>¿Cuáles son los cuatro principales vectores de ataque mencionados en esta clase?</li>
+          <li>Explique la diferencia entre phishing, spear phishing y whaling.</li>
+          <li>¿Qué es un "drive-by download" y cómo puede prevenirse?</li>
+          <li>Mencione tres tipos de firewalls y sus principales características.</li>
+          <li>¿Cuál es la regla 3-2-1 para copias de seguridad?</li>
+          <li>¿Qué información pueden obtener los atacantes de las redes sociales?</li>
+          <li>Explique los diferentes métodos de detección utilizados por el software antivirus.</li>
+          <li>¿Por qué es importante la segmentación de red en una empresa?</li>
+          <li>Mencione cinco señales de alerta que pueden indicar un correo de phishing.</li>
+          <li>¿Cuáles son las cinco funciones del Marco de Ciberseguridad NIST?</li>
+        </ol>
+      </div>
+    </div>
+
+    
+  
+
+</body></html>

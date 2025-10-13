@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" style=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 13
+
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+      body {
+        max-width: 95%;
+        margin: 0 auto;
+        padding: 1% 1%;
+        position: relative;
+        box-sizing: border-box;
+        font-family: 'Times New Roman', serif;
+        line-height: 1.6;
+        text-align: justify;
+      }
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        border-bottom: 2px solid #2c3e50;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+      }
+      h2 {
+        color: #34495e;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+      }
+      h3 {
+        color: #2c3e50;
+        margin-top: 25px;
+        margin-bottom: 15px;
+      }
+      .objetivos {
+        background-color: #ecf0f1;
+        padding: 20px;
+        margin: 20px 0;
+        border-left: 4px solid #3498db;
+      }
+      .cuestionario {
+        background-color: #fdf2e9;
+        padding: 20px;
+        margin: 30px 0;
+        border: 2px solid #e67e22;
+      }
+      .cuestionario h3 {
+        color: #d35400;
+        margin-top: 0;
+      }
+      .definicion {
+        background-color: #e8f5e8;
+        padding: 15px;
+        margin: 15px 0;
+        border-left: 4px solid #27ae60;
+      }
+      .importante {
+        background-color: #ffeaa7;
+        padding: 15px;
+        margin: 15px 0;
+        border-left: 4px solid #fdcb6e;
+      }
+      table {
+        margin: 20px 0;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid #bdc3c7;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #34495e;
+        color: white;
+      }
+      ol,
+      ul {
+        margin: 15px 0;
+        padding-left: 30px;
+      }
+      li {
+        margin: 8px 0;
+      }
+      .clase {
+        page-break-before: always;
+        margin-bottom: 50px;
+      }
+      .clase:first-child {
+        page-break-before: auto;
+      }
+      .btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+      }
+      .btn-primary {
+        background-color: #4ade80;
+        color: #222;
+      }
+      .btn-secondary {
+        background-color: #60a5fa;
+        color: #fff;}
+        @media (max-width: 768px) {
+            table {
+                display: block;
+                overflow-x: auto;
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 1% 0%;
+            }
+            body{
+              max-width: 100%;
+                margin: 0 auto;
+                padding: 1% 1%;
+            }
+            h2 {
+                
+                padding-left: 0px;
+            }
+        }
+    </style>
+  </head>
+  <body style="">
+   
+    
+<div style="margin-bottom: 24px">
+		   <a
+			 href="../materias/manipulacion-preservacion-datos.html"
+			 class="btn btn-primary"
+		   >
+			 Ir a Materia
+		   </a>
+		   <a href="materia1-sesion12.html" class="btn btn-secondary">
+			 Ir a Sesión 12
+		   </a>
+		   </a>
+		   <a href="materia1-sesion14.html" class="btn btn-secondary">
+			 Ir a Sesión 14
+		   </a>
+		 </div>
+    <div class="clase">
+      <h2>Sesión 13: Virus Informáticos: Tipos y Funcionamiento</h2>
+
+      
+
+      <h3>2.1 Definición y Clasificación de Virus Informáticos</h3>
+
+      <div class="definicion">
+        <strong>Virus Informático:</strong> Un programa malicioso que se replica insertando copias de sí mismo en otros
+        programas, archivos o sectores de arranque del disco duro. Un virus requiere un programa anfitrión para
+        propagarse y ejecutarse.
+      </div>
+
+      <p>Los virus informáticos se pueden clasificar según varios criterios:</p>
+
+      <h4>Por su Ubicación en el Sistema</h4>
+      <ul>
+        <li><strong>Virus de archivos:</strong> Infectan archivos ejecutables (.exe, .com)</li>
+        <li><strong>Virus de boot/arranque:</strong> Infectan el sector de arranque del disco</li>
+        <li><strong>Virus de macro:</strong> Infectan documentos con macros (Word, Excel)</li>
+        <li><strong>Virus residentes:</strong> Permanecen en memoria RAM</li>
+        <li><strong>Virus no residentes:</strong> Se ejecutan solo cuando se activa el archivo infectado</li>
+      </ul>
+
+      <h4>Por su Comportamiento</h4>
+      <ul>
+        <li><strong>Virus destructivos:</strong> Diseñados para dañar o eliminar datos</li>
+        <li><strong>Virus no destructivos:</strong> Se replican sin causar daño inmediato</li>
+        <li><strong>Virus furtivos:</strong> Intentan ocultarse de la detección</li>
+        <li><strong>Virus polimórficos:</strong> Cambian su código para evitar detección</li>
+        <li><strong>Virus metamórficos:</strong> Reescriben completamente su código</li>
+      </ul>
+
+      <h3>2.2 Tipos de Malware</h3>
+
+      <h4>Virus</h4>
+      <p>Como se definió anteriormente, requieren un programa anfitrión para replicarse y propagarse.</p>
+
+      <div class="importante">
+        <strong>Características de los Virus:</strong>
+        <ul>
+          <li>Necesitan un archivo anfitrión</li>
+          <li>Se replican automáticamente</li>
+          <li>Pueden permanecer latentes</li>
+          <li>Su activación puede ser por fecha, evento o acción específica</li>
+        </ul>
+      </div>
+
+      <h4>Gusanos (Worms)</h4>
+      <p>
+        Programas maliciosos que se replican automáticamente a través de redes sin necesidad de un archivo anfitrión.
+      </p>
+
+      <table>
+        <tbody><tr>
+          <th>Característica</th>
+          <th>Virus</th>
+          <th>Gusano</th>
+        </tr>
+        <tr>
+          <td>Archivo anfitrión</td>
+          <td>Requerido</td>
+          <td>No requerido</td>
+        </tr>
+        <tr>
+          <td>Propagación</td>
+          <td>Manual (ejecutar archivo infectado)</td>
+          <td>Automática por red</td>
+        </tr>
+        <tr>
+          <td>Objetivo principal</td>
+          <td>Dañar archivos/sistema</td>
+          <td>Consumir recursos de red</td>
+        </tr>
+        <tr>
+          <td>Detección</td>
+          <td>Más difícil</td>
+          <td>Más fácil (tráfico de red)</td>
+        </tr>
+      </tbody></table>
+
+      <h4>Troyanos (Trojans)</h4>
+      <p>Programas que aparentan ser legítimos pero contienen código malicioso oculto. No se replican por sí mismos.</p>
+
+      <p><strong>Tipos de Troyanos:</strong></p>
+      <ul>
+        <li><strong>RAT (Remote Access Trojan):</strong> Permite control remoto del sistema</li>
+        <li><strong>Banking Trojans:</strong> Roban información financiera</li>
+        <li><strong>Backdoor Trojans:</strong> Crean puertas traseras en el sistema</li>
+        <li><strong>DDoS Trojans:</strong> Convierten el sistema en parte de una botnet</li>
+        <li><strong>Downloader Trojans:</strong> Descargan otros malwares</li>
+      </ul>
+
+      <h4>Spyware</h4>
+      <p>Software diseñado para recopilar información del usuario sin su conocimiento o consentimiento.</p>
+
+      <div class="importante">
+        <strong>Tipos de información que recopila el Spyware:</strong>
+        <ul>
+          <li>Historial de navegación</li>
+          <li>Credenciales de acceso</li>
+          <li>Información personal y financiera</li>
+          <li>Pulsaciones de teclado (keyloggers)</li>
+          <li>Capturas de pantalla</li>
+        </ul>
+      </div>
+
+      <h4>Adware</h4>
+      <p>Software que muestra publicidad no deseada, generalmente en forma de ventanas emergentes o banners.</p>
+
+      <p><strong>Características del Adware:</strong></p>
+      <ul>
+        <li>Muestra anuncios excesivos</li>
+        <li>Puede ralentizar el sistema</li>
+        <li>A menudo se instala junto con software gratuito</li>
+        <li>Puede recopilar datos de navegación</li>
+        <li>Algunos tipos son más agresivos que otros</li>
+      </ul>
+
+      <h4>Rootkits</h4>
+      <p>
+        Colección de software malicioso diseñado para obtener control administrativo sobre un sistema mientras permanece
+        oculto.
+      </p>
+
+      <table>
+        <tbody><tr>
+          <th>Tipo de Rootkit</th>
+          <th>Ubicación</th>
+          <th>Dificultad de Detección</th>
+          <th>Persistencia</th>
+        </tr>
+        <tr>
+          <td>Rootkits de aplicación</td>
+          <td>Nivel de aplicación</td>
+          <td>Baja</td>
+          <td>Baja</td>
+        </tr>
+        <tr>
+          <td>Rootkits de kernel</td>
+          <td>Núcleo del sistema</td>
+          <td>Alta</td>
+          <td>Alta</td>
+        </tr>
+        <tr>
+          <td>Rootkits de bootkit</td>
+          <td>Sector de arranque</td>
+          <td>Muy alta</td>
+          <td>Muy alta</td>
+        </tr>
+        <tr>
+          <td>Rootkits de firmware</td>
+          <td>BIOS/UEFI</td>
+          <td>Extrema</td>
+          <td>Extrema</td>
+        </tr>
+      </tbody></table>
+
+      <h3>2.3 Mecanismos de Propagación y Daños Comunes</h3>
+
+      <h4>Mecanismos de Propagación</h4>
+
+      <p><strong>1. Medios de almacenamiento removibles</strong></p>
+      <ul>
+        <li>USB, CD/DVD, discos externos</li>
+        <li>Autorun/Autoplay en Windows</li>
+        <li>Archivos infectados copiados manualmente</li>
+      </ul>
+
+      <p><strong>2. Correo electrónico</strong></p>
+      <ul>
+        <li>Archivos adjuntos maliciosos</li>
+        <li>Enlaces a sitios infectados</li>
+        <li>Imágenes con código embebido</li>
+        <li>Documentos con macros maliciosas</li>
+      </ul>
+
+      <p><strong>3. Descargas de Internet</strong></p>
+      <ul>
+        <li>Software pirateado o crackeado</li>
+        <li>Actualizaciones falsas</li>
+        <li>Plugins y extensiones maliciosas</li>
+        <li>Sitios web comprometidos</li>
+      </ul>
+
+      <p><strong>4. Redes</strong></p>
+      <ul>
+        <li>Explotación de vulnerabilidades de red</li>
+        <li>Recursos compartidos sin protección</li>
+        <li>Conexiones P2P</li>
+        <li>Redes Wi-Fi inseguras</li>
+      </ul>
+
+      <h4>Daños Comunes</h4>
+
+      <div class="importante">
+        <strong>Daños a Nivel de Sistema:</strong>
+        <ul>
+          <li>Corrupción o eliminación de archivos</li>
+          <li>Modificación del registro de Windows</li>
+          <li>Desactivación de software de seguridad</li>
+          <li>Ralentización significativa del sistema</li>
+          <li>Inestabilidad y bloqueos frecuentes</li>
+        </ul>
+      </div>
+
+      <p><strong>Daños a Nivel de Datos:</strong></p>
+      <ul>
+        <li>Robo de información personal y financiera</li>
+        <li>Cifrado de archivos (ransomware)</li>
+        <li>Modificación no autorizada de documentos</li>
+        <li>Pérdida de datos críticos</li>
+        <li>Compromiso de credenciales de acceso</li>
+      </ul>
+
+      <p><strong>Daños a Nivel de Red:</strong></p>
+      <ul>
+        <li>Consumo excesivo de ancho de banda</li>
+        <li>Ataques DDoS desde el sistema infectado</li>
+        <li>Propagación a otros sistemas de la red</li>
+        <li>Comprometimiento de la seguridad de red</li>
+      </ul>
+
+      <h3>2.4 Ejemplos Reales y Casos de Estudio Recientes</h3>
+
+      <h4>Caso de Estudio 1: WannaCry (2017)</h4>
+      <p><strong>Tipo:</strong> Ransomware con capacidades de gusano</p>
+      <p><strong>Impacto:</strong> Infectó más de 300,000 computadoras en 150 países</p>
+
+      <p><strong>Mecanismo de propagación:</strong></p>
+      <ul>
+        <li>Explotó la vulnerabilidad EternalBlue en Windows</li>
+        <li>Se propagó automáticamente por redes sin intervención del usuario</li>
+        <li>Cifraba archivos y exigía pago en Bitcoin</li>
+      </ul>
+
+      <p><strong>Sectores afectados:</strong></p>
+      <ul>
+        <li>Sistema Nacional de Salud del Reino Unido</li>
+        <li>FedEx y otras grandes corporaciones</li>
+        <li>Sistemas ferroviarios en Alemania</li>
+        <li>Hospitales y sistemas críticos mundialmente</li>
+      </ul>
+
+      <h4>Caso de Estudio 2: Emotet (2014-2021)</h4>
+      <p><strong>Tipo:</strong> Troyano bancario evolucionado a botnet</p>
+      <p><strong>Impacto:</strong> Considerado una de las botnets más peligrosas del mundo</p>
+
+      <div class="importante">
+        <strong>Evolución de Emotet:</strong>
+        <ul>
+          <li><strong>Fase 1:</strong> Troyano bancario simple</li>
+          <li><strong>Fase 2:</strong> Downloader para otros malwares</li>
+          <li><strong>Fase 3:</strong> Plataforma completa de Malware-as-a-Service</li>
+        </ul>
+      </div>
+
+      <p><strong>Técnicas utilizadas:</strong></p>
+      <ul>
+        <li>Correos de phishing altamente sofisticados</li>
+        <li>Documentos de Office con macros maliciosas</li>
+        <li>Capacidades de auto-propagación en redes locales</li>
+        <li>Actualizaciones modulares</li>
+        <li>Técnicas de evasión de detección</li>
+      </ul>
+
+      <h4>Caso de Estudio 3: SolarWinds (2020)</h4>
+      <p><strong>Tipo:</strong> Ataque de cadena de suministro / Backdoor</p>
+      <p><strong>Impacto:</strong> Comprometió múltiples agencias gubernamentales y empresas Fortune 500</p>
+
+      <p><strong>Metodología del ataque:</strong></p>
+      <ol>
+        <li>Compromiso de la infraestructura de compilación de SolarWinds</li>
+        <li>Inserción de backdoor (SUNBURST) en actualizaciones legítimas</li>
+        <li>Distribución del malware a través del proceso normal de actualizaciones</li>
+        <li>Activación selectiva solo en objetivos de alto valor</li>
+        <li>Movimiento lateral dentro de las redes comprometidas</li>
+      </ol>
+
+      <div class="importante">
+        <strong>Lecciones aprendidas:</strong>
+        <ul>
+          <li>Importancia de la seguridad en la cadena de suministro</li>
+          <li>Necesidad de monitoreo continuo de actividades de red</li>
+          <li>Implementación de principios de Zero Trust</li>
+          <li>Verificación de integridad de software</li>
+        </ul>
+      </div>
+
+      <h4>Tendencias Actuales en Malware (2023-2024)</h4>
+
+      <p><strong>1. Malware-as-a-Service (MaaS)</strong></p>
+      <ul>
+        <li>Comercialización del malware</li>
+        <li>Reducción de barreras de entrada para cibercriminales</li>
+        <li>Modelos de suscripción y soporte técnico</li>
+      </ul>
+
+      <p><strong>2. Ataques dirigidos a la nube</strong></p>
+      <ul>
+        <li>Compromiso de cuentas de servicios en la nube</li>
+        <li>Explotación de configuraciones incorrectas</li>
+        <li>Cryptojacking en recursos de nube</li>
+      </ul>
+
+      <p><strong>3. Inteligencia Artificial en malware</strong></p>
+      <ul>
+        <li>Evasión automatizada de sistemas de detección</li>
+        <li>Generación automática de variantes</li>
+        <li>Optimización de campañas de phishing</li>
+      </ul>
+
+      <p><strong>4. Ataques a dispositivos IoT</strong></p>
+      <ul>
+        <li>Botnets de dispositivos IoT</li>
+        <li>Ataques DDoS masivos</li>
+        <li>Compromiso de privacidad en hogares inteligentes</li>
+      </ul>
+
+      <div class="cuestionario">
+        <h3>Cuestionario</h3>
+        <ol>
+          <li>¿Cuál es la principal diferencia entre un virus y un gusano informático?</li>
+          <li>Defina qué es un rootkit y explique por qué son particularmente peligrosos.</li>
+          <li>Mencione tres mecanismos de propagación de malware y explique brevemente cada uno.</li>
+          <li>¿Qué características tenía WannaCry que lo hicieron tan devastador en 2017?</li>
+          <li>Explique la diferencia entre spyware y adware.</li>
+          <li>¿Qué es un troyano bancario y cómo difiere de otros tipos de troyanos?</li>
+          <li>Describa la evolución de Emotet desde sus inicios hasta convertirse en una botnet.</li>
+          <li>¿Qué lecciones importantes se aprendieron del ataque a SolarWinds?</li>
+          <li>¿Qué significa "Malware-as-a-Service" y por qué es una tendencia preocupante?</li>
+          <li>Explique por qué los virus polimórficos son más difíciles de detectar que los virus tradicionales.</li>
+        </ol>
+      </div>
+    </div>
+
+   
+  
+
+</body></html>

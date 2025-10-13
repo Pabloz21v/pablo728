@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" style=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 16
+
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+      body {
+        max-width: 95%;
+        margin: 0 auto;
+        padding: 1% 1%;
+        position: relative;
+        box-sizing: border-box;
+        font-family: 'Times New Roman', serif;
+        line-height: 1.6;
+        text-align: justify;
+      }
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        border-bottom: 2px solid #2c3e50;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+      }
+      h2 {
+        color: #34495e;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+      }
+      h3 {
+        color: #2c3e50;
+        margin-top: 25px;
+        margin-bottom: 15px;
+      }
+      .objetivos {
+        background-color: #ecf0f1;
+        padding: 20px;
+        margin: 20px 0;
+        border-left: 4px solid #3498db;
+      }
+      .cuestionario {
+        background-color: #fdf2e9;
+        padding: 20px;
+        margin: 30px 0;
+        border: 2px solid #e67e22;
+      }
+      .cuestionario h3 {
+        color: #d35400;
+        margin-top: 0;
+      }
+      .definicion {
+        background-color: #e8f5e8;
+        padding: 15px;
+        margin: 15px 0;
+        border-left: 4px solid #27ae60;
+      }
+      .importante {
+        background-color: #ffeaa7;
+        padding: 15px;
+        margin: 15px 0;
+        border-left: 4px solid #fdcb6e;
+      }
+      table {
+        margin: 20px 0;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid #bdc3c7;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #34495e;
+        color: white;
+      }
+      ol,
+      ul {
+        margin: 15px 0;
+        padding-left: 30px;
+      }
+      li {
+        margin: 8px 0;
+      }
+      .clase {
+        page-break-before: always;
+        margin-bottom: 50px;
+      }
+      .clase:first-child {
+        page-break-before: auto;
+      }
+      .btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+      }
+      .btn-primary {
+        background-color: #4ade80;
+        color: #222;
+      }
+      .btn-secondary {
+        background-color: #60a5fa;
+        color: #fff;}
+        @media (max-width: 768px) {
+            table {
+                display: block;
+                overflow-x: auto;
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 1% 0%;
+            }
+            body{
+              max-width: 100%;
+                margin: 0 auto;
+                padding: 1% 1%;
+            }
+            h2 {
+                
+                padding-left: 0px;
+            }
+        }
+    </style>
+  </head>
+  <body style="">
+   
+    
+<div style="margin-bottom: 24px">
+		   <a
+			 href="../materias/manipulacion-preservacion-datos.html"
+			 class="btn btn-primary"
+		   >
+			 Ir a Materia
+		   </a>
+		   <a href="materia1-sesion15.html" class="btn btn-secondary">
+			 Ir a Sesión 15
+		   </a>
+		   </a>
+		   <!-- <a href="materia1-sesion17.html" class="btn btn-secondary">
+			 Ir a Sesión 17
+		   </a> -->
+		 </div>
+    <div class="clase">
+      <h2>Sesión 16: Seguridad en Dispositivos y Respuesta a Incidentes</h2>
+
+    
+
+      <h3>5.1 Seguridad en Dispositivos Móviles y Computadoras</h3>
+
+      <h4>5.1.1 Seguridad en Dispositivos Móviles</h4>
+
+      <p>
+        Los dispositivos móviles presentan desafíos únicos de seguridad debido a su portabilidad, conectividad constante
+        y el almacenamiento de gran cantidad de información personal y empresarial.
+      </p>
+
+      <div class="importante">
+        <strong>Principales amenazas a dispositivos móviles:</strong>
+        <ul>
+          <li><strong>Malware móvil:</strong> Aplicaciones maliciosas, troyanos, spyware</li>
+          <li><strong>Pérdida o robo:</strong> Acceso físico no autorizado al dispositivo</li>
+          <li><strong>Redes Wi-Fi inseguras:</strong> Interceptación de datos en redes públicas</li>
+          <li><strong>Aplicaciones maliciosas:</strong> Apps con permisos excesivos o código malicioso</li>
+          <li><strong>Phishing móvil:</strong> SMS y aplicaciones de phishing</li>
+          <li><strong>Man-in-the-Middle:</strong> Interceptación de comunicaciones</li>
+        </ul>
+      </div>
+
+      <p><strong>Mejores Prácticas para Seguridad Móvil:</strong></p>
+
+      <h5>Configuración del Dispositivo</h5>
+      <ul>
+        <li><strong>Bloqueo de pantalla:</strong> PIN, patrón, contraseña, biometría</li>
+        <li><strong>Cifrado del dispositivo:</strong> Activar cifrado completo del almacenamiento</li>
+        <li><strong>Autobloqueo:</strong> Configurar bloqueo automático tras inactividad</li>
+        <li><strong>Actualizaciones automáticas:</strong> Mantener OS y apps actualizadas</li>
+        <li><strong>Ubicación remota:</strong> Activar servicios de localización para recuperación</li>
+      </ul>
+
+      <h5>Gestión de Aplicaciones</h5>
+      <ul>
+        <li>Descargar apps solo de tiendas oficiales (Google Play, App Store)</li>
+        <li>Revisar permisos antes de instalar aplicaciones</li>
+        <li>Desinstalar apps no utilizadas regularmente</li>
+        <li>Leer reseñas y verificar desarrollador antes de instalar</li>
+        <li>Evitar hacer "jailbreak" o "root" al dispositivo</li>
+      </ul>
+
+      <table>
+        <tbody><tr>
+          <th>Plataforma</th>
+          <th>Características de Seguridad</th>
+          <th>Herramientas Nativas</th>
+          <th>Consideraciones Especiales</th>
+        </tr>
+        <tr>
+          <td>iOS</td>
+          <td>Sandboxing, App Store curado, cifrado fuerte</td>
+          <td>Find My, Screen Time, Keychain</td>
+          <td>Ecosistema cerrado, mayor control</td>
+        </tr>
+        <tr>
+          <td>Android</td>
+          <td>Google Play Protect, sandboxing, permisos granulares</td>
+          <td>Find My Device, Google Play Protect</td>
+          <td>Fragmentación, mayor personalización</td>
+        </tr>
+      </tbody></table>
+
+      <h4>5.1.2 Seguridad en Computadoras</h4>
+
+      <p>
+        Las computadoras de escritorio y portátiles requieren múltiples capas de protección debido a su complejidad y
+        las múltiples vías de ataque disponibles.
+      </p>
+
+      <h5>Seguridad del Sistema Operativo</h5>
+      <ul>
+        <li><strong>Actualizaciones regulares:</strong> Instalar parches de seguridad inmediatamente</li>
+        <li><strong>Control de cuentas de usuario (UAC):</strong> Configurar niveles apropiados</li>
+        <li><strong>Firewall:</strong> Activar y configurar correctamente</li>
+        <li><strong>Antivirus/EDR:</strong> Instalar solución de seguridad robusta</li>
+        <li><strong>Cifrado de disco:</strong> BitLocker, FileVault, o equivalentes</li>
+      </ul>
+
+      <h5>Configuración de Navegadores</h5>
+      <ul>
+        <li>Mantener navegadores actualizados</li>
+        <li>Configurar actualizaciones automáticas de plugins</li>
+        <li>Desactivar plugins innecesarios (Flash, Java en navegador)</li>
+        <li>Usar bloqueadores de anuncios y scripts</li>
+        <li>Configurar navegación privada para sitios sensibles</li>
+        <li>Gestionar cookies y datos de sitios web</li>
+      </ul>
+
+      <div class="importante">
+        <strong>Configuraciones de Seguridad Esenciales en Windows:</strong>
+        <ul>
+          <li>Windows Defender habilitado y actualizado</li>
+          <li>SmartScreen activado</li>
+          <li>Control de aplicaciones y navegador</li>
+          <li>Protección contra ransomware activada</li>
+          <li>BitLocker para cifrado de disco</li>
+          <li>Windows Update configurado correctamente</li>
+        </ul>
+      </div>
+
+      <h5>Gestión de Software</h5>
+      <ul>
+        <li>Mantener inventario de software instalado</li>
+        <li>Desinstalar programas no utilizados</li>
+        <li>Usar administradores de paquetes cuando sea posible</li>
+        <li>Verificar integridad de descargas (checksums)</li>
+        <li>Evitar software pirata o de fuentes no confiables</li>
+      </ul>
+
+      <h3>5.2 Detección de Infecciones y Brechas de Seguridad</h3>
+
+      <h4>5.2.1 Indicadores de Compromiso (IoC)</h4>
+
+      <p>
+        Los indicadores de compromiso son evidencias forenses que sugieren que un sistema ha sido comprometido por
+        actividad maliciosa.
+      </p>
+
+      <p><strong>Indicadores de Nivel de Sistema:</strong></p>
+      <ul>
+        <li><strong>Rendimiento degradado:</strong> Lentitud inusual del sistema</li>
+        <li><strong>Alto uso de recursos:</strong> CPU, memoria o red sin explicación</li>
+        <li><strong>Procesos desconocidos:</strong> Servicios o aplicaciones no reconocidas</li>
+        <li><strong>Archivos modificados:</strong> Cambios inesperados en archivos del sistema</li>
+        <li><strong>Conexiones de red sospechosas:</strong> Tráfico hacia IPs desconocidas</li>
+        <li><strong>Cambios en configuración:</strong> Modificaciones no autorizadas</li>
+      </ul>
+
+      <p><strong>Indicadores de Nivel de Red:</strong></p>
+      <ul>
+        <li>Tráfico de red inusual o en horarios no habituales</li>
+        <li>Conexiones a dominios o IPs maliciosas conocidas</li>
+        <li>Protocolos de comunicación inusuales</li>
+        <li>Gran volumen de datos salientes</li>
+        <li>Patrones de tráfico anómalos</li>
+      </ul>
+
+      <div class="importante">
+        <strong>Señales de Alerta Inmediata:</strong>
+        <ul>
+          <li>Pantallas de ransomware</li>
+          <li>Archivos cifrados con extensiones extrañas</li>
+          <li>Mensajes de antivirus sobre detecciones</li>
+          <li>Cambios inesperados en página de inicio del navegador</li>
+          <li>Ventanas emergentes excesivas</li>
+          <li>Usuarios reportando problemas similares</li>
+        </ul>
+      </div>
+
+      <h4>5.2.2 Técnicas de Detección</h4>
+
+      <p><strong>Monitoreo Proactivo:</strong></p>
+      <ul>
+        <li><strong>Análisis de logs:</strong> Revisión regular de registros del sistema</li>
+        <li><strong>Monitoreo de red:</strong> Análisis de tráfico en tiempo real</li>
+        <li><strong>Análisis de comportamiento:</strong> Detección de anomalías</li>
+        <li><strong>Threat Hunting:</strong> Búsqueda proactiva de amenazas</li>
+        <li><strong>Honeypots:</strong> Sistemas señuelo para detectar ataques</li>
+      </ul>
+
+      <p><strong>Análisis Forense Digital:</strong></p>
+      <ol>
+        <li><strong>Preservación:</strong> Crear copias bit-a-bit de evidencias</li>
+        <li><strong>Adquisición:</strong> Recopilar datos de múltiples fuentes</li>
+        <li><strong>Análisis:</strong> Examinar evidencias para encontrar indicadores</li>
+        <li><strong>Documentación:</strong> Registrar hallazgos y procedimientos</li>
+        <li><strong>Presentación:</strong> Preparar informes y evidencias</li>
+      </ol>
+
+      <h3>5.3 Herramientas de Análisis</h3>
+
+      <h4>5.3.1 Herramientas Antivirus y Antimalware</h4>
+
+      <table>
+        <tbody><tr>
+          <th>Categoría</th>
+          <th>Herramienta</th>
+          <th>Características Principales</th>
+          <th>Uso Recomendado</th>
+        </tr>
+        <tr>
+          <td>Antivirus Tradicional</td>
+          <td>Windows Defender, Bitdefender, Kaspersky</td>
+          <td>Detección basada en firmas, protección en tiempo real</td>
+          <td>Protección básica continua</td>
+        </tr>
+        <tr>
+          <td>Anti-malware Especializado</td>
+          <td>Malwarebytes, ESET Online Scanner</td>
+          <td>Detección avanzada, limpieza profunda</td>
+          <td>Análisis secundario y limpieza</td>
+        </tr>
+        <tr>
+          <td>EDR/XDR</td>
+          <td>CrowdStrike, SentinelOne, Microsoft Defender ATP</td>
+          <td>Detección y respuesta, análisis comportamental</td>
+          <td>Entornos empresariales avanzados</td>
+        </tr>
+        <tr>
+          <td>Herramientas Portátiles</td>
+          <td>RKILL, RootkitRevealer, GMER</td>
+          <td>Análisis específico sin instalación</td>
+          <td>Análisis de sistemas comprometidos</td>
+        </tr>
+      </tbody></table>
+
+      <h4>5.3.2 Análisis de Logs del Sistema</h4>
+
+      <p>
+        Los logs del sistema contienen información valiosa sobre actividades normales y anómalas que pueden indicar
+        compromisos de seguridad.
+      </p>
+
+      <p><strong>Tipos de Logs Importantes:</strong></p>
+      <ul>
+        <li><strong>Logs de autenticación:</strong> Intentos de login exitosos y fallidos</li>
+        <li><strong>Logs de sistema:</strong> Arranque, apagado, errores del sistema</li>
+        <li><strong>Logs de aplicaciones:</strong> Eventos específicos de aplicaciones</li>
+        <li><strong>Logs de seguridad:</strong> Cambios de permisos, accesos a recursos</li>
+        <li><strong>Logs de firewall:</strong> Tráfico permitido y bloqueado</li>
+        <li><strong>Logs de proxy/web:</strong> Actividad de navegación</li>
+      </ul>
+
+      <p><strong>Herramientas de Análisis de Logs:</strong></p>
+
+      <h5>Windows</h5>
+      <ul>
+        <li><strong>Event Viewer:</strong> Herramienta nativa de Windows</li>
+        <li><strong>PowerShell:</strong> Scripts para análisis automatizado</li>
+        <li><strong>Sysmon:</strong> Logging avanzado de actividad del sistema</li>
+        <li><strong>WinLogBeat:</strong> Exportación de logs a sistemas centralizados</li>
+      </ul>
+
+      <h5>Linux</h5>
+      <ul>
+        <li><strong>rsyslog/journald:</strong> Sistemas nativos de logging</li>
+        <li><strong>grep/awk/sed:</strong> Herramientas de línea de comandos</li>
+        <li><strong>Logwatch:</strong> Análisis automatizado de logs</li>
+        <li><strong>ELK Stack:</strong> Elasticsearch, Logstash, Kibana</li>
+      </ul>
+
+      <div class="importante">
+        <strong>Eventos de Windows Critical para Seguridad:</strong>
+        <ul>
+          <li><strong>4624:</strong> Logon exitoso</li>
+          <li><strong>4625:</strong> Logon fallido</li>
+          <li><strong>4648:</strong> Logon usando credenciales explícitas</li>
+          <li><strong>4720:</strong> Cuenta de usuario creada</li>
+          <li><strong>4732:</strong> Usuario agregado a grupo privilegiado</li>
+          <li><strong>7045:</strong> Servicio instalado</li>
+        </ul>
+      </div>
+
+      <h4>5.3.3 Herramientas de Análisis de Red</h4>
+
+      <p><strong>Analizadores de Tráfico:</strong></p>
+      <ul>
+        <li><strong>Wireshark:</strong> Captura y análisis detallado de paquetes</li>
+        <li><strong>tcpdump:</strong> Herramienta de línea de comandos para captura</li>
+        <li><strong>NetworkMiner:</strong> Análisis forense de tráfico de red</li>
+        <li><strong>Zeek (Bro):</strong> Monitor de seguridad de red</li>
+      </ul>
+
+      <p><strong>Herramientas de Monitoreo:</strong></p>
+      <ul>
+        <li><strong>Nagios:</strong> Monitoreo de infraestructura</li>
+        <li><strong>PRTG:</strong> Monitoreo de red y ancho de banda</li>
+        <li><strong>SolarWinds:</strong> Suite completa de monitoreo</li>
+        <li><strong>Splunk:</strong> Análisis de logs y datos de máquina</li>
+      </ul>
+
+      <h3>5.4 Pasos a Seguir ante un Incidente de Seguridad</h3>
+
+      <h4>5.4.1 Plan de Respuesta a Incidentes</h4>
+
+      <p>
+        Un plan de respuesta a incidentes es un conjunto documentado de procedimientos para detectar, responder y
+        recuperarse de incidentes de ciberseguridad.
+      </p>
+
+      <div class="definicion">
+        <strong>Incidente de Seguridad:</strong> Cualquier evento que comprometa la confidencialidad, integridad o
+        disponibilidad de sistemas de información o datos, o que viole políticas de seguridad de la organización.
+      </div>
+
+      <h4>5.4.2 Fases de Respuesta a Incidentes</h4>
+
+      <h5>Fase 1: Preparación</h5>
+      <ul>
+        <li>Establecer equipo de respuesta a incidentes (CSIRT)</li>
+        <li>Desarrollar políticas y procedimientos</li>
+        <li>Implementar herramientas de monitoreo y detección</li>
+        <li>Realizar entrenamientos regulares</li>
+        <li>Mantener inventario de activos críticos</li>
+        <li>Establecer canales de comunicación seguros</li>
+      </ul>
+
+      <h5>Fase 2: Detección e Identificación</h5>
+      <ul>
+        <li>Monitorear sistemas continuamente</li>
+        <li>Analizar alertas de seguridad</li>
+        <li>Verificar y validar incidentes potenciales</li>
+        <li>Clasificar severidad del incidente</li>
+        <li>Documentar evidencias iniciales</li>
+        <li>Notificar al equipo de respuesta</li>
+      </ul>
+
+      <table>
+        <tbody><tr>
+          <th>Nivel de Severidad</th>
+          <th>Descripción</th>
+          <th>Tiempo de Respuesta</th>
+          <th>Ejemplos</th>
+        </tr>
+        <tr>
+          <td>Crítico</td>
+          <td>Impacto severo en operaciones</td>
+          <td>Inmediato (&lt; 1 hora)</td>
+          <td>Ransomware, violación masiva de datos</td>
+        </tr>
+        <tr>
+          <td>Alto</td>
+          <td>Impacto significativo</td>
+          <td>2-4 horas</td>
+          <td>Compromiso de sistemas críticos</td>
+        </tr>
+        <tr>
+          <td>Medio</td>
+          <td>Impacto moderado</td>
+          <td>8-24 horas</td>
+          <td>Malware en sistemas no críticos</td>
+        </tr>
+        <tr>
+          <td>Bajo</td>
+          <td>Impacto mínimo</td>
+          <td>1-3 días</td>
+          <td>Intentos de phishing fallidos</td>
+        </tr>
+      </tbody></table>
+
+      <h5>Fase 3: Contención</h5>
+      <p><strong>Contención Inmediata:</strong></p>
+      <ul>
+        <li>Aislar sistemas comprometidos de la red</li>
+        <li>Preservar evidencias forenses</li>
+        <li>Implementar medidas temporales de protección</li>
+        <li>Evaluar alcance del compromiso</li>
+      </ul>
+
+      <p><strong>Contención a Largo Plazo:</strong></p>
+      <ul>
+        <li>Aplicar parches de seguridad</li>
+        <li>Cambiar credenciales comprometidas</li>
+        <li>Implementar controles adicionales</li>
+        <li>Preparar sistemas para recuperación</li>
+      </ul>
+
+      <h5>Fase 4: Erradicación y Recuperación</h5>
+      <p><strong>Erradicación:</strong></p>
+      <ul>
+        <li>Eliminar malware de todos los sistemas</li>
+        <li>Cerrar vulnerabilidades explotadas</li>
+        <li>Mejorar defensas existentes</li>
+        <li>Verificar eliminación completa de amenazas</li>
+      </ul>
+
+      <p><strong>Recuperación:</strong></p>
+      <ul>
+        <li>Restaurar sistemas desde backups limpios</li>
+        <li>Reconstruir sistemas comprometidos</li>
+        <li>Implementar monitoreo adicional</li>
+        <li>Validar funcionamiento normal</li>
+        <li>Restablecer operaciones gradualmente</li>
+      </ul>
+
+      <h5>Fase 5: Lecciones Aprendidas</h5>
+      <ul>
+        <li>Realizar revisión post-incidente</li>
+        <li>Documentar cronología completa</li>
+        <li>Identificar mejoras en procesos</li>
+        <li>Actualizar planes y procedimientos</li>
+        <li>Proporcionar entrenamiento adicional</li>
+        <li>Informar a stakeholders relevantes</li>
+      </ul>
+
+      <div class="importante">
+        <strong>Consideraciones Legales y Regulatorias:</strong>
+        <ul>
+          <li>Notificación a autoridades regulatorias (RGPD: 72 horas)</li>
+          <li>Notificación a individuos afectados</li>
+          <li>Preservación de evidencias para investigación</li>
+          <li>Cooperación con fuerzas del orden</li>
+          <li>Documentación para seguros y responsabilidad</li>
+          <li>Cumplimiento de obligaciones contractuales</li>
+        </ul>
+      </div>
+
+      <h4>5.4.3 Comunicación Durante Incidentes</h4>
+
+      <p><strong>Comunicación Interna:</strong></p>
+      <ul>
+        <li>Notificación inmediata al equipo de respuesta</li>
+        <li>Escalación a nivel ejecutivo según severidad</li>
+        <li>Actualizaciones regulares sobre progreso</li>
+        <li>Coordinación entre equipos técnicos</li>
+      </ul>
+
+      <p><strong>Comunicación Externa:</strong></p>
+      <ul>
+        <li>Notificaciones regulatorias obligatorias</li>
+        <li>Comunicación con clientes y socios</li>
+        <li>Coordinación con proveedores de servicios</li>
+        <li>Gestión de relaciones públicas y medios</li>
+      </ul>
+
+      <h4>5.4.4 Herramientas para Gestión de Incidentes</h4>
+
+      <table>
+        <tbody><tr>
+          <th>Categoría</th>
+          <th>Herramientas</th>
+          <th>Funcionalidad Principal</th>
+        </tr>
+        <tr>
+          <td>Ticketing/Tracking</td>
+          <td>ServiceNow, Jira, TheHive</td>
+          <td>Seguimiento de casos y workflows</td>
+        </tr>
+        <tr>
+          <td>Comunicación</td>
+          <td>Slack, Microsoft Teams, PagerDuty</td>
+          <td>Coordinación de equipo y alertas</td>
+        </tr>
+        <tr>
+          <td>Análisis Forense</td>
+          <td>Autopsy, Volatility, SANS SIFT</td>
+          <td>Análisis de evidencias digitales</td>
+        </tr>
+        <tr>
+          <td>Threat Intelligence</td>
+          <td>MISP, ThreatConnect, Recorded Future</td>
+          <td>Información sobre amenazas</td>
+        </tr>
+      </tbody></table>
+
+      <div class="cuestionario">
+        <h3>Cuestionario</h3>
+        <ol>
+          <li>¿Cuáles son las principales amenazas a la seguridad de dispositivos móviles?</li>
+          <li>Mencione cinco indicadores que podrían sugerir que un sistema está comprometido.</li>
+          <li>¿Cuáles son las cinco fases principales de respuesta a incidentes de seguridad?</li>
+          <li>Explique la diferencia entre contención inmediata y contención a largo plazo.</li>
+          <li>¿Qué configuraciones de seguridad son esenciales en dispositivos móviles?</li>
+          <li>¿Qué tipos de logs son más importantes para el análisis de seguridad?</li>
+          <li>¿Cuáles son las obligaciones legales al responder a un incidente de seguridad bajo el RGPD?</li>
+          <li>Explique qué es el análisis forense digital y sus principales fases.</li>
+          <li>¿Qué herramientas recomendaría para el análisis de tráfico de red sospechoso?</li>
+          <li>¿Por qué es importante la fase de "lecciones aprendidas" en la respuesta a incidentes?</li>
+        </ol>
+      </div>
+    </div>
+  
+
+</body></html>
