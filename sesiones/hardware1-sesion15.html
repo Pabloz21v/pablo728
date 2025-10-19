@@ -1,0 +1,757 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 15: Placas de Extensión Internas de PC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .question {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #6c757d;
+            margin: 20px 0;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            table {
+                font-size: 14px;
+            }
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-uno.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="hardware1-sesion14.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 14
+        </a>
+        <!-- <a
+        href="hardware1-sesion16.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 16
+      </a> -->
+      </div>
+        <h1>Sesión 15: Placas de Extensión Internas de PC</h1>
+
+        <h2>Introducción a las Tarjetas de Expansión</h2>
+
+        <h3>¿Qué son las tarjetas de expansión?</h3>
+        <p>Las tarjetas de expansión (también llamadas placas de expansión o tarjetas adaptadoras) son componentes de hardware que se instalan en las ranuras de expansión de la placa madre para agregar o mejorar funcionalidades de la computadora. Permiten personalizar y actualizar el sistema sin necesidad de reemplazar la motherboard completa.</p>
+
+        <h3>¿Por qué son importantes?</h3>
+        <ul>
+            <li>Modularidad: Permite actualizar componentes individuales sin cambiar todo el sistema.</li>
+            <li>Personalización: Adapta la PC a necesidades específicas (gaming, diseño, audio profesional).</li>
+            <li>Escalabilidad: Añade funciones conforme se necesiten.</li>
+            <li>Reparación: Facilita reemplazar componentes defectuosos sin descartar todo el equipo.</li>
+            <li>Rendimiento: Mejora capacidades específicas más allá de lo integrado en la motherboard.</li>
+        </ul>
+
+        <h2>Ranuras de Expansión: Tipos y Características</h2>
+
+        <h3>Tipos de ranuras (Slots)</h3>
+        <p>Antes de instalar una tarjeta de expansión, es fundamental entender qué tipo de ranuras tiene tu motherboard, ya que determinan qué tarjetas son compatibles y su rendimiento máximo.</p>
+
+        <table>
+            <tr>
+                <th>Tipo de ranura</th>
+                <th>Ancho de banda</th>
+                <th>Pines</th>
+                <th>Uso típico</th>
+                <th>Estado actual</th>
+            </tr>
+            <tr>
+                <td>ISA (Industry Standard Architecture)</td>
+                <td>8-16 MB/s</td>
+                <td>62-98</td>
+                <td>Tarjetas antiguas (1980s-1990s)</td>
+                <td>Obsoleto</td>
+            </tr>
+            <tr>
+                <td>PCI (Peripheral Component Interconnect)</td>
+                <td>133 MB/s (32-bit) / 266 MB/s (64-bit)</td>
+                <td>124</td>
+                <td>Tarjetas de sonido, red (1990s-2000s)</td>
+                <td>Obsoleto/En desuso</td>
+            </tr>
+            <tr>
+                <td>AGP (Accelerated Graphics Port)</td>
+                <td>266 MB/s - 2 GB/s</td>
+                <td>132</td>
+                <td>Tarjetas gráficas exclusivamente</td>
+                <td>Obsoleto</td>
+            </tr>
+            <tr>
+                <td>PCIe x1</td>
+                <td>Gen 3: 1 GB/s<br>Gen 4: 2 GB/s<br>Gen 5: 4 GB/s</td>
+                <td>18</td>
+                <td>Tarjetas de sonido, red, USB</td>
+                <td>Actual</td>
+            </tr>
+            <tr>
+                <td>PCIe x4</td>
+                <td>Gen 3: 4 GB/s<br>Gen 4: 8 GB/s<br>Gen 5: 16 GB/s</td>
+                <td>64</td>
+                <td>NVMe, tarjetas de captura, RAID</td>
+                <td>Actual</td>
+            </tr>
+            <tr>
+                <td>PCIe x8</td>
+                <td>Gen 3: 8 GB/s<br>Gen 4: 16 GB/s<br>Gen 5: 32 GB/s</td>
+                <td>98</td>
+                <td>GPUs secundarias, almacenamiento profesional</td>
+                <td>Actual</td>
+            </tr>
+            <tr>
+                <td>PCIe x16</td>
+                <td>Gen 3: 16 GB/s<br>Gen 4: 32 GB/s<br>Gen 5: 64 GB/s</td>
+                <td>164</td>
+                <td>Tarjetas gráficas de alto rendimiento</td>
+                <td>Actual (Estándar)</td>
+            </tr>
+            <tr>
+                <td>M.2 (slot especial)</td>
+                <td>Hasta 8 GB/s (Gen 4 x4)</td>
+                <td>Variable</td>
+                <td>SSDs NVMe, Wi-Fi, Bluetooth</td>
+                <td>Actual</td>
+            </tr>
+        </table>
+
+        <h3>Compatibilidad física y eléctrica</h3>
+        <p><strong>Regla importante:</strong> Una tarjeta PCIe de menor tamaño puede instalarse en una ranura más grande (ej: tarjeta x1 en ranura x16), pero NO al revés. Sin embargo, funcionará a la velocidad del dispositivo más lento.</p>
+        <p><strong>Ejemplo:</strong> Si instalas una tarjeta de red PCIe x1 (1 GB/s) en una ranura PCIe x16, funcionará perfectamente, pero solo usará 1 carril de los 16 disponibles.</p>
+
+        <h3>Generaciones PCIe</h3>
+        <ul>
+            <li>PCIe 3.0 (2010): Estándar actual en la mayoría de sistemas, 1 GB/s por carril.</li>
+            <li>PCIe 4.0 (2017): Duplica el ancho de banda, 2 GB/s por carril. Común en sistemas modernos.</li>
+            <li>PCIe 5.0 (2019): Duplica nuevamente, 4 GB/s por carril. Para hardware de última generación.</li>
+        </ul>
+        <p><strong>Retrocompatibilidad:</strong> PCIe es retrocompatible. Una tarjeta PCIe 4.0 funcionará en ranura 3.0 (a velocidad 3.0), y viceversa.</p>
+
+        <h2>Tarjetas de Expansión Más Frecuentes</h2>
+
+        <h3>Tarjetas Gráficas (GPU - Graphics Processing Unit)</h3>
+        <p>Previamente explorado en una sesión.</p>
+
+        <h3>Tarjetas de Sonido</h3>
+
+        <h4>Definición y función</h4>
+        <p>Las tarjetas de sonido procesan audio digital, convirtiendo señales digitales en analógicas (reproducción) y viceversa (grabación). Aunque la mayoría de motherboards incluyen audio integrado, las tarjetas dedicadas ofrecen mayor calidad y funciones profesionales.</p>
+
+        <h4>¿Cuándo necesitas una tarjeta de sonido dedicada?</h4>
+        <ul>
+            <li>Producción musical: Grabación multipista, latencia ultra baja.</li>
+            <li>Gaming competitivo: Audio posicional preciso (sonido 3D).</li>
+            <li>Audiofilia: Reproducción de alta fidelidad (Hi-Fi).</li>
+            <li>Streaming: Mezcla de múltiples fuentes de audio.</li>
+            <li>Audio profesional: Interfaces con equipos profesionales (XLR, TRS).</li>
+        </ul>
+
+        <table>
+            <tr>
+                <th>Característica</th>
+                <th>Audio integrado</th>
+                <th>Tarjeta básica</th>
+                <th>Tarjeta profesional</th>
+            </tr>
+            <tr>
+                <td>Relación señal/ruido (SNR)</td>
+                <td>92-100 dB</td>
+                <td>106-110 dB</td>
+                <td>120-130 dB</td>
+            </tr>
+            <tr>
+                <td>Tasa de muestreo</td>
+                <td>Hasta 192 kHz</td>
+                <td>Hasta 192 kHz</td>
+                <td>Hasta 384 kHz</td>
+            </tr>
+            <tr>
+                <td>Latencia</td>
+                <td>10-30 ms</td>
+                <td>5-10 ms</td>
+                <td><3 ms</td>
+            </tr>
+            <tr>
+                <td>Canales simultáneos</td>
+                <td>2-8 (estéreo/7.1)</td>
+                <td>2-8</td>
+                <td>8-128+</td>
+            </tr>
+            <tr>
+                <td>Precio típico</td>
+                <td>Incluido</td>
+                <td>$50-150</td>
+                <td>$200-2000+</td>
+            </tr>
+        </table>
+
+        <h3>Tarjetas de Red</h3>
+
+        <h4>Tarjetas Ethernet (Red cableada)</h4>
+        <p>Aunque la mayoría de motherboards incluyen puerto Ethernet integrado, las tarjetas dedicadas ofrecen mayor velocidad, menor latencia y funciones avanzadas como agregación de enlaces y offloading.</p>
+
+        <table>
+            <tr>
+                <th>Velocidad</th>
+                <th>Estándar</th>
+                <th>Cable requerido</th>
+                <th>Uso típico</th>
+                <th>Precio típico</th>
+            </tr>
+            <tr>
+                <td>100 Mbps</td>
+                <td>Fast Ethernet</td>
+                <td>Cat 5</td>
+                <td>Obsoleto, redes antiguas</td>
+                <td>$10-20</td>
+            </tr>
+            <tr>
+                <td>1 Gbps (1000 Mbps)</td>
+                <td>Gigabit Ethernet</td>
+                <td>Cat 5e/6</td>
+                <td>Estándar doméstico/oficina</td>
+                <td>$15-40</td>
+            </tr>
+            <tr>
+                <td>2.5 Gbps</td>
+                <td>2.5GBASE-T</td>
+                <td>Cat 5e/6</td>
+                <td>Gaming, workstations</td>
+                <td>$30-80</td>
+            </tr>
+            <tr>
+                <td>5 Gbps</td>
+                <td>5GBASE-T</td>
+                <td>Cat 6</td>
+                <td>Servidores pequeños, edición de video</td>
+                <td>$80-150</td>
+            </tr>
+            <tr>
+                <td>10 Gbps</td>
+                <td>10GBASE-T</td>
+                <td>Cat 6a/7</td>
+                <td>Servidores empresariales, NAS profesional</td>
+                <td>$100-300</td>
+            </tr>
+            <tr>
+                <td>25/40/100 Gbps</td>
+                <td>Fibra óptica</td>
+                <td>Fibra SFP+/QSFP</td>
+                <td>Data centers, ISPs</td>
+                <td>$300-5000+</td>
+            </tr>
+        </table>
+
+        <h4>Tarjetas Wi-Fi/Bluetooth</h4>
+
+        <table>
+            <tr>
+                <th>Estándar Wi-Fi</th>
+                <th>Velocidad máxima teórica</th>
+                <th>Frecuencias</th>
+                <th>Año</th>
+                <th>Uso actual</th>
+            </tr>
+            <tr>
+                <td>Wi-Fi 4 (802.11n)</td>
+                <td>600 Mbps</td>
+                <td>2.4 GHz / 5 GHz</td>
+                <td>2009</td>
+                <td>Obsoleto</td>
+            </tr>
+            <tr>
+                <td>Wi-Fi 5 (802.11ac)</td>
+                <td>3.5 Gbps</td>
+                <td>5 GHz</td>
+                <td>2014</td>
+                <td>Común, económico</td>
+            </tr>
+            <tr>
+                <td>Wi-Fi 6 (802.11ax)</td>
+                <td>9.6 Gbps</td>
+                <td>2.4 GHz / 5 GHz</td>
+                <td>2019</td>
+                <td>Estándar actual</td>
+            </tr>
+            <tr>
+                <td>Wi-Fi 6E</td>
+                <td>9.6 Gbps</td>
+                <td>2.4 / 5 / 6 GHz</td>
+                <td>2021</td>
+                <td>Alta gama</td>
+            </tr>
+            <tr>
+                <td>Wi-Fi 7 (802.11be)</td>
+                <td>46 Gbps</td>
+                <td>2.4 / 5 / 6 GHz</td>
+                <td>2024</td>
+                <td>Próxima generación</td>
+            </tr>
+        </table>
+
+        <h3>Controladoras de Almacenamiento</h3>
+
+        <h4>Definición y función</h4>
+        <p>Las controladoras de almacenamiento gestionan la comunicación entre la motherboard y los dispositivos de almacenamiento (HDDs, SSDs). Las tarjetas dedicadas ofrecen más puertos, mayor velocidad, y funciones como RAID.</p>
+
+        <h4>Tipos de controladoras</h4>
+
+        <table>
+            <tr>
+                <th>Tipo</th>
+                <th>Interfaz</th>
+                <th>Velocidad por dispositivo</th>
+                <th>Funciones principales</th>
+                <th>Uso típico</th>
+            </tr>
+            <tr>
+                <td>Controladora SATA</td>
+                <td>SATA III</td>
+                <td>6 Gbps (600 MB/s)</td>
+                <td>Agregar puertos SATA adicionales, HotSwap, Port multiplier</td>
+                <td>Expandir cantidad de discos duros/SSDs</td>
+            </tr>
+            <tr>
+                <td>Controladora RAID</td>
+                <td>SATA/SAS</td>
+                <td>6-12 Gbps por puerto</td>
+                <td>RAID 0, 1, 5, 6, 10, Caché integrado, Batería de respaldo, Gestión de fallos</td>
+                <td>Servidores, NAS, redundancia de datos</td>
+            </tr>
+            <tr>
+                <td>Controladora SAS</td>
+                <td>SAS (Serial Attached SCSI)</td>
+                <td>12-24 Gbps</td>
+                <td>Discos empresariales, Full-duplex, Conexión de múltiples dispositivos, Mayor confiabilidad</td>
+                <td>Servidores empresariales, almacenamiento masivo</td>
+            </tr>
+            <tr>
+                <td>Adaptador NVMe PCIe</td>
+                <td>PCIe x4/x8/x16</td>
+                <td>3-8 GB/s por SSD</td>
+                <td>Agregar slots M.2, Múltiples SSDs NVMe, RAID NVMe, Adaptador U.2</td>
+                <td>Workstations, edición de video 4K/8K</td>
+            </tr>
+        </table>
+
+        <h4>Configuraciones RAID comunes</h4>
+
+        <table>
+            <tr>
+                <th>RAID</th>
+                <th>Discos mínimos</th>
+                <th>Capacidad efectiva</th>
+                <th>Ventajas</th>
+                <th>Desventajas</th>
+            </tr>
+            <tr>
+                <td>RAID 0 (Striping)</td>
+                <td>2</td>
+                <td>100% (suma total)</td>
+                <td>Velocidad duplicada</td>
+                <td>Sin redundancia (si falla 1, se pierden todos)</td>
+            </tr>
+            <tr>
+                <td>RAID 1 (Mirroring)</td>
+                <td>2</td>
+                <td>50% (copia exacta)</td>
+                <td>Redundancia total</td>
+                <td>Desperdicia 50% del espacio</td>
+            </tr>
+            <tr>
+                <td>RAID 5</td>
+                <td>3</td>
+                <td>(n-1) discos</td>
+                <td>Buen balance velocidad/redundancia</td>
+                <td>Penalización en escritura</td>
+            </tr>
+            <tr>
+                <td>RAID 6</td>
+                <td>4</td>
+                <td>(n-2) discos</td>
+                <td>Tolera fallo de 2 discos</td>
+                <td>Mayor penalización en escritura</td>
+            </tr>
+            <tr>
+                <td>RAID 10 (1+0)</td>
+                <td>4</td>
+                <td>50%</td>
+                <td>Velocidad + redundancia</td>
+                <td>Caro (requiere muchos discos)</td>
+            </tr>
+        </table>
+
+        <h2>Tarjetas de Expansión Menos Frecuentes</h2>
+
+        <h3>Tarjetas Capturadoras de Video</h3>
+
+        <h4>Definición y función</h4>
+        <p>Capturan señales de video y audio desde fuentes externas (consolas de videojuegos, cámaras, otros PCs) y las convierten en formato digital para grabación, transmisión en vivo (streaming) o edición.</p>
+
+        <table>
+            <tr>
+                <th>Tipo</th>
+                <th>Resolución máxima</th>
+                <th>FPS máximo</th>
+                <th>Latencia</th>
+                <th>Uso típico</th>
+            </tr>
+            <tr>
+                <td>Entrada básica</td>
+                <td>1080p</td>
+                <td>30-60 FPS</td>
+                <td>100-200 ms</td>
+                <td>Grabación casual, streaming básico</td>
+            </tr>
+            <tr>
+                <td>Gamer/Streamer</td>
+                <td>1080p-1440p</td>
+                <td>60-120 FPS</td>
+                <td>30-80 ms</td>
+                <td>Streaming de juegos, YouTube/Twitch</td>
+            </tr>
+            <tr>
+                <td>Profesional</td>
+                <td>4K</td>
+                <td>60-120 FPS</td>
+                <td><20 ms</td>
+                <td>Producción de video, TV, eventos en vivo</td>
+            </tr>
+            <tr>
+                <td>Broadcast/Industrial</td>
+                <td>4K-8K</td>
+                <td>60-240 FPS</td>
+                <td><10 ms</td>
+                <td>Televisión profesional, estudios</td>
+            </tr>
+        </table>
+
+        <h3>Tarjetas de TV/Sintonizadoras</h3>
+
+        <h4>Definición y función</h4>
+        <p>Permiten recibir señales de televisión (terrestre, cable, satélite) directamente en la PC. Aunque menos comunes hoy por el streaming, siguen usándose para grabación de TV en vivo (DVR casero) y señales locales gratuitas.</p>
+
+        <h3>Tarjetas de Expansión de Puertos</h3>
+
+        <h4>Tarjetas USB adicionales</h4>
+        <p>Agregan puertos USB adicionales cuando los de la motherboard son insuficientes o para obtener versiones más nuevas.</p>
+
+        <table>
+            <tr>
+                <th>Tipo</th>
+                <th>Velocidad</th>
+                <th>Puertos típicos</th>
+                <th>Uso típico</th>
+            </tr>
+            <tr>
+                <td>USB 2.0</td>
+                <td>480 Mbps</td>
+                <td>4-7 puertos</td>
+                <td>Periféricos de baja velocidad (teclado, ratón)</td>
+            </tr>
+            <tr>
+                <td>USB 3.0/3.1 Gen 1</td>
+                <td>5 Gbps</td>
+                <td>2-4 puertos</td>
+                <td>Discos externos, cámaras</td>
+            </tr>
+            <tr>
+                <td>USB 3.1 Gen 2</td>
+                <td>10 Gbps</td>
+                <td>2-4 puertos</td>
+                <td>SSDs externos rápidos, capturadoras</td>
+            </tr>
+            <tr>
+                <td>USB 3.2 / USB4</td>
+                <td>20-40 Gbps</td>
+                <td>1-2 puertos</td>
+                <td>Thunderbolt 3/4, eGPUs, almacenamiento ultrarrápido</td>
+            </tr>
+        </table>
+
+        <h4>Tarjetas Thunderbolt / FireWire</h4>
+        <ul>
+            <li>Thunderbolt 3/4: 40 Gbps, conexión universal (video, datos, energía).</li>
+            <li>FireWire (IEEE 1394): 400-800 Mbps, usado en cámaras de video antiguas y audio profesional.</li>
+        </ul>
+
+        <h3>Tarjetas de Diagnóstico POST</h3>
+
+        <h4>Definición y función</h4>
+        <p>Muestran códigos de error durante el arranque (POST - Power-On Self-Test) para diagnosticar problemas de hardware. Esencial para técnicos y entusiastas que ensamblan o reparan PCs.</p>
+
+        <h3>Tarjetas Especializadas</h3>
+
+        <h4>Tarjetas de Aceleración de IA/ML</h4>
+        <ul>
+            <li>Google Coral TPU: Acelera inferencia de machine learning.</li>
+            <li>Intel Movidius: Procesamiento de visión artificial.</li>
+            <li>NVIDIA Tesla: Entrenamiento de modelos de IA (data centers).</li>
+        </ul>
+
+        <h4>Tarjetas de Minería de Criptomonedas</h4>
+        <ul>
+            <li>GPUs especializadas sin salidas de video, optimizadas para hashing.</li>
+            <li>Mayor eficiencia energética que GPUs de consumo.</li>
+            <li>Sin valor de reventa para gaming.</li>
+        </ul>
+
+        <h4>Tarjetas de Procesamiento de Señales (DSP)</h4>
+        <ul>
+            <li>Audio profesional: procesamiento de efectos en tiempo real.</li>
+            <li>Radioaficionados: SDR (Software Defined Radio).</li>
+            <li>Científicas: procesamiento de señales analógicas.</li>
+        </ul>
+
+        <h2>Instalación y Compatibilidad</h2>
+
+        <h3>Consideraciones antes de instalar</h3>
+
+        <h4>Compatibilidad de ranura</h4>
+        <ul>
+            <li>Verificar tipo y cantidad de ranuras disponibles en la motherboard.</li>
+            <li>Consultar manual de la placa madre para distribución de carriles PCIe.</li>
+            <li>Algunos slots comparten carriles (ej: M.2 puede deshabilitar un slot PCIe).</li>
+        </ul>
+
+        <h4>Espacio físico</h4>
+        <ul>
+            <li>Altura de la tarjeta: Half-height, full-height, de doble o triple slot.</li>
+            <li>Largo: Verificar que no choque con otros componentes (RAM, cooler de CPU).</li>
+            <li>Gabinete: Confirmar que el chasis tiene espacio y ranuras de expansión suficientes.</li>
+        </ul>
+
+        <h4>Requisitos de alimentación</h4>
+
+        <table>
+            <tr>
+                <th>Tipo de tarjeta</th>
+                <th>Consumo típico</th>
+                <th>Conectores requeridos</th>
+                <th>Fuente recomendada</th>
+            </tr>
+            <tr>
+                <td>Tarjeta de red/sonido básica</td>
+                <td>5-15W</td>
+                <td>Solo slot PCIe</td>
+                <td>Cualquiera</td>
+            </tr>
+            <tr>
+                <td>GPU gama media</td>
+                <td>150-200W</td>
+                <td>1x 8-pin PCIe</td>
+                <td>500-650W</td>
+            </tr>
+            <tr>
+                <td>GPU gama alta</td>
+                <td>250-350W</td>
+                <td>2x 8-pin o 1x 12VHPWR</td>
+                <td>750-850W</td>
+            </tr>
+            <tr>
+                <td>GPU extrema (RTX 4090)</td>
+                <td>350-450W</td>
+                <td>1x 16-pin (12VHPWR)</td>
+                <td>850-1000W+</td>
+            </tr>
+            <tr>
+                <td>Controladora RAID profesional</td>
+                <td>25-50W</td>
+                <td>6-pin PCIe (opcional)</td>
+                <td>500W+</td>
+            </tr>
+        </table>
+
+        <h4>Refrigeración</h4>
+        <ul>
+            <li>GPUs de alto rendimiento necesitan flujo de aire adecuado en el gabinete.</li>
+            <li>Verificar temperatura con software (GPU-Z, HWMonitor).</li>
+            <li>Considerar ventiladores adicionales o sistemas de refrigeración líquida.</li>
+        </ul>
+
+        <h3>Proceso de instalación física</h3>
+
+        <h4>Preparación:</h4>
+        <ul>
+            <li>Apagar la PC y desconectar el cable de alimentación.</li>
+            <li>Abrir el panel lateral del gabinete.</li>
+        </ul>
+
+        <h4>Identificar ranura:</h4>
+        <ul>
+            <li>Localizar ranura PCIe apropiada (generalmente x16 para GPU, x1 para red/sonido).</li>
+            <li>Quitar tapa metálica de la ranura de expansión del gabinete.</li>
+        </ul>
+
+        <h4>Insertar tarjeta:</h4>
+        <ul>
+            <li>Alinear conectores de la tarjeta con la ranura.</li>
+            <li>Presionar firmemente pero con cuidado ayudado SIEMPRE de las dos manos, hasta que encaje (se oirá un "click").</li>
+            <li>Asegurar con tornillo al chasis del gabinete.</li>
+        </ul>
+
+        <h4>Conectar alimentación (si aplica):</h4>
+        <ul>
+            <li>Conectar cables PCIe de 6-pin, 8-pin o 12VHPWR desde la fuente de poder.</li>
+            <li>Verificar que los conectores estén completamente insertados.</li>
+        </ul>
+
+        <h4>Cerrar y arrancar:</h4>
+        <ul>
+            <li>Cerrar gabinete.</li>
+            <li>Reconectar cable de alimentación.</li>
+            <li>Encender la PC.</li>
+        </ul>
+
+        <h3>Instalación de drivers y software</h3>
+        <p>Instalación de los drivers y/o software correspondientes para su óptimo funcionamiento.</p>
+    
+        <div class="section">
+            <h2>PREGUNTAS</h2>
+            <div class="question">
+                <h3>1. Conceptos Básicos
+¿Qué es una tarjeta de expansión y cuál es su principal ventaja en comparación con los componentes integrados en la motherboard?</h3>
+            </div>
+
+            <div class="question">
+                <h3>2. Tipos de Ranuras
+Explica la diferencia entre una ranura PCIe x1 y una PCIe x16 en términos de ancho de banda y uso típico.</h3>
+            </div>
+
+            <div class="question">
+                <h3>3. Compatibilidad
+¿Por qué una tarjeta PCIe 4.0 puede funcionar en una ranura PCIe 3.0? ¿Qué limitación tendría en este caso?</h3>
+            </div>
+
+            <div class="question">
+                <h3>4. Tarjetas de Sonido
+¿En qué situaciones sería recomendable utilizar una tarjeta de sonido dedicada en lugar del audio integrado de la motherboard? Menciona al menos dos ejemplos.</h3>
+            </div>
+
+            <div class="question">
+                <h3>5. Tarjetas de Red
+Si tienes una conexión a Internet de 5 Gbps, pero tu motherboard solo soporta Ethernet 1 Gbps, ¿qué tipo de tarjeta de expansión necesitarías para aprovechar toda la velocidad de tu conexión?</h3>
+            </div>
+
+            <div class="question">
+                <h3>6. Controladoras de Almacenamiento
+¿Qué es una controladora RAID y cuál es la principal ventaja de configurar un RAID 1 en un sistema con dos discos duros?</h3>
+            </div>
+
+            <div class="question">
+                <h3>7. Tarjetas de Captura de Video
+¿Qué características técnicas (resolución, FPS, latencia) son importantes al elegir una tarjeta capturadora de video para streaming profesional?</h3>
+            </div>
+
+            <div class="question">
+                <h3>8. Instalación Física
+Describe los pasos básicos para instalar físicamente una tarjeta gráfica en una ranura PCIe x16.</h3>
+            </div>
+
+            <div class="question">
+                <h3>9. Refrigeración y Alimentación
+¿Por qué es importante considerar la refrigeración y la fuente de alimentación al instalar una tarjeta gráfica de alto rendimiento?</h3>
+            </div>
+
+            <div class="question">
+                <h3>10. Tarjetas Especializadas
+Menciona dos ejemplos de tarjetas de expansión especializadas y describe brevemente su función.</h3>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
