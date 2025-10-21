@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 11: Tipos de JOIN, Integridad Referencial </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        code {
+            font-family: monospace;
+            background-color: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            table {
+                font-size: 14px;
+            }
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="margin-bottom: 24px">
+      <a
+        href="../materias/conversion-y-reparacion-de-datos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="materia2-sesion10.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 10
+      </a>
+      <!-- <a
+        href="materia2-sesion12.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f59e42;
+          color: #fff;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 102
+      </a> -->
+    </div>
+        <h1>Sesión 11: Tipos de JOIN, Integridad Referencial</h1>
+
+        <h2>Objetivos:</h2>
+        <ul>
+            <li>Comprender y aplicar los diferentes tipos de JOIN.</li>
+            <li>Entender la integridad referencial con ON UPDATE CASCADE.</li>
+            <!-- <li>Dominar la función de agregación COUNT().</li> -->
+            <!-- <li>Practicar consultas complejas con GROUP BY</li> -->
+        </ul>
+
+        <h2>Tipos de JOIN</h2>
+        <p>Los JOIN permiten combinar datos de dos o más tablas basándose en una relación entre ellas.</p>
+
+        <h3>INNER JOIN</h3>
+        <p><strong>Concepto:</strong> Devuelve solo los registros que tienen coincidencias en AMBAS tablas.</p>
+
+        <h4>Sintaxis:</h4>
+        <pre>
+SELECT columnas
+FROM tabla1
+INNER JOIN tabla2 ON tabla1.columna = tabla2.columna;
+        </pre>
+
+        <h4>Ejemplo:</h4>
+        <pre>
+-- Mostrar solo los clientes que tienen pedidos
+SELECT c.nombre, p.id_pedido, p.total
+FROM clientes c
+INNER JOIN pedidos p ON c.id_cliente = p.id_cliente;
+        </pre>
+        <p><strong>Interpretación:</strong> "Muestra únicamente los clientes que tienen al menos un pedido. Los clientes sin pedidos NO aparecen."</p>
+
+        <h3>LEFT JOIN</h3>
+        <p><strong>Concepto:</strong> Devuelve TODOS los registros de la tabla izquierda (primera tabla) y los registros coincidentes de la tabla derecha. Si no hay coincidencia, muestra NULL.</p>
+
+        <h4>Ejemplo:</h4>
+        <pre>
+-- Mostrar todos los clientes, tengan o no pedidos
+SELECT c.nombre, p.id_pedido, p.total
+FROM clientes c
+LEFT JOIN pedidos p ON c.id_cliente = p.id_cliente;
+        </pre>
+        <p><strong>Interpretación:</strong> "Muestra todos los clientes. Si un cliente no tiene pedidos, aparecerá con NULL en las columnas de pedidos."</p>
+
+        <h3>RIGHT JOIN</h3>
+        <p><strong>Concepto:</strong> Devuelve TODOS los registros de la tabla derecha (segunda tabla) y los registros coincidentes de la tabla izquierda. Si no hay coincidencia, muestra NULL.</p>
+
+        <h4>Ejemplo:</h4>
+        <pre>
+-- Mostrar todos los pedidos y sus clientes (si existen)
+SELECT c.nombre, p.id_pedido, p.total
+FROM clientes c
+RIGHT JOIN pedidos p ON c.id_cliente = p.id_cliente;
+        </pre>
+        <p><strong>Interpretación:</strong> "Muestra todos los pedidos. Si un pedido no tiene cliente asociado (lo cual es raro debido a las restricciones), aparecería con NULL."</p>
+
+        <h3>FULL OUTER JOIN (Simulado)</h3>
+        <p><strong>Concepto:</strong> MySQL no tiene FULL OUTER JOIN nativo, pero se puede simular con UNION de LEFT y RIGHT JOIN. Devuelve TODOS los registros cuando hay una coincidencia en cualquiera de las tablas.</p>
+
+        <h4>Ejemplo:</h4>
+        <pre>
+-- Mostrar todos los clientes y todos los pedidos
+SELECT c.nombre, p.id_pedido, p.total
+FROM clientes c
+LEFT JOIN pedidos p ON c.id_cliente = p.id_cliente
+UNION
+SELECT c.nombre, p.id_pedido, p.total
+FROM clientes c
+RIGHT JOIN pedidos p ON c.id_cliente = p.id_cliente;
+        </pre>
+        <p><strong>Interpretación:</strong> "Muestra todos los clientes (tengan o no pedidos) y todos los pedidos (tengan o no cliente)."</p>
+
+        
+
+        <h2>Integridad Referencial: ON UPDATE CASCADE</h2>
+
+        <h3>Concepto:</h3>
+        <p>ON UPDATE CASCADE actualiza automáticamente las claves foráneas cuando se modifica la clave primaria referenciada.</p>
+
+        <h4>Comparación:</h4>
+        <ul>
+            <li><strong>ON DELETE CASCADE</strong> → Elimina registros relacionados cuando se elimina el registro padre.</li>
+            <li><strong>ON UPDATE CASCADE</strong> → Actualiza registros relacionados cuando se modifica el registro padre.</li>
+        </ul>
+
+        <h4>Ejemplo práctico:</h4>
+        <pre>
+-- Tabla departamentos
+CREATE TABLE departamentos (
+    id_departamento INT PRIMARY KEY,
+    nombre_departamento VARCHAR(100) NOT NULL
+);
+
+-- Tabla empleados con UPDATE CASCADE
+CREATE TABLE empleados_empresa (
+    id_empleado INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    id_departamento INT NOT NULL,
+    FOREIGN KEY (id_departamento) REFERENCES departamentos(id_departamento)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+-- Insertar datos
+INSERT INTO departamentos (id_departamento, nombre_departamento) VALUES
+(10, 'Ventas'),
+(20, 'Recursos Humanos'),
+(30, 'Tecnología');
+
+INSERT INTO empleados_empresa (nombre, id_departamento) VALUES
+('Juan Pérez', 10),
+('María García', 10),
+('Carlos López', 20),
+('Ana Martínez', 30);
+
+-- Actualizar el id de un departamento
+UPDATE departamentos SET id_departamento = 15 WHERE id_departamento = 10;
+
+-- Verificar que los empleados se actualizaron automáticamente
+SELECT * FROM empleados_empresa;
+
+-- Los empleados que tenían id_departamento = 10 ahora tienen id_departamento = 15
+        </pre>
+        <p><strong>Interpretación:</strong> "Cuando cambiamos el id_departamento de 10 a 15 en la tabla departamentos, todos los empleados que tenían id_departamento = 10 se actualizaron automáticamente a 15 gracias a ON UPDATE CASCADE."</p>
+
+        <!-- <h2>Función de Agregación: COUNT()</h2>
+
+        <h3>Concepto:</h3>
+        <p>COUNT() cuenta el número de filas que cumplen cierta condición.</p>
+
+        <h4>Variantes:</h4>
+
+        <h4>COUNT(*)</h4>
+        <p>Cuenta todas las filas, incluyendo las que tienen NULL.</p>
+
+        <h4>Ejemplo:</h4>
+        <pre>
+-- Contar total de pedidos
+SELECT COUNT(*) AS total_pedidos FROM pedidos;
+        </pre>
+
+        <h4>COUNT(columna)</h4>
+        <p>Cuenta solo las filas donde la columna NO es NULL.</p>
+
+        <h4>Ejemplo:</h4>
+        <pre>
+-- Contar cuántas calificaciones hay (excluyendo NULL)
+SELECT COUNT(calificacion) AS total_calificaciones FROM inscripciones;
+        </pre>
+
+        <h4>COUNT(DISTINCT columna)</h4>
+        <p>Cuenta valores únicos en una columna.</p>
+
+        <h4>Ejemplo:</h4>
+        <pre>
+-- Contar cuántos clientes diferentes han hecho pedidos
+SELECT COUNT(DISTINCT id_cliente) AS clientes_con_pedidos FROM pedidos;
+        </pre>
+
+        <h2>COUNT con GROUP BY</h2>
+        <p>GROUP BY agrupa filas que tienen el mismo valor en columnas específicas.</p>
+
+        <h4>Ejemplos:</h4>
+        <pre>
+-- Contar cuántos pedidos tiene cada cliente
+SELECT id_cliente, COUNT(*) AS total_pedidos
+FROM pedidos
+GROUP BY id_cliente;
+
+-- Con JOIN para mostrar el nombre del cliente
+SELECT c.nombre, COUNT(p.id_pedido) AS total_pedidos
+FROM clientes c
+LEFT JOIN pedidos p ON c.id_cliente = p.id_cliente
+GROUP BY c.id_cliente, c.nombre;
+
+-- Contar estudiantes por curso
+SELECT c.nombre_curso, COUNT(i.id_estudiante) AS total_estudiantes
+FROM cursos c
+LEFT JOIN inscripciones i ON c.id_curso = i.id_curso
+GROUP BY c.id_curso, c.nombre_curso;
+        </pre>
+ -->
+
+
+        
+
+        <h2>Ejercicios Prácticos</h2>
+
+        <h3>Ejercicio 1: JOIN</h3>
+        <p>Usando las tablas de sistema_ventas:</p>
+        <ol>
+            <li>Mostrar todos los clientes y sus pedidos (incluyendo clientes sin pedidos).</li>
+            <li>Mostrar solo los clientes que tienen pedidos con estado 'Entregado'.</li>
+        </ol>
+
+        <h3>Ejercicio 2: UPDATE CASCADE</h3>
+        <ol>
+            <li>Crea una tabla productos con id_producto como PRIMARY KEY.</li>
+            <li>Crea una tabla detalles_pedido con id_producto como FOREIGN KEY con ON UPDATE CASCADE.</li>
+            <li>Inserta datos y prueba actualizar un id_producto para verificar la cascada.</li>
+        </ol>
+
+        <!-- <h3>Ejercicio 3: COUNT y agregaciones</h3>
+        <ol>
+            <li>Encuentra el curso con más estudiantes inscritos.</li>
+        </ol> -->
+    </div>
+</body>
+</html>

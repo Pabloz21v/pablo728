@@ -1,0 +1,499 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 10: Relaciones 1 a Muchos y Muchos a Muchos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+      
+      pre {
+        background: #f8f8f8;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 15px;
+        overflow-x: auto;
+        font-family: "Courier New", monospace;
+        font-size: 14px;
+        line-height: 1.4;
+        margin: 15px 0;
+      }
+
+      .sql-comment {
+        color: #008000;
+        font-style: italic;
+      }
+      code {
+        font-family: monospace;
+        background-color: #f4f4f4;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+        @media (max-width: 768px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            table,
+        pre {
+          font-size: 13px;
+          display: block;
+          overflow-x: auto;
+          width: 100%;
+        }
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .code-block {
+            background-color: #f5f5f5;
+            padding: 1%;
+            border-left: 1% solid #2c3e50;
+            margin: 1% 0;
+            font-family: monospace;
+            white-space: pre;
+            display: block;
+            overflow-x: auto;
+            width: 100%;
+        
+        }
+        .exercise {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-left: 4px solid #2c3e50;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+   
+    
+    <div class="container">
+        <div style="margin-bottom: 24px">
+      <a
+        href="../materias/conversion-y-reparacion-de-datos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="materia2-sesion9.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 9
+      </a>
+      <a
+        href="materia2-sesion11.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f59e42;
+          color: #fff;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 11
+      </a>
+    </div>
+        <h1>Sesión  10: RELACIONES 1 A MUCHOS Y MUCHOS A MUCHOS</h1>
+        <div class="section">
+            <h2>Objetivos:</h2>
+            <ul>
+                <li>Comprender y aplicar relaciones 1 a Muchos (1:N)</li>
+                <li>Comprender y aplicar relaciones Muchos a Muchos (N:M)</li>
+                <li>Practicar con INSERT y SELECT en tablas relacionadas</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Relaciones 1 a Muchos (1:N)</h2>
+            <h3>Concepto:</h3>
+            <p>Una relación 1 a Muchos significa que un registro en la tabla principal puede estar relacionado con múltiples registros en otra tabla, pero cada registro en la segunda tabla solo puede estar relacionado con un único registro de la primera.</p>
+
+            <h3>Ejemplo práctico: Clientes y Pedidos</h3>
+            <ul>
+                <li>Un cliente puede tener muchos pedidos</li>
+                <li>Cada pedido pertenece a un solo cliente</li>
+            </ul>
+
+            <h3>Script para crear las tablas:</h3>
+            <div class="code-block">
+CREATE DATABASE IF NOT EXISTS sistema_ventas;
+
+USE sistema_ventas;
+
+-- Tabla principal: clientes
+
+CREATE TABLE clientes (
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    telefono INT
+);
+
+-- Tabla relacionada: pedidos (muchos pedidos por cliente)
+
+CREATE TABLE pedidos (
+    id_pedido INT AUTO_INCREMENT PRIMARY KEY,
+    fecha_pedido DATE NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    estado VARCHAR(50) DEFAULT 'Pendiente',
+    id_cliente INT NOT NULL,
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente) ON DELETE CASCADE
+);
+            </div>
+
+            <p><strong>Interpretación:</strong> "La columna id_cliente en la tabla pedidos es una clave foránea que referencia a id_cliente en la tabla clientes. Un cliente puede tener múltiples pedidos. Al incorporar (ON DELETE CASCADE) si se elimina un cliente, todos sus pedidos también se eliminan."</p>
+
+            <h3>Inserción de datos:</h3>
+            <div class="code-block">
+-- Insertar clientes
+
+INSERT INTO clientes (nombre, email, telefono) VALUES
+('Juan Pérez', 'juan@email.com', '1234567890'),
+('María García', 'maria@email.com', '0987654321'),
+('Carlos López', 'carlos@email.com', '0987612321'),
+('Ana Martínez', 'ana@email.com', '0127612321');
+
+-- Insertar pedidos para diferentes clientes
+
+INSERT INTO pedidos (fecha_pedido, total, estado, id_cliente) VALUES
+('2025-01-15', 150.50, 'Entregado', 1),
+('2025-02-20', 320.00, 'Pendiente', 1),
+('2025-03-10', 89.99, 'Entregado', 1),
+('2025-01-25', 450.75, 'En proceso', 2),
+('2025-02-28', 210.00, 'Entregado', 2),
+('2025-03-05', 175.50, 'Pendiente', 3),
+('2025-03-15', 95.00, 'Entregado', 4);
+            </div>
+
+            <h3>Consultas básicas:</h3>
+            <div class="code-block">
+-- Mostrar todos los pedidos de un cliente específico
+
+SELECT * FROM pedidos WHERE id_cliente = 1;
+
+-- Mostrar cliente con sus pedidos usando JOIN
+
+SELECT c.nombre, p.id_pedido, p.fecha_pedido, p.total, p.estado
+FROM clientes c
+INNER JOIN pedidos p ON c.id_cliente = p.id_cliente
+WHERE c.id_cliente = 1;
+
+#interpretación: selecciona de la tabla clientes la columna nombre, de la tabla pedidos
+la columna fecha_pedido, total y estado, de la tabla clientes abreviada como c 
+al encontrar coincidencia en ambas tablas (inner join), con la tabla pedidos abreviada como p
+basado en el id_cliente de la tabla clientes sea igual al de la tabla pedidos
+donde el id_cliente de la tabla clientes sea igual a 1
+Observar que WHERE corresponde a la tabla FROM en este caso la tabla clientes.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Relaciones Muchos a Muchos (N:M)</h2>
+            <h3>Concepto:</h3>
+            <p>Una relación Muchos a Muchos significa que múltiples registros de una tabla pueden estar relacionados con múltiples registros de otra tabla.</p>
+
+            <p>Para implementar esta relación se necesita una <strong>TABLA INTERMEDIA</strong> (también llamada tabla pivote o tabla de unión) que conecte ambas tablas.</p>
+
+            <h3>Ejemplo práctico: Estudiantes y Cursos</h3>
+            <ul>
+                <li>Un estudiante puede inscribirse en muchos cursos</li>
+                <li>Un curso puede tener muchos estudiantes inscritos</li>
+                <li>Se necesita una tabla intermedia: inscripciones</li>
+            </ul>
+
+            <h3>Script para crear las tablas:</h3>
+            <div class="code-block">
+CREATE DATABASE IF NOT EXISTS sistema_escolar;
+USE sistema_escolar;
+
+-- Tabla 1: estudiantes
+
+CREATE TABLE estudiantes (
+    id_estudiante INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    fecha_nacimiento DATE,
+    email VARCHAR(100) UNIQUE
+);
+
+-- Tabla 2: cursos
+
+CREATE TABLE cursos (
+    id_curso INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_curso VARCHAR(100) NOT NULL,
+    creditos INT NOT NULL,
+    profesor VARCHAR(100) NOT NULL
+);
+
+-- Tabla intermedia: inscripciones (conecta estudiantes con cursos)
+
+CREATE TABLE inscripciones (
+    id_inscripcion INT AUTO_INCREMENT PRIMARY KEY,
+    id_estudiante INT NOT NULL,
+    id_curso INT NOT NULL,
+    fecha_inscripcion DATE NOT NULL,
+    calificacion DECIMAL(4,2) DEFAULT NULL,
+    FOREIGN KEY (id_estudiante) REFERENCES estudiantes(id_estudiante) ON DELETE CASCADE,
+    FOREIGN KEY (id_curso) REFERENCES cursos(id_curso) ON DELETE CASCADE,
+    UNIQUE(id_estudiante, id_curso) -- Un estudiante no puede inscribirse dos veces en el mismo curso
+);
+            </div>
+
+            <p><strong>Interpretación:</strong> "La tabla inscripciones contiene dos claves foráneas: una que referencia a estudiantes y otra que referencia a cursos. Esto permite que un estudiante tenga múltiples cursos y un curso tenga múltiples estudiantes. La restricción UNIQUE(id_estudiante, id_curso) evita duplicados."</p>
+
+            <h3>Inserción de datos:</h3>
+            <div class="code-block">
+-- Insertar estudiantes
+
+INSERT INTO estudiantes (nombre, apellido, fecha_nacimiento, email) VALUES
+('Pedro', 'González', '2005-03-15', 'pedro.gonzalez@escuela.com'),
+('Laura', 'Fernández', '2006-07-22', 'laura.fernandez@escuela.com'),
+('Diego', 'Rodríguez', '2005-11-08', 'diego.rodriguez@escuela.com'),
+('Sofía', 'Martínez', '2006-02-14', 'sofia.martinez@escuela.com'),
+('Lucas', 'Sánchez', '2005-09-30', 'lucas.sanchez@escuela.com');
+
+-- Insertar cursos
+
+INSERT INTO cursos (nombre_curso, creditos, profesor) VALUES
+('Matemáticas Avanzadas', 4, 'Prof. Roberto Díaz'),
+('Programación en Python', 5, 'Prof. Ana Torres'),
+('Historia Universal', 3, 'Prof. Carlos Ruiz'),
+('Física Cuántica', 4, 'Prof. María López'),
+('Literatura Contemporánea', 3, 'Prof. Juan Méndez');
+
+-- Insertar inscripciones (estudiantes inscritos en cursos)
+
+INSERT INTO inscripciones (id_estudiante, id_curso, fecha_inscripcion, calificacion) VALUES
+-- Pedro está inscrito en 3 cursos
+(1, 1, '2025-02-01', 8.5),
+(1, 2, '2025-02-01', 9.0),
+(1, 3, '2025-02-01', NULL),
+-- Laura está inscrita en 4 cursos
+(2, 1, '2025-02-02', 7.5),
+(2, 2, '2025-02-02', 8.0),
+(2, 4, '2025-02-02', 9.5),
+(2, 5, '2025-02-02', NULL),
+-- Diego está inscrito en 2 cursos
+(3, 2, '2025-02-03', NULL),
+(3, 3, '2025-02-03', 6.5),
+-- Sofía está inscrita en 3 cursos
+(4, 1, '2025-02-04', 10.0),
+(4, 4, '2025-02-04', 9.0),
+(4, 5, '2025-02-04', 8.5),
+-- Lucas está inscrito en 2 cursos
+(5, 3, '2025-02-05', 7.0),
+(5, 5, '2025-02-05', NULL);
+            </div>
+
+            <h3>Consultas con relaciones N:M:</h3>
+            <div class=>
+
+
+<pre><code><span class="sql-comment">Ver todos los cursos en los que está inscrito un estudiante específico</span>
+SELECT e.nombre, e.apellido, c.nombre_curso, i.calificacion
+FROM estudiantes e
+INNER JOIN inscripciones i ON e.id_estudiante = i.id_estudiante
+INNER JOIN cursos c ON i.id_curso = c.id_curso
+WHERE e.id_estudiante = 2;</code><br><code>
+#INTERPRETACION: selecciona de la tabla estudiantes las columnas nombre y apellido, 
+de la tabla cursos nombre_curso 
+y de la tabla inscripciones la columna calificacion
+de(from) la tabla estudiantes abrevidada como e
+al encontrar coincidencias en ambas tablas (inner join), con la tabla inscripciones abreviada como i
+basado en la columna id_estudiantes entre la tabla estudiantes e inscripciones,
+tambien al encontrar coincidencias con la tabla cursos abreviada como c
+basado en la columna id_curso entra la tabla inscripciones y cursos
+donde el id_estudiante de la tabla estudiantes sea igual a 2.</code></pre>
+
+
+
+<pre><code><span class="sql-comment">Ver todos los estudiantes inscritos en un curso específico</span>
+SELECT c.nombre_curso, e.nombre, e.apellido, i.fecha_inscripcion, i.calificacion
+FROM cursos c
+INNER JOIN inscripciones i ON c.id_curso = i.id_curso
+INNER JOIN estudiantes e ON i.id_estudiante = e.id_estudiante
+WHERE c.id_curso = 1;</code><br><code>
+#INTERPRETACION: selecciona de la tabla cursos nombre_curso 
+de la tabla estudiantes las columnas nombre y apellido, 
+y de la tabla inscripciones la columna fecha_inscripcion y calificacion
+de(from) la tabla cursos abrevidada como c
+al encontrar coincidencias en ambas tablas (inner join), con la tabla inscripciones abreviada como i
+basado en la columna id_curso entre la tabla cursos e inscripciones,
+tambien al encontrar coincidencias con la tabla estudiantes abreviada como e
+basado en la columna id_estudiante entra la tabla inscripciones y estudiantes
+donde el id_curso de la tabla cursos sea igual a 1.</code></pre>
+
+<!-- <pre><code><span class="sql-comment">Contar cuántos estudiantes tiene cada curso</span>
+SELECT c.nombre_curso, COUNT(i.id_estudiante) AS total_estudiantes
+FROM cursos c
+LEFT JOIN inscripciones i ON c.id_curso = i.id_curso
+GROUP BY c.id_curso, c.nombre_curso;</code><br><code>
+#INTERPRETACION: selecciona de la tabla cursos nombre_curso 
+y cuenta (count) la columna id_estudiante de la tabla inscripciones y nombrarla como total_estudiantes
+(asi se llamará la columna que aparecerá en el filtro con el resultado del conteo)
+de(from) la tabla cursos abrevidada como c
+mostrando todos los registros de la primer tabla "cursos"
+y los datos que coincidan de la segunda tabla (LEFT JOIN),
+osea tabla inscripciones abreviada como i
+basado en la columna id_curso entre la tabla cursos e inscripciones,
+agrupadas por id_curso y luego nombre_curso de la tabla cursos</code></pre> -->
+
+<!-- <pre><code><span class="sql-comment">Contar cuántos cursos tiene cada estudiante</span>
+SELECT e.nombre, e.apellido, COUNT(i.id_curso) AS total_cursos
+FROM estudiantes e
+LEFT JOIN inscripciones i ON e.id_estudiante = i.id_estudiante
+GROUP BY e.id_estudiante, e.nombre, e.apellido;</code><br><code>
+#INTERPRETACION: selecciona de la tabla estudiantes nombre, apellido
+y cuenta (count) la columna id_estudiante de la tabla inscripciones y nombrarla como total_cursos
+(asi se llamará la columna que aparecerá en el filtro con el resultado del conteo)
+de(from) la tabla estudiantes abrevidada como e
+mostrando todos los registros de la primer tabla "estudiantes"
+y los datos que coincidan de la segunda tabla (LEFT JOIN),
+osea tabla inscripciones abreviada como i
+basado en la columna id_estudiante entre la tabla estudiantes e inscripciones,
+agrupadas por id_estudiante, luego nombre y finalizar por apellidos de la tabla estudiantes</code></pre> -->
+
+
+
+
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Diferencias entre las relaciones</h2>
+            <table>
+                <tr>
+                    <th>Tipo de Relación</th>
+                    <th>Descripción</th>
+                    <th>Ejemplo</th>
+                </tr>
+                <tr>
+                    <td>Relación 1:1</td>
+                    <td>Una fila de tabla A se relaciona con UNA fila de tabla B</td>
+                    <td>Cliente - Dirección</td>
+                </tr>
+                <tr>
+                    <td>Relación 1:N</td>
+                    <td>Una fila de tabla A se relaciona con MUCHAS filas de tabla B</td>
+                    <td>Cliente - Pedidos</td>
+                </tr>
+                <tr>
+                    <td>Relación N:M</td>
+                    <td>Muchas filas de tabla A se relacionan con MUCHAS filas de tabla B</td>
+                    <td>Estudiantes - Cursos (necesita tabla intermedia)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Ejercicios Prácticos</h2>
+
+            <div class="exercise">
+                <h3>Ejercicio 1: Sistema de Biblioteca (1:N)</h3>
+                <h3>Pueden crear sus propias tablas con la tematica que deseen, no olviden pensar que es una relacion de 1 a muchos, ó respetar la ofrecida</h3>
+                <p>Crea las siguientes tablas:</p>
+                <ul>
+                    <li>autores (id_autor, nombre, nacionalidad, fecha_nacimiento)</li>
+                    <li>libros (id_libro, titulo, año_publicacion, genero, id_autor)</li>
+                </ul>
+                <p><strong>Requisitos:</strong></p>
+                <ul>
+                    <li>Un autor puede escribir muchos libros, pero cada libro tiene un solo autor</li>
+                    <li>Inserta 3 autores y al menos 6 libros</li>
+                    <li>Consulta todos los libros de un autor específico</li>
+                </ul>
+            </div>
+
+            <div class="exercise">
+                <h3>Ejercicio 2: Sistema de Proyectos (N:M)</h3>
+                <h3>Pueden crear sus propias tablas con la tematica que deseen, no olviden pensar que es una relacion de muchos a muchos, ó respetar la ofrecida</h3>
+
+                <p>Crea las siguientes tablas:</p>
+                <ul>
+                    <li>empleados (id_empleado, nombre, puesto, salario)</li>
+                    <li>proyectos (id_proyecto, nombre_proyecto, presupuesto, fecha_inicio)</li>
+                    <li>asignaciones (id_asignacion, id_empleado, id_proyecto, horas_asignadas, rol)</li>
+                </ul>
+                <p><strong>Requisitos:</strong></p>
+                <ul>
+                    <li>Un empleado puede trabajar en varios proyectos y un proyecto puede tener varios empleados</li>
+                    <li>Inserta 4 empleados y 3 proyectos</li>
+                    <li>Crea al menos 7 asignaciones</li>
+                    <li>Consulta todos los proyectos de un empleado</li>
+                    <li>Consulta todos los empleados de un proyecto</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
