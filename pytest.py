@@ -1,11 +1,19 @@
-productos = ["laptop", "mouse", "teclado", "monitor"]
-precios = [899.99, 25.50, 75.00, 199.99]
+calificaciones = [8.5, 6.0, 9.5, 7.0, 5.5, 10.0, 8.0]
+nombres = ["Pedro", "Lucía", "Miguel", "Ana", "Carlos", "Sofía", "Diego"]
 
-productos_info = [f"{producto.title()}: ${precio}" for producto, precio in zip(productos, precios)]
-productos_descuento = [f"{producto.title()} (con descuento)" for producto, precio in zip(productos, precios) if precio > 100]
+aprobados = []
+reprobados = []
 
-print("Información de productos:")
-for info in productos_info:
-    print(f"- {info}")
+print("=== REPORTE DE CALIFICACIONES ===")
 
-print(f"\nProductos con descuento: {productos_descuento}")
+for nombre, calificacion in zip(nombres, calificaciones):
+    if calificacion >= 7.0:
+        estado = "APROBADO"
+        aprobados.append(nombre)
+    else:
+        estado = "REPROBADO"
+        reprobados.append(nombre)
+    print(f"{nombre}: {calificacion} - {estado}")
+
+print(f"\nEstudiantes aprobados ({len(aprobados)}): {aprobados}")
+print(f"Estudiantes reprobados ({len(reprobados)}): {reprobados}")

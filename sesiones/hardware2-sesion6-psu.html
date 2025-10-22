@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 6 – PSU y Refrigeración (Actualizado 2025)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #2c3e50;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      pre {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        border-left: 4px solid #3498db;
+      }
+      code {
+        font-family: monospace;
+        background-color: #f8f9fa;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+        table {
+          font-size: 14px;
+        }
+        th,
+        td {
+          padding: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-dos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="../sesiones/hardware2-sesion5-gpu.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #a9c8e2;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 5
+        </a>
+        <!-- <a
+        href="../sesiones/hardware2-sesion7.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #a9c8e2;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 7
+      </a> -->
+      </div>
+      <h1>Sesión 6 – PSU y Refrigeración</h1>
+
+      
+
+      <h2>Factores que Encarecen PSU y Refrigeración</h2>
+
+      <h3>Resumen Visual PSU: ¿Qué Pagas Extra?</h3>
+      <pre>
+Precio Base PSU (ej. 500W 80+ White no-modular) → $45 USD / $54,000 ARS
+│ ├── +$15 USD → Certificación 80+ Bronze vs White
+│ │ │ ├── +$25 USD → 80+ Gold vs Bronze (eficiencia 87% vs 85%)
+│ │ │ │ │ ├── +$35 USD → Modular vs no-modular
+│ │ │ │ │ │ │ ├── +$50 USD → Single-rail design + protecciones premium
+│ │ │ │ │ │ │ │ │ │ │ └── +$120 USD → Marca Tier S (Seasonic Prime, Corsair AX)
+│ │ │ │ │ │ │ │ │ └── +$100 USD → Mayor wattage (850W+ vs 650W)
+│ │ │ │ │ │ │
++$60 USD → Bajo ruido (modo fanless, ventiladores premium)
+│ │ │ │ │ └── +$40 USD → Condensadores japoneses + garantía de 10 años
+│ │ │ └── +$30 USD → Semi-modular vs cables fijos
+└── +$200 USD → PSU para servidor/workstation (redundancia hot-swap)
+        </pre
+      >
+
+      <h3>Resumen Visual Refrigeración: ¿Qué Pagas Extra?</h3>
+      <pre>
+Precio Base Cooling (ej. Cooler stock incluido) → $0 USD
+│ ├── +$20 USD → Cooler tipo torre básico (4 heatpipes, ventilador 120mm)
+│ │ │ ├── +$35 USD → Cooler premium (6+ heatpipes, doble ventilador, bajo perfil)
+│ │ │ │ │ ├── +$50 USD → Alto rendimiento (NH-D15, Dark Rock Pro 4)
+│ │ │ │ │ │ │ ├── +$70 USD → AIO 240mm básico vs equivalente en aire
+│ │ │ │ │ │ │ │ │ │ │ └── +$100 USD → AIO 280/360mm premium (Corsair H150i)
+│ │ │ │ │ │ │ │ │ │ └── +$200 USD → Personalizado (bloques, radiadores, accesorios)
+│ │ │ │ │ │ │ │ │ └── +$80 USD → RGB + ecosistema de control por software
+│ │ │ │ │ │
+└── +$40 USD → Pasta térmica premium + kit de instalación
+│ │ │ │ │ └── +$25 USD → Kit de compatibilidad multi-sockets
+│ │ │ └── +$15 USD → Pasta térmica aftermarket vs stock
+└── +$500 USD → Refrigeración para servidor (1U/2U rackmount, ventiladores redundantes)
+        </pre
+      >
+
+      <h2>Conceptos Clave - PSU (Fuente de Alimentación)</h2>
+
+      <h3>Certificaciones de Eficiencia 80+</h3>
+      <table>
+        <tr>
+          <th>Certificación</th>
+          <th>Eficiencia 20%</th>
+          <th>Eficiencia 50%</th>
+          <th>Eficiencia 100%</th>
+        </tr>
+        <tr>
+          <td>80+ White</td>
+          <td>80%</td>
+          <td>80%</td>
+          <td>80%</td>
+        </tr>
+        <tr>
+          <td>80+ Bronze</td>
+          <td>82%</td>
+          <td>85%</td>
+          <td>82%</td>
+        </tr>
+        <tr>
+          <td>80+ Gold</td>
+          <td>87%</td>
+          <td>90%</td>
+          <td>87%</td>
+        </tr>
+        <tr>
+          <td>80+ Platinum</td>
+          <td>90%</td>
+          <td>92%</td>
+          <td>89%</td>
+        </tr>
+        <tr>
+          <td>80+ Titanium</td>
+          <td>92%</td>
+          <td>94%</td>
+          <td>90%</td>
+        </tr>
+      </table>
+
+      <!-- <h4>Cálculo de Eficiencia:</h4>
+      <p>Potencia DC Output ÷ Potencia AC Input × 100 = % Eficiencia</p>
+      <p>
+        <strong>Ejemplo:</strong> 500W output ÷ 588W input × 100 = 85% (80+
+        Bronze)
+      </p> -->
+
+      <h3>Topologías de Rail Design</h3>
+
+      <h4>Multi-Rail Design</h4>
+      <ul>
+        <li>
+          <strong>Ventaja:</strong> Protección independiente por rail
+          (típicamente 20A/rail).
+        </li>
+        <li>
+          <strong>Limitación:</strong> Componentes high-current pueden activar
+          OCP prematuro.
+        </li>
+        <li>
+          <strong>Uso ideal:</strong> Sistemas con consumo distribuido
+          uniformemente.
+        </li>
+        <li>
+          <strong>Seguridad:</strong> Mejor aislamiento ante fallas localizadas.
+        </li>
+      </ul>
+
+      <h4>Single Rail Design</h4>
+      <ul>
+        <li>
+          <strong>Ventaja:</strong> Mayor flexibilidad distribución de
+          corriente.
+        </li>
+        <li>
+          <strong>Protección:</strong> OCP global, generalmente 40-50A en +12V.
+        </li>
+        <li>
+          <strong>Uso ideal:</strong> GPUs high-end que demandan >30A
+          momentáneamente.
+        </li>
+        <li>
+          <strong>Riesgo:</strong> Fallo en un componente puede afectar todo el
+          rail.
+        </li>
+      </ul>
+
+      <h3>Protecciones Críticas del PSU</h3>
+      <table>
+        <tr>
+          <th>Protección</th>
+          <th>Siglas</th>
+          <th>Función</th>
+          <th>Trigger Típico</th>
+        </tr>
+        <tr>
+          <td>Protección contra Sobrecorriente</td>
+          <td>OCP</td>
+          <td>Limita corriente máxima por rail</td>
+          <td>>110% de la corriente nominal</td>
+        </tr>
+        <tr>
+          <td>Protección contra Sobretensión</td>
+          <td>OVP</td>
+          <td>Apaga el sistema si el voltaje supera el rango seguro</td>
+          <td>+12V > 13.2V</td>
+        </tr>
+        <tr>
+          <td>Protección contra Subtensión</td>
+          <td>UVP</td>
+          <td>Apaga el sistema si el voltaje es demasiado bajo</td>
+          <td>+12V < 10.8V</td>
+        </tr>
+        <tr>
+          <td>Protección contra Sobrepotencia</td>
+          <td>OPP</td>
+          <td>Apaga el sistema si la potencia total es excedida</td>
+          <td>>110% de la potencia nominal</td>
+        </tr>
+        <tr>
+          <td>Protección contra Cortocircuito</td>
+          <td>SCP</td>
+          <td>Protege ante cortocircuitos</td>
+          <td>Resistencia < 0.1Ω</td>
+        </tr>
+        <tr>
+          <td>Protección contra Sobretemperatura</td>
+          <td>OTP</td>
+          <td>Apaga el sistema por temperatura excesiva interna</td>
+          <td>>80°C interna</td>
+        </tr>
+      </table>
+
+      <h3>Tipos de Modularidad</h3>
+
+      <h4>No modular (cables fijos)</h4>
+      <ul>
+        <li><strong>Precio:</strong> Más económico ($10-20 USD menos).</li>
+        <li>
+          <strong>Manejo de cables:</strong> Desafiante, cables sobrantes pueden
+          acumularse y dificultar la organización
+        </li>
+        <li>
+          <strong>Flujo de aire:</strong> Puede impactar negativamente
+          (obstrucción por cables no utilizados)
+        </li>
+        <li>
+          <strong>Confiabilidad:</strong> Mayor confiabilidad (conexiones
+          soldadas directamente)
+        </li>
+        <li>
+          <strong>Uso ideal:</strong> Equipos con presupuesto ajustado o
+          gabinetes con buen manejo de cables
+        </li>
+      </ul>
+
+      <h4>Modular</h4>
+      <ul>
+        <li><strong>Flexibilidad:</strong> Todos los cables removibles.</li>
+        <li>
+          <strong>Estética:</strong> Máximo orden de cables, permite uso de
+          cables personalizados
+        </li>
+        <li>
+          <strong>Precio premium:</strong>Premium (aproximadamente $20-40 USD
+          más que las semi-modulares)
+        </li>
+        <li>
+          <strong>Riesgo:</strong> Más puntos de conexión = posibles puntos de
+          falla adicionales points.
+        </li>
+        <li>
+          <strong>Uso ideal:</strong> Equipos de alta gama o builds con enfoque
+          en estética y personalización
+        </li>
+      </ul>
+
+      <h4>Semi-Modular</h4>
+      <ul>
+        <li>
+          <strong>Cables fijos:</strong> Solo los esenciales: 24-pin ATX y
+          4+4-pin CPU
+        </li>
+        <li>
+          <strong>Cables modulares:</strong> PCIe, SATA, Molex (removibles según
+          necesidad)
+        </li>
+        <li>
+          <strong>Balance:</strong> Punto óptimo entre precio y funcionalidad
+        </li>
+        <li>
+          <strong>Manejo de cables:</strong> Significativamente mejor que las
+          non-modular
+        </li>
+        <li>
+          <strong>Uso ideal:</strong> La mayoría de equipos gaming o
+          workstations
+        </li>
+      </ul>
+
+      <h4>Cálculo de Capacidad PSU:</h4>
+      <p>PSU Capacidad = (CPU TDP + GPU TGP + 100W overhead) ÷ 0.8</p>
+      <p>
+        Overhead: 100W adicionales para ventiladores, discos, periféricos, etc.
+      </p>
+      <p>
+        Eficiencia: Se divide por 0.8 para compensar pérdidas (80% de eficiencia
+        típica).
+      </p>
+      <p>
+        <strong>Ejemplo:</strong> (125W i7 + 320W RTX 4080 + 100W) ÷ 0.8 = 681W
+        → PSU 750W recomendada
+      </p>
+      <p>
+        Recomendación: Redondear siempre al modelo comercial superior (ej: 681W
+        → 750W).
+      </p>
+      <h2>Conceptos Clave - Refrigeración</h2>
+
+      <h3>Fundamentos de Transferencia de Calor</h3>
+      <ul>
+        <li>
+          <strong>Conducción:</strong> CPU/GPU → IHS → pasta térmica → base del
+          disipador.
+        </li>
+        <li>
+          <strong>Convección:</strong> Aletas del disipador → flujo de aire →
+          extracción del gabinete.
+        </li>
+        
+      </ul>
+
+      
+
+      <h3>Air Cooling - Tipos y Arquitecturas</h3>
+
+      <h4>Stock Coolers (Incluidos con CPU)</h4>
+      <ul>
+        <li>
+          <strong>Intel:</strong> Laminar RM1 (LGA1700), adecuado para CPUs
+          no-K.
+        </li>
+        <li>
+          <strong>AMD:</strong> Wraith Stealth/Prism, competitivo con
+          aftermarket básico.
+        </li>
+        <li><strong>TDP Rating:</strong> 65-95W típicamente.</li>
+        <li>
+          <strong>Limitaciones:</strong> Ruido, temperatura bajo carga
+          sostenida.
+        </li>
+      </ul>
+
+      <h4>Tower Coolers</h4>
+      <ul>
+        <li>
+          <strong>Single Tower:</strong> 4-6 heatpipes, ventilador 120mm, TDP
+          150-180W.
+        </li>
+        <li>
+          <strong>Dual Tower:</strong> 6-8 heatpipes, doble ventilador
+          120/140mm, TDP 200-250W.
+        </li>
+        <li>
+          <strong>Heatpipe material:</strong> Cobre (performance) vs aluminio
+          (costo).
+        </li>
+        <li><strong>Contacto:</strong> Direct touch vs base niquelada.</li>
+      </ul>
+
+      <h4>Low-Profile Coolers</h4>
+      <ul>
+        <li><strong>Altura límite:</strong> <70mm para gabinetes ITX/HTPC.</li>
+        <li><strong>TDP capacity:</strong> 95-130W máximo.</li>
+        <li>
+          <strong>Compromiso de diseño:</strong> Ventiladores más pequeños =
+          mayor RPM = más ruido.
+        </li>
+      </ul>
+
+      <h3>Liquid Cooling - AIO vs Custom Loop</h3>
+
+      <h4>AIO (All-In-One) Cooling</h4>
+      <ul>
+        <li>
+          <strong>Tamaños:</strong> 120mm (básico), 240mm (punto ideal),
+          280/360mm (premium).
+        </li>
+        <li>
+          <strong>Ubicación de la bomba:</strong> Bloque de CPU (preferido) vs
+          montado en radiador.
+        </li>
+        <li>
+          <strong>Tuberías:</strong> Caucho vs trenzado, flexibilidad de
+          longitud.
+        </li>
+        <li>
+          <strong>Mantenimiento:</strong> Mínimo, sistema sellado, 5-7 años de
+          vida útil.
+        </li>
+        <li>
+          <strong>Modos de falla:</strong> Muerte de la bomba, fugas lentas,
+          burbujas de aire.
+        </li>
+      </ul>
+
+      <h4>Custom Loop Cooling</h4>
+      <ul>
+        <li>
+          <strong>Componentes:</strong> Bloque de CPU, bloque de GPU,
+          radiadores, bomba, depósito.
+        </li>
+        <li>
+          <strong>Tuberías:</strong> Tubo rígido (estética) vs tubo flexible
+          (flexibilidad).
+        </li>
+        <li>
+          <strong>Refrigerante:</strong> Agua destilada + biocida vs soluciones
+          premix.
+        </li>
+        <li>
+          <strong>Mantenimiento:</strong> Drenaje/anual, limpieza de
+          componentes.
+        </li>
+        <li>
+          <strong>Performance:</strong> Superior a AIO, especialmente
+          multi-componente.
+        </li>
+        <li>
+          <strong>Costo:</strong> $300-800 USD setup, excluyendo mano de obra.
+        </li>
+      </ul>
+
+      <h3>Compatibilidad de socket y montaje</h3>
+      
+
+      <h4>Siempre verificar la compatibilidad con la motherboard debido a que cada una tiene su forma de anclaje</h4>
+      
+
+      <h3>Thermal Compounds (Pasta Térmica)</h3>
+      <table>
+        <tr>
+          <th>Tipo</th>
+          <th>Conductividad (W/mK)</th>
+          <th>Precio</th>
+          <th>Durabilidad</th>
+          <th>Ejemplo</th>
+        </tr>
+        <tr>
+          <td>Stock (incluida)</td>
+          <td>0.7-1.5</td>
+          <td>$0</td>
+          <td>2-3 años</td>
+          <td>Intel/AMD stock paste</td>
+        </tr>
+        <tr>
+          <td>Base cerámica</td>
+          <td>1.5-3.0</td>
+          <td>$5-8 USD</td>
+          <td>3-5 años</td>
+          <td>Arctic MX-4, Noctua NT-H1</td>
+        </tr>
+        <tr>
+          <td>Base metálica</td>
+          <td>3.0-8.0</td>
+          <td>$8-15 USD</td>
+          <td>5-8 años</td>
+          <td>Thermal Grizzly Kryonaut</td>
+        </tr>
+        <tr>
+          <td>Metal líquido</td>
+          <td>38-73</td>
+          <td>$10-20 USD</td>
+          <td>Permanente*</td>
+          <td>Conductonaut, der8auer Carbonaut</td>
+        </tr>
+      </table>
+
+      
+
+      <h3>Configuración de Flujo de Aire y Presión en Gabinetes</h3>
+
+      <h4>Presión Balanceada</h4>
+      <ul>
+        <li><strong>Configuración ideal:</strong> Igual CFM intake/exhaust.</li>
+        <li><strong>Intake:</strong> Frontal/inferior (aire frío).</li>
+        <li>
+          <strong>Exhaust:</strong> Trasero/superior (aire caliente sube
+          naturalmente).
+        </li>
+      </ul>
+
+      <h4>Presión Negativa (Exhaust > Intake)</h4>
+      <ul>
+        <li>
+          <strong>Ventaja:</strong> Mejor temperatura de componentes en algunos
+          casos.
+        </li>
+        <li>
+          <strong>Desventaja:</strong> Acumulación de polvo a través de gaps no
+          filtrados.
+        </li>
+        <li>
+          <strong>Configuración:</strong> 1 intake frontal + 2-3 exhaust
+          (trasero + superior).
+        </li>
+      </ul>
+
+      <h4>Presión Positiva(Intake > Exhaust)</h4>
+      <ul>
+        <li>
+          <strong>Ventaja:</strong> Reduce acumulación de polvo, filtración de
+          aire efectiva.
+        </li>
+        <li>
+          <strong>Configuración:</strong> 2-3 intake frontal + 1 exhaust
+          trasero.
+        </li>
+        <li>
+          <strong>Ideal para:</strong> Ambientes con polvo, mantenimiento
+          mínimo.
+        </li>
+      </ul>
+
+      
+
+      <h2>Tipos de Uso y Características Esenciales</h2>
+
+      <h3>Ofimática Básica</h3>
+      <p>
+        <strong>Objetivo:</strong> Operación silenciosa, bajo consumo,
+        confiabilidad a largo plazo.
+      </p>
+
+      <h4>PSU - Características Críticas (🟢):</h4>
+      <ul>
+        <li>Capacidad: 400-500W suficiente (iGPU + CPU low-power).</li>
+        <li>Eficiencia: 80+ Bronze mínimo (ahorro en factura eléctrica).</li>
+        <li>Ruido: <20dB idle, modo fanless si posible.</li>
+        <li>Confiabilidad: 80,000+ MTBF, garantía 5+ años.</li>
+      </ul>
+
+      <h4>Cooling - Características Críticas (🟢):</h4>
+      <ul>
+        <li>Stock cooler suficiente para CPUs 65W TDP.</li>
+        <li>Prioridad de ruido: <25dB bajo carga.</li>
+        <li>Gabinete: 2 ventiladores (1 intake + 1 exhaust) adecuado.</li>
+      </ul>
+
+      <h4>Irrelevantes (🔴):</h4>
+      <ul>
+        <li>Cables modulares, 80+ Gold+.</li>
+        <li>Refrigeración de alta gama, RGB.</li>
+        <li>Capacidad de alta potencia en PSU.</li>
+      </ul>
+
+      <h3>Gaming Mainstream (1080p/1440p)</h3>
+      <p>
+        <strong>Objetivo:</strong> Performance estable, margen térmico,
+        capacidad de actualización.
+      </p>
+
+      <h4>PSU - Características Críticas (🟢):</h4>
+      <ul>
+        <li>Capacidad: 650-750W (Ryzen 5/7 + RTX 4060/4070 class).</li>
+        <li>Modularidad: Semi-modular recomendado (gestión de cables).</li>
+        <li>Single rail: Mejor para GPUs high-current.</li>
+        <li>Protecciones: OCP/OVP/UVP implementadas correctamente.</li>
+      </ul>
+
+      <h4>Cooling - Características Críticas (🟢):</h4>
+      <ul>
+        <li>CPU: Cooler tipo torre 160W+ TDP rating.</li>
+        <li>GPU: Refrigeración aftermarket (doble/triple ventilador).</li>
+        <li>Gabinete: 3-4 ventiladores óptimos (2 intake + 2 exhaust).</li>
+        <li>Control PWM: Curvas de temperatura-respuesta.</li>
+      </ul>
+
+      <h4>Características Útiles (🟡):</h4>
+      <ul>
+        <li>Eficiencia 80+ Gold (ahorro eléctrico a largo plazo).</li>
+        <li>AIO 240mm si estética/espacio es importante.</li>
+        <li>Integración de ecosistema RGB.</li>
+      </ul>
+
+      <h3>Gaming High-End (4K, Enthusiast)</h3>
+      <p>
+        <strong>Objetivo:</strong> Máximo rendimiento, capacidad de
+        overclocking, características premium.
+      </p>
+
+      <h4>PSU - Características Críticas (🟢):</h4>
+      <ul>
+        <li>Capacidad: 850W+ (i9/Ryzen 9 + RTX 4080/4090).</li>
+        <li>Eficiencia: 80+ Gold mínimo, Platinum preferido.</li>
+        <li>Totalmente modular: Estética de cables personalizados.</li>
+        <li>Single rail high-amperage: 70A+ en +12V.</li>
+        <li>Low ripple: <30mV todos los rails.</li>
+      </ul>
+
+      <h4>Cooling - Características Críticas (🟢):</h4>
+      <ul>
+        <li>CPU: AIO 280/360mm o aire premium (NH-D15 class).</li>
+        <li>GPU: Refrigeración personalizada o soluciones híbridas.</li>
+        <li>Gabinete: 6+ ventiladores, presión/temperatura optimizada.</li>
+        <li>Monitoreo térmico: Múltiples sensores, control de ventiladores.</li>
+      </ul>
+
+      <h3>Workstation (Content Creation, IA/ML)</h3>
+      <p>
+        <strong>Objetivo:</strong> Estabilidad 24/7, eficiencia bajo carga
+        sostenida, opciones de redundancia.
+      </p>
+
+      <h4>PSU - Características Críticas (🟢):</h4>
+      <ul>
+        <li>Capacidad: 1000W+ (configuraciones multi-GPU).</li>
+        <li>80+ Platinum/Titanium: ROI en ahorro eléctrico.</li>
+        <li>Grado industrial: Condensadores japoneses, garantía extendida.</li>
+        <li>Bajo ruido: Modo fanless hasta 40-50% load.</li>
+        <li>Multiple +12V rails si multi-GPU.</li>
+      </ul>
+
+      <h4>Cooling - Características Críticas (🟢):</h4>
+      <ul>
+        <li>
+          CPU: Loop personalizado o AIO premium para workloads sostenidos.
+        </li>
+        <li>GPU: Estilo blower en multi-GPU, flujo de aire crítico.</li>
+        <li>Redundancia: Capacidad de doble PSU en chasis de servidor.</li>
+        <li>
+          Monitoreo: Registro de temperatura/potencia para mantenimiento
+          predictivo.
+        </li>
+      </ul>
+
+      <h3>Servidor/NAS (Operación 24/7)</h3>
+      <p>
+        <strong>Objetivo:</strong> Máxima confiabilidad, eficiencia, gestión
+        remota, bajo ruido.
+      </p>
+
+      <h4>PSU - Características Críticas (🟢):</h4>
+      <ul>
+        <li>Grado servidor: Capacidad de PSU redundante.</li>
+        <li>80+ Platinum mínimo: Costos operativos críticos.</li>
+        <li>Rango de entrada amplio: 90-264V AC compatibility.</li>
+        <li>Hot-swap capability en chasis empresariales.</li>
+        <li>PMbus/I2C: Monitoreo y gestión remota.</li>
+      </ul>
+
+      <h4>Cooling - Características Críticas (🟢):</h4>
+      <ul>
+        <li>CPU de bajo consumo: 35-65W TDP, refrigeración pasiva posible.</li>
+        <li>Ventiladores redundantes: Configuración N+1.</li>
+        <li>Filtrado de polvo: Presión positiva, filtros lavables.</li>
+        <li>Monitoreo de temperatura: Integración IPMI/BMC.</li>
+      </ul>
+
+      <h3>HTPC/Media Center</h3>
+      <p>
+        <strong>Objetivo:</strong> Operación silenciosa, factor de forma
+        compacto, eficiencia.
+      </p>
+
+      <h4>PSU - Características Críticas (🟢):</h4>
+      <ul>
+        <li>Formato SFX/SFX-L para gabinetes ITX.</li>
+        <li>Fanless o semi-fanless operation.</li>
+        <li>80+ Gold para reducción de calor.</li>
+        <li>Cables compactos: Non-modular aceptable si bien enrutado.</li>
+      </ul>
+
+      <h4>Cooling - Características Críticas (🟢):</h4>
+      <ul>
+        <li>Cooler bajo perfil: <70mm altura.</li>
+        <li>Refrigeración pasiva posible para APUs 65W.</li>
+        <li>Ventiladores de gabinete 120mm máximo (limitación de ruido).</li>
+        <li>Resistencia al polvo: Diseño de gabinete cerrado.</li>
+      </ul>
+
+      <h2>Tabla de Recomendaciones por TDP y Presupuesto</h2>
+
+      <table>
+        <tr>
+          <th>CPU TDP</th>
+          <th>Cooler Económico</th>
+          <th>Cooler Mainstream</th>
+          <th>Cooler Premium</th>
+          <th>Capacidad PSU</th>
+        </tr>
+        <tr>
+          <td>35-65W</td>
+          <td>Stock cooler</td>
+          <td>Hyper 212 ($25)</td>
+          <td>NH-U12S ($50)</td>
+          <td>450-550W</td>
+        </tr>
+        <tr>
+          <td>95-125W</td>
+          <td>Hyper 212 ($25)</td>
+          <td>Scythe Fuma 2 ($60)</td>
+          <td>NH-D15 ($100)</td>
+          <td>550-650W</td>
+        </tr>
+        <tr>
+          <td>150-170W</td>
+          <td>Scythe Fuma 2 ($60)</td>
+          <td>AIO 240mm ($80)</td>
+          <td>AIO 360mm ($120)</td>
+          <td>650-750W</td>
+        </tr>
+        <tr>
+          <td>200W+</td>
+          <td>AIO 240mm ($80)</td>
+          <td>AIO 360mm ($120)</td>
+          <td>Custom loop ($300+)</td>
+          <td>850W+</td>
+        </tr>
+      </table>
+
+
+      <h2>Checklist de Selección PSU y Refrigeración</h2>
+
+      <h3>Verificación Pre-Compra PSU:</h3>
+      <ul>
+        <li>Cálculo de wattage: Peak load + 20-30% margen mínimo.</li>
+        <li>Recuento de conectores: Requisitos de PCIe 8-pin, SATA, Molex.</li>
+        <li>
+          Compatibilidad de formato: ATX/SFX se ajusta a la bahía de PSU del
+          gabinete.
+        </li>
+        <li>Certificación de eficiencia: Mínimo 80+ Bronze, Gold preferido.</li>
+        <li>
+          Necesidades modulares: Gestión de cables vs restricciones de
+          presupuesto.
+        </li>
+        <li>
+          Reputación de la marca: Verificar listas de niveles de PSU, reseñas.
+        </li>
+        <li>Cobertura de garantía: Disponibilidad de servicio local.</li>
+        <li>Diseño de rail: Single vs multi-rail según requisitos de GPU.</li>
+      </ul>
+
+      <h3>Verificación Pre-Compra Refrigeración:</h3>
+      <ul>
+        <li>
+          Compatibilidad TDP: Clasificación del cooler > TDP de CPU + margen de
+          overclocking.
+        </li>
+        <li>Compatibilidad de socket: Kit de montaje incluido/disponible.</li>
+        <li>Clearance del gabinete: Altura, ancho medidos.</li>
+        <li>
+          Compatibilidad de socket: Verificar antes de comprar, los sistemas de
+          montaje evolucionan.
+        </li>
+      </ul>
+
+
+
+      <h2>Preguntas </h2>
+
+      <ol>
+        <!-- <li>
+          ¿Cuál es la diferencia práctica entre single rail y multi rail PSU
+          design? ¿En qué escenarios cada uno es preferible y por qué?
+        </li> -->
+        <li>
+          Un sistema consume 520W peak load. ¿Qué capacidad de PSU
+          recomendarías? Justifica el cálculo incluyendo consideraciones de
+          eficiencia y margen.
+        </li>
+        <li>
+          ¿Por qué la pasta térmica de metal líquido no es recomendable para
+          usuarios promedio? Investiga riesgos vs beneficios y alternativas más
+          seguras.
+        </li>
+        <li>
+          ¿Cómo diagnosticarías si un sobrecalentamiento es causado por pasta
+          térmica degradada vs capacidad insuficiente del cooler? Describe el
+          proceso de solución de problemas paso a paso.
+        </li>
+        <li>
+          ¿Qué ventajas técnicas tiene un PSU 80+ Titanium vs 80+ Gold? ¿En qué
+          casos justifica el costo premium en Argentina?
+        </li>
+        <!-- <li>
+          Para un AIO 240mm, ¿es mejor montar el radiador como intake o exhaust?
+          Analiza el impacto en las temperaturas de la CPU y térmicas generales
+          del sistema.
+        </li> -->
+        <!-- <li>
+          ¿Por qué OCP (Over Current Protection) puede causar shutdowns en
+          sistemas con GPUs modernas? ¿Cómo se soluciona sin comprometer la
+          seguridad?
+        </li> -->
+        <li>
+          Un cliente quiere el sistema más silencioso posible para una
+          workstation de edición de video. ¿Qué PSU recomendarias?
+        </li>
+        <!-- <li>
+          ¿Cómo calcularías el ROI de actualizar de 80+ Bronze a 80+ Gold PSU?
+          Incluye costos de electricidad argentinos y patrones de uso típicos.
+        </li> -->
+        <li>
+          ¿Qué factores determinan si un gabinete necesita presión positiva,
+          negativa o balanceada? Considera polvo, temperaturas de componentes y
+          requisitos de mantenimiento.
+        </li>
+        
+      </ol>
+
+    </div>
+  </body>
+</html>
