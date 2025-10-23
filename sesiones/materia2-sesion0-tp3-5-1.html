@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP3 MySQL - Trabajo Práctico Integrador Final</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #2c3e50;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      pre {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        border-left: 4px solid #3498db;
+      }
+      code {
+        font-family: monospace;
+        background-color: #f8f9fa;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+        table {
+          font-size: 14px;
+        }
+        th,
+        td {
+          padding: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+      </div>
+      <h1>TP3 MySQL - Trabajo Práctico Integrador Final</h1>
+
+      <h2>Instrucciones Generales</h2>
+      <p>
+        En grupos de entre 4 integrantes deberán realizar el siguiente trabajo
+        práctico integrador.
+      </p>
+
+      <h3>IMPORTANTE:</h3>
+      <ul>
+        <li>Ir guardando todos los códigos SQL en un archivo Word.</li>
+        <li>La entrega se realiza por EMAIL.</li>
+        <li>Debe incluir los nombres y apellidos de todos los integrantes.</li>
+        <li>Fecha de entrega: En cuanto puedan para su revisión.</li>
+        <li>
+          Fecha defensa: los últimos dos miércoles de Noviembre. (Se evaluará lo
+          realizado para comprobar que todo el equipo tiene los conocimientos
+          básicos).
+        </li>
+      </ul>
+
+      <h2>Temática del Proyecto</h2>
+      <p>
+        Deberán crear un sistema completo de base de datos. Pueden elegir UNA de
+        las siguientes temáticas:
+      </p>
+      <ul>
+        <li>Opción 1: Sistema de Biblioteca.</li>
+        <li>Opción 2: Sistema de Tienda Online.</li>
+        <li>Opción 3: Sistema de Hospital.</li>
+        <li>Opción 4: Sistema de Escolaridad.</li>
+        <li>Opción 5: Temática libre.</li>
+      </ul>
+
+      <h2>Actividades por Tema</h2>
+
+      <h3>Creación de Base de Datos y Tablas</h3>
+      <p>
+        <strong>Objetivo:</strong> Evaluar el diseño completo de una base de
+        datos con múltiples tablas relacionadas.
+      </p>
+
+      <h4>Requisitos:</h4>
+      <ul>
+        <li>Crear la base de datos con un nombre descriptivo (temático).</li>
+        <li>
+          Crear un MÍNIMO de 2 tablas (evitar excederse en la cantidad de
+          columnas y tablas).
+        </li>
+        <li>Las tablas deben estar relacionadas entre sí.</li>
+        <li>
+          Implementar los tres tipos de relaciones:
+          <ul>
+            <li>Relación 1:1 (uno a uno).</li>
+           
+          </ul>
+        </li>
+      </ul>
+
+      <h4>Cada tabla debe contener:</h4>
+      <ul>
+        <li>Columna id como PRIMARY KEY con AUTO_INCREMENT.</li>
+        <li>Cada tabla debe contener al menos 3 columnas (incluyendo “ID”).</li>
+        <li>
+          Usar los tipos de datos: INT, VARCHAR, DOUBLE, DECIMAL, BOOLEAN, TEXT,
+          DATE.
+        </li>
+        <li>Aplicar NOT NULL donde corresponda.</li>
+        <li>Aplicar UNIQUE donde sea necesario.</li>
+        <li>
+          Definir todas las FOREIGN KEY con:
+          <ul>
+            <li>ON DELETE CASCADE.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h4>Incluir código para:</h4>
+      <ul>
+        <li>CREATE DATABASE IF NOT EXISTS.</li>
+        <li>USE.</li>
+        <li>CREATE TABLE IF NOT EXISTS.</li>
+        <li>DROP TABLE.</li>
+        <li>DROP DATABASE.</li>
+      </ul>
+
+      <h4>Ejemplo de estructura (Sistema de Biblioteca):</h4>
+      <ul>
+        <li>Tabla: bibliotecas (relación 1:1 con bibliotecarios).</li>
+        <li>Tabla: bibliotecarios.</li>
+      
+       
+      </ul>
+
+      <h3>Inserción Masiva de Datos</h3>
+      <p>
+        <strong>Objetivo:</strong> Poblar todas las tablas con datos realistas y
+        coherentes.
+      </p>
+
+      <h4>Requisitos:</h4>
+      <ul>
+        <li>Insertar MÍNIMO 3 registros en cada tabla principal.</li>
+        <li>Insertar MÍNIMO 6 registros en tablas intermedias.</li>
+        <li>
+          Algunos registros deben tener valores NULL donde esté permitido.
+        </li>
+      </ul>
+
+      <h3>Consultas con JOIN</h3>
+      <p>
+        <strong>Objetivo:</strong> Demostrar dominio de todos los tipos de JOIN
+        aprendidos.
+      </p>
+
+      <h4>Crear las siguientes consultas:</h4>
+      <p>No olvidar documentar qué visualizan gracias a dicha consulta.</p>
+      <h4>Se enseñó LEFT JOIN pero pueden usar el que quieran (teoria en sesión 11)</h4>
+
+      <ol>
+        <li>
+          INNER JOIN (opcional)
+          <ul>
+            <li>Consulta que involucre 2  tablas.</li>
+          </ul>
+        </li>
+        <li>
+          LEFT JOIN (1 consultas diferentes)
+          <ul>
+            <li>Consulta que involucre 2  tablas.</li>
+          </ul>
+        </li>
+        <li>
+          RIGHT JOIN (opcional)
+          <ul>
+            <li>Consulta que involucre 2 tablas.</li>
+          </ul>
+        </li>
+        <li>
+          Consulta que incorpore UNION (opcional)
+          <ul>
+            <li>Consulta que involucre 2  tablas.</li>
+          </ul>
+        </li>
+      </ol>
+
+
+      <h3>Consultas con Condiciones</h3>
+      <p>
+        <strong>Objetivo:</strong> Aplicar filtros complejos y ordenamiento.
+      </p>
+
+      <h4>Crear consultas usando:</h4>
+
+      <ol>
+        <li>
+          WHERE con operadores:
+          <ul>
+            <li>AND, OR, NOT (3 consultas).</li>
+            <li>>=, <=, <>, =, >, < (3 consultas).</li>
+            <li>IS NULL, IS NOT NULL (2 consultas).</li>
+          </ul>
+        </li>
+        <li>
+          ORDER BY:
+          <ul>
+            <li>ASC y DESC (2 consultas).</li>
+          </ul>
+        </li>
+        <li>
+          LIMIT:
+          <ul>
+            <li>Seleccionar los primeros N registros.</li>
+            <li>Combinado con ORDER BY para Top N.</li>
+          </ul>
+        </li>
+        <li>
+          DISTINCT: (1 consulta)
+          <ul>
+            <li>Usar DISTINCT.</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3>Modificación de Estructura de Tablas</h3>
+      <p><strong>Objetivo:</strong> Demostrar el uso de ALTER TABLE.</p>
+
+      <h4>Realizar:</h4>
+
+      <ol>
+        <li>
+          ADD COLUMN
+          <ul>
+            <li>Agregar una nueva columna a una tabla existente.</li>
+          </ul>
+        </li>
+        <li>
+          MODIFY COLUMN
+          <ul>
+            <li>Cambiar el tipo de dato de una columna.</li>
+          </ul>
+        </li>
+        <li>
+          CHANGE COLUMN
+          <ul>
+            <li>Renombrar una columna y cambiar su tipo.</li>
+          </ul>
+        </li>
+        <li>
+          DROP COLUMN
+          <ul>
+            <li>
+              Eliminar la columna creada para este ejercicio de una tabla.
+            </li>
+          </ul>
+        </li>
+      </ol>
+
+      <h2>Consejos y Recomendaciones</h2>
+      <ol>
+        <li>
+          Planificar antes de programar: Hacer un diagrama o planificar las
+          tablas y sus relaciones.
+        </li>
+        <li>Probar cada consulta antes de agregar la siguiente.</li>
+        <li>
+          Usar comentarios para explicar qué hace cada parte del código (es un
+          trabajo largo, se pueden perder). Se comenta usando al frente del
+          texto el símbolo numeral # o con doble guion medio --.
+        </li>
+        <li>Guardar el código frecuentemente.</li>
+        <li>
+          Consultar las sesiones anteriores como referencia (no se tienen que
+          memorizar los códigos, sino saber que existen y para qué sirven).
+        </li>
+        <li>No dejar todo para el último día.</li>
+      </ol>
+    </div>
+  </body>
+</html>
