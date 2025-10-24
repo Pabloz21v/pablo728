@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TPs entregados Hardware I 4°2°</title>
-    <style>
+<style>
       body {
         font-family: Arial, sans-serif;
         line-height: 1.6;
@@ -17,12 +17,14 @@
       }
       .table-responsive {
         width: 100%;
-        overflow-x: auto;
+        max-height: 500px; /* Altura máxima para activar el scroll */
+        overflow-y: auto;  /* Habilita el scroll vertical */
+        overflow-x: auto;  /* Mantén el scroll horizontal */
+        margin: 10px 0;
       }
       table {
         width: 100%;
         border-collapse: collapse;
-        margin: 10px 0;
         min-width: 400px;
       }
       th,
@@ -34,6 +36,13 @@
       th {
         background-color: #f2f2f2;
       }
+      thead tr {
+        position: sticky;
+        top: 0;
+        background-color: #f2f2f2;
+        z-index: 10;
+      }
+
       @media (max-width: 600px) {
         body {
           margin: 8px;
