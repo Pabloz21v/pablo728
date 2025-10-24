@@ -1,157 +1,160 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sesión 5: Bucles For</title>
     <style>
-        /* Estilos globales */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
+      /* Estilos globales */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+      }
 
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Encabezado */
+      header {
+        background-color: #0078d4;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+        border-radius: 5px 5px 0 0;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 2em;
+      }
+
+      /* Secciones */
+      section {
+        background-color: white;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        color: #0078d4;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 5px;
+      }
+
+      h3 {
+        color: #005a9e;
+      }
+
+      /* Código */
+      pre,
+      code {
+        background-color: #f4f4f4;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        padding: 10px;
+        font-family: "Courier New", Courier, monospace;
+        overflow-x: auto;
+        display: block;
+        margin: 10px 0;
+      }
+
+      /* Ejemplos */
+      .ejemplo {
+        background-color: #f0f8ff;
+        border-left: 4px solid #0078d4;
+        padding: 15px;
+        margin: 15px 0;
+      }
+
+      /* Tablas */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+          padding: 10px;
         }
 
-        /* Encabezado */
-        header {
-            background-color: #0078d4;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            border-radius: 5px 5px 0 0;
-            margin-bottom: 20px;
+        pre,
+        code {
+          font-size: 0.8em;
         }
 
-        h1 {
-            margin: 0;
-            font-size: 2em;
-        }
-
-        /* Secciones */
-        section {
-            background-color: white;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            color: #0078d4;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 5px;
-        }
-
-        h3 {
-            color: #005a9e;
-        }
-
-        /* Código */
-        pre, code {
-            background-color: #f4f4f4;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            padding: 10px;
-            font-family: 'Courier New', Courier, monospace;
-            overflow-x: auto;
-            display: block;
-            margin: 10px 0;
-        }
-
-        /* Ejemplos */
-        .ejemplo {
-            background-color: #f0f8ff;
-            border-left: 4px solid #0078d4;
-            padding: 15px;
-            margin: 15px 0;
-        }
-
-        /* Tablas */
         table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
+          font-size: 0.8em;
         }
+      }
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            pre, code {
-                font-size: 0.8em;
-            }
-
-            table {
-                font-size: 0.8em;
-            }
-        }
-
-        /* Pie de página */
-        footer {
-            text-align: center;
-            padding: 15px;
-            background-color: #0078d4;
-            color: white;
-            border-radius: 0 0 5px 5px;
-            margin-top: 20px;
-        }
+      /* Pie de página */
+      footer {
+        text-align: center;
+        padding: 15px;
+        background-color: #0078d4;
+        color: white;
+        border-radius: 0 0 5px 5px;
+        margin-top: 20px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div style="margin-bottom: 24px">
-      <a
-        href="../materias/desarrollo-1.html"
-        style="
-          padding: 10px 20px;
-          border-radius: 8px;
-          text-decoration: none;
-          font-weight: bold;
-          background: #4ade80;
-          color: #222;
-          display: inline-block;
-          margin-right: 10px;
-        "
-      >
-        Volver a Materia
-      </a>
-      <a
-        href="desarrollo1-sesion4.html"
-        style="
-          padding: 10px 20px;
-          border-radius: 8px;
-          text-decoration: none;
-          font-weight: bold;
-          background: #60a5fa;
-          color: #fff;
-          display: inline-block;
-          margin-right: 10px;
-        "
-      >
-        Ir a Sesión 4
-      </a>
-      <!-- <a
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion4.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 4
+        </a>
+        <!-- <a
         href="desarrollo1-sesion6.html"
         style="
           padding: 10px 20px;
@@ -165,39 +168,42 @@
       >
         Ir a Sesión 6
       </a> -->
-    </div>
-       
-            <h1>Sesión 5: Bucles For</h1>
-       
+      </div>
 
-        <section>
-            <h2>1. Introducción a los Bucles For </h2>
-            <p>El bucle <code>for</code> es ideal cuando sabemos exactamente sobre qué elementos queremos iterar. Es más simple y legible que rangos, cadenas, etc.</p>
+      <h1>Sesión 5: Bucles For</h1>
 
-            <h3>For con listas - La forma más común</h3>
+      <section>
+        <h2>1. Introducción a los Bucles For</h2>
+        <p>
+          El bucle <code>for</code> es ideal cuando sabemos exactamente sobre
+          qué elementos queremos iterar. Es más simple y legible que rangos,
+          cadenas, etc.
+        </p>
 
-            <div class="ejemplo">
-                <h4>Ejemplo 1 - Recorrer lista de nombres:</h4>
-                <pre><code>estudiantes = ["Ana", "Juan", "María", "Carlos", "Sofía"]
+        <h3>For con listas - La forma más común</h3>
+
+        <div class="ejemplo">
+          <h4>Ejemplo 1 - Recorrer lista de nombres:</h4>
+          <pre><code>estudiantes = ["Ana", "Juan", "María", "Carlos", "Sofía"]
 
 print("Lista de estudiantes:")
 for estudiante in estudiantes:
     print(f"- {estudiante}")
 
 print("Todos los estudiantes han sido procesados")</code></pre>
-                <p><strong>Salida:</strong></p>
-                <pre><code>Lista de estudiantes:
+          <p><strong>Salida:</strong></p>
+          <pre><code>Lista de estudiantes:
 - Ana
 - Juan
 - María
 - Carlos
 - Sofía
 Todos los estudiantes han sido procesados</code></pre>
-            </div>
+        </div>
 
-            <div class="ejemplo">
-                <h4>Ejemplo 2 - Operaciones con números:</h4>
-                <pre><code>numeros = [10, 25, 5, 40, 15]
+        <div class="ejemplo">
+          <h4>Ejemplo 2 - Operaciones con números:</h4>
+          <pre><code>numeros = [10, 25, 5, 40, 15]
 suma = 0
 mayor = 0
 
@@ -213,11 +219,11 @@ print(f"\nResultados:")
 print(f"Suma total: {suma}")
 print(f"Promedio: {promedio}")
 print(f"Número mayor: {mayor}")</code></pre>
-            </div>
+        </div>
 
-            <div class="ejemplo">
-                <h4>Ejemplo 3 - Análisis de calificaciones:</h4>
-                <pre><code>calificaciones = [8.5, 6.0, 9.5, 7.0, 5.5, 10.0, 8.0]
+        <div class="ejemplo">
+          <h4>Ejemplo 3 - Análisis de calificaciones:</h4>
+          <pre><code>calificaciones = [8.5, 6.0, 9.5, 7.0, 5.5, 10.0, 8.0]
 nombres = ["Pedro", "Lucía", "Miguel", "Ana", "Carlos", "Sofía", "Diego"]
 
 aprobados = []
@@ -236,13 +242,13 @@ for nombre, calificacion in zip(nombres, calificaciones):
 
 print(f"\nEstudiantes aprobados ({len(aprobados)}): {aprobados}")
 print(f"Estudiantes reprobados ({len(reprobados)}): {reprobados}")</code></pre>
-            </div>
+        </div>
 
-            <h3>For con range() - Controlando iteraciones</h3>
+        <h3>For con range() - Controlando iteraciones</h3>
 
-            <div class="ejemplo">
-                <h4>Ejemplo 1 - Range básico:</h4>
-                <pre><code>print("Conteo del 0 al 4:")
+        <div class="ejemplo">
+          <h4>Ejemplo 1 - Range básico:</h4>
+          <pre><code>print("Conteo del 0 al 4:")
 for i in range(5):
     print(f"Iteración {i}")
 
@@ -253,20 +259,20 @@ for i in range(1, 6):
 print("\nNúmeros pares del 0 al 10:")
 for i in range(0, 11, 2):
     print(f"Número par: {i}")</code></pre>
-            </div>
+        </div>
 
-            <div class="ejemplo">
-                <h4>Ejemplo 2 - Tabla de multiplicar:</h4>
-                <pre><code>numero = 7
+        <div class="ejemplo">
+          <h4>Ejemplo 2 - Tabla de multiplicar:</h4>
+          <pre><code>numero = 7
 print(f"=== TABLA DEL {numero} ===")
 for i in range(1, 11):
     resultado = numero * i
     print(f"{numero} x {i} = {resultado}")</code></pre>
-            </div>
+        </div>
 
-            <div class="ejemplo">
-                <h4>Ejemplo 3 - Generación de datos:</h4>
-                <pre><code>edades_empleados = []
+        <div class="ejemplo">
+          <h4>Ejemplo 3 - Generación de datos:</h4>
+          <pre><code>edades_empleados = []
 nombres_empleados = []
 
 print("Generando datos de empleados:")
@@ -281,16 +287,20 @@ print(f"\nDatos generados:")
 print(f"Nombres: {nombres_empleados}")
 print(f"Edades: {edades_empleados}")
 print(f"Edad promedio: {sum(edades_empleados) / len(edades_empleados):.1f} años")</code></pre>
-            </div>
-        </section>
+        </div>
+      </section>
 
-        <section>
-            <h2>2. For con Índices - enumerate() </h2>
-            <p>Cuando necesitamos tanto el elemento como su posición, usamos <code>enumerate()</code>. Es más elegante que manejar un contador manual.</p>
+      <section>
+        <h2>2. For con Índices - enumerate()</h2>
+        <p>
+          Cuando necesitamos tanto el elemento como su posición, usamos
+          <code>enumerate()</code>. Es más elegante que manejar un contador
+          manual.
+        </p>
 
-            <div class="ejemplo">
-                <h4>Ejemplo 1 - Lista numerada:</h4>
-                <pre><code>tareas = ["Estudiar Python", "Hacer ejercicio", "Leer libro", "Llamar a familia"]
+        <div class="ejemplo">
+          <h4>Ejemplo 1 - Lista numerada:</h4>
+          <pre><code>tareas = ["Estudiar Python", "Hacer ejercicio", "Leer libro", "Llamar a familia"]
 
 print("=== MI LISTA DE TAREAS ===")
 for indice, tarea in enumerate(tareas):
@@ -299,9 +309,9 @@ for indice, tarea in enumerate(tareas):
 print("\n=== VERSIÓN ALTERNATIVA ===")
 for numero, tarea in enumerate(tareas, start=1):
     print(f"{numero}. {tarea}")</code></pre>
-            </div>
+        </div>
 
-            <div class="ejemplo">
+        <!-- <div class="ejemplo">
                 <h4>Ejemplo 2 - Ranking de puntuaciones:</h4>
                 <pre><code>jugadores = ["Alice", "Bob", "Carol", "David", "Eva"]
 puntuaciones = [950, 1200, 800, 1100, 1050]
@@ -338,16 +348,16 @@ for indice, (producto, precio) in enumerate(zip(productos, precios)):
 
 print(f"\nProductos procesados: {len(productos_modificados)}")
 print(f"Productos con descuento: {len([p for p in productos_modificados if 'descuento' in p])}")</code></pre>
-            </div>
-        </section>
+            </div> -->
+      </section>
 
-        <section>
-            <h2>3. Control de Flujo en For </h2>
-            <h3>3.1 Break y Continue en For</h3>
+      <section>
+        <h2>3. Control de Flujo en For</h2>
+        <h3>3.1 Break y Continue en For</h3>
 
-            <div class="ejemplo">
-                <h4>Ejemplo 1 - Búsqueda con break:</h4>
-                <pre><code>inventario = ["Laptop", "Mouse", "Teclado", "Monitor", "Bocinas", "Tablet"]
+        <div class="ejemplo">
+          <h4>Ejemplo 1 - Búsqueda con break:</h4>
+          <pre><code>inventario = ["Laptop", "Mouse", "Teclado", "Monitor", "Bocinas", "Tablet"]
 producto_buscado = "Monitor"
 
 print(f"Buscando '{producto_buscado}' en el inventario...")
@@ -359,11 +369,11 @@ for indice, producto in enumerate(inventario):
 else:
     print(f"Producto '{producto_buscado}' no encontrado en el inventario")
 print("Búsqueda completada")</code></pre>
-            </div>
+        </div>
 
-            <div class="ejemplo">
-                <h4>Ejemplo 2 - Filtrado con continue:</h4>
-                <pre><code>temperaturas = [18, 25, 32, 15, 28, 35, 12, 30, 22]
+        <div class="ejemplo">
+          <h4>Ejemplo 2 - Filtrado con continue:</h4>
+          <pre><code>temperaturas = [18, 25, 32, 15, 28, 35, 12, 30, 22]
 ciudades = ["Madrid", "Barcelona", "Sevilla", "Bilbao", "Valencia", "Málaga", "Santander", "Zaragoza", "Córdoba"]
 
 print("=== CIUDADES CON TEMPERATURAS ALTAS (>25°C) ===")
@@ -373,14 +383,14 @@ for ciudad, temperatura in zip(ciudades, temperaturas):
     if temperatura <= 25:
         continue
     ciudades_calurosas += 1
-    print(f"🌡 {ciudad}: {temperatura}°C")
+    print(f" {ciudad}: {temperatura}°C")
 
 print(f"\nTotal de ciudades calurosas: {ciudades_calurosas}")</code></pre>
-            </div>
+        </div>
 
-            <div class="ejemplo">
-                <h4>Ejemplo 3 - Procesamiento con condiciones múltiples:</h4>
-                <pre><code>estudiantes = ["Ana", "Juan", "María", "Carlos", "Sofía", "Pedro", "Lucía"]
+        <!-- <div class="ejemplo">
+          <h4>Ejemplo 3 - Procesamiento con condiciones múltiples:</h4>
+          <pre><code>estudiantes = ["Ana", "Juan", "María", "Carlos", "Sofía", "Pedro", "Lucía"]
 calificaciones = [8.5, 4.0, 9.5, 7.0, 3.5, 10.0, 8.0]
 
 excelentes = []
@@ -406,27 +416,27 @@ print(f"\n=== RESUMEN ===")
 print(f"Estudiantes excelentes: {excelentes}")
 print(f"Estudiantes aprobados: {aprobados}")
 print(f"Estudiantes que necesitan ayuda: {necesitan_ayuda}")</code></pre>
-            </div>
-        </section>
+        </div> -->
+      </section>
 
-        <section>
-            <h2>4. For Anidados y Aplicaciones Avanzadas</h2>
-            <h3>4.1 Bucles for anidados</h3>
+      <section>
+        <h2>4. For Anidados y Aplicaciones Avanzadas</h2>
+        <h3>4.1 Bucles for anidados</h3>
 
-            <div class="ejemplo">
-                <h4>Ejemplo 1 - Tabla de multiplicar completa:</h4>
-                <pre><code>print("=== TABLAS DE MULTIPLICAR (1-5) ===")
+        <div class="ejemplo">
+          <h4>Ejemplo 1 - Tabla de multiplicar completa:</h4>
+          <pre><code>print("=== TABLAS DE MULTIPLICAR (1-5) ===")
 for tabla in range(1, 6):
     print(f"\n--- Tabla del {tabla} ---")
     for multiplicador in range(1, 11):
         resultado = tabla * multiplicador
         print(f"{tabla} x {multiplicador} = {resultado}")
 print("\n¡Todas las tablas completadas!")</code></pre>
-            </div>
+        </div>
 
-            <div class="ejemplo">
-                <h4>Ejemplo 2 - Análisis de ventas por tienda:</h4>
-                <pre><code>tiendas = ["Sucursal Norte", "Sucursal Sur", "Sucursal Centro"]
+        <div class="ejemplo">
+          <h4>Ejemplo 2 - Análisis de ventas por tienda:</h4>
+          <pre><code>tiendas = ["Sucursal Norte", "Sucursal Sur", "Sucursal Centro"]
 ventas_semanales = [
     [1200, 1500, 1800, 1600, 2000, 2200, 1400],
     [1000, 1200, 1400, 1300, 1700, 1900, 1100],
@@ -446,11 +456,11 @@ for indice_tienda, tienda in enumerate(tiendas):
     promedio_tienda = total_tienda / len(dias_semana)
     print(f" Total semanal: ${total_tienda}")
     print(f" Promedio diario: ${promedio_tienda:.2f}")</code></pre>
-            </div>
+        </div>
 
-            <div class="ejemplo">
-                <h4>Ejemplo 3 - Sistema de calificaciones por materia:</h4>
-                <pre><code>estudiantes = ["Ana", "Juan", "María"]
+        <!-- <div class="ejemplo">
+          <h4>Ejemplo 3 - Sistema de calificaciones por materia:</h4>
+          <pre><code>estudiantes = ["Ana", "Juan", "María"]
 materias = ["Matemáticas", "Historia", "Ciencias"]
 calificaciones = [
     [9.0, 8.5, 9.5],
@@ -483,16 +493,19 @@ for indice_materia, materia in enumerate(materias):
         suma_materia += calificaciones[indice_estudiante][indice_materia]
     promedio_materia = suma_materia / len(estudiantes)
     print(f"{materia}: {promedio_materia:.2f}")</code></pre>
-            </div>
-        </section>
+        </div> -->
+      </section>
 
-        <section>
-            <h2>5. Comprensiones de Lista (List Comprehensions) </h2>
-            <p>Las comprensiones de lista son una forma concisa de crear listas usando <code>for</code> en una sola línea.</p>
+      <section>
+        <h2>5. Comprensiones de Lista (List Comprehensions)</h2>
+        <p>
+          Las comprensiones de lista son una forma concisa de crear listas
+          usando <code>for</code> en una sola línea.
+        </p>
 
-            <div class="ejemplo">
-                <h4>Ejemplo 1 - Comparación tradicional vs comprensión:</h4>
-                <pre><code>numeros = [1, 2, 3, 4, 5]
+        <div class="ejemplo">
+          <h4>Ejemplo 1 - Comparación tradicional vs comprensión:</h4>
+          <pre><code>numeros = [1, 2, 3, 4, 5]
 cuadrados_tradicional = []
 for numero in numeros:
     cuadrados_tradicional.append(numero ** 2)
@@ -502,22 +515,22 @@ cuadrados_comprension = [numero ** 2 for numero in numeros]
 print(f"Método tradicional: {cuadrados_tradicional}")
 print(f"Con comprensión: {cuadrados_comprension}")
 print(f"¿Son iguales? {cuadrados_tradicional == cuadrados_comprension}")</code></pre>
-            </div>
+        </div>
 
-            <div class="ejemplo">
-                <h4>Ejemplo 2 - Filtrado con comprensión:</h4>
-                <pre><code>edades = [15, 22, 17, 30, 16, 25, 19, 40]
+        <div class="ejemplo">
+          <h4>Ejemplo 2 - Filtrado con comprensión:</h4>
+          <pre><code>edades = [15, 22, 17, 30, 16, 25, 19, 40]
 nombres = ["Ana", "Juan", "María", "Carlos", "Sofía", "Pedro", "Lucía", "Diego"]
 
 mayores_edad = [nombre for nombre, edad in zip(nombres, edades) if edad >= 18]
 
 print(f"Mayores de edad: {mayores_edad}")
 print(f"Total: {len(mayores_edad)} personas")</code></pre>
-            </div>
+        </div>
 
-            <div class="ejemplo">
-                <h4>Ejemplo 3 - Transformación de datos:</h4>
-                <pre><code>productos = ["laptop", "mouse", "teclado", "monitor"]
+        <div class="ejemplo">
+          <h4>Ejemplo 3 - Transformación de datos:</h4>
+          <pre><code>productos = ["laptop", "mouse", "teclado", "monitor"]
 precios = [899.99, 25.50, 75.00, 199.99]
 
 productos_info = [f"{producto.title()}: ${precio}" for producto, precio in zip(productos, precios)]
@@ -528,53 +541,70 @@ for info in productos_info:
     print(f"- {info}")
 
 print(f"\nProductos con descuento: {productos_descuento}")</code></pre>
-            </div>
-        </section>
+        </div>
+      </section>
 
-        <section>
-            <h2>Ejercicios </h2>
+      <section>
+        <h2>Ejercicios</h2>
 
-            <h3>Ejercicio 1: Análisis de Inventario</h3>
-            <p>Crea un programa que:</p>
-            <ul>
-                <li>Defina listas de productos, stock y precios</li>
-                <li>Use <code>for</code> para calcular el valor total del inventario</li>
-                <li>Encuentre el producto más caro y más barato</li>
-                <li>Cuente cuántos productos tienen stock bajo (&lt; 10)</li>
-                <li>Use <code>enumerate()</code> para mostrar un reporte numerado</li>
-            </ul>
+        <h3>Ejercicio 1: Análisis de Inventario</h3>
+        <p>Crea un programa que:</p>
+        <ul>
+          <li>Defina listas de productos, stock y precios</li>
+          <li>
+            Use <code>for</code> para calcular el valor total del inventario
+          </li>
+          <li>Encuentre el producto más caro y más barato</li>
+          <li>Cuente cuántos productos tienen stock bajo (&lt; 10)</li>
+          <li>Use <code>enumerate()</code> para mostrar un reporte numerado</li>
+        </ul>
 
-            <h3>Ejercicio 2: Generador de Patrones </h3>
-            <p>Usa <code>for</code> anidados para crear patrones:</p>
-            <ul>
-                <li>Crea un patrón de asteriscos en forma de pirámide (5 filas)</li>
-                <li>Genera una tabla de suma (1+1, 1+2, ..., 5+5)</li>
-                <li>Crea un patrón de números donde cada fila tenga tantos números como su número de fila</li>
-            </ul>
-            <p><em>Ejemplo:</em> Fila 1: 1, Fila 2: 1 2, Fila 3: 1 2 3</p>
+        <h3>Ejercicio 2: Generador de Patrones</h3>
+        <p>Usa <code>for</code> anidados para crear patrones:</p>
+        <ul>
+          <!-- <li>Crea un patrón de asteriscos en forma de pirámide (5 filas)</li> -->
+          <li>Genera una tabla de suma (1+1, 1+2, ..., 5+5)</li>
+          <!-- <li>
+            Crea un patrón de números donde cada fila tenga tantos números como
+            su número de fila
+          </li> -->
+        </ul>
+        <!-- <p><em>Ejemplo:</em> Fila 1: 1, Fila 2: 1 2, Fila 3: 1 2 3</p> -->
 
-            <h3>Ejercicio 3: Sistema de Calificaciones Avanzado</h3>
-            <p>Crea un sistema que:</p>
-            <ul>
-                <li>Use <code>for</code> con <code>zip()</code> para procesar estudiantes y sus 3 calificaciones</li>
-                <li>Calcule el promedio de cada estudiante</li>
-                <li>Use <code>break</code> para parar si encuentra un promedio perfecto (10.0)</li>
-                <li>Use <code>continue</code> para saltar estudiantes con promedios &lt; 6.0</li>
-                <li>Genere un reporte final con rankings</li>
-            </ul>
+        <h3>Ejercicio 3: Sistema de Calificaciones Avanzado</h3>
+        <p>Crea un sistema que:</p>
+        <ul>
+          <li>
+            Use <code>for</code> con <code>zip()</code> para procesar
+            estudiantes y sus 3 calificaciones
+          </li>
+          <li>Calcule el promedio de cada estudiante</li>
+          <li>
+            Use <code>break</code> para parar si encuentra un promedio perfecto
+            (10.0)
+          </li>
+          <li>
+            Use <code>continue</code> para saltar estudiantes con promedios &lt;
+            6.0
+          </li>
+          <li>Genere un reporte final con rankings</li>
+        </ul>
 
-            <h3>Ejercicio 4: Comprensiones de Lista </h3>
-            <p>Practica comprensiones de lista:</p>
-            <ul>
-                <li>Crea una lista de los cuadrados de números del 1 al 10</li>
-                <li>Filtra solo los números pares de una lista de números del 1 al 20</li>
-                <li>Convierte una lista de nombres a mayúsculas</li>
-                <li>Crea una lista con el largo (<code>len()</code>) de cada palabra en una frase</li>
-                <li>Compara el tiempo/líneas vs el método tradicional</li>
-            </ul>
-        </section>
-
-        
+        <h3>Ejercicio 4: Comprensiones de Lista</h3>
+        <p>Practica comprensiones de lista:</p>
+        <ul>
+          <li>Crea una lista de los cuadrados de números del 1 al 10</li>
+          <li>
+            Filtra solo los números pares de una lista de números del 1 al 20
+          </li>
+          <li>Convierte una lista de nombres a mayúsculas</li>
+          <li>
+            Crea una lista con el largo (<code>len()</code>) de cada palabra en
+            una frase
+          </li>
+          <!-- <li>Compara el tiempo/líneas vs el método tradicional</li> -->
+        </ul>
+      </section>
     </div>
-</body>
+  </body>
 </html>
