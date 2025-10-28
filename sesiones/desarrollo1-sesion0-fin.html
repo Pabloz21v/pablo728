@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" style="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trabajo Práctico - Programación en Python</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
+    <style>
+      body {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        position: relative;
+        box-sizing: border-box;
+        font-family: "Times New Roman", serif;
+        line-height: 1.6;
+        color: #333;
+      }
+      
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+      }
+
+      h2 {
+        color: #2c3e50;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+        margin-top: 30px;
+      }
+
+      h3 {
+        color: #34495e;
+        margin-top: 25px;
+      }
+
+      .intro-section {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-left: 4px solid #3498db;
+        margin: 20px 0;
+      }
+
+      .requirements-section {
+        background-color: #fff5f5;
+        padding: 15px;
+        border: 1px solid #e74c3c;
+        margin: 15px 0;
+      }
+
+      .optional-section {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border: 1px solid #3498db;
+        margin: 15px 0;
+      }
+
+      .work-mode-section {
+        background-color: #f9f9f9;
+        padding: 15px;
+        border: 1px solid #95a5a6;
+        margin: 15px 0;
+      }
+
+      .program-category {
+        margin: 25px 0;
+      }
+
+      .program-card {
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin: 10px 0;
+        background-color: #fafafa;
+      }
+
+      .program-title {
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 8px;
+      }
+
+      .program-description {
+        margin-bottom: 8px;
+        text-align: justify;
+      }
+
+      .program-concepts {
+        font-size: 0.9em;
+        color: #7f8c8d;
+        margin-bottom: 5px;
+      }
+
+      .difficulty {
+        font-size: 0.85em;
+        padding: 3px 8px;
+        border-radius: 3px;
+        display: inline-block;
+      }
+
+      .difficulty-easy {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      .difficulty-medium {
+        background-color: #fff3cd;
+        color: #856404;
+      }
+
+      .difficulty-hard {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+
+      ul {
+        padding-left: 25px;
+      }
+
+      li {
+        margin-bottom: 5px;
+      }
+
+      .category-games {
+        border-left: 4px solid #e74c3c;
+      }
+      .category-puzzles {
+        border-left: 4px solid #9b59b6;
+      }
+      .category-quiz {
+        border-left: 4px solid #f39c12;
+      }
+      .category-tools {
+        border-left: 4px solid #27ae60;
+      }
+      .category-simulators {
+        border-left: 4px solid #3498db;
+      }
+      .category-practical {
+        border-left: 4px solid #34495e;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 2%;
+        }
+
+        pre,
+        code {
+          font-size: 0.8em;
+        }
+
+        table {
+          font-size: 0.8em;
+        }
+      }
+    </style>
+  </head>
+  <body style="">
+    <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        
+        
+      </div>
+      <h1>Trabajo Práctico - Programación en Python</h1>
+
+      <div class="intro-section">
+        <h2>Introducción</h2>
+        <p>
+          Este trabajo práctico tiene como objetivo aplicar los conocimientos
+          adquiridos en Python durante el curso de Desarrollo 1. Los estudiantes
+          deberán demostrar su comprensión de los conceptos fundamentales de
+          programación mediante la creación de un mini programa funcional.
+        </p>
+        <p>
+          El proyecto permitirá a los alumnos consolidar sus habilidades de
+          programación, trabajar en equipo y desarrollar su creatividad en la
+          resolución de problemas computacionales.
+        </p>
+      </div>
+
+      <div class="requirements-section">
+        <h2>Requisitos Mínimos (OBLIGATORIOS)</h2>
+        <p>
+          Todos los programas deben incluir y demostrar el uso correcto de los
+          siguientes conceptos:
+        </p>
+        <ul>
+          <li>
+            <strong>Comentarios (#):</strong> Documentar el código explicando su
+            funcionamiento
+          </li>
+          <li>
+            <strong>Variables:</strong> Declarar y usar variables con nombres
+            descriptivos
+          </li>
+          <li>
+            <strong>Funciones input() y print():</strong> Interacción con el
+            usuario
+          </li>
+          <li>
+            <strong>Strings multilínea ("""):</strong> Para textos largos o
+            instrucciones
+          </li>
+          <li>
+            <strong>Control de tipos:</strong> Uso de int(), bool(), str() para
+            convertir datos
+          </li>
+          <li>
+            <strong>Condicionales if:</strong> Estructuras de control de flujo
+          </li>
+          <li>
+            <strong>Operadores de comparación:</strong> ==, !=, &gt;, &lt;,
+            &gt;=, &lt;=
+          </li>
+        </ul>
+      </div>
+
+      <div class="optional-section">
+        <h2>Contenidos Opcionales </h2>
+        <p>
+          Los siguientes elementos pueden incluirse para enriquecer el programa:
+        </p>
+        <ul>
+          <li><strong>match:</strong> Estructura de control alternativa</li>
+          <li><strong>continue y break:</strong> Control de bucles</li>
+          <li><strong>Listas []:</strong> Almacenamiento de múltiples datos</li>
+          <li><strong>Bucles for:</strong> Iteración sobre secuencias</li>
+          <li><strong>Bucles while:</strong> Repetición condicional</li>
+        </ul>
+      </div>
+
+      <div class="work-mode-section">
+        <h2>Modalidad de Trabajo</h2>
+        <ul>
+          <li><strong>Grupos:</strong> Máximo 4 integrantes por equipo</li>
+          <li>
+            <strong>Selección:</strong> Cada grupo debe acumular 3 puntos.
+          </li>
+          <li>
+            <strong>1 punto </strong> Proyectos faciles (facil)
+          </li>
+          <li>
+            <strong>2 puntos </strong> Proyectos medios (medio)
+          </li>
+          <li>
+            <strong>3 puntos </strong> Proyectos dificiles (dificil)
+          </li>
+          <li>
+            <strong>Requisitos:</strong> Debe aplicar TODOS los conceptos
+            mínimos obligatorios
+          </li>
+          <li>
+            <strong>Entrega:</strong> Código fuente comentado + demostración en
+            clase
+          </li>
+          <li>
+            <strong>Evaluación:</strong> Funcionalidad, uso correcto de
+            conceptos, claridad del código y trabajo en equipo
+          </li>
+        </ul>
+      </div>
+
+      <h2>Sugerencias de Mini Programas</h2>
+
+       <div class="program-category">
+      <h3 style="color: #e74c3c">🎮 Juegos</h3>
+
+      <div class="program-card category-games">
+        <div class="program-title">1. Piedra, Papel o Tijera</div>
+        <div class="program-description">Juego clásico contra la computadora con contador de victorias y derrotas.</div>
+        <div class="program-concepts">
+          Conceptos: variables, input/print, condicionales, operadores de comparación, conversión de tipos
+        </div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+      <div class="program-card category-games">
+        <div class="program-title">2. Adivina el Número</div>
+        <div class="program-description">
+          El usuario debe adivinar un número aleatorio entre 1 y 100 con pistas de "mayor" o "menor".
+        </div>
+        <div class="program-concepts">
+          Conceptos: variables, bucles while, condicionales, input/print, operadores de comparación
+        </div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+      <div class="program-card category-games">
+        <div class="program-title">3. Juego de Palabras</div>
+        <div class="program-description">
+          Adivinar una palabra oculta letra por letra, mostrando guiones y letras correctas.
+        </div>
+        <div class="program-concepts">Conceptos: strings, listas, bucles for, condicionales, input/print</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      <div class="program-card category-games">
+        <div class="program-title">4. Tres en Raya (Tic-Tac-Toe)</div>
+        <div class="program-description">Juego de tres en raya para dos jugadores con tablero visual en consola.</div>
+        <div class="program-concepts">
+          Conceptos: listas, bucles, condicionales complejas, input/print, strings multilínea
+        </div>
+        <span class="difficulty difficulty-hard">Difícil</span>
+      </div>
+
+      <div class="program-card category-games">
+        <div class="program-title">5. Juego de Memoria</div>
+        <div class="program-description">
+          El programa muestra una secuencia de números o letras que el usuario debe memorizar y repetir correctamente.
+        </div>
+        <div class="program-concepts">Conceptos: listas, strings, bucles, condicionales, input/print</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      <div class="program-card category-games">
+        <div class="program-title">6. Laberinto de Texto</div>
+        <div class="program-description">
+          Navegación por un laberinto simple usando comandos de texto (norte, sur, este, oeste).
+        </div>
+        <div class="program-concepts">Conceptos: strings, condicionales, match (opcional), bucles while</div>
+        <span class="difficulty difficulty-hard">Difícil</span>
+      </div>
+
+      <div class="program-card category-games">
+        <div class="program-title">7. Ahorcado</div>
+        <div class="program-description">
+          Juego clásico donde el usuario adivina letras de una palabra oculta antes de completar el dibujo del ahorcado.
+        </div>
+        <div class="program-concepts">Conceptos: strings, listas, bucles while, condicionales, input/print</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      
+
+      
+    </div>
+
+    <div class="program-category">
+      <h3 style="color: #9b59b6">🧩 Acertijos y Puzzles</h3>
+
+      <div class="program-card category-puzzles">
+        <div class="program-title">1. Calculadora de Edad en Planetas</div>
+        <div class="program-description">Calcula la edad del usuario en diferentes planetas del sistema solar.</div>
+        <div class="program-concepts">Conceptos: variables, input/print, operadores matemáticos, condicionales</div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+      <div class="program-card category-puzzles">
+        <div class="program-title">2. Detector de Palíndromos</div>
+        <div class="program-description">Verifica si una palabra o frase es un palíndromo (se lee igual al revés).</div>
+        <div class="program-concepts">Conceptos: strings, bucles, condicionales, operadores de comparación</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      <div class="program-card category-puzzles">
+        <div class="program-title">3. Generador de Contraseñas</div>
+        <div class="program-description">
+          Crea contraseñas aleatorias basadas en criterios del usuario (longitud, tipos de caracteres).
+        </div>
+        <div class="program-concepts">Conceptos: strings, listas, bucles for, condicionales, input/print</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      <div class="program-card category-puzzles">
+        <div class="program-title">4. Cifrado </div>
+        <div class="program-description">Programa que codifica y decodifica mensajes usando el cifrado .</div>
+        <div class="program-concepts">Conceptos: strings, bucles for, operadores matemáticos, condicionales</div>
+        <span class="difficulty difficulty-hard">Difícil</span>
+      </div>
+
+      <div class="program-card category-puzzles">
+        <div class="program-title">5. Analizador de Texto</div>
+        <div class="program-description">Cuenta palabras, caracteres, vocales y consonantes de un texto ingresado.</div>
+        <div class="program-concepts">Conceptos: strings, bucles for, condicionales, variables contadoras</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      
+
+      <div class="program-card category-puzzles">
+        <div class="program-title">6. Número Par o Impar</div>
+        <div class="program-description">
+          El usuario ingresa uno o varios números y el programa determina si son pares o impares, con estadísticas.
+        </div>
+        <div class="program-concepts">Conceptos: variables, condicionales, operadores matemáticos (%), input/print</div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+      <div class="program-card category-puzzles">
+        <div class="program-title">7. Calculadora de Factorial</div>
+        <div class="program-description">
+          Calcula el factorial de un número ingresado por el usuario (ej: 5! = 5 × 4 × 3 × 2 × 1 = 120).
+        </div>
+        <div class="program-concepts">Conceptos: variables, bucles for/while, operadores matemáticos, input/print</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+    </div>
+
+    <div class="program-category">
+      <h3 style="color: #f39c12">📝 Cuestionarios y Multiple Choice</h3>
+
+      <div class="program-card category-quiz">
+        <div class="program-title">1. Quiz de Cultura General</div>
+        <div class="program-description">Cuestionario de preguntas variadas con puntuación y resultado final.</div>
+        <div class="program-concepts">
+          Conceptos: listas, bucles for, condicionales, variables contadoras, input/print
+        </div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+      <div class="program-card category-quiz">
+        <div class="program-title">2. Test de Personalidad</div>
+        <div class="program-description">
+          Cuestionario que determina el tipo de personalidad basado en las respuestas del usuario.
+        </div>
+        <div class="program-concepts">
+          Conceptos: strings multilínea, condicionales complejas, variables, input/print
+        </div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      <div class="program-card category-quiz">
+        <div class="program-title">3. Examen de Matemáticas</div>
+        <div class="program-description">
+          Genera problemas matemáticos aleatorios y evalúa las respuestas del estudiante.
+        </div>
+        <div class="program-concepts">
+          Conceptos: operadores matemáticos, bucles, condicionales, conversión de tipos
+        </div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      <div class="program-card category-quiz">
+        <div class="program-title">4. Trivia Interactiva</div>
+        <div class="program-description">Sistema de trivia con diferentes categorías y niveles de dificultad.</div>
+        <div class="program-concepts">Conceptos: listas, match (opcional), bucles, condicionales complejas</div>
+        <span class="difficulty difficulty-hard">Difícil</span>
+      </div>
+
+      <div class="program-card category-quiz">
+        <div class="program-title">5. Evaluador de Conocimientos Python</div>
+        <div class="program-description">Quiz específico sobre conceptos de Python aprendidos en clase.</div>
+        <div class="program-concepts">Conceptos: strings, condicionales, bucles, listas, input/print</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      <div class="program-card category-quiz">
+        <div class="program-title">6. Test de Compatibilidad</div>
+        <div class="program-description">
+          Programa que evalúa la compatibilidad entre dos personas basado en sus respuestas.
+        </div>
+        <div class="program-concepts">
+          Conceptos: variables, condicionales, operadores de comparación, strings multilínea
+        </div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+      <div class="program-card category-quiz">
+        <div class="program-title">7. Quiz de Capitales del Mundo</div>
+        <div class="program-description">
+          Cuestionario sobre capitales de países con diferentes continentes y niveles de dificultad.
+        </div>
+        <div class="program-concepts">Conceptos: listas, condicionales, bucles for, variables contadoras, input/print</div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+      <div class="program-card category-quiz">
+        <div class="program-title">8. Adivina la Palabra con Pistas</div>
+        <div class="program-description">
+          El programa da pistas progresivas sobre una palabra (categoría, primera letra, longitud) hasta que el usuario adivine.
+        </div>
+        <div class="program-concepts">Conceptos: strings, condicionales, bucles while, listas, input/print</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+    </div>
+
+    <div class="program-category">
+      <h3 style="color: #27ae60">🔧 Calculadoras y Herramientas</h3>
+
+      <div class="program-card category-tools">
+        <div class="program-title">1. Calculadora Básica</div>
+        <div class="program-description">Calculadora que realiza operaciones básicas con menú de opciones.</div>
+        <div class="program-concepts">
+          Conceptos: variables, condicionales, match (opcional), operadores matemáticos, bucles
+        </div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+      <div class="program-card category-tools">
+        <div class="program-title">2. Conversor de Unidades</div>
+        <div class="program-description">Convierte entre diferentes unidades (temperatura, peso, longitud, etc.).</div>
+        <div class="program-concepts">Conceptos: variables, condicionales, operadores matemáticos, input/print</div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+      <div class="program-card category-tools">
+        <div class="program-title">3. Calculadora de IMC</div>
+        <div class="program-description">
+          Calcula el índice de masa corporal y proporciona interpretación de resultados.
+        </div>
+        <div class="program-concepts">
+          Conceptos: variables, operadores matemáticos, condicionales, conversión de tipos
+        </div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+      <div class="program-card category-tools">
+        <div class="program-title">4. Generador de Tablas de Multiplicar</div>
+        <div class="program-description">Crea y muestra tablas de multiplicar de cualquier número.</div>
+        <div class="program-concepts">Conceptos: bucles for, variables, operadores matemáticos, input/print</div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+      <div class="program-card category-tools">
+        <div class="program-title">5. Calculadora de Descuentos</div>
+        <div class="program-description">Calcula precios con descuentos, impuestos y ofertas especiales.</div>
+        <div class="program-concepts">Conceptos: variables, operadores matemáticos, condicionales, input/print</div>
+         <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+      <div class="program-card category-tools">
+        <div class="program-title">6. Calculadora de Propinas</div>
+        <div class="program-description">
+          Calcula el monto de propina según el total de la cuenta y el porcentaje elegido, dividiendo entre comensales.
+        </div>
+        <div class="program-concepts">Conceptos: variables, operadores matemáticos, condicionales, input/print</div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+  
+
+      <div class="program-card category-tools">
+        <div class="program-title">7. Conversor de Monedas</div>
+        <div class="program-description">
+          Convierte entre diferentes monedas (pesos, dólares, euros) usando tasas de cambio predefinidas.
+        </div>
+        <div class="program-concepts">Conceptos: variables, operadores matemáticos, condicionales, input/print</div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+    </div>
+
+    <div class="program-category">
+      <h3 style="color: #3498db">🎲 Simuladores</h3>
+
+      <div class="program-card category-simulators">
+        <div class="program-title">1. Simulador de Dados (Generala)</div>
+        <div class="program-description">
+          Simula el lanzamiento de uno o varios dados con estadísticas de resultados.
+        </div>
+        <div class="program-concepts">Conceptos: variables, bucles, condicionales, listas (opcional)</div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+      <div class="program-card category-simulators">
+        <div class="program-title">2. Simulador de Moneda</div>
+        <div class="program-description">Simula lanzamientos de moneda con conteo de caras y cruces.</div>
+        <div class="program-concepts">Conceptos: variables, bucles while, condicionales, operadores de comparación</div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+      <div class="program-card category-simulators">
+        <div class="program-title">3. Simulador de Crecimiento de Plantas</div>
+        <div class="program-description">
+          Simula el crecimiento de una planta virtual basado en cuidados del usuario.
+        </div>
+        <div class="program-concepts">Conceptos: variables, condicionales complejas, bucles, strings multilínea</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      <div class="program-card category-simulators">
+        <div class="program-title">4. Simulador de Elecciones</div>
+        <div class="program-description">Simula un proceso electoral con candidatos, votos y resultados finales.</div>
+        <div class="program-concepts">Conceptos: listas, bucles for, condicionales, variables contadoras</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      <div class="program-card category-simulators">
+        <div class="program-title">5. Simulador de Mascota Virtual</div>
+        <div class="program-description">Cuida una mascota virtual con necesidades de comida, juego y descanso.</div>
+        <div class="program-concepts">
+          Conceptos: variables, condicionales complejas, bucles while, strings multilínea
+        </div>
+        <span class="difficulty difficulty-hard">Difícil</span>
+      </div>
+
+    </div>
+
+    <div class="program-category">
+      <h3 style="color: #34495e">💼 Aplicaciones Prácticas</h3>
+
+      <div class="program-card category-practical">
+        <div class="program-title">1. Agenda de Contactos</div>
+        <div class="program-description">
+          Sistema básico para guardar, buscar y mostrar contactos con nombre y teléfono.
+        </div>
+        <div class="program-concepts">Conceptos: listas, bucles, condicionales, strings, input/print</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      <div class="program-card category-practical">
+        <div class="program-title">2. Lista de Compras Inteligente</div>
+        <div class="program-description">Gestor de lista de compras con precios y cálculo de total estimado.</div>
+        <div class="program-concepts">Conceptos: listas, bucles, variables, operadores matemáticos, condicionales</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      <div class="program-card category-practical">
+        <div class="program-title">3. Control de Gastos Personales</div>
+        <div class="program-description">Registra ingresos y gastos, muestra balance y categorías de gastos.</div>
+        <div class="program-concepts">Conceptos: variables, listas, bucles, condicionales, operadores matemáticos</div>
+        <span class="difficulty difficulty-hard">Difícil</span>
+      </div>
+
+
+     
+
+      <div class="program-card category-practical">
+        <div class="program-title">6. Planificador de Tareas</div>
+        <div class="program-description">Sistema para agregar, marcar como completadas y listar tareas pendientes.</div>
+        <div class="program-concepts">Conceptos: listas, bucles while, condicionales, strings, match (opcional)</div>
+        <span class="difficulty difficulty-hard">Difícil</span>
+      </div>
+    </div>
+
+    <div class="program-category">
+      <h3 style="color: #16a085">📖 Historias Interactivas</h3>
+
+      <div class="program-card category-stories">
+        <div class="program-title">1. Aventura en la Selva</div>
+        <div class="program-description">
+          Historia donde el usuario toma decisiones (caminar, escalar, nadar) que afectan el desarrollo de la aventura.
+        </div>
+        <div class="program-concepts">Conceptos: strings multilínea, condicionales, match (opcional), variables</div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+
+      <div class="program-card category-stories">
+        <div class="program-title">2. Misterio del Tesoro Perdido</div>
+        <div class="program-description">
+          El usuario sigue pistas y resuelve acertijos para encontrar un tesoro escondido en diferentes ubicaciones.
+        </div>
+        <div class="program-concepts">Conceptos: condicionales complejas, strings multilínea, variables, input/print</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      <div class="program-card category-stories">
+        <div class="program-title">3. Superhéroe vs. Villano</div>
+        <div class="program-description">
+          El usuario crea su superhéroe, elige poderes y enfrenta decisiones estratégicas para derrotar al villano.
+        </div>
+        <div class="program-concepts">Conceptos: variables, condicionales, listas (opcional), strings multilínea</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      <div class="program-card category-stories">
+        <div class="program-title">4. Viaje en el Tiempo</div>
+        <div class="program-description">
+          El usuario elige épocas históricas para visitar (dinosaurios, Edad Media, futuro) y vive aventuras en cada una.
+        </div>
+        <div class="program-concepts">Conceptos: strings multilínea, condicionales, match (opcional), bucles</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      
+
+      <div class="program-card category-stories">
+        <div class="program-title">5. Dilemas Éticos</div>
+        <div class="program-description">
+          Presenta situaciones morales complejas y muestra las consecuencias de cada decisión del usuario.
+          Al final del juego indicar cuan bueno o malo es la persona. (acumulador de bondad / maldad)
+        </div>
+        <div class="program-concepts">Conceptos: strings multilínea, condicionales complejas, variables, input/print</div>
+        <span class="difficulty difficulty-easy">Fácil</span>
+      </div>
+    </div>
+
+    <div class="program-category">
+      <h3 style="color: #c0392b">🎓 Mini Programas Educativos</h3>
+
+     
+
+      <div class="program-card category-educational">
+        <div class="program-title">1. Aprendizaje de Operaciones Matemáticas</div>
+        <div class="program-description">
+          Genera ejercicios de suma, resta, multiplicación o división y evalúa las respuestas del estudiante.
+        </div>
+        <div class="program-concepts">Conceptos: operadores matemáticos, bucles, condicionales, variables contadoras</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      <div class="program-card category-educational">
+        <div class="program-title">2. Vocabulario en Inglés</div>
+        <div class="program-description">
+          Muestra palabras en español y el usuario debe escribir su traducción en inglés, con sistema de puntos.
+        </div>
+        <div class="program-concepts">Conceptos: listas, condicionales, bucles for, variables, input/print</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+
+      
+
+      <div class="program-card category-educational">
+        <div class="program-title">3. Práctica de Ortografía</div>
+        <div class="program-description">
+          Presenta palabras con errores ortográficos comunes y el usuario debe corregirlas correctamente.
+        </div>
+        <div class="program-concepts">Conceptos: strings, condicionales, listas, bucles, operadores de comparación</div>
+        <span class="difficulty difficulty-medium">Intermedio</span>
+      </div>
+    </div>
+
+      <div
+        style="
+          margin-top: 40px;
+          padding: 20px;
+          background-color: #f8f9fa;
+          border: 1px solid #dee2e6;
+        "
+      >
+      
+
+        <h3>Fecha de Entrega</h3>
+        <p>
+          El proyecto debe ser entregado el
+          <strong>17 de noviembre</strong>por correo. Guardar el codigo en un archivo Word ya que si lo envian de otra forma lo interpreta como virus el sistema de correos.
+        </p>
+        <h3>Defensa</h3>
+        <p>Durante las 4 ultimas clases 18, 21, 25 y 28 de noviembre defenderan sus proyectos y se les preguntará sobre el codigo.</p>
+      </div>
+   
+  </body>
+</html>
