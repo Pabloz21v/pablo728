@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" style="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Backend</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        max-width: 1024px;
+        margin: 0 auto;
+        padding: 3% 8%;
+        position: relative;
+        box-sizing: border-box;
+        font-family: "Inter", Arial, sans-serif;
+        line-height: 1.6;
+        color: #2c3e50;
+        background: #ffffff;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 30px 0;
+        border-bottom: 3px solid #3498db;
+      }
+
+      .header h1 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+
+      .subtitle {
+        color: #7f8c8d;
+        font-size: 1.1em;
+        margin-bottom: 5px;
+      }
+
+      .duration {
+        background: #ecf0f1;
+        padding: 8px 16px;
+        border-radius: 20px;
+        display: inline-block;
+        color: #34495e;
+        font-weight: 500;
+      }
+
+      .section {
+        margin: 40px 0;
+        padding: 25px;
+        border-left: 4px solid #3498db;
+        background: #f8f9fa;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .section h2 {
+        color: #2c3e50;
+        margin: 0;
+        font-weight: 500;
+      }
+
+      .time-badge {
+        background: #3498db;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 0.9em;
+        font-weight: 500;
+      }
+
+      .highlight-box {
+        background: #e8f4f8;
+        border: 1px solid #3498db;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .important-note {
+        background: #fff3cd;
+        border: 1px solid #ffc107;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 15px 0;
+      }
+
+      .key-concept {
+        background: #d1ecf1;
+        border: 1px solid #17a2b8;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 15px 0;
+      }
+
+      .architecture-diagram {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 30px 0;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .diagram-box {
+        width: 150px;
+        padding: 20px;
+        text-align: center;
+        border-radius: 8px;
+        font-weight: 500;
+        color: white;
+      }
+
+      .frontend-box {
+        background: #e74c3c;
+      }
+      .backend-box {
+        background: #2ecc71;
+      }
+      .database-box {
+        background: #9b59b6;
+      }
+
+      .arrow {
+        font-size: 2em;
+        color: #34495e;
+        margin: 0 10px;
+      }
+
+      .code-block {
+        background: #2c3e50;
+        color: #ecf0f1;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        font-family: "Courier New", monospace;
+        font-size: 0.9em;
+        line-height: 1.4;
+      }
+
+      .code-html {
+        border-left: 4px solid #e74c3c;
+      }
+      .code-css {
+        border-left: 4px solid #3498db;
+      }
+      .code-js {
+        border-left: 4px solid #f1c40f;
+      }
+      .code-python {
+        border-left: 4px solid #2ecc71;
+      }
+
+      .language-label {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 0.8em;
+        margin-bottom: 10px;
+        display: inline-block;
+      }
+
+      .flow-diagram {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin: 25px 0;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 8px;
+      }
+
+      .flow-step {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        background: white;
+        border-radius: 6px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .step-number {
+        background: #3498db;
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: 15px;
+        flex-shrink: 0;
+      }
+
+      .comparison-table {
+        width: 100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #ddd;
+      }
+
+      .comparison-table th {
+        background: #3498db;
+        color: white;
+        font-weight: 500;
+      }
+
+      .comparison-table tr:nth-child(even) {
+        background: #f8f9fa;
+      }
+
+      .example-container {
+        background: white;
+        border: 2px solid #3498db;
+        border-radius: 10px;
+        padding: 25px;
+        margin: 25px 0;
+      }
+
+      .example-title {
+        color: #2c3e50;
+        margin-bottom: 20px;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      .tech-stack {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+      }
+
+      .tech-item {
+        text-align: center;
+        padding: 15px;
+      }
+
+      .tech-icon {
+        font-size: 2em;
+        margin-bottom: 10px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 12px 28px;
+        background: #1976d2;
+        color: #fff;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: bold;
+        text-decoration: none;
+        margin-top: 18px;
+        box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+        transition: background 0.2s;
+      }
+      .btn:hover {
+        background: #1565c0;
+      }
+    </style>
+  </head>
+  <body style="">
+    <div class="header">
+      <a href="../materias/usuarios-2.html" class="btn">Volver a Usuarios II</a>
+      <a href="usuarios-2-clase-4-frontend.html" class="btn">Ir a Sesión 4</a>
+      <!-- <a href="usuarios-2-clase-5-backend.html" class="btn">Ir a Sesión 5</a> -->
+      <h1>Sesión 5: Backend</h1>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <h2>1. Introducción: ¿Qué es el Backend?</h2>
+      </div>
+
+      <div class="key-concept">
+        💡 <strong>Concepto Clave:</strong> El Backend es la parte "invisible"
+        de una aplicación web que se ejecuta en el servidor y maneja toda la
+        lógica, datos y funcionalidades que el usuario no ve directamente.
+      </div>
+
+      <h3>Analogía del Restaurante</h3>
+      <p>Imaginen un restaurante:</p>
+      <ul>
+        <li>
+          <strong>Cliente (Usuario):</strong> La persona que hace el pedido
+        </li>
+        <li>
+          <strong>Mesero (Frontend):</strong> La interfaz que presenta el menú y
+          toma el pedido
+        </li>
+        <li>
+          <strong>Cocina (Backend):</strong> Donde se prepara la comida, se
+          verifican ingredientes, se cocina
+        </li>
+        <li>
+          <strong>Despensa (Base de Datos):</strong> Donde se guardan todos los
+          ingredientes
+        </li>
+      </ul>
+
+      <div class="highlight-box">
+        <h4>Frontend vs Backend</h4>
+        <table class="comparison-table">
+          <tbody>
+            <tr>
+              <th>Frontend (Lo que SÍ ve el usuario)</th>
+              <th>Backend (Lo que NO ve el usuario)</th>
+            </tr>
+            <tr>
+              <td>Botones, formularios, colores, texto</td>
+              <td>Procesamiento de datos, validaciones</td>
+            </tr>
+            <tr>
+              <td>Navegación entre páginas</td>
+              <td>Conexión con la base de datos</td>
+            </tr>
+            <tr>
+              <td>Animaciones, efectos visuales</td>
+              <td>Seguridad, autenticación</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <h2>2. La Arquitectura Web Completa</h2>
+      </div>
+
+      <h3>Diagrama de la Arquitectura</h3>
+      <div class="architecture-diagram">
+        <div class="diagram-box frontend-box">
+          Frontend<br />
+          (HTML, CSS, JS)
+        </div>
+        <div class="arrow">→</div>
+        <div class="diagram-box backend-box">
+          Backend<br />
+          (Python, Flask)
+        </div>
+        <div class="arrow">→</div>
+        <div class="diagram-box database-box">
+          Base de Datos<br />
+          (MySQL)
+        </div>
+      </div>
+
+      <h3>Flujo de Información (Petición-Respuesta)</h3>
+      <div class="flow-diagram">
+        <div class="flow-step">
+          <div class="step-number">1</div>
+          <div>
+            El usuario interactúa con el Frontend (hace clic en un botón, llena
+            un formulario)
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="step-number">2</div>
+          <div>El Frontend envía una petición HTTP al Backend</div>
+        </div>
+        <div class="flow-step">
+          <div class="step-number">3</div>
+          <div>
+            El Backend procesa la petición (valida datos, aplica lógica de
+            negocio)
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="step-number">4</div>
+          <div>
+            El Backend consulta o modifica la Base de Datos si es necesario
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="step-number">5</div>
+          <div>El Backend envía una respuesta de vuelta al Frontend</div>
+        </div>
+        <div class="flow-step">
+          <div class="step-number">6</div>
+          <div>El Frontend muestra el resultado al usuario</div>
+        </div>
+      </div>
+
+      <div class="important-note">
+        ⚠️ <strong>Importante:</strong> Las peticiones HTTP son como "cartas"
+        que se envían entre el Frontend y el Backend. Los tipos más comunes son:
+        <br /><br />
+        <strong>GET:</strong> Pedir información ("Dame la lista de
+        productos")<br />
+        <strong>POST:</strong> Enviar información nueva ("Guarda este nuevo
+        usuario")
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <h2>3. Frontend: La Interfaz</h2>
+      </div>
+
+      <div class="tech-stack">
+        <div class="tech-item">
+          <div class="tech-icon">🏗️</div>
+          <h4>HTML</h4>
+          <p>Estructura y contenido</p>
+        </div>
+        <div class="tech-item">
+          <div class="tech-icon">🎨</div>
+          <h4>CSS</h4>
+          <p>Diseño y estilo</p>
+        </div>
+        <div class="tech-item">
+          <div class="tech-icon">⚡</div>
+          <h4>JavaScript</h4>
+          <p>Interactividad y comunicación</p>
+        </div>
+      </div>
+
+      <h3>¿Por qué necesitamos JavaScript para conectar con el Backend?</h3>
+
+      <div class="key-concept">
+        💡 <strong>Concepto Clave:</strong> HTML y CSS son estáticos (no
+        cambian). JavaScript es dinámico y puede enviar y recibir datos del
+        servidor mientras el usuario usa la página.
+      </div>
+
+      <p>Ejemplo simple de formulario:</p>
+
+      <div class="code-block code-html">
+        <div class="language-label">HTML - Estructura</div>
+        &lt;form id="miFormulario"&gt; &lt;input type="text" id="nombre"
+        placeholder="Tu nombre"&gt; &lt;input type="email" id="email"
+        placeholder="Tu email"&gt; &lt;button
+        type="submit"&gt;Enviar&lt;/button&gt; &lt;/form&gt;
+      </div>
+
+      <div class="code-block code-css">
+        <div class="language-label">CSS - Estilo</div>
+        form { padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        input, button { margin: 10px 0; padding: 10px; width: 100%; }
+      </div>
+
+      <div class="code-block code-js">
+        <div class="language-label">JavaScript </div>
+        // Este código "escucha" cuando el usuario envía el formulario
+        <br>
+        document.getElementById('miFormulario').addEventListener('submit',
+        function(e) { e.preventDefault(); <br>
+          // Evita que la página se recargue <br>
+          //
+        Obtiene los datos del formulario <br>
+        const nombre =
+        document.getElementById('nombre').value; <br>
+        const email =
+        document.getElementById('email').value;<br>
+         // Envía los datos al backend
+        (¡esto es lo que nos conecta!) <br>
+        fetch('/guardar-usuario', { method:
+        'POST', headers: {'Content-Type': 'application/json'}, body:
+        JSON.stringify({nombre: nombre, email: email}) });<br> });
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <h2>4. Backend: El Cerebro de la Aplicación</h2>
+      </div>
+
+      <h3>Finalidad del Backend</h3>
+      <ul>
+        <li>
+          <strong>Procesar lógica:</strong> Calcular precios, validar datos,
+          tomar decisiones
+        </li>
+        <li>
+          <strong>Validar información:</strong> Verificar que los datos sean
+          correctos y seguros
+        </li>
+        <li>
+          <strong>Proteger datos:</strong> Manejar contraseñas, permisos,
+          información sensible
+        </li>
+        <li>
+          <strong>Conectar con bases de datos:</strong> Guardar y recuperar
+          información
+        </li>
+      </ul>
+
+      <h3>Python como lenguaje de Backend</h3>
+      <div class="highlight-box">
+        <h4>¿Por qué Python?</h4>
+        <ul>
+          <li>Sintaxis clara y fácil de entender</li>
+          <li>Gran cantidad de librerías disponibles</li>
+          <li>Excelente para desarrollo web</li>
+          <li>Comunidad activa y recursos de aprendizaje</li>
+        </ul>
+      </div>
+
+      <h3>¿Qué es un Framework?</h3>
+      <div class="key-concept">
+        💡 <strong>Framework:</strong> Es como una "caja de herramientas" que
+        nos proporciona funciones ya hechas para no tener que programar todo
+        desde cero. Es como tener una cocina equipada en lugar de tener que
+        fabricar cada utensilio.
+      </div>
+
+      <h3>Flask: Nuestro Framework de Ejemplo</h3>
+      <div class="important-note">
+        ⚠️ <strong>¿Por qué Flask?</strong><br />
+        • <strong>Simplicidad:</strong> Fácil de aprender y usar<br />
+        • <strong>Maneja rutas:</strong> Define qué hacer cuando llega cada
+        petición<br />
+        • <strong>Procesa peticiones:</strong> Recibe y responde
+        automáticamente<br />
+        • <strong>Flexibilidad:</strong> Se puede personalizar según nuestras
+        necesidades
+      </div>
+
+      <div class="code-block code-python">
+        <div class="language-label">Python con Flask - Ejemplo básico</div>
+        <br />from flask import Flask, request, jsonify <br />
+        # Crear la aplicación Flask app = Flask(__name__) <br />
+        # Definir una "ruta" - qué hacer cuando alguien visita nuestra página
+        <br />
+        @app.route('/') def inicio(): return "¡Hola! Este es nuestro backend"
+        <br />
+        # Ruta para recibir datos de un formulario <br />
+        @app.route('/guardar-usuario', methods=['POST']) def guardar_usuario():
+        <br />
+        # Obtener los datos que envió el frontend <br />
+        datos = request.get_json() nombre = datos['nombre'] email =
+        datos['email'] <br />
+        # Acá podríamos validar los datos
+        <br />if len(nombre) &lt; 2: return jsonify({'error': 'El nombre es muy
+        corto'}), 400 <br />
+        # Acá guardaríamos en la base de datos <br />
+        # (lo veremos en el ejemplo completo) <br />
+        return jsonify({'mensaje': 'Usuario guardado correctamente'})
+        <br /># Iniciar el servidor <br />
+        if __name__ == '__main__':
+        <br />app.run(debug=True)
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <h2>5. Ejemplo Práctico Completo: Sistema de Registro</h2>
+      </div>
+
+      <div class="example-container">
+        <h3 class="example-title">
+          📝 Sistema de Registro de Usuario Completo
+        </h3>
+
+        <h4>Paso 1: Frontend (HTML + CSS + JavaScript)</h4>
+        <div class="code-block code-html">
+          <div class="language-label">HTML - Formulario de registro</div>
+          <br />
+
+          &lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;title&gt;Registro
+          de Usuario&lt;/title&gt; &lt;style&gt; body font-family: Arial,
+          sans-serif; max-width: 500px; margin: 50px auto; <br />
+          .form-group { margin: 15px 0; } <br />
+          input { width: 100%; padding: 10px; border: 1px solid #ddd;
+          border-radius: 4px; } <br />
+          button { background: #007bff; color: white; padding: 12px 24px;
+          border: none; border-radius: 4px; cursor: pointer; } <br />
+          .mensaje { padding: 10px; margin: 10px 0; border-radius: 4px; } <br />
+          .exito { background: #d4edda; color: #155724; border: 1px solid
+          #c3e6cb; } <br />
+          .error { background: #f8d7da; color: #721c24; border: 1px solid
+          #f5c6cb; } <br />
+          &lt;/style&gt; &lt;/head&gt; &lt;body&gt; <br />
+          &lt;h1&gt;Registro de Usuario&lt;/h1&gt; <br />&lt; form
+          id="formularioRegistro"&gt;<br />
+          &lt;div class="form-group"&gt;<br />
+          &lt;input type="text" id="nombre" placeholder="Nombre completo"
+          required&gt;<br />
+          &lt;/div&gt; <br />
+          &lt;div class="form-group"&gt;<br />
+          &lt;input type="email" id="email" placeholder="Correo electrónico"
+          required&gt; <br />
+          &lt;/div&gt; <br />
+          &lt;div class="form-group"&gt; <br />
+          &lt;input type="password" id="password" placeholder="Contraseña"
+          required&gt; <br />
+          &lt;/div&gt; <br />
+          &lt;button type="submit"&gt;Registrar Usuario&lt;/button&gt;<br />
+          &lt;/form&gt; <br />
+          &lt;div id="mensaje"&gt;&lt;/div&gt;<br />
+          &lt;script&gt; <br />
+          // JavaScript para manejar el envío del formulario <br />
+          document.getElementById('formularioRegistro').addEventListener('submit',
+          async function(e) { e.preventDefault(); <br />
+          // Obtener datos del formulario <br />
+          const datos = { nombre: document.getElementById('nombre').value,
+          email: document.getElementById('email').value, password:
+          document.getElementById('password').value }; <br />
+          try { // Enviar datos al backend const respuesta = await
+          fetch('/registrar', { method: 'POST', headers: { 'Content-Type':
+          'application/json', }, body: JSON.stringify(datos) }); <br />
+          const resultado = await respuesta.json(); <br />
+          // Mostrar mensaje al usuario const mensajeDiv =
+          document.getElementById('mensaje'); <br />
+          if (respuesta.ok) { mensajeDiv.className = 'mensaje exito';<br />
+          mensajeDiv.textContent = resultado.mensaje; <br />
+          document.getElementById('formularioRegistro').reset(); <br />
+          } else { mensajeDiv.className = 'mensaje error';<br />
+          mensajeDiv.textContent = resultado.error; }<br />
+          } catch (error) { console.error('Error:', error); <br />
+          document.getElementById('mensaje').innerHTML = '&lt;div class="mensaje
+          error"&gt;Error de conexión&lt;/div&gt;'; } }); <br />
+          &lt;/script&gt; &lt;/body&gt; &lt;/html&gt;
+        </div>
+
+        <h4>Paso 2: Backend (Python + Flask)</h4>
+        <div class="code-block code-python">
+          <div class="language-label">Python - Servidor Backend completo</div>
+          <br />
+          from flask import Flask, request, jsonify, render_template_string
+          <br />
+          import mysql <br />
+          import hashlib from datetime<br />
+          import datetime <br />
+          # Crear aplicación Flask <br />
+          app = Flask(__name__) <br />
+          # Función para crear la base de datos <br />
+          def crear_base_datos(): conn = mysql.connect('usuarios.db') <br />
+          cursor = conn.cursor() <br />
+          # Crear tabla de usuarios si no existe <br />
+          cursor.execute(''' CREATE TABLE IF NOT EXISTS usuarios ( id INTEGER
+          PRIMARY KEY AUTOINCREMENT, nombre TEXT NOT NULL, email TEXT UNIQUE NOT
+          NULL, password_hash TEXT NOT NULL, fecha_registro TIMESTAMP DEFAULT
+          CURRENT_TIMESTAMP ) ''') <br />
+          conn.commit()<br />
+          conn.close()<br />
+          # Función para validar datos<br />
+          def validar_usuario(datos): errores = [] <br />
+          if not datos.get('nombre') or len(datos['nombre']) &lt; 2:<br />
+          errores.append("El nombre debe tener al menos 2 caracteres") <br />
+          if not datos.get('email') or '@' not in datos['email']: <br />
+          errores.append("El email no es válido")<br />
+          if not datos.get('password') or len(datos['password']) &lt; 6: <br />
+          errores.append("La contraseña debe tener al menos 6 caracteres")
+          return errores <br />
+          # Función para encriptar contraseña <br />
+          def encriptar_password(password): <br />
+          return hashlib.sha256(password.encode()).hexdigest() <br />
+          # Ruta principal - servir el formulario HTML <br />
+          @app.route('/') def index(): <br />
+          # En un proyecto real, esto sería un archivo HTML separado return
+          render_template_string(open('registro.html').read()) <br />
+          # Ruta para registrar usuario<br />
+          @app.route('/registrar', methods=['POST'])<br />
+          def registrar_usuario(): <br />
+          try: # Obtener datos del formulario <br />
+          datos = request.get_json()<br />
+          # Validar datos
+          <br />
+          errores = validar_usuario(datos) <br />
+          if errores: return<br />
+          jsonify({'error': '; '.join(errores)}), 400 <br />
+          # Conectar a la base de datos <br />
+          conn =mysql.connect('usuarios.db') <br />
+          cursor = conn.cursor() <br />
+          # Verificar si el email ya existe <br />
+          cursor.execute('SELECT email FROM usuarios WHERE email = ?',
+          (datos['email'],)) <br />
+          if cursor.fetchone(): <br />
+          conn.close() return<br />
+          jsonify({'error': 'Este email ya está registrado'}), 400<br />
+          # Encriptar contraseña <br />
+          password_hash = encriptar_password(datos['password']) <br />
+          # Guardar usuario en la base de datos <br />
+          cursor.execute(''' INSERT INTO usuarios (nombre, email, password_hash)
+          VALUES (?, ?, ?) ''', (datos['nombre'], datos['email'],
+          password_hash)) <br />
+          conn.commit() <br />
+          usuario_id = cursor.lastrowid <br />
+          conn.close() <br />
+          return jsonify({ 'mensaje': f'Usuario {datos["nombre"]} registrado
+          exitosamente', 'usuario_id': usuario_id }) <br />
+          except Exception as e: <br />
+          return jsonify({'error': 'Error interno del servidor'}), 500 <br />
+          # Ruta para listar usuarios (para verificar que funciona)<br />
+          @app.route('/usuarios') def listar_usuarios(): <br />
+          conn = mysql.connect('usuarios.db') <br />
+          cursor = conn.cursor() <br />
+          cursor.execute('SELECT id, nombre, email, fecha_registro FROM
+          usuarios') <br />
+          usuarios = cursor.fetchall()<br />
+          conn.close() <br />lista_usuarios = [] for usuario in usuarios: <br />
+          lista_usuarios.append({ 'id': usuario[0], 'nombre': usuario[1],
+          'email': usuario[2], 'fecha_registro': usuario[3] }) <br />
+          return jsonify(lista_usuarios) <br />
+          # Inicializar base de datos y ejecutar aplicación
+          <br />if __name__ == '__main__':<br />
+          crear_base_datos() <br />
+          print("Base de datos creada/verificada") <br />
+          print("Servidor ejecutándose en http://localhost:5000")<br />
+          app.run(debug=True)
+        </div>
+
+        <h4>Paso 3: Base de Datos (MySQL Workbench)</h4>
+        <div class="important-note">
+          La base de datos se crea automáticamente con esta estructura:
+          <br /><br />
+          <strong>Tabla: usuarios</strong><br />
+          • <code>id</code>: Número único para cada usuario<br />
+          • <code>nombre</code>: Nombre completo del usuario<br />
+          • <code>email</code>: Correo electrónico (único)<br />
+          • <code>password_hash</code>: Contraseña encriptada<br />
+          • <code>fecha_registro</code>: Cuándo se registró
+        </div>
+      </div>
+
+      <div class="flow-diagram">
+        <h4>Flujo completo del ejemplo:</h4>
+        <div class="flow-step">
+          <div class="step-number">1</div>
+          <div>
+            <strong>Usuario:</strong> Llena el formulario HTML con su nombre,
+            email y contraseña
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="step-number">2</div>
+          <div>
+            <strong>JavaScript:</strong> Captura los datos y los envía al
+            backend via POST
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="step-number">3</div>
+          <div>
+            <strong>Flask:</strong> Recibe los datos en la ruta /registrar
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="step-number">4</div>
+          <div>
+            <strong>Backend:</strong> Valida que los datos sean correctos
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="step-number">5</div>
+          <div>
+            <strong>Backend:</strong> Encripta la contraseña por seguridad
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="step-number">6</div>
+          <div><strong>Base de Datos:</strong> Guarda el nuevo usuario</div>
+        </div>
+        <div class="flow-step">
+          <div class="step-number">7</div>
+          <div><strong>Backend:</strong> Envía confirmación al frontend</div>
+        </div>
+        <div class="flow-step">
+          <div class="step-number">8</div>
+          <div>
+            <strong>Frontend:</strong> Muestra mensaje de éxito al usuario
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <h2>6. Conclusión y Casos de Uso</h2>
+      </div>
+
+      <h3>¿Por qué uno necesita del otro?</h3>
+
+      <div class="key-concept">
+        💡 <strong>Interdependencia:</strong> Frontend, Backend y Base de Datos
+        son como un equipo de trabajo. Cada uno tiene su función específica,
+        pero ninguno puede funcionar completamente sin los otros.
+      </div>
+
+      <div class="highlight-box">
+        <h4>Sin Backend, el Frontend no puede:</h4>
+        <ul>
+          <li>Guardar información permanentemente</li>
+          <li>Validar datos de forma segura</li>
+          <li>Manejar usuarios y contraseñas</li>
+          <li>Procesar lógica compleja</li>
+          <li>Conectarse con otros sistemas</li>
+        </ul>
+
+        <h4>Sin Frontend, el Backend no puede:</h4>
+        <ul>
+          <li>Mostrar información al usuario</li>
+          <li>Recibir datos del usuario</li>
+          <li>Proporcionar una interfaz amigable</li>
+          <li>Ser accesible para personas no técnicas</li>
+        </ul>
+
+        <h4>Sin Base de Datos, ninguno puede:</h4>
+        <ul>
+          <li>Recordar información entre sesiones</li>
+          <li>Almacenar grandes cantidades de datos</li>
+          <li>Mantener historiales</li>
+          <li>Funcionar para múltiples usuarios</li>
+        </ul>
+      </div>
+
+      <h3>Ejemplos Reales</h3>
+
+      <div class="tech-stack">
+        <div class="tech-item">
+          <div class="tech-icon">📱</div>
+          <h4>Redes Sociales</h4>
+          <p>
+            <strong>Frontend:</strong> Posts, likes, comentarios<br />
+            <strong>Backend:</strong> Algoritmos, notificaciones<br />
+            <strong>BBDD:</strong> Perfiles, mensajes, fotos
+          </p>
+        </div>
+        <div class="tech-item">
+          <div class="tech-icon">🛒</div>
+          <h4>E-commerce</h4>
+          <p>
+            <strong>Frontend:</strong> Catálogo, carrito<br />
+            <strong>Backend:</strong> Pagos, inventario<br />
+            <strong>BBDD:</strong> Productos, pedidos, usuarios
+          </p>
+        </div>
+        <div class="tech-item">
+          <div class="tech-icon">🎓</div>
+          <h4>Plataforma Educativa</h4>
+          <p>
+            <strong>Frontend:</strong> Videos, ejercicios<br />
+            <strong>Backend:</strong> Progreso, evaluaciones<br />
+            <strong>BBDD:</strong> Cursos, calificaciones, usuarios
+          </p>
+        </div>
+      </div>
+
+      <div class="important-note">
+        📝 <strong>Para Recordar:</strong> • El Frontend es lo que ve y usa el
+        usuario • El Backend es el "cerebro" que procesa todo • La Base de Datos
+        es la "memoria" que guarda todo • JavaScript es necesario para que el
+        Frontend se comunique con el Backend • Python + Flask nos ayuda a crear
+        Backends potentes y seguros • Los tres componentes trabajan juntos para
+        crear aplicaciones web completas.
+      </div>
+    </div>
+  </body>
+</html>
