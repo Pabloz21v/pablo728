@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 7 – Gabinetes y Periféricos Internos</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #2c3e50;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      pre {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        border-left: 4px solid #3498db;
+      }
+      code {
+        font-family: monospace;
+        background-color: #f8f9fa;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+        table {
+          font-size: 14px;
+        }
+        th,
+        td {
+          padding: 8px;
+        }
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-dos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="../sesiones/hardware2-sesion6-psu.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #a9c8e2;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 6
+        </a>
+        <!-- <a
+        href="../sesiones/hardware2-sesion8.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #a9c8e2;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 8
+      </a> -->
+      </div>
+      <h1>Sesión 7 – Gabinetes y Periféricos Internos</h1>
+
+      <!-- <h2>Objetivos de la Clase</h2>
+        <ul>
+            <li>Comprender los factores de forma de gabinetes y su impacto en compatibilidad y diseño de flujo de aire.</li>
+            <li>Analizar materiales de construcción, características de gestión de cables, y paneles de E/S modernos.</li>
+            <li>Evaluar compromisos entre optimización de flujo de aire, reducción de ruido, y características estéticas.</li>
+            <li>Identificar periféricos internos necesarios según caso de uso específico del cliente.</li>
+            <li>Diagnosticar problemas de compatibilidad, gestión térmica, y enrutado de cables.</li>
+            <li>Aplicar criterios de selección para configuraciones desde presupuesto básico hasta entusiastas.</li>
+        </ul> -->
+
+      <h2>Factores que Encarecen Gabinetes y Periféricos</h2>
+
+      <h3>Resumen Visual Gabinetes: ¿Qué Pagas Extra?</h3>
+      <pre>
+Precio Base (ej. Micro-ATX básico) → $35 USD / $42,000 ARS
+│ ├── +$20 USD → Mid Tower vs Micro-ATX (más espacio compatibilidad)
+│ │ │ ├── +$30 USD → Panel frontal de malla vs sólido (mejor flujo)
+│ │ │ │ │ ├── +$40 USD → Panel lateral vidrio templado vs acero
+│ │ │ │ │ │ │ ├── +$50 USD → Materiales premium (aluminio, acero grueso)
+│ │ │ │ │ │ │ │ │ │ ├── +$60 USD → E/S avanzado (USB-C, USB 3.2 Gen 2)
+│ │ │ │ │ │ │ │ │ │ │ │ ├── +$80 USD → Diseño sin herramientas + gestión cables
+│ │ │ │ │ │ │ │ │ │ │ │ │ │ └── +$120 USD → Marca premium (Fractal, Lian Li)
+│ │ │ │ │ │ │ │ │ │ │ │ │ │ └── +$100 USD → Ecosistema RGB + control por software
+│ │ │ │ │ │ │ │ │ │ │ │ └── +$70 USD → Materiales amortiguadores de ruido
+│ │ │ │ │ │ │ │ │ │ └── +$40 USD → Carenado PSU + montaje vertical GPU
+│ │ │ │
+└── +$25 USD → Ventiladores preinstalados vs sin ventiladores
+│ │ │ └── +$80 USD → Full Tower vs Mid Tower (capacidad workstation)
+└── +$200 USD → Chasis servidor/rackmount (características empresariales)
+        </pre
+      >
+
+      <h3>Resumen Visual Periféricos Internos: ¿Qué Pagas Extra?</h3>
+      <pre>
+Precio Base (cables básicos incluidos) → $0 USD
+│ ├── +$15 USD → Cables premium (enfundados, extensiones)
+├── +$25 USD → Hub/controlador de ventiladores básico
+│ │ │ │ │ ├── +$40 USD → Hub RGB + control por software
+│ │ │ │ │ │ ├── +$60 USD → Tarjeta de sonido dedicada (vs audio integrado)
+│ │ │ │ │ │ │ │ │ ├── +$80 USD → Tarjeta de red premium (2.5Gb, WiFi 6E)
+│ │ │ │ │ │ │ │ │ │ │ │ ├── +$120 USD → Tarjeta capturadora profesional
+│ │ │ │ │ │ │ │ │ │ │ │ └── +$200 USD → Grabadora Blu-ray + lector tarjetas
+│ │ │ │ │ │ │ │ │ │ │ │ └── +$100 USD → Bahías hot-swap con backplane
+│ │ │ │ │ │ │ │ │ │ └── +$50 USD → Cables extensión PCIe, divisores
+│ │ │ │ │
+└── +$30 USD → Lector tarjetas interno multiformato
+│ │ │ │ │ └── +$20 USD → Cables SATA premium + divisores alimentación
+│ │ │ └── +$10 USD → Bridas cables, accesorios gestión
+└── +$500 USD → Backplane empresarial (RAID, hot-swap)
+        </pre
+      >
+
+      <h2>Conceptos Clave - Gabinetes</h2>
+
+      <h3>Factores de Forma y Dimensiones</h3>
+
+      <table>
+        <tr>
+          <th>Factor de Forma</th>
+          <th>Dimensiones Típicas</th>
+          <th>Soporte Motherboard</th>
+          <th>Espacio GPU</th>
+          <th>Uso Ideal</th>
+        </tr>
+        <tr>
+          <td>Mini-ITX</td>
+          <td>200×300×400mm</td>
+          <td>Mini-ITX solamente</td>
+          <td>180-250mm</td>
+          <td>HTPC, builds compactos</td>
+        </tr>
+        <tr>
+          <td>Micro-ATX</td>
+          <td>220×400×450mm</td>
+          <td>mATX, Mini-ITX</td>
+          <td>280-320mm</td>
+          <td>Presupuesto, oficina</td>
+        </tr>
+        <tr>
+          <td>Mid Tower</td>
+          <td>230×450×500mm</td>
+          <td>ATX, mATX, Mini-ITX</td>
+          <td>320-400mm</td>
+          <td>Gaming mainstream</td>
+        </tr>
+        <tr>
+          <td>Full Tower</td>
+          <td>250×550×600mm</td>
+          <td>E-ATX, ATX, mATX</td>
+          <td>400-500mm</td>
+          <td>Entusiastas, workstation</td>
+        </tr>
+        <tr>
+          <td>Super Tower</td>
+          <td>280×600×700mm+</td>
+          <td>XL-ATX, E-ATX, ATX</td>
+          <td>500mm+</td>
+          <td>Refrigeración extrema, multi-GPU</td>
+        </tr>
+      </table>
+
+      <h3>Fundamentos del Diseño de Flujo de Aire</h3>
+
+      <h4>Panel Frontal Sólido/Cerrado</h4>
+      <ul>
+        <li>
+          <strong>Ventajas:</strong> Estética limpia, mejor amortiguación de
+          ruido.
+        </li>
+        <li>
+          <strong>Desventajas:</strong> Flujo de aire restringido, temperaturas
+          más altas.
+        </li>
+        <li>
+          <strong>Compromiso:</strong> Ventilaciones laterales/superiores para
+          compensar.
+        </li>
+        <li>
+          <strong>Ideal para:</strong> Builds oficina, ambientes sensibles al
+          ruido.
+        </li>
+      </ul>
+
+      <h4>Diseño Panel Frontal de Malla</h4>
+      <ul>
+        <li>
+          <strong>Ventajas:</strong> Flujo de aire sin restricciones,
+          temperaturas 5-10°C menores.
+        </li>
+        <li>
+          <strong>Desventajas:</strong> Mayor ingreso de polvo, menos aislación
+          de ruido.
+        </li>
+        <li>
+          <strong>Ideal para:</strong> Builds gaming, componentes alto
+          rendimiento.
+        </li>
+      </ul>
+
+      <h3>Factores Climáticos Locales</h3>
+
+      <h4>Consideraciones Polvo y Humedad:</h4>
+      <ul>
+        <li>
+          <strong>Polvo pampeano:</strong> Filtros malla metálica superiores a
+          plástico.
+        </li>
+        <li>
+          <strong>Humedad (CABA/Rosario):</strong> Ventilación constante, evitar
+          paneles cerrados.
+        </li>
+        <li>
+          <strong>Temperatura ambiente alta:</strong> 35°C+ en verano, flujo
+          aire crítico.
+        </li>
+        <li>
+          <strong>Estabilidad eléctrica:</strong> Cortes frecuentes, considerar
+          UPS.
+        </li>
+      </ul>
+      <!-- <h3>Configuraciones Típicas de Flujo de Aire</h3> -->
+<!-- 
+      <h4>Configuración Presión Positiva</h4>
+      <pre>
+┌─────────────────────────┐
+│ ↓ ENTRADA ↓ ENTRADA      │ ← Superior (salida opcional)
+│ [VENT]    [VENT]         │
+│                           │
+│ → ENTRADA →              │ ← Trasero SALIDA
+│ [VENT] Componentes [VENT]│
+│                           │
+│ ↑ ENTRADA (opcional)    │
+└─────────────────────────┘
+Frontal: 2×120mm Entrada | Trasero: 1×120mm Salida
+Resultado: +20 CFM entrada neta, polvo reducido
+        </pre
+      >
+
+      <h4>Configuración Presión Negativa</h4>
+      <pre>
+┌─────────────────────────┐
+│ ↑ SALIDA ↑ SALIDA       │ ← Salidas superiores
+│ [VENT]    [VENT]        │
+│                           │
+│ → ENTRADA →             │ ← Trasero SALIDA
+│ [VENT] Componentes [VENT]│
+│                           │
+│                           │
+└─────────────────────────┘
+Frontal: 1×120mm Entrada | Trasero+Superior: 3×120mm Salida
+Resultado: -40 CFM salida neta, mejor refrigeración componentes -->
+        </pre
+      >
+
+      <h3>Materiales de Construcción</h3>
+
+      <h4>Acero (SECC - Steel, Electro-galvanized, Cold-rolled, Coil)</h4>
+      <ul>
+        <li>
+          <strong>Grosor:</strong> 0.5-0.8mm presupuesto, 0.8-1.2mm premium.
+        </li>
+        <li>
+          <strong>Ventajas:</strong> Costo efectivo, resistente, blindaje EMI.
+        </li>
+        <li>
+          <strong>Desventajas:</strong> Peso, posible óxido si se daña el
+          recubrimiento.
+        </li>
+        <li>
+          <strong>Acabado:</strong> Pintura en polvo típica, calidad de pintura
+          variable.
+        </li>
+      </ul>
+
+      <h4>Aluminio</h4>
+      <ul>
+        <li>
+          <strong>Aleación típica:</strong> 6061-T6 (resistencia estructural).
+        </li>
+        <li>
+          <strong>Ventajas:</strong> Liviano, resistente corrosión, sensación
+          premium.
+        </li>
+        <li>
+          <strong>Desventajas:</strong> Premio costo 40-60%, menor blindaje EMI.
+        </li>
+        <li>
+          <strong>Procesado:</strong> Mecanizado CNC (premium) vs estampado
+          (costo).
+        </li>
+      </ul>
+
+      <h4>Vidrio Templado</h4>
+      <ul>
+        <li>
+          <strong>Grosor:</strong> 4-5mm estándar, clasificación seguridad
+          impacto.
+        </li>
+        <li>
+          <strong>Opciones tinte:</strong> Transparente, ahumado, con tinte RGB.
+        </li>
+        <li>
+          <strong>Montaje:</strong> Tornillos mariposa vs clips vs bisagras.
+        </li>
+        <li>
+          <strong>Consideración seguridad:</strong> Patrón rotura, protección
+          bordes.
+        </li>
+        <li>
+          <strong>Mantenimiento:</strong> Huellas visibles, frecuencia limpieza.
+        </li>
+      </ul>
+
+      <h3>Evolución Panel E/S</h3>
+
+      <table>
+        <tr>
+          <th>Generación</th>
+          <th>Conectores Típicos</th>
+          <th>Ancho Banda</th>
+          <th>Gabinetes Que Lo Incluyen</th>
+        </tr>
+        <tr>
+          <td>Legado (2015-2018)</td>
+          <td>2×USB 2.0, jacks audio</td>
+          <td>480 Mbps total</td>
+          <td>Gabinetes presupuesto, stock anterior</td>
+        </tr>
+        <tr>
+          <td>Estándar Actual</td>
+          <td>2×USB 3.0, 1×USB 2.0, audio</td>
+          <td>5 Gbps por USB 3.0</td>
+          <td>Mid towers mainstream</td>
+        </tr>
+        <tr>
+          <td>Premium Moderno</td>
+          <td>1×USB-C, 2×USB 3.2 Gen 2</td>
+          <td>10 Gbps USB-C/3.2</td>
+          <td>Gabinetes gaming/entusiastas</td>
+        </tr>
+        <tr>
+          <td>Vanguardia</td>
+          <td>USB-C 20Gbps, USB4</td>
+          <td>20-40 Gbps</td>
+          <td>Gabinetes premium 2024+</td>
+        </tr>
+      </table>
+
+      <h3>Características Gestión de Cables</h3>
+
+      <h4>Carenado PSU</h4>
+      <ul>
+        <li><strong>Función:</strong> Oculta cables PSU, mejora estética.</li>
+        <li>
+          <strong>Impacto flujo aire:</strong> Posible restricción si mal
+          diseñado.
+        </li>
+        <li>
+          <strong>Acceso:</strong> Removible vs fijo, impacto en mantenimiento.
+        </li>
+        <li><strong>Espacio altura:</strong> Verificar con PSU + cables.</li>
+      </ul>
+
+      <h4>Orificios Enrutado Cables (Pasacables)</h4>
+      <ul>
+        <li>
+          <strong>Ubicación:</strong> Detrás bandeja motherboard, ubicaciones
+          estratégicas.
+        </li>
+        <li>
+          <strong>Tamaño:</strong> 20-25mm diámetro típico, acomodar múltiples
+          cables.
+        </li>
+        <li>
+          <strong>Material:</strong> Pasacables goma (premium) vs borde
+          plástico.
+        </li>
+        <li>
+          <strong>Cantidad:</strong> 6-10 puntos enrutado en gabinetes premium.
+        </li>
+      </ul>
+
+      <h4>Espacio Gestión Cables</h4>
+      <ul>
+        <li>
+          <strong>Espacio trasero:</strong> 18-25mm mínimo, 30mm+ preferido.
+        </li>
+        <li>
+          <strong>Bridas velcro:</strong> Incluidas vs compra posterior
+          necesaria.
+        </li>
+        <li>
+          <strong>Puntos amarre cables:</strong> Anclajes moldeados vs agujeros
+          taladrados.
+        </li>
+        <li>
+          <strong>Beneficio PSU modular:</strong> Reduce volumen cables
+          significativamente.
+        </li>
+      </ul>
+
+      <h3>Compromiso Amortiguación Ruido vs Flujo de Aire</h3>
+
+      <table>
+        <tr>
+          <th>Enfoque</th>
+          <th>Reducción Ruido</th>
+          <th>Impacto Flujo</th>
+          <th>Premio Costo</th>
+          <!-- <th>Ejemplos Gabinetes</th> -->
+        </tr>
+        <tr>
+          <td>Amortiguación Completa</td>
+          <td>-15 a -20 dB</td>
+          <td>-30% flujo aire</td>
+          <td>+$40-60</td>
+          <!-- <td>be quiet! Silent Base</td> -->
+        </tr>
+        <tr>
+          <td>Amortiguación Selectiva</td>
+          <td>-8 a -12 dB</td>
+          <td>-15% flujo aire</td>
+          <td>+$20-35</td>
+          <!-- <td>Fractal Define Series</td> -->
+        </tr>
+        <tr>
+          <td>Diseño Híbrido</td>
+          <td>-5 a -8 dB</td>
+          <td>-5% flujo aire</td>
+          <td>+$15-25</td>
+          <!-- <td>Fractal Define 7 Compact</td> -->
+        </tr>
+        <tr>
+          <td>Enfoque Rendimiento</td>
+          <td>0 a -3 dB</td>
+          <td>+10% flujo aire</td>
+          <td>+$0-15</td>
+          <!-- <td>Meshify C, H500M</td> -->
+        </tr>
+      </table>
+
+      <h2>Conceptos Clave - Periféricos Internos</h2>
+
+      <h3>Tarjetas de Expansión Modernas</h3>
+
+      <h4>Tarjetas de Sonido</h4>
+      <ul>
+        <li>
+          <strong>Cuándo necesaria:</strong> Audio integrado insuficiente, uso
+          audiófilos.
+        </li>
+        <li><strong>Calidad DAC:</strong> SNR >100dB, THD <0.01%.</li>
+        <li>
+          <strong>Conectividad:</strong> Salida analógica, S/PDIF, surround 7.1.
+        </li>
+        <li>
+          <strong>Ejemplos:</strong> Creative AE-5 Plus ($150), ASUS Essence STX
+          II ($200).
+        </li>
+        <li>
+          <strong>Alternativa:</strong> DAC/amp USB externo frecuentemente mejor
+          valor.
+        </li>
+      </ul>
+
+      <h4>Tarjetas de Red</h4>
+      <ul>
+        <li>
+          <strong>Mejora Ethernet:</strong> 2.5GbE/10GbE vs 1GbE integrado.
+        </li>
+        <li>
+          <strong>Mejora WiFi:</strong> WiFi 6E/7 con mejor diseño antena.
+        </li>
+        <li>
+          <strong>Características empresariales:</strong> SR-IOV, capacidades
+          bypass.
+        </li>
+        <li>
+          <strong>Ejemplos:</strong> Intel X550-T2 10GbE ($180), ASUS AX6000
+          WiFi 6E ($120).
+        </li>
+      </ul>
+
+      <h4>Tarjetas Capturadoras</h4>
+      <ul>
+        <li>
+          <strong>Interna vs Externa:</strong> Ancho banda PCIe vs límites USB
+          3.0/3.1.
+        </li>
+        <li>
+          <strong>Resolución/framerate:</strong> Capacidad 1080p60 vs 4K60.
+        </li>
+        <li>
+          <strong>Latencia:</strong> Codificación hardware vs passthrough
+          software.
+        </li>
+        <li>
+          <strong>Ejemplos:</strong> Elgato 4K60 Pro MK.2 ($250), AVerMedia Live
+          Gamer 4K ($200).
+        </li>
+      </ul>
+
+      <h3>Unidades Ópticas y Lectores</h3>
+
+      <table>
+        <tr>
+          <th>Tipo</th>
+          <th>Velocidad Lectura</th>
+          <th>Capacidad Escritura</th>
+          <th>Precio (USD/ARS)</th>
+          <th>Uso Actual</th>
+        </tr>
+        <tr>
+          <td>DVD±RW</td>
+          <td>16× DVD</td>
+          <td>DVD±R/RW</td>
+          <td>$25 / $30,000</td>
+          <td>Medios legado, backup básico</td>
+        </tr>
+        <tr>
+          <td>Lector Blu-ray</td>
+          <td>12× BD, 16× DVD</td>
+          <td>Solo DVD</td>
+          <td>$45 / $54,000</td>
+          <td>Reproducción medios, juegos</td>
+        </tr>
+        <tr>
+          <td>Grabador Blu-ray</td>
+          <td>16× BD, 16× DVD</td>
+          <td>BD-R/RE, DVD±R/RW</td>
+          <td>$80 / $96,000</td>
+          <td>Backup profesional, archivado</td>
+        </tr>
+        <tr>
+          <td>UHD Blu-ray</td>
+          <td>UHD BD, BD, DVD</td>
+          <td>BD/DVD estándar</td>
+          <td>$120 / $144,000</td>
+          <td>Medios 4K, HTPC premium</td>
+        </tr>
+      </table>
+
+      <h4>Compatibilidad UHD Blu-ray:</h4>
+      <p>
+        Reproducción UHD Blu-ray requiere software específico (PowerDVD,
+        MakeMKV), soporte HDCP 2.2, y cadena GPU/display compatible. Verificar
+        compatibilidad ecosistema antes de compra.
+      </p>
+
+      <h3>Controladores Ventiladores y Hubs RGB</h3>
+
+      <h4>Controladores Ventiladores</h4>
+      <ul>
+        <li>
+          <strong>Control PWM vs DC:</strong> Precisión 4-pin vs voltaje 3-pin.
+        </li>
+        <li>
+          <strong>Cantidad canales:</strong> 6-10 ventiladores típico,
+          expandible.
+        </li>
+        <li>
+          <strong>Sensores temperatura:</strong> 2-4 sondas para curvas
+          personalizadas.
+        </li>
+        <li>
+          <strong>Control software:</strong> Independiente vs integración
+          motherboard.
+        </li>
+        <li>
+          <strong>Ejemplos:</strong> Aquacomputer Quadro ($60), Corsair
+          Commander Pro ($75).
+        </li>
+      </ul>
+
+      <h4>Hubs RGB</h4>
+      <ul>
+        <li>
+          <strong>Compatibilidad protocolo:</strong> Tiras ARGB 5V vs RGB 12V.
+        </li>
+        <li>
+          <strong>LEDs direccionables:</strong> Control individual vs
+          iluminación por zonas.
+        </li>
+        <li>
+          <strong>Ecosistema software:</strong> Compatibilidad iCUE, Aura Sync,
+          Mystic Light.
+        </li>
+        <li>
+          <strong>Entrega energía:</strong> Hub alimentado vs límites header
+          motherboard.
+        </li>
+        <li>
+          <strong>Ejemplos:</strong> Corsair Lighting Node Pro ($55), ASUS ROG
+          Terminal ($45).
+        </li>
+      </ul>
+
+      <h3>Cables Internos y Extensiones</h3>
+
+      <ul>
+        <li>
+          <strong>Cables riser:</strong> Montaje GPU vertical, builds estéticos.
+        </li>
+        <li>
+          <strong>Versión PCIe:</strong> Clasificados 3.0 vs 4.0 para
+          compatibilidad futura.
+        </li>
+        <li>
+          <strong>Impacto longitud:</strong> Integridad señal se degrada >30cm.
+        </li>
+        <li>
+          <strong>Calidad blindaje:</strong> Protección EMI en señales alta
+          frecuencia.
+        </li>
+        <li>
+          <strong>Pruebas:</strong> Verificar estabilidad con GPU objetivo antes
+          instalación permanente.
+        </li>
+      </ul>
+
+      <ul>
+        <li>
+          <strong>Datos SATA 3.0:</strong> Clasificados 6 Gbps, longitudes
+          30-100cm.
+        </li>
+        <li>
+          <strong>Conectores angulados:</strong> 90° para espacios reducidos.
+        </li>
+        <li><strong>Clips bloqueo:</strong> Conexión segura, pero frágiles.</li>
+        <li>
+          <strong>Divisores alimentación SATA:</strong> Adaptadores 1-a-3/4,
+          límites energía.
+        </li>
+        <li>
+          <strong>Indicadores calidad:</strong> Clasificación AWG, plateado
+          conectores.
+        </li>
+      </ul>
+
+      <h3>Bahías Almacenamiento y Backplanes</h3>
+      <!-- <h4>Bahías Estándar</h4> -->
+      <ul>
+        <li>
+          <strong>Bahías 3.5":</strong> HDDs, montaje tornillos tradicional.
+        </li>
+        <li>
+          <strong>Bahías 2.5":</strong> SSDs, adaptadores para compatibilidad
+          3.5".
+        </li>
+        <li>
+          <strong>Montaje sin herramientas:</strong> Rieles deslizantes,
+          tornillos mariposa.
+        </li>
+        <li>
+          <strong>Amortiguación vibraciones:</strong> Pasacables goma,
+          aislación.
+        </li>
+      </ul>
+
+      <ul>
+        <li>
+          <strong>Hot-swap SATA:</strong>Reemplazo drives individuales sin
+          tiempo inactividad
+        </li>
+        <li>
+          <strong>Backplanes SAS:</strong> Redundancia empresarial, ruta dual
+          Compatibilidad bandejas: Bandejas 2.5"/3.5", mecanismos bloqueo LEDs
+          energía/actividad: Indicación estado por drive
+        </li>
+        <li>
+          <strong>Ejemplos:</strong> Supermicro BPN-SAS3-826A ($200), iStarUSA
+          BPN-DE230SS ($150)
+        </li>
+      </ul>
+
+      <h3>Lectores Tarjetas e E/S Legado</h3>
+
+      <table>
+        <tr>
+          <th>Tipo Lector</th>
+          <th>Formatos Soportados</th>
+          <th>Interface</th>
+          <th>Velocidad</th>
+          <th>Precio (ARS)</th>
+        </tr>
+        <tr>
+          <td>SD/MicroSD Básico</td>
+          <td>SD, SDHC, SDXC</td>
+          <td>USB 3.0 interno</td>
+          <td>UHS-I (104 MB/s)</td>
+          <td>$18,000</td>
+        </tr>
+        <tr>
+          <td>Multiformato</td>
+          <td>CF, SD, MS, xD</td>
+          <td>USB 3.0 interno</td>
+          <td>Varía por formato</td>
+          <td>$30,000</td>
+        </tr>
+        <tr>
+          <td>CF Profesional</td>
+          <td>CFast, CF, SD UHS-II</td>
+          <td>PCIe x1</td>
+          <td>UHS-II (312 MB/s)</td>
+          <td>$84,000</td>
+        </tr>
+        <tr>
+          <td>Hub USB-C interno</td>
+          <td>Vía adaptadores</td>
+          <td>USB-C 3.2 Gen 2</td>
+          <td>10 Gbps compartidos</td>
+          <td>$42,000</td>
+        </tr>
+      </table>
+
+      <h2>Tipos de Uso y Características Esenciales</h2>
+
+      <h3>Oficina Básica</h3>
+      <p>
+        <strong>Objetivo:</strong> Funcionalidad, control costos, mantenimiento
+        mínimo.
+      </p>
+
+      <h4>Gabinete - Características Críticas (🟢):</h4>
+      <ul>
+        <li>Factor forma: Micro-ATX suficiente, eficiente espacio.</li>
+        <li>Ruido: Panel frontal cerrado, materiales amortiguadores sonido.</li>
+        <li>E/S básico: 2×USB 3.0 panel frontal adecuado.</li>
+        <li>Calidad construcción: Acero resistente, cobertura garantía.</li>
+        <li>Punto precio: Rango objetivo $35-50 USD.</li>
+      </ul>
+
+      <h4>Periféricos - Características Críticas (🟢):</h4>
+      <ul>
+        <li>Unidad DVD: Compatibilidad básica para medios legado.</li>
+        <li>Lector tarjetas: SD/microSD para flujo trabajo fotografía.</li>
+        <li>Cables: SATA estándar, no necesario premium.</li>
+      </ul>
+
+      <h4>Irrelevantes (🔴):</h4>
+      <ul>
+        <li>Vidrio templado, iluminación RGB.</li>
+        <li>Soporte múltiples GPU, alto flujo aire.</li>
+        <li>E/S premium (USB-C, alta velocidad).</li>
+        <li>Tarjetas sonido, capturadoras.</li>
+      </ul>
+
+      <h3>Gaming Mainstream (1080p/1440p)</h3>
+      <p>
+        <strong>Objetivo:</strong> Optimización rendimiento, atractivo estético,
+        capacidad actualización.
+      </p>
+
+      <h4>Gabinete - Características Críticas (🟢):</h4>
+      <ul>
+        <li>
+          Factor forma: Mid Tower para motherboard ATX + GPU longitud completa.
+        </li>
+        <li>Flujo aire: Panel frontal malla, mínimo 2×entrada + 1×salida.</li>
+        <li>Espacio GPU: 320mm+ para tarjetas modernas gama alta.</li>
+        <li>
+          Gestión cables: Carenado PSU, orificios enrutado, espacio trasero
+          20mm+.
+        </li>
+        <li>E/S moderno: Panel frontal USB-C preferido.</li>
+      </ul>
+
+      <h4>Características Útiles (🟡):</h4>
+      <ul>
+        <li>Panel lateral vidrio templado: Visibilidad componentes.</li>
+        <li>Soporte RGB: Compatibilidad header, tiras direccionables.</li>
+        <li>Instalación sin herramientas: Retención GPU, bahías drives.</li>
+        <li>Materiales premium: Acero más grueso, acentos aluminio.</li>
+      </ul>
+
+      <h4>Periféricos - Características Críticas (🟢):</h4>
+      <ul>
+        <li>
+          Controlador ventiladores: 6+ canales para gestión temperatura óptima.
+        </li>
+        <li>Hub RGB: Compatibilidad ecosistema (iCUE, Aura, etc.).</li>
+        <li>Cables premium: Extensiones enfundadas para estética.</li>
+      </ul>
+
+      <h3>Gaming Entusiasta (4K, Gama Alta)</h3>
+      <p>
+        <strong>Objetivo:</strong> Máximo rendimiento, capacidad de
+        overclocking, características premium.
+      </p>
+
+      <h4>Gabinete - Características Críticas (🟢):</h4>
+      <ul>
+        <li>Factor forma: Mid/Full Tower con soporte E-ATX.</li>
+        <li>
+          Capacidad refrigeración: Soporte AIO 360mm montaje superior/frontal.
+        </li>
+        <li>Espacio GPU: 400mm+ para tarjetas gruesas triple-slot.</li>
+        <li>Montaje GPU vertical: Posicionamiento estético opcional.</li>
+        <li>E/S premium: USB-C 3.2 Gen 2, múltiples puertos USB-A.</li>
+      </ul>
+
+      <h4>Características Premium (🟢):</h4>
+      <ul>
+        <li>Construcción: Paneles aluminio, grosor acero premium.</li>
+        <li>Gestión cables: Espacio 25mm+, bridas velcro incluidas.</li>
+        <li>Diseño modular: Paneles removibles, layouts reconfigurables.</li>
+        <li>
+          Optimización ruido: Amortiguación selectiva + balance flujo aire.
+        </li>
+      </ul>
+
+      <h4>Periféricos Premium:</h4>
+      <ul>
+        <li>
+          Ecosistema ventiladores: 6-9 ventiladores coincidentes con control
+          PWM.
+        </li>
+        <li>
+          Configuración RGB completa: Hub + tiras + integración iluminación
+          ventiladores.
+        </li>
+        <li>
+          Cables personalizados: Conjunto completo reemplazo cables PSU
+          enfundados.
+        </li>
+        <li>Opcional: Tarjeta sonido para gaming audiófilos.</li>
+      </ul>
+
+      <h3>Creación Contenido / Streaming</h3>
+      <p>
+        <strong>Objetivo:</strong> Funcionalidad profesional, confiabilidad,
+        expandibilidad.
+      </p>
+
+      <h4>Gabinete - Características Críticas (🟢):</h4>
+      <ul>
+        <li>
+          Slots PCIe: 4+ slots expansión para tarjetas captura, controladores
+          almacenamiento.
+        </li>
+        <li>
+          Bahías drives: 4+ montajes SATA para almacenamiento medios grande.
+        </li>
+        <li>Refrigeración: Gestión térmica cargas trabajo sostenidas.</li>
+        <li>Control ruido: Aislación ruido streaming/grabación.</li>
+      </ul>
+
+      <h4>Periféricos - Características Críticas (🟢):</h4>
+      <ul>
+        <li>Tarjeta captura: PCIe interna 4K60 (Elgato 4K60 Pro MK.2).</li>
+        <li>Tarjeta sonido: Calidad audio profesional (Creative AE-7).</li>
+        <li>
+          Controlador almacenamiento: Tarjeta RAID para redundancia medios.
+        </li>
+        <li>Actualización red: 2.5GbE para transferencias archivos grandes.</li>
+      </ul>
+
+      <h3>Workstation (IA/ML, CAD, Renderizado 3D)</h3>
+      <p>
+        <strong>Objetivo:</strong> Expandibilidad máxima, confiabilidad
+        profesional, operación 24/7.
+      </p>
+
+      <h4>Gabinete - Características Críticas (🟢):</h4>
+      <ul>
+        <li>Factor forma: Full Tower o chasis servidor para multi-GPU.</li>
+        <li>Slots PCIe: 7+ slots para múltiples tarjetas profesionales.</li>
+        <li>Entrega energía: Espacio para PSU 1200W+, soporte PSU dual.</li>
+        <li>Refrigeración: Soporte AIO 360mm+, capacidad CFM alto.</li>
+        <li>
+          Capacidad drives: 8+ bahías drives para conjuntos datos grandes.
+        </li>
+      </ul>
+
+      <h4>Características Profesionales (🟢):</h4>
+      <ul>
+        <li>Protección ESD: Consideraciones diseño antiestático.</li>
+        <li>Monitoreo: Sensores temperatura, detección falla ventiladores.</li>
+        <li>Capacidad hot-swap: Reemplazo drives sin tiempo inactividad.</li>
+        <li>Redundancia: Red dual, opciones PSU dual.</li>
+      </ul>
+
+      <h4>Periféricos Profesionales:</h4>
+      <ul>
+        <li>
+          Controlador RAID: Basado hardware para protección conjuntos datos.
+        </li>
+        <li>Red: 10GbE o superior para colaboración equipos.</li>
+        <li>Backup: Grabador Blu-ray para archivado offline.</li>
+        <li>Monitoreo: Controlador ventiladores con capacidad logging.</li>
+      </ul>
+
+      <h3>Servidor/NAS Doméstico</h3>
+      <p>
+        <strong>Objetivo:</strong> Confiabilidad 24/7, bajo ruido, refrigeración
+        eficiente, capacidad hot-swap.
+      </p>
+
+      <h4>Gabinete - Características Críticas (🟢):</h4>
+      <ul>
+        <li>
+          Bahías drives: 8-12 bahías hot-swap para expansión almacenamiento.
+        </li>
+        <li>Refrigeración: Ventiladores bajo ruido con redundancia.</li>
+        <li>Huella compacta: Montable rack o torre compacta.</li>
+        <li>
+          Eficiencia energética: Flujo aire optimizado, RGB/estética mínima.
+        </li>
+      </ul>
+
+      <h4>Periféricos - Características Críticas (🟢):</h4>
+      <ul>
+        <li>Backplane hot-swap: Soporte SATA/SAS.</li>
+        <li>Controlador RAID: Basado hardware con BBU.</li>
+        <li>Red: Múltiples puertos GbE, 10GbE opcional.</li>
+        <li>Integración UPS: Capacidades monitoreo energía.</li>
+      </ul>
+
+      <h3>HTPC (PC Teatro Hogar)</h3>
+      <p>
+        <strong>Objetivo:</strong> Operación silenciosa, tamaño compacto,
+        estética sala estar.
+      </p>
+
+      <h4>Gabinete - Características Críticas (🟢):</h4>
+      <ul>
+        <li>Factor forma: HTPC horizontal o vertical compacto.</li>
+        <li>Ruido: Operación <20dB, prioridad amortiguación sonido.</li>
+        <li>Restricción tamaño: Encaja dimensiones centro entretenimiento.</li>
+        <li>Estética: Diseño limpio, RGB mínimo.</li>
+        <li>Accesibilidad E/S: Puertos frontales convenientes.</li>
+      </ul>
+
+      <h4>Periféricos - Características Críticas (🟢):</h4>
+      <ul>
+        <li>Unidad Blu-ray: Capacidad UHD para medios 4K.</li>
+        <li>Receptor IR: Integración control remoto.</li>
+        <li>Tarjeta sonido: DAC alta calidad para sistema audio.</li>
+        <li>Red: WiFi 6+ para capacidad streaming.</li>
+      </ul>
+
+      <!-- <h2>Parte Práctica - Ejercicios Grupales (120 min)</h2> -->
+
+      <!-- <h3>
+        Actividad 1: Selección Gabinete y Análisis Compatibilidad (30 min)
+      </h3>
+
+      <h4>Escenario A: Build Gaming Compatibilidad</h4>
+
+      <h4>Componentes dados:</h4>
+      <ul>
+        <li>Motherboard: ASUS ROG STRIX X570-E (ATX, 305×244mm).</li>
+        <li>GPU: MSI GeForce RTX 4080 Gaming X Trio (335×140×75mm).</li>
+        <li>Refrigerador CPU: Noctua NH-D15 (165mm altura, 150×161×165mm).</li>
+        <li>PSU: Corsair RM850x (160×150×86mm, ATX estándar).</li>
+        <li>RAM: G.Skill Trident Z RGB (44mm altura).</li>
+      </ul>
+
+      <h4>Opciones gabinete evaluar:</h4>
+      <ol>
+        <li>Fractal Design Core 3000 (Micro-ATX, espacio GPU 310mm).</li>
+        <li>
+          NZXT H510 (Mid Tower, espacio GPU 325mm, refrigerador CPU 165mm).
+        </li>
+        <li>
+          Corsair 4000D (Mid Tower, espacio GPU 360mm, refrigerador CPU 170mm).
+        </li>
+        <li>Lian Li PC-O11 Dynamic (Mid Tower, espacio GPU 395mm).</li>
+      </ol>
+
+      <h4>Análisis requerido:</h4>
+      <ol>
+        <li>¿Cuáles gabinetes son físicamente compatibles?</li>
+        <li>¿Qué problemas espacio pueden surgir?</li>
+        <li>¿Cuál ofrece mejor flujo aire para esta configuración?</li>
+        <li>Clasificación por precio/rendimiento/compatibilidad.</li>
+      </ol>
+
+      <h3>Actividad 2: Diseño Optimización Flujo Aire (30 min)</h3>
+
+      <h4>Layout gabinete dado:</h4>
+
+      <h4>Layout Corsair 4000D</h4>
+      <pre>
+┌─────────────────────────────────────┐
+│ [SUP1] [SUP2] [SUP3]                │ ← Superior: 3×120mm opcional
+├─────────────────────────────────────┤
+│[F1][F2]                            │ MOTHERBOARD
+│ [T1]                                │ ← Frontal: 2×120mm, Trasero: 1×120mm
+│                                     │
+│                                     │ GPU
+│                                     │ REFRIGERADOR CPU
+│                                     │ PSU
+│                                     │
+└─────────────────────────────────────┘
+        </pre
+      >
+
+      <h4>Ventiladores disponibles:</h4>
+      <ul>
+        <li>6× Arctic P12 PWM.</li>
+      </ul>
+
+      <h4>AIO:</h4>
+      <ul>
+        <li>Radiador 240mm para ubicar.</li>
+      </ul>
+
+      <h4>GPU:</h4>
+      <ul>
+        <li>RTX 4080 (300W TGP).</li>
+      </ul>
+
+      <h4>CPU:</h4>
+      <ul>
+        <li>i7-13700K (125W + margen OC).</li>
+      </ul>
+
+      <h4>Desafíos diseño:</h4>
+      <ol>
+        <li>¿Dónde ubicar AIO 240mm? ¿Entrada frontal o salida superior?</li>
+        <li>¿Cómo distribuir los 6 ventiladores restantes?</li>
+        <li>¿Presión positiva, negativa, o balanceada?</li>
+        <li>¿Curvas velocidad ventilador para cada posición?</li>
+        <li>¿Deltas temperatura esperados vs ambiente?</li>
+      </ol>
+
+      <h3>Actividad 3: Taller Selección Periféricos (30 min)</h3>
+
+      <h4>Solicitud Cliente: Configuración Creador Contenido</h4>
+
+      <h4>Requerimientos:</h4>
+      <ul>
+        <li>Streaming + grabación 4K simultáneos.</li>
+        <li>Entrada múltiples cámaras (3× fuentes HDMI).</li>
+        <li>Monitoreo audio profesional.</li>
+        <li>Almacenamiento archivos grandes + flujo trabajo backup.</li>
+        <li>Presupuesto: $800 USD solo periféricos.</li>
+      </ul>
+
+      <h4>Selección componentes desde opciones:</h4>
+
+      <table>
+        <tr>
+          <th>Categoría</th>
+          <th>Opción A</th>
+          <th>Opción B</th>
+          <th>Opción C</th>
+        </tr>
+        <tr>
+          <td>Captura</td>
+          <td>Elgato 4K60 Pro ($250)</td>
+          <td>AVerMedia GC573 ($280)</td>
+          <td>Blackmagic Intensity Pro ($200)</td>
+        </tr>
+        <tr>
+          <td>Audio</td>
+          <td>Creative AE-7 ($230)</td>
+          <td>ASUS Essence STX II ($200)</td>
+          <td>Integrado + DAC externo ($120)</td>
+        </tr>
+        <tr>
+          <td>Almacenamiento</td>
+          <td>Tarjeta RAID + 4×HDD ($300)</td>
+          <td>2×NVMe + drive backup ($250)</td>
+          <td>SSD único grande ($200)</td>
+        </tr>
+        <tr>
+          <td>Red</td>
+          <td>Tarjeta 10GbE ($150)</td>
+          <td>Tarjeta 2.5GbE ($80)</td>
+          <td>1GbE integrado ($0)</td>
+        </tr>
+      </table>
+
+      <h3>Actividad 4: Planificación Gestión Cables (30 min)</h3>
+
+      <h4>Especificación sistema:</h4>
+      <ul>
+        <li>Motherboard: ATX con alimentación CPU 8-pin superior-izquierda.</li>
+        <li>GPU: RTX 4090 requiere 3×8-pin alimentación PCIe.</li>
+        <li>Almacenamiento: 2×NVMe, 4×drives SATA.</li>
+        <li>Ventiladores: 9×ventiladores PWM distribuidos por gabinete.</li>
+        <li>RGB: 6×tiras ARGB + iluminación ventiladores.</li>
+        <li>PSU: Corsair RM1000x completamente modular.</li>
+      </ul>
+
+      <h4>Desafío gestión cables:</h4>
+      <ol>
+        <li>Planificar rutas enrutado cables óptimas.</li>
+        <li>Identificar tipos cables requeridos y longitudes.</li>
+        <li>Calcular requerimientos entrega energía.</li>
+        <li>Diseñar topología control ventiladores/RGB.</li>
+        <li>Estimar tiempo ensamble y dificultad.</li>
+      </ol>
+
+      <h2>Consideraciones del Mercado Argentino (2025)</h2>
+
+      <h3>Disponibilidad y Precios Gabinetes</h3>
+
+      <table>
+        <tr>
+          <th>Marca</th>
+          <th>Disponibilidad Local</th>
+          <th>Sobreprecio vs USD</th>
+          <th>Garantía/Soporte</th>
+          <th>Modelos Destacados</th>
+        </tr>
+        <tr>
+          <td>Corsair</td>
+          <td>Excelente</td>
+          <td>+25-35%</td>
+          <td>3 años local</td>
+          <td>4000D, 5000D, ecosistema iCUE</td>
+        </tr>
+        <tr>
+          <td>Cooler Master</td>
+          <td>Muy buena</td>
+          <td>+20-30%</td>
+          <td>2 años distribuidor</td>
+          <td>Serie MasterBox, H500</td>
+        </tr>
+        <tr>
+          <td>Thermaltake</td>
+          <td>Buena</td>
+          <td>+15-25%</td>
+          <td>2-3 años</td>
+          <td>Serie Core, enfoque RGB</td>
+        </tr>
+        <tr>
+          <td>Fractal Design</td>
+          <td>Limitada</td>
+          <td>+30-40%</td>
+          <td>Variable</td>
+          <td>Series Define, Meshify (premium)</td>
+        </tr>
+        <tr>
+          <td>Lian Li</td>
+          <td>Muy limitada</td>
+          <td>+40-60%</td>
+          <td>Incierto</td>
+          <td>O11 Dynamic (importación)</td>
+        </tr>
+        <tr>
+          <td>Sentey/Gigabyte</td>
+          <td>Excelente</td>
+          <td>+10-20%</td>
+          <td>1-2 años local</td>
+          <td>Opciones presupuesto/mainstream</td>
+        </tr>
+      </table>
+
+      <h3>Estrategias Compra: Local vs Importación</h3> -->
+
+      
+
+      <!-- <h4>Cuándo Considerar Importación:</h4>
+      <ul>
+        <li>Gabinetes premium: Fractal, Lian Li, diferencia significativa.</li>
+        <li>Periféricos específicos: Tarjetas captura, audio profesional.</li>
+        <li>Ecosistemas RGB: Corsair iCUE completo.</li>
+        <li>Builds entusiastas: Donde presupuesto lo permita.</li>
+      </ul> -->
+
+      <!-- <h4>Cuándo Comprar Local:</h4>
+      <ul>
+        <li>
+          Gabinetes básicos: Sentey, Thermaltake disponibles y económicos.
+        </li>
+        <li>Componentes pesados: Costos envío altos para gabinetes.</li>
+        <li>
+          Necesidades garantía: RMA local importante para elementos grandes.
+        </li>
+        <li>Builds presupuesto: Opciones argentinas competitivas.</li>
+      </ul> -->
+
+      <!-- <h2>Preguntas de Evaluación Técnica</h2>
+
+      <h3>Preguntas Conceptuales</h3>
+      <ol>
+        <li>
+          Explicá la diferencia entre presión positiva y negativa en un
+          gabinete. ¿Cuándo conviene cada configuración y por qué? Incluí
+          cálculos CFM en tu respuesta.
+        </li>
+        <li>
+          Un cliente quiere un gabinete "silencioso" pero también "fresco".
+          ¿Cómo resolvés este conflicto? Compará materiales amortiguación vs
+          paneles malla con ejemplos específicos.
+        </li>
+        <li>
+          ¿Por qué un gabinete Mini-ITX premium puede costar más que un Mid
+          Tower básico? Analizá factores ingeniería, materiales, y volumen
+          producción.
+        </li>
+        <li>
+          Describí ventajas y desventajas del montaje GPU vertical. ¿Qué
+          consideraciones térmicas y compatibilidad hay que tener cuenta?
+        </li>
+      </ol>
+
+      <h3>Preguntas Prácticas</h3>
+      <ol>
+        <li>Un cliente tiene Ryzen 9 7950X + RTX 4090 + AIO 360mm.</li>
+      </ol> -->
+
+      <!-- <h2>Errores Comunes y Cómo Evitarlos</h2>
+
+      <h3>Errores Frecuentes PSU:</h3>
+      <ul>
+        <li>
+          PSU subdimensionada: Comprar exacto wattage calculado sin margen.
+        </li>
+        <li>
+          PSU genérica en builds caros: $50 PSU con $2000+ en componentes.
+        </li>
+        <li>Ignorar eficiencia: 80+ White en sistemas 24/7 operation.</li>
+        <li>Cables incompatibles: Mezclar cables modulares entre marcas.</li>
+        <li>Mala gestión de cables: Cables bloqueando airflow/ventiladores.</li>
+        <li>
+          No verificar conectores: Comprar PSU sin suficientes PCIe 8-pin.
+        </li>
+      </ul> -->
+
+      <!-- <h3>Errores Frecuentes Cooling:</h3>
+      <ul>
+        <li>Exceso de pasta térmica: Aplicar demasiado (peor rendimiento).</li>
+        <li>Presión de montaje incorrecta: Muy apretado o muy flojo.</li>
+        <li>Flujo de aire contradictorio: Ventiladores luchando entre sí.</li>
+        <li>
+          Ubicación incorrecta de la bomba AIO: Bomba sobre el radiador
+          (burbujas de aire).
+        </li>
+        <li>
+          Mantenimiento de polvo ignorado: Filtros obstruidos reduciendo
+          rendimiento.
+        </li>
+        <li>
+          Compatibilidad de socket asumida: LGA1700 vs LGA115X mounting
+          diferente.
+        </li>
+      </ul> -->
+
+      <!-- <h3>Buenas Prácticas PSU:</h3>
+      <ul>
+        <li>Calcular peak load + 20-30% margen mínimo.</li>
+        <li>Invertir en calidad PSU: es la base de todo el sistema.</li>
+        <li>
+          Verificar todos los requisitos de conectores antes de la compra.
+        </li>
+        <li>Usar cables modulares de una sola marca (nunca mezclar).</li>
+        <li>
+          Posicionar ventilador de PSU hacia abajo si el gabinete tiene
+          ventilación inferior.
+        </li>
+        <li>
+          Consultar listas de niveles de PSU para rankings de confiabilidad.
+        </li>
+      </ul> -->
+
+      <!-- <h3>Buenas Prácticas Cooling:</h3>
+      <ul>
+        <li>
+          Pasta térmica: punto del tamaño de un guisante, presión de montaje la
+          extiende.
+        </li>
+        <li>
+          Posición AIO: radiador en la parte superior del loop, bomba no en el
+          punto más alto.
+        </li>
+        <li>
+          Flujo de aire del gabinete: entrada frontal/inferior, salida
+          trasera/superior.
+        </li>
+        <li>Monitorear temperaturas post-instalación con HWiNFO64.</li>
+        <li>Limpiar filtros de polvo cada 3-6 meses.</li>
+        <li>
+          Curvas de ventiladores: rampa gradual vs agresiva (ruido vs
+          rendimiento).
+        </li>
+      </ul>
+
+      <h2>Troubleshooting Quick Reference</h2>
+
+      <table>
+        <tr>
+          <th>Síntoma</th>
+          <th>Causa Probable</th>
+          <th>Solución</th>
+        </tr>
+        <tr>
+          <td>Apagados aleatorios en gaming</td>
+          <td>Capacidad/OCP de PSU</td>
+          <td>Actualizar PSU, verificar conexiones</td>
+        </tr>
+        <tr>
+          <td>Altas temperaturas CPU en idle</td>
+          <td>Pasta térmica seca</td>
+          <td>Remontar cooler, pasta térmica fresca</td>
+        </tr>
+        <tr>
+          <td>Ruido de coil whine en PSU</td>
+          <td>Problema de calidad, desgaste normal</td>
+          <td>RMA si está en garantía</td>
+        </tr>
+        <tr>
+          <td>Ruido de bomba AIO</td>
+          <td>Burbujas de aire, posición</td>
+          <td>Reubicar, cebar bomba</td>
+        </tr>
+        <tr>
+          <td>Throttling térmico de GPU</td>
+          <td>Flujo de aire insuficiente en gabinete</td>
+          <td>Agregar ventiladores de salida, verificar clearance</td>
+        </tr>
+      </table>
+
+      <h2>Cierre y Mensajes Clave</h2>
+
+      <h3>
+        Pregunta Guía: ¿Vale la pena invertir en PSU y refrigeración premium?
+      </h3>
+
+      <h4>La respuesta varía según contexto, pero factores clave incluyen:</h4>
+      <ul>
+        <li>La PSU es la base: Un fallo compromete todo el sistema.</li>
+        <li>
+          La eficiencia se paga a largo plazo: ROI de 80+ Gold en 2-3 años con
+          costos de electricidad argentinos.
+        </li>
+        <li>
+          La refrigeración permite el rendimiento: El throttling térmico limita
+          hardware costoso.
+        </li>
+        <li>
+          El ruido importa en el uso diario: Refrigeración premium = mejor
+          experiencia de usuario.
+        </li>
+        <li>
+          La confiabilidad reduce el mantenimiento: Componentes de calidad =
+          menos llamadas de servicio.
+        </li>
+      </ul>
+
+      <h3>Mensajes Clave para el Alumno</h3>
+      <ol>
+        <li>
+          El cálculo de la PSU es crítico: Subdimensionar causa inestabilidad,
+          sobredimensionar desperdicia dinero.
+        </li>
+        <li>
+          La certificación de eficiencia importa: Los costos de electricidad se
+          acumulan durante la vida útil del componente.
+        </li>
+        <li>
+          El diseño térmico es sistémico: Refrigeración de CPU + flujo de aire
+          del gabinete + posición de la PSU.
+        </li>
+        <li>
+          Calidad sobre características llamativas: Un buen rendimiento > RGB
+          con especificaciones pobres.
+        </li>
+        <li>
+          Los cables modulares valen el premium: La gestión de cables impacta
+          significativamente el flujo de aire.
+        </li>
+        <li>
+          El mantenimiento es esencial: Los mejores componentes fallan sin el
+          cuidado adecuado.
+        </li>
+        <li>
+          Verificar la compatibilidad de sockets: Siempre revisar antes de
+          comprar, los sistemas de montaje evolucionan.
+        </li>
+      </ol>
+
+      <h3>Reflexión Final</h3>
+      <p>
+        La PSU y la refrigeración son componentes "invisibles" que definen la
+        experiencia total del sistema. Una PSU de calidad proporciona energía
+        estable que permite al hardware costoso operar según las
+        especificaciones. La refrigeración adecuada mantiene un rendimiento
+        constante y extiende la vida útil de los componentes. Ambos impactan los
+        niveles de ruido, la confiabilidad y los costos operativos. En el
+        contexto argentino, donde las piezas de reemplazo son costosas y la
+        disponibilidad es variable, invertir en PSU/refrigeración de calidad es
+        un seguro contra tiempos de inactividad y reparaciones costosas.
+      </p>
+
+      <h3>Consideración Específica para Argentina:</h3>
+      <p>
+        Los costos de electricidad relativamente altos hacen que las mejoras de
+        eficiencia se paguen por sí mismas más rápido que en otros mercados. La
+        cobertura de garantía local es crítica porque el RMA internacional es
+        complejo y costoso. Las consideraciones climáticas (calor, humedad) en
+        ciertas regiones argentinas hacen que la refrigeración adecuada sea más
+        importante que en climas templados. Construir para las condiciones
+        esperadas, no solo para las especificaciones en papel.
+      </p>
+
+      <h2>Checklist de Selección PSU y Refrigeración</h2>
+
+      <h3>Verificación Pre-Compra PSU:</h3>
+      <ul>
+        <li>Cálculo de wattage: Peak load + 20-30% margen mínimo.</li>
+        <li>Recuento de conectores: Requisitos de PCIe 8-pin, SATA, Molex.</li>
+        <li>
+          Compatibilidad de formato: ATX/SFX se ajusta a la bahía de PSU del
+          gabinete.
+        </li>
+        <li>Certificación de eficiencia: Mínimo 80+ Bronze, Gold preferido.</li>
+        <li>
+          Necesidades modulares: Gestión de cables vs restricciones de
+          presupuesto.
+        </li>
+        <li>
+          Reputación de la marca: Verificar listas de niveles de PSU, reseñas.
+        </li>
+        <li>Cobertura de garantía: Disponibilidad de servicio local.</li>
+        <li>Diseño de rail: Single vs multi-rail según requisitos de GPU.</li>
+      </ul>
+
+      <h3>Verificación Pre-Compra Refrigeración:</h3>
+      <ul>
+        <li>
+          Compatibilidad TDP: Clasificación del cooler > TDP de CPU + margen de
+          overclocking.
+        </li>
+        <li>Compatibilidad de socket: Kit de montaje incluido/disponible.</li>
+        <li>Clearance del gabinete: Altura, ancho medidos.</li>
+        <li>
+          Compatibilidad de socket: Verificar antes de comprar, los sistemas de
+          montaje evolucionan.
+        </li>
+      </ul> -->
+    </div>
+  </body>
+</html>

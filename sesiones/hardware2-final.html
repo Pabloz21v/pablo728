@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trabajo Práctico Integrador - Armado de PC</title>
+    <style>
+      body {
+        font-family: "Roboto", "Open Sans", sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #2c3e50;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      pre {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        border-left: 4px solid #3498db;
+      }
+      code {
+        font-family: monospace;
+        background-color: #f8f9fa;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+      .button-volver {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        background: #4ade80;
+        color: #222;
+        display: inline-block;
+        margin-bottom: 18px;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+        table {
+          font-size: 14px;
+        }
+        th,
+        td {
+          padding: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="../materias/hardware-dos.html" class="button-volver"
+        >Volver a Materia</a
+      >
+      <h1>Trabajo Práctico Integrador - Armado de PC</h1>
+
+      <h2>Instrucciones Generales</h2>
+      <ol>
+        <li>
+          En grupos de no más de 4 integrantes deberán armar la PC que se
+          sorteará.
+        </li>
+        <li>
+          Según la PC que les toque deberán investigar la necesidad a satisfacer
+          y a partir del mismo tomar la decisión sobre la elección de los
+          componentes que integran dicho PC (justificar esta decisión).
+        </li>
+        <li>No se tendrá en cuenta ni el monitor, ni los periféricos.</li>
+        <li>
+          Dicha PC se tiene que ajustar al presupuesto establecido con un margen
+          de error de +/- un 15%.
+        </li>
+        <li>Se debe justificar la compatibilidad de los componentes.</li>
+        <li>
+          Informar la razón de la selección de cada componente enfocado en
+          cumplir el requisito de dicho armado.
+        </li>
+        <li>Agregar los links y/o captura del producto con su precio.</li>
+        <li>
+          Armar una tabla final de cada componente, su característica crítica y
+          el precio del mismo.
+        </li>
+        <li>
+          Al final de dicha tabla su presupuesto USD/Pesos Arg Total/Final.
+        </li>
+        <li>
+          Dicho trabajo debe ser entregado en un archivo Word por correo con los
+          nombres de los integrantes.
+        </li>
+      </ol>
+
+      <h2>Fechas:</h2>
+      <ul>
+        <li> <strong>Fecha límite de entrega de trabajo:</strong> viernes 21 de noviembre.</li>
+        
+      </ul>
+      <ul><li><strong>
+Fecha de defensa:
+      </strong>
+ viernes 28 de noviembre.
+      </li></ul>
+      
+
+      <h2>Tipos de PC y Presupuestos</h2>
+
+      <table>
+        <tr>
+          <th>N°</th>
+          <th>Tipo de PC</th>
+          <th>Objetivo Principal</th>
+          <th>Perfil de Usuario</th>
+          <th>Presupuesto Sugerido (USD)</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>PC Ofimática Básica</td>
+          <td>Navegación web, office, tareas escolares</td>
+          <td>Estudiantes, oficinas pequeñas</td>
+          <td>$300 - $500</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>PC Ofimática Premium</td>
+          <td>Multitarea avanzada, virtualización ligera, productividad</td>
+          <td>Profesionales, emprendedores</td>
+          <td>$700 - $1,000</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>PC Gamer Económica</td>
+          <td>Juegos en 1080p (60 FPS), esports (LoL, CS2, Fortnite)</td>
+          <td>Gamers casuales, estudiantes</td>
+          <td>$600 - $900</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>PC Gamer Intermedia</td>
+          <td>Juegos en 1080p/1440p (60-144 FPS), streaming básico</td>
+          <td>Gamers entusiastas</td>
+          <td>$1,200 - $1,600</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>PC Gamer Alto Presupuesto</td>
+          <td>Juegos en 1440p/4K (144+ FPS), realidad virtual</td>
+          <td>Gamers avanzados, creadores de contenido</td>
+          <td>$2,000 - $3,000</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>PC para Streaming</td>
+          <td>Transmisión en 1080p/60fps, multitarea (juego + streaming)</td>
+          <td>Streamers, creadores de contenido</td>
+          <td>$1,500 - $2,200</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>PC para Edición de Video</td>
+          <td>
+            Edición 1080p/4K (Premiere, After Effects), renderizado moderado
+          </td>
+          <td>Editores de video, youtubers</td>
+          <td>$1,800 - $2,500</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>PC para Edición 3D</td>
+          <td>Modelado 3D (Blender, Maya), renderizado</td>
+          <td>Diseñadores 3D, arquitectos</td>
+          <td>$2,500 - $3,500</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>PC para Música</td>
+          <td>Producción musical (DAW), grabación, plugins</td>
+          <td>Músicos, productores</td>
+          <td>$1,200 - $2,000</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>PC para Fotografía</td>
+          <td>
+            Edición de fotos (Photoshop, Lightroom), manejo de archivos RAW
+          </td>
+          <td>Fotógrafos profesionales</td>
+          <td>$1,500 - $2,200</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>PC Home Theater (HTPC)</td>
+          <td>Reproducción 4K HDR, sonido envolvente, Kodi/Plex</td>
+          <td>Cinefilos, familias</td>
+          <td>$800 - $1,500</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>PC NAS / Servidor</td>
+          <td>Almacenamiento en red, backup, Plex, virtualización</td>
+          <td>Hogares, pequeñas empresas</td>
+          <td>$600 - $1,200</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>PC Mini-ITX</td>
+          <td>Portabilidad, bajo consumo, rendimiento equilibrado</td>
+          <td>Viajeros, espacios reducidos</td>
+          <td>$700 - $1,200</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>PC para Programación</td>
+          <td>
+            Desarrollo de software, máquinas virtuales, compilación rápida
+          </td>
+          <td>Programadores, ingenieros</td>
+          <td>$1,000 - $1,800</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>PC para Inteligencia Artificial</td>
+          <td>Entrenamiento de modelos (TensorFlow, PyTorch), GPU acelerada</td>
+          <td>Investigadores, estudiantes de IA</td>
+          <td>$2,500 - $4,000</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td>PC para CAD/CAM</td>
+          <td>Diseño asistido por computadora (AutoCAD, SolidWorks)</td>
+          <td>Ingenieros, diseñadores industriales</td>
+          <td>$2,000 - $3,500</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td>PC para Criptominería</td>
+          <td>Minería de criptomonedas (eficiencia energética)</td>
+          <td>Miners, entusiastas</td>
+          <td>$1,500 - $3,000</td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td>PC para Emulación</td>
+          <td>Emulación de consolas (PS3, Switch, arcade)</td>
+          <td>Coleccionistas, retro gamers</td>
+          <td>$800 - $1,500</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td>PC para VR</td>
+          <td>Realidad virtual (Meta Quest, Valve Index)</td>
+          <td>Entusiastas de VR, desarrolladores</td>
+          <td>$1,800 - $2,500</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td>PC para Simulación</td>
+          <td>Simuladores de vuelo (FS2020), carreras (iRacing)</td>
+          <td>Pilotos virtuales, simracers</td>
+          <td>$1,500 - $2,500</td>
+        </tr>
+        <tr>
+          <td>21</td>
+          <td>PC para Ciencia de Datos</td>
+          <td>Análisis de datos, machine learning, bases de datos</td>
+          <td>Científicos de datos, analistas</td>
+          <td>$2,000 - $3,500</td>
+        </tr>
+        <tr>
+          <td>22</td>
+          <td>PC para Diseño Gráfico</td>
+          <td>Diseño gráfico (Illustrator, InDesign), tipografía</td>
+          <td>Diseñadores gráficos</td>
+          <td>$1,500 - $2,200</td>
+        </tr>
+        <tr>
+          <td>23</td>
+          <td>PC para Educación</td>
+          <td>Laboratorios escolares, programación básica, robótica</td>
+          <td>Escuelas, talleres educativos</td>
+          <td>$400 - $800</td>
+        </tr>
+        <tr>
+          <td>24</td>
+          <td>PC para Trading</td>
+          <td>Análisis financiero, múltiples monitores, baja latencia</td>
+          <td>Traders, inversores</td>
+          <td>$1,200 - $2,000</td>
+        </tr>
+        <tr>
+          <td>25</td>
+          <td>PC para Arte Digital</td>
+          <td>Dibujo digital (Procreate, Clip Studio), tableta gráfica</td>
+          <td>Artistas digitales</td>
+          <td>$1,200 - $2,000</td>
+        </tr>
+        <tr>
+          <td>26</td>
+          <td>PC para Servidor de Juegos</td>
+          <td>Hostear servidores (Minecraft, CS2, Rust)</td>
+          <td>Comunidades de gaming</td>
+          <td>$1,000 - $2,000</td>
+        </tr>
+        <tr>
+          <td>27</td>
+          <td>PC Silenciosa</td>
+          <td>Bajo ruido, refrigeración pasiva, oficina silenciosa</td>
+          <td>Entornos profesionales, bibliotecas</td>
+          <td>$1,000 - $1,800</td>
+        </tr>
+        <tr>
+          <td>28</td>
+          <td>PC Workstation</td>
+          <td>
+            Rendimiento profesional (estaciones de trabajo para ingeniería,
+            arquitectura)
+          </td>
+          <td>Ingenieros, arquitectos, estudios</td>
+          <td>$3,000 - $6,000</td>
+        </tr>
+        <tr>
+          <td>29</td>
+          <td>PC para IA Avanzada</td>
+          <td>
+            Entrenamiento de modelos complejos, múltiples GPUs, alto rendimiento
+          </td>
+          <td>Empresas, laboratorios de investigación</td>
+          <td>$5,000 - $10,000+</td>
+        </tr>
+        <tr>
+          <td>30</td>
+          <td>Servidor Doméstico Avanzado</td>
+          <td>Almacenamiento masivo, virtualización, servicios en la nube</td>
+          <td>Hogares con alta demanda, PYMES</td>
+          <td>$1,500 - $3,000</td>
+        </tr>
+        <tr>
+          <td>31</td>
+          <td>PC Threadripper PRO</td>
+          <td>
+            Máximo rendimiento en multitarea, renderizado, trabajo con datasets
+            gigantes
+          </td>
+          <td>Profesionales de VFX, investigación científica</td>
+          <td>$4,000 - $8,000+</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
