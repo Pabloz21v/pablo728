@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" style="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyecto Final Integrador - Hardware 1</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
+    <style>
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 3%;
+        position: relative;
+        box-sizing: border-box;
+        font-family: "Times New Roman", serif;
+        line-height: 1.6;
+        background: white;
+      }
+
+      .header {
+        text-align: center;
+        background-color: #2c3e50;
+        color: white;
+        padding: 0%;
+        /* margin: -32px -80px 40px -80px; */
+      }
+
+      .header h1 {
+        margin: 0 0 1% 0;
+        font-size: 2.2em;
+        color: white;
+      }
+
+      .header h2 {
+        margin: 0;
+        /* font-size: 1.4em; */
+        color: #ecf0f1;
+        font-weight: normal;
+      }
+
+      h2 {
+        color: #3498db;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 8px;
+        margin-top: 35px;
+      }
+
+      h3 {
+        color: #2c3e50;
+        margin-top: 25px;
+      }
+
+      .info-general {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-left: 4px solid #3498db;
+        margin: 25px 0;
+      }
+
+      .fechas-importantes {
+        background-color: #fff3cd;
+        padding: 20px;
+        border: 2px solid #ffc107;
+        border-radius: 5px;
+        margin: 25px 0;
+      }
+
+      .warning {
+        background-color: #f8d7da;
+        padding: 15px;
+        border: 1px solid #f5c6cb;
+        border-radius: 4px;
+        margin: 20px 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 0.95em;
+      }
+
+      table th {
+        background-color: #2c3e50;
+        color: white;
+        padding: 12px;
+        text-align: left;
+      }
+
+      table td {
+        padding: 10px 12px;
+        border: 1px solid #ddd;
+      }
+
+      table tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      ul,
+      ol {
+        margin: 15px 0;
+        padding-left: 30px;
+      }
+
+      li {
+        margin: 8px 0;
+      }
+
+      .escenarios {
+        background-color: #e8f4f8;
+        padding: 20px;
+        border-radius: 5px;
+        margin: 20px 0;
+      }
+
+      .escenarios ol {
+        font-weight: bold;
+      }
+
+      .cronograma {
+        background-color: #f0f8f0;
+        padding: 20px;
+        border-radius: 5px;
+        margin: 20px 0;
+      }
+
+      .componente {
+        margin: 20px 0;
+        padding: 15px;
+        border-left: 3px solid #3498db;
+        background-color: #f8f9fa;
+      }
+
+      .componente h4 {
+        color: #2c3e50;
+        margin-top: 0;
+        font-weight: bold;
+      }
+
+      strong {
+        color: #2c3e50;
+      }
+
+      .recursos {
+        background-color: #e6f3ff;
+        padding: 20px;
+        border-radius: 5px;
+        margin: 20px 0;
+      }
+      .button-volver {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        background: #4ade80;
+        color: #222;
+        display: inline-block;
+        margin-bottom: 18px;
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open%20Sans:wght@400&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto%20Sans%20JP:wght@400&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400&amp;display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body style="">
+    <a href="../materias/hardware-uno.html" class="button-volver"
+      >Volver a Materia</a
+    >
+    <div class="header">
+      <h1>PROYECTO FINAL INTEGRADOR - HARDWARE 1</h1>
+      <h2>Diseño y Armado de PC Personalizada</h2>
+    </div>
+
+    <div class="info-general">
+      <h2>📋 Información General</h2>
+      <ul>
+        <li><strong>Modalidad:</strong> Individual</li>
+        <li>
+          <strong>📅 Fecha de entrega documento escrito:</strong> Lunes 24 de
+          noviembre de 2025
+        </li>
+        <li>
+          <strong>📅 Fecha de defensa oral:</strong> Jueves 27 de noviembre de
+          2025
+        </li>
+        <li><strong>Duración estimada del trabajo:</strong> 20 días</li>
+      </ul>
+    </div>
+
+    <h2>🎯 Objetivo del Proyecto</h2>
+    <p>
+      El objetivo de este proyecto es que demuestres tu comprensión integral de
+      los componentes de hardware de una PC. Deberás
+
+      <!--StartFragment--><span
+        style="
+          color: rgb(65, 84, 98);
+          font-family: 'Times New Roman', serif;
+          font-size: 17px;
+          font-style: normal;
+          font-variant-ligatures: normal;
+          font-variant-caps: normal;
+          font-weight: 400;
+          letter-spacing: normal;
+          orphans: 2;
+          text-align: start;
+          text-indent: 0px;
+          text-transform: none;
+          widows: 2;
+          word-spacing: 0px;
+          -webkit-text-stroke-width: 0px;
+          white-space: normal;
+          background-color: rgb(255, 255, 255);
+          text-decoration-thickness: initial;
+          text-decoration-style: initial;
+          text-decoration-color: initial;
+          display: inline !important;
+          float: none;
+        "
+        >explicar<span>&nbsp;</span></span
+      ><!--EndFragment-->
+
+      todos los componentes y su proceso de ensamblaje. Este proyecto integra
+      todos los conocimientos adquiridos durante el curso de Hardware 1.
+    </p>
+
+    <h2>💻 Descripción del Proyecto</h2>
+    <p>Deberás diseñar una PC completa:</p>
+
+    <div class="escenarios">
+      <ol>
+        <li>
+          <span style="color: rgb(65, 84, 98)"
+            >PC de oficina/productividad (trabajo, estudio, navegación) con los
+            siguientes componentes (cpu, gpu, motherboard, ram, almacenamiento,
+            psu, gabinete y refrigeración)</span
+          >
+        </li>
+      </ol>
+    </div>
+
+    <h2>📝 Requisitos del Documento Escrito</h2>
+    <p><strong>Estructura obligatoria del trabajo:</strong></p>
+
+    <h3>4.1 Carátula</h3>
+    <p>Debe incluir:</p>
+    <ul>
+      <li>Nombre del proyecto</li>
+      <li>Nombre del estudiante</li>
+      <li>Curso y año</li>
+      <li>Fecha de entrega</li>
+    </ul>
+    <ul></ul>
+
+    <h3>4.2 Explicar cada Componente&nbsp;</h3>
+    <p>
+      Por cada componente explicar teoricamente los item mencionado.Sin olvidar
+      la función y donde se conecta y como por cada&nbsp; compoenente.
+    </p>
+
+    <div class="componente">
+      <h4>🔧 CPU (Procesador)</h4>
+      <ul>
+        <li>Modelo específico seleccionado</li>
+        <li>Fabricante y generación</li>
+        <li>
+          Especificaciones técnicas: núcleos, hilos, frecuencia base y boost,
+          TDP, socket
+        </li>
+      </ul>
+    </div>
+
+    <div class="componente">
+      <h4>🔌 Motherboard (Placa Madre)</h4>
+      <ul>
+        <li>Chipset y socket (debe ser compatible con el CPU elegido)</li>
+        <li>Factor de forma (ATX, Micro-ATX, Mini-ITX)</li>
+        <li>
+          Slots de expansión disponibles (PCIe x16, x8, x4, x1, M.2, SATA)
+        </li>
+        <li>
+          Características importantes (conectores, puertos USB, audio, red)
+        </li>
+      </ul>
+    </div>
+
+    <div class="componente">
+      <h4>🧠 RAM (Memoria)</h4>
+      <ul>
+        <li>Tipo (DDR4/DDR5)</li>
+        <li>
+          Capacidad total y configuración (ej: 16GB - 2x8GB para dual channel)
+        </li>
+        <li>Frecuencia (MHz)</li>
+        <li>Latencia CAS (CL)</li>
+        <li>Compatibilidad con motherboard y CPU</li>
+      </ul>
+    </div>
+
+    <div class="componente">
+      <h4>💾 Almacenamiento</h4>
+      <ul>
+        <li>Tipo(s) seleccionado(s) (HDD/SSD SATA/SSD M.2 NVMe)</li>
+        <li>Capacidad de cada unidad</li>
+        <li>Velocidades de lectura/escritura</li>
+        <li>Interfaz de conexión</li>
+      </ul>
+    </div>
+
+    <div class="componente">
+      <h4>🎮 GPU (Placa de Video)</h4>
+      <ul>
+        <li>Fabricantes del chip y fabricante de la tarjeta</li>
+        <li>Memoria VRAM (cantidad y tipo)</li>
+        <li>Interfaz de conexión&nbsp;</li>
+        <li>Consumo energético (TDP)</li>
+        <li>Conectores de salida de video</li>
+      </ul>
+    </div>
+
+    <div class="componente">
+      <h4>⚡ Fuente de Alimentación (PSU)</h4>
+      <ul>
+        <li>Potencia (Watts)</li>
+        <li>Certificación de eficiencia&nbsp;</li>
+        <li>Tipo (Modular/Semi-modular/No modular)</li>
+        <li>Conectores disponibles</li>
+      </ul>
+    </div>
+
+    <div class="componente">
+      <h4>🏠 Gabinete (Case)</h4>
+      <ul>
+        <li>Modelos y fabricantes</li>
+        <li>Factor de forma&nbsp;</li>
+        <li>Sistema de flujo de aire y ventilación</li>
+        <li>Bahías y espacios disponibles</li>
+        <li>Características adicionales (RGB, vidrio templado, etc.)</li>
+      </ul>
+    </div>
+
+    <div class="componente">
+      <h4>❄️ Sistema de Refrigeración</h4>
+      <ul>
+        <li>Tipo (Stock cooler/Refrigeración por aire/Líquida AIO)</li>
+        <li>Compatibilidad con CPU y gabinete</li>
+        <li>Nivel de refrigeración necesario según TDP del CPU</li>
+      </ul>
+    </div>
+
+    <div class="componente">
+      <h4>🔧 Placas de Expansión (opcional)</h4>
+      <ul>
+        <li>Placas adicionales (Wi-Fi, sonido, capturadora, etc.)</li>
+      </ul>
+    </div>
+    <ul></ul>
+
+    <h3>4.3 Proceso de Ensamblaje&nbsp;</h3>
+    <p>Descripción paso a paso del orden correcto de armado:</p>
+    <ol>
+      <li>
+        <strong>Preparación:</strong> Precauciones contra electricidad estática,
+        herramientas necesarias
+      </li>
+      <li>
+        <strong>CPU:</strong> Instalación del procesador en el socket de la
+        motherboard
+      </li>
+      <li>
+        <strong>RAM:</strong> Instalación de módulos de memoria en slots
+        correctos
+      </li>
+      <li>
+        <strong>M.2:</strong> Instalación de almacenamiento M.2 NVMe (si aplica)
+      </li>
+      <li>
+        <strong>Motherboard:</strong> Montaje de la placa madre en el gabinete
+      </li>
+      <li><strong>PSU:</strong> Instalación de la fuente de alimentación</li>
+      <li>
+        <strong>Cables principales:</strong> Conexión de alimentación ATX&nbsp;
+      </li>
+      <li><strong>GPU:</strong> Instalación de la tarjeta gráfica</li>
+      <li>
+        <strong>Almacenamiento:</strong> Instalación de unidades SATA
+        adicionales
+      </li>
+      <li>
+        <strong>Conexiones finales:</strong> Panel frontal, ventiladores, SATA
+        datos
+      </li>
+      <li><strong>Verificación:</strong> Revisión de todas las conexiones</li>
+      <li>
+        <strong>Primera puesta en marcha:</strong> Encendido inicial&nbsp;
+      </li>
+    </ol>
+  </body>
+</html>
