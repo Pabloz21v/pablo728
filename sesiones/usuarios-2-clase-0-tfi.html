@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" style=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Integrador Final - Asistencia al Usuario</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@400;700&amp;display=swap" rel="stylesheet">
+    <style>
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 3%;
+        position: relative;
+        box-sizing: border-box;
+        font-family: 'Times New Roman', Times, serif;
+        line-height: 1.5;
+        color: #333;
+        background: white;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 30px 0;
+        border-bottom: 3px solid #2c5aa0;
+      }
+
+      .header h1 {
+        color: #1e3a8a;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .header h2 {
+        color: #2563eb;
+        font-size: 18px;
+        font-weight: normal;
+        margin-bottom: 20px;
+      }
+
+      .project-info {
+        background-color: #f8fafc;
+        padding: 20px;
+        border: 1px solid #e2e8f0;
+        margin-bottom: 30px;
+      }
+
+      .project-info p {
+        margin: 5px 0;
+        font-size: 14px;
+      }
+
+      h3 {
+        color: #1e40af;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #cbd5e1;
+        padding-bottom: 5px;
+      }
+
+      h4 {
+        color: #059669;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+
+      p {
+        text-align: justify;
+        margin-bottom: 12px;
+        font-size: 12px;
+      }
+
+      ul,
+      ol {
+        margin-left: 20px;
+        margin-bottom: 15px;
+      }
+
+      li {
+        margin-bottom: 8px;
+        font-size: 12px;
+      }
+
+      .section {
+        margin-bottom: 25px;
+        padding: 15px;
+        background-color: #fefefe;
+        border-left: 4px solid #10b981;
+      }
+
+      .cronograma-table,
+      .rubrica-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        font-size: 11px;
+      }
+
+      .cronograma-table th,
+      .cronograma-table td,
+      .rubrica-table th,
+      .rubrica-table td {
+        border: 1px solid #d1d5db;
+        padding: 8px;
+        text-align: left;
+      }
+
+      .cronograma-table th,
+      .rubrica-table th {
+        background-color: #e0f2fe;
+        font-weight: bold;
+        color: #0f172a;
+      }
+
+      .recursos {
+        background-color: #f0f9ff;
+        padding: 15px;
+        border: 1px solid #bae6fd;
+        margin-top: 20px;
+      }
+
+      .recursos ul {
+        columns: 2;
+        column-gap: 30px;
+      }
+
+      .entrega-box {
+        background-color: #fef3c7;
+        border: 2px solid #f59e0b;
+        padding: 15px;
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      .entrega-box strong {
+        color: #92400e;
+        font-size: 14px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 12px 28px;
+        background: #1976d2;
+        color: #fff;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: bold;
+        text-decoration: none;
+        margin-top: 18px;
+        box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+        transition: background 0.2s;
+      }
+      .btn:hover {
+        background: #1565c0;
+      }
+      
+    </style>
+  </head>
+  <body style="">
+    <a href="../materias/usuarios-2.html" class="btn">Volver a Usuarios II</a>
+    <div class="header">
+      <h1>PROYECTO INTEGRADOR FINAL</h1>
+      <h2>Arquitectura de Aplicaciones Web:<br>Frontend, Backend, Bases de Datos y Frameworks</h2>
+
+      <div class="project-info">
+        <p><strong>Materia:</strong> Asistencia al Usuario 2</p>
+        <p><strong>Curso:</strong> 7°1°</p>
+        <p><strong>Modalidad:</strong> Grupal (máximo 4 integrantes)</p>
+        <p><strong>Fecha de entrega:</strong> Lunes 24 de noviembre</p>
+      </div>
+    </div>
+
+    <h3>1. INTRODUCCIÓN Y FUNDAMENTACIÓN</h3>
+    <p>Las aplicaciones web son fundamentales para el funcionamiento de empresas, organizaciones y
+      servicios digitales. Comprender cómo se construyen estas aplicaciones y cómo interactúan sus diferentes
+      componentes es esencial para cualquier profesional que brinde asistencia técnica a usuarios.
+    </p>
+
+    <p>
+      Este proyecto integrador tiene como finalidad que investiguen y comprendan los pilares
+      fundamentales de las aplicaciones web modernas: el frontend (interfaz de usuario), el backend (lógica del
+      servidor), las bases de datos (almacenamiento de información) y los frameworks (herramientas de desarrollo). A
+      través de esta investigación, desarrollarán una visión integral de cómo estos elementos trabajan de manera
+      coordinada para crear soluciones tecnológicas efectivas.</p>
+
+    <h3>2. OBJETIVOS DE APRENDIZAJE</h3>
+    <p>Al finalizar este proyecto, los estudiantes serán capaces de:</p>
+    <ul>
+      <li>Investigar y comprender qué es el frontend y cuál es su rol en las aplicaciones web</li>
+      <li>Investigar y comprender qué es el backend y cuál es su función principal</li>
+      <li>Investigar y comprender qué son las bases de datos y su importancia en el almacenamiento de información</li>
+      <li>Investigar y comprender qué son los frameworks y por qué son útiles en el desarrollo</li>
+      <li>Analizar cómo se relacionan estos componentes entre sí para formar una aplicación completa</li>
+      <li>Evaluar la necesidad y utilidad de los frameworks en el desarrollo moderno</li>
+      <li>Identificar qué permite hacer cada componente y sus aplicaciones prácticas en el mundo real</li>
+      <li>Desarrollar habilidades de investigación y síntesis de información técnica</li>
+    </ul>
+
+    <h3>3. CONSIGNAS DETALLADAS</h3>
+    <p>
+      El trabajo debe organizarse en las siguientes cinco partes:
+    </p>
+
+    <div class="section">
+      <h4>PARTE 1: FRONTEND</h4>
+      <p>Investigar y desarrollar los siguientes puntos:</p>
+      <ul>
+        <li><strong>¿Qué es el frontend?</strong> Definir el concepto y explicar su importancia</li>
+        <li>
+          <strong>¿Qué elementos lo componen?</strong> Identificar las tecnologías principales (HTML, CSS, JavaScript)
+        </li>
+        <li><strong>¿Qué permite hacer?</strong> Describir las funcionalidades que se pueden implementar</li>
+        <li><strong>Ejemplos de tecnologías:</strong> Investigar al menos 3 tecnologías o herramientas de frontend</li>
+        <li>
+          <strong>¿Qué tipo de aplicaciones se pueden crear?</strong> Proporcionar ejemplos concretos de aplicaciones
+          web
+        </li>
+        <li>
+          <strong>Experiencia del usuario:</strong> Explicar cómo el frontend impacta en la experiencia del usuario
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>PARTE 2: BACKEND</h4>
+      <p>Investigar y desarrollar los siguientes puntos:</p>
+      <ul>
+        <li><strong>¿Qué es el backend?</strong> Definir el concepto y su rol en las aplicaciones</li>
+        <li><strong>¿Cuál es su función principal?</strong> Explicar las responsabilidades del backend</li>
+        <li><strong>¿Qué permite hacer?</strong> Describir los procesos que maneja</li>
+        <li>
+          <strong>Ejemplos de tecnologías:</strong> Elegir e investigar al menos 1 tecnología (Node.js, Python, Java,
+          PHP, etc.)
+        </li>
+        <li><strong>¿Qué procesos maneja?</strong> Explicar autenticación, procesamiento de datos, APIs, etc.</li>
+        <li><strong>Seguridad:</strong> Mencionar aspectos básicos de seguridad que maneja el backend</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>PARTE 3: BASES DE DATOS</h4>
+      <p>Investigar y desarrollar los siguientes puntos:</p>
+      <ul>
+        <li><strong>¿Qué son las bases de datos?</strong> Definir el concepto y su importancia</li>
+        <li><strong>¿Por qué son necesarias?</strong> Explicar la necesidad de almacenar y organizar información</li>
+        <li><strong>Tipos de bases de datos:</strong> Diferenciar entre relacionales y no relacionales</li>
+        <li>
+          <strong>Ejemplos de tecnologías:</strong> Investigar al menos 1 sistema de bases de datos (MySQL, PostgreSQL,
+          MongoDB, etc.)
+        </li>
+        <li><strong>¿Qué información se puede almacenar?</strong> Dar ejemplos de tipos de datos</li>
+        <li><strong>Operaciones básicas:</strong> Explicar conceptos como crear, leer, actualizar y eliminar datos</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>PARTE 4: FRAMEWORKS</h4>
+      <p>Investigar y desarrollar los siguientes puntos:</p>
+      <ul>
+        <li><strong>¿Qué son los frameworks?</strong> Definir el concepto claramente</li>
+        <li><strong>¿Para qué sirven?</strong> Explicar su propósito en el desarrollo</li>
+        <li><strong>¿Cuál es su necesidad y utilidad?</strong> Analizar por qué los desarrolladores los utilizan</li>
+        <li><strong>Ejemplos de frameworks:</strong> Investigar al menos 1 frameworks de frontend y 1 de backend</li>
+        <li><strong>Ventajas de usar frameworks:</strong> Listar y explicar los beneficios</li>
+        <li><strong>Desventajas potenciales:</strong> Mencionar posibles limitaciones</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>PARTE 5: INTEGRACIÓN Y RELACIÓN ENTRE COMPONENTES</h4>
+      <p>Esta es la parte más importante del proyecto. Desarrollar:</p>
+      <ul>
+        <li>
+          <strong>¿Cómo se relacionan frontend, backend y bases de datos?</strong> Explicar la interacción entre
+          componentes
+        </li>
+        <li>
+          <strong>Flujo de información:</strong> Describir paso a paso cómo viaja la información desde el usuario hasta
+          la base de datos y viceversa
+        </li>
+        <li>
+          <strong>Diagrama conceptual:</strong> Crear un diagrama simple (puede ser dibujado a mano y escaneado) que
+          muestre la relación entre los componentes
+        </li>
+        <li>
+          <strong>Caso de uso práctico:</strong> Elegir una aplicación web conocida (ej: red social, tienda online,
+          sistema de gestión) y describir cómo funcionarían todos los componentes juntos
+        </li>
+        <li>
+          <strong>Importancia de la integración:</strong> Explicar por qué es crucial que todos los componentes trabajen
+          coordinadamente
+        </li>
+      </ul>
+    </div>
+
+    
+    </div>
+
+    <h3>4. Entrega:</h3><ul>
+    </ul>
+
+    <div class="entrega-box">
+      <p><span style="color: rgb(65, 84, 98);">Fecha límite de entrega: </span><strong>Lunes 24 de noviembre</strong></p>
+      <p>Enviar por email con el asunto: "Proyecto Final Integral de asistencia al usuario 2 - 7°1°"</p><p>No olvidar poner los integrantes.</p>
+    </div>
+  
+
+</body></html>

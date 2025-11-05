@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" style="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyecto Final Integrador - Mantenimiento de Hardware</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
+    <style>
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 3%;
+        position: relative;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background: #f8fafc;
+      }
+
+      .header-section {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 30px 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+
+      h1 {
+        font-size: 28px;
+        margin-bottom: 15px;
+      }
+
+      h2 {
+        font-size: 22px;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 5px;
+      }
+
+      h3 {
+        font-size: 18px;
+        margin-top: 25px;
+        margin-bottom: 10px;
+      }
+
+      .info-box {
+        background: white;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        border-left: 4px solid #333;
+      }
+
+      
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2% 0;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+        font-size: 14px;
+      }
+
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+
+      ul,
+      ol {
+        margin: 15px 0;
+        padding-left: 25px;
+      }
+
+      li {
+        margin: 8px 0;
+      }
+
+      .highlight {
+        background-color: #fff3cd;
+        padding: 15px;
+        border-radius: 5px;
+        border-left: 4px solid #ffc107;
+        margin: 20px 0;
+      }
+
+      .section {
+        background: white;
+        padding: 25px;
+        margin: 20px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .component-list {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin: 20px 0;
+      }
+
+      .component-item {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        border: 1px solid #e9ecef;
+      }
+
+      .checklist-section {
+        background: #e8f5e8;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+      }
+
+      .warning {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+      }
+
+      .schedule-grid {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        gap: 15px;
+        margin: 20px 0;
+      }
+
+      .schedule-item {
+        background: white;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 12px 28px;
+        background: #1976d2;
+        color: #fff;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: bold;
+        text-decoration: none;
+        margin-top: 18px;
+        margin-bottom: 3%;
+        box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+        transition: background 0.2s;
+      }
+      .btn:hover {
+        background: #1565c0;
+      }
+      @media (max-width: 768px) {
+        .component-list {
+          display: flex;
+          flex-wrap: wrap;
+          /* grid-template-columns: repeat(2, 1fr); */
+          gap: 15px;
+          margin: 20px 0;
+        }
+      }
+      @media (max-width: 600px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+  </head>
+  <body style="">
+    <div>
+      <a href="../materias/mantenimiento-de-hardware.html" class="btn"
+        >Volver a Materia</a
+      >
+    </div>
+    <div class="header-section">
+      <h1>PROYECTO FINAL INTEGRADOR</h1>
+      <h2 style="border: none; margin: 10px 0; font-size: 20px">
+        Mantenimiento de Hardware
+      </h2>
+      <p style="font-size: 18px; color: #555; margin: 5px 0">
+        <strong
+          >Guía Completa de Diagnóstico y Reparación de Fallas en PC</strong
+        >
+      </p>
+      <hr style="margin: 20px 0" />
+      <p><strong>7°1° - Materia:</strong> Mantenimiento de Hardware</p>
+      <p><strong>Fecha de entrega:</strong> Lunes 24 de Noviembre de 2025</p>
+      <p><strong>Modalidad:</strong> Trabajo Grupal (Máximo 4 integrantes)</p>
+    </div>
+
+    <div class="section">
+      <h2>1. Introducción del Proyecto</h2>
+      <p>
+        Este proyecto final integrador tiene como propósito consolidar y aplicar
+        todos los conocimientos adquiridos durante el curso de Mantenimiento de
+        Hardware, mas los que deberán investigar.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>2. Objetivos del Proyecto</h2>
+
+      <h3>Objetivo General</h3>
+      <p>
+        Elaborar una guía técnica completa y práctica para el diagnóstico,
+        verificación y reparación de las principales fallas de hardware en
+        computadoras personales, integrando conocimientos teóricos y
+        procedimientos prácticos.
+      </p>
+
+      <h3>Objetivos Específicos</h3>
+      <ol>
+        <li>
+          Catalogar y clasificar las fallas más comunes por componente de
+          hardware
+        </li>
+        <li>
+          Desarrollar procedimientos sistemáticos de diagnóstico y verificación
+        </li>
+        <li>
+          Documentar soluciones prácticas con herramientas básicas y accesibles
+        </li>
+        <li>
+          Identificar fallas originadas por incompatibilidad, mala instalación o
+          configuración incorrecta
+        </li>
+        <li>
+          Crear herramientas de control (checklists) para mantenimiento
+          preventivo y diagnóstico
+        </li>
+      </ol>
+      <ul></ul>
+    </div>
+
+    <div class="section">
+      <h2>3. Descripción del Proyecto</h2>
+
+      <p>
+        Los grupos deberán crear una
+        <strong>guía técnica profesional</strong> que sirva como manual de
+        referencia para técnicos en hardware. Esta guía debe incluir:
+      </p>
+
+      <div class="info-box">
+        <h3>Componentes Principales de la Guía:</h3>
+        <ol>
+          <li>
+            <strong>Fallas por Componente:</strong> Análisis detallado de las
+            principales fallas de cada componente de hardware
+          </li>
+          <li>
+            <strong>Métodos de Verificación:</strong> Procedimientos
+            sistemáticos para confirmar fallas
+          </li>
+          <li>
+            <strong>Herramientas de Diagnóstico:</strong> Software y hardware
+            necesario para cada tipo de diagnóstico
+          </li>
+          <li>
+            <strong>Procedimientos de Reparación:</strong> Pasos detallados para
+            solucionar cada tipo de falla
+          </li>
+          <li>
+            <strong>Fallas de Origen No Físico:</strong> Problemas por
+            incompatibilidad, mala colocación o software
+          </li>
+          <li>
+            <strong>Checklists de Control:</strong> Herramientas para
+            mantenimiento preventivo y diagnóstico sistemático
+          </li>
+        </ol>
+      </div>
+
+      <p>
+        El enfoque debe ser <strong>práctico y aplicable</strong>, utilizando
+        herramientas básicas y procedimientos accesibles para técnicos de nivel
+        intermedio, aunque se permite incluir técnicas más avanzadas si el grupo
+        lo considera apropiado.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>4. Estructura de la Guía a Desarrollar</h2>
+
+      <p>
+        La guía debe organizarse por componentes de hardware. Para cada
+        componente, deben desarrollar las siguientes secciones:
+      </p>
+
+      <div class="component-list">
+        <div class="component-item">
+          <strong>🖥️ CPU (Procesador)</strong>
+          <p>Fallas térmicas, de socket, overclocking, etc.</p>
+        </div>
+        <div class="component-item">
+          <strong>💾 RAM (Memoria)</strong>
+          <p>Módulos defectuosos, incompatibilidad, slots dañados</p>
+        </div>
+        <div class="component-item">
+          <strong>🔌 Placa Madre</strong>
+          <p>VRM, capacitores, BIOS, conectores, pistas</p>
+        </div>
+        <div class="component-item">
+          <strong>💿 Almacenamiento</strong>
+          <p>HDD/SSD, sectores dañados, cables, conectores</p>
+        </div>
+        <div class="component-item">
+          <strong>⚡ Fuente de Alimentación</strong>
+          <p>Voltajes, conectores, capacidad insuficiente</p>
+        </div>
+        <div class="component-item">
+          <strong>🎮 GPU (Tarjeta Gráfica)</strong>
+          <p>Sobrecalentamiento, drivers, compatibilidad</p>
+        </div>
+        <div class="component-item">
+          <strong>❄️ Sistema de Refrigeración</strong>
+          <p>Ventiladores, pasta térmica, disipadores</p>
+        </div>
+        <div class="component-item">
+          <strong>🔌 Periféricos y Conectores</strong>
+          <p>USB, audio, red, HDMI, puertos E/S</p>
+        </div>
+      </div>
+
+      <h3>Estructura por Componente</h3>
+      <p>Para cada componente, la guía debe incluir:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Sección</th>
+            <th>Descripción</th>
+            <th>Contenido Mínimo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>A) Fallas Comunes</strong></td>
+            <td>Principales problemas que afectan al componente</td>
+            <td>Mínimo 3-5 fallas por componente</td>
+          </tr>
+          <tr>
+            <td><strong>B) Síntomas Observables</strong></td>
+            <td>Señales que indican cada tipo de falla</td>
+            <td>Síntomas visuales, auditivos, de comportamiento</td>
+          </tr>
+          <tr>
+            <td><strong>C) Herramientas de Diagnóstico</strong></td>
+            <td>Software y hardware necesario</td>
+            <td>Herramientas básicas y especializadas</td>
+          </tr>
+          <tr>
+            <td><strong>D) Procedimiento de Verificación</strong></td>
+            <td>Pasos para confirmar la falla</td>
+            <td>Proceso sistemático paso a paso</td>
+          </tr>
+          <tr>
+            <td><strong>E) Soluciones y Reparaciones</strong></td>
+            <td>Métodos de reparación detallados</td>
+            <td>Procedimientos con herramientas básicas</td>
+          </tr>
+          <tr>
+            <td><strong>F) Prevención</strong></td>
+            <td>Medidas para evitar futuras fallas</td>
+            <td>Mantenimiento preventivo específico</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>5. Sección Especial: Fallas por Origen No Físico</h2>
+
+      <p>
+        Una sección completa debe dedicarse a fallas que no son causadas por
+        daño físico del hardware, sino por:
+      </p>
+
+      <div class="info-box">
+        <h3>Tipos de Fallas No Físicas:</h3>
+        <ol>
+          <li>
+            <strong>Incompatibilidad de Componentes</strong>
+            <ul>
+              <li>RAM incompatible con motherboard</li>
+              <li>CPU no soportado por chipset</li>
+              <li>GPU incompatible con fuente de alimentación</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Mala Colocación o Instalación</strong>
+            <ul>
+              <li>RAM mal insertada</li>
+              <li>Conectores de alimentación sueltos</li>
+              <li>CPU mal instalado en socket</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Drivers y Software Incorrecto</strong>
+            <ul>
+              <li>Drivers desactualizados o incorrectos</li>
+              <li>Conflictos de software</li>
+              <li>Sistemas operativos incompatibles</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Configuración Incorrecta de BIOS/UEFI</strong>
+            <ul>
+              <li>Settings de RAM incorrectos</li>
+              <li>Overclocking inestable</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <h2>6. Checklists de Control</h2>
+
+      <p>Los grupos deben crear dos checklists profesionales:</p>
+
+      <h3>📋 Checklist 1: Mantenimiento Preventivo</h3>
+      <p>
+        <strong>Propósito:</strong> Prevenir fallas mediante mantenimiento
+        regular
+      </p>
+      <p>
+        <strong>Contenido:</strong> Lista sistemática de tareas de mantenimiento
+        preventivo organizadas por:
+      </p>
+      <ul>
+        <li>Mantenimiento semanal</li>
+        <li>Mantenimiento mensual</li>
+        <li>Mantenimiento trimestral</li>
+        <li>Mantenimiento anual</li>
+      </ul>
+
+      <h3>🔍 Checklist 2: Diagnóstico de Fallas</h3>
+      <p><strong>Propósito:</strong> Guía sistemática cuando hay problemas</p>
+      <p>
+        <strong>Contenido:</strong> Pasos ordenados para diagnosticar fallas:
+      </p>
+      <ul>
+        <li>Verificaciones iniciales</li>
+        <li>Tests de componentes básicos</li>
+        <li>Diagnóstico por síntomas</li>
+        <li>Procedimientos de aislamiento de fallas</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>
+        <span style="font-size: 18px">Elementos Visuales (Opcional):</span>
+      </h2>
+
+      <ul>
+        <li>
+          <strong>Imágenes:</strong> Pueden incorporar imagenes para reforzar el
+          material
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>7. Modalidad de Entrega</h2>
+      <div class="warning">
+        <ul>
+          <li><strong>Fecha límite:</strong> Lunes 24 de Noviembre de 2025</li>
+          <li><strong>Formato:</strong> Email con archivo Word&nbsp;</li>
+          <li><strong>Equipo:</strong>&nbsp;Integrantes.</li>
+          <li>
+            <strong>Asunto del email:</strong> "Proyecto Final - Mantenimiento
+            de Hardware "
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
