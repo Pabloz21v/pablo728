@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" style=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Choice - Temas de Informática</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 32px 80px;
+        position: relative;
+        box-sizing: border-box;
+        font-family: 'Times New Roman', Times, serif;
+        line-height: 1.6;
+      }
+
+      h1 {
+        color: #2563eb;
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 2rem;
+        border-bottom: 2px solid #2563eb;
+        padding-bottom: 15px;
+      }
+
+      h2 {
+        color: #2563eb;
+        background-color: #f8fafc;
+        padding: 15px 20px;
+        margin: 30px 0 20px 0;
+        border-left: 5px solid #2563eb;
+        font-size: 1.5rem;
+      }
+
+      .pregunta {
+        margin-bottom: 25px;
+        padding: 15px;
+        background-color: #fefefe;
+        border: 1px solid #e2e8f0;
+      }
+
+      .pregunta h3 {
+        color: #1e40af;
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+      }
+
+      .opciones {
+        margin-left: 20px;
+        margin-top: 10px;
+      }
+
+      .opciones div {
+        margin: 8px 0;
+        font-size: 1rem;
+      }
+
+      .tabla-respuestas {
+        margin-top: 40px;
+      }
+
+      .tabla-respuestas h2 {
+        text-align: center;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-size: 1rem;
+      }
+
+      th {
+        background-color: #1f2937;
+        color: white;
+        padding: 12px 15px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      td {
+        padding: 10px 15px;
+        border: 1px solid #d1d5db;
+        text-align: center;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9fafb;
+      }
+
+      tr:nth-child(odd) {
+        background-color: #ffffff;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 20px 30px;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        h2 {
+          font-size: 1.2rem;
+          padding: 10px 15px;
+        }
+
+        .pregunta {
+          padding: 10px;
+        }
+
+        table {
+          font-size: 0.9rem;
+        }
+
+        th,
+        td {
+          padding: 8px 10px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 15px 20px;
+        }
+
+        .opciones {
+          margin-left: 10px;
+        }
+
+        table {
+          font-size: 0.8rem;
+        }
+
+        th,
+        td {
+          padding: 6px 8px;
+        }
+      }
+    </style>
+  </head>
+  <body style="">
+    <h1>Multiple Choice - Temas de Informática</h1>
+
+    <h2>Tema 1</h2>
+
+    <div class="pregunta">
+      <h3>Pregunta 1: ¿Cuál de los siguientes dispositivos NO es un ejemplo de almacenamiento flash?</h3>
+      <div class="opciones">
+        <div>A) SSD</div>
+        <div>B) Memoria USB</div>
+        <div>C) Blu-ray</div>
+        <div>D) Tarjeta microSD</div>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <h3>Pregunta 2: ¿Cuál es la principal diferencia entre un HDD de 2.5" y uno de 3.5"?</h3>
+      <div class="opciones">
+        <div>A) Los HDD de 2.5" siempre tienen mayor capacidad</div>
+        <div>B) Los de 2.5" son para portátiles</div>
+        <div>C) Los HDD de 2.5" giran a 10,000 RPM</div>
+        <div>D) Los HDD de 3.5" son más resistentes a golpes</div>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <h3>Pregunta 3: ¿Cuál es la función principal de la CPU en un sistema informático?</h3>
+      <div class="opciones">
+        <div>a) Almacenar datos permanentemente</div>
+        <div>b) Interpretar y ejecutar instrucciones de los programas</div>
+        <div>c) Mostrar imágenes en la pantalla</div>
+        <div>d) Conectarse a internet</div>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <h3>Pregunta 4: ¿Cuál de las siguientes opciones describe mejor el "Overclocking"?</h3>
+      <div class="opciones">
+        <div>a) Reducir la velocidad de la CPU para ahorrar energía</div>
+        <div>b) Usar la CPU solo para tareas básicas</div>
+        <div>c) Cambiar la marca de la CPU por una más moderna</div>
+        <div>d) Aumentar la frecuencia de reloj de la CPU para mejorar su rendimiento </div>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <h3>Pregunta 5: ¿Qué tecnología de zócalos de expansión es la más moderna y reemplazó al PCI y AGP?</h3>
+      <div class="opciones">
+        <div>a) ISA</div>
+        <div>b) EISA</div>
+        <div>c) PCIe</div>
+        <div>d) SATA</div>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <h3>Pregunta 6: ¿Cuál de las siguientes aplicaciones NO es típica para una GPU dedicada (dGPU)?</h3>
+      <div class="opciones">
+        <div>A) Tareas de oficina básicas</div>
+        <div>A) Gaming de alto rendimiento</div>
+        <div>C) Renderizado de gráficos 3D</div>
+        <div>D) Minería de criptomonedas</div>
+      </div>
+    </div>
+
+    <h2>Tema 2</h2>
+
+    <div class="pregunta">
+      <h3>Pregunta 1: ¿Qué característica NO corresponde a los discos duros (HDD)?</h3>
+      <div class="opciones">
+        <div>A) Alta capacidad de almacenamiento (hasta varios TB)</div>
+        <div>B) Sensibilidad a golpes y vibraciones</div>
+        <div>C) Velocidad de lectura más rápida que los SSD</div>
+        <div>D) Uso común en servidores y respaldos</div>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <h3>Pregunta 2: ¿Qué tipo de memoria NO es volátil y se utiliza en los SSD para almacenar datos?</h3>
+      <div class="opciones">
+        <div>A) DRAM</div>
+        <div>B) NAND</div>
+        <div>C) SRAM</div>
+        <div>D) Cache L1</div>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <h3>Pregunta 3: ¿Qué término NO es un sinónimo común de "CPU"?</h3>
+      <div class="opciones">
+        <div>a) Microprocesador</div>
+        <div>b) Unidad central de proceso</div>
+        <div>c) Tarjeta gráfica</div>
+        <div>d) Procesador</div>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <h3>Pregunta 4: ¿Cuál es la función principal de la RAM en una computadora?</h3>
+      <div class="opciones">
+        <div>a) Almacenar datos permanentemente</div>
+        <div>b) Almacenar datos y programas temporalmente mientras están en uso</div>
+        <div>c) Procesar imágenes y videos</div>
+        <div>d) Conectarse a internet</div>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <h3>Pregunta 5: ¿Qué función cumple la batería CMOS en una placa madre?</h3>
+      <div class="opciones">
+        <div>a) Almacenar la configuración del BIOS/UEFI y mantener el reloj en tiempo real</div>
+        <div>b) Aumentar la velocidad del procesador</div>
+        <div>c) Proporcionar energía a la tarjeta gráfica</div>
+        <div>d) Conectar dispositivos USB</div>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <h3>Pregunta 6: ¿Qué tecnología de memoria es común en las GPUs dedicadas modernas?</h3>
+      <div class="opciones">
+        <div>A) RAM DDR4</div>
+        <div>B) SSD NVMe</div>
+        <div>C) Cache L3</div>
+        <div>D) VRAM GDDR6/GDDR7</div>
+      </div>
+    </div>
+
+    <h2>Tema 3</h2>
+
+    <div class="pregunta">
+      <h3>Pregunta 1: ¿Cuál de los siguientes NO es un componente principal de un disco duro (HDD)?</h3>
+      <div class="opciones">
+        <div>A) Platos (Platters)</div>
+        <div>B) Cabezal de lectura/escritura</div>
+        <div>C) Placa de expansión</div>
+        <div>D) Brazo actuador</div>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <h3>Pregunta 2: ¿Qué ventaja corresponde a los SSD M.2?</h3>
+      <div class="opciones">
+        <div>A) Baja velocidad de transferencia</div>
+        <div>B) Tamaño más compacto</div>
+        <div>C) Menor capacidad de almacenamiento</div>
+        <div>D) Mayor consumo energético</div>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <h3>Pregunta 3: ¿Cuáles son los 2 fabricantes de CPU más reconocidos?</h3>
+      <div class="opciones">
+        <div>a) Intel y ARM</div>
+        <div>b) ARM y Qualcomm</div>
+        <div>c) Intel y Qualcomm</div>
+        <div>d) Intel y AMD</div>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <h3>Pregunta 4: ¿Cuál es la función principal de la placa madre en una computadora?</h3>
+      <div class="opciones">
+        <div>a) Conectar y permitir la comunicación entre todos los componentes del sistema</div>
+        <div>b) Almacenar datos permanentemente</div>
+        <div>c) Procesar imágenes y videos</div>
+        <div>d) Conectarse a internet</div>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <h3>Pregunta 5: ¿Qué tipo de GPU comparte la memoria RAM del sistema?</h3>
+      <div class="opciones">
+        <div>A) GPU Dedicada (dGPU)</div>
+        <div>B) GPU Integrada (iGPU)</div>
+        <div>C) GPU para minería de criptomonedas</div>
+        <div>D) GPU para servidores</div>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <h3>Pregunta 6: ¿Cuál es la función principal de un gabinete en una computadora?</h3>
+      <div class="opciones">
+        <div>A) Aumentar la velocidad del procesador</div>
+        <div>B) Proteger y organizar los componentes internos, facilitando la refrigeración y conectividad</div>
+        <div>C) Generar energía para los componentes</div>
+        <div>D) Controlar el sistema operativo</div>
+      </div>
+    </div>
+
+    <div class="tabla-respuestas">
+      <h2>Tabla de Respuestas Correctas</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Tema</th>
+            <th>Pregunta</th>
+            <th>Respuesta Correcta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tema 1</td>
+            <td>Pregunta 1</td>
+            <td>C</td>
+          </tr>
+          <tr>
+            <td>Tema 1</td>
+            <td>Pregunta 2</td>
+            <td>B</td>
+          </tr>
+          <tr>
+            <td>Tema 1</td>
+            <td>Pregunta 3</td>
+            <td>B</td>
+          </tr>
+          <tr>
+            <td>Tema 1</td>
+            <td>Pregunta 4</td>
+            <td>D</td>
+          </tr>
+          <tr>
+            <td>Tema 1</td>
+            <td>Pregunta 5</td>
+            <td>C</td>
+          </tr>
+          <tr>
+            <td>Tema 1</td>
+            <td>Pregunta 6</td>
+            <td>A</td>
+          </tr>
+          <tr>
+            <td>Tema 2</td>
+            <td>Pregunta 1</td>
+            <td>C</td>
+          </tr>
+          <tr>
+            <td>Tema 2</td>
+            <td>Pregunta 2</td>
+            <td>B</td>
+          </tr>
+          <tr>
+            <td>Tema 2</td>
+            <td>Pregunta 3</td>
+            <td>C</td>
+          </tr>
+          <tr>
+            <td>Tema 2</td>
+            <td>Pregunta 4</td>
+            <td>B</td>
+          </tr>
+          <tr>
+            <td>Tema 2</td>
+            <td>Pregunta 5</td>
+            <td>A</td>
+          </tr>
+          <tr>
+            <td>Tema 2</td>
+            <td>Pregunta 6</td>
+            <td>D</td>
+          </tr>
+          <tr>
+            <td>Tema 3</td>
+            <td>Pregunta 1</td>
+            <td>C</td>
+          </tr>
+          <tr>
+            <td>Tema 3</td>
+            <td>Pregunta 2</td>
+            <td>B</td>
+          </tr>
+          <tr>
+            <td>Tema 3</td>
+            <td>Pregunta 3</td>
+            <td>D</td>
+          </tr>
+          <tr>
+            <td>Tema 3</td>
+            <td>Pregunta 4</td>
+            <td>A</td>
+          </tr>
+          <tr>
+            <td>Tema 3</td>
+            <td>Pregunta 5</td>
+            <td>B</td>
+          </tr>
+          <tr>
+            <td>Tema 3</td>
+            <td>Pregunta 6</td>
+            <td>B</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+
+</body></html>
