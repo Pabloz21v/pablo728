@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examen Hardware 1</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 15px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: clamp(24px, 5vw, 32px);
+      color: #333;
+    }
+    
+    .encabezado {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin-bottom: 25px;
+      font-size: clamp(14px, 4vw, 18px);
+    }
+    
+    @media (min-width: 620px) {
+      .encabezado {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    .encabezado div {
+      background-color: white;
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .encabezado strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    
+    .encabezado p {
+      margin: 5px 0;
+      font-size: clamp(12px, 3.5vw, 16px);
+    }
+    
+    #timer {
+      font-size: clamp(20px, 6vw, 28px) !important;
+      color: red;
+      font-weight: bold;
+    }
+    
+    #quiz {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    #quiz p {
+      margin: 15px 0 10px 0;
+      font-size: clamp(14px, 4vw, 16px);
+      font-weight: bold;
+      color: #333;
+    }
+    
+    label {
+      display: block;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: clamp(13px, 3.5vw, 15px);
+      background-color: #f9f9f9;
+      transition: background-color 0.3s;
+    }
+    
+    label:hover {
+      background-color: #efefef;
+    }
+    
+    label input[type="radio"] {
+      margin-right: 10px;
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+    }
+    
+    button {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      font-size: clamp(14px, 4vw, 16px);
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 15px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    button:hover {
+      background-color: #0056b3;
+    }
+    
+    button:active {
+      background-color: #004085;
+    }
+    
+    #resultado {
+      text-align: center;
+      font-size: clamp(16px, 4vw, 20px);
+      font-weight: bold;
+      color: #333;
+      background-color: white;
+      padding: 15px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    hr {
+      margin: 15px 0;
+      border: none;
+      border-top: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Examen de Hardware 1</h1>
+  <div class="encabezado">
+    <div>
+      <strong>Hora de inicio:</strong>
+      <p id="horaInicio"></p>
+    </div>
+    <div>
+      <strong>Tiempo restante:</strong>
+      <p id="timer"></p>
+    </div>
+    <div id="horaFinalizacionDiv" style="display: none;">
+      <strong>Hora de finalización:</strong>
+      <p id="horaFinalizacion"></p>
+    </div>
+  </div>
+  <div id="quiz"></div>
+  <button onclick="finalizar()">Finalizar</button>
+  <p id="resultado"></p>
+
+  <script>
+    const preguntasData = {
+      "preguntas": [
+        {
+          "id": 1,
+          "pregunta": "¿Cuál es la función principal de la CPU en una computadora?",
+          "opciones": [
+            "Almacenar datos permanentemente",
+            "Procesar instrucciones y cálculos",
+            "Controlar la energía eléctrica",
+            "Mostrar imágenes en pantalla"
+          ],
+          "respuesta_correcta": 1
+        },
+        {
+          "id": 2,
+          "pregunta": "¿Qué componente se utiliza para almacenar datos de manera volátil?",
+          "opciones": [
+            "Disco duro",
+            "Memoria RAM",
+            "Unidad SSD",
+            "Memoria USB"
+          ],
+          "respuesta_correcta": 1
+        },
+        {
+          "id": 3,
+          "pregunta": "¿Cuál de los siguientes dispositivos es considerado periférico de entrada?",
+          "opciones": [
+            "Monitor",
+            "Impresora",
+            "Teclado",
+            "Altavoces"
+          ],
+          "respuesta_correcta": 2
+        },
+        {
+          "id": 4,
+          "pregunta": "¿Qué componente se encarga de convertir la corriente alterna en corriente continua para la PC?",
+          "opciones": [
+            "Fuente de alimentación",
+            "Placa madre",
+            "CPU",
+            "Tarjeta gráfica"
+          ],
+          "respuesta_correcta": 0
+        },
+        {
+          "id": 5,
+          "pregunta": "¿Cuál es la función principal de la tarjeta gráfica?",
+          "opciones": [
+            "Procesar imágenes y videos",
+            "Almacenar programas",
+            "Controlar la red",
+            "Regular la temperatura"
+          ],
+          "respuesta_correcta": 0
+        },
+        {
+          "id": 6,
+          "pregunta": "¿Qué componente conecta y comunica todos los demás dentro de la PC?",
+          "opciones": [
+            "Placa madre",
+            "Fuente de poder",
+            "Disco duro",
+            "Memoria RAM"
+          ],
+          "respuesta_correcta": 0
+        }
+      ]
+    };
+
+    let seleccionadas = [];
+    let respuestas = {};
+    let tiempoRestante = 300; // 5 minutos en segundos
+    let examenTerminado = false;
+    let intervaloTimer = null;
+
+    function mostrarPreguntas() {
+      const quiz = document.getElementById("quiz");
+      seleccionadas.forEach((p, i) => {
+        let opcionesHTML = p.opciones.map((op, idx) =>
+          `<label id="label_preg${i}_op${idx}">
+             <input type="radio" id="preg${i}_op${idx}" name="preg${i}" value="${idx}" 
+              onclick="respuestas[${i}] = ${idx}" /> ${op}
+           </label>`
+        ).join("");
+        quiz.innerHTML += `<p><strong>${p.pregunta}</strong></p>${opcionesHTML}<hr>`;
+      });
+    }
+
+    function iniciarTimer() {
+      intervaloTimer = setInterval(() => {
+        const minutos = Math.floor(tiempoRestante / 60);
+        const segundos = tiempoRestante % 60;
+        const formato = `${minutos}:${segundos.toString().padStart(2, '0')}`;
+        document.getElementById('timer').innerText = formato;
+        
+        if (tiempoRestante <= 0) {
+          clearInterval(intervaloTimer);
+          finalizar();
+        }
+        
+        tiempoRestante--;
+      }, 1000);
+    }
+
+    function iniciarExamen() {
+      // Mostrar hora de inicio
+      const ahora = new Date();
+      const horaFormato = ahora.toLocaleTimeString('es-ES');
+      document.getElementById('horaInicio').innerText = horaFormato;
+      
+      // Seleccionar 5 aleatorias
+      seleccionadas = preguntasData.preguntas.sort(() => 0.5 - Math.random()).slice(0, 5);
+      mostrarPreguntas();
+      
+      // Iniciar timer
+      iniciarTimer();
+    }
+
+    function finalizar() {
+      if (examenTerminado) return; // Evitar ejecutar dos veces
+      examenTerminado = true;
+      
+      // Detener el timer
+      clearInterval(intervaloTimer);
+      
+      // Mostrar hora de finalización
+      const ahoraFin = new Date();
+      const horaFinFormato = ahoraFin.toLocaleTimeString('es-ES');
+      document.getElementById('horaFinalizacion').innerText = horaFinFormato;
+      document.getElementById('horaFinalizacionDiv').style.display = 'block';
+      const radios = document.querySelectorAll("input[type='radio']");
+      radios.forEach(radio => radio.disabled = true);
+      
+      // Ocultar el botón Finalizar
+      document.querySelector("button").style.display = "none";
+      
+      let correctas = 0;
+      seleccionadas.forEach((p, i) => {
+        const respuestaCorrecta = p.respuesta_correcta;
+        
+        // Colorear la respuesta correcta de verde
+        const labelCorrect = document.getElementById(`label_preg${i}_op${respuestaCorrecta}`);
+        if (labelCorrect) {
+          labelCorrect.style.backgroundColor = "#90EE90";
+          labelCorrect.style.fontWeight = "bold";
+        }
+        
+        // Colorear la respuesta seleccionada incorrecta de rojo y agregar leyenda
+        if (respuestas[i] !== undefined) {
+          if (respuestas[i] !== respuestaCorrecta) {
+            const labelIncorrect = document.getElementById(`label_preg${i}_op${respuestas[i]}`);
+            if (labelIncorrect) {
+              labelIncorrect.style.backgroundColor = "#FFB6C6";
+              labelIncorrect.style.fontWeight = "bold";
+              labelIncorrect.innerHTML += " <span style='color: red; font-weight: bold;'> ← opción que seleccionaste</span>";
+            }
+          } else {
+            // Si la respuesta seleccionada fue correcta, agregar leyenda a la opción correcta
+            labelCorrect.innerHTML += " <span style='color: green; font-weight: bold;'> ← opción que seleccionaste</span>";
+          }
+        }
+        
+        if (respuestas[i] == respuestaCorrecta) correctas++;
+      });
+      
+      const porcentaje = Math.round((correctas / seleccionadas.length) * 100);
+      document.getElementById("resultado").innerText =
+        (correctas >= 3 ? "¡Aprobado!" : "Reprobado") + " - " + porcentaje + "%";
+    }
+
+    // Iniciar examen cuando la página carga
+    iniciarExamen();
+  </script>
+</body>
+</html>

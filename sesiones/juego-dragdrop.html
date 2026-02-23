@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Identifica el Componente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+        background: #f4f6f9;
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+      #imagen {
+        width: 90%;
+        max-width: 300px;
+        height: auto;
+        border: 3px dashed #0078d7;
+        border-radius: 10px;
+        margin: 20px auto;
+        padding: 10px;
+        background: #fff;
+      }
+      #imagen img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+      #opciones {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .opcion {
+        flex: 1 1 100px;
+        max-width: 120px;
+        background: #0078d7;
+        color: #fff;
+        padding: 10px;
+        border-radius: 8px;
+        cursor: grab;
+        user-select: none;
+        transition: transform 0.2s, background 0.2s;
+      }
+      .opcion:active {
+        transform: scale(0.95);
+        background: #005a9e;
+      }
+      #resultado {
+        font-weight: bold;
+        margin-top: 20px;
+        font-size: 1.2em;
+        color: #333;
+      }
+      #siguiente {
+        margin-top: 20px;
+        padding: 12px 24px;
+        background: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1em;
+        cursor: pointer;
+        display: none;
+        transition: background 0.2s;
+      }
+      #siguiente:hover {
+        background: #218838;
+      }
+      #volverMenu {
+        margin-top: 20px;
+        padding: 12px 24px;
+        background: #ff5722;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1em;
+        cursor: pointer;
+        display: none;
+        transition: background 0.2s;
+      }
+      #volverMenu:hover {
+        background: #e64a19;
+      }
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 1.5em;
+        }
+        .opcion {
+          flex: 1 1 80px;
+          max-width: 100px;
+          font-size: 0.9em;
+        }
+        #siguiente,
+        #volverMenu {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Identifica el Componente</h1>
+    <div id="imagen" ondrop="soltar(event)" ondragover="permitir(event)"></div>
+    <div id="opciones"></div>
+    <p id="resultado"></p>
+    <button id="siguiente" onclick="siguientePregunta()">Siguiente</button>
+    <button id="volverMenu" onclick="location.href='../materias/juegos.html'">
+      Volver al Menú
+    </button>
+
+    <script>
+      const preguntas = [
+        {
+          img: "images/madre.webp",
+          correcta: "Placa madre",
+          opciones: ["CPU", "Placa madre", "RAM"],
+        },
+        {
+          img: "images/ram.webp",
+          correcta: "RAM",
+          opciones: ["GPU", "Disco duro", "RAM"],
+        },
+        {
+          img: "images/cpu.jpg",
+          correcta: "CPU",
+          opciones: ["CPU", "PSU", "Notebook"],
+        },
+        {
+          img: "images/psu.jpg",
+          correcta: "PSU",
+          opciones: ["GPU", "Teclado", "PSU"],
+        },
+        {
+          img: "images/gpu.jpg",
+          correcta: "GPU",
+          opciones: ["CPU", "GPU", "Mouse"],
+        },
+        {
+          img: "images/teclado.jfif",
+          correcta: "Teclado",
+          opciones: ["Notebook", "Teclado", "RAM"],
+        },
+        {
+          img: "images/mouse.jfif",
+          correcta: "Mouse",
+          opciones: ["Mouse", "CPU", "GPU"],
+        },
+        {
+          img: "images/notebook.jfif",
+          correcta: "Notebook",
+          opciones: ["Placa madre", "PSU", "Notebook"],
+        },
+      ];
+
+      let indice = 0;
+
+      function mostrarPregunta() {
+        document.getElementById("resultado").innerText = "";
+        document.getElementById("siguiente").style.display = "none";
+        document.getElementById("volverMenu").style.display = "none";
+        const pregunta = preguntas[indice];
+        const imgDiv = document.getElementById("imagen");
+        imgDiv.innerHTML = `<img src="${pregunta.img}" alt="componente">`;
+        const opcionesDiv = document.getElementById("opciones");
+        opcionesDiv.innerHTML = "";
+        pregunta.opciones.forEach((opcion) => {
+          const div = document.createElement("div");
+          div.className = "opcion";
+          div.innerText = opcion;
+          div.draggable = true;
+          div.ondragstart = (ev) => arrastrar(ev, opcion);
+          opcionesDiv.appendChild(div);
+        });
+      }
+
+      function arrastrar(ev, opcion) {
+        ev.dataTransfer.setData("text", opcion);
+      }
+
+      function permitir(ev) {
+        ev.preventDefault();
+      }
+
+      function soltar(ev) {
+        ev.preventDefault();
+        const respuesta = ev.dataTransfer.getData("text");
+        const pregunta = preguntas[indice];
+        if (respuesta === pregunta.correcta) {
+          document.getElementById("resultado").innerText =
+            "✅ ¡Correcto! 🎉 ¡Felicitaciones!";
+          document.getElementById("siguiente").style.display = "inline";
+        } else {
+          document.getElementById("resultado").innerText =
+            "❌ Incorrecto, intenta otra vez.";
+        }
+      }
+
+      function siguientePregunta() {
+        indice++;
+        if (indice < preguntas.length) {
+          mostrarPregunta();
+        } else {
+          document.getElementById("imagen").innerHTML = "";
+          document.getElementById("opciones").innerHTML = "";
+          document.getElementById("resultado").innerText =
+            "🎊 ¡Has completado todas las imágenes!";
+          document.getElementById("siguiente").style.display = "none";
+          document.getElementById("volverMenu").style.display = "inline";
+        }
+      }
+
+      // Iniciar juego
+      mostrarPregunta();
+    </script>
+  </body>
+</html>
