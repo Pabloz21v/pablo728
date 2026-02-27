@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -47,12 +47,14 @@
         border-radius: 8px;
         cursor: grab;
         user-select: none;
-        transition: transform 0.2s, background 0.2s;
+        transition:
+          transform 0.2s,
+          background 0.2s;
       }
-      .opcion:active {
+      /* .opcion:active {
         transform: scale(0.95);
         background: #005a9e;
-      }
+      } */
       #resultado {
         font-weight: bold;
         margin-top: 20px;
@@ -111,7 +113,7 @@
     <div id="opciones"></div>
     <p id="resultado"></p>
     <button id="siguiente" onclick="siguientePregunta()">Siguiente</button>
-    <button id="volverMenu" onclick="location.href='../materias/juegos.html'">
+    <button id="volverMenu" onclick="location.href = '../materias/juegos.html'">
       Volver al Menú
     </button>
 
