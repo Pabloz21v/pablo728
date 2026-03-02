@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Adivina el Componente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+        background: #f4f6f9;
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+      #pregunta {
+        font-size: 1.2em;
+        margin-bottom: 20px;
+        color: #444;
+      }
+      #opciones {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      button {
+        flex: 1 1 120px;
+        max-width: 200px;
+        background: #0078d7;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.2s;
+      }
+      button:hover {
+        background: #005a9e;
+        transform: scale(1.05);
+      }
+      #resultado {
+        font-weight: bold;
+        margin-top: 20px;
+        font-size: 1.2em;
+        color: #333;
+      }
+      #siguiente {
+        margin-top: 20px;
+        background: #28a745;
+      }
+      #siguiente:hover {
+        background: #218838;
+      }
+      #volverMenu {
+        margin-top: 20px;
+        background: #ff5722;
+      }
+      #volverMenu:hover {
+        background: #e64a19;
+      }
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 1.5em;
+        }
+        #pregunta {
+          font-size: 1em;
+        }
+        button {
+          flex: 1 1 100px;
+          font-size: 0.9em;
+        }
+        #siguiente,
+        #volverMenu {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Adivina el Componente</h1>
+    <p id="pregunta"></p>
+    <div id="opciones"></div>
+    <p id="resultado"></p>
+    <button id="siguiente" style="display: none" onclick="siguientePregunta()">
+      Siguiente
+    </button>
+    <button
+      id="volverMenu"
+      style="display: none"
+      onclick="location.href='../materias/juegos.html'"
+    >
+      Volver al Menú
+    </button>
+
+    <script>
+      const preguntas = [
+        {
+          texto:
+            "¿Cuál es la placa principal donde se conectan todos los componentes?",
+          correcta: "Placa madre",
+          opciones: ["CPU", "Placa madre", "RAM"],
+        },
+        {
+          texto:
+            "¿Qué componente almacena datos temporales para que la PC trabaje rápido?",
+          correcta: "RAM",
+          opciones: ["Disco duro", "RAM", "Teclado"],
+        },
+        {
+          texto:
+            "¿Qué componente es considerado el 'cerebro' de la computadora?",
+          correcta: "CPU",
+          opciones: [ "GPU", "Mouse","CPU"],
+        },
+        {
+          texto: "¿Qué componente suministra energía a la computadora?",
+          correcta: "PSU",
+          opciones: [ "Notebook", "RAM","PSU"],
+        },
+        {
+          texto:
+            "¿Qué componente se encarga de procesar gráficos y videojuegos?",
+          correcta: "GPU",
+          opciones: ["GPU", "CPU", "Teclado"],
+        },
+        {
+          texto: "¿Qué periférico se usa para escribir?",
+          correcta: "Teclado",
+          opciones: ["Mouse", "Teclado", "Notebook"],
+        },
+        {
+          texto: "¿Qué periférico se usa para mover el puntero?",
+          correcta: "Mouse",
+          opciones: ["Mouse", "CPU", "RAM"],
+        },
+        {
+          texto:
+            "¿Qué dispositivo portátil incluye todos los componentes en uno?",
+          correcta: "Notebook",
+          opciones: [ "Placa madre", "PSU", "Notebook"],
+        },
+      ];
+
+      let indice = 0;
+
+      function mostrarPregunta() {
+        document.getElementById("resultado").innerText = "";
+        document.getElementById("siguiente").style.display = "none";
+        document.getElementById("volverMenu").style.display = "none";
+        const pregunta = preguntas[indice];
+        document.getElementById("pregunta").innerText = pregunta.texto;
+        const opcionesDiv = document.getElementById("opciones");
+        opcionesDiv.innerHTML = "";
+        pregunta.opciones.forEach((opcion) => {
+          const btn = document.createElement("button");
+          btn.innerText = opcion;
+          btn.onclick = () => verificar(opcion);
+          opcionesDiv.appendChild(btn);
+        });
+      }
+
+      function verificar(respuesta) {
+        const pregunta = preguntas[indice];
+        if (respuesta === pregunta.correcta) {
+          document.getElementById("resultado").innerText =
+            "✅ ¡Correcto! 🎉 ¡Felicitaciones!";
+          document.getElementById("siguiente").style.display = "inline";
+        } else {
+          document.getElementById("resultado").innerText =
+            "❌ Incorrecto, intenta otra vez.";
+        }
+      }
+
+      function siguientePregunta() {
+        indice++;
+        if (indice < preguntas.length) {
+          mostrarPregunta();
+        } else {
+          document.getElementById("pregunta").innerText =
+            "🎊 ¡Has completado todas las preguntas!";
+          document.getElementById("opciones").innerHTML = "";
+          document.getElementById("siguiente").style.display = "none";
+          document.getElementById("volverMenu").style.display = "inline";
+        }
+      }
+
+      // Iniciar juego
+      mostrarPregunta();
+    </script>
+  </body>
+</html>
