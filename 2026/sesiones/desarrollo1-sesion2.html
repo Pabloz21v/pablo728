@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 2: Conectores Lógicos (AND, OR, NOT)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+      }
+      h2 {
+        color: #3498db;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+      }
+      .duration {
+        font-style: italic;
+        color: #7f8c8d;
+        text-align: center;
+      }
+      .theory {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .examples {
+        background-color: #fef9e7;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .tip {
+        background-color: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #3498db;
+      }
+      .activity {
+        background-color: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #27ae60;
+      }
+      ul {
+        margin-left: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 1
+        </a>
+        <a
+          href="desarrollo1-sesion3.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 3
+        </a>
+      </div>
+      <h1>Clase 2: Conectores Lógicos (AND, OR, NOT)</h1>
+
+      <div class="theory">
+        <h2>Marco Teórico</h2>
+        <p>
+          Las proposiciones simples se pueden combinar para formar proposiciones
+          compuestas usando <strong>conectores lógicos</strong>. Los tres
+          fundamentales son:
+        </p>
+        <ul>
+          <li>
+            <strong>Negación (NOT / NO):</strong> Invierte el valor de verdad.
+            Si era V pasa a F, y viceversa.
+          </li>
+          <li>
+            <strong>Conjunción (AND / Y):</strong> Solo es Verdadera si
+            <em>ambas</em> partes son verdaderas. (Ej: "Tengo lápiz Y tengo
+            papel").
+          </li>
+          <li>
+            <strong>Disyunción (OR / O):</strong> Es Verdadera si
+            <em>al menos una</em> de las partes es verdadera. (Ej: "Voy al cine
+            O voy al parque").
+          </li>
+        </ul>
+      </div>
+
+      <div class="examples">
+        <h2>Ejemplos</h2>
+        <p>Sea P: "Hace frío" (V) y Q: "Llueve" (F).</p>
+        <ul>
+          <li>
+            <strong>P AND Q:</strong> "Hace frío Y llueve" ->
+            <strong>Falso</strong> (porque no llueve).
+          </li>
+          <li>
+            <strong>P OR Q:</strong> "Hace frío O llueve" ->
+            <strong>Verdadero</strong> (porque hace frío).
+          </li>
+          <li>
+            <strong>NOT P:</strong> "NO hace frío" ->
+            <strong>Falso</strong> (porque sí hace frío).
+          </li>
+        </ul>
+      </div>
+
+      <div class="activity">
+        <h2>Actividad: Resolver las operaciones lógicas.</h2>
+        <p><em>Considerar: A = Verdadero, B = Falso, C = Verdadero.</em></p>
+        <ol>
+          <li>A AND B</li>
+          <li>A OR B</li>
+          <li>NOT A</li>
+          <li>NOT B</li>
+          <li>A AND C</li>
+          <li>B OR C</li>
+          <li>(A AND C) OR B</li>
+          <li>A AND (NOT B)</li>
+          <li>NOT (A OR B)</li>
+          <li>(A OR B) AND (NOT C)</li>
+        </ol>
+      </div>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 1
+        </a>
+        <a
+          href="desarrollo1-sesion3.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 3
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
