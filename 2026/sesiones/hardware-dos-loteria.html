@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selector Profesional Responsive</title>
+
+<style>
+    :root{
+        --primary:#00c853;
+        --bg:#111;
+        --card:#1f1f1f;
+    }
+
+    *{
+        box-sizing:border-box;
+    }
+
+    body{
+        margin:0;
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:var(--bg);
+        font-family:Arial, sans-serif;
+        color:white;
+        padding:20px;
+    }
+
+    .container{
+        width:100%;
+        max-width:500px;
+        text-align:center;
+    }
+
+    .display-wrapper{
+        width:100%;
+        aspect-ratio: 3 / 1;
+        min-height:100px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        overflow:hidden;
+        background:var(--card);
+        border:4px solid var(--primary);
+        border-radius:20px;
+        padding:15px;
+    }
+
+    .display{
+        font-size:clamp(20px, 6vw, 34px);
+        font-weight:bold;
+        text-align:center;
+        word-wrap:break-word;
+        transition: transform 0.1s ease-out;
+    }
+
+    button{
+        margin-top:30px;
+        width:100%;
+        padding:14px;
+        font-size:clamp(16px, 4vw, 20px);
+        font-weight:bold;
+        border:none;
+        border-radius:12px;
+        cursor:pointer;
+        background:var(--primary);
+        color:white;
+        transition:0.2s ease;
+    }
+
+    button:hover{
+        transform:scale(1.03);
+    }
+
+    button:disabled{
+        background:#444;
+        cursor:not-allowed;
+        transform:none;
+    }
+
+    /* Desktop Enhancements */
+    @media(min-width:768px){
+        .container{
+            max-width:600px;
+        }
+
+        .display-wrapper{
+            border-radius:25px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="display-wrapper">
+        <div class="display" id="display">Presiona START</div>
+    </div>
+    <button id="btn">START</button> 
+</div>
+
+
+
+<script>
+    const opcionesBase = [
+        "Placa Madre",
+        "Ram",
+        "GPU",
+        "CPU",
+        "PSU",
+        "Perifericos",
+        "Tarjetas de expansion",
+        "Refrigeracion",
+        "Gabinete"
+    ];
+
+    let opciones = [...opcionesBase];
+
+    const display = document.getElementById("display");
+    const btn = document.getElementById("btn");
+
+    let animando = false;
+
+    btn.addEventListener("click", iniciar);
+
+    function iniciar(){
+        if(animando) return;
+
+        animando = true;
+        btn.disabled = true;
+
+        const duracion = 3000;
+        const inicio = performance.now();
+        let ultimoCambio = 0;
+
+        function animar(tiempoActual){
+            const transcurrido = tiempoActual - inicio;
+            const progreso = Math.min(transcurrido / duracion, 1);
+
+            const easeOut = 1 - Math.pow(1 - progreso, 3);
+            const intervaloActual = 20 + (easeOut * 200);
+
+            if(tiempoActual - ultimoCambio > intervaloActual){
+                ultimoCambio = tiempoActual;
+
+                const indice = Math.floor(Math.random() * opciones.length);
+                display.textContent = opciones[indice];
+
+                display.style.transform = `translateY(-8px)`;
+                setTimeout(() => {
+                    display.style.transform = `translateY(0px)`;
+                }, 80);
+            }
+
+            if(progreso < 1){
+                requestAnimationFrame(animar);
+            }else{
+                finalizar();
+            }
+        }
+
+        requestAnimationFrame(animar);
+    }
+
+    function finalizar(){
+        if(opciones.length === 0){
+            opciones = [...opcionesBase];
+        }
+
+        const indiceFinal = Math.floor(Math.random() * opciones.length);
+        const seleccion = opciones[indiceFinal];
+
+        display.textContent = seleccion;
+        opciones.splice(indiceFinal, 1);
+
+        animando = false;
+        btn.disabled = false;
+    }
+</script>
+
+</body>
+</html>
