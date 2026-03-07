@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 1: Introducción a la Gestión de Datos</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+      }
+      h2 {
+        color: #3498db;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+      }
+      .duration {
+        font-style: italic;
+        color: #7f8c8d;
+        text-align: center;
+      }
+      .objectives {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .key-concepts {
+        background-color: #fef9e7;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .analogy {
+        background-color: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #3498db;
+      }
+      .risks {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .exercises {
+        background-color: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #27ae60;
+      }
+      ol,
+      ul {
+        margin-left: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <!-- <a
+          href="conversion-y-reparacion-de-datos-sesion1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 1
+        </a> -->
+        <a
+          href="conversion-y-reparacion-de-datos-sesion2.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 2
+        </a>
+      </div>
+      <h1>Clase 1: Introducción a la Gestión de Datos</h1>
+
+      <div class="objectives">
+        <h2>🎯 Objetivos:</h2>
+        <ul>
+          <li>Diferenciar claramente entre dato e información.</li>
+          <li>Comprender la importancia crítica del almacenamiento digital.</li>
+          <li>
+            Identificar los riesgos básicos que sufren los datos hoy en día.
+          </li>
+          <li>Introducir el concepto de ciclo de vida de los datos.</li>
+        </ul>
+      </div>
+
+      <div class="key-concepts">
+        <h2>¿Datos o Información? Una diferencia vital</h2>
+        <p>
+          A menudo usamos estas palabras como sinónimos, pero en informática son
+          muy distintos. Imagina que encuentras un papel en el suelo que dice
+          "38". ¿Qué significa? ¿Es la edad de alguien? ¿Una temperatura? ¿El
+          precio de un caramelo?
+        </p>
+        <p>💡 <strong>Definiciones Clave:</strong></p>
+        <ul>
+          <li>
+            <strong>Dato:</strong> Es la unidad mínima, un hecho crudo sin
+            contexto (ej: "38", "Rojo", "12/05/2026"). Por sí solo no permite
+            tomar decisiones.
+          </li>
+          <li>
+            <strong>Información:</strong> Es el conjunto de datos procesados y
+            organizados que tienen un significado (ej: "La temperatura actual es
+            de 38 grados"). La información reduce la incertidumbre.
+          </li>
+        </ul>
+        <p>
+          En esta materia, nuestro trabajo será proteger, recuperar y
+          transformar esos datos para que la información nunca se pierda. Si un
+          archivo se daña, perdemos información y volvemos a tener solo "ruido"
+          o datos ilegibles.
+        </p>
+      </div>
+
+      <div class="analogy">
+        <h2>¿Dónde viven los datos? Almacenamiento Físico vs. Lógico</h2>
+        <p>Cuando guardas un archivo, ocurren dos cosas:</p>
+        <ol>
+          <li>
+            <strong>Físicamente:</strong> Se magnetiza un sector de un disco
+            duro, o se atrapan electrones en una celda de memoria de un SSD o
+            Pendrive.
+          </li>
+          <li>
+            <strong>Lógicamente:</strong> El Sistema Operativo (Windows, Linux)
+            anota en un "índice" dónde guardó ese archivo, cómo se llama y qué
+            tamaño tiene.
+          </li>
+        </ol>
+        <p>🏢 <em>Analogía del Edificio:</em></p>
+        <p>Imagina un disco rígido como una biblioteca gigante.</p>
+        <ul>
+          <li>
+            El <strong>Almacenamiento Físico</strong> son las estanterías
+            reales.
+          </li>
+          <li>
+            El <strong>Sistema de Archivos (Lógico)</strong> es el catálogo o
+            índice en la entrada que te dice "El libro de Historia está en el
+            Pasillo 4, Estante B".
+          </li>
+        </ul>
+        <p>
+          Si se quema la biblioteca (daño físico), pierdes los libros. Pero si
+          se pierde el catálogo (daño lógico), los libros siguen ahí, ¡pero no
+          sabes dónde están! En esta materia aprenderemos a recuperar ambos
+          casos.
+        </p>
+      </div>
+
+      <div class="risks">
+        <h2>El valor de los datos y sus riesgos</h2>
+        <p>
+          Hoy en día, para una empresa o una persona, perder datos puede ser
+          catastrófico. Fotos familiares irrepetibles, tesis de grado, balances
+          contables de años. Los datos enfrentan tres enemigos principales:
+        </p>
+        <ul>
+          <li>
+            <strong>Fallas de Hardware:</strong> El disco deja de funcionar.
+          </li>
+          <li>
+            <strong>Fallas de Software/Lógicas:</strong> Virus, borrados
+            accidentales, archivos corruptos.
+          </li>
+          <li>
+            <strong>Obsolescencia:</strong> Formatos antiguos que ya no podemos
+            abrir (ej: disquetes, archivos de programas viejos).
+          </li>
+        </ul>
+      </div>
+
+      <div class="exercises">
+        <h2>✏ Ejercicios de Fijación - Clase 1</h2>
+        <h3>Parte A: Diferenciación Dato/Información</h3>
+        <p>
+          Indica si los siguientes elementos son DATOS (D) o INFORMACIÓN (I):
+        </p>
+        <ol>
+          <li>El número "2500" escrito en una servilleta.</li>
+          <li>
+            El reporte de ventas del mes de marzo que dice "Total: $2500".
+          </li>
+          <li>Una lista de nombres sin título ni contexto.</li>
+          <li>El semáforo en color rojo (indicando que debes detenerte).</li>
+          <li>El código binario "01000001" sin saber qué representa.</li>
+        </ol>
+        <h3>Parte B: Análisis de Casos</h3>
+        <ol>
+          <li>
+            Un usuario dice: "Borré la carpeta de mis fotos y luego vacié la
+            papelera". ¿El problema es FÍSICO o LÓGICO? Justifica.
+          </li>
+          <li>
+            Se cae un disco externo al piso y empieza a hacer un ruido metálico
+            ("clac-clac"). ¿El problema es FÍSICO o LÓGICO?
+          </li>
+          <li>
+            Si formateas un pendrive por error, ¿los datos desaparecen
+            físicamente al instante? Explica con tus palabras inventando una
+            analogía.
+          </li>
+        </ol>
+        <h3>Parte C: Investigación Breve</h3>
+        <ol>
+          
+          <li>
+            Menciona 3 dispositivos de almacenamiento que se usaban hace 20 años
+            y hoy ya casi no existen. (agregar imagenes)
+          </li>
+          <li>
+            Investiga y nombra al menos un dispositivos de almacenamiento de datos industriales y o de seguridad. (agregar imagenes)
+          </li>
+        </ol>
+        
+      </div>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <!-- <a
+          href="conversion-y-reparacion-de-datos-sesion1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 1
+        </a> -->
+        <a
+          href="conversion-y-reparacion-de-datos-sesion2.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 2
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
