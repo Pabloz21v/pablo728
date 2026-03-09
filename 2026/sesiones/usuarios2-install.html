@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instalación de MySQL Workbench</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+      }
+      h2 {
+        color: #3498db;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+      }
+      .installation {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .resources {
+        background-color: #fef9e7;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .error {
+        background-color: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #e74c3c;
+      }
+      ol,
+      ul {
+        margin-left: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      a {
+        color: #3498db;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/usuarios-2.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+      </div>
+      <h1>Instalación de MySQL Workbench</h1>
+
+      <div class="installation">
+        <h2>Descarga</h2>
+        <p>Para instalar MySQL Workbench, sigue estos pasos:</p>
+        <ol>
+          <li>
+            Visita la
+            <a href="https://dev.mysql.com/downloads/workbench/" target="_blank"
+              >página oficial de descargas de MySQL Workbench</a
+            >.
+          </li>
+          <li>
+            Nos aseguramos de elegir el sistema operativo correcto y elegimos el
+            archivo más pesado, que suele ser la versión completa.
+          </li>
+          <li>
+            Puede aparecer la sugerencia de registrarse o iniciar sesión. Salta
+            esta opción dando clic en el texto inferior "No thanks, just start
+            my download." para descargar sin registrarse.
+          </li>
+          <li>
+            Una vez descargado, ejecuta el instalador y sigue las instrucciones
+            en pantalla para completar la instalación.
+          </li>
+        </ol>
+
+        <h2>Instalación</h2>
+        <ol>
+          <li>
+            Cuando aparezcan 4 opciones, seleccionar la opcion FULL, click en
+            Next.
+          </li>
+          <li>
+            En una pestaña "Accounts and Roles" deben ingresar estas
+            credenciales. <br />
+            Usuario: e728 <br />
+            Password: e728
+          </li>
+          <li>
+            En la misma pestaña verán "Add User", ingresar las mismas
+            credenciales.
+          </li>
+          <li>
+            Una vez completada la installation, escribir Work en el buscador de
+            windows, si aparece MySQL Workbench iniciarlo.
+          </li>
+          <li>
+            Debajo de MySQL Connections se encuentra un boton gris "Local
+            instance..." Dar Click.
+          </li>
+          <li>Usar las credenciales ingresadas anteriormente.</li>
+          <li>Si todo salío bien se encontraran dentro de la herramienta.</li>
+        </ol>
+      </div>
+
+      <div class="resources">
+        <h2>Recursos para Aprender SQL</h2>
+        <h3>Teoría y Práctica de SQL</h3>
+        <ul>
+          <li>
+            <a href="https://www.w3schools.com/sql/" target="_blank"
+              >w3schools - SQL Tutorial</a
+            >: Un tutorial interactivo para aprender SQL desde cero.
+          </li>
+        </ul>
+        <h3>Cursos Recomendados</h3>
+        <ul>
+          <li>
+            <a
+              href="https://www.youtube.com/playlist?list=PLDfQIFbmwhrc7K3kINzhGRGMFQQx9xn0q"
+              target="_blank"
+              >Curso desde YouTube</a
+            >: Busca cursos de MySQL en YouTube para seguir tutoriales
+            prácticos.
+          </li>
+          <li>
+            <a href="https://dev.mysql.com/doc/workbench/en/" target="_blank"
+              >Documentación oficial de MySQL Workbench</a
+            >: Guías y manuales para aprender a usar MySQL Workbench.
+          </li>
+        </ul>
+      </div>
+
+      <div class="error">
+        <h2>Solución a Errores Comunes</h2>
+        <h3>Error 2503 y 2502 en Windows 10 / 11</h3>
+        <p>
+          Si encuentras los errores 2503 o 2502 durante la instalación, sigue
+          estos pasos:
+        </p>
+        <ol>
+          <li>Cierra todas las aplicaciones en segundo plano.</li>
+          <li>Ejecuta el instalador como administrador.</li>
+          <li>Desactiva temporalmente el antivirus durante la instalación.</li>
+        </ol>
+      </div>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/usuarios-2.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
