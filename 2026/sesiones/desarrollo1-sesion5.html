@@ -1,120 +1,229 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clase 5: ¿Qué es un algoritmo?</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-            background-color: #f9f9f9;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+      }
+      h2 {
+        color: #3498db;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+      }
+      .theory {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .characteristics {
+        background-color: #fef9e7;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .example {
+        background-color: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .activity {
+        background-color: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #27ae60;
+      }
+      ol,
+      ul {
+        margin-left: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      @media (max-width: 600px) {
         .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          padding: 10px;
         }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-        }
-        h2 {
-            color: #3498db;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
-        }
-        .theory {
-            background-color: #f0f8ff;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        .characteristics {
-            background-color: #fef9e7;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        .example {
-            background-color: #e8f4f8;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        .activity {
-            background-color: #e8f8f5;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            border-left: 4px solid #27ae60;
-        }
-        ol, ul {
-            margin-left: 20px;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>Clase 5: ¿Qué es un algoritmo?</h1>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion4.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 4
+        </a>
+        <a
+          href="desarrollo1-sesion6.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 6
+        </a>
+      </div>
+      <h1>Clase 5: ¿Qué es un algoritmo?</h1>
 
-        <div class="theory">
-            <h2>Marco Teórico</h2>
-            <p>Un <strong>algoritmo</strong> es una secuencia ordenada y finita de pasos bien definidos que permiten realizar una actividad o resolver un problema. Un algoritmo no es necesariamente código de computadora; una receta de cocina es un algoritmo.</p>
-        </div>
+      <div class="theory">
+        <h2>Marco Teórico</h2>
+        <p>
+          Un <strong>algoritmo</strong> es una secuencia ordenada y finita de
+          pasos bien definidos que permiten realizar una actividad o resolver un
+          problema. Un algoritmo no es necesariamente código de computadora; una
+          receta de cocina es un algoritmo.
+        </p>
+      </div>
 
-        <div class="characteristics">
-            <h2>Características de un Algoritmo</h2>
-            <ul>
-                <li><strong>Preciso:</strong> Cada paso es claro y sin ambigüedades.</li>
-                <li><strong>Finito:</strong> Termina en algún momento.</li>
-                <li><strong>Definido:</strong> Si se sigue dos veces con los mismos datos, da el mismo resultado.</li>
-            </ul>
-        </div>
+      <div class="characteristics">
+        <h2>Características de un Algoritmo</h2>
+        <ul>
+          <li>
+            <strong>Preciso:</strong> Cada paso es claro y sin ambigüedades.
+          </li>
+          <li><strong>Finito:</strong> Termina en algún momento.</li>
+          <li>
+            <strong>Definido:</strong> Si se sigue dos veces con los mismos
+            datos, da el mismo resultado. ( si nada cambia, siempre deberia dar el mismo resultado)
+          </li>
+        </ul>
+      </div>
 
-        <div class="example">
-            <h2>Ejemplo: Algoritmo para lavarse los dientes</h2>
-            <ol>
-                <li>Tomar el cepillo y la pasta.</li>
-                <li>Poner pasta en el cepillo.</li>
-                <li>Cepillar los dientes superiores.</li>
-                <li>Cepillar los dientes inferiores.</li>
-                <li>Enjuagarse la boca.</li>
-                <li>Lavar el cepillo.</li>
-            </ol>
-        </div>
+      <div class="example">
+        <h2>Ejemplo: Algoritmo para lavarse los dientes</h2>
+        <ol>
+          <li>Tomar el cepillo y la pasta.</li>
+          <li>Poner pasta en el cepillo.</li>
+          <li>Cepillar los dientes superiores.</li>
+          <li>Cepillar los dientes inferiores.</li>
+          <li>Enjuagarse la boca.</li>
+          <li>Lavar el cepillo.</li>
+          <li>Devolver el cepillo y la pasta a su lugar.</li>
+        </ol>
+      </div>
 
-        <div class="activity">
-            <h2>Actividad 5: Escribir los pasos (algoritmo natural) para las siguientes tareas</h2>
-            <p>Escribe una secuencia ordenada de pasos para cada una de las siguientes tareas cotidianas:</p>
-            <ol>
-                <li>Cambiar la bombilla de una lámpara.</li>
-                <li>Preparar una taza de té.</li>
-                <li>Cargar saldo en la tarjeta de transporte (SUBE/Bus).</li>
-                <li>Buscar una palabra en el diccionario (físico).</li>
-                <li>Enviar un mensaje de WhatsApp.</li>
-                <li>Cruzar la calle de forma segura.</li>
-                <li>Atarse los cordones de las zapatillas.</li>
-                <li>Sacar punta a un lápiz.</li>
-                <li>Comprar un alfajor en el kiosco.</li>
-                <li>Encender la computadora y abrir un navegador.</li>
-            </ol>
-        </div>
+      <div class="activity">
+        <h2>
+          Actividad 5: Escribir los pasos (algoritmo natural) para las
+          siguientes tareas
+        </h2>
+        <p>
+          Escribe una secuencia ordenada de pasos para cada una de las
+          siguientes tareas cotidianas:
+        </p>
+        <ol>
+          <li>Cambiar la bombilla de una lámpara.</li>
+          <li>Preparar una taza de té.</li>
+          <li>Cargar saldo en la tarjeta de transporte (SUBE/Bus).</li>
+          <li>Buscar una palabra en el diccionario (físico).</li>
+          <li>Enviar un mensaje de WhatsApp.</li>
+          <li>Cruzar la calle de forma segura.</li>
+          <li>Atarse los cordones de las zapatillas.</li>
+          <li>Sacar punta a un lápiz.</li>
+          <li>Comprar un alfajor en el kiosco.</li>
+          <li>Encender la computadora y abrir un navegador.</li>
+        </ol>
+      </div>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion4.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 4
+        </a>
+        <a
+          href="desarrollo1-sesion6.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 6
+        </a>
+      </div>
     </div>
-</body>
+  </body>
 </html>
