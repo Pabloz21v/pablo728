@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 2: Estructuras de Archivos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        .duration {
+            font-style: italic;
+            color: #7f8c8d;
+            text-align: center;
+        }
+        .objectives {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .intro {
+            background-color: #fef9e7;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .anatomy {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .hex {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .activity {
+            background-color: #e8f8f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #27ae60;
+        }
+        .questionnaire {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        ol, ul {
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Clase 2: Estructuras de Archivos</h1>
+
+        <div class="objectives">
+            <h2>🎯 Objetivos de Aprendizaje:</h2>
+            <ul>
+                <li>Entender que una extensión (.jpg, .doc) es solo una etiqueta.</li>
+                <li>Comprender la estructura interna real de un archivo (Header, Body, Footer).</li>
+                <li>Aprender a identificar archivos por su "Firma Digital" o "Magic Numbers".</li>
+            </ul>
+        </div>
+
+        <div class="intro">
+            <h2>"No juzgues un libro por su portada" (Ni un archivo por su extensión)</h2>
+            <p>En Windows, estamos acostumbrados a ver archivos como <code>foto.jpg</code> o <code>trabajo.docx</code>. La parte final (la extensión) le dice al sistema operativo qué programa usar para abrirlo. Pero, <strong>¿qué pasa si le cambiamos la extensión a un archivo?</strong></p>
+            <p>Si a <code>cancion.mp3</code> le cambias el nombre a <code>cancion.txt</code>, la música NO se convierte en texto mágicamente. Sigue siendo una canción, pero ahora Windows intentará abrirla con el Bloc de Notas y verás símbolos extraños. Esto demuestra que <strong>el contenido interno define al archivo, no su nombre</strong>.</p>
+        </div>
+
+        <div class="anatomy">
+            <h2>Anatomía de un Archivo</h2>
+            <p>Internamente, casi todos los archivos tienen una estructura similar:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sección</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>HEADER (Cabecera)</strong></td>
+                        <td>Es el comienzo del archivo. Contiene la "Firma" o "Magic Number" que identifica realmente qué tipo de archivo es. También suele tener metadatos (fecha, autor, tamaño).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BODY (Cuerpo)</strong></td>
+                        <td>Es el contenido real: los píxeles de la foto, el audio de la canción o el texto del documento. Es la parte más grande.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EOF (End Of File)</strong></td>
+                        <td>Una marca especial que indica "aquí termina el archivo". Todo lo que esté después de esto suele ser ignorado.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="hex">
+            <h2>Análisis Hexadecimal: Viendo la matrix</h2>
+            <p>Como las computadoras guardan todo en binario (0 y 1), para los humanos es difícil leerlo. Por eso usamos la representación <strong>Hexadecimal</strong> (base 16, usa 0-9 y A-F).</p>
+            <p>Si abrimos archivos con un "Editor Hexadecimal", podemos ver su verdadera identidad en los primeros bytes (el Header).</p>
+            <p><strong>EJEMPLO REAL DE HEADERS (Magic Numbers):</strong></p>
+            <ol>
+                <li>Archivo JPEG (.jpg): Hex: <code>FF D8 FF ...</code> (Siempre empieza así. Si ves <code>FF D8 FF</code>, es una imagen JPG, no importa si se llama "documento.txt").</li>
+                <li>Archivo PDF (.pdf): Hex: <code>25 50 44 46 ...</code> (En texto legible se lee como "%PDF").</li>
+                <li>Archivo ZIP o Word/Excel nuevos (.docx, .xlsx): Hex: <code>50 4B 03 04 ...</code> (Son las iniciales de Phil Katz, creador del formato ZIP. ¡Los docx son en realidad Zips!).</li>
+            </ol>
+            <p>⚠ <strong>¿Por qué importa esto?</strong></p>
+            <p>Cuando un virus ataca o un disco se rompe, a veces los archivos pierden sus nombres y extensiones. Quedan como <code>file001</code>, <code>file002</code>. Sabiendo leer el Header, ¡puedes saber qué son y recuperarlos!</p>
+        </div>
+
+        <div class="activity">
+            <h2>🛠 ACTIVIDAD PRÁCTICA Y EJERCICIOS - CLASE 2</h2>
+            <h3>Ejercicio Práctico Guiado: "El detective de archivos"</h3>
+            <p><strong>Instrucciones:</strong></p>
+            <ol>
+                <li>Crea un archivo de texto en el Bloc de Notas, escribe "Hola Mundo" y guárdalo como <code>prueba.txt</code>.</li>
+                <li>Cámbiale el nombre a <code>prueba.jpg</code>. Intenta abrirlo. ¿Qué pasa?</li>
+                <li>Vuelve a ponerle <code>.txt</code>.</li>
+                <li>Ahora toma una imagen real <code>foto.jpg</code>. Cámbiale la extensión a <code>.txt</code> y ábrela con el Bloc de Notas. ¿Qué ves? (Deberías ver símbolos raros).</li>
+                <li>Busca en esos símbolos las primeras letras. ¿Ves algo como "JFIF" o "Exif" cerca del principio?</li>
+            </ol>
+        </div>
+
+        <div class="questionnaire">
+            <h2>Cuestionario de Comprensión</h2>
+            <ol>
+                <li>¿Qué es un "Magic Number" en informática?</li>
+                <li>Si un archivo comienza con los bytes <code>25 50 44 46</code>, ¿qué tipo de archivo es probablemente?</li>
+                <li>¿Por qué un archivo .docx en realidad empieza con la firma de un archivo ZIP?</li>
+                <li>Si se borra el "EOF" (marcador de final) de una imagen, ¿crees que se podrá ver completa? ¿Por qué?</li>
+                <li>Explica por qué cambiar la extensión de un archivo no convierte su formato.</li>
+            </ol>
+            <h3>Investigación</h3>
+            <ol>
+                <li>Busca en internet la firma hexadecimal (Magic Number) de un archivo <strong>PNG</strong>.</li>
+                <li>Busca la firma hexadecimal de un archivo ejecutable de Windows (<strong>.exe</strong>). Pista: Son dos letras muy famosas.</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
