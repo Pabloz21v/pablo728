@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 2: Anatomía de Archivos y Sistema Hexadecimal</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        background-color: #f5f7fa;
+      }
+      .container {
+        max-width: 900px;
+        margin: 20px auto;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+        font-size: 2.2em;
+        margin-bottom: 10px;
+      }
+      h2 {
+        color: #3498db;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 8px;
+        font-size: 1.6em;
+        margin-top: 25px;
+      }
+      h3 {
+        color: #2980b9;
+        font-size: 1.3em;
+        margin-top: 20px;
+      }
+      .duration {
+        font-style: italic;
+        color: #7f8c8d;
+        text-align: center;
+        font-size: 0.9em;
+      }
+      .objectives,
+      .key-concepts,
+      .analogy,
+      .risks,
+      .exercises {
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+      }
+      .objectives {
+        background-color: #eaf2f8;
+        border-left: 4px solid #3498db;
+      }
+      .key-concepts {
+        background-color: #fef9e7;
+        border-left: 4px solid #f39c12;
+      }
+      .analogy {
+        background-color: #e8f8f5;
+        border-left: 4px solid #27ae60;
+      }
+      .risks {
+        background-color: #fdebd0;
+        border-left: 4px solid #e74c3c;
+      }
+      .exercises {
+        background-color: #e8f4f8;
+        border-left: 4px solid #9b59b6;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      .hex-example {
+        font-family: "Courier New", monospace;
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+        margin: 5px 0;
+      }
+      .warning {
+        background-color: #fdebd0;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid #e74c3c;
+        margin: 20px 0;
+      }
+      .tip {
+        background-color: #e8f8f5;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid #27ae60;
+        margin: 20px 0;
+      }
+      .code-block {
+        background-color: #282c34;
+        color: #abb2bf;
+        padding: 15px;
+        border-radius: 5px;
+        font-family: "Courier New", monospace;
+        overflow-x: auto;
+        margin: 15px 0;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 15px;
+          margin: 10px;
+        }
+        h1 {
+          font-size: 1.8em;
+        }
+        h2 {
+          font-size: 1.4em;
+        }
+        table {
+          display: block;
+          overflow-x: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="datos2-sesion1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 1
+        </a>
+        <a
+          href="datos2-sesion3.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 3
+        </a>
+      </div>
+      <h1>Clase 2: Anatomía de Archivos y Sistema Hexadecimal</h1>
+
+      <!-- CLASE 2 -->
+      <div class="objectives">
+        <h3>🎯 Objetivo</h3>
+        <p>
+          Comprender que los archivos digitales son mucho más que su nombre o
+          icono. Aprenderemos a "ver la matrix" de la computadora (hexadecimal)
+          y descubriremos la verdadera identidad de los archivos analizando su
+          estructura interna.
+        </p>
+      </div>
+
+      <div class="analogy">
+        <h3>
+          📚 "No juzgues un libro por su portada" (Ni un archivo por su
+          extensión)
+        </h3>
+        <p>
+          En sistemas como Windows, solemos confiar ciegamente en lo que vemos.
+          Si un archivo termina en <span class="hex-example">.mp3</span>,
+          asumimos que es música. Si termina en
+          <span class="hex-example">.docx</span>, asumimos que es un documento.
+          <strong>La extensión es solo una etiqueta</strong> que le dice al
+          sistema operativo qué programa usar para abrirlo.
+        </p>
+        <p>
+          <strong>🧠 Experimento Mental:</strong> Si tomas una canción
+          <span class="hex-example">cancion.mp3</span> y le cambias el nombre a
+          <span class="hex-example">cancion.txt</span>... ¿La música se
+          convierte mágicamente en palabras?
+        </p>
+        <p>
+          <strong>Respuesta:</strong> ¡NO! El contenido interno sigue siendo
+          audio comprimido. Pero si intentas abrirlo, Windows usará el Bloc de
+          Notas y verás miles de símbolos extraños sin sentido.
+          <strong
+            >El hábito no hace al monje, y la extensión no hace al
+            archivo.</strong
+          >
+        </p>
+      </div>
+
+      <div class="key-concepts">
+        <h3>🔍 Anatomía de un Archivo</h3>
+        <p>
+          Internamente, casi todos los archivos digitales siguen una estructura
+          lógica, similar a un cuerpo humano o una carta:
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parte</th>
+              <th>Nombre Técnico</th>
+              <th>Función</th>
+              <th>Ejemplo Visual</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>🧠 Cabeza</td>
+              <td>HEADER (Cabecera)</td>
+              <td>
+                Contiene la <strong>firma</strong> o
+                <strong>magic number</strong>. Es el DNI real del archivo; dice
+                qué es verdaderamente (imagen, video, etc.), sin importar la
+                extensión.
+              </td>
+              <td><span class="hex-example">25 50 44 46</span> (PDF)</td>
+            </tr>
+            <tr>
+              <td>🏋️ Cuerpo</td>
+              <td>BODY (Cuerpo)</td>
+              <td>
+                Contenido real: píxeles, ondas de audio, texto. Es la parte más
+                pesada.
+              </td>
+              <td>📷🎵📄</td>
+            </tr>
+            <tr>
+              <td>👣 Pies</td>
+              <td>EOF (End Of File)</td>
+              <td>
+                Marca especial que indica "¡Aquí termina!". Todo después suele
+                ser ignorado.
+              </td>
+              <td><span class="hex-example">[EOF]</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="key-concepts">
+        <h3>✨ Los "Magic Numbers" (Firmas de Archivos)</h3>
+        <p>
+          Las computadoras no adivinan; leen los primeros bytes del archivo para
+          saber qué es. Aquí tienes algunas firmas famosas en hexadecimal:
+        </p>
+        <ul>
+          <li>
+            📷 <strong>JPG:</strong> <span class="hex-example">FF D8 FF</span>
+          </li>
+          <li>
+            📄 <strong>PDF:</strong>
+            <span class="hex-example">25 50 44 46</span> (que en texto se lee
+            "%PDF")
+          </li>
+          <li>
+            🖼 <strong>PNG:</strong>
+            <span class="hex-example">89 50 4E 47</span>
+          </li>
+          <li>
+            📦 <strong>ZIP / DOCX / XLSX:</strong>
+            <span class="hex-example">50 4B 03 04</span> (iniciales de Phil
+            Katz, creador del formato ZIP)
+          </li>
+        </ul>
+        <div class="tip">
+          <p>
+            💡 <strong>¿Sabías que?</strong> Los archivos de Office modernos
+            (<span class="hex-example">.docx</span>,
+            <span class="hex-example">.pptx</span>) son en realidad archivos
+            ZIP. ¡Puedes cambiarles la extensión a
+            <span class="hex-example">.zip</span> y explorar su contenido!
+          </p>
+        </div>
+      </div>
+
+      <div class="key-concepts">
+        <h3>🔢 Sistema Hexadecimal: Viendo la Matrix</h3>
+        <p>
+          Las computadoras solo entienden binario (0 y 1), pero leer
+          <span class="hex-example">1011010111000101</span> es doloroso para
+          humanos. Por eso usamos el <strong>sistema hexadecimal</strong> (base
+          16):
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Decimal</th>
+              <th>Binario (4 bits)</th>
+              <th>Hexadecimal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0</td>
+              <td>0000</td>
+              <td><strong>0</strong></td>
+            </tr>
+            <tr>
+              <td>1-9</td>
+              <td>...</td>
+              <td><strong>1-9</strong></td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>1010</td>
+              <td><strong>A</strong></td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>1011</td>
+              <td><strong>B</strong></td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>1100</td>
+              <td><strong>C</strong></td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>1101</td>
+              <td><strong>D</strong></td>
+            </tr>
+            <tr>
+              <td>14</td>
+              <td>1110</td>
+              <td><strong>E</strong></td>
+            </tr>
+            <tr>
+              <td>15</td>
+              <td>1111</td>
+              <td><strong>F</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <p><strong>¿Por qué usamos hexadecimal?</strong></p>
+        <ul>
+          <li>
+            <strong>Compacto:</strong> Un byte (<span class="hex-example"
+              >11111111</span
+            >) se escribe como <span class="hex-example">FF</span>.
+          </li>
+          <li>
+            <strong>Colores:</strong> En diseño web, el rojo puro es
+            <span class="hex-example">#FF0000</span> (Rojo: FF, Verde: 00, Azul:
+            00).
+          </li>
+          <li>
+            <strong>Memoria:</strong> Las direcciones de memoria se ven como
+            <span class="hex-example">0x7FFFFFFF</span>.
+          </li>
+        </ul>
+      </div>
+
+      <div class="exercises">
+        <h3>🛠 PRÁCTICAS</h3>
+        <h4>Actividad 1: El detective de archivos</h4>
+        <ol>
+          <li>
+            Abrir el Bloc de Notas, escribir "Hola Mundo" y guárdarlo como
+            <span class="hex-example">prueba.txt</span>.
+          </li>
+          <li>
+            Cámbiale el nombre a <span class="hex-example">prueba.jpg</span>.
+            ¿Qué error te da al intentar abrirlo?
+          </li>
+          <li>
+            Busca una imagen real <span class="hex-example">foto.jpg</span>,
+            cámbiale la extensión a <span class="hex-example">.txt</span> y
+            ábrela con el Bloc de Notas.
+          </li>
+          <li>
+            ¿Ves símbolos raros? Busca al principio: ¿hay letras como "JFIF" o
+            "Exif"? ¡Eso confirma que es una imagen!
+          </li>
+        </ol>
+        <h4>Actividad 2: Decodificando el Mensaje Misterioso</h4>
+        <p>
+          Convierte el siguiente código hexadecimal a texto usando un
+          <a
+            href="https://www.rapidtables.com/convert/number/hex-to-ascii.html"
+            target="_blank"
+            >convertidor online</a
+          >:
+        </p>
+        <div class="code-block">
+          42 75 65 6E 20 64 69 61 20 63 68 69 63 6F 73 21 20 45 73 70 65 72 6F
+          20 71 75 65 20 73 65 20 76 61 79 61 20 65 6E 74 65 6E 64 69 65 6E 64
+          6F 20 65 6C 20 74 65 6D 61 2C 20 63 75 61 6C 71 75 69 65 72 20 64 75
+          64 61 20 70 72 65 67 75 6E 74 65 6E 2E 20 45 73 74 61 20 70 61 67 69
+          6E 61 20 70 65 72 6D 69 74 65 20 63 6F 6E 76 65 72 74 69 72 20 74 65
+          78 74 6F 20 6F 20 63 6F 64 69 67 6F 20 65 6E 74 72 65 20 62 69 6E 61
+          72 69 6F 2C 20 64 65 63 69 6D 61 6C 2C 20 6F 63 74 61 6C 2C 20 68 65
+          78 61 64 65 63 69 6D 61 6C 2C 20 74 65 78 74 6F 2E 20 4C 6F 73 20 64
+          6F 73 20 75 6C 74 69 6D 6F 73 20 73 6F 6E 20 6C 6F 73 20 64 65 20 6E
+          75 65 73 74 72 6F 20 69 6E 74 65 72 65 73 2E
+        </div>
+        <h4>Actividad 3: Análisis de Cabeceras</h4>
+        <p>
+          Descarga archivos de ejemplo: imagen.jpg, documento.pdf, ejecutable.exe. y abrilo con
+          <a href="https://mh-nexus.de/en/hxd/" target="_blank">HxD</a>.
+          Busca sus cabeceras en hexadecimal: <br>
+          <span class="hex-example">JPG: FF D8 FF</span>. <br>
+          <span class="hex-example">PDF: 25 50 44 46 (%PDF)</span>. <br>
+          <span class="hex-example">EXE: 4D 5A (MZ)</span>. <br>
+          <p>Consejo: Usa la lista de magic numbers para reconocer tipos de archivos.</p>
+          <p><a href="https://en.wikipedia.org/wiki/List_of_file_signatures" target="_blank">Wikipedia magic numbers</a>.
+         </p>
+         <p> <a href="https://filesig.search.org/" target="_blank">Filesig magic numbers</a>.</p>
+          
+        </p>
+
+        <h4>Actividad 4: "El archivo misterioso"</h4>
+        <ul>
+            <li>
+              <strong>Objetivo:</strong> Determinar el tipo y contenido de un
+              archivo desconocido usando análisis hexadecimal.
+            </li>
+          </ul>
+          <h4>Pasos:</h4>
+
+          <ol>
+            <li>
+              Descargamos el fichero .RAR, lo descomprimimos.
+              <a
+                href="descargas/A-ver-que-soy.zip"
+                download
+                class="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg font-semibold shadow ml-2"
+                >Descargar archivo misterioso</a
+              >
+            </li>
+            <li>
+              Abrir
+              <ul>
+                <li>Identifican la cabecera hexadecimal.</li>
+                <li>Buscan texto legible (ej: cadenas ASCII).</li>
+                <li>Correlacionan con magic numbers.</li>
+              </ul>
+            </li>
+            <li>
+              Presentan sus hallazgos:
+              <ul>
+                <li>Tipo de archivo.</li>
+                <li>Posible contenido (ej: texto oculto, imagen).</li>
+              </ul>
+            </li>
+          </ol>
+          <div class="bg-gray-700/60 rounded-lg p-4 my-4">
+            <p><strong>Ejemplo de archivo misterioso:</strong></p>
+            <ul>
+              <li>Cabecera: 89 50 4E 47 → PNG.</li>
+            </ul>
+          </div>
+          <h4>Consejos</h4>
+          <ul>
+            <li>
+              Seguridad: no editar archivos críticos del sistema sin
+              conocimiento.
+            </li>
+          </ul>
+      </div>
+
+      <div class="exercises">
+        <h3>📝 Practica</h3>
+
+        <ol>
+          <li>
+            ¿Qué es un "Magic Number" y para qué sirve al sistema operativo?
+          </li>
+          <li>
+            Si un archivo empieza con <span class="hex-example">FF D8 FF</span>,
+            ¿qué tipo de archivo es con seguridad?
+          </li>
+          <li>Convierte el número decimal 15 a hexadecimal.</li>
+          <li>
+            Explica por qué al cambiar la extensión .mp3 a .txt la música no se
+            convierte en texto.
+          </li>
+          <li>
+            ¿Por qué un archivo .docx empieza con la misma firma que un archivo
+            .zip?
+          </li>
+          <li>¿Qué significa EOF?</li>
+          <li>
+            En el sistema hexadecimal, ¿qué valor decimal tiene la letra 'A'?
+          </li>
+          <li>
+            Si borramos el encabezado (Header) de un archivo, ¿podremos abrirlo
+            normalmente? ¿Por qué?
+          </li>
+          <li>
+            ¿Cuántos bits representa un par de dígitos hexadecimales (ej: FF)?
+          </li>
+          <li>
+            Menciona una aplicación práctica (uso) del sistema hexadecimal fuera de
+            los archivos (pista: web).
+          </li>
+        </ol>
+      </div>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="datos2-sesion1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 1
+        </a>
+        <a
+          href="datos2-sesion3.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 3
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

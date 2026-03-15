@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 8: Pseudocódigo y Diagramación</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+      }
+      h2 {
+        color: #3498db;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+      }
+      .theory {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .example {
+        background-color: #fef9e7;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .activity {
+        background-color: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #27ae60;
+      }
+      .next-week {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      ol,
+      ul {
+        margin-left: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      code {
+        background-color: #f4f4f4;
+        padding: 5px;
+        border-radius: 3px;
+        font-family: monospace;
+        display: block;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion7.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 7
+        </a>
+        <a
+          href="desarrollo1-sesion9.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 9
+        </a>
+      </div>
+      <h1>Clase 8: Pseudocódigo y Diagramación</h1>
+
+      <div class="theory">
+        <h2>Marco Teórico</h2>
+        <p>
+          El <strong>Pseudocódigo</strong> es una forma de escribir algoritmos
+          utilizando un lenguaje mezcla entre el lenguaje humano y el de
+          programación. No tiene reglas de sintaxis estrictas, pero debe ser
+          claro. Se utilizan palabras clave como:
+          <code>LEER, IMPRIMIR, CALCULAR, SI/ENTONCES</code>.
+        </p>
+      </div>
+
+      <div class="example">
+        <h2>Ejemplo 1: Área de un triángulo</h2>
+        <div style="overflow-x: auto">
+          <pre><code>
+    INICIO<br />
+        LEER base <br />
+        LEER altura <br />
+        area = (base * altura) / 2 <br />
+        IMPRIMIR area <br />
+    FIN</code></pre>
+        </div>
+
+        INICIO: comienza el algoritmo. <br />
+        Las líneas entre medio son las instrucciones que se ejecutan en orden.
+        <br />
+        base: la base del triangulo. <br />
+        altura: altura del triangulo. <br />
+        area: resultado de calcular base por altura dividido dos.
+        <br />
+        IMPRIMIR: muestra el resultado del calculo
+        <br />FIN: termina el algoritmo.
+      </div>
+
+      <div class="example">
+        <h2>Ejemplo 2: Calcular el promedio de tres notas</h2>
+        <p>
+          <em
+            >Problema: Solicitar tres notas al usuario y mostrar el
+            promedio.</em
+          >
+        </p>
+
+        <div style="overflow-x: auto">
+          <pre><code>
+    INICIO 
+        LEER nota1 
+        LEER nota2 
+        LEER nota3 
+        suma = nota1 + nota2 + nota3 
+        promedio = suma / 3 
+        IMPRIMIR promedio 
+    FIN </code></pre>
+        </div>
+        <p>
+          <strong>Explicación:</strong> Se leen las tres notas, se suman, se
+          dividen entre 3 para obtener el promedio y finalmente se muestra el
+          resultado.
+        </p>
+      </div>
+
+      <div class="example">
+        <h2>Ejemplo 3: Determinar si una persona es mayor de edad</h2>
+        <p>
+          <em
+            >Problema: Leer la edad de una persona y mostrar si es mayor de edad
+            (18 años o más).</em
+          >
+        </p>
+        <div style="overflow-x: auto">
+          <pre><code >
+    INICIO 
+        LEER edad 
+        SI edad >= 18 ENTONCES 
+            IMPRIMIR "Eres mayor de edad" 
+        SINO 
+            IMPRIMIR "Eres menor de edad"
+        FIN SI 
+    FIN </code></pre>
+        </div>
+        <p>
+          <strong>Explicación:</strong> Se lee la edad y se evalúa una
+          condición. Dependiendo del resultado, se imprime un mensaje u otro.
+        </p>
+      </div>
+      <div class="example">
+        <h2>Ejemplo 4: Calcular la propina de una comida</h2>
+        <p>
+          <em
+            >Problema: Calcular el 15% de propina a partir del total de una
+            cuenta.</em
+          >
+        </p>
+        <div style="overflow-x: auto">
+          <pre><code>
+    INICIO 
+        LEER total_cuenta
+        propina = total_cuenta * 0.15
+        total_a_pagar = total_cuenta + propina 
+        IMPRIMIR "Propina: ", propina 
+        IMPRIMIR "Total con propina: ", total_a_pagar 
+    FIN</code> </pre>
+        </div>
+        <p>
+          <strong>Explicación:</strong> Se lee el monto de la cuenta, se calcula
+          la propina multiplicando por 0.15, se suma al total original y se
+          muestran ambos resultados.
+        </p>
+      </div>
+
+      <div class="activity">
+        <h2>Actividad 8: Escribir en Pseudocódigo</h2>
+        <p>Escribe en pseudocódigo los siguientes algoritmos:</p>
+        <ol>
+          <li>Sumar dos números ingresados por el usuario.</li>
+          <li>Calcular el doble de un número.</li>
+          <li>
+            Solicitar el nombre del usuario y saludarlo ("Hola [nombre]").
+          </li>
+          <li>Calcular el cubo de un número.</li>
+          <li>Convertir grados Celsius a Fahrenheit (F = C * 1.8 + 32).</li>
+          <li>
+            Calcular el porcentaje de asistencia (dadas clases totales y
+            asistidas).
+          </li>
+          <li>Intercambiar el valor de dos variables (usando una auxiliar).</li>
+          <li>Leer la edad y mostrar cuántos meses ha vivido (aprox).</li>
+          <li>Calcular el costo total de X entradas de cine a precio Y.</li>
+          <li>
+            Algoritmo que reciba un número y muestre su sucesor (número + 1).
+          </li>
+        </ol>
+      </div>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion7.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 7
+        </a>
+        <a
+          href="desarrollo1-sesion9.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 9
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

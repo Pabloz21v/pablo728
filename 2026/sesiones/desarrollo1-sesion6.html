@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 6: Pasos para resolver problemas</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+      }
+      h2 {
+        color: #3498db;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+      }
+      .theory {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .example {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .tip {
+        background-color: #fef9e7;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #f39c12;
+      }
+      .activity {
+        background-color: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #27ae60;
+      }
+      ol,
+      ul {
+        margin-left: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion5.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 5
+        </a>
+        <a
+          href="desarrollo1-sesion7.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 7
+        </a>
+        </div>
+      <h1>Clase 6: Pasos para resolver problemas</h1>
+
+      <div class="theory">
+        <h2>Marco Teórico</h2>
+        <p>
+          Antes de intentar programar, debemos entender el problema. La
+          metodología sugerida es:
+        </p>
+        <ol>
+          <li>
+            <strong>Análisis del problema:</strong> ¿Qué me piden? ¿Qué datos
+            tengo?
+          </li>
+          <li>
+            <strong>Diseño del algoritmo:</strong> ¿Cómo lo resuelvo paso a
+            paso?
+          </li>
+          <li>
+            <strong>Prueba de escritorio:</strong> Seguir los pasos manualmente
+            para ver si funciona.
+          </li>
+        </ol>
+      </div>
+
+      <div class="example">
+        <h2>Ejemplo 1: Planificación de un viaje en coche</h2>
+        <h3>
+          Problema: Queremos saber cuánto tiempo tardaremos en llegar a la playa
+          para pasar el día.
+        </h3>
+
+        <h3>Análisis de la situación:</h3>
+        <p>Objetivo: Calcular la duración total de un viaje.</p>
+        <p>Obstáculos (Datos que faltan o variables que influyen):</p>
+        <ul>
+          <li>Distancia: ¿A qué distancia está la playa?</li>
+          <li>Velocidad: ¿A qué velocidad promedio planeamos conducir?</li>
+          <li>Tráfico: ¿Hay posibilidad de embotellamientos?</li>
+          <li>
+            Paradas: ¿Pensamos hacer paradas para cargar gasolina, comer o ir al
+            baño?
+          </li>
+          <li>Ruta: ¿Vamos por autopista o por camino secundario?</li>
+          
+        </ul>
+      </div>
+
+      <div class="example">
+        <h2>Ejemplo 2: Preparar una limonada para vender en la escuela</h2>
+        <h3>Problema: Decidir cuánta limonada preparar para vender durante el recreo y cuánto cobrar por cada vaso.
+</h3>
+<h3>Análisis de la situación:</h3>
+<p> Objetivo: Determinar la cantidad de producción y el precio de venta.
+</p>
+<p>Obstáculos (Datos que faltan o variables que influyen):</li>
+        <ul>
+          <li>Demanda: ¿Cuántos estudiantes podrían comprar limonada? ¿Qué día de la semana hace más calor (y por lo tanto, venderíamos más)?
+</li>
+          <li>Costos: ¿Cuánto cuestan los limones, el azúcar, los vasos y el hielo?
+</li>
+          <li>Competencia: ¿Hay otros puestos de bebidas?
+</li>
+          <li>Capacidad: ¿Cuánta limonada podemos preparar con los recursos que tenemos en casa?
+          </li>
+          <li>Precio: ¿Cuánto están dispuestos a pagar nuestros compañeros? ¿Buscamos tener ganancia o solo recuperar la inversión?
+          </li>
+        </ul>
+      </div>
+
+
+
+
+
+
+
+
+
+      <div class="activity">
+        <h2>Actividad 6: Análisis de situaciones</h2>
+        <p>Para cada problema, identificar el objetivo y los obstáculos:</p>
+        <ol>
+          <li>
+            Problema: Calcular cuánta pintura necesito para pintar una pared.
+            (¿Qué datos faltan?).
+          </li>
+          <li>
+            Problema: Decidir qué ropa ponerme hoy. (¿Qué variables influyen?
+            Clima, ocasión).
+          </li>
+          <li>Problema: Organizar un torneo de fútbol en la escuela.</li>
+          <li>Problema: Calcular el promedio de 3 notas.</li>
+          <li>
+            Problema: Saber si tengo dinero suficiente para comprar un juego.
+          </li>
+          <li>Problema: Determinar cuál de dos amigos es más alto.</li>
+          <li>
+            Problema: Repartir una pizza entre 3 personas equitativamente.
+          </li>
+          <li>
+            Problema: Calcular la edad de una persona sabiendo su año de
+            nacimiento.
+          </li>
+          <li>
+            Problema: Saber si un número es par o impar (sin calculadora).
+          </li>
+          <li>
+            Problema: Convertir pesos a dólares (¿Qué dato externo necesito?).
+          </li>
+        </ol>
+      </div>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion5.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 5
+        </a>
+        <a
+          href="desarrollo1-sesion7.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 7
+        </a>
+        </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CLASE 3: Metadatos y Seguridad Digital</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        background-color: #f5f7fa;
+      }
+      .container {
+        max-width: 900px;
+        margin: 20px auto;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+        font-size: 2.2em;
+        margin-bottom: 10px;
+      }
+      h2 {
+        color: #3498db;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 8px;
+        font-size: 1.6em;
+        margin-top: 25px;
+      }
+      h3 {
+        color: #2980b9;
+        font-size: 1.3em;
+        margin-top: 20px;
+      }
+      .duration {
+        font-style: italic;
+        color: #7f8c8d;
+        text-align: center;
+        font-size: 0.9em;
+      }
+      .objectives,
+      .key-concepts,
+      .analogy,
+      .risks,
+      .exercises {
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+      }
+      .objectives {
+        background-color: #eaf2f8;
+        border-left: 4px solid #3498db;
+      }
+      .key-concepts {
+        background-color: #fef9e7;
+        border-left: 4px solid #f39c12;
+      }
+      .analogy {
+        background-color: #e8f8f5;
+        border-left: 4px solid #27ae60;
+      }
+      .risks {
+        background-color: #fdebd0;
+        border-left: 4px solid #e74c3c;
+      }
+      .exercises {
+        background-color: #e8f4f8;
+        border-left: 4px solid #9b59b6;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      .hex-example {
+        font-family: "Courier New", monospace;
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+        margin: 5px 0;
+      }
+      .warning {
+        background-color: #fdebd0;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid #e74c3c;
+        margin: 20px 0;
+      }
+      .tip {
+        background-color: #e8f8f5;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid #27ae60;
+        margin: 20px 0;
+      }
+      .code-block {
+        background-color: #282c34;
+        color: #abb2bf;
+        padding: 15px;
+        border-radius: 5px;
+        font-family: "Courier New", monospace;
+        overflow-x: auto;
+        margin: 15px 0;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 15px;
+          margin: 10px;
+        }
+        h1 {
+          font-size: 1.8em;
+        }
+        h2 {
+          font-size: 1.4em;
+        }
+        table {
+          display: block;
+          overflow-x: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+
+      <!-- CLASE 3 -->
+      <h1>CLASE 3: Metadatos y Seguridad Digital</h1>
+      <div class="objectives">
+        <h3>🎯 Objetivo </h3>
+        <p>
+          Descubrir la información invisible que viaja con nuestros archivos.
+          Entender qué son los metadatos, cómo verlos, los riesgos de privacidad
+          que implican y cómo limpiarlos para proteger nuestra identidad.
+        </p>
+      </div>
+
+      <div class="key-concepts">
+        <h3>📌 ¿Qué son los Metadatos?</h3>
+        <p>
+          <strong>"Datos sobre los datos".</strong> Imagina una lata de comida:
+        </p>
+        <ul>
+          <li><strong>Contenido:</strong> La sopa (el archivo: tu foto).</li>
+          <li>
+            <strong>Metadatos:</strong> La etiqueta nutricional, fecha de
+            vencimiento, fábrica, código de barras.
+          </li>
+        </ul>
+        <p>
+          No son la foto en sí, pero describen <strong>todo sobre ella</strong>:
+          qué cámara se usó, a qué hora, con qué luz, y a veces
+          <strong>exactamente dónde</strong> estabas.
+        </p>
+      </div>
+
+      <div class="key-concepts">
+        <h3>📊 Tipos de Metadatos</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Descripción</th>
+              <th>Ejemplos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Descriptivos</td>
+              <td>Informan sobre el contenido.</td>
+              <td>Título, Autor, Palabras clave, Comentarios.</td>
+            </tr>
+            <tr>
+              <td>Estructurales</td>
+              <td>Cómo se organiza el archivo.</td>
+              <td>Número de páginas (PDF), duración (video), capítulos.</td>
+            </tr>
+            <tr>
+              <td>Técnicos</td>
+              <td>Detalles de hardware/software.</td>
+              <td>
+                Modelo de cámara (iPhone 15), apertura focal, ISO, resolución.
+              </td>
+            </tr>
+            <tr>
+              <td>Geográficos (⚠ Peligrosos)</td>
+              <td>Ubicación física exacta.</td>
+              <td>Coordenadas GPS (Latitud/Longitud).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="risks">
+        <h3>⚠ Riesgos de Privacidad: "Stalking Digital"</h3>
+        <p>Si compartes una foto original con metadatos GPS:</p>
+        <ol>
+          <li>Un extraño puede descargarla.</li>
+          <li>Puede ver las propiedades del archivo.</li>
+          <li>Puede copiar las coordenadas GPS en Google Maps.</li>
+          <li>
+            <strong>Resultado:</strong> Sabe dónde vives, estudias o estás de
+            vacaciones (con un margen de error de 5 metros).
+          </li>
+        </ol>
+        <div class="warning">
+          <p>
+            ⚠ <strong>Advertencia:</strong> El "Modelo del Dispositivo" en los
+            metadatos puede revelar si tienes un teléfono costoso, atrayendo a
+            ladrones.
+          </p>
+        </div>
+      </div>
+
+      <div class="key-concepts">
+        <h3>🔧 Herramientas de Gestión y Limpieza</h3>
+        <p>No necesitas ser hacker para ver o borrar metadatos:</p>
+        <ul>
+          <li>
+            <strong>Windows:</strong> Clic derecho > Propiedades > Detalles >
+            "Quitar propiedades e información personal".
+          </li>
+          <li>
+            <strong>ExifTool:</strong> Herramienta gratuita y potente para ver
+            TODO lo oculto (<a href="https://exiftool.org/" target="_blank"
+              >exiftool.org</a
+            >).
+          </li>
+          <li>
+            <strong>Apps Móviles:</strong> "Photo Exif Editor" o "Scrambled
+            Exif" (Android).
+          </li>
+        </ul>
+      </div>
+
+      <div class="exercises">
+        <h3>🛠 ACTIVIDADES</h3>
+        <h4>Actividad 1: Detectives de Metadatos</h4>
+        <ol>
+          <li>
+            Tomen una foto en el aula <strong>con el GPS activado</strong>.
+          </li>
+          <li>Transfieran la foto a la PC (usando cable o Drive).</li>
+          <li>
+            Analícenla con
+            <a href="https://jimpl.com/" target="_blank">jimpl.com</a> o
+            <a href="https://exiftool.org/" target="_blank">ExifTool</a>.
+          </li>
+          <li>
+            <strong>Reto:</strong> ¿Quién encuentra la marca exacta del celular
+            y la altitud a la que se tomó la foto?
+          </li>
+        </ol>
+        <h4>Actividad 2: Limpieza Forense</h4>
+        <p>
+          Usando las propiedades de Windows o una app, eliminen todos los
+          metadatos de la foto anterior. Vuelvan a analizarla: ¿desapareció el
+          GPS?
+        </p>
+        <h4>Proyecto Integrador: "El Archivo Misterioso"</h4>
+        <p>
+          El docente entregará un archivo sin extensión llamado
+          <span class="hex-example">misterio_file</span>:
+        </p>
+        <ol>
+          <li>Usen HxD para ver el Header y descubrir su extensión real.</li>
+          <li>Renómbrenlo y ábranlo.</li>
+          <li>
+            Analicen sus metadatos: ¿Quién es el autor? ¿Cuándo se creó? ¿Hay
+            coordenadas ocultas?
+          </li>
+        </ol>
+      </div>
+
+      <div class="objectives">
+        <h3>📚 Recursos Adicionales</h3>
+        <ul>
+          <li>
+            <a href="https://mh-nexus.de/en/hxd/" target="_blank"
+              >HxD (Editor Hexadecimal Gratuito)</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.rapidtables.com/convert/number/hex-to-ascii.html"
+              target="_blank"
+              >Convertidor Hex a ASCII</a
+            >
+          </li>
+          <li>
+            <a href="https://jimpl.com/" target="_blank"
+              >Jimpl (Analizador EXIF online)</a
+            >
+          </li>
+          <li>
+            <a href="https://exiftool.org/" target="_blank"
+              >ExifTool (Herramienta avanzada)</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.garykessler.net/library/file_sigs.html"
+              target="_blank"
+              >Lista completa de firmas de archivos (Gary Kessler)</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="exercises">
+        <h3>📝 Practica</h3>
+        
+        <ol>
+          <li>Define "Metadatos" con tus propias palabras.</li>
+          <li>Menciona 3 ejemplos de metadatos técnicos en una fotografía.</li>
+          <li>¿Qué significa EXIF?</li>
+          <li>
+            ¿Es seguro enviar una foto por correo electrónico si no quiero
+            revelar mi ubicación? Justifica.
+          </li>
+          <li>
+            ¿Qué red social suele borrar los metadatos automáticamente y cuál
+            no?
+          </li>
+          <li>
+            Explica paso a paso cómo borrar metadatos en Windows sin instalar
+            programas.
+          </li>
+          <li>
+            ¿Qué riesgo de seguridad implica dejar el modelo del dispositivo en
+            los metadatos?
+          </li>
+          <li>
+            ¿Los documentos PDF tienen metadatos? Si es así, ¿qué pueden
+            contener?
+          </li>
+          <li>¿Qué es un metadato "estructural"?</li>
+          <li>
+            Reflexión: ¿Crees que las empresas deberían borrar los metadatos por
+            defecto o es responsabilidad del usuario?
+          </li>
+        </ol>
+      </div>
+    </div>
+  </body>
+</html>

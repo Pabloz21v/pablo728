@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Almacenamiento Avanzado I: Discos Duros (HDD) Profundizado</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+      }
+      h2 {
+        color: #3498db;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+      }
+      h3 {
+        color: #2980b9;
+      }
+      .toc {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .intro {
+        background-color: #fef9e7;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .architecture {
+        background-color: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .impact {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .technologies {
+        background-color: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .buffer {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .bottlenecks {
+        background-color: #fef9e7;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .uses {
+        background-color: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .specs {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .guide {
+        background-color: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .market {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .future {
+        background-color: #fef9e7;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .faq {
+        background-color: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      ol,
+      ul {
+        margin-left: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      code {
+        background-color: #f4f4f4;
+        padding: 5px;
+        border-radius: 3px;
+        font-family: monospace;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-dos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <!-- <a
+          href="hardware2-sesion1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 1
+        </a> -->
+        <a
+          href="hardware2-sesion2.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 2
+        </a>
+      </div>
+      <h1>Almacenamiento Avanzado I: Discos Duros (HDD)</h1>
+      <p></p>
+
+      <div class="toc">
+        <h2>📚 Tabla de Contenidos</h2>
+        <ol>
+          <li>Introducción y Contexto 2026</li>
+          <li>Arquitectura HDD Profundizada</li>
+          <li>El Impacto de las RPM y Densidad Areal</li>
+          <li>Tecnologías de Grabación: CMR vs SMR</li>
+          <li>Buffer/Caché del HDD</li>
+          <li>Bottlenecks (Cuellos de Botella)</li>
+          <li>HDD para Usos Específicos y Precios</li>
+          <li>Especificaciones Técnicas Importantes</li>
+          <li>Guía de Toma de Decisiones</li>
+          <li>Análisis de Mercado Argentina 2026</li>
+          <li>Tecnologías Futuras</li>
+          <li>Banco de Preguntas y Respuestas</li>
+        </ol>
+      </div>
+
+      <div class="intro">
+        <h2>Introducción y Contexto 2026</h2>
+        <p>
+          En el panorama tecnológico actual de 2026, aunque los SSD dominan como
+          unidades de arranque y para aplicaciones de alto rendimiento, los
+          Discos Duros Mecánicos (HDD) siguen siendo los reyes del
+          <strong>almacenamiento masivo</strong>.
+        </p>
+        <p>💡 <strong>¿Por qué seguimos estudiando HDD en 2026?</strong></p>
+        <p>
+          La respuesta es simple: <strong>Costo por Gigabyte</strong>. Mientras
+          un SSD de 4TB puede costar alrededor de $220 USD, un HDD de la misma
+          capacidad ronda los $85 USD. Para centros de datos, servidores de
+          video, y backups empresariales que requieren Petabytes de espacio, el
+          HDD es la única solución económicamente viable.
+        </p>
+        <p>
+          Entender la física detrás de estos dispositivos es crucial para un
+          técnico, ya que permite diagnosticar fallas por sonido, entender por
+          qué ciertos discos son lentos en tareas específicas y recomendar el
+          hardware correcto para evitar pérdidas de datos catastróficas.
+        </p>
+      </div>
+
+      <div class="architecture">
+        <h2>Arquitectura HDD Profundizada</h2>
+        <p>
+          Un disco duro es una maravilla de la ingeniería mecánica de precisión.
+          A diferencia de los SSD que son puramente electrónicos, los HDD
+          dependen de partes móviles que operan a tolerancias microscópicas.
+        </p>
+        <h3>🔘 Platos (Platters)</h3>
+        <p>
+          Son discos rígidos fabricados generalmente de
+          <strong>vidrio o aluminio</strong>, recubiertos de una finísima capa
+          de material magnético (aleación de cobalto). Aquí es donde residen
+          físicamente los datos. Los discos modernos de alta capacidad (ej. 18TB
+          o 22TB) utilizan múltiples platos apilados (hasta 9 o 10) dentro de la
+          misma carcasa estándar de 3.5 pulgadas, a menudo sellados con
+          <strong>Helio</strong> en lugar de aire para reducir la fricción y
+          permitir que los platos estén más juntos.
+        </p>
+        <h3>🦾 Cabezales (Heads)</h3>
+        <p>
+          Son los componentes encargados de leer y escribir los pulsos
+          magnéticos. <strong>Concepto Crítico:</strong> Los cabezales
+          <strong>NO tocan</strong> el plato. Flotan sobre un colchón de aire
+          generado por la propia rotación del disco. La distancia de flotación
+          es de aproximadamente <strong>3 a 5 nanómetros</strong>.
+        </p>
+        <p>
+          ⚠ <strong>Head Crash:</strong> Si el disco recibe un golpe mientras
+          funciona, el cabezal puede tocar el plato, rayando la superficie
+          magnética y destruyendo los datos instantáneamente.
+        </p>
+        <h3>⚙ Motor (Spindle)</h3>
+        <p>
+          Es el motor que hace girar los platos. Su velocidad se mide en
+          <strong>RPM</strong> (Revoluciones Por Minuto). Debe mantener una
+          velocidad constante y precisa.
+        </p>
+        <h3>📍 Actuador (Voice Coil Actuator)</h3>
+        <p>
+          Es el motor electromagnético que mueve el brazo de los cabezales. Su
+          velocidad determina el
+          <strong>Tiempo de Búsqueda (Seek Time)</strong>, que es el tiempo que
+          tarda el cabezal en viajar desde una pista a otra.
+        </p>
+      </div>
+
+      <div class="impact">
+        <h2>El Impacto de las RPM y la Densidad Areal</h2>
+        <p>
+          Las RPM definen cuán rápido pasan los datos por debajo del cabezal.
+          Históricamente, más RPM significaba más velocidad, pero hoy en día hay
+          un factor igual de importante: la densidad de datos.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>RPM</th>
+              <th>Uso Típico</th>
+              <th>Ventajas</th>
+              <th>Desventajas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>5400 RPM</td>
+              <td>Almacenamiento masivo, CCTV, NAS Hogar</td>
+              <td>Silenciosos, fríos, menor consumo, mayor vida útil.</td>
+              <td>Mayor latencia (tiempo de búsqueda más lento).</td>
+            </tr>
+            <tr>
+              <td>7200 RPM</td>
+              <td>Escritorio, Gaming económico, NAS Pro, Enterprise</td>
+              <td>
+                Mejor tiempo de acceso, mayor tasa de transferencia sostenida.
+              </td>
+              <td>Más ruido, vibración y temperatura. Mayor desgaste.</td>
+            </tr>
+            <tr>
+              <td>10k / 15k RPM</td>
+              <td>Servidores Legacy (En desuso)</td>
+              <td>Tiempos de búsqueda muy bajos para ser mecánicos.</td>
+              <td>
+                OBSOLETOS: Reemplazados casi totalmente por SSDs Enterprise por
+                costo/beneficio.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>🧠 <strong>Concepto Clave: Densidad Areal</strong></p>
+        <p>
+          Es la cantidad de bits que caben en una pulgada cuadrada de superficie
+          del plato.
+        </p>
+      </div>
+
+      <div class="technologies">
+        <h2>Tecnologías de Grabación: CMR vs SMR</h2>
+        <p>
+          Esta es la distinción técnica <strong>más importante</strong> al
+          comprar un HDD hoy en día.
+        </p>
+        <h3>🟦 CMR (Conventional Magnetic Recording)</h3>
+        <p>
+          Las pistas de datos se escriben una al lado de la otra, paralelas,
+          dejando un pequeño espacio de seguridad entre ellas.
+        </p>
+        <ul>
+          <li>
+            <strong>Comportamiento:</strong> Permite escribir y reescribir
+            cualquier sector individualmente sin molestar a los vecinos.
+          </li>
+          <li>
+            <strong>Rendimiento:</strong> Predecible, estable y rápido tanto en
+            lectura como escritura.
+          </li>
+          <li>
+            <strong>Uso Obligatorio:</strong> RAID (ZFS, RAID 5, RAID 6), NAS,
+            Sistemas Operativos, Bases de Datos.
+          </li>
+        </ul>
+        <h3>🟧 SMR (Shingled Magnetic Recording)</h3>
+        <p>
+          Las pistas se escriben <strong>superpuestas parcialmente</strong>,
+          como las tejas de un techo (Shingles), para aumentar la densidad y
+          reducir costos de fabricación.
+        </p>
+        <ul>
+          <li>
+            <strong>El Problema Técnico:</strong> El cabezal de escritura es más
+            ancho que el de lectura. Si necesitas modificar un dato en medio de
+            una "teja", inevitablemente sobrescribes parte de la pista
+            siguiente.
+          </li>
+          <li>
+            <strong>Consecuencia:</strong> Velocidades de escritura aleatoria
+            atrozmente lentas.
+          </li>
+          <li>
+            <strong>Uso:</strong> Archivo muerto (escribir una vez, leer
+            muchas), Backups fríos, Discos externos USB económicos.
+          </li>
+        </ul>
+        <p>🚨 <strong>El Escándalo WD 2020 ("SMR Scandal"):</strong></p>
+        <p>
+          En 2020, se descubrió que Western Digital estaba vendiendo discos de
+          la línea "Red" (para NAS) con tecnología SMR sin indicarlo en la
+          etiqueta. Esto causó fallos masivos en arrays RAID de usuarios. Como
+          resultado, WD tuvo que lanzar la línea "Red Plus" (CMR garantizado) y
+          dejar la línea "Red" normal (algunos SMR) para uso básico, además de
+          pagar compensaciones legales.
+        </p>
+        <h3>🔍 ¿Cómo identificar SMR antes de comprar?</h3>
+        <ol>
+          <li>
+            Tamaño del Caché sospechoso: Si ves un disco de 2TB o 4TB con
+            <strong>256MB</strong> de caché, es una señal de alerta.
+          </li>
+          <li>
+            Texto en la hoja de datos: Buscar términos como "Drive Managed SMR",
+            "Archive", o "Shingled".
+          </li>
+          <li>
+            Listas comunitarias: Consultar bases de datos de sitios como
+            <em>NasCompares</em> o <em>r/DataHoarder</em>.
+          </li>
+        </ol>
+      </div>
+
+      <div class="buffer">
+        <h2>Buffer/Caché del HDD</h2>
+        <p>
+          Es una memoria DRAM de alta velocidad integrada en la placa lógica
+          (PCB) del disco. Sus tamaños típicos varían entre 32MB, 64MB, 128MB,
+          256MB y hasta 512MB en modelos Enterprise.
+        </p>
+        <p>
+          <strong>Función:</strong> Almacena temporalmente datos que están
+          esperando ser escritos en el plato o datos que se leen frecuentemente.
+        </p>
+        <p>⚠ <strong>Mito: "Más caché siempre es mejor"</strong></p>
+        <p>
+          No necesariamente. Un disco CMR con 64MB de caché tendrá un
+          rendimiento sostenido mucho mejor que un disco SMR con 256MB de caché.
+        </p>
+      </div>
+
+      <div class="bottlenecks">
+        <h2>Bottlenecks (Cuellos de Botella)</h2>
+        <p>
+          Un cuello de botella es el componente que limita el rendimiento
+          general de un sistema. En el caso de los HDD:
+        </p>
+        <ul>
+          <li>
+            <strong>Interfaz SATA III:</strong> Tiene un ancho de banda teórico
+            de <strong>6 Gbit/s</strong> (aprox. 600 MB/s).
+          </li>
+          <li>
+            <strong>Velocidad del HDD:</strong> Los discos mecánicos más rápidos
+            del mundo (ej. Seagate Exos 20TB) apenas alcanzan
+            <strong>280-290 MB/s</strong> en lectura secuencial en el borde
+            exterior del plato.
+          </li>
+        </ul>
+        <p>
+          <strong>Conclusión Matemática:</strong> Capacidad SATA III (600 MB/s)
+          > Velocidad Máx HDD (290 MB/s). Por lo tanto,
+          <strong>SATA III NO limita a los HDD mecánicos</strong>.
+        </p>
+      </div>
+
+      <div class="uses">
+        <h2>HDD para Usos Específicos y Precios</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Categoría</th>
+              <th>Línea WD</th>
+              <th>Línea Seagate</th>
+              <th>Características</th>
+              <th>Precio Aprox. (4TB)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Escritorio / PC</td>
+              <td>Blue</td>
+              <td>BarraCuda</td>
+              <td>
+                Uso general, 8 horas/día. Muchos son SMR. No aptos para RAID.
+              </td>
+              <td>$85 USD / $110.000 ARS</td>
+            </tr>
+            <tr>
+              <td>NAS / Pyme</td>
+              <td>Red Plus</td>
+              <td>IronWolf</td>
+              <td>
+                24/7, Tecnología CMR, Firmware anti-vibración, aptos RAID.
+              </td>
+              <td>$105 USD / $136.000 ARS</td>
+            </tr>
+            <tr>
+              <td>Vigilancia</td>
+              <td>Purple</td>
+              <td>SkyHawk</td>
+              <td>
+                24/7, Priorizan escritura (no perder cuadros de video) sobre
+                lectura.
+              </td>
+              <td>$95 USD / $123.000 ARS</td>
+            </tr>
+            <tr>
+              <td>Enterprise</td>
+              <td>Gold</td>
+              <td>Exos</td>
+              <td>
+                Máxima fiabilidad, 5 años garantía, alto rendimiento, ruidosos.
+              </td>
+              <td>$130 USD / $169.000 ARS</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="specs">
+        <h2>Especificaciones Técnicas Importantes</h2>
+        <ul>
+          <li>
+            <strong>MTBF (Mean Time Between Failures):</strong> Tiempo medio
+            entre fallos. En discos Enterprise suele ser de 2 a 2.5 millones de
+            horas.
+          </li>
+          <li>
+            <strong>Workload Rate (Carga de Trabajo):</strong> Límite de datos
+            escritos/leídos por año.
+          </li>
+          <li>
+            <strong>URE (Unrecoverable Read Error):</strong> Probabilidad de que
+            el disco no pueda leer un sector. Crítico para reconstruir RAIDs
+            grandes.
+          </li>
+        </ul>
+      </div>
+      <div class="market">
+        <h2>Análisis de Mercado Argentina 2026</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Capacidad</th>
+              <th>Precio Aprox (ARS)</th>
+              <th>Costo por TB</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>HDD WD Blue</td>
+              <td>2 TB</td>
+              <td>$75.000</td>
+              <td>$37.500 / TB</td>
+            </tr>
+            <tr>
+              <td>SSD SATA Kingston</td>
+              <td>1 TB</td>
+              <td>$65.000</td>
+              <td>$65.000 / TB</td>
+            </tr>
+            <tr>
+              <td>HDD Seagate IronWolf</td>
+              <td>8 TB</td>
+              <td>$240.000</td>
+              <td><strong>$30.000 / TB</strong></td>
+            </tr>
+            <tr>
+              <td>SSD NVMe Gen4</td>
+              <td>2 TB</td>
+              <td>$160.000</td>
+              <td>$80.000 / TB</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <strong>Conclusión:</strong> El HDD sigue siendo aproximadamente
+          <strong>2 a 3 veces más barato</strong> por Terabyte que el SSD.
+        </p>
+      </div>
+
+      <div class="future">
+        <h2>Tecnologías Futuras</h2>
+        <p>
+          Para romper el límite físico de la densidad areal, los fabricantes han
+          desarrollado tecnologías asistidas por energía:
+        </p>
+        <ul>
+          <li>
+            <strong>HAMR (Heat-Assisted Magnetic Recording):</strong> Seagate
+            utiliza un pequeño láser en el cabezal para calentar el punto de
+            grabación momentáneamente.
+          </li>
+          <li>
+            <strong>MAMR (Microwave-Assisted Magnetic Recording):</strong>
+            Western Digital utiliza microondas para excitar el material
+            magnético y facilitar la escritura en áreas minúsculas.
+          </li>
+        </ul>
+      </div>
+
+      <!-- <div class="guide">
+        <h2>Guía de Toma de Decisiones</h2>
+        <h3>CASO 1: "Quiero armar una PC Gamer barata con mucho espacio"</h3>
+        <p>
+          ✅ <strong>Recomendación:</strong> SSD NVMe pequeño (500GB) para
+          Windows/Apps + HDD 2TB/4TB 7200 RPM (WD Blue o Seagate BarraCuda) para
+          juegos pesados y archivos.
+        </p>
+        <h3>
+          CASO 2: "Necesito un servidor NAS para mi oficina de arquitectos (RAID
+          5)"
+        </h3>
+        <p>
+          ✅ <strong>Recomendación:</strong> OBLIGATORIO discos CMR. WD Red
+          Plus, Seagate IronWolf o Toshiba N300.
+        </p>
+        <h3>
+          CASO 3: "Backup de fotos familiares que guardaré en un cajón (Backup
+          Frío)"
+        </h3>
+        <p>
+          ✅ <strong>Recomendación:</strong> Aquí la tecnología SMR es aceptable
+          porque es más barata y la velocidad de escritura no es crítica.
+        </p>
+        <h3>
+          CASO 4: "Sistema de cámaras de seguridad (DVR/NVR) grabando 24/7"
+        </h3>
+        <p>✅ <strong>Recomendación:</strong> WD Purple o Seagate SkyHawk.</p>
+      </div> -->
+
+      <div class="faq">
+        <h2>Preguntas</h2>
+        <ul>
+          <li>
+            Explicar con tus propias palabras la diferencia técnica entre CMR
+            (Conventional Magnetic Recording) y SMR (Shingled Magnetic
+            Recording). Agregar imagen.
+          </li>
+          <li>
+            ¿Por qué los discos SMR son significativamente más lentos en
+            escritura aleatoria que los CMR?
+          </li>
+          <li>
+            ¿Cuál es la función real del caché en un disco SMR y por qué es más
+            grande que en los discos tradicionales?
+          </li>
+          <li>
+            ¿Cómo puedes identificar si un disco duro es CMR o SMR antes de
+            comprarlo? Menciona al menos 3 métodos de verificación.
+          </li>
+          <li>
+            ¿Qué función cumple el buffer/caché en un disco duro estándar? ¿De
+            qué tamaño suele ser en modelos actuales?
+          </li>
+          <li>
+            ¿Qué es un bottleneck o cuello de botella en informática aplicado al
+            almacenamiento?
+          </li>
+          <li>
+            ¿Por qué los HDD mecánicos nunca llegan a saturar la interfaz SATA
+            III?
+          </li>
+          <li>
+            Si conecto un HDD SATA III en un puerto SATA II de una placa madre
+            antigua, ¿perderé rendimiento notable? Justifica basándote en la
+            velocidad mecánica del disco vs la interfaz.
+          </li>
+          <li>
+            ¿Qué ventajas tienen los discos de 5400 RPM en comparación con los
+            de 7200 RPM? (Pensar en ruido, calor y consumo). ¿En qué escenarios
+            los elegirías?
+          </li>
+          <li>
+            ¿Que escandalo ocurrio con los SMR?
+          </li>
+          <li>
+            Mencionar 3 marcas principales de discos duros y detalla sus líneas
+            de colores o nombres para los siguientes usos: Escritorio / Uso
+            general, NAS (Network Attached Storage), Vigilancia (DVR/NVR)
+          </li>
+          <li>
+            Buscar en una tienda local online (ej: MercadoLibre, CompraGamer,
+            Amazon) y realizar lo siguiente: Encuentra el HDD de 1TB o 2TB más
+            barato. Busca su ficha técnica oficial. ¿Es SMR o CMR? Busca un
+            disco etiquetado para "NAS". Compara su precio con el modelo de
+            escritorio de misma capacidad. Calcula el "Costo por Terabyte" de un
+            disco de 1TB vs uno de 4TB. ¿Cuál conviene más económicamente?
+            (Incluir capturas de pantalla de los productos y precios.)
+          </li>
+          <li>
+            Busca en internet las especificaciones de un disco Seagate IronWolf
+            Pro de 8TB. Responde: ¿Es CMR o SMR? ¿Cómo lo identificaste? Incluir
+            captura de la hoja de datos o link web de la (datasheet).
+          </li>
+          <li>
+            ¿Para qué tipo de uso recomendarías un disco SMR? Justificar la
+            respuesta con ejemplos concretos.
+          </li>
+        </ul>
+      </div>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-dos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <!-- <a
+          href="hardware2-sesion1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 1
+        </a> -->
+        <a
+          href="hardware2-sesion2.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 2
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

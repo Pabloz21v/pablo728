@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 7: Análisis Entrada-Proceso-Salida (EPS)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+      }
+      h2 {
+        color: #3498db;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+      }
+      .theory {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .example {
+        background-color: #fef9e7;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .activity {
+        background-color: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #27ae60;
+      }
+      ol,
+      ul {
+        margin-left: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      code {
+        background-color: #f4f4f4;
+        padding: 5px;
+        border-radius: 3px;
+        font-family: monospace;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion6.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 6
+        </a>
+        <a
+          href="desarrollo1-sesion8.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 8
+        </a>
+      </div>
+      <h1>Clase 7: Análisis Entrada-Proceso-Salida (EPS)</h1>
+
+      <div class="theory">
+        <h2>Marco Teórico</h2>
+        <p>Todo sistema informático funciona bajo el esquema EPS:</p>
+        <ul>
+          <li>
+            <strong>Entrada (Input):</strong> Los datos necesarios que el
+            usuario o el entorno deben proveer. (numeros, textos, imagenes, etc)
+          </li>
+          <li>
+            <strong>Proceso:</strong> Las operaciones, cálculos o decisiones que
+            se hacen con los datos. (formulas, TRUE/verdadero o FALSE/falso,
+            etc)
+          </li>
+          <li>
+            <strong>Salida (Output):</strong> El resultado final que se muestra.
+          </li>
+        </ul>
+      </div>
+
+      <div class="example">
+        <h2>Ejemplo 1: Sumar dos números</h2>
+        <ul>
+          <li><strong>Entrada:</strong> Dos números (A y B).</li>
+          <li><strong>Proceso:</strong> Sumar A + B.</li>
+          <li><strong>Salida:</strong> El resultado de la suma.</li>
+        </ul>
+      </div>
+
+      <div class="example">
+        <h2>Ejemplo 2: Calcular la propina en un restaurante</h2>
+        <ul>
+          <li>
+            <strong>Entrada:</strong> El monto total de la cuenta (en pesos o
+            dólares).
+          </li>
+          <li>
+            <strong>Proceso:</strong> Multiplicar el total de la cuenta por 0.10
+            (que es el 10%).
+          </li>
+          <li>
+            <strong>Salida:</strong> La cantidad de dinero que debemos dejar de
+            propina.
+          </li>
+        </ul>
+      </div>
+      <div class="example">
+        <h2>Ejemplo 3: Saber si un estudiante aprobó un examen</h2>
+        <ul>
+          <li>
+            <strong>Entrada:</strong> La calificación numérica del estudiante
+            (por ejemplo, de 0 a 100).
+          </li>
+          <li>
+            <strong>Proceso:</strong> Comparar la calificación ingresada con el
+            número 60. Preguntarse: ¿Es mayor o igual a 60?
+          </li>
+          <li>
+            <strong>Salida:</strong> Un mensaje que diga "Aprobado" o
+            "Reprobado" según el resultado de la comparación.
+          </li>
+        </ul>
+      </div>
+      <div class="example">
+        <h2>Ejemplo 4: Calcular la velocidad promedio de un corredor</h2>
+        <ul>
+          <li>
+            <strong>Entrada:</strong> La distancia total recorrida (en
+            kilómetros) y el tiempo total que tardó (en horas).
+          </li>
+          <li>
+            <strong>Proceso:</strong> Dividir la distancia recorrida entre el
+            tiempo empleado (Velocidad = Distancia / Tiempo).
+          </li>
+          <li><strong>Salida:</strong> La velocidad promedio (en km/h).</li>
+        </ul>
+      </div>
+
+      <div class="activity">
+        <h2>Actividad 7: Definir Entrada, Proceso y Salida</h2>
+        <p>Para cada problema, definir Entrada, Proceso y Salida:</p>
+        <ol>
+          <li>
+            Calcular el área de un rectángulo. (<code>E:</code> base, altura /
+            <code>P:</code> base*altura / <code>S:</code> área).
+          </li>
+          <li>Calcular el cambio a devolver en una compra.</li>
+          <li>Convertir metros a centímetros.</li>
+          <li>Calcular el promedio de 3 notas de un alumno.</li>
+          <li>
+            Determinar los años que cumple una persona (dado año actual y año
+            nacimiento).
+          </li>
+          <li>Calcular el precio final de un producto con 21% de IVA.</li>
+          <li>Dados dos equipos de fútbol y sus goles, decir quién ganó.</li>
+          <li>Calcular cuántos minutos hay en X horas.</li>
+          <li>Dividir una cuenta de restaurante entre N amigos.</li>
+          <li>Calcular el perímetro de un cuadrado.</li>
+        </ol>
+      </div>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion6.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 6
+        </a>
+        <a
+          href="desarrollo1-sesion8.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 8
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
