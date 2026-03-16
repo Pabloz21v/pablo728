@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="es">
   <head>
@@ -7,7 +6,7 @@
     <title>Sesión 4: SSD M.2 y NVMe</title>
     <style>
       body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         line-height: 1.6;
         margin: 0;
         padding: 20px;
@@ -41,7 +40,8 @@
         border-collapse: collapse;
         margin: 20px 0;
       }
-      th, td {
+      th,
+      td {
         border: 1px solid #ddd;
         padding: 12px;
         text-align: left;
@@ -53,7 +53,10 @@
       tr:nth-child(even) {
         background-color: #f2f2f2;
       }
-      .intro, .technical, .resistance, .connection {
+      .intro,
+      .technical,
+      .resistance,
+      .connection {
         background-color: #fef9e7;
         padding: 15px;
         border-radius: 5px;
@@ -128,16 +131,30 @@
       <div class="intro">
         <h2>1. Introducción</h2>
         <h3>Contexto histórico:</h3>
-        <p>Los SSD M.2 surgieron como una evolución de los SSD SATA para ofrecer mayor velocidad y menor tamaño físico. NVMe (Non-Volatile Memory Express) es un protocolo diseñado específicamente para SSD, aprovechando el bus PCIe para alcanzar velocidades superiores a SATA.</p>
+        <p>
+          Los SSD M.2 surgieron como una evolución de los SSD SATA para ofrecer
+          mayor velocidad y menor tamaño físico. NVMe (Non-Volatile Memory
+          Express) es un protocolo diseñado específicamente para SSD,
+          aprovechando el bus PCIe para alcanzar velocidades superiores a SATA.
+        </p>
       </div>
 
       <div class="technical">
         <h2>2. Tecnología M.2</h2>
         <h3>¿Qué es M.2?</h3>
         <ul>
-          <li><strong>Definición:</strong> Formato de SSD que utiliza un conector directo a la placa madre, eliminando la necesidad de cables.</li>
-          <li><strong>Slot:</strong> Donde se coloca la memoria de almacenamiento SSD M.2.</li>
-          <li><strong>Ventajas:</strong>
+          <li>
+            <strong>Definición:</strong> Formato de SSD que utiliza un conector
+            directo a la placa madre, eliminando la necesidad de cables.
+          </li>
+          <li>
+            <strong>Slot:</strong> Es un factor de forma para varias tarjetas de
+            expansión, acá se coloca la memoria de almacenamiento SSD M.2.
+            <br />Aunque se usa masivamente para SSD, también puede albergar
+            tarjetas Wi-Fi, Bluetooth, 4G/5G o incluso tarjetas de captura
+          </li>
+          <li>
+            <strong>Ventajas:</strong>
             <ul>
               <li>Tamaño compacto (ideal para laptops y sistemas mini-ITX).</li>
               <li>Mayor velocidad (especialmente con NVMe).</li>
@@ -150,23 +167,27 @@
         <table>
           <tr>
             <th>Clave</th>
-            <th>Descripción</th>
+            <th>Posición de la Muesca</th>
+            <th>Interfaz Eléctrica</th>
             <th>Protocolos Soportados</th>
           </tr>
           <tr>
             <td>B</td>
-            <td>Muesca en el lado derecho del conector.</td>
+            <td>Muesca en el lado derecho del conector. (pines 12-19)</td>
             <td>SATA y PCIe x2</td>
+            <td>AHCI (para SATA) o NVMe (si el slot da PCIe x2)</td>
           </tr>
           <tr>
             <td>M</td>
-            <td>Muesca en el lado izquierdo del conector.</td>
+            <td>Muesca en el lado izquierdo del conector. (pines 59-66)</td>
             <td>SATA y PCIe x4</td>
+            <td>AHCI (para SATA) o NVMe (para PCIe)</td>
           </tr>
           <tr>
             <td>B+M</td>
             <td>Muescas en ambos lados.</td>
             <td>SATA y PCIe x2</td>
+            <td>Generalmente AHCI (SATA) o NVMe limitado a x2</td>
           </tr>
         </table>
 
@@ -200,16 +221,24 @@
         <h3>Compatibilidad con Placas Madre</h3>
         <h4>Chipsets comunes y su soporte:</h4>
         <ul>
-          <li><strong>Intel:</strong>
+          <li>
+            <strong>Intel:</strong>
             <ul>
               <li>Z390, Z490, Z590: Soportan NVMe en slots M.2.</li>
-              <li>H370, B360: Soportan NVMe, pero pueden tener limitaciones en el número de slots.</li>
+              <li>
+                H370, B360: Soportan NVMe, pero pueden tener limitaciones en el
+                número de slots.
+              </li>
             </ul>
           </li>
-          <li><strong>AMD:</strong>
+          <li>
+            <strong>AMD:</strong>
             <ul>
               <li>B550, X570: Soportan NVMe en slots M.2.</li>
-              <li>A520: Soporta NVMe, pero puede compartir ancho de banda con otros dispositivos.</li>
+              <li>
+                A520: Soporta NVMe, pero puede compartir ancho de banda con
+                otros dispositivos.
+              </li>
             </ul>
           </li>
         </ul>
@@ -217,22 +246,36 @@
         <h4>Limitaciones:</h4>
         <ul>
           <li>Algunos slots M.2 solo soportan SATA, no NVMe.</li>
-          <li>En placas con múltiples slots M.2, usar uno puede deshabilitar puertos SATA o PCIe.</li>
+          <li>
+            En placas con múltiples slots M.2, usar uno puede deshabilitar
+            puertos SATA o PCIe.
+          </li>
         </ul>
 
         <h4>Recomendación:</h4>
-        <p>Verificar los slots M.2 de la placa madre y qué componente admiten para evitar comprar un SSD incompatible.</p>
+        <p>
+          Verificar los slots M.2 de la placa madre y qué componente admiten
+          para evitar comprar un SSD incompatible.
+        </p>
       </div>
 
       <div class="technical">
         <h2>3. Tecnología NVMe</h2>
         <h3>¿Qué es NVMe?</h3>
         <ul>
-          <li><strong>Definición:</strong> Protocolo de comunicación diseñado específicamente para unidades de estado sólido (SSD), que utiliza el bus PCIe para alcanzar velocidades superiores a las de SATA.</li>
-          <li><strong>Ventajas sobre el protocolo AHCI (usado en SATA):</strong>
+          <li>
+            <strong>Definición:</strong> Protocolo de comunicación diseñado
+            específicamente para unidades de estado sólido (SSD), que utiliza el
+            bus PCIe para alcanzar velocidades superiores a las de SATA.
+          </li>
+          <li>
+            <strong>Ventajas sobre el protocolo AHCI (usado en SATA):</strong>
             <ul>
               <li>Menor latencia.</li>
-              <li>Mayor paralelismo (miles de colas de comandos vs. una sola en AHCI).</li>
+              <li>
+                Mayor paralelismo (miles de colas de comandos vs. una sola en
+                AHCI).
+              </li>
               <li>Optimizado para memoria flash.</li>
             </ul>
           </li>
@@ -266,12 +309,11 @@
         <ul>
           <li>PCIe 3.0 x4: Hasta 3500 MB/s.</li>
           <li>PCIe 4.0 x4: Hasta 7000 MB/s.</li>
-          <li>PCIe 5.0 x4: Hasta 12000 MB/s (en desarrollo).</li>
+          <li>PCIe 5.0 x4: Hasta 12000 MB/s.</li>
         </ul>
 
         <h3>Comparación de Rendimiento</h3>
         <div style="overflow-x: auto">
-
           <table>
             <tr>
               <th>Tipo de SSD</th>
@@ -311,18 +353,47 @@
         <h2>4. Componentes de un SSD M.2 NVMe</h2>
         <h3>Componentes Principales</h3>
         <ol>
-          <li><strong>Memoria NAND Flash:</strong> Similar a los SSD SATA, pero optimizada para mayor velocidad. Tipos: TLC o QLC en modelos de consumo, MLC en modelos empresariales.</li>
-          <li><strong>Controlador NVMe:</strong> Gestiona la comunicación con el sistema a través del protocolo NVMe. Optimiza el acceso paralelo a la memoria NAND.</li>
-          <li><strong>Caché DRAM (opcional):</strong> Mejora el rendimiento en operaciones intensivas. Algunos modelos económicos prescinden de ella.</li>
-          <li><strong>Interfaz PCIe:</strong> Conector M.2 con clave M o B+M para NVMe.</li>
-          <li><strong>Firmware:</strong> Software interno que controla el comportamiento del SSD.</li>
+          <li>
+            <strong>Memoria NAND Flash:</strong> Similar a los SSD SATA, pero
+            optimizada para mayor velocidad. Tipos: TLC o QLC en modelos de
+            consumo, MLC en modelos empresariales.
+          </li>
+          <li>
+            <strong>Controlador NVMe:</strong> Gestiona la comunicación con el
+            sistema a través del protocolo NVMe. Optimiza el acceso paralelo a
+            la memoria NAND.
+          </li>
+          <li>
+            <strong>Caché DRAM (opcional):</strong> Mejora el rendimiento en
+            operaciones intensivas. Algunos modelos económicos prescinden de
+            ella. Los SSD NVMe sin DRAM (económicos) utilizan una pequeña parte
+            de la memoria RAM del sistema (a través de la tecnología HMB - Host
+            Memory Buffer) para almacenar las tablas de mapeo. Esto abarata
+            costes, pero puede afectar al rendimiento en cargas de trabajo muy
+            pesadas.
+          </li>
+          <li>
+            <strong>Interfaz PCIe:</strong> Conector M.2 con clave M o B+M para
+            NVMe.
+          </li>
+          <li>
+            <strong>Firmware:</strong> Software interno que controla el
+            comportamiento del SSD.
+          </li>
         </ol>
 
         <h3>Resistencia y Desgaste</h3>
         <ul>
-          <li><strong>Ciclos de escritura:</strong> Similar a los SSD SATA, pero con mayor durabilidad en modelos de gama alta.</li>
-          <li><strong>TBW (Terabytes Written):</strong> Indica la cantidad de datos que pueden escribirse antes de que el SSD falle.</li>
-          <li><strong>Técnicas para Prolongar la Vida Útil:</strong>
+          <li>
+            <strong>Ciclos de escritura:</strong> Similar a los SSD SATA, pero
+            con mayor durabilidad en modelos de gama alta.
+          </li>
+          <li>
+            <strong>TBW (Terabytes Written):</strong> Indica la cantidad de
+            datos que pueden escribirse antes de que el SSD falle.
+          </li>
+          <li>
+            <strong>Técnicas para Prolongar la Vida Útil:</strong>
             <ul>
               <li>Wear Leveling.</li>
               <li>Over-Provisioning.</li>
@@ -344,25 +415,75 @@
 
         <h3>Incompatibilidades Comunes</h3>
         <ul>
-          <li>Slots M.2 que solo soportan SATA: Un SSD NVMe no funcionará en un slot M.2 que solo soporte SATA.</li>
-          <li>Limitaciones de chipset: Algunas placas madre desactivan puertos SATA al usar ciertos slots M.2.</li>
-          <li>Ancho de banda compartido: En placas con múltiples slots M.2, usar uno puede reducir el ancho de banda disponible para tarjetas gráficas.</li>
+          <li>
+            Slots M.2 que solo soportan SATA: Un SSD NVMe no funcionará en un
+            slot M.2 que solo soporte SATA.
+          </li>
+          <li>
+            Limitaciones de chipset: Algunas placas madre desactivan puertos
+            SATA al usar ciertos slots M.2.
+          </li>
+          <li>
+            Ancho de banda compartido: En placas con múltiples slots M.2, usar
+            uno puede reducir el ancho de banda disponible para tarjetas
+            gráficas.
+          </li>
         </ul>
       </div>
 
       <div class="technical">
         <h2>6. Cuestionario de Tarea</h2>
         <ol>
-          <li>¿Qué significa M.2 y cómo se diferencia de los SSD SATA tradicionales?</li>
+          <li>
+            ¿Qué significa M.2 y cómo se diferencia de los SSD SATA
+            tradicionales?
+          </li>
+          <li>Agregar imagenes de los 5 formatos (longitudes) </li>
+          <li>¿Cuál es la importancia de elegir correctamente el formato de un SSD m.2?</li>
+          <li>
+            Investiga qué son los formatos M.2 2230 y 2242. ¿En qué tipo de
+            dispositivos (más allá de los portátiles grandes) se suelen
+            encontrar estos tamaños tan pequeños?
+          </li>
           <li>¿Qué es NVMe y por qué es más rápido que AHCI?</li>
-          <li>¿Cuáles son las velocidades máximas teóricas de NVMe en PCIe 3.0 x4 y PCIe 4.0 x4?</li>
-          <li>¿Qué componentes principales tiene un SSD M.2 NVMe y qué función cumple cada uno?</li>
-          <li>¿Qué es el TBW en un SSD NVMe y cómo se relaciona con su durabilidad?</li>
-          <li>¿Qué técnicas se utilizan para prolongar la vida útil de un SSD NVMe?</li>
-          <li>¿Cómo se instala físicamente un SSD M.2 NVMe en una placa madre?</li>
-          <li>¿Qué diferencias hay entre un SSD M.2 SATA y un SSD M.2 NVMe en términos de rendimiento y compatibilidad?</li>
-          <li>¿Por qué un SSD NVMe es significativamente más rápido que un SSD SATA, aunque ambos usen memoria NAND?</li>
-          <li>Investigar cómo verificar si una placa madre soporta NVMe y qué generaciones de PCIe admite.</li>
+          <li>
+            ¿Cuáles son las velocidades máximas teóricas de NVMe en PCIe 3.0 x4
+            y PCIe 4.0 x4?
+          </li>
+          <li>
+            ¿Qué componentes principales tiene un SSD M.2 NVMe y qué función
+            cumple cada uno?
+          </li>
+          <li>
+            ¿Qué es el TBW en un SSD NVMe y cómo se relaciona con su
+            durabilidad?
+          </li>
+          <li>
+            ¿Qué técnicas se utilizan para prolongar la vida útil de un SSD
+            NVMe?
+          </li>
+          <li>
+            ¿Cómo se instala físicamente un SSD M.2 NVMe en una placa madre? Agrega imagen de placas con un SSD M.2 y otra donde se coloca un M:2.
+          </li>
+          <li>
+            ¿Qué diferencias hay entre un SSD M.2 SATA y un SSD M.2 NVMe en
+            términos de rendimiento y compatibilidad?
+          </li>
+          <li>
+            ¿Por qué un SSD NVMe es significativamente más rápido que un SSD
+            SATA, aunque ambos usen memoria NAND?
+          </li>
+          <li>
+            ¿Qué es el "Host Memory Buffer" (HMB) y en qué tipo de SSD NVMe es
+            más común encontrarlo? ¿Qué ventaja y qué desventaja tiene frente a
+            tener una caché DRAM dedicada en el propio SSD?
+          </li>
+          
+          
+          <li>
+            Investigar cómo verificar si una placa madre soporta NVMe y qué
+            generaciones de PCIe admite.
+          </li>
         </ol>
       </div>
       <div style="margin-bottom: 24px">
