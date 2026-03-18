@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 3: Filtrado y Borrado en Bases de Datos</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      header {
+        /* background-color: #2c3e50; */
+        color: white;
+        padding: 20px;
+        text-align: center;
+        border-radius: 8px 8px 0 0;
+      }
+      h1,
+      h2 {
+        color: #2c3e50;
+      }
+      h2 {
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+      }
+      .section {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .practice {
+        background-color: #fef9e7;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .theory {
+        background-color: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .exercise {
+        background-color: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #27ae60;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      code {
+        background-color: #f4f4f4;
+        padding: 5px;
+        border-radius: 3px;
+        font-family: monospace;
+        display: block;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/usuarios-2.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="usuarios2-sesion2.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 2
+        </a>
+        <a
+          href="usuarios2-sesion4.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 4
+        </a>
+      </div>
+      <header>
+        <h1>Sesión 3: Filtrado y Borrado en Bases de Datos</h1>
+      </header>
+
+      <div class="section">
+        <h2>📍 Ver Bases de Datos, Tablas y Posicionarse</h2>
+        <h3>Teoría</h3>
+        <p>Comandos básicos:</p>
+        <ul>
+          <li>
+            <code>SHOW DATABASES;</code> → Muestra todas las bases de datos.
+          </li>
+          <li>
+            <code>SHOW TABLES;</code> → Muestra las tablas de la base de datos
+            activa.
+          </li>
+          <li><code>USE nombreBD;</code> → Selecciona una base de datos.</li>
+        </ul>
+        <h3>Práctica</h3>
+        <ol>
+          <li>Escribir y ejecutar: <code>SHOW DATABASES;</code></li>
+          <li>Escribir y ejecutar: <code>SHOW TABLES;</code></li>
+          <li>
+            Escribir y ejecutar: <code>USE tu_database_para_continuar;</code>
+          </li>
+        </ol>
+      </div>
+
+      <div class="section">
+        <h2>📍 Crear Tablas y Tipos de Datos</h2>
+        <h3>Teoría</h3>
+        <p>Para crear una tabla:</p>
+        <code>
+          CREATE TABLE alumnos ( id INT AUTO_INCREMENT PRIMARY KEY, nombre
+          VARCHAR(50), edad INT, promedio DOUBLE );
+        </code>
+        <p>
+          <strong>AUTO_INCREMENT:</strong> Genera automáticamente valores
+          consecutivos (suma 1 al número anterior).
+        </p>
+        <p><strong>DOUBLE:</strong> Tipo de dato para números con decimales.</p>
+        <h3>Práctica</h3>
+        <ol>
+          <li>Crear la tabla alumnos.</li>
+          <li>
+            Insertar datos:
+            <code>
+              INSERT INTO alumnos (nombre, edad, promedio) VALUES ('Juan', 20,
+              8.5), ('Ana', 22, 9.3), ('Pedro', 19, 7.2);
+            </code>
+          </li>
+          <li>Verificar con: <code>SELECT * FROM alumnos;</code></li>
+        </ol>
+      </div>
+
+      <div class="section">
+        <h2>📍 Consultas y Filtros</h2>
+        <h3>Teoría</h3>
+        <p>
+          Usar operadores permite filtrar datos de la tabla dependiendo de las
+          condiciones que establezcan.
+        </p>
+        <p><strong>SELECT ... FROM ... WHERE</strong></p>
+        <code> SELECT nombre, promedio FROM alumnos WHERE promedio > 6; </code>
+        <p>
+          Interpretación: Seleccionar en las columnas nombre y promedio de la
+          tabla alumnos los registros con un valor en promedio mayores a 6.
+        </p>
+        <ul>
+          <li><strong>AND</strong> → Ambas condiciones deben cumplirse.</li>
+          <li><strong>OR</strong> → Al menos una condición debe cumplirse.</li>
+          <li><strong>NOT</strong> → Niega una condición.</li>
+        </ul>
+        <h3>Práctica</h3>
+        <ol>
+          <li>
+            Seleccionar alumnos mayores de 20 años <strong>y</strong> con
+            promedio > 8:
+            <code>SELECT * FROM alumnos WHERE edad > 20 AND promedio > 8;</code>
+          </li>
+          <li>
+            Seleccionar alumnos con promedio > 9 <strong>o</strong> edad < 20:
+            <code>SELECT * FROM alumnos WHERE promedio > 9 OR edad < 20;</code>
+          </li>
+          <li>
+            Seleccionar alumnos que <strong>no</strong> tengan promedio mayor a
+            8:
+            <code>SELECT * FROM alumnos WHERE NOT promedio > 8;</code>
+          </li>
+        </ol>
+      </div>
+
+      <div class="section">
+        <h2>📍 Operaciones con Tablas y Registros</h2>
+        <h3>Teoría + Ejemplos</h3>
+        <ul>
+          <li>
+            <strong>DELETE (borra registros):</strong>
+            <code>DELETE FROM alumnos WHERE id = 2;</code>
+            <p>Borra la fila dentro de la tabla que cumpla lo indicado.</p>
+          </li>
+          <li>
+            <strong
+              >TRUNCATE (vacía toda la tabla, pero mantiene estructura):</strong
+            >
+            <code>TRUNCATE TABLE alumnos;</code>
+            <p>Vacía todos los datos dentro de la tabla, dejándola vacía.</p>
+          </li>
+          <li>
+            <strong>DROP TABLE IF EXISTS (elimina la tabla si existe):</strong>
+            <code>DROP TABLE IF EXISTS alumnos;</code>
+            <p>Elimina la tabla si existe.</p>
+          </li>
+        </ul>
+        <h3>Práctica</h3>
+        <ol>
+          <li>Insertar algunos registros, al menos 15 alumnos.</li>
+          <li>Borrar un alumno específico.</li>
+          <li>Borrar un rango de alumnos.</li>
+          <li>Truncar la tabla.</li>
+          <li>Insertar de nuevo datos y renombrar la tabla a estudiantes.</li>
+          <li>Dropear la tabla definitivamente.</li>
+        </ol>
+      </div>
+
+      <div class="exercise">
+        <h2>📍 Ejercicios </h2>
+        <h3>Ejercicio 1</h3>
+        <ol>
+          <li>
+            Crear una base de datos llamada <code>cursoDB</code> y seleccionarla
+            con <code>USE</code>
+          </li>
+          <li>
+            Crear la tabla <code>productos</code> con:
+            <ul>
+              <li><code>id</code> (INT AUTO_INCREMENT, PRIMARY KEY)</li>
+              <li><code>nombre</code> (VARCHAR 40)</li>
+              <li><code>precio</code> (DOUBLE)</li>
+              <li><code>stock</code> (INT)</li>
+            </ul>
+          </li>
+          <li>Insertar al menos 4 productos distintos.</li>
+          <li>
+            Usar <code>SELECT ... WHERE</code> para:
+            <ul>
+              <li>Filtrar productos con precio > 100.</li>
+              <li>Filtrar productos con stock < 50 AND precio < 500.</li>
+              <li>
+                Filtrar productos que <strong>no</strong> tengan stock mayor a
+                20.
+              </li>
+            </ul>
+          </li>
+          <li>Borrar un producto con <code>DELETE</code></li>
+          <li>Vaciar la tabla con <code>TRUNCATE</code></li>
+          <li>
+            Renombrar la tabla <code>productos</code> como <code>inventario</code>
+          </li>
+          <li>Eliminar la tabla con <code>DROP TABLE IF EXISTS</code></li>
+          
+        </ol>
+        <h3>Ejercicio 2</h3>
+        <ol>
+           <li>Crear una tabla en tu base de datos con la temática de tu interés:</li> 
+            
+              <li>Dicha tabla debe contener ID autoincremental.</li>
+              <li>
+                Dos columnas usando el tipo de dato <code>VARCHAR()</code>
+              </li>
+              <li>Dos columnas usando el tipo de dato <code>INT</code></li>
+              <li>Dos columnas usando el tipo de dato <code>DOUBLE</code></li>
+              <li>Insertar registros.</li>
+              <li>
+                Generar 3 filtros tratando de aprovechar el máximo de
+                operadores.
+              </li>
+              <li>Borrar un registro específico.</li>
+              <li>
+                Volver a insertar registros (no importa si se repiten los
+                valores).
+              </li>
+              <li>Borrar un rango de registros.</li>
+              <li>Volver a insertar registros.</li>
+              <li>
+                Crear un <code>DELETE</code> para eliminar por IDs mayores o
+                iguales a (deciden el número de donde parte el DELETE) y un
+                valor de otra columna (ejemplo: promedio < 6).
+              </li>
+              <li>Truncar la tabla.</li>
+              <li>Volver a crear la tabla e insertar los registros.</li>
+              <li>Renombrar la tabla.</li>
+              <li>Eliminar la tabla si existe.</li>
+            </ul>
+          </li>
+        
+      </div>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/usuarios-2.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="usuarios2-sesion2.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 2
+        </a>
+        <a
+          href="usuarios2-sesion4.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 4
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

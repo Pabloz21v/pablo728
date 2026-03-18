@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 2: Almacenamiento Avanzado — SSD SATA</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      header {
+        color: white;
+        padding: 20px;
+        text-align: center;
+        border-radius: 8px 8px 0 0;
+      }
+      h1,
+      h2 {
+        color: #2c3e50;
+      }
+      h2 {
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+      }
+      .objectives {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .architecture {
+        background-color: #fef9e7;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .controller {
+        background-color: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .nand {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .performance {
+        background-color: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .limitations {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .comparison {
+        background-color: #fef9e7;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .practice {
+        background-color: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .questions {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      code {
+        background-color: #f4f4f4;
+        padding: 5px;
+        border-radius: 3px;
+        font-family: monospace;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-dos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="hardware2-sesion1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 1
+        </a>
+        <a
+          href="hardware2-sesion3.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 3
+        </a>
+      </div>
+      <header>
+        <h1>Sesión 2: Almacenamiento Avanzado — SSD SATA</h1>
+      </header>
+
+      <div class="objectives">
+        <h2>Objetivos de la Sesión</h2>
+        <ul>
+          <li>
+            Comprender la arquitectura interna de un SSD SATA y la función
+            crítica de sus componentes.
+          </li>
+          <li>
+            Identificar los tipos de memoria NAND (SLC, MLC, TLC, QLC) y sus
+            diferencias técnicas en la vida real.
+          </li>
+          <li>
+            Analizar las diferencias de rendimiento y longevidad entre SSD con
+            DRAM dedicada y modelos DRAM-less.
+          </li>
+          <li>
+            Calcular e interpretar métricas de durabilidad clave: TBW (Total
+            Bytes Written) y DWPD (Drive Writes Per Day).
+          </li>
+          <li>
+            Reconocer las limitaciones físicas del bus SATA III y por qué actúa
+            como cuello de botella.
+          </li>
+          <li>
+            Comparar SSDs reales del mercado para tomar decisiones de compra
+            inteligentes basadas en especificaciones técnicas.
+          </li>
+        </ul>
+      </div>
+
+      <div class="architecture">
+        <h2>Arquitectura de un SSD SATA</h2>
+        <p>
+          A diferencia de los discos mecánicos (HDD), un SSD no tiene partes
+          móviles. Es un sistema embebido complejo que funciona más parecido a
+          una pequeña computadora dedicada al almacenamiento.
+        </p>
+        <p>
+          <strong>CONTROLADOR:</strong> El "Cerebro" que gestiona
+          lectura/escritura, wear leveling, ECC y garbage collection.
+        </p>
+        <p><strong>NAND FLASH:</strong> Almacenes de datos.</p>
+        <p>
+          <strong>DRAM CACHE (Opcional):</strong> Memoria volátil rápida para
+          caché de tabla de mapeo (FTL).
+        </p>
+        <p>
+          <strong>SATA INTERFACE PINS:</strong> La interfaz SATA conecta el SSD
+          a la placa madre usando exactamente el mismo conector físico que los
+          antiguos HDD mecánicos. Tiene 7 pines de datos y 15 pines de
+          alimentación.
+        </p>
+      </div>
+
+      <div class="controller">
+        <h2>El Controlador y su Importancia</h2>
+        <p>
+          El controlador es un procesador embebido que ejecuta el Firmware. Es
+          el componente más crítico para la fiabilidad del disco.
+        </p>
+        <p>
+          <strong>Marcas principales:</strong> Phison, Silicon Motion, Samsung
+          (Propietario), Western Digital (Propietario).
+        </p>
+        <p>
+          ⚠ <strong>Regla de oro:</strong> Un buen controlador con un firmware
+          optimizado puede hacer que memorias NAND baratas rindan decentemente.
+          Pero un mal controlador puede arruinar incluso las memorias más caras,
+          provocando lentitud o muerte súbita del disco.
+        </p>
+        <h3>Los 3 Pilares del Controlador</h3>
+        <ul>
+          <li>
+            <strong>Estabilidad:</strong> Corrige errores (ECC) y gestiona
+            bloques defectuosos.
+          </li>
+          <li>
+            <strong>Rendimiento:</strong> Gestiona paralelismo entre chips NAND
+            para maximizar velocidad.
+          </li>
+          <li>
+            <strong>Durabilidad:</strong> Aplica Wear Leveling para gastar todas
+            las celdas por igual.
+          </li>
+        </ul>
+        <h3>¿Qué es la FTL (Flash Translation Layer)?</h3>
+        <p>
+          Es la "tabla de direcciones" del SSD. Mapea las direcciones lógicas
+          que ve Windows (ej: Sector 100) a las direcciones físicas reales en
+          los chips NAND (ej: Chip 2, Bloque 4, Página 8). Sin la FTL, el
+          sistema operativo no podría usar la memoria Flash.
+        </p>
+      </div>
+
+      <div class="nand">
+        <h2>Tipos de Memoria NAND (Evolución)</h2>
+        <p>
+          La evolución de la tecnología busca almacenar más bits en el mismo
+          espacio físico (celda), reduciendo costos pero sacrificando
+          durabilidad y velocidad nativa.
+        </p>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Bits/celda</th>
+                <th>Ciclos P/E (Aprox)</th>
+                <th>Velocidad</th>
+                <th>Costo</th>
+                <th>Uso principal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>SLC</td>
+                <td>1</td>
+                <td>~100,000</td>
+                <td>⚡⚡⚡ Muy Alta</td>
+                <td>💰💰💰💰 Extremo</td>
+                <td>Industrial / Militar / Caché</td>
+              </tr>
+              <tr>
+                <td>MLC</td>
+                <td>2</td>
+                <td>~10,000</td>
+                <td>⚡⚡⚡ Alta</td>
+                <td>💰💰💰 Alto</td>
+                <td>Servidores / Pro (En desuso)</td>
+              </tr>
+              <tr>
+                <td>TLC</td>
+                <td>3</td>
+                <td>~3,000</td>
+                <td>⚡⚡ Media</td>
+                <td>💰💰 Medio</td>
+                <td><strong>Estándar actual</strong> (Ej: 870 EVO)</td>
+              </tr>
+              <tr>
+                <td>QLC</td>
+                <td>4</td>
+                <td>~1,000</td>
+                <td>⚡ Baja (nativa)</td>
+                <td>💰 Bajo</td>
+                <td>Almacenamiento masivo (Ej: 870 QVO)</td>
+              </tr>
+              <tr>
+                <td>PLC</td>
+                <td>5</td>
+                <td>~300</td>
+                <td>⚡ Muy baja</td>
+                <td>💰 Muy bajo</td>
+                <td>Futuro / Nicho ultra barato</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          🔬 <strong>Principio Físico:</strong> Más bits por celda = más niveles
+          de voltaje a distinguir.
+        </p>
+        <p>
+          La memoria SLC solo distingue 2 estados (0, 1). La QLC debe distinguir
+          16 niveles de voltaje exactos en una sola celda microscópica. Esto
+          requiere más tiempo para escribir con precisión (lentitud) y desgasta
+          más el aislante (menos vida útil).
+        </p>
+      </div>
+
+      <div class="performance">
+        <h2>DRAM vs DRAM-less</h2>
+        <p><strong>SSD CON DRAM:</strong></p>
+        <ul>
+          <li>Tiene chip de RAM dedicado en la PCB.</li>
+          <li>Mantiene la tabla de mapeo (FTL) en esta RAM rápida.</li>
+          <li>Acceso aleatorio muy rápido y latencia estable.</li>
+
+          <li>Mayor vida útil: Reduce escrituras innecesarias a la NAND.</li>
+        </ul>
+        <p>
+          ⚠ <strong>RECOMENDADO PARA:</strong> Disco principal del Sistema
+          Operativo (Windows), Gaming, Edición.
+        </p>
+
+        <p><strong>SSD DRAM-less:</strong></p>
+        <ul>
+          <li>Sin chip de RAM dedicado.</li>
+          <li>Más económico de fabricar.</li>
+          <li>Guarda la tabla de mapeo en la propia NAND (lenta).</li>
+          <li>Menor rendimiento en multitarea o cuando el disco está lleno.</li>
+        </ul>
+        <p>
+          ⚠ <strong>RECOMENDADO PARA:</strong> Revivir PCs viejas,
+          almacenamiento secundario de juegos, ofimática básica.
+        </p>
+        <p>
+          📦 <strong>Tecnología HMB (Host Memory Buffer):</strong> Permite a los
+          SSDs modernos sin DRAM "pedir prestado" un trocito muy pequeño de la
+          RAM de tu PC (unos 64MB) para usarlo como caché de mapa. Mejora mucho
+          el rendimiento, pero no iguala a tener DRAM dedicada.
+        </p>
+      </div>
+
+      <div class="performance">
+        <h2>Tecnologías de Rendimiento y Durabilidad</h2>
+        <h3>SLC Cache Dinámica</h3>
+        <p>
+          Como las memorias TLC y QLC son lentas escribiendo, el controlador
+          trata una parte del espacio libre como si fuera SLC (1 bit) para
+          escribir muy rápido. Luego, en momentos de reposo, compacta los datos
+          a su estado real.
+        </p>
+
+        <h3>Métricas de Resistencia</h3>
+        <p>
+          <strong>TBW (Total Bytes Written):</strong> Garantía de volumen de
+          escritura total.
+        </p>
+        <ul>
+          <li>Samsung 870 EVO 500GB: 300 TBW</li>
+          <li>Samsung 870 EVO 1TB: 600 TBW</li>
+          <li>Crucial BX500 1TB: 360 TBW</li>
+        </ul>
+        <p>
+          <strong>DWPD (Drive Writes Per Day):</strong> Veces que puedes llenar
+          el disco al día durante la garantía.
+        </p>
+        <ul>
+          <li>
+            Fórmula : DWPD = TBW (Terabytes ) × 1000 (GB) / (Capacidad (GB) ×
+            Días (Tiempo de garantía))
+          </li>
+        </ul>
+      </div>
+
+      <div class="limitations">
+        <h2>Limitaciones de SATA III</h2>
+        <p>
+          La interfaz SATA III nació en 2009. Su límite teórico es 6
+          Gigabits/segundo.
+        </p>
+        <ul>
+          <li><strong>Teórico:</strong> 600 MB/s</li>
+          <li><strong>Real efectivo:</strong> ~550 - 560 MB/s.</li>
+        </ul>
+        <p>
+          🔑 <strong>El cuello de botella:</strong> Hoy en día, casi cualquier
+          SSD decente satura el bus SATA. Por eso, al comparar SSDs SATA de gama
+          alta vs baja, la velocidad secuencial máxima es irrelevante (todos
+          dicen "550 MB/s").
+        </p>
+        <p>La diferencia real está en:</p>
+        <ul>
+          <li>Velocidad aleatoria (IOPS)</li>
+          <li>Durabilidad (TBW)</li>
+          <li>Rendimiento sostenido (no caer de velocidad)</li>
+        </ul>
+      </div>
+
+      <div class="comparison">
+        <h2>Comparativa General del Mercado</h2>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Tecnología</th>
+                <th>Velocidad (MB/s)</th>
+                <th>Precio/GB</th>
+                <th>Interfaz</th>
+                <th>Uso Ideal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>HDD Mecánico</td>
+                <td>80 – 160</td>
+                <td>Muy Bajo</td>
+                <td>SATA</td>
+                <td>Backups, Archivos fríos (Fotos/Videos)</td>
+              </tr>
+              <tr>
+                <td><strong>SSD SATA</strong></td>
+                <td><strong>~560 (Tope)</strong></td>
+                <td><strong>Medio</strong></td>
+                <td><strong>SATA III</strong></td>
+                <td>
+                  <strong>Sistemas básicos, Revivir laptops, Juegos</strong>
+                </td>
+              </tr>
+              <tr>
+                <td>NVMe PCIe 3.0</td>
+                <td>3,500</td>
+                <td>Medio-Alto</td>
+                <td>M.2</td>
+                <td>Gamer estándar, Usuario avanzado</td>
+              </tr>
+              <tr>
+                <td>NVMe PCIe 4.0</td>
+                <td>7,400</td>
+                <td>Alto</td>
+                <td>M.2</td>
+                <td>PS5, PC Gama Alta, Edición Video</td>
+              </tr>
+              <tr>
+                <td>NVMe PCIe 5.0</td>
+                <td>12,000+</td>
+                <td>Premium</td>
+                <td>M.2</td>
+                <td>Entusiastas extremos, Servidores</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="practice">
+        <h2>Práctica y Análisis</h2>
+        <h3>1. Análisis de Hardware Real</h3>
+        <p>
+          Usaremos las fichas técnicas de 3 modelos populares (Kingston A400,
+          Crucial MX500, Samsung 870 QVO).
+          <br />
+          Identificaremos: ¿Tiene DRAM? ¿Qué tipo de NAND usa? ¿Cuál es su
+          garantía en TBW?
+        </p>
+       
+        <h3>Arquitectura y Componentes</h3>
+        <ol>
+          <li>
+            ¿Cuáles son los 4 componentes principales de un SSD SATA? Incluye un
+            diagrama o imagen de la PCB señalando cada uno.
+          </li>
+          <li>
+            Explica qué es el controlador y por qué es tan importante. 
+          </li>
+          <!-- <li>
+            ¿Qué significa "FTL" (Flash Translation Layer) y qué función cumple?
+          </li> -->
+        </ol>
+        <h3>Tipos de NAND y Rendimiento</h3>
+        <ol>
+         
+          <li>
+            ¿Por qué la memoria QLC es más barata que la TLC? 
+          </li>
+          <li>
+            ¿Recomendarías un SSD QLC como disco principal del sistema
+            operativo? 
+          </li>
+          <li>
+            Explica la diferencia entre SSD con DRAM y DRAM-less. ¿Cuál
+            recomendarías para Windows 11?
+          </li>
+        </ol>
+        <h3>Caché, Durabilidad y Cálculos</h3>
+        <ol>
+          
+          
+          <li>
+            Calcula el DWPD de un Samsung 870 EVO 1TB (600 TBW, 5 años). Muestra
+            el desarrollo.
+          </li>
+
+          
+          <li>
+            ¿Qué es HMB (Host Memory Buffer) y cómo ayuda a los SSDs DRAM-less?
+          </li>
+        </ol>
+        <h3>Calculadora de Vida Útil</h3>
+        <p>
+          Calcula la vida estimada en AÑOS para 3 modelos (Gama Baja, Media,
+          Alta) bajo 3 escenarios de uso (buscar 1 de cada gama y buscar su TBW):
+        </p>
+        <ul>
+          <li>Usuario Ofimática (10 GB/día)</li>
+          <li>Usuario Gamer (50 GB/día)</li>
+          <li>Editor de Video (100 GB/día)</li>
+        </ul>
+        <p>
+          Reflexión: ¿Es realista preocuparse por "quemar" el SSD en uso
+          doméstico?
+        </p>
+        
+      </div>
+
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-dos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="hardware2-sesion1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 1
+        </a>
+        <a
+          href="hardware2-sesion3.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 3
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Almacenamiento Avanzado I: Discos Duros (HDD) Profundizado</title>
+    <title>Sesión 1: Almacenamiento Avanzado - Discos Duros (HDD)</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -197,7 +197,7 @@
           Ir a Sesión 2
         </a>
       </div>
-      <h1>Almacenamiento Avanzado I: Discos Duros (HDD)</h1>
+      <h1>Sesión 1: Almacenamiento Avanzado: Discos Duros (HDD)</h1>
       <p></p>
 
       <div class="toc">
@@ -295,41 +295,43 @@
           Históricamente, más RPM significaba más velocidad, pero hoy en día hay
           un factor igual de importante: la densidad de datos.
         </p>
-        <table>
-          <thead>
-            <tr>
-              <th>RPM</th>
-              <th>Uso Típico</th>
-              <th>Ventajas</th>
-              <th>Desventajas</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>5400 RPM</td>
-              <td>Almacenamiento masivo, CCTV, NAS Hogar</td>
-              <td>Silenciosos, fríos, menor consumo, mayor vida útil.</td>
-              <td>Mayor latencia (tiempo de búsqueda más lento).</td>
-            </tr>
-            <tr>
-              <td>7200 RPM</td>
-              <td>Escritorio, Gaming económico, NAS Pro, Enterprise</td>
-              <td>
-                Mejor tiempo de acceso, mayor tasa de transferencia sostenida.
-              </td>
-              <td>Más ruido, vibración y temperatura. Mayor desgaste.</td>
-            </tr>
-            <tr>
-              <td>10k / 15k RPM</td>
-              <td>Servidores Legacy (En desuso)</td>
-              <td>Tiempos de búsqueda muy bajos para ser mecánicos.</td>
-              <td>
-                OBSOLETOS: Reemplazados casi totalmente por SSDs Enterprise por
-                costo/beneficio.
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>RPM</th>
+                <th>Uso Típico</th>
+                <th>Ventajas</th>
+                <th>Desventajas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>5400 RPM</td>
+                <td>Almacenamiento masivo, CCTV, NAS Hogar</td>
+                <td>Silenciosos, fríos, menor consumo, mayor vida útil.</td>
+                <td>Mayor latencia (tiempo de búsqueda más lento).</td>
+              </tr>
+              <tr>
+                <td>7200 RPM</td>
+                <td>Escritorio, Gaming económico, NAS Pro, Enterprise</td>
+                <td>
+                  Mejor tiempo de acceso, mayor tasa de transferencia sostenida.
+                </td>
+                <td>Más ruido, vibración y temperatura. Mayor desgaste.</td>
+              </tr>
+              <tr>
+                <td>10k / 15k RPM</td>
+                <td>Servidores Legacy (En desuso)</td>
+                <td>Tiempos de búsqueda muy bajos para ser mecánicos.</td>
+                <td>
+                  OBSOLETOS: Reemplazados casi totalmente por SSDs Enterprise
+                  por costo/beneficio.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <p>🧠 <strong>Concepto Clave: Densidad Areal</strong></p>
         <p>
           Es la cantidad de bits que caben en una pulgada cuadrada de superficie
@@ -455,56 +457,59 @@
 
       <div class="uses">
         <h2>HDD para Usos Específicos y Precios</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Categoría</th>
-              <th>Línea WD</th>
-              <th>Línea Seagate</th>
-              <th>Características</th>
-              <th>Precio Aprox. (4TB)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Escritorio / PC</td>
-              <td>Blue</td>
-              <td>BarraCuda</td>
-              <td>
-                Uso general, 8 horas/día. Muchos son SMR. No aptos para RAID.
-              </td>
-              <td>$85 USD / $110.000 ARS</td>
-            </tr>
-            <tr>
-              <td>NAS / Pyme</td>
-              <td>Red Plus</td>
-              <td>IronWolf</td>
-              <td>
-                24/7, Tecnología CMR, Firmware anti-vibración, aptos RAID.
-              </td>
-              <td>$105 USD / $136.000 ARS</td>
-            </tr>
-            <tr>
-              <td>Vigilancia</td>
-              <td>Purple</td>
-              <td>SkyHawk</td>
-              <td>
-                24/7, Priorizan escritura (no perder cuadros de video) sobre
-                lectura.
-              </td>
-              <td>$95 USD / $123.000 ARS</td>
-            </tr>
-            <tr>
-              <td>Enterprise</td>
-              <td>Gold</td>
-              <td>Exos</td>
-              <td>
-                Máxima fiabilidad, 5 años garantía, alto rendimiento, ruidosos.
-              </td>
-              <td>$130 USD / $169.000 ARS</td>
-            </tr>
-          </tbody>
-        </table>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Categoría</th>
+                <th>Línea WD</th>
+                <th>Línea Seagate</th>
+                <th>Características</th>
+                <th>Precio Aprox. (4TB)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Escritorio / PC</td>
+                <td>Blue</td>
+                <td>BarraCuda</td>
+                <td>
+                  Uso general, 8 horas/día. Muchos son SMR. No aptos para RAID.
+                </td>
+                <td>$85 USD / $110.000 ARS</td>
+              </tr>
+              <tr>
+                <td>NAS / Pyme</td>
+                <td>Red Plus</td>
+                <td>IronWolf</td>
+                <td>
+                  24/7, Tecnología CMR, Firmware anti-vibración, aptos RAID.
+                </td>
+                <td>$105 USD / $136.000 ARS</td>
+              </tr>
+              <tr>
+                <td>Vigilancia</td>
+                <td>Purple</td>
+                <td>SkyHawk</td>
+                <td>
+                  24/7, Priorizan escritura (no perder cuadros de video) sobre
+                  lectura.
+                </td>
+                <td>$95 USD / $123.000 ARS</td>
+              </tr>
+              <tr>
+                <td>Enterprise</td>
+                <td>Gold</td>
+                <td>Exos</td>
+                <td>
+                  Máxima fiabilidad, 5 años garantía, alto rendimiento,
+                  ruidosos.
+                </td>
+                <td>$130 USD / $169.000 ARS</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div class="specs">
@@ -528,42 +533,45 @@
       </div>
       <div class="market">
         <h2>Análisis de Mercado Argentina 2026</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Capacidad</th>
-              <th>Precio Aprox (ARS)</th>
-              <th>Costo por TB</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>HDD WD Blue</td>
-              <td>2 TB</td>
-              <td>$75.000</td>
-              <td>$37.500 / TB</td>
-            </tr>
-            <tr>
-              <td>SSD SATA Kingston</td>
-              <td>1 TB</td>
-              <td>$65.000</td>
-              <td>$65.000 / TB</td>
-            </tr>
-            <tr>
-              <td>HDD Seagate IronWolf</td>
-              <td>8 TB</td>
-              <td>$240.000</td>
-              <td><strong>$30.000 / TB</strong></td>
-            </tr>
-            <tr>
-              <td>SSD NVMe Gen4</td>
-              <td>2 TB</td>
-              <td>$160.000</td>
-              <td>$80.000 / TB</td>
-            </tr>
-          </tbody>
-        </table>
+        <div style="overflow-x: auto">
+
+          <table>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Capacidad</th>
+                <th>Precio Aprox (ARS)</th>
+                <th>Costo por TB</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>HDD WD Blue</td>
+                <td>2 TB</td>
+                <td>$75.000</td>
+                <td>$37.500 / TB</td>
+              </tr>
+              <tr>
+                <td>SSD SATA Kingston</td>
+                <td>1 TB</td>
+                <td>$65.000</td>
+                <td>$65.000 / TB</td>
+              </tr>
+              <tr>
+                <td>HDD Seagate IronWolf</td>
+                <td>8 TB</td>
+                <td>$240.000</td>
+                <td><strong>$30.000 / TB</strong></td>
+              </tr>
+              <tr>
+                <td>SSD NVMe Gen4</td>
+                <td>2 TB</td>
+                <td>$160.000</td>
+                <td>$80.000 / TB</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <p>
           <strong>Conclusión:</strong> El HDD sigue siendo aproximadamente
           <strong>2 a 3 veces más barato</strong> por Terabyte que el SSD.
@@ -662,9 +670,7 @@
             de 7200 RPM? (Pensar en ruido, calor y consumo). ¿En qué escenarios
             los elegirías?
           </li>
-          <li>
-            ¿Que escandalo ocurrio con los SMR?
-          </li>
+          <li>¿Que escandalo ocurrio con los SMR?</li>
           <li>
             Mencionar 3 marcas principales de discos duros y detalla sus líneas
             de colores o nombres para los siguientes usos: Escritorio / Uso
