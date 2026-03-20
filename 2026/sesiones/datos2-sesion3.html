@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 3: Formatos y Compatibilidad</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      header {
+        color: white;
+        padding: 20px;
+        text-align: center;
+        border-radius: 8px 8px 0 0;
+      }
+      h1,
+      h2 {
+        color: #2c3e50;
+      }
+      h2 {
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+      }
+      .objectives {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .theory {
+        background-color: #fef9e7;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .example {
+        background-color: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .comparison {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .practice {
+        background-color: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #27ae60;
+      }
+      .exercise {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #e74c3c;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      code {
+        background-color: #f4f4f4;
+        padding: 5px;
+        border-radius: 3px;
+        font-family: monospace;
+        display: block;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="datos2-sesion2.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 2
+        </a>
+        <a
+          href="datos2-sesion4.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 4
+        </a>
+      </div>
+      <header>
+        <h1>Clase 3: Formatos y Compatibilidad</h1>
+      </header>
+
+      <div class="objectives">
+        <h2>🎯 Objetivos de Aprendizaje:</h2>
+        <ul>
+          <li>Distinguir entre formatos propietarios (cerrados) y abiertos.</li>
+          <li>
+            Comprender la importancia de la interoperabilidad entre sistemas.
+          </li>
+          <li>
+            Conocer y aplicar formatos estándar de intercambio: CSV, TXT, XML,
+            JSON.
+          </li>
+          <li>
+            Identificar los problemas más comunes de compatibilidad y sus
+            causas.
+          </li>
+          <li>
+            Realizar conversiones manuales y con software de texto plano a
+            planilla de cálculo.
+          </li>
+        </ul>
+      </div>
+
+      <div class="theory">
+        <h2>📖 La Torre de Babel Digital</h2>
+        <p>
+          Imagina que le mandás una carta escrita en español a alguien que solo
+          lee japonés. No hay comunicación posible, aunque las palabras estén
+          físicamente escritas. En informática ocurre exactamente lo mismo: si
+          un sistema guarda información en un formato que otro sistema no
+          entiende, los datos existen pero son inaccesibles o se interpretan de
+          forma incorrecta.
+        </p>
+        <p>
+          Este problema es más frecuente de lo que parece. Una empresa puede
+          exportar datos desde su sistema de gestión en un formato específico y,
+          al intentar importarlos en otro programa, encontrar que las fechas
+          aparecen al revés, los nombres tienen símbolos raros o las columnas no
+          coinciden. Ese caos tiene nombre:
+          <strong>incompatibilidad de formatos</strong>.
+        </p>
+        <p>
+          En esta clase vamos a entender por qué sucede esto, qué formatos
+          universales existen para evitarlo y cómo convertir datos correctamente
+          sin perder información en el intento.
+        </p>
+      </div>
+
+      <div class="theory">
+        <h2>📚 Tipos de Formatos de Archivo:</h2>
+        <h3>Formatos Propietarios (Cerrados):</h3>
+        <p>
+          Son diseñados y controlados por una empresa específica. Solo el
+          software oficial de esa empresa garantiza abrirlos y editarlos
+          perfectamente.
+        </p>
+        <p>
+          <strong>Ejemplos:</strong> .PSD (Adobe Photoshop), .AI (Adobe
+          Illustrator), .NUMBERS (Apple), .CDR (CorelDraw).
+        </p>
+        <p>
+          ⚠ <strong>Riesgo:</strong> Si la empresa cierra, cambia el formato o
+          deja de actualizar el programa, los archivos quedan "huérfanos" y
+          pueden volverse ilegibles con el tiempo.
+        </p>
+        <p>🔎 <strong>Caso Real — El Problema de WordPerfect:</strong></p>
+        <p>
+          En los años 90, WordPerfect era el procesador de texto más popular del
+          mundo. Millones de documentos se guardaron en su formato propietario
+          .WPD. Cuando Microsoft Word tomó el mercado, muchos de esos documentos
+          quedaron inaccesibles porque ningún programa moderno los abría
+          correctamente. Las empresas que habían guardado contratos y documentos
+          legales en ese formato tuvieron que invertir tiempo y dinero en
+          recuperarlos. La lección: los formatos abiertos protegen tu
+          información en el futuro.
+        </p>
+        <h3>Formatos Abiertos (Libres):</h3>
+        <p>
+          Sus especificaciones técnicas son públicas. Cualquier desarrollador
+          puede crear software para leerlos o escribirlos.
+        </p>
+        <p>
+          <strong>Ejemplos:</strong> .TXT, .CSV, .XML, .JSON, .PNG, .PDF/A,
+          .ODT, .SVG.
+        </p>
+        <p>
+          ✅ <strong>Ventaja:</strong> Son ideales para preservar información a
+          largo plazo e intercambiar datos entre sistemas distintos.
+        </p>
+      </div>
+
+      <div class="theory">
+        <h2>📖 Los Cuatro Formatos Universales de Intercambio</h2>
+        <h3>📄 A. TXT — Texto Plano</h3>
+        <p>
+          Es el formato más básico y universal de todos. No tiene formato visual
+          de ningún tipo: sin negritas, sin colores, sin tablas. Solo caracteres
+          de texto.
+          <strong
+            >Cualquier sistema, en cualquier idioma y en cualquier época, puede
+            abrir un archivo TXT.</strong
+          >
+        </p>
+        <p>
+          Se usa para archivos de configuración de sistemas, logs (registros de
+          eventos), scripts y cualquier situación donde la simplicidad sea
+          prioritaria.
+        </p>
+        <!-- <p><strong>Ejemplo de archivo TXT (log de sistema):</strong></p>
+        <code>
+          [2026-03-15 08:32:01] Inicio de sesión: usuario admin [2026-03-15
+          08:45:12] Archivo modificado: ventas_marzo.xlsx [2026-03-15 09:01:55]
+          Error: Disco externo no encontrado [2026-03-15 09:02:10] Sesión
+          cerrada: usuario admin
+        </code> -->
+        <h3>
+          📊 B. CSV — Comma Separated Values (Valores Separados por Comas)
+        </h3>
+        <p>
+          Es el formato de intercambio de datos tabulares (tablas) más usado del
+          mundo. Ideal para mover datos entre Excel, Google Sheets, bases de
+          datos y sistemas web. Cada línea es una fila y los valores de cada
+          columna se separan por un delimitador (coma o punto y coma).
+        </p>
+        <p>
+          La primera línea generalmente contiene los
+          <strong>encabezados</strong> de las columnas.
+        </p>
+        <!-- <p><strong>Ejemplo de archivo CSV (lista de alumnos):</strong></p>
+        <code>
+          Apellido,Nombre,DNI,Fecha_Nacimiento,Promedio
+          Rodríguez,Ana,45123456,2009-07-15,8.50
+          Gómez,Lucas,45234567,2009-11-03,7.20
+          Fernández,Sofía,45345678,2010-02-28,9.10
+          Pérez,Matías,45456789,2009-09-20,6.80
+        </code> -->
+        <h3>🔑 Reglas importantes del CSV:</h3>
+        <ul>
+          <li>
+            Si un campo contiene el carácter delimitador, debe encerrarse entre
+            comillas dobles. Ej: "Rodríguez, Ana" (el apellido con coma adentro
+            va entre comillas).
+          </li>
+          <li>
+            Si un campo contiene comillas dobles, se duplican para "escaparlas".
+            Ej: "Dijo ""hola""" representa el texto: Dijo "hola".
+          </li>
+          <li>
+            Las celdas vacías se representan con dos delimitadores juntos. Ej:
+            Ana,,45123456 (sin nombre del medio).
+          </li>
+        </ul>
+        <h3>🏷 C. XML — eXtensible Markup Language</h3>
+        <p>
+          XML es un lenguaje de marcado diseñado para almacenar y transportar
+          datos de forma estructurada y autodescriptiva. Usa etiquetas (similar
+          a HTML) que el propio usuario define según sus necesidades.
+        </p>
+        <p>
+          A diferencia del CSV, XML puede representar estructuras de datos
+          complejas y jerárquicas (datos dentro de datos). Es muy usado en
+          sistemas empresariales, servicios web, archivos de configuración y
+          facturación electrónica (la AFIP en Argentina usa XML para las
+          facturas electrónicas).
+        </p>
+        <p>
+          <!-- <strong>Ejemplo de archivo XML (mismo listado de alumnos):</strong>
+        </p>
+         <pre><code>
+
+            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+            &lt;alumnos>
+              &lt;alumno id="1">
+                &lt;apellido>Rodríguez</apellido>
+                &lt;nombre>Ana</nombre>
+                &lt;dni>45123456</dni>
+                &lt;fecha_nacimiento>2009-07-15</fecha_nacimiento>
+                &lt;promedio>8.50</promedio>
+              </alumno>
+              &lt;alumno id="2">
+                &lt;apellido>Gómez</apellido>
+                &lt;nombre>Lucas</nombre>
+                &lt;dni>45234567</dni>
+                &lt;fecha_nacimiento>2009-11-03</fecha_nacimiento>
+                &lt;promedio>7.20</promedio>
+              </alumno>
+            </alumnos>
+          
+        </code></pre> -->
+        </p>
+
+        <h3>🌐 D. JSON — JavaScript Object Notation</h3>
+        <p>
+          JSON es el formato moderno y preferido para intercambio de datos en
+          aplicaciones web y APIs (los servicios que usan las apps de tu celular
+          para obtener datos de internet). Es más compacto que XML y muy fácil
+          de leer y escribir para los programadores.
+        </p>
+        <p>
+          Utiliza dos estructuras básicas: objetos (pares clave-valor entre
+          llaves {}) y arreglos (listas de valores entre corchetes []).
+        </p>
+        <!-- <p>
+          <strong>Ejemplo de archivo JSON (mismo listado de alumnos):</strong>
+        </p>
+        <code>
+          { "curso": "5to 2do", "anio": 2026, "alumnos": [ { "apellido":
+          "Rodríguez", "nombre": "Ana", "dni": 45123456, "fecha_nacimiento":
+          "2009-07-15", "promedio": 8.50 }, { "apellido": "Gómez", "nombre":
+          "Lucas", "dni": 45234567, "fecha_nacimiento": "2009-11-03",
+          "promedio": 7.20 } ] }
+        </code> -->
+      </div>
+
+      <div class="theory">
+        <h2>📖 Problemas Comunes de Compatibilidad</h2>
+        <h3>⚡ A. Problemas de Codificación de Caracteres (Encoding)</h3>
+        <p>
+          Las computadoras guardan texto como números. Para saber qué número
+          corresponde a qué letra, usan una tabla de codificación. El problema
+          surge cuando dos programas usan tablas distintas.
+        </p>
+        <p><strong>Codificaciones más importantes:</strong></p>
+        <ul>
+          <li>
+            <strong>ASCII:</strong> La más antigua (1963). Solo contempla letras
+            del inglés (128 caracteres). No incluye la ñ, los acentos (á, é, í,
+            ó, ú) ni caracteres de otros idiomas.
+          </li>
+          <li>
+            <strong>ISO-8859-1 / Latin-1:</strong> Extensión de ASCII para
+            idiomas occidentales. Incluye ñ y acentos. Muy usada en Argentina
+            durante años.
+          </li>
+          <li>
+            <strong>UTF-8:</strong> El estándar moderno y universal. Puede
+            representar más de 1 millón de caracteres: español, chino, árabe,
+            emojis 😊, y más.
+            <strong>Es la codificación recomendada hoy en día.</strong>
+          </li>
+        </ul>
+        <p>🧪 <strong>Ejemplo de error por encoding:</strong></p>
+        <p>
+          Un archivo generado en un sistema argentino antiguo (Latin-1) dice:
+        </p>
+        <p>José Martínez — Dirección: Rincón 342</p>
+        <p>
+          Si lo abrís con un programa configurado en UTF-8, puede aparecer como:
+        </p>
+        <p>José Martínez — Dirección: Rincón 342 o con signos raros como:</p>
+        <p>Josß Martßnez</p>
+        <p>
+          Los datos no se perdieron, solo se están "leyendo con el libro de
+          códigos equivocado".
+        </p>
+        <h3>⚡ B. Problemas con Separadores (Delimitadores)</h3>
+        <p>
+          En archivos CSV, los datos se separan por un carácter especial llamado
+          delimitador. El estándar internacional usa la coma (,), pero Argentina
+          y muchos países de habla hispana usan el punto y coma (;) porque la
+          coma ya se usa como separador decimal en los números (escribimos
+          $1.500,50 en vez de $1,500.50).
+        </p>
+        <p>
+          ⚠ <strong>Error muy común:</strong> Exportás una tabla de Excel a CSV
+          y al abrirla en otro programa todos los datos aparecen en UNA SOLA
+          columna. Causa: el archivo usa punto y coma pero el programa espera
+          comas. Solución: revisar y especificar el delimitador correcto al
+          importar.
+        </p>
+        <h3>⚡ C. Problemas con Formatos de Fecha y Número</h3>
+        <p>
+          No todos los países escriben las fechas igual, y eso genera conflictos
+          al intercambiar datos:
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>País / Sistema</th>
+              <th>Formato de fecha</th>
+              <th>Ejemplo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>🇦🇷 Argentina / Europa</td>
+              <td>DD/MM/AAAA</td>
+              <td>15/03/2026 → 15 de marzo</td>
+            </tr>
+            <tr>
+              <td>Estados Unidos</td>
+              <td>MM/DD/AAAA</td>
+              <td>03/15/2026 → 15 de marzo</td>
+            </tr>
+            <tr>
+              <td>🌐 ISO 8601 (Universal)</td>
+              <td>AAAA-MM-DD</td>
+              <td>2026-03-15 → 15 de marzo</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Si un sistema americano exporta y lo importa un sistema argentino, lo
+          leerá como 1 de febrero cuando en realidad es 2 de enero. En contextos
+          de salud, finanzas o logística, este tipo de error puede tener
+          consecuencias graves.
+        </p>
+        <h3>⚡ D. Problemas de Fin de Línea (Line Endings)</h3>
+        <p>
+          Windows, Linux y Mac representan el "salto de línea" de manera
+          diferente. Cuando se intercambian archivos de texto entre sistemas
+          distintos, a veces aparecen caracteres extraños o todo el texto queda
+          en una sola línea.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Sistema Operativo</th>
+              <th>Carácter de fin de línea</th>
+              <th>Código</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Windows</td>
+              <td>CR + LF (Carriage Return + Line Feed)</td>
+              <td>\\r\\n</td>
+            </tr>
+            <tr>
+              <td>Linux / Mac moderno</td>
+              <td>LF (Line Feed)</td>
+              <td>\\n</td>
+            </tr>
+            <tr>
+              <td>Mac antiguo (pre-2001)</td>
+              <td>CR (Carriage Return)</td>
+              <td>\\r</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="comparison">
+        <h2>📊 Tabla Comparativa de Formatos</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th>TXT</th>
+              <th>CSV</th>
+              <th>XML</th>
+              <th>JSON</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Legibilidad humana</td>
+              <td>✅ Muy alta</td>
+              <td>✅ Alta</td>
+              <td>⚠ Media</td>
+              <td>✅ Alta</td>
+            </tr>
+            <tr>
+              <td>Estructura de datos</td>
+              <td>❌ Sin estructura</td>
+              <td>⚠ Solo tablas planas</td>
+              <td>✅ Jerárquica compleja</td>
+              <td>✅ Jerárquica moderna</td>
+            </tr>
+            <tr>
+              <td>Tamaño de archivo</td>
+              <td>✅ Mínimo</td>
+              <td>✅ Pequeño</td>
+              <td>❌ Grande (verboso)</td>
+              <td>✅ Compacto</td>
+            </tr>
+            <tr>
+              <td>Uso principal</td>
+              <td>Logs, config</td>
+              <td>Planillas, BD</td>
+              <td>Empresas, AFIP</td>
+              <td>APIs web, apps</td>
+            </tr>
+            <tr>
+              <td>Compatible con Excel</td>
+              <td>⚠ Limitado</td>
+              <td>✅ Nativo</td>
+              <td>⚠ Con plugin</td>
+              <td>⚠ Con herramienta</td>
+            </tr>
+            <tr>
+              <td>Soporta tipos de dato</td>
+              <td>❌ Solo texto</td>
+              <td>⚠ Solo texto</td>
+              <td>✅ Con esquema</td>
+              <td>✅ Texto, número, bool</td>
+            </tr>
+            <tr>
+              <td>Estándar internacional</td>
+              <td>✅ Sí</td>
+              <td>✅ RFC 4180</td>
+              <td>✅ W3C</td>
+              <td>✅ RFC 8259</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="theory">
+        <h2>📊 Conversión entre Formatos: ¿Qué se mantiene y qué se pierde?</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Conversión</th>
+              <th>Se conserva ✅</th>
+              <th>Se pierde ❌</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Word (.docx) → TXT</td>
+              <td>Todo el texto</td>
+              <td>Formato, imágenes, tablas, colores, fuentes</td>
+            </tr>
+            <tr>
+              <td>Excel (.xlsx) → CSV</td>
+              <td>Datos y texto de celdas</td>
+              <td>Fórmulas, gráficos, colores, múltiples hojas</td>
+            </tr>
+            <tr>
+              <td>JSON → CSV</td>
+              <td>Datos del nivel principal</td>
+              <td>Datos anidados (sub-objetos), tipos de dato</td>
+            </tr>
+            <tr>
+              <td>XML → JSON</td>
+              <td>Estructura y datos</td>
+              <td>Atributos XML, comentarios, instrucciones</td>
+            </tr>
+            <tr>
+              <td>BMP → JPG (con compresión)</td>
+              <td>Imagen visual aproximada</td>
+              <td>Calidad original (pérdida irreversible)</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>⚠ <strong>Concepto clave — Compresión con y sin pérdida:</strong></p>
+        <ul>
+          <li>
+            <strong>Sin pérdida (Lossless):</strong> PNG, ZIP, FLAC. El archivo
+            reducido contiene TODA la información original. Al descomprimir, se
+            recupera el archivo exacto.
+          </li>
+          <li>
+            <strong>Con pérdida (Lossy):</strong> JPG, MP3, AAC. Para reducir
+            tamaño, descarta información que el ojo/oído difícilmente nota.
+            <strong
+              >Una vez comprimido así, la calidad original NO se puede
+              recuperar</strong
+            >, aunque se convierta a otro formato.
+          </li>
+        </ul>
+      </div>
+      <div class="exercise">
+        <h2>🔄 Búsqueda</h2>
+        <h3>Cuatro Formatos Universales</h3>
+        <h4>
+          Buscar imágenes y archivos en paginas web de los cuatro formatos
+          universales para familiarizarse y conocer como están distribuidos y
+          organizados los datos
+        </h4>
+        <ol>
+          <ul>
+            Existen webs que ofrecer archivos de este tipo de formatos para
+            realizar practicas
+          </ul>
+        </ol>
+      </div>
+      <div class="practice">
+        <h2>
+          🖥 Guía Práctica — Conversión de Texto Plano a Planilla de Cálculo
+        </h2>
+        <h3>GUÍA PASO A PASO: Importar CSV en Microsoft Excel</h3>
+        <ol>
+          <li>
+            Abrí Microsoft Excel. Andá a
+            <strong>Datos → Obtener datos externos → Desde texto/CSV</strong>.
+          </li>
+          <li>Seleccioná el archivo .csv o .txt que querés importar.</li>
+          <li>
+            Excel mostrará una <strong>Vista Previa</strong>. Prestar atención
+            al tipo de delimitador detectado.
+          </li>
+          <li>
+            Si los datos aparecen en una sola columna, cambiá el separador de
+            Coma a Punto y coma (o viceversa) hasta que las columnas se separen
+            correctamente.
+          </li>
+          <li>
+            Verificá la <strong>codificación de caracteres</strong>: si los
+            acentos y la ñ se ven mal, cambiá de UTF-8 a ISO-8859-1 (Latin-1) o
+            al revés.
+          </li>
+          <li>
+            Verificá el <strong>formato de las columnas</strong>: columnas de
+            fechas, números o texto deben marcarse correctamente para que Excel
+            no las interprete mal.
+          </li>
+          <li>
+            Hacé clic en <strong>Cargar</strong> o <strong>Importar</strong>.
+          </li>
+        </ol>
+      </div>
+
+      <div class="exercise">
+        <h2>🔄 Ejercicios y Actividades</h2>
+        <h3>━━━ PARTE A: COMPRENSIÓN TEÓRICA ━━━</h3>
+        <h4>Ejercicio 1 — Formatos abiertos vs propietarios</h4>
+        <p>
+          Clasificá cada uno de los siguientes formatos escribiendo
+          <strong>A</strong> (Abierto) o <strong>P</strong> (Propietario) en el
+          espacio indicado. Justificá al menos 3 de tus respuestas.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Formato</th>
+              <th>Tipo (A/P)</th>
+              <th>Justificación (completar 3)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>.TXT</td>
+              <td></td>
+              <td>
+                <!-- Es un formato de texto plano sin restricciones de propiedad. -->
+              </td>
+            </tr>
+            <tr>
+              <td>.DOCX (Word moderno)</td>
+              <td></td>
+              <td>
+                <!-- Es un formato desarrollado y controlado por Microsoft. -->
+              </td>
+            </tr>
+            <tr>
+              <td>.PSD (Photoshop)</td>
+              <td></td>
+              <td>
+                <!-- Es un formato desarrollado y controlado por Adobe. -->
+              </td>
+            </tr>
+            <tr>
+              <td>.CSV</td>
+              <td></td>
+              <td>
+                <!-- Es un formato estándar para intercambio de datos. -->
+              </td>
+            </tr>
+            <tr>
+              <td>.ODT (LibreOffice)</td>
+              <td></td>
+              <td>
+                <!-- Es un formato abierto desarrollado por la comunidad de
+                LibreOffice. -->
+              </td>
+            </tr>
+            <tr>
+              <td>.AI (Adobe Illustrator)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>.JSON</td>
+              <td></td>
+              <td>
+                <!-- Es un formato estándar para intercambio de datos en la web. -->
+              </td>
+            </tr>
+            <tr>
+              <td>.MP3</td>
+              <td></td>
+              <td>
+                <!-- Es un formato estándar para audio. -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h4>Ejercicio 2 — Errores de codificación</h4>
+        <p>
+          Un técnico recibe un archivo CSV exportado por un sistema del hospital
+          local. Al abrirlo en Excel, los nombres de los pacientes aparecen con
+          símbolos raros: Josß Ramßrez.
+        </p>
+        <ol>
+          <li>
+            ¿Qué tipo de problema es este?<strong>
+              (encoding / delimitador / fecha / fin de línea)</strong
+            >
+          </li>
+          <li>
+            ¿Cuál es probablemente la codificación del archivo original?
+            <strong>ASCII/ ISO-8859-1 - Latin-1 / UTF-8</strong>
+          </li>
+          <li>
+            ¿Qué codificación debería usar al abrirlo para ver los caracteres
+            correctamente? <strong>ASCII/ ISO-8859-1 - Latin-1 / UTF-8</strong>
+          </li>
+          <!-- <li>
+            ¿Es un problema de pérdida de datos o solo de interpretación?
+            <strong>Solo de interpretación</strong>
+          </li> -->
+        </ol>
+        <h4>Ejercicio 3 — Análisis de fechas</h4>
+        <p>
+          Un sistema americano exporta el siguiente CSV con información de
+          pedidos:
+        </p>
+        <code>
+          ID,Fecha_Pedido,Cliente,Total <br />
+          001,04/05/2026,Martínez,15000 <br />
+          002,05/04/2026,López,8500
+        </code>
+        <ol>
+          <li>
+            Interpretando las fechas con el formato
+            <strong>americano</strong> (MM/DD/AAAA), ¿qué días corresponden?
+            <!-- <strong>5 de abril y 15 de mayo</strong> -->
+          </li>
+          <li>
+            Interpretando con el formato
+            <strong>argentino</strong> (DD/MM/AAAA), ¿qué días corresponden?
+            <!-- <strong>4 de mayo y 5 de abril</strong> -->
+          </li>
+          <li>
+            ¿Cómo deberían estar escritas las fechas para evitar toda
+            ambigüedad?
+            <!-- <strong>2026-04-05 y 2026-05-04</strong> -->
+          </li>
+        </ol>
+        <h3>━━━ PARTE B: CONVERSIÓN MANUAL ━━━</h3>
+        <h4>Ejercicio 4 — De tabla a CSV</h4>
+        <p>
+          Convertí la siguiente tabla al formato CSV usando coma como
+          delimitador y con encabezados en la primera línea:
+        </p>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Precio</th>
+              <th>Stock</th>
+              <th>Categoría</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Monitor 24"</td>
+              <td>$85000</td>
+              <td>12</td>
+              <td>Periférico</td>
+            </tr>
+            <tr>
+              <td>Teclado mecánico</td>
+              <td>$32000</td>
+              <td>25</td>
+              <td>Periférico</td>
+            </tr>
+            <tr>
+              <td>SSD 1TB</td>
+              <td>$45000</td>
+              <td>8</td>
+              <td>Almacenamiento</td>
+            </tr>
+            <tr>
+              <td>Auriculares</td>
+              <td>$27000</td>
+              <td>15</td>
+              <td>Audio</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- <code>
+          Producto,Precio,Stock,Categoría "Monitor 24"",$85000,12,Periférico
+          Teclado mecánico,$32000,25,Periférico SSD 1TB,$45000,8,Almacenamiento
+          "Auriculares, gamer",$27000,15,Audio
+        </code> -->
+        <!-- <h4>Ejercicio 5 — De CSV a JSON</h4>
+        <p>
+          Tomá los primeros DOS productos del ejercicio anterior y convertílos
+          manualmente al formato JSON.
+        </p>
+        <p>
+          El JSON debe tener un array llamado <code>"productos"</code> que
+          contenga los objetos de cada artículo.
+        </p>
+        <code>
+          { "productos": [ { "Producto": "Monitor 24\"", "Precio": "$85000",
+          "Stock": 12, "Categoría": "Periférico" }, { "Producto": "Teclado
+          mecánico", "Precio": "$32000", "Stock": 25, "Categoría": "Periférico"
+          } ] }
+        </code> -->
+        <h4>Ejercicio 5 — De datos a XML</h4>
+        <p>
+          Usá los mismos datos de los productos (todos los del Ejercicio 4) y
+          representalos en formato XML.
+        </p>
+        <p>
+          El elemento raíz debe llamarse <code>&lt;inventario&gt;</code> (es
+          como si le dieramos titulo a la tabla)
+          <br />
+          y cada producto debe ir dentro de una etiqueta
+          <code>&lt;producto&gt;</code>
+        </p>
+        <!-- <code>
+          <inventario>
+            <producto>
+              <Producto>Monitor 24"</Producto>
+              <Precio>$85000</Precio>
+              <Stock>12</Stock>
+              <Categoría>Periférico</Categoría>
+            </producto>
+            <producto>
+              <Producto>Teclado mecánico</Producto>
+              <Precio>$32000</Precio>
+              <Stock>25</Stock>
+              <Categoría>Periférico</Categoría>
+            </producto>
+            <producto>
+              <Producto>SSD 1TB</Producto>
+              <Precio>$45000</Precio>
+              <Stock>8</Stock>
+              <Categoría>Almacenamiento</Categoría>
+            </producto>
+            <producto>
+              <Producto>Auriculares</Producto>
+              <Precio>$27000</Precio>
+              <Stock>15</Stock>
+              <Categoría>Audio</Categoría>
+            </producto>
+          </inventario>
+        </code> -->
+        <!-- <h3>━━━ PARTE C: ACTIVIDAD PRÁCTICA EN COMPUTADORA ━━━</h3>
+        <h4>Ejercicio 7 — Crear y abrir un CSV en Excel/LibreOffice</h4>
+        <p>Seguí estos pasos:</p>
+        <ol>
+          <li>Abrí el Bloc de Notas (Windows) o Gedit (Linux).</li>
+          <li>Escribí el siguiente contenido exactamente como se muestra:</li>
+          <code>
+            Apellido;Nombre;Materia;Nota;Fecha
+            Rodríguez;Ana;Sistemas;8;15/03/2026
+            Gómez;Lucas;Sistemas;7;15/03/2026
+            Fernández;Sofía;Sistemas;9;15/03/2026
+            Pérez;Matías;Sistemas;6;15/03/2026
+          </code>
+          <li>
+            Guardalo como <code>notas_sistemas.csv</code> (asegurate de guardar
+            con extensión .csv, no .txt).
+          </li>
+          <li>
+            Abrí Excel o LibreOffice Calc e importá el archivo usando el
+            asistente de importación.
+          </li>
+          <li>
+            Verificá que los datos queden en columnas separadas correctamente.
+          </li>
+          <li>
+            Aplicale formato a la planilla: poné los encabezados en negrita,
+            centrá la columna Nota y Fecha, y dale un color de fondo a la fila
+            de encabezados.
+          </li>
+          <li>Guardala como archivo de Excel (.xlsx).</li>
+        </ol>
+        <h4>Ejercicio 8 — Detectar el error</h4>
+        <p>
+          El siguiente archivo CSV fue exportado por un sistema, pero tiene
+          <strong>al menos 3 errores</strong> que van a causar problemas al
+          importarlo. Identificá cada error y explicá cómo corregirlo:
+        </p>
+        <code>
+          nombre,apellido,edad,promedio,ingreso Juan;García;15;8.5;2024-03-01
+          María,López,dieciséis,7,20 Pedro,Martínez,15,6.90,"2024,05,10"
+          Ana,"Rodríguez, Beatriz,14,9.20,2024-03-01
+        </code>
+        <ol>
+          <li>
+            Error 1: <strong>Delimitador inconsistente</strong> (usa punto y
+            coma en la primera línea y comas en las demás).
+          </li>
+          <li>
+            Error 2: <strong>Valor no numérico</strong> ("dieciséis" en lugar de
+            un número).
+          </li>
+          <li>
+            Error 3: <strong>Comillas mal usadas</strong> ("Rodríguez, Beatriz"
+            debería ser "Rodríguez, Beatriz" o "Rodríguez; Beatriz").
+          </li>
+        </ol> -->
+        <h3>━━━ PARTE C: ANÁLISIS Y REFLEXIÓN ━━━</h3>
+        <!-- <h4>Ejercicio 6 — Compresión con y sin pérdida</h4>
+        <p>
+          Sofía tiene una foto de la graduación de su hermana en formato BMP de
+          8 MB. La comprime a JPG de 500 KB para enviarla por WhatsApp. Luego su
+          mamá la guarda, la convierte nuevamente a BMP y la imprime en gran
+          tamaño.
+        </p>
+        <ol>
+          <li>
+            ¿La foto impresa tendrá la misma calidad que la original?
+            <strong>No, porque la compresión JPG es con pérdida.</strong>
+          </li>
+          <li>
+            ¿Qué debería haber hecho Sofía para enviarla por WhatsApp Y
+            conservar la calidad original?
+            <strong>Enviarla en formato PNG o mantenerla en BMP.</strong>
+          </li>
+          <li>
+            ¿Qué formato usarías para comprimir sin pérdida una imagen
+            importante? <strong>PNG o TIFF.</strong>
+          </li>
+        </ol>
+        <h4>Ejercicio 7 — El caso de la AFIP</h4>
+        <p>
+          La AFIP (Administración Federal de Ingresos Públicos) exige que las
+          facturas electrónicas en Argentina se emitan en formato XML.
+        </p>
+        <ol>
+          <li>
+            ¿Por qué creés que el Estado elige XML y no un formato propietario
+            como .XLS de Excel?
+            <strong
+              >Porque XML es un estándar abierto y garantiza
+              interoperabilidad.</strong
+            >
+          </li>
+          <li>
+            ¿Qué ventaja tiene XML para que tanto el sistema del comerciante
+            como el de la AFIP puedan leer los mismos archivos sin importar qué
+            software usa cada uno?
+            <strong
+              >Es autodescriptivo y puede ser validado con esquemas.</strong
+            >
+          </li>
+          <li>
+            Investigá: ¿qué es el comprobante electrónico CAE y en qué formato
+            se incluye en la factura?
+            <strong
+              >El CAE es un código de autorización electrónico que se incluye en
+              el XML de la factura.</strong
+            >
+          </li>
+        </ol>
+        <h4>Ejercicio 8 — Elección de formato</h4>
+        <p>
+          Para cada situación, elegí el formato más adecuado (TXT, CSV, XML,
+          JSON) y justificá tu elección:
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Situación</th>
+              <th>Formato elegido</th>
+              <th>Justificación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                Exportar el listado de alumnos de un sistema escolar para
+                abrirlo en Excel
+              </td>
+              <td>CSV</td>
+              <td>
+                Es el formato estándar para tablas y es compatible con Excel.
+              </td>
+            </tr>
+            <tr>
+              <td>Una app de celular que consulta el clima desde internet</td>
+              <td>JSON</td>
+              <td>
+                Es el formato preferido para APIs y es fácil de leer y escribir.
+              </td>
+            </tr>
+            <tr>
+              <td>Un sistema de facturación electrónica empresarial</td>
+              <td>XML</td>
+              <td>Es autodescriptivo y puede manejar estructuras complejas.</td>
+            </tr>
+            <tr>
+              <td>Un archivo de configuración simple de un programa</td>
+              <td>TXT</td>
+              <td>Es simple y universal, ideal para configuraciones.</td>
+            </tr>
+          </tbody>
+        </table> -->
+        <h4>Ejercicio 6 — Investigación: Herramientas de conversión</h4>
+        <p>Investigá y respondé:</p>
+        <ol>
+          <li>
+            ¿Qué hace la herramienta online <strong>csvjson.com</strong>?
+            <!-- <strong>Convierte archivos CSV a JSON y viceversa.</strong> -->
+          </li>
+          <li>
+            ¿Qué riesgos de privacidad existen al subir datos sensibles (DNI,
+            notas, datos bancarios) a conversores online?
+            <!-- <strong
+              >Exposición de datos a terceros y posible almacenamiento no
+              seguro.</strong> -->
+          </li>
+          <li>
+            ¿Qué alternativa local (sin internet) existe para convertir archivos
+            CSV a Excel en Windows?
+            <!-- <strong>Usar Excel o LibreOffice Calc.</strong> -->
+          </li>
+        </ol>
+      </div>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="datos2-sesion2.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 2
+        </a>
+        <a
+          href="datos2-sesion4.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 4
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
