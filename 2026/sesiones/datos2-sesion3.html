@@ -431,32 +431,34 @@
           No todos los países escriben las fechas igual, y eso genera conflictos
           al intercambiar datos:
         </p>
-        <table>
-          <thead>
-            <tr>
-              <th>País / Sistema</th>
-              <th>Formato de fecha</th>
-              <th>Ejemplo</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>🇦🇷 Argentina / Europa</td>
-              <td>DD/MM/AAAA</td>
-              <td>15/03/2026 → 15 de marzo</td>
-            </tr>
-            <tr>
-              <td>Estados Unidos</td>
-              <td>MM/DD/AAAA</td>
-              <td>03/15/2026 → 15 de marzo</td>
-            </tr>
-            <tr>
-              <td>🌐 ISO 8601 (Universal)</td>
-              <td>AAAA-MM-DD</td>
-              <td>2026-03-15 → 15 de marzo</td>
-            </tr>
-          </tbody>
-        </table>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>País / Sistema</th>
+                <th>Formato de fecha</th>
+                <th>Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>🇦🇷 Argentina / Europa</td>
+                <td>DD/MM/AAAA</td>
+                <td>15/03/2026 → 15 de marzo</td>
+              </tr>
+              <tr>
+                <td>Estados Unidos</td>
+                <td>MM/DD/AAAA</td>
+                <td>03/15/2026 → 15 de marzo</td>
+              </tr>
+              <tr>
+                <td>🌐 ISO 8601 (Universal)</td>
+                <td>AAAA-MM-DD</td>
+                <td>2026-03-15 → 15 de marzo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <p>
           Si un sistema americano exporta y lo importa un sistema argentino, lo
           leerá como 1 de febrero cuando en realidad es 2 de enero. En contextos
@@ -500,108 +502,112 @@
 
       <div class="comparison">
         <h2>📊 Tabla Comparativa de Formatos</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Característica</th>
-              <th>TXT</th>
-              <th>CSV</th>
-              <th>XML</th>
-              <th>JSON</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Legibilidad humana</td>
-              <td>✅ Muy alta</td>
-              <td>✅ Alta</td>
-              <td>⚠ Media</td>
-              <td>✅ Alta</td>
-            </tr>
-            <tr>
-              <td>Estructura de datos</td>
-              <td>❌ Sin estructura</td>
-              <td>⚠ Solo tablas planas</td>
-              <td>✅ Jerárquica compleja</td>
-              <td>✅ Jerárquica moderna</td>
-            </tr>
-            <tr>
-              <td>Tamaño de archivo</td>
-              <td>✅ Mínimo</td>
-              <td>✅ Pequeño</td>
-              <td>❌ Grande (verboso)</td>
-              <td>✅ Compacto</td>
-            </tr>
-            <tr>
-              <td>Uso principal</td>
-              <td>Logs, config</td>
-              <td>Planillas, BD</td>
-              <td>Empresas, AFIP</td>
-              <td>APIs web, apps</td>
-            </tr>
-            <tr>
-              <td>Compatible con Excel</td>
-              <td>⚠ Limitado</td>
-              <td>✅ Nativo</td>
-              <td>⚠ Con plugin</td>
-              <td>⚠ Con herramienta</td>
-            </tr>
-            <tr>
-              <td>Soporta tipos de dato</td>
-              <td>❌ Solo texto</td>
-              <td>⚠ Solo texto</td>
-              <td>✅ Con esquema</td>
-              <td>✅ Texto, número, bool</td>
-            </tr>
-            <tr>
-              <td>Estándar internacional</td>
-              <td>✅ Sí</td>
-              <td>✅ RFC 4180</td>
-              <td>✅ W3C</td>
-              <td>✅ RFC 8259</td>
-            </tr>
-          </tbody>
-        </table>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Característica</th>
+                <th>TXT</th>
+                <th>CSV</th>
+                <th>XML</th>
+                <th>JSON</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Legibilidad humana</td>
+                <td>✅ Muy alta</td>
+                <td>✅ Alta</td>
+                <td>⚠ Media</td>
+                <td>✅ Alta</td>
+              </tr>
+              <tr>
+                <td>Estructura de datos</td>
+                <td>❌ Sin estructura</td>
+                <td>⚠ Solo tablas planas</td>
+                <td>✅ Jerárquica compleja</td>
+                <td>✅ Jerárquica moderna</td>
+              </tr>
+              <tr>
+                <td>Tamaño de archivo</td>
+                <td>✅ Mínimo</td>
+                <td>✅ Pequeño</td>
+                <td>❌ Grande (verboso)</td>
+                <td>✅ Compacto</td>
+              </tr>
+              <tr>
+                <td>Uso principal</td>
+                <td>Logs, config</td>
+                <td>Planillas, BD</td>
+                <td>Empresas, AFIP</td>
+                <td>APIs web, apps</td>
+              </tr>
+              <tr>
+                <td>Compatible con Excel</td>
+                <td>⚠ Limitado</td>
+                <td>✅ Nativo</td>
+                <td>⚠ Con plugin</td>
+                <td>⚠ Con herramienta</td>
+              </tr>
+              <tr>
+                <td>Soporta tipos de dato</td>
+                <td>❌ Solo texto</td>
+                <td>⚠ Solo texto</td>
+                <td>✅ Con esquema</td>
+                <td>✅ Texto, número, bool</td>
+              </tr>
+              <tr>
+                <td>Estándar internacional</td>
+                <td>✅ Sí</td>
+                <td>✅ RFC 4180</td>
+                <td>✅ W3C</td>
+                <td>✅ RFC 8259</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div class="theory">
         <h2>📊 Conversión entre Formatos: ¿Qué se mantiene y qué se pierde?</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Conversión</th>
-              <th>Se conserva ✅</th>
-              <th>Se pierde ❌</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Word (.docx) → TXT</td>
-              <td>Todo el texto</td>
-              <td>Formato, imágenes, tablas, colores, fuentes</td>
-            </tr>
-            <tr>
-              <td>Excel (.xlsx) → CSV</td>
-              <td>Datos y texto de celdas</td>
-              <td>Fórmulas, gráficos, colores, múltiples hojas</td>
-            </tr>
-            <tr>
-              <td>JSON → CSV</td>
-              <td>Datos del nivel principal</td>
-              <td>Datos anidados (sub-objetos), tipos de dato</td>
-            </tr>
-            <tr>
-              <td>XML → JSON</td>
-              <td>Estructura y datos</td>
-              <td>Atributos XML, comentarios, instrucciones</td>
-            </tr>
-            <tr>
-              <td>BMP → JPG (con compresión)</td>
-              <td>Imagen visual aproximada</td>
-              <td>Calidad original (pérdida irreversible)</td>
-            </tr>
-          </tbody>
-        </table>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Conversión</th>
+                <th>Se conserva ✅</th>
+                <th>Se pierde ❌</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Word (.docx) → TXT</td>
+                <td>Todo el texto</td>
+                <td>Formato, imágenes, tablas, colores, fuentes</td>
+              </tr>
+              <tr>
+                <td>Excel (.xlsx) → CSV</td>
+                <td>Datos y texto de celdas</td>
+                <td>Fórmulas, gráficos, colores, múltiples hojas</td>
+              </tr>
+              <tr>
+                <td>JSON → CSV</td>
+                <td>Datos del nivel principal</td>
+                <td>Datos anidados (sub-objetos), tipos de dato</td>
+              </tr>
+              <tr>
+                <td>XML → JSON</td>
+                <td>Estructura y datos</td>
+                <td>Atributos XML, comentarios, instrucciones</td>
+              </tr>
+              <tr>
+                <td>BMP → JPG (con compresión)</td>
+                <td>Imagen visual aproximada</td>
+                <td>Calidad original (pérdida irreversible)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <p>⚠ <strong>Concepto clave — Compresión con y sin pérdida:</strong></p>
         <ul>
           <li>
@@ -679,72 +685,74 @@
           <strong>A</strong> (Abierto) o <strong>P</strong> (Propietario) en el
           espacio indicado. Justificá al menos 3 de tus respuestas.
         </p>
-        <table>
-          <thead>
-            <tr>
-              <th>Formato</th>
-              <th>Tipo (A/P)</th>
-              <th>Justificación (completar 3)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>.TXT</td>
-              <td></td>
-              <td>
-                <!-- Es un formato de texto plano sin restricciones de propiedad. -->
-              </td>
-            </tr>
-            <tr>
-              <td>.DOCX (Word moderno)</td>
-              <td></td>
-              <td>
-                <!-- Es un formato desarrollado y controlado por Microsoft. -->
-              </td>
-            </tr>
-            <tr>
-              <td>.PSD (Photoshop)</td>
-              <td></td>
-              <td>
-                <!-- Es un formato desarrollado y controlado por Adobe. -->
-              </td>
-            </tr>
-            <tr>
-              <td>.CSV</td>
-              <td></td>
-              <td>
-                <!-- Es un formato estándar para intercambio de datos. -->
-              </td>
-            </tr>
-            <tr>
-              <td>.ODT (LibreOffice)</td>
-              <td></td>
-              <td>
-                <!-- Es un formato abierto desarrollado por la comunidad de
-                LibreOffice. -->
-              </td>
-            </tr>
-            <tr>
-              <td>.AI (Adobe Illustrator)</td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>.JSON</td>
-              <td></td>
-              <td>
-                <!-- Es un formato estándar para intercambio de datos en la web. -->
-              </td>
-            </tr>
-            <tr>
-              <td>.MP3</td>
-              <td></td>
-              <td>
-                <!-- Es un formato estándar para audio. -->
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Formato</th>
+                <th>Tipo (A/P)</th>
+                <th>Justificación (completar 3)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>.TXT</td>
+                <td></td>
+                <td>
+                  <!-- Es un formato de texto plano sin restricciones de propiedad. -->
+                </td>
+              </tr>
+              <tr>
+                <td>.DOCX (Word moderno)</td>
+                <td></td>
+                <td>
+                  <!-- Es un formato desarrollado y controlado por Microsoft. -->
+                </td>
+              </tr>
+              <tr>
+                <td>.PSD (Photoshop)</td>
+                <td></td>
+                <td>
+                  <!-- Es un formato desarrollado y controlado por Adobe. -->
+                </td>
+              </tr>
+              <tr>
+                <td>.CSV</td>
+                <td></td>
+                <td>
+                  <!-- Es un formato estándar para intercambio de datos. -->
+                </td>
+              </tr>
+              <tr>
+                <td>.ODT (LibreOffice)</td>
+                <td></td>
+                <td>
+                  <!-- Es un formato abierto desarrollado por la comunidad de
+                  LibreOffice. -->
+                </td>
+              </tr>
+              <tr>
+                <td>.AI (Adobe Illustrator)</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>.JSON</td>
+                <td></td>
+                <td>
+                  <!-- Es un formato estándar para intercambio de datos en la web. -->
+                </td>
+              </tr>
+              <tr>
+                <td>.MP3</td>
+                <td></td>
+                <td>
+                  <!-- Es un formato estándar para audio. -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <h4>Ejercicio 2 — Errores de codificación</h4>
         <p>
           Un técnico recibe un archivo CSV exportado por un sistema del hospital
@@ -803,42 +811,44 @@
           Convertí la siguiente tabla al formato CSV usando coma como
           delimitador y con encabezados en la primera línea:
         </p>
-        <table border="1">
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Precio</th>
-              <th>Stock</th>
-              <th>Categoría</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Monitor 24"</td>
-              <td>$85000</td>
-              <td>12</td>
-              <td>Periférico</td>
-            </tr>
-            <tr>
-              <td>Teclado mecánico</td>
-              <td>$32000</td>
-              <td>25</td>
-              <td>Periférico</td>
-            </tr>
-            <tr>
-              <td>SSD 1TB</td>
-              <td>$45000</td>
-              <td>8</td>
-              <td>Almacenamiento</td>
-            </tr>
-            <tr>
-              <td>Auriculares</td>
-              <td>$27000</td>
-              <td>15</td>
-              <td>Audio</td>
-            </tr>
-          </tbody>
-        </table>
+        <div style="overflow-x: auto">
+          <table border="1">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Categoría</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Monitor 24"</td>
+                <td>$85000</td>
+                <td>12</td>
+                <td>Periférico</td>
+              </tr>
+              <tr>
+                <td>Teclado mecánico</td>
+                <td>$32000</td>
+                <td>25</td>
+                <td>Periférico</td>
+              </tr>
+              <tr>
+                <td>SSD 1TB</td>
+                <td>$45000</td>
+                <td>8</td>
+                <td>Almacenamiento</td>
+              </tr>
+              <tr>
+                <td>Auriculares</td>
+                <td>$27000</td>
+                <td>15</td>
+                <td>Audio</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <!-- <code>
           Producto,Precio,Stock,Categoría "Monitor 24"",$85000,12,Periférico
