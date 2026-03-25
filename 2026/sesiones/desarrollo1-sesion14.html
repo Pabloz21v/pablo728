@@ -10,6 +10,118 @@
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      header {
+        /* background-color: #2c3e50; */
+        color: white;
+        padding: 20px;
+        text-align: center;
+        border-radius: 8px 8px 0 0;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #2c3e50;
+      }
+      h2 {
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+      }
+      section {
+        background-color: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .theory {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .tip {
+        background-color: #fef9e7;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #f39c12;
+      }
+      .example {
+        background-color: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .actividad {
+        background-color: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #27ae60;
+      }
+      .ejemplo {
+        border-left: 4px solid #4caf50;
+        padding-left: 15px;
+        margin-bottom: 20px;
+      }
+
+      .tip-docente {
+        background-color: #e7f3fe;
+        padding: 15px;
+        border-radius: 5px;
+        border-left: 4px solid #2196f3;
+        margin: 20px 0;
+      }
+
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      code {
+        background-color: #f4f4f4;
+        padding: 5px;
+        border-radius: 3px;
+        font-family: monospace;
+        display: block;
+      }
+      ol,
+      ul {
+        margin-left: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+        body {
+          padding: 10px;
+        }
+        section {
+          padding: 10px;
+        }
+      }
+    </style>
+    <!-- <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
         color: #333;
         max-width: 1000px;
         margin: 0 auto;
@@ -81,80 +193,82 @@
           padding: 10px;
         }
       }
-    </style>
+    </style> -->
   </head>
   <body>
-    <div style="margin-bottom: 24px">
-      <a
-        href="../materias/desarrollo-1.html"
-        style="
-          padding: 10px 20px;
-          border-radius: 8px;
-          text-decoration: none;
-          font-weight: bold;
-          background: #4ade80;
-          color: #222;
-          display: inline-block;
-          margin-right: 10px;
-        "
-      >
-        Volver a Materia
-      </a>
-      <a
-        href="desarrollo1-sesion13.html"
-        style="
-          padding: 10px 20px;
-          border-radius: 8px;
-          text-decoration: none;
-          font-weight: bold;
-          background: #60a5fa;
-          color: #fff;
-          display: inline-block;
-          margin-right: 10px;
-        "
-      >
-        Ir a Sesión 13
-      </a>
-      <a
-        href="desarrollo1-sesion15.html"
-        style="
-          padding: 10px 20px;
-          border-radius: 8px;
-          text-decoration: none;
-          font-weight: bold;
-          background: #f9e282;
-          color: #222;
-          display: inline-block;
-        "
-      >
-        Ir a Sesión 15
-      </a>
-    </div>
-    <header>
-      <h1>Clase 14: Condicional Múltiple (elif) y Condiciones Compuestas</h1>
-    </header>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion13.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 13
+        </a>
+        <a
+          href="desarrollo1-sesion15.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 15
+        </a>
+      </div>
+      <header>
+        <h1>Clase 14: Condicional Múltiple (elif) y Condiciones Compuestas</h1>
+      </header>
 
-    <section>
-      <h2>Marco Teórico</h2>
-      <p>
-        Cuando existen <strong>más de dos alternativas posibles</strong>, usar
-        solo <code>if / else</code> puede volverse insuficiente o poco claro.
-        Python ofrece <code>elif</code> (abreviatura de "else if") para
-        encadenar múltiples condiciones. Solo se ejecuta el bloque de la
-        <em>primera</em> condición que resulte verdadera; el resto se saltea.
-      </p>
+      <section>
+        <h2>Marco Teórico</h2>
+        <p>
+          Cuando existen <strong>más de dos alternativas posibles</strong>, usar
+          solo <code>if / else</code> puede volverse insuficiente o poco claro.
+          Python ofrece <code>elif</code> (abreviatura de "else if") para
+          encadenar múltiples condiciones. Solo se ejecuta el bloque de la
+          <em>primera</em> condición que resulte verdadera; el resto se saltea.
+        </p>
 
-      <p>
-        Además, podemos construir
-        <strong>condiciones compuestas</strong> combinando comparaciones con los
-        operadores lógicos <code>and</code>, <code>or</code> y <code>not</code>,
-        cerrando el círculo entre lógica proposicional y programación.
-      </p>
-    </section>
+        <p>
+          Además, podemos construir
+          <strong>condiciones compuestas</strong> combinando comparaciones con
+          los operadores lógicos <code>and</code>, <code>or</code> y
+          <code>not</code>, cerrando el círculo entre lógica proposicional y
+          programación.
+        </p>
+      </section>
 
-    <section>
-      <h2>Sintaxis</h2>
-      <pre>
+      <section>
+        <h2>Sintaxis</h2>
+        <pre>
 if condicion_1:
     # bloque 1
 
@@ -166,16 +280,15 @@ elif condicion_3:
 
 else:
     # bloque por defecto (ninguna condición se cumplió)
-        </pre
-      >
-    </section>
+        </pre>
+      </section>
 
-    <section>
-      <h2>Ejemplos</h2>
+      <section>
+        <h2>Ejemplos</h2>
 
-      <div class="ejemplo">
-        <h3>Ejemplo 1 — Calificaciones por letra:</h3>
-        <pre>
+        <div class="ejemplo">
+          <h3>Ejemplo 1 — Calificaciones por letra:</h3>
+          <pre>
 nota = float(input("Ingresá tu nota (0-10): "))
 
 if nota >= 9:
@@ -187,12 +300,12 @@ elif nota >= 6:
 else:
     print("Desaprobado ✗")
             </pre
-        >
-      </div>
+          >
+        </div>
 
-      <div class="ejemplo">
-        <h3>Ejemplo 2 — Condición compuesta con <code>and</code>:</h3>
-        <pre>
+        <div class="ejemplo">
+          <h3>Ejemplo 2 — Condición compuesta con <code>and</code>:</h3>
+          <pre>
 edad = int(input("Edad: "))
 permiso = input("¿Tenés permiso de tus padres? (si/no): ")
 
@@ -201,12 +314,12 @@ if edad >= 16 and permiso == "si":
 else:
     print("No podés participar.")
             </pre
-        >
-      </div>
+          >
+        </div>
 
-      <div class="ejemplo">
-        <h3>Ejemplo 3 — Condición con <code>or</code>:</h3>
-        <pre>
+        <div class="ejemplo">
+          <h3>Ejemplo 3 — Condición con <code>or</code>:</h3>
+          <pre>
 dia = input("¿Qué día es hoy? ").lower()
 
 if dia == "sabado" or dia == "domingo":
@@ -214,12 +327,12 @@ if dia == "sabado" or dia == "domingo":
 else:
     print("Es día de semana, a estudiar 📚")
             </pre
-        >
-      </div>
+          >
+        </div>
 
-      <div class="ejemplo">
-        <h3>Ejemplo 4 — Menú de opciones:</h3>
-        <pre>
+        <div class="ejemplo">
+          <h3>Ejemplo 4 — Menú de opciones:</h3>
+          <pre>
 print("=== Calculadora ===")
 print("1 - Sumar")
 print("2 - Restar")
@@ -236,125 +349,127 @@ elif opcion == "2":
 else:
     print("Opción no válida.")
             </pre
+          >
+        </div>
+      </section>
+
+      <div class="tip-docente">
+        <h3>💡 Tip para el docente:</h3>
+        <p>
+          Retomar las tablas de verdad de la Semana 1 y mostrar cómo
+          <code>and</code> y <code>or</code> en Python funcionan exactamente
+          igual que los conectores lógicos. Este puente entre teoría y práctica
+          refuerza la comprensión de ambos bloques. Se puede proponer que
+          conviertan una tabla de verdad en un <code>if</code>.
+        </p>
+      </div>
+
+      <section>
+        <h2>
+          Actividad 14: Programas con <code>elif</code> y condiciones compuestas
+        </h2>
+        <div class="actividad">
+          <ol>
+            <li>
+              Pedir la nota del estudiante (0-10) y clasificarla:
+              "Sobresaliente" (9-10), "Muy Bueno" (7-8), "Aprobado" (6),
+              "Desaprobado" (0-5).
+            </li>
+            <li>
+              Clasificar la temperatura: si es menor a 0°C → "Bajo cero 🥶",
+              entre 0 y 15 → "Frío 🧥", entre 16 y 25 → "Agradable ☀️", mayor a
+              25 → "Calor 🌞".
+            </li>
+            <li>
+              Pedir el número de un mes (1-12) y mostrar a qué trimestre del año
+              pertenece (1-3: Primer trimestre, etc.).
+            </li>
+            <li>
+              Pedir edad y mostrar la categoría deportiva: "Infantil" (8-11),
+              "Cadete" (12-14), "Junior" (15-17), "Senior" (18 o más). Si es
+              menor de 8: "Sin categoría aún".
+            </li>
+            <li>
+              Sistema de login: pedir usuario y contraseña. Solo si usuario es
+              "admin" <strong>y</strong> contraseña es "1234" mostrar "Sesión
+              iniciada". En cualquier otro caso, "Credenciales incorrectas".
+            </li>
+            <li>
+              Pedir un número entre 1 y 7 y mostrar el día de la semana
+              correspondiente (1→Lunes, ..., 7→Domingo). Si el número no está en
+              ese rango, mostrar "Número inválido".
+            </li>
+            <li>
+              Calculadora básica con menú: pedir dos números y una operación (+,
+              -, *, /). Usar <code>elif</code> para cada operación. Controlar la
+              división por cero.
+            </li>
+            <li>
+              Pedir el sueldo de una persona. Si gana menos de $50.000, no paga
+              impuesto. Si gana entre $50.000 y $100.000, paga 9%. Si gana más
+              de $100.000, paga 17%. Calcular e imprimir el impuesto.
+            </li>
+            <li>
+              Pedir si hace frío (si/no) y si tiene campera (si/no). Usando
+              <code>and</code> / <code>or</code>, indicar: si hace frío y no
+              tiene campera → "¡Abrigate!"; si hace frío y tiene campera →
+              "Estás bien"; si no hace frío → "No necesitás campera".
+            </li>
+            <li>
+              <em>Desafío:</em> Pedir tres números distintos e indicar cuál es
+              el mayor, cuál el del medio y cuál el menor, sin usar funciones de
+              Python (solo <code>if</code> / <code>elif</code> /
+              <code>else</code>).
+            </li>
+          </ol>
+        </div>
+      </section>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
         >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion13.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 13
+        </a>
+        <a
+          href="desarrollo1-sesion15.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 15
+        </a>
       </div>
-    </section>
-
-    <div class="tip-docente">
-      <h3>💡 Tip para el docente:</h3>
-      <p>
-        Retomar las tablas de verdad de la Semana 1 y mostrar cómo
-        <code>and</code> y <code>or</code> en Python funcionan exactamente igual
-        que los conectores lógicos. Este puente entre teoría y práctica refuerza
-        la comprensión de ambos bloques. Se puede proponer que conviertan una
-        tabla de verdad en un <code>if</code>.
-      </p>
-    </div>
-
-    <section>
-      <h2>
-        Actividad 14: Programas con <code>elif</code> y condiciones compuestas
-      </h2>
-      <div class="actividad">
-        <ol>
-          <li>
-            Pedir la nota del estudiante (0-10) y clasificarla: "Sobresaliente"
-            (9-10), "Muy Bueno" (7-8), "Aprobado" (6), "Desaprobado" (0-5).
-          </li>
-          <li>
-            Clasificar la temperatura: si es menor a 0°C → "Bajo cero 🥶", entre
-            0 y 15 → "Frío 🧥", entre 16 y 25 → "Agradable ☀️", mayor a 25 →
-            "Calor 🌞".
-          </li>
-          <li>
-            Pedir el número de un mes (1-12) y mostrar a qué trimestre del año
-            pertenece (1-3: Primer trimestre, etc.).
-          </li>
-          <li>
-            Pedir edad y mostrar la categoría deportiva: "Infantil" (8-11),
-            "Cadete" (12-14), "Junior" (15-17), "Senior" (18 o más). Si es menor
-            de 8: "Sin categoría aún".
-          </li>
-          <li>
-            Sistema de login: pedir usuario y contraseña. Solo si usuario es
-            "admin" <strong>y</strong> contraseña es "1234" mostrar "Sesión
-            iniciada". En cualquier otro caso, "Credenciales incorrectas".
-          </li>
-          <li>
-            Pedir un número entre 1 y 7 y mostrar el día de la semana
-            correspondiente (1→Lunes, ..., 7→Domingo). Si el número no está en
-            ese rango, mostrar "Número inválido".
-          </li>
-          <li>
-            Calculadora básica con menú: pedir dos números y una operación (+,
-            -, *, /). Usar <code>elif</code> para cada operación. Controlar la
-            división por cero.
-          </li>
-          <li>
-            Pedir el sueldo de una persona. Si gana menos de $50.000, no paga
-            impuesto. Si gana entre $50.000 y $100.000, paga 9%. Si gana más de
-            $100.000, paga 17%. Calcular e imprimir el impuesto.
-          </li>
-          <li>
-            Pedir si hace frío (si/no) y si tiene campera (si/no). Usando
-            <code>and</code> / <code>or</code>, indicar: si hace frío y no tiene
-            campera → "¡Abrigate!"; si hace frío y tiene campera → "Estás bien";
-            si no hace frío → "No necesitás campera".
-          </li>
-          <li>
-            <em>Desafío:</em> Pedir tres números distintos e indicar cuál es el
-            mayor, cuál el del medio y cuál el menor, sin usar funciones de
-            Python (solo <code>if</code> / <code>elif</code> /
-            <code>else</code>).
-          </li>
-        </ol>
-      </div>
-    </section>
-    <div style="margin-bottom: 24px">
-      <a
-        href="../materias/desarrollo-1.html"
-        style="
-          padding: 10px 20px;
-          border-radius: 8px;
-          text-decoration: none;
-          font-weight: bold;
-          background: #4ade80;
-          color: #222;
-          display: inline-block;
-          margin-right: 10px;
-        "
-      >
-        Volver a Materia
-      </a>
-      <a
-        href="desarrollo1-sesion13.html"
-        style="
-          padding: 10px 20px;
-          border-radius: 8px;
-          text-decoration: none;
-          font-weight: bold;
-          background: #60a5fa;
-          color: #fff;
-          display: inline-block;
-          margin-right: 10px;
-        "
-      >
-        Ir a Sesión 13
-      </a>
-      <a
-        href="desarrollo1-sesion15.html"
-        style="
-          padding: 10px 20px;
-          border-radius: 8px;
-          text-decoration: none;
-          font-weight: bold;
-          background: #f9e282;
-          color: #222;
-          display: inline-block;
-        "
-      >
-        Ir a Sesión 15
-      </a>
     </div>
   </body>
 </html>
