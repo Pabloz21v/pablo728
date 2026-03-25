@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 11: Entrada y Salida (Input/Print)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            /* background-color: #2c3e50; */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        h2 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        .theory {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .example {
+            background-color: #fef9e7;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .activity {
+            background-color: #e8f8f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #27ae60;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 5px;
+            border-radius: 3px;
+            font-family: monospace;
+            display: block;
+        }
+        ol, ul {
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+          <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion10.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 10
+        </a>
+        <a
+          href="desarrollo1-sesion12.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 12
+        </a>
+      </div>
+        <header>
+            <h1>Clase 11: Entrada y Salida (Input/Print)</h1>
+        </header>
+
+        <div class="theory">
+            <h2>Marco Teórico</h2>
+            <p>Para que el programa sea interactivo, necesitamos pedir datos al usuario.</p>
+            <p>La función <code>input()</code> se utiliza para recibir datos del usuario. Siempre devuelve un texto (string), aunque el usuario escriba un número.</p>
+            <p><strong>Ejemplo:</strong></p>
+            <code>
+variable = input("Mensaje para el usuario: ")
+            </code>
+        </div>
+
+        <div class="example">
+            <h2>Ejemplo</h2>
+            <code>
+nombre = input("¿Cómo te llamas? ")
+print("Hola", nombre)
+            </code>
+        </div>
+
+        <div class="activity">
+            <h2>Actividad 11: Programas interactivos</h2>
+            <p>Crea un archivo <code>.py</code> para cada uno de los siguientes ejercicios y ejecuta el código:</p>
+            <ol>
+                <li>Pedir al usuario su nombre y saludarlo.</li>
+                <li>Pedir el nombre de su mascota e imprimirlo.</li>
+                <li>Pedir el nombre y el apellido por separado, y mostrar "Bienvenido [Apellido], [Nombre]".</li>
+                <li>Pedir la ciudad donde vive y mostrar "Vives en [ciudad]".</li>
+                <li>Preguntar "¿Cuál es tu comida favorita?" y repetir la respuesta.</li>
+                <li>Pedir tres palabras al usuario y mostrarlas en orden inverso (primero mostrar la 3ra, etc).</li>
+                <li>Hacer un programa que simule un formulario: pedir Nombre, Edad, Mail y mostrar todo al final.</li>
+                <li>Pedir al usuario que complete la frase "Mi deporte favorito es...".</li>
+                <li>Pedir un color y mostrar "Tu color elegido es [color]".</li>
+                <li>Usar <code>input()</code> sin guardar en variable (solo para pausar el programa "Presione Enter para salir").</li>
+            </ol>
+        </div>
+        <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion10.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 10
+        </a>
+        <a
+          href="desarrollo1-sesion12.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 12
+        </a>
+      </div>
+    </div>
+</body>
+</html>

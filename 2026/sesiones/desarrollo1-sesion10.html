@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 10: Variables y Tipos de Datos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            /* background-color: #2c3e50; */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        h2 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        .theory {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .tip {
+            background-color: #fef9e7;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #f39c12;
+        }
+        .activity {
+            background-color: #e8f8f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #27ae60;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 5px;
+            border-radius: 3px;
+            font-family: monospace;
+            display: block;
+        }
+        ol, ul {
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+         <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion9.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 9
+        </a>
+        <a
+          href="desarrollo1-sesion11.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 11
+        </a>
+      </div>
+        <header>
+            <h1>Clase 10: Variables y Tipos de Datos</h1>
+        </header>
+
+        <div class="theory">
+            <h2>Marco Teórico</h2>
+            <p>Una <strong>variable</strong> es un espacio en memoria con nombre para guardar un dato. En Python se crean asignando un valor con <code>=</code>.</p>
+            <h3>Tipos de datos básicos:</h3>
+            <ul>
+                <li><strong>int</strong> (Enteros): Números sin decimales (10, -5, 2024).</li>
+                <li><strong>float</strong> (Flotantes): Números con decimales (3.14, 2.5). Se usa punto, no coma.</li>
+                <li><strong>str</strong> (String/Cadena): Texto entre comillas (<code>"Hola"</code>, <code>'Python'</code>).</li>
+                <li><strong>bool</strong> (Booleanos): Valores de verdad (<code>True</code>, <code>False</code>). Importante la mayúscula inicial.</li>
+            </ul>
+        </div>
+
+        <div class="tip">
+            <h2>Tip para el docente</h2>
+            <p>Explique que el nombre de la variable no debe tener espacios ni empezar con números. Use la convención <code>snake_case</code> (ej: <code>nombre_usuario</code>).</p>
+        </div>
+
+        <div class="activity">
+            <h2>Actividad 10: Escribir programas en Python que definan variables</h2>
+            <p>Crea un archivo <code>.py</code> para cada uno de los siguientes ejercicios y ejecuta el código:</p>
+            <ol>
+                <li>Crear variable <code>mensaje = "Hola"</code> e imprimirla.</li>
+                <li>Crear variable <code>edad = 15</code> e imprimirla.</li>
+                <li>Definir <code>x = 10</code>, <code>y = 20</code>. Imprimir ambos.</li>
+                <li>Definir una variable con el nombre de tu materia favorita e imprimirla.</li>
+                <li>Crear una variable <code>precio = 50.5</code> (float) e imprimirla.</li>
+                <li>Definir <code>es_lunes = False</code>.</li>
+                <li>Cambiar el valor de una variable: definir <code>a = 5</code>, imprimir, luego <code>a = 10</code>, imprimir.</li>
+                <li>Intentar sumar un string y un int en un print (para ver el error).</li>
+                <li>Crear variables <code>nombre</code> y <code>apellido</code> e imprimir las dos juntas.</li>
+                <li>Usar la función <code>type(variable)</code> para imprimir de qué tipo es una variable entera.</li>
+            </ol>
+        </div>
+          <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion9.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 9
+        </a>
+        <a
+          href="desarrollo1-sesion11.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 11
+        </a>
+      </div>
+    </div>
+</body>
+</html>
