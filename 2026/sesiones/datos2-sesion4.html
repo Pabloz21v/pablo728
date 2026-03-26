@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 4: Integridad de Datos y Hashes</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      header {
+        /* background-color: #2c3e50; */
+        color: white;
+        padding: 20px;
+        text-align: center;
+        border-radius: 8px 8px 0 0;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #2c3e50;
+      }
+      h2 {
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+      }
+      .section {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .example {
+        background-color: #fef9e7;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .comparison {
+        background-color: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .activity {
+        background-color: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #27ae60;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      code {
+        background-color: #f4f4f4;
+        padding: 5px;
+        border-radius: 3px;
+        font-family: monospace;
+        display: block;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="datos2-sesion3.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 3
+        </a>
+        <a
+          href="datos2-sesion5.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 5
+        </a>
+      </div>
+      <header>
+        <h1>Clase 4: Integridad de Datos y Hashes</h1>
+      </header>
+
+      <div class="section">
+        <h2>¿Llegó bien el mensaje? — El concepto de Integridad</h2>
+        <p>
+          ❓ "Cuando descargas un juego de 50 GB o envías un contrato importante
+          por email, ¿cómo sabes que el archivo no fue alterado durante el
+          proceso?"
+        </p>
+        <h3>💥 Corrupción accidental</h3>
+        <p>
+          Errores durante la transmisión por fallas de red, problemas en el
+          disco duro o interrupciones en la descarga.
+        </p>
+        <h3>🦠 Manipulación maliciosa</h3>
+        <p>
+          Un atacante (Man-in-the-Middle) intercepta el archivo y lo modifica
+          para inyectar malware o alterar datos.
+        </p>
+        <h3>🔑 Definición de Integridad</h3>
+        <p>La integridad de los datos garantiza que la información:</p>
+        <ul>
+          <li>No fue modificada</li>
+          <li>No fue dañada</li>
+          <li>Se mantiene exactamente igual desde su origen</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>La "Huella Digital" del archivo: HASH</h2>
+        <p>
+          Un <strong>hash</strong> es el resultado de aplicar una función
+          matemática a un archivo. Convierte cualquier entrada (imagen, video,
+          PDF) en una cadena <strong>ÚNICA</strong> de caracteres de longitud
+          fija.
+        </p>
+        <p>
+          📄 <strong>archivo.pdf</strong> ➜ ⚙ <strong>Función SHA-256</strong> ➜
+          <strong>A1B2C3...F9</strong>
+        </p>
+        <ul>
+          <li>
+            🔁 <strong>Determinista</strong>: Siempre genera exactamente el
+            mismo resultado para el mismo archivo de entrada.
+          </li>
+          <li>
+            💥 <strong>Efecto Avalancha</strong>: Cambiar 1 solo bit en el
+            archivo original cambia completamente el hash resultante.
+          </li>
+          <li>
+            🚫 <strong>Irreversible</strong>: Es una función de un solo sentido.
+            No se puede "des-hashear" para recuperar el archivo original.
+          </li>
+        </ul>
+      </div>
+
+      <div class="comparison">
+        <h2>Comparativa de Algoritmos Comunes</h2>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Algoritmo</th>
+                <th>Longitud</th>
+                <th>Seguridad</th>
+                <th>Uso actual</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>MD5</td>
+                <td>32 caracteres (hex)</td>
+                <td>❌ Obsoleto</td>
+                <td>
+                  Verificación rápida no crítica (vulnerable a colisiones)
+                </td>
+              </tr>
+              <tr>
+                <td>SHA-1</td>
+                <td>40 caracteres (hex)</td>
+                <td>⚠ Débil</td>
+                <td>En desuso por seguridad</td>
+              </tr>
+              <tr>
+                <td>SHA-256</td>
+                <td>64 caracteres (hex)</td>
+                <td>✅ Seguro</td>
+                <td>Bancos, blockchain, firmas digitales, SSL</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="example" style="overflow-x: auto">
+          <h3>Ejemplo Real (Efecto Avalancha):</h3>
+          <p>Texto: "Hola mundo" SHA-256:</p>
+          <div>b94d27b9934d3e08a52e52d7da7dabfac484efe04294e576e4d...</div>
+          <p>Texto: "Hola mund0" (solo cambia la última letra) SHA-256:</p>
+          <p>4a8a08f09d37b73795649038408b5f33...</p>
+          <p>¡Son completamente diferentes!</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>CHECKSUM — El Primer Nivel de Verificación</h2>
+        <p>📌 <strong>Definición</strong></p>
+        <p>
+          Un checksum (suma de verificación) es un valor numérico calculado a
+          partir de los datos de un archivo para detectar errores, muy útil para
+          detectar perdida de paquetes (información que se pierde durante la
+          transmisión, la cual llega incompleta al receptor). Es una técnica más
+          antigua y simple que un hash criptográfico.
+        </p>
+        <h3>⚙ Cómo funciona</h3>
+        <ol>
+          <li>Se suman los valores de los datos (bytes).</li>
+          <li>Se obtiene un número final.</li>
+          <li>Se envía junto al archivo.</li>
+          <li>El receptor repite la suma y compara.</li>
+        </ol>
+        <div class="example">
+          <h3>🔍 Ejemplo Conceptual</h3>
+          <p>A = 65, B = 66, C = 67</p>
+          <p>Suma Original: 198</p>
+          <p>Error en transmisión (C cambia por D):</p>
+          <p>A = 65, B = 66, D = 68</p>
+          <p>Nueva Suma: 199</p>
+          <p>❌ ¡Error detectado!</p>
+        </div>
+        <h3>⚠ Limitaciones del Checksum:</h3>
+        <ul>
+          <li>
+            No es seguro contra ataques intencionados (fácil de falsificar).
+          </li>
+          <li>
+            No detecta modificaciones complejas (ej: cambiar el orden de los
+            bytes podría dar la misma suma).
+          </li>
+          <li>
+            Su uso principal es detectar
+            <strong>errores accidentales</strong> (ruido en la red, fallos de
+            disco).
+          </li>
+        </ul>
+      </div>
+
+      <div class="comparison">
+        <h2>⚖ Tabla Comparativa: Hash vs Checksum</h2>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Característica</th>
+                <th>Checksum (ej: CRC32)</th>
+                <th>Hash Criptográfico (ej: SHA-256)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Complejidad</td>
+                <td>Baja (Suma simple/XOR)</td>
+                <td>Alta (Matemática compleja)</td>
+              </tr>
+              <tr>
+                <td>Seguridad</td>
+                <td>❌ Baja (Fácil de engañar)</td>
+                <td>✅ Alta (Casi imposible de engañar)</td>
+              </tr>
+              <tr>
+                <td>Resistencia a ataques</td>
+                <td>No</td>
+                <td>Sí</td>
+              </tr>
+              <tr>
+                <td>Uso principal</td>
+                <td>Errores accidentales</td>
+                <td>Seguridad e Integridad</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          "El checksum fue la base histórica → los hashes son su evolución
+          segura."
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>¿Cómo se valida? — Proceso Completo</h2>
+        <p>
+          "El checksum fue la base histórica → los hashes son su evolución
+          segura."
+        </p>
+        <p>📤 <strong>EMISOR:</strong></p>
+        <p>
+          <strong>Archivo</strong> → <strong>Calcular SHA-256</strong> →
+          <strong>Hash Original</strong>
+        </p>
+        <p>⬇ Se envían por internet (Archivo + Hash) ⬇</p>
+        <p>📥 <strong>RECEPTOR:</strong></p>
+        <p>
+          <strong>Descargar Archivo</strong> →
+          <strong>Recalcular SHA-256</strong> → <strong>Comparar</strong>
+        </p>
+        <h3>⚠ Puntos Críticos</h3>
+        <ul>
+          <li>
+            Se debe usar el <strong>MISMO algoritmo</strong> en ambos lados.
+          </li>
+          <li>
+            El archivo debe estar <strong>100% completo</strong> antes de
+            calcular.
+          </li>
+          <li>
+            La comparación debe ser <strong>EXACTA</strong> (byte a byte).
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>🛠 Herramientas en Windows (Práctica)</h2>
+        <p>Símbolo del Sistema (CMD) - CertUtil</p>
+        <code>
+          certutil -hashfile documento.pdf MD5 <br />
+          certutil -hashfile documento.pdf SHA256
+        </code>
+        <p>PowerShell</p>
+        <code> Get-FileHash documento.pdf -Algorithm SHA256 </code>
+      </div>
+
+      <div class="activity" style="overflow-x: auto">
+        <h2>Actividades Prácticas</h2>
+        <h3>Comparación Visual</h3>
+        <p>
+          <strong>Escenario:</strong> Tienes un archivo llamado contrato.pdf. Su
+          Hash MD5 original oficial es: E4D909C290D0FB1CA068FFADF22CBD0D
+        </p>
+        <p>Te envían tres copias y calculas sus hashes:</p>
+        <ul>
+          <li>Copia A: E4D909C290D0FB1CA068FFADF22CBD0D</li>
+          <li>Copia B: E4D909C290D0FB1CA068FFADF22CBD0E</li>
+          <li>Copia C: 88A4B2... (totalmente distinto)</li>
+        </ul>
+        <h3>Preguntas:</h3>
+        <ol>
+          <li>¿Cuál copia es válida y segura de usar?</li>
+          <li>
+            ¿Por qué la Copia B es inválida si solo cambia la última letra?
+          </li>
+          <li>¿Qué implica que la Copia C sea completamente diferente?</li>
+        </ol>
+        <h3>El Efecto Avalancha</h3>
+        <p>
+          <strong>Concepto:</strong> En los algoritmos de hash, cambiar una
+          simple coma en un libro de 1000 páginas cambia el hash resultante por
+          completo.
+        </p>
+        <h3>Preguntas:</h3>
+        <ol>
+          <li>
+            ¿Por qué esta característica es buena para la seguridad informática?
+          </li>
+          <li>
+            ¿Qué pasaría si un cambio pequeño generara un hash muy similar al
+            original?
+          </li>
+        </ol>
+        <h3>Checksum vs Hash</h3>
+        <p>
+          <strong>Escenario:</strong> Sos el administrador de red de una
+          empresa.
+        </p>
+        <h3>Preguntas:</h3>
+        <ol>
+          <li>
+            ¿En qué caso usarías un <strong>checksum</strong> y no un hash
+            criptográfico? Dá un ejemplo concreto.
+          </li>
+          <li>
+            ¿Por qué ya no se recomienda usar <strong>MD5</strong> para
+            seguridad crítica (como contraseñas)?
+          </li>
+          <li>Completá: Dos archivos con distinto contenido...</li>
+          <ul>
+            <li>¿Pueden tener el mismo checksum? (Sí/No)</li>
+            <li>¿Pueden tener el mismo hash SHA-256? (Sí/No)</li>
+          </ul>
+        </ol>
+        <h3>Ataque Conceptual</h3>
+        <p>
+          <strong>Escenario:</strong> Un atacante logra entrar al servidor web,
+          modifica el archivo instalador (.exe) por un virus, y ADEMÁS actualiza
+          el texto en la página web que muestra el hash original, poniendo el
+          hash de su virus.
+        </p>
+        <h3>Preguntas:</h3>
+        <ol>
+          <li>
+            Si el usuario descarga el archivo y compara el hash con lo que ve en
+            la web, ¿se dará cuenta del engaño?
+          </li>
+          <li>
+            ¿El sistema de verificación por hash simple sigue siendo seguro en
+            este caso?
+          </li>
+          <li>
+            Investigar: ¿Qué mecanismo adicional (que usa criptografía
+            asimétrica) se necesitaría para evitar esto?
+          </li>
+        </ol>
+        <h3>Herramientas</h3>
+        <ol>
+          <li>
+            Escribí el comando exacto para usar CertUtil en Windows y calcular
+            el SHA-256 de un archivo llamado "informe.docx".
+          </li>
+        </ol>
+      </div>
+
+      <div class="section">
+        <h2>🧠 Resumen de la Clase</h2>
+        <h3>Integridad</h3>
+        <p>
+          Garantía de que los datos no fueron alterados, dañados o modificados
+          desde su origen hasta su destino.
+        </p>
+        <h3>Hash</h3>
+        <p>
+          Huella digital matemática única. Es determinista, irreversible y tiene
+          efecto avalancha. SHA-256 es el estándar actual.
+        </p>
+        <h3>Checksum</h3>
+        <p>
+          Método simple y rápido para detectar errores accidentales. No sirve
+          para seguridad contra ataques.
+        </p>
+        <h3>Herramientas</h3>
+        <p>
+          Windows: CertUtil / PowerShell. Python: Librería hashlib (seguridad) y
+          zlib (checksums).
+        </p>
+        <p>
+          "Un solo bit diferente = Hash completamente distinto = Archivo
+          comprometido"
+        </p>
+      </div>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="datos2-sesion3.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 3
+        </a>
+        <a
+          href="datos2-sesion5.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 5
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
