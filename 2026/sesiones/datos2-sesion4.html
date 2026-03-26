@@ -365,13 +365,42 @@
 
       <div class="section">
         <h2>🛠 Herramientas en Windows (Práctica)</h2>
+        <div>
+          <ol>
+            <li>
+              reamos una carpeta, dentro de la misma creamos un archivo .docx
+              (Word) este archivo debe contener algún texto.
+            </li>
+            <li>
+              Abrimos el CMD, esto se hace apretando en el teclado el logo de
+              Windows y escribimos CMD
+            </li>
+            <li>Escribimos CD acompañado de un espacio “CD “</li>
+            <li>
+              Procedemos a desplazar la carpeta creada a la consola del CMD
+            </li>
+            <li>Si lo hicieron bien aparece mas texto.</li>
+            <li>
+              Apretamos ENTER, esto no ubicará dentro de la carpeta y detectará
+              el fichero /archivo Word dentro.
+            </li>
+            <li>
+              Ahora pegamos el código ofrecido. Respetar el nombre que le
+              pusieron al archivo Word
+            </li>
+            <li>Adaptar el código ofrecido con el nombre que crearon y o tipo de extensión del arvhico creado.</li>
+            <li>Lo pegamos en la consola y apretamos ENTER.</li>
+            <li>Si todo salió bien les ofrecerá la información solicitada.</li>
+          </ol>
+          
+        </div>
         <p>Símbolo del Sistema (CMD) - CertUtil</p>
         <code>
-          certutil -hashfile documento.pdf MD5 <br />
-          certutil -hashfile documento.pdf SHA256
+          certutil -hashfile documento.docx MD5 <br />
+          certutil -hashfile documento.docx SHA256
         </code>
         <p>PowerShell</p>
-        <code> Get-FileHash documento.pdf -Algorithm SHA256 </code>
+        <code> Get-FileHash documento.docx -Algorithm SHA256 </code>
       </div>
 
       <div class="activity" style="overflow-x: auto">
