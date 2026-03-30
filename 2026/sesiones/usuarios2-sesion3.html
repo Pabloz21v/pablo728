@@ -181,7 +181,27 @@
           <strong>AUTO_INCREMENT:</strong> Genera automáticamente valores
           consecutivos (suma 1 al número anterior).
         </p>
+            <p>
+      En desarrollo 2 ustedes crean un id_nombre_tabla los valores de los ID
+      (números) no deben repetirse dentro de la tabla. Ejemplo el DNI, son
+      únicos, o las patentes de los autos. Al ser únicos permiten identificar
+      algo de forma precisa.
+    </p>
+    <p>
+      Bueno para asegurar que cada vez que ingresen un nuevo alumno (para este
+      ejemplo) al usar
+      <code>INSERT INTO alumnos (nombre,edad,promedio)</code> no deben escribir
+      la primer columna (ID) que crearon con <code>CREATE TABLE alumnos</code>, ya
+      que esa columna aumentará de a 1 (+1) cada vez que ingresen un nuevo
+      alumno, asegurando así que cada ID sea único.
+    </p>
         <p><strong>DOUBLE:</strong> Tipo de dato para números con decimales.</p>
+            <p>
+      En clases previas para indicar que se debe escribir un número en una
+      columna, ejemplo: la columna EDAD, usaron INT. Bueno para indicar que el
+      número puede llevar coma se usa DOUBLE. Por ejemplo, para un promedio, la
+      cuenta bancaria o la plata en “mercado pago”, o sus calificaciones 9,5.
+    </p>
         <h3>Práctica</h3>
         <ol>
           <li>Crear la tabla alumnos.</li>
@@ -215,6 +235,22 @@
           <li><strong>NOT</strong> → Niega una condición.</li>
         </ul>
         <h3>Práctica</h3>
+            <p>
+      <strong
+        >Crear varios alumnos e insertar los códigos para observar su
+        comportamiento</strong
+      >
+    </p>
+    <p>
+      Recuerden que han creado otras tablas llamadas alumnos, estas tablas
+      viejas serán distintas a la sugerida en esta clase, la pueden dropear, o
+      crear una nueva con otro nombre.
+    </p>
+    <p>
+      También pueden renombrar las viejas tablas usando la siguiente sentencia:
+    </p>
+    <p><strong>RENAME (renombrar tabla):</strong></p>
+    <pre>RENAME TABLE alumnos TO estudiantes;</pre>
         <ol>
           <li>
             Seleccionar alumnos mayores de 20 años <strong>y</strong> con
@@ -240,19 +276,20 @@
           <li>
             <strong>DELETE (borra registros):</strong>
             <code>DELETE FROM alumnos WHERE id = 2;</code>
-            <p>Borra la fila dentro de la tabla que cumpla lo indicado.</p>
+            <p>Borra la fila dentro de la tabla que cumpla lo indicado. En este ejemplo si encuentra en la columna nombre de la
+          tabla alumnos con el valor = 'Pedro'; Borrará esa fila.</p>
           </li>
           <li>
             <strong
               >TRUNCATE (vacía toda la tabla, pero mantiene estructura):</strong
             >
             <code>TRUNCATE TABLE alumnos;</code>
-            <p>Vacía todos los datos dentro de la tabla, dejándola vacía.</p>
+            <p>En vez de DELETE que borra solo la fila indicada, TRUNCATE borra todos los datos dentro de la tabla, dejándola vacía.</p>
           </li>
           <li>
             <strong>DROP TABLE IF EXISTS (elimina la tabla si existe):</strong>
             <code>DROP TABLE IF EXISTS alumnos;</code>
-            <p>Elimina la tabla si existe.</p>
+            <p>Ya vieron como usar DROP, nada más que acá se agrega la sentencia “IF EXISTS”, es decir, si existe.</p>
           </li>
         </ul>
         <h3>Práctica</h3>
