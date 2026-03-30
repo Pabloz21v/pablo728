@@ -1,0 +1,1524 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 5: Placas Madre Modernas de PC de Escritorio</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+
+      /* Nav */
+      nav {
+        background-color: #1a1a2e;
+        border-bottom: 4px solid #e94560;
+        padding: 15px;
+        text-align: center;
+        margin-bottom: 30px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 10px;
+        font-weight: bold;
+        font-size: 0.9em;
+      }
+
+      /* Headers */
+      .course-header {
+        background: #1a1a2e;
+        color: white;
+        padding: 30px;
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 4px solid #e94560;
+      }
+      .course-header h1 {
+        color: white;
+        margin: 0 0 10px 0;
+        font-size: 2.2em;
+      }
+      .course-header h2 {
+        color: #e94560;
+        margin: 0 0 5px 0;
+        border: none;
+        font-size: 1.5em;
+      }
+      .course-header p {
+        margin: 0;
+        font-size: 1em;
+        color: #ccc;
+      }
+
+      h2 {
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 5px;
+        margin-top: 50px;
+      }
+
+      /* Class specific themes */
+      .c1-header {
+        color: #0f3460;
+        border-left: 6px solid #0f3460;
+        padding-left: 10px;
+        margin-top: 30px;
+        font-size: 1.3em;
+      }
+      .c1-th {
+        background-color: #0f3460;
+        color: white;
+      }
+
+      .c2-header {
+        color: #533483;
+        border-left: 6px solid #533483;
+        padding-left: 10px;
+        margin-top: 30px;
+        font-size: 1.3em;
+      }
+      .c2-th {
+        background-color: #533483;
+        color: white;
+      }
+
+      .c3-header {
+        color: #1b4332;
+        border-left: 6px solid #1b4332;
+        padding-left: 10px;
+        margin-top: 30px;
+        font-size: 1.3em;
+      }
+      .c3-th {
+        background-color: #1b4332;
+        color: white;
+      }
+
+      /* Boxes */
+      .box-activity {
+        background-color: #fff8e1;
+        border-left: 5px solid #ffc107;
+        padding: 20px;
+        margin: 20px 0;
+      }
+      .box-question {
+        background-color: #e3f2fd;
+        border-left: 5px solid #1976d2;
+        padding: 20px;
+        margin: 20px 0;
+      }
+      .box-info {
+        background-color: #e8f5e9;
+        border-left: 5px solid #43a047;
+        padding: 15px;
+        margin: 20px 0;
+      }
+      .box-warning {
+        background-color: #fff3e0;
+        border-left: 5px solid #e64a19;
+        padding: 15px;
+        margin: 20px 0;
+      }
+      .box-danger {
+        background-color: #fce4ec;
+        border-left: 5px solid #c62828;
+        padding: 15px;
+        margin: 20px 0;
+      }
+
+      .time-badge {
+        display: inline-block;
+        background-color: #e0e0e0;
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 0.8em;
+        color: #333;
+        margin-left: 10px;
+        vertical-align: middle;
+      }
+
+      /* Tables */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background-color: white;
+        font-size: 0.85em;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px 12px;
+        text-align: left;
+        vertical-align: top;
+      }
+      tr:nth-child(even) {
+        background-color: #f8f9fa;
+      }
+      .pinout-table {
+        font-family: monospace;
+        font-size: 0.9em;
+      }
+
+      .answer {
+        color: #555;
+        font-style: italic;
+        margin-top: 5px;
+        font-size: 0.95em;
+        display: block;
+        margin-bottom: 15px;
+      }
+
+      footer {
+        margin-top: 60px;
+        padding-top: 20px;
+        border-top: 1px solid #ccc;
+        text-align: center;
+        font-size: 0.85em;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-uno.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="hardware1-sesion4.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 4
+        </a>
+        <a
+          href="hardware1-sesion6.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 6
+        </a>
+      </div>
+
+      <!-- ========================================== CLASE 1 ========================================== -->
+      <h2 id="clase1" style="color: #0f3460">
+        Sesión 5: Placas Madre Modernas de PC de Escritorio
+      </h2>
+      <h3 class="c1-header">
+        SECCIÓN 1 — ¿Qué es la Placa Madre?
+        <span class="time-badge"></span>
+      </h3>
+      <h3></h3>
+      <p>
+        La placa madre (motherboard o mainboard) es el componente principal de
+        una computadora que actúa como la columna vertebral del sistema. Es una
+        placa de circuito impreso (PCB) que conecta y permite la comunicación
+        entre todos los componentes del equipo: procesador, memoria RAM,
+        tarjetas de expansión, dispositivos de almacenamiento y periféricos.
+      </p>
+
+      <h3>Funciones Principales</h3>
+      <ul>
+        <li>
+          Conexión física: Proporciona conectores y slots para todos los
+          componentes.
+        </li>
+        <li>
+          Distribución de energía: Distribuye la alimentación eléctrica a todos
+          los componentes (proporcionada por la fuente de poder).
+        </li>
+        <li>
+          Comunicación de datos: Facilita el intercambio de información entre
+          componentes mediante la comunicación de buses y controladores.
+        </li>
+        <li>
+          Control del sistema: Aloja el firmware (BIOS/UEFI) que controla el
+          arranque.
+        </li>
+        <li>
+          Expansión: Permite agregar nuevos componentes mediante slots de
+          expansión.
+        </li>
+      </ul>
+      <h3 class="c1-header">
+        SECCIÓN 1.1 — FACTORES DE FORMA
+        <span class="time-badge"></span>
+      </h3>
+      <p>
+        El factor de forma determina dimensiones físicas, agujeros de montaje y
+        layout eléctrico. Es fundamental para la compatibilidad con el gabinete
+        (case).
+      </p>
+
+      <div style="overflow-x: auto">
+        <table>
+          <tbody>
+            <tr>
+              <th class="c1-th">Factor de Forma</th>
+              <th class="c1-th">Dimensiones</th>
+              <th class="c1-th">Slots RAM máx.</th>
+              <th class="c1-th">Slots PCIe máx.</th>
+              <th class="c1-th">Perf. de montaje</th>
+              <th class="c1-th">Uso típico</th>
+            </tr>
+            <tr>
+              <td><strong>E-ATX</strong></td>
+              <td>305 × 330 mm</td>
+              <td>4–8</td>
+              <td>5–7</td>
+              <td>12</td>
+              <td>
+                Workstations extremas, overclocking extremo, servidores pequeños
+              </td>
+            </tr>
+            <tr>
+              <td><strong>ATX</strong></td>
+              <td>305 × 244 mm</td>
+              <td>4</td>
+              <td>3–7</td>
+              <td>9</td>
+              <td>PC Gaming estándar, estaciones de trabajo</td>
+            </tr>
+            <tr>
+              <td><strong>Micro-ATX (mATX)</strong></td>
+              <td>244 × 244 mm</td>
+              <td>2–4</td>
+              <td>1–3</td>
+              <td>4 a 8</td>
+              <td>PCs de oficina, gaming económico, gabinetes medianos</td>
+            </tr>
+            <tr>
+              <td><strong>Mini-ITX</strong></td>
+              <td>170 × 170 mm</td>
+              <td>2</td>
+              <td>1</td>
+              <td>4</td>
+              <td>HTPC, PCs ultra compactas, LAN party builds</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="box-info">
+        <strong>Compatibilidad de gabinetes:</strong>
+        <ul>
+          <li>Un gabinete ATX acepta placas ATX, Micro-ATX y Mini-ITX.</li>
+          <li>Un gabinete Micro-ATX solo acepta Micro-ATX y Mini-ITX.</li>
+          <li>
+            La placa Mini-ITX entra en casi cualquier gabinete, pero solo tiene
+            1 slot PCIe.
+          </li>
+        </ul>
+      </div>
+
+      <div class="box-warning" style="border-left-color: #43a047">
+        🔍 <strong>Identificación:</strong> Para determinar el factor de forma
+        de una placa desconocida, medir el ancho (lado donde están los puertos
+        traseros) y el alto. 305mm de alto = ATX o E-ATX. 244mm de alto =
+        Micro-ATX.
+      </div>
+
+      <div class="box-info">
+        <h4>ATX (Advanced Technology eXtended):</h4>
+        <ul>
+          <li>
+            Ventajas: Máxima expansión, mejor refrigeración, más conectores.
+          </li>
+          <li>Desventajas: Requiere gabinete grande, mayor costo.</li>
+          <li>
+            Ideal para: Gaming, workstations, sistemas con múltiples tarjetas.
+          </li>
+        </ul>
+      </div>
+
+      <div class="box-info">
+        <h4>Micro-ATX:</h4>
+        <ul>
+          <li>
+            Ventajas: Buen equilibrio tamaño/características, precio moderado.
+          </li>
+          <li>Desventajas: Limitaciones de expansión.</li>
+          <li>
+            Ideal para: Oficina, gaming básico, sistemas de propósito general.
+          </li>
+        </ul>
+      </div>
+
+      <div class="box-info">
+        <h4>Mini-ITX:</h4>
+        <ul>
+          <li>Ventajas: Muy compacto, bajo consumo, silencioso.</li>
+          <li>
+            Desventajas: Expansión muy limitada, mayor costo por
+            características.
+          </li>
+          <li>Ideal para: HTPC, sistemas portátiles, espacios reducidos.</li>
+        </ul>
+      </div>
+
+      <div class="box-warning" style="border-left-color: #43a047">
+        <h3>La elección del factor de forma afecta:</h3>
+        <ol>
+          <li>Cantidad de slots PCIe y RAM.</li>
+          <li>Número de puertos SATA/USB.</li>
+          <li>Compatibilidad con gabinetes y fuentes de poder.</li>
+        </ol>
+      </div>
+
+      <h3 class="c1-header">
+        SECCIÓN 1.2 — CHIPSETS <span class="time-badge"></span>
+      </h3>
+      <p>
+        Históricamente, las placas tenían dos chips: el Northbridge (conectaba
+        CPU, RAM y GPU a alta velocidad) y el Southbridge (gestionaba
+        periféricos lentos: USB, SATA, PCI). A partir de Intel Sandy Bridge
+        (2011), el Northbridge fue integrado dentro del propio CPU, y el
+        Southbridge evolucionó al PCH (Platform Controller Hub), que sigue
+        siendo un chip separado en la placa.
+      </p>
+      <h4>Chipset Moderno (PCH - Platform Controller Hub):</h4>
+      <p>
+        El chipset moderno es esencialmente un Southbridge mejorado que se
+        comunica directamente con el CPU.
+      </p>
+
+      <ul>
+        <li>
+          Funciones actuales:
+          <ul>
+            <li>
+              Gestiona PCIe lanes adicionales (para tarjetas secundarias, NVMe,
+              Wi-Fi).
+            </li>
+            <li>Controladores SATA y USB.</li>
+            <li>Controla red Ethernet, Wi-Fi/Bluetooth integrados.</li>
+            <li>Audio de alta definición (HD).</li>
+            <li>Administra puertos USB (cantidad, versión 2.0/3.2/4.0).</li>
+            <li>Soporte para overclocking (OC). "Permite que los componentes trabajen por encima de su capacidad estable". Se verá mas adelante.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <strong>Chipsets Intel Modernos (Plataforma LGA1700/LGA1851):</strong>
+      <div style="overflow-x: auto">
+        <table>
+          <tbody>
+            <tr>
+              <th class="c1-th">Chipset</th>
+              <th class="c1-th">Gama</th>
+              <th class="c1-th">OC CPU</th>
+              <th class="c1-th">OC RAM</th>
+              <th class="c1-th">PCIe CPU/PCH</th>
+              <th class="c1-th">USB 3.2 Gen2</th>
+            </tr>
+            <tr>
+              <td><strong>Z890</strong></td>
+              <td>Entusiasta</td>
+              <td>✅ Sí</td>
+              <td>✅ Sí</td>
+              <td>24 / 24</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td><strong>Z790</strong></td>
+              <td>Entusiasta</td>
+              <td>✅ Sí</td>
+              <td>✅ Sí</td>
+              <td>20 / 20</td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <td><strong>B760</strong></td>
+              <td>Media</td>
+              <td>❌ No</td>
+              <td>✅ XMP</td>
+              <td>20 / 12</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td><strong>H770</strong></td>
+              <td>Media-Baja</td>
+              <td>❌ No</td>
+              <td>❌ No</td>
+              <td>20 / 8</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td><strong>H610</strong></td>
+              <td>Entrada</td>
+              <td>❌ No</td>
+              <td>❌ No</td>
+              <td>16 / 4</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <strong>Chipsets AMD Modernos (Plataforma AM5):</strong>
+      <div style="overflow-x: auto">
+        <table>
+          <tbody>
+            <tr>
+              <th class="c1-th">Chipset</th>
+              <th class="c1-th">Gama</th>
+              <th class="c1-th">OC CPU</th>
+              <th class="c1-th">OC RAM</th>
+              <th class="c1-th">PCIe CPU/PCH</th>
+              <th class="c1-th">USB 3.2 Gen2x2</th>
+            </tr>
+            <tr>
+              <td><strong>X670E</strong></td>
+              <td>Entusiasta</td>
+              <td>✅ Sí</td>
+              <td>✅ EXPO</td>
+              <td>24 / 12</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td><strong>X670</strong></td>
+              <td>Entusiasta</td>
+              <td>✅ Sí</td>
+              <td>✅ EXPO</td>
+              <td>24 / 8</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td><strong>B650E</strong></td>
+              <td>Media-Alta</td>
+              <td>✅ Sí</td>
+              <td>✅ EXPO</td>
+              <td>24 / 8</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td><strong>B650</strong></td>
+              <td>Media</td>
+              <td>✅ Sí</td>
+              <td>✅ EXPO</td>
+              <td>20 / 6</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><strong>A620</strong></td>
+              <td>Entrada</td>
+              <td>❌ No</td>
+              <td>✅ EXPO</td>
+              <td>20 / 6</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="box-info">
+        <strong>Nomenclatura:</strong>
+        <ul>
+          <li>
+            En Intel, la letra del chipset indica la gama: Z = Extremo, B =
+            Mainstream, H = Básico.
+          </li>
+          <li>En AMD: X = Extremo, B = Mainstream, A = Básico.</li>
+          <li>
+            La "E" al final en AMD indica PCIe 5.0 obligatorio en todos los
+            slots.
+          </li>
+        </ul>
+      </div>
+
+      <div class="box-info">
+
+        <h3>PCIe CPU / PCH:</h3>
+  
+        <p>
+          En la tabla, esta columna indica cuántos
+          <strong>carriles (lanes)</strong> de datos tiene el sistema y quién se
+          encarga de gestionarlos:
+        </p>
+  
+        <ul>
+          <li>
+            <strong>CPU (Carriles Directos):</strong> Son las líneas conectadas
+            directamente al procesador. Se reservan para componentes que requieren
+            la mínima latencia y máxima velocidad, como la
+            <strong>placa de video (GPU)</strong> y el
+            <strong>SSD NVMe principal</strong>.
+          </li>
+          <li>
+            <strong>PCH (Platform Controller Hub):</strong> Es el nombre técnico
+            del <strong>Chipset</strong>. Estos carriles son gestionados por el
+            chip de la placa madre y se usan para componentes secundarios: puertos
+            SATA, tarjetas de red, sonido y <strong>SSDs adicionales</strong>.
+          </li>
+        </ul>
+  
+        <p><strong>¿Por qué es importante el número (ej. 24 / 24)?</strong></p>
+  
+        <ul>
+          <li>
+            <strong>24 (CPU): </strong> Significa que puedes conectar una GPU a máxima potencia y probablemente varios SSDs M.2 Gen5 sin que se "roben" velocidad entre ellos.
+            <li>
+            <strong>24 (PCH):</strong>  Significa que la placa madre tiene mucha capacidad para conectar periféricos extras, puertos USB de alta velocidad y más almacenamiento sin saturar el sistema.
+          </li>
+          </li>
+        </ul>
+      </div>
+
+      <h3 class="c1-header">
+        SECCIÓN 1.3 — SOCKETS DE CPU <span class="time-badge"></span>
+      </h3>
+      <p> El socket es el zócalo mecánico y eléctrico donde se instala la CPU.
+        Define compatibilidad con procesadores. Existen tres tipos:
+        <ul>
+          <li>LGA (Land
+        Grid Array – pines en la placa).</li>
+          <li>PGA (Pin Grid Array – pines en la CPU)</li>
+          <li>BGA (Ball Grid Array – soldado, no intercambiable).</li>
+        </ul>
+         
+        
+      </p>
+      <div style="overflow-x: auto">
+        <table>
+          <tbody>
+            <tr>
+              <th class="c1-th">Socket</th>
+              <th class="c1-th">Fabr.</th>
+              <th class="c1-th">Tipo</th>
+              <th class="c1-th">Pines</th>
+              <th class="c1-th">CPUs Compatibles</th>
+              <th class="c1-th">RAM</th>
+              <th class="c1-th">Identificación / Apariencia</th>
+            </tr>
+            <tr>
+              <td><strong>LGA1851</strong></td>
+              <td>Intel</td>
+              <td>LGA</td>
+              <td>1851</td>
+              <td>Core Ultra 200 (Arrow Lake)</td>
+              <td>DDR5</td>
+              <td>
+                Rectangular, palanca de retención, 1851 pines diminutos en placa
+              </td>
+            </tr>
+            <tr>
+              <td><strong>LGA1700</strong></td>
+              <td>Intel</td>
+              <td>LGA</td>
+              <td>1700</td>
+              <td>12ª, 13ª, 14ª Gen Core</td>
+              <td>DDR4/5</td>
+              <td>
+                Rectangular alargado (distinto a LGA1200), retención metálica
+              </td>
+            </tr>
+            <tr>
+              <td><strong>AM5</strong></td>
+              <td>AMD</td>
+              <td>LGA</td>
+              <td>1718</td>
+              <td>Ryzen 7000, 8000, 9000</td>
+              <td>DDR5</td>
+              <td>
+                Cuadrado, bracket negro, 1718 pines (GRAN CAMBIO: AMD pasó de
+                PGA a LGA)
+              </td>
+            </tr>
+            <tr>
+              <td><strong>AM4</strong></td>
+              <td>AMD</td>
+              <td>PGA</td>
+              <td>1331</td>
+              <td>Ryzen 1000 a 5000</td>
+              <td>DDR4</td>
+              <td>
+                Cuadrado, palanca lateral ZIF simple,
+                <strong>pines en la CPU</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="box-danger">
+        ⚠️ <strong>NUNCA tocar el interior del socket LGA.</strong> Los pines
+        son tan delgados como un cabello y se doblan fácilmente. Usar pinzas
+        aisladas si accidentalmente cae algo. Antes de instalar la CPU,
+        verificar que todos los pines estén rectos.
+      </div>
+
+      <h3 class="c1-header">
+        SECCIÓN 1.4 — SLOTS DE MEMORIA RAM (DIMM)
+        <span class="time-badge"></span>
+      </h3>
+      <p>
+        Los zócalos DIMM sostienen módulos de RAM de forma modular. Son ranuras
+        largas y delgadas con clips plásticos en los extremos que retienen el
+        módulo.
+      </p>
+
+      <div style="overflow-x: auto">
+        <table>
+          <tbody>
+            <tr>
+              <th class="c1-th">Característica</th>
+              <th class="c1-th">DDR4</th>
+              <th class="c1-th">DDR5</th>
+            </tr>
+            <tr>
+              <td><strong>Pines</strong></td>
+              <td>288</td>
+              <td>288</td>
+            </tr>
+            <tr>
+              <td><strong>Voltaje estándar</strong></td>
+              <td>1.2 V</td>
+              <td>1.1 V</td>
+            </tr>
+            <tr>
+              <td><strong>Voltaje OC (XMP/EXPO)</strong></td>
+              <td>hasta 1.5 V</td>
+              <td>hasta 1.4 V</td>
+            </tr>
+            <tr>
+              <td><strong>Velocidad base</strong></td>
+              <td>2133 MHz</td>
+              <td>4800 MHz</td>
+            </tr>
+            <tr>
+              <td><strong>Velocidades comunes</strong></td>
+              <td>2400, 2666, 3200, 3600 MHz</td>
+              <td>5200, 5600, 6000, 6400 MHz</td>
+            </tr>
+            <tr>
+              <td><strong>Velocidades extremas (OC)</strong></td>
+              <td>hasta ~5000 MHz</td>
+              <td>hasta ~9000+ MHz</td>
+            </tr>
+            <tr>
+              <td><strong>Capacidad máx por módulo</strong></td>
+              <td>32 GB</td>
+              <td>128 GB</td>
+            </tr>
+            <tr>
+              <td><strong>PMIC (gestión energía)</strong></td>
+              <td>En la placa base</td>
+              <td>En el módulo mismo</td>
+            </tr>
+            <tr>
+              <td><strong>Notch (muesca central)</strong></td>
+              <td>Posición diferente que DDR5</td>
+              <td>Posición diferente que DDR4</td>
+            </tr>
+            <tr>
+              <td><strong>Compatibilidad retroactiva</strong></td>
+              <td>❌ No son intercambiables</td>
+              <td>❌ No son intercambiables</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="box-info">
+        <strong>DUAL CHANNEL:</strong> Para activar el modo dual channel (que
+        dobla el ancho de banda), se deben insertar los módulos en el 2° y 4°
+        slot contando desde la CPU (usualmente del mismo color). Consultar
+        siempre el manual ya que algunos fabricantes recomiendan el orden
+        inverso (slots 1 y 3).
+      </div>
+
+      <h3 class="c1-header">
+        SECCIÓN 1.5 — SLOTS PCIe <span class="time-badge"></span>
+      </h3>
+      <p>
+        PCIe (Peripheral Component Interconnect Express) es el bus de expansión
+        principal moderno. Funciona con "carriles" (lanes) bidireccionales. Más
+        carriles = más ancho de banda. Son totalmente retrocompatibles entre
+        generaciones.
+      </p>
+
+      <strong>Tipos de Slot PCIe:</strong>
+      <div style="overflow-x: auto">
+        <table>
+          <tbody>
+            <tr>
+              <th class="c1-th">Slot</th>
+              <th class="c1-th">Carriles físicos</th>
+              <th class="c1-th">Ancho banda (PCIe 4.0)</th>
+              <th class="c1-th">Usos principales</th>
+              <th class="c1-th">Apariencia</th>
+            </tr>
+            <tr>
+              <td><strong>PCIe x16</strong></td>
+              <td>16</td>
+              <td>32 GB/s</td>
+              <td>GPU, capturadoras 4K, tarjetas RAID</td>
+              <td>
+                El más largo, suele tener refuerzo metálico, siempre el más
+                cercano al CPU
+              </td>
+            </tr>
+            <tr>
+              <td><strong>PCIe x8</strong></td>
+              <td>8 (igual de largo al x16)</td>
+              <td>16 GB/s</td>
+              <td>GPUs secundarias, RAID de rendimiento</td>
+              <td>
+                Mismo largo que x16 pero contactos metálicos solo en la mitad
+                del slot
+              </td>
+            </tr>
+            <tr>
+              <td><strong>PCIe x4</strong></td>
+              <td>4</td>
+              <td>8 GB/s</td>
+              <td>M.2 controllers adicionales, red 10GbE</td>
+              <td>Tamaño mediano</td>
+            </tr>
+            <tr>
+              <td><strong>PCIe x1</strong></td>
+              <td>1</td>
+              <td>2 GB/s</td>
+              <td>Tarjetas de sonido, red 1GbE, USB adicional</td>
+              <td>El más corto, pequeño</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <strong>Velocidades por Generación PCIe (por carril):</strong>
+      <div style="overflow-x: auto">
+        <table>
+          <tbody>
+            <tr>
+              <th class="c1-th">Generación</th>
+              <th class="c1-th">Velocidad por carril</th>
+              <th class="c1-th">x4 total</th>
+              <th class="c1-th">x8 total</th>
+              <th class="c1-th">x16 total</th>
+              <th class="c1-th">Retrocompatible</th>
+            </tr>
+            <tr>
+              <td><strong>PCIe 2.0</strong></td>
+              <td>0.5 GB/s</td>
+              <td>2 GB/s</td>
+              <td>4 GB/s</td>
+              <td>8 GB/s</td>
+              <td>✅ Sí</td>
+            </tr>
+            <tr>
+              <td><strong>PCIe 3.0</strong></td>
+              <td>~1 GB/s</td>
+              <td>4 GB/s</td>
+              <td>8 GB/s</td>
+              <td>16 GB/s</td>
+              <td>✅ Sí</td>
+            </tr>
+            <tr>
+              <td><strong>PCIe 4.0</strong></td>
+              <td>~2 GB/s</td>
+              <td>8 GB/s</td>
+              <td>16 GB/s</td>
+              <td>32 GB/s</td>
+              <td>✅ Sí</td>
+            </tr>
+            <tr>
+              <td><strong>PCIe 5.0</strong></td>
+              <td>~4 GB/s</td>
+              <td>16 GB/s</td>
+              <td>32 GB/s</td>
+              <td>64 GB/s</td>
+              <td>✅ Sí</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="box-info">
+        💡 <strong>Retrocompatibilidad PCIe:</strong> Una GPU PCIe 4.0 funciona
+        en un slot PCIe 3.0 (a menor velocidad). Una tarjeta x1 puede insertarse
+        en un slot x16 (solo usa 1 carril). El primer slot x16 desde el CPU
+        siempre tiene prioridad eléctrica máxima — siempre conectar la GPU ahí.
+      </div>
+
+      <h3 class="c1-header">
+        SECCIÓN 1.6 — ALMACENAMIENTO: SATA III y M.2
+        <span class="time-badge"></span>
+      </h3>
+
+      <p>
+        <strong>SATA III:</strong> Conector de datos de 7 pines, forma de L.
+        Velocidad teórica máxima de 6 Gb/s (≈ 600 MB/s). Utilizado para discos
+        duros mecánicos (HDD) y SSDs de 2.5". Los conectores se ubican en el
+        borde derecho de la placa.
+      </p>
+
+      <strong>Tipos de Slot M.2:</strong>
+      <div style="overflow-x: auto">
+        <table>
+          <tbody>
+            <tr>
+              <th class="c1-th">Tipo</th>
+              <th class="c1-th">Llave (Key)</th>
+              <th class="c1-th">Protocolo</th>
+              <th class="c1-th">Velocidad máx.</th>
+              <th class="c1-th">Usos</th>
+            </tr>
+            <tr>
+              <td><strong>M.2 NVMe</strong></td>
+              <td>M-key (muesca a la derecha)</td>
+              <td>PCIe 3.0/4.0/5.0</td>
+              <td>hasta ~14.000 MB/s (PCIe 5.0)</td>
+              <td>SSD NVMe de altísima velocidad</td>
+            </tr>
+            <tr>
+              <td><strong>M.2 SATA</strong></td>
+              <td>B+M key (muescas en ambos lados)</td>
+              <td>SATA</td>
+              <td>hasta 600 MB/s</td>
+              <td>SSD económicos factor forma M.2</td>
+            </tr>
+            <tr>
+              <td><strong>M.2 Wi-Fi</strong></td>
+              <td>E-key</td>
+              <td>PCIe x2 + USB 2.0</td>
+              <td>Depende del módulo</td>
+              <td>Tarjetas Wi-Fi / Bluetooth</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="box-info">
+        <strong>Nomenclatura M.2:</strong> El número indica dimensiones. "2280"
+        = 22mm de ancho × 80mm de largo (el más común). "2230" = 22mm × 30mm
+        (usado en consolas portátiles y ultrabooks).
+      </div>
+
+      <h3 class="c1-header">
+        SECCIÓN 1.7 — CONECTORES DE ALIMENTACIÓN
+        <span class="time-badge"></span>
+      </h3>
+      <div style="overflow-x: auto">
+        <table>
+          <tbody>
+            <tr>
+              <th class="c1-th">Conector</th>
+              <th class="c1-th">Pines</th>
+              <th class="c1-th">Función</th>
+              <th class="c1-th">Ubicación en placa</th>
+              <th class="c1-th">Obligatorio</th>
+            </tr>
+            <tr>
+              <td><strong>ATX 24-pin</strong> (20+4)</td>
+              <td>24</td>
+              <td>Alimentación principal de toda la placa</td>
+              <td>Borde derecho central</td>
+              <td>✅ Sí</td>
+            </tr>
+            <tr>
+              <td><strong>EPS 8-pin CPU</strong> (4+4)</td>
+              <td>8</td>
+              <td>Alimenta el VRM de la CPU (+12V puro)</td>
+              <td>Esquina superior izquierda</td>
+              <td>✅ Sí</td>
+            </tr>
+            <tr>
+              <td><strong>EPS 8-pin extra</strong></td>
+              <td>8</td>
+              <td>Energía extra para CPUs de alto TDP (OC)</td>
+              <td>Junto al primer conector CPU</td>
+              <td>⚡ Solo OC extremo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="c1-header">
+        SECCIÓN 1.8 — CONECTORES DEL PANEL FRONTAL (F_PANEL)
+        <span class="time-badge"></span>
+      </h3>
+      <p>
+        Conecta los botones e indicadores luminosos del gabinete con la placa
+        madre. Generalmente es un bloque de 20 pines (con algunos ausentes) en
+        la esquina inferior derecha.
+      </p>
+      <div style="overflow-x: auto">
+        <table>
+          <tbody>
+            <tr>
+              <th class="c1-th">Conector del gabinete</th>
+              <th class="c1-th">Pines</th>
+              <th class="c1-th">Polaridad requerida</th>
+              <th class="c1-th">Función</th>
+              <th class="c1-th">Si se conecta al revés...</th>
+            </tr>
+            <tr>
+              <td><strong>Power SW</strong></td>
+              <td>2</td>
+              <td>❌ No</td>
+              <td>Botón de encendido</td>
+              <td>✅ Funciona igual</td>
+            </tr>
+            <tr>
+              <td><strong>Reset SW</strong></td>
+              <td>2</td>
+              <td>❌ No</td>
+              <td>Botón de reinicio</td>
+              <td>✅ Funciona igual</td>
+            </tr>
+            <tr>
+              <td><strong>Power LED</strong></td>
+              <td>2 o 3</td>
+              <td>✅ Sí (+ y -)</td>
+              <td>Luz de equipo encendido</td>
+              <td>❌ El LED no prende</td>
+            </tr>
+            <tr>
+              <td><strong>HDD LED</strong></td>
+              <td>2</td>
+              <td>✅ Sí (+ y -)</td>
+              <td>Luz actividad de disco</td>
+              <td>❌ El LED no prende</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="c1-header">
+        SECCIÓN 1.9 — HEADERS DE VENTILADORES
+        <span class="time-badge"></span>
+      </h3>
+      <p>
+        Operan mediante PWM (4 pines, señal digital) o DC (3 pines, voltaje
+        variable). Disposición de pines: 1-GND / 2-+12V / 3-Sensor RPM / 4-Señal
+        PWM.
+      </p>
+      <ul>
+        <li>
+          <strong>CPU_FAN:</strong> (4 pines). Obligatorio para el ventilador
+          del disipador de la CPU.
+        </li>
+        <li>
+          <strong>CPU_OPT:</strong> (4 pines). Opcional, copia la velocidad de
+          CPU_FAN.
+        </li>
+        <li>
+          <strong>SYS_FAN / CHA_FAN:</strong> (3/4 pines). Para ventiladores del
+          chasis del gabinete.
+        </li>
+        <li>
+          <strong>AIO_PUMP:</strong> (4 pines). Para bomba de refrigeración
+          líquida. ⚠️ <em>Siempre entrega 12V al 100%</em>, no conectar
+          ventiladores normales aquí si se desea silencio.
+        </li>
+      </ul>
+
+      <h3 class="c1-header">
+        SECCIÓN 1.10 — HEADERS USB Y AUDIO FRONTAL
+        <span class="time-badge"></span>
+      </h3>
+      <ul>
+        <li>
+          <strong>USB 2.0 Header:</strong> 9 pines (falta 1 en la esquina).
+          Velocidad 480 Mb/s.
+        </li>
+        <li>
+          <strong>USB 3.2 Gen1 Header:</strong> 19 pines (conector rectangular,
+          suele ser azul). Velocidad 5 Gb/s.
+        </li>
+        <li>
+          <strong>USB 3.2 Gen2x2 Type-C:</strong> 40 pines, conector metálico
+          ultra compacto. 20 Gb/s.
+        </li>
+        <li>
+          <strong>F_AUDIO / AAFP:</strong> 9 pines (falta el pin 6). Conecta los
+          jacks de 3.5mm del frente del gabinete.
+        </li>
+        <li>
+          <strong>RGB Header:</strong> 4 pines (12V, R, G, B). 🚨
+          <em>Peligro:</em> Nunca conectar tiras ARGB (5V) aquí, se quemarán al
+          instante.
+        </li>
+        <li>
+          <strong>ARGB Header:</strong> 3 pines (5V, Data, GND). Tiras LED
+          direccionables.
+        </li>
+      </ul>
+
+      <h3 class="c1-header">
+        SECCIÓN 1.11 — OTROS COMPONENTES IMPORTANTES
+        <span class="time-badge"></span>
+      </h3>
+      <ul>
+        <li>
+          <strong>BIOS/UEFI Chip:</strong> Chip pequeño de 8 pines (SOIC-8).
+          Almacena el firmware de arranque.
+        </li>
+        <li>
+          <strong>Pila CMOS (CR2032):</strong> Pila de litio de 3V que mantiene
+          el reloj (RTC) y la memoria volátil de la BIOS.
+        </li>
+        <li>
+          <strong>CLR_CMOS:</strong> Dos pines que, al unirse con un puente
+          metálico por 10s, borran toda la configuración de la BIOS
+          devolviéndola a fábrica.
+        </li>
+        <li>
+          <strong>VRM (Voltage Regulator Module):</strong> Circuito de MOSFETs y
+          bobinas alrededor del socket que transforma los 12V de la fuente a ~1V
+          para el procesador.
+        </li>
+        <li>
+          <strong>Debug LEDs:</strong> Cuatro pequeñas luces (CPU, DRAM, VGA,
+          BOOT) que facilitan identificar qué componente falla si la PC no da
+          video.
+        </li>
+      </ul>
+
+<div >
+        <h3 class="c1-header">SECCIÓN 1.12 — ¿Qué es un Bus?</h3>
+    <p>
+        En el contexto de una placa madre (Motherboard), un bus es un sistema de comunicación que transfiere datos entre componentes. Imagínalo como una autopista digital. No es solo un cable; es un conjunto de líneas eléctricas y protocolos que definen cómo viaja la información.
+    </p>
+    <p>
+        La eficiencia de la PC no depende solo de qué tan rápido "piensa" tu CPU, sino de qué tan rápido puede mover esa información a través de estos buses.
+    </p>
+
+    <div class="box-info">
+      <h2>Tipos de Buses Principales</h2>
+      <h3>La Tríada Clásica</h3>
+      <ul>
+          <li><strong>📡 Bus de Datos</strong><br>
+          Transporta la información real (los bits que forman tus archivos y programas) entre la CPU y otros componentes.<br>
+          Es bidireccional (los datos entran y salen).</li>
+  
+          <li><strong>📍 Bus de Direcciones</strong><br>
+          Transporta la ubicación de memoria donde los datos deben ser leídos o escritos. Determina cuánta RAM puede direccionar la CPU.<br>
+          Es unidireccional (CPU -> Memoria).</li>
+  
+          <li><strong>⚙️ Bus de Control</strong><br>
+          Gestiona y sincroniza las operaciones. Envía señales de "Leer", "Escribir", interrupciones y reloj del sistema.</li>
+      </ul>
+    </div>
+
+    <div class="box-info">
+
+      <h3>Buses de Alta Velocidad Modernos</h3>
+      <ul>
+          <li><strong>⚡ PCIe (Peripheral Component Interconnect Express)</strong><br>
+          El estándar de oro actual. Utiliza Lanes (carriles) seriales punto a punto. Una ranura x16 tiene 16 carriles dedicados para enviar y recibir datos simultáneamente.<br>
+          Gen 4.0 Gen 5.0</li>
+  
+          <li><strong>🟦 DMI (Direct Media Interface)</strong><br>
+          El enlace propietario de Intel que conecta la CPU con el Chipset (PCH). En las últimas generaciones, es esencialmente una conexión PCIe x8 modificada.</li>
+  
+          <li><strong>🟥 Infinity Fabric</strong><br>
+          La arquitectura de interconexión de AMD. No solo conecta CPU y Chipset, sino también los chiplets dentro del propio procesador Ryzen.</li>
+      </ul>
+    </div>
+
+    <h3 class="c1-header">SECCIÓN 1.13 — Buffers </h3>
+    <p>
+        Si los buses son las autopistas, los buffers son las estaciones de refuerzo y los semáforos inteligentes. Un buffer es un circuito que almacena temporalmente datos mientras se mueven de un lugar a otro, o refuerza una señal eléctrica.
+    </p>
+<div class="box-info"  style="overflow-x: auto">
+<table border="1">
+        <tr>
+            <th>Tipo de Buffer</th>
+            <th>Función Principal</th>
+            <th>Ejemplo de Uso</th>
+        </tr>
+        <tr>
+            <td>Clock Buffer</td>
+            <td>Toma una señal de reloj oscilante y la distribuye a múltiples componentes, asegurando sincronización perfecta.</td>
+            <td>Sincronizar CPU y RAM.</td>
+        </tr>
+        <tr>
+            <td>Memory Buffer</td>
+            <td>Aísla eléctricamente los módulos de memoria del controlador para permitir mayor capacidad y estabilidad.</td>
+            <td>RAM registrada (RDIMM) o LRDIMM en servidores.</td>
+        </tr>
+        <tr>
+            <td>PCIe Redriver/Retimer</td>
+            <td>Limpia y amplifica las señales PCIe que viajan largas distancias en la placa madre para evitar pérdida de datos (ruido).</td>
+            <td>Placas madre con ranuras PCIe 5.0 lejanas a la CPU.</td>
+        </tr>
+    </table>
+</div>
+    
+
+    <p>
+        <em>Nota:</em> A medida que aumentan las velocidades (como en PCIe 5.0), las señales eléctricas se degradan más rápido con la distancia, haciendo que los buffers (Retimers) sean obligatorios en placas de gama alta.
+    </p>
+    </div>
+
+     <div >
+        <h3 class="c1-header">SECCIÓN 1.14 —  Tecnologías de Protección </h3>
+      <div class="box-info" >
+
+        <ul>
+            <li><strong>Protección ESD:</strong> Diodos en los puertos USB/HDMI que actúan como fusibles ante descargas electrostáticas.</li>
+            
+            <li><strong>Anti-Surge / Over-voltage: </strong>Si tu fuente de poder (PSU) envía un pico de voltaje, la placa madre tiene integrados chips que cortan el flujo de energía en milisegundos para salvar la CPU.</li>
+          <li><strong>Protección Térmica de VRM:</strong> Si los VRM superan los 100°C-110°C, la placa ordena a la CPU bajar su velocidad inmediatamente (Thermal Throttling) para evitar que los MOSFETs se derritan.</li>
+            <li><strong>Smart Power Stages (SPS):</strong> El VRM moderno detecta sobrecorrientes y temperaturas excesivas instantáneamente, protegiendo la CPU.</li>
+            <li><strong>Refuerzo Físico (Armor):</strong> Slots PCIe de acero soldados a través del PCB para soportar el peso de las GPUs modernas de triple ventilador.</li>
+            <li><strong>Protección Térmica M.2:</strong> Disipadores integrados (M.2 Shield) para evitar el "throttling" en los SSDs de alta velocidad.</li>
+        </ul>
+      </div>
+        <p>La calidad de los componentes de soporte (VRM, capacitores, reguladores) es tan importante como las características principales de la placa madre. Una VRM deficiente puede limitar el rendimiento del procesador y la estabilidad del sistema, especialmente en aplicaciones exigentes o overclocking.</p>
+    </div>
+
+      <div class="box-activity">
+        <strong>📋 ACTIVIDAD PRÁCTICA </strong><br /><br />
+        <strong>Título:</strong> Identificación de componentes en una placa
+        madre ATX moderna<br />
+        <strong>Instrucciones:</strong>
+        <ol>
+          <li>
+            Abrí tu navegador y buscá en Google Images:
+            <em>"ASUS ROG STRIX Z790-F motherboard"</em>
+          </li>
+          <li>
+            Seleccioná la imagen de más alta resolución disponible
+            (preferentemente del sitio oficial ASUS).
+          </li>
+          <li>Completá la siguiente tabla identificándolos en la imagen:</li>
+        </ol>
+        <div style="overflow-x: auto">
+          <table>
+            <tbody>
+              <tr>
+                <th class="c1-th">N°</th>
+                <th class="c1-th">Componente a encontrar</th>
+                <th class="c1-th">¿Lo encontraste?</th>
+                <th class="c1-th">Descripción de su ubicación en la imagen</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Socket LGA1700</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Slots DIMM (RAM) — ¿cuántos y de qué color?</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Slot PCIe x16 reforzado (para GPU)</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Slots PCIe x1</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Slots M.2 (¿cuántos tiene?)</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Conectores SATA III (¿cuántos?)</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Conector de alimentación 24-pin</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Conector 8-pin CPU (EPS)</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>Header F_PANEL (Panel Frontal)</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>Headers de ventiladores (CPU_FAN, SYS_FAN)</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>Pila CMOS (redondeada, metálica)</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td>Header F_AUDIO / AAFP</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td>Debug LEDs o POST display</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>14</td>
+                <td>Chip PCH (Intel) con disipador</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <strong>4.</strong> Buscá ahora
+        <em>"MSI MAG B650 TOMAHAWK WIFI"</em> (placa AMD). ¿Qué diferencias
+        visuales notás en el socket comparado con la placa Intel?
+      </div>
+
+      <div class="box-question">
+        <strong>❓ PREGUNTAS DE REPASO </strong>
+        <ol>
+          <li><strong>¿Qué es una placa madre y cuál es su función principal en una computadora?</strong></li>
+          <li>
+            <strong
+              >¿Cuáles es la importancia de las dimensiones de una placas?</strong
+            >
+            <!-- <span class="answer">➤ 305 × 244 mm.</span> -->
+          </li>
+          <li><strong>¿Qué es el chipset y cuál es su función en una placa madre?</strong></li>
+          <li>
+            <strong
+              >¿Qué diferencia hay entre un chipset Z790 y un B760 de
+              Intel?</strong
+            >
+            <!-- <span class="answer"
+              >➤ Z790 permite overclocking de CPU y RAM con más carriles PCIe y
+              puertos USB; B760 no permite OC de CPU pero sí perfiles XMP de RAM
+              y tiene menos conectividad PCIe.</span
+            > -->
+          </li>
+          <li><strong>¿Qué tipos de sockets de CPU existen y cuáles son sus diferencias?</strong></li>
+          <li>
+            <strong
+              >¿Cuántos pines tiene el socket AM5 y qué tipo es
+              (LGA/PGA)?</strong
+            >
+            <!-- <span class="answer"
+              >➤ 1718 pines, tipo LGA (los pines están en la placa madre, no en
+              el CPU). Esto es un gran cambio histórico para AMD que usaba PGA
+              hasta AM4.</span
+            > -->
+          </li>
+          <li>
+            <strong
+              >¿Qué velocidad máxima teórica tiene SATA III y cómo se ve su
+              conector?</strong
+            >
+            <!-- <span class="answer"
+              >➤ 6 Gb/s ≈ 600 MB/s. El conector en la placa tiene forma de “L”
+              con 7 pines, es pequeño y delgado, generalmente en el borde
+              derecho de la placa.</span
+            > -->
+          </li>
+          <li>
+            <strong
+              >¿Cuántos pines tiene el conector principal de alimentación ATX ?</strong
+            >
+            <!-- <span class="answer"
+              >➤ 24 pines (o 20+4 separable). Lleva +12V, +5V, +3.3V, -12V y
+              +5VSB (Stand-By). Es el conector más grande de la placa, ubicado
+              en el borde derecho.</span
+            > -->
+          </li>
+          <li>
+            <strong>¿Qué diferencia hay entre CPU_FAN y AIO_PUMP?</strong>
+            <!-- <span class="answer"
+              >➤ CPU_FAN ajusta la velocidad del ventilador según la temperatura
+              (puede bajar a menos RPM en reposo); AIO_PUMP alimenta la bomba de
+              refrigeración líquida que SIEMPRE debe correr al 100% para no
+              dañarse.</span
+            > -->
+          </li>
+          <li><strong>¿Qué tipos de memoria RAM se utilizan en las placas madre modernas?</strong></li>
+          <li>
+            <strong
+              >¿En qué se diferencia físicamente DDR4 de DDR5 si ambas tienen
+              288 pines?</strong
+            >
+            <!-- <span class="answer"
+              >➤ La posición de la muesca (notch) central es diferente, haciendo
+              imposible la inserción incorrecta. Además DDR5 tiene el PMIC (chip
+              de gestión de energía) en el módulo mismo, no en la placa.</span
+            > -->
+          </li>
+          <li>
+            <strong
+              >¿Qué conectores incluye el F_PANEL y cuáles requieren
+              polaridad?</strong
+            >
+            <!-- <span class="answer"
+              >➤ Power SW, Reset SW (sin polaridad: funcionan en cualquier
+              orientación) y Power LED, HDD LED (CON polaridad: el LED no
+              enciende si se invierte).</span
+            > -->
+          </li>
+          <li>
+            <strong
+              >¿Cuál es la diferencia entre un slot M.2 NVMe (M-key) y uno M.2
+              SATA (B+M key)?</strong
+            >
+            <!-- <span class="answer"
+              >➤ M.2 NVMe usa protocolo PCIe y alcanza hasta 14.000 MB/s (PCIe
+              5.0), tiene muesca solo en el lado M. M.2 SATA usa protocolo SATA
+              antiguo, máx 600 MB/s, tiene muescas en ambos lados (B+M).</span
+            > -->
+          </li>
+          <li>
+            <strong
+              >¿Qué es un VRM y por qué es importante para el
+              overclocking?</strong
+            >
+            <!-- <span class="answer"
+              >➤ El VRM (Voltage Regulator Module) convierte los 12V de la
+              fuente al voltaje preciso que necesita la CPU (~1V). Más fases VRM
+              = mayor capacidad de corriente = más estabilidad al subir la
+              frecuencia del CPU.</span
+            > -->
+          </li>
+          <!-- <li>
+            <strong
+              >¿Qué pasa si conecto una tira ARGB de 5V en un header RGB de
+              12V?</strong
+            >
+            <span class="answer"
+              >➤ Los LEDs de la tira se destruirán irreversiblemente por
+              sobrevoltaje. Siempre verificar si el header dice “5V” (ARGB) o
+              “12V” (RGB) antes de conectar.</span
+            >
+          </li> -->
+          <li>
+            <strong
+              >¿Para qué sirven los Debug LEDs en una placa premium y qué
+              indican?</strong
+            >
+            <!-- <span class="answer"
+              >➤ Son 4 LEDs (CPU, DRAM, VGA, BOOT) que se encienden durante el
+              POST. Si el sistema no arranca, el LED que queda encendido indica
+              cuál componente falló, facilitando enormemente el diagnóstico sin
+              monitor.</span
+            > -->
+          </li>
+          <li><strong>¿Qué precauciones se deben tomar al conectar los conectores del panel frontal?</strong></li>
+          <li><strong> ¿Que son los buses?
+</strong></li>
+<li><strong>¿Que son los buffers?
+ </strong></li>
+<li><strong>¿Cuál es la relación entre buffers y buses?
+ </strong></li>
+
+          
+        <li><strong>¿Qué tecnologías de protección suelen incluir las placas madre modernas?</strong></li>
+        
+        
+        </ol>
+      </div>
+
+      <hr />
+
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-uno.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="hardware1-sesion4.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 4
+        </a>
+        <a
+          href="hardware1-sesion6.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 6
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

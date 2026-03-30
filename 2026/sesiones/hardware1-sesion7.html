@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 7: Placas Madre de Notebook (Laptop)</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+
+      /* Nav */
+      nav {
+        background-color: #1a1a2e;
+        border-bottom: 4px solid #e94560;
+        padding: 15px;
+        text-align: center;
+        margin-bottom: 30px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 10px;
+        font-weight: bold;
+        font-size: 0.9em;
+      }
+
+      /* Headers */
+      .course-header {
+        background: #1a1a2e;
+        color: white;
+        padding: 30px;
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 4px solid #e94560;
+      }
+      .course-header h1 {
+        color: white;
+        margin: 0 0 10px 0;
+        font-size: 2.2em;
+      }
+      .course-header h2 {
+        color: #e94560;
+        margin: 0 0 5px 0;
+        border: none;
+        font-size: 1.5em;
+      }
+      .course-header p {
+        margin: 0;
+        font-size: 1em;
+        color: #ccc;
+      }
+
+      h2 {
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 5px;
+        margin-top: 50px;
+      }
+
+      /* Class specific themes */
+      .c1-header {
+        color: #0f3460;
+        border-left: 6px solid #0f3460;
+        padding-left: 10px;
+        margin-top: 30px;
+        font-size: 1.3em;
+      }
+      .c1-th {
+        background-color: #0f3460;
+        color: white;
+      }
+
+      .c2-header {
+        color: #533483;
+        border-left: 6px solid #533483;
+        padding-left: 10px;
+        margin-top: 30px;
+        font-size: 1.3em;
+      }
+      .c2-th {
+        background-color: #533483;
+        color: white;
+      }
+
+      .c3-header {
+        color: #1b4332;
+        border-left: 6px solid #1b4332;
+        padding-left: 10px;
+        margin-top: 30px;
+        font-size: 1.3em;
+      }
+      .c3-th {
+        background-color: #1b4332;
+        color: white;
+      }
+
+      /* Boxes */
+      .box-activity {
+        background-color: #fff8e1;
+        border-left: 5px solid #ffc107;
+        padding: 20px;
+        margin: 20px 0;
+      }
+      .box-question {
+        background-color: #e3f2fd;
+        border-left: 5px solid #1976d2;
+        padding: 20px;
+        margin: 20px 0;
+      }
+      .box-info {
+        background-color: #e8f5e9;
+        border-left: 5px solid #43a047;
+        padding: 15px;
+        margin: 20px 0;
+      }
+      .box-warning {
+        background-color: #fff3e0;
+        border-left: 5px solid #e64a19;
+        padding: 15px;
+        margin: 20px 0;
+      }
+      .box-danger {
+        background-color: #fce4ec;
+        border-left: 5px solid #c62828;
+        padding: 15px;
+        margin: 20px 0;
+      }
+
+      .time-badge {
+        display: inline-block;
+        background-color: #e0e0e0;
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 0.8em;
+        color: #333;
+        margin-left: 10px;
+        vertical-align: middle;
+      }
+
+      /* Tables */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background-color: white;
+        font-size: 0.85em;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px 12px;
+        text-align: left;
+        vertical-align: top;
+      }
+      tr:nth-child(even) {
+        background-color: #f8f9fa;
+      }
+      .pinout-table {
+        font-family: monospace;
+        font-size: 0.9em;
+      }
+
+      .answer {
+        color: #555;
+        font-style: italic;
+        margin-top: 5px;
+        font-size: 0.95em;
+        display: block;
+        margin-bottom: 15px;
+      }
+
+      footer {
+        margin-top: 60px;
+        padding-top: 20px;
+        border-top: 1px solid #ccc;
+        text-align: center;
+        font-size: 0.85em;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-uno.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="hardware1-sesion6.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 6
+        </a>
+        <a
+          href="hardware1-sesion8.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 8
+        </a>
+      </div>
+
+      <!-- ========================================== CLASE 3 ========================================== -->
+      <h2 id="clase3" style="color: #1b4332">
+        Sesión 7: Placas Madre de Notebook (Laptop)
+      </h2>
+      <p>
+        <em>Miniaturización y diseño propietario: el corazón de una laptop</em>
+      </p>
+
+      <h3 class="c3-header">
+        SECCIÓN 3.1 — INTRODUCCIÓN: DISEÑO PROPIETARIO
+        <span class="time-badge"></span>
+      </h3>
+      <p>
+        A diferencia de las PCs de escritorio (ATX, ITX),
+        <strong>NO existe un factor de forma estándar para notebooks</strong>.
+        Cada placa está diseñada exclusivamente para un modelo de carcasa. El
+        nivel de integración es máximo (PCB de hasta 14 capas), lo que dificulta
+        reparaciones que exigen lectura de esquemáticos complejos y
+        microsoldadura SMD.
+      </p>
+
+      <h3 class="c3-header">
+        SECCIÓN 3.2 — CPU BGA (Ball Grid Array)
+        <span class="time-badge"></span>
+      </h3>
+      <p>
+        El procesador está permanentemente
+        <strong>soldado a la placa madre</strong> mediante cientos de bolitas de
+        estaño bajo su superficie (BGA).
+        <strong>No se puede actualizar ni retirar</strong> sin una máquina
+        industrial de Reballing.
+      </p>
+      <ul>
+        <li>
+          <strong>Procesadores U:</strong> Ultra bajo consumo (15W). Laptops de
+          oficina.
+        </li>
+        <li>
+          <strong>Procesadores H/HX:</strong> Alto rendimiento (45W+). Laptops
+          gaming y creadores.
+        </li>
+      </ul>
+
+      <h3 class="c3-header">
+        SECCIÓN 3.3 — EMBEDDED CONTROLLER (EC)
+        <span class="time-badge"></span>
+      </h3>
+      <p>
+        El EC es un microcontrolador siempre activo en la placa (incluso
+        apagada). Gestiona tareas de muy bajo nivel: teclado, lectura del
+        touchpad, encendido de ventiladores, control de LEDs y la negociación de
+        carga de la batería. Si una laptop "muerta" ni siquiera enciende su luz
+        de carga al conectarla, frecuentemente es un problema del EC o su
+        circuito aledaño.
+      </p>
+
+      <h3 class="c3-header">
+        SECCIÓN 3.4 — MEMORIA RAM EN NOTEBOOK
+        <span class="time-badge"></span>
+      </h3>
+      <table>
+        <tbody>
+          <tr>
+            <th class="c3-th">Tipo de Memoria</th>
+            <th class="c3-th">Características Técnicas</th>
+            <th class="c3-th">Identificación visual / Impacto</th>
+          </tr>
+          <tr>
+            <td><strong>SO-DIMM</strong><br />(DDR3, DDR4, DDR5)</td>
+            <td>
+              Módulos más cortos, voltaje más bajo (ej. 1.2V), removibles.
+            </td>
+            <td>
+              Se insertan con un ángulo de 45° en la ranura. Permiten expansión
+              a futuro.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>LPDDR Soldada</strong><br />(LPDDR4x, LPDDR5)</td>
+            <td>Ultra bajo voltaje (hasta 0.6V), soldadura BGA directa.</td>
+            <td>
+              Chips negros al lado del CPU.
+              <strong>Imposible ampliarla.</strong> El cliente debe elegir la
+              RAM definitiva al comprar.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="c3-header">
+        SECCIÓN 3.5 — ALMACENAMIENTO <span class="time-badge"></span>
+      </h3>
+      <ul>
+        <li>
+          <strong>M.2 2280 NVMe:</strong> El estándar actual (22mm ancho x 80mm
+          largo). Removible.
+        </li>
+        <li>
+          <strong>M.2 2230 NVMe:</strong> Más corto (cuadrado). Típico de
+          ultrabooks Surface y consolas portátiles.
+        </li>
+        <li>
+          <strong>eMMC:</strong> Chip de almacenamiento barato soldado
+          directamente a la placa. Rinde solo ~400 MB/s. Imposible actualizar.
+        </li>
+      </ul>
+
+      <h3 class="c3-header">
+        SECCIÓN 3.6 — CONECTOR DE PANTALLA
+        <span class="time-badge"></span>
+      </h3>
+      <ul>
+        <li>
+          <strong>eDP (Embedded DisplayPort):</strong> El estándar actual. Usa
+          conectores ultra finos de 30 a 40 pines.
+        </li>
+        <li>
+          <strong>LVDS:</strong> Estándar pre-2013. Cable más ancho y grueso.
+        </li>
+      </ul>
+      <div class="box-danger">
+        🚨 eDP y LVDS son eléctricamente incompatibles. Comprar el panel
+        incorrecto para un reemplazo puede generar un cortocircuito en la placa.
+      </div>
+
+      <h3 class="c3-header">
+        SECCIÓN 3.7 — CONECTORES ZIF (Zero Insertion Force)
+        <span class="time-badge"></span>
+      </h3>
+      <p>
+        Utilizados para conectar los cables planos (flex) del teclado, touchpad
+        y huella dactilar. Cuentan con una pequeña
+        <strong>palanca o lengüeta plástica</strong> que se levanta (liberando
+        presión) para poder meter o sacar la cinta flexible.
+      </p>
+      <div class="box-warning">
+        ⚠️ <strong>Mucho cuidado:</strong> Las palancas de los ZIF son híper
+        frágiles. Se deben manipular con espátula plástica empujando levemente
+        hacia <em>arriba</em>. Una palanca partida inutiliza la conexión entera.
+      </div>
+
+      <h3 class="c3-header">
+        SECCIÓN 3.8 — CONECTOR DE BATERÍA
+        <span class="time-badge"></span>
+      </h3>
+      <p>
+        Usa conectores multi-pin que proveen: Potencia (+ y GND), y Datos
+        (SDA/SCL) vía protocolo <strong>SMBus</strong>. El protocolo SMBus
+        permite al Sistema Operativo y al EC saber el porcentaje de batería,
+        ciclos de vida y desgaste de las celdas directamente desde el BMS
+        interno de la batería.
+      </p>
+
+      <h3 class="c3-header">
+        SECCIÓN 3.9 — SISTEMA TÉRMICO <span class="time-badge"></span>
+      </h3>
+      <p>
+        Compuesto por <strong>Heat pipes</strong> (tubos de cobre rellenos de
+        líquido vaporizable), placas de cobre, y un
+        <strong>Blower Fan</strong> (turbina de aspas ultradelgadas). La pasta
+        térmica se degrada en 3-4 años, siendo el servicio térmico preventivo
+        una tarea esencial.
+      </p>
+
+      <h3 class="c3-header">
+        SECCIÓN 3.10 — OTROS (Wi-Fi y BIOS)
+        <span class="time-badge"></span>
+      </h3>
+      <ul>
+        <li>
+          <strong>Wi-Fi:</strong> Usan slot M.2 E-Key tamaño 2230 con 2 cables
+          coaxiales súper finos adheridos a presión.
+        </li>
+        <li>
+          <strong>Jack de carga (DC-IN):</strong> Frecuentemente se suelda a la
+          placa base y sufre enorme estrés mecánico (rotura clásica).
+        </li>
+      </ul>
+
+      <div class="box-activity">
+        <strong>📋 ACTIVIDAD PRÁCTICA — Clase 3</strong><br /><br />
+        1. Ingresá a la web de <em>iFixit.com</em> y buscá el "Teardown" de un
+        modelo como "Lenovo ThinkPad X1 Carbon".<br />
+        2. Revisá las fotos de la placa madre al desnudo y localizá: el bloque
+        de disipación de cobre, la turbina, el chip gigante del CPU soldado, la
+        pila CMOS envuelta en termocontraíble negro con cables, y la gran
+        batería de polímero conectada a los pines B+/SDA/SCL.<br />
+        3. Identificá al menos 3 puertos ZIF blancos y negros.
+      </div>
+
+      <div class="box-question">
+        <strong>❓ PREGUNTAS DE REPASO — Clase 3</strong>
+        <ol>
+          <li>
+            <strong
+              >¿Por qué la mayoría de los notebooks modernos usan BGA para el
+              CPU en lugar de socket?</strong
+            >
+            <span class="answer"
+              >➤ Por razones de espacio (BGA es extremadamente compacto), menor
+              resistencia eléctrica y térmica, mejor rendimiento y menor costo
+              de fabricación en volumen. La portabilidad tiene más valor que la
+              reemplazabilidad.</span
+            >
+          </li>
+          <li>
+            <strong
+              >¿Cuál es la diferencia entre SO-DIMM DDR4 y LPDDR4X en términos
+              prácticos?</strong
+            >
+            <span class="answer"
+              >➤ SO-DIMM DDR4 está en un slot removible (se puede ampliar),
+              opera a 1.2V. LPDDR4X está soldada (no reemplazable), opera a solo
+              0.6V activo (más eficiente energéticamente) y suele ofrecer mayor
+              velocidad.</span
+            >
+          </li>
+          <li>
+            <strong>¿Qué significa “2230” en un módulo M.2?</strong>
+            <span class="answer"
+              >➤ 22mm de ancho × 30mm de largo. Es el tamaño más compacto,
+              típico de ultrabooks delgados, consolas portátiles (Steam Deck,
+              Surface Pro) y módulos Wi-Fi.</span
+            >
+          </li>
+          <li>
+            <strong>¿Qué es un conector ZIF y qué cuidados requiere?</strong>
+            <span class="answer"
+              >➤ Zero Insertion Force: conector para cables FFC planos con
+              palanca de bloqueo. La palanca se debe levantar SIEMPRE hacia
+              arriba con herramienta plástica (nunca metálica). La palanca es
+              muy frágil: si se rompe, inutiliza todo el conector.</span
+            >
+          </li>
+          <li>
+            <strong
+              >¿Qué es el Embedded Controller (EC) y qué funciones
+              cumple?</strong
+            >
+            <span class="answer"
+              >➤ Es un microcontrolador siempre activo que gestiona: teclado,
+              touchpad, batería (carga, salud, temperatura vía SMBus), sensores
+              térmicos, botón de encendido, ventiladores y LEDs de estado.
+              Funciona incluso con el sistema apagado.</span
+            >
+          </li>
+          <li>
+            <strong
+              >¿Por qué una pantalla LVDS no puede reemplazarse directamente con
+              una eDP?</strong
+            >
+            <span class="answer"
+              >➤ Porque son estándares de señal completamente diferentes. LVDS
+              usa señales diferenciales paralelas; eDP usa señales seriales del
+              protocolo DisplayPort. Los voltajes, número de pines y protocolos
+              son incompatibles.</span
+            >
+          </li>
+          <li>
+            <strong
+              >¿Qué es el SMBus en el conector de batería y para qué
+              sirve?</strong
+            >
+            <span class="answer"
+              >➤ Es un protocolo de comunicación serie (derivado de I²C) que
+              permite al EC leer del BMS de la batería: porcentaje de carga,
+              voltaje de cada celda, temperatura, ciclos de carga y capacidad
+              real vs diseñada.</span
+            >
+          </li>
+          <li>
+            <strong
+              >¿Qué es el almacenamiento eMMC y en qué se diferencia de un SSD
+              NVMe M.2?</strong
+            >
+            <span class="answer"
+              >➤ eMMC es memoria flash soldada a la placa (no removible), usa
+              interfaz paralela y tiene velocidades de ~400 MB/s. Un SSD NVMe
+              M.2 es removible (si hay slot), usa interfaz PCIe serie y alcanza
+              2000–14.000+ MB/s según la generación.</span
+            >
+          </li>
+          <li>
+            <strong
+              >¿Qué ventajas y desventajas tiene la memoria LPDDR5 soldada vs
+              SO-DIMM DDR5 en un notebook?</strong
+            >
+            <span class="answer"
+              >➤ LPDDR5 soldada: menor voltaje (más batería), mayor velocidad,
+              más compacta. Desventaja: no se puede ampliar ni reemplazar si
+              falla. SO-DIMM DDR5: upgradeable y reemplazable en caso de falla,
+              pero con mayor voltaje y más espacio físico.</span
+            >
+          </li>
+          <li>
+            <strong
+              >¿Cómo afecta la falta de factor de forma estándar al trabajo del
+              técnico?</strong
+            >
+            <span class="answer"
+              >➤ Cada reparación es diferente. No existen manuales de servicio
+              públicos para la mayoría de los modelos, las piezas son difíciles
+              de conseguir y caras, y se requieren habilidades de microsoldadura
+              para muchas reparaciones. Los esquemas eléctricos raramente son
+              públicos.</span
+            >
+          </li>
+        </ol>
+      </div>
+
+      <hr />
+
+      <h2 id="resumen" style="color: #1a1a2e">Resumen Comparativo General</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th style="background: #1a1a2e; color: white">Característica</th>
+            <th style="background: #0f3460; color: white">PC Moderna</th>
+            <th style="background: #533483; color: white">PC Legacy</th>
+            <th style="background: #1b4332; color: white">Notebook</th>
+          </tr>
+          <tr>
+            <td><strong>Formato</strong></td>
+            <td>ATX, mATX, ITX</td>
+            <td>AT, Baby-AT, ATX antiguo</td>
+            <td>Completamente Propietario</td>
+          </tr>
+          <tr>
+            <td><strong>CPU</strong></td>
+            <td>Socket LGA (LGA1700/AM5)</td>
+            <td>LGA775, Socket 478, PGA AM3</td>
+            <td>BGA Soldado fijo</td>
+          </tr>
+          <tr>
+            <td><strong>RAM</strong></td>
+            <td>DDR4/DDR5 DIMM 288p</td>
+            <td>DDR, DDR2, DDR3 DIMM</td>
+            <td>SO-DIMM (ángulo 45°) o LPDDR soldada</td>
+          </tr>
+          <tr>
+            <td><strong>Almacenamiento</strong></td>
+            <td>SATA III, M.2 NVMe (PCIe 4.0/5.0)</td>
+            <td>IDE PATA (cinta 40p), SATA I/II</td>
+            <td>M.2 2280 NVMe, eMMC soldado</td>
+          </tr>
+          <tr>
+            <td><strong>Expansión</strong></td>
+            <td>Múltiples ranuras PCIe (x16, x1)</td>
+            <td>ISA, PCI, AGP</td>
+            <td>Escasa. Solo Wi-Fi M.2</td>
+          </tr>
+          <tr>
+            <td><strong>Conectividad Interna</strong></td>
+            <td>Header USB 3.0/USB-C, ARGB</td>
+            <td>Puerto COM, LPT (Paralelo)</td>
+            <td>Flex/Cintas vía puertos ZIF</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="box-info">
+        <strong>💡 Consejo final para el técnico de reparación:</strong><br />
+        Al recibir un equipo: 1) Clasifícalo por tipo (Desktop o Laptop) y Era
+        (Moderna o Legacy). 2) Esto te indicará si debes buscar fallas en pines
+        de Socket (LGA) o en chips BGA, y si puedes mejorar su almacenamiento
+        usando discos IDE, SATA o M.2. 3) Jamás intervengas sin pulsera
+        antiestática ni manual de placa en mano.
+      </div>
+
+      <footer>
+        "Hardware 1 — Módulo de Placas Madre | Documento de Estudio Oficial | 3
+        Clases × 80 minutos"<br />
+        Contenido: Factores de Forma · Chipsets · Sockets · RAM · PCIe ·
+        SATA/M.2 · Conectores de Alimentación · Headers · Legacy Technology ·
+        Notebook Architecture.
+      </footer>
+
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-uno.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="hardware1-sesion6.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 6
+        </a>
+        <a
+          href="hardware1-sesion8.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 8
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
