@@ -483,45 +483,48 @@
       </ul>
 
       <h3>2.2 Tabla comparativa NVMe vs AHCI</h3>
-      <table>
-        <tbody>
-          <tr>
-            <th>Característica</th>
-            <th>AHCI (SATA)</th>
-            <th>NVMe (PCIe)</th>
-          </tr>
-          <tr>
-            <td>Colas de comandos</td>
-            <td>1 cola / 32 comandos</td>
-            <td>64.535 colas / 65.535 comandos</td>
-          </tr>
-          <tr>
-            <td>Latencia típica</td>
-            <td>~100 µs</td>
-            <td>~20 µs</td>
-          </tr>
-          <tr>
-            <td>Velocidad máxima</td>
-            <td>~600 MB/s</td>
-            <td>hasta 14.000 MB/s</td>
-          </tr>
-          <tr>
-            <td>Uso de CPU</td>
-            <td>Alto</td>
-            <td>Muy bajo</td>
-          </tr>
-          <tr>
-            <td>Diseñado para</td>
-            <td>HDDs mecánicos</td>
-            <td>Memorias flash</td>
-          </tr>
-          <tr>
-            <td>Interfaz física</td>
-            <td>SATA</td>
-            <td>PCIe / M.2</td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="overflow-x: auto">
+
+        <table>
+          <tbody>
+            <tr>
+              <th>Característica</th>
+              <th>AHCI (SATA)</th>
+              <th>NVMe (PCIe)</th>
+            </tr>
+            <tr>
+              <td>Colas de comandos</td>
+              <td>1 cola / 32 comandos</td>
+              <td>64.535 colas / 65.535 comandos</td>
+            </tr>
+            <tr>
+              <td>Latencia típica</td>
+              <td>~100 µs</td>
+              <td>~20 µs</td>
+            </tr>
+            <tr>
+              <td>Velocidad máxima</td>
+              <td>~600 MB/s</td>
+              <td>hasta 14.000 MB/s</td>
+            </tr>
+            <tr>
+              <td>Uso de CPU</td>
+              <td>Alto</td>
+              <td>Muy bajo</td>
+            </tr>
+            <tr>
+              <td>Diseñado para</td>
+              <td>HDDs mecánicos</td>
+              <td>Memorias flash</td>
+            </tr>
+            <tr>
+              <td>Interfaz física</td>
+              <td>SATA</td>
+              <td>PCIe / M.2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <div class="callout">
         <span class="badge badge-blue">CONCEPTO CLAVE</span><br />
@@ -556,42 +559,45 @@
       </ul>
 
       <h3>3.2 Generaciones PCIe</h3>
-      <table>
-        <tbody>
-          <tr>
-            <th>Generación</th>
-            <th>Ancho de banda (x1)</th>
-            <th>Velocidad (x4) teórica</th>
-            <th>Velocidad (x4) aprox. real</th>
-            <th>Período</th>
-            <th>Ejemplos de SSDs</th>
-          </tr>
-          <tr>
-            <td>PCIe 3.0</td>
-            <td>8 Gb/s</td>
-            <td>~32 Gb/s</td>
-            <td>~3.500 MB/s</td>
-            <td>2015-2020</td>
-            <td>Samsung 970 EVO, WD Blue SN570</td>
-          </tr>
-          <tr>
-            <td>PCIe 4.0</td>
-            <td>16 Gb/s</td>
-            <td>~64 Gb/s</td>
-            <td>~7.000 MB/s</td>
-            <td>2020-actual</td>
-            <td>Samsung 980 Pro, WD Black SN850X</td>
-          </tr>
-          <tr>
-            <td>PCIe 5.0</td>
-            <td>32 Gb/s</td>
-            <td>~128 Gb/s</td>
-            <td>~14.000 MB/s</td>
-            <td>2023-2026</td>
-            <td>Crucial T705, Seagate FireCuda 540</td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="overflow-x: auto">
+
+        <table>
+          <tbody>
+            <tr>
+              <th>Generación</th>
+              <th>Ancho de banda (x1)</th>
+              <th>Velocidad (x4) teórica</th>
+              <th>Velocidad (x4) aprox. real</th>
+              <th>Período</th>
+              <th>Ejemplos de SSDs</th>
+            </tr>
+            <tr>
+              <td>PCIe 3.0</td>
+              <td>8 Gb/s</td>
+              <td>~32 Gb/s</td>
+              <td>~3.500 MB/s</td>
+              <td>2015-2020</td>
+              <td>Samsung 970 EVO, WD Blue SN570</td>
+            </tr>
+            <tr>
+              <td>PCIe 4.0</td>
+              <td>16 Gb/s</td>
+              <td>~64 Gb/s</td>
+              <td>~7.000 MB/s</td>
+              <td>2020-actual</td>
+              <td>Samsung 980 Pro, WD Black SN850X</td>
+            </tr>
+            <tr>
+              <td>PCIe 5.0</td>
+              <td>32 Gb/s</td>
+              <td>~128 Gb/s</td>
+              <td>~14.000 MB/s</td>
+              <td>2023-2026</td>
+              <td>Crucial T705, Seagate FireCuda 540</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3>3.3 Lanes (Carriles)</h3>
       <ul>
@@ -713,80 +719,86 @@
         </div>
       </div>
 
-      <table>
-        <tbody>
-          <tr>
-            <th>Nomenclatura</th>
-            <th>Ancho</th>
-            <th>Largo</th>
-            <th>Uso principal</th>
-          </tr>
-          <tr>
-            <td>2230</td>
-            <td>22 mm</td>
-            <td>30 mm</td>
-            <td>Consolas portátiles (Steam Deck), tablets Surface</td>
-          </tr>
-          <tr>
-            <td>2242</td>
-            <td>22 mm</td>
-            <td>42 mm</td>
-            <td>Laptops ultradelgadas, servidores</td>
-          </tr>
-          <tr>
-            <td>2260</td>
-            <td>22 mm</td>
-            <td>60 mm</td>
-            <td>Menos común, uso industrial</td>
-          </tr>
-          <tr>
-            <td><strong>2280</strong></td>
-            <td>22 mm</td>
-            <td>80 mm</td>
-            <td>⭐ <strong>Estándar PC escritorio y laptops</strong></td>
-          </tr>
-          <tr>
-            <td>22110</td>
-            <td>22 mm</td>
-            <td>110 mm</td>
-            <td>Servidores y workstations</td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="overflow-x: auto">
+
+        <table>
+          <tbody>
+            <tr>
+              <th>Nomenclatura</th>
+              <th>Ancho</th>
+              <th>Largo</th>
+              <th>Uso principal</th>
+            </tr>
+            <tr>
+              <td>2230</td>
+              <td>22 mm</td>
+              <td>30 mm</td>
+              <td>Consolas portátiles (Steam Deck), tablets Surface</td>
+            </tr>
+            <tr>
+              <td>2242</td>
+              <td>22 mm</td>
+              <td>42 mm</td>
+              <td>Laptops ultradelgadas, servidores</td>
+            </tr>
+            <tr>
+              <td>2260</td>
+              <td>22 mm</td>
+              <td>60 mm</td>
+              <td>Menos común, uso industrial</td>
+            </tr>
+            <tr>
+              <td><strong>2280</strong></td>
+              <td>22 mm</td>
+              <td>80 mm</td>
+              <td>⭐ <strong>Estándar PC escritorio y laptops</strong></td>
+            </tr>
+            <tr>
+              <td>22110</td>
+              <td>22 mm</td>
+              <td>110 mm</td>
+              <td>Servidores y workstations</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3>4.3 Keys (Muescas de Seguridad)</h3>
-      <table>
-        <tbody>
-          <tr>
-            <th>Key</th>
-            <th>Muesca</th>
-            <th>Lanes PCIe</th>
-            <th>Protocolo</th>
-            <th>Uso actual</th>
-          </tr>
-          <tr>
-            <td><strong>Key M</strong></td>
-            <td>Derecha </td>
-            <td>x4</td>
-            <td>NVMe o SATA</td>
-            <td>⭐ Estándar NVMe moderno</td>
-          </tr>
-          <tr>
-            <td><strong>Key B</strong></td>
-            <td>Izquierda </td>
-            <td>x2</td>
-            <td>SATA o NVMe x2</td>
-            <td>Antiguo, menos frecuente</td>
-          </tr>
-          <tr>
-            <td><strong>Key B+M</strong></td>
-            <td>Ambas muescas</td>
-            <td>x2 (máx.)</td>
-            <td>SATA o NVMe x2</td>
-            <td>Común en SSD SATA M.2</td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="overflow-x: auto">
+
+        <table>
+          <tbody>
+            <tr>
+              <th>Key</th>
+              <th>Muesca</th>
+              <th>Lanes PCIe</th>
+              <th>Protocolo</th>
+              <th>Uso actual</th>
+            </tr>
+            <tr>
+              <td><strong>Key M</strong></td>
+              <td>Derecha </td>
+              <td>x4</td>
+              <td>NVMe o SATA</td>
+              <td>⭐ Estándar NVMe moderno</td>
+            </tr>
+            <tr>
+              <td><strong>Key B</strong></td>
+              <td>Izquierda </td>
+              <td>x2</td>
+              <td>SATA o NVMe x2</td>
+              <td>Antiguo, menos frecuente</td>
+            </tr>
+            <tr>
+              <td><strong>Key B+M</strong></td>
+              <td>Ambas muescas</td>
+              <td>x2 (máx.)</td>
+              <td>SATA o NVMe x2</td>
+              <td>Común en SSD SATA M.2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <div class="callout warning">
         <span class="badge badge-red">⚠️ CUIDADO CON EL KEY B+M</span><br />
@@ -801,58 +813,61 @@
       <h2 class="section-title">5. Tecnología NAND Interna</h2>
 
       <h3>5.1 Tipos de NAND</h3>
-      <table>
-        <tbody>
-          <tr>
-            <th>Tipo</th>
-            <th>Bits/celda</th>
-            <th>Velocidad</th>
-            <th>Durabilidad (TBW)</th>
-            <th>Costo</th>
-            <th>Uso principal</th>
-          </tr>
-          <tr>
-            <td>SLC</td>
-            <td>1 bit</td>
-            <td>⚡ Muy alta</td>
-            <td>⭐⭐⭐⭐⭐ Muy alta</td>
-            <td>💰💰💰💰 Muy alto</td>
-            <td>Servidores, uso como caché</td>
-          </tr>
-          <tr>
-            <td>MLC</td>
-            <td>2 bits</td>
-            <td>Alta</td>
-            <td>⭐⭐⭐⭐ Alta</td>
-            <td>💰💰💰 Alto</td>
-            <td>SSDs profesionales (raro hoy)</td>
-          </tr>
-          <tr>
-            <td><strong>TLC</strong></td>
-            <td><strong>3 bits</strong></td>
-            <td><strong>Media/Alta</strong></td>
-            <td>⭐⭐⭐ <strong>Media</strong></td>
-            <td>💰💰 <strong>Medio</strong></td>
-            <td>⭐ <strong>Estándar consumo actual</strong></td>
-          </tr>
-          <tr>
-            <td>QLC</td>
-            <td>4 bits</td>
-            <td>Media</td>
-            <td>⭐⭐ Baja</td>
-            <td>💰 Bajo</td>
-            <td>Almacenamiento masivo/lectura</td>
-          </tr>
-          <tr>
-            <td>PLC</td>
-            <td>5 bits</td>
-            <td>Baja</td>
-            <td>⭐ Muy baja</td>
-            <td>💰 Muy bajo</td>
-            <td>Emergente, nicho económico</td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="overflow-x: auto">
+
+        <table>
+          <tbody>
+            <tr>
+              <th>Tipo</th>
+              <th>Bits/celda</th>
+              <th>Velocidad</th>
+              <th>Durabilidad (TBW)</th>
+              <th>Costo</th>
+              <th>Uso principal</th>
+            </tr>
+            <tr>
+              <td>SLC</td>
+              <td>1 bit</td>
+              <td>⚡ Muy alta</td>
+              <td>⭐⭐⭐⭐⭐ Muy alta</td>
+              <td>💰💰💰💰 Muy alto</td>
+              <td>Servidores, uso como caché</td>
+            </tr>
+            <tr>
+              <td>MLC</td>
+              <td>2 bits</td>
+              <td>Alta</td>
+              <td>⭐⭐⭐⭐ Alta</td>
+              <td>💰💰💰 Alto</td>
+              <td>SSDs profesionales (raro hoy)</td>
+            </tr>
+            <tr>
+              <td><strong>TLC</strong></td>
+              <td><strong>3 bits</strong></td>
+              <td><strong>Media/Alta</strong></td>
+              <td>⭐⭐⭐ <strong>Media</strong></td>
+              <td>💰💰 <strong>Medio</strong></td>
+              <td>⭐ <strong>Estándar consumo actual</strong></td>
+            </tr>
+            <tr>
+              <td>QLC</td>
+              <td>4 bits</td>
+              <td>Media</td>
+              <td>⭐⭐ Baja</td>
+              <td>💰 Bajo</td>
+              <td>Almacenamiento masivo/lectura</td>
+            </tr>
+            <tr>
+              <td>PLC</td>
+              <td>5 bits</td>
+              <td>Baja</td>
+              <td>⭐ Muy baja</td>
+              <td>💰 Muy bajo</td>
+              <td>Emergente, nicho económico</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3>5.2 Caché SLC Dinámica</h3>
       <p>
@@ -888,40 +903,43 @@
       </div>
 
       <h3>5.3 DRAM vs DRAM-less</h3>
-      <table>
-        <tbody>
-          <tr>
-            <th>Característica</th>
-            <th>Con DRAM</th>
-            <th>DRAM-less (sin DRAM)</th>
-            <th>DRAM-less + HMB</th>
-          </tr>
-          <tr>
-            <td>Tabla de mapeo (FTL)</td>
-            <td>Local en DRAM dedicada</td>
-            <td>No tiene</td>
-            <td>En RAM del sistema (HMB)</td>
-          </tr>
-          <tr>
-            <td>Rendimiento aleatorio</td>
-            <td>Excelente</td>
-            <td>Lento</td>
-            <td>Moderado</td>
-          </tr>
-          <tr>
-            <td>Latencia</td>
-            <td>Baja</td>
-            <td>Alta</td>
-            <td>Media</td>
-          </tr>
-          <tr>
-            <td>Recomendado para SO</td>
-            <td>✅ Sí</td>
-            <td>❌ No ideal</td>
-            <td>⚠️ Aceptable</td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="overflow-x: auto">
+
+        <table>
+          <tbody>
+            <tr>
+              <th>Característica</th>
+              <th>Con DRAM</th>
+              <th>DRAM-less (sin DRAM)</th>
+              <th>DRAM-less + HMB</th>
+            </tr>
+            <tr>
+              <td>Tabla de mapeo (FTL)</td>
+              <td>Local en DRAM dedicada</td>
+              <td>No tiene</td>
+              <td>En RAM del sistema (HMB)</td>
+            </tr>
+            <tr>
+              <td>Rendimiento aleatorio</td>
+              <td>Excelente</td>
+              <td>Lento</td>
+              <td>Moderado</td>
+            </tr>
+            <tr>
+              <td>Latencia</td>
+              <td>Baja</td>
+              <td>Alta</td>
+              <td>Media</td>
+            </tr>
+            <tr>
+              <td>Recomendado para SO</td>
+              <td>✅ Sí</td>
+              <td>❌ No ideal</td>
+              <td>⚠️ Aceptable</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <section id="sec6">
@@ -946,32 +964,35 @@
       </div>
 
       <h3>6.2 Endurance – TBW y DWPD</h3>
-      <table>
-        <tbody>
-          <tr>
-            <th>Métrica</th>
-            <th>Nombre completo</th>
-            <th>Descripción</th>
-            <th>Ejemplo</th>
-          </tr>
-          <tr>
-            <td><strong>TBW</strong></td>
-            <td>Terabytes Written</td>
-            <td>
-              Total de TB que el disco puede escribir de forma garantizada.
-            </td>
-            <td>600 TBW en 5 años</td>
-          </tr>
-          <tr>
-            <td><strong>DWPD</strong></td>
-            <td>Drive Writes Per Day</td>
-            <td>
-              Escrituras diarias sobre la capacidad total durante la garantía.
-            </td>
-            <td>0.33 DWPD</td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="overflow-x: auto">
+
+        <table>
+          <tbody>
+            <tr>
+              <th>Métrica</th>
+              <th>Nombre completo</th>
+              <th>Descripción</th>
+              <th>Ejemplo</th>
+            </tr>
+            <tr>
+              <td><strong>TBW</strong></td>
+              <td>Terabytes Written</td>
+              <td>
+                Total de TB que el disco puede escribir de forma garantizada.
+              </td>
+              <td>600 TBW en 5 años</td>
+            </tr>
+            <tr>
+              <td><strong>DWPD</strong></td>
+              <td>Drive Writes Per Day</td>
+              <td>
+                Escrituras diarias sobre la capacidad total durante la garantía.
+              </td>
+              <td>0.33 DWPD</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <!-- <div class="callout">
         <strong>Fórmula DWPD:</strong><br />
@@ -1069,83 +1090,85 @@
 
     <section id="sec9">
       <h2 class="section-title">9. Comparativa de Rendimiento Master</h2>
+<div style="overflow-x: auto">
 
-      <table>
-        <tbody>
-          <tr>
-            <th>Tecnología</th>
-            <th>Protocolo</th>
-            <th>Vel. Lectura</th>
-            <th>Vel. Visual</th>
-            <th>IOPS (4K)</th>
-            <th>Latencia</th>
-            <th>Costo/GB</th>
-          </tr>
-          <tr>
-            <td>HDD 7200 rpm</td>
-            <td>IDE/SATA</td>
-            <td>~150 MB/s</td>
-            <td>
-              <div
-                class="speed-mini-bar"
-                style="width: 11px; background: #64748b"
-              ></div>
-            </td>
-            <td>~100</td>
-            <td>~10 ms</td>
-            <td>Muy bajo</td>
-          </tr>
-          <tr>
-            <td>SSD SATA</td>
-            <td>AHCI</td>
-            <td>~550 MB/s</td>
-            <td>
-              <div
-                class="speed-mini-bar"
-                style="width: 39px; background: #3b82f6"
-              ></div>
-            </td>
-            <td>~90.000</td>
-            <td>~0.1 ms</td>
-            <td>Medio</td>
-          </tr>
-          <tr>
-            <td>SSD NVMe Gen 3</td>
-            <td>NVMe</td>
-            <td>~3.500 MB/s</td>
-            <td><div class="speed-mini-bar" style="width: 72px"></div></td>
-            <td>~600.000</td>
-            <td>~0.02 ms</td>
-            <td>Medio-Alto</td>
-          </tr>
-          <tr class="highlight-row">
-            <td>⭐ SSD NVMe Gen 4</td>
-            <td>NVMe</td>
-            <td>~7.000 MB/s</td>
-            <td><div class="speed-mini-bar" style="width: 144px"></div></td>
-            <td>~1.000.000</td>
-            <td>~0.015 ms</td>
-            <td>Alto</td>
-          </tr>
-          <tr>
-            <td>SSD NVMe Gen 5</td>
-            <td>NVMe</td>
-            <td>~14.000 MB/s</td>
-            <td>
-              <div
-                class="speed-mini-bar"
-                style="
-                  width: 200px;
-                  background: linear-gradient(90deg, #7c3aed, #06b6d4);
-                "
-              ></div>
-            </td>
-            <td>~2.000.000</td>
-            <td>~0.01 ms</td>
-            <td>Muy Alto</td>
-          </tr>
-        </tbody>
-      </table>
+  <table>
+    <tbody>
+      <tr>
+        <th>Tecnología</th>
+        <th>Protocolo</th>
+        <th>Vel. Lectura</th>
+        <th>Vel. Visual</th>
+        <th>IOPS (4K)</th>
+        <th>Latencia</th>
+        <th>Costo/GB</th>
+      </tr>
+      <tr>
+        <td>HDD 7200 rpm</td>
+        <td>IDE/SATA</td>
+        <td>~150 MB/s</td>
+        <td>
+          <div
+            class="speed-mini-bar"
+            style="width: 11px; background: #64748b"
+          ></div>
+        </td>
+        <td>~100</td>
+        <td>~10 ms</td>
+        <td>Muy bajo</td>
+      </tr>
+      <tr>
+        <td>SSD SATA</td>
+        <td>AHCI</td>
+        <td>~550 MB/s</td>
+        <td>
+          <div
+            class="speed-mini-bar"
+            style="width: 39px; background: #3b82f6"
+          ></div>
+        </td>
+        <td>~90.000</td>
+        <td>~0.1 ms</td>
+        <td>Medio</td>
+      </tr>
+      <tr>
+        <td>SSD NVMe Gen 3</td>
+        <td>NVMe</td>
+        <td>~3.500 MB/s</td>
+        <td><div class="speed-mini-bar" style="width: 72px"></div></td>
+        <td>~600.000</td>
+        <td>~0.02 ms</td>
+        <td>Medio-Alto</td>
+      </tr>
+      <tr class="highlight-row">
+        <td>⭐ SSD NVMe Gen 4</td>
+        <td>NVMe</td>
+        <td>~7.000 MB/s</td>
+        <td><div class="speed-mini-bar" style="width: 144px"></div></td>
+        <td>~1.000.000</td>
+        <td>~0.015 ms</td>
+        <td>Alto</td>
+      </tr>
+      <tr>
+        <td>SSD NVMe Gen 5</td>
+        <td>NVMe</td>
+        <td>~14.000 MB/s</td>
+        <td>
+          <div
+            class="speed-mini-bar"
+            style="
+              width: 200px;
+              background: linear-gradient(90deg, #7c3aed, #06b6d4);
+            "
+          ></div>
+        </td>
+        <td>~2.000.000</td>
+        <td>~0.01 ms</td>
+        <td>Muy Alto</td>
+      </tr>
+    </tbody>
+  </table>
+      </div>
       <div class="callout tip">
         <span class="badge badge-yellow"> IOPS 4K:</span><br>
         
