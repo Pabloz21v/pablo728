@@ -1,0 +1,1398 @@
+<!doctype html>
+<html lang="es-ES" data-theme="light" style="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 3: Almacenamiento Avanzado II – SSD NVMe y M.2</title>
+    <style>
+      :root {
+        --bg-color: #0f1729;
+        --card-bg: #1a2744;
+        --text-color: #f8fafc;
+        --accent-blue: #3b82f6;
+        --accent-cyan: #06b6d4;
+        --accent-green: #10b981;
+        --accent-yellow: #f59e0b;
+        --accent-red: #ef4444;
+        --border-color: #2dd4bf;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        line-height: 1.6;
+      }
+
+      /* HEADER */
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid var(--accent-cyan);
+      }
+      .header h1 {
+        font-size: 2.5rem;
+        margin: 0;
+        background: linear-gradient(
+          to right,
+          var(--accent-blue),
+          var(--accent-cyan)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .header h2 {
+        font-size: 1.8rem;
+        color: var(--accent-cyan);
+        margin: 10px 0;
+      }
+      .header h3 {
+        font-size: 1.2rem;
+        color: #94a3b8;
+        font-weight: normal;
+        margin: 5px 0 20px 0;
+      }
+      .info-row {
+        display: inline-block;
+        background: var(--card-bg);
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        color: var(--accent-green);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      /* TOC */
+      .toc {
+        background: var(--card-bg);
+        padding: 20px 30px;
+        border-radius: 12px;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      }
+      .toc h3 {
+        color: var(--accent-blue);
+        margin-top: 0;
+      }
+      .toc ul {
+        list-style: none;
+        padding: 0;
+        columns: 2;
+      }
+      .toc li {
+        margin-bottom: 8px;
+      }
+      .toc a {
+        color: var(--accent-cyan);
+        text-decoration: none;
+      }
+
+      /* SECTIONS */
+      section {
+        margin-bottom: 50px;
+      }
+      /* h2.section-title is defined below with gradient */
+      h3 {
+        color: var(--accent-blue);
+        margin-top: 30px;
+      }
+
+      /* CARDS & INFO BOXES */
+      .card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 15px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      }
+      .callout {
+        border-left: 5px solid var(--accent-cyan);
+        background: rgba(6, 182, 212, 0.1);
+        padding: 15px 20px;
+        margin: 20px 0;
+        border-radius: 0 8px 8px 0;
+      }
+      .warning {
+        border-left-color: var(--accent-red);
+        background: rgba(239, 68, 68, 0.1);
+      }
+      .tip {
+        border-left-color: var(--accent-yellow);
+        background: rgba(245, 158, 11, 0.1);
+      }
+      .badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      .badge-blue {
+        background: var(--accent-blue);
+        color: white;
+      }
+      .badge-red {
+        background: var(--accent-red);
+        color: white;
+      }
+      .badge-yellow {
+        background: var(--accent-yellow);
+        color: #000;
+      }
+      .badge-green {
+        background: var(--accent-green);
+        color: white;
+      }
+
+      /* TABLES */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: var(--card-bg);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      th,
+      td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #334155;
+      }
+      th {
+        background: #0f172a;
+        color: var(--accent-cyan);
+        font-weight: bold;
+      }
+      tr:nth-child(even) {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      /* VISUAL ELEMENTS */
+      .speed-bar-container {
+        margin: 10px 0;
+        background: #334155;
+        border-radius: 10px;
+        height: 20px;
+        width: 100%;
+      }
+      .speed-bar {
+        height: 100%;
+        border-radius: 10px;
+        background: linear-gradient(
+          90deg,
+          var(--accent-blue),
+          var(--accent-cyan)
+        );
+      }
+
+      .thermometer {
+        display: flex;
+        height: 30px;
+        border-radius: 15px;
+        overflow: hidden;
+        margin: 20px 0;
+      }
+      .therm-green {
+        width: 50%;
+        background: var(--accent-green);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6rem;
+        font-weight: bold;
+        color: #000;
+      }
+      .therm-yellow {
+        width: 20%;
+        background: var(--accent-yellow);
+        color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6rem;
+        font-weight: bold;
+      }
+      .therm-orange {
+        color: #000;
+        width: 10%;
+        background: #ea580c;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6rem;
+        font-weight: bold;
+      }
+      .therm-red {
+        color: #000;
+        width: 20%;
+        background: var(--accent-red);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6rem;
+        font-weight: bold;
+      }
+
+      /* LISTS */
+      ul {
+        padding-left: 20px;
+      }
+      .q-list {
+        list-style: none;
+        padding: 0;
+      }
+      .q-list li {
+        margin-bottom: 15px;
+        background: var(--card-bg);
+        padding: 15px;
+        border-radius: 8px;
+        display: flex;
+        align-items: flex-start;
+      }
+      .q-num {
+        background: var(--accent-blue);
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: 15px;
+        flex-shrink: 0;
+      }
+
+      /* SECTION TITLE GRADIENT BAR */
+      h2.section-title {
+        color: #fff;
+        background: linear-gradient(90deg, #1e3a5f 0%, #1a2744 100%);
+        border-left: 5px solid var(--accent-cyan);
+        border-bottom: none;
+        padding: 12px 18px;
+        border-radius: 0 8px 8px 0;
+        margin-top: 40px;
+        font-size: 1.3rem;
+      }
+
+      /* M.2 SIZE VISUAL */
+      .m2-visual {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 20px 0;
+      }
+      .m2-bar-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .m2-label {
+        width: 55px;
+        font-size: 0.85rem;
+        font-weight: bold;
+        color: var(--accent-cyan);
+        text-align: right;
+        flex-shrink: 0;
+      }
+      .m2-bar {
+        height: 22px;
+        background: linear-gradient(
+          90deg,
+          var(--accent-blue),
+          var(--accent-cyan)
+        );
+        border-radius: 0 6px 6px 0;
+        display: flex;
+        align-items: center;
+        padding-left: 8px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        color: #fff;
+        white-space: nowrap;
+      }
+
+      /* SPEED ROW IN COMPARISON */
+      .speed-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 4px 0;
+      }
+      .speed-label-sm {
+        font-size: 0.75rem;
+        width: 110px;
+        flex-shrink: 0;
+        color: #94a3b8;
+      }
+      .speed-mini-bar {
+        height: 14px;
+        border-radius: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--accent-blue),
+          var(--accent-cyan)
+        );
+      }
+
+      /* HIGHLIGHT STAR ROW */
+      tr.highlight-row td {
+        background: rgba(59, 130, 246, 0.15);
+        font-weight: bold;
+      }
+
+      /* BONUS BADGE */
+      .badge-purple {
+        background: #7c3aed;
+        color: white;
+      }
+
+      /* FOOTER */
+      .footer {
+        text-align: center;
+        margin-top: 60px;
+        padding-top: 20px;
+        border-top: 1px solid #334155;
+        color: #94a3b8;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body style="">
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion2.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 2
+      </a>
+      <a
+        href="hardware2-sesion4.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 4
+      </a>
+    </div>
+    <div class="header">
+      <h1>SESIÓN 3</h1>
+      <h2>Almacenamiento Avanzado II – SSD NVMe y M.2</h2>
+      <h3>Protocolo, Arquitectura y Profundización Técnica</h3>
+    </div>
+
+    <div class="toc">
+      <h3>Índice de Contenidos</h3>
+      <ul>
+        <li><a href="#sec1">1. Objetivos de la Sesión</a></li>
+        <li><a href="#sec2">2. ¿Qué es NVMe? Diferencias con AHCI</a></li>
+        <li><a href="#sec3">3. PCIe – El Bus de Comunicación</a></li>
+        <li><a href="#sec4">4. Factor de Forma M.2</a></li>
+        <li><a href="#sec5">5. Tecnología NAND Interna</a></li>
+        <li><a href="#sec6">6. Over-Provisioning y Endurance</a></li>
+        <li><a href="#sec7">7. Gestión Térmica y Throttling</a></li>
+        <li><a href="#sec8">8. Compatibilidad con Motherboards</a></li>
+        <li><a href="#sec9">9. Comparativa de Rendimiento</a></li>
+        <li><a href="#sec10">10. Práctica y Análisis</a></li>
+        <li><a href="#sec11">11. Preguntas </a></li>
+        <li><a href="#sec12">12. Actividades Prácticas </a></li>
+      </ul>
+    </div>
+
+    <section id="sec1">
+      <h2 class="section-title">1. Objetivos de la Sesión</h2>
+      <div class="card">
+        <ul>
+          <li>🎯 Comprender qué es NVMe y por qué supera a AHCI</li>
+          <li>🎯 Dominar las generaciones PCIe y sus velocidades reales</li>
+          <li>
+            🎯 Identificar visualmente los factores de forma M.2 y sus Keys
+          </li>
+          <li>
+            🎯 Entender la tecnología NAND interna (tipos, caché SLC, DRAM)
+          </li>
+          <li>
+            🎯 Conocer el mecanismo de throttling térmico y cómo mitigarlo
+          </li>
+          <li>
+            🎯 Analizar conflictos de compatibilidad en motherboards reales
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sec2">
+      <h2 class="section-title">2. ¿Qué es NVMe? Diferencias con AHCI</h2>
+
+      <h3>2.1 Definición de NVMe</h3>
+      <ul>
+        <li>
+          <strong>NVMe (Non-Volatile Memory Express):</strong> Protocolo
+          diseñado desde cero para memorias flash de alta velocidad.
+        </li>
+        <li>
+          Reemplaza a
+          <strong>AHCI (Advanced Host Controller Interface)</strong>, el cual
+          fue diseñado originalmente para discos mecánicos (HDD).
+        </li>
+        <li>
+          Permite una comunicación directa con la CPU a través del bus PCIe,
+          eliminando capas intermedias y cuellos de botella.
+        </li>
+      </ul>
+
+      <h3>2.2 Tabla comparativa NVMe vs AHCI</h3>
+      <table>
+        <tbody>
+          <tr>
+            <th>Característica</th>
+            <th>AHCI (SATA)</th>
+            <th>NVMe (PCIe)</th>
+          </tr>
+          <tr>
+            <td>Colas de comandos</td>
+            <td>1 cola / 32 comandos</td>
+            <td>64.535 colas / 65.535 comandos</td>
+          </tr>
+          <tr>
+            <td>Latencia típica</td>
+            <td>~100 µs</td>
+            <td>~20 µs</td>
+          </tr>
+          <tr>
+            <td>Velocidad máxima</td>
+            <td>~600 MB/s</td>
+            <td>hasta 14.000 MB/s</td>
+          </tr>
+          <tr>
+            <td>Uso de CPU</td>
+            <td>Alto</td>
+            <td>Muy bajo</td>
+          </tr>
+          <tr>
+            <td>Diseñado para</td>
+            <td>HDDs mecánicos</td>
+            <td>Memorias flash</td>
+          </tr>
+          <tr>
+            <td>Interfaz física</td>
+            <td>SATA</td>
+            <td>PCIe / M.2</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <span class="badge badge-blue">CONCEPTO CLAVE</span><br />
+        <strong>¿Por qué importa la cantidad de colas?</strong><br />
+        Las 64.535 colas de NVMe permiten un paralelismo masivo. Mientras un SSD
+        SATA (AHCI) debe procesar solicitudes casi en fila india (1 cola de 32
+        comandos), un NVMe puede procesar miles de solicitudes simultáneas,
+        vital para sistemas operativos modernos, bases de datos y gaming
+        (DirectStorage).
+      </div>
+    </section>
+
+    <section id="sec3">
+      <h2 class="section-title">3. PCIe – El Bus de Comunicación</h2>
+
+      <h3>3.1 ¿Qué es PCIe?</h3>
+      <ul>
+        <li>
+          <strong
+            >PCI Express (Peripheral Component Interconnect Express):</strong
+          >
+          bus de alta velocidad punto a punto.
+        </li>
+        <li>
+          Usado por componentes de alto rendimiento: GPU, SSDs NVMe, tarjetas de
+          red.
+        </li>
+        <li>
+          Organizado en "lanes" (carriles) de transmisión de datos
+          bidireccionales.
+        </li>
+      </ul>
+
+      <h3>3.2 Generaciones PCIe</h3>
+      <table>
+        <tbody>
+          <tr>
+            <th>Generación</th>
+            <th>Ancho de banda (x1)</th>
+            <th>Velocidad (x4) teórica</th>
+            <th>Velocidad (x4) aprox. real</th>
+            <th>Período</th>
+            <th>Ejemplos de SSDs</th>
+          </tr>
+          <tr>
+            <td>PCIe 3.0</td>
+            <td>8 Gb/s</td>
+            <td>~32 Gb/s</td>
+            <td>~3.500 MB/s</td>
+            <td>2015-2020</td>
+            <td>Samsung 970 EVO, WD Blue SN570</td>
+          </tr>
+          <tr>
+            <td>PCIe 4.0</td>
+            <td>16 Gb/s</td>
+            <td>~64 Gb/s</td>
+            <td>~7.000 MB/s</td>
+            <td>2020-actual</td>
+            <td>Samsung 980 Pro, WD Black SN850X</td>
+          </tr>
+          <tr>
+            <td>PCIe 5.0</td>
+            <td>32 Gb/s</td>
+            <td>~128 Gb/s</td>
+            <td>~14.000 MB/s</td>
+            <td>2023-2026</td>
+            <td>Crucial T705, Seagate FireCuda 540</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3.3 Lanes (Carriles)</h3>
+      <ul>
+        <li>Un SSD M.2 NVMe típico utiliza <strong>4 lanes (x4)</strong>.</li>
+        <li>
+          Si se conecta en un slot limitado a x2, su velocidad máxima se reduce
+          a la MITAD.
+        </li>
+      </ul>
+
+      <div class="callout tip">
+        <span class="badge badge-yellow">💡 TIP DE RETROCOMPATIBILIDAD</span
+        ><br />
+        Un SSD NVMe PCIe 4.0 funciona perfectamente en una placa base con slot
+        PCIe 3.0, pero estará limitado a la velocidad de PCIe 3.0 (~3.500 MB/s).
+        <strong>Siempre funciona el estándar más antiguo como límite.</strong>
+      </div>
+
+      <div class="callout warning">
+        <span class="badge badge-red">⚠️ IMPORTANTE: BOTTLENECKS</span><br />
+        SATA topa en ~550 MB/s. PCIe 3.0 x4 llega a ~3.500 MB/s. PCIe 4.0 x4
+        llega a ~7.000 MB/s. Instalar un NVMe PCIe 5.0 (14.000 MB/s) en una
+        placa PCIe 3.0 deja al SSD funcionando aproximadamente al 25% de su
+        capacidad real.
+      </div>
+    </section>
+
+    <section id="sec4">
+      <h2 class="section-title">4. Factor de Forma M.2</h2>
+
+      <h3>4.1 ¿Qué es M.2?</h3>
+      <ul>
+        <li>
+          M.2 es el <strong>conector físico (factor de forma)</strong>, NO un
+          protocolo.
+        </li>
+        <li>
+          Puede transportar <strong>señal SATA O señal PCIe (NVMe)</strong>. ¡No
+          confundir!
+        </li>
+        <li>Ancho estándar: siempre 22 milímetros.</li>
+      </ul>
+
+      <h3>4.2 Tamaños M.2 – Nomenclatura 22XX</h3>
+
+      <div class="m2-visual">
+        <div class="m2-bar-row">
+          <span class="m2-label">2230</span>
+          <div
+            class="m2-bar"
+            style="
+              width: 80px;
+              background: linear-gradient(90deg, #475569, #64748b);
+            "
+          >
+            30 mm
+          </div>
+          <span style="font-size: 0.8rem; color: #94a3b8"
+            >Steam Deck / Surface</span
+          >
+        </div>
+        <div class="m2-bar-row">
+          <span class="m2-label">2242</span>
+          <div
+            class="m2-bar"
+            style="
+              width: 112px;
+              background: linear-gradient(90deg, #1d4ed8, #3b82f6);
+            "
+          >
+            42 mm
+          </div>
+          <span style="font-size: 0.8rem; color: #94a3b8"
+            >Laptops ultradelgadas</span
+          >
+        </div>
+        <div class="m2-bar-row">
+          <span class="m2-label">2260</span>
+          <div
+            class="m2-bar"
+            style="
+              width: 160px;
+              background: linear-gradient(90deg, #0e7490, #06b6d4);
+            "
+          >
+            60 mm
+          </div>
+          <span style="font-size: 0.8rem; color: #94a3b8">Uso industrial</span>
+        </div>
+        <div class="m2-bar-row">
+          <span class="m2-label">⭐ 2280</span>
+          <div
+            class="m2-bar"
+            style="
+              width: 213px;
+              background: linear-gradient(90deg, #047857, #10b981);
+            "
+          >
+            80 mm — ESTÁNDAR
+          </div>
+          <span style="font-size: 0.8rem; color: #10b981; font-weight: bold"
+            >PC Escritorio / Laptops</span
+          >
+        </div>
+        <div class="m2-bar-row">
+          <span class="m2-label">22110</span>
+          <div
+            class="m2-bar"
+            style="
+              width: 293px;
+              background: linear-gradient(90deg, #92400e, #f59e0b);
+            "
+          >
+            110 mm
+          </div>
+          <span style="font-size: 0.8rem; color: #94a3b8"
+            >Servidores / Workstations</span
+          >
+        </div>
+      </div>
+
+      <table>
+        <tbody>
+          <tr>
+            <th>Nomenclatura</th>
+            <th>Ancho</th>
+            <th>Largo</th>
+            <th>Uso principal</th>
+          </tr>
+          <tr>
+            <td>2230</td>
+            <td>22 mm</td>
+            <td>30 mm</td>
+            <td>Consolas portátiles (Steam Deck), tablets Surface</td>
+          </tr>
+          <tr>
+            <td>2242</td>
+            <td>22 mm</td>
+            <td>42 mm</td>
+            <td>Laptops ultradelgadas, servidores</td>
+          </tr>
+          <tr>
+            <td>2260</td>
+            <td>22 mm</td>
+            <td>60 mm</td>
+            <td>Menos común, uso industrial</td>
+          </tr>
+          <tr>
+            <td><strong>2280</strong></td>
+            <td>22 mm</td>
+            <td>80 mm</td>
+            <td>⭐ <strong>Estándar PC escritorio y laptops</strong></td>
+          </tr>
+          <tr>
+            <td>22110</td>
+            <td>22 mm</td>
+            <td>110 mm</td>
+            <td>Servidores y workstations</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>4.3 Keys (Muescas de Seguridad)</h3>
+      <table>
+        <tbody>
+          <tr>
+            <th>Key</th>
+            <th>Muesca</th>
+            <th>Lanes PCIe</th>
+            <th>Protocolo</th>
+            <th>Uso actual</th>
+          </tr>
+          <tr>
+            <td><strong>Key M</strong></td>
+            <td>Derecha </td>
+            <td>x4</td>
+            <td>NVMe o SATA</td>
+            <td>⭐ Estándar NVMe moderno</td>
+          </tr>
+          <tr>
+            <td><strong>Key B</strong></td>
+            <td>Izquierda </td>
+            <td>x2</td>
+            <td>SATA o NVMe x2</td>
+            <td>Antiguo, menos frecuente</td>
+          </tr>
+          <tr>
+            <td><strong>Key B+M</strong></td>
+            <td>Ambas muescas</td>
+            <td>x2 (máx.)</td>
+            <td>SATA o NVMe x2</td>
+            <td>Común en SSD SATA M.2</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout warning">
+        <span class="badge badge-red">⚠️ CUIDADO CON EL KEY B+M</span><br />
+        Un SSD M.2 con Key B+M <strong>NO</strong> es necesariamente NVMe. La
+        mayoría de los SSD SATA M.2 usan Key B+M para encajar en cualquier
+        ranura. Es crucial verificar el protocolo en las especificaciones del
+        fabricante.
+      </div>
+    </section>
+
+    <section id="sec5">
+      <h2 class="section-title">5. Tecnología NAND Interna</h2>
+
+      <h3>5.1 Tipos de NAND</h3>
+      <table>
+        <tbody>
+          <tr>
+            <th>Tipo</th>
+            <th>Bits/celda</th>
+            <th>Velocidad</th>
+            <th>Durabilidad (TBW)</th>
+            <th>Costo</th>
+            <th>Uso principal</th>
+          </tr>
+          <tr>
+            <td>SLC</td>
+            <td>1 bit</td>
+            <td>⚡ Muy alta</td>
+            <td>⭐⭐⭐⭐⭐ Muy alta</td>
+            <td>💰💰💰💰 Muy alto</td>
+            <td>Servidores, uso como caché</td>
+          </tr>
+          <tr>
+            <td>MLC</td>
+            <td>2 bits</td>
+            <td>Alta</td>
+            <td>⭐⭐⭐⭐ Alta</td>
+            <td>💰💰💰 Alto</td>
+            <td>SSDs profesionales (raro hoy)</td>
+          </tr>
+          <tr>
+            <td><strong>TLC</strong></td>
+            <td><strong>3 bits</strong></td>
+            <td><strong>Media/Alta</strong></td>
+            <td>⭐⭐⭐ <strong>Media</strong></td>
+            <td>💰💰 <strong>Medio</strong></td>
+            <td>⭐ <strong>Estándar consumo actual</strong></td>
+          </tr>
+          <tr>
+            <td>QLC</td>
+            <td>4 bits</td>
+            <td>Media</td>
+            <td>⭐⭐ Baja</td>
+            <td>💰 Bajo</td>
+            <td>Almacenamiento masivo/lectura</td>
+          </tr>
+          <tr>
+            <td>PLC</td>
+            <td>5 bits</td>
+            <td>Baja</td>
+            <td>⭐ Muy baja</td>
+            <td>💰 Muy bajo</td>
+            <td>Emergente, nicho económico</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>5.2 Caché SLC Dinámica</h3>
+      <p>
+        Muchos SSD TLC/QLC escriben primero simulando celdas SLC (1 bit) para
+        ser muy rápidos. Cuando esta "caché" se agota en copias largas, la
+        velocidad cae a su rendimiento nativo.
+      </p>
+      <div
+        style="background: var(--card-bg); padding: 15px; border-radius: 8px"
+      >
+        <p style="margin: 0; font-size: 0.9rem">
+          Velocidad con Caché SLC (Ej: 3000 MB/s)
+        </p>
+        <div class="speed-bar-container" style="width: 100%">
+          <div class="speed-bar" style="width: 100%"></div>
+        </div>
+        <p style="margin: 15px 0 0 0; font-size: 0.9rem">
+          Velocidad sin Caché SLC (Nativa TLC/QLC) (Ej: 400 MB/s)
+        </p>
+        <div class="speed-bar-container" style="width: 100%">
+          <div
+            class="speed-bar"
+            style="width: 15%; background: var(--accent-red)"
+          ></div>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <span class="badge badge-green">📝 CONTROLADOR Y FIRMWARE</span><br />
+        El controlador es el 'cerebro' del SSD. Un buen controlador (ej: Phison
+        E18, Samsung Elpis) marca la diferencia en rendimiento, estabilidad y
+        durabilidad, incluso usando el mismo tipo de memoria NAND.
+      </div>
+
+      <h3>5.3 DRAM vs DRAM-less</h3>
+      <table>
+        <tbody>
+          <tr>
+            <th>Característica</th>
+            <th>Con DRAM</th>
+            <th>DRAM-less (sin DRAM)</th>
+            <th>DRAM-less + HMB</th>
+          </tr>
+          <tr>
+            <td>Tabla de mapeo (FTL)</td>
+            <td>Local en DRAM dedicada</td>
+            <td>No tiene</td>
+            <td>En RAM del sistema (HMB)</td>
+          </tr>
+          <tr>
+            <td>Rendimiento aleatorio</td>
+            <td>Excelente</td>
+            <td>Lento</td>
+            <td>Moderado</td>
+          </tr>
+          <tr>
+            <td>Latencia</td>
+            <td>Baja</td>
+            <td>Alta</td>
+            <td>Media</td>
+          </tr>
+          <tr>
+            <td>Recomendado para SO</td>
+            <td>✅ Sí</td>
+            <td>❌ No ideal</td>
+            <td>⚠️ Aceptable</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="sec6">
+      <h2 class="section-title">6. Over-Provisioning y Endurance</h2>
+
+      <div class="card">
+        <h3>6.1 Over-Provisioning (OP)</h3>
+        <p>
+          Es un espacio reservado extra (no particionado/visible para el SO) que
+          el controlador usa para mover datos, mejorar el rendimiento sostenido
+          (garbage collection) y aumentar la vida útil.
+        </p>
+        <ul>
+          <li>
+            <strong>Usuarios normales:</strong> Dejar 7-10% sin particionar.
+          </li>
+          <li>
+            <strong>Workstations/NAS:</strong> Dejar 12-20% de OP rinde grandes
+            frutos en escrituras pesadas.
+          </li>
+        </ul>
+      </div>
+
+      <h3>6.2 Endurance – TBW y DWPD</h3>
+      <table>
+        <tbody>
+          <tr>
+            <th>Métrica</th>
+            <th>Nombre completo</th>
+            <th>Descripción</th>
+            <th>Ejemplo</th>
+          </tr>
+          <tr>
+            <td><strong>TBW</strong></td>
+            <td>Terabytes Written</td>
+            <td>
+              Total de TB que el disco puede escribir de forma garantizada.
+            </td>
+            <td>600 TBW en 5 años</td>
+          </tr>
+          <tr>
+            <td><strong>DWPD</strong></td>
+            <td>Drive Writes Per Day</td>
+            <td>
+              Escrituras diarias sobre la capacidad total durante la garantía.
+            </td>
+            <td>0.33 DWPD</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- <div class="callout">
+        <strong>Fórmula DWPD:</strong><br />
+        <code>DWPD = TBW ÷ (Años_garantía × 365 × Capacidad_TB)</code
+        ><br /><br />
+        <em>Ejemplo práctico:</em> Un SSD de 1TB con 600 TBW y 5 años de
+        garantía:<br />
+        <code>600 ÷ (5 × 365 × 1) = 600 ÷ 1825 ≈ 0.33 DWPD</code><br />
+        (Significa que puedes escribir un 33% del disco todos los días durante 5
+        años antes de agotar la garantía).
+      </div> -->
+    </section>
+
+    <section id="sec7">
+      <h2 class="section-title">7. Gestión Térmica y Throttling</h2>
+
+      <h3>7.1 ¿Por qué calientan más los NVMe?</h3>
+      <p>
+        A mayor velocidad, mayor actividad eléctrica y procesamiento. El
+        componente más crítico es el controlador NVMe, que puede superar los
+        80°C bajo carga sostenida extrema.
+      </p>
+
+      <div class="callout warning">
+        <span class="badge badge-red">⚠️ THROTTLING TÉRMICO</span><br />
+        Mecanismo de defensa. Cuando la temperatura supera ~75-80°C, el
+        controlador reduce DRÁSTICAMENTE la velocidad (hasta un 70-80%) para
+        proteger la NAND y evitar daños. El resultado: un NVMe rápido rindiendo
+        temporalmente como un disco mecánico.
+      </div>
+
+      <div class="thermometer">
+        <div class="therm-green">0-50°C (Normal)</div>
+        <div class="therm-yellow">50-70°C (Carga)</div>
+        <div class="therm-orange">70-80°C (Riesgo)</div>
+        <div class="therm-red">80°C+ (Throttling)</div>
+      </div>
+
+      <h3>7.2 Soluciones de refrigeración</h3>
+      <div class="card">
+        1. <strong>Disipador pasivo</strong> de aluminio/cobre (solución
+        económica y más común).
+      </div>
+      <div class="card">
+        2. <strong>M.2 Shield</strong> integrado en la motherboard (presente en
+        placas base mid/high-end).
+      </div>
+      <div class="card">
+        3. <strong>Disipador activo</strong> con ventilador (obligatorio en
+        muchos SSDs PCIe 5.0).
+      </div>
+      <div class="card">
+        4. <strong>Flujo de aire</strong> adecuado en el gabinete general de la
+        PC.
+      </div>
+    </section>
+
+    <section id="sec8">
+      <h2 class="section-title">8. Compatibilidad con Motherboards</h2>
+
+      <div class="callout warning">
+        <span class="badge badge-red">⚠️ CONFLICTOS DE RECURSOS PCIe</span
+        ><br />
+        En muchas placas, usar un slot M.2 específico puede
+        <strong>DESHABILITAR</strong> puertos SATA (ej: SATA 5 y 6) o reducir el
+        ancho de banda del slot PCIe secundario.
+        <strong
+          >SIEMPRE consultar el manual de la motherboard antes de
+          comprar/instalar.</strong
+        >
+      </div>
+
+      <h3>8.1 Checklist de instalación (Antes de comprar)</h3>
+      <ul style="list-style: none; padding-left: 0">
+        <li>✅ ¿La placa soporta M.2 NVMe (no solo M.2 SATA)?</li>
+        <li>✅ ¿Qué generación PCIe soporta ese slot M.2?</li>
+        <li>✅ ¿El slot tiene 4 carriles (x4) o está limitado a x2?</li>
+        <li>✅ ¿Usar ese slot deshabilita algún puerto SATA?</li>
+        <li>✅ ¿Afecta al slot PCIe x16 principal de la tarjeta gráfica?</li>
+        <li>
+          ✅ ¿El tamaño del SSD (ej: 2280) tiene tornillo de anclaje disponible?
+        </li>
+      </ul>
+
+      <div class="card">
+        <h3>8.2 Bifurcación PCIe (Bifurcation)</h3>
+        <p>
+          Es la capacidad técnica de dividir un slot físico (ej: x16) en
+          múltiples enlaces lógicos (ej: x4/x4/x4/x4). Permite usar tarjetas
+          adaptadoras para colocar hasta 4 SSDs NVMe en un solo slot grande.
+          Requiere soporte explícito en la BIOS/UEFI de la placa base.
+        </p>
+      </div>
+    </section>
+
+    <section id="sec9">
+      <h2 class="section-title">9. Comparativa de Rendimiento Master</h2>
+
+      <table>
+        <tbody>
+          <tr>
+            <th>Tecnología</th>
+            <th>Protocolo</th>
+            <th>Vel. Lectura</th>
+            <th>Vel. Visual</th>
+            <th>IOPS (4K)</th>
+            <th>Latencia</th>
+            <th>Costo/GB</th>
+          </tr>
+          <tr>
+            <td>HDD 7200 rpm</td>
+            <td>IDE/SATA</td>
+            <td>~150 MB/s</td>
+            <td>
+              <div
+                class="speed-mini-bar"
+                style="width: 11px; background: #64748b"
+              ></div>
+            </td>
+            <td>~100</td>
+            <td>~10 ms</td>
+            <td>Muy bajo</td>
+          </tr>
+          <tr>
+            <td>SSD SATA</td>
+            <td>AHCI</td>
+            <td>~550 MB/s</td>
+            <td>
+              <div
+                class="speed-mini-bar"
+                style="width: 39px; background: #3b82f6"
+              ></div>
+            </td>
+            <td>~90.000</td>
+            <td>~0.1 ms</td>
+            <td>Medio</td>
+          </tr>
+          <tr>
+            <td>SSD NVMe Gen 3</td>
+            <td>NVMe</td>
+            <td>~3.500 MB/s</td>
+            <td><div class="speed-mini-bar" style="width: 72px"></div></td>
+            <td>~600.000</td>
+            <td>~0.02 ms</td>
+            <td>Medio-Alto</td>
+          </tr>
+          <tr class="highlight-row">
+            <td>⭐ SSD NVMe Gen 4</td>
+            <td>NVMe</td>
+            <td>~7.000 MB/s</td>
+            <td><div class="speed-mini-bar" style="width: 144px"></div></td>
+            <td>~1.000.000</td>
+            <td>~0.015 ms</td>
+            <td>Alto</td>
+          </tr>
+          <tr>
+            <td>SSD NVMe Gen 5</td>
+            <td>NVMe</td>
+            <td>~14.000 MB/s</td>
+            <td>
+              <div
+                class="speed-mini-bar"
+                style="
+                  width: 200px;
+                  background: linear-gradient(90deg, #7c3aed, #06b6d4);
+                "
+              ></div>
+            </td>
+            <td>~2.000.000</td>
+            <td>~0.01 ms</td>
+            <td>Muy Alto</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout tip">
+        <span class="badge badge-yellow"> IOPS 4K:</span><br>
+        
+          Mide qué tan eficiente es una unidad de almacenamiento manejando archivos pequeños y
+          dispersos, lo que define la "agilidad" real de tu sistema informático
+        
+      </div>
+      <div class="callout tip">
+        <span class="badge badge-yellow">💡 PERSPECTIVA PRÁCTICA</span><br />
+        En gaming actual, la diferencia entre un NVMe Gen 3 (3.500 MB/s) y un
+        Gen 5 (14.000 MB/s) es <strong>menos de 1 segundo</strong> en tiempos de
+        carga de juego. La diferencia real se nota en movimiento masivo de
+        archivos y edición de video 8K RAW. Para el usuario promedio, un
+        <strong>Gen 3 o Gen 4 con DRAM</strong> es la relación
+        precio/rendimiento óptima.
+      </div>
+    </section>
+
+    <section id="sec10">
+      <h2 class="section-title">10. Práctica y Análisis</h2>
+      <div class="card">
+        <h3>🔍 Actividad de Reconocimiento Visual</h3>
+        <p>
+          Identificación visual de Keys (M, B, B+M) y
+          distinción entre chips NAND, Controlador y memoria DRAM (Agregar imagenes).
+        </p>
+      </div>
+      <!-- <div class="card">
+        <h3>📊 Lectura de Diagramas de Bloques</h3>
+        <p>
+          Análisis de diagramas de placas base (chipset vs CPU lanes) para
+          entender de dónde provienen las líneas PCIe de cada slot M.2.
+        </p>
+      </div> -->
+      <!-- <div class="card">
+        <h3>📖 Detección de Conflictos en Manuales</h3>
+        <p>
+          Los alumnos recibirán manuales PDF de Asus, MSI y Gigabyte para buscar
+          advertencias de "lane sharing" y puertos SATA deshabilitados.
+        </p>
+      </div> -->
+    </section>
+
+    <section id="sec11">
+      <h2 class="section-title">11. Preguntas</h2>
+      
+      <ul class="q-list">
+        <li>
+          <span class="q-num">1</span>¿Qué significa "NVMe"? ¿En qué se
+          diferencia del protocolo AHCI utilizado por SATA?
+        </li>
+        <li>
+          <span class="q-num">2</span>Explica qué es PCIe y por qué permite
+          velocidades mucho mayores que SATA.
+        </li>
+        <!-- <li>
+          <span class="q-num">3</span>Completa la tabla de generaciones PCIe
+          (para conexión x4): Gen 3, Gen 4, Gen 5 (Bandwidth/Vel real).
+        </li> -->
+        
+        <li>
+          <span class="q-num">3</span>¿Qué significa lane sharing? y como impacta en los Lane de los PCIe usados para los M.2
+        </li>
+        <li>
+          <span class="q-num">4</span>¿Qué significa "x4" en PCIe x4? ¿Qué
+          pasaría si conectas un SSD NVMe x4 en un slot x2?
+        </li>
+        <li>
+          <span class="q-num">5</span>Un SSD NVMe PCIe 4.0 se instala en una
+          motherboard con slot PCIe 3.0. ¿A qué velocidad funcionará? ¿Por qué?
+        </li>
+        <li>
+          <span class="q-num">6</span>Explica la nomenclatura de los tamaños
+          M.2. ¿Qué significa "2280"? Agregar imagen de los 5 tamaños de M.2.
+        </li>
+        <li>
+          <span class="q-num">7</span>¿Cuál es el factor de forma M.2 más común
+          actualmente? ¿Por qué?
+        </li>
+        <li>
+          <span class="q-num">8</span>Explica la diferencia entre M.2 Key B, Key
+          M y Key B+M.
+        </li>
+        <li>
+          <span class="q-num">9</span>¿Un SSD M.2 Key B+M siempre es NVMe?
+          Justifica tu respuesta.
+        </li>
+        <li>
+          <span class="q-num">10</span>¿Se puede instalar un SSD M.2 Key M en un
+          slot Key B? ¿Por qué? 
+        </li>
+        <li>
+          <span class="q-num">11</span>Explica la diferencia entre "interfaz",
+          "protocolo" y "factor de forma" usando ejemplos de almacenamiento.
+        </li>
+        <li>
+          <span class="q-num">12</span>¿Un SSD M.2 siempre es más rápido que un
+          SSD SATA 2.5"? Explica con ejemplos.
+        </li>
+        <li>
+          <span class="q-num">13</span>¿Por qué los SSDs NVMe se calientan más
+          que los SATA? Desarrolla tu respuesta con conceptos físicos.
+        </li>
+        <li>
+          <span class="q-num">14</span>¿Qué es el "throttling térmico" en un
+          SSD?
+        </li>
+        
+        <li>
+          <span class="q-num">15</span>¿A partir de qué temperatura un SSD NVMe
+          comienza a hacer throttling? ¿Qué consecuencias tiene?
+        </li>
+        <li>
+          <span class="q-num">16</span>Menciona 3 soluciones para mejorar la
+          refrigeración de un SSD M.2 NVMe.
+        </li>
+        <li>
+          <span class="q-num">17</span>Investiga porque usar los slots M.2 pueden deshabilitar los puertos SATA 5 y 6.
+        </li>
+        <!-- <li>
+          <span class="q-num">22</span>¿Qué es la "compartición de lanes PCIe"?
+          Da un ejemplo práctico.
+        </li> -->
+        <li>
+          <span class="q-num">18</span>Investigar "Un usuario instala 2 SSDs NVMe en su
+          placa, pero su tarjeta gráfica ahora funciona en x8 en lugar de x16".
+          ¿or qué puede estar sucediendo esto y cómo solucionarlo?.
+        </li>
+        <li>
+          <span class="q-num">19</span>Buscar el precio de un M.2 de 4TB y comprarlo con el precio de un SSD Sata de 4TB y un HDD de 4TB.
+        </li>
+        <!-- <li style="border-left: 3px solid #7c3aed">
+          <span class="q-num" style="background: #7c3aed">🎁</span>
+          <div>
+            <span class="badge badge-purple">BONUS</span><br />Investiga qué es
+            <strong>DirectStorage</strong> de Microsoft y cómo aprovecha la
+            velocidad de los SSDs NVMe para gaming. ¿Qué juegos ya lo soportan?
+            Incluye fuentes e imágenes.
+          </div>
+        </li> -->
+      </ul>
+    </section>
+
+    <section id="sec12">
+      <!-- <h2 class="section-title">12. Actividades Prácticas</h2>
+
+      <div class="card">
+        <h3>🛠️ ACTIVIDAD 1: GUÍA DE IDENTIFICACIÓN DE M.2</h3>
+        <p>
+          <strong>Instrucciones:</strong> Busca imágenes de alta calidad de al
+          menos 10 SSDs M.2 diferentes. Para cada imagen identifica:
+        </p>
+        <ul>
+          <li>Factor de forma (2242, 2260, 2280).</li>
+          <li>Key (B, M o B+M) observando las muescas.</li>
+          <li>SATA o NVMe basándote en pistas visuales.</li>
+          <li>
+            Crea una presentación señalando estos puntos con flechas. Incluye
+            "Tips para identificar sin ver la caja".
+          </li>
+        </ul>
+      </div> -->
+
+      <div class="card">
+        <h3>📑 ACTIVIDAD : ANÁLISIS DE COMPATIBILIDAD DE MOTHERBOARD</h3>
+        <p>
+          <strong>Instrucciones:</strong> Descarga el manual de una motherboard
+          B550, Z690 o B650 y documentar detalladamente:
+        </p>
+        <ul>
+          <li>Cantidad de slots M.2 y su ubicación física.</li>
+          <li>Generación PCIe de cada slot y si proviene del CPU o Chipset.</li>
+          <li>Soporte de interfaz (¿Soporta SATA y NVMe?).</li>
+          <li>Limitaciones explícitas (Puertos deshabilitados).</li>
+        </ul>
+      </div>
+
+      <!-- <div class="card">
+        <h3>💼 ACTIVIDAD 3: CASO PRÁCTICO – UPGRADE DE ALMACENAMIENTO</h3>
+        <p>
+          <strong>Escenario:</strong> Cliente con MSI B450 Tomahawk Max (PCIe
+          3.0), Ryzen 5 3600, 16GB RAM y un HDD 1TB. Presupuesto $80,000 ARS.
+          Quiere Windows 11 rápido y mantener el HDD.
+        </p>
+        <ul>
+          <li>Propón 3 opciones de upgrade: Económica, Balanceada, Premium.</li>
+          <li>Justifica técnica y económicamente cada modelo propuesto.</li>
+          <li>
+            Responde: ¿Recomendarías un SSD PCIe 4.0 en esta placa PCIe 3.0?
+          </li>
+          <li>Redacta un email profesional al cliente.</li>
+        </ul>
+      </div> -->
+    </section>
+
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion2.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 2
+      </a>
+      <a
+        href="hardware2-sesion4.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 4
+      </a>
+    </div>
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516"
+      integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg=="
+      data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
