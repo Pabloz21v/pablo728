@@ -1,84 +1,219 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clase 10: Variables y Tipos de Datos</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Clase 1: Variables en Python | Fundamentos de Programación</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #f6f9fc;
+        font-family:
+          system-ui, "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+        line-height: 1.5;
+        color: #1a2a3a;
+        padding: 1rem;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        padding: 1.5rem;
+      }
+
+      @media (min-width: 768px) {
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-            background-color: #f9f9f9;
+          padding: 2rem;
         }
         .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          padding: 2rem 2.5rem;
         }
-        header {
-            /* background-color: #2c3e50; */
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 8px 8px 0 0;
+      }
+
+      h1 {
+        font-size: 1.9rem;
+        background: linear-gradient(135deg, #1e3c72, #2b4c7c);
+        background-clip: text;
+        -webkit-background-clip: text;
+        /* color: transparent; */
+        margin-bottom: 0.5rem;
+        border-left: 5px solid #2b4c7c;
+        padding-left: 1rem;
+      }
+
+      .subtitulo {
+        color: #4a627a;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 0.75rem;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+        margin: 1.5rem 0 1rem 0;
+        color: #1e3c72;
+        border-bottom: 2px solid #cbd5e1;
+        padding-bottom: 0.3rem;
+      }
+
+      h3 {
+        font-size: 1.3rem;
+        margin: 1.2rem 0 0.8rem 0;
+        color: #2c3e66;
+      }
+
+      .card {
+        background: #f8fafc;
+        border-radius: 1.2rem;
+        padding: 1rem 1.2rem;
+        margin: 1rem 0;
+        border-left: 4px solid #3b82f6;
+      }
+
+      .badge {
+        display: inline-block;
+        background: #e6f0ff;
+        color: #1e40af;
+        font-weight: 600;
+        font-size: 0.75rem;
+        padding: 0.2rem 0.7rem;
+        border-radius: 20px;
+        margin-right: 0.5rem;
+      }
+
+      pre {
+        background: #0f172a;
+        color: #e2e8f0;
+        padding: 1rem;
+        border-radius: 1rem;
+        overflow-x: auto;
+        font-size: 0.85rem;
+        font-family: "JetBrains Mono", "Fira Code", monospace;
+        margin: 1rem 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+      code {
+        font-family: "JetBrains Mono", "Fira Code", monospace;
+        background: #eef2ff;
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.5rem;
+        font-size: 0.85rem;
+        color: #b91c1c;
+      }
+
+      pre code {
+        background: transparent;
+        padding: 0;
+        color: #e2e8f0;
+        font-size: 0.85rem;
+      }
+
+      ul,
+      ol {
+        margin: 0.75rem 0 0.75rem 1.5rem;
+      }
+
+      li {
+        margin: 0.4rem 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.2rem 0;
+        font-size: 0.9rem;
+        background: #ffffff;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
+      th,
+      td {
+        border: 1px solid #e2e8f0;
+        padding: 0.7rem;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: #eef2ff;
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      .ejemplo-cuento {
+        background: #fff7ed;
+        border-left: 5px solid #f59e0b;
+        padding: 1rem;
+        border-radius: 1rem;
+        margin: 1.2rem 0;
+      }
+
+      footer {
+        margin-top: 2rem;
+        text-align: center;
+        font-size: 0.8rem;
+        color: #6c757d;
+        border-top: 1px solid #e2e8f0;
+        padding-top: 1.5rem;
+      }
+
+      .btn-copy {
+        display: inline-block;
+        background: #eef2ff;
+        border-radius: 12px;
+        padding: 0.2rem 0.7rem;
+        font-size: 0.7rem;
+        color: #1e3c72;
+        cursor: pointer;
+        float: right;
+        transition: 0.2s;
+      }
+
+      .btn-copy:hover {
+        background: #cbdffc;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 1rem;
         }
-        h1, h2 {
-            color: #2c3e50;
+        h1 {
+          font-size: 1.6rem;
         }
         h2 {
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
+          font-size: 1.4rem;
         }
-        .theory {
-            background-color: #f0f8ff;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
+        pre {
+          font-size: 0.75rem;
+          padding: 0.8rem;
         }
-        .tip {
-            background-color: #fef9e7;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            border-left: 4px solid #f39c12;
+        th,
+        td {
+          padding: 0.5rem;
         }
-        .activity {
-            background-color: #e8f8f5;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            border-left: 4px solid #27ae60;
-        }
-        code {
-            background-color: #f4f4f4;
-            padding: 5px;
-            border-radius: 3px;
-            font-family: monospace;
-            display: block;
-        }
-        ol, ul {
-            margin-left: 20px;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-         <div style="margin-bottom: 24px">
+      <div style="margin-bottom: 24px">
         <a
           href="../materias/desarrollo-1.html"
           style="
@@ -124,44 +259,331 @@
           Ir a Sesión 11
         </a>
       </div>
-        <header>
-            <h1>Clase 10: Variables y Tipos de Datos</h1>
-        </header>
+      <h1>📦 Variables en Python</h1>
+      <div class="subtitulo">
+        Aprende a guardar información como un profesional · Desarrollo 1
+      </div>
 
-        <div class="theory">
-            <h2>Marco Teórico</h2>
-            <p>Una <strong>variable</strong> es un espacio en memoria con nombre para guardar un dato. En Python se crean asignando un valor con <code>=</code>.</p>
-            <h3>Tipos de datos básicos:</h3>
-            <ul>
-                <li><strong>int</strong> (Enteros): Números sin decimales (10, -5, 2024).</li>
-                <li><strong>float</strong> (Flotantes): Números con decimales (3.14, 2.5). Se usa punto, no coma.</li>
-                <li><strong>str</strong> (String/Cadena): Texto entre comillas (<code>"Hola"</code>, <code>'Python'</code>).</li>
-                <li><strong>bool</strong> (Booleanos): Valores de verdad (<code>True</code>, <code>False</code>). Importante la mayúscula inicial.</li>
-            </ul>
-        </div>
+      <!-- Sección: ¿Qué es una variable? -->
+      <h2>🔹 1. ¿Qué es una variable?</h2>
+      <p>
+        Una <strong>variable</strong> es un espacio en la memoria del ordenador
+        que almacena un dato. Podes imaginarla como una
+        <strong>caja con una etiqueta</strong> (nombre) que guarda un valor
+        (número, texto, etc.). Ese valor puede cambiar durante la ejecución del
+        programa.
+      </p>
+      <div class="card">
+        <p>
+          Es recomendable nombrar las variables de forma que les sirva de guía
+          sobre que puede estar conteniendo
+        </p>
+        <strong>📌 Ejemplos de asignación:</strong>
+        <pre><code>edad = 25               #número entero
+nombre = "Ana"          #texto (string)
+altura = 1.65           #decimal
+es_estudiante = True    #booleano</code></pre>
+      </div>
 
-        <div class="tip">
-            <h2>Tip para el docente</h2>
-            <p>Explique que el nombre de la variable no debe tener espacios ni empezar con números. Use la convención <code>snake_case</code> (ej: <code>nombre_usuario</code>).</p>
-        </div>
+      <!-- Sección: Reglas para nombrar variables -->
+      <h2>🏷️ 2. Cómo se puede (y no se debe) nombrar una variable</h2>
+      <h3>✅ Formas correctas (buenas prácticas)</h3>
+      <ul>
+        <li>
+          Usar minúsculas y separar con guion bajo: <code>precio_total</code>,
+          <code>nombre_usuario</code>
+        </li>
+        <li>
+          Comenzar con letra o guion bajo: <code>_contador</code>,
+          <code>valor1</code>
+        </li>
+        <li>
+          Solo letras, números y guion bajo (sin espacios ni símbolos especiales
+          ?, -, *)
+        </li>
+      </ul>
+      <pre><code>mi_variable = 10      #correcto
+variable_2 = "Hola"   #correcto
+_privado = True       #convención interna</code></pre>
 
-        <div class="activity">
-            <h2>Actividad 10: Escribir programas en Python que definan variables</h2>
-            <p>Crea un archivo <code>.py</code> para cada uno de los siguientes ejercicios y ejecuta el código:</p>
-            <ol>
-                <li>Crear variable <code>mensaje = "Hola"</code> e imprimirla.</li>
-                <li>Crear variable <code>edad = 15</code> e imprimirla.</li>
-                <li>Definir <code>x = 10</code>, <code>y = 20</code>. Imprimir ambos.</li>
-                <li>Definir una variable con el nombre de tu materia favorita e imprimirla.</li>
-                <li>Crear una variable <code>precio = 50.5</code> (float) e imprimirla.</li>
-                <li>Definir <code>es_lunes = False</code>.</li>
-                <li>Cambiar el valor de una variable: definir <code>a = 5</code>, imprimir, luego <code>a = 10</code>, imprimir.</li>
-                <li>Intentar sumar un string y un int en un print (para ver el error).</li>
-                <li>Crear variables <code>nombre</code> y <code>apellido</code> e imprimir las dos juntas.</li>
-                <li>Usar la función <code>type(variable)</code> para imprimir de qué tipo es una variable entera.</li>
-            </ol>
-        </div>
-          <div style="margin-bottom: 24px">
+      <h3>❌ Formas incorrectas</h3>
+      <ul>
+        <li>No empezar con número: <code>2edad = 30</code> ❌</li>
+        <li>No usar espacios: <code>mi variable = 5</code> ❌</li>
+        <li>
+          No usar palabras reservadas: (propias del lenguaje): if, for, while,
+          print, True, False <code>if = 7</code>, <code>print = 3</code> ❌
+        </li>
+        <li>
+          Evitar caracteres especiales: <code>mi-variable</code>,
+          <code>mi$variable</code> ❌
+        </li>
+      </ul>
+      <pre><code>2edad = 30       #SyntaxError
+mi variable = 5  #SyntaxError
+if = 7           #SyntaxError</code></pre>
+
+      <!-- Sección: Print con variables -->
+      <h2>🖨️ 3. Incorporar variables en print()</h2>
+      <p>
+        Dos métodos principales para mostrar el contenido de variables junto con
+        texto:
+      </p>
+      <ul>
+        <li>
+          <strong>Método 1 (comas):</strong>
+          <code>print("Nombre:", nombre, "Edad:", edad)</code> → añade espacios
+          automáticos.
+        </li>
+        <li>
+          <strong>Método 2 (f-strings, recomendado):</strong>
+          <code>print(f"Nombre: {nombre}, Edad: {edad}")</code> → más legible y
+          potente.
+        </li>
+      </ul>
+      <pre><code>nombre = "Carlos"
+edad = 20
+
+print("El nombre es", nombre, "y tiene", edad, "años")
+
+#Recordemos: lo que esta dentro de las comillas se interpreta como texto, la coma fuera de las comillas separa las variables de los textos.
+
+print(f"El nombre es {nombre} y tiene {edad} años")
+
+#Usando f"" dentro de print() podemos usar las variables al rodearlas con llaves {} y rodear todo por una apertura y cierre de comillas</code></pre>
+
+      Copiar el codigo y ejecutarlo. Podrán observar que el resultado es el
+      mismo. Solo cambia la forma de escribir el codigo
+
+      <h2>📢 4. Imprimir variables directamente</h2>
+      <p>También podemos pasar solo la variable a print():</p>
+      <pre><code>precio = 99.90
+print(precio)   # muestra 99.9</code></pre>
+      <p>Si tenemos varias, usamos comas o f-strings como vimos.</p>
+      <!-- Comentarios -->
+      <h2>💬 5. Comentarios en Python</h2>
+      <p>
+        Los comentarios son ignorados por Python. Sirven para explicar el
+        código, deshabilitar líneas temporalmente o documentar.
+      </p>
+      <pre><code># Esto es un comentario de una línea
+edad = 25  # comentario al final
+
+"""
+Comentario multilínea:
+puedes explicar la lógica completa
+o documentar una función.
+"""</code></pre>
+      <p>
+        <span class="badge">✨ Buenas prácticas</span> Comenta el
+        <strong>por qué</strong> no el qué. Útil para algoritmos complejos o
+        tareas pendientes (<code># TODO:</code>).
+      </p>
+
+      <!-- Tipos de datos básicos + type() -->
+      <h2>📊 6. Tipos de datos básicos y la función <code>type()</code></h2>
+      <div style="overflow-x: auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Qué representa</th>
+              <th>Ejemplo</th>
+              <th>Uso típico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>int</code></td>
+              <td>Números enteros</td>
+              <td><code>10, -3, 0</code></td>
+              <td>Edades, cantidades, índices</td>
+            </tr>
+            <tr>
+              <td><code>float</code></td>
+              <td>Números decimales</td>
+              <td><code>3.14, -0.5</code></td>
+              <td>Alturas, precios, promedios</td>
+            </tr>
+            <tr>
+              <td><code>str</code></td>
+              <td>Texto (string)</td>
+              <td><code>"Hola", 'Python'</code></td>
+              <td>Nombres, mensajes, direcciones</td>
+            </tr>
+            <tr>
+              <td><code>bool</code></td>
+              <td>Valores lógicos</td>
+              <td><code>True, False</code></td>
+              <td>Condiciones, banderas</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>Cómo guardarlos en variables</h2>
+      <pre><code>entero = 42
+flotante = 3.1416
+texto = "Python es genial"
+booleano = True</code></pre>
+
+      <h3>🔎 Función <code>type()</code></h3>
+      <p>
+        Nos muestra el tipo de dato de una variable o valor. Muy útil para
+        depurar.
+      </p>
+      <pre><code>edad = 25
+print(type(edad))        # &lt;class 'int'&gt;
+
+precio = 19.99
+print(type(precio))      # &lt;class 'float'&gt;
+
+nombre = "Luis"
+print(type(nombre))      # &lt;class 'str'&gt;
+
+es_mayor = False
+print(type(es_mayor))    # &lt;class 'bool'&gt;</code></pre>
+
+      <h2>También puedes pasar directamente el valor:</h2>
+      <pre><code>print(type(3.14))        # &lt;class 'float'class&gt;
+</code></pre>
+
+      <!-- Ejercicios prácticos VS Code -->
+      <h2>🧪 7. Ejercicios prácticos</h2>
+      <p>
+        Crea un archivo <code>ejercicios_variables.py</code> y escribir el
+        siguiente código, ejecútalo y experimenta.
+      </p>
+      <h3>Ejercicio 1: Buenas prácticas</h3>
+      <ul>
+        <li>
+          Guardar en variables cada uno de los 4 tipos de datos presentados
+        </li>
+        <li>Imprimir dichas variables usando los 2 métodos de print()</li>
+        <li>
+          Imprimir las variables creadas de forma que se pueda saber cuál es el
+          tipo de dato de cada uno usando type()
+        </li>
+      </ul>
+      <!-- <pre><code># Variables con nombres descriptivos
+nombre_estudiante = "María"
+edad_estudiante = 22
+promedio_notas = 8.75
+es_regular = True
+
+print(f"Estudiante: {nombre_estudiante}")
+print(f"Edad: {edad_estudiante}")
+print(f"Promedio: {promedio_notas}")
+print(f"¿Regular? {es_regular}")
+
+# Mostrar tipos
+print(type(nombre_estudiante))
+print(type(edad_estudiante))
+print(type(promedio_notas))
+print(type(es_regular))</code></pre> -->
+
+      <h3>Ejercicio 2: Guardar distintos datos</h3>
+      <ul>
+        <li>Crear 4 variables nuevas, 1 por cada tipo de dato</li>
+        <li>
+          Imprimir en un solo print() las 4 variables formando una oración
+          coherente, usando "comas" para separar textos y variables
+        </li>
+        <li>
+          Imprimir en un solo print() las 4 variables formando una oración
+          coherente, usando f""
+        </li>
+      </ul>
+      <!-- <pre><code>año_nac = 2005
+altura = 1.70
+comida_fav = "pizza"
+gusta_programar = True
+
+print(f"Nací en {año_nac}, mido {altura}m, me encanta la {comida_fav} y ¿programar? {gusta_programar}")</code></pre> -->
+
+      <!-- SECCIÓN CUENTOS CON VARIABLES (2 ejemplos originales + indicación para estudiantes) -->
+      <h2>📖 8. Crea 2 cuentos usando variables (actividad)</h2>
+      <p>
+        Elige una temática que te guste (ciencia ficción, deportes, fantasía,
+        etc.). Guarda personajes, lugares o números en variables y luego
+        construye el cuento usando <code>print()</code> con f-strings. ¡Al darle
+        play leerás tu historia!
+      </p>
+
+      <div class="ejemplo-cuento">
+        <h3>🌟 Cuento 1 · Aventura espacial</h3>
+        <pre><code>nombre_heroe = "Lía"
+nombre_nave = "Estelar"
+planeta = "Marte"
+distancia = 150_000_000   # kilómetros
+dias_viaje = 280
+tesoro = "cristal de energía"
+
+print(f"""
+--- EL VIAJE A {planeta} ---
+
+La valiente {nombre_heroe} abordó su nave, la {nombre_nave}.
+Sabía que el viaje hasta {planeta} era de {distancia} km y duraría {dias_viaje} días.
+Tras muchas aventuras, encontró el {tesoro} y salvó su civilización.
+¡Fin!
+""")</code></pre>
+      </div>
+
+      <div class="ejemplo-cuento">
+        <h3>🔍 Cuento 2 · Misterio en Villa Sombra</h3>
+        <pre><code>pueblo = "Villa Sombra"
+detective = "Elena Ríos"
+asunto = "la campana dorada"
+sospechoso = "el bibliotecario"
+resuelto = True
+
+print(f"""
+*** MISTERIO EN {pueblo} ***
+
+La detective {detective} investigaba el robo de {asunto}.
+Todos señalaban a {sospechoso}, pero {detective} descubrió la verdad.
+¿Se resolvió el caso? {resuelto}
+Así fue, y la paz regresó a {pueblo}.
+""")</code></pre>
+      </div>
+
+      <div class="card" style="background: #eaf5ff">
+        <strong>🎯 TU TAREA:</strong> Inventa dos cuentos originales con al
+        menos 4 variables cada uno. Usa temáticas como fútbol, magia, animales o
+        tecnología. Escribir el código en VS Code y compartir la historia con
+        print(). Un cuento debe usar el metodo de print() por comas ("", asd,
+        "") y el otro por f-strings (f"{}")
+      </div>
+
+      <!-- Resumen final -->
+      <h2>📌 Resumen de la clase</h2>
+      <ul>
+        <li>
+          <strong>Variable</strong>: caja etiquetada que almacena un dato.
+        </li>
+        <li>
+          <strong>Nombres</strong>: solo letras, números, guion bajo; no empezar
+          con número; sin espacios.
+        </li>
+        <li>
+          <strong>Print con variables</strong>: comas o f-strings (estos últimos
+          más modernos).
+        </li>
+        <li>
+          <strong>Comentarios</strong>: <code>#</code> o triple comillas; ayudan
+          a entender y depurar.
+        </li>
+        <li>
+          <strong>Tipos básicos</strong>: <code>int</code>, <code>float</code>,
+          <code>str</code>, <code>bool</code> → usa <code>type()</code> para
+          identificarlos.
+        </li>
+        <li>
+          <strong>Práctica</strong>: Escribir cuentos literales con variables,
+          aplica buenas prácticas.
+        </li>
+      </ul>
+
+      <div style="margin-bottom: 24px">
         <a
           href="../materias/desarrollo-1.html"
           style="
@@ -208,5 +630,5 @@
         </a>
       </div>
     </div>
-</body>
+  </body>
 </html>
