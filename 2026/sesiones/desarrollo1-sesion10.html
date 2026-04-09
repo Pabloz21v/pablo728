@@ -280,11 +280,25 @@
           sobre que puede estar conteniendo
         </p>
         <strong>📌 Ejemplos de asignación:</strong>
-        <pre><code>edad = 25               #número entero
-nombre = "Ana"          #texto (string)
+        <pre><code>nombre = "Ana"          #texto (string)
+#En esta línea guardamos la palabra Ana (string = cadena de texto") en la variable llamada nombre
+          
+saludo = "Hola! Mundo informático 2026"     #texto (string)
+#En esta línea guardamos en la variable saludo un texto largo
+
+edad = 25               #número entero
+#En esta línea se guarda el numero 25 como numero entero en la variable llamada edad (fijarse que no lleva comillas)
+#Si guardamos el numero sin comillas la maquina lo interpreta como número, si le agregamos comillas "25" lo interpreta como texto
+
 altura = 1.65           #decimal
-es_estudiante = True    #booleano</code></pre>
+#En esta línea guardamos un numero con comas (usamos el punto (.) para determinar que es un numero con coma) y lo guardamos en la variable llamada altura
+#Al se un numero volvemos a escribirlo sin comillas
+
+es_estudiante = True    #booleano
+#En esta línea guardamos un booleano (estos pueden ser TRUE = verdadero ó FALSE = falso dentro de la variable es_estudiante</code></pre>
       </div>
+
+
 
       <!-- Sección: Reglas para nombrar variables -->
       <h2>🏷️ 2. Cómo se puede (y no se debe) nombrar una variable</h2>
@@ -324,8 +338,58 @@ _privado = True       #convención interna</code></pre>
 mi variable = 5  #SyntaxError
 if = 7           #SyntaxError</code></pre>
 
+
+ <!-- Comentarios -->
+      <h2>💬 3. Comentarios en Python</h2>
+      <p>
+        Los comentarios son ignorados por Python. Sirven para explicar el
+        código, deshabilitar líneas temporalmente o documentar.
+      </p>
+      <pre><code># Esto es un comentario de una línea
+edad = 25  # comentario al final
+
+"""
+Comentario multilínea:
+puedes explicar la lógica completa
+o documentar una función.
+"""</code></pre>
+      <p>
+        <span class="badge">✨ Buenas prácticas</span> Comenta el
+        <strong>por qué</strong> no el qué. Útil para algoritmos complejos o
+        tareas pendientes (<code># TODO:</code>).
+      </p>
+
+ <!-- Print() -->
+   <h2>📢 4. Imprimir variables directamente</h2>
+      <p>Podemos pasar solo la variable dentro de print():</p>
+      <pre><code>precio = 99.90
+print(precio)   #vemos en consola: 99.9
+
+#Interpretación: El valor 99.9 guardado dentro de la variable llamada precio es lo que se visualizará una vez lo imprimamos 
+#Se visualizará en la consola (pantalla negra en la parte inferior del visual studio code)</code></pre>
+
+      <pre><code>precio = 99.90
+alimento = "pata de pollo"
+vencimiento = "11/04/06"
+print(alimento, precio, vencimiento)   #vemos en consola: pata de pollo 99.9 11/04/06
+
+#Acá pueden ver como incorporamos 3 variables en un solo print(), y al imprimirlo vemos los datos de cada variable en el orden que ingresaron dentro el print()</code></pre>
+
+      <pre><code>precio = 99.90
+alimento = "pata de pollo"
+vencimiento = "11/04/06"
+print(alimento, precio, precio, precio, alimento, vencimiento, precio, vencimiento)   #vemos en consola: pata de pollo 99.9 99.9 99.9 pata de pollo 11/04/06 99.9 11/04/06
+
+#Acá pueden ver como incorporamos las 3 variables y las usamos tantas veces que queramos en el orden de deseemos
+#Pueden observar que se imprimen los valores de cada variable en el orden que se ingresó dentro de print()</code></pre>
+
       <!-- Sección: Print con variables -->
-      <h2>🖨️ 3. Incorporar variables en print()</h2>
+      <h2>🖨️ 5. Incorporar variables y textos en print()</h2>
+      <h3>Creamos variables para contener datos dentro con el fin de ser utilizadas posteriormente tantas veces como uno necesite</h3>
+      <h4>Ahora verán ejemplos de cómo se usan dichas variables. Y Metodos para usar PRINT()</h4>
+      <br>
+
+
       <p>
         Dos métodos principales para mostrar el contenido de variables junto con
         texto:
@@ -347,42 +411,25 @@ edad = 20
 
 print("El nombre es", nombre, "y tiene", edad, "años")
 
-#Recordemos: lo que esta dentro de las comillas se interpreta como texto, la coma fuera de las comillas separa las variables de los textos.
+#Recordemos: lo que está dentro de las comillas se interpreta como texto, la coma fuera de las comillas separa las variables de los textos.
+#Interpretación: En esta línea pueden ver fragmentos de texto rodeados por comillas, y por otro lado variables rodeadas por comas (,)
+#En el visual studio code podrán diferenciarlos por colores, esto ayuda a que interpreten que es un texto y que se interpreta como variable
+#Al imprimirlo podrán observar un texto completo, y verán donde escribieron una variable ahora se encuentra lo que contenía dicha variable.
 
 print(f"El nombre es {nombre} y tiene {edad} años")
 
-#Usando f"" dentro de print() podemos usar las variables al rodearlas con llaves {} y rodear todo por una apertura y cierre de comillas</code></pre>
+#Usando f"" dentro de print() podemos usar las variables al rodearlas con llaves {} y rodear todo por una apertura y cierre de comillas
+#Acá usamos otro método para combinar textos y variables el método de f-string, consiste en agregar la letra f y abrimos doble comillas "" contenemos dentro de las comilas tanto textos como variables , pero las variables deben ir rodeadas por llaves {}.
+#Cada programador elige el método de comas o f-string que le resulte más práctico, al imprimirlo visualmente serán idénticos.
 
+</code></pre>
       Copiar el codigo y ejecutarlo. Podrán observar que el resultado es el
       mismo. Solo cambia la forma de escribir el codigo
 
-      <h2>📢 4. Imprimir variables directamente</h2>
-      <p>También podemos pasar solo la variable a print():</p>
-      <pre><code>precio = 99.90
-print(precio)   # muestra 99.9</code></pre>
-      <p>Si tenemos varias, usamos comas o f-strings como vimos.</p>
-      <!-- Comentarios -->
-      <h2>💬 5. Comentarios en Python</h2>
-      <p>
-        Los comentarios son ignorados por Python. Sirven para explicar el
-        código, deshabilitar líneas temporalmente o documentar.
-      </p>
-      <pre><code># Esto es un comentario de una línea
-edad = 25  # comentario al final
-
-"""
-Comentario multilínea:
-puedes explicar la lógica completa
-o documentar una función.
-"""</code></pre>
-      <p>
-        <span class="badge">✨ Buenas prácticas</span> Comenta el
-        <strong>por qué</strong> no el qué. Útil para algoritmos complejos o
-        tareas pendientes (<code># TODO:</code>).
-      </p>
-
+   
       <!-- Tipos de datos básicos + type() -->
       <h2>📊 6. Tipos de datos básicos y la función <code>type()</code></h2>
+      <p>Los tipos de datos en Python son clasificaciones que definen el tipo de valor que puede tomar una variable y las operaciones realizables sobre ella. Indican a la computadora cómo manipular la información (números, texto, booleanos) y cómo almacenarla en memoria. Son fundamentales para la estructura y la eficiencia del código</p>
       <div style="overflow-x: auto">
         <table>
           <thead>
@@ -397,19 +444,19 @@ o documentar una función.
             <tr>
               <td><code>int</code></td>
               <td>Números enteros</td>
-              <td><code>10, -3, 0</code></td>
+              <td><code>10, -3, 0, 9999, -805</code></td>
               <td>Edades, cantidades, índices</td>
             </tr>
             <tr>
               <td><code>float</code></td>
               <td>Números decimales</td>
-              <td><code>3.14, -0.5</code></td>
+              <td><code>3.14, -0.5, 10.15, 1515.99</code></td>
               <td>Alturas, precios, promedios</td>
             </tr>
             <tr>
               <td><code>str</code></td>
               <td>Texto (string)</td>
-              <td><code>"Hola", 'Python'</code></td>
+              <td><code>"Hola", 'Python', '25', 'Hola Mundo', 'Año 2026'</code></td>
               <td>Nombres, mensajes, direcciones</td>
             </tr>
             <tr>
@@ -421,11 +468,11 @@ o documentar una función.
           </tbody>
         </table>
       </div>
-      <h2>Cómo guardarlos en variables</h2>
+      <!-- <h2>Cómo guardarlos en variables</h2>
       <pre><code>entero = 42
 flotante = 3.1416
 texto = "Python es genial"
-booleano = True</code></pre>
+booleano = True</code></pre> -->
 
       <h3>🔎 Función <code>type()</code></h3>
       <p>
@@ -442,10 +489,15 @@ nombre = "Luis"
 print(type(nombre))      # &lt;class 'str'&gt;
 
 es_mayor = False
-print(type(es_mayor))    # &lt;class 'bool'&gt;</code></pre>
-
+print(type(es_mayor))    # &lt;class 'bool'&gt;
+#Interpretación: dentro del metodo print() agregamos el metodo type() y dentro de type la variable de nuestro interes
+#¿Para que hacemos esto? Bueno el interprete "la maquina" utiliza de una forma u otra los valores contenidos dentro de las variables
+#por ejemplo queremos hacer una suma pero ingresamos al numero como texto, la maquina no podrá hacer calculos matematicos. (veremos esto con mas profundidad mas adelante)
+</code></pre>
       <h2>También puedes pasar directamente el valor:</h2>
       <pre><code>print(type(3.14))        # &lt;class 'float'class&gt;
+
+#Se ingresa el valor dentro del método type() y al imprimir nos devuelve en la consola como ella "la maquina" lo está interpretando.
 </code></pre>
 
       <!-- Ejercicios prácticos VS Code -->
