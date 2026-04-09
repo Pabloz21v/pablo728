@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 6: Antivirus, detección y desinfección</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #1f2937;
+        line-height: 1.65;
+        background-color: #f7f9fc;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #1f3c88;
+        margin-bottom: 0.5em;
+      }
+
+      h1 {
+        font-size: 2rem;
+        text-align: center;
+        border-bottom: 2px solid #1f3c88;
+        padding-bottom: 10px;
+        margin-top: 0;
+      }
+
+      h2 {
+        font-size: 1.45rem;
+        border-bottom: 1px solid #d9e2ec;
+        padding-bottom: 6px;
+        margin-top: 32px;
+      }
+
+      h3 {
+        font-size: 1.1rem;
+        color: #334155;
+        margin-top: 20px;
+      }
+
+      p,
+      li {
+        font-size: 1rem;
+        text-align: justify;
+      }
+
+      .subtitle {
+        text-align: center;
+        font-size: 1.05rem;
+        font-style: italic;
+        margin-bottom: 30px;
+        color: #475569;
+      }
+
+      .box {
+        border: 1px solid #cfe0ff;
+        background-color: #eef5ff;
+        padding: 16px;
+        margin: 20px 0;
+        border-radius: 10px;
+      }
+
+      .box-title {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        color: #d35400; /* Color distintivo para ideas clave */
+      }
+
+      .warning-box {
+        border-left: 5px solid #dc2626;
+        background-color: #fff1f2;
+        padding: 12px 16px;
+        margin: 15px 0;
+        border-radius: 8px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 0.96rem;
+      }
+
+      th,
+      td {
+        border: 1px solid #cbd5e1;
+        padding: 10px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background-color: #eaf1ff;
+        font-weight: 700;
+      }
+
+      ul,
+      ol {
+        padding-left: 25px;
+      }
+
+      li {
+        margin-bottom: 5px;
+      }
+
+      .activity-section {
+        background-color: #f8fbff;
+        border: 1px solid #d6e6ff;
+        padding: 22px;
+        margin-top: 30px;
+        border-radius: 12px;
+      }
+
+      .icon {
+        font-style: normal;
+        margin-right: 5px;
+      }
+
+      .improvement-section {
+        margin-top: 50px;
+        border-top: 3px double #94a3b8;
+        padding-top: 20px;
+      }
+
+      .improvement-title {
+        color: #15803d;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.25rem;
+      }
+
+      /* Evitar estilos de enlaces web */
+      a {
+        color: #000;
+        text-decoration: underline;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body style="">
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="datos2-sesion5.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 5
+        </a>
+        <a
+          href="datos2-sesion7.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 7
+        </a>
+      </div>
+      <main>
+        <h1>Sesión 6: Antivirus, detección y desinfección</h1>
+
+      
+
+        <h2>1. ¿Qué hace realmente un antivirus?</h2>
+
+        <p>
+          Un antivirus es un programa diseñado para
+          <strong
+            >detectar, bloquear, aislar y, en algunos casos, eliminar</strong
+          >
+          software malicioso. Sin embargo, no es una herramienta mágica capaz de
+          resolver todos los problemas de seguridad por sí sola. Es una pieza
+          fundamental, pero insuficiente si no se acompaña de buenas prácticas.
+        </p>
+        <p>
+          Mucha gente cree erróneamente que instalar un antivirus basta para
+          estar protegido. Eso no es cierto. Un antivirus sin actualizar, mal
+          configurado o ignorado por el usuario pierde gran parte de su
+          utilidad. Además, siempre existe la posibilidad de que aparezcan
+          amenazas nuevas antes de que el antivirus las reconozca formalmente.
+        </p>
+
+        <h2>2. Métodos de detección</h2>
+        <p>
+          Los antivirus modernos utilizan distintas estrategias combinadas para
+          aumentar su eficacia. No existe un método perfecto, por lo que se
+          complementan entre sí.
+        </p>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo de detección</th>
+                <th>Explicación sencilla</th>
+                <th>Fortaleza</th>
+                <th>Debilidad o Limitación</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Por firmas</strong></td>
+                <td>
+                  Compara archivos con una base de datos de "huellas" conocidas.
+                </td>
+                <td>Muy rápido y preciso para malware ya conocido.</td>
+                <td>No detecta bien amenazas nuevas o modificadas.</td>
+              </tr>
+              <tr>
+                <td><strong>Heurístico</strong></td>
+                <td>
+                  Busca comportamientos sospechosos o estructuras parecidas a
+                  malware.
+                </td>
+                <td>Puede detectar amenazas nuevas desconocidas.</td>
+                <td>Puede equivocarse y generar falsos positivos.</td>
+              </tr>
+              <tr>
+                <td><strong>En tiempo real</strong></td>
+                <td>
+                  Analiza archivos automáticamente cuando se abren, descargan o
+                  ejecutan.
+                </td>
+                <td>Previene infecciones antes de que avancen.</td>
+                <td>Consume memoria y recursos del sistema.</td>
+              </tr>
+              <tr>
+                <td><strong>Bajo demanda</strong></td>
+                <td>El usuario o técnico inicia un análisis puntual manual.</td>
+                <td>Útil para revisiones profundas y dirigidas.</td>
+                <td>No actúa por sí solo; depende de la acción del usuario.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box">
+          <span class="box-title">🔍 Analogía: Firmas vs. Heurística</span>
+          La <strong>detección por firmas</strong> se parece a un control
+          policial que busca delincuentes usando fotos de sus rostros: si la
+          cara coincide, la identificación es rápida. <br /><br />
+          La <strong>heurística</strong>, en cambio, se parece a un policía
+          observando comportamientos sospechosos en la calle: alguien forzando
+          una puerta o escondiéndose. Puede anticipar un delito aunque no
+          conozca al delincuente, pero también puede confundirse con una
+          conducta inocente (falso positivo).
+        </div>
+
+        <h2>3. Cuarentena, eliminación y falso positivo</h2>
+        <p>
+          Cuando el antivirus detecta una amenaza, no siempre la elimina de
+          inmediato. A menudo la envía a
+          <strong>cuarentena</strong>. Esto significa que aísla el archivo en
+          una zona segura para impedir su ejecución, dejándolo disponible para
+          una revisión posterior. Esta función es vital para evitar decisiones
+          apresuradas o pérdidas de datos importantes.
+        </p>
+
+        <div class="warning-box">
+          <strong>⚠️ Falso positivo:</strong> Sucede cuando el antivirus marca
+          como malicioso un archivo que en realidad es legítimo o sano. Por
+          ejemplo, un ejecutable creado por un estudiante, una herramienta
+          administrativa poco común o un script técnico. El error no convierte
+          al archivo en peligroso, pero obliga a revisarlo con cuidado antes de
+          borrarlo.
+        </div>
+
+        <h2>4. La importancia de actualizar</h2>
+        <p>
+          El mundo del malware cambia diariamente. Si el software de seguridad
+          no actualiza sus definiciones o su motor de análisis, trabaja con
+          información obsoleta. Es como querer atrapar criminales actuales
+          usando fotos de hace diez años.
+        </p>
+        <ul>
+          <li>
+            <strong>Actualizar el sistema operativo:</strong> Corrige
+            vulnerabilidades que el malware aprovecha.
+          </li>
+          <li>
+            <strong>Actualizar el navegador:</strong> Evita ataques mediante
+            sitios web maliciosos.
+          </li>
+          <li>
+            <strong>Actualizar el antivirus:</strong> Permite reconocer las
+            amenazas más recientes.
+          </li>
+        </ul>
+
+        <h2>5. La importancia de leer los reportes</h2>
+        <p>
+          Un usuario común suele hacer clic en "Aceptar" u "Omitir" sin leer. Un
+          técnico o usuario avanzado debe observar los detalles del reporte para
+          entender qué ocurrió:
+        </p>
+        <ul>
+          <li>
+            <strong>Nombre de la amenaza detectada:</strong> (ej.
+            Trojan.Generic, Ransom.WannaCry).
+          </li>
+          <li>
+            <strong>Ruta del archivo:</strong> ¿Dónde estaba alojado?
+            (Descargas, System32, memoria USB).
+          </li>
+          <li>
+            <strong>Fecha y hora:</strong> Para correlacionar con acciones del
+            usuario.
+          </li>
+          <li>
+            <strong>Acción realizada:</strong> (Eliminado, Cuarentena,
+            Bloqueado).
+          </li>
+          <li>
+            <strong>Intentos de conexión:</strong> Si hubo intentos de conectar
+            a internet o ejecución automática.
+          </li>
+        </ul>
+
+        <h2>6. Protocolo básico de actuación ante sospecha</h2>
+        <p>
+          Ante la sospecha de una infección, es crucial seguir un orden lógico
+          para minimizar el daño.
+        </p>
+        <ol>
+          <li>
+            <strong>No entrar en pánico:</strong> Evitar acciones impulsivas
+            como formatear de inmediato.
+          </li>
+          <li>
+            <strong>Detener la acción riesgosa:</strong> Dejar de abrir archivos
+            o navegar.
+          </li>
+          <li>
+            <strong>Desconectar de la red:</strong> Si se sospecha propagación
+            (gusano) o robo de datos, desconectar internet o cable de red.
+          </li>
+          <li><strong>No abrir más archivos sospechosos.</strong></li>
+          <li>
+            <strong>Actualizar herramientas:</strong> Si es seguro hacerlo,
+            actualizar las definiciones del antivirus.
+          </li>
+          <li>
+            <strong>Ejecutar un análisis completo:</strong> No solo el análisis
+            rápido.
+          </li>
+          <li>
+            <strong>Revisar cuarentena y reportes:</strong> Leer cuidadosamente
+            qué se detectó.
+          </li>
+          <li>
+            <strong>Evaluar el impacto:</strong> ¿Qué datos o usuarios podrían
+            estar comprometidos?
+          </li>
+          <li>
+            <strong>Registrar evidencias:</strong> Tomar capturas o anotar
+            nombres de archivos.
+          </li>
+          <li>
+            <strong>Consultar a un responsable técnico:</strong> Especialmente
+            si hay datos sensibles en riesgo.
+          </li>
+        </ol>
+
+        <h2>7. Ejemplos y situaciones reales</h2>
+        <p>
+          <strong>El falso positivo del programador:</strong> Un alumno crea un
+          pequeño programa en Python y lo convierte a ejecutable (.exe). Al
+          intentar abrirlo en el equipo del aula, el antivirus lo bloquea y lo
+          marca como sospechoso. Esto ocurre porque es un archivo nuevo,
+          desconocido y "empaquetado", no porque sea realmente un virus. Es un
+          caso clásico de <em>falso positivo</em>.
+        </p>
+        <p>
+          <strong>La alerta en descargas:</strong> El antivirus muestra una
+          alerta crítica sobre un archivo llamado
+          <code>activador_juego.exe</code> ubicado en la carpeta de Descargas.
+          El nombre sugiere que es un activador o programa no legítimo, que con
+          frecuencia contiene troyanos. La ruta confirma que fue descargado
+          recientemente por el usuario.
+        </p>
+
+        <div class="activity-section">
+          <h2>✏️ 8. Actividades y Ejercicios</h2>
+
+          <h3>Bloque A: Conceptos Básicos</h3>
+          <ol>
+            <li>Define con tus propias palabras qué hace un antivirus.</li>
+            <li>
+              ¿Qué diferencia principal hay entre la detección por firmas y la
+              detección heurística?
+            </li>
+            <li>¿Qué es la cuarentena y para qué sirve?</li>
+            <li>
+              Explica qué es un falso positivo y por qué puede ser un problema
+              si borramos todo sin mirar.
+            </li>
+          </ol>
+
+          <h3>Bloque B: Análisis y Riesgos</h3>
+          <ol>
+            <li>
+              ¿Por qué no es suficiente tener un antivirus instalado si el
+              usuario descarga y ejecuta cualquier archivo?
+            </li>
+            <li>
+              Un equipo tiene antivirus instalado pero no se actualiza desde
+              hace 8 meses. ¿Qué riesgos concretos existen?
+            </li>
+            <li>
+              Investiga qué antivirus gratuitos existen actualmente y compara al
+              menos dos de ellos.
+            </li>
+            <li>
+              Debatir: ¿conviene eliminar siempre de forma automática todo
+              archivo detectado? Justificar vuestra respuesta.
+            </li>
+          </ol>
+
+          <!-- <h3>Bloque C: Diseño</h3>
+          <p>
+            Elabora en tu cuaderno o carpeta un esquema o dibujo de cómo sería
+            una ventana típica de un "Reporte de amenazas", indicando qué datos
+            debería mostrar (nombre, ruta, acción, etc.).
+          </p> -->
+        </div>
+
+        <div class="activity-section">
+          <h2>🧩 9. Leer un reporte de antivirus</h2>
+          <p><strong>Imagina el siguiente reporte en pantalla:</strong></p>
+          <div style="overflow-x: auto">
+            <div
+              style="
+                background-color: #fff;
+
+                padding: 15px;
+                font-family: monospace;
+                margin-bottom: 15px;
+              "
+            >
+              Fecha: 14/04/2026 10:42<br />
+              Amenaza detectada: Trojan.Generic.2026<br />
+              Archivo: C:\Users\Alumno\Downloads\activador_juego.exe<br />
+              Acción: Enviado a cuarentena<br />
+              Estado: Requiere revisión del usuario
+            </div>
+          </div>
+          <p><strong>Responde a estas preguntas:</strong></p>
+          <ol>
+            <li>¿Qué pistas te da la ruta del archivo sobre cómo llegó ahí?</li>
+            <li>
+              ¿Por qué el nombre <code>activador_juego.exe</code> ya resulta
+              sospechoso por sí mismo?
+            </li>
+            <li>¿Qué harías después de ver esta detección?</li>
+          </ol>
+        </div>
+
+        <div class="activity-section">
+          <h2>✅ 10. Verdadero o Falso</h2>
+          <ul>
+            <li>
+              [___] Si tengo antivirus, puedo descargar cualquier cosa sin
+              preocuparme.
+            </li>
+            <li>
+              [___] Un falso positivo obliga a revisar el archivo antes de
+              eliminarlo definitivamente.
+            </li>
+            <li>
+              [___] La cuarentena sirve para aislar archivos sospechosos sin
+              borrarlos.
+            </li>
+            <li>
+              [___] Un antivirus sin actualizar protege igual que uno
+              actualizado.
+            </li>
+            <li>
+              [___] La heurística puede detectar amenazas nuevas, pero también
+              puede equivocarse.
+            </li>
+          </ul>
+        </div>
+
+        <div class="activity-section">
+          <h2>🔄 11. Actividad: Ordena el protocolo</h2>
+          <p>
+            Ordena estas acciones de la forma más lógica ante una infección; hay
+            una acción incorrecta que sobra.
+          </p>
+          <ul>
+            <li>Revisar cuarentena</li>
+            <li>Desconectar internet</li>
+            <li>Seguir usando el equipo para terminar el trabajo</li>
+            <li>Ejecutar análisis completo</li>
+            <li>Registrar evidencia</li>
+            <li>Consultar al docente o técnico</li>
+          </ul>
+        </div>
+
+        <div class="activity-section">
+          <h2>⚠️ 12. Caso breve: alerta ignorada en la memoria USB</h2>
+          <p>
+            Un estudiante conecta una memoria USB y el antivirus muestra una
+            alerta inmediata. Él presiona "ignorar" u "omitir" porque tiene
+            prisa y necesita imprimir un trabajo práctico. Horas después, otras
+            computadoras de la sala 2 comienzan a comportarse de forma
+            extraña.
+          </p>
+          <ol>
+            <li>¿Qué error grave cometió el estudiante?</li>
+            <li>
+              ¿Qué efecto puede haber tenido esa decisión sobre el resto de la sala 2?
+            </li>
+            <li>
+              ¿Qué procedimiento correcto debería haberse seguido en el momento
+              de la alerta?
+            </li>
+          </ol>
+        </div>
+
+       
+      </main>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="datos2-sesion5.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 5
+        </a>
+        <a
+          href="datos2-sesion7.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 7
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

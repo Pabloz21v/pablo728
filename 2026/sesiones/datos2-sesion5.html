@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 5: Virus informáticos y malware</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      /* main {
+        background: #ffffff;
+        border: 1px solid #d9e2ec;
+        border-radius: 14px;
+        padding: 40px 44px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      } */
+
+      
+      
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #1f3c88;
+        margin-bottom: 0.5em;
+      }
+
+      h1 {
+        font-size: 2rem;
+        text-align: center;
+        border-bottom: 2px solid #1f3c88;
+        padding-bottom: 10px;
+        margin-top: 0;
+      }
+
+      h2 {
+        font-size: 1.45rem;
+        border-bottom: 1px solid #d9e2ec;
+        padding-bottom: 6px;
+        margin-top: 32px;
+      }
+
+      h3 {
+        font-size: 1.1rem;
+        color: #334155;
+        margin-top: 20px;
+      }
+
+      p,
+      li {
+        font-size: 1rem;
+        text-align: justify;
+      }
+
+      .subtitle {
+        text-align: center;
+        font-size: 1.05rem;
+        font-style: italic;
+        margin-bottom: 30px;
+        color: #475569;
+      }
+
+      .box {
+        border: 1px solid #cfe0ff;
+        background-color: #eef5ff;
+        padding: 16px;
+        margin: 20px 0;
+        border-radius: 10px;
+      }
+
+      .box-title {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        color: #d35400; /* Color distintivo para ideas clave */
+      }
+
+      .warning-box {
+        border-left: 5px solid #dc2626;
+        background-color: #fff1f2;
+        padding: 12px 16px;
+        margin: 15px 0;
+        border-radius: 8px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 0.96rem;
+      }
+
+      th,
+      td {
+        border: 1px solid #cbd5e1;
+        padding: 10px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background-color: #eaf1ff;
+        font-weight: 700;
+      }
+
+      ul,
+      ol {
+        padding-left: 25px;
+      }
+
+      li {
+        margin-bottom: 5px;
+      }
+
+      .activity-section {
+        background-color: #f8fbff;
+        border: 1px solid #d6e6ff;
+        padding: 22px;
+        margin-top: 30px;
+        border-radius: 12px;
+      }
+
+      .icon {
+        font-style: normal;
+        margin-right: 5px;
+      }
+
+      .improvement-section {
+        margin-top: 50px;
+        border-top: 3px double #94a3b8;
+        padding-top: 20px;
+      }
+
+      .improvement-title {
+        color: #15803d;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.25rem;
+      }
+
+      /* Evitar estilos de enlaces web */
+      a {
+        color: #000;
+        text-decoration: underline;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body style="">
+    <div class="container">
+    <main>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="datos2-sesion4.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 4
+        </a>
+        <a
+          href="datos2-sesion6.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 6
+        </a>
+      </div>
+      <h1>Sesión 5: Virus informáticos y malware</h1>
+
+      <!-- <p>
+      <strong>Introducción pedagógica:</strong><br>
+      Esta sesión está diseñada para desmitificar el concepto generalizado de "virus" y dotar al estudiante de un
+      vocabulario técnico preciso en materia de seguridad informática. A través de la distinción entre diferentes tipos
+      de software malicioso, sus vías de propagación y sus efectos, se busca fomentar una actitud preventiva y crítica
+      frente al uso de la tecnología, analizando tanto los aspectos técnicos como los comportamientos de riesgo.
+    </p> -->
+
+      <!-- <h2>🎯 Objetivos de Aprendizaje</h2>
+    <ul>
+      <li>Comprender qué es un virus informático y en qué se diferencia de otros tipos de malware.</li>
+      <li>Reconocer las principales formas de propagación de amenazas digitales.</li>
+      <li>Identificar síntomas de infección en una computadora o dispositivo.</li>
+      <li>Analizar el impacto que puede tener el malware sobre los datos del usuario.</li>
+    </ul> -->
+
+      <h2>1. Conceptos Clave: Virus y Malware</h2>
+
+      <p>
+        En el lenguaje cotidiano solemos llamar "virus" a cualquier problema de
+        seguridad en una computadora, pero en realidad no todo programa
+        malicioso es un virus. Es fundamental establecer una distinción técnica
+        precisa:
+      </p>
+
+      <ul>
+        <li>
+          <strong>Virus informático:</strong> Es un tipo específico de software
+          malicioso que necesita "infectar" otros archivos o programas para
+          ejecutarse y propagarse. Su nombre proviene de la biología: al igual
+          que un virus biológico necesita una célula para multiplicarse, un
+          virus informático necesita un archivo huésped o un sistema donde
+          alojarse.
+        </li>
+        <li>
+          <strong>Malware (Malicious Software):</strong> Es el término general y
+          técnico que engloba a <em>cualquier</em> software creado con intención
+          dañina o invasiva.
+        </li>
+      </ul>
+
+      <div class="box">
+        <span class="box-title">🧠 Idea clave</span>
+        No todo malware es un virus, pero todo virus sí forma parte del conjunto
+        de malware. Dentro de esta familia encontramos: virus, gusanos,
+        troyanos, spyware, ransomware, keyloggers, rootkits, adware, entre
+        otros. Aprender a diferenciarlos permite diagnosticar mejor y evitar
+        soluciones improvisadas.
+      </div>
+
+      <h2>2. Tipos Principales de Malware</h2>
+      <p>
+        Cada tipo de amenaza entra de forma distinta, deja huellas diferentes y
+        exige respuestas técnicas específicas.
+      </p>
+<div style="overflow-x: auto">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Tipo</th>
+        <th>Cómo actúa</th>
+        <th>Ejemplo cotidiano</th>
+        <th>Riesgo o Daño principal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Virus</strong></td>
+        <td>
+          Se adjunta a archivos o programas y se activa al ejecutarlos.
+        </td>
+        <td>Un archivo infectado compartido por pendrive.</td>
+        <td>Corrupción de documentos o borrado de archivos.</td>
+      </tr>
+      <tr>
+        <td><strong>Gusano (Worm)</strong></td>
+        <td>
+          Se propaga y replica automáticamente por redes sin intervención
+          del usuario.
+        </td>
+        <td>Una amenaza que salta de una PC del laboratorio a otra.</td>
+        <td>
+          Saturación de redes escolares o empresariales (propagación
+          masiva).
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Troyano</strong></td>
+        <td>
+          Se disfraza de programa útil o legítimo para engañar al usuario.
+        </td>
+        <td>Un "crack" para activar un juego o programa.</td>
+        <td>
+          Robo de datos, contraseñas bancarias o apertura de "puertas
+          traseras".
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Spyware</strong></td>
+        <td>Espía la actividad del usuario sin su consentimiento.</td>
+        <td>Software oculto que registra los sitios web visitados.</td>
+        <td>Pérdida de privacidad y captura de historial.</td>
+      </tr>
+      <tr>
+        <td><strong>Keylogger</strong></td>
+        <td>Registra todas las teclas presionadas por el usuario.</td>
+        <td>Programa invisible que captura lo escrito en el teclado.</td>
+        <td>Robo de usuarios y contraseñas.</td>
+      </tr>
+      <tr>
+        <td><strong>Ransomware</strong></td>
+        <td>
+          Cifra los archivos del usuario y exige un pago para recuperarlos.
+        </td>
+        <td>
+          Documentos escolares o fotos que ya no abren y piden rescate.
+        </td>
+        <td>Secuestro de la información y bloqueo de datos.</td>
+      </tr>
+      <tr>
+        <td><strong>Adware</strong></td>
+        <td>Muestra publicidad invasiva o redirecciona el navegador.</td>
+        <td>Ventanas emergentes que aparecen solas.</td>
+        <td>
+          Molestia constante, rastreo y posible descarga de otras amenazas.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+      </div>
+
+      <h2>3. ¿Cómo se propagan las amenazas?</h2>
+      <p>
+        Una idea equivocada es pensar que las amenazas "entran solas". Casi
+        siempre existe una combinación de tres factores:
+        <strong
+          >vulnerabilidad técnica, descuido humano y falta de prevención</strong
+        >. Las vías de propagación más comunes incluyen:
+      </p>
+
+      <ol>
+        <li>
+          <strong>Archivos adjuntos en correos falsos (Phishing):</strong>
+          Correos que simulan provenir de una entidad real para engañar al
+          usuario.
+        </li>
+        <li>
+          <strong>Descargas desde sitios no confiables:</strong> Incluye
+          software pirata, instaladores dudosos y webs de dudosa reputación.
+        </li>
+        <li>
+          <strong>Pendrives y discos externos infectados:</strong> Especialmente
+          peligrosos si se conectan en múltiples equipos (hogar, escuela,
+          cibercafé).
+        </li>
+        <li>
+          <strong>Macros maliciosas:</strong> Scripts ocultos dentro de
+          documentos ofimáticos (Word, Excel).
+        </li>
+        <li>
+          <strong>Explotación de fallos del sistema:</strong> Ocurre cuando el
+          sistema operativo o el software no están actualizados.
+        </li>
+        <li>
+          <strong>Redes compartidas mal configuradas:</strong> Permiten el paso
+          de gusanos entre equipos conectados.
+        </li>
+        <li>
+          <strong>Enlaces falsos por mensajería:</strong> Sorteos, premios o
+          urgencias inventadas que llegan por chat.
+        </li>
+        <li>
+          <strong>Uso de "Cracks" o activadores:</strong> Programas para usar
+          software de pago gratis que frecuentemente incluyen troyanos.
+        </li>
+      </ol>
+
+      <h2>4. Síntomas de una Infección</h2>
+      <p>
+        Aunque algunas amenazas están diseñadas para ser invisibles, existen
+        señales de alerta que un técnico debe reconocer:
+      </p>
+      <ul>
+        <li>Aparición de ventanas emergentes o publicidades extrañas.</li>
+        <li>Creación de accesos directos desconocidos.</li>
+        <li>El navegador cambia su página de inicio sin permiso.</li>
+        <li>
+          Archivos que desaparecen, cambian de nombre o quedan inaccesibles.
+        </li>
+        <li>
+          Uso excesivo de disco, red o procesador sin explicación aparente.
+        </li>
+        <li>El antivirus se desactiva solo o no permite abrirse.</li>
+      </ul>
+
+      <div class="warning-box">
+        <strong>⚠️ Muy importante:</strong> No toda lentitud implica virus. Una
+        PC puede ir lenta por falta de memoria, disco lleno o demasiados
+        programas abiertos. El técnico no debe diagnosticar "a ojo", sino
+        observar, comparar síntomas y usar herramientas.
+      </div>
+
+      <h2>5. Impacto sobre los Datos</h2>
+      <p>
+        El malware afecta directamente a los pilares de la seguridad
+        informática: integridad, disponibilidad y confidencialidad.
+      </p>
+
+      <div style="overflow-x: auto">
+
+        <table>
+          <thead>
+            <tr>
+              <th>Dimensión afectada</th>
+              <th>¿Qué significa?</th>
+              <th>Ejemplo de daño</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Integridad</strong></td>
+              <td>
+                Los datos fueron modificados, alterados o dañados sin
+                autorización.
+              </td>
+              <td>
+                Un archivo cambia su contenido o una base de datos es corrompida.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Disponibilidad</strong></td>
+              <td>
+                Los datos existen, pero no pueden usarse cuando se necesitan.
+              </td>
+              <td>Ransomware que cifra documentos impidiendo su apertura.</td>
+            </tr>
+            <tr>
+              <td><strong>Confidencialidad</strong></td>
+              <td>La información llega a personas no autorizadas.</td>
+              <td>Robo de contraseñas, fotos privadas o listados de clientes.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>6. Ejemplos y Casos Cotidianos</h2>
+
+      <p>Para contextualizar el aprendizaje, analicemos situaciones comunes:</p>
+
+      <p>
+        <strong>El "juego gratis" (Troyano):</strong> Si descargas un juego
+        desde una web no oficial y, al instalarlo, se introduce en segundo plano
+        un programa que roba contraseñas, probablemente no sea un virus clásico,
+        sino un troyano. El usuario creyó instalar algo útil, pero abrió la
+        puerta a una amenaza.
+      </p>
+
+      <p>
+        <strong>El editor de vídeo "Premium" (Cadena de errores):</strong> Un
+        estudiante descarga una versión pirateada de un editor de vídeo para un
+        trabajo práctico. El instalador funciona, pero instala un troyano
+        silencioso. Días después, su correo envía spam y pierde el acceso a sus
+        redes sociales. La infección no fue "mala suerte", sino el resultado de
+        decisiones inseguras.
+      </p>
+
+      <p>
+        <strong>La factura falsa (Phishing/Ransomware):</strong> Una alumna abre
+        un archivo adjunto que decía ser una factura. A los pocos minutos, su
+        fondo de pantalla cambia y sus documentos no abren (han sido cifrados).
+        Esto es un ataque típico de ransomware iniciado por ingeniería social.
+      </p>
+
+      <div class="activity-section">
+        <h2>✏️ 7. Actividades y Ejercicios</h2>
+
+        <h3>Bloque A: Comprensión y Análisis</h3>
+        <ol>
+          <li>
+            Explica con tus propias palabras la diferencia entre
+            <strong>virus</strong> y <strong>malware</strong>.
+          </li>
+          <li>
+            Lee el caso de la "factura falsa" mencionado anteriormente. ¿Qué
+            tipo de malware crees que actuó y qué dimensión de la seguridad
+            afectó (integridad, disponibilidad o confidencialidad)?
+          </li>
+          <li>
+            Indica si las siguientes señales son compatibles con una infección o
+            no necesariamente:
+            <ul>
+              <li>PC lenta.</li>
+              <li>Publicidades emergentes constantes.</li>
+              <li>Batería descargada.</li>
+              <li>Archivos con nombres extraños o cifrados.</li>
+              <li>Ruido mecánico del disco duro.</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h3>Bloque B: Investigación y Tabla</h3>
+        <ol>
+          <li>
+            Investiga un caso famoso de malware histórico (por ejemplo:
+            WannaCry, ILOVEYOU o Melissa) y escribe un breve resumen de qué
+            hacía.
+          </li>
+          <li>
+            Según la tabla "2. Tipos Principales de Malware" Explicar cuál es el
+            malware que consideras ser más vulnerable.
+          </li>
+        </ol>
+
+        <h3>Bloque C: Debate</h3>
+        <p>
+          <strong>Consigna:</strong> ¿Por qué muchas veces se dice que el primer
+          y mejor "antivirus" debería ser el sentido crítico del usuario?
+          Justifica tu respuesta.
+        </p>
+      </div>
+
+      <div class="activity-section">
+        <h2>🧩 8. Actividad Guiada: Mapa de Infección</h2>
+        <p>
+          <strong>Consigna:</strong> En grupos, elegir uno de los siguientes
+          escenarios y elaborar el recorrido probable de la infección:
+        </p>
+        <ul>
+          <li>
+            <strong>Escenario 1:</strong> Un pendrive infectado pasa por tres
+            computadoras de al sala 2 .
+          </li>
+          <li>
+            <strong>Escenario 2:</strong> Una docente abre un correo falso con
+            una supuesta boleta de servicio impaga.
+          </li>
+          <li>
+            <strong>Escenario 3:</strong> Un estudiante instala un programa /
+            juego crackeado descargado desde un foro de internet.
+          </li>
+        </ul>
+        <p>
+          <strong>Para el caso elegido, responder a estas preguntas:</strong>
+        </p>
+        <ol>
+          <li>¿Cuál fue el punto de entrada exacto?</li>
+          <li>¿Qué error humano facilitó el problema?</li>
+          <li>¿Qué datos quedaron en riesgo?</li>
+          <li>
+            ¿Cómo podría haberse evitado técnicamente o mediante comportamiento?
+          </li>
+        </ol>
+      </div>
+
+      <div class="activity-section">
+        <h2>🚦 9. Semáforo de Riesgo</h2>
+        <p>
+          Clasifica las siguientes situaciones como <strong>Verde</strong> (bajo
+          riesgo), <strong>Amarillo</strong> (riesgo medio) o
+          <strong>Rojo</strong> (alto riesgo):
+        </p>
+<div style="overflow-x: auto">
+
+      </div>
+        <table>
+          <tbody>
+            <tr>
+              <td>Descargar LibreOffice desde su sitio web oficial.</td>
+              <td><strong>[ ]</strong></td>
+            </tr>
+            <tr>
+              <td>
+                Abrir un archivo adjunto .zip enviado por un remitente
+                desconocido.
+              </td>
+              <td><strong>[ ]</strong></td>
+            </tr>
+            <tr>
+              <td>
+                Conectar un pendrive encontrado en la calle a tu ordenador
+                personal.
+              </td>
+              <td><strong>[ ]</strong></td>
+            </tr>
+            <tr>
+              <td>Mantener actualizado Windows y el antivirus.</td>
+              <td><strong>[ ]</strong></td>
+            </tr>
+            <tr>
+              <td>
+                Instalar un "activador" para usar un programa de pago gratis.
+              </td>
+              <td><strong>[ ]</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="activity-section">
+        <h2>📝 10. Preguntas</h2>
+        <ol>
+          <li>
+            ¿Qué tipo de amenaza se propaga sola por la red sin que el usuario
+            tenga que abrir un archivo específico?
+          </li>
+          <li>
+            ¿Qué malware está especialmente diseñado para registrar las teclas
+            pulsadas y robar contraseñas?
+          </li>
+          <li>
+            Menciona 4 formas diferentes de propagación de software malicioso.
+          </li>
+          <li>
+            ¿Por qué el software pirata representa un riesgo inherente para la
+            seguridad de los datos?
+          </li>
+
+          <li>
+            Explica la diferencia técnica entre un virus, un gusano y un
+            troyano.
+          </li>
+          <li>
+            ¿Por qué el ransomware es especialmente grave para una institución
+            como una escuela, un hospital o una PYME?
+          </li>
+          <!-- <li>
+          Escribe un ejemplo realista de un mensaje que podría usarse para engañar a alguien mediante ingeniería social.
+        </li> -->
+        </ol>
+      </div>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="datos2-sesion4.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 4
+        </a>
+        <a
+          href="datos2-sesion6.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 6
+        </a>
+      </div>
+    </main>
+
+    <!-- <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script> -->
+  </body>
+</html>
