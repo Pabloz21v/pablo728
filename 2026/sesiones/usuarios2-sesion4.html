@@ -558,21 +558,25 @@ SELECT * FROM productos WHERE descripcion IS NOT NULL;</code></pre>
 
       <h2>8. DISTINCT</h2>
       <ul>
-        <li>Muestra los valores que no se repiten en una columna indicada.</li>
+        <li>Muestra los valores de una columna indicada sin mostrar los valores repatidos.</li>
+      <li>Útil para averiguar la existencia de algo en una tabla (no cuantas veces existe) </li>
+      <li>Ej: estamos en una agencia de autos y un cliente quiere saber que modelos tiene:
+        Bueno el empleado ejecuta un filtro para saber que modelos tiene, no cuantos)
+      </li>
       </ul>
 
       <pre><code>-- Ver precios únicos en la tabla
 SELECT DISTINCT precio FROM productos;</code></pre>
       <div class="note">
-        Selecciona en la columna <code>precio</code> los valores únicos en la
-        tabla productos.
+        Selecciona en la columna <code>precio</code> los valores en la
+        tabla productos sin repatir el mismo valor.
       </div>
 
       <pre><code>-- Ver solo nombres de productos distintos
 SELECT DISTINCT nombre FROM productos;</code></pre>
       <div class="note">
-        Selecciona en la columna <code>nombre</code> los valores únicos en la
-        tabla productos.
+        Selecciona en la columna <code>nombre</code> los valores en la
+        tabla productos sin repatir el mismo valor.
       </div>
 
       <h2>9. Ejercicios prácticos</h2>

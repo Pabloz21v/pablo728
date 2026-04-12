@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP y Examen 1°: MySQL</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+      }
+
+      header {
+        /* background-color: #2c3e50; */
+        color: white;
+        padding: 20px;
+        text-align: center;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: #2c3e50;
+      }
+
+      .section {
+        background-color: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .code-block {
+        background-color: #f4f4f4;
+        padding: 15px;
+        border-radius: 5px;
+        font-family: "Courier New", Courier, monospace;
+        overflow-x: auto;
+        margin: 15px 0;
+      }
+
+      .note {
+        background-color: #e8f4fc;
+        padding: 10px;
+        border-left: 4px solid #3498db;
+        margin: 15px 0;
+      }
+
+      .warning {
+        background-color: #fdebd0;
+        padding: 10px;
+        border-left: 4px solid #e67e22;
+        margin: 15px 0;
+      }
+
+      .important {
+        background-color: #e8f8f5;
+        padding: 10px;
+        border-left: 4px solid #16a085;
+        margin: 15px 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #2c3e50;
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+
+        .code-block {
+          font-size: 14px;
+        }
+
+        table {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/usuarios-2.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+    </div>
+    <header>
+      <h1>TP y Examen 1°: MySQL (13 a 22 de abril)</h1>
+    </header>
+
+    <div class="section">
+      <h2>Instrucciones Generales</h2>
+      <p>
+        <strong>TP:</strong> En grupos de entre 2-4 integrantes deberán realizar
+        las siguientes actividades. Se dedicarán 2 clases (13 y 15 de abril)
+        para dicho trabajo (pueden avanzar en casa).
+      </p>
+
+      <div class="note">
+        <p>
+          <strong>IA:</strong> Pueden apoyarse con el uso de IA, tener cuidado
+          en que la IA les agregue contenido no enseñado en clase. A la vez,
+          analizar el código ofrecido por la IA e interpretarlo para juzgar si
+          es lo que desean y comprender qué les entregó.
+        </p>
+      </div>
+
+      <div class="warning">
+        <p>
+          <strong>Advertencia:</strong> Enviar por correo los script.sql (es
+          decir, su código). Este puede ser interpretado como potencial virus,
+          bloqueando toda posibilidad de descargarlo y recuperarlo. Guardarlo en
+          un archivo WORD, block de notas o similar.
+        </p>
+      </div>
+
+      <p>
+        <strong>Entrega del TP:</strong> Por <strong>EMAIL</strong> (fecha
+        límite: <strong>18 de abril, 23:59 hs</strong>).
+      </p>
+      <ul>
+        <li>Debe incluir los nombres y apellidos de los integrantes.</li>
+        <li>1 tabla si son 1 o 2 integrantes.</li>
+        <li>2 tablas si son más de 2 integrantes.</li>
+      </ul>
+
+      <div class="important">
+        <p><strong>Examen:</strong> 20 y 22 de abril.</p>
+        <ul>
+          <li>
+            Se les preguntará a los miembros del grupo sobre el código utilizado
+            para corroborar su entendimiento.
+          </li>
+          <li>
+            Se les solicitará cambiar partes de código para verificar la
+            comprensión del código usado.
+          </li>
+        </ul>
+        <p>
+          <strong>Calificación:</strong> Tendrán una nota grupal (por el TP) y
+          una individual (examen oral y modificación del código trabajado).
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>1. Creación y Gestión de Bases de Datos y Tablas</h2>
+      <p>
+        <strong>Objetivo:</strong> Evaluar el uso de
+        <code>CREATE DATABASE</code>, <code>DROP DATABASE</code>,
+        <code>USE</code>, <code>CREATE TABLE IF NOT EXISTS</code>,
+        <code>DROP TABLE</code>, y tipos de datos.
+      </p>
+      <ul>
+        <li>Las tablas pueden ser de la temática que más les guste.</li>
+      </ul>
+      <ol>
+        <li>
+          <strong>TABLA:</strong> Dicha tabla debe contener como mínimo 6
+          columnas aplicando los tipos de datos aprendidos.
+          <ul>
+            <li>
+              Primera columna llamada <strong>id</strong> (no olvidar asignarla
+              como clave primaria y auto incremental).
+            </li>
+            <li><code>VARCHAR</code></li>
+            <li><code>INT</code></li>
+            <li><code>DOUBLE</code></li>
+            <li><code>BOOLEAN</code></li>
+            <li><code>TEXT</code></li>
+            <li>
+              Usar <code>NOT NULL</code> en alguna/s columna/s (que tenga
+              sentido por qué no debe estar vacía dicha o dichas columnas).
+            </li>
+          </ul>
+        </li>
+        <li>Aplicar <code>IF NOT EXISTS</code> al crear tablas o DDBB.</li>
+        <li>Incluir código para eliminar tanto las tablas como las DDBB.</li>
+        <li>
+          No olvidar usar <code>USE</code> para posicionarse en la DDBB donde
+          trabajen.
+        </li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>2. Inserción y Consulta de Datos</h2>
+      <p>
+        <strong>Objetivo:</strong> Evaluar el uso de <code>INSERT INTO</code>,
+        <code>SELECT * FROM</code>, y <code>LIMIT</code>.
+      </p>
+      <ol>
+        <li>
+          Insertar 10 registros por tabla (es decir, 4 filas
+          <code>VALUES</code>).
+        </li>
+        <li>
+          Insertar 4 registros más por tabla repitiendo algunos datos de los 10
+          primeros registros y dejando algunos espacios vacíos (precaución con
+          dejar valores vacíos en la columna/s que designaron con
+          <code>NOT NULL</code>).
+        </li>
+        <li>Mostrar todos los registros.</li>
+        <li>Mostrar 5 registros.</li>
+        <li>Mostrar 10 registros.</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>3. Actualización y Eliminación de Datos</h2>
+      <p>
+        <strong>Objetivo:</strong> Evaluar el uso de <code>UPDATE</code>,
+        <code>SET</code>, <code>WHERE</code>, <code>DELETE</code>, y
+        <code>TRUNCATE</code>.
+      </p>
+      <ol>
+        <li>
+          Actualizar el valor de algún registro basado en la columna con tipo de
+          dato <code>VARCHAR</code>.
+        </li>
+        <li>
+          Actualizar el valor de algún registro basado en la columna con tipo de
+          dato <code>INT</code>.
+        </li>
+        <li>
+          Actualizar los valores de la tabla con tipo de dato
+          <code>DOUBLE</code> mayor (<code>></code>) o menor (<code><</code>) a
+          un valor que establezcan.
+        </li>
+        <li>
+          Actualizar los valores de la tabla con tipo de dato
+          <code>INT</code> mayor o igual a (<code>>=</code>) o menor o igual a
+          (<code><=</code>) un valor que exista.
+        </li>
+        <li>
+          Actualizar uno o más datos de la tabla con tipo de dato
+          <code>VARCHAR()</code>.
+        </li>
+        <li>Actualizar uno o más registros rompiendo la seguridad.</li>
+        <li>Eliminar una fila/registro basado en su <code>id</code>.</li>
+        <li>Eliminar un rango de registros.</li>
+        <li>Eliminar uno o más registros rompiendo la seguridad.</li>
+        <li>Vaciar la tabla.</li>
+        <li>Volver a insertar los registros a la tabla.</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>4. Consultas con Condiciones</h2>
+      <p>
+        <strong>Objetivo:</strong> Evaluar el uso de <code>WHERE</code>,
+        <code>AND</code>, <code>OR</code>, <code>NOT</code>, <code>>=</code>,
+        <code><=</code>, <code><></code>, <code>=</code>, <code>></code>,
+        <code><</code>, <code>IS NULL</code>, <code>IS NOT NULL</code>.
+      </p>
+      <ol>
+        <li>
+          Crear un filtro usando <code>AND</code> que involucre 3 columnas.
+        </li>
+        <li>
+          Crear un filtro usando <code>OR</code> que involucre 3 columnas.
+        </li>
+        <li>
+          Crear un filtro usando <code>NOT</code> que involucre 2 columnas.
+        </li>
+        <li>
+          Crear uno o más filtros que apliquen <code>>=</code>, <code><=</code>,
+          <code><></code>.
+        </li>
+        <li>
+          Crear uno o más filtros que apliquen <code>=</code>, <code>></code>,
+          <code><</code>.
+        </li>
+        <li>
+          Crear un filtro usando <code>IS NULL</code> y otro usando
+          <code>IS NOT NULL</code>.
+        </li>
+        <li>
+          Crear tres filtros combinando: <code>>=</code>, <code><=</code>,
+          <code><></code>, <code>=</code>, <code>></code>, <code><</code>,
+          <code>AND</code>, <code>OR</code>, <code>NOT</code>,
+          <code>IS NULL</code>, <code>IS NOT NULL</code>.
+        </li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>5. Ordenamiento y Valores Distintos</h2>
+      <p>
+        <strong>Objetivo:</strong> Evaluar el uso de
+        <code>ORDER BY</code> (<code>ASC/DESC</code>) y <code>DISTINCT</code>,
+        <code>RENAME</code>.
+      </p>
+      <ol>
+        <li>
+          Ordenar los registros de mayor a menor por la columna que contenga el
+          tipo de dato <code>VARCHAR</code>.
+        </li>
+        <li>
+          Ordenar los registros de menor a mayor por la columna que contenga el
+          tipo de dato <code>DOUBLE</code>.
+        </li>
+        <li>
+          Ordenar los registros (<code>ASC</code> o <code>DESC</code>) de la
+          columna que deseen y que se vean solo 7 registros.
+        </li>
+        <li>
+          Mostrar los registros basado en la columna con tipo de dato
+          <code>INT</code>.
+        </li>
+        <li>
+          Mostrar qué existe en las columnas del tipo de dato
+          <code>VARCHAR()</code> y <code>BOOLEAN</code>.
+        </li>
+        <li>Cambiar el nombre de las dos tablas.</li>
+        <li>Cambiar el nombre de las tablas a sus nombres originales.</li>
+      </ol>
+    </div>
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/usuarios-2.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+    </div>
+  </body>
+</html>

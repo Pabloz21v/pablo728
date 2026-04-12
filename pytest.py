@@ -1,14 +1,14 @@
-precio = 99.90
-alimento = "pata de pollo"
-vencimiento = "11/04/06"
-print(alimento, precio, precio, precio, alimento, vencimiento, precio,vencimiento) 
+pueblo = "Villa Sombra"
+detective = "Elena Ríos"
+asunto = "la campana dorada"
+sospechoso = "el bibliotecario"
+resuelto = True
 
-# Esto es un comentario de una línea
-edad = 25  # comentario al final
+print(f"""
+*** MISTERIO EN {pueblo} ***
 
-"""
-Comentario multilínea:
-puedes explicar la lógica completa
-o documentar una función.
-"""
-print(edad)
+La detective {detective} investigaba el robo de {asunto}.
+Todos señalaban a {sospechoso}, pero {detective} descubrió la verdad.
+¿Se resolvió el caso? {resuelto}
+Así fue, y la paz regresó a {pueblo}.
+""")
