@@ -240,10 +240,7 @@
       <h2 id="clase3" style="color: #1b4332">
         Sesión 7: Placas Madre de Notebook (Laptop)
       </h2>
-      <p>
-        <em>Miniaturización y diseño propietario: el corazón de una laptop</em>
-      </p>
-
+      
       <h3 class="c3-header">
         SECCIÓN 3.1 — INTRODUCCIÓN: DISEÑO PROPIETARIO
         <span class="time-badge"></span>
@@ -268,6 +265,7 @@
         <strong>No se puede actualizar ni retirar</strong> sin una máquina
         industrial de Reballing.
       </p>
+      <p>          Existen excepciones donde si se puede cambiar de procesador. Normalmente los CPU que encontramos en estos casos son LGA.</p>
       <ul>
         <li>
           <strong>Procesadores U:</strong> Ultra bajo consumo (15W). Laptops de
@@ -296,34 +294,37 @@
         SECCIÓN 3.4 — MEMORIA RAM EN NOTEBOOK
         <span class="time-badge"></span>
       </h3>
-      <table>
-        <tbody>
-          <tr>
-            <th class="c3-th">Tipo de Memoria</th>
-            <th class="c3-th">Características Técnicas</th>
-            <th class="c3-th">Identificación visual / Impacto</th>
-          </tr>
-          <tr>
-            <td><strong>SO-DIMM</strong><br />(DDR3, DDR4, DDR5)</td>
-            <td>
-              Módulos más cortos, voltaje más bajo (ej. 1.2V), removibles.
-            </td>
-            <td>
-              Se insertan con un ángulo de 45° en la ranura. Permiten expansión
-              a futuro.
-            </td>
-          </tr>
-          <tr>
-            <td><strong>LPDDR Soldada</strong><br />(LPDDR4x, LPDDR5)</td>
-            <td>Ultra bajo voltaje (hasta 0.6V), soldadura BGA directa.</td>
-            <td>
-              Chips negros al lado del CPU.
-              <strong>Imposible ampliarla.</strong> El cliente debe elegir la
-              RAM definitiva al comprar.
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="overflow-x: auto">
+
+        <table>
+          <tbody>
+            <tr>
+              <th class="c3-th">Tipo de Memoria</th>
+              <th class="c3-th">Características Técnicas</th>
+              <th class="c3-th">Identificación visual / Impacto</th>
+            </tr>
+            <tr>
+              <td><strong>SO-DIMM</strong><br />(DDR3, DDR4, DDR5)</td>
+              <td>
+                Módulos más cortos, voltaje más bajo (ej. 1.2V), removibles.
+              </td>
+              <td>
+                Se insertan con un ángulo de 45° en la ranura. Permiten expansión
+                a futuro.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>LPDDR Soldada</strong><br />(LPDDR4x, LPDDR5)</td>
+              <td>Ultra bajo voltaje (hasta 0.6V), soldadura BGA directa.</td>
+              <td>
+                Chips negros al lado del CPU.
+                <strong>Imposible ampliarla.</strong> El cliente debe elegir la
+                RAM definitiva al comprar.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3 class="c3-header">
         SECCIÓN 3.5 — ALMACENAMIENTO <span class="time-badge"></span>
@@ -341,12 +342,19 @@
           <strong>eMMC:</strong> Chip de almacenamiento barato soldado
           directamente a la placa. Rinde solo ~400 MB/s. Imposible actualizar.
         </li>
+        <li><strong>SSD 2.5: </strong> Podemos encontrar este tipo de almacenamiento en notebooks actuales y no tanto</li>
+      <li><strong>HDD 2.5: </strong>Estos discos los podemos encontrar en las primeras notebooks e incluso en algunas de unos pocos años atras, facilmente reemplazable por un SSD 2.5".</li>
       </ul>
-
       <h3 class="c3-header">
         SECCIÓN 3.6 — CONECTOR DE PANTALLA
-        <span class="time-badge"></span>
+        <span class="time-badge">
+          <!-- Estos tipos de conexiones permiten cubrir la necesidad de un cable
+           flexible que conecte la parte superior de la notebook (pantalla) con la parte inferi
+           or (placa madre) -->
+          </span>
       </h3>
+      <p>Protocolos de datos (el "lenguaje") que viajan a través de los hilos del conector ZIF y conectores para llevar la imagen a la pantalla.</p>
+      <!-- <p>Estos son los "lenguajes" eléctricos que viajan por los hilos del conector ZIF.</p> -->
       <ul>
         <li>
           <strong>eDP (Embedded DisplayPort):</strong> El estándar actual. Usa
@@ -366,7 +374,7 @@
         <span class="time-badge"></span>
       </h3>
       <p>
-        Utilizados para conectar los cables planos (flex) del teclado, touchpad
+        Utilizados para conectar los cables planos (flex) del teclado, touchpad, pantalla
         y huella dactilar. Cuentan con una pequeña
         <strong>palanca o lengüeta plástica</strong> que se levanta (liberando
         presión) para poder meter o sacar la cinta flexible.
@@ -374,7 +382,7 @@
       <div class="box-warning">
         ⚠️ <strong>Mucho cuidado:</strong> Las palancas de los ZIF son híper
         frágiles. Se deben manipular con espátula plástica empujando levemente
-        hacia <em>arriba</em>. Una palanca partida inutiliza la conexión entera.
+        hacia <em>arriba</em>. Una palanca partida puede inutilizar la conexión entera.
       </div>
 
       <h3 class="c3-header">
@@ -388,20 +396,49 @@
         ciclos de vida y desgaste de las celdas directamente desde el BMS
         interno de la batería.
       </p>
+      <ul>
 
+        <li>
+            <strong>Jack de carga (DC-IN):</strong> Frecuentemente se suelda a la
+            placa base y sufre enorme estrés mecánico (rotura clásica).
+          </li>
+      </ul>
+      <p>Los voltajes que requiere un modelo de notebook puede variar con respecto a otro, por lo que se tiene que saber que voltaje requiere para usar un cargador acorde</p>
+<ul>
+  <li>
+    <strong>
+    Si es menor: 
+  </strong> 
+  La notebook probablemente no encienda, o la batería no cargue, o el equipo se apague bajo carga pesada.</li>
+<li><strong>
+    Si es mayor: 
+  </strong> Podés quemar los MOSFETs de entrada o el chip de carga (Charger IC) de forma instantánea. Una diferencia de incluso 2V puede ser fatal.</li>
+</ul>
+<p>En cuanto al amperaje:</p>
+<ul>
+  <li> <strong>
+    Si el cargador tiene más Amperios:
+  </strong> No pasa nada malo; la notebook solo tomará lo que necesite. De hecho, el cargador trabajará más frío.
+</li>
+<li><strong>
+    Si el cargador tiene menos Amperios:
+  </strong>  El cargador se va a sobrecalentar, puede quemarse, o la notebook limitará el rendimiento del procesador para no apagar el cargador.</li>
+</ul>
+
+      <p>Otro factor que varia es la forma del Jack que se puede conectar. Es de importancia colocar el jack de carga correcto ya que al usan uno incorrecto podemos hacer falso contacto o romper la entrada.</p>
       <h3 class="c3-header">
         SECCIÓN 3.9 — SISTEMA TÉRMICO <span class="time-badge"></span>
       </h3>
       <p>
         Compuesto por <strong>Heat pipes</strong> (tubos de cobre rellenos de
-        líquido vaporizable), placas de cobre, y un
+        líquido vaporizable), placas de cobre (algunas notebooks solo disponen de esta refrigeracion pasiva), y un
         <strong>Blower Fan</strong> (turbina de aspas ultradelgadas). La pasta
         térmica se degrada en 3-4 años, siendo el servicio térmico preventivo
         una tarea esencial.
       </p>
 
       <h3 class="c3-header">
-        SECCIÓN 3.10 — OTROS (Wi-Fi y BIOS)
+        SECCIÓN 3.10 — Wi-Fi
         <span class="time-badge"></span>
       </h3>
       <ul>
@@ -409,92 +446,90 @@
           <strong>Wi-Fi:</strong> Usan slot M.2 E-Key tamaño 2230 con 2 cables
           coaxiales súper finos adheridos a presión.
         </li>
-        <li>
-          <strong>Jack de carga (DC-IN):</strong> Frecuentemente se suelda a la
-          placa base y sufre enorme estrés mecánico (rotura clásica).
-        </li>
+        
       </ul>
 
       <div class="box-activity">
-        <strong>📋 ACTIVIDAD PRÁCTICA — Clase 3</strong><br /><br />
-        1. Ingresá a la web de <em>iFixit.com</em> y buscá el "Teardown" de un
-        modelo como "Lenovo ThinkPad X1 Carbon".<br />
-        2. Revisá las fotos de la placa madre al desnudo y localizá: el bloque
-        de disipación de cobre, la turbina, el chip gigante del CPU soldado, la
-        pila CMOS envuelta en termocontraíble negro con cables, y la gran
-        batería de polímero conectada a los pines B+/SDA/SCL.<br />
-        3. Identificá al menos 3 puertos ZIF blancos y negros.
+        <strong>📋 ACTIVIDAD PRÁCTICA</strong><br /><br />
+        1. Buscar la placa madre de Lenovo ThinkPad X1 Carbon<br />
+        2. Idenfiticar el bloque
+        de disipación de cobre (tubos y/o placas), la turbina, el chip del CPU soldado, el EC, 
+        slot de RAM, unidad de almacenamiento, la
+        pila CMOS envuelta en termocontraíble negro con cables, y la
+        batería, jack de carga, M.2 para Wi-fi.<br />
+        <!-- 3. Identificar al menos 3 puertos ZIF blancos y negros, y conecciones entra pantalla y placa madre. -->
       </div>
 
       <div class="box-question">
-        <strong>❓ PREGUNTAS DE REPASO — Clase 3</strong>
+        <strong>❓ PREGUNTAS </strong>
         <ol>
           <li>
             <strong
               >¿Por qué la mayoría de los notebooks modernos usan BGA para el
               CPU en lugar de socket?</strong
             >
-            <span class="answer"
+            <!-- <span class="answer"
               >➤ Por razones de espacio (BGA es extremadamente compacto), menor
               resistencia eléctrica y térmica, mejor rendimiento y menor costo
               de fabricación en volumen. La portabilidad tiene más valor que la
               reemplazabilidad.</span
-            >
+            > -->
           </li>
           <li>
             <strong
               >¿Cuál es la diferencia entre SO-DIMM DDR4 y LPDDR4X en términos
-              prácticos?</strong
+              prácticos? Agregar imagen de memorias RAM LPDDR</strong
             >
-            <span class="answer"
+            <!-- <span class="answer"
               >➤ SO-DIMM DDR4 está en un slot removible (se puede ampliar),
               opera a 1.2V. LPDDR4X está soldada (no reemplazable), opera a solo
               0.6V activo (más eficiente energéticamente) y suele ofrecer mayor
-              velocidad.</span
+              velocidad.</span -->
             >
           </li>
           <li>
-            <strong>¿Qué significa “2230” en un módulo M.2?</strong>
-            <span class="answer"
+            <strong>¿Qué significa “2230” en un módulo M.2? Agregar imagen del WIFI M.2 2230</strong>
+            <!-- <span class="answer"
               >➤ 22mm de ancho × 30mm de largo. Es el tamaño más compacto,
               típico de ultrabooks delgados, consolas portátiles (Steam Deck,
               Surface Pro) y módulos Wi-Fi.</span
-            >
+            > -->
           </li>
           <li>
-            <strong>¿Qué es un conector ZIF y qué cuidados requiere?</strong>
-            <span class="answer"
+            <strong>¿Qué es un conector ZIF y qué cuidados requiere? Agregar imagen del conector y que se conecta</strong>
+            <!-- <span class="answer"
               >➤ Zero Insertion Force: conector para cables FFC planos con
               palanca de bloqueo. La palanca se debe levantar SIEMPRE hacia
               arriba con herramienta plástica (nunca metálica). La palanca es
               muy frágil: si se rompe, inutiliza todo el conector.</span
-            >
+            > -->
           </li>
+          <li><strong>¿Cuál es la relación entre conectores ZIF en notebooks y los protocolos eDP (Embedded DisplayPort y LVDS?</strong></li>
           <li>
             <strong
               >¿Qué es el Embedded Controller (EC) y qué funciones
               cumple?</strong
             >
-            <span class="answer"
+            <!-- <span class="answer"
               >➤ Es un microcontrolador siempre activo que gestiona: teclado,
               touchpad, batería (carga, salud, temperatura vía SMBus), sensores
               térmicos, botón de encendido, ventiladores y LEDs de estado.
               Funciona incluso con el sistema apagado.</span
-            >
+            > -->
           </li>
           <li>
             <strong
               >¿Por qué una pantalla LVDS no puede reemplazarse directamente con
               una eDP?</strong
             >
-            <span class="answer"
+            <!-- <span class="answer"
               >➤ Porque son estándares de señal completamente diferentes. LVDS
               usa señales diferenciales paralelas; eDP usa señales seriales del
               protocolo DisplayPort. Los voltajes, número de pines y protocolos
               son incompatibles.</span
-            >
+            > -->
           </li>
-          <li>
+          <!-- <li>
             <strong
               >¿Qué es el SMBus en el conector de batería y para qué
               sirve?</strong
@@ -505,20 +540,20 @@
               voltaje de cada celda, temperatura, ciclos de carga y capacidad
               real vs diseñada.</span
             >
-          </li>
+          </li> -->
           <li>
             <strong
               >¿Qué es el almacenamiento eMMC y en qué se diferencia de un SSD
               NVMe M.2?</strong
             >
-            <span class="answer"
+            <!-- <span class="answer"
               >➤ eMMC es memoria flash soldada a la placa (no removible), usa
               interfaz paralela y tiene velocidades de ~400 MB/s. Un SSD NVMe
               M.2 es removible (si hay slot), usa interfaz PCIe serie y alcanza
               2000–14.000+ MB/s según la generación.</span
-            >
+            > -->
           </li>
-          <li>
+          <!-- <li>
             <strong
               >¿Qué ventajas y desventajas tiene la memoria LPDDR5 soldada vs
               SO-DIMM DDR5 en un notebook?</strong
@@ -529,26 +564,26 @@
               falla. SO-DIMM DDR5: upgradeable y reemplazable en caso de falla,
               pero con mayor voltaje y más espacio físico.</span
             >
-          </li>
+          </li> -->
           <li>
             <strong
               >¿Cómo afecta la falta de factor de forma estándar al trabajo del
               técnico?</strong
             >
-            <span class="answer"
+            <!-- <span class="answer"
               >➤ Cada reparación es diferente. No existen manuales de servicio
               públicos para la mayoría de los modelos, las piezas son difíciles
               de conseguir y caras, y se requieren habilidades de microsoldadura
               para muchas reparaciones. Los esquemas eléctricos raramente son
               públicos.</span
-            >
+            > -->
           </li>
         </ol>
       </div>
 
       <hr />
 
-      <h2 id="resumen" style="color: #1a1a2e">Resumen Comparativo General</h2>
+      <!-- <h2 id="resumen" style="color: #1a1a2e">Resumen Comparativo General</h2>
       <table>
         <tbody>
           <tr>
@@ -603,7 +638,7 @@
         de Socket (LGA) o en chips BGA, y si puedes mejorar su almacenamiento
         usando discos IDE, SATA o M.2. 3) Jamás intervengas sin pulsera
         antiestática ni manual de placa en mano.
-      </div>
+      </div> -->
 
       
 
