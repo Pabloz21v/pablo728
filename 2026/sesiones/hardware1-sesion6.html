@@ -263,7 +263,7 @@
       <tr>
         <td><strong>ATX 1.x / 2.x</strong></td>
         <td>1995 – 2003</td>
-        <td>Solo conector principal de 20 pines (no 24), puertos traseros limitados.</td>
+        <td>Solo conector principal de 20 pines PSU - Fuente de poder (no 24), puertos traseros limitados.</td>
       </tr>
       <tr>
         <td><strong>BTX</strong></td>
@@ -280,7 +280,7 @@
     <h3 class="c2-header">
       SECCIÓN 2.2 — ARQUITECTURA NORTHBRIDGE / SOUTHBRIDGE <span class="time-badge"></span>
     </h3>
-    <p>En placas legacy existían DOS chips principales claramente visibles sobre el PCB (la placa):</p>
+    <p>En placas legacy existían DOS chips principales visibles sobre el PCB (la placa):</p>
     <ul>
       <li>
         <strong>NORTHBRIDGE (Puente Norte):</strong> Cerca del procesador y RAM, siempre con disipador. Gestionaba la
@@ -293,6 +293,7 @@
     </ul>
 
     <h3 class="c2-header">SECCIÓN 2.3 — CHIPSETS LEGACY IMPORTANTES <span class="time-badge"></span></h3>
+    <p>Dependiendo del Chipset se podria trabajar con un tipo de hardware o no.</p>
     <table>
       <tbody><tr>
         <th class="c2-th">Chipset (NB+SB)</th>
@@ -331,12 +332,9 @@
       </tr>
     </tbody></table>
 
-    <div class="box-warning" style="border-left-color: #c62828">
-      ⚠️ <strong>INCOMPATIBILIDAD LGA1151:</strong> Los sockets LGA1151 v1 (6ª/7ª gen) y v2 (8ª/9ª gen) son físicamente
-      IDÉNTICOS, pero incompatibles eléctricamente. Un procesador de 8ª gen no funcionará en placas H110/Z170.
-    </div>
+    
 
-    <h3 class="c2-header">SECCIÓN 2.4 — SOCKETS LEGACY <span class="time-badge">/span></h3>
+    <h3 class="c2-header">SECCIÓN 2.4 — SOCKETS LEGACY <span class="time-badge"></span></h3>
     <table>
       <tbody><tr>
         <th class="c2-th">Socket</th>
@@ -374,7 +372,11 @@
         <td>Intel Sandy/Ivy Bridge. Base metálica pesada.</td>
       </tr>
     </tbody></table>
-
+<div class="box-warning" style="border-left-color: #c62828">
+      ⚠️ <strong>INCOMPATIBILIDAD LGA1151:</strong> Los sockets LGA1151 v1 (6ª/7ª gen) y v2 (8ª/9ª gen) son físicamente
+      IDÉNTICOS, pero incompatibles eléctricamente. Un procesador de 8ª gen no funcionará en placas H110/Z170.
+    </div>
+    
     <h3 class="c2-header">SECCIÓN 2.5 — MEMORIA RAM LEGACY <span class="time-badge"></span></h3>
     <table>
       <tbody><tr>
@@ -427,14 +429,14 @@
       </li>
       <li>
         <strong>Floppy (34 pines):</strong> Más corto que el IDE. Cable con un "giro" al final que determina qué
-        disquetera es la unidad A: y cuál es la B:.
+        disquetera es la unidad A: y cuál es la B: (La disquetera es donde se colocaban los disquets).
       </li>
     </ul>
 
     <h3 class="c2-header">SECCIÓN 2.8 — JUMPERS <span class="time-badge"></span></h3>
     <p>
       Un jumper es una cubierta plástica con un puente metálico interno que conecta dos pines en la placa, cerrando un
-      circuito de configuración manual.
+      circuito de configuración manual. (También lo vieron en los HDD para configurar si son Master/Primario o Slave/Secundario)
     </p>
     <ul>
       <li>
@@ -461,7 +463,7 @@
         <td>6+6</td>
         <td>+5V, +12V, -5V, -12V, GND</td>
         <td>Placas AT/Baby-AT</td>
-        <td>⚠️ Si se conectan en orden incorrecto, puede quemar la placa. Regla: cables negros (GND) juntos en el centro.</td>
+        <td>⚠️ Si se conectan en orden incorrecto, puede quemar la placa.</td>
       </tr>
       <tr>
         <td><strong>ATX 20-pin</strong></td>
@@ -521,72 +523,80 @@
       </li>
       <li>
         <strong>Speaker Header:</strong> 4 pines (+5V, GND, NC, Señal). Conecta el altavoz piezo. Emite los famosos
-        <strong>"Beep Codes"</strong> de la BIOS que avisan si la RAM o CPU fallan.
+        <strong>"Beep Codes"</strong> de la BIOS que avisan que está fallando (cada fabricante decide la secuencia de pitidos para cada falla).
       </li>
     </ul>
 
     <div class="box-activity">
-      <strong>📋 ACTIVIDAD PRÁCTICA — Clase 2</strong><br><br>
+      <strong>📋 ACTIVIDAD PRÁCTICA </strong><br><br>
       1. Buscá en Google Images "Intel DG41RQ motherboard".<br>
-      2. Identificá: Socket LGA775, slots DDR2, coexistencia de conectores IDE y SATA, slots blancos PCI y el pequeño
-      jumper CLR_CMOS cerca de la pila redonda.<br>
+      2. Identificá: Socket LGA775, Chipset Northbridge y Southbridge, slots DDR2, coexistencia de conectores IDE y SATA, slots blancos PCI, PCIe, Header SERIAL/PARALELO (COM / LPT) de estar presentes y el pequeño
+      jumper CLR_CMOS cerca de la pila redonda. Se pueden ayudar buscando el manual de dicha placa madre<br>
       3. Respondé: Si una empresa te trae esta placa porque olvidaron la contraseña del setup de BIOS, ¿qué paso físico
       harías para resolverlo?
     </div>
 
     <div class="box-question">
-      <strong>❓ PREGUNTAS DE REPASO — Clase 2</strong>
+      <strong>❓ PREGUNTAS</strong>
       <ol>
         <li>
-          <strong>¿Por qué una empresa podría mantener un PC con Windows XP en 2025?</strong>
-          <span class="answer">➤ Porque tiene software a medida que solo corre en esa versión, o maquinaria industrial controlada por puertos COM/LPT sin soporte en sistemas operativos modernos, o el costo de migración es prohibitivo.</span>
+<strong>¿Por qué una empresa podría mantener un PC con Windows XP en 2025?</strong>
+          <!-- <span class="answer">➤ Porque tiene software a medida que solo corre en esa versión, o maquinaria industrial controlada por puertos COM/LPT sin soporte en sistemas operativos modernos, o el costo de migración es prohibitivo.</span> -->
         </li>
         <li>
           <strong>¿Cuál es la diferencia física entre un conector IDE y SATA?</strong>
-          <span class="answer">➤ IDE tiene 40 pines y usa un cable cinta plano y muy ancho; SATA tiene 7 pines y usa un cable delgado en forma de L. SATA es mucho más compacto y fácil de manejar.</span>
+          <!-- <span class="answer">➤ IDE tiene 40 pines y usa un cable cinta plano y muy ancho; SATA tiene 7 pines y usa un cable delgado en forma de L. SATA es mucho más compacto y fácil de manejar.</span> -->
         </li>
         <li>
           <strong>¿Qué es un jumper y cómo se usa el CLR_CMOS?</strong>
-          <span class="answer">➤ Un jumper es un puente plástico/metálico que cortocircuita dos pines de configuración. Para limpiar la BIOS: apagar el equipo, desenchufarlo, mover el jumper de pines 1-2 a pines 2-3 por 10-30 segundos, y volver a la posición original antes de encender.</span>
+          <!-- <span class="answer">➤ Un jumper es un puente plástico/metálico que cortocircuita dos pines de configuración. Para limpiar la BIOS: apagar el equipo, desenchufarlo, mover el jumper de pines 1-2 a pines 2-3 por 10-30 segundos, y volver a la posición original antes de encender.</span> -->
         </li>
         <li>
           <strong>¿En qué se diferencia DDR2 de DDR3 si ambas tienen 240 pines?</strong>
-          <span class="answer">➤ La posición de la muesca (notch) está en diferente lugar, haciendo físicamente imposible la inserción incorrecta. También difieren en voltaje (1.8V DDR2 vs 1.5V DDR3) y velocidades máximas.</span>
+          <!-- <span class="answer">➤ La posición de la muesca (notch) está en diferente lugar, haciendo físicamente imposible la inserción incorrecta. También difieren en voltaje (1.8V DDR2 vs 1.5V DDR3) y velocidades máximas.</span> -->
         </li>
         <li>
-          <strong>¿Qué velocidad máxima ofrece el bus AGP 8x?</strong>
-          <span class="answer">➤ 2 GB/s (2.1 GB/s exactamente) de ancho de banda total.</span>
+          <strong>¿Qué velocidad máxima ofrece el bus AGP 8x? Agregar imagen del Slot AGP</strong>
+          <!-- <span class="answer">➤ 2 GB/s (2.1 GB/s exactamente) de ancho de banda total.</span> -->
         </li>
         <li>
           <strong>¿Por qué NO se puede usar un Core i7-8700K en una placa Z170 (LGA1151 v1)?</strong>
-          <span class="answer">➤ Porque aunque el socket físico es idéntico, Intel cambió el controlador de gestión de energía en los procesadores de 8ª gen, incompatible con los chipsets Z170/Z270. Se necesita chipset Z370/Z390.</span>
+          <!-- <span class="answer">➤ Porque, aunque el socket físico es idéntico, Intel cambió el controlador de gestión de energía en los procesadores de 8ª gen, incompatible con los chipsets Z170/Z270. Se necesita chipset Z370/Z390.</span> -->
         </li>
         <li>
-          <strong>¿Cuántos dispositivos admite un canal IDE y cómo se configuran?</strong>
-          <span class="answer">➤ 2 dispositivos: Master (Maestro) y Slave (Esclavo), configurados mediante jumpers físicos en la parte trasera del disco duro o unidad óptica. Una etiqueta en el disco indica las posiciones MA, SL y CS.</span>
+          <strong>¿Cuántos dispositivos admite un canal IDE y cómo se configuran? </strong>
+          <!-- <span class="answer">➤ 2 dispositivos: Master (Maestro) y Slave (Esclavo), configurados mediante jumpers físicos en la parte trasera del disco duro o unidad óptica. Una etiqueta en el disco indica las posiciones MA, SL y CS.</span> -->
         </li>
         <li>
           <strong>¿Cuál es el riesgo del conector de alimentación AT (P8+P9)?</strong>
-          <span class="answer">➤ Si se conectan en orden incorrecto se aplican voltajes incorrectos a la placa y puede quemarse. La regla es: cables negros (GND) de ambos conectores siempre juntos en el centro.</span>
+          <!-- <span class="answer">➤ Si se conectan en orden incorrecto se aplican voltajes incorrectos a la placa y puede quemarse. La regla es: cables negros (GND) de ambos conectores siempre juntos en el centro. </span> -->
         </li>
         <li>
-          <strong>¿Para qué sirve el header del Speaker interno y por qué es importante?</strong>
-          <span class="answer">➤ Conecta el altavoz piezo del gabinete. Emite códigos de beep durante el POST que indican fallas de hardware (RAM, video, CPU) incluso sin monitor. Es la herramienta diagnóstica más básica en equipos sin pantalla disponible.</span>
+          <strong>¿Para qué sirve el header del Speaker interno y por qué es importante? </strong>
         </li>
         <li>
-          <strong>¿Qué es el Northbridge y qué función cumplía en las placas antiguas?</strong>
-          <span class="answer">➤ Era el chip que conectaba la CPU con la RAM y la GPU a alta velocidad (bus FSB). En las placas modernas, sus funciones fueron integradas dentro del propio CPU (desde Sandy Bridge en 2011).</span>
+          <strong>¿Qué es el Northbridge y qué función cumplía en las placas antiguas? </strong>
+          <!-- <span class="answer">➤ Era el chip que conectaba la CPU con la RAM y la GPU a alta velocidad (bus FSB). En las placas modernas, sus funciones fueron integradas dentro del propio CPU (desde Sandy Bridge en 2011).</span> -->
         </li>
         <li>
-          <strong>¿Qué ventaja tenía el slot AGP sobre PCI para las tarjetas de video?</strong>
-          <span class="answer">➤ AGP tenía una conexión directa y dedicada a través del Northbridge, mientras que PCI compartía el bus con todos los dispositivos. Esto le daba a la GPU mucho más ancho de banda exclusivo.</span>
+          <strong>¿Qué es el Southbridge y qué función cumplía en las placas antiguas?</strong>
+          <!-- <span class="answer">➤ Era el chip que conectaba la CPU con la RAM y la GPU a alta velocidad (bus FSB). En las placas modernas, sus funciones fueron integradas dentro del propio CPU (desde Sandy Bridge en 2011).</span> -->
         </li>
         <li>
-          <strong>¿Cuál fue el problema del factor de forma BTX que hizo que no se adoptara?</strong>
-          <span class="answer">➤ Fue diseñado para el Pentium 4 (que generaba muchísimo calor), pero casi al mismo tiempo Intel lanzó los Core 2 Duo (muchíisimo más eficientes en temperatura), haciendo innecesario el BTX. El mercado nunca lo adoptó.</span>
+          <strong>¿Qué ventaja tenía el slot AGP sobre PCI para las tarjetas de video? </strong>
+          <!-- <span class="answer">➤ AGP tenía una conexión directa y dedicada a través del Northbridge, mientras que PCI compartía el bus con todos los dispositivos. Esto le daba a la GPU mucho más ancho de banda exclusivo. </span> -->
         </li>
+<li>
+          <strong>Agregar imagen comparativa del slot AGP vs PCI vs PCIe y como diferenciarlas / identificarlas </strong>
+         </li>
+        
+        <li>
+          <strong>Buscar imágenes de los Header SERIAL/PARALELO (COM / LPT) en un placa madre antigua, también que se conectaba en dichos pines en la placa madre </strong>
+         </li>
       </ol>
     </div>
+
+
 
     <hr>
 
