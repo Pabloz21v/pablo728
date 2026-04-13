@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="es-ES" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 4: Armado de PCs – Almacenamiento</title>
+    <style>
+      :root {
+        --bg-color: #0f1729;
+        --card-bg: #1a2744;
+        --text-color: #f8fafc;
+        --accent-blue: #3b82f6;
+        --accent-cyan: #06b6d4;
+        --accent-green: #10b981;
+        --accent-yellow: #f59e0b;
+        --accent-red: #ef4444;
+        --border-color: #2dd4bf;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        line-height: 1.6;
+      }
+
+      /* HEADER */
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid var(--accent-cyan);
+      }
+      .header h1 {
+        font-size: 2.5rem;
+        margin: 0;
+        background: linear-gradient(
+          to right,
+          var(--accent-blue),
+          var(--accent-cyan)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .header h2 {
+        font-size: 1.8rem;
+        color: var(--accent-cyan);
+        margin: 10px 0;
+      }
+      .header h3 {
+        font-size: 1.2rem;
+        color: #94a3b8;
+        font-weight: normal;
+        margin: 5px 0 20px 0;
+      }
+      .info-row {
+        display: inline-block;
+        background: var(--card-bg);
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        color: var(--accent-green);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      /* TOC */
+      .toc {
+        background: var(--card-bg);
+        padding: 20px 30px;
+        border-radius: 12px;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      }
+      .toc h3 {
+        color: var(--accent-blue);
+        margin-top: 0;
+      }
+      .toc ul {
+        list-style: none;
+        padding: 0;
+        columns: 2;
+      }
+      .toc li {
+        margin-bottom: 8px;
+      }
+      .toc a {
+        color: var(--accent-cyan);
+        text-decoration: none;
+      }
+
+      /* SECTIONS */
+      section {
+        margin-bottom: 50px;
+      }
+      h3 {
+        color: var(--accent-blue);
+        margin-top: 30px;
+      }
+
+      /* CARDS & INFO BOXES */
+      .card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 15px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      }
+      .callout {
+        border-left: 5px solid var(--accent-cyan);
+        background: rgba(6, 182, 212, 0.1);
+        padding: 15px 20px;
+        margin: 20px 0;
+        border-radius: 0 8px 8px 0;
+      }
+      .warning {
+        border-left-color: var(--accent-red);
+        background: rgba(239, 68, 68, 0.1);
+      }
+      .tip {
+        border-left-color: var(--accent-yellow);
+        background: rgba(245, 158, 11, 0.1);
+      }
+      .badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      .badge-blue {
+        background: var(--accent-blue);
+        color: white;
+      }
+      .badge-red {
+        background: var(--accent-red);
+        color: white;
+      }
+      .badge-yellow {
+        background: var(--accent-yellow);
+        color: #000;
+      }
+      .badge-green {
+        background: var(--accent-green);
+        color: white;
+      }
+      .badge-purple {
+        background: #7c3aed;
+        color: white;
+      }
+
+      /* TABLES */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: var(--card-bg);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      th,
+      td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #334155;
+      }
+      th {
+        background: #0f172a;
+        color: var(--accent-cyan);
+        font-weight: bold;
+      }
+      tr:nth-child(even) {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      /* SPEED MINI BARS */
+      .speed-mini-bar {
+        height: 14px;
+        border-radius: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--accent-blue),
+          var(--accent-cyan)
+        );
+      }
+
+      /* SECTION TITLE GRADIENT BAR */
+      h2.section-title {
+        color: #fff;
+        background: linear-gradient(90deg, #1e3a5f 0%, #1a2744 100%);
+        border-left: 5px solid var(--accent-cyan);
+        border-bottom: none;
+        padding: 12px 18px;
+        border-radius: 0 8px 8px 0;
+        margin-top: 40px;
+        font-size: 1.3rem;
+      }
+
+      /* M.2 VISUAL (reused) */
+      .m2-visual {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 20px 0;
+      }
+      .m2-bar-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .m2-label {
+        width: 55px;
+        font-size: 0.85rem;
+        font-weight: bold;
+        color: var(--accent-cyan);
+        text-align: right;
+        flex-shrink: 0;
+      }
+      .m2-bar {
+        height: 22px;
+        background: linear-gradient(
+          90deg,
+          var(--accent-blue),
+          var(--accent-cyan)
+        );
+        border-radius: 0 6px 6px 0;
+        display: flex;
+        align-items: center;
+        padding-left: 8px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        color: #fff;
+        white-space: nowrap;
+      }
+
+      /* THERMOMETER */
+      .thermometer {
+        display: flex;
+        height: 30px;
+        border-radius: 15px;
+        overflow: hidden;
+        margin: 20px 0;
+      }
+      .therm-green {
+        width: 50%;
+        background: var(--accent-green);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6rem;
+        font-weight: bold;
+        color: #000;
+      }
+      .therm-yellow {
+        width: 20%;
+        background: var(--accent-yellow);
+        color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6rem;
+        font-weight: bold;
+      }
+      .therm-orange {
+        color: #000;
+        width: 10%;
+        background: #ea580c;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6rem;
+        font-weight: bold;
+      }
+      .therm-red {
+        color: #000;
+        width: 20%;
+        background: var(--accent-red);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6rem;
+        font-weight: bold;
+      }
+
+      /* LISTS & Q */
+      ul {
+        padding-left: 20px;
+      }
+      .q-list {
+        list-style: none;
+        padding: 0;
+      }
+      .q-list li {
+        margin-bottom: 15px;
+        background: var(--card-bg);
+        padding: 15px;
+        border-radius: 8px;
+        display: flex;
+        align-items: flex-start;
+      }
+      .q-num {
+        background: var(--accent-blue);
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: 15px;
+        flex-shrink: 0;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 60px;
+        padding-top: 20px;
+        border-top: 1px solid #334155;
+        color: #94a3b8;
+        font-size: 0.9rem;
+      }
+      .btn-nav {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion3.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 3
+      </a>
+      <a
+        href="hardware2-sesion5.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 5
+      </a>
+    </div>
+
+    <div class="header">
+      <h1>SESIÓN 4</h1>
+      <h2>Armado de PCs – Almacenamiento</h2>
+      <h3>Casos reales, compatibilidad y estrategias según uso</h3>
+    </div>
+
+    <div class="toc">
+      <h3>📑 Índice de Contenidos</h3>
+      <ul>
+        <li><a href="#introduccion">1. Introducción y Objetivos</a></li>
+        <li><a href="#conceptos-basicos">2. Fundamentos Físicos y Lógicos</a></li>
+        <!-- <li><a href="#iops-secuencial">IOPS y Velocidades Secuenciales</a></li> -->
+        <li><a href="#interfaces">3. Interfaces, Protocolos y Factores de Forma</a></li>
+        <li><a href="#criterios">4. Criterios de Decisión y Cuellos de Botella</a></li>
+        <li><a href="#casos">5. Casos de Uso, Presupuestos y Combinaciones</a></li>
+        <li><a href="#preguntas">6. Preguntas</a></li>
+      </ul>
+    </div>
+
+    <!-- ================= SECCIÓN 1 ================= -->
+    <section id="introduccion">
+      <h2 class="section-title">1. Introducción y Objetivos</h2>
+      <div class="card">
+        <p>
+           Hoy en día, la elección del disco duro o SSD es una de las
+          decisiones que más impacta en la "agilidad" percibida de una computadora. Aprenderemos no solo qué es más rápido,
+          sino qué es más inteligente comprar según el presupuesto y el uso que se le dará al equipo.
+        </p>
+        <h3>🎯 Objetivos de la Sesión</h3>
+        <ul>
+          <li>Diferenciar las arquitecturas de HDD, SSD SATA y SSD NVMe.</li>
+          <li>Comprender métricas clave: TBW, DWPD, IOPs y velocidades secuenciales.</li>
+          <li>Identificar compatibilidades físicas y lógicas (M.2, PCIe, SATA).</li>
+          <li>Diseñar configuraciones de almacenamiento óptimas para distintos perfiles de usuario.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= SECCIÓN 2 ================= -->
+    <section id="conceptos-basicos">
+      <h2 class="section-title">2. Fundamentos Físicos y Lógicos</h2>
+
+      <h3>2.1 Disco Duro Mecánico (HDD)</h3>
+      <div class="card">
+        <p>
+          A pesar de la popularidad de los SSD, el HDD sigue siendo el rey del
+          <strong>almacenamiento masivo económico</strong>. Funciona mediante platos magnéticos que giran y cabezales que
+          leen/escriben sin tocar el plato (flotan a nanómetros).
+        </p>
+        <ul>
+          <li><strong>RPM:</strong> 5400 (más fríos/silenciosos) o 7200 (más rápidos).</li>
+          <li><strong>Densidad Areal:</strong> Cantidad de datos por pulgada cuadrada.</li>
+          <li><strong>Caché/Buffer:</strong> Memoria DRAM pequeña (32MB-256MB).</li>
+        </ul>
+        <div class="callout warning">
+          <span class="badge badge-red">⚠️ Error Común</span><br />
+          Pensar que los HDD están obsoletos. Para NAS, videovigilancia o almacenar terabytes de video crudo, su coste por GB los hace insustituibles.
+        </div>
+      </div>
+
+      <h3>📀 CMR vs SMR (CRÍTICO)</h3>
+      <div class="card">
+        <ul>
+          <li><strong>CMR (Grabación Magnética Convencional):</strong> Pistas paralelas. Rendimiento estable. Ideal para NAS y RAID (WD Red Plus, Seagate IronWolf).</li>
+          <li><strong>SMR (Grabación Magnética Superpuesta):</strong> Pistas solapadas como tejas. Escrituras aleatorias <em>atrozmente lentas</em>. Solo para archivo estático.</li>
+        </ul>
+      </div>
+
+      <h3>⚡ SSD (Solid State Drive) - NAND Flash</h3>
+      <div class="card">
+        <p>No tienen partes móviles. Usan memoria NAND gestionada por un <strong>Controlador</strong> (el "cerebro").</p>
+        <h4>Tipos de Memoria NAND</h4>
+        <div style="overflow-x: auto">
+          <table>
+            <thead><tr><th>Tipo</th><th>Bits por celda</th><th>Velocidad/Durabilidad</th><th>Uso Actual</th></tr></thead>
+            <tbody>
+              <tr><td>SLC</td><td>1 bit</td><td>Altísima</td><td>Caché / Militar (caro)</td></tr>
+              <tr><td>MLC</td><td>2 bits</td><td>Alta</td><td>Servidores Legacy</td></tr>
+              <tr><td><strong>TLC</strong></td><td><strong>3 bits</strong></td><td><strong>Media/Buena</strong></td><td>⭐ Estándar consumo actual</td></tr>
+              <tr><td>QLC</td><td>4 bits</td><td>Baja</td><td>Almacenamiento masivo barato</td></tr>
+              <tr><td>PLC</td><td>5 bits</td><td>Muy baja</td><td>Emergente, nicho económico</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ========== NUEVA SUBSECCIÓN: IOPS y Velocidades Secuenciales ========== -->
+<h3>IOPS y Velocidades Secuenciales</h3>
+<div class="card">
+  <p>
+    Dos métricas fundamentales para entender el rendimiento real de un disco, pero que miden cosas muy distintas.
+    <strong>IOPS</strong> determina la agilidad del sistema en tareas cotidianas; la <strong>velocidad secuencial</strong>
+    define la rapidez al mover archivos grandes y continuos.
+  </p>
+
+  <h4>📌 ¿Qué son las IOPS?</h4>
+  <p>
+    <strong>IOPS = Input/Output Operations Per Second</strong> (Operaciones de Entrada/Salida por segundo).<br>
+    Mide cuántas operaciones de <strong>lectura o escritura aleatoria</strong> puede realizar el disco en un segundo.
+    Es la métrica reina para la sensación de “fluidez” del PC.
+  </p>
+  <div class="callout tip">
+    <span class="badge badge-yellow">📖 Analogía (biblioteca)</span><br>
+    Buscar 1000 libros diferentes, cada uno en una estantería distinta. Las IOPS indican <strong>cuántos libros puedes localizar y abrir por segundo</strong>. No importa el tamaño del libro, sino la velocidad para encontrarlo.
+  </div>
+
+  <h4>⚡ ¿Qué son las Velocidades Secuenciales?</h4>
+  <p>
+    Se miden en <strong>MB/s</strong> (megabytes por segundo) e indican la tasa de transferencia de <strong>datos contiguos y ordenados</strong>.
+    Son clave para archivos muy grandes (películas 4K, ISO, máquinas virtuales).
+  </p>
+  <div class="callout tip">
+    <span class="badge badge-yellow">📖 Analogía (biblioteca)</span><br>
+    Leer <strong>un solo libro muy grueso de principio a fin</strong>. La velocidad secuencial es la rapidez con la que pasas las páginas.
+  </div>
+
+  <h4>📊 Comparativa práctica: HDD vs SSD SATA vs M.2 NVMe</h4>
+  <div style="overflow-x: auto">
+    <table>
+      <thead>
+        <tr><th>Característica</th><th>HDD (7200 rpm)</th><th>SSD SATA</th><th>M.2 NVMe (Gen3)</th><th>M.2 NVMe (Gen4)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Velocidad Secuencial (lectura)</strong></td><td>~150‑200 MB/s</td><td>~500‑560 MB/s</td><td>~3.500 MB/s</td><td>~7.000 MB/s</td></tr>
+        <tr><td><strong>IOPS (lectura aleatoria)</strong></td><td>&lt; 200</td><td>10k – 90k</td><td>200k – 500k</td><td>500k – 1M+</td></tr>
+        <tr><td><strong>IOPS (escritura aleatoria)</strong></td><td>&lt; 200</td><td>20k – 80k</td><td>200k – 500k</td><td>500k – 800k+</td></tr>
+        <tr><td><strong>Factor limitante principal</strong></td><td>Brazo mecánico</td><td>Interfaz SATA III</td><td>Interfaz PCIe 3.0</td><td>Interfaz PCIe 4.0</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>🎯 ¿Cuándo importa cada una?</h4>
+  <ul>
+    <li><strong>Las IOPS mandan en:</strong> arranque del sistema operativo, apertura de programas y juegos, multitarea con muchos archivos pequeños, bases de datos, navegación pesada.</li>
+    <li><strong>La velocidad secuencial manda en:</strong> copiar/mover archivos enormes (películas, ISOs, backups), edición de video 4K/8K con archivos sin comprimir, transferencias masivas de datos.</li>
+  </ul>
+
+  <div class="callout warning">
+    <span class="badge badge-red">⚠️ Regla de oro para el 90% de los usuarios</span><br />
+    <strong>Las IOPS son el rey</strong>. Cualquier SSD (incluso SATA) multiplica por cientos las IOPS de un HDD, y eso es lo que hace que el PC “vuele” al abrir programas o encender Windows. La velocidad secuencial ultraalta del NVMe solo se nota en trabajos profesionales con archivos monstruosos.
+  </div>
+
+  <div class="callout tip">
+    <span class="badge badge-yellow">💡 Resumen para elegir</span><br />
+    <ul style="margin-top: 8px; margin-bottom: 0;">
+      <li><strong> HDD → cámbialo a cualquier SSD</strong> (mejora abismal en IOPS).</li>
+      <li><strong>SSD SATA → pasar a NVMe NO es un cambio revolucionario</strong> en el día a día (solo en edición profesional o copias masivas).</li>
+      <li><strong>Para juegos y ofimática</strong>, un SSD SATA o un NVMe de gama media ofrecen la misma experiencia práctica.</li>
+    </ul>
+  </div>
+</div>
+<!-- ========== FIN DE LA NUEVA SUBSECCIÓN ========== -->
+
+      <h3>🧠 DRAM vs DRAM-less + HMB</h3>
+      <div class="card">
+        <ul>
+          <li><strong>Con DRAM:</strong> Chip RAM dedicado → muy rápidos, ideales para Sistema Operativo.</li>
+          <li><strong>DRAM-less:</strong> Más baratos, más lentos en multitarea.</li>
+          <li><strong>HMB (Host Memory Buffer):</strong> NVMe DRAM-less pide prestada RAM del sistema para compensar.</li>
+        </ul>
+      </div>
+
+      <div class="callout tip">
+        <span class="badge badge-yellow">💡 Caché SLC Dinámica</span><br />
+        Los SSD TLC/QLC escriben primero simulando celdas SLC (muy rápido). Si copias un archivo muy grande y llenas esa caché, la velocidad cae drásticamente a la velocidad nativa de la NAND.
+      </div>
+    </section>
+
+    <!-- ================= SECCIÓN 3 ================= -->
+    <section id="interfaces">
+      <h2 class="section-title">3. Interfaces, Protocolos y Factores de Forma </h2>
+      <div class="callout warning">
+        <span class="badge badge-red">⚠️ ¡NOTA CRUCIAL! M.2 NO ES SINÓNIMO DE NVMe</span><br />
+        M.2 es solo el conector (el "enchufe"). Un puerto M.2 puede llevar señal SATA o señal PCIe (NVMe). Siempre revisa el manual de la motherboard.
+      </div>
+
+      <h3>3.1 SATA III vs NVMe</h3>
+      <div style="overflow-x: auto">
+        <table>
+          <thead><tr><th>Característica</th><th>SATA III (AHCI)</th><th>NVMe (PCIe)</th></tr></thead>
+          <tbody>
+            <tr><td>Protocolo diseñado para...</td><td>Discos Mecánicos (HDDs)</td><td>Memorias Flash de alta velocidad</td></tr>
+            <tr><td>Límite de velocidad</td><td>~550 MB/s</td><td>Hasta 14,000 MB/s (PCIe 5.0)</td></tr>
+            <tr><td>Colas de comandos</td><td>1 cola (32 comandos)</td><td>64,000 colas (64,000 comandos c/u)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3.2 Generaciones PCIe y Lanes</h3>
+      <div class="card">
+        <p>Los NVMe usan pistas (Lanes) del bus PCIe. Lo normal es usar 4 lanes (x4).</p>
+        <ul>
+          <li><strong>PCIe 3.0 x4:</strong> ~3,500 MB/s</li>
+          <li><strong>PCIe 4.0 x4:</strong> ~7,000 MB/s</li>
+          <li><strong>PCIe 5.0 x4:</strong> ~14,000 MB/s</li>
+        </ul>
+        <div class="callout tip">
+          <span class="badge badge-yellow">💡 Retrocompatibilidad</span><br />
+          Puedes poner un NVMe PCIe 4.0 en una placa 3.0, pero funcionará a velocidad de 3.0.
+        </div>
+      </div>
+
+      <h3>3.3 Factores de Forma M.2 (2280)</h3>
+      <div class="m2-visual">
+        <div class="m2-bar-row"><span class="m2-label">2230</span><div class="m2-bar" style="width:80px; background:#475569">30 mm</div><span style="font-size:0.8rem;color:#94a3b8">Steam Deck / Surface</span></div>
+        <div class="m2-bar-row"><span class="m2-label">2242</span><div class="m2-bar" style="width:112px; background:#1d4ed8">42 mm</div><span style="font-size:0.8rem;color:#94a3b8">Laptops ultradelgadas</span></div>
+        <div class="m2-bar-row"><span class="m2-label">2260</span><div class="m2-bar" style="width:160px; background:#0e7490">60 mm</div><span style="font-size:0.8rem;color:#94a3b8">Industrial</span></div>
+        <div class="m2-bar-row"><span class="m2-label">⭐ 2280</span><div class="m2-bar" style="width:213px; background:#047857">80 mm — ESTÁNDAR</div><span style="font-size:0.8rem;color:#10b981;font-weight:bold">PC Escritorio / Laptops</span></div>
+        <div class="m2-bar-row"><span class="m2-label">22110</span><div class="m2-bar" style="width:293px; background:#92400e">110 mm</div><span style="font-size:0.8rem;color:#94a3b8">Servidores / Workstations</span></div>
+      </div>
+
+      <h3>🔑 Keys (Muescas físicas)</h3>
+      <div style="overflow-x: auto">
+        <table>
+          <thead><tr><th>Key</th><th>Muesca</th><th>Lanes PCIe</th><th>Protocolo</th><th>Uso actual</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Key M</strong></td><td>Derecha</td><td>x4</td><td>NVMe o SATA</td><td>⭐ Estándar NVMe moderno</td></tr>
+            <tr><td><strong>Key B</strong></td><td>Izquierda</td><td>x2</td><td>SATA o NVMe x2</td><td>Antiguo, menos frecuente</td></tr>
+            <tr><td><strong>Key B+M</strong></td><td>Ambas muescas</td><td>x2 (máx.)</td><td>SATA o NVMe x2</td><td>Común en SSD SATA M.2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= SECCIÓN 4 ================= -->
+    <section id="criterios">
+      <h2 class="section-title">4. Criterios de Decisión y Compatibilidad </h2>
+      <h3>📊 Durabilidad: TBW, DWPD y Over-Provisioning</h3>
+      <div class="card">
+        <p><strong>TBW (Terabytes Written):</strong> cantidad total de datos que puedes escribir dentro de la garantía. (Ej: 600 TBW).<br>
+        <strong>DWPD (Drive Writes Per Day):</strong> cuántas veces al día puedes reescribir la capacidad del disco durante la garantía.<br>
+        <strong>Over-Provisioning (OP):</strong> dejar un 7-10% sin particionar mejora rendimiento sostenido y vida útil.</p>
+      </div>
+
+      <h3>📌 Criterios que realmente importan al comprar</h3>
+      <div class="card">
+        <ul>
+          <li><strong>Rendimiento secuencial:</strong> importante para copias grandes.</li>
+          <li><strong>Rendimiento aleatorio:</strong> clave para SO, programas y multitarea.</li>
+          <li><strong>Capacidad:</strong> según volumen real de datos.</li>
+          <li><strong>Durabilidad:</strong> TBW/DWPD y tipo de NAND.</li>
+          <li><strong>Temperatura:</strong> decisiva en NVMe de alto rendimiento.</li>
+          <li><strong>Precio por GB:</strong> fundamental en almacenamiento masivo.</li>
+          <li><strong>Compatibilidad:</strong> tamaño, protocolo, lanes.</li>
+        </ul>
+      </div>
+
+      <h3>🌡️ Temperatura y Throttling</h3>
+      <div class="callout warning">
+        <span class="badge badge-red">⚠️ Throttling Térmico</span><br />
+        Si el controlador pasa los ~75°C, reduce su velocidad para proteger la NAND. Los NVMe PCIe 4.0/5.0 suelen necesitar disipador.
+      </div>
+      <div class="thermometer">
+        <div class="therm-green">0-50°C (Normal)</div>
+        <div class="therm-yellow">50-70°C (Carga)</div>
+        <div class="therm-orange">70-80°C (Riesgo)</div>
+        <div class="therm-red">80°C+ (Throttling)</div>
+      </div>
+
+      <div class="callout tip">
+        <span class="badge badge-yellow">💡 VELOCIDAD VS PERCEPCIÓN REAL</span><br />
+        Pasar de HDD a SSD SATA cambia la vida. Pasar de SSD SATA a NVMe PCIe 4.0 <strong>NO</strong> se nota casi nada en tareas ofimáticas o carga de juegos (mejora de apenas 1-2 segundos). La súper velocidad del NVMe brilla al mover archivos gigantes o editar video profesional.
+      </div>
+    </section>
+
+    <!-- ================= SECCIÓN 5 ================= -->
+    <section id="casos">
+      <h2 class="section-title">5. Casos de Uso, Presupuestos y Combinaciones</h2>
+      <div class="card">
+        <p>El mejor almacenamiento no es el más caro, sino el que equilibra rendimiento, capacidad, fiabilidad y presupuesto.</p>
+      </div>
+
+      <h3>📈 Comparativa rápida</h3>
+      <div style="overflow-x: auto">
+        <table>
+          <thead><tr><th>Tecnología</th><th>Velocidad típica</th><th>Precio por GB</th><th>Punto fuerte</th><th>Cuándo elegirlo</th></tr></thead>
+          <tbody>
+            <tr><td>HDD 5400/7200 rpm</td><td>100-260 MB/s</td><td>Muy bajo</td><td>Capacidad masiva barata</td><td>Backups, archivos, NAS</td></tr>
+            <tr><td>SSD SATA</td><td>500-560 MB/s</td><td>Medio</td><td>Gran salto de agilidad</td><td>Oficina, portátiles antiguos</td></tr>
+            <tr><td>SSD NVMe</td><td>3000-14000 MB/s</td><td>Medio-alto</td><td>Máximo rendimiento</td><td>Gaming, edición, trabajo profesional</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>🎮 Escenario 1: PC Gamer</h3>
+      <div class="card">
+        <strong>Uso: </strong>Windows, lanzadores, juegos actuales, Discord. <br>
+        <strong>Recomendación:</strong> 1 SSD NVMe PCIe 3.0 o 4.0 de 1TB o 2TB TLC. <br>
+        <strong>Justificación:</strong> Mejoran las cargas, actualizaciones y la respuesta general del sistema. <br>
+        <strong>Evitar:</strong> gastar mucho en PCIe 5.0 si solo se juega.
+      </div>
+      
+      <h3>🎬 Escenario 2: PC Gamer + edición gráfica/vídeo</h3>
+      <div class="card">
+      
+        <strong>Uso: </strong>Juegos, grabación de partidas, Photoshop, Premiere, DaVinci. <br>
+        <strong>Recomendación:</strong> NVMe PCIe 4.0 con DRAM de 1TB (sistema+proyectos activos) + HDD CMR de 4TB+ (material bruto).</div>
+        <strong>Justificación:</strong> El NVMe acelera cachés, previsualizaciones y copias de trabajo; el HDD abarata el almacenamiento masivo. <br>
+      
+      </div>
+      
+      <h3>🏠 Escenario 3: PC Familiar</h3>
+      <div class="card">
+        <strong>Uso: </strong>Navegar, estudiar, ofimática, fotos familiares, impresión, videollamadas. <br>
+        <strong>Recomendación:</strong> SSD SATA de 500 GB o NVMe de entrada de 500 GB/1 TB, según compatibilidad. <br>
+        <strong>Justificación:</strong> Para este perfil importa más la agilidad general y la fiabilidad que la velocidad extrema. <br>
+  
+      </div>
+    
+      <h3>🎥 Escenario 4: PC Familiar + trabajo de camarógrafo</h3>
+      <div class="card">
+        <strong>Uso: </strong>PC de uso diario más guardado de bodas, eventos, sesiones y copias de seguridad. <br>
+        <strong>Recomendación:</strong>  SSD principal de 500 GB o 1 TB para sistema + 2 HDD CMR de 4 TB/8 TB en espejo o con política de backup. <br>
+        <strong>Justificación:</strong> Los vídeos ocupan muchísimo espacio y no conviene guardarlos solo en un SSD caro ni en un único disco sin redundancia. <br>
+        
+      </div>
+
+      <h3>💼 Escenario 5: PC de Oficina</h3>
+      <div class="card">
+        <strong>Uso: </strong>Word, Excel, navegador con muchas pestañas, facturación, correo. <br>
+        <strong>Recomendación:</strong> SSD SATA de 480/500 GB o 1 TB; si la placa lo soporta y el precio es similar, NVMe básico. <br>
+        <strong>Justificación:</strong> La diferencia entre HDD y SSD es enorme; la diferencia entre SATA y NVMe básico suele ser secundaria en este entorno. <br>
+      
+      </div>
+     
+      <h3>🖥️ Escenario 6: Workstation diseño/arquitectura/edición profesional</h3>
+      <div class="card">
+        <strong>Uso: </strong> CAD 3D, render, fotografía pesada, vídeo 4K/8K, bibliotecas de texturas. <br>
+        <strong>Recomendación:</strong> NVMe PCIe 4.0/5.0 de alta gama con DRAM para proyectos activos + segundo NVMe o SSD SATA para scratch/caché + HDD o NAS para archivo. <br>
+        <strong>Justificación:</strong> Aquí sí importa el rendimiento sostenido, la gestión térmica, el TBW y la estabilidad bajo cargas largas. <br>
+  
+      </div>
+     
+      <h3>📡 Escenario 7: NAS o servidor doméstico</h3>
+      <div class="card">
+        <strong>Uso: </strong>Encendido 24/7, copias de seguridad, Plex, almacenamiento compartido, cámaras. <br>
+        <strong>Recomendación:</strong>  HDD específicos para NAS/vigilancia según uso, siempre revisando si son CMR. Puede añadirse un SSD pequeño como caché o para el sistema.<br>
+        <strong>Justificación:</strong> Por la necesidad de almacenar grandes cantidades de TERAS y manteniendo un uso contante se requiere CMR y HDD por su bajo costo y gran capacidad almacenamiento <br>
+        <strong>Evitar:</strong> HDD SMR en RAID o cargas de escritura frecuentes.
+      </div>
+
+      <h3>💰 Recomendaciones por presupuesto</h3>
+      <div style="overflow-x: auto">
+        <table>
+          <thead><tr><th>Nivel</th><th>Propuesta</th><th>Perfil ideal</th></tr></thead>
+          <tbody>
+            <tr><td>Básico</td><td>SSD SATA 480/500 GB</td><td>Oficina, estudio, PC familiar económica</td></tr>
+            <tr><td>Equilibrado</td><td>NVMe 1TB + HDD 2/4TB</td><td>Gaming, uso mixto, creador ocasional</td></tr>
+            <tr><td>Alto rendimiento</td><td>NVMe con DRAM 1/2TB + segundo SSD/NVMe + HDD/NAS</td><td>Edición profesional, workstation</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>📈 Combinaciones recomendadas</h3>
+      <div class="card" style="overflow-x: auto">
+        <ul>
+          <li><strong>Solo HDD: </strong>solo recomendable para archivo frío, DVR/NVR o NAS económico.</li>
+          <li><strong>Solo SSD SATA: </strong>ideal para oficina, estudio, portátiles antiguos y presupuestos ajustados.</li>
+          <li><strong>Solo NVMe:</strong> ideal para gamer medio o PC moderna que no necesita terabytes de archivo.</li>
+          <li><strong>NVMe + HDD: </strong> la combinación más versátil para gaming, edición ligera y uso mixto.</li>
+          <li><strong>NVMe + NVMe + HDD/NAS: </strong>solución profesional para separar sistema, proyectos activos y archivo.</li>
+
+      </ul>
+      </div>
+
+      <div class="callout warning">
+        <span class="badge badge-red">🚫 Mitos y errores comunes</span>
+        <ul>
+          <li>"Si dice M.2, entonces es NVMe" → falso.</li>
+          <li>"Cuanto más MB/s, mejor para cualquier usuario" → falso.</li>
+          <li>"Todos los HDD de la misma capacidad sirven para NAS" → falso; revisar CMR/SMR.</li>
+          <li>"Cualquier SSD sirve igual para sistema operativo" → falso; DRAM, HMB y TBW importan.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="preguntas">
+      <h2 class="section-title">6. Preguntas</h2>
+      <ul class="q-list">
+        <li><span class="q-num">1</span>Un cliente quiere un disco de 4TB para guardar películas antiguas. SSD SATA cuesta 200€, HDD cuesta 75€. ¿Cuál recomiendas y por qué?</li>
+        <li><span class="q-num">2</span>¿Por qué un HDD SMR es una pésima elección para un sistema NAS o RAID?</li>
+        <li><span class="q-num">3</span>Explica la diferencia entre SSD con DRAM dedicada y DRAM-less. ¿Para qué uso recomendarías DRAM dedicada ?</li>
+        <li><span class="q-num">4</span>Tu cliente edita video 8K. Al copiar 200GB, el disco empieza a 3000 MB/s y cae a 400 MB/s. ¿Qué fenómeno ocurre?</li>
+        <li><span class="q-num">5</span>Arma teóricamente el almacenamiento para un Arquitecto (CAD 3D pesado, renders masivos). Justifica.</li>
+        <li><span class="q-num">6</span>
+          <div>
+         <p><strong>El streamer que graba y edita en la misma PC:</strong></p>
+        <p>Perfil: Usuario que juega títulos actuales, hace streaming en directo y graba sus partidas en 1440p (archivos de ~50 GB por sesión). Además, edita esos vídeos para subirlos a YouTube, pero no tiene presupuesto para dos NVMe de alta gama. <br>
+Necesidad: Quiere respuesta rápida en juegos y edición, pero también necesita al menos 2 TB para guardar proyectos recientes y 4 TB adicionales para archivar partidas antiguas. Su placa base tiene un slot M.2 PCIe 4.0, un slot M.2 PCIe 3.0 y 4 puertos SATA.<br>
+Pregunta: ¿Qué combinación de discos (modelos, interfaces, tecnologías) le recomendarías? Justifica cada elección mencionando cuellos de botella, caché SLC, y si evitarías algún tipo de HDD o SSD.</p>
+
+          </div>
+ </li>
+      
+<li><span class="q-num">7</span>
+  <div>
+<p><strong>El fotógrafo de bodas que viaja con su laptop:</strong></p>
+<p>Perfil: Fotógrafo profesional que edita en una laptop con un solo slot M.2 (PCIe 3.0) y un bahía SATA para disco de 2.5″. Su trabajo: importar 200 GB de fotos RAW por evento, editarlas en Lightroom y hacer copias de seguridad en dos discos externos. Actualmente sufre lentitud al importar y al exportar lotes.<br>
+Necesidad: Quiere acelerar el flujo de trabajo, pero no puede abrir la laptop para cambiar el slot M.2 (solo tiene el de fábrica). Tiene presupuesto para un SSD interno de hasta 2 TB y un disco externo de respaldo.<br>
+Pregunta: ¿Qué tipo de SSD interno elegirías (SATA M.2, NVMe, DRAM, DRAM-less, TLC/QLC) y por qué? ¿Recomendarías HDD o SSD para el respaldo externo?</p>
+  </div>
+</li>
+     </ul>
+    </section>
+
+    
+
+    <div style="margin-top: 30px;">
+      <a href="../materias/hardware-dos.html" class="btn-nav" style="background:#4ade80; color:#222;">Volver a Materia</a>
+      <a href="hardware2-sesion3.html" class="btn-nav" style="background:#60a5fa; color:#fff;">Ir a Sesión 3</a>
+      <a href="hardware2-sesion5.html" class="btn-nav" style="background:#f9e282; color:#222;">Ir a Sesión 5</a>
+    </div>
+  </body>
+</html>
