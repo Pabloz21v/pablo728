@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Sesión 5 – Procesadores de Alto Rendimiento I: costo, TDP e IPC</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0f1729;
+      --card-bg: #1a2744;
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e6;
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-yellow: #f59e0b;
+      --accent-red: #ef4444;
+      --border-glow: #2dd4bf;
+      --border-subtle: #334155;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      font-family: 'Segoe UI', system-ui, -apple-system, 'Roboto', sans-serif;
+      color: var(--text-primary);
+      line-height: 1.5;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: transparent;
+    }
+
+    /* Header styles */
+    .hero {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding: 1.5rem 1rem 2rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      background: linear-gradient(135deg, #ffffff, var(--accent-cyan), var(--accent-blue));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.3px;
+    }
+
+    .hero-sub {
+      color: var(--accent-cyan);
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-desc {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      max-width: 700px;
+      margin: 0.75rem auto 0;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid var(--accent-cyan);
+      border-radius: 40px;
+      padding: 0.25rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent-cyan);
+      margin-top: 1rem;
+    }
+
+    /* TOC Grid */
+    .toc-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+    }
+
+    .toc-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--accent-cyan);
+      padding-left: 0.75rem;
+      color: var(--accent-cyan);
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .toc-grid a {
+      color: var(--text-primary);
+      text-decoration: none;
+      background: rgba(59, 130, 246, 0.1);
+      padding: 0.6rem 1rem;
+      border-radius: 12px;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toc-grid a:hover {
+      background: rgba(6, 182, 212, 0.2);
+      border-color: var(--accent-cyan);
+      transform: translateX(5px);
+    }
+
+    /* Section titles */
+    .section-title {
+      background: linear-gradient(90deg, #1e3a5f, #1a2744);
+      border-left: 5px solid var(--accent-cyan);
+      border-radius: 0 16px 16px 0;
+      padding: 0.9rem 1.5rem;
+      margin: 2rem 0 1.5rem 0;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: white;
+      letter-spacing: -0.2px;
+    }
+
+    /* Card general */
+    .card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: transform 0.1s ease;
+    }
+
+    .card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-left: 3px solid var(--accent-blue);
+      padding-left: 0.75rem;
+    }
+
+    .card h4 {
+      font-size: 1.1rem;
+      margin: 1rem 0 0.5rem;
+      color: var(--accent-green);
+    }
+
+    /* Callouts */
+    .callout {
+      border-left: 5px solid;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 1rem 1.5rem;
+      border-radius: 16px;
+      margin: 1.5rem 0;
+    }
+
+    .callout.normal {
+      border-left-color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.08);
+    }
+    .callout.warning {
+      border-left-color: var(--accent-red);
+      background: rgba(239, 68, 68, 0.08);
+    }
+    .callout.tip {
+      border-left-color: var(--accent-yellow);
+      background: rgba(245, 158, 11, 0.08);
+    }
+    .callout-title {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Table styling */
+    .table-wrapper {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card-bg);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    th {
+      background-color: #0f172a;
+      color: var(--accent-cyan);
+      padding: 12px 10px;
+      font-weight: 600;
+      border-bottom: 2px solid var(--accent-cyan);
+    }
+    td {
+      padding: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+    }
+    tr:hover td {
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    /* Barras visuales (TDP termómetro) */
+    .tdp-visual {
+      background: #0f172a;
+      border-radius: 20px;
+      padding: 1.2rem;
+      margin: 1rem 0;
+    }
+    .bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+      color: var(--text-secondary);
+    }
+    .bar-bg {
+      background: #2d3748;
+      border-radius: 40px;
+      height: 28px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-green), var(--accent-yellow), var(--accent-red));
+      border-radius: 40px;
+      text-align: right;
+      line-height: 28px;
+      padding-right: 8px;
+      color: white;
+      font-weight: bold;
+      font-size: 0.75rem;
+    }
+
+    /* q-list */
+    .q-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .q-item {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 1rem 1rem 1rem 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      transition: all 0.2s;
+    }
+    .q-number {
+      background: var(--accent-blue);
+      width: 32px;
+      height: 32px;
+      border-radius: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .q-text {
+      color: var(--text-primary);
+      line-height: 1.45;
+    }
+
+    /* Botones */
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0 1.5rem;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      background: rgba(59, 130, 246, 0.2);
+      border: 1px solid var(--accent-blue);
+      padding: 0.6rem 1.2rem;
+      border-radius: 40px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-btn:hover {
+      background: var(--accent-blue);
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+
+    /* listas */
+    ul, ol {
+      padding-left: 1.5rem;
+      margin: 0.8rem 0;
+    }
+    li {
+      margin: 0.5rem 0;
+      color: var(--text-secondary);
+    }
+    p {
+      color: var(--text-secondary);
+      margin-bottom: 0.8rem;
+    }
+    strong {
+      color: white;
+    }
+    a {
+      color: var(--accent-cyan);
+    }
+    hr {
+      border-color: var(--border-subtle);
+    }
+    @media (max-width: 680px) {
+      .container {
+        padding: 0 0.5rem;
+      }
+      .section-title {
+        font-size: 1.3rem;
+      }
+      .q-item {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  
+  <!-- Botones superiores -->
+  <div >
+      <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion4.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 4
+      </a>
+      <a
+        href="hardware2-sesion6.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 6
+      </a>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <div class="hero">
+    <h1>Sesión 5 – Procesadores de Alto Rendimiento I<br>costo, TDP e IPC</h1>
+    <div class="hero-sub">Arquitectura moderna & tecnologías disruptivas</div>
+    <div class="hero-desc">Análisis profundo de costos, eficiencia térmica, IPC, 3D V-Cache, arquitectura híbrida y claves para ensamblaje profesional.</div>
+   
+  </div>
+
+  <!-- TABLA DE CONTENIDOS (TOC) -->
+  <div class="toc-card" id="toc">
+    <div class="toc-title">📖 Contenido de la sesión</div>
+    <div class="toc-grid">
+      <a href="#sec-teoria">🔬 1. Desarrollo Teórico</a>
+      <a href="#sec-tabla">📊 2. Tabla Comparativa CPU</a>
+      <a href="#sec-errores">⚠️ 3. Errores Frecuentes</a>
+      <a href="#sec-actividades">🛠️ 4. Actividades Prácticas</a>
+      <a href="#sec-preguntas">❓ 5. Preguntas</a>
+    </div>
+  </div>
+
+  <!-- SECCIÓN TEORÍA -->
+  <section id="sec-teoria">
+    <h2 class="section-title">🔬 1. Desarrollo Teórico</h2>
+    <div class="card">
+      <h3>1.1. ¿Qué encarece un CPU? (Cascada de costos)</h3>
+      <p>El precio de un procesador no es arbitrario; está escalonado según el costo de fabricación y las características habilitadas. A modo de referencia relativa (utilizando dólares para evitar la fluctuación del peso argentino):</p>
+      <ul>
+        <li><strong>Precio base (~$100 USD):</strong> Procesadores básicos con gráficos integrados modestos (Ej: Athlon 3000G). Cubren las necesidades de ofimática.</li>
+        <li><strong>+ $50 USD (Más núcleos):</strong> Aumento de matrices de procesamiento (Ej: Ryzen 5 3600, 6 Núcleos / 12 Hilos).</li>
+        <li><strong>+ $100 USD (Arquitectura moderna):</strong> Reducción de nanómetros e incremento de IPC (Ej: salto de Zen 2 a Zen 3).</li>
+        <li><strong>+ $150 USD (Caché 3D apilada):</strong> Tecnología costosa de empaquetado tridimensional para gaming (Ej: Ryzen 7 5800X3D).</li>
+        <li><strong>+ $200 USD (Soporte de nueva generación):</strong> Transición a nuevas memorias (DDR5) y buses (PCIe 5.0).</li>
+        <li><strong>+ $300 a $500 USD (Segmento HEDT/Extreme):</strong> Tecnologías profesionales (AVX-512, soporte de memoria ECC oficial masivo, frecuencias límite de 6 GHz).</li>
+      </ul>
+
+      <h3>1.2. TDP, Consumo Eléctrico y MTP</h3>
+      <p>El <strong>TDP (Thermal Design Power)</strong> se define como el calor máximo que el sistema de refrigeración debe ser capaz de disipar (medido en vatios/W). Es un error común creer que el TDP equivale al consumo eléctrico exacto en la pared.</p>
+      <ul>
+        <li><strong>TDP Bajo (35-65W):</strong> Ideales para oficinas o HTPC. Silenciosos, cooler de fábrica.</li>
+        <li><strong>TDP Medio (65-105W):</strong> Requieren coolers de torre de gama media.</li>
+        <li><strong>TDP Alto (125W+):</strong> Requieren refrigeración líquida o doble torre de alta gama.</li>
+      </ul>
+      <p><strong>El costo oculto:</strong> Comprar un CPU de alto TDP (ej. Core i9-13900K) implica invertir entre $100 y $200 USD adicionales en refrigeración líquida y una fuente de poder (PSU) mucho más robusta.<br>
+      <strong>TDP Nominal vs MTP/PBP:</strong> Procesadores modernos (especialmente Intel 12ª/13ª gen) introducen conceptos como el MTP (Maximum Turbo Power). Un CPU puede indicar un TDP nominal de 125W, pero en ráfagas de máximo esfuerzo consumir más de 250W.</p>
+      
+      <!-- BARRA VISUAL: termómetro TDP (opcional) -->
+      <div class="tdp-visual">
+        <div class="bar-label"><span>🌡️ TDP / Consumo térmico orientativo</span> <span>Refrigeración requerida</span></div>
+        <div class="bar-bg"><div class="bar-fill" style="width: 25%; background: linear-gradient(90deg, #10b981, #f59e0b);">≤65W</div></div>
+        <div class="bar-bg"><div class="bar-fill" style="width: 50%; background: #f59e0b;">105W</div></div>
+        <div class="bar-bg"><div class="bar-fill" style="width: 85%; background: #ef4444;">≥250W (MTP)</div></div>
+        <p style="font-size:0.8rem; margin-top:8px;">💡 A mayor TDP, mayor inversión en disipador y fuente de alimentación.</p>
+      </div>
+
+      <h3>1.3. IPC y Frecuencias de Reloj</h3>
+      <p>El <strong>IPC (Instrucciones por Ciclo)</strong> mide cuántas operaciones puede resolver un núcleo en un solo pulso de reloj (Hz). Un alto IPC es el Santo Grial de los procesadores: permite ganar rendimiento sin necesidad de aumentar la frecuencia, ahorrando energía y reduciendo el calor.</p>
+      <p>Las <strong>Frecuencias (MHz/GHz)</strong> se dividen en: <strong>Base</strong> (mínima garantizada) y <strong>Boost / Turbo</strong> (máxima puntual). Existe un límite físico conocido como el <strong>"Frequency Wall"</strong> alrededor de los 5 a 6 GHz. Superar este límite dispara el consumo eléctrico y la temperatura de manera exponencial.</p>
+
+      <h3>1.4. Núcleos, Hilos y Arquitectura Híbrida</h3>
+      <p>Un <strong>Núcleo (Core) Físico</strong> es una unidad de procesamiento independiente. Un <strong>Hilo (Thread)</strong> es un flujo de instrucciones virtual. Tecnologías como Hyper-Threading (Intel) o SMT (AMD) permiten manejar dos hilos simultáneos. Para gaming, el rendimiento "Single-Thread" sigue siendo crítico.</p>
+
+      <h3>1.5. Socket y Proceso de Fabricación</h3>
+      <p>El <strong>Socket</strong> define la vida útil de la plataforma (ej. AM4 duró más de 5 años, mientras que Intel suele cambiar de socket cada dos generaciones). El <strong>Proceso de Fabricación (Nanómetros - nm)</strong> indica el tamaño de los transistores. AMD logró sortear costos dividiendo el CPU en pequeños módulos llamados <strong>Chiplets</strong> en lugar de un diseño monolítico.</p>
+
+      <h3>1.6. Memoria Caché y 3D V-Cache</h3>
+      <p>La memoria caché L1/L2 es ultrarrápida por núcleo, la L3 es compartida. AMD introdujo el <strong>3D V-Cache</strong>, apilando verticalmente memoria L3 extra. Un Ryzen 7 5800X3D (con 96MB de L3) puede superar en juegos a procesadores mucho más nuevos y caros.</p>
+
+      <h3>1.7. Características adicionales (iGPU, OC, ECC, AVX-512)</h3>
+      <ul>
+        <li><strong>iGPU (Gráficos Integrados):</strong> Útiles para oficinas o diagnóstico. AMD serie "G" indica que tiene graficas integradas, Intel indica ausencia de graficas integradas con "F".</li>
+        <li><strong>Overclocking (OC):</strong> Reemplazado por <strong>PBO</strong> (Precision Boost Overdrive) overclock automático.</li>
+        <li><strong>XMP / EXPO:</strong> Perfiles de overclocking para memoria RAM, vitales para evitar cuellos de botella.</li>
+        <li><strong>ECC:</strong> Es una tecnología que permite detectar y corregir automáticamente errores en
+           los datos que se procesan. No todos los CPU tienen soporte para esta tecnología. Util para servidores/workstations</li>
+        <li><strong>AVX-512:</strong> Instrucciones avanzadas para cálculo avanzado científico, IA, renderizado 3D.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TABLA COMPARATIVA -->
+  <section id="sec-tabla">
+    <h2 class="section-title">📊 2. Tabla Comparativa</h2>
+    <div class="card">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Modelo CPU</th><th>Núcleos / Hilos</th><th>Frec. Boost</th><th>TDP Nominal</th><th>Socket</th><th>Perfil / Segmento Recomendado</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>AMD Athlon 3000G</td><td>2 / 4</td><td>3.5 GHz</td><td>35 W</td><td>AM4</td><td>Ofimática básica, bajo presupuesto.</td></tr>
+            <tr><td>AMD Ryzen 5 5600</td><td>6 / 12</td><td>4.4 GHz</td><td>65 W</td><td>AM4</td><td>Gaming 1080p, excelente costo/beneficio.</td></tr>
+            <tr><td>AMD Ryzen 7 7700X</td><td>8 / 16</td><td>5.4 GHz</td><td>105 W</td><td>AM5</td><td>Gaming de gama alta, streaming, productivo.</td></tr>
+            <tr><td>Intel Core i9-13900K</td><td>24 / 32</td><td>5.8 GHz</td><td>125 W (253W MTP)</td><td>LGA 1700</td><td>Entusiasta, renderizado pesado. Requiere líquida.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ERRORES FRECUENTES (callout warning) -->
+  <section id="sec-errores">
+    <h2 class="section-title">⚠️ Mitos y Errores Frecuentes</h2>
+    <div class="callout warning">
+      <div class="callout-title">🚨 Ideas equivocadas comunes en hardware</div>
+      <ul>
+        <li><strong>"Más GHz siempre es mejor":</strong> Falso. Un CPU viejo a 5 GHz rendirá mucho menos que uno moderno a 4 GHz debido a la diferencia abismal de IPC.</li>
+        <li><strong>"El TDP es el consumo de la fuente":</strong> Falso. Es una medida térmica. Una fuente de poder debe calcularse sumando el MTP del CPU, el pico de consumo de la GPU y un margen de seguridad.</li>
+        <li><strong>"A más núcleos, más FPS en los juegos":</strong> Falso. La mayoría de los juegos modernos utilizan eficientemente entre 4 y 6 núcleos. Para gaming, el IPC, la Caché L3 y la frecuencia son mucho más importantes.</li>
+        <li><strong>"Cualquier CPU encaja en mi motherboard si es de la misma marca":</strong> Falso. Depende estrictamente del Socket y de la actualización del BIOS (Chipset).</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="callout tip">
+      <div class="callout-title">💡 TIP clave para ensamblaje</div>
+      <p>Activar perfiles EXPO o XMP en la BIOS es fundamental para liberar el rendimiento real de memorias DDR5/DDR4. Muchos usuarios pierden hasta un 15% de FPS por omitir este paso.</p>
+    </div>
+
+  <!-- ACTIVIDADES PRÁCTICAS -->
+  <section id="sec-actividades">
+    <h2 class="section-title">🛠️ 3. Actividades Prácticas</h2>
+    
+    <div class="card">
+      <h3>📌 ACTIVIDAD 1: Análisis de Ecosistemas y "Cuellos de Botella"</h3>
+      <p><strong>Propósito:</strong> Que el estudiante comprenda que el costo de un procesador no puede evaluarse de manera aislada, sino en conjunto con su socket, motherboard y tipo de memoria RAM asociada.</p>
+      <p><strong>Consignas:</strong></p>
+      <ol>
+        <!-- <li>Ingresen a portales de hardware (locales de Argentina o bases de datos como PCPartPicker).</li> -->
+        <li>Tomen los procesadores: Intel Core i5-12400F y AMD Ryzen 5 7600X.</li>
+        <li>Para cada uno, investiguen y anoten: Socket requerido, tipo de memoria soportada (DDR4 o DDR5), y busquen un modelo de motherboard de gama media compatible (Chipset B660/B760 para Intel o B650 para AMD).</li>
+        <li>Estimen de manera el costo de dicho armado (CPU + Motherboard + RAM) resulta más económico para un armado actual de gama media.</li>
+      </ol>
+      <!-- <p><strong>Producto esperado:</strong> Un cuadro sinóptico o tabla por alumno/grupo detallando las combinaciones obligatorias y una conclusión escrita sobre qué plataforma ofrece el ecosistema más accesible en este momento.</p> -->
+      <p><strong>Criterio:</strong> Precisión en la compatibilidad de sockets/chipsets/memorias y justificación lógica en la conclusión económica.</p>
+    </div>
+
+    <!-- <div class="card">
+      <h3>⚙️ ACTIVIDAD 2: Laboratorio Teórico de Tecnologías Específicas (3D V-Cache y PBO)</h3>
+      <p><strong>Propósito:</strong> Analizar cómo tecnologías avanzadas (arquitectura de memoria y gestión de energía) alteran el rendimiento real sin necesidad de recurrir a métricas clásicas como "más GHz".</p>
+      <p><strong>Consignas:</strong></p>
+      <ol>
+        <li>Lean reseñas técnicas especializadas o visualicen comparativas en video sobre el procesador <em>Ryzen 7 5800X3D</em> versus el <em>Ryzen 7 5800X</em> (modelo normal).</li>
+        <li>Documenten: ¿En qué tipos de tareas la tecnología 3D V-Cache genera un impacto masivo (ej. +20% de rendimiento) y en cuáles no genera ninguna diferencia?</li>
+        <li>Si estuvieran configurando una PC para un cliente cuyo objetivo exclusivo es jugar <em>Simuladores de vuelo pesados</em> o juegos competitivos (CS2/Valorant), ¿justificarían el costo extra del modelo "X3D"? Argumenten.</li>
+        <li>Expliquen por escrito por qué en CPUs de gama alta modernos se recomienda usar PBO (AMD) o perfiles automáticos en vez de hacer Overclocking manual agresivo en todos los núcleos.</li>
+      </ol>
+      <p><strong>Producto esperado:</strong> Un informe breve (máximo una carilla) respondiendo a las preguntas planteadas con lenguaje técnico adecuado.</p>
+      <p><strong>Criterio de evaluación:</strong> Comprensión correcta del funcionamiento de la caché L3 masiva, identificación del impacto real en gaming y claridad al definir los riesgos del overclocking.</p>
+    </div> -->
+
+    
+  </section>
+
+  <!-- PREGUNTAS DE CONSOLIDACIÓN -->
+  <section id="sec-preguntas">
+    <h2 class="section-title">❓ 4. Preguntas</h2>
+    <div class="q-list">
+      <div class="q-item"><div class="q-number">1</div><div class="q-text">¿Qué diferencia conceptual existe entre el TDP nominal indicado en la caja y el consumo eléctrico máximo real (o MTP) en procesadores modernos?</div></div>
+      <div class="q-item"><div class="q-number">2</div><div class="q-text">¿Por qué el IPC (Instrucciones Por Ciclo) es tan importante como la frecuencia de reloj para determinar el rendimiento final de un CPU?</div></div>
+     <!-- <div class="q-item"><div class="q-number">3</div><div class="q-text">Investigar cual es la diferencia entre modo turbo y overclock</div></div> -->
+     
+      <div class="q-item"><div class="q-number">3</div><div class="q-text">Si un cliente prioriza juegos competitivos a 1080p, ¿qué especificación del CPU impactará más: la cantidad de núcleos totales o la memoria Caché L3 / 3D V-Cache?</div></div>
+      <!-- <div class="q-item"><div class="q-number">4</div><div class="q-text">¿Qué ventaja fundamental ofrece la arquitectura de "chiplets" implementada por AMD frente a los diseños monolíticos tradicionales?</div></div> -->
+      <!-- <div class="q-item"><div class="q-number">5</div><div class="q-text">Explica brevemente la diferencia física y lógica entre un núcleo de procesamiento real y un hilo virtual (gracias a SMT/Hyper-Threading).</div></div> -->
+      <div class="q-item"><div class="q-number">4</div><div class="q-text">¿Por qué es un error técnico asumir que un procesador antiguo que alcanza 5.0 GHz siempre será más rápido que uno moderno a 4.5 GHz?</div></div>
+      <div class="q-item"><div class="q-number">5</div><div class="q-text">En el contexto de ensamblado, ¿qué sucede física y lógicamente si se intenta instalar un procesador de socket AM5 en un motherboard con socket AM4?</div></div>
+      <div class="q-item"><div class="q-number">6</div><div class="q-text">¿Para qué perfil de usuario o en qué escenarios recomendarías un procesador con iGPU (gráficos integrados) en lugar de uno sin ella?</div></div>
+      <div class="q-item"><div class="q-number">7</div><div class="q-text">¿Qué riesgos asume el usuario al realizar Overclocking manual y por qué las alternativas dinámicas como PBO son hoy mucho más recomendadas?</div></div>
+      <div class="q-item"><div class="q-number">8</div><div class="q-text">Define qué son los perfiles XMP o EXPO de la memoria RAM y por qué son cruciales al ensamblar una PC con un procesador de alto rendimiento.</div></div>
+      <div class="q-item"><div class="q-number">9</div><div class="q-text">¿En qué escenarios específicos o entornos profesionales resulta indispensable contar con soporte para memoria ECC o instrucciones AVX-512?</div></div>
+      <!-- <div class="q-item"><div class="q-number">12</div><div class="q-text">Teniendo en cuenta el concepto del "Frequency Wall", ¿por qué los fabricantes de semiconductores priorizan hoy reducir los nanómetros en lugar de subir indefinidamente la velocidad en GHz?</div></div> -->
+    </div>
+  </section>
+
+  <!-- Botones de navegación inferiores -->
+  <div >
+       <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion4.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 4
+      </a>
+      <a
+        href="hardware2-sesion6.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 6
+      </a>
+    </div>
+  </div>
+
+
+</div>
+
+<script>
+  // Smooth scroll para todos los enlaces internos
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === "#" || href === "") return;
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es-ES" data-theme="light" style=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 6: Armado de PC CPU</title>
+    <style>
+      :root {
+        --bg-main: #0f1729;
+        --bg-card: #1a2744;
+        --text-main: #f8fafc;
+        --text-muted: #cbd5e1;
+        --blue: #3b82f6;
+        --cyan: #06b6d4;
+        --green: #10b981;
+        --yellow: #f59e0b;
+        --red: #ef4444;
+        --border-deco: #2dd4bf;
+        --table-header: #0f172a;
+        --table-border: #334155;
+      }
+
+      body {
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 32px 20px;
+        line-height: 1.6;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        background: linear-gradient(90deg, var(--blue), var(--cyan));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      h2 {
+        color: var(--cyan);
+        text-align: center;
+        margin-top: 0;
+        font-weight: 400;
+      }
+
+      h3 {
+        color: var(--text-muted);
+        text-align: center;
+        font-weight: 300;
+        margin-bottom: 2rem;
+      }
+
+      h2.section-title {
+        background: linear-gradient(to right, #1e3a5f, var(--bg-card));
+        border-left: 5px solid var(--cyan);
+        border-radius: 0 12px 12px 0;
+        padding: 12px 20px;
+        color: var(--text-main);
+        text-align: left;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+
+      .badge {
+        display: inline-block;
+        background-color: var(--blue);
+        color: #fff;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: bold;
+        margin: 0 auto;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .center {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .toc {
+        background-color: var(--bg-card);
+        border-radius: 12px;
+        padding: 20px 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
+      .toc h4 {
+        color: var(--cyan);
+        margin-top: 0;
+        border-bottom: 1px solid var(--table-border);
+        padding-bottom: 10px;
+      }
+      .toc-columns {
+        column-count: 2;
+        column-gap: 40px;
+      }
+      .toc a {
+        color: var(--text-main);
+        text-decoration: none;
+        display: block;
+        margin-bottom: 8px;
+        transition: color 0.2s;
+      }
+      .toc a:hover {
+        color: var(--cyan);
+      }
+
+      .card {
+        background-color: var(--bg-card);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 24px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      .grid-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 24px;
+      }
+
+      .callout {
+        border-left: 5px solid var(--cyan);
+        background-color: rgba(6, 182, 212, 0.1);
+        padding: 16px 20px;
+        border-radius: 0 8px 8px 0;
+        margin: 24px 0;
+      }
+      .callout.warning {
+        border-left-color: var(--red);
+        background-color: rgba(239, 68, 68, 0.1);
+      }
+      .callout.tip {
+        border-left-color: var(--yellow);
+        background-color: rgba(245, 158, 11, 0.1);
+      }
+      .callout-title {
+        font-weight: bold;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .callout.warning .callout-title {
+        color: var(--red);
+      }
+      .callout.tip .callout-title {
+        color: var(--yellow);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: var(--bg-card);
+        border-radius: 8px;
+        margin-bottom: 24px;
+        word-break: break-word;
+      }
+      th,
+      td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid var(--table-border);
+      }
+      th {
+        background-color: var(--table-header);
+        color: var(--cyan);
+        font-weight: 600;
+      }
+      tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.02);
+      }
+
+      .q-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .q-item {
+        background-color: var(--bg-card);
+        border-radius: 12px;
+        padding: 16px;
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .q-number {
+        background-color: var(--blue);
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        flex-shrink: 0;
+      }
+
+      .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin: 40px 0;
+        border-top: 1px solid var(--table-border);
+        padding-top: 20px;
+      }
+      .nav-btn {
+        display: inline-block;
+        background-color: var(--bg-card);
+        color: var(--cyan);
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: 1px solid var(--table-border);
+        font-weight: 600;
+        transition: all 0.2s;
+      }
+      .nav-btn:hover {
+        background-color: var(--table-border);
+        color: white;
+      }
+
+      .methodology-list {
+        counter-reset: my-counter;
+        list-style: none;
+        padding: 0;
+      }
+      .methodology-list li {
+        counter-increment: my-counter;
+        background: var(--bg-card);
+        margin-bottom: 10px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        border-left: 4px solid var(--blue);
+      }
+      .methodology-list li::before {
+        content: counter(my-counter);
+        background: var(--blue);
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        font-weight: bold;
+      }
+
+      footer {
+        text-align: center;
+        color: var(--text-muted);
+        border-top: 1px solid var(--table-border);
+        padding-top: 20px;
+        margin-top: 40px;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body style="">
+    <header id="portada">
+      <!-- <div class="center">
+        <span class="badge">Módulo Avanzado</span>
+      </div> -->
+      <h1>Sesión 6: Armado de PC CPU</h1>
+
+    </header>
+
+    <div class="toc">
+      <h4>Tabla de Contenidos</h4>
+      <div class="toc-columns">
+        <a href="#sesion-6">▶ Sesión 6: Tipos de CPU según caso de uso</a>
+        <a href="#s6-cronograma">↳ Cronograma y Ficha</a>
+        <a href="#s6-metodologia">↳ Metodología de Selección</a>
+        <a href="#s6-casos">↳ Casos de Uso</a>
+        <a href="#s6-taller">↳ Taller de Selección</a>
+        <a href="#s6-preguntas">↳ Preguntas y Consignas</a>
+      </div>
+    </div>
+
+ 
+
+
+    <!-- ================= SESIÓN 6 ================= -->
+    <section id="sesion-6">
+      <h2 class="section-title">Sesión 6 — Tipos de CPU según caso de uso: selección y recomendación técnica</h2>
+
+      <div class="card" id="s6-cronograma">
+        <h4 style="color: var(--cyan); margin-top: 0">Ficha de la Sesión</h4>
+        <ul style="margin-bottom: 0">
+          <li><strong>Duración Total:</strong> 160 minutos.</li>
+          <li><strong>Modalidad:</strong> Teórico-práctica (Taller de simulación de ensambles).</li>
+          <li>
+            <strong>Enfoque:</strong> Perfilado de usuarios, optimización de presupuestos y prevención de cuellos de
+            botella.
+          </li>
+          <li>
+            <strong>Herramientas sugeridas:</strong> PCPartPicker, buscadores de precios locales, comparadores técnicos.
+          </li>
+        </ul>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Bloque</th>
+            <th>Actividad</th>
+            <th>Duración</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Metodología de selección y mapeo de plataformas</td>
+            <td>30 min</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Casos de Uso: Desde ofimática hasta IA y Servidores</td>
+            <td>50 min</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Taller de validación y presupuesto local (Práctica)</td>
+            <td>60 min</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Revisión de configuraciones y resolución de consultas</td>
+            <td>20 min</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="text-align: right; color: var(--cyan); font-weight: bold">TOTAL:</td>
+            <td style="color: var(--cyan); font-weight: bold">160 min</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div id="s6-metodologia">
+        <h3>Metodología de Selección</h3>
+        <p>
+          Elegir un procesador a ciegas basándose en el precio lleva al desbalance del equipo. Siga esta metodología
+          técnica:
+        </p>
+        <ul class="methodology-list">
+          <li>
+            <strong>Identificar uso principal:</strong> No existe la "PC para todo" óptima. ¿Es 80% gaming y 20% Excel?
+            ¿O es 100% renders en Premiere?
+          </li>
+          <li>
+            <strong>Definir presupuesto global:</strong> El CPU no debería superar el 20-25% del presupuesto total en
+            una PC Gamer, pero puede ser el 40% en una Workstation.
+          </li>
+          <li>
+            <strong>Analizar métricas críticas:</strong> Si es gaming, mirar L3 y Boost. Si es servidor, mirar TDP y
+            ECC.
+          </li>
+          <li>
+            <strong>Descartar hardware irrelevante:</strong> No pagar extra por AVX-512 o iGPUs potentes si el cliente
+            no va a usarlos.
+          </li>
+          <li>
+            <strong>Validar plataforma (Costo Total):</strong> Un CPU barato en una placa madre carísima con DDR5
+            obligatoria puede salir más caro que un CPU superior en AM4.
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-title">🎯 Tip: Prevención de Cuellos de Botella (Bottlenecks)</div>
+        <p>
+          Un error común es combinar un i9-14900K con una RTX 3050, o un i3 con una RTX 4080.
+          <strong>Regla práctica:</strong> A resolución 1080p, el procesador trabaja más duro enviando frames a la GPU;
+          aquí el CPU importa mucho. En resoluciones 4K, la GPU se asfixia antes de que el CPU pueda sudar, por lo que
+          un procesador de gama media (Ryzen 5) es más que suficiente para empujar gráficos en 4K.
+        </p>
+      </div>
+
+      <div id="s6-casos">
+        <h3>Perfiles y Casos de Uso (Tabla Maestra)</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Perfil</th>
+              <th>Prioridad Técnica</th>
+              <th>Irrelevante</th>
+              <th>Rango Núcleos / TDP</th>
+              <th>Ejemplos Recomendados</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Ofimática</strong></td>
+              <td>Bajo costo, iGPU, bajo TDP</td>
+              <td>Caché masiva, Overclock</td>
+              <td>2 a 4 / 35-65W</td>
+              <td>Athlon 3000G, i3-12100, Ryzen 3 5300G</td>
+            </tr>
+            <tr>
+              <td><strong>Gaming (1080/1440p)</strong></td>
+              <td>Alto IPC, Caché L3, Freq Boost</td>
+              <td>+8 núcleos, ECC</td>
+              <td>6 a 8 / 65-105W</td>
+              <td>Ryzen 5 5600, i5-12400F, R7 7800X3D</td>
+            </tr>
+            <tr>
+              <td><strong>Edición Video 4K</strong></td>
+              <td>Multi-thread, ancho banda PCIe</td>
+              <td>iGPU potente</td>
+              <td>8 a 16 / 105-170W</td>
+              <td>Ryzen 7 5700X, i9-13900K, R9 5950X</td>
+            </tr>
+            <tr>
+              <td><strong>Workstation / CAD</strong></td>
+              <td>Núcleos masivos, Canales RAM, ECC</td>
+              <td>Consumo, iGPU</td>
+              <td>16 a 64 / 250W+</td>
+              <td>Threadripper PRO, Intel Xeon W</td>
+            </tr>
+            <tr>
+              <td><strong>NAS / Servidor Hogar</strong></td>
+              <td>Estabilidad 24/7, bajo TDP, iGPU (Plex)</td>
+              <td>Overclock, RGB</td>
+              <td>4 a 6 / 35-45W</td>
+              <td>Ryzen 5 5600GE, Xeon E-2336</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="grid-cards">
+          <div class="card" style="margin-bottom: 0">
+            <h4 style="color: var(--cyan); margin-top: 0">Detalle: Ofimática Básica</h4>
+            <p>
+              La clave es la longevidad y el bajo ruido. Un Celeron o i3 moderno de 12va gen sobra para sistemas POS
+              (puntos de venta) o administración. <em>Presupuesto PC completa ARS: $180k - $280k.</em> No requieren
+              disipadores de terceros.
+            </p>
+          </div>
+          <div class="card" style="margin-bottom: 0">
+            <h4 style="color: var(--blue); margin-top: 0">Detalle: Edición y Producción</h4>
+            <p>
+              Programas como Premiere Pro o DaVinci Resolve tragan hilos de proceso. Además del CPU (mínimo 8 núcleos
+              reales), es crítico acompañarlo con SSDs NVMe Gen4 y 32GB+ de RAM; de nada sirve un Ryzen 9 si los datos
+              le llegan lento desde el disco.
+            </p>
+          </div>
+          <div class="card" style="margin-bottom: 0; grid-column: 1 / -1">
+            <h4 style="color: var(--yellow); margin-top: 0">Detalle: Workstation &amp; Servidor</h4>
+            <p>
+              En ámbitos corporativos se paga por estabilidad certificada (Certificaciones ISV para SolidWorks/AutoCAD)
+              y por memoria ECC (que previene cuelgues por errores de bits en la RAM). Un NAS casero para Plex prioriza
+              el hardware de transcodificación (Intel QuickSync en la iGPU) por sobre el poder bruto, buscando gastar
+              apenas 35W de electricidad al estar prendido 24/7.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="s6-taller">
+        <h3>Taller de Selección y Validación</h3>
+
+        <div class="card">
+          <h4>Actividad 1: Simulador Multiperfil en PCPartPicker</h4>
+          <p><strong>Consigna:</strong> Crear configuraciones completas para:</p>
+          <ul>
+            <li>Ofimática ($200k ARS)</li>
+            <li>Gaming 4K ($700k ARS)</li>
+            <li>Workstation CAD ($1.2M ARS)</li>
+          </ul>
+          <p>
+            <strong>Entregable:</strong> Enlaces a las builds, capturas, tablas de compatibilidad y justificación
+            técnica del balance CPU/GPU/Placa.
+          </p>
+        </div>
+
+        <div class="card">
+          <h4>Actividad 2: Auditoría de Cuellos de Botella</h4>
+          <p>
+            <strong>Consigna:</strong> Se presentan 3 presupuestos armados "por clientes" con graves desbalances (Ej:
+            Ryzen 9 con GTX 1650 y fuente genérica). Identificar el error, explicar por qué fallará y rearmar el
+            presupuesto manteniendo el mismo costo total.
+          </p>
+        </div>
+
+        <div class="card">
+          <h4>Actividad 3: Proyecto Empresa de Arquitectura</h4>
+          <p>
+            <strong>Escenario:</strong> Estudio de arquitectura con 8 empleados (4 arquitectos renderistas, 2
+            secretarias, 2 gestores). Presupuesto global $3M ARS.<br>
+            <strong>Consigna:</strong> Diseñar la compra de hardware clasificando a los empleados en 2 o 3 perfiles
+            técnicos. Asignar el procesador correcto a cada uno maximizando el presupuesto de la empresa.
+          </p>
+        </div>
+      </div>
+
+      <div id="s6-preguntas">
+        <h3>Preguntas Guía y Consignas (Entregable en Word)</h3>
+        <div class="q-list">
+          <div class="q-item">
+            <div class="q-number">1</div>
+            <div>
+              Para un usuario de ofimática, justifique (mín. 100 palabras) por qué el alto IPC, el Overclock y las
+              instrucciones AVX-512 son un desperdicio de dinero.
+            </div>
+          </div>
+          <div class="q-item">
+            <div class="q-number">2</div>
+            <div>
+              Calcule el costo eléctrico adicional anual de tener un Servidor/NAS casero con un CPU de 125W frente a uno
+              de 35W (asuma 24hs encendido y busque el valor aprox del kWh en su factura).
+            </div>
+          </div>
+          <div class="q-item">
+            <div class="q-number">3</div>
+            <div>
+              Defina "Bottleneck" (cuello de botella). ¿Por qué un CPU impacta mucho más en los FPS a 1080p que en
+              resolución 4K?
+            </div>
+          </div>
+          <div class="q-item">
+            <div class="q-number">4</div>
+            <div>
+              ¿Por qué en la edición de video profesional (DaVinci/Premiere) los núcleos físicos y el ancho de banda
+              PCIe son más relevantes que tener frecuencias de 6.0 GHz?
+            </div>
+          </div>
+          <div class="q-item">
+            <div class="q-number">5</div>
+            <div>
+              Investigue qué es una "Workstation". Cite 3 diferencias técnicas estrictas de hardware frente a una PC
+              Gamer de gama ultra alta.
+            </div>
+          </div>
+          <div class="q-item">
+            <div class="q-number">6</div>
+            <div>
+              ¿Qué es el servidor Plex y qué tecnología presente en las iGPUs (especialmente de Intel) facilita la
+              transcodificación de video en tiempo real?
+            </div>
+          </div>
+          <div class="q-item">
+            <div class="q-number">7</div>
+            <div>
+              Diferencie un procesador de consumo tradicional de su versión "PRO" (ej. Ryzen PRO) y de un "Server-Grade"
+              (EPYC/Xeon). ¿Qué aportan en seguridad a nivel de hardware?
+            </div>
+          </div>
+          <div class="q-item">
+            <div class="q-number">8</div>
+            <div>
+              ¿Qué significa que una plataforma de trabajo tenga certificación ISV (Independent Software Vendor) y por
+              qué los ingenieros civiles dependen de ello?
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navegación inferior -->
+    <div class="nav-buttons">
+      <a href="#sesion-5" class="nav-btn">← Volver a Sesión 5</a>
+      <a href="#portada" class="nav-btn">Ir al Inicio ↑</a>
+    </div>
+
+    <footer>
+      <p>
+        Material desarrollado para la cursada de Hardware II. Los precios y especificaciones son teóricos y destinados
+        al análisis técnico académico.
+      </p>
+    </footer>
+  
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>
