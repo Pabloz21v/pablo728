@@ -1,83 +1,234 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clase 11: Entrada y Salida (Input/Print)</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>
+      Clase 11: Entrada y Salida (input y print) | Fundamentos de Programación
+    </title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #f6f9fc;
+        font-family:
+          system-ui, "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+        line-height: 1.5;
+        color: #1a2a3a;
+        padding: 1rem;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        padding: 1.5rem;
+      }
+
+      @media (min-width: 768px) {
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-            background-color: #f9f9f9;
+          padding: 2rem;
         }
         .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          padding: 2rem 2.5rem;
         }
-        header {
-            /* background-color: #2c3e50; */
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 8px 8px 0 0;
+      }
+
+      h1 {
+        font-size: 1.9rem;
+        background: linear-gradient(135deg, #1e3c72, #2b4c7c);
+        background-clip: text;
+        -webkit-background-clip: text;
+        /* color: transparent; */
+        margin-bottom: 0.5rem;
+        border-left: 5px solid #2b4c7c;
+        padding-left: 1rem;
+      }
+
+      .subtitulo {
+        color: #4a627a;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 0.75rem;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+        margin: 1.5rem 0 1rem 0;
+        color: #1e3c72;
+        border-bottom: 2px solid #cbd5e1;
+        padding-bottom: 0.3rem;
+      }
+
+      h3 {
+        font-size: 1.3rem;
+        margin: 1.2rem 0 0.8rem 0;
+        color: #2c3e66;
+      }
+
+      h4 {
+        font-size: 1.1rem;
+        margin: 0.8rem 0 0.4rem;
+        color: #334155;
+      }
+
+      .card {
+        background: #f8fafc;
+        border-radius: 1.2rem;
+        padding: 1rem 1.2rem;
+        margin: 1rem 0;
+        border-left: 4px solid #3b82f6;
+      }
+
+      .warning-card {
+        background: #fff0f0;
+        border-left: 5px solid #dc2626;
+      }
+
+      .tip-card {
+        background: #fef9e3;
+        border-left: 5px solid #f59e0b;
+      }
+
+      .badge {
+        display: inline-block;
+        background: #e6f0ff;
+        color: #1e40af;
+        font-weight: 600;
+        font-size: 0.75rem;
+        padding: 0.2rem 0.7rem;
+        border-radius: 20px;
+        margin-right: 0.5rem;
+      }
+
+      pre {
+        background: #0f172a;
+        color: #e2e8f0;
+        padding: 1rem;
+        border-radius: 1rem;
+        overflow-x: auto;
+        font-size: 0.85rem;
+        font-family: "JetBrains Mono", "Fira Code", monospace;
+        margin: 1rem 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+      code {
+        font-family: "JetBrains Mono", "Fira Code", monospace;
+        background: #eef2ff;
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.5rem;
+        font-size: 0.85rem;
+        color: #b91c1c;
+      }
+
+      pre code {
+        background: transparent;
+        padding: 0;
+        color: #e2e8f0;
+        font-size: 0.85rem;
+      }
+
+      ul,
+      ol {
+        margin: 0.75rem 0 0.75rem 1.5rem;
+      }
+
+      li {
+        margin: 0.4rem 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.2rem 0;
+        font-size: 0.9rem;
+        background: #ffffff;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
+      th,
+      td {
+        border: 1px solid #e2e8f0;
+        padding: 0.7rem;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: #eef2ff;
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      .comparativa-table td pre {
+        margin: 0.5rem 0;
+      }
+
+      footer {
+        margin-top: 2rem;
+        text-align: center;
+        font-size: 0.8rem;
+        color: #6c757d;
+        border-top: 1px solid #e2e8f0;
+        padding-top: 1.5rem;
+      }
+
+      .btn-copy {
+        display: inline-block;
+        background: #eef2ff;
+        border-radius: 12px;
+        padding: 0.2rem 0.7rem;
+        font-size: 0.7rem;
+        color: #1e3c72;
+        cursor: pointer;
+        float: right;
+        transition: 0.2s;
+      }
+
+      .btn-copy:hover {
+        background: #cbdffc;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 1rem;
         }
-        h1, h2 {
-            color: #2c3e50;
+        h1 {
+          font-size: 1.6rem;
         }
         h2 {
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
+          font-size: 1.4rem;
         }
-        .theory {
-            background-color: #f0f8ff;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
+        pre {
+          font-size: 0.75rem;
+          padding: 0.8rem;
         }
-        .example {
-            background-color: #fef9e7;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
+        th,
+        td {
+          padding: 0.5rem;
         }
-        .activity {
-            background-color: #e8f8f5;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            border-left: 4px solid #27ae60;
-        }
-        code {
-            background-color: #f4f4f4;
-            padding: 5px;
-            border-radius: 3px;
-            font-family: monospace;
-            display: block;
-        }
-        ol, ul {
-            margin-left: 20px;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-          <div style="margin-bottom: 24px">
+      <!-- Navegación superior -->
+      <div style="margin-bottom: 24px">
         <a
           href="../materias/desarrollo-1.html"
           style="
@@ -123,45 +274,413 @@
           Ir a Sesión 12
         </a>
       </div>
-        <header>
-            <h1>Clase 11: Entrada y Salida (Input/Print)</h1>
-        </header>
 
-        <div class="theory">
-            <h2>Marco Teórico</h2>
-            <p>Para que el programa sea interactivo, necesitamos pedir datos al usuario.</p>
-            <p>La función <code>input()</code> se utiliza para recibir datos del usuario. Siempre devuelve un texto (string), aunque el usuario escriba un número.</p>
-            <p><strong>Ejemplo:</strong></p>
-            <code>
-variable = input("Mensaje para el usuario: ")
-            </code>
-        </div>
+      <h1>⌨️ Clase 11: Entrada y Salida (input y print)</h1>
+      <div class="subtitulo">
+        Haz que tus programas conversen con el usuario 
+      </div>
 
-        <div class="example">
-            <h2>Ejemplo</h2>
-            <code>
+      <!-- Introducción -->
+      <div class="card">
+        <p>
+          <span class="badge">🎯 Repaso breve</span> En la sesión anterior
+          (Clase 10) aprendimos qué son las variables: cajas donde guardamos
+          datos. Pero hasta ahora, los datos los escribíamos directamente en el
+          código.
+          <strong
+            >¿Qué pasaría si queremos que sea la persona que usa el programa
+            quien introduzca esos datos?</strong
+          >
+          Para que un programa sea verdaderamente interactivo y dinámico,
+          necesitamos <strong>pedir datos al usuario</strong>. Hoy aprenderemos
+          a abrir esa vía de comunicación.
+        </p>
+      </div>
+
+      <!-- Objetivos -->
+      <h2>🎯 Objetivos de la clase</h2>
+      <ul>
+        <li>
+          Comprender el concepto de Entrada (Input) y Salida (Output) en
+          programación.
+        </li>
+        <li>
+          Aprender a utilizar la función <code>input()</code> para capturar
+          información del usuario.
+        </li>
+        <li>
+          Combinar <code>input()</code> con <code>print()</code> para crear
+          programas interactivos.
+        </li>
+        <li>
+          Identificar cómo el ordenador interpreta los datos introducidos por
+          teclado.
+        </li>
+        <li>
+          Aplicar buenas prácticas para evitar errores comunes de sintaxis y
+          lógica.
+        </li>
+      </ul>
+
+      <!-- Marco Teórico -->
+      <h2>📚 Marco Teórico: Entrada y Salida</h2>
+      <p>
+        En el mundo de la informática, llamamos
+        <strong>Entrada (Input)</strong> a la información que ingresa al
+        ordenador (por ejemplo, cuando tecleamos nuestro nombre). Llamamos
+        <strong>Salida (Output)</strong> a la información que el ordenador nos
+        devuelve o muestra en pantalla (por ejemplo, un mensaje de bienvenida).
+      </p>
+
+      <h3>🔹 ¿Qué hace <code>input()</code>?</h3>
+      <p>
+        La función <code>input()</code> detiene la ejecución del programa y
+        queda esperando a que el usuario escriba algo en el teclado y pulse la
+        tecla <strong>Enter</strong>. Generalmente, dentro de los paréntesis
+        escribimos un mensaje (texto entre comillas) para indicarle al usuario
+        qué debe escribir.
+      </p>
+
+      <h3>🔹 ¿Qué hace <code>print()</code>?</h3>
+      <p>
+        Como ya vimos, <code>print()</code> se encarga de la
+        <strong>Salida</strong>. Imprime en la consola lo que le indiquemos:
+        texto puro, variables, o combinaciones.
+      </p>
+
+      <h3>🔹 ¿Cómo guardamos lo introducido por el usuario?</h3>
+      <p>
+        Si solo usamos <code>input()</code>, el usuario escribirá algo, pero el
+        programa lo olvidará inmediatamente. Para poder usar esa información más
+        tarde, debemos guardarla en una <strong>variable</strong> usando el
+        signo igual (<code>=</code>).
+      </p>
+
+      <!-- Tabla comparativa -->
+      <h3>Comparativa: Código estático vs. Código interactivo</h3>
+      <table class="comparativa-table">
+        <thead>
+          <tr>
+            <th>📦 Asignación directa (Clase 10)</th>
+            <th>💬 Asignación interactiva (Clase 11)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <pre><code>nombre = "Ana"
+apellido = "Robles"
+edad = "76"
+mascota = "Sultán"</code></pre>
+              <em
+                >El programador decide que el nombre siempre será "Ana",
+                "Robles", etc.</em
+              >
+            </td>
+            <td>
+              <pre><code>nombre = input("¿Cómo te llamas? ")
+apellido = input("¿Cuál es tu apellido? ")
+edad = input("¿Cuál es tu edad? ")
+mascota = input("¿Cómo se llama tu mascota? ")</code></pre>
+              <em
+                >El programa pregunta y se adapta a lo que escriba el
+                usuario.</em
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Ejemplos guiados -->
+      <h2>💡 Ejemplos</h2>
+
+      <div class="card">
+        <h3>📌 Ejemplo 1: Pedir nombre y saludar</h3>
+        <pre><code># Pedimos el nombre al usuario y lo guardamos en la variable 'nombre'
 nombre = input("¿Cómo te llamas? ")
-print("Hola", nombre)
-            </code>
-        </div>
 
-        <div class="activity">
-            <h2>Actividad 11: Programas interactivos</h2>
-            <p>Crea un archivo <code>.py</code> para cada uno de los siguientes ejercicios y ejecuta el código:</p>
-            <ol>
-                <li>Pedir al usuario su nombre y saludarlo.</li>
-                <li>Pedir el nombre de su mascota e imprimirlo.</li>
-                <li>Pedir el nombre y el apellido por separado, y mostrar "Bienvenido [Apellido], [Nombre]".</li>
-                <li>Pedir la ciudad donde vive y mostrar "Vives en [ciudad]".</li>
-                <li>Preguntar "¿Cuál es tu comida favorita?" y repetir la respuesta.</li>
-                <li>Pedir tres palabras al usuario y mostrarlas en orden inverso (primero mostrar la 3ra, etc).</li>
-                <li>Hacer un programa que simule un formulario: pedir Nombre, Edad, Mail y mostrar todo al final.</li>
-                <li>Pedir al usuario que complete la frase "Mi deporte favorito es...".</li>
-                <li>Pedir un color y mostrar "Tu color elegido es [color]".</li>
-                <li>Usar <code>input()</code> sin guardar en variable (solo para pausar el programa "Presione Enter para salir").</li>
-            </ol>
-        </div>
-        <div style="margin-bottom: 24px">
+# Saludamos utilizando la variable
+print("Hola,", nombre)</code></pre>
+        <p>
+          <strong>Interpretación:</strong> El ordenador muestra el mensaje
+          "¿Cómo te llamas? " y pausa el programa. Si el usuario escribe
+          "Carlos" y pulsa Enter, la palabra "Carlos" se guarda en la variable
+          <code>nombre</code>. Luego <code>print()</code> imprime "Hola," y el
+          contenido de la variable. En pantalla veremos:
+          <strong>Hola, Carlos</strong>.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>📌 Ejemplo 2: Pedir ciudad y mostrar mensaje con f-strings</h3>
+        <pre><code>ciudad = input("¿En qué ciudad vivís? ")
+print(f"¡Qué bonita debe ser {ciudad} en esta época del año!")</code></pre>
+        <p>
+          <strong>Interpretación:</strong> Usamos f-strings (cadenas
+          formateadas). Al colocar la letra <code>f</code> antes de las
+          comillas, podemos incrustar la variable <code>ciudad</code> dentro de
+          llaves <code>{}</code>.
+        </p>
+        <p>
+          Linea 1: Primero solicita introducir una ciudad, la ingresamos,
+          precionamos enter.
+        </p>
+        <p>Linea 2: Imprimirá el mensaje con la ciudad que introducimos.</p>
+      </div>
+
+      <div class="card">
+        <h3>📌 Ejemplo 3: Pedir nombre y apellido por separado</h3>
+        <pre><code>nombre = input("Introduce tu nombre: ")
+apellido = input("Introduce tu apellido: ")
+print(f"Bienvenido/a {apellido}, {nombre}, te deseo un muy buen día")</code></pre>
+        <p>
+          <strong>Interpretación:</strong> Podemos usar tantos  <code>input()</code> como necesitemos. 
+          Cada uno debe guardarse en una variable diferente. Al final, en el <code>print()</code> , podemos alterar el orden de las variables sin problema. Si el usuario escribe "María" y luego "García", el programa imprimirá: Bienvenido/a García, María te deseo un muy buen dia.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>📌 Ejemplo 4: Simular un pequeño formulario</h3>
+        <pre><code>print("--- FORMULARIO DE REGISTRO ---")
+usuario_nombre = input("Nombre: ")
+usuario_edad = input("Edad: ")
+usuario_correo = input("Correo electrónico: ")
+
+print("\n--- DATOS GUARDADOS ---")
+print(f"Usuario: {usuario_nombre}")
+print(f"Edad: {usuario_edad} años")
+print(f"Email: {usuario_correo}")</code></pre>
+        <p>
+          <strong>Interpretación:</strong>Este bloque simula un registro real. Nota cómo usamos <code>print("\n...")</code> . 
+          El símbolo <code> \n </code> crea un salto de línea (como pulsar Enter al escribir un documento) para que el resultado en consola quede visualmente más ordenado y separado.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>📌 Ejemplo 5: Pausar el programa</h3>
+        <pre><code>input("Pulsa la tecla Enter para salir...")
+print("Este programa ha terminado su tarea.")</code></pre>
+        <p>
+          <strong>Interpretación:</strong> Acá vemos un uso especial de <code>input() </code> 
+          sin guardarlo en una variable. No nos importa lo que el usuario escriba; 
+          solo queremos aprovechar la capacidad de <code>input()</code>  para pausar el programa 
+          hasta que se pulse Enter. Esto es muy útil al crear programas ejecutables 
+          para que la ventana no se cierre de golpe al terminar.
+        </p>
+      </div>
+
+      <!-- Atención: input siempre devuelve texto -->
+      <div class="warning-card card">
+        <h3>⚠️ Atención: <code>input()</code> SIEMPRE devuelve texto</h3>
+        <p>
+          Este es uno de los conceptos más importantes que deben asimilar. La función <code>input()</code> 
+          está programada para capturar las pulsaciones del teclado como
+           <strong>caracteres de texto (string - <code>str</code> )</strong>, sin importar
+          si el usuario teclea letras o números.
+        </p>
+        <pre><code>edad = input("¿Cuántos años tenés? ")
+print(type(edad))   # &lt;class 'str'&gt;</code></pre>
+        <p>
+          Si el usuario escribe <code>25</code>, visualmente parece un número, pero Python lo guarda como
+          <code>"25"</code> (con comillas internas, es decir, texto). Si probas el código anterior, la consola mostrará 
+          <code><class 'str'> </code>(string).
+            <br>
+          <strong>¿Por qué es importante?</strong> Porque si intentamos hacer operaciones matemáticas con un texto, el programa fallará o hará cosas inesperadas (como sumar
+           <code>"25" + "1"</code> y dar como resultado 
+          <code>"251"</code> en lugar de <code>26</code>). En próximas clases aprenderemos a
+          convertir esos textos a números enteros (<code>int</code>) o decimales
+          (<code>float</code>).
+        </p>
+      </div>
+
+      <!-- Errores frecuentes -->
+      <h2>❌ Errores Frecuentes al usar <code>input()</code></h2>
+      <ul>
+        <li>
+          <strong>Olvidar las comillas en el mensaje:</strong> ❌
+          <code>nombre = input(Escribe tu nombre: )</code> → SyntaxError. ✅
+          <code>nombre = input("Escribe tu nombre: ")</code>
+        </li>
+        <li>
+          <strong>Olvidar dejar un espacio al final del mensaje:</strong> ❌
+          <code>input("Nombre:")</code> → el usuario escribirá pegado. ✅
+          <code>input("Nombre: ")</code>
+        </li>
+        <li>
+          <strong>Poner la variable entre comillas en el print:</strong> ❌
+          <code>print("Hola, 'nombre'")</code> → imprime literal "Hola,
+          'nombre'". ✅ <code>print("Hola,", nombre)</code>
+        </li>
+        <li>
+          <strong
+            >Confundir <code>input()</code> con <code>print()</code>:</strong
+          >
+          ❌ <code>input("El resultado es", variable)</code> → usamos
+          <code>input()</code> solo para pedir. ✅ para mostrar usamos
+          <code>print()</code>.
+        </li>
+        <li>
+          <strong>No asignar el input a ninguna variable:</strong> ❌
+          <code>input("Dime tu color:")</code> → la respuesta se pierde. ✅
+          <code>color = input("Dime tu color: ")</code>
+        </li>
+      </ul>
+
+      <!-- Actividades prácticas -->
+      <h2>🧪 Actividades Prácticas</h2>
+      <p>
+        Abre Visual Studio Code, crea un archivo
+        <code>sesion11_ejercicios.py</code> y practica con los siguientes
+        ejercicios.
+      </p>
+
+      <h3>
+        📘 Ejercicios básicos (usamos <code>input()</code> y
+        <code>print()</code>)
+      </h3>
+      <ol>
+        <li>
+          <strong>El saludo formal:</strong> Pide al usuario su nombre y luego
+          salúdalo imprimiendo "Saludos cordiales, [nombre]".
+        </li>
+        <li>
+          <strong>La mascota:</strong> Pregunta "¿Cuál es el nombre de tu
+          mascota y/o mascotas?" y muestra un mensaje bonito que incluya esos
+          nombres.
+        </li>
+        <li>
+          <strong>Apellidos primero:</strong> Pide nombre y apellido en dos
+          <code>input()</code> distintos y muestra: "Registrado en el sistema:
+          [Apellido], [Nombre]".
+        </li>
+        <li>
+          <strong>Geografía personal:</strong> Pide la ciudad donde vive y
+          muestra: "Vives en la maravilla, genial, grandiosa, hermosa ciudad de
+          [ciudad]".
+        </li>
+        <li>
+          <strong>El eco culinario:</strong> Pregunta "¿Cuál es tu comida
+          favorita?" y responde: "¡Mmm! A mí también me encanta comer [comida]".
+        </li>
+      </ol>
+
+      <h3>⚙️ Ejercicios intermedios</h3>
+      <ol start="6">
+        <li>
+          <strong>El orden inverso:</strong> Pide tres palabras diferentes con
+          tres variables (<code>palabra1</code>, <code>palabra2</code>,
+          <code>palabra3</code>) y luego imprímelas en una sola línea pero en
+          orden inverso (tercera, segunda, primera).
+        </li>
+        <li>
+          <strong>Completar la frase:</strong> Muestra "Por favor, completa la
+          frase: Mi deporte favorito es..." Captura la respuesta y luego imprime
+          la frase completa.
+        </li>
+        <li>
+          <strong>Elección de color:</strong> Pide un color, imprime "Tu color
+          elegido es [color]" y en la siguiente línea imprime el tipo de dato
+          usando <code>type()</code> (observarás que es <code>str</code>).
+        </li>
+        <li>
+          <strong>Pausa obligatoria:</strong> Crea un programa que imprima tres
+          líneas de texto (una historia corta). Al final, usa un
+          <code>input()</code> sin guardarlo que diga "Presione Enter para salir
+          del cuento...".
+        </li>
+        <li>
+          <strong>El entrevistador:</strong> Pide a un compañero su
+          banda/cantante favorito y su canción preferida, luego muestra usando
+          f-strings: "Acabas de sintonizar [canción] del gran artista
+          [artista]".
+        </li>
+        <li>
+          <strong>Repetición redundante:</strong> Pide una palabra cualquiera y
+          luego usa un solo <code>print()</code> para imprimir esa misma
+          variable cinco veces separadas por comas.
+        </li>
+        <li>
+          <strong>El detective de tipos:</strong> Pide un número por teclado
+          (ej. año de nacimiento). Imprímelo y en la línea siguiente imprime
+          <code>type()</code> de esa variable para demostrar que Python lo
+          considera texto. Añade un comentario explicando por qué.
+        </li>
+      </ol>
+
+      <div class="tip-card card">
+        <h3>🚀 Desafío Extra: El Gran Formulario Interactivo</h3>
+        <p>
+          Crea un archivo llamado <code>formulario_final.py</code>. Diseña un
+          programa que pida 5 datos al usuario sobre su perfil profesional:
+        </p>
+        <ul>
+          <li>Nombre completo</li>
+          <li>Color favorito</li>
+          <li>Comida favorita</li>
+          <li>Actividad favorita</li>
+          <li>Materia que menos te gusta</li>
+        </ul>
+        <p>
+          Una vez que el usuario haya contestado todo, redacta un pequeño
+          párrafo coherente e integrado utilizando
+          <strong>f-strings</strong> donde aparezcan los 5 datos introducidos.
+          ¡Sé creativo con la redacción!
+        </p>
+      </div>
+
+        <div class="tip-card card">
+        <h3>🚀 Desafío Extra 2: El cuento loco</h3>
+        <p>
+          Crea un archivo llamado <code>cuento_loco.py</code>. Diseña un
+          programa que pida no más de 10 datos a tus amigos/compañeros:
+        </p>
+        <p>Guardar cada dato en una variable</p>
+        <p>
+         Armar un cuento aprovechando los datos que ingresará tu amigo por medio de los input() <br>
+              ¡Ojo! no hagas un cuento ofensivo, la idea es practicar y que sea divertido. <br>
+         No deben saber la estructura de tu cuento ya que la idea es que sea sorpresa el cuento que saldrá al combinar tu cuento con los datos ingresados.
+        </p>
+      </div>
+
+
+      <!-- Resumen final -->
+      <h2>📌 Resumen de la clase</h2>
+      <ul>
+        <li>
+          <code>input()</code> es la herramienta fundamental para recibir datos
+          del usuario (Entrada).
+        </li>
+        <li>
+          Todo programa interactivo sigue un ciclo: preguntar con
+          <code>input()</code>, guardar en variable, procesar y mostrar con
+          <code>print()</code> (Salida).
+        </li>
+        <li>
+          <strong>Fundamental:</strong> Todo lo que entra a través de
+          <code>input()</code> es considerado <strong>texto (str)</strong> por
+          el ordenador, incluso si tecleamos números.
+        </li>
+        <li>
+          Podemos combinar textos fijos y variables usando comas en
+          <code>print()</code> o las más modernas <strong>f-strings</strong>.
+        </li>
+        <li>
+          Si usamos <code>input()</code> sin asignarlo a una variable, actúa
+          simplemente como una pausa en la ejecución.
+        </li>
+      </ul>
+
+      <!-- Recuadro de buenas prácticas -->
+      <div class="card">
+        <span class="badge">✨ Buenas prácticas</span>
+        <p>
+          Siempre incluye un mensaje claro dentro de <code>input()</code> para
+          guiar al usuario. Usa <code>f-strings</code> para mayor legibilidad.
+          Recuerda convertir tipos cuando necesites números (lo veremos pronto).
+        </p>
+      </div>
+
+       <div style="margin-bottom: 24px">
         <a
           href="../materias/desarrollo-1.html"
           style="
@@ -207,6 +726,8 @@ print("Hola", nombre)
           Ir a Sesión 12
         </a>
       </div>
+
+   
     </div>
-</body>
+  </body>
 </html>
