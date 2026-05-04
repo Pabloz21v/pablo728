@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 5: Relaciones 1 a 1 y Modificación de Tablas</title>
+    <style>
+      /* --- Estilos tomados de usuarios2-sesion4.html --- */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      header {
+        background-color: #2c3e50;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        border-radius: 8px 8px 0 0;
+        margin-bottom: 20px;
+      }
+      h1, h2 {
+        color: #2c3e50;
+      }
+      h1 {
+        margin: 0;
+        color: white;
+      }
+      header h1 {
+        color: white;
+      }
+      h2 {
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+        margin-top: 1.5em;
+      }
+      h3 {
+        color: #2980b9;
+        margin-top: 1.2em;
+      }
+      .section, .info-box, .objective-list {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .theory {
+        background-color: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      .exercise, .command-explanation {
+        background-color: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #27ae60;
+      }
+      .card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+        font-family: monospace;
+        font-size: 14px;
+      }
+      code {
+        font-family: monospace;
+        background-color: #f4f4f4;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+      .highlight {
+        background-color: #e3f2fd;
+        padding: 10px;
+        border-left: 4px solid #3498db;
+        margin-bottom: 20px;
+      }
+      .question {
+        font-weight: bold;
+        color: #e74c3c;
+      }
+      .note {
+        background-color: #fffde7;
+        padding: 10px;
+        border-left: 4px solid #ffd600;
+        margin: 15px 0;
+      }
+      .interpretation {
+        background-color: #fef9e7;
+        padding: 10px;
+        border-left: 4px solid #f39c12;
+        margin: 15px 0;
+        font-style: italic;
+      }
+      .command-title {
+        font-weight: bold;
+        color: #27ae60;
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+      }
+      .sql-comment {
+        color: #008000;
+        font-style: italic;
+      }
+      footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 0.9em;
+        color: #7f8c8d;
+      }
+      .btn-nav {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+      }
+      .btn-volver {
+        background: #4ade80;
+        color: #222;
+      }
+      .btn-anterior {
+        background: #60a5fa;
+        color: #fff;
+      }
+      .btn-siguiente {
+        background: #f9e282;
+        color: #222;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+        body {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Botones de navegación iguales a sesion4 -->
+      <div style="margin-bottom: 24px">
+        <a href="../materias/usuarios-2.html" class="btn-nav btn-volver">
+          Volver a Materia
+        </a>
+        <a href="usuarios2-sesion4.html" class="btn-nav btn-anterior">
+          Ir a Sesión 4
+        </a>
+        <a href="usuarios2-sesion6.html" class="btn-nav btn-siguiente">
+          Ir a Sesión 6
+        </a>
+      </div>
+
+      <header>
+        <h1>Sesión 5: Relaciones 1 a 1 y Modificación de Tablas</h1>
+      </header>
+
+      <div class="section">
+        <div class="objective-list">
+          <p><strong>Objetivos:</strong></p>
+          <ul>
+            <li>Comprender y aplicar relaciones <strong>1 a 1</strong> usando <code>FOREIGN KEY</code>.</li>
+            <li>Aprender a insertar valores <code>NULL</code> en registros.</li>
+            <li>Usar los tipos de datos <code>DECIMAL</code> y <code>DATE</code>.</li>
+            <li>Modificar el nombre y tipo de dato de una columna en una tabla existente.</li>
+            <li>Practicar con ejemplos y ejercicios</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>1. Relaciones 1 a 1 con FOREIGN KEY</h2>
+      <h3>Concepto:</h3>
+      <p>Una relación <strong>1 a 1</strong> significa que cada registro en una tabla tiene <strong>un solo registro relacionado</strong> en otra tabla.</p>
+      <p><strong>Ejemplo práctico:</strong></p>
+      <ul>
+        <li>Tabla <code>clientes</code> y tabla <code>direcciones</code>.</li>
+        <li>Cada cliente tiene <strong>una sola dirección</strong>, y cada dirección pertenece a <strong>un solo cliente</strong>.</li>
+      </ul>
+
+      <div class="command-explanation">
+        <div class="command-title">FOREIGN KEY (Clave Foránea)</div>
+        <p>Establece una relación entre dos tablas, garantizando la integridad referencial.</p>
+        <p><span style="font-weight: bold;">Función:</span> Asegura que el valor en una columna de una tabla corresponda a un valor existente en la tabla referenciada.</p>
+        <p><span style="font-weight: bold;">Sintaxis básica:</span> <code>FOREIGN KEY (columna_local) REFERENCES tabla_referencia(columna_referencia)</code></p>
+        <p><span style="font-weight: bold;">Interpretación:</span> <em>"Esta columna debe contener valores que existan en otra tabla específica."</em></p>
+      </div>
+
+      <div class="command-explanation">
+        <div class="command-title">REFERENCES (Referencias)</div>
+        <p>Especifica qué tabla y columna son referenciadas por la clave foránea.</p>
+        <p><span style="font-weight: bold;">Función:</span> Define el destino de la relación, indicando la tabla padre y su columna primary key.</p>
+        <p><span style="font-weight: bold;">Sintaxis:</span> <code>REFERENCES nombre_tabla(nombre_columna)</code></p>
+        <p><span style="font-weight: bold;">Interpretación:</span> <em>"Los valores de esta columna deben existir en la columna especificada de la tabla indicada."</em></p>
+      </div>
+
+      <div class="command-explanation">
+        <div class="command-title">ON DELETE CASCADE (Eliminación en Cascada)</div>
+        <p>Define qué sucede con los registros relacionados cuando se elimina el registro padre.</p>
+        <p><span style="font-weight: bold;">Función:</span> Elimina automáticamente todos los registros hijos cuando se elimina el registro padre.</p>
+        <p><span style="font-weight: bold;">Alternativas:</span></p>
+        <ul>
+          <li><code>ON DELETE SET NULL</code>: Establece NULL en la clave foránea</li>
+          <li><code>ON DELETE RESTRICT</code>: Impide la eliminación si existen registros relacionados</li>
+          <li><code>ON DELETE NO ACTION</code>: Similar a RESTRICT</li>
+        </ul>
+        <p><span style="font-weight: bold;">Interpretación:</span> <em>"Si elimino un cliente, también elimina automáticamente su dirección."</em></p>
+      </div>
+
+      <h3>Script para crear las tablas:</h3>
+      <pre><code><span class="sql-comment">-- Tabla principal: clientes</span>
+CREATE TABLE clientes (
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    fecha_registro DATE NOT NULL
+);
+
+<span class="sql-comment">-- Tabla relacionada: direcciones</span>
+CREATE TABLE direcciones (
+    id_direccion INT AUTO_INCREMENT PRIMARY KEY,
+    calle VARCHAR(100) NOT NULL,
+    ciudad VARCHAR(50) NOT NULL,
+    codigo_postal VARCHAR(20),
+    id_cliente INT UNIQUE,
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente) ON DELETE CASCADE
+);
+</code><code>#INTERPRETACION DE:
+#FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente) ON DELETE CASCADE
+#establecer como clave foranea la columna id_cliente de la tabla direcciones
+referenciandola con la columna id_cliente de la tabla clientes y ante la eliminacion
+de un cliente se borran los registros en la tabla direcciones relacionados al id_cliente.</code></pre>
+</code></pre>
+      <div class="interpretation">
+        <strong>Interpretación:</strong> <em>"Cada cliente tiene una dirección única, y si se elimina un cliente, su dirección también se elimina automáticamente (ON DELETE CASCADE)."</em>
+      </div>
+
+      <h2>2. Tipos de Datos: DECIMAL y DATE</h2>
+      <h3>DECIMAL(p,s)</h3>
+      <ul>
+        <li><strong>Uso:</strong> Números exactos, como precios o medidas.</li>
+        <li><strong>p:</strong> Número total de dígitos.</li>
+        <li><strong>s:</strong> Número de decimales.</li>
+        <li><strong>Ejemplo:</strong> <code>DECIMAL(10,2)</code> → <code>12345678.90</code> (8 dígitos enteros y 2 decimales).</li>
+      </ul>
+      <h3>DATE</h3>
+      <ul>
+        <li><strong>Uso:</strong> Almacena fechas en formato <code>YYYY-MM-DD</code>.</li>
+        <li>YYYY = año, MM = mes, DD = día.</li>
+        <li><strong>Ejemplos:</strong> <code>'2025-10-27'</code>, <code>'2000-07-30'</code>, <code>'1989-02-15'</code>.</li>
+      </ul>
+
+      <div class="command-explanation">
+        <div class="command-title">ALTER TABLE (Alterar Tabla)</div>
+        <p>Modifica la estructura de una tabla existente.</p>
+        <p><span style="font-weight: bold;">Función:</span> Permite agregar, eliminar o modificar columnas y restricciones.</p>
+        <p><span style="font-weight: bold;">Sintaxis básica:</span> <code>ALTER TABLE nombre_tabla [ADD|DROP|MODIFY|CHANGE] ...</code></p>
+        <p><span style="font-weight: bold;">Interpretación:</span> <em>"Quiero cambiar algo en la estructura de esta tabla que ya existe."</em></p>
+      </div>
+
+      <div class="command-explanation">
+        <div class="command-title">ADD COLUMN (Agregar Columna)</div>
+        <p>Agrega una nueva columna a una tabla existente.</p>
+        <p><span style="font-weight: bold;">Función:</span> Permite expandir la estructura de datos sin perder información existente.</p>
+        <p><span style="font-weight: bold;">Sintaxis:</span> <code>ALTER TABLE tabla ADD COLUMN nombre_columna tipo_dato [restricciones]</code></p>
+        <p><span style="font-weight: bold;">Interpretación:</span> <em>"Agregar un nuevo campo a esta tabla para almacenar información adicional."</em></p>
+      </div>
+
+      <div class="command-explanation">
+        <div class="command-title">DEFAULT (Valor por Defecto)</div>
+        <p>Establece un valor automático para una columna cuando no se proporciona un valor explícito.</p>
+        <p><span style="font-weight: bold;">Función:</span> Garantiza que la columna tenga un valor incluso si no se especifica durante la inserción.</p>
+        <p><span style="font-weight: bold;">Sintaxis:</span> <code>nombre_columna tipo_dato DEFAULT valor_por_defecto</code></p>
+        <p><span style="font-weight: bold;">Interpretación:</span> <em>"Si no especifico un valor para este campo, usa automáticamente este valor predeterminado."</em></p>
+      </div>
+
+      <h3>Modificación de la tabla clientes para incluir DECIMAL:</h3>
+      <pre><code>ALTER TABLE clientes
+ADD COLUMN saldo DECIMAL(10,2) DEFAULT 0.00;</code></pre>
+      <div class="interpretation">
+        <strong>Interpretación:</strong> <em>"Ahora cada cliente tendrá un campo `saldo` que almacena valores monetarios con 2 decimales, como $100.50."</em>
+      </div>
+       <pre><code>ALTER TABLE clientes
+ADD COLUMN activo BOOLEAN DEFAULT TRUE;</code></pre>
+<div class="interpretation">
+        <strong>Interpretación:</strong> <em>"Ahora cada cliente tendrá un campo / columna `activo` que almacena TRUE ó FALSE, o 1 ó 2"</em>
+      </div>
+      <h2>3. Insertar Valores NULL</h2>
+      <h3>Formas de insertar NULL:</h3>
+      <h4>1. Omitir la columna (si permite NULL):</h4>
+      <pre><code>INSERT INTO clientes (nombre, email, fecha_registro)
+VALUES ('Juan Pérez', 'juan@example.com', '2025-09-01');</code></pre>
+      <p><em>(El campo `saldo` se llenará con el valor por defecto: `0.00`)</em></p>
+
+      <h4>2. Insertar explícitamente NULL:</h4>
+      <h5>Recordar que no se debe asignar a la columna el valor NOT NULL donde queremos ingresar un valor NULL</h5>
+      <pre><code>INSERT INTO clientes (nombre, email, fecha_registro, saldo)
+VALUES ('Ana Gómez', 'ana@example.com', '2025-09-02', NULL);</code></pre>
+      <p><em>(El campo `saldo` quedará como `NULL` si no tiene valor por defecto)</em></p>
+
+      <h2>3. Uso de DEFAULT en inserciones</h2>
+<h3>Formas de usar DEFAULT:</h3>
+
+<h4>1. Omitir la columna (cuando tiene DEFAULT definido):</h4>
+<pre><code>INSERT INTO clientes (nombre, email, fecha_registro)
+VALUES ('Juan Pérez', 'juan@example.com', '2025-09-01');</code></pre>
+<p><em>(El campo `saldo` tomará automáticamente el valor por defecto: `0.00`)</em></p>
+
+<h4>2. Usar la palabra clave DEFAULT explícitamente:</h4>
+<h5>Así indicamos claramente que queremos el valor predeterminado</h5>
+<pre><code>INSERT INTO clientes (nombre, email, fecha_registro, saldo, activo)
+VALUES ('Ana Gómez', 'ana@example.com', '2025-09-02', DEFAULT, DEFAULT);</code></pre>
+<p><em>(`saldo` tomará `0.00` y `activo` tomará `TRUE` o `1` según su DEFAULT)</em></p>
+
+<div class="note">
+  <strong>📌 Nota importante:</strong> La palabra clave <code>DEFAULT</code> funciona tanto en <code>INSERT</code> como en <code>UPDATE</code>, y es útil cuando queremos restaurar el valor por defecto de una columna sin necesidad de conocer cuál es ese valor.
+</div>
+
+<h4>3.1 Usar DEFAULT en UPDATE (restaurar valor por defecto):</h4>
+<pre><code>UPDATE clientes SET saldo = DEFAULT WHERE id_cliente = 2;</code></pre>
+<p><em>(El cliente con id 2 recuperará el saldo por defecto `0.00`)</em></p>
+
+      <h2>4. Modificar el Nombre y Tipo de Dato de una Columna</h2>
+      <div class="command-explanation">
+        <div class="command-title">CHANGE COLUMN (Cambiar Columna)</div>
+        <p>Cambia tanto el nombre como el tipo de dato de una columna existente.</p>
+        <p><span style="font-weight: bold;">Función:</span> Permite renombrar una columna y modificar su definición completamente.</p>
+        <p><span style="font-weight: bold;">Sintaxis:</span> <code>ALTER TABLE tabla CHANGE COLUMN nombre_actual nombre_nuevo tipo_dato</code></p>
+        <p><span style="font-weight: bold;">Interpretación:</span> <em>"Quiero cambiar el nombre de esta columna y posiblemente también su tipo de dato."</em></p>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+      <div class="command-explanation">
+        <div class="command-title">MODIFY COLUMN (Modificar Columna)</div>
+        <p>Cambia únicamente el tipo de dato de una columna, manteniendo su nombre.</p>
+        <p><span style="font-weight: bold;">Función:</span> Permite alterar las características de una columna sin cambiar su nombre.</p>
+        <p><span style="font-weight: bold;">Sintaxis:</span> <code>ALTER TABLE tabla MODIFY COLUMN nombre_columna nuevo_tipo_dato</code></p>
+        <p><span style="font-weight: bold;">Interpretación:</span> <em>"Mantener el nombre de la columna, pero cambiar su tipo de dato o restricciones."</em></p>
+      </div>
+
+      <h3>Cambiar el nombre de una columna:</h3>
+   <pre><code>ALTER TABLE clientes
+CHANGE COLUMN email correo_electronico VARCHAR(100);</code><code>
+
+#modificar en la tabla clientes el nombre de la columna email por 
+correo_electronico y varchar de 100 caracteres.</code></pre>
+      <div class="interpretation">
+        <strong>Interpretación:</strong> <em>"La columna `email` ahora se llamará `correo_electronico`."</em>
+      </div>
+
+      <h3>Cambiar el tipo de dato de una columna:</h3>
+    <pre><code>ALTER TABLE clientes
+MODIFY COLUMN fecha_registro DATETIME;</code><code>
+
+#cambiar en la tabla clientes el tipo de dato de la 
+columna fecha_registro a DATETIME </code></pre>
+
+      <div class="interpretation">
+        <strong>Interpretación:</strong> <em>"El campo `fecha_registro` ahora almacenará fecha <strong>y hora</strong> (ej: `2025-09-01 14:30:00`)."</em>
+      </div>
+
+      <h2>5. Inserción de Datos para Practicar</h2>
+      <h3>Tabla clientes:</h3>
+      <pre><code>INSERT INTO clientes (nombre, correo_electronico, fecha_registro, saldo)
+VALUES
+    ('Juan Pérez', 'juan@example.com', '2025-09-01', 150.75),
+    ('Ana Gómez', 'ana@example.com', '2025-09-02', NULL), 
+    ('Luis Martínez', 'luis@example.com', '2025-09-03', 250.00), 
+    ('María López', 'maria@example.com', '2025-09-04', NULL),
+    ('Carlos Ruiz', 'carlos@example.com', '2025-09-05', 0.00),
+    ('Elena Sánchez', 'elena@example.com', '2025-09-06', 99.99);</code></pre>
+
+      <h3>Tabla direcciones:</h3>
+      <pre><code>INSERT INTO direcciones (calle, ciudad, codigo_postal, id_cliente)
+VALUES
+    ('Calle 123', 'Buenos Aires', '12345', 1),
+    ('Av. Principal', 'Córdoba', '67890', 3),
+    ('Calle Falsa', 'Rosario', '54321', 5),
+    ('Calle Verdadera', 'Córdoba', null, 2);</code></pre>
+
+      <h2>6. Ejemplos Prácticos</h2>
+      <div class="command-explanation">
+        <div class="command-title">Filtro - LEFT JOIN (Unión Izquierda)</div>
+        <p><span style="font-weight: bold;">Propósito:</span> Combina registros de dos tablas, incluyendo todos los registros de la tabla izquierda.</p>
+        <p><span style="font-weight: bold;">Función:</span> Muestra todos los registros de la primera tabla, incluso si no tienen coincidencias en la segunda tabla.</p>
+        <p><span style="font-weight: bold;">Sintaxis:</span> <code>SELECT ... FROM tabla1 LEFT JOIN tabla2 ON tabla1.columna = tabla2.columna</code></p>
+        <p><span style="font-weight: bold;">Ejemplo:</span> <code>SELECT * FROM clientes LEFT JOIN direcciones ON clientes.id_clientes= direcciones.id_clientes</code></p>
+        
+        <p><span style="font-weight: bold;">Interpretación:</span> <em>"Muestra todos los clientes, incluso aquellos que no tienen dirección registrada."</em></p>
+      </div>
+
+      <div class="command-explanation">
+        <div class="command-title">Abreviación de Nombres de Tabla (Alias)</div>
+        <p>Crear nombres cortos para las tablas dentro de una consulta.</p>
+        <p><span style="font-weight: bold;">Función:</span> Simplifica la escritura de consultas complejas y mejora la legibilidad.</p>
+        <p><span style="font-weight: bold;">Sintaxis:</span> <code>FROM tabla_nombre AS alias</code> o simplemente <code>FROM tabla_nombre alias</code></p>
+        <p><span style="font-weight: bold;">Ejemplo:</span> <code>FROM clientes c</code> donde 'c' es el alias para 'clientes'</p>
+        <p><span style="font-weight: bold;">Ejemplo2:</span> <code>FROM direcciones d c</code> donde 'd' es el alias para 'direcciones'</p>
+        
+        <p><span style="font-weight: bold;">Interpretación:</span> <em>"En lugar de escribir 'clientes' cada vez, usaré simplemente 'c'."</em></p>
+      </div>
+
+      <div class="command-explanation">
+        <div class="command-title">SELECT FROM WHERE con Funciones de Fecha</div>
+        <p><span style="font-weight: bold;">YEAR():</span> Extrae el año de una fecha</p>
+        <p><span style="font-weight: bold;">MONTH():</span> Extrae el mes de una fecha (1-12)</p>
+        <p><span style="font-weight: bold;">DAY():</span> Extrae el día del mes de una fecha (1-31)</p>
+        <p>Filtrar y analizar datos basándose en componentes específicos de fechas.</p>
+        <p><span style="font-weight: bold;">Sintaxis:</span> <code>WHERE YEAR(fecha_columna) = 2025</code></p>
+        <p><span style="font-weight: bold;">Interpretación:</span> <em>"Mostrar solo los registros del año 2025" o "Filtrar por mes de septiembre"</em></p>
+      </div>
+
+      <h3>Ejemplo 1: Relación 1 a 1 usando LEFT JOIN y alias</h3>
+      <pre><code><span class="sql-comment">-- Mostrar el cliente y su dirección</span>
+SELECT c.nombre, d.calle, d.ciudad
+FROM clientes c
+LEFT JOIN direcciones d ON c.id_cliente = d.id_cliente;</code><code>
+  
+#selecciona la columna nombre de la tabla clientes y,
+calle y ciudad de la tabla direcciones donde la tabla clientes
+(alias de clientes con la letra c) relacionandolo con la tabla direcciones
+(alias de direcciones con <span style="background-color: initial;">la letra d) en donde la columa 
+id_clientes de la tabla </span><span style="background-color: initial;">clientes sea igual a la columna 
+clientes de la tabla direcciones</span></code></pre>
+        <div class="interpretation">
+      <strong>Interpretación :</strong>
+      <em
+        >"Muestra el nombre de cada cliente junto a su calle y ciudad. Si no
+        tiene dirección, aparecerá `NULL`. Uso 'c' como alias para 'clientes' y
+        'd' para 'direcciones' para simplificar la escritura."</em
+      >
+    </div>
+
+<h3>Ejemplo 2: Filtrar por NULL</h3>
+    <pre><code><span class="sql-comment">-- Clientes sin dirección</span>
+SELECT c.nombre
+FROM clientes c
+LEFT JOIN direcciones d ON c.id_cliente = d.id_cliente
+WHERE d.calle IS NULL;</code><code>
+
+#selecciona la columna nombre de la tabla clientes(abreviando clientes como c)
+relacionandolo con la tabla direcciones (abreviando direcciones como d)
+en donde la columna id_cliente de la tabla cliente sea igual a 
+la columna id_cliente de la tabla direcciones donde en la tabla direciones 
+la columna calle es null</code></pre>
+
+    <div class="interpretation">
+      <strong>Interpretación :</strong>
+      <em>"Lista los clientes que no tienen una calle registrada."</em>
+    </div>
+
+    <h3>Ejemplo 3: Usar DECIMAL</h3>
+    <pre><code><span class="sql-comment">-- Clientes con saldo mayor a 100</span>
+SELECT nombre, saldo
+FROM clientes
+WHERE saldo &gt; 100;</code><code>
+  
+#selecciona la columna nombre y saldo de la tabla clientes donde el saldo sea mayor a 100</code></pre>
+
+    <div class="interpretation">
+      <strong>Interpretación :</strong>
+      <em>"Muestra los clientes que tienen un saldo superior a $100.00."</em>
+    </div>
+
+    <h3>Ejemplo 4: Usar DATE con funciones YEAR, MONTH, DAY</h3>
+    <pre><code><span class="sql-comment">-- Clientes registrados en septiembre de 2025</span>
+SELECT nombre, fecha_registro
+FROM clientes
+WHERE YEAR(fecha_registro) = 2025 AND MONTH(fecha_registro) = 9;</code><code>
+  
+#seleciona las columnas nombre y fecha_registro de la tabla clientes donde
+el año en la columna fecha_registro sea igual a 2025 y el mes 
+en la columa fecha_registro sea igual a 9</code></pre>
+
+    <div class="interpretation">
+      <strong>Interpretación :</strong>
+      <em>"Lista los clientes que se registraron en septiembre de 2025."</em>
+    </div>
+
+    <h3>Ejemplo 5: Combinando funciones de fecha</h3>
+    <pre><code><span class="sql-comment">-- Clientes registrados el día 1 de cualquier mes</span>
+SELECT nombre, fecha_registro
+FROM clientes c
+WHERE DAY(c.fecha_registro) = 1;</code><code>
+  
+#seleciona las columnas nombre y fecha_registro de la tabla clientes
+<span style="background-color: initial;">(abreviado con la letra c) donde 
+</span><span style="background-color: initial;">el dia en la columna fecha_registro de la tabla clientes 
+sea igual a 1</span></code></pre>
+
+    <div class="interpretation">
+      <strong>Interpretación :</strong>
+      <em
+        >"Muestra los clientes que se registraron el primer día de cualquier
+        mes."</em
+      >
+    </div>
+
+      <h2>7. Ejercicios para el Alumno</h2>
+      <ol>
+        <li>
+          <strong>Relaciones 1 a 1:</strong>
+          <ul>
+            <li>Crea una tabla <code>clientes</code> con al menos 5 <code>clientes</code>. Dicha tabla debe tener las sig columnas: id_cliente, nombre, saldo, direccion.</li>
+            <li>Crea una tabla <code>pasaportes</code> relacionada 1 a 1. Dicha tabla debe tener las sig columnas: id_pasaporte, fecha, pais, id_cliente.</li>
+            <li>La tabla debe tener los siguientes tipos de datos <code>DECIMAL</code> y <code>DATE</code>.</li>
+            <li>Inserta 3 pasaportes para los clientes con <code>id_cliente</code> 1, 3 y 5.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Valores NULL:</strong>
+          <ul>
+            <li>Inserta un cliente sin saldo y sin dirección.</li>
+            <li>Actualiza el saldo de un cliente a <code>NULL</code>.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Modificar columnas:</strong>
+          <ul>
+            <li>Cambia el nombre de una columna.</li>
+            <li>Modifica el tipo de dato de una columna.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Consultas con alias y LEFT JOIN:</strong>
+          <ul>
+            <li>Lista los clientes con saldo <code>NULL</code> usando alias para las tablas.</li>
+            <li>Muestra los clientes registrados después del <code>2020-05-15</code> usando funciones de fecha.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Práctica con DECIMAL:</strong>
+          <ul>
+            <li>Actualiza el saldo de un registro a <code>125.30</code>.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Consultas avanzadas con fechas:</strong>
+          <ul>
+            <li>Lista los clientes registrados en el año 2025 usando <code>YEAR()</code>.</li>
+            <li>Encuentra clientes registrados el dia 15 usando <code>DAY()</code>.</li>
+          </ul>
+        </li>
+      </ol>
+
+      <!-- <h2>8. Resumen y Cierre</h2>
+      <div class="section">
+        <h3>Conceptos Clave Aprendidos:</h3>
+        <ul>
+          <li><strong>Relaciones 1 a 1:</strong> Usan <code>FOREIGN KEY</code>, <code>REFERENCES</code> y <code>UNIQUE</code>.</li>
+          <li><strong>NULL:</strong> Se inserta omitiendo el valor, usando <code>NULL</code> explícitamente.</li>
+          <li><strong>DECIMAL:</strong> Ideal para valores monetarios y números exactos.</li>
+          <li><strong>DATE:</strong> Almacena fechas sin hora en formato YYYY-MM-DD.</li>
+          <li><strong>Modificar tablas:</strong> <code>ALTER TABLE</code> + <code>CHANGE</code> o <code>MODIFY</code>.</li>
+          <li><strong>LEFT JOIN:</strong> Combina tablas mostrando todos los registros de la tabla izquierda.</li>
+          <li><strong>Alias:</strong> Simplifican las consultas usando nombres cortos para las tablas.</li>
+          <li><strong>Funciones de fecha:</strong> <code>YEAR()</code>, <code>MONTH()</code>, <code>DAY()</code> para filtrar por componentes de fecha.</li>
+        </ul>
+      </div> -->
+
+      <!-- Botones de navegación al final igual que al inicio -->
+      <div style="margin-bottom: 24px; margin-top: 30px;">
+        <a href="../materias/usuarios-2.html" class="btn-nav btn-volver">
+          Volver a Materia
+        </a>
+        <a href="usuarios2-sesion4.html" class="btn-nav btn-anterior">
+          Ir a Sesión 4
+        </a>
+        <a href="usuarios2-sesion6.html" class="btn-nav btn-siguiente">
+          Ir a Sesión 6
+        </a>
+      </div>
+      <!-- <footer>
+        <p>Material de estudio - Base de Datos</p>
+      </footer> -->
+    </div>
+  </body>
+</html>
