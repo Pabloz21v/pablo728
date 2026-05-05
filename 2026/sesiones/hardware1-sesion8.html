@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" style=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 8 - 🔌 Puertos y Conexiones de PC</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+      /* Document Style Overrides for Word-like appearance */
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        color: #333;
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: #fff;
+        line-height: 1.5;
+      }
+
+      /* Typography */
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        font-weight: 600;
+      }
+
+      h1 {
+        font-size: 2.2em;
+        margin-bottom: 0.2em;
+        color: #1a237e;
+      }
+
+      h2 {
+        font-size: 1.5em;
+        margin-top: 1.5em;
+        margin-bottom: 0.8em;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #eee;
+      }
+
+      h3 {
+        font-size: 1.2em;
+        margin-top: 1.2em;
+        color: #444;
+      }
+
+      p {
+        margin-bottom: 1em;
+        text-align: justify;
+      }
+
+      /* Custom Header Box */
+      .doc-header {
+        border-bottom: 4px solid #1a237e;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+      }
+
+      .doc-meta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        font-size: 0.9em;
+        color: #555;
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 4px;
+        margin-top: 10px;
+      }
+
+      /* Section Styling */
+      .section-legacy h2 {
+        color: #d35400;
+        border-bottom-color: #d35400;
+      }
+      .section-modern h2 {
+        color: #0277bd;
+        border-bottom-color: #0277bd;
+      }
+      .section-notebook h2 {
+        color: #6a1b9a;
+        border-bottom-color: #6a1b9a;
+      }
+      .section-activity h2 {
+        color: #2e7d32;
+        border-bottom-color: #2e7d32;
+      }
+      .section-review h2 {
+        color: #c62828;
+        border-bottom-color: #c62828;
+      }
+
+      /* Tables */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        font-size: 0.9em;
+      }
+
+      th {
+        background-color: #f0f0f0;
+        font-weight: bold;
+        text-align: left;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+
+      td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        vertical-align: top;
+      }
+
+      tr:nth-child(even) {
+        background-color: #fbfbfb;
+      }
+
+      /* Special Boxes */
+      .box {
+        padding: 15px;
+        margin: 15px 0;
+        border-left: 4px solid;
+        border-radius: 2px;
+      }
+
+      .box-tip {
+        background-color: #fffde7;
+        border-color: #fbc02d;
+      }
+
+      .box-curiosity {
+        background-color: #e1f5fe;
+        border-color: #039be5;
+      }
+
+      .box-title {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        font-size: 0.85em;
+      }
+
+      /* Agenda Timeline */
+      .agenda {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 0;
+        padding: 10px;
+        background: #eee;
+        border-radius: 4px;
+        font-size: 0.8em;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .agenda-item {
+        text-align: center;
+      }
+
+      .agenda-time {
+        font-weight: bold;
+        display: block;
+        color: #1a237e;
+      }
+
+      /* Activity List */
+      .activity-list li {
+        margin-bottom: 12px;
+        padding-bottom: 12px;
+        border-bottom: 1px dashed #eee;
+      }
+
+      /* Questions */
+      .question-block {
+        margin-bottom: 15px;
+      }
+
+      summary {
+        background-color: #fce4ec;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #c62828;
+        font-weight: bold;
+      }
+
+      details[open] summary {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      .answer-key {
+        padding: 15px;
+        border: 1px solid #fce4ec;
+        border-top: none;
+        background-color: #fff;
+      }
+
+      .time-badge {
+        float: right;
+        font-size: 0.6em;
+        background: #eee;
+        padding: 2px 8px;
+        border-radius: 10px;
+        color: #666;
+        vertical-align: middle;
+        margin-top: 5px;
+      }
+
+      /* Speed Bar */
+      .speed-bar-container { margin: 6px 0; }
+      .speed-label { font-size: 0.8em; color: #333; display: inline-block; width: 200px; }
+      .speed-bar { display: inline-block; height: 14px; border-radius: 3px; vertical-align: middle; }
+      .speed-val { font-size: 0.78em; color: #555; margin-left: 6px; font-weight: bold; }
+
+      /* Port Cards */
+      .port-cards { display: flex; flex-wrap: wrap; gap: 12px; margin: 15px 0; }
+      .port-card { border: 2px solid #ddd; border-radius: 6px; padding: 12px; flex: 1 1 200px; background: #fafafa; }
+      .port-card h4 { margin: 0 0 6px 0; font-size: 1em; }
+      .port-card p { font-size: 0.85em; margin: 3px 0; }
+
+      /* Color pill */
+      .pill { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.8em; font-weight: bold; color: white; margin: 2px; }
+
+      /* Section intro bar */
+      .section-bar { padding: 8px 14px; border-radius: 4px; font-size: 0.85em; margin-bottom: 12px; font-style: italic; color: #fff; }
+      .bar-legacy  { background-color: #d35400; }
+      .bar-modern  { background-color: #0277bd; }
+      .bar-notebook{ background-color: #6a1b9a; }
+      .bar-activity{ background-color: #2e7d32; }
+      .bar-review  { background-color: #c62828; }
+
+      /* Q short answer lines */
+      .qa-line { border: none; border-bottom: 1px solid #ccc; width: 100%; margin: 4px 0 10px 0; display: block; height: 18px; }
+
+      /* Notebook grid */
+      .nb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+      @media (max-width: 600px) { .nb-grid { grid-template-columns: 1fr; } }
+
+      footer { margin-top: 50px; border-top: 2px solid #1a237e; padding-top: 10px; font-size: 0.8em; color: #888; text-align: center; }
+
+      code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-size: 0.9em; color: #333; }
+    </style>
+  </head>
+  <body style="">
+     <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-uno.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="hardware1-sesion7.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 7
+        </a>
+        <a
+          href="hardware1-sesion9.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 9
+        </a>
+      </div>
+    <!-- HEADER -->
+    <div class="doc-header">
+      <h1>Sesión 8 - 🔌 Puertos y Conexiones de PC</h1>
+    
+
+    <!-- SECCION 1: INTRODUCCION -->
+    <section>
+      <h2>1. Introducción </h2>
+      <p>
+        ¿Por qué es fundamental conocer los puertos? En el mundo laboral de IT, no siempre trabajaremos con equipos de
+        última generación. Muchas empresas (fábricas, oficinas gubernamentales, hospitales) utilizan hardware que no
+        pueden actualizar debido a costos o compatibilidad con maquinaria específica.
+      </p>
+      <p>Esta clase dividimos el estudio en tres categorías:</p>
+      <ul>
+        <li><strong>PC "Vieja" (Legacy):</strong> Equipos que empresas mantienen por necesidad.</li>
+        <li><strong>PC Moderna:</strong> El estándar actual de escritorio.</li>
+        <li><strong>Notebooks:</strong> Equipos portátiles con versiones compactas de los puertos.</li>
+      </ul>
+     
+    </section>
+
+    <!-- SECCION 2: PUERTOS LEGACY -->
+    <section class="section-legacy">
+      <h2>2. Puertos Legacy (PC Antigua) <span class="time-badge"></span></h2>
+      <div class="section-bar bar-legacy">🖥️ Equipos de empresas que no pueden actualizar su hardware — fábricas, hospitales, organismos públicos. Estos puertos siguen vigentes en el campo laboral.</div>
+      <p>Estos puertos son comunes en motherboards anteriores a 2010. 
+     El técnico de IT (ustedes a futuro) <strong>debe saber identificarlos para dar soporte</strong>.</p>
+
+     <div style="overflow-x: auto">
+
+       <table>
+         <thead>
+           <tr style="background-color:#d35400; color:white;">
+             <th style="color:rgb(0, 0, 0); border-color:#b04300;" width="14%">Puerto</th>
+             <th style="color:rgb(0, 0, 0); border-color:#b04300;" width="8%">Ícono</th>
+             <th style="color:rgb(0, 0, 0); border-color:#b04300;" width="22%">Identificación Visual</th>
+             <th style="color:rgb(0, 0, 0); border-color:#b04300;" width="22%">Uso Principal</th>
+             <th style="color:rgb(0, 0, 0); border-color:#b04300;" width="12%">Velocidad</th>
+             <th style="color:rgb(0, 0, 0); border-color:#b04300;" width="22%">Se conecta...</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td><strong>Serial (COM / RS-232)</strong></td>
+             <td style="font-size:1.4em; text-align:center">🔌</td>
+             <td>Macho, <strong>9 pines</strong> (DB-9), forma trapezoidal. A veces color turquesa o negro. Tornillos de sujeción a ambos lados.</td>
+             <td>Configuración de routers/switches, maquinaria industrial, PLCs (Controladores Lógicos Programables).</td>
+             <td style="color:#c0392b;"><strong>115 Kbps</strong><br><em>Muy lento</em></td>
+             <td>Módems viejos, ratón serial, lectoras de código de barras industriales, UPS.</td>
+           </tr>
+           <tr>
+             <td><strong>Paralelo (LPT / Centronics)</strong></td>
+             <td style="font-size:1.4em; text-align:center">🖨️</td>
+             <td>Hembra, <strong>25 pines</strong> (DB-25). El más largo del panel trasero. Color típico: rosa o bordo. Con tornillos a los costados.</td>
+             <td>Impresión. Fue el estándar de impresoras durante 20 años (1981–2000).</td>
+             <td style="color:#c0392b;"><strong>~150 KB/s</strong></td>
+             <td>Impresoras de matriz de punto, impresoras láser antiguas, scanners, dongles de licencia (llaves de seguridad).</td>
+           </tr>
+           <tr>
+             <td><strong>PS/2</strong></td>
+             <td style="font-size:1.4em; text-align:center">🖱️⌨️</td>
+             <td>Circular, <strong>6 pines</strong> en disposición redonda.<br><span class="pill" style="background:#6a1b9a;">Violeta</span> = Teclado<br><span class="pill" style="background:#27ae60;">Verde</span> = Mouse<br>Idénticos en forma, solo el color los distingue.</td>
+             <td>Entrada de periféricos básicos. <em>No es Hot-Swap</em> — conectar con el equipo encendido puede dañar la placa madre.</td>
+             <td>N/A<br><em style="font-size:0.85em;">Interfaz lenta, sin plug&amp;play</em></td>
+             <td>Teclado PS/2, Mouse PS/2. <em>Nota: algunos teclados gaming de alta gama aún incluyen PS/2 por su latencia mínima.</em></td>
+           </tr>
+           <tr>
+             <td><strong>VGA</strong><br><em style="font-size:0.85em;">Video Graphics Array</em></td>
+             <td style="font-size:1.4em; text-align:center">📺</td>
+             <td>Hembra, <strong>15 pines</strong> (3 filas de 5 pines), forma trapezoidal. Color <span class="pill" style="background:#1565c0;">Azul</span> estándar. Tornillos de sujeción.</td>
+             <td>Video <strong>analógico</strong>. Fue el único estándar de video en PC durante décadas (1987–2010). Aún presente en proyectores de salas de reuniones.</td>
+             <td>Max 2048×1536<br><em style="font-size:0.85em;">Señal analógica — pierde calidad con cable largo</em></td>
+             <td>Monitores CRT, monitores LCD viejos, proyectores, pantallas de conferencias.</td>
+           </tr>
+           <tr>
+             <td><strong>RJ-11</strong><br><em style="font-size:0.85em;">Módem Telefónico</em></td>
+             <td style="font-size:1.4em; text-align:center">☎️</td>
+             <td>Similar al RJ-45 pero <strong>más angosto</strong> (4 contactos visibles). Se confunde fácilmente con el puerto de red. Comparar tamaños es clave.</td>
+             <td>Conexión a la línea telefónica para internet Dial-Up. <em>Ya casi inexistente en campo.</em></td>
+             <td style="color:#c0392b;"><strong>56 Kbps</strong></td>
+             <td>Cable telefónico RJ-11 (el cable del teléfono fijo).</td>
+           </tr>
+         </tbody>
+       </table>
+      </div>
+
+      
+    </section>
+
+    <!-- SECCION 3: PUERTOS MODERNOS -->
+    <section class="section-modern">
+      <h2>3. Puertos Modernos (PC Escritorio) <span class="time-badge"></span></h2>
+      <div class="section-bar bar-modern">💻 Hardware actual de escritorio. Placas madres desde ~2010 en adelante. Estos son los puertos que el técnico encontrará con mayor frecuencia.</div>
+
+      <h3>🔌 A. Familia USB — Universal Serial Bus</h3>
+      <p>El USB reemplazó a casi todos los puertos legacy. Es el estándar universal actual. Lo más importante: <strong>generación = velocidad + color del plástico interior</strong>.</p>
+
+      <div style="overflow-x: auto">
+
+        <table>
+          <thead>
+            <tr style="background-color:#0277bd; color:white;">
+              <th style="color:black;">Versión USB</th>
+              <th style="color:black;">Tipo de Conector</th>
+              <th style="color:black;">Color Interior</th>
+              <th style="color:black;">Velocidad Máx.</th>
+              <th style="color:black;">¿Qué se conecta?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>USB 1.1</strong><br><em style="color:#999; font-size:0.85em;">Legacy</em></td>
+              <td>Type-A / Type-B</td>
+              <td><span class="pill" style="background:#555;">⚫ Negro</span></td>
+              <td>12 Mbps</td>
+              <td>Mouse, teclado antiguos. Ya en desuso.</td>
+            </tr>
+            <tr>
+              <td><strong>USB 2.0</strong><br><em style="color:#27ae60; font-size:0.85em;">Muy común hoy</em></td>
+              <td>Type-A / Type-B / Mini-B / Micro-B</td>
+              <td><span class="pill" style="background:#555;">⚫ Negro</span></td>
+              <td><strong>480 Mbps</strong></td>
+              <td>Teclado, mouse, impresoras, cámaras web, pendrives básicos, cargadores de celular.</td>
+            </tr>
+            <tr>
+              <td><strong>USB 3.0</strong><br><em style="font-size:0.85em;">= USB 3.1 Gen 1<br>= USB 3.2 Gen 1x1</em></td>
+              <td>Type-A / Type-B / Micro-B 3.0</td>
+              <td><span class="pill" style="background:#1565c0;">🔵 Azul</span></td>
+              <td><strong>5 Gbps</strong> <em>(SuperSpeed)</em></td>
+              <td>Pendrives rápidos, discos externos HDD/SSD, cámaras fotográficas, hubs USB.</td>
+            </tr>
+            <tr>
+              <td><strong>USB 3.1 Gen 2</strong><br><em style="font-size:0.85em;">= USB 3.2 Gen 2x1</em></td>
+              <td>Type-A / Type-C</td>
+              <td><span class="pill" style="background:#c62828;">🔴 Rojo</span> o Teal</td>
+              <td><strong>10 Gbps</strong> <em>(SuperSpeed+)</em></td>
+              <td>SSD externos de alta velocidad, periféricos profesionales de video.</td>
+            </tr>
+            <tr>
+              <td><strong>USB 3.2 Gen 2x2</strong></td>
+              <td>Type-C (exclusivo)</td>
+              <td><span class="pill" style="background:#6a1b9a;">🟣 Violeta</span> o sin color estandar.</td>
+              <td><strong>20 Gbps</strong></td>
+              <td>Almacenamiento profesional, cámaras de alta resolución, captura de video.</td>
+            </tr>
+            <tr style="background:#fff8f0;">
+              <td><strong>USB4 / Thunderbolt 4</strong></td>
+              <td>Type-C (con ícono ⚡ o "40G")</td>
+              <td>Oval negro (reversible)</td>
+              <td><strong>40 Gbps</strong></td>
+              <td>GPUs externas (eGPU), pantallas 8K, almacenamiento NVMe externo, docking stations completas.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="overflow-x: auto">
+
+        <p><strong>📊 Escala de velocidad comparativa (visual):</strong></p>
+        <div style="background:#f5f5f5; padding:14px; border-radius:4px; margin-bottom:15px;">
+          <div class="speed-bar-container"><span class="speed-label">USB 1.1</span><span class="speed-bar" style="width:3px; background:#aaa;"></span><span class="speed-val">12 Mbps</span></div>
+          <div class="speed-bar-container"><span class="speed-label">USB 2.0 ⚫</span><span class="speed-bar" style="width:22px; background:#555;"></span><span class="speed-val">480 Mbps</span></div>
+          <div class="speed-bar-container"><span class="speed-label">USB 3.0 🔵</span><span class="speed-bar" style="width:90px; background:#1565c0;"></span><span class="speed-val">5 Gbps</span></div>
+          <div class="speed-bar-container"><span class="speed-label">USB 3.1 Gen2 🔴</span><span class="speed-bar" style="width:180px; background:#c62828;"></span><span class="speed-val">10 Gbps</span></div>
+          <div class="speed-bar-container"><span class="speed-label">USB 3.2 Gen 2x2 🟣</span><span class="speed-bar" style="width:260px; background:#6a1b9a;"></span><span class="speed-val">20 Gbps</span></div>
+          <div class="speed-bar-container"><span class="speed-label">USB4 / Thunderbolt4 ⚡</span><span class="speed-bar" style="width:380px; background:#e65100;"></span><span class="speed-val">40 Gbps</span></div>
+        </div>
+      </div>
+
+      <div class="box box-tip">
+        <span class="box-title">💡  Compatibilidad hacia atrás</span>
+        Un dispositivo USB 3.0 <em>sí</em> funciona en un puerto USB 2.0, pero la velocidad se limita al puerto más lento (cuello de botella). Ejemplo: un pendrive USB 3.0 en un puerto USB 2.0 funciona a solo 480 Mbps. 
+      </div>
+
+      <div class="box box-curiosity">
+        <span class="box-title">⚡ Thunderbolt vs USB4</span>
+        Thunderbolt 4 (tecnología de Intel) y USB4 usan el mismo conector físico (USB-C) y la misma velocidad máxima (40 Gbps). La diferencia es que Thunderbolt tiene certificación más estricta. Se identifica por el ícono del rayo ⚡ estampado junto al puerto. Un puerto Thunderbolt acepta dispositivos USB normales, pero no al revés.
+      </div>
+
+      <h3>📺 B. Puertos de Video Digital</h3>
+      <div style="overflow-x: auto">
+
+        <table>
+          <thead>
+            <tr style="background-color:#0277bd; color:white;">
+              <th style="color:black;">Puerto</th>
+              <th style="color:black;">Descripción Física</th>
+              <th style="color:black;">Transmite</th>
+              <th style="color:black;">Resolución / Generación</th>
+              <th style="color:black;">Uso típico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>VGA</strong><br><em style="color:#999; font-size:0.85em;">Analógico — obsoleto</em></td>
+              <td>15 pines, trapezoidal <span class="pill" style="background:#1565c0;">Azul</span></td>
+              <td>🖼️ Solo video (analógico)</td>
+              <td>Max ~2048×1536. Pérdida de calidad visible a alta resolución.</td>
+              <td>PC vieja a monitor/proyector viejo.</td>
+            </tr>
+            <tr>
+              <td><strong>DVI</strong><br><em style="font-size:0.85em;">Digital Visual Interface</em></td>
+              <td>24+1 ó 24+5 pines, conector grande <span class="pill" style="background:#eee; color:#333;">⬜ Blanco</span> con pines cuadriculados + barra horizontal.</td>
+              <td>🖼️ Video digital (DVI-D) o mixto analógico+digital (DVI-I)</td>
+              <td>Max 1920×1200 @60Hz (single link) / 2560×1600 (dual link)</td>
+              <td>Monitores LCD de 2000–2010. En desuso en placas actuales.</td>
+            </tr>
+            <tr>
+              <td><strong>HDMI</strong><br><em style="font-size:0.85em;">High-Definition Multimedia Interface</em></td>
+              <td>19 pines, conector trapezoidal plano y pequeño. Forma de "casa/trapecio". Muy reconocible.</td>
+              <td>🖼️+🔊 <strong>Video + Audio digital</strong></td>
+              <td>HDMI 1.4: 4K@30Hz<br>HDMI 2.0: 4K@60Hz<br>HDMI 2.1: 8K@60Hz / 4K@120Hz</td>
+              <td>Monitores, TVs, proyectores, home theater. El más universal actualmente.</td>
+            </tr>
+            <tr>
+              <td><strong>DisplayPort (DP)</strong></td>
+              <td>Rectangular con <strong>una sola esquina cortada</strong> (asimétrico). Tiene clip de seguridad.</td>
+              <td>🖼️+🔊 Video + Audio + datos USB (en versión DP Alt Mode)</td>
+              <td>DP 1.4: 8K@60Hz<br>DP 2.0: hasta 16K</td>
+              <td>Monitores gaming (alta frecuencia de refresco), multi-monitor en cadena (Daisy Chain).</td>
+            </tr>
+            <tr>
+              <td><strong>Mini HDMI / Micro HDMI</strong></td>
+              <td>Versiones reducidas de HDMI. Considerablemente más pequeños.</td>
+              <td>🖼️+🔊 Video + Audio</td>
+              <td>Igual que HDMI según versión</td>
+              <td>Cámaras DSLR, tablets, notebooks compactas. Requieren adaptador a HDMI Type A.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="box box-tip">
+        <span class="box-title">💡  HDMI vs DisplayPort en el campo</span>
+        HDMI es el estándar del mundo del <em>entretenimiento</em> (TVs, home theater, proyectores). DisplayPort es el estándar del mundo <em>PC y gaming</em> (altas frecuencias, multi-monitor). Las tarjetas de video modernas traen ambos. Muchos monitores actuales ya NO incluyen VGA ni DVI.
+      </div>
+
+      <h3>🔊 C. Puertos de Audio — Jacks 3.5mm</h3>
+      <p>Las placas madre modernas incluyen hasta <strong>6 jacks de audio 3.5mm</strong> con un código de colores estandarizado internacionalmente (PC 99 Color Standard):</p>
+     
+     <div style="overflow-x: auto">
+
+       <table>
+         <thead>
+           <tr style="background-color:#0277bd; color:white;">
+             <th style="color:black;">Color</th>
+             <th style="color:black;">Función</th>
+             <th style="color:black;">Se conecta...</th>
+             <th style="color:black;">Presente en</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td><span class="pill" style="background:#27ae60;">🟢 Verde</span></td>
+             <td><strong>Salida de línea estéreo (Line Out)</strong></td>
+             <td>Parlantes, auriculares, amplificadores.</td>
+             <td>Todas las placas</td>
+           </tr>
+           <tr>
+             <td><span class="pill" style="background:#e91e63;">🩷 Rosa / Rojo</span></td>
+             <td><strong>Entrada de Micrófono (Mic In)</strong></td>
+             <td>Micrófono de PC.</td>
+             <td>Todas las placas</td>
+           </tr>
+           <tr>
+             <td><span class="pill" style="background:#1565c0;">🔵 Azul</span></td>
+             <td><strong>Entrada de Línea (Line In)</strong></td>
+             <td>Instrumentos musicales, mixer, reproductor externo para grabar.</td>
+             <td>Mayoría de placas</td>
+           </tr>
+           <tr>
+             <td><span class="pill" style="background:#333;">⚫ Negro</span></td>
+             <td>Surround Trasero (Rear Out)</td>
+             <td>Parlantes traseros en sistema 5.1/7.1.</td>
+             <td>Placas con audio multicanal</td>
+           </tr>
+           <tr>
+             <td><span class="pill" style="background:#e67e22;">🟠 Naranja</span></td>
+             <td>Canal Central + Subwoofer</td>
+             <td>Parlante central y subwoofer en 5.1/7.1.</td>
+             <td>Placas con audio multicanal</td>
+           </tr>
+           <tr>
+             <td><span class="pill" style="background:#aaa; color:#333;">⚪ Gris / Plateado</span></td>
+             <td>Surround Lateral (Side Out)</td>
+             <td>Parlantes laterales en sistema 7.1.</td>
+             <td>Placas high-end</td>
+           </tr>
+         </tbody>
+       </table>
+      </div>
+      <p style="font-size:0.85em;"><strong>Panel frontal del gabinete:</strong> Normalmente solo tiene 2 jacks: Verde (auricular) y Rosa (micrófono), conectados al header HD Audio de la placa madre.</p>
+      <p style="font-size:0.85em;"><strong>S/PDIF Óptico (Toslink):</strong> Puerto cuadradito naranja con tapita. Transmite audio digital puro hacia receptores AV y amplificadores. Presente en placas de media y alta gama</p>
+
+      <h3>🌐 D. Red — Puerto Ethernet (RJ-45)</h3>
+      <p>El conector RJ-45 tiene <strong>8 contactos</strong> (4 pares de hilos) y es similar al RJ-11 telefónico pero más ancho. Posee 2 LEDs indicadores integrados:</p>
+    <div style="overflow-x: auto">
+
+      <table>
+        <thead>
+          <tr style="background-color:#0277bd; color:white;">
+            <th style="color:black;">Estándar</th>
+            <th style="color:black;">Velocidad</th>
+            <th style="color:black;">Cable mínimo recomendado (se ve en materia de redes)</th>
+            <th style="color:black;">Cuándo aparece</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Fast Ethernet</td>
+            <td>100 Mbps</td>
+            <td>Cat 5</td>
+            <td>PCs viejas, switches de oficina básicos.</td>
+          </tr>
+          <tr>
+            <td><strong>Gigabit Ethernet</strong></td>
+            <td><strong>1 Gbps (1000 Mbps)</strong></td>
+            <td>Cat 5e / Cat 6</td>
+            <td><strong>Estándar actual</strong> en todas las placas madre desde ~2010.</td>
+          </tr>
+          <tr>
+            <td>2.5G Ethernet</td>
+            <td>2.5 Gbps</td>
+            <td>Cat 5e / Cat 6</td>
+            <td>Placas gaming y servidores medianos.</td>
+          </tr>
+          <tr>
+            <td>10G Ethernet</td>
+            <td>10 Gbps</td>
+            <td>Cat 6a / Cat 7</td>
+            <td>Servidores, NAS, estaciones de trabajo profesionales.</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="font-size:0.85em;">LEDs del puerto RJ-45: 🟢 Verde sólido = conectado. 🟢 Verde parpadeante = tráfico de datos activo. 🟡 Ámbar = puede indicar velocidad Gigabit vs 100Mbps (varía por fabricante).</p>
+
+      <!-- <div class="box box-curiosity">
+        <span class="box-title">🌐 Dato: La categoría del cable importa</span>
+        Aunque la placa tenga Gigabit Ethernet, si el cable es Cat 3 o Cat 5 viejo sin la "e", la velocidad real se verá limitada. El conector físico es siempre RJ-45, pero la categoría del cable determina el techo de velocidad alcanzable.
+      </div> -->
+    </section>
+
+    <!-- SECCION 4: NOTEBOOKS -->
+    <section class="section-notebook">
+      <h2>4. Puertos en Notebooks <span class="time-badge"></span></h2>
+      <div class="section-bar bar-notebook">💼 Las notebooks priorizan la portabilidad sobre la cantidad de puertos. Conocer sus limitaciones es clave para dar soporte en entornos corporativos y educativos.</div>
+      <p>Las laptops sacrifican cantidad de puertos a cambio de menor peso y grosor. 
+      </p>
+<div style="overflow-x: auto">
+
+  <table>
+    <thead>
+      <tr style="background-color:#6a1b9a; color:white;">
+        <th style="color:black;">Puerto / Característica</th>
+        <th style="color:black;">PC de Escritorio</th>
+        <th style="color:black;">Notebook Estándar</th>
+        <th style="color:black;">Ultrabook / MacBook</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>USB Type-A</strong></td>
+        <td>4 a 8+ puertos</td>
+        <td>2 a 4 puertos</td>
+        <td>1 o ninguno</td>
+      </tr>
+      <tr>
+        <td><strong>USB-C / Thunderbolt</strong></td>
+        <td>1 a 2 (placas modernas)</td>
+        <td>1 a 2</td>
+        <td>1 a 4 (único tipo en MacBook Air/Pro)</td>
+      </tr>
+      <tr>
+        <td><strong>Video</strong></td>
+        <td>HDMI Type A + DisplayPort</td>
+        <td>HDMI Type A</td>
+        <td>Mini HDMI o solo USB-C + adaptador</td>
+      </tr>
+      <tr>
+        <td><strong>Ethernet (RJ-45)</strong></td>
+        <td>Siempre presente</td>
+        <td>Presente en la mayoría</td>
+        <td>Ausente — requiere adaptador USB→RJ45</td>
+      </tr>
+      <tr>
+        <td><strong>Audio</strong></td>
+        <td>3 a 6 jacks separados (coloreados)</td>
+        <td>Combo Jack 3.5mm (TRRS: auricular + mic)</td>
+        <td>Combo Jack 3.5mm (TRRS)</td>
+      </tr>
+      <tr>
+        <td><strong>Lector de tarjetas</strong></td>
+        <td>Opcional en panel frontal</td>
+        <td>SD Card reader lateral</td>
+        <td>SD o MicroSD (o ausente en ultrabooks)</td>
+      </tr>
+      <tr>
+        <td><strong>Seguridad física</strong></td>
+        <td>Gabinete cerrado con llave</td>
+        <td>Ranura Kensington Lock (ovalada)</td>
+        <td>Kensington Lock en algunos modelos</td>
+      </tr>
+    </tbody>
+  </table>
+      </div>
+
+      <div class="nb-grid">
+        <div class="box box-tip">
+          <span class="box-title">💡 Combo Jack TRRS</span>
+          El jack de 3.5mm en notebooks tiene <strong>4 contactos</strong> (TRRS: Tip-Ring-Ring-Sleeve) en lugar de 3 (TRS) del de PC de escritorio. Esto le permite manejar auricular <em>y</em> micrófono en un solo conector, igual que los auriculares de celular. Un auricular de PC con micrófono separado necesita un <em>splitter TRRS</em> para funcionar correctamente.
+        </div>
+        <div class="box box-curiosity">
+          <span class="box-title">🔌 Docking Station en empresas</span>
+          Las empresas que entregan notebooks a empleados utilizan <strong>Docking Stations</strong>: un hub que se conecta por un solo cable USB-C/Thunderbolt y provee al empleado de teclado, monitor externo, ethernet, impresora y carga. El empleado llega al escritorio, conecta un cable, y tiene todo el equipamiento completo.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCION 5: ACTIVIDAD -->
+    <section class="section-activity">
+      <h2>5. 🔍 Actividad: Detective de Puertos <span class="time-badge"></span></h2>
+      <div class="section-bar bar-activity">👥 Buscar cada término en Google Imágenes 📋</div>
+
+      
+
+      <ol class="activity-list">
+        <li>
+          <strong>🔎 Busca:</strong> <code>puerto COM RS-232 conector DB-9 placa madre</code>
+          <br>❓ <em>¿Cuántos pines tiene? ¿Es macho (tiene pinches metálicos) o hembra (tiene agujeros) en la placa? Agregar imagen</em>
+        </li>
+        <li>
+          <strong>🔎 Busca:</strong> <code>puerto paralelo LPT DB-25 placa madre</code>
+          <br>❓ <em>¿Cuántos pines tiene? ¿Es más largo o más corto que el conector VGA de 15 pines? Agregar imagen</em>
+        </li>
+        <li>
+          <strong>🔎 Busca:</strong> <code>conectores PS/2 teclado mouse colores violeta verde</code>
+          <br>❓ <em>Anotá el color de cada uno y para qué sirve. ¿Por qué crees que los diseñaron de distinto color si son físicamente idénticos?  Agregar imagen</em>
+        </li>
+        <li>
+          <strong>🔎 Busca:</strong> <code>diferencia USB 2.0 vs USB 3.0 color interior azul negro</code>
+          <br>❓ <em>¿Qué parte del conector cambia de color entre USB 2.0 y USB 3.0?. Agregar imagen</em>
+        </li>
+        <li>
+          <strong>🔎 Busca:</strong> <code>VGA conector forma placa video</code>
+          <br>❓ <em>¿Color tipico del conector? ¿Es hembra o macho? Describí su forma con tus palabras.  Agregar imagen</em>
+        </li>
+        <li>
+          <strong>🔎 Busca:</strong> <code>HDMI Type A conector forma placa video</code>
+          <br>❓ <em>¿El conector HDMI es simétrico o asimétrico? Describí su forma con tus palabras.  Agregar imagen</em>
+        </li>
+        <li>
+          <strong>🔎 Busca:</strong> <code>Mini HDMI  conector forma placa video. </code><br>
+          <strong>🔎 Busca:</strong> <code> Micro HDMI conector forma placa video. </code>
+          <br>❓ <em>Diferencias. Agregar imagen de cada uno</em>
+        </li>
+        <li>
+          <strong>🔎 Busca:</strong> <code>DisplayPort conector forma esquina cortada diferencia HDMI</code>
+          <br>❓ <em>¿Qué tiene de particular la forma del DisplayPort que lo hace fácil de identificar? ¿Cuántas esquinas tiene rectas? Agregar imagen</em>
+        </li>
+        <li>
+          <strong>🔎 Busca:</strong> <code>panel trasero motherboard 6 jacks audio colores</code>
+          <br>❓ <em>Identificá y anotá al menos 4 colores que ves y su función según lo aprendido en clase. Agregar imagen</em>
+        </li>
+        <li>
+          <strong>🔎 Busca:</strong> <code>USB Type-C conector forma oval reversible</code>
+          <br>❓ <em>Observá la forma ovalada del USB-C. ¿Por qué se dice que es "reversible" a diferencia del USB-A rectangular? Agregar imagen</em>
+        </li>
+        <li>
+          <strong>🔎 Busca:</strong> <code>S/PDIF Óptico (Toslink) conector forma placa madre</code>
+          <br>❓ <em>Observá la forma. Agregar imagen del conector y del cable</em>
+        </li>
+        <li>
+          <strong>🔎 Busca:</strong> <code>conector RJ45 ethernet LED indicador velocidad</code>
+          <br>❓ <em>¿Cuántos LEDs ves en el conector? ¿Dónde están ubicados y qué indica cuando parpadean? Agregar imagen</em>
+        </li>
+        <li>
+          <strong>🔎 Busca:</strong> <code>puerto Thunderbolt 4 símbolo rayo USB-C notebook</code>
+          <br>❓ <em>¿Qué símbolo identifica al Thunderbolt junto al conector USB-C? ¿En qué marcas de notebook lo encontraste? Agregar imagen</em>
+        </li>
+        <li>
+          <strong>🔎 Busca:</strong> <code>Ranura Kensington Lock (ovalada) y Candado</code>
+          <br>❓ <em> Agregar imagen del conector y del candado. Interpretar el uso del mismo</em>
+        </li>
+        <li>
+          <strong>🔎 Busca:</strong> <code>Docking Station</code>
+          <br>❓ <em>¿Que beneficio te proporciona? Agregar imagen.</em>
+        </li>
+        <li>
+          <strong></strong> <code>USB</code>
+          <br>❓ <em>¿Que ocurre cuando  queremos transferir datos de un pendrive 3.1 en un conector USB 2? </em>
+        <br>❓ <em>¿Y si ahora queremos enviar datos desde el conector USB 2 al pendrive 3.1? </em>
+        </li>
+      </ol>
+
+    
+    </section>
+
+    <!-- SECCION 6: REPASO
+    <section class="section-review">
+      <h2>6. Preguntas de Repaso <span class="time-badge">⏱️ 10 min</span></h2>
+      <div class="section-bar bar-review">📝 Las preguntas pueden responderse en el cuaderno, en voz alta o de forma grupal. El docente puede usar el formato de competencia: el primero que responde gana un punto extra.</div>
+
+      <h3>🔘 Parte A — Selección Múltiple <em style="font-size:0.8em; color:#aaa;">(5 preguntas)</em></h3>
+      <ol>
+        <li class="question-block">
+          ¿Qué color interior tiene usualmente el puerto USB 3.0 Type-A?
+          <br>a) Negro &nbsp;&nbsp; b) Azul &nbsp;&nbsp; c) Rojo &nbsp;&nbsp; d) Blanco
+        </li>
+        <li class="question-block">
+          ¿Qué puerto de video transmite tanto audio como video en un solo cable?
+          <br>a) VGA &nbsp;&nbsp; b) DVI &nbsp;&nbsp; c) HDMI &nbsp;&nbsp; d) Puerto Serial
+        </li>
+        <li class="question-block">
+          ¿Cuál es la velocidad máxima teórica del USB 2.0?
+          <br>a) 1 Gbps &nbsp;&nbsp; b) 480 Mbps &nbsp;&nbsp; c) 5 Gbps &nbsp;&nbsp; d) 115 Kbps
+        </li>
+        <li class="question-block">
+          ¿Qué puerto circular de color verde identifica al ratón en PCs antiguas?
+          <br>a) USB Type-A &nbsp;&nbsp; b) PS/2 &nbsp;&nbsp; c) LPT &nbsp;&nbsp; d) Serial DB-9
+        </li>
+        <li class="question-block">
+          ¿Cuál es la principal ventaja FÍSICA del conector USB Type-C sobre el Type-A?
+          <br>a) Es más barato de fabricar &nbsp;&nbsp; b) Es reversible (no tiene orientación obligatoria) &nbsp;&nbsp; c) Solo funciona en notebooks &nbsp;&nbsp; d) Transmite únicamente carga eléctrica
+        </li>
+      </ol>
+
+      <h3>✅ Parte B — Verdadero o Falso <em style="font-size:0.8em; color:#aaa;">(5 preguntas)</em></h3>
+      <ol>
+        <li class="question-block">El puerto VGA transmite señal <strong>digital</strong>. &nbsp;&nbsp;&nbsp;( V &nbsp;/&nbsp; F )</li>
+        <li class="question-block">El USB 3.0 es aproximadamente <strong>10 veces más rápido</strong> que el USB 2.0. &nbsp;&nbsp;&nbsp;( V &nbsp;/&nbsp; F )</li>
+        <li class="question-block">El puerto Paralelo (LPT) se usaba principalmente para conectar <strong>monitores</strong>. &nbsp;&nbsp;&nbsp;( V &nbsp;/&nbsp; F )</li>
+        <li class="question-block">Los puertos de red RJ-45 tienen <strong>8 contactos</strong> internos. &nbsp;&nbsp;&nbsp;( V &nbsp;/&nbsp; F )</li>
+        <li class="question-block">El jack de audio color <strong>rosa</strong> en el panel trasero de una PC es para conectar parlantes. &nbsp;&nbsp;&nbsp;( V &nbsp;/&nbsp; F )</li>
+      </ol>
+
+      <h3>✏️ Parte C — Respuesta Corta <em style="font-size:0.8em; color:#aaa;">(5 preguntas)</em></h3>
+      <ol>
+        <li class="question-block">
+          Nombrá al menos <strong>3 estándares de velocidad</strong> de Ethernet por cable (nombre + velocidad).
+          <span class="qa-line"></span><span class="qa-line"></span>
+        </li>
+        <li class="question-block">
+          Nombrá los <strong>3 colores de jack de audio más comunes</strong> del panel trasero y qué función cumple cada uno.
+          <span class="qa-line"></span><span class="qa-line"></span>
+        </li>
+        <li class="question-block">
+          ¿Qué significa que un conector sea <strong>"reversible"</strong>? Dá un ejemplo concreto.
+          <span class="qa-line"></span><span class="qa-line"></span>
+        </li>
+        <li class="question-block">
+          Si conectás un pendrive USB 3.0 en un puerto USB 2.0 de la PC, ¿a qué velocidad máxima va a funcionar y por qué?
+          <span class="qa-line"></span><span class="qa-line"></span>
+        </li>
+        <li class="question-block">
+          ¿Qué ventaja tiene el <strong>DisplayPort</strong> sobre el HDMI para usuarios con <strong>múltiples monitores</strong>?
+          <span class="qa-line"></span><span class="qa-line"></span>
+        </li>
+      </ol>
+
+      <details>
+        <summary>🔽 Ver Respuestas Correctas — Solo Docente (hacer clic para expandir)</summary>
+        <div class="answer-key">
+          <p><strong>📌 Parte A — Selección Múltiple:</strong></p>
+          <ol>
+            <li><strong>b) Azul</strong> — el plástico interior (lengüeta) es azul en USB 3.0.</li>
+            <li><strong>c) HDMI</strong> — único en esta lista que transmite audio y video en un solo cable.</li>
+            <li><strong>b) 480 Mbps</strong> — USB 2.0 High Speed. (USB 3.0 = 5 Gbps).</li>
+            <li><strong>b) PS/2</strong> — circular, 6 pines, verde=mouse, violeta=teclado.</li>
+            <li><strong>b) Es reversible</strong> — no hay orientación correcta ni incorrecta al insertar el conector.</li>
+          </ol>
+          <p><strong>📌 Parte B — Verdadero o Falso:</strong></p>
+          <ol>
+            <li><strong>FALSO</strong> — VGA transmite señal <em>analógica</em>, no digital.</li>
+            <li><strong>VERDADERO</strong> — USB 2.0: 480 Mbps vs USB 3.0: 5000 Mbps ≈ 10× más rápido.</li>
+            <li><strong>FALSO</strong> — El puerto LPT (Paralelo) era para impresoras, no monitores. El de monitores era VGA.</li>
+            <li><strong>VERDADERO</strong> — RJ-45 tiene 8 contactos (4 pares de hilos trenzados).</li>
+            <li><strong>FALSO</strong> — El jack rosa/rojo es para el <em>micrófono</em>. El verde es para parlantes/auriculares.</li>
+          </ol>
+          <p><strong>📌 Parte C — Respuesta Corta (guía de corrección):</strong></p>
+          <ol>
+            <li>Fast Ethernet (100 Mbps), <strong>Gigabit Ethernet (1 Gbps)</strong>, 2.5G (2.5 Gbps), 10G Ethernet (10 Gbps). Aceptar 3 correctas con su velocidad.</li>
+            <li>🟢 Verde = Salida estéreo (parlantes/auriculares). 🩷 Rosa = Entrada de micrófono. 🔵 Azul = Entrada de línea (Line In).</li>
+            <li>Reversible: se puede insertar el conector en cualquier orientación sin que importe cuál lado va arriba. Ejemplo: USB Type-C, conector Lightning de iPhone antiguo.</li>
+            <li>Funcionará a máximo <strong>480 Mbps</strong> (velocidad del USB 2.0), ya que la velocidad queda limitada por el componente más lento del camino — principio del "cuello de botella".</li>
+            <li>DisplayPort soporta <strong>Daisy Chain</strong> (conectar múltiples monitores en cadena desde una sola salida de GPU) y es superior para altas frecuencias de refresco. HDMI no soporta daisy chain nativo.</li>
+          </ol>
+        </div>
+      </details>
+    </section>
+
+    <footer>
+      <p>📚 Hardware 1 — Unidad: Puertos y Conexiones de PC &nbsp;|&nbsp; Duración: 80 min &nbsp;|&nbsp; Fecha: ___________________</p>
+      <p>Docente: ___________________________ &nbsp;|&nbsp; Curso / División: ___________________________</p>
+    </footer> -->
+   <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-uno.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="hardware1-sesion7.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 7
+        </a>
+        <a
+          href="hardware1-sesion9.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 9
+        </a>
+      </div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>
