@@ -1,8 +1,9 @@
-<!DOCTYPE html>
-<html lang="es-ES" data-theme="light" style=""><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sesión 6: Armado de PC CPU</title>
+<!doctype html>
+<html lang="es-ES" data-theme="light" style="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 6: Armado de PC - CPU</title>
     <style>
       :root {
         --bg-main: #0f1729;
@@ -22,7 +23,7 @@
       body {
         background-color: var(--bg-main);
         color: var(--text-main);
-        font-family: 'Segoe UI', system-ui, sans-serif;
+        font-family: "Segoe UI", system-ui, sans-serif;
         max-width: 1000px;
         margin: 0 auto;
         padding: 32px 20px;
@@ -268,19 +269,64 @@
     </style>
   </head>
   <body style="">
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion5.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 5
+      </a>
+      <a
+        href="hardware2-sesion7.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 7
+      </a>
+    </div>
     <header id="portada">
       <!-- <div class="center">
         <span class="badge">Módulo Avanzado</span>
       </div> -->
-      <h1>Sesión 6: Armado de PC CPU</h1>
-
+      <h1>Sesión 6: Armado de PC - CPU</h1>
     </header>
 
     <div class="toc">
       <h4>Tabla de Contenidos</h4>
       <div class="toc-columns">
         <a href="#sesion-6">▶ Sesión 6: Tipos de CPU según caso de uso</a>
-        <a href="#s6-cronograma">↳ Cronograma y Ficha</a>
+        <!-- <a href="#s6-cronograma">↳ Cronograma y Ficha</a> -->
         <a href="#s6-metodologia">↳ Metodología de Selección</a>
         <a href="#s6-casos">↳ Casos de Uso</a>
         <a href="#s6-taller">↳ Taller de Selección</a>
@@ -288,13 +334,13 @@
       </div>
     </div>
 
- 
-
-
     <!-- ================= SESIÓN 6 ================= -->
     <section id="sesion-6">
-      <h2 class="section-title">Sesión 6 — Tipos de CPU según caso de uso: selección y recomendación técnica</h2>
-
+      <h2 class="section-title">
+        Sesión 6 — Tipos de CPU según caso de uso: selección y recomendación
+        técnica
+      </h2>
+      <!-- 
       <div class="card" id="s6-cronograma">
         <h4 style="color: var(--cyan); margin-top: 0">Ficha de la Sesión</h4>
         <ul style="margin-bottom: 0">
@@ -308,9 +354,9 @@
             <strong>Herramientas sugeridas:</strong> PCPartPicker, buscadores de precios locales, comparadores técnicos.
           </li>
         </ul>
-      </div>
+      </div> -->
 
-      <table>
+      <!-- <table>
         <thead>
           <tr>
             <th>Bloque</th>
@@ -344,50 +390,66 @@
             <td style="color: var(--cyan); font-weight: bold">160 min</td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
 
       <div id="s6-metodologia">
         <h3>Metodología de Selección</h3>
         <p>
-          Elegir un procesador a ciegas basándose en el precio lleva al desbalance del equipo. Siga esta metodología
-          técnica:
+          Elegir un procesador a ciegas basándose en el precio lleva al
+          desbalance del equipo. Siga esta metodología técnica:
         </p>
         <ul class="methodology-list">
           <li>
-            <strong>Identificar uso principal:</strong> No existe la "PC para todo" óptima. ¿Es 80% gaming y 20% Excel?
-            ¿O es 100% renders en Premiere?
+            <strong>Identificar uso principal:</strong> Identificamos las
+            necesidades del cliente para determinar el mejor armado
           </li>
           <li>
-            <strong>Definir presupuesto global:</strong> El CPU no debería superar el 20-25% del presupuesto total en
-            una PC Gamer, pero puede ser el 40% en una Workstation.
+            <strong>Definir presupuesto global:</strong> Según el presupuesto
+            tendremos que determinar la gama/calidad de los productos. No todos
+            tienen que ser de la peor o mejor calidad en el armado, sino elegir
+            en base al presupuesto lo más optimo.
           </li>
           <li>
-            <strong>Analizar métricas críticas:</strong> Si es gaming, mirar L3 y Boost. Si es servidor, mirar TDP y
-            ECC.
+            <strong>Analizar métricas críticas:</strong> Si es gaming, mirar L3
+            y Boost. Si es servidor, mirar TDP y ECC. (para analizar las
+            métricas debemos conocerlas, saber su relevancia y utilidad)
           </li>
           <li>
-            <strong>Descartar hardware irrelevante:</strong> No pagar extra por AVX-512 o iGPUs potentes si el cliente
-            no va a usarlos.
+            <strong>Descartar hardware irrelevante:</strong>No elegir un
+            componente con métricas /características que ya logramos identificar
+            el cliente no va a aprovechar. Ej: No pagar extra por AVX-512 o
+            iGPUs potentes si el cliente no va a usarlos.
           </li>
           <li>
-            <strong>Validar plataforma (Costo Total):</strong> Un CPU barato en una placa madre carísima con DDR5
-            obligatoria puede salir más caro que un CPU superior en AM4.
+            <strong>Validar plataforma (Costo Total):</strong> Un CPU barato en
+            una placa madre carísima con DDR5 obligatoria puede salir más caro
+            que un CPU superior en AM4.
+          </li>
+          <li>
+            <strong>Buscar precios:</strong> No siempre la plataforma donde
+            encontramos buen precio de un componente significa que todos serán
+            igual de baratos, siempre buscar el mejor precio.
           </li>
         </ul>
       </div>
 
       <div class="callout tip">
-        <div class="callout-title">🎯 Tip: Prevención de Cuellos de Botella (Bottlenecks)</div>
+        <div class="callout-title">
+          🎯 Tip: Prevención de Cuellos de Botella (Bottlenecks)
+        </div>
         <p>
-          Un error común es combinar un i9-14900K con una RTX 3050, o un i3 con una RTX 4080.
-          <strong>Regla práctica:</strong> A resolución 1080p, el procesador trabaja más duro enviando frames a la GPU;
-          aquí el CPU importa mucho. En resoluciones 4K, la GPU se asfixia antes de que el CPU pueda sudar, por lo que
-          un procesador de gama media (Ryzen 5) es más que suficiente para empujar gráficos en 4K.
+          Un error común es combinar un CPU i9-14900K con una GPU RTX 3050, o un
+          CPU i3 con una GPU RTX 4080.
+          <strong>Regla práctica:</strong> A resolución 1080p, el procesador
+          trabaja más duro enviando frames (fotogramas) a la GPU; acá el CPU
+          importa mucho. En resoluciones 4K, la GPU se asfixia antes de que el
+          CPU pueda sudar, por lo que un procesador de gama media (Ryzen 5) es
+          más que suficiente para empujar gráficos en 4K.
         </p>
       </div>
 
       <div id="s6-casos">
-        <h3>Perfiles y Casos de Uso (Tabla Maestra)</h3>
+        <h3>Perfiles y Casos de Uso</h3>
 
         <table>
           <thead>
@@ -409,7 +471,7 @@
             </tr>
             <tr>
               <td><strong>Gaming (1080/1440p)</strong></td>
-              <td>Alto IPC, Caché L3, Freq Boost</td>
+              <td>Alto IPC, Caché L3, Frecuencia, Boost</td>
               <td>+8 núcleos, ECC</td>
               <td>6 a 8 / 65-105W</td>
               <td>Ryzen 5 5600, i5-12400F, R7 7800X3D</td>
@@ -440,27 +502,38 @@
 
         <div class="grid-cards">
           <div class="card" style="margin-bottom: 0">
-            <h4 style="color: var(--cyan); margin-top: 0">Detalle: Ofimática Básica</h4>
+            <h4 style="color: var(--cyan); margin-top: 0">
+              Detalle: Ofimática Básica
+            </h4>
             <p>
-              La clave es la longevidad y el bajo ruido. Un Celeron o i3 moderno de 12va gen sobra para sistemas POS
-              (puntos de venta) o administración. <em>Presupuesto PC completa ARS: $180k - $280k.</em> No requieren
+              La clave es la longevidad y el bajo ruido. Un Celeron o i3 moderno
+              de 12va gen sobra para sistemas POS (puntos de venta) o
+              administración.
+              <em>Presupuesto PC completa ARS: $180k - $280k.</em> No requieren
               disipadores de terceros.
             </p>
           </div>
           <div class="card" style="margin-bottom: 0">
-            <h4 style="color: var(--blue); margin-top: 0">Detalle: Edición y Producción</h4>
+            <h4 style="color: var(--blue); margin-top: 0">
+              Detalle: Edición y Producción
+            </h4>
             <p>
-              Programas como Premiere Pro o DaVinci Resolve tragan hilos de proceso. Además del CPU (mínimo 8 núcleos
-              reales), es crítico acompañarlo con SSDs NVMe Gen4 y 32GB+ de RAM; de nada sirve un Ryzen 9 si los datos
-              le llegan lento desde el disco.
+              Programas como Premiere Pro o DaVinci Resolve tragan hilos de
+              proceso. Además del CPU (mínimo 8 núcleos reales), es crítico
+              acompañarlo con SSDs NVMe Gen4 y 32GB+ de RAM; de nada sirve un
+              Ryzen 9 si los datos le llegan lento desde el disco.
             </p>
           </div>
-          <div class="card" style="margin-bottom: 0; grid-column: 1 / -1">
-            <h4 style="color: var(--yellow); margin-top: 0">Detalle: Workstation &amp; Servidor</h4>
+          <div class="card" style="margin-bottom: 0">
+            <h4 style="color: var(--yellow); margin-top: 0">
+              Detalle: Workstation &amp; Servidor
+            </h4>
             <p>
-              En ámbitos corporativos se paga por estabilidad certificada (Certificaciones ISV para SolidWorks/AutoCAD)
-              y por memoria ECC (que previene cuelgues por errores de bits en la RAM). Un NAS casero para Plex prioriza
-              el hardware de transcodificación (Intel QuickSync en la iGPU) por sobre el poder bruto, buscando gastar
+              En ámbitos corporativos se paga por estabilidad certificada
+              (Certificaciones ISV para SolidWorks/AutoCAD) y por memoria ECC
+              (que previene cuelgues por errores de bits en la RAM). Un NAS
+              casero para Plex prioriza el hardware de transcodificación (Intel
+              QuickSync en la iGPU) por sobre el poder bruto, buscando gastar
               apenas 35W de electricidad al estar prendido 24/7.
             </p>
           </div>
@@ -468,99 +541,92 @@
       </div>
 
       <div id="s6-taller">
-        <h3>Taller de Selección y Validación</h3>
+        <h3>Preguntas - Taller de Selección y Validación</h3>
 
         <div class="card">
-          <h4>Actividad 1: Simulador Multiperfil en PCPartPicker</h4>
-          <p><strong>Consigna:</strong> Crear configuraciones completas para:</p>
+          <h4>Actividad 1: Estoy corto de plata</h4>
+          <p><strong>Consigna:</strong> Necesito un CPU barato</p>
           <ul>
-            <li>Ofimática ($200k ARS)</li>
-            <li>Gaming 4K ($700k ARS)</li>
-            <li>Workstation CAD ($1.2M ARS)</li>
+            <li>Ofimática</li>
+            <li>Gaming 1440p</li>
+            <li>Edición Video 4K</li>
           </ul>
           <p>
-            <strong>Entregable:</strong> Enlaces a las builds, capturas, tablas de compatibilidad y justificación
-            técnica del balance CPU/GPU/Placa.
+            Para cada armado de PC buscar y sugerir un CPU económico que cubra
+            la necesidad del cliente. <br />
+            Defender la elección en base al precio, características. <br />
+            Fecha de lanzamiento no debe ser más viejo al primer trimestre del
+            2025 (Q1 2025). <br />
+            Agregar captura del precio y web de la ficha técnica del CPU
+            seleccionado.
           </p>
         </div>
 
         <div class="card">
-          <h4>Actividad 2: Auditoría de Cuellos de Botella</h4>
+          <h4>Actividad 2: Proyecto Empresa de Arquitectura</h4>
           <p>
-            <strong>Consigna:</strong> Se presentan 3 presupuestos armados "por clientes" con graves desbalances (Ej:
-            Ryzen 9 con GTX 1650 y fuente genérica). Identificar el error, explicar por qué fallará y rearmar el
-            presupuesto manteniendo el mismo costo total.
-          </p>
-        </div>
-
-        <div class="card">
-          <h4>Actividad 3: Proyecto Empresa de Arquitectura</h4>
-          <p>
-            <strong>Escenario:</strong> Estudio de arquitectura con 8 empleados (4 arquitectos renderistas, 2
-            secretarias, 2 gestores). Presupuesto global $3M ARS.<br>
-            <strong>Consigna:</strong> Diseñar la compra de hardware clasificando a los empleados en 2 o 3 perfiles
-            técnicos. Asignar el procesador correcto a cada uno maximizando el presupuesto de la empresa.
+            <strong>Escenario:</strong> Estudio de arquitectura con 8 empleados
+            (4 arquitectos renderistas, 2 secretarias). <br />
+            <strong>Consigna:</strong> Diseñar la compra de hardware
+            clasificando a los empleados por perfiles técnicos. Asignar el
+            procesador correcto a cada uno maximizando el presupuesto de la
+            empresa. <strong>Presupuesto</strong> Armar 2 presupuestos, uno
+            económico y otro premium. En una tabla mencionar los CPU
+            recomendados para cada escenario, precio, perfil del cliente a
+            cubrir. Agregar imagen de los CPU con su precio.
           </p>
         </div>
       </div>
 
       <div id="s6-preguntas">
-        <h3>Preguntas Guía y Consignas (Entregable en Word)</h3>
         <div class="q-list">
           <div class="q-item">
             <div class="q-number">1</div>
             <div>
-              Para un usuario de ofimática, justifique (mín. 100 palabras) por qué el alto IPC, el Overclock y las
-              instrucciones AVX-512 son un desperdicio de dinero.
+              Para un usuario de ofimática, ¿Por qué el alto IPC, el Overclock y
+              las instrucciones AVX-512 son un desperdicio de dinero?
             </div>
           </div>
-          <div class="q-item">
+          <!-- <div class="q-item">
             <div class="q-number">2</div>
             <div>
               Calcule el costo eléctrico adicional anual de tener un Servidor/NAS casero con un CPU de 125W frente a uno
               de 35W (asuma 24hs encendido y busque el valor aprox del kWh en su factura).
             </div>
+          </div> -->
+          <div class="q-item">
+            <div class="q-number">2</div>
+            <div>
+              Defina "Bottleneck" (cuello de botella). ¿Por qué un CPU impacta
+              mucho más en los FPS a 1080p que en resolución 4K?
+            </div>
           </div>
           <div class="q-item">
             <div class="q-number">3</div>
             <div>
-              Defina "Bottleneck" (cuello de botella). ¿Por qué un CPU impacta mucho más en los FPS a 1080p que en
-              resolución 4K?
+              ¿Por qué en la edición de video profesional (DaVinci/Premiere) los
+              núcleos físicos y el ancho de banda PCIe son más relevantes que
+              tener frecuencias de 6.0 GHz?
             </div>
           </div>
           <div class="q-item">
             <div class="q-number">4</div>
             <div>
-              ¿Por qué en la edición de video profesional (DaVinci/Premiere) los núcleos físicos y el ancho de banda
-              PCIe son más relevantes que tener frecuencias de 6.0 GHz?
+              Investigue qué es una "Workstation". Buscar un CPU compatible para
+              una Workstation, su precio en el mercado. Comparar sus
+              características (fichas técnicas) y precio con un CPU AMD Ryzen 9
+              9950X3D.
             </div>
           </div>
           <div class="q-item">
             <div class="q-number">5</div>
             <div>
-              Investigue qué es una "Workstation". Cite 3 diferencias técnicas estrictas de hardware frente a una PC
-              Gamer de gama ultra alta.
-            </div>
-          </div>
-          <div class="q-item">
-            <div class="q-number">6</div>
-            <div>
-              ¿Qué es el servidor Plex y qué tecnología presente en las iGPUs (especialmente de Intel) facilita la
-              transcodificación de video en tiempo real?
-            </div>
-          </div>
-          <div class="q-item">
-            <div class="q-number">7</div>
-            <div>
-              Diferencie un procesador de consumo tradicional de su versión "PRO" (ej. Ryzen PRO) y de un "Server-Grade"
-              (EPYC/Xeon). ¿Qué aportan en seguridad a nivel de hardware?
-            </div>
-          </div>
-          <div class="q-item">
-            <div class="q-number">8</div>
-            <div>
-              ¿Qué significa que una plataforma de trabajo tenga certificación ISV (Independent Software Vendor) y por
-              qué los ingenieros civiles dependen de ello?
+              Comparar dos procesadores: <br />
+              Intel i9-13900K (24C/32T, 125W, ~$600 USD) <br />
+              AMD Ryzen 9 7950X (16C/32T, 125W, ~$600 USD) <br />
+              ¿Cuál elegirías para una workstation de IA y por qué? ¿Y para
+              gaming en 4K? Considera factores como IPC, caché, soporte ECC y
+              AVX-512.
             </div>
           </div>
         </div>
@@ -569,17 +635,63 @@
 
     <!-- Navegación inferior -->
     <div class="nav-buttons">
-      <a href="#sesion-5" class="nav-btn">← Volver a Sesión 5</a>
-      <a href="#portada" class="nav-btn">Ir al Inicio ↑</a>
+      <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion5.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 5
+      </a>
+      <a
+        href="hardware2-sesion7.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 7
+      </a>
+    </div>
+      <a href="#portada" class="nav-btn" >Ir al Inicio ↑</a>
     </div>
 
-    <footer>
-      <p>
-        Material desarrollado para la cursada de Hardware II. Los precios y especificaciones son teóricos y destinados
-        al análisis técnico académico.
-      </p>
-    </footer>
-  
 
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
-</body></html>
+
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516"
+      integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg=="
+      data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
