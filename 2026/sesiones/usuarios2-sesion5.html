@@ -201,7 +201,7 @@
           <ul>
             <li>Comprender y aplicar relaciones <strong>1 a 1</strong> usando <code>FOREIGN KEY</code>.</li>
             <li>Aprender a insertar valores <code>NULL</code> en registros.</li>
-            <li>Usar los tipos de datos <code>DECIMAL</code> y <code>DATE</code>.</li>
+            <li>Usar los tipos de datos <code>DECIMAL</code> , <code>DATE</code> y <code>UNIQUE</code>.</li>
             <li>Modificar el nombre y tipo de dato de una columna en una tabla existente.</li>
             <li>Practicar con ejemplos y ejercicios</li>
           </ul>
@@ -274,7 +274,7 @@ de un cliente se borran los registros en la tabla direcciones relacionados al id
         <strong>Interpretación:</strong> <em>"Cada cliente tiene una dirección única, y si se elimina un cliente, su dirección también se elimina automáticamente (ON DELETE CASCADE)."</em>
       </div>
 
-      <h2>2. Tipos de Datos: DECIMAL y DATE</h2>
+      <h2>2. Tipos de Datos: DECIMAL, DATE y Unique</h2>
       <h3>DECIMAL(p,s)</h3>
       <ul>
         <li><strong>Uso:</strong> Números exactos, como precios o medidas.</li>
@@ -289,6 +289,19 @@ de un cliente se borran los registros en la tabla direcciones relacionados al id
         <li><strong>Ejemplos:</strong> <code>'2025-10-27'</code>, <code>'2000-07-30'</code>, <code>'1989-02-15'</code>.</li>
       </ul>
 
+      <h3>UNIQUE</h3>
+      <ul>
+        <li><strong>Uso:</strong> El dato debe ser unico en la columna asignada <br>
+           <code>CREATE TABLE correos ( <br>
+            id INT AUTO_INCREMENT PRIMARY KEY, <br>
+            email VARCHAR(60) UNIQUE
+);</code></li>
+<h3>¿Cuándo usar cada PRIMARY KEY o UNIQUE?</h3>
+        <li>Usar PRIMARY KEY para la columna que identifica de forma única cada fila (ej: id). No permite valores NULL</li>
+        <li>Usar UNIQUE para columnas que deben ser únicas pero no son la identidad principal (ej: email). Permite valores NULL</li>
+        <li>Una FOREIGN KEY puede referenciar a una columna UNIQUE (no nula)</li>
+      </ul>
+<br>
       <div class="command-explanation">
         <div class="command-title">ALTER TABLE (Alterar Tabla)</div>
         <p>Modifica la estructura de una tabla existente.</p>
@@ -551,7 +564,7 @@ sea igual a 1</span></code></pre>
           <ul>
             <li>Crea una tabla <code>clientes</code> con al menos 5 <code>clientes</code>. Dicha tabla debe tener las sig columnas: id_cliente, nombre, saldo, direccion.</li>
             <li>Crea una tabla <code>pasaportes</code> relacionada 1 a 1. Dicha tabla debe tener las sig columnas: id_pasaporte, fecha, pais, id_cliente.</li>
-            <li>La tabla debe tener los siguientes tipos de datos <code>DECIMAL</code> y <code>DATE</code>.</li>
+            <li>La tabla debe tener los siguientes tipos de datos <code>DECIMAL</code> , <code>DATE</code> y <code>UNIQUE</code>.</li>
             <li>Inserta 3 pasaportes para los clientes con <code>id_cliente</code> 1, 3 y 5.</li>
           </ul>
         </li>
