@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="es" data-theme="light" style="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Sesión 9: BIOS, UEFI, CMOS y procedimientos de identificación y reseteo
+    </title>
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+     /* ===== RESET Y BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
+  color: #1a2a3a;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* ===== TIPOGRAFÍA ===== */
+h1, h2, h3, h4 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  text-align: center;
+  background: linear-gradient(135deg, #1a2a3a, #2d4a6e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(90deg, #3b82f6, #1e40af);
+  border-image-slice: 1;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding-left: 0.75rem;
+  border-left: 5px solid #3b82f6;
+  color: #1e3a5f;
+}
+
+h3 {
+  font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #2c3e50;
+}
+
+/* ===== NAVEGACIÓN ===== */
+div[style*="margin-bottom: 24px"] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 2rem !important;
+}
+
+div[style*="margin-bottom: 24px"] a {
+  padding: 10px 20px !important;
+  border-radius: 50px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 0.9rem !important;
+}
+
+div[style*="margin-bottom: 24px"] a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* ===== CAJAS DESTACADAS ===== */
+.caja-destacada {
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.caja-destacada.importante,
+.caja-destacada[class*="importante"] {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  border-left: 6px solid #dc2626;
+  box-shadow: 0 4px 14px rgba(220,38,38,0.1);
+}
+
+.caja-destacada.consejo,
+.caja-destacada[class*="consejo"] {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  border-left: 6px solid #2563eb;
+  box-shadow: 0 4px 14px rgba(37,99,235,0.1);
+}
+
+.caja-destacada.precaucion,
+.caja-destacada[class*="precaucion"] {
+  background: linear-gradient(135deg, #fed7aa, #fde68a);
+  border-left: 6px solid #f59e0b;
+  box-shadow: 0 4px 14px rgba(245,158,11,0.1);
+}
+
+.titulo-caja {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ===== TABLAS ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+th {
+  background: linear-gradient(135deg, #1e3a5f, #2c5282);
+  color: white;
+  font-weight: 600;
+  padding: 12px;
+  text-align: left;
+}
+
+td {
+  padding: 10px 12px;
+  background-color: white;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===== LISTAS ===== */
+ul, ol {
+  margin: 1rem 0 1rem 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* ===== CÓDIGOS Y EJEMPLOS ===== */
+code, .codigo {
+  background: #2d3748;
+  color: #e2e8f0;
+  padding: 0.2rem 0.4rem;
+  border-radius: 6px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85em;
+}
+
+/* ===== BOTONES DE ACCIÓN ===== */
+.boton, button, [role="button"] {
+  transition: all 0.3s ease;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  body {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .caja-destacada {
+    padding: 1rem;
+  }
+  
+  table {
+    font-size: 0.75rem;
+  }
+  
+  th, td {
+    padding: 8px;
+  }
+  
+  ul, ol {
+    padding-left: 1rem;
+  }
+  
+  h2 {
+    padding-left: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  
+  th {
+    position: sticky;
+    top: 0;
+  }
+  
+  tr {
+    margin-bottom: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    width: 40%;
+    color: #1e3a5f;
+  }
+}
+
+/* ===== SCROLL SMOOTH ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ===== FOOTER / ENLACES INFERIORES ===== */
+div[style*="margin-top: 30px"],
+div:last-of-type[style*="margin-bottom"] {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 2px dashed #cbd5e1;
+}
+
+/* ===== MEJORAS DE LECTURA ===== */
+p {
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+
+/* ===== ENLACES GENERALES ===== */
+a:not([class*="boton"]):not([style*="background"]) {
+  color: #2563eb;
+  text-decoration: none;
+  border-bottom: 1px dotted #93c5fd;
+  transition: all 0.2s;
+}
+
+a:not([class*="boton"]):not([style*="background"]):hover {
+  color: #1e40af;
+  border-bottom-color: #1e40af;
+}
+    </style>
+  </head>
+  <body style="">
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion8.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 8
+      </a>
+      <a
+        href="hardware1-sesion10.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 10
+      </a>
+    </div>
+    <h1>
+      Sesión 9: BIOS, UEFI, CMOS y procedimientos de identificación y reseteo
+    </h1>
+
+    <div class="caja-destacada">
+      <span class="titulo-caja">Introducción Pedagógica</span>
+      <p>
+        Bienvenidos a esta sesión intensiva sobre los componentes fundamentales
+        que dan vida a un ordenador antes de que el sistema operativo entre en
+        acción. Como futuros técnicos de hardware, comprender cómo funciona el
+        firmware base (BIOS/UEFI), cómo interactúa con el hardware físico y cómo
+        solucionar problemas de arranque es una de las habilidades más críticas
+        que podéis desarrollar. En este documento exploraremos desde los
+        conceptos teóricos hasta los procedimientos prácticos de identificación
+        y reseteo en placas base reales.
+      </p>
+    </div>
+
+    <h2>1. Objetivos de Aprendizaje</h2>
+    <ul>
+      <li>
+        Diferenciar conceptualmente entre RAM (volátil), ROM (no volátil) y sus
+        roles en el arranque.
+      </li>
+      <li>
+        Comprender qué es el firmware y cómo BIOS/UEFI controlan el hardware
+        antes del sistema operativo.
+      </li>
+      <li>
+        Entender el proceso de POST y cómo interpretar sus señales de error
+        (Beep Codes).
+      </li>
+      <li>
+        Identificar visual y funcionalmente el rol de la pila CR2032 y la
+        memoria CMOS.
+      </li>
+      <li>
+        Navegar y configurar parámetros clave como el Boot Order, perfiles
+        XMP/DOCP y Secure Boot.
+      </li>
+      <li>
+        Realizar procedimientos seguros de reseteo y recuperación de BIOS
+        mediante diversos métodos físicos e interfaces.
+      </li>
+    </ul>
+
+    <div class="caja-destacada precaucion">
+      <span class="titulo-caja">⚠ PRECAUCIÓN: Normas de Seguridad Previas</span>
+      <p>
+        Antes de manipular cualquier placa base o componente interno, es
+        <strong>obligatorio</strong> seguir estas buenas prácticas:
+      </p>
+      <ol>
+        <li>
+          <strong>Apagar y desenchufar:</strong> Apague la fuente de
+          alimentación (botón en O) y desconecte el cable de corriente de la
+          pared.
+        </li>
+        <li>
+          <strong>Descargar energía residual:</strong> Presione el botón de
+          encendido del chasis durante 5-10 segundos con el equipo desenchufado
+          para vaciar los condensadores.
+        </li>
+        <li>
+          <strong>Electricidad estática (ESD):</strong> Utilice una pulsera
+          antiestática o toque una parte metálica sin pintura del chasis antes
+          de tocar los componentes electrónicos.
+        </li>
+        <li>
+          <strong>No forzar:</strong> Nunca fuerce la extracción de la pila CMOS
+          ni doble los pines de los jumpers.
+        </li>
+        <li>
+          <strong>Consultar el manual:</strong> Cada placa base es diferente; el
+          manual del fabricante es la guía definitiva para localizar
+          componentes.
+        </li>
+      </ol>
+    </div>
+
+    <h2>2. Desarrollo Teórico Fundacional</h2>
+
+    <h3>A. ROM, Firmware y Memoria Flash</h3>
+    <p>
+      La <strong>ROM (Read Only Memory)</strong> es memoria no volátil: conserva
+      su contenido sin energía eléctrica. A diferencia de la RAM, no se puede
+      escribir libremente en el uso diario. Hoy en día, los chips que albergan
+      la BIOS/UEFI son técnicamente <strong>memoria Flash (EEPROM)</strong>, que
+      sí permite reescritura controlada mediante un proceso llamado
+      <em>flasheo</em> o actualización de firmware.
+    </p>
+    <p>
+      El <strong>Firmware</strong> es el software de bajo nivel grabado en este
+      chip de la placa madre. Su función principal es ser el primer programa que
+      ejecuta la CPU al recibir energía. Sin firmware, la CPU sería incapaz de
+      comunicarse con la memoria RAM, el disco duro o el teclado.
+    </p>
+
+    <div class="caja-destacada importante">
+      <span class="titulo-caja">Importante: Actualización (Flash)</span>
+      <p>
+        El proceso de flasheo reescribe el firmware para corregir errores o
+        añadir compatibilidad con nuevos procesadores. Un corte de luz durante
+        este proceso puede "brickear" (inutilizar) la placa base. Para evitarlo,
+        algunos fabricantes incluyen tecnologías de doble BIOS (DualBIOS) como
+        medida de seguridad.
+      </p>
+    </div>
+
+    <h3>B. BIOS Legacy vs UEFI</h3>
+    <p>
+      El <strong>BIOS (Basic Input/Output System)</strong> tradicional fue el
+      estándar de firmware durante décadas. Sin embargo, debido a sus severas
+      limitaciones (ejecución en modo real de 16 bits, interfaz exclusiva de
+      texto, y la incapacidad de arrancar desde discos mayores a 2.2 TB usando
+      MBR), fue reemplazado progresivamente.
+    </p>
+    <p>
+      El <strong>UEFI (Unified Extensible Firmware Interface)</strong> es el
+      sucesor moderno, introducido para superar estas barreras. La mayoría de
+      los ordenadores fabricados a partir de 2012 utilizan UEFI por defecto.
+    </p>
+
+    <table>
+      <caption>
+        Comparativa: BIOS Legacy vs UEFI
+      </caption>
+      <tbody>
+        <tr>
+          <th>Característica</th>
+          <th>BIOS Legacy</th>
+          <th>UEFI</th>
+        </tr>
+        <tr>
+          <td>Arquitectura</td>
+          <td>16 bits (modo real)</td>
+          <td>32 o 64 bits</td>
+        </tr>
+        <tr>
+          <td>Interfaz de usuario</td>
+          <td>Texto (generalmente azul/gris), solo teclado</td>
+          <td>Gráfica (GUI), soporta ratón y teclado</td>
+        </tr>
+        <tr>
+          <td>Tamaño máx. de disco de arranque</td>
+          <td>2.2 TB (formato MBR)</td>
+          <td>9.4 ZB (formato GPT) - Sin límite práctico</td>
+        </tr>
+        <tr>
+          <td>Particiones primarias</td>
+          <td>Máximo 4</td>
+          <td>Hasta 128 (en Windows)</td>
+        </tr>
+        <tr>
+          <td>Tiempo de arranque</td>
+          <td>Lento (20-30 segundos)</td>
+          <td>Rápido (soporta Fast Boot, 5-10 seg)</td>
+        </tr>
+        <tr>
+          <td>Seguridad pre-OS</td>
+          <td>Básica/Nula</td>
+          <td>Avanzada (Secure Boot)</td>
+        </tr>
+        <tr>
+          <td>Capacidades de Red</td>
+          <td>No incluidas nativamente</td>
+          <td>Soporta drivers de red, descargas directas</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>C. CMOS y la Pila CR2032</h3>
+    <p>
+      Existe mucha confusión entre BIOS y CMOS. Mientras la BIOS/UEFI es el
+      <em>programa</em> (guardado en la memoria Flash no volátil), el
+      <strong>CMOS (Complementary Metal-Oxide Semiconductor)</strong> es una
+      minúscula porción de memoria RAM (típicamente 256 bytes) de bajísimo
+      consumo, integrada normalmente en el chipset. Esta memoria almacena la
+      <strong>configuración personalizada del usuario</strong> (orden de
+      arranque, perfiles de memoria, fecha y hora del sistema).
+    </p>
+    <p>
+      Al ser tecnología RAM, el CMOS pierde sus datos si se queda sin energía.
+      Aquí entra en juego la
+      <strong>pila CR2032</strong> (una batería de litio de 3 voltios en forma
+      de moneda), que mantiene viva esta memoria cuando el equipo está
+      desenchufado. Su vida útil ronda los 3 a 5 años.
+    </p>
+    <p>
+      <strong>Síntomas de batería agotada:</strong> Pérdida constante de la hora
+      del sistema tras apagar el equipo, y mensajes de error en el arranque como
+      "CMOS Checksum Error" o "CMOS Battery Failure".
+    </p>
+
+    <h3>D. POST y Códigos de Error (Beep Codes)</h3>
+    <p>
+      El <strong>POST (Power-On Self Test)</strong> es la rutina de
+      autodiagnóstico que ejecuta el firmware cada vez que se enciende el
+      ordenador, <em>antes</em> de buscar el sistema operativo. Su labor es
+      verificar que el procesador (CPU), la memoria RAM, la tarjeta de vídeo
+      (GPU) y los dispositivos de almacenamiento básicos estén presentes y
+      funcionen eléctricamente.
+    </p>
+    <p>
+      Si el POST detecta un error crítico antes de poder inicializar la
+      pantalla, utiliza un altavoz interno (Speaker/Buzzer) para emitir pitidos
+      de diagnóstico. Aunque varían por fabricante, aquí vemos un ejemplo
+      clásico:
+    </p>
+
+    <table>
+      <caption>
+        Ejemplos de Beep Codes (AMI BIOS)
+      </caption>
+      <tbody>
+        <tr>
+          <th>Código de pitidos</th>
+          <th>Problema diagnosticado</th>
+        </tr>
+        <tr>
+          <td>1 pitido corto</td>
+          <td>POST exitoso (todo OK). Comienza el arranque.</td>
+        </tr>
+        <tr>
+          <td>2 pitidos cortos</td>
+          <td>Error en la memoria RAM.</td>
+        </tr>
+        <tr>
+          <td>1 largo + 2 cortos</td>
+          <td>Error en la tarjeta de vídeo.</td>
+        </tr>
+        <tr>
+          <td>Pitidos continuos / repetitivos</td>
+          <td>Memoria RAM no detectada o mal insertada.</td>
+        </tr>
+        <tr>
+          <td>Sin pitido + sin imagen (y ventiladores giran)</td>
+          <td>Posible fallo crítico en CPU o fuente de alimentación.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>3. Configuración Avanzada en BIOS/UEFI</h2>
+
+    <div class="caja-destacada consejo">
+      <span class="titulo-caja">Ingreso al BIOS</span>
+      <p>
+        Para entrar en la configuración, hay que pulsar repetidamente una tecla
+        específica durante el brevísimo lapso del POST. Si usa Windows con
+        "Inicio rápido" activado, puede que deba reiniciar el equipo (no apagar
+        y encender) para poder capturar este momento.
+      </p>
+      <table style="width: auto; margin-top: 10px">
+        <tbody>
+          <tr>
+            <th>Fabricante</th>
+            <th>Tecla Acceso BIOS</th>
+            <th>Tecla Boot Menu (Temporal)</th>
+          </tr>
+          <tr>
+            <td>ASUS</td>
+            <td>F2 o Supr (Del)</td>
+            <td>F8</td>
+          </tr>
+          <tr>
+            <td>Gigabyte / MSI</td>
+            <td>Supr (Del)</td>
+            <td>F12 (Giga) / F11 (MSI)</td>
+          </tr>
+          <tr>
+            <td>HP (Portátiles)</td>
+            <td>F10 o Esc</td>
+            <td>F9</td>
+          </tr>
+          <tr>
+            <td>Lenovo / Dell</td>
+            <td>F1, F2</td>
+            <td>F12</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>A. Boot Order (Prioridad de Arranque)</h3>
+    <p>
+      Es la lista ordenada de dispositivos donde el firmware buscará el
+      <em>Bootloader</em> (cargador del sistema operativo). Para una instalación
+      limpia de Windows, se debe colocar la unidad USB (pendrive) en la posición
+      número 1. Para uso diario, el SSD/HDD principal debe estar en la primera
+      posición. Si el disco correcto no está en la lista, aparecerá el error "No
+      bootable device found".
+    </p>
+
+    <h3>B. XMP / DOCP (Perfiles de Rendimiento de RAM)</h3>
+    <p>
+      Por motivos de compatibilidad estandarizada (JEDEC), al instalar memoria
+      RAM de alta velocidad (por ejemplo, DDR4 a 3600 MHz), la placa base la
+      hará funcionar inicialmente a su velocidad base segura (ej. 2133 MHz).
+      Para alcanzar el rendimiento por el que pagó el cliente, el
+      técnico/usuario debe entrar a la UEFI y activar el perfil preconfigurado
+      de fábrica:
+    </p>
+    <ul>
+      <li>
+        <strong>XMP (Extreme Memory Profile):</strong> Terminología usada
+        mayormente en plataformas Intel.
+      </li>
+      <li>
+        <strong>DOCP (Direct Overclock Profile) / EXPO:</strong> Equivalente
+        para plataformas AMD.
+      </li>
+    </ul>
+
+    <h3>C. Secure Boot (Arranque Seguro)</h3>
+    <p>
+      Es un estándar de seguridad de UEFI que verifica que el sistema operativo
+      y los drivers de bajo nivel tengan una firma digital criptográfica válida
+      otorgada por una autoridad de confianza (como Microsoft). Evita que se
+      carguen
+      <em>rootkits</em> o malware a nivel de arranque. Es un requisito estricto
+      para instalar Windows 11. Sin embargo, los técnicos a menudo deben
+      desactivarlo temporalmente para arrancar herramientas de diagnóstico Linux
+      o instalar distribuciones no firmadas.
+    </p>
+
+    <h2>4. Guía Visual para Reconocer Componentes y Botones</h2>
+    <p>
+      Para diagnosticar y resetear configuraciones erróneas, es fundamental
+      saber identificar físicamente los componentes en la placa base.
+    </p>
+
+    <h3>Identificación del Chip BIOS/UEFI</h3>
+    <ul>
+      <li>
+        <strong>En placas modernas:</strong> Suelen ser pequeños chips negros de
+        8 pines soldados a la placa (formato SOIC-8), a menudo ubicados cerca
+        del chipset o de los puertos SATA. Marcas como Winbond o Macronix (MXIC)
+        suelen estar impresas. En placas de gama alta, pueden verse dos chips
+        juntos marcados como "M_BIOS" (Main) y "B_BIOS" (Backup)
+        ofreciendo DualBIOS.
+      </li>
+      <li>
+        <strong>En placas Legacy antiguas:</strong> Eran chips rectangulares
+        mucho más grandes, frecuentemente insertados en un zócalo (DIP) para
+        poder extraerlos físicamente con pinzas, y solían tener una pegatina
+        brillante holográfica encima con la marca "AMI", "Award" o "Phoenix".
+      </li>
+      <li>
+        <strong>En portátiles (Notebooks):</strong> Son chips SOIC-8 diminutos,
+        extremadamente difíciles de distinguir de otros controladores a simple
+        vista sin leer la serigrafía (es la capa de tinta que se imprime sobre
+        la placa PCB para identificar componentes, polaridades, etc<!--EndFragment-->
+
+        ) o revisar el esquema esquemático de la placa.
+      </li>
+    </ul>
+
+    <h3>Localización de la Pila CMOS</h3>
+    <ul>
+      <li>
+        <strong>Placas de escritorio:</strong> Es muy evidente. Una pila de
+        botón plateada (CR2032) encajada en un zócalo circular negro o blanco de
+        plástico, generalmente en la mitad inferior de la placa o cerca de las
+        ranuras PCIe.
+      </li>
+      <li>
+        <strong>En portátiles:</strong> Raramente usan el zócalo circular de
+        escritorio por falta de espacio. Suelen ser pilas de botón envueltas en
+        plástico termorretráctil (generalmente negro, amarillo o azul) con un
+        cable rojo y negro que termina en un diminuto conector blanco enchufado
+        a la placa base.
+      </li>
+    </ul>
+
+    <h3>Identificación del Jumper y Botones de Reseteo (Clear CMOS)</h3>
+    <ul>
+      <li>
+        <strong>El Jumper (CLR_CMOS / CLRTC / JBAT1):</strong> Son 2 o 3
+        pequeños pines metálicos expuestos en la placa base, ubicados muy cerca
+        de la pila CMOS. A veces tienen un capuchón de plástico (jumper) uniendo
+        dos pines.
+      </li>
+      <li>
+        <strong>Botón interno:</strong> En placas modernas de gama media-alta,
+        el jumper se sustituye por un pequeño pulsador físico soldado
+        directamente a la placa, a menudo de color rojo o negro, serigrafiado
+        como "CLR_CMOS" o "RST".
+      </li>
+      <li>
+        <strong>Panel trasero (I/O Shield):</strong> En placas de gama alta, hay
+        un botón accesible desde el panel de puertos/perifericos traseros,
+        etiquetado como "Clear CMOS" (a menudo iluminado o con un icono de una
+        flecha circular). Permite resetear la BIOS sin abrir el chasis.
+      </li>
+    </ul>
+
+    <h2>5. Procedimientos de Reseteo y Recuperación</h2>
+    <p>
+      Existen varias formas de devolver la BIOS a su configuración de fábrica
+      (Clear CMOS). Esto es vital si el equipo no da imagen por un mal
+      overclocking o si se ha olvidado la contraseña de la BIOS.
+    </p>
+
+    <h3>Métodos de Reset (Clear CMOS)</h3>
+    <ol>
+      <li>
+        <strong>Por Jumper (El método clásico de taller):</strong> Con el PC
+        apagado y desenchufado, localizar los pines CLR_CMOS. Si son 3 pines y
+        el puente está en 1-2, moverlo a 2-3 durante 10 segundos, y devolverlo a
+        1-2. Si solo son 2 pines expuestos, tocar ambos simultáneamente con la
+        punta de un destornillador plano metálico durante 10 segundos para hacer
+        cortocircuito (puente).
+      </li>
+      <li>
+        <strong>Extracción de Pila:</strong> Con el PC desenchufado, presione la
+        pestaña metálica del zócalo para liberar la pila CR2032. Espere entre 1
+        y 5 minutos para asegurar que los condensadores se descarguen por
+        completo, y vuelva a colocarla.
+      </li>
+      <li>
+        <strong>Botón Panel Trasero:</strong> Con el equipo apagado pero
+        conectado a la corriente (fuente en ON), mantener presionado el botón
+        "Clear CMOS" de la parte trasera durante 5-10 segundos.
+      </li>
+    </ol>
+
+    <h3>Recuperación de BIOS (Flashback / Q-Flash Plus)</h3>
+    <p>
+      ¿Qué pasa si una actualización sale mal o el equipo no muestra nada en
+      pantalla ni pita (placa "brickeada")? Las placas modernas incorporan
+      tecnologías que permiten flashear el firmware
+      <strong>incluso sin tener CPU ni memoria RAM instaladas</strong>.
+    </p>
+    <ol>
+      <li>
+        Se descarga el archivo de BIOS correcto desde otro PC y se renombra
+        según lo indique el fabricante (ej. MSI.ROM, GIGABYTE.bin).
+      </li>
+      <li>Se guarda en un pendrive USB formateado en FAT32.</li>
+      <li>
+        Con la placa base conectada a la fuente de alimentación (pero el PC
+        apagado), se inserta el pendrive en un
+        <strong>puerto USB específico</strong> del panel trasero (suele estar
+        delineado o tener escrito "BIOS").
+      </li>
+      <li>
+        Se presiona un pequeño botón contiguo llamado "Flash BIOS Button" o
+        similar durante 3 segundos.
+      </li>
+      <li>
+        Un LED comenzará a parpadear, indicando que el chip se está
+        reprogramando de forma autónoma. Cuando el LED se apaga (unos 5 minutos
+        después), la placa ha revivido.
+      </li>
+    </ol>
+
+    <h2>6. Actividades </h2>
+
+
+    <ol>
+  <li>¿Cuál es la diferencia fundamental entre la memoria RAM (volátil) y la memoria ROM (no volátil) en el contexto del proceso de arranque de un ordenador?</li>
+  <li>Explica qué es el firmware y por qué es crucial para el funcionamiento de una placa base antes de que se cargue el sistema operativo.</li>
+  <li>Describe brevemente qué es el proceso POST (Power-On Self Test) y qué tipo de señales utiliza para comunicar errores críticos cuando la pantalla aún no está inicializada.</li>
+  <li>¿Qué función cumple la pila CR2032 en la placa base y cuáles son dos síntomas claros de que esta batería se ha agotado? </li>
+   <li>Agregar imagen de pila CR2032 y explicar que indica su codigo "CR2032" </li>
+   <li>Imagen de pila CMOS en placa madre moderna, legacy y notebook</li>
+   <li>Imagen de pila CMOS en placa madre de notebook (envuelta en
+        termorretráctil con cablecito)</li>
+   <li>Imagen panel trasero con boton de reset CMOS y puerto USB dedicado a BIOS Flashback junto a su
+        botón de activación.</li>
+   <li>Imagen de botón de reset CMOS dentro de la placa madre y pines + jumper para resetear (CLR_CMOS / JBAT1)</li>
+  <li>Comparar el BIOS Legacy con el UEFI mencionando al menos tres diferencias clave en cuanto a arquitectura, interfaz y capacidades de almacenamiento.</li>
+ <li>
+       Agregar imagen de una interfaz gráfica de <strong>UEFI</strong> moderna frente a una
+        interfaz de texto de <strong>BIOS Legacy</strong>.
+      </li>
+  <li>Un cliente te trae un PC que enciende los ventiladores pero no da imagen, y el altavoz interno emite una secuencia de "un pitido largo seguido de dos pitidos cortos". Según los códigos de ejemplo (AMI BIOS), ¿cuál es el diagnóstico más probable?</li>
+  <li>Si acabas de instalar memorias RAM DDR4 de 3600 MHz pero el sistema las reconoce a 2133 MHz, ¿qué debes activar en la UEFI para solucionarlo? ¿Cómo se llaman estos perfiles en plataformas Intel y AMD respectivamente?</li>
+  <li>Describe el procedimiento seguro para realizar un "Clear CMOS" mediante el método del jumper, incluyendo las medidas de seguridad previas (desconexión, descarga de energía, ESD).</li>
+  <li>¿Qué tecnología incorporan las placas base modernas para recuperar el firmware incluso cuando no hay CPU o RAM instaladas? Explica los pasos básicos para usarla.</li>
+  <li>Si un usuario olvida la contraseña de acceso a la BIOS, ¿por qué el procedimiento de Clear CMOS es la solución más efectiva y qué hace exactamente este proceso?</li>
+  <li>Imagen de chip de BIOS soldado (formato SOIC-8) en una placa
+        base moderna.</li>
+  <li>
+  ¿Que ofrecen los dos chips juntos marcados como "M_BIOS" y "B_BIOS".  Agregar imagen de M_BIOS y B_BIOS
+  </li>
+  <li>Buscar imagen de zocalo DIP</li>
+  <li>Identifica físicamente: ¿cómo se diferencia visualmente un chip de BIOS Legacy (antiguo) de un chip de BIOS moderno en formato SOIC-8 en una placa base?</li>
+  <!-- <li>¿Cuál es la principal limitación del estilo de partición MBR en relación con el BIOS Legacy, y cómo resuelve UEFI este problema mediante el uso de GPT?</li> -->
+</ol>
+    <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion8.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 8
+      </a>
+      <a
+        href="hardware1-sesion10.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 10
+      </a>
+    </div>
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516"
+      integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg=="
+      data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
