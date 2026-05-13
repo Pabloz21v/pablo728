@@ -235,6 +235,17 @@
         font-size: 1.2rem;
         font-weight: 600;
       }
+      @media (max-width: 680px) {
+      .container {
+        padding: 0 0.5rem;
+      }
+      body {
+        padding: 0rem;
+      }
+      .q-item {
+        flex-direction: column;
+      }
+    }
     </style>
   </head>
   <body style="">
@@ -437,47 +448,50 @@
           <em>Throttling</em>).
         </p>
          <h3>Configuraciones típicas de VRM por gama</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Gama de Placa Madre</th>
-                <th>Fases VRM (CPU + iGPU/RAM)</th>
-                <th>Componentes típicos</th>
-                <th>Procesadores compatibles</th>
-                <th>Uso recomendado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Entry-Level</td>
-                <td>3+1, 4+1</td>
-                <td>MOSFETs básicos, chokes pequeños, sin heatsink</td>
-                <td>Intel Pentium/Celeron, Ryzen 3</td>
-                <td>Oficinas, uso básico</td>
-            </tr>
-            <tr>
-                <td>Mid-Range</td>
-                <td>6+2, 8+2</td>
-                <td>MOSFETs de 40A-50A, chokes de ferrita, heatsink pequeño</td>
-                <td>Intel i5, Ryzen 5</td>
-                <td>Gaming 1080p, edición de video ligera</td>
-            </tr>
-            <tr>
-                <td>High-End</td>
-                <td>10+2, 12+2, 14+2</td>
-                <td>DrMOS (60A-90A), chokes premium, heatsinks grandes</td>
-                <td>Intel i7/i9, Ryzen 7/9</td>
-                <td>Gaming 4K, streaming, renderizado</td>
-            </tr>
-            <tr>
-                <td>Enthusiast/Workstation</td>
-                <td>16+2, 20+2, 32+0</td>
-                <td>DrMOS de 100A+, controladores PWM avanzados, VRM en capas</td>
-                <td>Intel Core i9-14900K, Ryzen 9 7950X</td>
-                <td>Overclocking extremo, servidores</td>
-            </tr>
-        </tbody>
-    </table>
+         <div style="overflow-x: auto">
+
+           <table>
+               <thead>
+                   <tr>
+                       <th>Gama de Placa Madre</th>
+                       <th>Fases VRM (CPU + iGPU/RAM)</th>
+                       <th>Componentes típicos</th>
+                       <th>Procesadores compatibles</th>
+                       <th>Uso recomendado</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   <tr>
+                       <td>Entry-Level</td>
+                       <td>3+1, 4+1</td>
+                       <td>MOSFETs básicos, chokes pequeños, sin heatsink</td>
+                       <td>Intel Pentium/Celeron, Ryzen 3</td>
+                       <td>Oficinas, uso básico</td>
+                   </tr>
+                   <tr>
+                       <td>Mid-Range</td>
+                       <td>6+2, 8+2</td>
+                       <td>MOSFETs de 40A-50A, chokes de ferrita, heatsink pequeño</td>
+                       <td>Intel i5, Ryzen 5</td>
+                       <td>Gaming 1080p, edición de video ligera</td>
+                   </tr>
+                   <tr>
+                       <td>High-End</td>
+                       <td>10+2, 12+2, 14+2</td>
+                       <td>DrMOS (60A-90A), chokes premium, heatsinks grandes</td>
+                       <td>Intel i7/i9, Ryzen 7/9</td>
+                       <td>Gaming 4K, streaming, renderizado</td>
+                   </tr>
+                   <tr>
+                       <td>Enthusiast/Workstation</td>
+                       <td>16+2, 20+2, 32+0</td>
+                       <td>DrMOS de 100A+, controladores PWM avanzados, VRM en capas</td>
+                       <td>Intel Core i9-14900K, Ryzen 9 7950X</td>
+                       <td>Overclocking extremo, servidores</td>
+                   </tr>
+               </tbody>
+           </table>
+      </div>
 
       <h3>Mitos comunes sobre el VRM</h3>
 
@@ -625,82 +639,88 @@
 
       <div class="card">
         <h3>Comparativa Estructural: Legacy vs Moderna vs Notebook</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Característica</th>
-              <th>Legacy (Desktop)</th>
-              <th>Moderna (Desktop)</th>
-              <th>Notebook (Portátil)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Memoria RAM</strong></td>
-              <td>DDR3 o DDR4 inicial</td>
-              <td>DDR4 de alta frec. o DDR5</td>
-              <td>LPDDR / SO-DIMM (a veces soldada)</td>
-            </tr>
-            <tr>
-              <td><strong>Almacenamiento</strong></td>
-              <td>SATA III / M.2 PCIe 3.0</td>
-              <td>M.2 NVMe PCIe 4.0 / 5.0</td>
-              <td>1 o 2 ranuras M.2 NVMe</td>
-            </tr>
-            <tr>
-              <td><strong>Actualización de CPU</strong></td>
-              <td>Sí (limitado a su gen)</td>
-              <td>Sí (varias generaciones)</td>
-              <td>No (CPU soldado)</td>
-            </tr>
-            <tr>
-              <td><strong>Factor de Forma</strong></td>
-              <td>ATX / mATX estándar</td>
-              <td>ATX / mATX estándar</td>
-              <td>Propietario / Personalizado</td>
-            </tr>
-            <tr>
-              <td><strong>Uso Recomendado</strong></td>
-              <td>Presupuestos muy ajustados, retro-gaming</td>
-              <td>Equipos nuevos, Workstations, Gaming actual</td>
-              <td>Estudiantes, profesionales nómadas</td>
-            </tr>
-          </tbody>
-        </table>
+   <div style="overflow-x: auto">
+
+     <table>
+       <thead>
+         <tr>
+           <th>Característica</th>
+           <th>Legacy (Desktop)</th>
+           <th>Moderna (Desktop)</th>
+           <th>Notebook (Portátil)</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr>
+           <td><strong>Memoria RAM</strong></td>
+           <td>DDR3 o DDR4 inicial</td>
+           <td>DDR4 de alta frec. o DDR5</td>
+           <td>LPDDR / SO-DIMM (a veces soldada)</td>
+         </tr>
+         <tr>
+           <td><strong>Almacenamiento</strong></td>
+           <td>SATA III / M.2 PCIe 3.0</td>
+           <td>M.2 NVMe PCIe 4.0 / 5.0</td>
+           <td>1 o 2 ranuras M.2 NVMe</td>
+         </tr>
+         <tr>
+           <td><strong>Actualización de CPU</strong></td>
+           <td>Sí (limitado a su gen)</td>
+           <td>Sí (varias generaciones)</td>
+           <td>No (CPU soldado)</td>
+         </tr>
+         <tr>
+           <td><strong>Factor de Forma</strong></td>
+           <td>ATX / mATX estándar</td>
+           <td>ATX / mATX estándar</td>
+           <td>Propietario / Personalizado</td>
+         </tr>
+         <tr>
+           <td><strong>Uso Recomendado</strong></td>
+           <td>Presupuestos muy ajustados, retro-gaming</td>
+           <td>Equipos nuevos, Workstations, Gaming actual</td>
+           <td>Estudiantes, profesionales nómadas</td>
+         </tr>
+       </tbody>
+     </table>
+      </div>
       </div>
 
       <div class="card">
         <h3>Matriz de Recomendación por Escenarios</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Perfil del Cliente</th>
-              <th>CPU Elegido</th>
-              <th>Chipset / Formato Ideal</th>
-              <th>Justificación</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Oficina Administrativa</td>
-              <td>Intel Core i3-12100</td>
-              <td>H610 / mATX</td>
-              <td>Menor costo, tareas básicas, no necesita OC.</td>
-            </tr>
-            <tr>
-              <td>Gamer 1080p / 1440p</td>
-              <td>AMD Ryzen 5 5600</td>
-              <td>B550 / ATX o mATX</td>
-              <td>Gran relación precio/rendimiento. Soporta PCIe 4.0 para SSDs rápidos.</td>
-            </tr>
-            <tr>
-              <td>Editor de Video 4K (Workstation)</td>
-              <td>Intel Core i9-13900K</td>
-              <td>Z790 / ATX</td>
-              <td>Requiere VRMs masivos (16+ fases), muchas pistas PCIe y DDR5.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div style="overflow-x: auto">
+
+          <table>
+            <thead>
+              <tr>
+                <th>Perfil del Cliente</th>
+                <th>CPU Elegido</th>
+                <th>Chipset / Formato Ideal</th>
+                <th>Justificación</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Oficina Administrativa</td>
+                <td>Intel Core i3-12100</td>
+                <td>H610 / mATX</td>
+                <td>Menor costo, tareas básicas, no necesita OC.</td>
+              </tr>
+              <tr>
+                <td>Gamer 1080p / 1440p</td>
+                <td>AMD Ryzen 5 5600</td>
+                <td>B550 / ATX o mATX</td>
+                <td>Gran relación precio/rendimiento. Soporta PCIe 4.0 para SSDs rápidos.</td>
+              </tr>
+              <tr>
+                <td>Editor de Video 4K (Workstation)</td>
+                <td>Intel Core i9-13900K</td>
+                <td>Z790 / ATX</td>
+                <td>Requiere VRMs masivos (16+ fases), muchas pistas PCIe y DDR5.</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
       </div>
     </section>
 
