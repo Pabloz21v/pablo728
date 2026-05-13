@@ -1,0 +1,910 @@
+<!doctype html>
+<html lang="es-ES" data-theme="light" style="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 7: Armado de PC - Placas Madre</title>
+    <style>
+      :root {
+        --bg-primary: #0f1729;
+        --card-bg: #1a2744;
+        --text-primary: #f8fafc;
+        --text-secondary: #cbd5e6;
+        --accent-blue: #3b82f6;
+        --accent-cyan: #06b6d4;
+        --accent-green: #10b981;
+        --accent-yellow: #f59e0b;
+        --accent-red: #ef4444;
+        --border-subtle: #334155;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg-primary);
+        font-family:
+          'Segoe UI',
+          system-ui,
+          -apple-system,
+          sans-serif;
+        color: var(--text-primary);
+        line-height: 1.6;
+        padding: 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      /* Tipografía y Textos */
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+      p {
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+      }
+      ul,
+      ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--text-secondary);
+      }
+      li {
+        margin-bottom: 0.5rem;
+      }
+      strong {
+        color: var(--text-primary);
+      }
+      a {
+        color: var(--accent-cyan);
+        text-decoration: none;
+      }
+
+      /* Hero / Encabezado */
+      .hero {
+        text-align: center;
+        margin-bottom: 2.5rem;
+        padding: 2rem 1rem;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+        background: linear-gradient(135deg, #ffffff, var(--accent-cyan), var(--accent-blue));
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        margin-bottom: 1rem;
+      }
+      .hero-sub {
+        color: var(--accent-cyan);
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+      }
+      .hero-desc {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* Tabla de Contenidos */
+      .toc-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-bottom: 2.5rem;
+        border: 1px solid rgba(6, 182, 212, 0.2);
+      }
+      .toc-title {
+        font-size: 1.3rem;
+        color: var(--accent-cyan);
+        border-left: 4px solid var(--accent-cyan);
+        padding-left: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+      .toc-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+      .toc-grid a {
+        background: rgba(59, 130, 246, 0.1);
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        display: block;
+        color: var(--text-primary);
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+
+      /* Títulos de sección y tarjetas */
+      .section-title {
+        background: linear-gradient(90deg, #1e3a5f, var(--bg-primary));
+        border-left: 5px solid var(--accent-cyan);
+        border-radius: 0 16px 16px 0;
+        padding: 1rem 1.5rem;
+        margin: 3rem 0 1.5rem 0;
+        font-size: 1.8rem;
+        color: #fff;
+      }
+      .card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .card h3 {
+        color: var(--accent-cyan);
+        border-left: 3px solid var(--accent-blue);
+        padding-left: 0.75rem;
+        font-size: 1.4rem;
+      }
+
+      /* Callouts */
+      .callout {
+        border-left: 5px solid;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin: 1.5rem 0;
+      }
+      .callout.warning {
+        border-left-color: var(--accent-red);
+        background: rgba(239, 68, 68, 0.08);
+      }
+      .callout.tip {
+        border-left-color: var(--accent-yellow);
+        background: rgba(245, 158, 11, 0.08);
+      }
+      .callout-title {
+        font-weight: bold;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+      }
+
+      /* Tablas */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card-bg);
+        border-radius: 12px;
+        margin: 1.5rem 0;
+      }
+      th,
+      td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      th {
+        background-color: #0f172a;
+        color: var(--accent-cyan);
+        font-weight: 600;
+      }
+
+      /* Preguntas Numeradas */
+      .q-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      .q-item {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 1.2rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        border: 1px solid rgba(6, 182, 212, 0.2);
+      }
+      .q-number {
+        background: var(--accent-blue);
+        color: #fff;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        flex-shrink: 0;
+      }
+      .q-text {
+        color: var(--text-primary);
+        line-height: 1.5;
+      }
+
+      /* Footer / Motivador */
+      .motivator {
+        text-align: center;
+        padding: 3rem 1rem;
+        margin-top: 3rem;
+        border-top: 1px solid var(--border-subtle);
+        color: var(--accent-green);
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body style="">
+      <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion6.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 6
+      </a>
+      <a
+        href="hardware2-sesion8.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 8
+      </a>
+    </div>
+    <header class="hero">
+       <h1>Sesión 7: Armado de PC - Placas Madre</h1>
+      <div class="hero-sub">
+        Cómo elegir la motherboard correcta según presupuesto, necesidad, generación y compatibilidad
+      </div>
+     
+    </header>
+
+    
+    <div class="toc-card" id="indice">
+      <div class="toc-title">📋 Índice de la Sesión</div>
+      <div class="toc-grid">
+        <!-- <a href="#proposito">🎯 Propósito de la clase</a> -->
+        <a href="#teoria-eje">⚙️ 1. La placa madre como eje del sistema</a>
+        <a href="#teoria-costos">💰 2. Cascada de costos: ¿Qué encarece?</a>
+        <a href="#teoria-socket">🔌 3. Socket, Chipset y Generación</a>
+        <a href="#teoria-vrm">⚡ 4. VRM y Fases de alimentación</a>
+        <a href="#teoria-form">📏 5. Factores de forma</a>
+        <a href="#teoria-legacy">🕰️ 6. Placas madre legacy</a>
+        <a href="#teoria-modernas">🚀 7. Placas madre modernas</a>
+        <a href="#teoria-notebook">💻 8. Placas madre de notebook</a>
+        <a href="#teoria-criterio">🧠 9. Criterio de elección por cliente</a>
+        <a href="#tablas">📊 Tablas Comparativas</a>
+        <a href="#casos">💼 Casos Prácticos</a>
+        <a href="#preguntas">❓ Preguntas de Práctica</a>
+      </div>
+    </div>
+
+<!--     
+    <section id="proposito">
+      <h2 class="section-title">🎯 Propósito de la clase</h2>
+      <div class="card">
+        <p>
+          Al finalizar este documento, dejarás de ver la placa madre como una simple "pieza donde se conecta todo" y
+          comenzarás a analizarla como el componente crítico que define el rendimiento, la estabilidad y la vida útil de
+          toda la computadora.
+        </p>
+        <p>
+          Entenderás que no existe la "mejor" placa absoluta, sino la más adecuada para cada escenario, equilibrando
+          correctamente las fases de poder (VRM), el chipset, la compatibilidad de RAM/almacenamiento y el formato,
+          tanto en equipos de escritorio clásicos como en notebooks modernas.
+        </p>
+      </div>
+    </section> -->
+
+    
+    <section id="teoria-eje">
+      <h2 class="section-title">⚙️ 1. La placa madre como eje del sistema</h2>
+      <div class="card">
+        <h3>La columna vertebral del Hardware</h3>
+        <p>
+          La motherboard es el circuito principal que orquesta la comunicación entre el CPU, la memoria RAM, el
+          almacenamiento, la tarjeta gráfica y los periféricos. Si el CPU es el cerebro, la placa madre es el sistema
+          nervioso.
+        </p>
+        <p>
+          Elegir mal este componente puede provocar que un procesador muy potente no pueda alcanzar su velocidad máxima
+          por estrangulamiento térmico (throttling) del VRM, o que el usuario se quede sin opciones de actualización a
+          futuro.
+        </p>
+      </div>
+    </section>
+
+    <section id="teoria-costos">
+      <h2 class="section-title">💰 2. Qué encarece una placa madre: Cascada de costos</h2>
+      <div class="card">
+        <h3>El precio no es arbitrario</h3>
+        <p>
+          A menudo, dos placas para el mismo procesador pueden costar $80 USD o $400 USD. ¿Por qué ocurre esto? El
+          aumento de precio se justifica mediante una "cascada de características":
+        </p>
+        <ul>
+          <li>
+            <strong>Nivel Base:</strong> Chipsets básicos (ej. A320, H610). VRM mínimo (4+1 fases). Ideales para CPU de
+            gama de entrada sin overclock.
+          </li>
+          <li>
+            <strong>+ Mejor Chipset y VRM:</strong> Integración de chipsets intermedios (B550, B760). Fases de
+            alimentación robustas con disipadores de aluminio.
+          </li>
+          <li>
+            <strong>+ Conectividad Extra:</strong> Adición de módulos Wi-Fi 6E/7, Bluetooth, LAN de 2.5 GbE y mejor chip
+            de audio integrado.
+          </li>
+          <li>
+            <strong>+ Soporte Avanzado:</strong> Múltiples puertos M.2, compatibilidad con memoria DDR5 a frecuencias
+            extremas y ranuras PCIe 5.0 reforzadas.
+          </li>
+          <li>
+            <strong>+ Características Premium:</strong> Botones de BIOS Flashback, pantallas de diagnóstico POST,
+            diseños E-ATX masivos y VRMs grado servidor (16+ fases).
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="teoria-socket">
+      <h2 class="section-title">🔌 3. Socket, Chipset y Generación</h2>
+      <div class="card">
+        <p>
+          <strong>El Socket</strong> es la conexión física. Si el CPU no coincide con el socket (por ejemplo, intentar
+          poner un procesador LGA 1700 en una placa LGA 1200), es físicamente imposible instalarlo.
+        </p>
+        <p>
+          <strong>El Chipset</strong> es el controlador lógico. Define las "reglas del juego": cuántos puertos USB de
+          alta velocidad soporta, si permite hacer Overclock (OC) del procesador o si puede dividir los canales PCIe.
+          Ejemplo: En AMD, la serie 'A' (A520/A620) es de entrada; la 'B' (B550/B650) es la media/equilibrada, y la 'X'
+          (X570/X670) es para entusiastas.
+          Tener en cuenta que estas letras acompañadas de numeros indican el chipset que contiene dicha placa madre. <br>
+          Cuando buscamos una placa madre lo primero que vamos a encontrar es la marca acompañada del chipset que contiene.
+        </p>
+
+        <div class="callout tip">
+          <div class="callout-title">💡 Consejo de compatibilidad</div>
+          Un mismo socket puede albergar diferentes generaciones de CPU (ej. AM4 de AMD soportó las series 1000, 2000,
+          3000, 4000 y 5000). Sin embargo,
+          <strong>siempre debes verificar que la versión de la BIOS esté actualizada</strong> para reconocer la nueva
+          generación. Si no lo está, la PC no dará video al encender.
+        </div>
+      </div>
+    </section>
+
+    <section id="teoria-vrm">
+      <h2 class="section-title">⚡ 4. VRM y Fases de Alimentación</h2>
+      <div class="card">
+        <h3>El corazón energético del procesador</h3>
+        <p>
+          El <strong>VRM (Módulo Regulador de Voltaje)</strong>es un circuito electrónico en la placa madre 
+          encargado de convertir, regular y estabilizar el voltaje de entrada 
+           de 12V brutos de la fuente de poder y los
+          convierte en el voltaje limpio y preciso (aprox. 1V a 1.4V) que necesita 
+            el CPU, GPU integrada, RAM y otros componentes para funcionar.
+        </p>
+        <h3>¿Cómo identificar el VRM en una placa madre?</h3>
+        <p>El VRM se ubica alrededor del socket del CPU (generalmente en la parte superior o lateral). Se reconoce por:</p>
+       <ul><li>Chokes (bobinas): Componentes cilíndricos (color negro, marrón o dorado) que filtran el ruido eléctrico.</li>
+       <li>MOSFETs (transistores de potencia): Pequeños chips rectangulares (a menudo con disipadores de calor).</li>
+       <li>Capacitores sólidos o electrolíticos: Cilindros plateados o negros que estabilizan el voltaje.</li>
+      <li>Controlador PWM (IC): Chip que gestiona la conmutación de los MOSFETs (ej: IR35201, ISL69269, etc.).</li></ul>
+     <p>En placas madre gaming, el VRM suele tener disipadores de calor (heatsinks) sobre los MOSFETs y chokes, especialmente en modelos de alta gama.</p>
+     <br>
+     <h3>¿Cómo se cuentan las fases del VRM?</h3>
+     <p>Las fases se refieren a circuitos independientes que distribuyen la carga de corriente. La notación X+Y significa:</p>
+     <ul><li>X: Número de fases dedicadas al CPU (ej: 8 en "8+2").</li>
+     <li>Y: Número de fases para otras partes (ej: 2 para el iGPU o memoria en "8+2").</li></ul>
+     <p>
+          Las <strong>fases de poder</strong> (indicadas como 8+2, 12+1, etc.) determinan cómo se distribuye esta carga
+          de trabajo. A más fases reales y mejores MOSFETs, menos se calienta cada componente individual. Si instalas un
+          CPU muy demandante (ej. i9 o Ryzen 9) en una placa con VRM pobre (4 fases), el VRM se sobrecalentará, y la
+          placa reducirá automáticamente la velocidad del CPU para evitar quemarse (fenómeno conocido como
+          <em>Throttling</em>).
+        </p>
+         <h3>Configuraciones típicas de VRM por gama</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Gama de Placa Madre</th>
+                <th>Fases VRM (CPU + iGPU/RAM)</th>
+                <th>Componentes típicos</th>
+                <th>Procesadores compatibles</th>
+                <th>Uso recomendado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Entry-Level</td>
+                <td>3+1, 4+1</td>
+                <td>MOSFETs básicos, chokes pequeños, sin heatsink</td>
+                <td>Intel Pentium/Celeron, Ryzen 3</td>
+                <td>Oficinas, uso básico</td>
+            </tr>
+            <tr>
+                <td>Mid-Range</td>
+                <td>6+2, 8+2</td>
+                <td>MOSFETs de 40A-50A, chokes de ferrita, heatsink pequeño</td>
+                <td>Intel i5, Ryzen 5</td>
+                <td>Gaming 1080p, edición de video ligera</td>
+            </tr>
+            <tr>
+                <td>High-End</td>
+                <td>10+2, 12+2, 14+2</td>
+                <td>DrMOS (60A-90A), chokes premium, heatsinks grandes</td>
+                <td>Intel i7/i9, Ryzen 7/9</td>
+                <td>Gaming 4K, streaming, renderizado</td>
+            </tr>
+            <tr>
+                <td>Enthusiast/Workstation</td>
+                <td>16+2, 20+2, 32+0</td>
+                <td>DrMOS de 100A+, controladores PWM avanzados, VRM en capas</td>
+                <td>Intel Core i9-14900K, Ryzen 9 7950X</td>
+                <td>Overclocking extremo, servidores</td>
+            </tr>
+        </tbody>
+    </table>
+
+      <h3>Mitos comunes sobre el VRM</h3>
+
+    <div class="myth">
+        <span class="myth-title">❌ "Más fases siempre es mejor"</span>
+        <p>Falso. Depende de la <strong>calidad de los componentes</strong>. 8 fases con MOSFETs de 90A pueden ser mejores que 12 fases con MOSFETs de 30A.</p>
+    </div>
+
+    <div class="myth">
+        <span class="myth-title">❌ "El VRM no afecta el rendimiento"</span>
+        <p>Falso. Un VRM débil puede causar <strong>throttling</strong>, reduciendo el rendimiento del CPU en un <strong>10-30%</strong> en casos extremos.</p>
+    </div>
+
+    <div class="myth">
+        <span class="myth-title">❌ "Todas las placas con el mismo chipset tienen el mismo VRM"</span>
+        <p>Falso. El chipset (ej: B650) solo define conectividad. El VRM depende del <strong>fabricante y modelo específico</strong>.</p>
+    </div>
+      </div>
+    </section>
+
+    <section id="teoria-form">
+      <h2 class="section-title">📏 5. Factores de forma</h2>
+      <div class="card">
+        <p>El formato define las dimensiones físicas y las opciones de expansión.</p>
+        <ul>
+          <li>
+            <strong>Mini-ITX:</strong> Ultras compactas (17x17 cm). Ideal para espacios reducidos, pero limitada a 1
+            puerto PCIe y 2 zócalos de RAM. Suelen ser más caras por la miniaturización.
+          </li>
+          <li>
+            <strong>Micro-ATX (mATX):</strong> El formato más común por su balance costo/beneficio. Ideal para la
+            mayoría de los usuarios, soporta 1 GPU y varias tarjetas de expansión menores.
+          </li>
+          <li>
+            <strong>ATX Estándar:</strong> Máxima capacidad en consumo. 7 ranuras de expansión, múltiples M.2, ideal
+            para Workstations y gabinetes Mid/Full Tower.
+          </li>
+          <li>
+            <strong>E-ATX (Extended ATX):</strong> Placas enormes para el segmento entusiasta y servidores. Requieren
+            gabinetes especiales.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="teoria-legacy">
+      <h2 class="section-title">🕰️ 6. Placas madre Legacy</h2>
+      <div class="card">
+        <h3>Plataformas de generaciones anteriores</h3>
+        <p>
+          Llamamos "legacy" a aquellas placas que usan tecnologías ya desplazadas en la vanguardia (como DDR3, primeras
+          versiones de DDR4, y PCIe 3.0), por ejemplo las plataformas Intel de 4ta a 9na generación, o los primeros
+          chipsets AM4 (A320).
+        </p>
+        <p>
+          <strong>Ventajas:</strong> Su precio en el mercado de usados es inbatible. Son excelentes para armar equipos
+          de ofimática, centros multimedia o PC gaming de entrada a muy bajo costo.<br>
+          <strong>Limitaciones:</strong> Sin soporte para SSDs NVMe de última generación (o capados en velocidad), sin
+          Wi-Fi moderno, y sin posibilidad de instalar un procesador que corra juegos "Next Gen" a altas tasas de
+          cuadros.
+        </p>
+      </div>
+    </section>
+
+    <section id="teoria-modernas">
+      <h2 class="section-title">🚀 7. Placas madre Modernas</h2>
+      <div class="card">
+        <p>
+          Estas placas integran las arquitecturas del presente y el futuro cercano (ej. Intel LGA 1700, AMD AM5). Se
+          caracterizan por soportar:
+        </p>
+        <ul>
+          <li><strong>Memoria DDR5:</strong> Con velocidades base que superan los 4800MHz y menores voltajes.</li>
+          <li>
+            <strong>PCIe 4.0 y 5.0:</strong> Ancho de banda duplicado respecto a generaciones pasadas, vital para SSDs
+            NVMe ultrarrápidos (hasta 14,000 MB/s) y GPUs futuras.
+          </li>
+          <li>
+            <strong>Conectividad:</strong> Puertos USB-C 3.2 Gen 2x2, Thunderbolt 4, Red LAN de 2.5G o 10G, y Wi-Fi 6E/7
+            integrados de forma nativa.
+          </li>
+          <li>
+            <strong>Seguridad:</strong> Módulos TPM 2.0 integrados en hardware/BIOS, obligatorios para sistemas
+            operativos como Windows 11.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="teoria-notebook">
+      <h2 class="section-title">💻 8. Placas madre de Notebook</h2>
+      <div class="card">
+        <h3>El desafío de la ultra-integración</h3>
+        <p>
+          A diferencia de las PCs de escritorio donde imperan estándares como ATX,
+          <strong>las placas de notebook utilizan factores de forma propietarios</strong>. Cada fabricante diseña la
+          placa con la forma exacta del chasis del portátil.
+        </p>
+        <p>
+          <strong>Componentes soldados:</strong> Para lograr grosores milimétricos, el CPU y la Tarjeta Gráfica (GPU)
+          vienen soldados directamente a la placa (formato BGA). No se pueden reemplazar. En muchos ultrabooks actuales,
+          incluso la memoria RAM y el módulo Wi-Fi están soldados.
+        </p>
+        <p>
+          <strong>Límites de Upgrade:</strong> En la mayoría de laptops modernas, las únicas actualizaciones posibles
+          son cambiar el SSD (M.2 NVMe) y, si el equipo lo permite, añadir un módulo RAM SO-DIMM adicional.
+        </p>
+        <p>
+          <strong>Diagnóstico:</strong> Una falla de VRM o un corto en una placa de notebook suele significar el cambio
+          completo de la placa (lo cual equivale al costo casi total del equipo) o requerir microsoldadura avanzada de
+          alto nivel.
+        </p>
+      </div>
+    </section>
+
+    <section id="teoria-criterio">
+      <h2 class="section-title">🧠 9. Criterio de elección por cliente</h2>
+      <div class="card">
+        <p>El flujo correcto para presupuestar una placa madre es el siguiente:</p>
+        <ol>
+          <li><strong>Definir la Necesidad:</strong> ¿Ofimática? ¿Gaming 1080p? ¿Renderizado 3D? ¿Movilidad? ¿IA? ¿Musica?</li>
+          <li><strong>Elegir el CPU:</strong> Esto bloquea inmediatamente el <strong>Socket</strong>.</li>
+          <li>
+            <strong>Seleccionar el Chipset:</strong> Basado en si el cliente hará Overclock o cuántos SSDs necesita.
+          </li>
+          <li>
+            <strong>Determinar el VRM:</strong> Si el CPU es un i3 o Ryzen 5, un VRM básico basta. Si es un i9 o Ryzen
+            9, el presupuesto debe ir a una placa con disipadores contundentes.
+          </li>
+          <li><strong>Factor de forma:</strong> Ajustarlo al gabinete disponible.</li>
+        </ol>
+        <div class="callout warning">
+          <div class="callout-title">⚠️ Error Frecuente (Mito)</div>
+          Creer que "comprar la placa base más cara y 'gaming' del mercado dará más FPS en los juegos". Falso. La placa
+          madre <strong>no genera rendimiento por sí misma</strong>. Su trabajo es no limitar a la GPU y al CPU. Es
+          preferible gastar $150 USD en una placa equilibrada y derivar los $200 USD restantes para comprar una Tarjeta
+          Gráfica más potente.
+        </div>
+      </div>
+    </section>
+
+    
+    <section id="tablas">
+      <h2 class="section-title">📊 Tablas Comparativas</h2>
+
+      <div class="card">
+        <h3>Comparativa Estructural: Legacy vs Moderna vs Notebook</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th>Legacy (Desktop)</th>
+              <th>Moderna (Desktop)</th>
+              <th>Notebook (Portátil)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Memoria RAM</strong></td>
+              <td>DDR3 o DDR4 inicial</td>
+              <td>DDR4 de alta frec. o DDR5</td>
+              <td>LPDDR / SO-DIMM (a veces soldada)</td>
+            </tr>
+            <tr>
+              <td><strong>Almacenamiento</strong></td>
+              <td>SATA III / M.2 PCIe 3.0</td>
+              <td>M.2 NVMe PCIe 4.0 / 5.0</td>
+              <td>1 o 2 ranuras M.2 NVMe</td>
+            </tr>
+            <tr>
+              <td><strong>Actualización de CPU</strong></td>
+              <td>Sí (limitado a su gen)</td>
+              <td>Sí (varias generaciones)</td>
+              <td>No (CPU soldado)</td>
+            </tr>
+            <tr>
+              <td><strong>Factor de Forma</strong></td>
+              <td>ATX / mATX estándar</td>
+              <td>ATX / mATX estándar</td>
+              <td>Propietario / Personalizado</td>
+            </tr>
+            <tr>
+              <td><strong>Uso Recomendado</strong></td>
+              <td>Presupuestos muy ajustados, retro-gaming</td>
+              <td>Equipos nuevos, Workstations, Gaming actual</td>
+              <td>Estudiantes, profesionales nómadas</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>Matriz de Recomendación por Escenarios</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Perfil del Cliente</th>
+              <th>CPU Elegido</th>
+              <th>Chipset / Formato Ideal</th>
+              <th>Justificación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Oficina Administrativa</td>
+              <td>Intel Core i3-12100</td>
+              <td>H610 / mATX</td>
+              <td>Menor costo, tareas básicas, no necesita OC.</td>
+            </tr>
+            <tr>
+              <td>Gamer 1080p / 1440p</td>
+              <td>AMD Ryzen 5 5600</td>
+              <td>B550 / ATX o mATX</td>
+              <td>Gran relación precio/rendimiento. Soporta PCIe 4.0 para SSDs rápidos.</td>
+            </tr>
+            <tr>
+              <td>Editor de Video 4K (Workstation)</td>
+              <td>Intel Core i9-13900K</td>
+              <td>Z790 / ATX</td>
+              <td>Requiere VRMs masivos (16+ fases), muchas pistas PCIe y DDR5.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    
+    <section id="casos">
+      <h2 class="section-title">💼 Casos Prácticos de Selección</h2>
+
+      <div class="card">
+        <h3>Caso 1: El ciber-café económico</h3>
+        <p>
+          <strong>Cliente:</strong> Un emprendedor quiere armar 5 PCs para juegos e-sports (Valorant, CS:GO) con el
+          mínimo presupuesto posible. Procesador elegido: Ryzen 5 4600G (con gráficos integrados).
+        </p>
+        <p>
+          <strong>Análisis y Recomendación:</strong> No tiene sentido comprar una placa B550. Dado que es un CPU de bajo
+          consumo y gráficos integrados, la mejor opción es una placa <strong>A520 mATX</strong>. Cumple con la
+          conectividad básica, soporta RAM DDR4 en dual-channel (vital para la APU) y reduce drásticamente el costo por
+          máquina.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Caso 2: El Streamer exigente</h3>
+        <p>
+          <strong>Cliente:</strong> Un creador de contenido armará un PC con un Ryzen 9 7900X, 64GB de RAM y captura
+          video en 4K. Quiere que el equipo le dure 5 años sin cambiar el procesador.
+        </p>
+        <p>
+          <strong>Análisis y Recomendación:</strong> Acá el VRM es lo mas importante. Recomendaríamos una placa
+          <strong>X670 o B650E en formato ATX</strong>. La serie "E" (Extreme) le garantiza pistas PCIe 5.0 para las
+          próximas generaciones de tarjetas gráficas, y el VRM de una placa de esta gama asegurará que el procesador no
+          sufra Throttling durante horas de renderizado pesado.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Caso 3: Estudiante de Arquitectura Nómade</h3>
+        <p>
+          <strong>Cliente:</strong> Una estudiante de arquitectura necesita movilidad y potencia para AutoCAD y Lumion.
+          Duda entre comprar una PC de escritorio mini-ITX o una Notebook Gamer.
+        </p>
+        <p>
+          <strong>Análisis y Recomendación:</strong> Aunque la Mini-ITX permite upgrades, necesita monitor y periféricos
+          aparte. Se recomienda una <strong>Notebook con placa madre diseñada para refrigeración avanzada</strong> (GPU
+          de la serie RTX 4060 o superior). Como <em>advertencia crítica</em> al cliente: debe comprar el equipo con el
+          CPU y GPU definitivos, ya que la motherboard de la notebook los tiene soldados y jamás podrá mejorarlos.
+        </p>
+      </div>
+    </section>
+
+    
+    <section id="preguntas">
+      <h2 class="section-title">❓ Preguntas de Práctica</h2>
+      <div class="card">
+     
+        <div class="q-list">
+          <div class="q-item">
+            <div class="q-number">1</div>
+            <div class="q-text">
+              Un cliente asegura que cambiar su placa base actual de 100 USD por una de 400 USD (con el mismo procesador
+              y gráfica) duplicará sus FPS en los juegos. ¿Cómo le explicarías técnicamente que esto es un mito?
+            </div>
+          </div>
+          <div class="q-item">
+            <div class="q-number">2</div>
+            <div class="q-text">
+              Buscar las dos placas, una serie A y otra X, observar su ficha tecnica para comparar sus caracteristicas y los valores que soporta.
+            </div>
+          </div>
+          <div class="q-item">
+            <div class="q-number">3</div>
+            <div class="q-text">
+              ¿Por qué un procesador de altísima gama (ej. Ryzen 9) puede funcionar más lento en una placa base
+              económica (chipset A) en comparación con una de gama alta (chipset X), incluso si tienen el mismo socket?
+            </div>
+          </div>
+          <div class="q-item">
+            <div class="q-number">4</div>
+            <div class="q-text">
+              Explica con tus palabras qué es el VRM y por qué el número de "Fases de poder" es crítico al presupuestar
+              estaciones de trabajo o equipos para Overclocking.
+            </div>
+          </div>
+          <div class="q-item">
+            <div class="q-number">5</div>
+            <div class="q-text">
+              Buscar 2 placa madre, una Mini-ITX y una ATX modernas.
+              Comprar la cantidad y generaciones que soporta cada  slot para RAM, GPU, M.2, SATA, tipo de socket CPU.
+            </div>
+          </div>
+          <!-- <div class="q-item">
+            <div class="q-number">6</div>
+            <div class="q-text">
+              Un cliente quiere reutilizar el disco duro y la memoria de su notebook vieja en una PC de escritorio
+              nueva. ¿Qué limitaciones físicas y técnicas (relacionadas a la placa madre de ambos equipos) se
+              encontrará?
+            </div>
+          </div> -->
+          <div class="q-item">
+            <div class="q-number">6</div>
+            <div class="q-text">
+              Detalla 3 características tecnológicas que definirían a una placa madre actual como "Moderna" en
+              contraposición a una placa "Legacy" de hace 6 años.
+            </div>
+          </div>
+          <div class="q-item">
+            <div class="q-number">7</div>
+            <div class="q-text">
+              En el ámbito de reparación de Notebooks, ¿por qué el diagnóstico y cambio de una placa base es mucho más
+              complejo y costoso que en una computadora de escritorio? Mencioná la integración de componentes.
+            </div>
+          </div>
+          <div class="q-item">
+            <div class="q-number">8</div>
+            <div class="q-text">
+              Tu cliente compra un procesador Ryzen 5000 de caja cerrada y una placa madre AM4 nueva, pero al ensamblar
+              la PC no da video. Ambos componentes funcionan por separado. ¿Cuál es el problema técnico más probable y
+              cómo se soluciona?
+            </div>
+          </div>
+          <div class="q-item">
+            <div class="q-number">9</div>
+            <div class="q-text">
+              Describe el proceso escalonado de toma de decisiones ("Cascada de elección") que utilizas como técnico
+              para elegir la placa madre perfecta para un cliente, empezando desde la necesidad del usuario.
+            </div>
+          </div>
+          <div class="q-item">
+            <div class="q-number">10</div>
+            <div class="q-text">
+              Si un usuario de oficina solo necesita navegar por internet, usar Excel y visualizar correos,
+              ¿recomendarías un chipset H610/A520 o un Z790/X670? Justifica tu respuesta argumentando los costos
+              innecesarios.
+            </div>
+          </div>
+          <div class="q-item">
+            <div class="q-number">11</div>
+            <div class="q-text">
+              Explica brevemente la importancia de la tecnología PCIe (3.0, 4.0 vs 5.0) integrada en la placa madre al
+              momento de elegir el almacenamiento (M.2 NVMe).
+            </div>
+          </div>
+          <!-- <div class="q-item">
+            <div class="q-number">12</div>
+            <div class="q-text">
+              Al comprar una notebook para edición de video pesado a futuro, ¿por qué es vital asegurar en el
+              presupuesto inicial el procesador y la gráfica de mejor nivel, aunque haya que sacrificar RAM inicial,
+              según la arquitectura de las motherboards de portátiles?
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </section>
+
+    
+  
+
+     <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion6.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 6
+      </a>
+      <a
+        href="hardware2-sesion8.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 8
+      </a>
+    </div>
+  
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>
