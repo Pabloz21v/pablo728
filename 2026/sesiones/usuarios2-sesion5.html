@@ -296,7 +296,7 @@ de un cliente se borran los registros en la tabla direcciones relacionados al id
             id INT AUTO_INCREMENT PRIMARY KEY, <br>
             email VARCHAR(60) UNIQUE
 );</code></li>
-<h3>¿Cuándo usar cada PRIMARY KEY o UNIQUE?</h3>
+<h3>¿Cuándo usar PRIMARY KEY o UNIQUE?</h3>
         <li>Usar PRIMARY KEY para la columna que identifica de forma única cada fila (ej: id). No permite valores NULL</li>
         <li>Usar UNIQUE para columnas que deben ser únicas pero no son la identidad principal (ej: email). Permite valores NULL</li>
         <li>Una FOREIGN KEY puede referenciar a una columna UNIQUE (no nula)</li>
@@ -557,7 +557,7 @@ sea igual a 1</span></code></pre>
       >
     </div>
 
-      <h2>7. Ejercicios para el Alumno</h2>
+      <h2>7. Ejercicios </h2>
       <ol>
         <li>
           <strong>Relaciones 1 a 1:</strong>
@@ -604,6 +604,69 @@ sea igual a 1</span></code></pre>
         </li>
       </ol>
 
+
+      <h2>8. Ejercicios segunda semana (se evaluará con defensa)</h2>
+      <ol>
+        <li>
+          <strong>Relaciones 1 a 1:</strong>
+          <ul>
+            <li>Crear una tabla de la tematica de tu gusto con al menos 6 registros. Dicha tabla debe tener la columna ID, nombrarla ID_nombre_de_tu_tabla</li>
+            <li>Crear otra tabla para la relacionada 1 a 1 (pensar de que forma estarán relacionadas las 2 tablas). No olvidar crear una columna para relacionarla con la primera</li>
+            <li>Entre las dos tablas aplicar todos los tipos de datos aprendidos hasta el momento </li>
+            <li>A algunas columnas aplicar Default, Not Null, Unique</li>
+            <li>Insertar 4 registros en la segunda tabla y relacionarlo con los registros de la primer tabla</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Valores NULL o DEFAULT:</strong>
+          <ul>
+            <li>Insertar un registro con una columna NULL</li>
+            <li>Actualizar el registro NULL con un dato</li>
+          </ul>
+          <ul>
+            <li>Insertar un registro con una columna Default</li>
+            <li>Actualizar el registro Default con otro dato</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Modificar columnas:</strong>
+          <ul>
+            <li>Cambiar el nombre de una columna.</li>
+            <li>Modificar el tipo de dato de una columna.</li>
+          </ul>
+          <strong>Agregar columnas:</strong>
+          <ul>
+            <li>Agregar una columna con el tipo de dato que deseen en cada tabla.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Consultas con alias y LEFT JOIN:</strong>
+          <ul>
+            <li>Crear un filtro que muestre los registros relacionados de ambas tablas usando alias, basado en dos columnas de la primer tabla (padre) y uno de la tabla hija</li>
+            <li>Crear un filtro que muestre los registros relacionados de ambas tablas usando alias, basado en uno columnas de la primer tabla (padre) y dos de la tabla hija (evitar usar las mismas columnas del item anterior)</li>
+            <li>Crear un filtro que muestre los registros relacionados de ambas tablas usando alias, basado en tres columas de la primer tabla (padre) y tres de la tabla hija (evitar usar las mismas columnas del item anterior)</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Práctica con DECIMAL:</strong>
+          <ul>
+            <li>Actualizar uno o varios datos en la tabla con el tipo de dato DECIMAL.</li>
+            <li>Crear unu filtro para columna del tipo de dato DECIMAL y aplicar LIMIT</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Práctica con fechas:</strong>
+          <ul>
+            <li>Actualizar uno o varios datos en la tabla con el tipo de dato DATE.</li>
+            <li>Filtrar la tabla por la columna que contenga el tipo de dato DATE usando <code>YEAR(), MONTH() o DAY()</code>.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>ELiminar</strong>
+          <ul><li>Eliminar un registro de la tabla padre</li></ul>
+        </li>
+
+      </ol>
       <!-- <h2>8. Resumen y Cierre</h2>
       <div class="section">
         <h3>Conceptos Clave Aprendidos:</h3>
