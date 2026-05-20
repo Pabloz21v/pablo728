@@ -208,7 +208,7 @@ code, .codigo {
   }
 }
 
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   table, thead, tbody, th, td, tr {
     display: block;
   }
@@ -239,7 +239,7 @@ code, .codigo {
     width: 40%;
     color: #1e3a5f;
   }
-}
+} */
 
 /* ===== SCROLL SMOOTH ===== */
 html {
@@ -429,53 +429,56 @@ a:not([class*="boton"]):not([style*="background"]):hover {
       los ordenadores fabricados a partir de 2012 utilizan UEFI por defecto.
     </p>
 
-    <table>
-      <caption>
-        Comparativa: BIOS Legacy vs UEFI
-      </caption>
-      <tbody>
-        <tr>
-          <th>Característica</th>
-          <th>BIOS Legacy</th>
-          <th>UEFI</th>
-        </tr>
-        <tr>
-          <td>Arquitectura</td>
-          <td>16 bits (modo real)</td>
-          <td>32 o 64 bits</td>
-        </tr>
-        <tr>
-          <td>Interfaz de usuario</td>
-          <td>Texto (generalmente azul/gris), solo teclado</td>
-          <td>Gráfica (GUI), soporta ratón y teclado</td>
-        </tr>
-        <tr>
-          <td>Tamaño máx. de disco de arranque</td>
-          <td>2.2 TB (formato MBR)</td>
-          <td>9.4 ZB (formato GPT) - Sin límite práctico</td>
-        </tr>
-        <tr>
-          <td>Particiones primarias</td>
-          <td>Máximo 4</td>
-          <td>Hasta 128 (en Windows)</td>
-        </tr>
-        <tr>
-          <td>Tiempo de arranque</td>
-          <td>Lento (20-30 segundos)</td>
-          <td>Rápido (soporta Fast Boot, 5-10 seg)</td>
-        </tr>
-        <tr>
-          <td>Seguridad pre-OS</td>
-          <td>Básica/Nula</td>
-          <td>Avanzada (Secure Boot)</td>
-        </tr>
-        <tr>
-          <td>Capacidades de Red</td>
-          <td>No incluidas nativamente</td>
-          <td>Soporta drivers de red, descargas directas</td>
-        </tr>
-      </tbody>
-    </table>
+    <div style="overflow-x: auto">
+
+      <table>
+        <caption>
+          Comparativa: BIOS Legacy vs UEFI
+        </caption>
+        <tbody>
+          <tr>
+            <th>Característica</th>
+            <th>BIOS Legacy</th>
+            <th>UEFI</th>
+          </tr>
+          <tr>
+            <td>Arquitectura</td>
+            <td>16 bits (modo real)</td>
+            <td>32 o 64 bits</td>
+          </tr>
+          <tr>
+            <td>Interfaz de usuario</td>
+            <td>Texto (generalmente azul/gris), solo teclado</td>
+            <td>Gráfica (GUI), soporta ratón y teclado</td>
+          </tr>
+          <tr>
+            <td>Tamaño máx. de disco de arranque</td>
+            <td>2.2 TB (formato MBR)</td>
+            <td>9.4 ZB (formato GPT) - Sin límite práctico</td>
+          </tr>
+          <tr>
+            <td>Particiones primarias</td>
+            <td>Máximo 4</td>
+            <td>Hasta 128 (en Windows)</td>
+          </tr>
+          <tr>
+            <td>Tiempo de arranque</td>
+            <td>Lento (20-30 segundos)</td>
+            <td>Rápido (soporta Fast Boot, 5-10 seg)</td>
+          </tr>
+          <tr>
+            <td>Seguridad pre-OS</td>
+            <td>Básica/Nula</td>
+            <td>Avanzada (Secure Boot)</td>
+          </tr>
+          <tr>
+            <td>Capacidades de Red</td>
+            <td>No incluidas nativamente</td>
+            <td>Soporta drivers de red, descargas directas</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
 
     <h3>C. CMOS y la Pila CR2032</h3>
     <p>
