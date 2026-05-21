@@ -144,7 +144,52 @@
   </head>
   <body>
     <div class="container">
-
+ <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="datos2-sesion6.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 6
+        </a>
+        <a
+          href="datos2-sesion8.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 8
+        </a>
+      </div>
       <!-- CLASE 3 -->
       <h1>CLASE 7: Metadatos y Seguridad Digital</h1>
       <div class="objectives">
@@ -214,10 +259,10 @@
 
       <div class="risks">
         <h3>⚠ Riesgos de Privacidad: "Stalking Digital"</h3>
-        <p>Si compartes una foto original con metadatos GPS:</p>
+        <p>Si compartís una foto original con metadatos GPS:</p>
         <ol>
           <li>Un extraño puede descargarla.</li>
-          <li>Puede ver las propiedades del archivo.</li>
+          <li>Puede ver las propiedades (metadatos Geográficos) del archivo.</li>
           <li>Puede copiar las coordenadas GPS en Google Maps.</li>
           <li>
             <strong>Resultado:</strong> Sabe dónde vives, estudias o estás de
@@ -227,8 +272,19 @@
         <div class="warning">
           <p>
             ⚠ <strong>Advertencia:</strong> El "Modelo del Dispositivo" en los
-            metadatos puede revelar si tienes un teléfono costoso, atrayendo a
+            metadatos puede revelar si tenes un teléfono costoso, atrayendo a
             ladrones.
+          </p>
+          <p>
+            <ol>
+              <h3>⚠ <strong>Positivo:</strong></h3>
+              <li>  Te accidentas en algún lugar, pero subiste fotos de tus actividades durante ese día, puede permitir dar una idea de donde estes o enfocar mas la zona de búsqueda.
+              </li>
+              <li> En caso de robos, algunos ladrones suben fotos desde el celular robado entregando la geolocalización, permitiendo ubicar donde se encuentra tu dispositivo.
+              </li>
+              <li>Casos de criminalística: algunos criminales suben sus delitos a las redes, entregando los metadatos, facilitando su captura.
+              </li>
+            </ol>
           </p>
         </div>
       </div>
@@ -247,6 +303,7 @@
               >exiftool.org</a
             >).
           </li>
+          <li> <strong>Descargar </strong> el archivo seleccionar el sistema operativo de tu pc, 32 o 64-bit de extensión .zip, descomprimirlo, entrar a la carpeta y posteriormente arrastrar una imagen, video, etc. sobre el archivo exiftool(-k).exe, automáticamente se abre una consola cmd (pantalla negra) con los metadatos del archivo arrastrado.</li>
           <li>
             <strong>Apps Móviles:</strong> "Photo Exif Editor" o "Scrambled
             Exif" (Android).
@@ -278,36 +335,14 @@
           metadatos de la foto anterior. Vuelvan a analizarla: ¿desapareció el
           GPS?
         </p>
-        <h4>Proyecto Integrador: "El Archivo Misterioso"</h4>
-        <p>
-          El docente entregará un archivo sin extensión llamado
-          <span class="hex-example">misterio_file</span>:
-        </p>
-        <ol>
-          <li>Usen HxD para ver el Header y descubrir su extensión real.</li>
-          <li>Renómbrenlo y ábranlo.</li>
-          <li>
-            Analicen sus metadatos: ¿Quién es el autor? ¿Cuándo se creó? ¿Hay
-            coordenadas ocultas?
-          </li>
-        </ol>
+        
       </div>
 
       <div class="objectives">
         <h3>📚 Recursos Adicionales</h3>
         <ul>
-          <li>
-            <a href="https://mh-nexus.de/en/hxd/" target="_blank"
-              >HxD (Editor Hexadecimal Gratuito)</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://www.rapidtables.com/convert/number/hex-to-ascii.html"
-              target="_blank"
-              >Convertidor Hex a ASCII</a
-            >
-          </li>
+         
+     
           <li>
             <a href="https://jimpl.com/" target="_blank"
               >Jimpl (Analizador EXIF online)</a
@@ -316,13 +351,6 @@
           <li>
             <a href="https://exiftool.org/" target="_blank"
               >ExifTool (Herramienta avanzada)</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://www.garykessler.net/library/file_sigs.html"
-              target="_blank"
-              >Lista completa de firmas de archivos (Gary Kessler)</a
             >
           </li>
         </ul>
@@ -334,13 +362,12 @@
         <ol>
           <li>Define "Metadatos" con tus propias palabras.</li>
           <li>Menciona 3 ejemplos de metadatos técnicos en una fotografía.</li>
-          <li>¿Qué significa EXIF?</li>
           <li>
-            ¿Es seguro enviar una foto por correo electrónico si no quiero
+            Investigar: ¿Es seguro enviar una foto por correo electrónico si no quiero
             revelar mi ubicación? Justifica.
           </li>
           <li>
-            ¿Qué red social suele borrar los metadatos automáticamente y cuál
+           Investigar: ¿Qué red social suele borrar los metadatos automáticamente y cuál
             no?
           </li>
           <li>
@@ -362,6 +389,52 @@
           </li>
         </ol>
       </div>
+      <div style="margin-bottom: 24px">
+         <a
+           href="../materias/conversion-y-reparacion-de-datos.html"
+           style="
+             padding: 10px 20px;
+             border-radius: 8px;
+             text-decoration: none;
+             font-weight: bold;
+             background: #4ade80;
+             color: #222;
+             display: inline-block;
+             margin-right: 10px;
+           "
+         >
+           Volver a Materia
+         </a>
+         <a
+           href="datos2-sesion6.html"
+           style="
+             padding: 10px 20px;
+             border-radius: 8px;
+             text-decoration: none;
+             font-weight: bold;
+             background: #60a5fa;
+             color: #fff;
+             display: inline-block;
+             margin-right: 10px;
+           "
+         >
+           Ir a Sesión 6
+         </a>
+         <a
+           href="datos2-sesion8.html"
+           style="
+             padding: 10px 20px;
+             border-radius: 8px;
+             text-decoration: none;
+             font-weight: bold;
+             background: #f9e282;
+             color: #222;
+             display: inline-block;
+           "
+         >
+           Ir a Sesión 8
+         </a>
+       </div>
     </div>
   </body>
 </html>
