@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" style=""><head><meta charset="utf-8">
+    
+    <title>TP 2: Integrador de MySQL</title>
+    
+    <style>
+     /* ============================================
+   ESTILOS MEJORADOS - TP Integrador MySQL
+   Colores más vibrantes, mejor espaciado y jerarquía
+   ============================================ */
+
+/* Variables globales para fácil personalización */
+:root {
+  --primary: #1e3a5f;        /* Azul profundo */
+  --primary-dark: #0a2a44;
+  --secondary: #2c7da0;      /* Azul medio */
+  --accent: #61a5c2;         /* Azul claro para detalles */
+  --success: #2a9d8f;        /* Verde para tablas */
+  --warning: #e9c46a;        /* Amarillo para advertencias */
+  --danger: #e63946;          /* Rojo para crítico */
+  --text-dark: #1e2a3a;
+  --text-muted: #4a627a;
+  --bg-light: #f8fafc;
+  --bg-code: #eef2f5;
+  --border-light: #cbd5e1;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem 2.5rem;
+  background: linear-gradient(135deg, #f5f7fb 0%, #ffffff 100%);
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: var(--text-dark);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+/* Encabezados con jerarquía visual */
+h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid var(--accent);
+  display: inline-block;
+  width: 100%;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--secondary);
+  font-style: italic;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding-left: 0.75rem;
+  border-left: 5px solid var(--accent);
+  background: linear-gradient(90deg, rgba(44,125,160,0.08) 0%, rgba(44,125,160,0) 100%);
+  padding: 0.5rem 0 0.5rem 1rem;
+  border-radius: 0 12px 12px 0;
+}
+
+h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--secondary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Párrafos y listas más legibles */
+p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+ul, ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  font-size: 0.98rem;
+}
+
+li strong {
+  color: var(--primary);
+}
+
+/* Tablas modernas */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.5rem 0;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+th {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  font-weight: 600;
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-dark);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background-color: rgba(44,125,160,0.05);
+}
+
+/* Código: mucho más legible y destacado */
+code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  background: var(--bg-code);
+  color: var(--primary-dark);
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid #d1d9e8;
+  white-space: nowrap;
+}
+
+pre {
+  background: #1e2a3a;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 12px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  margin: 1rem 0;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  border: none;
+  padding: 0;
+  white-space: pre;
+}
+
+/* Cajas destacadas (advertencias) */
+.highlight-box {
+  background: linear-gradient(135deg, #fff9e8 0%, #fff3d6 100%);
+  border-left: 6px solid var(--warning);
+  border-radius: 16px;
+  padding: 1.2rem 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: var(--shadow);
+}
+
+.highlight-box strong {
+  display: block;
+  font-size: 1.1rem;
+  color: #b26b00;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.highlight-box p {
+  margin-bottom: 0;
+  color: #5c4a1a;
+}
+
+/* Botones y elementos interactivos (opcional) */
+button, .btn-demo {
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* Estilo para listas de fechas */
+ul li strong, p strong {
+  color: var(--primary-dark);
+}
+
+/* Mejora visual para separadores */
+hr {
+  margin: 2rem 0;
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem 1.2rem;
+    margin: 0.5rem;
+    border-radius: 12px;
+  }
+  
+  h1 {
+    font-size: 1.6rem;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+  }
+  
+  table, th, td {
+    font-size: 0.85rem;
+  }
+  
+  code {
+    white-space: normal;
+    word-break: break-word;
+  }
+}
+
+/* Personalización del scroll */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-light);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
+    </style>
+  </head>
+  <body style="">
+    <h1>TP 2: Integrador de MySQL</h1>
+    <!-- <p class="subtitle">Trabajo práctico integrador de contenidos y preparación para defensa y examen oral</p> -->
+
+<h2>Fechas:</h2>
+<ul><li><strong>Fecha límite de entrega de trabajo:</strong>  viernes 19 de junio.</li>
+<li><strong>Fecha de defensa:</strong>  cuando quieran (incluso en mi horario de PEP de 15 a 18:30hs de lunes a viernes), pero antes 26 de junio.</li>
+<li><strong>29 de junio notas entregadas al sistema educativo.</strong></li></ul>
+    <h2>1. Instrucciones Generales</h2>
+    <ul>
+      <li><strong>Modalidad de trabajo:</strong> En grupos de 2 a 4 integrantes.</li>
+      <li>
+        <strong>Temática:</strong> Libertad total para elegir la temática de las bases de datos y tablas, tal como se
+        realizó en el TP1. 
+        <!-- Se sugiere elegir escenarios reales y coherentes (por ejemplo: gestión de biblioteca, sistema
+        de reservas médicas, e-commerce, etc.). Aunque los nombres de las tablas y columnas sean libres, la aplicación
+        de los requisitos técnicos es estricta. -->
+      </li>
+      <li>
+        <strong>Uso de Inteligencia Artificial:</strong> Está permitido el apoyo con herramientas de IA (ChatGPT,
+        Copilot, etc.) para consultar dudas. Sin embargo,
+        <strong>NO deben incorporar contenido, funciones o comandos que no hayan sido enseñados en clase</strong>.
+      </li>
+      <li>
+        <strong>Defensa del código:</strong> Cada miembro del grupo debe ser capaz de defender, interpretar y explicar
+        cada línea de código entregada. Se evaluará la comprensión individual del trabajo grupal.
+      </li>
+      <li>
+        <strong>Formato de entrega:</strong> Si la plataforma o su servicio de correo bloquea los archivos con extensión
+        <code>.sql</code>, deberán pegar todo su script en un documento
+        <strong>Word (.docx), PDF o bloc de notas (.txt)</strong> de forma ordenada, jerárquica y debidamente comentada.
+      </li>
+      <li>
+        <strong>Identificación:</strong> Deben figurar los nombres y apellidos completos de todos los integrantes en el
+        encabezado del archivo entregado.
+      </li>
+    </ul>
+
+    <h2>2. Propósito del TP</h2>
+    <p>
+      El objetivo de este trabajo práctico es evaluar la capacidad del alumnado para integrar de manera lógica todos los
+      conceptos abordados en las clases.:
+    </p>
+    <ul>
+      <li>Creación de bases de datos y modelado de tablas.</li>
+      <li>Asignación adecuada de todos los <strong>tipos de datos</strong> enseñados.</li>
+      <li>
+        Aplicación estricta de restricciones estructurales: <code>PRIMARY KEY</code>, <code>FOREIGN KEY</code>,
+        <code>NOT NULL</code>, <code>UNIQUE</code> y <code>DEFAULT</code>.
+      </li>
+      <!-- <li>Manipulación de datos mediante inserciones, modificaciones y borrados lógicos y físicos.</li> -->
+      <li>
+        Construcción de filtros avanzados y ordenamientos (<code>WHERE</code>, <code>ORDER BY</code>,
+        <code>DISTINCT</code>, <code>IS NULL</code>, <code>IS NOT NULL</code>).
+      </li>
+      <li>
+        Relacionamiento de tablas mediante <code>INNER JOIN</code>, <code>LEFT JOIN</code> y <code>RIGHT JOIN</code>.
+      </li>
+      <li>Manejo de integridad referencial con <code>ON UPDATE CASCADE</code> y <code>ON DELETE CASCADE</code>.</li>
+      <li>
+        Agrupación de datos y uso de funciones específicas: 
+        <!-- <code>COUNT()</code>, -->
+         <!-- <code>GROUP BY</code>, -->
+        <code>YEAR()</code>, <code>MONTH()</code>, <code>DAY()</code>.
+      </li>
+    </ul>
+
+    <h2>3. Preparación inicial del script</h2>
+    <p>
+      Al inicio de su archivo SQL, deben plantear la estructura base para que el script pueda ser ejecutado múltiples
+      veces sin generar errores de duplicación. Deben incluir:
+    </p>
+    <ul>
+      <li>Comandos <code>DROP DATABASE IF EXISTS</code> o <code>DROP TABLE IF EXISTS</code> según corresponda.</li>
+      <li>Creación de la base de datos utilizando <code>CREATE DATABASE IF NOT EXISTS</code> y tablas<code>CREATE TABLE IF NOT EXISTS</code>.</li>
+      <li>Selección de la base de datos con <code>USE</code>.</li>
+      <li>
+        A modo de apoyo y comprobación, incluyan los comandos <code>SHOW DATABASES;</code> y
+        <code>SHOW TABLES;</code> (pueden dejarlos comentados).
+      </li>
+      <li>
+        Aseguren una nomenclatura coherente y estandarizada para todos sus objetos (por ejemplo, uso consistente de
+        minúsculas y guiones bajos).
+      </li>
+    </ul>
+
+    <h2>4. Parte A: Relación 1 a 1 y Modificaciones</h2>
+    <!-- <p>En esta sección aplicarán restricciones y manipularán la estructura de las tablas. Sigan estos pasos:</p> -->
+    <ol>
+      <li>
+        Crear una tabla principal con la temática escogida que contenga al menos <strong>6 registros</strong>. La
+        columna que actúe como clave primaria debe nombrarse estrictamente siguiendo este formato:
+        <code>ID_nombre_de_tu_tabla</code>.
+      </li>
+      <li>
+        Crear una segunda tabla diseñada para tener una <strong>relación 1 a 1</strong> con la primera. No olviden
+        definir la columna que servirá como clave foránea (FK) y <code>ON DELETE CASCADE</code> ,<code>ON UPDATE CASCADE</code>para relacionarlas.
+      </li>
+      <li>
+        Entre ambas tablas, es obligatorio aplicar
+        <strong>todos los tipos de datos enseñados hasta el momento</strong> (por ejemplo: INT, VARCHAR, DECIMAL, DATE,
+        BOOLEAN, TEXT, etc.).
+      </li>
+      <li>
+        A las columnas que consideren pertinentes, apliquen las restricciones <code>DEFAULT</code>,
+        <code>NOT NULL</code> y <code>UNIQUE</code>.
+      </li>
+      <li>
+        Insertar al menos <strong>4 registros</strong> en la segunda tabla y relacionarlos lógicamente con los registros
+        de la primera tabla.
+      </li>
+      <li>
+        <strong>Ejercicios con valores NULL y DEFAULT:</strong>
+        <ul>
+          <li>
+            Insertar un registro dejando explícitamente una columna como <code>NULL</code>. Luego, actualizar dicho
+            registro asignándole un dato válido.
+          </li>
+          <li>
+            Insertar un registro permitiendo que actúe el valor <code>DEFAULT</code> en una columna. Posteriormente,
+            actualizar ese registro modificando el valor por defecto.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Modificación de estructuras (ALTER):</strong>
+        <ul>
+          <li>Cambiar el nombre de una columna existente.</li>
+          <li>Modificar el tipo de dato de una columna existente.</li>
+          <li>
+            Agregar una nueva columna con el tipo de dato que deseen en <strong>cada una</strong> de las dos tablas.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Consultas con alias y tipos de JOIN:</strong>
+        <ul>
+          <li>
+            Crear un filtro que muestre registros relacionados utilizando alias, basado en
+            <strong>dos columnas de la tabla padre y una de la tabla hija</strong>.
+          </li>
+          <li>
+            Crear un filtro que muestre registros relacionados utilizando alias, basado en
+            <strong>una columna de la tabla padre y dos de la tabla hija</strong> (eviten repetir las columnas del ítem
+            anterior).
+          </li>
+          <li>
+            Crear un filtro que muestre registros relacionados utilizando alias, basado en
+            <strong>tres columnas de la tabla padre y tres de la tabla hija</strong>.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Prácticas específicas:</strong>
+        <ul>
+          <li>
+            Actualizar uno o varios datos en una columna del tipo <code>DECIMAL</code>. Crear un filtro para esta
+            columna aplicando <code>LIMIT</code>.
+          </li>
+          <li>
+            Actualizar uno o varios datos en una columna del tipo <code>DATE</code>. Filtrar la tabla utilizando las
+            funciones <code>YEAR()</code>, <code>MONTH()</code> o <code>DAY()</code>.
+          </li>
+          <li>Eliminar al menos un registro de la <strong>tabla padre</strong>.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>5. Parte B: Relación 1 a Muchos (1:N)</h2>
+    <p>
+      Amplíen su base de datos creando un escenario que represente una relación de "uno a muchos" (por ejemplo: un
+      cliente realiza muchas compras, un autor escribe muchos libros).
+    </p>
+    <ul>
+      <li>Definir claramente las tablas con sus respectivas <code>PRIMARY KEY</code> y <code>FOREIGN KEY</code>.</li>
+      <li>La <strong>tabla padre</strong> (lado "1") debe contener al menos <strong>4 registros</strong>.</li>
+      <li>
+        La <strong>tabla hija</strong> (lado "muchos") debe contener al menos <strong>8 registros</strong> vinculados.
+      </li>
+      <li>
+        Redactar al menos <strong>4 consultas demostrativas</strong>:
+        <ol>
+          <li>Una consulta que muestre todos los registros relacionados (padre e hijos).</li>
+          <li>Una consulta que aplique un filtro sobre un dato de la tabla padre.</li>
+          <li>Una consulta que aplique un filtro sobre un dato de la tabla hija.</li>
+          <li>Una consulta ordenada utilizando <code>ORDER BY</code>.</li>
+        </ol>
+      </li>
+      <li>
+        Dentro de las consultas anteriores, es <strong>obligatorio</strong> utilizar al menos un
+        <code>INNER JOIN</code> y un <code>LEFT JOIN</code> o <code>RIGHT JOIN</code>.
+      </li>
+      <li>
+        Realizar un <code>DELETE</code> sobre un registro de la tabla padre y que borre los datos relacionados en las otras tablas.
+      </li>
+    </ul>
+
+    <h2>6. Parte C: Relación Muchos a Muchos (N:M)</h2>
+    <p>Implementar un escenario de relación "muchos a muchos" mediante una tabla intermedia o pivote.</p>
+    <ul>
+      <li>Crear dos tablas principales y <strong>una tabla intermedia</strong>.</li>
+      <li>
+        Volumen de datos mínimo: insertar <strong>4 registros</strong> en la primera tabla principal,
+        <strong>4 registros</strong> en la segunda, y al menos <strong>7 registros</strong> en la tabla intermedia.
+      </li>
+      <li>
+        La tabla intermedia debe contener, además de las claves foráneas,
+        <strong>al menos un dato propio adicional</strong> (por ejemplo: fecha_registro, estado, calificación, etc.).
+      </li>
+      <li>
+        Redactar consultas que empleen <code>JOIN</code> y el uso de <strong>alias</strong> (<code>AS</code>) para:
+        <ul>
+          <li>Mostrar todos los elementos de la tabla B asociados a un registro específico de la tabla A.</li>
+          <li>Mostrar todos los elementos de la tabla A asociados a un registro específico de la tabla B.</li>
+        </ul>
+      </li>
+      <li>
+        Diseñar dos consultas que aplique la cláusula <code>ORDER BY</code>.
+        <!-- analítica que combine la función <code>COUNT()</code> y la cláusula <code>GROUP BY</code>. -->
+      </li>
+    </ul>
+
+    <h2>7. Parte D: Consultas Integradoras y Control de Integridad</h2>
+    <p>Para finalizar el desarrollo del script, deben implementar las siguientes operaciones integradoras:</p>
+
+    <div class="highlight-box">
+      <strong>¡Advertencia Crítica: Error Code 1175!</strong>
+      <p>
+        Recuerden que por medidas de seguridad, el motor de base de datos puede impedir actualizaciones o borrados
+        masivos (Safe Updates). Utilicen siempre la cláusula <code>WHERE</code> apuntando a claves primarias o campos
+        seguros. Si deciden desactivar esta protección temporalmente, deben justificarlo claramente mediante comentarios
+        en el script.
+      </p>
+    </div>
+
+    <ul>
+      <li>
+        Exhibir al menos una consulta clara que utilice <code>INNER JOIN</code>, otra con <code>LEFT JOIN</code> y una
+        tercera con <code>RIGHT JOIN</code>.
+      </li>
+      <li>
+        Configurar una relación utilizando <code>ON DELETE CASCADE</code> y <code>ON UPDATE CASCADE</code>.
+         Demostrar su efecto actualizando la clave
+        primaria de un registro padre y mostrando cómo se refleja automáticamente en la tabla hija.
+        Por otro lado el efecto de Eliminar un dato de la tabla padre y como elimina a el/los hijos.
+        y otra limpieza utilizando <code>TRUNCATE</code>.
+      </li>
+      <li>
+        Construir una batería de consultas que apliquen en su conjunto los siguientes operadores lógicos y de
+        comparación: <code>AND</code>, <code>OR</code>, <code>NOT</code>, <code>&gt;</code>, <code>&lt;</code>,
+        <code>&gt;=</code>, <code>&lt;=</code>, <code>=</code>, <code>&lt;&gt;</code>, <code>IS NULL</code> e
+        <code>IS NOT NULL</code>.
+      </li>
+      <li>
+        Realizar una consulta que elimine resultados duplicados en la visualización mediante el uso de
+        <code>DISTINCT</code>.
+      </li>
+      <li>
+        Aplicar ordenamientos con <code>ORDER BY</code> tanto de forma ascendente (<code>ASC</code>) como descendente
+        (<code>DESC</code>).
+      </li>
+      <!-- <li>
+        Ejecutar una eliminación de datos usando <code>DELETE</code> 
+         Se exige explicar brevemente mediante un comentario en el código cuál es la diferencia técnica entre ambas
+        sentencias. 
+      </li> -->
+    </ul>
+
+    <h2>8. Entrega  </h2>
+    <p>El documento a entregar debe cumplir estrictamente con lo siguiente:</p>
+    <ul>
+      <li>Nombres y apellidos completos de los integrantes.</li>
+      <li>
+        Una breve explicación (en formato texto o comentario inicial) de la temática elegida para facilitar la revisión
+        del docente.
+      </li>
+      <!-- <li>
+        El script SQL completo, ordenado, con correcta indentación y uso de punto y coma al final de cada instrucción.
+      </li>
+      <li>
+        Separación clara mediante comentarios indicando qué bloque corresponde a la Parte A, Parte B, Parte C y Parte D.
+      </li>
+      <li>
+        Evidencia textual (comentarios explicativos en el código) de que el grupo comprende qué hace cada comando
+        ejecutado.
+      </li> -->
+    </ul>
+
+    <!-- <h2>9. Criterios de Evaluación</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Criterio de Evaluación</th>
+          <th>Descripción de lo evaluado</th>
+          <th>Peso Orientativo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Estructura y Modelado</strong></td>
+          <td>
+            Creación lógica de bases de datos y tablas, correcta implementación de relaciones (1:1, 1:N, N:M), uso
+            adecuado de PK y FK.
+          </td>
+          <td>20%</td>
+        </tr>
+        <tr>
+          <td><strong>Tipos de Datos y Restricciones</strong></td>
+          <td>Asignación precisa de tipos de datos y restricciones (NOT NULL, UNIQUE, DEFAULT).</td>
+          <td>15%</td>
+        </tr>
+        <tr>
+          <td><strong>Operaciones CRUD</strong></td>
+          <td>Llenado coherente de datos, actualizaciones correctas, manejo de borrados y truncados.</td>
+          <td>15%</td>
+        </tr>
+        <tr>
+          <td><strong>Consultas, Filtros y Agrupaciones</strong></td>
+          <td>Uso impecable de WHERE, operadores lógicos, funciones de fecha, ORDER BY y DISTINCT
+            , COUNT y GROUP BY 
+            .</td>
+          <td>20%</td>
+        </tr>
+        <tr>
+          <td><strong>Relaciones y JOIN</strong></td>
+          <td>
+            Sintaxis correcta en uniones de tablas (LEFT, RIGHT, INNER JOIN), manejo de alias y aplicación de ON UPDATE
+            CASCADE.
+          </td>
+          <td>15%</td>
+        </tr>
+        <tr>
+          <td><strong>Defensa oral y Comprensión</strong></td>
+          <td>
+            Capacidad técnica para explicar el código entregado, responder preguntas y realizar modificaciones en vivo.
+          </td>
+          <td>15%</td>
+        </tr>
+      </tbody>
+    </table> -->
+
+    <h2>9. Recomendaciones Finales</h2>
+    <ul>
+      <li>
+        <strong>Prueben el script por partes:</strong> Ejecuten bloque por bloque para identificar errores de sintaxis
+        antes de correr el archivo completo.
+      </li>
+      <li>
+        <strong>Comenten su código:</strong> Les será de gran utilidad durante la defensa oral y ayudará al docente a
+        entender su lógica.
+      </li>
+      <!-- <li><strong>Mantengan la coherencia:</strong> Respeten la nomenclatura elegida a lo largo de todo el trabajo.</li> -->
+      <li>
+        <strong>Verifiquen compatibilidad:</strong> Si una <code>PRIMARY KEY</code> es de tipo <code>INT</code>, su
+        respectiva <code>FOREIGN KEY</code> debe ser estrictamente <code>INT</code>.
+      </li>
+    </ul>
+
+    <!-- <div class="highlight-box">
+      <strong>Recordatorio Fundamental:</strong> Si los integrantes del grupo no pueden explicar cómo funciona el código
+      entregado o qué función cumple determinada instrucción,
+      <strong>el trabajo práctico no se considerará resuelto</strong>, independientemente de que el script ejecute sin
+      errores.
+    </div> -->
+
+    <!-- <h2>11. Resumen: Contenidos que deben aparecer sí o sí</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Categoría</th>
+          <th>Comandos y estructuras de aplicación obligatoria</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Comandos Básicos (DDL)</strong></td>
+          <td>
+            <code>CREATE</code>, <code>USE</code>, <code>DROP</code>, <code>TRUNCATE</code>, <code>RENAME</code>,
+            <code>ALTER</code>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Tipos de Datos y Restricciones</strong></td>
+          <td>
+            <code>INT</code>, <code>VARCHAR</code>, <code>DECIMAL</code>, <code>DATE</code>, <code>PRIMARY KEY</code>,
+            <code>FOREIGN KEY</code>, <code>UNIQUE</code>, <code>NOT NULL</code>, <code>DEFAULT</code>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Manipulación de Datos (DML)</strong></td>
+          <td><code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code></td>
+        </tr>
+        <tr>
+          <td><strong>Consultas y Filtros Básicos</strong></td>
+          <td>
+            <code>WHERE</code>, operadores (&gt;, &lt;, =, &lt;&gt;, AND, OR, NOT), <code>IS NULL</code>,
+            <code>IS NOT NULL</code>, <code>ORDER BY</code>, <code>DISTINCT</code>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Relaciones y Combinaciones</strong></td>
+          <td>
+            Relaciones 1:1, 1:N, N:M, <code>LEFT JOIN</code>, <code>INNER JOIN</code>, <code>RIGHT JOIN</code>, Uso de
+            Alias (<code>AS</code>)
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Operaciones Avanzadas</strong></td>
+          <td>
+            <code>ON UPDATE CASCADE</code>, <code>COUNT()</code>, <code>GROUP BY</code>, Funciones de fecha
+            (<code>YEAR()</code>, <code>MONTH()</code>, <code>DAY()</code>)
+          </td>
+        </tr>
+      </tbody>
+    </table> -->
+  
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>

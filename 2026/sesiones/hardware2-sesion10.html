@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="es-ES" style="background-color: rgb(15, 23, 41);" data-theme="light"><head><meta charset="utf-8">
+    
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 10  Armado de PC - PSU</title>
+    <style>
+      :root {
+        --bg-primary: #0b1120;
+        --card-bg: #1e293b;
+        --text-primary: #f8fafc;
+        --text-secondary: #94a3b8;
+        --accent-blue: #3b82f6;
+        --accent-cyan: #06b6d4;
+        --accent-green: #10b981;
+        --accent-yellow: #f59e0b;
+        --accent-red: #ef4444;
+        --border-subtle: #334155;
+        --gradient-text: linear-gradient(135deg, #ffffff, #06b6d4, #3b82f6);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--bg-primary);
+        font-family:
+          'Segoe UI',
+          system-ui,
+          -apple-system,
+          sans-serif;
+        color: var(--text-primary);
+        line-height: 1.7;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+      }
+
+      /* Navegación */
+      .nav-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .nav-btn {
+        padding: 0.7rem 1.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: opacity 0.2s;
+        text-align: center;
+      }
+
+      .nav-btn.primary {
+        background: var(--accent-green);
+        color: #000;
+      }
+      .nav-btn.secondary {
+        background: var(--accent-blue);
+        color: #fff;
+      }
+      .nav-btn.tertiary {
+        background: var(--accent-yellow);
+        color: #000;
+      }
+
+      /* Hero */
+      .hero {
+        text-align: center;
+        padding: 3rem 1rem;
+        background: var(--card-bg);
+        border-radius: 16px;
+        border: 1px solid var(--border-subtle);
+        margin-bottom: 2.5rem;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        background: var(--gradient-text);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin: 0 0 1rem 0;
+        line-height: 1.2;
+      }
+
+      .hero-sub {
+        color: var(--accent-cyan);
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .hero-desc {
+        color: var(--text-secondary);
+        max-width: 700px;
+        margin: 0 auto;
+        font-size: 1.05rem;
+      }
+
+      /* Tabla de contenidos */
+      .toc-card {
+        background: rgba(30, 41, 59, 0.5);
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 3rem;
+        border: 1px solid var(--border-subtle);
+      }
+
+      .toc-title {
+        font-size: 1.3rem;
+        color: var(--accent-cyan);
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border-subtle);
+        padding-bottom: 0.5rem;
+      }
+
+      .toc-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+
+      .toc-grid a {
+        color: var(--text-primary);
+        text-decoration: none;
+        background: var(--card-bg);
+        padding: 0.8rem 1.2rem;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+      }
+
+      /* Títulos de sección */
+      .section-title {
+        background: linear-gradient(90deg, #1e3a5f, transparent);
+        border-left: 6px solid var(--accent-cyan);
+        padding: 1rem 1.5rem;
+        border-radius: 0 12px 12px 0;
+        margin: 3.5rem 0 1.5rem;
+        font-size: 1.7rem;
+        color: #fff;
+      }
+
+      /* Tarjetas y contenido */
+      .card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--border-subtle);
+      }
+
+      h3 {
+        color: var(--accent-cyan);
+        margin-top: 0;
+        font-size: 1.4rem;
+      }
+
+      h4 {
+        color: var(--accent-blue);
+        font-size: 1.2rem;
+        margin-top: 1.5rem;
+      }
+
+      p {
+        margin-bottom: 1.2rem;
+      }
+
+      strong {
+        color: #fff;
+      }
+
+      ul,
+      ol {
+        padding-left: 1.5rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+
+      /* Callouts */
+      .callout {
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 2rem 0;
+        border-left: 5px solid;
+      }
+
+      .callout-title {
+        font-weight: 700;
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.1rem;
+        color: #fff;
+      }
+
+      .callout.warning {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: var(--accent-red);
+      }
+
+      .callout.tip {
+        background: rgba(245, 158, 11, 0.1);
+        border-color: var(--accent-yellow);
+      }
+
+      .callout.idea {
+        background: rgba(16, 185, 129, 0.1);
+        border-color: var(--accent-green);
+      }
+
+      .callout p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Tablas Responsive (Sin scrollbars) */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2rem 0;
+        background: var(--bg-primary);
+        border-radius: 8px;
+      }
+
+      th,
+      td {
+        padding: 1.2rem;
+        text-align: left;
+        border: 1px solid var(--border-subtle);
+      }
+
+      th {
+        background-color: rgba(6, 182, 212, 0.1);
+        color: var(--accent-cyan);
+        font-weight: 600;
+      }
+
+      td {
+        color: var(--text-secondary);
+      }
+
+      /* Estilos responsive para tablas sin usar overflow-x */
+      @media (max-width: 768px) {
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+          display: block;
+        }
+
+        thead tr {
+          position: absolute;
+          top: -9999px;
+          left: -9999px;
+        }
+
+        tr {
+          margin-bottom: 1.5rem;
+          border: 1px solid var(--border-subtle);
+          border-radius: 8px;
+          background: var(--card-bg);
+        }
+
+        td {
+          border: none;
+          border-bottom: 1px solid var(--border-subtle);
+          position: relative;
+          padding-left: 40%;
+          min-height: 3rem;
+        }
+
+        td::before {
+          content: attr(data-label);
+          position: absolute;
+          left: 1rem;
+          top: 1.2rem;
+          width: 35%;
+          padding-right: 10px;
+          font-weight: bold;
+          color: var(--accent-cyan);
+        }
+
+        td:last-child {
+          border-bottom: 0;
+        }
+      }
+
+      /* Grid de Preguntas */
+      .q-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+
+      .q-card {
+        background: rgba(11, 17, 32, 0.5);
+        border-radius: 12px;
+        padding: 1.5rem;
+        display: flex;
+        gap: 1.5rem;
+        border: 1px solid var(--border-subtle);
+      }
+
+      .q-num {
+        background: var(--accent-blue);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+      }
+
+      .q-text {
+        margin-top: 0.2rem;
+        color: var(--text-secondary);
+      }
+
+      .checklist {
+        list-style-type: none;
+        padding-left: 0;
+      }
+
+      .checklist li {
+        position: relative;
+        padding-left: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .checklist li::before {
+        content: '✅';
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      .formula-box {
+        background: var(--bg-primary);
+        padding: 1.5rem;
+        border-radius: 8px;
+        font-family: monospace;
+        font-size: 1.1rem;
+        color: var(--accent-green);
+        text-align: center;
+        border: 1px dashed var(--accent-cyan);
+        margin: 1.5rem 0;
+      }
+    </style>
+  </head>
+  <body style="">
+    <div class="container">
+      
+   <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion9.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 9
+      </a>
+      <a
+        href="hardware2-sesion11.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 11
+      </a>
+    </div>
+
+      
+      <div class="hero">
+        <h1>Sesión 10  Armado de PC - PSU</h1>
+        <div class="hero-sub">El corazón energético de cualquier equipo informático</div>
+        <div class="hero-desc">
+          Aprende a diagnosticar, seleccionar y presupuestar fuentes de alimentación evaluando necesidades de potencia
+          real, compatibilidad intergeneracional, estándares de seguridad y escenarios específicos de clientes.
+        </div>
+      </div>
+
+      
+      <div class="toc-card">
+        <h3 class="toc-title">📖 Contenido de la sesión</h3>
+        <div class="toc-grid">
+          <a href="#objetivos">🎯 1. Objetivos de aprendizaje</a>
+          <a href="#que-es-psu">⚡ 2. ¿Qué es una PSU y por qué importa?</a>
+          <a href="#tipos-psu">🖥️ 3. Diferencias: Moderna, Legacy y Notebook</a>
+          <a href="#factores-precio">💰 4. Factores que alteran el precio</a>
+          <a href="#generacion">🔌 5. Generación, estándares y conectores</a>
+          <a href="#protecciones">🛡️ 6. Protecciones esenciales</a>
+          <a href="#calculo">🧮 7. Método de cálculo y selección</a>
+          <a href="#mitos">🛑 8. Mitos y errores frecuentes</a>
+          <a href="#casos">💼 9. Casos de cliente y recomendaciones</a>
+          <a href="#checklist">✅ 10. Checklist de selección</a>
+          <!-- <a href="#actividad">🛠️ 11. Actividad práctica</a> -->
+          <a href="#preguntas">❓ 11. Preguntas finales</a>
+        </div>
+      </div>
+
+      
+      <section id="objetivos">
+        <h2 class="section-title">🎯 1. Objetivos de aprendizaje</h2>
+        <div class="card">
+          <ul>
+            <li>
+              <strong>Distinguir</strong> entre la potencia nominal publicitaria y la potencia real continua de una
+              fuente.
+            </li>
+            <li>
+              <strong>Evaluar</strong> las diferencias arquitectónicas entre fuentes de PC modernas, equipos legacy y
+              adaptadores de notebooks.
+            </li>
+            <li>
+              <strong>Seleccionar</strong> la PSU adecuada basándose en el presupuesto del cliente, el consumo del
+              hardware y los estándares actuales (como ATX 3.0).
+            </li>
+            <li>
+              <strong>Prevenir</strong> fallos catastróficos entendiendo los voltajes, las protecciones internas y los
+              riesgos de usar adaptadores de corriente inadecuados.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      
+      <section id="que-es-psu">
+        <h2 class="section-title">⚡ 2. ¿Qué es una PSU y por qué es crítica?</h2>
+        <div class="card">
+          <h3>El traductor de energía</h3>
+          <p>
+            La <strong>Power Supply Unit (PSU)</strong> o Fuente de Alimentación es el componente encargado de convertir
+            la corriente alterna (CA) de alto voltaje de la pared (110V/220V) en corriente continua (CC) de bajo voltaje
+            perfectamente estable para los componentes internos (+12V, +5V, +3.3V).
+          </p>
+
+          <h3>Estabilidad y "Rizado" (Ripple)</h3>
+          <p>
+            Ninguna conversión de energía es perfecta. El voltaje que entrega una PSU tiene pequeñas fluctuaciones o
+            "ruido" eléctrico llamado <strong>Rizado o Ripple</strong>. En una PSU de mala calidad, este rizado es alto.
+            Los reguladores de voltaje (VRM) de la placa base y la tarjeta gráfica tienen que trabajar al máximo para
+            limpiar ese ruido. A largo plazo, un rizado excesivo degrada los condensadores de la placa base y la GPU,
+            reduciendo su vida útil drásticamente.
+          </p>
+
+          <h3>Potencia Nominal vs. Potencia Continua (Real)</h3>
+          <p>Este es el punto de fallo más común al presupuestar:</p>
+          <ul>
+            <li>
+              <strong>Potencia Nominal (Pico):</strong> Es el número grande en la caja de las fuentes baratas (ej.
+              "800W"). Significa que la fuente puede alcanzar 800W por unos pocos segundos antes de apagarse o dañarse.
+              Operarla continuamente a ese nivel provocará un fallo.
+            </li>
+            <li>
+              <strong>Potencia Continua (Real):</strong> Es la potencia que una fuente de calidad (generalmente
+              certificada) garantiza poder entregar 24/7 sin sobrecalentarse, evaluada generalmente a temperaturas
+              internas de 40°C o 50°C.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      
+      <section id="tipos-psu">
+        <h2 class="section-title">🖥️ 3. Diferencias: Moderna, Legacy y Notebook</h2>
+        <div class="card">
+          <p>
+            No podemos aplicar las mismas reglas a un equipo de 2010, a una workstation de 2024 y a un ordenador
+            portátil.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Característica</th>
+                <th>Escritorio Moderno (ATX 12V 2.x / 3.x)</th>
+                <th>Escritorio Legacy (Previo a 2010)</th>
+                <th>Portátil (Notebook)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Característica"><strong>Formato y Ubicación</strong></td>
+                <td data-label="Moderno">Interna (ATX, SFX).</td>
+                <td data-label="Legacy">Interna (ATX clásico, a veces con ventilador de 80mm trasero).</td>
+                <td data-label="Notebook">Externa (Ladrillo adaptador CA/CC).</td>
+              </tr>
+              <tr>
+                <td data-label="Característica"><strong>Distribución de Carga</strong></td>
+                <td data-label="Moderno">
+                  Prioridad casi absoluta en el <strong>raíl de +12V</strong> (alimenta CPU y GPU).
+                </td>
+                <td data-label="Legacy">
+                  Carga pesada en los raíles de <strong>+5V y +3.3V</strong> (CPUs y placas antiguas usaban más estos).
+                </td>
+                <td data-label="Notebook">Entrega un <strong>único voltaje</strong> general (ej. 19.5V).</td>
+              </tr>
+              <tr>
+                <td data-label="Característica"><strong>Conversión DC-DC</strong></td>
+                <td data-label="Moderno">Se hace en la PSU (12V principal, de ahí se saca 5V y 3.3V internamente).</td>
+                <td data-label="Legacy">
+                  Regulación en grupo (Group Regulated), menos estable si las cargas varían mucho.
+                </td>
+                <td data-label="Notebook">
+                  La conversión de 19V a voltajes menores (1V, 3.3V, 5V) se hace
+                  <strong>dentro de la placa base</strong>.
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Característica"><strong>Conectores Clave</strong></td>
+                <td data-label="Moderno">EPS (8 pines CPU), 12VHPWR o 12V-2x6 para GPUs.</td>
+                <td data-label="Legacy">ATX 20 pines, P4 (4 pines CPU), Molex, Berg (Disquetera).</td>
+                <td data-label="Notebook">Jack de corriente (Punta azul /amarillo/negro, aguja central) o USB-C PD.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout idea">
+            <div class="callout-title">💡 Idea Clave sobre Fuentes de Portátil</div>
+            <p>
+              En un PC de escritorio, la PSU es la responsable de entregar múltiples voltajes (+12V, +5V, +3.3V). En un
+              portátil, el "cargador" solo es un transformador que entrega un único voltaje de corriente continua (ej.
+              19V). Es la <strong>placa base del portátil</strong> la que actúa como "fuente interna", dividiendo esos
+              19V para el procesador, los puertos USB y la pantalla.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      
+      <section id="factores-precio">
+        <h2 class="section-title">💰 4. Factores que alteran el precio</h2>
+        <div class="card">
+          <p>
+            ¿Por qué una fuente de 650W puede costar $40000 y otra de 650W costar $130000? El cliente siempre hará esta
+            pregunta.
+          </p>
+
+          <ul>
+            <li>
+              <strong>Certificación de Eficiencia (80 PLUS / Cybenetics):</strong> Mide cuánta energía de la pared se
+              convierte en energía útil frente a cuánta se pierde en forma de calor. Una fuente con certificación
+              Titanium tiene componentes de altísima pureza frente a una sin certificar o "White".
+            </li>
+            <li>
+              <strong>Calidad de los Condensadores:</strong> Fuentes premium usan condensadores 100% japoneses
+              certificados para 105°C, garantizando una vida útil de 7 a 12 años. Fuentes económicas usan condensadores
+              chinos/taiwaneses de 85°C.
+            </li>
+            <li>
+              <strong>Topología Interna:</strong> El diseño "DC-DC con LLC Resonante" (premium) mantiene el voltaje
+              estable independientemente de la carga, mientras que el "Group Regulated" (barato) puede desestabilizar el
+              raíl de +5V si la GPU demanda mucho en +12V.
+            </li>
+            <li>
+              <strong>Modularidad:</strong>
+              <ul>
+                <li><em>No modular:</em> Todos los cables están fijos (más barato).</li>
+                <li><em>Semi-modular:</em> Cable 24 pines y CPU fijos, el resto (PCIe, SATA) extraíbles.</li>
+                <li>
+                  <em>Full modular:</em> Todos los cables extraíbles (estética limpia, fácil instalación, mayor coste).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Formato:</strong> Las fuentes <strong>SFX</strong> o <strong>SFX-L</strong> (para cajas Mini-ITX)
+              cuestan significativamente más que el estándar <strong>ATX</strong> debido a la complejidad de
+              miniaturizar componentes de alta potencia.
+            </li>
+            <li>
+              <strong>Garantía:</strong> Una fuente barata da 1 o 2 años. Una Tier A ofrece 10 o 12 años de garantía
+              directa.
+            </li>
+          </ul>
+
+          <h4>La Tabla del 80 PLUS (Ejemplo a 50% de carga)</h4>
+          <h5>Cuando hablamos de eficiencia no referimos a que tan bien aprovecha la energia de la "pared", en ves de desperdiciarla en forma de calor.</h5>
+          <table>
+            <thead>
+              <tr>
+                <th>Certificación</th>
+                <th>Eficiencia aprox. (230V)</th>
+                <th>Significado para el cliente</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Certificación"><strong>80 PLUS White/Standard</strong></td>
+                <td data-label="Eficiencia">~82%</td>
+                <td data-label="Significado">Presupuesto ajustado, equipos de oficina.</td>
+              </tr>
+              <tr>
+                <td data-label="Certificación"><strong>80 PLUS Bronze</strong></td>
+                <td data-label="Eficiencia">~85%</td>
+                <td data-label="Significado">El mínimo aceptable para Gaming moderno (Gama de entrada/media).</td>
+              </tr>
+              <tr>
+                <td data-label="Certificación"><strong>80 PLUS Gold</strong></td>
+                <td data-label="Eficiencia">~90%</td>
+                <td data-label="Significado">Punto dulce calidad/precio. Gaming gama alta y workstations.</td>
+              </tr>
+              <tr>
+                <td data-label="Certificación"><strong>80 PLUS Platinum / Titanium</strong></td>
+                <td data-label="Eficiencia">92% - 94%</td>
+                <td data-label="Significado">
+                  Equipos entusiastas, servidores 24/7. Menor calor, mayor ahorro a largo plazo.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      
+      <section id="generacion">
+        <h2 class="section-title">🔌 5. Generación, estándares y compatibilidad</h2>
+        <div class="card">
+          <h3>Los Picos Transitorios y la norma ATX 3.0 / 3.1</h3>
+          <p>
+            Las tarjetas gráficas de gama alta modernas (como la serie RTX 4000 y 5000 de NVIDIA, o RX 7000 de AMD)
+            pueden experimentar <strong>excursiones de potencia (picos transitorios)</strong> que duran microsegundos
+            pero alcanzan hasta 2.5 veces su consumo normal. Una fuente de 750W estándar (ATX 2.4) podría detectar esto
+            como un cortocircuito y apagar el PC para protegerse.
+          </p>
+          <p>
+            El estándar <strong>ATX 3.0 y 3.1</strong> fue creado precisamente para esto: obliga a las fuentes a
+            soportar picos de hasta el 200% de su potencia total durante tiempos breves sin apagarse, y estandariza el
+            cable para tarjetas gráficas de alta potencia.
+          </p>
+
+          <h3>Tabla de Conectores y Usos</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Conector</th>
+                <th>Descripción y Uso</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Conector"><strong>ATX 24 Pines</strong></td>
+                <td data-label="Uso">Alimentación principal para la placa base.</td>
+              </tr>
+              <tr>
+                <td data-label="Conector"><strong>EPS (4+4 pines)</strong></td>
+                <td data-label="Uso">
+                  Alimentación exclusiva para el Procesador (CPU). No confundir con PCIe. Las placas modernas piden 8
+                  pines o incluso 8+4 o 8+8 pines.
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Conector"><strong>PCIe (6+2 pines)</strong></td>
+                <td data-label="Uso">
+                  Tarjetas gráficas clásicas. Cada cable entrega hasta 150W (+ 75W de la ranura PCIe de la placa).
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Conector"><strong>12VHPWR / 12V-2x6</strong></td>
+                <td data-label="Uso">
+                  El estándar de ATX 3.0/3.1. Un solo cable de 12+4 pines puede entregar hasta 600W a GPUs de última
+                  generación.
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Conector"><strong>SATA</strong></td>
+                <td data-label="Uso">
+                  Discos duros (HDD), unidades de estado sólido de 2.5" (SSD) y controladores RGB o ventiladores.
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Conector"><strong>Molex (Legacy)</strong></td>
+                <td data-label="Uso">
+                  Uso en discos IDE antiguos o ventiladores directos. Muy obsoleto, pero presente en equipos legacy.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout warning">
+            <div class="callout-title">⚠️ Regla de Oro en Notebooks (Portátiles)</div>
+            <p>
+              Cuando el cliente pierde el cargador, no podés venderle cualquier "cargador universal" solo porque la
+              clavija entra. Debes verificar estrictamente tres factores:
+            </p>
+            <ol>
+              <li>
+                <strong>Voltaje (V):</strong> DEBE SER IDÉNTICO al original (ej. si dice 19.5V, debe ser 19.5V. Un error
+                aquí quemará la placa base).
+              </li>
+              <li>
+                <strong>Amperaje (A) o Potencia (W):</strong> Puede ser IGUAL O MAYOR. Si el portátil pide 3.33A, un
+                cargador de 4.62A funcionará perfectamente (el portátil solo tomará los amperios que necesita). Si le
+                pones uno de 2.1A, el cargador se sobrecalentará y el equipo irá lento o no cargará la batería.
+              </li>
+              <li>
+                <strong>Polaridad:</strong> Verifica el símbolo (+ y -). Usualmente el centro es positivo, pero
+                conectarlo invertido destruye el equipo al instante.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      
+      <section id="protecciones">
+        <h2 class="section-title">🛡️ 6. Protecciones esenciales</h2>
+        <div class="card">
+          <p>
+            Una fuente de alimentación no solo da energía, es el <strong>escudo principal</strong> del ordenador ante la
+            red eléctrica. Exige siempre que la fuente cuente con estas siglas:
+          </p>
+          <ul>
+            <li>
+              <strong>OVP / UVP (Over/Under Voltage Protection):</strong> Apaga la fuente si el voltaje en algún raíl
+              sube demasiado (OVP) o cae demasiado (UVP), salvando los chips sensibles de la placa base.
+            </li>
+            <li>
+              <strong>OCP (Over Current Protection):</strong> Evita que un raíl intente entregar más amperios de los que
+              físicamente soporta el cableado o el diseño.
+            </li>
+            <li>
+              <strong>OPP (Over Power Protection):</strong> Si la suma del consumo de los componentes supera la
+              capacidad total de la fuente (ej. pedirle 800W a una de 600W), la fuente se apaga preventivamente.
+            </li>
+            <li>
+              <strong>SCP (Short Circuit Protection):</strong> Protección absoluta e inmediata. Si se cruzan un cable de
+              tierra y uno de voltaje, detiene la fuente para evitar un incendio.
+            </li>
+            <li>
+              <strong>OTP (Over Temperature Protection):</strong> Monitorea los disipadores internos de la PSU y la
+              apaga si el calor es crítico.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      
+      <section id="calculo">
+        <h2 class="section-title">🧮 7. Método de cálculo y selección</h2>
+        <div class="card">
+          <p>
+            Las fuentes de alimentación alcanzan su
+            <strong>máxima eficiencia térmica y eléctrica entre el 50% y el 70% de su capacidad total</strong>. Comprar
+            una fuente donde el sistema consuma el 100% genera ruido extremo del ventilador y reduce drásticamente su
+            vida útil.
+          </p>
+
+          <h3>Fórmula orientativa para presupuestar</h3>
+          <div class="formula-box">
+            Consumo Estimado = TDP CPU + TGP Tarjeta Gráfica + 100W (Placa, ventiladores, discos)
+            <br><br>
+            Potencia Recomendada de PSU = Consumo Estimado × 1.35
+          </div>
+
+          <h4>Ejemplo práctico:</h4>
+          <p>
+            Un cliente quiere armar un PC con un procesador Ryzen 5 7600X (TDP 105W) y una tarjeta gráfica RTX 4070 (TGP
+            200W).
+          </p>
+          <ul>
+            <li>Consumo Base: 105W + 200W = 305W</li>
+            <li>Añadir resto del sistema: 305W + 100W = 405W (Consumo Estimado Máximo)</li>
+            <li>Margen de seguridad y eficiencia (35% más): 405W × 1.35 = <strong>546W</strong></li>
+          </ul>
+          <p>
+            <strong>Conclusión:</strong> Deberías presupuestar una fuente de calidad de <strong>550W o 650W</strong>.
+          </p>
+
+          <div class="callout tip">
+            <div class="callout-title">💡 Adaptadores para Tarjetas Gráficas</div>
+            <p>
+              Si la GPU moderna pide un conector de 8 pines, y la fuente antigua del cliente no lo tiene...
+              <strong>NO uses adaptadores Molex a PCIe ni SATA a PCIe</strong>. Esos cables no están diseñados para el
+              amperaje que exige una GPU y tienden a derretirse o causar incendios. Recomienda siempre el cambio de la
+              fuente.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      
+      <section id="mitos">
+        <h2 class="section-title">🛑 8. Mitos y errores frecuentes</h2>
+        <div class="card">
+          <ul>
+            <li>
+              <strong>"Una fuente de 850W consumirá más luz en mi factura que una de 500W":</strong> FALSO. El ordenador
+              solo "tira" de la fuente la energía que necesita. Si tu PC necesita 300W, ambas fuentes extraerán 300W
+              (más la ineficiencia).
+            </li>
+            <li>
+              <strong>"Los cables modulares son universales":</strong> FALSO Y PELIGROSO. Nunca reutilices los cables de
+              una fuente modular antigua en una nueva, incluso si son de la misma marca. El pinout (el orden de los
+              cables) que va a la fuente cambia. Usar un cable ajeno quemará los discos duros o la placa base al
+              encender.
+            </li>
+            <li>
+              <strong>"Si la fuente es pesada, es buena":</strong> Antiguamente, las fuentes con PFC Pasivo y
+              transformadores pesados sugerían calidad. Hoy, componentes modernos muy eficientes pueden ser ligeros. Es
+              mejor verificar listados técnicos (PSU Tier List) y revisiones de expertos.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      
+      <section id="casos">
+        <h2 class="section-title">💼 9. Casos de cliente y recomendaciones</h2>
+        <div class="card">
+          <table>
+            <thead>
+              <tr>
+                <th>Perfil de Cliente</th>
+                <th>Escenario del Hardware</th>
+                <th>Recomendación Profesional</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Perfil"><strong>Oficina Básica</strong></td>
+                <td data-label="Escenario">
+                  Procesador con gráficos integrados (ej. Core i3 o Ryzen 5 5600G). Sin GPU dedicada. Consumo total &lt;
+                  150W.
+                </td>
+                <td data-label="Recomendación">
+                  Fuente de 400W a 500W, 80 PLUS White o Bronze de marca reconocida (Corsair, EVGA, Seasonic).
+                  Prioridad: Coste contenido, pero huyendo de marcas genéricas.
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Perfil"><strong>Gaming Medio</strong></td>
+                <td data-label="Escenario">
+                  Ryzen 5 / Core i5 + Gráfica como RTX 4060 o RX 7600. Consumo estimado de 350W.
+                </td>
+                <td data-label="Recomendación">
+                  Fuente de 650W 80 PLUS Bronze o Gold. Formato semi-modular (o full modular si el presupuesto lo
+                  permite) para facilitar la gestión de cables en la caja.
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Perfil"><strong>Gaming Alto/Entusiasta</strong></td>
+                <td data-label="Escenario">Ryzen 7/9 + RTX 4080 Super o RTX 4090.</td>
+                <td data-label="Recomendación">
+                  Fuente de 850W o 1000W con certificación <strong>ATX 3.0 / 3.1</strong>. Debe incluir obligatoriamente
+                  cable nativo <strong>12V-2x6 / 12VHPWR</strong> para evitar adaptadores. Certificación Gold o
+                  superior.
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Perfil"><strong>Mantenimiento PC Legacy</strong></td>
+                <td data-label="Escenario">
+                  Restauración de PC de 2008 (Core 2 Quad, mucha carga en +5V) cuya fuente explotó.
+                </td>
+                <td data-label="Recomendación">
+                  Buscar una fuente de baja potencia (500W) pero que cuente con cableado legacy (Molex) y confirmar en
+                  la etiqueta lateral que soporta al menos 15A a 20A en el raíl de +5V.
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Perfil"><strong>Portátil (Cargador perdido)</strong></td>
+                <td data-label="Escenario">Cliente perdió el cargador de su laptop ASUS.</td>
+                <td data-label="Recomendación">
+                  Leer etiqueta inferior del equipo (Ej: 19V - 3.42A). Conseguir transformador equivalente o superior en
+                  Amperios (ej. 19V - 4.74A) verificando el diámetro del conector y polaridad.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      
+      <section id="checklist">
+        <h2 class="section-title">✅ 10. Checklist de selección de PSU</h2>
+        <div class="card">
+          <p>Antes de generar el presupuesto final, verifica que la fuente seleccionada cumpla con:</p>
+          <ul class="checklist">
+            <li><strong>Potencia continua:</strong> ¿Cubre el consumo estimado del sistema + el 30% de margen?</li>
+            <li>
+              <strong>Conectores PCIe/EPS:</strong> ¿Tiene suficientes cables separados de 8 pines para la gráfica y la
+              CPU elegida?
+            </li>
+            <li>
+              <strong>Compatibilidad ATX 3.0:</strong> ¿Si el equipo lleva una GPU moderna de gama alta, la fuente
+              incorpora cable 12VHPWR nativo?
+            </li>
+            <li>
+              <strong>Formato físico:</strong> ¿Las dimensiones de la PSU entran en la caja elegida? (Cuidado con cajas
+              compactas que exigen formato SFX).
+            </li>
+            <li><strong>Protecciones confirmadas:</strong> ¿El fabricante detalla en la caja OCP, OVP, SCP, OPP?</li>
+          </ul>
+        </div>
+      </section>
+
+      
+      <!-- <section id="actividad">
+        <h2 class="section-title">🛠️ 11. Actividad práctica</h2>
+        <div class="card">
+          <h3>Evaluación de Presupuestos</h3>
+          <p>Un cliente cuenta con un presupuesto total ajustado y te trae esta cotización para jugar a 1440p:</p>
+          <ul>
+            <li>Procesador: AMD Ryzen 5 7600X</li>
+            <li>Placa Base: B650 ATX</li>
+            <li>Tarjeta Gráfica: Radeon RX 7800 XT</li>
+            <li><strong>Opción de PSU A:</strong> Genérica 1000W RGB sin certificación 80 PLUS (Precio: 35€).</li>
+            <li><strong>Opción de PSU B:</strong> Corsair RM650 (650W) 80 PLUS Gold Full Modular (Precio: 85€).</li>
+          </ul>
+          <p>
+            <strong>Consigna:</strong> El cliente insiste en que "la de 1000W es mejor porque tiene más potencia y es
+            más barata". Escribe una respuesta técnica pero amigable, explicándole por qué la Opción A es un riesgo
+            grave, justificando la elección de la Opción B utilizando los conceptos aprendidos (Rizado, Potencia Nominal
+            vs Continua, Protecciones y Margen Real calculado).
+          </p>
+        </div>
+      </section> -->
+
+      
+      <section id="preguntas">
+        <h2 class="section-title">❓ 11. Preguntas</h2>
+        <div class="q-grid">
+          <div class="q-card">
+            <div class="q-num">1</div>
+            <div class="q-text">
+              Un cliente con un portátil HP que pide 19.5V y 2.31A olvidó su cargador. Te pide probar con el tuyo, que
+              entrega 19.5V y 4.62A. ¿Es seguro conectarlo? Explica tu razonamiento.
+            </div>
+          </div>
+          <div class="q-card">
+            <div class="q-num">2</div>
+            <div class="q-text">
+              Tienes otro portátil que requiere 19.5V y le conectas un cargador de 15V con alto amperaje. ¿Qué le
+              sucederá al equipo?
+            </div>
+          </div>
+          <!-- <div class="q-card">
+            <div class="q-num">3</div>
+            <div class="q-text">
+              Explica con tus palabras la diferencia fundamental entre una "Potencia Nominal" de 800W en una fuente
+              barata, y una "Potencia Continua" de 650W en una fuente de Tier A.
+            </div>
+          </div> -->
+          <div class="q-card">
+            <div class="q-num">3</div>
+            <div class="q-text">
+              Un sistema sufre apagones repentinos cuando se abre un videojuego exigente, pero funciona perfecto
+              navegando por internet. ¿Qué protección interna de la PSU es más probable que se esté activando (OPP/OCP)
+              y por qué?
+            </div>
+          </div>
+          <div class="q-card">
+            <div class="q-num">4</div>
+            <div class="q-text">
+              A la hora de armar un equipo con una NVIDIA RTX 4080 Super, ¿Por qué deberíamos insistir en que el cliente
+              compre una fuente con estándar ATX 3.0 / 3.1 en lugar de una ATX 2.4 antigua? (Pista: Picos transitorios).
+            </div>
+          </div>
+          <div class="q-card">
+            <div class="q-num">5</div>
+            <div class="q-text">
+              Calcular la PSU ideal: CPU TDP de 65W, Tarjeta Gráfica TGP de 150W, más placa y ventiladores (100W).
+              Usando la regla del 30-35% de margen, ¿qué capacidad mínima de fuente presupuestarías?
+            </div>
+          </div>
+          <div class="q-card">
+            <div class="q-num">6</div>
+            <div class="q-text">
+              Definir el "Rizado" (Ripple) y explicar cómo una fuente económica a la larga puede matar los capacitores
+              de una placa base costosa.
+            </div>
+          </div>
+          <div class="q-card">
+            <div class="q-num">7</div>
+            <div class="q-text">
+              Un cliente actualiza su fuente por otra de la misma marca, ambas Full-Modular. Para ahorrar tiempo, deja
+              los cables de la fuente vieja dentro del PC y solo conecta la nueva "caja". Al encender, sus discos duros
+              se queman. ¿Por qué ocurrió esto?
+            </div>
+          </div>
+          <!-- <div class="q-card">
+            <div class="q-num">9</div>
+            <div class="q-text">
+              En la reparación de un equipo Legacy (Año 2007), notas que la nueva fuente de alta gama apaga el sistema
+              bajo carga de CPU. ¿Qué concepto sobre la distribución de raíles (+12V vs +5V/+3.3V) explica este problema
+              de incompatibilidad?
+            </div>
+          </div> -->
+          <div class="q-card">
+            <div class="q-num">8</div>
+            <div class="q-text">
+              ¿Resumir de qué forma actúan las protecciones de la PSU?
+            </div>
+          </div>
+          <div class="q-card">
+            <div class="q-num">9</div>
+            <div class="q-text">
+              El cliente te pide que utilices cables adaptadores SATA a PCIe de 8 pines porque su fuente genérica no
+              tiene cables para gráfica. ¿Cómo le justificas técnica y preventivamente tu negativa a hacer ese
+              ensamblaje?
+            </div>
+          </div>
+          <div class="q-card">
+            <div class="q-num">10</div>
+            <div class="q-text">
+              ¿Es cierto que una fuente de 1000W hará que el recibo eléctrico sea el doble de caro que si usara una de
+              500W para el mismo PC? Desmiente este mito haciendo referencia a la demanda de carga del sistema.
+            </div>
+          </div>
+        </div>
+      </section>
+<br>
+      
+        <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion9.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 9
+      </a>
+      <a
+        href="hardware2-sesion11.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 11
+      </a>
+    </div>
+    </div>
+  
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>

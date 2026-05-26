@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="es-ES" style="background-color: rgb(15, 23, 41);" data-theme="light"><head><meta charset="utf-8">
+    
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 9  Armado de PC - GPU</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg-primary: #0f1729;
+        --card-bg: #1a2744;
+        --text-primary: #f8fafc;
+        --text-secondary: #cbd5e6;
+        --accent-blue: #3b82f6;
+        --accent-cyan: #06b6d4;
+        --accent-green: #10b981;
+        --accent-yellow: #f59e0b;
+        --accent-red: #ef4444;
+        --border-subtle: #334155;
+      }
+
+      body {
+        background-color: var(--bg-primary);
+        font-family:
+          'Segoe UI',
+          system-ui,
+          -apple-system,
+          'Roboto',
+          sans-serif;
+        color: var(--text-primary);
+        line-height: 1.6;
+        padding: 2rem 1rem;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      /* Hero / Encabezado */
+      .hero {
+        text-align: center;
+        margin-bottom: 2.5rem;
+        padding: 1.5rem 1rem 2rem;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+
+      h1 {
+        font-size: 2.2rem;
+        background: linear-gradient(135deg, #ffffff, var(--accent-cyan), var(--accent-blue));
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.3px;
+      }
+
+      .hero-sub {
+        color: var(--accent-cyan);
+        font-size: 1.3rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      .hero-desc {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        max-width: 700px;
+        margin: 0.75rem auto 0;
+      }
+
+      /* Tabla de Contenidos */
+      .toc-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(45, 212, 191, 0.2);
+      }
+
+      .toc-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        border-left: 4px solid var(--accent-cyan);
+        padding-left: 0.75rem;
+        color: var(--accent-cyan);
+      }
+
+      .toc-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 0.75rem;
+      }
+
+      .toc-grid a {
+        color: var(--text-primary);
+        text-decoration: none;
+        background: rgba(59, 130, 246, 0.1);
+        padding: 0.6rem 1rem;
+        border-radius: 12px;
+        border: 1px solid transparent;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      /* Títulos de sección */
+      .section-title {
+        background: linear-gradient(90deg, #1e3a5f, #1a2744);
+        border-left: 5px solid var(--accent-cyan);
+        border-radius: 0 16px 16px 0;
+        padding: 0.9rem 1.5rem;
+        margin: 2rem 0 1.5rem 0;
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: white;
+        letter-spacing: -0.2px;
+      }
+
+      /* Tarjetas (Cards) */
+      .card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 1.5rem;
+        margin-bottom: 1.8rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        margin-top: 1.5rem;
+        color: var(--accent-cyan);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-left: 3px solid var(--accent-blue);
+        padding-left: 0.75rem;
+      }
+
+      .card h3:first-child {
+        margin-top: 0;
+      }
+
+      .card p {
+        color: var(--text-secondary);
+        margin-bottom: 0.8rem;
+      }
+
+      .card ul,
+      .card ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--text-secondary);
+      }
+
+      .card li {
+        margin-bottom: 0.5rem;
+      }
+
+      strong {
+        color: white;
+      }
+
+      /* Callouts */
+      .callout {
+        border-left: 5px solid;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 1rem 1.5rem;
+        border-radius: 16px;
+        margin: 1.5rem 0;
+        color: var(--text-secondary);
+      }
+
+      .callout.warning {
+        border-left-color: var(--accent-red);
+        background: rgba(239, 68, 68, 0.08);
+      }
+
+      .callout.tip {
+        border-left-color: var(--accent-yellow);
+        background: rgba(245, 158, 11, 0.08);
+      }
+
+      .callout-title {
+        font-weight: bold;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      /* Tablas responsivas mediante scroll horizontal */
+      .table-wrapper {
+        margin: 1.5rem 0;
+        border-radius: 16px;
+        border: 1px solid var(--border-subtle);
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card-bg);
+        min-width: 600px;
+      }
+
+      th,
+      td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid var(--border-subtle);
+        color: var(--text-secondary);
+      }
+
+      th {
+        background-color: #0f172a;
+        color: var(--accent-cyan);
+        font-weight: 600;
+      }
+
+      /* Lista de Preguntas */
+      .q-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+
+      .q-item {
+        background: var(--card-bg);
+        border-radius: 18px;
+        padding: 1rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        border: 1px solid rgba(6, 182, 212, 0.2);
+      }
+
+      .q-number {
+        background: var(--accent-blue);
+        color: white;
+        width: 32px;
+        height: 32px;
+        border-radius: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      .q-text {
+        color: var(--text-primary);
+        line-height: 1.45;
+      }
+
+      /* Cierre / Motivador */
+      .motivator {
+        text-align: center;
+        padding: 2.5rem 1rem;
+        margin-top: 3rem;
+        border-top: 1px solid var(--border-subtle);
+        color: var(--accent-green);
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      @media (max-width: 680px) {
+        body {
+          padding: 1rem 0.5rem;
+        }
+        .section-title {
+          font-size: 1.3rem;
+          padding: 0.8rem 1rem;
+        }
+        .card {
+          padding: 1.2rem;
+        }
+        .q-item {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body style="">
+    <div class="container">
+        <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion8.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 8
+      </a>
+      <a
+        href="hardware2-sesion10.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 10
+      </a>
+    </div>
+      <header class="hero">
+        <h1>Sesión 9  Armado de PC - GPU</h1>
+        <div class="hero-sub">
+          Cómo elegir la tarjeta gráfica correcta según presupuesto, necesidad, generación y compatibilidad
+        </div>
+        <div class="hero-desc">
+          Forma tu criterio técnico para seleccionar GPUs de escritorio (modernas y legacy) y notebooks. Aprende a
+          evaluar factores clave más allá del marketing: rendimiento real, compatibilidad, consumo y perfil de usuario.
+        </div>
+      </header>
+
+      
+      <div class="toc-card" id="toc">
+        <div class="toc-title">📋 Índice de la Sesión</div>
+        <div class="toc-grid">
+          <a href="#objetivos">🎯 Objetivos de la clase</a>
+          <a href="#teoria-gpu">🧠 1. ¿Qué es una GPU?</a>
+          <a href="#teoria-costos">💰 2. Cascada de costos</a>
+          <a href="#teoria-tipos">⚡ 3. Legacy, Moderna y Notebook</a>
+          <a href="#teoria-arquitectura">🚀 4. Arquitectura y Generación</a>
+          <a href="#teoria-vram">💾 5. VRAM: Capacidad y Bus</a>
+          <a href="#teoria-tecnologias">⏱️ 6. Rasterización, RT y Upscaling</a>
+          <a href="#teoria-consumo">🔌 7. Consumo, TGP y Fuente</a>
+          <a href="#teoria-compatibilidad-fisica">📏 8. Compatibilidad Física</a>
+          <a href="#teoria-compatibilidad-logica">⚙️ 9. Compatibilidad Lógica</a>
+          <a href="#teoria-notebooks">💻 10. GPU de Notebook</a>
+          <a href="#teoria-eleccion">👤 11. Elección según cliente</a>
+          <a href="#tablas">📊 Tablas Comparativas</a>
+          <a href="#casos">💼 Casos Prácticos</a>
+          <a href="#preguntas">❓ Preguntas de Práctica</a>
+        </div>
+      </div>
+
+      
+      <section id="objetivos">
+        <h2 class="section-title">🎯 Objetivos de la clase</h2>
+        <div class="card">
+      
+          <ul>
+            <li>
+              <strong>Comprender el rol vital</strong> de la GPU en distintos escenarios, desde ofimática básica hasta
+              cargas de trabajo exigentes como gaming 4K, edición de video y Machine Learning.
+            </li>
+            <li>
+              <strong>Evaluar el valor real</strong> de una tarjeta gráfica, desmitificando el marketing y entendiendo
+              cómo factores como la VRAM, el ancho de banda y las tecnologías de upscaling (DLSS/FSR) impactan el
+              rendimiento.
+            </li>
+            <li>
+              <strong>Identificar diferencias críticas</strong> entre GPUs de escritorio modernas, opciones legacy
+              viables y variantes para notebook (TGP móvil y limitaciones térmicas).
+            </li>
+            <li>
+              <strong>Garantizar la compatibilidad total</strong> del sistema, evitando cuellos de botella (bottlenecks)
+              con la CPU y asegurando que la fuente de poder (PSU) y el gabinete sean adecuados.
+            </li>
+            <li>
+              <strong>Formar un criterio técnico sólido</strong> para recomendar la mejor opción según el presupuesto y
+              las necesidades específicas de cada cliente.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      
+      <section id="teoria-gpu">
+        <h2 class="section-title">🧠 1. Qué es una GPU y por qué importa</h2>
+        <div class="card">
+          <p>
+            La <strong>Graphics Processing Unit (GPU)</strong> o Unidad de Procesamiento Gráfico es el procesador
+            especializado en la renderización de imágenes, video y animaciones en 2D y 3D. Mientras que la CPU (el
+            procesador principal) tiene pocos núcleos potentes diseñados para tareas secuenciales complejas, la GPU
+            posee miles de núcleos más pequeños diseñados para el <strong>cómputo paralelo masivo</strong>.
+          </p>
+          <p>
+            Su importancia radica en que descarga a la CPU del pesado trabajo visual. Sin una GPU adecuada, tareas como
+            jugar videojuegos modernos, renderizar video de alta resolución o entrenar modelos de Inteligencia
+            Artificial serían insoportablemente lentas o directamente imposibles. Además, muchas CPUs modernas carecen
+            de gráficos integrados (iGPU), haciendo que una tarjeta gráfica dedicada (dGPU) sea indispensable para que
+            el equipo simplemente dé video.
+          </p>
+        </div>
+      </section>
+
+      <section id="teoria-costos">
+        <h2 class="section-title">💰 2. Qué encarece una GPU: Cascada de Costos</h2>
+        <div class="card">
+          <p>
+            El precio de una tarjeta gráfica se incrementa gradualmente según las capacidades y tecnologías que se le
+            añadan. Un resumen visual de esta "cascada":
+          </p>
+          <ul>
+            <li>
+              <strong>Precio Base (Gama de Entrada - ej. RX 6600):</strong> Rendimiento decente en 1080p, componentes de
+              refrigeración básicos, 8GB de VRAM.
+            </li>
+            <li>
+              <strong>+ Más VRAM y Ancho de Bus:</strong> Aumentar de 8GB a 12GB o 16GB, y ensanchar el bus (ej. de
+              128-bit a 192-bit) para mayores resoluciones (1440p).
+            </li>
+            <li>
+              <strong>+ Arquitectura Moderna:</strong> Las arquitecturas más recientes (ej. NVIDIA Ada Lovelace o AMD
+              RDNA 3) ofrecen mejor eficiencia energética y soporte para tecnologías de última generación.
+            </li>
+            <li>
+              <strong>+ Capacidades de Ray Tracing Avanzado:</strong> Núcleos dedicados más potentes para manejar
+              iluminación realista sin sacrificar todos los FPS.
+            </li>
+            <li>
+              <strong>+ Tecnologías Propietarias Premium:</strong> Soporte para Frame Generation (DLSS 3+) o
+              codificadores duales AV1.
+            </li>
+            <li>
+              <strong>+ Refrigeración y Componentes Premium:</strong> Sistemas de disipación de triple ventilador,
+              cámaras de vapor, iluminación RGB, y PCBs personalizados por ensambladoras (ASUS ROG, MSI Gaming X).
+            </li>
+            <li>
+              <strong>+ Gama Entusiasta (4K y +):</strong> El salto a las tarjetas insignia (ej. RTX 4090 o RX 7900 XTX)
+              tiene un costo exponencial por ser lo mejor del mercado.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="teoria-tipos">
+        <h2 class="section-title">⚡ 3. GPU Legacy, Moderna y Notebook</h2>
+        <div class="card">
+          <h3>GPU Legacy (Generaciones pasadas)</h3>
+          <p>
+            Las GPUs "legacy" son aquellas de generaciones anteriores (ej. GTX 1000/1600 o RTX 2000/3000 de NVIDIA; RX
+            5000/6000 de AMD).
+            <strong>Cuándo conviene:</strong> Tienen una excelente relación calidad-precio en el mercado de segunda
+            mano. Una RTX 3060 Ti usada puede rendir igual que una RTX 4060 nueva, costando menos.
+            <strong>Limitaciones:</strong> Carecen de tecnologías modernas (Frame Gen), pierden soporte de drivers a
+            largo plazo, y a menudo consumen más energía. Una GTX 1650 ya no es recomendable en año.
+          </p>
+          <h3>GPU Moderna (Escritorio)</h3>
+          <p>
+            Son las generaciones actuales (RTX 4000/5000 o RX 7000/9000). Ofrecen el máximo rendimiento, eficiencia
+            (rendimiento por watt) y todas las tecnologías de IA y reescalado. Sin embargo, su precio de entrada suele
+            ser alto.
+          </p>
+          <h3>GPU Notebook (Movilidad con asteriscos)</h3>
+          <p>
+            Las GPUs de notebook comparten el nombre con sus contrapartes de escritorio (ej. "RTX 4070 Laptop"), pero
+            <strong>su rendimiento es considerablemente menor (20% a 40% menos)</strong>. Esto se debe a estrictos
+            límites de consumo de energía (TGP) y restricciones térmicas. Están soldadas a la placa base, por lo que
+            <strong>no se pueden actualizar</strong>.
+          </p>
+        </div>
+      </section>
+
+      <section id="teoria-arquitectura">
+        <h2 class="section-title">🚀 4. Arquitectura y Generación: Más que un nombre comercial</h2>
+        <div class="card">
+          <p>
+            El nombre comercial (ej. "RTX 4060") es solo la superficie. Lo que define el rendimiento real es la
+            <strong>arquitectura subyacente</strong> y el proceso de fabricación (medido en nanómetros).
+          </p>
+          <ul>
+            <li>
+              <strong>NVIDIA:</strong> Pascal (GTX 10), Turing (RTX 20), Ampere (RTX 30), Ada Lovelace (RTX 40),
+              Blackwell (RTX 50). Cada generación mejora la eficiencia y añade/mejora núcleos especializados (RT Cores
+              para Ray Tracing, Tensor Cores para IA/DLSS).
+            </li>
+            <li>
+              <strong>AMD:</strong> RDNA (RX 5000), RDNA 2 (RX 6000), RDNA 3 (RX 7000), RDNA 4 (RX 9000). RDNA trajo
+              mejoras masivas en eficiencia; las generaciones recientes incluyen Ray Accelerators y AI Accelerators.
+            </li>
+          </ul>
+          <p>
+            <strong>No basta mirar el nombre:</strong> Una GPU de gama alta antigua (ej. RTX 2080 Ti) puede ser superada
+            en características (y a veces en rendimiento puro) por una gama media moderna (ej. RTX 4060 Ti) debido a la
+            eficiencia de la nueva arquitectura y las tecnologías de upscaling.
+          </p>
+        </div>
+      </section>
+
+      <section id="teoria-vram">
+        <h2 class="section-title">💾 5. VRAM: Capacidad, Bus y Ancho de Banda</h2>
+        <div class="card">
+          <p>
+            La VRAM (Video RAM) es la memoria dedicada de la tarjeta gráfica, donde almacena texturas, sombras y datos
+            para renderizar.
+          </p>
+          <ul>
+            <li>
+              <strong>Capacidad:</strong> 8GB es el límite absoluto para 1080p en 2026. Para 1440p se recomiendan 12GB+,
+              y para 4K, 16GB+. Menos VRAM de la necesaria causa tirones (stuttering) cuando la GPU debe buscar datos en
+              la lenta RAM del sistema.
+            </li>
+            <li>
+              <strong>Ancho de Bus (Bits):</strong> Es la "autopista" entre la GPU y la VRAM. Un bus estrecho (128-bit)
+              limita severamente el rendimiento a altas resoluciones, sin importar cuánta VRAM tenga la tarjeta. 192-bit
+              o 256-bit son preferibles para 1440p+.
+            </li>
+            <li>
+              <strong>Ancho de Banda (GB/s):</strong> Es el volumen de datos que puede transitar por el bus. Depende de
+              la velocidad de la memoria (ej. GDDR6 vs GDDR6X vs GDDR7) y el ancho del bus. A mayor resolución, más
+              ancho de banda se necesita.
+            </li>
+          </ul>
+          <div class="callout warning">
+            <div class="callout-title">⚠️ Mito: "Más Gigas = Más Rápida"</div>
+            Una GPU de gama baja con 16GB de VRAM (ej. RTX 4060 Ti 16GB) no es mágicamente más rápida que una GPU de
+            gama alta con 12GB (ej. RTX 4070). El chip gráfico (el motor) de la primera no tiene la potencia para
+            aprovechar esos 16GB. La VRAM debe acompañar a la potencia del chip, no reemplazarla.
+          </div>
+        </div>
+      </section>
+
+      <section id="teoria-tecnologias">
+        <h2 class="section-title">⏱️ 6. Rasterización, Ray Tracing y Upscaling (DLSS/FSR)</h2>
+        <div class="card">
+          <p>
+            <strong>Rasterización:</strong> Es la técnica clásica para generar gráficos 3D proyectándolos en píxeles 2D.
+            Es rápida, eficiente y el estándar de la industria.
+          </p>
+          <p>
+            <strong>Ray Tracing (RT):</strong> Simula físicamente el comportamiento de la luz (reflejos, sombras,
+            iluminación global). Ofrece realismo increíble pero tiene un costo de rendimiento brutal (caída del 30-50%
+            de FPS). NVIDIA lleva ventaja aquí gracias a sus RT Cores más avanzados.
+          </p>
+          <h3>El salvavidas: Upscaling y Frame Generation</h3>
+          <p>
+            Para combatir la pérdida de FPS del Ray Tracing (o altas resoluciones), nacieron las tecnologías de
+            reescalado inteligente:
+          </p>
+          <ul>
+            <li>
+              <strong>NVIDIA DLSS (Deep Learning Super Sampling):</strong> Usa IA (Tensor Cores) para renderizar el
+              juego a menor resolución (ej. 1080p) y ampliarlo a mayor resolución (ej. 1440p) con calidad casi
+              indistinguible del nativo. La versión 3/4 incluye <em>Frame Generation</em> (crea frames falsos entre los
+              reales) para duplicar los FPS. Solo funciona en gráficas RTX.
+            </li>
+            <li>
+              <strong>AMD FSR (FidelityFX Super Resolution):</strong> Cumple la misma función de upscaling y generación
+              de cuadros. Su gran ventaja es que es de código abierto y funciona en
+              <strong>casi cualquier GPU</strong> (AMD, NVIDIA o Intel).
+            </li>
+            <li>
+              <strong>Intel XeSS:</strong> La alternativa de Intel, similar a FSR, que funciona mejor en sus propias
+              GPUs (Arc) pero es compatible con las demás.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="teoria-consumo">
+        <h2 class="section-title">🔌 7. Consumo, TGP y Fuente de Alimentación</h2>
+        <div class="card">
+          <p>
+            El <strong>TGP (Total Graphics Power)</strong> es el consumo máximo de energía de la tarjeta gráfica. Una
+            GPU potente requiere mucha energía y, por ende, una fuente de poder (PSU) robusta y de calidad.
+          </p>
+          <ul>
+            <li>
+              <strong>Gama de entrada (ej. RTX 4060):</strong> TGP ~115W. Fuente recomendada: 500W. Conector: 1x 8-pin
+              PCIe.
+            </li>
+            <li>
+              <strong>Gama media-alta (ej. RX 7800 XT):</strong> TGP ~260W. Fuente recomendada: 650W-700W. Conector: 2x
+              8-pin.
+            </li>
+            <li>
+              <strong>Gama entusiasta (ej. RTX 4090):</strong> TGP ~450W+. Fuente recomendada: 850W-1000W. Conector: 1x
+              12VHPWR (16-pin) o 3-4x 8-pin.
+            </li>
+          </ul>
+          <div class="callout tip">
+            <div class="callout-title">💡 Consejo Práctico: El cálculo de la fuente</div>
+             Para calcular la PSU necesaria: TGP de la GPU + TDP de la CPU + 150W (para
+            mother, discos, fans y margen de seguridad). Además, asegúrate de que la fuente sea al menos 80 Plus Bronze
+            de una marca reconocida (Corsair, Seasonic, EVGA).
+          </div>
+        </div>
+      </section>
+
+      <section id="teoria-compatibilidad-fisica">
+        <h2 class="section-title">📏 8. Compatibilidad Física: El factor "Gabinete"</h2>
+        <div class="card">
+          <p>
+            Las GPUs modernas son <strong>enormes</strong>. Antes de recomendar una compra, debes verificar las medidas
+            del gabinete del cliente.
+          </p>
+          <ul>
+            <li>
+              <strong>Longitud (Largo):</strong> Mide el espacio libre en el gabinete. Una GPU de triple ventilador
+              puede medir más de 320mm y chocar contra los ventiladores frontales o los discos duros.
+            </li>
+            <li>
+              <strong>Grosor (Slots):</strong> Las gráficas ya no ocupan solo 2 slots PCIe. Muchas ocupan 2.5, 3 o
+              incluso casi 4 slots (ej. RTX 4080/4090). Esto puede bloquear otros conectores PCIe en la motherboard.
+            </li>
+            <li>
+              <strong>Ancho (Hacia la tapa lateral):</strong> El cable de alimentación (especialmente el delicado
+              conector 12VHPWR de NVIDIA) necesita espacio para doblarse sin tensión. Si el gabinete es estrecho, la
+              tapa no cerrará.
+            </li>
+            <li>
+              <strong>Soporte anti-flexión:</strong> Las GPUs pesadas pueden doblar el puerto PCIe (GPU sag). Es
+              recomendable incluir un soporte (bracket) para evitar daños en la placa madre a largo plazo.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="teoria-compatibilidad-logica">
+        <h2 class="section-title">⚙️ 9. Compatibilidad Lógica: Bottleneck y Pantallas</h2>
+        <div class="card">
+          <p>
+            <strong>El temido Bottleneck (Cuello de botella):</strong> Ocurre cuando un componente es tan lento que
+            frena al resto. Poner una poderosa RTX 4080 junto a un viejo procesador i5 de 8va generación en resolución
+            1080p hará que la GPU trabaje al 40% de su capacidad esperando a que la CPU prepare los cuadros/fotogramas/frames. A mayor
+            resolución (1440p, 4K), el cuello de botella se traslada a la GPU.
+          </p>
+          <p>
+            <strong>Versión de PCIe:</strong> PCIe 3.0 vs 4.0 vs 5.0. Son retrocompatibles, pero instalar una tarjeta
+            diseñada con un bus físico PCIe 4.0 x8 (como la RTX 4060) en una placa madre antigua con PCIe 3.0 reducirá
+            el rendimiento entre un 3% y un 10%. Como también colocar una GPU PCIe 5.0 x16 en un placa madre que soporta 4.0 y su CPU que soporta 4.0, esto recae en la perdida de la mitad del rendimiento máximo que se podría alcanzar.
+          </p>
+          <p>
+            <strong>El Monitor:</strong> Es absurdo comprar una GPU de $1000 dólares para jugar en un monitor 1080p a
+            60Hz. La GPU generará 200 FPS (fotogramas por segundo), pero el usuario solo verá 60. La gráfica debe coincidir con la resolución y
+            tasa de refresco (Hz) del monitor objetivo.
+          </p>
+        </div>
+      </section>
+
+      <section id="teoria-notebooks">
+        <h2 class="section-title">💻 10. GPU de Notebook: TGP y Engaños</h2>
+        <div class="card">
+          <p>Comprar una laptop gamer es terreno pantanoso. El nombre de la GPU no cuenta toda la historia.</p>
+          <ul>
+            <li>
+              <strong>El TGP (Total Graphics Power) Móvil:</strong> Es el factor más importante. Una "RTX 4060 Laptop"
+              configurada a 45W (en una laptop delgada) rendirá mucho peor que la misma "RTX 4060 Laptop" configurada a
+              115W (en una laptop gruesa de alto rendimiento).
+              <strong>Siempre revisa el TGP en las especificaciones de la notebook.</strong>
+            </li>
+            <li>
+              <strong>Thermal Throttling:</strong> Si la notebook no tiene buena refrigeración, la GPU se calentará
+              rápidamente y reducirá su velocidad (frecuencia) para no quemarse, desplomando los FPS tras 10 minutos de
+              juego.
+            </li>
+            <li>
+              <strong>Mux Switch (Advanced Optimus):</strong> Las buenas notebooks permiten conectar la dGPU
+              directamente a la pantalla (bypass de la gráfica integrada del procesador), ganando hasta un 15% de
+              rendimiento.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="teoria-eleccion">
+        <h2 class="section-title">👤 11. Cómo elegir GPU según el cliente</h2>
+        <div class="card">
+          <ul>
+            <li>
+              <strong>Ofimática / Navegación:</strong> Gráficos Integrados (iGPU) del procesador (Intel UHD, AMD Radeon
+              Vega). Costo $0 extra. Bajo consumo, suficiente para video 4K y multi-monitor básico.
+            </li>
+            <li>
+              <strong>Gaming 1080p (Presupuesto Ajustado):</strong> GPU: RX 6600 o RTX 3060. VRAM: 8GB. CPU acompañante:
+              i3/i5 o Ryzen 5. Excelente rendimiento en Esports y competitivo.
+            </li>
+            <li>
+              <strong>Gaming 1440p (Equilibrado):</strong> GPU: RX 7700 XT / 7800 XT o RTX 4070. VRAM: 12GB a 16GB. CPU:
+              i5K o Ryzen 5/7. El "Sweet Spot" actual para máxima calidad visual sin gastar fortunas.
+            </li>
+            <li>
+              <strong>Gaming 4K (Entusiasta):</strong> GPU: RTX 5070 Ti / RX 7900 XTX. VRAM: 16GB a 24GB. CPU: i7/i9
+              o Ryzen 7X3D/9. Requiere fuentes potentes y monitores caros.
+            </li>
+            <li>
+              <strong>Edición de Video / Streaming profesional:</strong> NVIDIA tiene ventaja por sus codificadores
+              NVENC y soporte en Premiere/DaVinci. Se recomienda RTX 4060 Ti 16GB o superior. El upscaling y ray tracing
+              importan poco.
+            </li>
+            <li>
+              <strong>Workstation IA / Machine Learning:</strong> VRAM es reina. NVIDIA domina el software (CUDA Cores,
+              Tensor Cores). Modelos como RTX 4090 o líneas profesionales (RTX Ada Generation).
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      
+      <section id="tablas">
+        <h2 class="section-title">📊 Tablas Comparativas</h2>
+
+        <div class="card">
+          <h3>Comparativa: GPU Legacy, Moderna y Notebook (Gama Media)</h3>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Factor</th>
+                  <th>Legacy Desktop (Ej. RTX 3060)</th>
+                  <th>Moderna Desktop (Ej. RTX 4060)</th>
+                  <th>Moderna Notebook (Ej. RTX 4060 Laptop)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Arquitectura</strong></td>
+                  <td>Anterior (Ampere)</td>
+                  <td>Actual (Ada Lovelace)</td>
+                  <td>Actual (Ada Lovelace)</td>
+                </tr>
+                <tr>
+                  <td><strong>Rendimiento Bruto</strong></td>
+                  <td>Base 100%</td>
+                  <td>~115%</td>
+                  <td>~85% a 95% (Depende del TGP)</td>
+                </tr>
+                <tr>
+                  <td><strong>Tecnologías (DLSS 3+)</strong></td>
+                  <td>No soporta Frame Generation</td>
+                  <td>Soporte completo</td>
+                  <td>Soporte completo</td>
+                </tr>
+                <tr>
+                  <td><strong>Consumo (TGP típico)</strong></td>
+                  <td>170W</td>
+                  <td>115W (Más eficiente)</td>
+                  <td>45W a 115W (Limitado térmicamente)</td>
+                </tr>
+                <tr>
+                  <td><strong>VRAM</strong></td>
+                  <td>12GB (A menudo superior)</td>
+                  <td>8GB (A menudo criticada)</td>
+                  <td>8GB</td>
+                </tr>
+                <tr>
+                  <td><strong>Actualizable</strong></td>
+                  <td>Sí</td>
+                  <td>Sí</td>
+                  <td>No (Soldada)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Matriz de Recomendación por Perfil de Uso</h3>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Perfil del Cliente</th>
+                  <th>Resolución / FPS Obj.</th>
+                  <th>VRAM Sugerida</th>
+                  <th>Gama Recomendada</th>
+                  <th>Criterio Técnico Principal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Oficina / Home School</td>
+                  <td>1080p / 60 FPS (No gaming)</td>
+                  <td>N/A (Compartida). Usa la memoria RAM</td>
+                  <td>Integrada (iGPU)</td>
+                  <td>Ahorro máximo de costo y energía. Cumple sobradamente tareas 2D.</td>
+                </tr>
+                <tr>
+                  <td>Gamer Competitivo (Esports)</td>
+                  <td>1080p / 144+ FPS</td>
+                  <td>8GB</td>
+                  <td>Entrada / Legacy (RX 6600)</td>
+                  <td>Se buscan FPS brutos en baja calidad visual. El CPU importa más que la GPU aquí.</td>
+                </tr>
+                <tr>
+                  <td>Gamer AAA Equilibrado</td>
+                  <td>1440p / 60-100 FPS</td>
+                  <td>12GB a 16GB</td>
+                  <td>Media / Alta (RX 7800 XT)</td>
+                  <td>Priorizar ancho de bus y VRAM para texturas pesadas. DLSS/FSR son cruciales.</td>
+                </tr>
+                <tr>
+                  <td>Streamer / Creador Contenido</td>
+                  <td>1080p/1440p + Grabación</td>
+                  <td>12GB+</td>
+                  <td>Media / Alta (NVIDIA)</td>
+                  <td>
+                    El hardware encoder (NVENC/AV1) y software estable (CUDA) son prioritarios sobre los FPS puros.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      
+      <section id="casos">
+        <h2 class="section-title">💼 Casos Prácticos de Selección</h2>
+
+        <div class="card">
+          <h3>Caso 1: La PC del Contador (El gasto innecesario)</h3>
+          <p>
+            <strong>El Cliente:</strong> Un contador necesita una PC para Excel, software de gestión y navegación
+            intensiva. El presupuesto incluye un i5-13400F y una GTX 1650 "para que vaya fluido".
+          </p>
+          <p>
+            <strong>Análisis y Recomendación:</strong> Es un error común creer que una tarjeta dedicada básica acelera
+            tareas ofimáticas. Una GTX 1650 no aportará nada a Excel. <strong>Recomendación:</strong> Cambiar la CPU a
+            un i5-13400 (sin la F, que incluye gráficos integrados UHD 730) o un Ryzen 5 8600G. Eliminar la GTX 1650 del
+            presupuesto y destinar ese dinero a más RAM o un SSD más rápido, donde realmente notará mejoría.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Caso 2: El Gamer de 1080p obsesionado con lo nuevo</h3>
+          <p>
+            <strong>El Cliente:</strong> Juega exclusivamente en un monitor 1080p de 144Hz. Quiere comprar una RTX 4070
+            Ti Super ($800 USD) para "jugar a todo en Ultra durante 5 años". Su procesador es un Ryzen 5 5600X.
+          </p>
+          <p>
+            <strong>Análisis y Recomendación:</strong> A 1080p, la RTX 4070 Ti Super está sobredimensionada, y el Ryzen
+            5 5600X creará un severo cuello de botella (bottleneck). La GPU jamás alcanzará el 100% de uso.
+            <strong>Recomendación:</strong> Adquirir una RX 7600 XT o RTX 4060 Ti ($350-400 USD), que sobrarán para
+            1080p/144Hz. Con el dinero ahorrado, puede actualizar su CPU (ej. Ryzen 7 5700X3D) o comprar un monitor
+            1440p para realmente aprovechar una GPU mejor.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Caso 3: El Estudiante de Arquitectura Nómade</h3>
+          <p>
+            <strong>El Cliente:</strong> Estudiante de arquitectura necesita usar AutoCAD y Lumion. Viaja todos los días
+            en transporte público. Duda entre armar una PC de escritorio con una RTX 4070 o comprar una notebook con
+            "RTX 4070".
+          </p>
+          <p>
+            <strong>Análisis y Recomendación:</strong> Si bien la PC de escritorio será más potente por el mismo precio
+            y permitirá actualizaciones, la necesidad de movilidad (ir a la facultad) es el factor limitante.
+            <strong>Recomendación:</strong> Debe elegir la Notebook, pero se le debe advertir que la "RTX 4070 Laptop"
+            rendirá como una RTX 4060 de escritorio. Para compensar, el técnico debe buscar un modelo de notebook con un
+            alto TGP (ej. 100W+ en lugar de 45W) y asegurarse de que tenga Mux Switch y suficiente VRAM para sus
+            renders.
+          </p>
+        </div>
+      </section>
+
+      
+      <section id="preguntas">
+        <h2 class="section-title">❓ Preguntas</h2>
+        <div class="card">
+        
+          <div class="q-list">
+            <!-- <div class="q-item">
+              <div class="q-number">1</div>
+              <div class="q-text">
+                Un cliente quiere jugar <em>Cyberpunk 2077</em> a 1440p con Ray Tracing al máximo. Su presupuesto le
+                permite una RX 7800 XT (AMD) o una RTX 4070 (NVIDIA). ¿Cuál eliges y por qué motivo técnico específico?
+              </div>
+            </div> -->
+            <div class="q-item">
+              <div class="q-number">1</div>
+              <div class="q-text">
+                Explica por qué tener 16GB de VRAM en una GPU de gama baja (como algunas versiones de la RTX 4060 Ti)
+                puede ser considerado una estrategia de marketing más que un beneficio real de rendimiento frente a 12GB
+                en una GPU superior.
+              </div>
+            </div>
+            <div class="q-item">
+              <div class="q-number">2</div>
+              <div class="q-text">
+                Si un cliente decide comprar una RTX 5070 y mantener su antiguo procesador Intel Core i7 de 9na
+                generación para jugar en 1080p, ¿qué fenómeno técnico ocurrirá? Descríbelo.
+              </div>
+            </div>
+            <div class="q-item">
+              <div class="q-number">3</div>
+              <div class="q-text">
+                Menciona 3 diferencias críticas (no solo de rendimiento bruto) entre comprar una GPU de escritorio y una
+                GPU de notebook del mismo nombre (ej. RTX 5070).
+              </div>
+            </div>
+            <div class="q-item">
+              <div class="q-number">4</div>
+              <div class="q-text">
+                Define qué es DLSS y FSR. ¿Cuál es la principal ventaja de FSR frente a la solución de NVIDIA (sin profundizar en detalles)?
+              </div>
+            </div>
+            <div class="q-item">
+              <div class="q-number">5</div>
+              <div class="q-text">
+                Un usuario quiere armar un equipo para hacer streaming en Twitch y editar videos para YouTube. ¿A qué
+                marca de GPU (AMD o NVIDIA) le darías prioridad y qué componente interno justifica esa elección?
+              </div>
+            </div>
+            <!-- <div class="q-item">
+              <div class="q-number">7</div>
+              <div class="q-text">
+                Describe la "cascada de costos" de una GPU. ¿Qué características extra justifican que el modelo tope de
+                gama de una ensambladora cueste $100 dólares más que el modelo base del mismo chip?
+              </div>
+            </div> -->
+            <div class="q-item">
+              <div class="q-number">6</div>
+              <div class="q-text">
+                Vas a instalar una nueva RX 7900 XTX (GPU enorme). Menciona al menos 3 aspectos de "compatibilidad
+                física" que debes verificar antes de comprar el gabinete o instalarla.
+              </div>
+            </div>
+            <div class="q-item">
+              <div class="q-number">7</div>
+              <div class="q-text">
+                ¿Qué es el TGP (Total Graphics Power) y por qué es el dato más importante a revisar antes de comprar una
+                notebook gamer?
+              </div>
+            </div>
+            <div class="q-item">
+              <div class="q-number">8</div>
+              <div class="q-text">
+                Si un cliente solo necesita la PC para tareas de contabilidad, Excel y correos, ¿qué componente asume el
+                rol de procesar los gráficos y cómo impacta en el presupuesto general?
+              </div>
+            </div>
+            <div class="q-item">
+              <div class="q-number">9</div>
+              <div class="q-text">
+                ¿Cuándo recomendarías a un cliente comprar una GPU "Legacy" usada (ej. RTX 3060 Ti) en lugar de una
+                moderna de gama de entrada nueva (ej. RTX 4060)?
+              </div>
+            </div>
+            <!-- <div class="q-item">
+              <div class="q-number">12</div>
+              <div class="q-text">
+                El cálculo de la fuente de poder (PSU) es vital. Si eliges una GPU con un TGP de 250W y una CPU con un
+                TDP de 105W, ¿cuál sería el tamaño mínimo en Watts recomendado para la fuente, incluyendo el margen de
+                seguridad?
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </section>
+
+      
+      
+         <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion8.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 8
+      </a>
+      <a
+        href="hardware2-sesion10.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 10
+      </a>
+    </div>
+    </div>
+
+    
+  
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>

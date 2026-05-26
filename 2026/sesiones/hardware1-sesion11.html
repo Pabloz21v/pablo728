@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sesión 11: CPU MODERNAS DE ESCRITORIO Y NOTEBOOK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f1f5f9;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            line-height: 1.5;
+            color: #0f172a;
+            padding: 2rem 1rem;
+        }
+
+        /* contenedor principal */
+        .week-section {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
+            padding: 2rem 1.8rem;
+            transition: all 0.2s ease;
+        }
+
+        /* tipografía responsiva */
+        h2, h3, h4 {
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.25;
+            margin-top: 1.8em;
+            margin-bottom: 0.6em;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        h2 {
+            font-size: 1.9rem;
+            background: linear-gradient(135deg, #1e293b, #2d3a5e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            border-left: 5px solid #3b82f6;
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: #0f2b3d;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.4rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            color: #1e3a5f;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .timing {
+            font-size: 0.75rem;
+            font-weight: normal;
+            background: #eef2ff;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            color: #2563eb;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0;
+        }
+
+        p, li {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            color: #1e293b;
+        }
+
+        ul, ol {
+            margin: 0.5rem 0 1rem 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        strong {
+            color: #0c4a6e;
+            font-weight: 600;
+        }
+
+        /* caja de ejemplos */
+        .example-box {
+            background: #f8fafc;
+            border-left: 4px solid #f97316;
+            padding: 1.2rem 1.5rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+
+        .example-box p {
+            margin-bottom: 0.6rem;
+        }
+
+        /* tablas responsivas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0;
+            font-size: 0.9rem;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        th {
+            background: #eef2ff;
+            padding: 0.75rem 0.8rem;
+            text-align: left;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        td {
+            border: 1px solid #e2e8f0;
+            padding: 0.7rem 0.8rem;
+            vertical-align: top;
+            background: white;
+        }
+
+        /* cuestionario */
+        .exercises {
+            background: #fef9e3;
+            padding: 1.2rem 1.5rem 1.2rem 2.5rem;
+            border-radius: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .exercises li {
+            margin-bottom: 0.6rem;
+            font-weight: 500;
+        }
+
+        /* mejoras responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+            .week-section {
+                padding: 1.4rem 1.2rem;
+                border-radius: 1.5rem;
+            }
+            h2 {
+                font-size: 1.6rem;
+                padding-left: 0.75rem;
+            }
+            h3 {
+                font-size: 1.3rem;
+            }
+            h4 {
+                font-size: 1.1rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .timing {
+                font-size: 0.7rem;
+                align-self: flex-start;
+            }
+            ul, ol {
+                margin-left: 1.2rem;
+            }
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            /* tabla mobile friendly */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            thead {
+                display: table-header-group;
+            }
+            tbody {
+                display: table-row-group;
+            }
+            tr {
+                display: table-row;
+            }
+            th, td {
+                display: table-cell;
+            }
+            /* para tablas que requieren scroll horizontal en móvil */
+            .table-wrapper {
+                overflow-x: auto;
+                margin: 1rem 0;
+            }
+            .exercises {
+                padding: 1rem 1rem 1rem 1.8rem;
+            }
+        }
+
+        /* mejoras para pantallas muy pequeñas */
+        @media (max-width: 480px) {
+            .week-section {
+                padding: 1rem;
+            }
+            h2 {
+                font-size: 1.4rem;
+            }
+            h3 {
+                font-size: 1.2rem;
+            }
+            li, p {
+                font-size: 0.95rem;
+            }
+            .example-box {
+                padding: 0.9rem 1rem;
+            }
+        }
+
+        /* detalles visuales */
+        a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        hr {
+            margin: 1.5rem 0;
+            border: 0;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .week-section ul li, .week-section ol li {
+            transition: background 0.1s ease;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 2rem;
+        }
+
+        /* scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+  <body style="">
+    <header>
+
+
+
+    <div class="week-section">
+             <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion10.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 10
+      </a>
+      <a
+        href="hardware1-sesion12.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 12
+      </a>
+    </div>
+      <h2 class="week5-header">Sesión 11: CPU MODERNAS DE ESCRITORIO Y NOTEBOOK</h2>
+
+
+      <h3>1. Objetivos de Aprendizaje</h3>
+      <ul>
+        <li>Analizar las características de los procesadores modernos de escritorio y notebook.</li>
+        <li>Comprender marcas, fabricantes, generaciones, sufijos y niveles comerciales.</li>
+        <li>Interpretar conceptos como turbo, TDP, overclock, núcleos, hilos y rendimiento.</li>
+        <li>Relacionar CPU moderna con socket, chipset, memoria y necesidades térmicas.</li>
+      </ul>
+
+      <h3>2. Teória</h3>
+
+      <h4>A. Panorama actual: marcas, fabricantes y familias <span class="timing"></span></h4>
+      <p>
+        En la actualidad, las dos grandes marcas de procesadores x86 para PCs son <strong>Intel</strong> y <strong>AMD</strong>. Ambas diseñan arquitecturas y modelos para escritorio y notebook. Además, existen otros actores muy relevantes en portátiles y dispositivos móviles, como <strong>Apple Silicon</strong>, <strong>Qualcomm</strong> o <strong>MediaTek</strong>, aunque en Hardware I conviene concentrarse principalmente en Intel y AMD por su presencia en el ecosistema escolar y técnico.
+      </p>
+      <ul>
+        <li><strong>Intel:</strong> líneas Celeron, Pentium, Core i3/i5/i7/i9, Core Ultra, Xeon.</li>
+        <li><strong>AMD:</strong> líneas Athlon, Ryzen 3/5/7/9, Threadripper, EPYC.</li>
+        <li><strong>Fabricación:</strong> muchas CPU son diseñadas por una empresa y fabricadas en plantas propias o de terceros. Hoy el proceso de fabricación se mide en nanómetros (7nm, 5nm, 4nm, etc.), aunque ese número también es parte del marketing técnico.</li>
+      </ul>
+
+      <h4>B. CPU modernas: escritorio vs notebook <span class="timing"></span></h4>
+      <p>
+        Las CPU modernas de escritorio priorizan rendimiento sostenido, mayor consumo permitido y más capacidad de refrigeración. Las de notebook priorizan eficiencia energética, baja temperatura y autonomía.
+      </p>
+      <ul>
+        <li><strong>Escritorio:</strong> más TDP, frecuencias sostenidas más altas, mejor disipación, posibilidad de upgrade.</li>
+        <li><strong>Notebook:</strong> TDP más bajo, versiones optimizadas, frecuencias turbo variables según temperatura y batería, casi siempre BGA soldadas.</li>
+        <li><strong>APU / iGPU:</strong> muchos procesadores modernos integran gráficos dentro del mismo chip.</li>
+      </ul>
+      <p>
+        En notebooks actuales es muy común encontrar CPU soldadas, mientras que en escritorio predominan sockets reemplazables como <strong>LGA1700</strong>, <strong>AM4</strong> o <strong>AM5</strong>.
+      </p>
+
+      <h4>C. Componentes internos relevantes en CPUs modernas <span class="timing"></span></h4>
+      <ul>
+        <li><strong>Núcleos (cores):</strong> unidades de procesamiento independientes.</li>
+        <li><strong>Hilos (threads):</strong> caminos lógicos de ejecución. Ejemplo: 6 núcleos / 12 hilos.</li>
+        <li><strong>Caché L1, L2 y L3:</strong> cada nivel ofrece distinto equilibrio entre velocidad y tamaño.</li>
+        <li><strong>Controlador de memoria integrado:</strong> comunica directamente con la RAM.</li>
+        <li><strong>Controlador PCIe integrado:</strong> conecta GPU y SSD NVMe con gran velocidad.</li>
+        <li><strong>iGPU (gráficos integrados):</strong> presente en muchos modelos, evita usar placa de video dedicada.</li>
+        <li><strong>Unidades de predicción y ejecución:</strong> intentan anticipar instrucciones para ganar rendimiento.</li>
+        <li><strong>Encapsulado, die e IHS:</strong> el die hace el trabajo real; el IHS ayuda a disipar el calor.</li>
+      </ul>
+
+      <h4>D. Núcleos, hilos y variantes actuales <span class="timing"></span></h4>
+      <p>
+        Las CPU modernas ya no se evalúan solo por frecuencia. Una parte clave del rendimiento es la combinación entre cantidad de núcleos, hilos y eficiencia de cada arquitectura.
+      </p>
+      <ul>
+        <li><strong>Intel Hyper-Threading:</strong> permite dos hilos por núcleo en muchos modelos.</li>
+        <li><strong>AMD SMT (Simultaneous Multithreading):</strong> equivalente al multihilo simultáneo.</li>
+        <li><strong>Núcleos híbridos:</strong> en Intel moderna pueden coexistir <strong>P-Cores</strong> (alto rendimiento) y <strong>E-Cores</strong> (alta eficiencia).</li>
+        <li><strong>Uso práctico:</strong> más núcleos favorecen multitarea, edición, virtualización y renderizado.</li>
+      </ul>
+
+      <h4>E. Velocidad, turbo, overclock y rendimiento real <span class="timing"></span></h4>
+      <ul>
+        <li><strong>Frecuencia base:</strong> velocidad garantizada mínima o sostenida en ciertas condiciones.</li>
+        <li><strong>Turbo / Boost:</strong> aumento automático de frecuencia si temperatura, consumo y carga lo permiten.</li>
+        <li><strong>Overclock:</strong> aumento manual de frecuencia o voltaje por encima de especificación.</li>
+        <li><strong>TDP:</strong> potencia térmica de diseño. No es exactamente consumo real, pero orienta sobre la refrigeración necesaria.</li>
+        <li><strong>IPC:</strong> instrucciones por ciclo. Una CPU moderna puede rendir mucho más a igual GHz que una antigua.</li>
+      </ul>
+      <p>
+        El <strong>overclock</strong> puede mejorar rendimiento, pero eleva temperatura, consumo y riesgo de inestabilidad. Por eso requiere buena placa madre, fuente confiable, refrigeración adecuada y conocimientos técnicos. En notebooks generalmente no es viable o está muy limitado.
+      </p>
+      <p>
+        El <strong>Turbo Boost</strong> (Intel) o <strong>Precision Boost</strong> (AMD) es automático, mientras que el overclock suele ser manual.
+      </p>
+
+      <h4>F. Generaciones, niveles y sufijos <span class="timing"></span></h4>
+      <p>
+        Leer correctamente el nombre de una CPU moderna es una habilidad clave para el técnico. Ejemplos:
+      </p>
+      <ul>
+        <li><strong>Intel Core i5-12400:</strong> “12” indica generación; “400” ubica el nivel dentro de la gama.</li>
+        <li><strong>Intel Core i7-13700K:</strong> 13ª generación; sufijo K indica multiplicador desbloqueado para overclock.</li>
+        <li><strong>AMD Ryzen 5 5600G:</strong> Ryzen 5 indica gama media; 5xxx indica generación/familia; sufijo G indica gráficos integrados.</li>
+        <li><strong>AMD Ryzen 7 7840HS:</strong> en notebooks, el número y sufijo ayudan a identificar segmento, potencia y generación.</li>
+      </ul>
+      <p><strong>Sufijos más comunes:</strong></p>
+      <table>
+        <tbody><tr>
+          <th>Marca</th>
+          <th>Sufijo</th>
+          <th>Significado general</th>
+        </tr>
+        <tr><td>Intel</td><td>K</td><td>Desbloqueado para overclock</td></tr>
+        <tr><td>Intel</td><td>F</td><td>Sin gráficos integrados</td></tr>
+        <tr><td>Intel</td><td>KF</td><td>Sin iGPU y desbloqueado</td></tr>
+        <tr><td>Intel</td><td>T</td><td>Bajo consumo en escritorio</td></tr>
+        <tr><td>Intel</td><td>H / HX / U / P</td><td>Notebook: alto rendimiento, extremo o bajo consumo</td></tr>
+        <tr><td>AMD</td><td>G</td><td>Con gráficos integrados</td></tr>
+        <tr><td>AMD</td><td>X</td><td>Mayor rendimiento/frecuencia</td></tr>
+        <tr><td>AMD</td><td>X3D</td><td>Gran caché 3D, muy orientado a gaming</td></tr>
+        <tr><td>AMD</td><td>U / HS / H / HX</td><td>Notebook: eficiencia o alto rendimiento</td></tr>
+      </tbody></table>
+
+      <h4>G. Compatibilidad con socket, chipset y motherboard <span class="timing"></span></h4>
+      <p>
+        Una CPU moderna debe ser compatible con varios elementos al mismo tiempo:
+      </p>
+      <ul>
+        <li><strong>Socket/zócalo:</strong> ejemplo LGA1700, AM4, AM5.</li>
+        <li><strong>Chipset:</strong> ejemplo H610, B660, Z790, A320, B550, X670.</li>
+        <li><strong>BIOS/UEFI:</strong> algunas placas requieren actualización para nuevas generaciones.</li>
+        <li><strong>Tipo de memoria:</strong> DDR4 o DDR5 según plataforma.</li>
+        <li><strong>Potencia y VRM:</strong> una placa básica puede limitar un procesador muy exigente.</li>
+      </ul>
+      <p>
+        <strong>Ejemplo:</strong> un Intel Core i5 de 12ª generación requiere LGA1700, pero no cualquier motherboard LGA1700 es igual: el chipset define puertos, overclock, cantidad de líneas PCIe y soporte general. Lo mismo pasa con AMD Ryzen en AM4 o AM5.
+      </p>
+
+      <h4>H. CPU sin IHS y observación del die <span class="timing"></span></h4>
+      <p>
+        Al retirar el IHS en algunos procesadores modernos mediante <em>delid</em>, puede observarse el die real y el material térmico interno. Esto se hace sobre todo en contextos avanzados de overclock o reparación especializada, pero implica alto riesgo.
+      </p>
+      <p>
+        Ver una CPU sin IHS ayuda a entender que el verdadero procesador es una pequeña pieza de silicio muy delicada, y que el encapsulado metálico existe para proteger y disipar calor.
+      </p>
+
+      <h4>I. Temas complementarios relevantes <span class="timing"></span></h4>
+      <ul>
+        <li><strong>Throttle térmico:</strong> reducción automática de velocidad cuando la CPU se calienta demasiado.</li>
+        <li><strong>Undervolt:</strong> bajar voltaje para reducir temperatura y consumo.</li>
+        <li><strong>Benchmark:</strong> prueba estandarizada para comparar rendimiento.</li>
+        <li><strong>Escenarios de uso:</strong> oficina, gaming, edición de video, programación, virtualización.</li>
+      </ul>
+
+      <h3>3. Ejemplos Prácticos</h3>
+      <div class="example-box">
+        <p><strong>Ejemplo 1 (Gama y nombre):</strong> Comparar Intel Core i3, i5 e i7 de una misma generación y discutir para qué usuario conviene cada uno.</p>
+        <p><strong>Ejemplo 2 (Sufijos):</strong> Comparar un Intel 12400 con un 12400F y preguntar qué sucede si la PC no tiene placa de video dedicada.</p>
+        <p><strong>Ejemplo 3 (Notebook moderna):</strong> Comparar una notebook con Ryzen 5 U frente a otra con Intel H o HX, explicando autonomía vs rendimiento.</p>
+      </div>
+
+      <h3>4. Cuestionario</h3>
+      <ol class="exercises">
+        <li><strong>Marcas:</strong> ¿Cuáles son las dos marcas principales de CPU para PC?</li>
+        <li><strong>Familias:</strong> ¿Qué diferencia general hay entre Intel Core i5 e Intel Core i7?</li>
+        <li><strong>Sufijo:</strong> ¿Qué significa la letra F en muchos procesadores Intel?</li>
+        <li><strong>Sufijo:</strong> ¿Qué significa la letra G en varios procesadores AMD?</li>
+        <li><strong>Turbo:</strong> ¿En qué se diferencia el turbo automático del overclock manual?</li>
+        <li><strong>TDP:</strong> ¿Para qué sirve conocer el TDP de una CPU?</li>
+        <li><strong>Hilos:</strong> ¿Qué significa que una CPU tenga 8 núcleos y 16 hilos?</li>
+        <li><strong>Compatibilidad:</strong> ¿Qué tres factores mínimos revisaría antes de comprar una CPU?</li>
+        <li><strong>Notebook:</strong> ¿Por qué muchas CPU modernas de notebook no pueden cambiarse fácilmente?</li>
+        <li><strong>Aplicación:</strong> Si una PC se usará para oficina, ¿conviene priorizar máximo rendimiento o equilibrio entre consumo, temperatura y costo?</li>
+        <li>Buscar imágenes de <strong>Intel Core i3, i5, i7, i9</strong> y <strong>AMD Ryzen 3, 5, 7, 9</strong>.</li>
+        <li>Buscar imágenes de <strong>CPU modernas de notebook BGA</strong> y de <strong>CPU de escritorio LGA/AM5</strong>.</li>
+        <li>Buscar fotos de <strong>CPU moderna sin IHS</strong> y del <strong>die expuesto</strong>.</li>
+        <li>Buscar capturas de <strong>Turbo Boost, Precision Boost, TDP, benchmarks y throttling</strong>.</li>
+        <li>Buscar imágenes de <strong>sockets modernos: LGA1700, AM4, AM5</strong> y chipsets relacionados.</li>
+    
+      </ol>
+
+    
+
+        <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion10.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 10
+      </a>
+      <a
+        href="hardware1-sesion12.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 12
+      </a>
+    </div>
+    </div>
+  
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

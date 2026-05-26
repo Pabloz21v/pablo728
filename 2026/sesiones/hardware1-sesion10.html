@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sesión 10: CPU LEGACY DE ESCRITORIO Y NOTEBOOK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f1f5f9;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            line-height: 1.5;
+            color: #0f172a;
+            padding: 2rem 1rem;
+        }
+
+        /* contenedor principal */
+        .week-section {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
+            padding: 2rem 1.8rem;
+            transition: all 0.2s ease;
+        }
+
+        /* tipografía responsiva */
+        h2, h3, h4 {
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.25;
+            margin-top: 1.8em;
+            margin-bottom: 0.6em;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        h2 {
+            font-size: 1.9rem;
+            background: linear-gradient(135deg, #1e293b, #2d3a5e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            border-left: 5px solid #3b82f6;
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: #0f2b3d;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.4rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            color: #1e3a5f;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .timing {
+            font-size: 0.75rem;
+            font-weight: normal;
+            background: #eef2ff;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            color: #2563eb;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0;
+        }
+
+        p, li {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            color: #1e293b;
+        }
+
+        ul, ol {
+            margin: 0.5rem 0 1rem 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        strong {
+            color: #0c4a6e;
+            font-weight: 600;
+        }
+
+        /* caja de ejemplos */
+        .example-box {
+            background: #f8fafc;
+            border-left: 4px solid #f97316;
+            padding: 1.2rem 1.5rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+
+        .example-box p {
+            margin-bottom: 0.6rem;
+        }
+
+        /* tablas responsivas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0;
+            font-size: 0.9rem;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        th {
+            background: #eef2ff;
+            padding: 0.75rem 0.8rem;
+            text-align: left;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        td {
+            border: 1px solid #e2e8f0;
+            padding: 0.7rem 0.8rem;
+            vertical-align: top;
+            background: white;
+        }
+
+        /* cuestionario */
+        .exercises {
+            background: #fef9e3;
+            padding: 1.2rem 1.5rem 1.2rem 2.5rem;
+            border-radius: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .exercises li {
+            margin-bottom: 0.6rem;
+            font-weight: 500;
+        }
+
+        /* mejoras responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+            .week-section {
+                padding: 1.4rem 1.2rem;
+                border-radius: 1.5rem;
+            }
+            h2 {
+                font-size: 1.6rem;
+                padding-left: 0.75rem;
+            }
+            h3 {
+                font-size: 1.3rem;
+            }
+            h4 {
+                font-size: 1.1rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .timing {
+                font-size: 0.7rem;
+                align-self: flex-start;
+            }
+            ul, ol {
+                margin-left: 1.2rem;
+            }
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            /* tabla mobile friendly */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            thead {
+                display: table-header-group;
+            }
+            tbody {
+                display: table-row-group;
+            }
+            tr {
+                display: table-row;
+            }
+            th, td {
+                display: table-cell;
+            }
+            /* para tablas que requieren scroll horizontal en móvil */
+            .table-wrapper {
+                overflow-x: auto;
+                margin: 1rem 0;
+            }
+            .exercises {
+                padding: 1rem 1rem 1rem 1.8rem;
+            }
+        }
+
+        /* mejoras para pantallas muy pequeñas */
+        @media (max-width: 480px) {
+            .week-section {
+                padding: 1rem;
+            }
+            h2 {
+                font-size: 1.4rem;
+            }
+            h3 {
+                font-size: 1.2rem;
+            }
+            li, p {
+                font-size: 0.95rem;
+            }
+            .example-box {
+                padding: 0.9rem 1rem;
+            }
+        }
+
+        /* detalles visuales */
+        a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        hr {
+            margin: 1.5rem 0;
+            border: 0;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .week-section ul li, .week-section ol li {
+            transition: background 0.1s ease;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 2rem;
+        }
+
+        /* scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="week-section">
+             <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion9.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 9
+      </a>
+      <a
+        href="hardware1-sesion11.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 11
+      </a>
+    </div>
+        <h2 class="week5-header">Sesión 10: CPU LEGACY DE ESCRITORIO Y NOTEBOOK</h2>
+
+        <h3>1. Objetivos de Aprendizaje</h3>
+        <ul>
+            <li>Comprender qué es una CPU, sus sinónimos y su función dentro de la computadora.</li>
+            <li>Reconocer la evolución de los procesadores legacy de escritorio y notebook.</li>
+            <li>Identificar componentes internos básicos de una CPU y las etapas del procesamiento.</li>
+            <li>Relacionar generaciones antiguas, encapsulados, sockets y compatibilidad con la placa madre.</li>
+        </ul>
+
+        <h3>2. Teória</h3>
+
+        <h4>A. ¿Qué es una CPU? Sinónimos y función <span class="timing"></span></h4>
+        <p>
+            La <strong>CPU</strong> significa <em>Central Processing Unit</em>, es decir, <strong>Unidad Central de Procesamiento</strong>.
+             También se la llama <strong>microprocesador</strong>, <strong>procesador</strong> o informalmente <strong>el cerebro de la computadora, Núcleo de procesamiento o Chip de procesamiento</strong>. Su función es interpretar instrucciones, realizar cálculos, tomar decisiones lógicas y coordinar el trabajo del resto del sistema.
+        </p>
+        <p>
+            Aunque muchas personas llaman "CPU" al gabinete completo, técnicamente la CPU es solo el chip principal que se instala en la placa madre o viene soldado en el equipo. Su trabajo consiste en ejecutar programas siguiendo un ciclo básico:
+        </p>
+        <ol>
+            <li><strong>Buscar (Fetch):</strong> toma la instrucción desde memoria.</li>
+            <li><strong>Decodificar (Decode):</strong> interpreta qué operación debe realizar.</li>
+            <li><strong>Ejecutar (Execute):</strong> hace el cálculo o acción solicitada.</li>
+            <li><strong>Escribir resultado (Write Back):</strong> guarda el resultado en registros o memoria.</li>
+        </ol>
+        <p>
+            Este ciclo ocurre millones o miles de millones de veces por segundo. Por eso la CPU necesita ser extremadamente rápida y trabajar en coordinación con la memoria RAM, el chipset y los dispositivos de entrada/salida.
+        </p>
+
+        <h4>B. Componentes internos más importantes de una CPU <span class="timing"></span></h4>
+        <ul>
+            <li><strong>Unidad de Control (CU):</strong> dirige el flujo de instrucciones y coordina qué hace cada parte.</li>
+            <li><strong>ALU (Unidad Aritmético-Lógica):</strong> realiza operaciones matemáticas y lógicas.</li>
+            <li><strong>Registros:</strong> memorias internas ultra rápidas donde la CPU guarda datos temporales inmediatos.</li>
+            <li><strong>Caché:</strong> memoria interna de alta velocidad que evita ir constantemente a la RAM. En CPUs legacy predominaban L1 y L2; en modelos más avanzados apareció L3.</li>
+            <li><strong>FPU:</strong> unidad de coma flotante, dedicada a cálculos decimales y científicos. En procesadores muy antiguos podía venir separada o ser limitada.</li>
+            <li><strong>Buses internos:</strong> caminos eléctricos que unen las distintas partes del procesador.</li>
+            <li><strong>Controlador de memoria:</strong> en CPUs antiguas estaba fuera de la CPU, normalmente en el Northbridge; luego pasó a integrarse dentro del microprocesador.</li>
+        </ul>
+        <p>
+            En las CPU legacy es clave explicar que muchas funciones que hoy están integradas dentro del procesador antes dependían más del chipset de la motherboard.
+        </p>
+
+        <h4>C. CPU legacy de escritorio: principales etapas históricas <span class="timing"></span></h4>
+        <p>
+            Llamamos <strong>CPU legacy</strong> a los procesadores de generaciones antiguas, que hoy ya no son modernos pero siguen siendo fundamentales para entender la evolución del hardware. Algunos hitos importantes son:
+        </p>
+        <ul>
+            <li><strong>Intel 8086 / 80286 / 80386 / 80486:</strong> sentaron las bases de la arquitectura x86.</li>
+            <li><strong>Pentium / Pentium MMX:</strong> popularizaron el procesamiento multimedia y mayores frecuencias.</li>
+            <li><strong>Pentium II / III:</strong> mejoraron caché, rendimiento general y uso en PCs hogareñas.</li>
+            <li><strong>Pentium 4:</strong> elevó mucho la frecuencia en GHz, pero generaba mucho calor y consumía bastante.</li>
+            <li><strong>Celeron:</strong> versión económica de Intel, con menos caché o prestaciones recortadas.</li>
+            <li><strong>Athlon, Duron, Sempron (AMD):</strong> principales rivales de Intel en el mundo legacy.</li>
+            <li><strong>Core 2 Duo / Core 2 Quad:</strong> transición hacia CPUs multinúcleo más eficientes, muy importantes en escuelas y oficinas durante muchos años.</li>
+        </ul>
+        <p>
+            En escritorio, los procesadores antiguos solían venir en formatos PGA o cartucho (como algunos Pentium II), usaban disipadores relativamente simples y dependían de sockets hoy obsoletos como Socket 370, Socket 478, Socket 775, Socket A/462, AM2, AM2+ y AM3.
+        </p>
+
+        <h4>D. CPU legacy de notebook <span class="timing"></span></h4>
+        <p>
+            En notebooks antiguas, el desafío siempre fue combinar rendimiento con bajo consumo y poca generación de calor. Por eso aparecieron líneas específicas para portátiles:
+        </p>
+        <ul>
+            <li><strong>Intel Pentium M:</strong> muy eficiente para su época, marcó una gran diferencia frente al Pentium 4 móvil.</li>
+            <li><strong>Intel Core Solo / Core Duo:</strong> primeros pasos hacia notebooks de dos núcleos.</li>
+            <li><strong>Intel Centrino:</strong> no era una CPU sola, sino una plataforma (CPU + chipset + Wi-Fi) optimizada para notebooks.</li>
+            <li><strong>AMD Turion y Turion X2:</strong> alternativa de AMD para portátiles.</li>
+        </ul>
+        <p>
+            Muchos micros de notebook ya venían en encapsulados <strong>BGA</strong> o en formatos más difíciles de reemplazar. Esto reducía tamaño, mejoraba refrigeración y aumentaba integración, pero complicaba reparación y actualización.
+        </p>
+
+        <h4>E. Frecuencia, rendimiento y caché en procesadores legacy <span class="timing"></span></h4>
+        <p>
+            Antes, la publicidad se enfocaba mucho en los <strong>MHz</strong> o <strong>GHz</strong>, pero no siempre más frecuencia significaba mejor rendimiento. Dos procesadores con la misma velocidad podían rendir distinto según:
+        </p>
+        <ul>
+            <li>Arquitectura interna.</li>
+            <li>Tamaño y niveles de caché.</li>
+            <li>Cantidad de núcleos.</li>
+            <li>Eficiencia por ciclo (IPC).</li>
+            <li>Velocidad del bus frontal (<strong>FSB</strong>, Front Side Bus).</li>
+        </ul>
+        <p>
+            En equipos legacy era común hablar de <strong>FSB 533, 800, 1066 o 1333 MHz</strong>, ya que ese bus unía CPU con chipset. Hoy ese concepto perdió protagonismo porque el controlador de memoria y otras funciones se integraron en la CPU.
+        </p>
+
+        <h4>F. Núcleos e hilos en la etapa legacy <span class="timing"></span></h4>
+        <p>
+            Los primeros procesadores eran de <strong>un solo núcleo</strong>. Luego aparecieron los <strong>dual core</strong> y más tarde los <strong>quad core</strong>. En legacy, esto fue revolucionario porque permitió ejecutar varias tareas con más fluidez.
+        </p>
+        <ul>
+            <li><strong>Núcleo:</strong> unidad física capaz de ejecutar instrucciones.</li>
+            
+        </ul>
+            <ul>
+                <li><strong>Hilo (thread):</strong> secuencia de ejecución lógica.</li>
+                
+            </ul>
+            <ul>
+                
+                <li><strong>Hyper-Threading (Intel):</strong> permite que un núcleo físico trabaje como dos hilos lógicos en ciertos escenarios.</li>
+            </ul>
+        <p>
+            No todas las CPUs antiguas tenían multihilo. Muchas solo tenían 1 núcleo y 1 hilo. Otras, como algunos Pentium 4, incorporaron Hyper-Threading. Más adelante, Core 2 Duo y Athlon X2 popularizaron los dos núcleos reales.
+        </p>
+
+        <h4>G. Encapsulados y compatibilidad: PGA, BGA, socket y chipset <span class="timing"></span></h4>
+        <ul>
+            <li><strong>PGA (Pin Grid Array):</strong> el procesador tiene pines. Ejemplo: muchos AMD antiguos.</li>
+            <li><strong>LGA (Land Grid Array):</strong> los pines están en la motherboard. Ejemplo: Intel Socket 775.</li>
+            <li><strong>BGA (Ball Grid Array):</strong> el chip va soldado a la placa. Muy común en notebooks.</li>
+        </ul>
+        <p>
+            La compatibilidad de una CPU no depende solo de que "entre" físicamente. También debe ser compatible con:
+        </p>
+        <ul>
+            <li><strong>Socket/zócalo:</strong> forma física de conexión.</li>
+            <li><strong>Chipset (en la placa madre):</strong> debe reconocer y trabajar con ese microprocesador.</li>
+            <li><strong>BIOS/UEFI:</strong> puede requerir actualización para detectar el modelo.</li>
+            <li><strong>TDP:</strong> la placa y refrigeración deben soportar el calor generado. (se profundizará en una sesión dedicada a la refrigeración</li>
+        </ul>
+
+        <h4>H. CPU sin IHS <span class="timing"></span></h4>
+        <p>
+            El <strong>IHS (Integrated Heat Spreader)</strong> es la tapa metálica superior del procesador. Su función es distribuir el calor hacia el disipador. En algunos procesadores legacy, o al observar el chip sin IHS, puede verse el <strong>die</strong> o núcleo de silicio expuesto.
+        </p>
+        <p>
+            Una CPU sin IHS es mucho más delicada: si se ejerce demasiada presión al colocar el disipador, el die puede quebrarse. Por eso algunos modelos antiguos requerían extremo cuidado en el montaje.
+        </p>
+
+       
+
+        <h3>3. Cuestionario</h3>
+        <ol class="exercises">
+            <li><strong>Definición:</strong> ¿Qué significan las siglas CPU?</li>
+            <li><strong>Sinónimos:</strong> Mencione al menos dos formas de llamar a una CPU.</li>
+            <li><strong>Proceso:</strong> Nombre las cuatro etapas básicas del ciclo de instrucción. Buscar algun ejemplo para reforzar su entendimiento</li>
+            <li><strong>Legacy:</strong> ¿Qué diferencia general existe entre una CPU de escritorio antigua y una de notebook antigua?</li>
+            <li><strong>Núcleos:</strong> ¿Qué es un núcleo? Dar una analogia de ue es un núcleo</li>
+            <li><strong>Núcleos:</strong> ¿Qué ventaja aportó pasar de un núcleo a dos núcleos?</li>
+            <li><strong>Caché:</strong> ¿Para qué sirve la memoria caché?</li>
+            <li><strong>Compatibilidad:</strong> ¿Por qué una CPU no puede elegirse mirando solo el socket?</li>
+            <li><strong>Encapsulado:</strong> Diferencie PGA, LGA y BGA.</li>
+            <li><strong>IHS:</strong> ¿Qué función cumple el IHS?</li>
+            <!-- <li><strong>Reflexión:</strong> ¿Por qué no siempre una CPU con más GHz rinde mejor que otra?</li> -->
+            <li>Buscar 1 imagen de alguno de los CPU: <strong>Intel Pentium 4, Intel Core 2 Duo, AMD Athlon XP, AMD Sempron</strong>.</li>
+            <li>Buscar imágenes comparativas de <strong>CPU PGA, LGA y BGA</strong>.</li>
+            <li>Buscar imágenes comparativas de <strong>CPU de escritorio vs CPU de notebook</strong>.</li>
+            <li>Buscar fotos de <strong>procesadores legacy sin IHS</strong> (pueden ser los del punto 10).</li>
+            <li>Buscar imágenes de <strong>sockets antiguos: Socket 370, Socket 478, Socket 775, Socket A</strong>.</li>
+            <li>Buscar imágenes del <strong>die expuesto, puede ser un Athlon XP</strong> y del <strong>IHS</strong> para comparar. Con escribir "ihs cpu" en el buscador alcanza</li>
+        </ol>
+
+       
+
+         <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion9.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 9
+      </a>
+      <a
+        href="hardware1-sesion11.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 11
+      </a>
+    </div>
+    </div>
+    
+</body>
+</html>

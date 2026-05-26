@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CLASE 8: Recuperación, Reparación y Backup de Datos</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+        line-height: 1.6;
+        background: #f1f5f9;
+        color: #1e293b;
+        padding: 20px;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 28px;
+        box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        padding: 20px 28px 40px;
+        transition: all 0.2s;
+      }
+      @media (max-width: 700px) {
+        body {
+          padding: 12px;
+        }
+        .container {
+          padding: 16px 18px 30px;
+        }
+      }
+      h1 {
+        font-size: 2rem;
+        background: linear-gradient(135deg, #0f2b3d, #1e4a6e);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        text-align: center;
+        margin: 0.25rem 0 0.5rem;
+        letter-spacing: -0.3px;
+      }
+      .duration {
+        text-align: center;
+        background: #eef2ff;
+        display: inline-block;
+        width: auto;
+        margin: 0 auto 20px;
+        padding: 6px 18px;
+        border-radius: 60px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #1e40af;
+      }
+      h2 {
+        font-size: 1.7rem;
+        margin: 1.2rem 0 0.8rem;
+        border-left: 5px solid #3b82f6;
+        padding-left: 18px;
+        color: #0c4a6e;
+      }
+      h3 {
+        font-size: 1.35rem;
+        margin: 1rem 0 0.5rem;
+        color: #166534;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .card {
+        background: #f8fafc;
+        border-radius: 24px;
+        padding: 1.5rem;
+        margin: 1.8rem 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e2e8f0;
+      }
+      .objectives,
+      .key-concepts,
+      .analogy,
+      .risks,
+      .exercises,
+      .tip {
+        padding: 1.2rem 1.6rem;
+        border-radius: 24px;
+        margin: 1.5rem 0;
+        border-left: 6px solid;
+      }
+      .objectives {
+        background: #eef2ff;
+        border-left-color: #3b82f6;
+      }
+      .key-concepts {
+        background: #fefce8;
+        border-left-color: #eab308;
+      }
+      .analogy {
+        background: #e0f2fe;
+        border-left-color: #0284c7;
+      }
+      .risks {
+        background: #ffe4e6;
+        border-left-color: #e11d48;
+      }
+      .exercises {
+        background: #f3e8ff;
+        border-left-color: #9333ea;
+      }
+      .tip {
+        background: #dcfce7;
+        border-left-color: #16a34a;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 18px 0;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+      th {
+        background: #1e3a5f;
+        color: white;
+        padding: 12px 10px;
+        font-weight: 600;
+      }
+      td {
+        border-bottom: 1px solid #cbd5e1;
+        padding: 10px 12px;
+        background: #fff;
+      }
+      tr:nth-child(even) td {
+        background: #f9fafb;
+      }
+      .code-block {
+        background: #0f172a;
+        color: #cbd5e6;
+        padding: 14px 18px;
+        border-radius: 16px;
+        font-family: "Courier New", monospace;
+        overflow-x: auto;
+        font-size: 0.85rem;
+        margin: 15px 0;
+      }
+      .warning {
+        background: #fef2f2;
+        border-left: 4px solid #dc2626;
+        padding: 1rem;
+        border-radius: 1rem;
+        margin: 1rem 0;
+      }
+      .button-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin: 24px 0 16px;
+        justify-content: center;
+      }
+      .btn {
+        padding: 10px 20px;
+        border-radius: 40px;
+        text-decoration: none;
+        font-weight: 600;
+        background: #e2e8f0;
+        color: #1e293b;
+        transition: 0.2s;
+        display: inline-block;
+      }
+      .btn-primary {
+        background: #3b82f6;
+        color: white;
+      }
+      .btn-success {
+        background: #10b981;
+        color: white;
+      }
+      .btn-warning {
+        background: #f59e0b;
+        color: #1e1b2f;
+      }
+      hr {
+        margin: 20px 0;
+        border-color: #e2e8f0;
+      }
+      footer {
+        text-align: center;
+        margin-top: 2rem;
+        font-size: 0.8rem;
+        color: #5b6e8c;
+      }
+      @media (max-width: 640px) {
+        .card {
+          padding: 1rem;
+        }
+        h2 {
+          font-size: 1.4rem;
+        }
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        .container {
+          padding: 5%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Navegación simulada estilo materia -->
+
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="datos2-sesion7.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 7
+        </a>
+        <a
+          href="datos2-sesion9.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 9
+        </a>
+      </div>
+      <h1>🛡️ CLASE 8: Recuperación, Reparación y Backup de Datos</h1>
+      <p style="text-align: center; font-size: 1rem; margin-bottom: 20px">
+        Desde un borrado accidental hasta la clonación forense.
+      </p>
+
+      <!-- OBJETIVO -->
+      <div class="objectives">
+        <h3>🎯 Objetivo de la clase</h3>
+        <p>
+          Comprender cómo funciona el borrado lógico y físico de archivos,
+          recuperar datos eliminados, dominar estrategias de backup (regla
+          3-2-1), reparar cabeceras corruptas, y realizar clonado de discos. Al
+          final, aplicarás herramientas reales como Recuva, TestDisk y clonado
+          bit a bit.
+        </p>
+      </div>
+
+      <!-- Bloque 1: Recuperación Lógica -->
+      <h2>📁 1. Recuperación de Datos I (Lógica)</h2>
+      <div class="key-concepts">
+        <h3>🧠 ¿Qué pasa cuando borramos un archivo?</h3>
+        <p>
+          <strong>Papelera de reciclaje vs borrado permanente:</strong> Al
+          enviar un archivo a la papelera, sólo se mueve a una carpeta especial.
+          Al vaciar la papelera o usar <kbd>Mayús + Supr</kbd>, el sistema
+          <strong>no destruye los datos</strong>; simplemente marca ese espacio
+          como “disponible para sobrescribir”.
+        </p>
+        <p>
+          🔍 <strong>Tabla de asignación de archivos (FAT / MFT):</strong> Los
+          sistemas de archivos (FAT32, NTFS, exFAT) usan una tabla maestra donde
+          registran nombres, ubicaciones y atributos. Cuando se “borra”, se
+          elimina la entrada, pero los datos persisten hasta que otro archivo
+          los pise.
+        </p>
+        <div class="tip">
+          ✨ <strong>Analogía didáctica:</strong> Es como un libro de
+          biblioteca: quitas la ficha del catálogo, pero el libro sigue en el
+          estante. Sólo cuando otro estudiante trae un libro nuevo y ocupa ese
+          lugar, se pierde el anterior.
+        </div>
+      </div>
+
+      <div class="exercises">
+        <h3>🛠️ Actividad 1: Recuperación forense con Recuva / TestDisk</h3>
+        <p>
+          Usa un pendrive de prueba
+          (sin información confidencial).
+        </p>
+        <ol>
+          <li>
+            <strong>Preparación:</strong> Inserta un USB vacío o con datos de
+            muestra. Copia algunas imágenes o documentos. Luego bórralos con
+            <kbd>Mayús+Supr</kbd>.
+          </li>
+          <li>
+            <strong>Descarga Recuva (gratuito)</strong> o
+            <strong>TestDisk</strong> (portable). Escanea el USB.
+          </li>
+          <li>
+            Analiza los archivos encontrados, intenta recuperar al menos 2
+            archivos.
+          </li>
+          <li>
+            <strong>Reflexión:</strong> ¿Qué archivos aparecen con nombres
+            originales? ¿Qué ocurre si grabas nueva información en el USB?
+          </li>
+        </ol>
+        <p>
+          📌 <strong>Comando útil con TestDisk (modo consola):</strong> permite
+          recuperar particiones perdidas. Para archivos individuales, usa
+          <strong>PhotoRec</strong> (incluido en TestDisk).
+        </p>
+        <div class="code-block">
+          # Ejemplo simbólico (explicación)<br />
+          testdisk → seleccionar disco → [Analyse] → [Quick Search] → listar
+          archivos borrados
+        </div>
+      </div>
+
+      <!-- Estrategias de Backup -->
+      <h2>💾 2. Prevención y Backups: Regla 3-2-1</h2>
+      <div class="card">
+        <h3>📀 Tipos de respaldo</h3>
+        <ul>
+          <li>
+            <strong>Completo (Full):</strong> Copia toda la información. Lento
+            pero fácil de restaurar.
+          </li>
+          <li>
+            <strong>Incremental:</strong> Solo copia los cambios desde la última
+            copia (completa o incremental). Requiere menos espacio.
+          </li>
+          <li>
+            <strong>Diferencial:</strong> Copia todos los cambios desde el
+            último backup completo. Restauración más rápida que incremental.
+          </li>
+        </ul>
+        <h3>⚡ Regla 3-2-1 (estándar profesional)</h3>
+        <p>
+          🔹 <strong>3</strong> copias de tus datos.<br />
+          🔹 <strong>2</strong> tipos de medios diferentes (disco duro, nube,
+          cinta).<br />
+          🔹 <strong>1</strong> copia fuera de las instalaciones (off-site).
+        </p>
+        <div class="warning">
+          🚨 <strong>Ejemplo concreto:</strong> Documentos de clase: 1) original
+          en laptop, 2) copia en disco externo, 3) copia en Google Drive.
+          ¡Protección total!
+        </div>
+      </div>
+
+      <div class="exercises">
+        <h3>
+          🤖 Actividad 2: Planificación y ejecución de rutina automatizada de
+          backup
+        </h3>
+        <p>
+         Crear script o tarea programada (Windows
+          Backup o FreeFileSync).
+        </p>
+        <ol>
+          <li>
+            Diseña una política: ¿cada cuánto harás backups? ¿Completo semanal +
+            incremental diario?
+          </li>
+          <li>
+            Usa la herramienta “Historial de archivos” de Windows o programa
+            <strong>Duplicati / FreeFileSync</strong>.
+          </li>
+          <li>
+            Configura una carpeta de origen (ej: “Mis Documentos”) y destino
+            (USB externo o carpeta en la nube).
+          </li>
+          <li>
+            Realiza una simulación: agrega un archivo nuevo, ejecuta backup
+            incremental y verifica que solo se respalde el cambio.
+          </li>
+        </ol>
+        <p>
+          💡 <strong>Para casa:</strong> Implementa la regla 3-2-1 con tus fotos
+          del celular.
+        </p>
+      </div>
+
+      <!-- Recuperación de particiones -->
+      <h2>🗂️ 3. Recuperación de Datos II: Particiones (MBR/GPT)</h2>
+      <div class="key-concepts">
+        <p>
+          El disco se divide en particiones mediante esquemas:
+          <strong>MBR (Master Boot Record)</strong> soporta hasta 2 TB y 4
+          particiones primarias;
+          <strong>GPT (GUID Partition Table)</strong> permite más particiones y
+          discos enormes, además incluye redundancia.
+        </p>
+        <p>
+          🔧 Si la tabla de particiones se daña (por error de formateo, virus o
+          corte eléctrico), el sistema operativo no ve las unidades, pero los
+          datos suelen seguir intactos.
+        </p>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Esquema</th>
+                <th>Tamaño máx disco</th>
+                <th>Nº particiones</th>
+                <th>Seguridad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>MBR</td>
+                <td>2 TB</td>
+                <td>4 primarias</td>
+                <td>Un solo sector boot</td>
+              </tr>
+              <tr>
+                <td>GPT</td>
+                <td>9.4 ZB</td>
+                <td>128 (Windows)</td>
+                <td>Tabla de particiones respaldo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="analogy">
+        <h3>⚙️ Actividad 3: Simulación de daño en partición y recuperación</h3>
+        <p>
+          Usando máquina virtual o USB secundario,
+          nunca en disco principal
+        </p>
+        <ol>
+          <li>
+            Crea un pendrive con al menos 8 GB y crea dos particiones usando
+            DiskPart o GParted.
+          </li>
+          <li>
+            Daña la tabla de particiones MBR (por ejemplo, sobrescribe los
+            primeros sectores con
+            <code>dd if=/dev/zero of=/dev/sdX bs=512 count=1</code> en Linux, o
+            con herramienta de simulación).
+          </li>
+          <li>
+            Utiliza <strong>TestDisk</strong> para analizar y reescribir la
+            tabla MBR o GPT: escanea y recupera el acceso a las particiones.
+          </li>
+          <li>
+            Vuelve a montar el disco y verifica que los archivos estén
+            accesibles.
+          </li>
+        </ol>
+        <div class="tip">
+          💡 <strong>Dato clave:</strong> TestDisk puede reparar sectores de
+          arranque dañados y reconstruir la estructura. Ideal para discos que de
+          repente aparecen como “RAW”.
+        </div>
+      </div>
+
+      <!-- Reparación de archivos dañados -->
+      <h2>🔨 4. Reparación de Archivos Dañados (Cabeceras corruptas)</h2>
+      <div class="card">
+        <p>
+          Muchas extensiones (JPG, PDF, DOCX) tienen una cabecera que identifica
+          el tipo de archivo. Si la cabecera se corrompe, el sistema no sabe
+          cómo abrirlo. Herramientas específicas pueden reescribir la firma.
+        </p>
+        <ul>
+          <li>
+            <strong>Word (.docx):</strong> WinRAR puede extraer el contenido
+            XML; a veces renombrar a .zip y reparar archivos internos.
+          </li>
+          <li>
+            <strong>Imágenes JPG:</strong> Utilidades como
+            <strong>JPEG Repair, Stellar Phoenix</strong> o
+            <strong>PhotoRec</strong> (recupera incluso con cabecera dañada).
+          </li>
+          <li>
+            <strong>PDF:</strong> Adobe Reader ya intenta reparar, o
+            herramientas como <strong>PDF Repair Toolbox</strong>.
+          </li>
+        </ul>
+        <div class="code-block">
+          🔎 Estructura típica: archivo JPG saludable empieza con "FF D8 FF" en
+          hexadecimal. Si ves otros valores, se puede reparar manualmente con un
+          editor hexadecimal.
+        </div>
+      </div>
+
+      <div class="exercises">
+        <h3>
+          🧪 Actividad 4: Reparación de documento Word corrupto intencionalmente
+        </h3>
+        <p>
+           Aprende sobre la fragilidad de los
+          encabezados.
+        </p>
+        <ol>
+          <li>Crea un archivo .docx de prueba (una frase).</li>
+          <li>
+            Ábrelo con un editor hexadecimal (HxD) y modifica los primeros 4
+            bytes a valores aleatorios. Guarda y comprueba que Word no lo abre.
+          </li>
+          <li>
+            Intenta repararlo: renombra a .zip, extrae el contenido y abre
+            "document.xml". Reconstruye un nuevo .docx importando la estructura
+            limpia.
+          </li>
+          <li>
+            Alternativa más sencilla: usa la función “Abrir y reparar” de
+            Microsoft Word o prueba herramientas online (con cuidado con datos
+            sensibles).
+          </li>
+        </ol>
+        <p>
+          ✅ Conclusión: incluso si un archivo parece irrecuperable, muchas
+          veces el contenido real sobrevive.
+        </p>
+      </div>
+
+      <!-- Clonado forense -->
+      <h2>🖥️ 5. Utilitarios de Clonado: Imágenes de disco bit a bit</h2>
+      <div class="key-concepts">
+        <p>
+          El clonado forense no copia archivos sueltos, sino que genera una
+          <strong>imagen exacta</strong> del dispositivo (sectores, incluso los
+          borrados). Usado en recuperación de datos y peritajes.
+        </p>
+        <p>
+          <strong>Herramientas clave:</strong> <strong>DD</strong> (Linux/ WSL),
+          <strong>FTK Imager</strong> (gratuito, interfaz gráfica),
+          <strong>Clonezilla</strong> para clonado de discos.
+        </p>
+      </div>
+
+      <div class="analogy">
+        <h3>📀 Actividad 5: Creación de una imagen de disco de un USB</h3>
+        Preservar evidencia.</p>
+        <ol>
+          <li>Inserta una memoria USB pequeña (con datos de ejemplo).</li>
+          <li>
+            Usa <strong>FTK Imager Lite</strong> (Windows) o el comando
+            <code>dd</code> si estás en Linux o Mac: <br />
+            <code
+              >sudo dd if=/dev/sdb of=backup_usb.img bs=4M status=progress</code
+            >
+          </li>
+          <li>
+            Verifica que la imagen tenga el mismo tamaño que el dispositivo
+            original.
+          </li>
+          <li>
+            Monta la imagen como unidad virtual (con OSFMount) y comprueba que
+            se pueden explorar los archivos sin necesidad del USB físico.
+          </li>
+          <li>
+            <strong>¿Por qué útil?</strong> Para trabajar sobre una copia y no
+            dañar el original durante el análisis forense.
+          </li>
+        </ol>
+        <div class="warning">
+          ⚠️ Cuidado: al elegir la unidad origen ("if") no equivoques el
+          destino, podrías sobrescribir tu disco principal.
+        </div>
+      </div>
+
+      <!-- Material de lectura completo para el estudiante -->
+      <h2>📖 Material de lectura: Fundamentos técnicos</h2>
+      <div class="tip">
+        <h3>📘 Resumen extendido para estudiar en casa</h3>
+        <ul>
+          <li>
+            <strong>Borrado lógico vs físico:</strong> El borrado lógico solo
+            elimina punteros en el MFT. El borrado seguro (sobrescritura) sí
+            destruye los datos. Herramientas como DBAN o cifrado previenen
+            recuperación.
+          </li>
+          <li>
+            <strong>Estructura interna FAT/NTFS:</strong> FAT utiliza una tabla
+            de asignación de clústeres; NTFS emplea Master File Table ($MFT) con
+            registros de cada archivo.
+          </li>
+          <li>
+            <strong>Particiones MBR:</strong> reserva 512 bytes para código de
+            arranque y tabla de particiones (4 entradas de 16 bytes). GPT es más
+            moderno con cabecera primaria y secundaria al final del disco.
+          </li>
+          <li>
+            <strong>Cabeceras de archivos más comunes:</strong> PDF: "%PDF",
+            PNG: "‰PNG", ZIP: "PK", DOCX (basado en ZIP).
+          </li>
+          <li>
+            <strong>Backup diferencial vs incremental:</strong> Diferencial
+            acumula cambios desde el último completo → ocupa más pero restaura
+            rápido; Incremental guarda cambios desde la última copia de
+            cualquier tipo → ahorra espacio pero restaura más lento.
+          </li>
+          <li>
+            <strong>Clonado bit a bit:</strong> genera un hash (MD5/SHA1) para
+            verificar integridad forense.
+          </li>
+        </ul>
+        <p>
+          🔗 Recursos recomendados:
+          <a href="https://www.cgsecurity.org/wiki/TestDisk" target="_blank"
+            >TestDisk Documentation</a
+          >,
+          <a href="https://www.ccleaner.com/recuva" target="_blank">Recuva</a>,
+          <a href="https://clonezilla.org/" target="_blank">Clonezilla</a> y
+          guía oficial de <strong>FTK Imager</strong>.
+        </p>
+      </div>
+
+      <!-- Cuestionario final (120 min, se recomienda últimos 15 min) -->
+      <h2>📝 Cuestionario </h2>
+      <div class="exercises" style="background: #f1f5f9">
+        <p>
+          <strong>Responde en tu cuaderno o en la plataforma:</strong> (ayuda a
+          consolidar conocimientos)
+        </p>
+        <ol>
+          <li>
+            ¿Cuál es la diferencia fundamental entre la papelera de reciclaje y
+            el borrado permanente con Mayús+Supr?
+          </li>
+          <li>
+            Menciona dos diferencias entre los sistemas de archivos FAT32 y NTFS
+            en cuanto a la gestión de archivos borrados.
+          </li>
+          <li>
+            Explica con tus palabras qué es la regla 3-2-1 de backups y por qué
+            es tan eficaz.
+          </li>
+          <li>
+            Imagina que formateaste sin querer tu disco duro externo. ¿Qué
+            herramienta utilizarías para recuperar las particiones y por qué?
+          </li>
+          <li>
+            ¿Qué información podemos encontrar en la cabecera de un archivo JPG
+            dañado y cómo se puede reparar?
+          </li>
+          <li>
+            ¿En qué consiste una imagen de disco “bit a bit”? Menciona dos
+            ventajas forenses.
+          </li>
+          <li>
+            ¿Cuál es la principal amenaza si solo realizamos backups completos
+            cada mes sin ningún otro tipo de copia?
+          </li>
+          <li>
+            Nombra dos herramientas gratuitas para clonado forense y una para
+            reparación de documentos Word corruptos.
+          </li>
+          <li>
+            Si una partición MBR está dañada pero los datos existen físicamente,
+            ¿TestDisk puede reescribir la tabla? ¿Verdadero o falso? Justifica.
+          </li>
+          <li>
+            Reflexión: ¿Consideras importante que los chicos de tu edad aprendan
+            a recuperar archivos borrados? ¿Qué situación de la vida real te
+            podría salvar?
+          </li>
+        </ol>
+        <div class="tip">
+          💡 <strong>Respuestas sugeridas (autoevaluación):</strong> 1. Papelera
+          no libera espacio; Mayús+Supr marca el espacio como disponible. 2.
+          NTFS tiene MFT más detallada y journaling. 3. Tres copias, dos medios
+          distintos, una off-site. 4. TestDisk o GParted. 5. La firma mágica FF
+          D8; se corrige con editor hexadecimal o herramienta especializada. 6.
+          Copia sector a sector sin modificar original, integridad hash. 7.
+          Riesgo de perder todo el trabajo entre backups. 8. FTK Imager, DD;
+          para Word: Open and Repair o 7-Zip. 9. Verdadero, TestDisk reconstruye
+          MBR/GPT. 10. Respuesta abierta.
+        </div>
+      </div>
+
+      <!-- Botones inferiores -->
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="datos2-sesion7.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 7
+        </a>
+        <a
+          href="datos2-sesion9.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 9
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
