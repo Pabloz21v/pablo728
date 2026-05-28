@@ -1,221 +1,606 @@
-
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clase 12: Operaciones Básicas y Conversión de Tipos (Casting)</title>
+<html lang="es" data-theme="light" style=""><head><meta charset="utf-8">
+    
+    
+    <title>Clase 12: Tipos de datos y Operadores Aritméticos | Fundamentos de Programación</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #f6f9fc;
+        font-family: system-ui, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+        line-height: 1.5;
+        color: #1a2a3a;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 1rem;
+      }
+
+      .container {
+        background: white;
+        border-radius: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        padding: 1.5rem;
+      }
+
+      @media (min-width: 768px) {
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-            background-color: #f9f9f9;
+          padding: 2rem;
         }
         .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          padding: 2rem 2.5rem;
         }
-        header {
-            /* background-color: #2c3e50; */
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 8px 8px 0 0;
+      }
+
+      h1 {
+        font-size: 1.9rem;
+        background: linear-gradient(135deg, #1e3c72, #2b4c7c);
+        background-clip: text;
+        -webkit-background-clip: text;
+        margin-bottom: 0.5rem;
+        border-left: 5px solid #2b4c7c;
+        padding-left: 1rem;
+      }
+
+      .subtitulo {
+        color: #4a627a;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 0.75rem;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+        margin: 1.5rem 0 1rem 0;
+        color: #1e3c72;
+        border-bottom: 2px solid #cbd5e1;
+        padding-bottom: 0.3rem;
+      }
+
+      h3 {
+        font-size: 1.3rem;
+        margin: 1.2rem 0 0.8rem 0;
+        color: #2c3e66;
+      }
+
+      .card {
+        background: #f8fafc;
+        border-radius: 1.2rem;
+        padding: 1rem 1.2rem;
+        margin: 1rem 0;
+        border-left: 4px solid #3b82f6;
+      }
+
+      .warning-card {
+        background: #fff0f0;
+        border-left: 5px solid #dc2626;
+      }
+
+      .tip-card {
+        background: #fef9e3;
+        border-left: 5px solid #f59e0b;
+      }
+
+      .badge {
+        display: inline-block;
+        background: #e6f0ff;
+        color: #1e40af;
+        font-weight: 600;
+        font-size: 0.75rem;
+        padding: 0.2rem 0.7rem;
+        border-radius: 20px;
+        margin-right: 0.5rem;
+      }
+
+      pre {
+        background: #0f172a;
+        color: #e2e8f0;
+        padding: 1rem;
+        border-radius: 1rem;
+        overflow-x: auto;
+        font-size: 0.85rem;
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        margin: 1rem 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+      code {
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        background: #eef2ff;
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.5rem;
+        font-size: 0.85rem;
+        color: #b91c1c;
+      }
+
+      pre code {
+        background: transparent;
+        padding: 0;
+        color: #e2e8f0;
+        font-size: 0.85rem;
+      }
+
+      ul,
+      ol {
+        margin: 0.75rem 0 0.75rem 1.5rem;
+      }
+
+      li {
+        margin: 0.4rem 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.2rem 0;
+        font-size: 0.9rem;
+        background: #ffffff;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
+      th,
+      td {
+        border: 1px solid #e2e8f0;
+        padding: 0.7rem;
+        text-align: left;
+        vertical-align: middle;
+      }
+
+      th {
+        background: #eef2ff;
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      .nav-links {
+        margin-bottom: 24px;
+      }
+
+      .nav-links a {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+
+      .btn-materia {
+        background: #4ade80;
+        color: #222;
+      }
+      .btn-prev {
+        background: #60a5fa;
+        color: #fff;
+      }
+      .btn-next {
+        background: #f9e282;
+        color: #222;
+        margin-right: 0 !important;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 1rem;
         }
-        h1, h2 {
-            color: #2c3e50;
+        h1 {
+          font-size: 1.6rem;
         }
         h2 {
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
+          font-size: 1.4rem;
         }
-        .theory {
-            background-color: #f0f8ff;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
+        pre {
+          font-size: 0.75rem;
+          padding: 0.8rem;
         }
-        .example {
-            background-color: #fef9e7;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
+        th,
+        td {
+          padding: 0.5rem;
         }
-        .activity {
-            background-color: #e8f8f5;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            border-left: 4px solid #27ae60;
-        }
-        code {
-            background-color: #f4f4f4;
-            padding: 5px;
-            border-radius: 3px;
-            font-family: monospace;
-            display: block;
-        }
-        ol, ul {
-            margin-left: 20px;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body style="">
     <div class="container">
-        <div style="margin-bottom: 24px">
-        <a
-          href="../materias/desarrollo-1.html"
-          style="
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            background: #4ade80;
-            color: #222;
-            display: inline-block;
-            margin-right: 10px;
-          "
-        >
-          Volver a Materia
-        </a>
-        <a
-          href="desarrollo1-sesion11.html"
-          style="
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            background: #60a5fa;
-            color: #fff;
-            display: inline-block;
-            margin-right: 10px;
-          "
-        >
-          Ir a Sesión 11
-        </a>
-        <a
-          href="desarrollo1-sesion13.html"
-          style="
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            background: #f9e282;
-            color: #222;
-            display: inline-block;
-          "
-        >
-          Ir a Sesión 13
-        </a>
+      <div class="nav-links">
+        <a href="../materias/desarrollo-1.html" class="btn-materia">Volver a Materia</a>
+        <a href="desarrollo1-sesion11.html" class="btn-prev">Ir a Sesión 11</a>
+        <a href="desarrollo1-sesion13.html" class="btn-next">Ir a Sesión 13</a>
       </div>
-        <header>
-            <h1>Clase 12: Operaciones Básicas y Conversión de Tipos (Casting)</h1>
-        </header>
 
-        <div class="theory">
-            <h2>Marco Teórico</h2>
-            <p>Para operar matemáticamente con datos ingresados por <code>input()</code>, debemos convertirlos (Casting).</p>
-            <p>Ejemplos de conversión:</p>
-            <ul>
-                <li><code>numero = int(input("Ingrese nro: "))</code> (Para enteros).</li>
-                <li><code>precio = float(input("Ingrese precio: "))</code> (Para decimales).</li>
-            </ul>
-            <p><strong>Operadores:</strong></p>
-            <ul>
-                <li><code>+</code> (suma)</li>
-                <li><code>-</code> (resta)</li>
-                <li><code>*</code> (multiplicación)</li>
-                <li><code>/</code> (división)</li>
-            </ul>
-        </div>
+      <h1>🧮 Clase 12: Tipos de datos y Operadores Aritméticos</h1>
+      <div class="subtitulo">Aprende a diferenciar textos de números y a realizar cálculos con Python</div>
 
-        <div class="example">
-            <h2>Ejemplo: Sumadora</h2>
-            <code>
-a = int(input("Primer número: "))
-b = int(input("Segundo número: "))
-resultado = a + b
-print("La suma es:", resultado)
-            </code>
-        </div>
+      <div class="card">
+        <p>
+          <span class="badge">🔄 Repaso previo</span> En la Clase 11 aprendimos a comunicarnos con el usuario a través
+          de la función <code>input()</code>. Vimos que <code>input()</code> tiene una característica especial:
+          <strong>siempre</strong> devuelve la información en formato de texto (string), incluso si el usuario teclea
+          números (podemos decir que lo recibido desde consola lo guarda entre comillas "hola"). Hoy vamos a profundizar en qué significa esto de "formato de texto" frente a "formato numérico" y
+          cómo podemos realizar operaciones matemáticas con ellos.
+        </p>
+      </div>
 
-        <div class="activity">
-            <h2>Actividad 12: Calculadoras simples</h2>
-            <p>Crea un archivo <code>.py</code> para cada uno de los siguientes ejercicios y ejecuta el código:</p>
-            <ol>
-                <li>Pedir dos números enteros y mostrar su suma.</li>
-                <li>Pedir dos números y mostrar su resta.</li>
-                <li>Pedir dos números y mostrar su multiplicación.</li>
-                <li>Pedir el año actual y el año de nacimiento, calcular y mostrar la edad aproximada.</li>
-                <li>Pedir el precio de un producto y la cantidad comprada, calcular el total (precio * cantidad).</li>
-                <li>Calcular el promedio de 3 notas (ingresadas como float). Recuerda los paréntesis: <code>(n1+n2+n3)/3</code>.</li>
-                <li>Convertir una medida en kilómetros a metros (multiplicar por 1000).</li>
-                <li>Calcular el área de un cuadrado (lado * lado). Pedir el lado al usuario.</li>
-                <li>Pedir un número y mostrar su doble y su mitad.</li>
-                <li>Programa "Repartija": Ingresar monto total de la cena y cantidad de personas. Calcular cuánto paga cada uno (división).</li>
-            </ol>
-        </div>
-        <div style="margin-bottom: 24px">
-        <a
-          href="../materias/desarrollo-1.html"
-          style="
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            background: #4ade80;
-            color: #222;
-            display: inline-block;
-            margin-right: 10px;
-          "
-        >
-          Volver a Materia
-        </a>
-        <a
-          href="desarrollo1-sesion11.html"
-          style="
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            background: #60a5fa;
-            color: #fff;
-            display: inline-block;
-            margin-right: 10px;
-          "
-        >
-          Ir a Sesión 11
-        </a>
-        <a
-          href="desarrollo1-sesion13.html"
-          style="
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            background: #f9e282;
-            color: #222;
-            display: inline-block;
-          "
-        >
-          Ir a Sesión 13
-        </a>
+      <h2>🎯 Objetivos de la clase</h2>
+      <ul>
+        <li>
+          Comprender en detalle los tipos de datos: enteros (<code>int</code>), decimales (<code>float</code>) y cadenas
+          de texto (<code>str</code>).
+        </li>
+        <li>Utilizar la función <code>type()</code> para verificar el tipo de cualquier dato.</li>
+        <li>Distinguir la diferencia crítica entre un número real (ej. 25) y un texto que parece número (ej. "25").</li>
+        <li>Aprender a utilizar los operadores aritméticos básicos en Python.</li>
+        <li>Entender el orden de las operaciones matemáticas.</li>
+      </ul>
+
+      <h2>📦 Qué son los tipos de datos</h2>
+      <p>
+        Imagina que estás organizando una mudanza. Tienes cajas para libros, bolsas para ropa y fundas para objetos
+        frágiles. Cada tipo de objeto requiere un contenedor diferente y se maneja de forma distinta. En programación,
+        sucede lo mismo: el ordenador necesita saber exactamente qué tipo de información está guardando en una variable
+        para saber qué operaciones puede hacer con ella. ¿Puede sumar estas dos cosas? ¿Puede ponerlas en mayúsculas?
+        Depende de su tipo.
+      </p>
+
+      <h3>1. Enteros (<code>int</code>)</h3>
+      <p>
+        Son números sin parte decimal, tanto positivos como negativos, incluyendo el cero. Su nombre viene de
+        <em>integer</em>.
+      </p>
+      <pre><code>edad = 25
+temperatura = -5
+año = 2024</code></pre>
+
+      <h3>2. Decimales (<code>float</code>)</h3>
+      <p>Son números que tienen una parte fraccionaria (número con coma). Su nombre viene de <em>floating point</em> (coma flotante).</p>
+      <div class="warning-card card">
+        <h3>⚠️ ¡Importante! El separador decimal</h3>
+        <p>
+          En español solemos usar la coma para los decimales (ej. 3,14), pero en Python y en la mayoría de lenguajes de
+          programación, <strong>se debe utilizar el punto (.)</strong>.
+        </p>
+        <p>✅ Correcto: <code>3.14</code> usamos el punto<br>❌ Incorrecto: <code>3,14</code>no usemos la coma</p>
+      </div>
+      <pre><code>precio = 19.99
+peso = 75.5
+pi = 3.14159</code></pre>
+
+      <h3>3. Cadenas de texto (<code>str</code>)</h3>
+      <p>
+        Representan secuencias de caracteres: letras, símbolos, e incluso números si los tratamos como texto. Su nombre
+        viene de <em>string</em>. Siempre deben ir entre comillas simples (<code>'...'</code>) o dobles
+        (<code>"..."</code>).
+      </p>
+      <pre><code>nombre = "Laura"
+mensaje = '¡Hola a todos!'
+numero_falso = "42"  # ¡Ojo! Al tener comillas, esto es texto, no un número para operar.</code></pre>
+
+      <h2>🔍 La función <code>type()</code></h2>
+      <p>
+        A veces, mirando el código, podemos tener dudas sobre qué tipo de dato hay en una variable. Python nos ofrece un
+        "detector de mentiras" llamado <code>type()</code>. Esta función nos devuelve el tipo exacto del dato que le
+        pasemos.
+      </p>
+      <pre><code>numero = 10
+print(type(numero))  # &lt;class 'int'&gt;
+# observen como al guardar el dato en la variable SIN usar las comillas este SI lo interpreta como número.
+# Y lo confirmamos ya que print(type(numero)) nos entrega 'int' ósea número entero.
+# Muy importante para realizar cálculos matemáticos.
+
+numero_dos = "10"
+print(type(numero_dos))  # &lt;class 'str'&gt;
+# observen como al guardar el dato en la variable CON usar las comillas este SI lo interpreta como texto.
+# Y lo confirmamos ya que print(type(numero_dos)) nos entrega 'str' ósea una cadena de texto.
+
+numero_tres = 10.0
+print(type(numero_tres))  # &lt;class 'float'&gt;
+# observen como al guardar el dato en la variable SIN usar las comillas este SI lo interpreta como número decimal.
+# Y lo confirmamos ya que print(type(numero_tres)) nos entrega 'float' ósea número decimal.
+# Muy importante para realizar cálculos matemáticos.</code></pre>
+
+
+      <p>
+        También puedemos usar <code>type()</code> directamente sobre un valor, sin necesidad de guardarlo antes en una
+        variable. Esto resulta muy útil cuando estás practicando y quieres comprobar rápidamente cómo está interpretando
+        Python lo que has escrito.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Expresión</th>
+            <th>Qué ve Python</th>
+            <th>Tipo devuelto por <code>type()</code></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>type(8)</code></td>
+            <td>Un número entero</td>
+            <td><code>int</code></td>
+          </tr>
+          <tr>
+            <td><code>type(8.0)</code></td>
+            <td>Un número decimal</td>
+            <td><code>float</code></td>
+          </tr>
+          <tr>
+            <td><code>type("8")</code></td>
+            <td>Un texto formado por un carácter</td>
+            <td><code>str</code></td>
+          </tr>
+          <tr>
+            <td><code>type("Hola")</code></td>
+            <td>Una cadena de texto</td>
+            <td><code>str</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>🎭 Número vs. Texto:</h2>
+      <p>Este es el punto donde ocurren el 90% de los errores al empezar a programar. Observa estos dos casos:</p>
+      <pre><># Caso A: Suma de enteros (int)
+primer_numero = 10
+segundo_numero = 5
+print(primer_numero + segundo_numero)  # Resultado: 15
+
+# Caso B: Suma de textos (str)
+texto_uno= "10"
+texto_dos = "5"
+print(texto_uno + texto_dos)  # Resultado: 105
+
+# Caso C: Suma de textos (str)
+texto_tres = "tomá"
+texto_cuatro = "té"
+print(texto_tres + texto_cuatro)  # Resultado: tomáté</code></pre>
+      <p>
+        <strong>¿Qué ha pasado en el Caso B?</strong> Cuando usamos el operador <code>+</code> con números, Python los
+        suma matemáticamente. Pero cuando usamos el operador <code>+</code> con textos (strings), Python los
+        <strong>concatena</strong>, es decir, los pega uno detrás del otro como vagones de tren. ¡Por eso "10" + "5"
+        resulta en "105"! <br>
+        <strong>Caso C:</strong> si sumamos textos ingresando letras en vez de números se concatenaran los textos uniendolos dando por resultado tomáté.
+      </p>
+
+      <h2>🧮 Operadores Aritméticos</h2>
+      <p>Ahora que ya sabemos distinguir los números verdaderos, veamos qué podemos hacer con ellos:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Operador</th>
+            <th>Nombre</th>
+            <th>Ejemplo de uso</th>
+            <th>Resultado esperado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>+</code></td>
+            <td>Suma</td>
+            <td><code>10 + 3</code></td>
+            <td><code>13</code></td>
+          </tr>
+          <tr>
+            <td><code>-</code></td>
+            <td>Resta</td>
+            <td><code>10 - 3</code></td>
+            <td><code>7</code></td>
+          </tr>
+          <tr>
+            <td><code>*</code></td>
+            <td>Multiplicación</td>
+            <td><code>10 * 3</code></td>
+            <td><code>30</code></td>
+          </tr>
+          <tr>
+            <td><code>/</code></td>
+            <td>División exacta</td>
+            <td><code>10 / 3</code></td>
+            <td><code>3.3333333333333335</code> (siempre devuelve float)</td>
+          </tr>
+          <tr>
+            <td><code>//</code></td>
+            <td>División entera</td>
+            <td><code>10 // 3</code></td>
+            <td><code>3</code> (descarta los decimales)</td>
+          </tr>
+          <tr>
+            <td><code>%</code></td>
+            <td>Módulo (resto)</td>
+            <td><code>10 % 3</code></td>
+            <td><code>1</code> (lo que sobra de dividir 10 entre 3)</td>
+          </tr>
+          <tr>
+            <td><code>**</code></td>
+            <td>Potencia (exponente)</td>
+            <td><code>10 ** 3</code></td>
+            <td><code>1000</code> (10 al cubo: 10 * 10 * 10)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>El Orden de las Operaciones</h3>
+      <p>
+        Python sigue las mismas reglas matemáticas que aprendiste en la escuela para resolver ecuaciones combinadas <br>
+        Es importante saber este orden para lograr cálculos correctos.
+      </p>
+      <ol>
+        <li><strong>P</strong>aréntesis <code>()</code></li>
+        <li><strong>E</strong>xponentes <code>**</code></li>
+        <li>
+          <strong>M</strong>ultiplicación, <strong>D</strong>ivisión y <strong>M</strong>ódulo <code>* / // %</code> (de
+          izquierda a derecha)
+        </li>
+        <li><strong>S</strong>uma y <strong>R</strong>esta <code>+ -</code> (de izquierda a derecha)</li>
+      </ol>
+      <pre><code>resultado = 10 + 5 * 2
+# Primero multiplica (5*2=10), luego suma (10+10=20)
+print(resultado)  # 20
+
+resultado2 = (10 + 5) * 2
+# Primero el paréntesis (10+5=15), luego multiplica (15*2=30)
+print(resultado2) # 30</code></pre>
+
+      <h2>💡 Ejemplos guiados paso a paso (ejecutarlos en el VSC)</h2>
+
+      <div class="card">
+        <h3>📌 Ejemplo 1: Verificar tipos de datos</h3>
+        <pre><code>nombre = "Marta"
+edad = 19
+altura = 1.68
+
+print(nombre)
+print(type(nombre))
+print(edad)
+print(type(edad))
+print(altura)
+print(type(altura))</code></pre>
+        <p>
+          <strong>Interpretación línea por línea:</strong> primero guardamos un texto en <code>nombre</code>, luego un
+          entero en <code>edad</code> y después un decimal en <code>altura</code>. Cada vez que usamos
+          <code>type(variable)</code>, Python nos muestra cómo está clasificando internamente ese dato.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>📌 Ejemplo 2: La diferencia entre sumar y concatenar</h3>
+        <pre><code>numero1 = 10
+numero2 = 5
+texto1 = "10"
+texto2 = "5"
+
+print(numero1 + numero2)  # 15
+print(texto1 + texto2)    # 105</code></pre>
+        <p>
+          <strong>Interpretación:</strong> en las dos primeras variables hay números reales, así que el operador
+          <code>+</code> realiza una suma matemática. En las dos últimas variables hay textos entre comillas, por eso el
+          mismo operador <code>+</code> no suma, sino que pega un texto detrás del otro.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>📌 Ejemplo 3: Mini cuenta con varios operadores</h3>
+        <pre><code>precio = 12.5
+cantidad = 4
+subtotal = precio * cantidad
+promedio = subtotal / 2
+resto = 13 % 5
+potencia = 2 ** 3
+
+print("Subtotal:", subtotal)
+print("Promedio:", promedio)
+print("Resto:", resto)
+print("Potencia:", potencia)</code></pre>
+        <p>
+          <strong>Interpretación línea por línea:</strong> multiplicamos <code>precio</code> por <code>cantidad</code>
+          para calcular un subtotal. Después dividimos ese subtotal entre 2. Luego calculamos el resto de dividir 13
+          entre 5 con <code>%</code>. Por último, usamos <code>**</code> para calcular 2 elevado a 3. Este ejemplo te
+          muestra que los operadores aritméticos pueden combinarse para resolver situaciones reales.
+        </p>
+      </div>
+
+      <div class="tip-card card">
+        <span class="badge">✨ Buenas prácticas</span>
+        <p>
+          Aunque conozcan el orden de operaciones, es muy recomendable <strong>usar paréntesis</strong> para que nuestro
+          código sea más fácil de leer para otros humanos. Es mejor escribir <code>(10 * 5) + 3</code> que
+          <code>10 * 5 + 3</code>. Además, usar nombres de variables claros como <code>precio_total</code> o
+          <code>cantidad_productos</code> para entender los cálculos con facilidad.
+        </p>
+      </div>
+
+      <h2>❌ Errores Frecuentes</h2>
+      <ul>
+        <li>
+          <strong>Usar coma decimal en lugar de punto:</strong> <code>pi = 3,14</code> creará un tipo de dato diferente
+          (una tupla, lo verán mas adelante) en lugar de un float. Recuerda usar <code>3.14</code>.
+        </li>
+        <li>
+          <strong>Poner comillas a números sin querer:</strong> Escribir <code>edad = "25"</code> en lugar de
+          <code>edad = 25</code>. Luego, al querer sumar años, te dará error de tipos.
+        </li>
+        <li>
+          <strong>Intentar sumar texto con número:</strong> <code>"Tengo " + 25 + " años"</code>. Python no sabe si
+          quieres sumar o concatenar, y lanzará un <code>TypeError</code>. (Se soluciona con f-strings como vimos en
+          clases pasadas).
+        </li>
+        <li>
+          <strong>Confundir <code>/</code> con <code>//</code>:</strong> <code>10 / 2</code> da
+          <code>5.0</code> (float), mientras que <code>10 // 2</code> da <code>5</code> (int).
+        </li>
+      </ul>
+
+      <h2>🧪 Actividades Prácticas</h2>
+      <p>Crea un archivo <code>sesion12_operaciones.py</code> en Visual Studio Code y resuelver:</p>
+
+      <ol>
+        <li>
+          <strong>Calculadora básica:</strong> Crear variables para dos números (ej. 15 y 4). Imprimir en líneas separadas
+          el resultado de sumarlos, restarlos, multiplicarlos y dividirlos.
+        </li>
+        <li>
+          <strong>Calculadora de propinas:</strong> Fuimos a un restaurante y tenemos que pagar $45000.50 (float) por la comida más un 10% de propina. 
+           Calcular el monto de la propina y el total a pagar, imprimiendo ambos valores.
+        </li>
+        <li>
+          <strong>Comprobación de tipos:</strong> Crea tres variables: <code>var1 = 100</code>,
+          <code>var2 = "100"</code> y <code>var3 = 100.0</code>. Comentar previamente que tipo de dato es cada uno.
+          Luego imprimir el tipo de cada una usando
+          <code>type()</code> para comprobar como Python las ha interpretado.
+        </li>
+        <li>
+          <strong>Conversión de unidades:</strong> Tienes una distancia en kilómetros (ej. 5 km). Conviértela a metros
+          multiplicando por 1000 e imprime el resultado.
+        </li>
+
+      </ol>
+
+      <div class="tip-card card">
+        <h3>🚀 Desafío: Reparto de Pizzas</h3>
+        <p>
+          Imagina que pides pizzas para una fiesta. Hay 23 porciones en total y son 5 amigos. Escribir un programa que
+          utilice la división entera (<code>//</code>) para calcular cuántas porciones enteras le tocan a cada amigo, y
+          el operador módulo (<code>%</code>) para calcular cuántas porciones van a sobrar en la caja para dárselas al perro. Muestra los
+          resultados de forma amigable con un <code>print()</code>.
+        </p>
+      </div>
+
+      <h2>📌 Resumen de la clase</h2>
+      <ul>
+        <li>
+          Los tipos básicos que manejamos son: enteros (<code>int</code>), decimales (<code>float</code>) y texto
+          (<code>str</code>).
+        </li>
+        <li>La función <code>type(variable)</code> nos ayuda a descubrir cómo Python interpreta un dato concreto.</li>
+        <li>
+          ¡Cuidado con las comillas! <code>15</code> es un número con el que podemos operar, <code>"15"</code> es puro
+          texto.
+        </li>
+        <li>El operador <code>+</code> suma números, pero concatena (pega) textos.</li>
+        <li>
+          Tenemos operadores para suma (<code>+</code>), resta (<code>-</code>), multiplicación (<code>*</code>),
+          división exacta (<code>/</code>), división entera (<code>//</code>), módulo o resto (<code>%</code>) y
+          potencia (<code>**</code>).
+        </li>
+        <li>Las operaciones siguen el orden matemático tradicional, priorizando siempre los paréntesis.</li>
+      </ul>
+
+      <div class="nav-links" style="margin-top: 30px">
+        <a href="../materias/desarrollo-1.html" class="btn-materia">Volver a Materia</a>
+        <a href="desarrollo1-sesion11.html" class="btn-prev">Ir a Sesión 11</a>
+        <a href="desarrollo1-sesion13.html" class="btn-next">Ir a Sesión 13</a>
       </div>
     </div>
-</body>
-</html>
+  
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>
