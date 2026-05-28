@@ -4,269 +4,788 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clase 13: Condicional Simple y Doble (if / else)</title>
+    <title>
+      Clase 13: Booleanos, Operadores de Comparación, Operadores Lógicos y Condicionales if | Fundamentos de
+      Programación
+    </title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #f6f9fc;
+        font-family: system-ui, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+        line-height: 1.5;
+        color: #1a2a3a;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 1rem;
+      }
+
+      .container {
+        background: white;
+        border-radius: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        padding: 1.5rem;
+      }
+
+      @media (min-width: 768px) {
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-            background-color: #f9f9f9;
+          padding: 2rem;
         }
         .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          padding: 2rem 2.5rem;
         }
-        header {
-            /* background-color: #2c3e50; */
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 8px 8px 0 0;
+      }
+
+      h1 {
+        font-size: 1.9rem;
+        background: linear-gradient(135deg, #1e3c72, #2b4c7c);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        margin-bottom: 0.5rem;
+        border-left: 5px solid #2b4c7c;
+        padding-left: 1rem;
+      }
+
+      .subtitulo {
+        color: #4a627a;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 0.75rem;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+        margin: 1.5rem 0 1rem 0;
+        color: #1e3c72;
+        border-bottom: 2px solid #cbd5e1;
+        padding-bottom: 0.3rem;
+      }
+
+      h3 {
+        font-size: 1.3rem;
+        margin: 1.2rem 0 0.8rem 0;
+        color: #2c3e66;
+      }
+
+      .card {
+        background: #f8fafc;
+        border-radius: 1.2rem;
+        padding: 1rem 1.2rem;
+        margin: 1rem 0;
+        border-left: 4px solid #3b82f6;
+      }
+
+      .warning-card {
+        background: #fff0f0;
+        border-left: 5px solid #dc2626;
+      }
+
+      .tip-card {
+        background: #fef9e3;
+        border-left: 5px solid #f59e0b;
+      }
+
+      .badge {
+        display: inline-block;
+        background: #e6f0ff;
+        color: #1e40af;
+        font-weight: 600;
+        font-size: 0.75rem;
+        padding: 0.2rem 0.7rem;
+        border-radius: 20px;
+        margin-right: 0.5rem;
+      }
+
+      pre {
+        background: #0f172a;
+        color: #e2e8f0;
+        padding: 1rem;
+        border-radius: 1rem;
+        font-size: 0.85rem;
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        margin: 1rem 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow: hidden;
+      }
+
+      code {
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        background: #eef2ff;
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.5rem;
+        font-size: 0.85rem;
+        color: #b91c1c;
+      }
+
+      pre code {
+        background: transparent;
+        padding: 0;
+        color: #e2e8f0;
+        font-size: 0.85rem;
+      }
+
+      ul,
+      ol {
+        margin: 0.75rem 0 0.75rem 1.5rem;
+      }
+
+      li {
+        margin: 0.4rem 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.2rem 0;
+        font-size: 0.9rem;
+        background: #ffffff;
+        border-radius: 1rem;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
+      th,
+      td {
+        border: 1px solid #e2e8f0;
+        padding: 0.7rem;
+        text-align: left;
+        vertical-align: middle;
+      }
+
+      th {
+        background: #eef2ff;
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      .nav-links {
+        margin-bottom: 24px;
+      }
+
+      .nav-links a {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+
+      .btn-materia {
+        background: #4ade80;
+        color: #222;
+      }
+      .btn-prev {
+        background: #60a5fa;
+        color: #fff;
+      }
+      .btn-next {
+        background: #f9e282;
+        color: #222;
+        margin-right: 0 !important;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 1rem;
         }
-        h1, h2 {
-            color: #2c3e50;
+        h1 {
+          font-size: 1.6rem;
         }
         h2 {
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
+          font-size: 1.4rem;
         }
-        .theory {
-            background-color: #f0f8ff;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
+        pre {
+          font-size: 0.75rem;
+          padding: 0.8rem;
         }
-        .tip {
-            background-color: #fef9e7;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            border-left: 4px solid #f39c12;
+        th,
+        td {
+          padding: 0.5rem;
         }
-        .example {
-            background-color: #e8f4f8;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        .activity {
-            background-color: #e8f8f5;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            border-left: 4px solid #27ae60;
-        }
-        code {
-            background-color: #f4f4f4;
-            padding: 5px;
-            border-radius: 3px;
-            font-family: monospace;
-            display: block;
-        }
-        ol, ul {
-            margin-left: 20px;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body style="">
     <div class="container">
-        <div style="margin-bottom: 24px">
-        <a
-          href="../materias/desarrollo-1.html"
-          style="
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            background: #4ade80;
-            color: #222;
-            display: inline-block;
-            margin-right: 10px;
-          "
-        >
-          Volver a Materia
-        </a>
-        <a
-          href="desarrollo1-sesion12.html"
-          style="
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            background: #60a5fa;
-            color: #fff;
-            display: inline-block;
-            margin-right: 10px;
-          "
-        >
-          Ir a Sesión 12
-        </a>
-        <a
-          href="desarrollo1-sesion14.html"
-          style="
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            background: #f9e282;
-            color: #222;
-            display: inline-block;
-          "
-        >
-          Ir a Sesión 14
-        </a>
+      <div class="nav-links">
+        <a href="../materias/desarrollo-1.html" class="btn-materia">Volver a Materia</a>
+        <a href="desarrollo1-sesion12.html" class="btn-prev">Ir a Sesión 12</a>
+        <a href="desarrollo1-sesion14.html" class="btn-next">Ir a Sesión 14</a>
       </div>
-        <header>
-            <h1>Clase 13: Condicional Simple y Doble (if / else)</h1>
-        </header>
 
-        <div class="theory">
-            <h2>Marco Teórico</h2>
-            <p>Hasta ahora nuestros programas ejecutaban las instrucciones siempre en el mismo orden, de arriba hacia abajo (estructura <strong>secuencial</strong>). Pero los problemas reales requieren tomar <strong>decisiones</strong>: hacer una cosa u otra según se cumpla o no una condición. Para eso usamos la estructura <strong>selectiva</strong>.</p>
-            <p>En Python, la estructura básica es el <code>if</code>. Si la condición es <code>True</code>, se ejecuta el bloque interno; si es <code>False</code>, se salta. El <code>else</code> define qué hacer cuando la condición no se cumple. La <strong>indentación</strong> (4 espacios o 1 Tab) es obligatoria en Python para indicar qué instrucciones pertenecen a cada bloque.</p>
-            <h3>Operadores de Comparación</h3>
-            <ul>
-                <li><code>==</code> → igual a</li>
-                <li><code>!=</code> → distinto de</li>
-                <li><code>&gt;</code> → mayor que</li>
-                <li><code>&lt;</code> → menor que</li>
-                <li><code>&gt;=</code> → mayor o igual que</li>
-                <li><code>&lt;=</code> → menor o igual que</li>
-            </ul>
-            <h3>Sintaxis</h3>
-            <code>
-if condicion:
-    # bloque que se ejecuta si la condición es True
-else:
-    # bloque que se ejecuta si la condición es False
-            </code>
-        </div>
+      <h1>✅ Clase 13: Booleanos, Operadores de Comparación, Operadores Lógicos y Condicionales if</h1>
+      <div class="subtitulo">
+        Aprende a dotar de inteligencia a tus programas para que tomen decisiones por sí mismos.
+      </div>
 
-        <div class="example">
-            <h2>Ejemplos</h2>
-            <h3>Ejemplo 1 — if simple:</h3>
-            <code>
-edad = int(input("¿Cuántos años tenés? "))
+      <div class="card">
+        <p>
+          <span class="badge">🔄 Repaso previo</span> Hasta ahora, nuestros programas eran lineales: ejecutaban las
+          instrucciones una por una, de arriba hacia abajo, sin excepción. Aprendimos a pedir datos con
+          <code>input()</code>, descubrimos que siempre devuelve un texto (<code>str</code>) con la función
+          <code>type()</code>, y vimos cómo hacer matemáticas con los operadores aritméticos básicos. Hoy, vamos a dar
+          el paso más importante en la programación: enseñarle a la computadora a
+          <strong>tomar decisiones</strong> dependiendo de los datos que reciba.
+        </p>
+      </div>
 
-if edad >= 18:
+      <h2>🎯 Objetivos de la clase</h2>
+      <ul>
+        <li>
+          Comprender el tipo de dato booleano (<code>bool</code>) y sus dos únicos valores: <code>True</code> y
+          <code>False</code>.
+        </li>
+        <li>Aprender a usar los operadores de comparación para evaluar datos.</li>
+        <li>
+          Conectar varias condiciones utilizando operadores lógicos (<code>and</code>, <code>or</code>,
+          <code>not</code>).
+        </li>
+        <li>
+          Dominar la conversión de datos de texto (<code>str</code>) a números (<code>int</code> y <code>float</code>).
+        </li>
+        <li>
+          Crear estructuras condicionales <code>if</code>, <code>elif</code> y <code>else</code> respetando la
+          <strong>indentación</strong>.
+        </li>
+      </ul>
+
+      <h2>⚖️ 1. Qué es un dato booleano (<code>bool</code>)</h2>
+      <p>
+        En el mundo real, muchas preguntas tienen solo dos respuestas posibles: ¿Está lloviendo? (Sí o No), ¿El usuario
+        está registrado? (Verdadero o Falso). En Python, este tipo de información se maneja con los
+        <strong>datos booleanos</strong>. Tienen solo dos valores posibles que siempre deben escribirse con la primera
+        letra en mayúscula:
+      </p>
+      <ul>
+        <li><code>True</code> (Verdadero)</li>
+        <li><code>False</code> (Falso)</li>
+      </ul>
+
+      <pre><code>llueve = True
+es_de_noche = False
+
+print(type(llueve))  # Devuelve &lt;class 'bool'&gt;
+#Observen que estas palabras True y False se ingresan sin comillas.
+#Y al usar la funciín type() verificamos que se interpreta como booleano
+#Notaremos en el VSC que toma otro color.
+
+# ¡Ojo con las comillas!
+falso_texto = "False" 
+print(type(falso_texto))  # Devuelve &lt;class 'str'&gt; (porque tiene comillas)
+#Si lo escribimos con comillas se interpreta como texto</code></pre>
+
+      <h2>🔍 2. Operadores de Comparación</h2>
+      <p>
+        Para que la computadora decida, primero tiene que comparar. Los operadores de comparación toman dos valores, los
+        evalúan y devuelven un resultado booleano (<code>True</code> o <code>False</code>).
+      </p>
+<div style="overflow-x: auto">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Operador</th>
+        <th>Significado</th>
+        <th>Ejemplo</th>
+        <th>Resultado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>==</code></td>
+        <td>Igual a (compara valores)</td>
+        <td><code>5 == 5 <br>"a" == "a" <br>"hola" == "hola"</code></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>!=</code></td>
+        <td>Distinto de</td>
+        <td><code>5 != 3 <br>"hola" != "HOLA"<br>"B" != "b"</code></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>!=</code></td>
+        <td>Distinto de</td>
+        <td><code>5 != 5 <br>"hola" != "hola"<br>"b" != "b"</code></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>&gt;</code></td>
+        <td>Mayor que</td>
+        <td><code>10 &gt; 20 <br> 15.50 &gt; 20 </code></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>&gt;</code></td>
+        <td>Mayor que</td>
+        <td><code>40 &gt; 20 <br> 95.75 &gt; 50 </code></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>&lt;</code></td>
+        <td>Menor que</td>
+        <td><code>8 &lt; 10 <br>65 &lt; 100.50 </code></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>&lt;</code></td>
+        <td>Menor que</td>
+        <td><code>20 &lt; 15 <br>500 &lt; 150.99 </code></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>&gt;=</code></td>
+        <td>Mayor o igual que</td>
+        <td><code>15 &gt;= 15</code></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>&lt;=</code></td>
+        <td>Menor o igual que</td>
+        <td><code>4 &lt;= 2</code></td>
+        <td><code>False</code></td>
+      </tr>
+    </tbody>
+  </table>
+      </div>
+<p>Observar como luego de comprar 2 datos, sean textos o
+   números el resultado de esa comparación es un boleando, <code>True</code> o <code>False</code> según si dicha comparación es afirmativa o no.</p>
+   <br>
+
+   <div class="warning-card card">
+        <h3>⚠️ Peligro: = vs ==</h3>
+        <p>
+          Un solo igual <code>=</code> sirve para <strong>guardar</strong> (asignar) un valor en una variable. <br>Dos
+          iguales <code>==</code> sirven para <strong>comparar</strong> si dos cosas son idénticas.
+        </p>
+        <p>
+          <code>edad = 18</code> (Guarda 18 en edad) <br><code>edad == 18</code> (Pregunta: ¿Es la edad igual a 18?)
+        </p>
+      </div>
+
+      <h2>🧠 3. Operadores Lógicos</h2>
+      <p>
+        A veces una sola comparación no basta. ¿Qué pasa si quiero saber si un usuario tiene más de 18 años
+        <strong>Y</strong> tiene licencia de conducir? Usamos los operadores lógicos:
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Operador</th>
+            <th>Descripción</th>
+            <th>Ejemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>and</code></td>
+            <td>Devuelve <code>True</code> solo si <strong>AMBAS</strong> condiciones son verdaderas.</td>
+            <td><code>(10 &gt; 5) and (8 &lt; 10)</code> → <code>True</code></td>
+          </tr>
+          <tr>
+            <td><code>or</code></td>
+            <td>Devuelve <code>True</code> si <strong>AL MENOS UNA</strong> condición es verdadera.</td>
+            <td><code>(10 &gt; 50) or (8 &lt; 10)</code> → <code>True</code></td>
+          </tr>
+          <tr>
+            <td><code>not</code></td>
+            <td>Invierte el resultado. Cambia <code>True</code> a <code>False</code> y viceversa.</td>
+            <td><code>not (5 == 5)</code> → <code>False</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>🔀 4. Estructuras Condicionales (if)</h2>
+      <p>
+        La instrucción <code>if</code> (que significa "si" condicional en inglés) evalúa una expresión. Si el resultado
+        es <code>True</code>, ejecuta el bloque de código que tiene dentro. Si es <code>False</code>, lo salta.
+      </p>
+
+      <pre><code># Estructura básica de un if
+edad = 20
+
+if edad &gt;= 18:
     print("Eres mayor de edad.")
+    print("Puedes pasar.")
 
-print("Fin del programa.")  # Esta línea siempre se ejecuta
-            </code>
-            <h3>Ejemplo 2 — if / else:</h3>
-            <code>
-nota = float(input("Ingresá tu nota: "))
+print("Este mensaje se imprime siempre.")
 
-if nota >= 6:
-    print("Aprobaste ✓")
+Cuando ejecutamos el código: en la línea if edad &gt;= 18 la maquina compara el valor guardado dentro de la variable edad (en este caso el numero 20) con el número 18.
+Podemos afirmar que 20 es mayor que 18 por lo que es un TRUE. Al ser TRUE ejecuta las 2 líneas indentadas Eres mayor de edad. Puedes pasar. 
+Si cambiamos el valor 20 por uno menor a 18, no ejecutara las líneas indentadas. </code></pre>
+
+
+      <div class="warning-card card">
+        <h3>🛑 MUY IMPORTANTE: La Indentación (Sangría)</h3>
+        <p>
+          En otros lenguajes se usan llaves <code>{}</code> para decir qué código está dentro del <code>if</code>.
+          <strong>En Python usamos espacios en blanco al principio de cada línea</strong>. A eso se le llama
+          <em>indentación</em>, y no es un adorno visual: <strong>es obligatoria</strong>. Python la utiliza para saber
+          exactamente qué instrucciones pertenecen al bloque del <code>if</code> y cuáles no.
+        </p>
+        <p>
+          Dicho de forma muy simple: cuando escribes un <code>if</code>, la línea termina con dos puntos
+          <code>:</code> y, justo debajo, debes desplazar hacia la derecha las instrucciones que quieres ejecutar si la
+          condición se cumple. Lo habitual y recomendable es usar <strong>4 espacios</strong>.
+        </p>
+        <ul>
+          <li>
+            Todo lo que tenga <strong>4 espacios</strong> de margen debajo del <code>if</code>, pertenece al
+            <code>if</code>.
+          </li>
+          <li>
+            Si una línea vuelve al margen normal, Python entiende que el bloque del <code>if</code> ha terminado.
+          </li>
+          <li>
+            Si olvidas la indentación, Python lanzará un error como <code>IndentationError</code> y el programa no se
+            ejecutará.
+          </li>
+          <li>
+            <strong>NUNCA</strong> mezcles tabulaciones con espacios. Lo más seguro es configurar Visual Studio Code para
+            trabajar siempre con espacios.
+          </li>
+        </ul>
+        <pre><code># ❌ INCORRECTO (Dará un IndentationError)
+if 5 &gt; 2:
+print("Es mayor")
+
+# ✅ CORRECTO
+if 5 &gt; 2:
+    print("Es mayor")  # Estos 4 espacios indican que esta línea pertenece al if.</code></pre>
+        <pre><code>temperatura = 32
+
+if temperatura &gt; 30:
+    print("Hace mucho calor")
+    print("Bebe agua")
+
+print("Fin del programa")</code></pre>
+        <p>
+          Observar bien el ejemplo anterior: las dos líneas con 4 espacios se ejecutan solo si
+          <code>temperatura &gt; 30</code> es verdadero. En cambio, <code>print("Fin del programa")</code> está pegado al
+          margen izquierdo, por eso <strong>se ejecuta siempre</strong>, independientemente del resultado del
+          <code>if</code>.
+        </p>
+        <p>
+          Recuerdar esta idea clave: <strong>una línea indentada está dentro del condicional; una línea sin indentación,
+          está fuera</strong>. En Python, entender esto es imprescindible para trabajar con <code>if</code>,
+          <code>elif</code>, <code>else</code>, bucles y funciones.
+        </p>
+      </div>
+
+      <h3>Añadiendo alternativas: <code>else</code> y <code>elif</code></h3>
+      <p>
+        ¿Y si la condición no se cumple? Para eso usamos <code>else</code> (sino). Y si queremos evaluar varias opciones
+        en cadena, usamos <code>elif</code> (sino, si...).
+      </p>
+
+      <pre><code>nota = 7
+
+if nota &gt;= 9:
+    print("¡Sobresaliente!")
+elif nota &gt;= 6:
+    print("Aprobado, bien hecho.")
 else:
-    print("Desaprobaste ✗")
-            </code>
-            <h3>Ejemplo 3 — comparar strings:</h3>
-            <code>
-clave = input("Ingresá la contraseña: ")
+    print("Reprobado, necesitas estudiar más.")
+  
+#Observemos como dependiendo del número que guardemos en la variable nota se imprime determinado texto.
+#Para el valor nota = 7 primero pasar por if nota es mayor o igual a 9, no entrega un FALSE, motivo por el que no ingresa a:  print("¡Sobresaliente!")
+#Continua con nota es mayor o igual a 6, esta comparación da TRUE, por lo que pasa a imprimir: Aprobado, bien hecho.
+#En este caso el código no ejecuta else ya que previamente se cumplió una condición. Dado el caso que ninguna condición previa se cumpla else se ejecutará.
+#Pueden cambiar el valor guardado en la variable nota para probar los distintos resultados.</code></pre>
 
-if clave == "python2024":
-    print("Acceso permitido.")
+
+      <h2>🔄 5. Convertir input() a números (str a int/float)</h2>
+      <p>
+        Recordemos la clase anterior: <code>input()</code> <strong>siempre</strong> devuelve texto. Esto significa que,
+        aunque el usuario escriba <code>25</code> por teclado, Python lo recibe como <code>"25"</code>. A simple vista
+        parece un número, pero internamente sigue siendo una cadena de texto.
+      </p>
+      <pre><code>numero = 25
+print(type(numero))      # &lt;class 'int'&gt;
+
+numero = "25"
+print(type(numero))      # &lt;class 'str'&gt;
+
+numero = input("Escribe un número: ")
+print(type(numero))      # &lt;class 'str'&gt;
+
+numero = int(input("Escribe un número entero: "))
+print(type(numero))      # &lt;class 'int'&gt;
+
+precio = float(input("Escribe un precio: "))
+print(type(precio))      # &lt;class 'float'&gt;</code></pre>
+      <p>
+        Fíjate en la diferencia:
+      </p>
+      <ul>
+        <li><code>numero = 25</code> guarda un número entero real.</li>
+        <li><code>numero = "25"</code> guarda texto, no un número para calcular.</li>
+        <li><code>numero = input(...)</code> también guarda texto, aunque el usuario teclee cifras.</li>
+        <li><code>numero = int(input(...))</code> convierte ese texto en entero.</li>
+        <li><code>precio = float(input(...))</code> convierte ese texto en decimal.</li>
+      </ul>
+      <p>
+        Analiza ahora este problema:
+      </p>
+
+      <pre><code>numero_string = input("Ingresa un número: ")  # Si escribo 25, se guarda como "25"
+if numero_string &gt; 10:  # ¡ERROR! Python no puede comparar texto con números.
+    print("El número es grande")</code></pre>
+
+      <p>
+        Para solucionar esto, debemos usar funciones de conversión de tipos. Envolvemos el <code>input()</code> dentro
+        de <code>int()</code> para enteros, o <code>float()</code> para decimales.
+      </p>
+<div style="overflow-x: auto">
+
+  <table class="comparativa-table">
+    <thead>
+      <tr>
+        <th>❌ Sin conversión (se guarda como texto)</th>
+        <th>✅ Con conversión (se guarda como número)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <pre><code>edad = input("Cuál es tu edad?: ")
+# edad vale "25" (str)</code></pre>
+        </td>
+        <td>
+          <pre><code>edad = int(input("Cuál es tu edad?: "))
+# edad vale 25 (int)</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <pre><code>precio = input("Cuanto sale el producto?: ")
+# precio vale "15.5" (str)</code></pre>
+        </td>
+        <td>
+          <pre><code>precio = float(input("Cuanto sale el producto?: "))
+# precio vale 15.5 (float)</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+      </div>
+<p>Observar como usando  <code>int()</code> para enteros, o <code>float()</code> para decimales <br>
+   de la forma expresada
+<code>precio = int(input(...))</code>  y <code>precio = float(input(...))</code> serán guardadas como números
+permitiendo que podamos realizar cálculos matemáticos con ellos </p>
+
+
+      <h2>💡 6. Integración Práctica (Ejemplos Paso a Paso)</h2>
+
+      <div class="card">
+        <h3>📌 Ejemplo 1: Edad para votar</h3>
+        <pre><code># 1. Pedimos el dato y LO CONVERTIMOS a entero en la misma línea
+edad = int(input("¿Cuántos años tienes? "))
+
+# 2. Comparamos usando if / else
+if edad &gt;= 16:
+    print("Ya tienes edad para votar.")
 else:
-    print("Contraseña incorrecta.")
-            </code>
-            <h3>Ejemplo 4 — número positivo o negativo:</h3>
-            <code>
-num = int(input("Ingresá un número: "))
+    # Si tiene 15 o menos, calculamos cuánto le falta
+    faltan = 16 - edad
+    print(f"Aún no puedes votar. Te faltan {faltan} años.")</code></pre>
+      </div>
 
-if num >= 0:
-    print("El número es positivo o cero.")
+      <div class="card">
+        <h3>📌 Ejemplo 2: Cálculo y decisión</h3>
+        <pre><code>print("--- SUMADORA INTELIGENTE ---")
+num1 = int(input("Introduce el primer número: "))
+num2 = int(input("Introduce el segundo número: "))
+
+resultado = num1 + num2
+
+print(f"El resultado de la suma es {resultado}")
+
+if resultado &gt; 0:
+    print("¡El resultado es un número positivo!")
+elif resultado &lt; 0:
+    print("El resultado es un número negativo.")
 else:
-    print("El número es negativo.")
-            </code>
-        </div>
+    print("El resultado es exactamente cero.")</code></pre>
+      </div>
 
-        <div class="tip">
-            <h2>💡 Tip para el docente</h2>
-            <p>Insistir en dos puntos clave:</p>
-            <ol>
-                <li>El <code>==</code> (comparación) es distinto del <code>=</code> (asignación). Es el error más común.</li>
-                <li>La indentación es parte de la sintaxis en Python; un bloque mal indentado genera error. Proponer que los estudiantes deliberadamente rompan la indentación para ver qué mensaje arroja VS Code.</li>
-            </ol>
-        </div>
+      <div class="card">
+        <h3>📌 Ejemplo 3: Nombre y edad con mensaje personalizado</h3>
+        <pre><code>nombre = input("¿Cómo te llamas? ")
+edad = int(input("¿Qué edad tienes? "))
 
-        <div class="activity">
-            <h2>Actividad 13: Programas con if / else</h2>
-            <p>Crea un archivo <code>.py</code> para cada uno de los siguientes ejercicios o agrupa varios en uno solo:</p>
-            <ol>
-                <li>Pedir un número al usuario. Si es mayor a 0, imprimir "Positivo", si no "Negativo o cero".</li>
-                <li>Pedir la temperatura en °C. Si es mayor a 30, imprimir "Hace calor 🌞", si no "Temperatura agradable 🌤".</li>
-                <li>Pedir la nota del alumno (0-10). Si es ≥ 6, mostrar "Aprobado", si no "Reprobado".</li>
-                <li>Pedir el nombre del usuario. Si el nombre tiene más de 5 letras, mostrar "Nombre largo", si no "Nombre corto". <em>Pista: usar <code>len(nombre)</code>.</em></li>
-                <li>Pedir dos números. Mostrar cuál es el mayor (o si son iguales).</li>
-                <li>Programa de descuento: pedir el precio de un producto. Si el precio es mayor a $1000, aplicar 10% de descuento e imprimir el precio final; si no, imprimir el precio sin cambios.</li>
-                <li>Pedir la contraseña al usuario. Si es "1234", mostrar "Bienvenido al sistema", si no "Acceso denegado".</li>
-                <li>Pedir un número. Verificar si es par o impar usando el operador módulo <code>%</code> (par si <code>num % 2 == 0</code>).</li>
-                <li>Pedir la cantidad de horas trabajadas. Si es mayor a 8, indicar que hay horas extras; si no, indicar jornada normal.</li>
-                <li>Pedir un número del 1 al 10. Si el número está entre 1 y 5 (inclusive), mostrar "Mitad baja"; si está entre 6 y 10, mostrar "Mitad alta". <em>Pista: usar <code>AND</code> para combinar condiciones.</em></li>
-            </ol>
-        </div>
-        <div style="margin-bottom: 24px">
-        <a
-          href="../materias/desarrollo-1.html"
-          style="
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            background: #4ade80;
-            color: #222;
-            display: inline-block;
-            margin-right: 10px;
-          "
-        >
-          Volver a Materia
-        </a>
-        <a
-          href="desarrollo1-sesion12.html"
-          style="
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            background: #60a5fa;
-            color: #fff;
-            display: inline-block;
-            margin-right: 10px;
-          "
-        >
-          Ir a Sesión 12
-        </a>
-        <a
-          href="desarrollo1-sesion14.html"
-          style="
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            background: #f9e282;
-            color: #222;
-            display: inline-block;
-          "
-        >
-          Ir a Sesión 14
-        </a>
+if edad &gt;= 18:
+    print(f"Hola {nombre}, eres mayor de edad.")
+else:
+    print(f"Hola {nombre}, aún eres menor de edad.")</code></pre>
+        <p>
+          <strong>Interpretación:</strong> aquí combinamos dos tipos de entrada distintos. El nombre se guarda como
+          texto, porque queremos usarlo dentro de un mensaje. La edad, en cambio, se convierte a entero con
+          <code>int()</code> porque vamos a compararla con el número <code>18</code>. Este ejemplo muestra que en un mismo
+          programa podemos pedir <strong>texto y números</strong> según la necesidad.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>📌 Ejemplo 4: Nota decimal y comprobación de aprobado</h3>
+        <pre><code>nota = float(input("Introduce tu nota final: "))
+
+if nota &gt;= 6.0:
+    print("Has aprobado.")
+else:
+    print("No has aprobado todavía.")</code></pre>
+        <p>
+          <strong>Interpretación:</strong> usamos <code>float()</code> porque la nota puede llevar decimales, por ejemplo
+          <code>7.5</code> o <code>5.75</code>. Si dejáramos ese dato como texto, no podríamos compararlo correctamente con
+          <code>6.0</code>.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>📌 Ejemplo 5: Tienda con descuento (Uso de float)</h3>
+        <pre><code>total_compra = float(input("¿De cuánto es el total de tu compra? $"))
+
+if total_compra &gt;= 5000:
+    print("¡Felicidades! Tienes un 10% de descuento.")
+    descuento = total_compra * 0.10
+    total_final = total_compra - descuento
+    print(f"Se te descontaron ${descuento}. Total a pagar: ${total_final}")
+else:
+    print(f"Total a pagar: ${total_compra}")
+    print("A partir de $5000 aplicamos un 10% de descuento.")</code></pre>
+      </div>
+
+      <h2>❌ Errores Frecuentes</h2>
+      <ul>
+        <li>
+          <strong>Usar <code>=</code> en lugar de <code>==</code> en un if:</strong> <code>if edad = 18:</code> lanzará
+          error. Recuerda usar <code>==</code> para comparar.
+        </li>
+        <li>
+          <strong>Olvidar los dos puntos (<code>:</code>) al final del if/else:</strong> Son obligatorios para indicarle
+          a Python que empieza un bloque nuevo.
+        </li>
+        <li>
+          <strong>Mala indentación:</strong> Poner el <code>print()</code> en el mismo nivel que el <code>if</code> en
+          lugar de dejarle 4 espacios al margen.
+        </li>
+        <li>
+          <strong>Olvidar convertir el <code>input()</code>:</strong> <code>edad = input()</code> y luego hacer
+          <code>if edad &gt; 18:</code> dará TypeError (compara texto contra número).
+        </li>
+        <li>
+          <strong>Comparar texto con número:</strong> Si <code>edad = input("Edad: ")</code>, entonces <code>edad</code>
+          es <code>str</code>. Compararlo con <code>18</code> sin convertirlo provocará error.
+        </li>
+        <li>
+          <strong>Poner <code>"True"</code> con comillas:</strong> <code>activo = "True"</code> crea un texto, no un
+          booleano. <code>activo = True</code> es lo correcto.
+        </li>
+      </ul>
+
+      <h2>🧪 7. Actividades Prácticas</h2>
+      <p>
+        Crea un archivo <code>sesion13_condicionales.py</code> en Visual Studio Code e intenta resolver los siguientes
+        retos:
+      </p>
+
+      <ol>
+        <li>
+          <strong>Detector de números pares:</strong> Pide al usuario un número entero (usa <code>int(input())</code>).
+          Si el número al ser dividido por 2 tiene de resto 0 (usa el operador módulo <code>%</code>), imprime que es
+          par. Sino, imprime que es impar.
+        </li>
+        <li>
+          <strong>Control de acceso a montaña rusa:</strong> Pide al usuario su altura en metros (usa
+          <code>float(input())</code>, ejemplo: 1.65). Si mide más de 1.40 metros, imprime "Puedes subir", si mide
+          menos, imprime "Lo siento, debes crecer un poco más".
+        </li>
+        <li>
+          <strong>Login simple:</strong> Pide un usuario (texto) y una contraseña (texto). Si el usuario es "admin"
+          <code>and</code> la contraseña es "12345", imprime "Acceso concedido". Si no, imprime "Credenciales
+          incorrectas".
+        </li>
+        <li>
+          <strong>Clasificador de temperaturas:</strong> Pide una temperatura entera. <br>- Si es menor a 10, imprime
+          "Hace frío". <br>- Si está entre 10 y 25 (incluidos), imprime "Clima agradable". <br>- Si es mayor a 25,
+          imprime "Hace calor".
+        </li>
+         <li>
+          <strong>Elegir opciones:</strong> Crear una lista de opciones, por Ej)<br>Ingresar: 
+          <br>A si te gustan lo video juegos
+        <br>  B si te gusta la moda
+       <br>   C si te gustan los autos
+        <br>  D si te gusta dormir
+        <br> X ninguna de las anteriores
+           <br>Crear un if-elif-else que imprima un mensaje según la letra ingresada
+           <br>En este punto compararemos letras.
+           <br>📌 Si ingresan letras mayúsculas asegurarse que la letra a comparar sea mayúscula. Los mismo para minúscula.
+        </li>
+
+      </ol>
+
+      <div class="tip-card card">
+        <h3>🚀 Desafío Final: El Cajero Automático</h3>
+        <p>
+          Crea un pequeño programa de cajero. Primero, establece una variable <code>saldo = 10000.0</code>.<br>
+          1. Saluda al usuario y dile cuánto dinero tiene.<br>
+          2. Pregúntale cuánto dinero quiere retirar (usando <code>float(input())</code>).<br>
+          3. <strong>Condición:</strong> Si el monto a retirar es mayor que el saldo, dile "Fondos insuficientes".<br>
+          4. Si el monto es menor o igual al saldo, resta el monto del saldo, infórmale que el retiro fue exitoso y
+          muéstrale su nuevo saldo actualizado usando f-strings.
+        </p>
+      </div>
+
+      <h2>📌 Resumen de la clase</h2>
+      <ul>
+        <li>Los booleanos (<code>bool</code>) indican <code>True</code> (Verdadero) o <code>False</code> (Falso).</li>
+        <li>
+          Comparamos con <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>,
+          <code>&lt;=</code>.
+        </li>
+        <li>
+          Podemos unir condiciones con los operadores lógicos <code>and</code>, <code>or</code>, <code>not</code>.
+        </li>
+        <li>
+          La estructura <code>if</code> - <code>elif</code> - <code>else</code> nos permite crear caminos y decisiones
+          en el código.
+        </li>
+        <li>
+          <strong>La indentación es vital</strong>: 4 espacios a la derecha marcan qué líneas pertenecen a un
+          condicional.
+        </li>
+        <li>
+          Siempre que operes con números introducidos por el usuario, debes convertir el texto recibido envolviéndolo en
+          <code>int()</code> o <code>float()</code>.
+        </li>
+      </ul>
+
+      <div class="card">
+        <span class="badge">✨ Buenas prácticas</span>
+        <p>
+          Antes de programar condicionales complejos, pensar en la lógica de tu programa como si se la explicaras a
+          alguien en voz alta. "Si pasa esto, hago esto, si no, hago esto otro". Revisa siempre tu
+          <strong>indentación</strong> y tus <strong>dos puntos <code>:</code></strong>.
+        </p>
+      </div>
+
+      <div class="nav-links" style="margin-top: 30px">
+        <a href="../materias/desarrollo-1.html" class="btn-materia">Volver a Materia</a>
+        <a href="desarrollo1-sesion12.html" class="btn-prev">Ir a Sesión 12</a>
+        <a href="desarrollo1-sesion14.html" class="btn-next">Ir a Sesión 14</a>
       </div>
     </div>
-</body>
-</html>
+  
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>

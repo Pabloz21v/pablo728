@@ -1,3 +1,3 @@
-a= "hola"
-b= "chau"
-print(a+b)
+a= "B"
+b= "B"
+print(a!=b)

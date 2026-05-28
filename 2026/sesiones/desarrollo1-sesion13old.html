@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 13: Condicional Simple y Doble (if / else)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            /* background-color: #2c3e50; */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        h2 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        .theory {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .tip {
+            background-color: #fef9e7;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #f39c12;
+        }
+        .example {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .activity {
+            background-color: #e8f8f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #27ae60;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 5px;
+            border-radius: 3px;
+            font-family: monospace;
+            display: block;
+        }
+        ol, ul {
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion12.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 12
+        </a>
+        <a
+          href="desarrollo1-sesion14.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 14
+        </a>
+      </div>
+        <header>
+            <h1>Clase 13: Condicional Simple y Doble (if / else)</h1>
+        </header>
+
+        <div class="theory">
+            <h2>Marco Teórico</h2>
+            <p>Hasta ahora nuestros programas ejecutaban las instrucciones siempre en el mismo orden, de arriba hacia abajo (estructura <strong>secuencial</strong>). Pero los problemas reales requieren tomar <strong>decisiones</strong>: hacer una cosa u otra según se cumpla o no una condición. Para eso usamos la estructura <strong>selectiva</strong>.</p>
+            <p>En Python, la estructura básica es el <code>if</code>. Si la condición es <code>True</code>, se ejecuta el bloque interno; si es <code>False</code>, se salta. El <code>else</code> define qué hacer cuando la condición no se cumple. La <strong>indentación</strong> (4 espacios o 1 Tab) es obligatoria en Python para indicar qué instrucciones pertenecen a cada bloque.</p>
+            <h3>Operadores de Comparación</h3>
+            <ul>
+                <li><code>==</code> → igual a</li>
+                <li><code>!=</code> → distinto de</li>
+                <li><code>&gt;</code> → mayor que</li>
+                <li><code>&lt;</code> → menor que</li>
+                <li><code>&gt;=</code> → mayor o igual que</li>
+                <li><code>&lt;=</code> → menor o igual que</li>
+            </ul>
+            <h3>Sintaxis</h3>
+            <code>
+if condicion:
+    # bloque que se ejecuta si la condición es True
+else:
+    # bloque que se ejecuta si la condición es False
+            </code>
+        </div>
+
+        <div class="example">
+            <h2>Ejemplos</h2>
+            <h3>Ejemplo 1 — if simple:</h3>
+            <code>
+edad = int(input("¿Cuántos años tenés? "))
+
+if edad >= 18:
+    print("Eres mayor de edad.")
+
+print("Fin del programa.")  # Esta línea siempre se ejecuta
+            </code>
+            <h3>Ejemplo 2 — if / else:</h3>
+            <code>
+nota = float(input("Ingresá tu nota: "))
+
+if nota >= 6:
+    print("Aprobaste ✓")
+else:
+    print("Desaprobaste ✗")
+            </code>
+            <h3>Ejemplo 3 — comparar strings:</h3>
+            <code>
+clave = input("Ingresá la contraseña: ")
+
+if clave == "python2024":
+    print("Acceso permitido.")
+else:
+    print("Contraseña incorrecta.")
+            </code>
+            <h3>Ejemplo 4 — número positivo o negativo:</h3>
+            <code>
+num = int(input("Ingresá un número: "))
+
+if num >= 0:
+    print("El número es positivo o cero.")
+else:
+    print("El número es negativo.")
+            </code>
+        </div>
+
+        <div class="tip">
+            <h2>💡 Tip para el docente</h2>
+            <p>Insistir en dos puntos clave:</p>
+            <ol>
+                <li>El <code>==</code> (comparación) es distinto del <code>=</code> (asignación). Es el error más común.</li>
+                <li>La indentación es parte de la sintaxis en Python; un bloque mal indentado genera error. Proponer que los estudiantes deliberadamente rompan la indentación para ver qué mensaje arroja VS Code.</li>
+            </ol>
+        </div>
+
+        <div class="activity">
+            <h2>Actividad 13: Programas con if / else</h2>
+            <p>Crea un archivo <code>.py</code> para cada uno de los siguientes ejercicios o agrupa varios en uno solo:</p>
+            <ol>
+                <li>Pedir un número al usuario. Si es mayor a 0, imprimir "Positivo", si no "Negativo o cero".</li>
+                <li>Pedir la temperatura en °C. Si es mayor a 30, imprimir "Hace calor 🌞", si no "Temperatura agradable 🌤".</li>
+                <li>Pedir la nota del alumno (0-10). Si es ≥ 6, mostrar "Aprobado", si no "Reprobado".</li>
+                <li>Pedir el nombre del usuario. Si el nombre tiene más de 5 letras, mostrar "Nombre largo", si no "Nombre corto". <em>Pista: usar <code>len(nombre)</code>.</em></li>
+                <li>Pedir dos números. Mostrar cuál es el mayor (o si son iguales).</li>
+                <li>Programa de descuento: pedir el precio de un producto. Si el precio es mayor a $1000, aplicar 10% de descuento e imprimir el precio final; si no, imprimir el precio sin cambios.</li>
+                <li>Pedir la contraseña al usuario. Si es "1234", mostrar "Bienvenido al sistema", si no "Acceso denegado".</li>
+                <li>Pedir un número. Verificar si es par o impar usando el operador módulo <code>%</code> (par si <code>num % 2 == 0</code>).</li>
+                <li>Pedir la cantidad de horas trabajadas. Si es mayor a 8, indicar que hay horas extras; si no, indicar jornada normal.</li>
+                <li>Pedir un número del 1 al 10. Si el número está entre 1 y 5 (inclusive), mostrar "Mitad baja"; si está entre 6 y 10, mostrar "Mitad alta". <em>Pista: usar <code>AND</code> para combinar condiciones.</em></li>
+            </ol>
+        </div>
+        <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo1-sesion12.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 12
+        </a>
+        <a
+          href="desarrollo1-sesion14.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 14
+        </a>
+      </div>
+    </div>
+</body>
+</html>
