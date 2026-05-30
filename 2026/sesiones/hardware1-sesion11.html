@@ -332,12 +332,12 @@
 
       <h4>A. Panorama actual: marcas, fabricantes y familias <span class="timing"></span></h4>
       <p>
-        En la actualidad, las dos grandes marcas de procesadores x86 para PCs son <strong>Intel</strong> y <strong>AMD</strong>. Ambas diseñan arquitecturas y modelos para escritorio y notebook. Además, existen otros actores muy relevantes en portátiles y dispositivos móviles, como <strong>Apple Silicon</strong>, <strong>Qualcomm</strong> o <strong>MediaTek</strong>, aunque en Hardware I conviene concentrarse principalmente en Intel y AMD por su presencia en el ecosistema escolar y técnico.
+        En la actualidad, las dos grandes marcas de procesadores x86 para PCs son <strong>Intel</strong> y <strong>AMD</strong>. Ambas diseñan arquitecturas y modelos para escritorio y notebook. Además, existen otros actores muy relevantes en portátiles y dispositivos móviles, como <strong>Apple Silicon</strong>, <strong>Qualcomm</strong> o <strong>MediaTek</strong>.
       </p>
       <ul>
         <li><strong>Intel:</strong> líneas Celeron, Pentium, Core i3/i5/i7/i9, Core Ultra, Xeon.</li>
         <li><strong>AMD:</strong> líneas Athlon, Ryzen 3/5/7/9, Threadripper, EPYC.</li>
-        <li><strong>Fabricación:</strong> muchas CPU son diseñadas por una empresa y fabricadas en plantas propias o de terceros. Hoy el proceso de fabricación se mide en nanómetros (7nm, 5nm, 4nm, etc.), aunque ese número también es parte del marketing técnico.</li>
+        <li><strong>Fabricación:</strong> muchas CPU son diseñadas por una empresa y fabricadas en plantas propias o de terceros.</li>
       </ul>
 
       <h4>B. CPU modernas: escritorio vs notebook <span class="timing"></span></h4>
@@ -401,7 +401,9 @@
         <li><strong>AMD Ryzen 5 5600G:</strong> Ryzen 5 indica gama media; 5xxx indica generación/familia; sufijo G indica gráficos integrados.</li>
         <li><strong>AMD Ryzen 7 7840HS:</strong> en notebooks, el número y sufijo ayudan a identificar segmento, potencia y generación.</li>
       </ul>
-      <p><strong>Sufijos más comunes:</strong></p>
+
+
+  <p><strong>Sufijos más comunes:</strong></p>
       <table>
         <tbody><tr>
           <th>Marca</th>
@@ -419,7 +421,66 @@
         <tr><td>AMD</td><td>U / HS / H / HX</td><td>Notebook: eficiencia o alto rendimiento</td></tr>
       </tbody></table>
 
-      <h4>G. Compatibilidad con socket, chipset y motherboard <span class="timing"></span></h4>
+<h4>G. Niveles comerciales, y gama en CPU modernas <span class="timing"></span></h4>
+<p>
+  Es importante distinguir dos ideas: <strong>el nivel comercial</strong> y <strong>la generación</strong>.
+  Los nombres <strong>i3, i5, i7, i9</strong> o <strong>Ryzen 3, Ryzen 5, Ryzen 7, Ryzen 9</strong> indican la
+  <strong>gama o nivel</strong> del producto. En cambio, la <strong>generación</strong> suele identificarse por los números del modelo.
+  Por ejemplo: <strong>Intel Core i5-12400</strong> pertenece a la <strong>12ª generación</strong>, y
+  <strong>AMD Ryzen 5 5600</strong> pertenece a la <strong>serie/generación 5000</strong>.
+</p>
+
+<div class="table-wrapper">
+  <table>
+    <tbody>
+      <tr>
+        <th>Nivel comercial</th>
+        <th>Intel</th>
+        <th>AMD</th>
+        <th>Ubicación en la gama</th>
+        <th>Uso típico</th>
+      </tr>
+      <tr>
+        <td>Básico / entrada</td>
+        <td>Core i3</td>
+        <td>Ryzen 3</td>
+        <td>Gama de acceso</td>
+        <td>Ofimática, navegación, estudio, tareas generales y equipos económicos.</td>
+      </tr>
+      <tr>
+        <td>Medio</td>
+        <td>Core i5</td>
+        <td>Ryzen 5</td>
+        <td>Gama media</td>
+        <td>Uso equilibrado: multitarea, estudio técnico, gaming medio y trabajo diario.</td>
+      </tr>
+      <tr>
+        <td>Medio-alto / alto</td>
+        <td>Core i7</td>
+        <td>Ryzen 7</td>
+        <td>Gama alta</td>
+        <td>Gaming exigente, edición, diseño, programación pesada y multitarea avanzada.</td>
+      </tr>
+      <tr>
+        <td>Entusiasta / muy alto</td>
+        <td>Core i9</td>
+        <td>Ryzen 9</td>
+        <td>Gama entusiasta</td>
+        <td>Render, virtualización, edición profesional, cargas intensivas y máximo rendimiento.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+  <strong>Resumen útil:</strong> <strong>i3 / Ryzen 3</strong>, <strong>i5 / Ryzen 5</strong>, <strong>i7 / Ryzen 7</strong> e
+  <strong>i9 / Ryzen 9</strong> no significan automáticamente una generación, sino un <strong>nivel de gama</strong>.
+  La generación real se reconoce mirando la numeración completa del modelo.
+</p>
+
+    
+
+      <h4>H. Compatibilidad con socket, chipset y motherboard <span class="timing"></span></h4>
       <p>
         Una CPU moderna debe ser compatible con varios elementos al mismo tiempo:
       </p>
@@ -434,15 +495,58 @@
         <strong>Ejemplo:</strong> un Intel Core i5 de 12ª generación requiere LGA1700, pero no cualquier motherboard LGA1700 es igual: el chipset define puertos, overclock, cantidad de líneas PCIe y soporte general. Lo mismo pasa con AMD Ryzen en AM4 o AM5.
       </p>
 
-      <h4>H. CPU sin IHS y observación del die <span class="timing"></span></h4>
-      <p>
-        Al retirar el IHS en algunos procesadores modernos mediante <em>delid</em>, puede observarse el die real y el material térmico interno. Esto se hace sobre todo en contextos avanzados de overclock o reparación especializada, pero implica alto riesgo.
-      </p>
-      <p>
-        Ver una CPU sin IHS ayuda a entender que el verdadero procesador es una pequeña pieza de silicio muy delicada, y que el encapsulado metálico existe para proteger y disipar calor.
-      </p>
+            <h4>I. Función general de las conexiones de una CPU <span class="timing"></span></h4>
+<p>
+  En una CPU moderna, los contactos o pines no cumplen todos la misma tarea. En general, pueden agruparse en conexiones de
+  <strong>corriente</strong>, <strong>tierra</strong>, <strong>datos</strong> y algunas que no se usan de forma directa
+  (<strong>nada</strong>, reservadas o sin conexión). La distribución exacta depende del socket y del modelo.
+</p>
 
-      <h4>I. Temas complementarios relevantes <span class="timing"></span></h4>
+<div class="table-wrapper">
+  <table>
+    <tbody>
+      <tr>
+        <th>Tipo de conexión</th>
+        <th>Nombre técnico habitual</th>
+        <th>Función principal</th>
+        <th>Importancia práctica</th>
+      </tr>
+      <tr>
+        <td>Corriente</td>
+        <td>VCC / VDD / alimentación</td>
+        <td>Entregan energía eléctrica al procesador para que funcionen los núcleos, la caché, el controlador de memoria y otros bloques internos.</td>
+        <td>Sin estas líneas la CPU no puede encender ni trabajar de forma estable.</td>
+      </tr>
+      <tr>
+        <td>Tierra</td>
+        <td>GND / VSS / masa</td>
+        <td>Proveen la referencia eléctrica y el retorno de corriente del circuito.</td>
+        <td>Ayudan a estabilizar tensiones, reducir ruido eléctrico y proteger la integridad de las señales.</td>
+      </tr>
+      <tr>
+        <td>Datos</td>
+        <td>Data / Address / Control / Clock</td>
+        <td>Transportan información entre la CPU y el resto del sistema: memoria RAM, chipset, PCIe, reloj, señales de control y comunicación.</td>
+        <td>Permiten que la CPU reciba instrucciones, lea y escriba datos, sincronice tiempos y se comunique con la placa madre.</td>
+      </tr>
+      <tr>
+        <td>Nada</td>
+        <td>NC / RSVD / Reserved</td>
+        <td>No tienen uso funcional visible para el técnico, o quedan reservadas para compatibilidad, pruebas o futuras revisiones.</td>
+        <td>No deben interpretarse como “faltantes”; en muchos encapsulados existen contactos sin uso directo.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+  En muchos procesadores modernos, una gran cantidad de contactos está destinada a <strong>corriente</strong> y
+  <strong>tierra</strong>, porque la CPU necesita alimentación muy estable para trabajar a alta velocidad.
+</p>
+
+
+
+      <h4>J. Temas complementarios relevantes <span class="timing"></span></h4>
       <ul>
         <li><strong>Throttle térmico:</strong> reducción automática de velocidad cuando la CPU se calienta demasiado.</li>
         <li><strong>Undervolt:</strong> bajar voltaje para reducir temperatura y consumo.</li>
@@ -450,29 +554,26 @@
         <li><strong>Escenarios de uso:</strong> oficina, gaming, edición de video, programación, virtualización.</li>
       </ul>
 
-      <h3>3. Ejemplos Prácticos</h3>
-      <div class="example-box">
-        <p><strong>Ejemplo 1 (Gama y nombre):</strong> Comparar Intel Core i3, i5 e i7 de una misma generación y discutir para qué usuario conviene cada uno.</p>
-        <p><strong>Ejemplo 2 (Sufijos):</strong> Comparar un Intel 12400 con un 12400F y preguntar qué sucede si la PC no tiene placa de video dedicada.</p>
-        <p><strong>Ejemplo 3 (Notebook moderna):</strong> Comparar una notebook con Ryzen 5 U frente a otra con Intel H o HX, explicando autonomía vs rendimiento.</p>
-      </div>
 
-      <h3>4. Cuestionario</h3>
+
+      <h3>3. Cuestionario</h3>
       <ol class="exercises">
         <li><strong>Marcas:</strong> ¿Cuáles son las dos marcas principales de CPU para PC?</li>
-        <li><strong>Familias:</strong> ¿Qué diferencia general hay entre Intel Core i5 e Intel Core i7?</li>
+        <li><strong>Gamas:</strong> ¿Qué diferencia general hay entre Intel Core i5 e Intel Core i7?</li>
         <li><strong>Sufijo:</strong> ¿Qué significa la letra F en muchos procesadores Intel?</li>
         <li><strong>Sufijo:</strong> ¿Qué significa la letra G en varios procesadores AMD?</li>
         <li><strong>Turbo:</strong> ¿En qué se diferencia el turbo automático del overclock manual?</li>
         <li><strong>TDP:</strong> ¿Para qué sirve conocer el TDP de una CPU?</li>
         <li><strong>Hilos:</strong> ¿Qué significa que una CPU tenga 8 núcleos y 16 hilos?</li>
         <li><strong>Compatibilidad:</strong> ¿Qué tres factores mínimos revisaría antes de comprar una CPU?</li>
+       
+        <li><strong>Función :</strong> ¿Qué función cuplen los pines o contactos de los CPU y como los podemos organizar segun su conexión?</li>
         <li><strong>Notebook:</strong> ¿Por qué muchas CPU modernas de notebook no pueden cambiarse fácilmente?</li>
-        <li><strong>Aplicación:</strong> Si una PC se usará para oficina, ¿conviene priorizar máximo rendimiento o equilibrio entre consumo, temperatura y costo?</li>
-        <li>Buscar imágenes de <strong>Intel Core i3, i5, i7, i9</strong> y <strong>AMD Ryzen 3, 5, 7, 9</strong>.</li>
+        <!-- <li><strong>Aplicación:</strong> Si una PC se usará para oficina, ¿conviene priorizar máximo rendimiento o equilibrio entre consumo, temperatura y costo?</li> -->
+        <li>Buscar imágenes de <strong>Un CPU de Intel Core  (i3, i5, i7, i9)</strong> y uno de<strong>AMD Ryzen (3, 5, 7, 9)</strong>.</li>
         <li>Buscar imágenes de <strong>CPU modernas de notebook BGA</strong> y de <strong>CPU de escritorio LGA/AM5</strong>.</li>
         <li>Buscar fotos de <strong>CPU moderna sin IHS</strong> y del <strong>die expuesto</strong>.</li>
-        <li>Buscar capturas de <strong>Turbo Boost, Precision Boost, TDP, benchmarks y throttling</strong>.</li>
+        <!-- <li>Buscar capturas de <strong>Turbo Boost, Precision Boost, TDP, benchmarks y throttling</strong>.</li> -->
         <li>Buscar imágenes de <strong>sockets modernos: LGA1700, AM4, AM5</strong> y chipsets relacionados.</li>
     
       </ol>

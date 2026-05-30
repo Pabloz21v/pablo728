@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es-ES" data-theme="light" style=""><head><meta charset="utf-8">
+    
+    <title>Segmentos para incorporar: operadores de comparación y lógicos en if</title>
+    <style>
+      html {
+        background: #f6f9fc;
+        font-family: system-ui, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+        color: #1a2a3a;
+        line-height: 1.5;
+      }
+
+      body {
+        max-width: 880px;
+        margin: 2rem auto;
+        padding: 32px 80px;
+        background: white;
+        border-radius: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        position: relative;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        font-size: 1.9rem;
+        background: linear-gradient(135deg, #1e3c72, #2b4c7c);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.5rem;
+        border-left: 5px solid #2b4c7c;
+        padding-left: 1rem;
+      }
+
+      .subtitulo {
+        color: #4a627a;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 0.75rem;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+        margin: 1.5rem 0 1rem 0;
+        color: #1e3c72;
+        border-bottom: 2px solid #cbd5e1;
+        padding-bottom: 0.3rem;
+      }
+
+      h3 {
+        font-size: 1.3rem;
+        margin: 1.2rem 0 0.8rem 0;
+        color: #2c3e66;
+      }
+
+      .card {
+        background: #f8fafc;
+        border-radius: 1.2rem;
+        padding: 1.2rem 1.5rem;
+        margin: 1.5rem 0;
+        border-left: 4px solid #3b82f6;
+      }
+
+      .warning-card {
+        background: #fff0f0;
+        border-left: 5px solid #dc2626;
+      }
+
+      .tip-card {
+        background: #fef9e3;
+        border-left: 5px solid #f59e0b;
+      }
+
+      .badge {
+        display: inline-block;
+        background: #e6f0ff;
+        color: #1e40af;
+        font-weight: 600;
+        font-size: 0.8rem;
+        padding: 0.2rem 0.7rem;
+        border-radius: 20px;
+        margin-right: 0.5rem;
+        vertical-align: middle;
+      }
+
+      pre {
+        background: #0f172a;
+        color: #e2e8f0;
+        padding: 1.2rem;
+        border-radius: 1rem;
+        font-size: 0.9rem;
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        margin: 1rem 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+
+      code {
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        background: #eef2ff;
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+        color: #b91c1c;
+      }
+
+      pre code {
+        background: transparent;
+        padding: 0;
+        color: #e2e8f0;
+        font-size: 0.9rem;
+      }
+
+      ol,
+      ul {
+        margin: 1rem 0 1rem 2rem;
+      }
+
+      li {
+        margin: 0.5rem 0;
+      }
+
+      strong {
+        color: #0f172a;
+      }
+    </style>
+  </head>
+  <body style="">
+    <h1>Segmentos para incorporar: operadores de comparación y lógicos en if</h1>
+    <div class="subtitulo">Material complementario para ampliar las explicaciones y la práctica de la Sesión 13.</div>
+
+    <div class="card">
+      <p>
+        <span class="badge">💡 Información</span>
+        Los siguientes bloques de contenido están diseñados para insertarse directamente en el archivo HTML de la Sesión
+        13. Han sido redactados respetando el mismo estilo visual, las etiquetas CSS y el tono docente del documento
+        original para asegurar una integración perfecta sin afectar el formato.
+      </p>
+    </div>
+
+    <h2>📍 Dónde agregar cada segmento</h2>
+    <p>
+      Para mantener la coherencia narrativa de la clase, te sugerimos incorporar estos bloques en las siguientes
+      ubicaciones exactas de tu archivo original:
+    </p>
+    <ol>
+      <li>
+        <strong>Segmento A (Comparación):</strong> Cópialo y pégalo justo después de la tarjeta
+        <code>warning-card</code> titulada <em>"⚠️ Peligro: = vs =="</em> y antes del título
+        <em>"🧠 3. Operadores Lógicos"</em>.
+      </li>
+      <li>
+        <strong>Segmento B (Lógicos):</strong> Cópialo y pégalo justo debajo de la tabla que explica <code>and</code>,
+        <code>or</code>, y <code>not</code>, y antes del título <em>"🔀 4. Estructuras Condicionales (if)"</em>.
+      </li>
+      <li>
+        <strong>Segmento C (Ejercicios):</strong> Cópialo y pégalo dentro del apartado
+        <em>"🧪 7. Actividades Prácticas"</em>, reemplazando la lista ordenada de ejercicios actual o añadiéndolo justo
+        antes de la tarjeta <em>"🚀 Desafío Final: El Cajero Automático"</em>.
+      </li>
+    </ol>
+
+    <h2>🧪 Segmento A: ejemplos de operadores de comparación dentro de if</h2>
+
+    <div class="card">
+      <h3>1. Acceso por edad (Uso de <code>&gt;=</code>)</h3>
+      <p>
+        En este ejemplo comprobamos si un valor es "mayor o igual que" el requerido. Observa cómo, si la condición se
+        cumple (es <code>True</code>), entramos al bloque del <code>if</code>.
+      </p>
+      <pre><code>edad = int(input("Ingresa tu edad: "))
+
+if edad &gt;= 18:
+    print("Acceso permitido.")
+    print("Disfruta de la película.")
+else:
+    print("Acceso denegado. Eres menor de edad.")</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>2. Validación de respuesta exacta (Uso de <code>==</code> y <code>!=</code>)</h3>
+      <p>
+        Aquí evaluamos si el texto introducido es idéntico a la respuesta correcta. Si el usuario se equivoca, la
+        condición del <code>if</code> es <code>False</code> y el programa ejecuta el <code>else</code>.
+      </p>
+      <pre><code>capital = input("¿Cuál es la capital de Francia?: ")
+
+if capital == "Paris":
+    print("¡Correcto! Has ganado 10 puntos.")
+else:
+    print("Incorrecto. La respuesta era Paris.")</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>3. Clasificación de temperatura (Uso de <code>&lt;</code>)</h3>
+      <p>
+        Podemos usar el operador "menor que" para activar una advertencia según el valor ingresado. Es muy útil en
+        sistemas que monitorean sensores.
+      </p>
+      <pre><code>temperatura = float(input("Ingrese la temperatura del motor: "))
+
+if temperatura &lt; 90.0:
+    print("El motor está funcionando a una temperatura segura.")
+else:
+    print("¡ALERTA! Sobrecalentamiento detectado.")</code></pre>
+    </div>
+
+    <div class="tip-card card">
+      <h3>📌 Ubicación recomendada del Segmento A</h3>
+      <p>
+        Copia las tres tarjetas anteriores e insértalas en tu código HTML original justo antes del encabezado
+        <code>&lt;h2&gt;🧠 3. Operadores Lógicos&lt;/h2&gt;</code>. Servirán como puente perfecto entre la teoría de la
+        tabla de comparación y la introducción lógica.
+      </p>
+    </div>
+
+    <h2>🧠 Segmento B: ejemplos de operadores lógicos dentro de if</h2>
+
+    <div class="card">
+      <h3>1. Doble validación estricta (Uso de <code>and</code>)</h3>
+      <p>
+        El operador <code>and</code> obliga a que <strong>todas</strong> las condiciones sean verdaderas. En este
+        simulador de inicio de sesión, tanto el nombre de usuario como la contraseña deben coincidir a la vez.
+      </p>
+      <pre><code>usuario = input("Usuario: ")
+clave = input("Contraseña: ")
+
+if usuario == "admin" and clave == "secreta123":
+    print("Autenticación exitosa. Cargando panel de control...")
+else:
+    print("Error: Usuario o contraseña incorrectos.")</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>2. Múltiples caminos válidos (Uso de <code>or</code>)</h3>
+      <p>
+        Con <code>or</code>, basta con que <strong>una sola</strong> de las condiciones se cumpla. Aquí le damos un
+        descuento al cliente si es mayor de 65 años O si tiene un pase especial.
+      </p>
+      <pre><code>edad = int(input("¿Cuántos años tienes?: "))
+tiene_pase = input("¿Tienes pase VIP? (si/no): ")
+
+if edad &gt;= 65 or tiene_pase == "si":
+    print("¡Felicidades! Tienes entrada gratuita al museo.")
+else:
+    print("El costo de tu entrada es de $1500.")</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>3. Invertir la lógica (Uso de <code>not</code>)</h3>
+      <p>
+        El operador <code>not</code> se usa mucho cuando queremos evaluar si algo "no" está sucediendo o cuando tenemos
+        una variable booleana y queremos actuar sobre su estado negativo.
+      </p>
+      <pre><code>hay_stock = False
+
+# "not hay_stock" se lee como "si NO hay stock"
+if not hay_stock:
+    print("Lo sentimos, el producto está agotado.")
+else:
+    print("Añadiendo producto al carrito de compras.")</code></pre>
+    </div>
+
+    <div class="tip-card card">
+      <h3>📌 Ubicación recomendada del Segmento B</h3>
+      <p>
+        Inserta estas tres tarjetas en tu archivo original inmediatamente después de la tabla HTML que explica
+        <code>and</code>, <code>or</code> y <code>not</code>, y justo antes del encabezado
+        <code>&lt;h2&gt;🔀 4. Estructuras Condicionales (if)&lt;/h2&gt;</code>.
+      </p>
+    </div>
+
+    <h2>✍️ Segmento C: ejercicios propuestos</h2>
+
+    <div class="card">
+      <h3>🎯 Bloque 1: Prácticas de Comparación Básica</h3>
+      <ol>
+        <li>
+          <strong>Aprobación escolar:</strong> Pide al usuario que ingrese su calificación del 1 al 10 (usa
+          <code>int(input())</code>). Crea un <code>if</code> que verifique si la nota es
+          <strong>mayor o igual a 6</strong>. Si es así, imprime "Materia Aprobada"; de lo contrario, imprime "Debes
+          rendir examen final".
+        </li>
+        <li>
+          <strong>Contraseña simple:</strong> Pide al usuario que configure un PIN numérico. Luego pide que lo repita.
+          Si el primer PIN es <strong>distinto de</strong> (<code>!=</code>) el segundo, imprime "Los PIN no coinciden".
+          Si son iguales, imprime "PIN guardado con éxito".
+        </li>
+        <li>
+          <strong>Control de peso en ascensor:</strong> Pide al usuario ingresar el peso total de la carga (usa
+          <code>float</code>). Si el peso es <strong>menor o igual a</strong> 300.0 kg, el programa debe mostrar
+          "Ascensor en movimiento". Si lo supera, mostrar "Exceso de peso detectado".
+        </li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>🎯 Bloque 2: Prácticas con Operadores Lógicos</h3>
+      <ol start="4">
+        <li>
+          <strong>Descuento combinado:</strong> Un cine ofrece precio especial si la película es a la mañana ("M")
+          <strong>Y</strong> si la persona es estudiante ("S"). Pide al usuario el turno y si es estudiante. Usa
+          <code>and</code> para determinar si aplica o no el descuento e imprime un mensaje adecuado.
+        </li>
+        <li>
+          <strong>Selección de idiomas:</strong> Pregunta al usuario si habla "Español" o si habla "Inglés". Si al menos
+          uno de los dos idiomas es afirmativo (usa <code>or</code>), imprime "Perfil apto para el puesto de atención al
+          cliente". Si ambos son negativos, imprime "No cumples con el perfil bilingüe".
+        </li>
+        <li>
+          <strong>Sistema sin conexión:</strong> Crea una variable booleana <code>hay_conexion = False</code>. Usa el
+          operador <code>not</code> dentro del <code>if</code> para imprimir "Buscando red WiFi..." si no hay conexión,
+          y "Navegando..." en el caso contrario.
+        </li>
+      </ol>
+    </div>
+
+    <div class="tip-card card">
+      <h3>📌 Ubicación recomendada del Segmento C</h3>
+      <p>
+        Copia estas dos tarjetas con los seis ejercicios y pégalas dentro de la sección
+        <code>&lt;h2&gt;🧪 7. Actividades Prácticas&lt;/h2&gt;</code> de tu archivo, reemplazando la lista anterior o
+        sumando estos ejercicios como entrenamiento previo al desafío del Cajero Automático.
+      </p>
+    </div>
+
+    <div class="warning-card card">
+      <span class="badge">✓ Buenas prácticas finales</span>
+      <p>
+        Al escribir condicionales <code>if</code> combinados, usa paréntesis si tu lógica tiene varios operadores (por
+        ejemplo: <code>if (edad &gt; 18) and (saldo &gt; 100):</code>). Aunque Python muchas veces no los exige
+        obligatoriamente, ayudan muchísimo a que tu código sea legible para ti y para otros programadores. Recuerda
+        siempre mantener tus <strong>4 espacios</strong> de indentación intactos al probar estos ejemplos.
+      </p>
+    </div>
+  
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>

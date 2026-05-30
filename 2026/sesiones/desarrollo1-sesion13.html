@@ -306,6 +306,12 @@ print(type(falso_texto))  # Devuelve &lt;class 'str'&gt; (porque tiene comillas)
         <td><code>5 == 5 <br>"a" == "a" <br>"hola" == "hola"</code></td>
         <td><code>True</code></td>
       </tr>
+       <tr>
+        <td><code>==</code></td>
+        <td>Igual a (compara valores)</td>
+        <td><code>5 == 8 <br>"a" == a <br>"hola" == "HOLA"</code></td>
+        <td><code>False</code></td>
+      </tr>
       <tr>
         <td><code>!=</code></td>
         <td>Distinto de</td>
@@ -372,6 +378,7 @@ print(type(falso_texto))  # Devuelve &lt;class 'str'&gt; (porque tiene comillas)
         </p>
       </div>
 
+      
       <h2>🧠 3. Operadores Lógicos</h2>
       <p>
         A veces una sola comparación no basta. ¿Qué pasa si quiero saber si un usuario tiene más de 18 años
@@ -585,6 +592,21 @@ if numero_string &gt; 10:  # ¡ERROR! Python no puede comparar texto con número
 permitiendo que podamos realizar cálculos matemáticos con ellos </p>
 
 
+
+    <div class="card">
+      <h3>3. Clasificación de temperatura (Uso de <code>&lt;</code>)</h3>
+      <p>
+        Podemos usar el operador "menor que" para activar una advertencia según el valor ingresado. Es muy útil en
+        sistemas que monitorean sensores.
+      </p>
+      <pre><code>temperatura = float(input("Ingrese la temperatura del motor: "))
+
+if temperatura &lt; 90.0:
+    print("El motor está funcionando a una temperatura segura.")
+else:
+    print("¡ALERTA! Sobrecalentamiento detectado.")</code></pre>
+    </div>
+
       <h2>💡 6. Integración Práctica (Ejemplos Paso a Paso)</h2>
 
       <div class="card">
@@ -601,8 +623,23 @@ else:
     print(f"Aún no puedes votar. Te faltan {faltan} años.")</code></pre>
       </div>
 
+      
+    <div class="card">
+      <h3>📌 Ejemplo 2: Validación de respuesta exacta (Uso de <code>==</code> y <code>!=</code>)</h3>
+      <p>
+        Aquí evaluamos si el texto introducido es idéntico a la respuesta correcta. Si el usuario se equivoca, la
+        condición del <code>if</code> es <code>False</code> y el programa ejecuta el <code>else</code>.
+      </p>
+      <pre><code>capital = input("¿Cuál es la capital de Francia?: ")
+
+if capital == "Paris":
+    print("¡Correcto! Has ganado 10 puntos.")
+else:
+    print("Incorrecto. La respuesta era Paris.")</code></pre>
+    </div>
+
       <div class="card">
-        <h3>📌 Ejemplo 2: Cálculo y decisión</h3>
+        <h3>📌 Ejemplo 3: Cálculo y decisión</h3>
         <pre><code>print("--- SUMADORA INTELIGENTE ---")
 num1 = int(input("Introduce el primer número: "))
 num2 = int(input("Introduce el segundo número: "))
@@ -620,7 +657,7 @@ else:
       </div>
 
       <div class="card">
-        <h3>📌 Ejemplo 3: Nombre y edad con mensaje personalizado</h3>
+        <h3>📌 Ejemplo 4: Nombre y edad con mensaje personalizado</h3>
         <pre><code>nombre = input("¿Cómo te llamas? ")
 edad = int(input("¿Qué edad tienes? "))
 
@@ -637,7 +674,7 @@ else:
       </div>
 
       <div class="card">
-        <h3>📌 Ejemplo 4: Nota decimal y comprobación de aprobado</h3>
+        <h3>📌 Ejemplo 5: Nota decimal y comprobación de aprobado</h3>
         <pre><code>nota = float(input("Introduce tu nota final: "))
 
 if nota &gt;= 6.0:
@@ -652,7 +689,7 @@ else:
       </div>
 
       <div class="card">
-        <h3>📌 Ejemplo 5: Tienda con descuento (Uso de float)</h3>
+        <h3>📌 Ejemplo 6: Tienda con descuento (Uso de float)</h3>
         <pre><code>total_compra = float(input("¿De cuánto es el total de tu compra? $"))
 
 if total_compra &gt;= 5000:
@@ -664,6 +701,51 @@ else:
     print(f"Total a pagar: ${total_compra}")
     print("A partir de $5000 aplicamos un 10% de descuento.")</code></pre>
       </div>
+
+          <div class="card">
+      <h3>📌 Ejemplo 7: Doble validación estricta (Uso de <code>and</code>)</h3>
+      <p>
+        El operador <code>and</code> obliga a que <strong>todas</strong> las condiciones sean verdaderas. En este
+        simulador de inicio de sesión, tanto el nombre de usuario como la contraseña deben coincidir a la vez.
+      </p>
+      <pre><code>usuario = input("Usuario: ")
+clave = input("Contraseña: ")
+
+if usuario == "admin" and clave == "secreta123":
+    print("Autenticación exitosa. Cargando panel de control...")
+else:
+    print("Error: Usuario o contraseña incorrectos.")</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>📌 Ejemplo 8: Múltiples caminos válidos (Uso de <code>or</code>)</h3>
+      <p>
+        Con <code>or</code>, basta con que <strong>una sola</strong> de las condiciones se cumpla. Aquí le damos un
+        descuento al cliente si es mayor de 65 años O si tiene un pase especial.
+      </p>
+      <pre><code>edad = int(input("¿Cuántos años tienes?: "))
+tiene_pase = input("¿Tienes pase VIP? (si/no): ")
+
+if edad &gt;= 65 or tiene_pase == "si":
+    print("¡Felicidades! Tienes entrada gratuita al museo.")
+else:
+    print("El costo de tu entrada es de $1500.")</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>📌 Ejemplo 9: Invertir la lógica (Uso de <code>not</code>)</h3>
+      <p>
+        El operador <code>not</code> se usa mucho cuando queremos evaluar si algo "no" está sucediendo o cuando tenemos
+        una variable booleana y queremos actuar sobre su estado negativo.
+      </p>
+      <pre><code>hay_stock = False
+
+# "not hay_stock" se lee como "si NO hay stock"
+if not hay_stock:
+    print("Lo sentimos, el producto está agotado.")
+else:
+    print("Añadiendo producto al carrito de compras.")</code></pre>
+    </div>
 
       <h2>❌ Errores Frecuentes</h2>
       <ul>
@@ -731,8 +813,52 @@ else:
            <br>En este punto compararemos letras.
            <br>📌 Si ingresan letras mayúsculas asegurarse que la letra a comparar sea mayúscula. Los mismo para minúscula.
         </li>
-
       </ol>
+
+
+
+    <div class="card">
+      <h3>🎯 Bloque 1: Prácticas de Comparación Básica</h3>
+      <ol>
+        <li>
+          <strong>Aprobación escolar:</strong> Pide al usuario que ingrese su calificación del 1 al 10 (usa
+          <code>int(input())</code>). Crea un <code>if</code> que verifique si la nota es
+          <strong>mayor o igual a 6</strong>. Si es así, imprime "Materia Aprobada"; de lo contrario, imprime "Debes
+          rendir examen final".
+        </li>
+        <li>
+          <strong>Contraseña simple:</strong> Pide al usuario que configure un PIN numérico. Luego pide que lo repita.
+          Si el primer PIN es <strong>distinto de</strong> (<code>!=</code>) el segundo, imprime "Los PIN no coinciden".
+          Si son iguales, imprime "PIN guardado con éxito".
+        </li>
+        <li>
+          <strong>Control de peso en ascensor:</strong> Pide al usuario ingresar el peso total de la carga (usa
+          <code>float</code>). Si el peso es <strong>menor o igual a</strong> 300.0 kg, el programa debe mostrar
+          "Ascensor en movimiento". Si lo supera, mostrar "Exceso de peso detectado".
+        </li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>🎯 Bloque 2: Prácticas con Operadores Lógicos</h3>
+      <ol start="4">
+        <li>
+          <strong>Descuento combinado:</strong> Un cine ofrece precio especial si la película es a la mañana ("M")
+          <strong>Y</strong> si la persona es estudiante ("S"). Pide al usuario el turno y si es estudiante. Usa
+          <code>and</code> para determinar si aplica o no el descuento e imprime un mensaje adecuado.
+        </li>
+        <li>
+          <strong>Selección de idiomas:</strong> Pregunta al usuario si habla "Español" o si habla "Inglés". Si al menos
+          uno de los dos idiomas es afirmativo (usa <code>or</code>), imprime "Perfil apto para el puesto de atención al
+          cliente". Si ambos son negativos, imprime "No cumples con el perfil bilingüe".
+        </li>
+        <li>
+          <strong>Sistema sin conexión:</strong> Crea una variable booleana <code>hay_conexion = False</code>. Usa el
+          operador <code>not</code> dentro del <code>if</code> para imprimir "Buscando red WiFi..." si no hay conexión,
+          y "Navegando..." en el caso contrario.
+        </li>
+      </ol>
+    </div>
 
       <div class="tip-card card">
         <h3>🚀 Desafío Final: El Cajero Automático</h3>
@@ -765,7 +891,8 @@ else:
           condicional.
         </li>
         <li>
-          Siempre que operes con números introducidos por el usuario, debes convertir el texto recibido envolviéndolo en
+          Siempre que operes con números introducidos por el usuario, debemos convertir el texto recibido envolviéndolo en
+          la función
           <code>int()</code> o <code>float()</code>.
         </li>
       </ul>
