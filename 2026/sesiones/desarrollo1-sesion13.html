@@ -427,8 +427,12 @@ if edad &gt;= 18:
 
 print("Este mensaje se imprime siempre.")
 
-Cuando ejecutamos el código: en la línea if edad &gt;= 18 la maquina compara el valor guardado dentro de la variable edad (en este caso el numero 20) con el número 18.
-Podemos afirmar que 20 es mayor que 18 por lo que es un TRUE. Al ser TRUE ejecuta las 2 líneas indentadas Eres mayor de edad. Puedes pasar. 
+Cuando ejecutamos el código: en la línea 
+if edad &gt;= 18 
+la maquina compara el valor guardado dentro de la variable edad (en este caso el numero 20) con el número 18.
+Podemos afirmar que 20 es mayor que 18 por lo que es un TRUE. Al ser TRUE ejecuta las 2 líneas indentadas 
+    Eres mayor de edad. 
+    Puedes pasar. 
 Si cambiamos el valor 20 por uno menor a 18, no ejecutara las líneas indentadas. </code></pre>
 
 
@@ -518,19 +522,25 @@ else:
         parece un número, pero internamente sigue siendo una cadena de texto.
       </p>
       <pre><code>numero = 25
-print(type(numero))      # &lt;class 'int'&gt;
+print(type(numero))      #En consola veríamos: &lt;class 'int'&gt;
+La máquina lo interprete como un numero entero (int-integer)
 
 numero = "25"
-print(type(numero))      # &lt;class 'str'&gt;
+print(type(numero))      #En consola veríamos: &lt;class 'str'&gt;
+La máquina lo interprete como un texto (str-string-cadena de texto)
 
 numero = input("Escribe un número: ")
-print(type(numero))      # &lt;class 'str'&gt;
+print(type(numero))      #En consola veríamos: &lt;class 'str'&gt;
+Lo ingresado por medio de un input la maquina lo interpreta como un texto, no importa si ingresamos un número.
 
 numero = int(input("Escribe un número entero: "))
-print(type(numero))      # &lt;class 'int'&gt;
+print(type(numero))      #En consola veríamos: &lt;class 'int'&gt;
+Para que la maquina interprete lo ingresado por un input como numero entero debemos agregar int() tal y como ven en este ejemplo.
 
 precio = float(input("Escribe un precio: "))
-print(type(precio))      # &lt;class 'float'&gt;</code></pre>
+print(type(precio))      #En consola veríamos: &lt;class 'float'&gt;
+Para que la maquina interprete lo ingresado por un input como numero decimal debemos agregar float() tal y como ven en este ejemplo.
+</code></pre>
       <p>
         Fíjate en la diferencia:
       </p>
@@ -591,7 +601,7 @@ if numero_string &gt; 10:  # ¡ERROR! Python no puede comparar texto con número
 <code>precio = int(input(...))</code>  y <code>precio = float(input(...))</code> serán guardadas como números
 permitiendo que podamos realizar cálculos matemáticos con ellos </p>
 
-
+<!-- 
 
     <div class="card">
       <h3>3. Clasificación de temperatura (Uso de <code>&lt;</code>)</h3>
@@ -605,10 +615,10 @@ if temperatura &lt; 90.0:
     print("El motor está funcionando a una temperatura segura.")
 else:
     print("¡ALERTA! Sobrecalentamiento detectado.")</code></pre>
-    </div>
+    </div> -->
 
       <h2>💡 6. Integración Práctica (Ejemplos Paso a Paso)</h2>
-
+<h3>Ir probando estos codigos en el VSC y analizar los comportamientos.</h3>
       <div class="card">
         <h3>📌 Ejemplo 1: Edad para votar</h3>
         <pre><code># 1. Pedimos el dato y LO CONVERTIMOS a entero en la misma línea
@@ -636,7 +646,24 @@ if capital == "Paris":
     print("¡Correcto! Has ganado 10 puntos.")
 else:
     print("Incorrecto. La respuesta era Paris.")</code></pre>
+
+<p>No detonar el explosivo:</p>
+
+<pre><code>
+explosivo = int(input("Jugador uno: designar número a la bomba del 1 al 6: "))
+desactivar = int(input("Jugador dos: ingresar número que no detone la bomba del 1 al 6: "))
+
+if desactivar != explosivo:
+    print("Sobrevivimos! ")
+else:
+    print("BOOOOOMMMM!!! Explotamos")
+
+#En este ejemplo el primer jugador ingresa el número que contiene la bomba.
+#El segundo jugador ingresa un numero esperando no detonar la bomba.
+</code></pre>
     </div>
+
+
 
       <div class="card">
         <h3>📌 Ejemplo 3: Cálculo y decisión</h3>
@@ -653,7 +680,10 @@ if resultado &gt; 0:
 elif resultado &lt; 0:
     print("El resultado es un número negativo.")
 else:
-    print("El resultado es exactamente cero.")</code></pre>
+    print("El resultado es exactamente cero.")
+  
+  #Podemos ver que no solo se hace un cálculo matemático, sino que también evaluamos el número.
+</code></pre>
       </div>
 
       <div class="card">
@@ -744,8 +774,12 @@ else:
 if not hay_stock:
     print("Lo sentimos, el producto está agotado.")
 else:
-    print("Añadiendo producto al carrito de compras.")</code></pre>
-    </div>
+    print("Añadiendo producto al carrito de compras.")
+  
+#Primero veamos que se guarda el booleano False en la variable hay_Stock indicando que nos quedamos sin productos.
+#Luego vemos que invertimos su valor usando "not" ósea de False a TRUE.
+#Ya que ahora es TRUE ingresa dentro de la indentación (primer condición) imprimiendo: o sentimos, el producto está agotado.</code></pre>
+ </div>
 
       <h2>❌ Errores Frecuentes</h2>
       <ul>
@@ -776,13 +810,46 @@ else:
       </ul>
 
       <h2>🧪 7. Actividades Prácticas</h2>
-      <p>
-        Crea un archivo <code>sesion13_condicionales.py</code> en Visual Studio Code e intenta resolver los siguientes
-        retos:
-      </p>
+     
 
+    <div class="card">
+      <h3>
+        🎯 Crea un archivo <code>sesion13_condicionales.py</code> en Visual Studio Code e intenta resolver los siguientes
+        retos:
+      </h3>
       <ol>
         <li>
+          <strong>Aprobación escolar:</strong> Pide al usuario que ingrese su calificación del 1 al 10 (usa
+          <code>int(input())</code>). Crea un <code>if</code> que verifique si la nota es
+          <strong>mayor o igual a 6</strong>. Si es así, imprime "Materia Aprobada"; de lo contrario, imprime "Debes
+          rendir examen final".
+        </li>
+        <li>
+          <strong>Contraseña simple:</strong> Pide al usuario que configure un PIN numérico. Luego pide que lo repita.
+          Si el primer PIN es <strong>distinto de</strong> (<code>!=</code>) el segundo, imprime "Los PIN no coinciden".
+          Si son iguales, imprime "PIN guardado con éxito".
+        </li>
+        <li>
+          <strong>Control de peso en ascensor:</strong> Pide al usuario ingresar el peso total de la carga (usa
+          <code>float</code>). Si el peso es <strong>menor o igual a</strong> 300.0 kg, el programa debe mostrar
+          "Ascensor en movimiento". Si lo supera, mostrar "Exceso de peso detectado".
+        </li>
+         <li>
+          <strong>Descuento combinado:</strong> Un cine ofrece precio especial si la película es a la mañana ("M")
+          <strong>Y</strong> si la persona es estudiante ("S"). Pide al usuario el turno y si es estudiante. Usa
+          <code>and</code> para determinar si aplica o no el descuento e imprime un mensaje adecuado.
+        </li>
+        <li>
+          <strong>Selección de idiomas:</strong> Pregunta al usuario si habla "Español" o si habla "Inglés". Si al menos
+          uno de los dos idiomas es afirmativo (usa <code>or</code>), imprime "Perfil apto para el puesto de atención al
+          cliente". Si ambos son negativos, imprime "No cumples con el perfil bilingüe".
+        </li>
+        <li>
+          <strong>Sistema sin conexión:</strong> Crea una variable booleana <code>hay_conexion = False</code>. Usa el
+          operador <code>not</code> dentro del <code>if</code> para imprimir "Buscando red WiFi..." si no hay conexión,
+          y "Navegando..." en el caso contrario.
+        </li>
+                <li>
           <strong>Detector de números pares:</strong> Pide al usuario un número entero (usa <code>int(input())</code>).
           Si el número al ser dividido por 2 tiene de resto 0 (usa el operador módulo <code>%</code>), imprime que es
           par. Sino, imprime que es impar.
@@ -814,51 +881,9 @@ else:
            <br>📌 Si ingresan letras mayúsculas asegurarse que la letra a comparar sea mayúscula. Los mismo para minúscula.
         </li>
       </ol>
-
-
-
-    <div class="card">
-      <h3>🎯 Bloque 1: Prácticas de Comparación Básica</h3>
-      <ol>
-        <li>
-          <strong>Aprobación escolar:</strong> Pide al usuario que ingrese su calificación del 1 al 10 (usa
-          <code>int(input())</code>). Crea un <code>if</code> que verifique si la nota es
-          <strong>mayor o igual a 6</strong>. Si es así, imprime "Materia Aprobada"; de lo contrario, imprime "Debes
-          rendir examen final".
-        </li>
-        <li>
-          <strong>Contraseña simple:</strong> Pide al usuario que configure un PIN numérico. Luego pide que lo repita.
-          Si el primer PIN es <strong>distinto de</strong> (<code>!=</code>) el segundo, imprime "Los PIN no coinciden".
-          Si son iguales, imprime "PIN guardado con éxito".
-        </li>
-        <li>
-          <strong>Control de peso en ascensor:</strong> Pide al usuario ingresar el peso total de la carga (usa
-          <code>float</code>). Si el peso es <strong>menor o igual a</strong> 300.0 kg, el programa debe mostrar
-          "Ascensor en movimiento". Si lo supera, mostrar "Exceso de peso detectado".
-        </li>
-      </ol>
     </div>
 
-    <div class="card">
-      <h3>🎯 Bloque 2: Prácticas con Operadores Lógicos</h3>
-      <ol start="4">
-        <li>
-          <strong>Descuento combinado:</strong> Un cine ofrece precio especial si la película es a la mañana ("M")
-          <strong>Y</strong> si la persona es estudiante ("S"). Pide al usuario el turno y si es estudiante. Usa
-          <code>and</code> para determinar si aplica o no el descuento e imprime un mensaje adecuado.
-        </li>
-        <li>
-          <strong>Selección de idiomas:</strong> Pregunta al usuario si habla "Español" o si habla "Inglés". Si al menos
-          uno de los dos idiomas es afirmativo (usa <code>or</code>), imprime "Perfil apto para el puesto de atención al
-          cliente". Si ambos son negativos, imprime "No cumples con el perfil bilingüe".
-        </li>
-        <li>
-          <strong>Sistema sin conexión:</strong> Crea una variable booleana <code>hay_conexion = False</code>. Usa el
-          operador <code>not</code> dentro del <code>if</code> para imprimir "Buscando red WiFi..." si no hay conexión,
-          y "Navegando..." en el caso contrario.
-        </li>
-      </ol>
-    </div>
+
 
       <div class="tip-card card">
         <h3>🚀 Desafío Final: El Cajero Automático</h3>

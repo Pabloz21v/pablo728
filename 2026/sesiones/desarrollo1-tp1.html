@@ -1,0 +1,753 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad Integradora: Proyecto individual de códigos en Python</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #f6f9fc;
+        font-family:
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+        line-height: 1.6;
+        color: #1a2a3a;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .container {
+        background-color: #ffffff;
+        border-radius: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        padding: 3rem;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+        background: linear-gradient(135deg, #1e3c72, #2b4c7c);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.5rem;
+        border-left: 6px solid #2b4c7c;
+        padding-left: 1rem;
+        line-height: 1.2;
+      }
+
+      .subtitulo {
+        color: #4a627a;
+        margin-bottom: 2.5rem;
+        font-size: 1.2rem;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 1rem;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+        margin: 2rem 0 1rem 0;
+        color: #1e3c72;
+        border-bottom: 2px solid #cbd5e1;
+        padding-bottom: 0.4rem;
+      }
+
+      h3 {
+        font-size: 1.3rem;
+        margin: 1.5rem 0 0.8rem 0;
+        color: #2c3e66;
+      }
+
+      h4 {
+        font-size: 1.1rem;
+        margin: 1rem 0 0.5rem 0;
+        color: #3b82f6;
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
+
+      ul,
+      ol {
+        margin: 1rem 0 1rem 2rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+
+      .card {
+        background-color: #f8fafc;
+        border-radius: 1.2rem;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        border-left: 5px solid #3b82f6;
+      }
+
+      .warning-card {
+        background-color: #fff0f0;
+        border-radius: 1.2rem;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        border-left: 5px solid #dc2626;
+      }
+
+      .tip-card {
+        background-color: #fef9e3;
+        border-radius: 1.2rem;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        border-left: 5px solid #f59e0b;
+      }
+
+      .badge {
+        display: inline-block;
+        background-color: #e6f0ff;
+        color: #1e40af;
+        font-weight: 600;
+        font-size: 0.8rem;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .badge-easy {
+        background-color: #dcfce7;
+        color: #166534;
+      }
+
+      .badge-medium {
+        background-color: #fef3c7;
+        color: #92400e;
+      }
+
+      .badge-hard {
+        background-color: #fee2e2;
+        color: #991b1b;
+      }
+
+      pre {
+        background-color: #0f172a;
+        color: #e2e8f0;
+        padding: 1.5rem;
+        border-radius: 1rem;
+        font-size: 0.9rem;
+        font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+        margin: 1.5rem 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+      code {
+        font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+        background-color: #eef2ff;
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+        color: #b91c1c;
+      }
+
+      pre code {
+        background-color: transparent;
+        padding: 0;
+        color: #e2e8f0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-size: 0.95rem;
+        background-color: #ffffff;
+        border-radius: 1rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      th,
+      td {
+        border: 1px solid #e2e8f0;
+        padding: 1rem;
+        text-align: left;
+        vertical-align: middle;
+      }
+
+      th {
+        background-color: #eef2ff;
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .project-card {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+      }
+
+      .project-card h4 {
+        margin-top: 0;
+        font-size: 1.15rem;
+        color: #1e293b;
+      }
+
+      .project-card .desc {
+        font-size: 0.9rem;
+        color: #475569;
+        margin-bottom: 1rem;
+      }
+
+      .project-card .req {
+        font-size: 0.85rem;
+        background-color: #f8fafc;
+        padding: 0.8rem;
+        border-radius: 0.5rem;
+        border: 1px dashed #cbd5e1;
+        margin-bottom: 0.8rem;
+      }
+
+      .project-card .extra {
+        font-size: 0.85rem;
+        color: #047857;
+        font-weight: 600;
+      }
+      @media (max-width: 600px) {
+        body {
+        padding:0;
+        }
+        .container {
+          padding: 1rem;
+        }
+        h1 {
+          font-size: 1.6rem;
+        }
+        h2 {
+          font-size: 1.4rem;
+        }
+        pre {
+          font-size: 0.75rem;
+          padding: 0.8rem;
+        }
+        th,
+        td {
+          padding: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body style="">
+
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+       
+ 
+      </div>
+
+      <h1>Actividad Integradora: individual </h1>
+      <div class="subtitulo">Aplicando todo lo aprendido hasta la sesión 13 inclusive.</div>
+
+
+
+      <h2>🎯 1. Objetivos de la actividad</h2>
+      <ul>
+        <li>Consolidar la escritura de código en Python utilizando Visual Studio Code.</li>
+        <li>
+          Demostrar el dominio en la captura de datos (<code>input</code>), su procesamiento y la muestra de resultados
+          (<code>print</code>).
+        </li>
+        <li>Aplicar correctamente la conversión de tipos de datos para realizar cálculos matemáticos.</li>
+        <li>
+          Crear flujos lógicos y toma de decisiones utilizando operadores relacionales, operadores lógicos y estructuras
+          condicionales (<code>if</code>, <code>elif</code>, <code>else</code>).
+        </li>
+        <li>Expresar verbalmente el razonamiento detrás del código escrito.</li>
+      </ul>
+
+      <h2>🧠 2. Conceptos que puedes aplicar</h2>
+      <p>Tus proyectos deben apoyarse en el siguiente catálogo de herramientas vistas en clase:</p>
+      <ul>
+        <li>
+          <strong>Entorno:</strong> Creación de archivos
+          <code>.py</code> y ejecución del programa.
+        </li>
+        <li>
+          <strong>Variables:</strong> Asignación correcta, reglas para nombrar variables (uso de guiones bajos, nombres
+          descriptivos).
+        </li>
+        <li>
+          <strong>Comentarios:</strong> Uso de <code>#</code> para explicar líneas específicas o triple comilla
+          <code>"""</code> para documentar bloques.
+        </li>
+        <li>
+          <strong>Entrada y Salida:</strong> Captura de texto con <code>input()</code> y muestra de datos combinados
+          mediante <code>print()</code> (uso de f-strings y separación por comas).
+        </li>
+        <li>
+          <strong>Tipos de datos:</strong> Enteros (<code>int</code>), decimales (<code>float</code>), texto
+          (<code>str</code>) y booleanos (<code>bool</code>).
+        </li>
+        <li>
+          <strong>Inspección y Conversión:</strong> Uso de <code>type()</code> para verificar datos y transformación con
+          <code>int()</code> y <code>float()</code>.
+        </li>
+        <li>
+          <strong>Operadores Aritméticos:</strong> Suma (<code>+</code>), resta (<code>-</code>), multiplicación
+          (<code>*</code>), división exacta (<code>/</code>), división entera (<code>//</code>), módulo (<code>%</code>)
+          y potencia (<code>**</code>).
+        </li>
+        <li>
+          <strong>Operadores de Comparación:</strong> <code>==</code>, <code>!=</code>, <code>&gt;</code>,
+          <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>.
+        </li>
+        <li><strong>Operadores Lógicos:</strong> <code>and</code>, <code>or</code>, <code>not</code>.</li>
+        <li>
+          <strong>Estructuras Condicionales:</strong> Uso correcto de <code>if</code>, <code>elif</code> y
+          <code>else</code>.
+        </li>
+        <li>
+          <strong>Sintaxis vital:</strong> Indentación estricta (4 espacios) y uso de los dos puntos (<code>:</code>) al
+          final de las condiciones.
+        </li>
+      </ul>
+
+      <h2>🗣️ 3. Cómo se evaluará</h2>
+      <div class="warning-card">
+        <p><strong>Evaluación mediante Defensa Oral</strong></p>
+        <p>
+          No basta con que el código funcione. Serán evaluados oralmente sobre los proyectos que presenten.
+          Se les pedirá que expliquen líneas específicas de su propio código, como también posibles modificaciones en vivo.
+          Deberán ser capaces de responder a
+          preguntas como:
+        </p>
+        <ul>
+          <li>
+            <em>"¿Por qué utilizaste <code>float()</code> en lugar de <code>int()</code> en esta línea?¿Que son?"</em>
+          </li>
+          <li><em>"¿Qué sucedería si el usuario introduce un número negativo aquí?"</em></li>
+          <li>
+            <em>"Explícame cómo funciona esta condición combinada con el operador <code>and</code>."</em>
+          </li>
+          <li><em>"¿Qué tipo de dato devuelve esta operación matemática?"</em></li>
+          <li><em>Que ocurre en una condición si es True o False</em> </li>
+        </ul>
+        <p>El código es tuyo, por lo que debes comprender el 100% de lo que tenés escrito. </p>
+
+      </div>
+          
+      <h2>⭐ 4. Sistema de puntos</h2>
+      <p>
+        Para aprobar la actividad integradora debes acumular un total de <strong>3 puntos</strong>. Los proyectos están
+        clasificados en tres niveles de dificultad. Podes decidir tu combinación de puntos para alcanzar la meta:
+      </p>
+      <p><strong>Libertad:</strong> Pueden crear sus propios codigos, de la tematica que gusten, dependiendo los conocimientos aplicados tendrán un puntaje.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Nivel de dificultad</th>
+            <th>Valor</th>
+            <th>Complejidad esperada</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Fácil</strong></td>
+            <td>1 Punto</td>
+            <td>Entrada básica, cálculos sencillos, condiciones de un solo nivel (if/else).</td>
+          </tr>
+          <tr>
+            <td><strong>Medio</strong></td>
+            <td>2 Puntos</td>
+            <td>
+              Múltiples entradas, conversión de datos, condicionales encadenados (if/elif/else), múltiples operadores
+              matemáticos.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Difícil</strong></td>
+            <td>3 Puntos</td>
+            <td>
+              Lógica compleja, combinación estricta de operadores (and/or/not), validación de múltiples escenarios,
+              matemáticas combinadas.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="tip-card">
+        <p><strong>Ejemplos de combinaciones válidas para llegar a 3 puntos:</strong></p>
+        <ul>
+          <li>Desarrollar <strong>3 proyectos de Nivel Fácil</strong> (1 + 1 + 1 = 3).</li>
+          <li>Desarrollar <strong>1 proyecto Nivel Fácil y 1 Nivel Medio</strong> (1 + 2 = 3).</li>
+          <li>Desarrollar <strong>1 proyecto Nivel Difícil</strong> (3 = 3).</li>
+        </ul>
+      </div>
+
+      <h2>✅ 5. Requisitos mínimos para cualquier código</h2>
+      <p>Independientemente de la dificultad que elijas, todo código entregado debe cumplir con lo siguiente:</p>
+      <ul>
+        <li>
+          <strong>Mensajes claros:</strong> Los <code>input()</code> deben indicar exactamente qué se espera del
+          usuario.
+        </li>
+        <li>
+          <strong>Variables descriptivas:</strong> Nada de usar <code>x</code> o <code>y</code>. Usa
+          <code>precio_total</code>, <code>edad_usuario</code>, etc.
+        </li>
+        <li><strong>Comentarios útiles:</strong> Al menos 2 comentarios por programa explicando la lógica central.</li>
+        <li>
+          <strong>Interactividad:</strong> Todo programa debe pedir al menos un dato al usuario y mostrar al menos un
+          resultado formateado.
+        </li>
+        <li>
+          <strong>Lógica funcional:</strong> Al menos una estructura condicional (<code>if</code>)
+          .
+        </li>
+        <li>
+          <strong>Presentación ordenada:</strong> Usa f-strings para que los mensajes de salida sean naturales, si ayuda a la lectura en consola.
+        </li>
+      </ul>
+
+      <h2>🛠️ 6. Opciones de proyectos sugeridos</h2>
+      <p>
+        Elige de las siguientes listas los proyectos que deseas programar. Puedes adaptar ligeramente las temáticas si
+        lo prefieres, siempre que se mantenga la complejidad de los conceptos.
+      </p>
+   
+
+      
+      <h3><span class="badge badge-easy">Nivel Fácil (1 Punto)</span></h3>
+      <div class="project-grid">
+        <div class="project-card">
+          <h4>1. Calculadora de Edad Exacta</h4>
+          <p class="desc">Pide el año actual y el año de nacimiento. Calcula la edad que cumple este año.</p>
+          <p class="req"><strong>Usa:</strong> input(), int(), resta matemática, print con f-string, según la edad y/o año devolver algún mensaje usando if</p>
+    
+        </div>
+        <div class="project-card">
+          <h4>2. Historia Personalizada</h4>
+          <p class="desc">Pregunta nombre, edad, hobby, etc. Arma una historia corta con distintos escenarios. </p>
+          <p class="req"><strong>Usa:</strong> Múltiples inputs, variables tipo str, f-strings avanzados, darle a elegir con if en que historia aparecerá su info.</p>
+      
+        </div>
+        <div class="project-card">
+          <h4>3. Conversor de Moneda</h4>
+          <p class="desc">Pregunta cuántos pesos tiene el usuario y conviértelos distintas monedas extrajeras EJ: euro y dolar.</p>
+          <p class="req"><strong>Usa:</strong> input(), float(), multiplicación, darle a elegir a que moneda lo quiere convertir con if.</p>
+      
+        </div>
+        <div class="project-card">
+          <h4>4. Calculadora de Propinas</h4>
+          <p class="desc">Pide el total de una cuenta de restaurante y calcula automáticamente la propina según el % que quiere aportar</p>
+          <p class="req"><strong>Usa:</strong> float(), operadores matemáticos, suma final, usar if para calcular un 10% o 15% o 20% según la elección del cliente</p>
+
+        </div>
+        <div class="project-card">
+          <h4>5. Verificador de Temperatura</h4>
+          <p class="desc">Pide la temperatura actual. Si es mayor a 25, avisa que hace calor, si no, que está fresco. </p>
+          <p class="req"><strong>Usa:</strong> float(), if/else simple, operador &gt;.</p>
+    
+        </div>
+        <div class="project-card">
+          <h4>6. Par o Impar</h4>
+          <p class="desc">Pide un número entero y determina si es par o impar.</p>
+          <p class="req"><strong>Usa:</strong> int(), operador módulo (%), if/else, == 0.</p>
+     
+        </div>
+        <div class="project-card">
+          <h4>7. Promedio Escolar Básico</h4>
+          <p class="desc">Pide dos calificaciones y calcula el promedio matemático. </p>
+          <p class="req"><strong>Usa:</strong> float(), suma, división (/), paréntesis para el orden matemático. Según la calificación emitir mensajes de excelente, aprobado o desaprobado</p>
+     
+        </div>
+        <div class="project-card">
+          <h4>8. Calculadora de Días Vividos</h4>
+          <p class="desc">Pide la edad de la persona y calcula un aproximado de los días, horas o meses que ha vivido. </p>
+          <p class="req"><strong>Usa:</strong> int(), multiplicación por 365. La persona debe poder elegir una de las 3 opciones. </p>
+        </div>
+        <div class="project-card">
+          <h4>9. Acceso a Montaña Rusa</h4>
+          <p class="desc">Pide la estatura en metros (ej: 1.55). Si mide más de 1.40, puede pasar. Si mide menos No podrá</p>
+          <p class="req"><strong>Usa:</strong> float(), if/else, operador &gt;.</p>
+       
+        </div>
+        <div class="project-card">
+          <h4>10. Adivina la Capital</h4>
+          <p class="desc">Pregunta la capital de un país. Si acierta exactamente el nombre, gana.</p>
+          <p class="req"><strong>Usa:</strong> input() como string, operador de igualdad (==). Generar tantas condiciones if como consideres para cubrir las distintas formas que pueda escribir la palabra </p>
+        </div>
+  
+      </div>
+
+
+      
+      <h3><span class="badge badge-medium">Nivel Medio (2 Puntos)</span></h3>
+      <div class="project-grid">
+        <div class="project-card">
+          <h4>1. Cajero Automático</h4>
+          <p class="desc">
+            Define un saldo inicial. Pide cuánto retirar. Si hay dinero, descuéntalo y muestra el saldo; si no, da
+            error.
+          </p>
+          <p class="req"><strong>Usa:</strong> Variables previas, float(), if/else, resta, comparaciones.</p>
+         
+        </div>
+        <div class="project-card">
+          <h4>2. Sistema de Calificaciones</h4>
+          <p class="desc">Pide nota de 0 a 10. Muestra "Sobresaliente" (9-10), "Aprobado" (6-8), "Reprobado" (&lt;6).</p>
+          <p class="req"><strong>Usa:</strong> if, elif, else, operadores de comparación (&gt;=, &lt;=).</p>
+          <p class="extra"> Controla que no introduzcan más de 10.</p>
+        </div>
+        <div class="project-card">
+          <h4>3. Calculadora de IMC</h4>
+          <p class="desc">
+            Pide peso (kg) y altura (m). Calcula IMC (peso / altura**2). Muestra el estado (bajo peso, normal,
+            sobrepeso).
+          </p>
+          <p class="req"><strong>Usa:</strong> float(), potencia (**), if/elif/else encadenados.</p>
+          <p class="extra"> Explica la fórmula en un print inicial.</p>
+        </div>
+        <div class="project-card">
+          <h4>4. Tienda de Zapatos</h4>
+          <p class="desc">
+            Zapatos cuestan $50000. Si compran más de 3 pares, hay 10% de descuento. Si compran más de 5, 20%.
+          </p>
+          <p class="req"><strong>Usa:</strong> int(), matemáticas combinadas, if/elif/else.</p>
+          <p class="extra">Muestra el monto total descontado.</p>
+        </div>
+        <div class="project-card">
+          <h4>5. Tipos de Triángulos</h4>
+          <p class="desc">
+            Pide la medida de los 3 lados. Identifica si es equilátero (3 iguales), isósceles (2 iguales) o escaleno
+            (ninguno).
+          </p>
+          <p class="req"><strong>Usa:</strong> float(), operadores lógicos (and, or) y de comparación.</p>
+          <p class="extra"> Comprobar primero que los lados sean válidos (&gt;0).</p>
+        </div>
+        <div class="project-card">
+          <h4>6. Mini Cuestionario</h4>
+          <p class="desc">
+            Haz 3 preguntas de opción múltiple. Cada acierto suma 10 puntos. Al final muestra el puntaje total.
+          </p>
+          <p class="req"><strong>Usa:</strong> Variable contador (puntaje = 0), múltiples if sucesivos.</p>
+          <p class="extra">Muestrar un mensaje distinto según el puntaje final.</p>
+        </div>
+    
+        <div class="project-card">
+          <h4>7. Recomendador de Cine</h4>
+          <p class="desc">
+            Pide edad y género favorito ("Acción", "Comedia", "Terror"). Recomienda una película exacta según ambos
+            datos.
+          </p>
+          <p class="req"><strong>Usa:</strong> Operadores lógicos (and), if/elif/else.</p>
+          <p class="extra"> Agrega opción "Infantil" si edad &lt; 12.</p>
+        </div>
+        <div class="project-card">
+          <h4>8. Convertidor de Temperatura</h4>
+          <p class="desc">
+            Menú: 1 para C a F, 2 para F a C. Pide la temperatura y realiza la fórmula correspondiente.
+          </p>
+          <p class="req"><strong>Usa:</strong> Menú con print triples comillas, if/elif, fórmulas completas.</p>
+          <p class="extra">C de Celsius y F de Faraday</p>
+        </div>
+    
+      
+      </div>
+
+      
+      <h3><span class="badge badge-hard">Nivel Difícil (3 Puntos)</span></h3>
+      <div class="project-grid">
+        <div class="project-card">
+          <h4>1. Login Complejo</h4>
+          <p class="desc">
+            Pide usuario, contraseña y una operación de seguridad (Ej: ¿Cuánto es 3+4?). Todo debe ser correcto para
+            entrar.
+          </p>
+          <p class="req"><strong>Usa:</strong> Múltiples variables, validación estricta con múltiples (and).</p>
+          <p class="extra"> Da mensajes de error específicos (falla user, falla pass).</p>
+        </div>
+        <div class="project-card">
+          <h4>2. Calculadora de Impuestos Renta</h4>
+          <p class="desc">
+            Sueldo &lt; $10k paga 0%. De $10k a $20k paga 10%. Más de $20k paga 20%. Calcula el impuesto exacto a
+            descontar.
+          </p>
+          <p class="req"><strong>Usa:</strong> Lógica de tramos, float(), if/elif/else, matemáticas de porcentajes.</p>
+          <p class="extra">Imprime un recibo de sueldo detallado.</p>
+        </div>
+        <div class="project-card">
+          <h4>3. Simulador de Compras (Carrito)</h4>
+          <p class="desc">
+            Tres productos fijos. El usuario indica cantidad de cada uno. Calcula subtotal, aplica envío si subtotal &lt;
+            $50, y da total final.
+          </p>
+          <p class="req"><strong>Usa:</strong> Acumulación de sumas, if para envío.</p>
+          <p class="extra"> Si el usuario no tiene suficiente dinero (input previo), deniega compra.</p>
+        </div>
+        <div class="project-card">
+          <h4>4. Clasificador de Becas</h4>
+          <p class="desc">
+            Otorga beca si: promedio &gt;= 8 AND ingresos &lt; 1000. Otorga beca especial si promedio &gt;= 9.5 OR zona ==
+            "rural".
+          </p>
+          <p class="req"><strong>Usa:</strong> Lógica muy compleja con 'and', 'or', precedencia de evaluación.</p>
+          <p class="extra">Pide los 3 datos en un formato amigable.</p>
+        </div>
+        <div class="project-card">
+          <h4>5. Aventura RPG de Texto</h4>
+          <p class="desc">
+            Crea un camino de 3 decisiones. Si elige A, pasa a otra pregunta. Si elige B, pierde. Todo debe encadenarse.
+          </p>
+          <p class="req"><strong>Usa:</strong> Estructuras if anidadas (un if dentro de otro if).</p>
+          <p class="extra">Maneja inventario simple (una variable booleana llave = True).</p>
+        </div>
+        <div class="project-card">
+          <h4>6. Máquina Expendedora</h4>
+          <p class="desc">
+            Muestra menú con 3 opciones. Pide ingresar dinero. Evalúa si alcanza, entrega producto y calcula el cambio
+            exacto.
+          </p>
+          <p class="req"><strong>Usa:</strong> float() o int(), if, comparaciones (dinero &gt;= precio), restas.</p>
+          <p class="extra">Advierte exactamente cuánto dinero falta si no alcanza.</p>
+        </div>
+    
+        <div class="project-card">
+          <h4>7.  Médico Clínico</h4>
+          <p class="desc">
+            Pregunta: ¿Fiebre? (S/N), ¿Dificultad al respirar? (S/N), ¿Dolor de pecho? (S/N). Clasifica la urgencia en
+            Rojo, Amarillo o Verde según combinaciones.
+          </p>
+          <p class="req">
+            <strong>Usa:</strong> Múltiples and/or, booleanos, inputs convertidos a mayúscula mentalmente.
+          </p>
+          <p class="extra">Rechaza ingresos que no sean S o N.</p>
+        </div>
+      
+        <div class="project-card">
+          <h4>8. Trivia con Vidas</h4>
+          <p class="desc">
+            Tienes 2 vidas iniciales. Haz pregunta 1: si falla, resta vida. Haz pregunta 2: si falla, resta vida. Si
+            vidas &gt; 0, felicita al final.
+          </p>
+          <p class="req">
+            <strong>Usa:</strong> Control de estado (restar 1 a la variable vidas), validación constante.
+          </p>
+          <p class="extra"> Finaliza el juego abruptamente si llega a 0 en la mitad.</p>
+        </div>
+    
+      </div>
+
+      <h2>💡 7. Consejos para ganar más puntos y defender bien el trabajo</h2>
+      <div class="card">
+        <ul>
+          <li>
+            <strong>Prueba a romper tu código:</strong> Durante el desarrollo, mete textos donde pide números y date
+            cuenta del error. Esto te ayudará a entender la diferencia entre <code>"25"</code> y <code>25</code>.
+          </li>
+          <li>
+            <strong>Comenta tu razonamiento:</strong> Usa <code>#</code> profusamente. Si estás en la defensa oral y te
+            pones nervioso, tus propios comentarios te recordarán qué hace esa línea.
+          </li>
+          <li>
+            <strong>No copies y pegues código que no entiendas:</strong> Es mejor un proyecto Fácil (1 punto) que
+            entiendas a la perfección, a presentar un proyecto Difícil copiado de internet que no puedas explicar.
+          </li>
+          <li>
+            <strong>Atención a la indentación:</strong> Revisa que debajo de cada <code>if</code> haya exactamente 4
+            espacios. VS Code te ayuda, pero confírmalo visualmente.
+          </li>
+        </ul>
+      </div>
+
+      <h2>📥 8. Entrega del trabajo</h2>
+      <div class="warning-card">
+        <h3>¡ATENCIÓN: CÓMO GUARDAR Y ENVIAR EL CÓDIGO! 🛑</h3>
+        <p>
+          Los servicios de correo electrónico modernos (como Gmail, Outlook, etc.) detectan los archivos con extensión
+          <code>.py</code> como programas ejecutables y, por motivos de seguridad,
+          <strong>frecuentemente los bloquean, asumiendo que podrían ser virus</strong>.
+        </p>
+        <p>
+          Para evitar que la tarea se pierda o no pueda ser abierta por el profesor, hacer lo siguiente:
+        </p>
+        <ol>
+          <li>Desarrolla todo tu proyecto y pruébalo en Visual Studio Code con extensión <code>.py</code>.</li>
+          <li>Una vez esté perfecto, copia todo tu código.</li>
+          <li>
+            Abre el <strong>Bloc de Notas (Notepad), Word, o Documentos de google </strong> 
+             en tu computadora, pega el código y guárdalo.
+          </li>
+          <li>Nombra el archivo con tu nombre y el proyecto.</li>
+          <li><strong>Envía ese archivo por correo.</strong> </li>
+        </ol>
+      </div>
+
+      <h2>🌟 Recordatorio final</h2>
+      <div class="card">
+        <p>
+          La programación no se trata de memorizar, sino de <strong>aprender a pensar lógicamente</strong>. Equivocarse,
+          ver letras rojas en la consola y corregir errores es la rutina de todo desarrollador profesional. ¡Disfruta el
+          proceso de crear algo de la nada y diviértete programando tus proyectos!
+        </p>
+        <p>Hasta contarle al profe sobre sus dificultades suma en la nota</p>
+      </div>
+       <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+       
+ 
+      </div>
+    </div>
+  
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>
