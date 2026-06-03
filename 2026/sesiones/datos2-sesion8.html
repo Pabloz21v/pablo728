@@ -1,6 +1,8 @@
-<!DOCTYPE html>
-<html lang="es" data-theme="light" style=""><head><meta charset="utf-8">
-    
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sesión 8: Recuperación de datos</title>
     <style>
       body {
@@ -143,7 +145,7 @@
         margin-bottom: 8px;
       }
       code {
-        font-family: 'Courier New', Courier, monospace;
+        font-family: "Courier New", Courier, monospace;
         background: #f1f5f9;
         padding: 1px 4px;
         border-radius: 4px;
@@ -168,461 +170,601 @@
   </head>
   <body style="">
     <div class="container">
-    <div style="margin-bottom: 24px">
-         <a
-           href="../materias/conversion-y-reparacion-de-datos.html"
-           style="
-             padding: 10px 20px;
-             border-radius: 8px;
-             text-decoration: none;
-             font-weight: bold;
-             background: #4ade80;
-             color: #222;
-             display: inline-block;
-             margin-right: 10px;
-           "
-         >
-           Volver a Materia
-         </a>
-         <a
-           href="datos2-sesion7.html"
-           style="
-             padding: 10px 20px;
-             border-radius: 8px;
-             text-decoration: none;
-             font-weight: bold;
-             background: #60a5fa;
-             color: #fff;
-             display: inline-block;
-             margin-right: 10px;
-           "
-         >
-           Ir a Sesión 7
-         </a>
-         <a
-           href="datos2-sesion9.html"
-           style="
-             padding: 10px 20px;
-             border-radius: 8px;
-             text-decoration: none;
-             font-weight: bold;
-             background: #f9e282;
-             color: #222;
-             display: inline-block;
-           "
-         >
-           Ir a Sesión 9
-         </a>
-       </div>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="datos2-sesion7.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 7
+        </a>
+        <a
+          href="datos2-sesion9.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 9
+        </a>
+      </div>
 
       <h1>Sesión 8: Recuperación de datos</h1>
-      <p class="subtitle">Almacenamiento, borrado, sobrescritura, recuperación y prevención de la pérdida de información.</p>
-
-    <div class="objective-box">
-      <h3>Objetivo de la sesión</h3>
-      <p>
-        Comprender a nivel técnico cómo se almacena la información, los procesos lógicos de borrado y las técnicas de
-        recuperación en diferentes medios de almacenamiento (HDD y SSD). Aprender a reconocer las
-        limitaciones impuestas por el hardware, el estado en el que pueden encontrarse los archivos recuperados, y
-        establecer un procedimiento riguroso de actuación y prevención ante la pérdida de datos.
+      <p class="subtitle">
+        Almacenamiento, borrado, sobrescritura, recuperación y prevención de la
+        pérdida de información.
       </p>
-    </div>
 
-    <h2>1. ¿Qué es realmente la recuperación de datos?</h2>
-    <p>
-      La recuperación de datos no es magia; es un conjunto de técnicas informáticas que permiten extraer información de
-      un dispositivo de almacenamiento cuando el usuario o el sistema operativo ya no pueden acceder a ella de forma
-      normal. Esto es posible porque, en la mayoría de los casos,
-      <strong>eliminar un archivo no borra físicamente sus datos al instante</strong>. La información permanece en el
-      disco en estado "latente" hasta que un nuevo dato ocupa su lugar.
-    </p>
-
-    <h2>2. Cómo se almacenan los datos (Sectores, Bloques y Sistemas de Archivos)</h2>
-    <p>
-      Para entender cómo se recuperan los datos, primero debemos entender cómo se guardan. El almacenamiento difiere
-      enormemente según la tecnología del dispositivo.
-    </p>
-
-    <h3>Discos Duros Mecánicos (HDD)</h3>
-    <p>
-      Los HDD utilizan platos magnéticos giratorios. La superficie se divide en
-      <strong>sectores</strong> (tradicionalmente de 512 bytes o 4 KB). El cabezal de escritura magnetiza estos sectores
-      para representar ceros y unos. Los datos se pueden sobrescribir magnéticamente un número casi ilimitado de veces.
-    </p>
-
-    <h3>Unidades de Estado Sólido (SSD y Pendrives)</h3>
-    <p>
-      Los SSD utilizan memoria flash NAND, que no tiene partes móviles. Los datos se almacenan en
-      <strong>celdas</strong> de memoria, agrupadas en <strong>páginas</strong>, que a su vez forman
-      <strong>bloques</strong>. A diferencia del HDD, la memoria flash no puede sobrescribir datos directamente sobre
-      datos antiguos. Primero debe <em>borrar</em> el bloque completo antes de poder escribir nuevos datos en él.
-    </p>
-
-    <h3>El Sistema de Archivos y los Índices</h3>
-    <p>
-      Independientemente de si es HDD o SSD, el sistema operativo (Windows, macOS, Linux) organiza los datos mediante un
-      <strong>Sistema de Archivos</strong> (como NTFS, exFAT o FAT32). El elemento central de este sistema es el índice
-      o tabla de asignación (por ejemplo, la <em>Master File Table</em> o MFT en NTFS).
-    </p>
-
-    <div class="highlight-box">
-      <strong>Analogía del libro:</strong> El disco duro es como un gran libro. El Sistema de Archivos es el
-      <em>Índice / index</em> del libro. Cuando guardas un archivo, escribimos el texto en una página y anotamos en el índice:
-      "MiFoto.jpg está en la página 45".
-    </div>
-
-    <h2>3. ¿Qué ocurre al borrar un archivo normalmente?</h2>
-    <p>
-      Cuando vacías la papelera de reciclaje o usas <code>Shift + Supr</code>, el sistema operativo
-      <strong>no destruye el archivo</strong>. Lo que hace es ir al índice (la MFT) y eliminar la referencia. Borra la
-      anotación que decía que "MiFoto.jpg" estaba en la página 45, y marca esa página (sectores o bloques) como "Espacio
-      Disponible".
-    </p>
-    <p>
-      Como el archivo ya no está en el índice, el sistema operativo deja de mostrarlo. Sin embargo, los ceros y unos de
-      la fotografía siguen intactos en el disco. Un software de recuperación escanea el disco ignorando el índice,
-      buscando directamente las "páginas" del libro para rescatar los textos huérfanos.
-    </p>
-    <p>Dicho de forma más simple se borra del índice donde se encuentra el archivo que borremos (ej: página 35 -> foto) e indicamos en el índice que ese espacio está a disposición para escribir algo nuevo (ósea ocupamos esa página para guardar algo nuevo). Ahora 
-       sí vamos viendo página por página eventualmente vamos a encontrar nuestro archivo
-        borrado un presente (ej: llegamos a la página 35 y encontramos la foto borrada). </p>
-
-
-    <h2>4. Sobrescritura: El enemigo de la recuperación</h2>
-    <p>
-      <strong>Sobrescribir datos</strong> significa guardar nueva información en los sectores que previamente fueron
-      marcados como disponibles. Si descargas una película nueva y el sistema operativo decide guardarla en el espacio
-      que ocupaba tu foto borrada, los datos de la foto se destruyen físicamente para hacer sitio a la película.
-      <strong>Una vez que los datos son sobrescritos, la recuperación es tecnológicamente imposible</strong>.
-    </p>
-
-    <div class="warning-box">
-      Regla de Oro: Si borras un archivo por error, <strong>APAGA O DEJA DE USAR EL DISCO INMEDIATAMENTE</strong>. Cada
-      minuto que el sistema operativo sigue encendido, escribe archivos temporales, logs y actualizaciones en segundo
-      plano que podrían sobrescribir tus datos perdidos. ¡Nunca instales el programa de recuperación en el mismo disco
-      donde perdiste los datos!
-    </div>
-
-    <h2>5. HDD vs SSD: El papel crítico del comando TRIM</h2>
-    <p>
-      La tecnología ha cambiado las reglas de la recuperación. En los SSD modernos, existe una función llamada
-      <strong>TRIM</strong>. Como la memoria flash necesita borrar bloques antes de escribir, hacer esto en el momento
-      de guardar ralentiza el ordenador. Para evitarlo, TRIM actúa en segundo plano.
-    </p>
-    <p>
-      Cuando borras un archivo en un SSD, el sistema operativo envía el comando TRIM a la controladora del disco
-      indicando: "Este archivo ya no sirve, vacía esas celdas de memoria cuando tengas un rato libre". El SSD procede a
-      purgar los datos físicamente con descargas eléctricas casi de inmediato.
-    </p>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Característica</th>
-            <th>HDD (Discos Mecánicos)</th>
-            <th>SSD (Estado Sólido)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Cómo guarda los datos</strong></td>
-            <td>En sectores magnéticos sobre platos giratorios.</td>
-            <td>En celdas de memoria flash agrupadas en páginas y bloques.</td>
-          </tr>
-          <tr>
-            <td><strong>Comportamiento al borrar</strong></td>
-            <td>Borra la referencia del sistema de archivos. Los datos suelen quedar físicamente en el disco.</td>
-            <td>Borra la referencia y normalmente marca las celdas con TRIM para su limpieza interna.</td>
-          </tr>
-          <tr>
-            <td><strong>Persistencia tras borrado</strong></td>
-            <td>Alta, siempre que no haya sobrescritura.</td>
-            <td>Baja o muy baja, especialmente en equipos modernos.</td>
-          </tr>
-          <tr>
-            <td><strong>Formateo rápido</strong></td>
-            <td>Suele permitir recuperación parcial o amplia si se actúa pronto.</td>
-            <td>Reduce mucho las posibilidades por TRIM y gestión interna del controlador.</td>
-          </tr>
-          <tr>
-            <td><strong>Daño físico</strong></td>
-            <td>Puede producir clics, rozaduras, fallos de motor o cabezal.</td>
-            <td>Puede implicar fallo de controlador, chips NAND o soldaduras.</td>
-          </tr>
-          <tr>
-            <td><strong>Probabilidad de recuperación lógica</strong></td>
-            <td><strong>Alta</strong> si el disco no se siguió usando.</td>
-            <td><strong>Baja</strong> o muy baja en muchos escenarios reales.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="comparison-box">
-      <strong>¿Cuándo puede considerarse definitivo un borrado?</strong> En la práctica, cuando los bloques del archivo ya han sido sobrescritos por datos nuevos, cuando TRIM ha vaciado las celdas en un SSD, cuando se ha realizado un borrado seguro diseñado para impedir recuperación, o cuando el soporte ha sufrido un daño físico severo que impide leer la información residual. Antes de eso, puede haber margen de recuperación; después, las opciones caen drásticamente o desaparecen.
-    </div>
-
-    <h2>6. Recuperación Lógica vs. Daño Físico</h2>
-    <p>Es vital distinguir entre los dos tipos de pérdida de datos:</p>
-    <ul>
-      <li>
-        <strong>Daño Lógico (Recuperable por software):</strong> El disco funciona perfectamente a nivel físico, pero el
-        sistema de archivos está corrupto, formateado accidentalmente o los archivos fueron borrados. Las herramientas
-        de software son efectivas acá.
-      </li>
-      <li>
-        <strong>Daño Físico (Requiere laboratorio):</strong> El disco hace ruidos de clic (cabezales rotos), no
-        enciende, sufrió un cortocircuito, golpes, o el SSD tiene chips quemados.
-        <strong>Ningún software puede reparar un disco roto</strong>. Forzar la lectura de un disco mecánicamente dañado
-        rayará los platos, destruyendo la información para siempre. Requiere enviarse a un laboratorio con cámara limpia
-        (sala blanca).
-      </li>
-    </ul>
-
-    <h2>7. Estados posibles de los archivos recuperados</h2>
-    <p>
-      Debido a la sobrescritura parcial o la fragmentación (el archivo estaba guardado en pedazos dispersos por el
-      disco), los archivos recuperados pueden presentar estos estados:
-    </p>
-    <ul>
-      <!-- <li> <strong>Intactos:</strong> Podemos llegar a recuperar archivos en las mismas condiciones al momento en que fueron borrados.</li> -->
-      <li>
-        <strong>Vídeos corruptos o congelados:</strong> El vídeo puede abrirse, reproducir los primeros 10 segundos y
-        luego detenerse abruptamente o mostrar píxeles verdes. Esto indica que un fragmento del archivo original fue
-        sobrescrito.
-      </li>
-      <li>
-        <strong>Fotos con zonas grises o desalineadas:</strong> Ocurre comúnmente en imágenes JPG. Falta un segmento de
-        datos, por lo que la parte inferior de la foto se ve gris o los colores se desplazan (efecto glitch).
-      </li>
-      <li>
-        <strong>Documentos de texto con caracteres extraños:</strong> Un archivo de Word o Excel que al abrirse muestra
-        símbolos ilegibles (ej. <code>ÐÏ^à¡±á&gt;</code>). El software recuperó el encabezado del archivo, pero el cuerpo
-        contenía datos basura o pertenecía a otro programa.
-      </li>
-      <li>
-        <strong>Archivos huérfanos (Recuperación RAW):</strong> Cuando la MFT o índice está totalmente destruido, el
-        software recupera los archivos buscando firmas (ej. todos los JPG empiezan por <code>FF D8</code>). En este
-        caso, se recupera el archivo, pero <strong>se pierde el nombre original y las carpetas</strong>. Aparecerán como
-        <code>Archivo001.jpg</code>, <code>Archivo002.pdf</code>.
-      </li>
-      <li>
-        <strong>Contenido mezclado:</strong> Abres un documento PDF que debería ser tu tesis, y a mitad de la lectura el
-        texto se convierte en código de un programa del sistema. Se recuperaron sectores cruzados de dos archivos
-        diferentes.
-      </li>
-    </ul>
-
-    <h2>8. Procedimiento riguroso de recuperación (Paso a Paso)</h2>
-    <p>Si te enfrentas a un borrado accidental o a un formateo rápido(borra el indice, no los archivos), este es el protocolo profesional:</p>
-    <ol>
-      <li>
-        <strong>Aislar la unidad:</strong> Apaga el ordenador inmediatamente. No apagues desde Windows si es tu unidad
-        C:, quita la corriente si es necesario. Si es un pendrive, extráelo con cuidado.
-      </li>
-      <li>
-        <strong>Conectar como unidad secundaria:</strong> Extrae el disco afectado y conéctalo a
-        <em>otro ordenador</em> mediante una caja USB externa o puerto SATA, o arranca el ordenador desde un Live USB
-        (como Hiren's Boot o un Linux Live).
-      </li>
-      <li>
-        <strong>(Recomendado) Hacer un clon a nivel de bits:</strong> Los técnicos profesionales clonan el disco dañado
-        a un disco sano y trabajan sobre la copia.
-      </li>
-      <li>
-        <strong>Escanear con software especializado:</strong> Ejecuta el programa de recuperación sobre la unidad
-        afectada.
-      </li>
-      <li>
-        <strong>Guardar en un disco DIFERENTE:</strong> Selecciona los archivos recuperados y
-        <strong>guárdalos siempre en otro pendrive o disco externo</strong>. Si los guardas en el mismo disco,
-        sobrescribirás los archivos que aún no has recuperado.
-      </li>
-    </ol>
-
-    <h2>9. Herramientas y criterios de uso</h2>
-    <p>
-      Existen decenas de herramientas. Lo importante no es memorizar un programa, sino entender qué hacen: buscan
-      estructuras de archivos huérfanas en los bloques crudos del disco.
-    </p>
-    <ul>
-      <li>
-        <strong>Disk Drill / Recuva / EaseUS (Para Windows/Mac):</strong> Programas de entorno gráfico que permiten escaneos
-        rápidos (buscan restos en la MFT) o profundos (RAW, escanean sector por sector buscando firmas de archivos). Son
-        ideales para recuperación lógica en discos duros, tarjetas SD y pendrives.
-      </li>
-      <li>
-        <strong>Recuperar Fotos - All Recovery (Apps Móviles):</strong> Aplicaciones para smartphones.
-        <em>Nota técnica:</em> Los teléfonos móviles modernos (Android/iOS) están encriptados y utilizan almacenamiento
-        flash (UFS/NVMe) con TRIM o su equivalente. Si borras algo de un móvil moderno, la recuperación
-        real es casi nula. Las apps suelen recuperar "thumbnails" (miniaturas de baja calidad) que quedaron en la caché
-        de WhatsApp o del navegador, pero no el archivo original de alta resolución.
-      </li>
-      <li><strong>Otras Apps para movil:</strong>Pueden buscar en las appstore programas de recuperación de archivos. Siempre optar por los mejor puntuados/calificados y con mayor cantidad de descargas</li>
-    </ul>
-
-
-    <h2>10. Prevención: La Regla del Backup 3-2-1</h2>
-    <p>
-      La recuperación de datos nunca es 100% garantizada. El único método seguro es la prevención mediante copias de
-      seguridad (Backup). La industria utiliza la regla <strong>3-2-1</strong>:
-    </p>
-    <div class="highlight-box">
-      <ul>
-        <li><strong>3 copias de tus datos:</strong> El original y dos respaldos.</li>
-        <li>
-          <strong>2 medios diferentes:</strong> Por ejemplo, un disco duro externo y un servidor NAS (evita que un mismo
-          fallo eléctrico queme ambos).
-        </li>
-        <li>
-          <strong>1 copia fuera del sitio (Off-site):</strong> Un respaldo en la nube (Google Drive, OneDrive) o un
-          disco en casa de un familiar. Protege contra incendios, robos o desastres naturales en tu ubicación principal.
-        </li>
-      </ul>
-    </div>
-
-    <h2>11. Ejemplos Cotidianos y Casos Reales</h2>
-    <p>
-      <strong>Caso 1: El formateo de la cámara fotográfica (HDD/SD Card).</strong><br>
-      Un fotógrafo formatea por error su tarjeta SD (que funciona sin TRIM y en FAT32) en su cámara. Sabe que no debe
-      tomar <em>ninguna foto más</em>. Extrae la tarjeta, la conecta al PC, abre un software de escaneo profundo y
-      recupera el 100% de las fotos, aunque sin los nombres originales (recuperación RAW).
-    </p>
-
-    <p>
-      <strong>Caso 2: El trabajo final (puede ser tu tesis universitaria) en el portátil SSD.</strong><br>
-      Un estudiante borra accidentalmente su Tesis Final de su portátil (con un disco NVMe SSD). Vacía la papelera.
-      Se da cuenta a los 5 minutos e instala un programa de recuperación en el mismo ordenador.
-      <strong>Escenario desafortunado</strong> El resultado es fracaso
-      absoluto: primero, el comando TRIM limpió la memoria, y segundo, al instalar el programa sobrescribió los pocos
-      bloques que pudieran haber quedado residuales.
-      <strong>Escenario suertudo:</strong> Instala un programa de recuperación de datos y por fortuna los archivos instalados ocuparon otros espacios asignados a sobrescribir, por lo que pudo recuperar su Tesis Final sin problemas y fue la persona más feliz del mundo.
-    </p>
-
-
-    <hr>
-
-    <div class="activity-section">
-      <h2>12. Actividades y Ejercicios</h2>
-
-      <h3>Bloque A: Preguntas de Reflexión</h3>
-    <ol>
-      <li>
-        Explica con tus propias palabras la analogía del índice de un libro y cómo se relaciona con la MFT del sistema
-        de archivos al borrar un dato.
-      </li>
-      <li>
-        ¿Por qué se insiste tanto en no instalar el software de recuperación en la misma unidad donde se perdieron los
-        datos?
-      </li>
-      <li>
-        Describe qué es el comando TRIM, en qué tipo de discos actúa y cómo afecta a las esperanzas de recuperación.
-      </li>
-      <li>
-        Explica por qué un archivo recuperado con éxito por un software podría mostrar caracteres ilegibles al abrirse.
-      </li>
-    </ol>
-
-    <h3>Bloque B: Verdadero o Falso</h3>
-    <ul>
-      <li>
-        [___] Cuando vacío la papelera de reciclaje en un disco duro mecánico (HDD), los datos se eliminan físicamente
-        al instante.
-      </li>
-      <li>
-        [___] Si mi disco duro hace un ruido de "clic" constante y no es reconocido, debo usar Disk Drill rápidamente
-        para sacar los datos.
-      </li>
-      <li>
-        [___] La fragmentación de un archivo disminuye las posibilidades de recuperarlo en perfectas condiciones tras
-        ser borrado.
-      </li>
-      <li>[___] La regla 3-2-1 recomienda tener 3 copias de seguridad en la nube exclusivamente.</li>
-      <li>
-        [___] Recuperar datos en modo "RAW" o por "firmas" implica que perderé los nombres originales de los archivos
-        (ej. de <code>vacaciones.jpg</code> pasará a <code>file001.jpg</code>).
-      </li>
-    </ul>
-
-    <h3>Bloque C: Resolución de Casos Prácticos</h3>
-      <div class="highlight-box">
-        <strong>Caso Práctico:</strong>
+      <div class="objective-box">
+        <h3>Objetivo de la sesión</h3>
         <p>
-          Tu cliente te trae un disco duro externo USB (HDD tradicional). Te explica que tenía una carpeta llamada
-          "Contabilidad 2025" y la borró por error ayer. Desde entonces, para "calmar los nervios", descargó e instaló un
-          videojuego de 50 GB directamente en ese mismo disco duro externo.
-        </p>
-        <p>
-          <em>Tarea:</em> Redacta qué le dirías al cliente sobre las probabilidades de recuperar su carpeta intacta,
-          basándote en los conceptos de índice, sectores y sobrescritura estudiados en esta sesión.
+          Comprender a nivel técnico cómo se almacena la información, los
+          procesos lógicos de borrado y las técnicas de recuperación en
+          diferentes medios de almacenamiento (HDD y SSD). Aprender a reconocer
+          las limitaciones impuestas por el hardware, el estado en el que pueden
+          encontrarse los archivos recuperados, y establecer un procedimiento
+          riguroso de actuación y prevención ante la pérdida de datos.
         </p>
       </div>
 
-    <h3>Bloque D: Recuperación de datos.</h3>
-<div class="highlight-box">
-<strong>Desde tu pc, notebook o Movil</strong> <br>
-<p style="color: red;"><strong>ULTRAIMPORTANTE: Ya que esta práctica se realiza con 
-  elementos personales, está totalmente prohibido mostrar a nadie los archivos
-   encontrados, y si un alguien te pide ver, el profesor dice que NO!!!</strong>
-</p>
+      <h2>1. ¿Qué es realmente la recuperación de datos?</h2>
+      <p>
+        La recuperación de datos no es magia; es un conjunto de técnicas
+        informáticas que permiten extraer información de un dispositivo de
+        almacenamiento cuando el usuario o el sistema operativo ya no pueden
+        acceder a ella de forma normal. Esto es posible porque, en la mayoría de
+        los casos,
+        <strong
+          >eliminar un archivo no borra físicamente sus datos al
+          instante</strong
+        >. La información permanece en el disco en estado "latente" hasta que un
+        nuevo dato ocupa su lugar.
+      </p>
 
-<p>Instalar alguno de los programas propuestos, o instalar alguno de confianza y realizar la recuperación de datos, ver el menú de archivos recuperados, abrir algunas imágenes, videos y/o archivos</p>
-<p>  <em>Tarea:</em> Describir la experiencia que tuviste sobre el estado de los archivos recuperados, si reconoces las imágenes encontradas o algo que te llame la atención</p>
+      <h2>
+        2. Cómo se almacenan los datos (Sectores, Bloques y Sistemas de
+        Archivos)
+      </h2>
+      <p>
+        Para entender cómo se recuperan los datos, primero debemos entender cómo
+        se guardan. El almacenamiento difiere enormemente según la tecnología
+        del dispositivo.
+      </p>
 
-</div>
+      <h3>Discos Duros Mecánicos (HDD)</h3>
+      <p>
+        Los HDD utilizan platos magnéticos giratorios. La superficie se divide
+        en
+        <strong>sectores</strong> (tradicionalmente de 512 bytes o 4 KB). El
+        cabezal de escritura magnetiza estos sectores para representar ceros y
+        unos. Los datos se pueden sobrescribir magnéticamente un número casi
+        ilimitado de veces.
+      </p>
 
+      <h3>Unidades de Estado Sólido (SSD y Pendrives)</h3>
+      <p>
+        Los SSD utilizan memoria flash NAND, que no tiene partes móviles. Los
+        datos se almacenan en
+        <strong>celdas</strong> de memoria, agrupadas en
+        <strong>páginas</strong>, que a su vez forman <strong>bloques</strong>.
+        A diferencia del HDD, la memoria flash no puede sobrescribir datos
+        directamente sobre datos antiguos. Primero debe <em>borrar</em> el
+        bloque completo antes de poder escribir nuevos datos en él.
+      </p>
+
+      <h3>El Sistema de Archivos y los Índices</h3>
+      <p>
+        Independientemente de si es HDD o SSD, el sistema operativo (Windows,
+        macOS, Linux) organiza los datos mediante un
+        <strong>Sistema de Archivos</strong> (como NTFS, exFAT o FAT32). El
+        elemento central de este sistema es el índice o tabla de asignación (por
+        ejemplo, la <em>Master File Table</em> o MFT en NTFS).
+      </p>
+
+      <div class="highlight-box">
+        <strong>Analogía del libro:</strong> El disco duro es como un gran
+        libro. El Sistema de Archivos es el <em>Índice / index</em> del libro.
+        Cuando guardas un archivo, escribimos el texto en una página y anotamos
+        en el índice: "MiFoto.jpg está en la página 45".
+      </div>
+
+      <h2>3. ¿Qué ocurre al borrar un archivo normalmente?</h2>
+      <p>
+        Cuando vacías la papelera de reciclaje o usas <code>Shift + Supr</code>,
+        el sistema operativo <strong>no destruye el archivo</strong>. Lo que
+        hace es ir al índice (la MFT) y eliminar la referencia. Borra la
+        anotación que decía que "MiFoto.jpg" estaba en la página 45, y marca esa
+        página (sectores o bloques) como "Espacio Disponible".
+      </p>
+      <p>
+        Como el archivo ya no está en el índice, el sistema operativo deja de
+        mostrarlo. Sin embargo, los ceros y unos de la fotografía siguen
+        intactos en el disco. Un software de recuperación escanea el disco
+        ignorando el índice, buscando directamente las "páginas" del libro para
+        rescatar los textos huérfanos.
+      </p>
+      <p>
+        Dicho de forma más simple se borra del índice donde se encuentra el
+        archivo que borremos (ej: página 35 -> foto) e indicamos en el índice
+        que ese espacio está a disposición para escribir algo nuevo (ósea
+        ocupamos esa página para guardar algo nuevo). Ahora sí vamos viendo
+        página por página eventualmente vamos a encontrar nuestro archivo
+        borrado un presente (ej: llegamos a la página 35 y encontramos la foto
+        borrada).
+      </p>
+
+      <h2>4. Sobrescritura: El enemigo de la recuperación</h2>
+      <p>
+        <strong>Sobrescribir datos</strong> significa guardar nueva información
+        en los sectores que previamente fueron marcados como disponibles. Si
+        descargas una película nueva y el sistema operativo decide guardarla en
+        el espacio que ocupaba tu foto borrada, los datos de la foto se
+        destruyen físicamente para hacer sitio a la película.
+        <strong
+          >Una vez que los datos son sobrescritos, la recuperación es
+          tecnológicamente imposible</strong
+        >.
+      </p>
+
+      <div class="warning-box">
+        Regla de Oro: Si borras un archivo por error,
+        <strong>APAGA O DEJA DE USAR EL DISCO INMEDIATAMENTE</strong>. Cada
+        minuto que el sistema operativo sigue encendido, escribe archivos
+        temporales, logs y actualizaciones en segundo plano que podrían
+        sobrescribir tus datos perdidos. ¡Nunca instales el programa de
+        recuperación en el mismo disco donde perdiste los datos!
+      </div>
+
+      <h2>5. HDD vs SSD: El papel crítico del comando TRIM</h2>
+      <p>
+        La tecnología ha cambiado las reglas de la recuperación. En los SSD
+        modernos, existe una función llamada
+        <strong>TRIM</strong>. Como la memoria flash necesita borrar bloques
+        antes de escribir, hacer esto en el momento de guardar ralentiza el
+        ordenador. Para evitarlo, TRIM actúa en segundo plano.
+      </p>
+      <p>
+        Cuando borras un archivo en un SSD, el sistema operativo envía el
+        comando TRIM a la controladora del disco indicando: "Este archivo ya no
+        sirve, vacía esas celdas de memoria cuando tengas un rato libre". El SSD
+        procede a purgar los datos físicamente con descargas eléctricas casi de
+        inmediato.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th>HDD (Discos Mecánicos)</th>
+              <th>SSD (Estado Sólido)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Cómo guarda los datos</strong></td>
+              <td>En sectores magnéticos sobre platos giratorios.</td>
+              <td>
+                En celdas de memoria flash agrupadas en páginas y bloques.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Comportamiento al borrar</strong></td>
+              <td>
+                Borra la referencia del sistema de archivos. Los datos suelen
+                quedar físicamente en el disco.
+              </td>
+              <td>
+                Borra la referencia y normalmente marca las celdas con TRIM para
+                su limpieza interna.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Persistencia tras borrado</strong></td>
+              <td>Alta, siempre que no haya sobrescritura.</td>
+              <td>Baja o muy baja, especialmente en equipos modernos.</td>
+            </tr>
+            <tr>
+              <td><strong>Formateo rápido</strong></td>
+              <td>
+                Suele permitir recuperación parcial o amplia si se actúa pronto.
+              </td>
+              <td>
+                Reduce mucho las posibilidades por TRIM y gestión interna del
+                controlador.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Daño físico</strong></td>
+              <td>
+                Puede producir clics, rozaduras, fallos de motor o cabezal.
+              </td>
+              <td>
+                Puede implicar fallo de controlador, chips NAND o soldaduras.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Probabilidad de recuperación lógica</strong></td>
+              <td><strong>Alta</strong> si el disco no se siguió usando.</td>
+              <td>
+                <strong>Baja</strong> o muy baja en muchos escenarios reales.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="comparison-box">
+        <strong>¿Cuándo puede considerarse definitivo un borrado?</strong> En la
+        práctica, cuando los bloques del archivo ya han sido sobrescritos por
+        datos nuevos, cuando TRIM ha vaciado las celdas en un SSD, cuando se ha
+        realizado un borrado seguro diseñado para impedir recuperación, o cuando
+        el soporte ha sufrido un daño físico severo que impide leer la
+        información residual. Antes de eso, puede haber margen de recuperación;
+        después, las opciones caen drásticamente o desaparecen.
+      </div>
+
+      <h2>6. Recuperación Lógica vs. Daño Físico</h2>
+      <p>Es vital distinguir entre los dos tipos de pérdida de datos:</p>
+      <ul>
+        <li>
+          <strong>Daño Lógico (Recuperable por software):</strong> El disco
+          funciona perfectamente a nivel físico, pero el sistema de archivos
+          está corrupto, formateado accidentalmente o los archivos fueron
+          borrados. Las herramientas de software son efectivas acá.
+        </li>
+        <li>
+          <strong>Daño Físico (Requiere laboratorio):</strong> El disco hace
+          ruidos de clic (cabezales rotos), no enciende, sufrió un
+          cortocircuito, golpes, o el SSD tiene chips quemados.
+          <strong>Ningún software puede reparar un disco roto</strong>. Forzar
+          la lectura de un disco mecánicamente dañado rayará los platos,
+          destruyendo la información para siempre. Requiere enviarse a un
+          laboratorio con cámara limpia (sala blanca).
+        </li>
+      </ul>
+
+      <h2>7. Estados posibles de los archivos recuperados</h2>
+      <p>
+        Debido a la sobrescritura parcial o la fragmentación (el archivo estaba
+        guardado en pedazos dispersos por el disco), los archivos recuperados
+        pueden presentar estos estados:
+      </p>
+      <ul>
+        <!-- <li> <strong>Intactos:</strong> Podemos llegar a recuperar archivos en las mismas condiciones al momento en que fueron borrados.</li> -->
+        <li>
+          <strong>Vídeos corruptos o congelados:</strong> El vídeo puede
+          abrirse, reproducir los primeros 10 segundos y luego detenerse
+          abruptamente o mostrar píxeles verdes. Esto indica que un fragmento
+          del archivo original fue sobrescrito.
+        </li>
+        <li>
+          <strong>Fotos con zonas grises o desalineadas:</strong> Ocurre
+          comúnmente en imágenes JPG. Falta un segmento de datos, por lo que la
+          parte inferior de la foto se ve gris o los colores se desplazan
+          (efecto glitch).
+        </li>
+        <li>
+          <strong>Documentos de texto con caracteres extraños:</strong> Un
+          archivo de Word o Excel que al abrirse muestra símbolos ilegibles (ej.
+          <code>ÐÏ^à¡±á&gt;</code>). El software recuperó el encabezado del
+          archivo, pero el cuerpo contenía datos basura o pertenecía a otro
+          programa.
+        </li>
+        <li>
+          <strong>Archivos huérfanos (Recuperación RAW):</strong> Cuando la MFT
+          o índice está totalmente destruido, el software recupera los archivos
+          buscando firmas (ej. todos los JPG empiezan por <code>FF D8</code>).
+          En este caso, se recupera el archivo, pero
+          <strong>se pierde el nombre original y las carpetas</strong>.
+          Aparecerán como <code>Archivo001.jpg</code>,
+          <code>Archivo002.pdf</code>.
+        </li>
+        <li>
+          <strong>Contenido mezclado:</strong> Abres un documento PDF que
+          debería ser tu tesis, y a mitad de la lectura el texto se convierte en
+          código de un programa del sistema. Se recuperaron sectores cruzados de
+          dos archivos diferentes.
+        </li>
+      </ul>
+
+      <h2>8. Procedimiento riguroso de recuperación (Paso a Paso)</h2>
+      <p>
+        Si te enfrentas a un borrado accidental o a un formateo rápido(borra el
+        indice, no los archivos), este es el protocolo profesional:
+      </p>
+      <ol>
+        <li>
+          <strong>Aislar la unidad:</strong> Apaga el ordenador inmediatamente.
+          No apagues desde Windows si es tu unidad C:, quita la corriente si es
+          necesario. Si es un pendrive, extráelo con cuidado.
+        </li>
+        <li>
+          <strong>Conectar como unidad secundaria:</strong> Extrae el disco
+          afectado y conéctalo a <em>otro ordenador</em> mediante una caja USB
+          externa o puerto SATA, o arranca el ordenador desde un Live USB (como
+          Hiren's Boot o un Linux Live).
+        </li>
+        <li>
+          <strong>(Recomendado) Hacer un clon a nivel de bits:</strong> Los
+          técnicos profesionales clonan el disco dañado a un disco sano y
+          trabajan sobre la copia.
+        </li>
+        <li>
+          <strong>Escanear con software especializado:</strong> Ejecuta el
+          programa de recuperación sobre la unidad afectada.
+        </li>
+        <li>
+          <strong>Guardar en un disco DIFERENTE:</strong> Selecciona los
+          archivos recuperados y
+          <strong>guárdalos siempre en otro pendrive o disco externo</strong>.
+          Si los guardas en el mismo disco, sobrescribirás los archivos que aún
+          no has recuperado.
+        </li>
+      </ol>
+
+      <h2>9. Herramientas y criterios de uso</h2>
+      <p>
+        Existen decenas de herramientas. Lo importante no es memorizar un
+        programa, sino entender qué hacen: buscan estructuras de archivos
+        huérfanas en los bloques crudos del disco.
+      </p>
+      <ul>
+        <li>
+          <strong>Disk Drill / Recuva / EaseUS (Para Windows/Mac):</strong>
+          Programas de entorno gráfico que permiten escaneos rápidos (buscan
+          restos en la MFT) o profundos (RAW, escanean sector por sector
+          buscando firmas de archivos). Son ideales para recuperación lógica en
+          discos duros, tarjetas SD y pendrives.
+        </li>
+        <li>
+          <strong>Recuperar Fotos - All Recovery (Apps Móviles):</strong>
+          Aplicaciones para smartphones. <em>Nota técnica:</em> Los teléfonos
+          móviles modernos (Android/iOS) están encriptados y utilizan
+          almacenamiento flash (UFS/NVMe) con TRIM o su equivalente. Si borras
+          algo de un móvil moderno, la recuperación real es casi nula. Las apps
+          suelen recuperar "thumbnails" (miniaturas de baja calidad) que
+          quedaron en la caché de WhatsApp o del navegador, pero no el archivo
+          original de alta resolución.
+        </li>
+        <li>
+          <strong>Otras Apps para movil:</strong>Pueden buscar en las appstore
+          programas de recuperación de archivos. Siempre optar por los mejor
+          puntuados/calificados y con mayor cantidad de descargas
+        </li>
+      </ul>
+
+      <h2>10. Prevención: La Regla del Backup 3-2-1</h2>
+      <p>
+        La recuperación de datos nunca es 100% garantizada. El único método
+        seguro es la prevención mediante copias de seguridad (Backup). La
+        industria utiliza la regla <strong>3-2-1</strong>:
+      </p>
+      <div class="highlight-box">
+        <ul>
+          <li>
+            <strong>3 copias de tus datos:</strong> El original y dos respaldos.
+          </li>
+          <li>
+            <strong>2 medios diferentes:</strong> Por ejemplo, un disco duro
+            externo y un servidor NAS (evita que un mismo fallo eléctrico queme
+            ambos).
+          </li>
+          <li>
+            <strong>1 copia fuera del sitio (Off-site):</strong> Un respaldo en
+            la nube (Google Drive, OneDrive) o un disco en casa de un familiar.
+            Protege contra incendios, robos o desastres naturales en tu
+            ubicación principal.
+          </li>
+        </ul>
+      </div>
+
+      <h2>11. Ejemplos Cotidianos y Casos Reales</h2>
+      <p>
+        <strong
+          >Caso 1: El formateo de la cámara fotográfica (HDD/SD Card).</strong
+        ><br />
+        Un fotógrafo formatea por error su tarjeta SD (que funciona sin TRIM y
+        en FAT32) en su cámara. Sabe que no debe tomar
+        <em>ninguna foto más</em>. Extrae la tarjeta, la conecta al PC, abre un
+        software de escaneo profundo y recupera el 100% de las fotos, aunque sin
+        los nombres originales (recuperación RAW).
+      </p>
+
+      <p>
+        <strong
+          >Caso 2: El trabajo final (puede ser tu tesis universitaria) en el
+          portátil SSD.</strong
+        ><br />
+        Un estudiante borra accidentalmente su Tesis Final de su portátil (con
+        un disco NVMe SSD). Vacía la papelera. Se da cuenta a los 5 minutos e
+        instala un programa de recuperación en el mismo ordenador.
+        <strong>Escenario desafortunado</strong> El resultado es fracaso
+        absoluto: primero, el comando TRIM limpió la memoria, y segundo, al
+        instalar el programa sobrescribió los pocos bloques que pudieran haber
+        quedado residuales. <strong>Escenario suertudo:</strong> Instala un
+        programa de recuperación de datos y por fortuna los archivos instalados
+        ocuparon otros espacios asignados a sobrescribir, por lo que pudo
+        recuperar su Tesis Final sin problemas y fue la persona más feliz del
+        mundo.
+      </p>
+
+      <hr />
+
+      <div class="activity-section">
+        <h2>12. Actividades y Ejercicios</h2>
+
+        <h3>Bloque A: Preguntas de Reflexión</h3>
+        <ol>
+          <li>
+            Explica con tus propias palabras la analogía del índice de un libro
+            y cómo se relaciona con la MFT del sistema de archivos al borrar un
+            dato.
+          </li>
+          <li>
+            ¿Por qué se insiste tanto en no instalar el software de recuperación
+            en la misma unidad donde se perdieron los datos?
+          </li>
+          <li>
+            Describe qué es el comando TRIM, en qué tipo de discos actúa y cómo
+            afecta a las esperanzas de recuperación.
+          </li>
+          <li>
+            Explica por qué un archivo recuperado con éxito por un software
+            podría mostrar caracteres ilegibles al abrirse.
+          </li>
+        </ol>
+
+        <h3>Bloque B: Verdadero o Falso</h3>
+        <ul>
+          <li>
+            [___] Cuando vacío la papelera de reciclaje en un disco duro
+            mecánico (HDD), los datos se eliminan físicamente al instante.
+          </li>
+          <li>
+            [___] Si mi disco duro hace un ruido de "clic" constante y no es
+            reconocido, debo usar Disk Drill rápidamente para sacar los datos.
+          </li>
+          <li>
+            [___] La fragmentación de un archivo disminuye las posibilidades de
+            recuperarlo en perfectas condiciones tras ser borrado.
+          </li>
+          <li>
+            [___] La regla 3-2-1 recomienda tener 3 copias de seguridad en la
+            nube exclusivamente.
+          </li>
+          <li>
+            [___] Recuperar datos en modo "RAW" o por "firmas" implica que
+            perderé los nombres originales de los archivos (ej. de
+            <code>vacaciones.jpg</code> pasará a <code>file001.jpg</code>).
+          </li>
+        </ul>
+
+        <h3>Bloque C: Resolución de Casos Prácticos</h3>
+        <div class="highlight-box">
+          <strong>Caso Práctico:</strong>
+          <p>
+            Tu cliente te trae un disco duro externo USB (HDD tradicional). Te
+            explica que tenía una carpeta llamada "Contabilidad 2025" y la borró
+            por error ayer. Desde entonces, para "calmar los nervios", descargó
+            e instaló un videojuego de 50 GB directamente en ese mismo disco
+            duro externo.
+          </p>
+          <p>
+            <em>Tarea:</em> Redacta qué le dirías al cliente sobre las
+            probabilidades de recuperar su carpeta intacta, basándote en los
+            conceptos de índice, sectores y sobrescritura estudiados en esta
+            sesión.
+          </p>
+        </div>
+
+        <h3>Bloque D: Recuperación de datos.</h3>
+        <div class="highlight-box">
+          <strong>Desde tu pc, notebook o Movil</strong> <br />
+          <p style="color: red">
+            <strong
+              >ULTRAIMPORTANTE: Ya que esta práctica se realiza con elementos
+              personales, está totalmente prohibido mostrar a nadie los archivos
+              encontrados, y si un alguien te pide ver, el profesor dice que
+              NO!!!</strong
+            >
+          </p>
+
+          <p>
+            Instalar alguno de los programas propuestos, o instalar alguno de
+            confianza y realizar la recuperación de datos, ver el menú de
+            archivos recuperados, abrir algunas imágenes, videos y/o archivos
+          </p>
+          <p>
+            <em>Tarea:</em> Describir la experiencia que tuviste sobre el estado
+            de los archivos recuperados, si reconoces las imágenes encontradas o
+            algo que te llame la atención
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="datos2-sesion7.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 7
+        </a>
+        <a
+          href="datos2-sesion9.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 9
+        </a>
+      </div>
     </div>
 
-
-   <div style="margin-bottom: 24px">
-         <a
-           href="../materias/conversion-y-reparacion-de-datos.html"
-           style="
-             padding: 10px 20px;
-             border-radius: 8px;
-             text-decoration: none;
-             font-weight: bold;
-             background: #4ade80;
-             color: #222;
-             display: inline-block;
-             margin-right: 10px;
-           "
-         >
-           Volver a Materia
-         </a>
-         <a
-           href="datos2-sesion7.html"
-           style="
-             padding: 10px 20px;
-             border-radius: 8px;
-             text-decoration: none;
-             font-weight: bold;
-             background: #60a5fa;
-             color: #fff;
-             display: inline-block;
-             margin-right: 10px;
-           "
-         >
-           Ir a Sesión 7
-         </a>
-         <a
-           href="datos2-sesion9.html"
-           style="
-             padding: 10px 20px;
-             border-radius: 8px;
-             text-decoration: none;
-             font-weight: bold;
-             background: #f9e282;
-             color: #222;
-             display: inline-block;
-           "
-         >
-           Ir a Sesión 9
-         </a>
-       </div>
-    </div>
-  
-
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
-</body></html>
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447"
+      integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ=="
+      data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

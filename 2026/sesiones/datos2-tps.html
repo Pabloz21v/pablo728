@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Examen Oral - Consignas</title>
+    <!-- Google Fonts para mejorar tipografía -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #e9eef3 0%, #dce3ec 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            color: #1e2a3e;
+        }
+
+        /* Contenedor principal tipo tarjeta */
+        .exam-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* Espaciado interno */
+        .exam-content {
+            padding: 2rem 2rem 2.5rem;
+        }
+
+        /* Encabezados */
+        h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e4668, #2c5a8c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.3px;
+            border-left: 5px solid #2c7da0;
+            padding-left: 1.2rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1f4e6e;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.4rem;
+            border-bottom: 3px solid #cbdde9;
+            display: inline-block;
+        }
+
+        /* Lista mejorada */
+        .consignas-list {
+            list-style: none;
+            margin: 1.5rem 0 1.8rem 0;
+        }
+
+        .consignas-list li {
+            background: #fefefe;
+            margin-bottom: 1.2rem;
+            padding: 1rem 1rem 1rem 2.8rem;
+            border-radius: 1.2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            border: 1px solid #eef2f8;
+        }
+
+        .consignas-list li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border-color: #d4e2f0;
+        }
+
+        /* viñeta personalizada */
+        .consignas-list li::before {
+            content: "📌";
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            font-size: 1.2rem;
+            color: #2c7da0;
+        }
+
+        /* estilo para el texto strong dentro de la lista */
+        .consignas-list li strong {
+            color: #1f6392;
+            font-weight: 700;
+            background: #eef4fc;
+            padding: 0.15rem 0.4rem;
+            border-radius: 12px;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        /* bloque de nota final */
+        .nota-final {
+            margin: 2rem 0 0.5rem 0;
+            background: #f8fbfe;
+            border-left: 6px solid #2c7da0;
+            border-radius: 1rem;
+            padding: 1.2rem 1.6rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            transition: all 0.2s;
+        }
+
+        .nota-final p {
+            margin: 0.5rem 0;
+        }
+
+        .nota-final strong:first-child {
+            font-size: 1.15rem;
+            color: #1a5d7a;
+            display: inline-block;
+            background: #e2edf7;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            margin-right: 0.6rem;
+        }
+
+        .nota-final p {
+            color: #1e2f3d;
+        }
+
+        /* Ejemplos dentro de nota-final */
+        .nota-final br {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 650px) {
+            .exam-content {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 1.6rem;
+                padding-left: 0.8rem;
+            }
+            .consignas-list li {
+                padding: 0.8rem 0.8rem 0.8rem 2.3rem;
+            }
+            .consignas-list li::before {
+                left: 0.7rem;
+                top: 0.75rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Pie de página (opcional) */
+        .footer-note {
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #7a8e9e;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="exam-container">
+    <div class="exam-content">
+       <div style="margin-bottom: 24px">
+        <a
+          href="../materias/conversion-y-reparacion-de-datos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+       
+       
+      </div>
+        <h1>Consignas Examen Oral Primer Cuatrimestre</h1>
+
+        <h2>Consignas de Evaluación</h2>
+
+        <ul class="consignas-list">
+            <li>
+                <strong>Modalidad:</strong> El examen consistirá en una defensa oral individual. Cada estudiante deberá exponer
+                sobre las dos (2) sesiones que más le hayan interesado, excluyendo obligatoriamente la sesión
+                1, ya que era repaso del año pasado.
+            </li>
+            <li>
+                <strong>Enfoque de la presentación:</strong> El objetivo principal es evaluar la capacidad de comunicación y
+                síntesis. Deben preparar su exposición imaginando que le están enseñando el tema a un familiar (su abuelo,
+                padre, tío) o a un amigo. Es fundamental practicar cómo explicar los conceptos de forma clara, didáctica y
+                accesible para alguien que no es especialista en la materia.
+            </li>
+            <li>
+                <strong>Tiempo de defensa:</strong> Cada estudiante dispondrá de un máximo de quince (15) minutos para realizar
+                su exposición completa.
+            </li>
+            <li>
+                <strong>Lugar de rendición:</strong> La defensa podrá llevarse a cabo en el aula durante el horario habitual de
+                clase, o bien en los horarios de PEP de su profe (de 15:00 hs. a 18:30 hs.) en la
+                oficina técnica.
+            </li>
+            <li>
+                <strong>Fechas habilitadas:</strong> Pueden rendir la segunda, tercera y cuarta
+                semana del mes de junio (específicamente, del 8 al 26 de junio).
+            </li>
+            <li>
+                <strong>Fecha límite:</strong> El período de exámenes finalizará el día 26 de junio inclusive.
+                No se aceptarán defensas posteriores a esta fecha (cierre de notas primer cuatrimestre).
+            </li>
+        </ul>
+
+        <div class="nota-final">
+            <p>
+                <strong>Importante</strong> <br>
+                La entrega de los TP's importa. Se calculará el % de trabajos entregados.
+                En base a la nota obtenida de la defensa oral, se lo multiplica por el % de trabajos entregados. <br>
+                Ej 1) Nota Defensa 10 - Entregó 4 de 8 trabajos, ósea 50% = 10*50% -> 5 de nota final. <br>
+                Ej 2) Nota Defensa 9 - Entregó 8 de 8 trabajos, ósea 100% = 9*100% -> 9 de nota final. <br>
+                Ej 3) Nota Defensa 8 - Entregó 6 de 8 trabajos, ósea 75% = 8*75% -> 6 de nota final.
+            </p>
+            <p>Por lo tanto es conveniente ponerse al día con los TP's</p>
+        </div>
+        
+        <div class="footer-note">
+            📅 Período de exámenes: 8 al 26 de junio — ¡Buena suerte!
+        </div>
+        <div style="margin-bottom: 24px">
+               <a
+                 href="../materias/conversion-y-reparacion-de-datos.html"
+                 style="
+                   padding: 10px 20px;
+                   border-radius: 8px;
+                   text-decoration: none;
+                   font-weight: bold;
+                   background: #4ade80;
+                   color: #222;
+                   display: inline-block;
+                   margin-right: 10px;
+                 "
+               >
+                 Volver a Materia
+               </a>
+              
+              
+             </div>
+    </div>
+</div>
+<!-- Script original (Cloudflare Beacon) que ya estaba presente -->
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
