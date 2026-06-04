@@ -1,0 +1,1052 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examen para valientes - Versión Mejorada</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        padding: 15px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: clamp(24px, 5vw, 32px);
+        color: #333;
+      }
+
+      .encabezado {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-bottom: 25px;
+        font-size: clamp(14px, 4vw, 18px);
+      }
+
+      @media (min-width: 620px) {
+        .encabezado {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .encabezado div {
+        background-color: white;
+        padding: 12px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .encabezado strong {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+      }
+
+      .encabezado p {
+        margin: 5px 0;
+        font-size: clamp(12px, 3.5vw, 16px);
+      }
+
+      #timer {
+        font-size: clamp(20px, 6vw, 28px) !important;
+        color: red;
+        font-weight: bold;
+      }
+
+      #quiz {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      #quiz p {
+        margin: 15px 0 10px 0;
+        font-size: clamp(14px, 4vw, 16px);
+        font-weight: bold;
+        color: #333;
+      }
+
+      label {
+        display: block;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: clamp(13px, 3.5vw, 15px);
+        background-color: #f9f9f9;
+        transition: background-color 0.3s;
+      }
+
+      label:hover {
+        background-color: #efefef;
+      }
+
+      label input[type="radio"] {
+        margin-right: 10px;
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+      }
+
+      button {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        font-size: clamp(14px, 4vw, 16px);
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      button:active {
+        background-color: #004085;
+      }
+
+      #resultado {
+        text-align: center;
+        font-size: clamp(16px, 4vw, 20px);
+        font-weight: bold;
+        color: #333;
+        background-color: white;
+        padding: 15px;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      hr {
+        margin: 15px 0;
+        border: none;
+        border-top: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Examen para valientes</h1>
+    <div class="encabezado">
+      <div>
+        <strong>Hora de inicio:</strong>
+        <p id="horaInicio"></p>
+      </div>
+      <div>
+        <strong>Tiempo restante:</strong>
+        <p id="timer"></p>
+      </div>
+      <div id="horaFinalizacionDiv" style="display: none">
+        <strong>Hora de finalización:</strong>
+        <p id="horaFinalizacion"></p>
+      </div>
+    </div>
+    <div id="quiz"></div>
+    <button onclick="finalizar()">Finalizar</button>
+    <p id="resultado"></p>
+
+    <script>
+      const preguntasData = {
+        preguntas: [
+          // Sesión 1: Introducción a los Dispositivos de Almacenamiento
+          // Sesión 1: Introducción a los Dispositivos de Almacenamiento
+          // Sesión 1: Introducción a los Dispositivos de Almacenamiento
+          {
+            id: 1,
+            pregunta:
+              "¿Cuál es la principal diferencia entre el almacenamiento magnético y el almacenamiento flash?",
+            opciones: [
+              "El almacenamiento magnético usa discos giratorios y el flash usa chips de memoria",
+              "El almacenamiento magnético usa láser y el flash usa discos ópticos",
+              "El almacenamiento magnético solo funciona en teléfonos y el flash en computadoras",
+              "El almacenamiento magnético necesita internet y el flash no",
+            ],
+            respuesta_correcta:
+              "El almacenamiento magnético usa discos giratorios y el flash usa chips de memoria",
+          },
+          {
+            id: 2,
+            pregunta:
+              "¿Cuál de las siguientes opciones corresponde a una característica del almacenamiento flash?",
+            opciones: [
+              "Tiene partes mecánicas y por eso es más lento",
+              "Es más rápido porque no tiene partes móviles",
+              "Se lee únicamente con un láser",
+              "Es más sensible a golpes y vibraciones",
+            ],
+            respuesta_correcta: "Es más rápido porque no tiene partes móviles",
+          },
+          {
+            id: 3,
+            pregunta:
+              "¿Qué dispositivo es un ejemplo de almacenamiento magnético?",
+            opciones: ["Tarjeta SD", "Memoria USB", "Disco duro HDD", "SSD"],
+            respuesta_correcta: "Disco duro HDD",
+          },
+          {
+            id: 4,
+            pregunta:
+              "¿Cuál es una ventaja del almacenamiento flash respecto al almacenamiento magnético?",
+            opciones: [
+              "Es más resistente a golpes",
+              "Tiene discos giratorios",
+              "Depende de un cabezal para leer y escribir",
+              "Siempre tiene menor velocidad de lectura",
+            ],
+            respuesta_correcta: "Es más resistente a golpes",
+          },
+          {
+            id: 5,
+            pregunta:
+              "¿Cuál de las siguientes opciones incluye dos dispositivos de almacenamiento interno?",
+            opciones: [
+              "HDD y SSD",
+              "USB y tarjeta SD",
+              "CD y DVD",
+              "Pendrive y HDD",
+            ],
+            respuesta_correcta: "HDD y SSD",
+          },
+          {
+            id: 6,
+            pregunta:
+              "¿Qué característica distingue al almacenamiento interno?",
+            opciones: [
+              "Se conecta siempre por USB",
+              "Está dentro del dispositivo",
+              "Solo sirve para hacer copias de seguridad",
+              "Es únicamente óptico",
+            ],
+            respuesta_correcta: "Está dentro del dispositivo",
+          },
+          {
+            id: 7,
+            pregunta:
+              "¿Cuál de estos pares corresponde a ejemplos de almacenamiento interno en una computadora?",
+            opciones: [
+              "Disco duro externo y memoria USB",
+              "Tarjeta microSD y Blu-ray",
+              "HDD y SSD",
+              "DVD y pendrive",
+            ],
+            respuesta_correcta: "HDD y SSD",
+          },
+          {
+            id: 8,
+            pregunta:
+              " ¿Para qué se usa típicamente el almacenamiento interno?",
+            opciones: [
+              "Para respaldos y transferencia de archivos",
+              "Para películas y software antiguo",
+              "Para sistema operativo, programas y archivos fijos",
+              "Para conectar cámaras y teléfonos",
+            ],
+            respuesta_correcta:
+              "Para sistema operativo, programas y archivos fijos",
+          },
+          {
+            id: 9,
+            pregunta:
+              "¿Cuál de las siguientes opciones incluye dos dispositivos de almacenamiento externo?",
+            opciones: [
+              "Disco duro externo y memoria USB",
+              "HDD y SSD interno",
+              "Memoria RAM y CPU",
+              "DVD y placa madre",
+            ],
+            respuesta_correcta: "Disco duro externo y memoria USB",
+          },
+          {
+            id: 10,
+            pregunta: "¿Qué caracteriza al almacenamiento externo?",
+            opciones: [
+              "Está integrado dentro del equipo",
+              "Solo puede ser óptico",
+              "Se encuentra fuera del dispositivo y puede conectarse",
+              "Se utiliza únicamente para el sistema operativo",
+            ],
+            respuesta_correcta:
+              "Se encuentra fuera del dispositivo y puede conectarse",
+          },
+          {
+            id: 11,
+            pregunta:
+              "¿Cuál de estos pares corresponde a ejemplos de almacenamiento externo?",
+            opciones: [
+              "SSD y RAM",
+              "USB y disco duro externo",
+              "Microprocesador y RAM",
+              "CD y memoria caché",
+            ],
+            respuesta_correcta: "USB y disco duro externo",
+          },
+          {
+            id: 12,
+            pregunta:
+              "¿Para qué se usa típicamente el almacenamiento externo ?",
+            opciones: [
+              "Para sistema operativo y programas fijos",
+              "Para cálculos y procesamiento de datos",
+              "Para respaldos, transferencia de archivos y expansión de capacidad",
+              "Para controlar la energía del equipo",
+            ],
+            respuesta_correcta:
+              "Para respaldos, transferencia de archivos y expansión de capacidad",
+          },
+          {
+            id: 13,
+            pregunta:
+              "¿Cuál de las siguientes opciones menciona dos ejemplos de almacenamiento óptico?",
+            opciones: [
+              "CD y DVD",
+              "HDD y DVD",
+              "CD y microSD",
+              "Disco externo y Blu-ray",
+            ],
+            respuesta_correcta: "CD y DVD",
+          },
+          {
+            id: 14,
+            pregunta:
+              "¿Qué dispositivo también es un ejemplo de almacenamiento óptico además del CD y el DVD?",
+            opciones: ["Blu-ray", "SSD", "Memoria RAM", "Tarjeta SD"],
+            respuesta_correcta: "Blu-ray",
+          },
+          {
+            id: 15,
+            pregunta:
+              "¿Cuál de estos grupos está formado únicamente por dispositivos de almacenamiento óptico?",
+            opciones: [
+              "CD, DVD y Blu-ray",
+              "HDD, SSD y USB",
+              "Pendrive, microSD y SSD",
+              "Disco externo, RAM y DVD",
+            ],
+            respuesta_correcta: "CD, DVD y Blu-ray",
+          },
+          {
+            id: 16,
+            pregunta:
+              " ¿Cómo se leen los dispositivos de almacenamiento óptico?",
+            opciones: [
+              "Con un cabezal magnético",
+              "Con chips de memoria flash",
+              "Con láser",
+              "Con conexión USB",
+            ],
+            respuesta_correcta: "Con láser",
+          },
+          {
+            id: 17,
+            pregunta:
+              "¿Cómo se llama el componente capaz de leer discos ópticos en una PC o notebook?",
+            opciones: [
+              "Unidad óptica",
+              "Disco duro",
+              "Disquetera",
+              "Fuente de alimentación",
+            ],
+            respuesta_correcta: "Unidad óptica",
+          },
+          {
+            id: 18,
+            pregunta:
+              "¿Qué dispositivo se utiliza para leer CD, DVD o Blu-ray en una computadora?",
+            opciones: [
+              "Lectora óptica",
+              "Placa madre",
+              "Pendrive",
+              "Memoria caché",
+            ],
+            respuesta_correcta: "Lectora óptica",
+          },
+          {
+            id: 19,
+            pregunta: "¿Qué tienen en común los CD-RW, DVD-RW y BD-RE?",
+            opciones: [
+              "Son discos ópticos regrabables que permiten borrar y volver a escribir datos",
+              "Son memorias flash de solo lectura",
+              "Son discos magnéticos de alta velocidad",
+              "Son dispositivos de almacenamiento interno no extraíbles",
+            ],
+            respuesta_correcta:
+              "Son discos ópticos regrabables que permiten borrar y volver a escribir datos",
+          },
+          {
+            id: 20,
+            pregunta: "¿Qué significa que un disco sea CD-RW, DVD-RW o BD-RE?",
+            opciones: [
+              "Que solo puede grabarse una vez",
+              "Que puede leerse únicamente en internet",
+              "Que puede borrarse y reutilizarse varias veces",
+              "Que funciona como memoria RAM",
+            ],
+            respuesta_correcta:
+              "Que puede borrarse y reutilizarse varias veces",
+          },
+          {
+            id: 21,
+            pregunta: "¿Qué tipo de almacenamiento utiliza un pendrive?",
+            opciones: [
+              "Almacenamiento magnético",
+              "Almacenamiento flash",
+              "Almacenamiento óptico",
+              "Almacenamiento en caché",
+            ],
+            respuesta_correcta: "Almacenamiento flash",
+          },
+          {
+            id: 22,
+            pregunta:
+              "¿Por qué un pendrive se considera un dispositivo de almacenamiento flash?",
+            opciones: [
+              "Porque usa discos giratorios para guardar datos",
+              "Porque almacena información en chips de memoria no volátil",
+              "Porque necesita un láser para leer los datos",
+              "Porque solo funciona dentro de la computadora",
+            ],
+            respuesta_correcta:
+              "Porque almacena información en chips de memoria no volátil",
+          },
+          // Clase 2: Discos Duros (HDD) – Funcionamiento y Tipos
+          // Clase 2: Discos Duros (HDD) – Funcionamiento y Tipos
+          // Clase 2: Discos Duros (HDD) – Funcionamiento y Tipos
+          {
+            id: 23,
+            pregunta:
+              "¿Qué sinónimos se usan para referirse a un HDD?",
+            opciones: [
+              "Disco duro y Hard Disk Drive",
+              "Hard Disk Drive y SSD",
+              "Unidad óptica y Disco duro",
+              "Placa madre y procesador",
+            ],
+            respuesta_correcta: "Disco duro y Hard Disk Drive",
+          },
+          {
+            id: 24,
+            pregunta:
+              "¿Cuál de las siguientes opciones enumera correctamente componentes internos de un HDD?",
+            opciones: [
+              "Platos, cabezales, motor de giro, brazo actuador, circuito lógico y memoria caché",
+              "Teclado, fuente, Platos, brazo actuador, memoria caché y ventilador",
+              "GPU, cabezales, pila CMOS, brazo actuador, circuito lógico y BIOS",
+              "Platos, batería, cabezales, circuito lógico, memoria caché y parlantes",
+            ],
+            respuesta_correcta:
+              "Platos, cabezales, motor de giro, brazo actuador, circuito lógico y memoria caché",
+          },
+          {
+            id: 25,
+            pregunta:
+              "¿Cuáles son las medidas físicas más comunes de los HDD mencionadas en el material?",
+            opciones: [
+              "1.8 y 2.2 pulgadas",
+              "2.5 y 3.5 pulgadas",
+              "4.0 y 5.0 pulgadas",
+              "2.0 y 4.5 pulgadas",
+            ],
+            respuesta_correcta: "2.5 y 3.5 pulgadas",
+          },
+          {
+            id: 26,
+            pregunta: "¿Qué significa la sigla RPM en un HDD?",
+            opciones: [
+              "Rendimiento por memoria",
+              "Revoluciones por minuto",
+              "Registro de potencia magnética",
+              "Rotación por módulo",
+            ],
+            respuesta_correcta: "Revoluciones por minuto",
+          },
+          {
+            id: 27,
+            pregunta:
+              "¿Por qué los HDD de 3.5 pulgadas no se usan habitualmente en laptops?",
+            opciones: [
+              "Porque no almacenan datos de forma permanente",
+              "Porque son más grandes, consumen más energía y están orientados a desktops o servidores",
+              "Porque no usan platos magnéticos",
+              "Porque solo funcionan con puertos USB",
+            ],
+            respuesta_correcta:
+              "Porque son más grandes, consumen más energía y están orientados a desktops o servidores",
+          },
+          {
+            id: 28,
+            pregunta:
+              "¿Por qué los cabezales de un HDD no tocan los platos durante su operación normal?",
+            opciones: [
+              "Porque están pegados al eje del motor",
+              "Porque giran más lento que los platos",
+              "Porque flotan a una altura de 3 a 6 nanómetros gracias a un colchón de aire generado por la rotación",
+              "Porque solo se activan cuando el disco está apagado",
+            ],
+            respuesta_correcta:
+              "Porque flotan a una altura de 3 a 6 nanómetros gracias a un colchón de aire generado por la rotación",
+          },
+          {
+            id: 29,
+            pregunta: "¿Qué función cumple la memoria caché en los HDD?",
+            opciones: [
+              "Guardar el sistema operativo de manera definitiva",
+              "Almacenar temporalmente datos frecuentes para reducir latencia y mejorar el rendimiento",
+              "Reemplazar los platos magnéticos",
+              "Aumentar físicamente la cantidad de cabezales",
+            ],
+            respuesta_correcta:
+              "Almacenar temporalmente datos frecuentes para reducir latencia y mejorar el rendimiento",
+          },
+          {
+            id: 30,
+            pregunta:
+              "¿Cuál describe correctamente qué son los cables SATA e IDE y qué función cumplen?",
+            opciones: [
+              "Son cables de video que conectan el monitor a la placa madre",
+              "Son cables de datos que conectan el HDD a la placa madre; IDE usa 40 pines y SATA 7 pines",
+              "Son cables de corriente exclusivos para ventiladores",
+              "Son conectores inalámbricos para discos externos",
+            ],
+            respuesta_correcta:
+              "Son cables de datos que conectan el HDD a la placa madre; IDE usa 40 pines y SATA 7 pines",
+          },
+          {
+            id: 31,
+            pregunta:
+              "¿Cuáles son los conectores de alimentación de un HDD IDE y de un HDD SATA?",
+            opciones: [
+              "Molex en IDE y conector de alimentación SATA de 15 pines en SATA",
+              "USB-C en IDE y Molex en SATA",
+              "HDMI en IDE y DisplayPort en SATA",
+              "Conector de 7 pines en IDE y Molex en SATA",
+            ],
+            respuesta_correcta:
+              "Molex en IDE y conector de alimentación SATA de 15 pines en SATA",
+          },
+          {
+            id: 32,
+            pregunta:
+              "¿Qué interfaz es más rápida: IDE o SATA III?",
+            opciones: [
+              "IDE, porque alcanza 600 MB/s",
+              "SATA III, porque alcanza 600 MB/s frente a 133 MB/s de IDE",
+              "Ambas son iguales, con 300 MB/s",
+              "IDE, porque usa 80 conductores",
+            ],
+            respuesta_correcta:
+              "SATA III, porque alcanza 600 MB/s frente a 133 MB/s de IDE",
+          },
+          {
+            id: 33,
+            pregunta:
+              "¿Qué ocurre si configuras dos discos HDD IDE como Master en el mismo canal?",
+            opciones: [
+              "Aumenta automáticamente la velocidad de transferencia",
+              "Los discos se convierten en SATA",
+              "No serán reconocidos por la BIOS",
+              "Se activa el modo RAID de forma automática",
+            ],
+            respuesta_correcta: "No serán reconocidos por la BIOS",
+          },
+          {
+            id: 34,
+            pregunta:
+              '¿Qué es el "Click of Death" en un HDD y cuál suele ser su causa?',
+            opciones: [
+              "Es un modo de ahorro de energía causado por baja temperatura",
+              "Es un ruido repetitivo de clic asociado a fallas mecánicas o de posicionamiento de los cabezales",
+              "Es una función de limpieza automática de los platos",
+              "Es una alerta normal que indica que la caché está llena",
+            ],
+            respuesta_correcta:
+              "Es un ruido repetitivo de clic asociado a fallas mecánicas o de posicionamiento de los cabezales",
+          },
+          {
+            id: 35,
+            pregunta: "¿Qué significa la sigla HDD?",
+            opciones: [
+              "Hard Disk Drive",
+              "High Data Device",
+              "Hybrid Disk Driver",
+              "Heavy Drive Disk",
+            ],
+            respuesta_correcta: "Hard Disk Drive",
+          },
+          {
+            id: 36,
+            pregunta:
+              "¿Que palabras describen el almacenamiento HDD?",
+            opciones: [
+              "Óptico y temporal",
+              "Magnético y permanente",
+              "Volátil y electrónico",
+              "Inalámbrico y externo",
+            ],
+            respuesta_correcta: "Magnético y permanente",
+          },
+          {
+            id: 37,
+            pregunta:
+              "¿Qué componente del HDD almacena los datos en superficies magnéticas?",
+            opciones: [
+              "Brazo actuador",
+              "Platos",
+              "Memoria caché",
+              "Conector SATA",
+            ],
+            respuesta_correcta: "Platos",
+          },
+          {
+            id: 38,
+            pregunta:
+              "¿Qué componente mueve los cabezales radialmente sobre los platos para acceder a los datos?",
+            opciones: [
+              "Motor de giro",
+              "Brazo actuador",
+              "Circuito lógico",
+              "Buffer SATA",
+            ],
+            respuesta_correcta: "Brazo actuador",
+          },
+          {
+            id: 39,
+            pregunta:
+              '¿Qué indica la medida en pulgadas de un HDD, como 2.5" o 3.5"?',
+            opciones: [
+              "La velocidad de lectura",
+              "El tamaño físico del disco",
+              "La cantidad de memoria caché",
+              "El voltaje de alimentación",
+            ],
+            respuesta_correcta: "El tamaño físico del disco",
+          },
+          {
+            id: 40,
+            pregunta:
+              "¿Qué tamaño de HDD se usa típicamente en notebooks?",
+            opciones: [
+              "1.8 pulgadas",
+              "2.5 pulgadas",
+              "3.5 pulgadas",
+              "5.25 pulgadas",
+            ],
+            respuesta_correcta: "2.5 pulgadas",
+          },
+          {
+            id: 41,
+            pregunta: "¿Qué aspecto del HDD expresan las RPM?",
+            opciones: [
+              "La cantidad de pines del conector",
+              "La velocidad de rotación de los platos",
+              "La capacidad máxima del disco",
+              "La temperatura de trabajo",
+            ],
+            respuesta_correcta: "La velocidad de rotación de los platos",
+          },
+        //   {
+        //     id: 42,
+        //     pregunta:
+        //       "¿Cuál de los siguientes valores aparece en el material como velocidad de rotación común en HDD?",
+        //     opciones: ["2400 RPM", "5400 RPM", "15000 RPM", "2200 RPM"],
+        //     respuesta_correcta: "5400 RPM",
+        //   },
+          {
+            id: 43,
+            pregunta:
+              '¿Qué combinación explica mejor por qué los HDD de 3.5" no se usan normalmente en laptops?',
+            opciones: [
+              "Porque son más pequeños y ligeros",
+              'Porque requieren menos energía que los de 2.5"',
+              "Porque tienen mayor tamaño físico y mayor consumo de energía",
+              "Porque no pueden conectarse a una placa madre",
+            ],
+            respuesta_correcta:
+              "Porque tienen mayor tamaño físico y mayor consumo de energía",
+          },
+          {
+            id: 44,
+            pregunta:
+              '¿En qué tipo de equipos se usan típicamente los HDD de 2.5" ?',
+            opciones: [
+              "Servidores de gran capacidad exclusivamente",
+              "Laptops, consolas y dispositivos portátiles",
+              "Solo equipos industriales antiguos",
+              "Monitores y televisores",
+            ],
+            respuesta_correcta: "Laptops, consolas y dispositivos portátiles",
+          },
+          {
+            id: 45,
+            pregunta:
+              "¿Qué permite que los cabezales del HDD no toquen el plato en funcionamiento normal?",
+            opciones: [
+              "Un campo eléctrico fijo",
+              "Un colchón de aire generado por la rotación",
+              "Una capa de goma protectora",
+              "Un freno mecánico interno",
+            ],
+            respuesta_correcta: "Un colchón de aire generado por la rotación",
+          },
+        //   {
+        //     id: 46,
+        //     pregunta:
+        //       "¿A qué altura aproximada flotan los cabezales sobre los platos según el material?",
+        //     opciones: [
+        //       "3-6 nanómetros",
+        //       "3-6 milímetros",
+        //       "3-6 centímetros",
+        //       "3-6 micrómetros",
+        //     ],
+        //     respuesta_correcta: "3-6 nanómetros",
+        //   },
+          {
+            id: 47,
+            pregunta:
+              "¿Qué ventaja ofrece la memoria caché al HDD durante las operaciones frecuentes?",
+            opciones: [
+              "Aumenta el tamaño físico del disco",
+              "Reduce la latencia y mejora el rendimiento",
+              "Convierte el disco en SSD",
+              "Elimina la necesidad de platos magnéticos",
+            ],
+            respuesta_correcta: "Reduce la latencia y mejora el rendimiento",
+          },
+        //   {
+        //     id: 48,
+        //     pregunta: '¿Qué es el "write caching" mencionado ?',
+        //     opciones: [
+        //       "Un sistema que borra datos antiguos automáticamente",
+        //       "Una técnica para acumular temporalmente datos antes de escribirlos en los platos",
+        //       "Un método para enfriar el motor del HDD",
+        //       "Un tipo de conector de alimentación",
+        //     ],
+        //     respuesta_correcta:
+        //       "Una técnica para acumular temporalmente datos antes de escribirlos en los platos",
+        //   },
+          {
+            id: 49,
+            pregunta:
+              "¿Qué función principal cumplen los cables IDE y SATA en un HDD?",
+            opciones: [
+              "Transportar vídeo hacia el monitor",
+              "Conectar el disco duro a la placa madre para transmitir datos",
+              "Regular la temperatura del disco",
+              "Reemplazar la memoria caché",
+            ],
+            respuesta_correcta:
+              "Conectar el disco duro a la placa madre para transmitir datos",
+          },
+          {
+            id: 50,
+            pregunta:
+              "¿Cuál es una diferencia física correcta entre el cable/conector IDE y el SATA?",
+            opciones: [
+              "IDE usa 7 pines y SATA 40 pines",
+              "IDE es inalámbrico y SATA usa fibra óptica",
+              "IDE usa 40 pines y SATA usa 7 pines para datos",
+              "Ambos usan exactamente el mismo conector",
+            ],
+            respuesta_correcta:
+              "IDE usa 40 pines y SATA usa 7 pines para datos",
+          },
+          {
+            id: 51,
+            pregunta:
+              "¿Qué conector de alimentación utiliza un HDD IDE?",
+            opciones: ["Molex", "USB-C", "Mini SATA", "DisplayPort"],
+            respuesta_correcta: "Molex",
+          },
+          {
+            id: 52,
+            pregunta:
+              "¿Cuántos pines tiene el conector de alimentación de un HDD SATA?",
+            opciones: ["4 pines", "7 pines", "15 pines", "24 pines"],
+            respuesta_correcta: "15 pines",
+          },
+        //   {
+        //     id: 53,
+        //     pregunta:
+        //       "¿Cuál es la velocidad máxima indicada para IDE ?",
+        //     opciones: ["133 MB/s", "300 MB/s", "600 MB/s", "1.5 GB/s"],
+        //     respuesta_correcta: "133 MB/s",
+        //   },
+        //   {
+        //     id: 54,
+        //     pregunta:
+        //       "¿Cuál es la velocidad máxima indicada para SATA III ?",
+        //     opciones: ["150 MB/s", "133 MB/s", "300 MB/s", "600 MB/s"],
+        //     respuesta_correcta: "600 MB/s",
+        //   },
+          {
+            id: 55,
+            pregunta:
+              "¿Qué elemento debe configurarse en un HDD IDE para definir roles como Master o Slave?",
+            opciones: [
+              "La memoria caché",
+              "Los jumpers",
+              "Los platos",
+              "El cable de alimentación",
+            ],
+            respuesta_correcta: "Los jumpers",
+          },
+          {
+            id: 56,
+            pregunta:
+              "¿Qué consecuencia puede tener una configuración incorrecta de jumpers en discos IDE?",
+            opciones: [
+              "Aumenta automáticamente la velocidad del disco",
+              "Impide el reconocimiento del disco o causa conflictos",
+              "Convierte el disco en SATA",
+              "Duplica la capacidad de almacenamiento",
+            ],
+            respuesta_correcta:
+              "Impide el reconocimiento del disco o causa conflictos",
+          },
+          {
+            id: 57,
+            pregunta: '¿Qué describe mejor el "Click of Death" en un HDD?',
+            opciones: [
+              "Un sonido repetitivo de clic que indica un posible fallo del disco",
+              "El ruido normal del ventilador del gabinete",
+              "Una función de inicio rápido del sistema operativo",
+              "Una alarma de temperatura de la placa madre",
+            ],
+            respuesta_correcta:
+              "Un sonido repetitivo de clic que indica un posible fallo del disco",
+          },
+          {
+            id: 58,
+            pregunta:
+              '¿Cuál es una causa habitual asociada al "Click of Death" en un HDD?',
+            opciones: [
+              "Fallo mecánico o desalineación de los cabezales",
+              "Exceso de memoria RAM en el equipo",
+              "Uso de un monitor con baja resolución",
+              "Actualización correcta del BIOS",
+            ],
+            respuesta_correcta:
+              "Fallo mecánico o desalineación de los cabezales",
+          },
+        ],
+      };
+
+      let seleccionadas = []; // Preguntas seleccionadas con opciones mezcladas
+      let respuestas = {}; // Respuestas del usuario (índice de opción seleccionada)
+      let tiempoRestante = 900; // 5 minutos en segundos
+      let examenTerminado = false;
+      let intervaloTimer = null;
+
+      /**
+       * Función para mezclar un array (Fisher-Yates shuffle)
+       */
+      function mezclarArray(array) {
+        const nuevoArray = [...array];
+        for (let i = nuevoArray.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [nuevoArray[i], nuevoArray[j]] = [nuevoArray[j], nuevoArray[i]];
+        }
+        return nuevoArray;
+      }
+
+      /**
+       * Mezcla las opciones de una pregunta y retorna:
+       * - opcionesMezcladas: array con las opciones en orden aleatorio
+       * - indiceCorrecto: nuevo índice donde se encuentra la respuesta correcta
+       */
+      function mezclarOpciones(preguntaOriginal) {
+        const opcionesOriginales = [...preguntaOriginal.opciones];
+        const respuestaCorrectaOriginal = preguntaOriginal.respuesta_correcta;
+
+        // Crear array de objetos con cada opción y si es correcta o no
+        const opcionesConFlag = opcionesOriginales.map((op) => ({
+          texto: op,
+          esCorrecta: op === respuestaCorrectaOriginal,
+        }));
+
+        // Mezclar las opciones
+        const opcionesMezcladasObj = mezclarArray(opcionesConFlag);
+
+        // Extraer solo los textos y encontrar el nuevo índice de la correcta
+        const opcionesMezcladas = opcionesMezcladasObj.map((obj) => obj.texto);
+        const indiceCorrecto = opcionesMezcladasObj.findIndex(
+          (obj) => obj.esCorrecta,
+        );
+
+        return {
+          opcionesMezcladas: opcionesMezcladas,
+          indiceCorrecto: indiceCorrecto,
+        };
+      }
+
+      /**
+       * Selecciona 5 preguntas aleatorias y mezcla sus opciones
+       */
+      function seleccionarPreguntasAleatorias() {
+        // Mezclar preguntas y tomar las primeras 5
+        const preguntasMezcladas = mezclarArray(preguntasData.preguntas);
+        const preguntasSeleccionadas = preguntasMezcladas.slice(0, 10);
+
+        // Para cada pregunta seleccionada, mezclar sus opciones
+        return preguntasSeleccionadas.map((pregunta) => {
+          const { opcionesMezcladas, indiceCorrecto } =
+            mezclarOpciones(pregunta);
+          return {
+            id: pregunta.id,
+            pregunta: pregunta.pregunta,
+            opciones: opcionesMezcladas,
+            respuesta_correcta: indiceCorrecto, // Guardamos el índice correcto después de mezclar
+          };
+        });
+      }
+
+      function mostrarPreguntas() {
+        const quiz = document.getElementById("quiz");
+        quiz.innerHTML = ""; // Limpiar contenido previo
+
+        seleccionadas.forEach((p, i) => {
+          let opcionesHTML = p.opciones
+            .map(
+              (op, idx) =>
+                `<label id="label_preg${i}_op${idx}">
+             <input type="radio" id="preg${i}_op${idx}" name="preg${i}" value="${idx}" 
+              onclick="respuestas[${i}] = ${idx}" /> ${op}
+           </label>`,
+            )
+            .join("");
+          quiz.innerHTML += `<p><strong>${p.pregunta}</strong></p>${opcionesHTML}<hr>`;
+        });
+      }
+
+      function iniciarTimer() {
+        intervaloTimer = setInterval(() => {
+          if (examenTerminado) return; // Detener si ya terminó
+
+          const minutos = Math.floor(tiempoRestante / 60);
+          const segundos = tiempoRestante % 60;
+          const formato = `${minutos}:${segundos.toString().padStart(2, "0")}`;
+          document.getElementById("timer").innerText = formato;
+
+          if (tiempoRestante <= 0) {
+            clearInterval(intervaloTimer);
+            finalizar();
+          }
+
+          tiempoRestante--;
+        }, 1000);
+      }
+
+      function iniciarExamen() {
+        // Mostrar hora de inicio
+        const ahora = new Date();
+        const horaFormato = ahora.toLocaleTimeString("es-ES");
+        document.getElementById("horaInicio").innerText = horaFormato;
+
+        // Seleccionar 5 preguntas aleatorias con opciones mezcladas
+        seleccionadas = seleccionarPreguntasAleatorias();
+        mostrarPreguntas();
+
+        // Iniciar timer
+        iniciarTimer();
+      }
+
+      function finalizar() {
+        if (examenTerminado) return;
+        examenTerminado = true;
+
+        // Detener el timer
+        clearInterval(intervaloTimer);
+
+        // Mostrar hora de finalización
+        const ahoraFin = new Date();
+        const horaFinFormato = ahoraFin.toLocaleTimeString("es-ES");
+        document.getElementById("horaFinalizacion").innerText = horaFinFormato;
+        document.getElementById("horaFinalizacionDiv").style.display = "block";
+
+        // Deshabilitar todos los radios
+        const radios = document.querySelectorAll("input[type='radio']");
+        radios.forEach((radio) => (radio.disabled = true));
+
+        // Ocultar el botón Finalizar
+        document.querySelector("button").style.display = "none";
+
+        let correctas = 0;
+
+        seleccionadas.forEach((p, i) => {
+          const respuestaCorrectaIdx = p.respuesta_correcta;
+
+          // Colorear la respuesta correcta de verde
+          const labelCorrect = document.getElementById(
+            `label_preg${i}_op${respuestaCorrectaIdx}`,
+          );
+          if (labelCorrect) {
+            labelCorrect.style.backgroundColor = "#90EE90";
+            labelCorrect.style.fontWeight = "bold";
+          }
+
+          // Verificar respuesta del usuario
+          const respuestaUsuario = respuestas[i];
+
+          if (respuestaUsuario !== undefined) {
+            if (respuestaUsuario !== respuestaCorrectaIdx) {
+              // Respuesta incorrecta: colorear la opción seleccionada de rojo
+              const labelIncorrect = document.getElementById(
+                `label_preg${i}_op${respuestaUsuario}`,
+              );
+              if (labelIncorrect) {
+                labelIncorrect.style.backgroundColor = "#FFB6C6";
+                labelIncorrect.style.fontWeight = "bold";
+                labelIncorrect.innerHTML +=
+                  " <span style='color: red; font-weight: bold;'> ← Incorrecto ❌</span>";
+              }
+              // Agregar indicador en la respuesta correcta
+              if (labelCorrect) {
+                labelCorrect.innerHTML +=
+                  " <span style='color: #485699; font-weight: bold;'> ← Respuesta correcta</span>";
+              }
+            } else {
+              // Respuesta correcta
+              if (labelCorrect) {
+                labelCorrect.innerHTML +=
+                  " <span style='color: green; font-weight: bold;'> ← Correcto ✅</span>";
+              }
+              correctas++;
+            }
+          } else {
+            // No respondió la pregunta, solo mostrar indicador de respuesta correcta
+            if (labelCorrect) {
+              labelCorrect.innerHTML +=
+                " <span style='color: red; font-weight: bold;'> ← Respuesta correcta (pregunta no respondida)</span>";
+            }
+          }
+        });
+
+        const porcentaje = Math.round((correctas / seleccionadas.length) * 100);
+        const mensaje =
+          // Cantidad minima para aprobar
+          (correctas >= 6 ? "✅ ¡Aprobado!" : "❌ Reprobado") +
+          ` - ${porcentaje}% (${correctas}/${seleccionadas.length} correctas)`;
+        document.getElementById("resultado").innerText = mensaje;
+      }
+
+      // Iniciar examen cuando la página carga
+      iniciarExamen();
+    </script>
+  </body>
+</html>
