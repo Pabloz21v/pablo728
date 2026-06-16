@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examen</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        padding: 15px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: clamp(24px, 5vw, 32px);
+        color: #333;
+      }
+
+      .encabezado {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-bottom: 25px;
+        font-size: clamp(14px, 4vw, 18px);
+      }
+
+      @media (min-width: 620px) {
+        .encabezado {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .encabezado div {
+        background-color: white;
+        padding: 12px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .encabezado strong {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+      }
+
+      .encabezado p {
+        margin: 5px 0;
+        font-size: clamp(12px, 3.5vw, 16px);
+      }
+
+      #timer {
+        font-size: clamp(20px, 6vw, 28px) !important;
+        color: red;
+        font-weight: bold;
+      }
+
+      #quiz {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      #quiz p {
+        margin: 15px 0 10px 0;
+        font-size: clamp(14px, 4vw, 16px);
+        font-weight: bold;
+        color: #333;
+      }
+
+      label {
+        display: block;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: clamp(13px, 3.5vw, 15px);
+        background-color: #f9f9f9;
+        transition: background-color 0.3s;
+      }
+
+      label:hover {
+        background-color: #efefef;
+      }
+
+      label input[type="radio"] {
+        margin-right: 10px;
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+      }
+
+      button {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        font-size: clamp(14px, 4vw, 16px);
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      button:active {
+        background-color: #004085;
+      }
+
+      #resultado {
+        text-align: center;
+        font-size: clamp(16px, 4vw, 20px);
+        font-weight: bold;
+        color: #333;
+        background-color: white;
+        padding: 15px;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      hr {
+        margin: 15px 0;
+        border: none;
+        border-top: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Examen</h1>
+    <div class="encabezado">
+      <div>
+        <strong>Hora de inicio:</strong>
+        <p id="horaInicio"></p>
+      </div>
+      <div>
+        <strong>Tiempo restante:</strong>
+        <p id="timer"></p>
+      </div>
+      <div id="horaFinalizacionDiv" style="display: none">
+        <strong>Hora de finalización:</strong>
+        <p id="horaFinalizacion"></p>
+      </div>
+    </div>
+    <div id="quiz"></div>
+    <button onclick="finalizar()">Finalizar</button>
+    <p id="resultado"></p>
+
+    <script>
+      const preguntasData = {
+        preguntas: [
+          // Almacenamiento
+					// Almacenamiento
+          // Almacenamiento
+           {
+      "id": 1,
+      "pregunta": "¿Cuál es la diferencia principal entre el almacenamiento magnético y el almacenamiento flash?",
+      "opciones": [
+        "El magnético usa discos giratorios y el flash usa chips de memoria",
+        "El magnético usa láser y el flash usa imanes",
+        "El magnético solo sirve para uso externo y el flash solo para uso interno",
+        "El magnético no almacena datos y el flash sí"
+      ],
+      "respuesta_correcta": "El magnético usa discos giratorios y el flash usa chips de memoria"
+    },
+    {
+      "id": 2,
+      "pregunta": "¿Qué opción presenta dos dispositivos de almacenamiento interno y tres externos?",
+      "opciones": [
+        "HDD y SSD internos; pendrive, disco externo y tarjeta SD externos",
+        "Pendrive y tarjeta SD internos; HDD, SSD y Blu-ray externos",
+        "DVD y CD internos; SSD, HDD y RAM externos",
+        "MicroSD y USB internos; disco óptico, RAM y caché externos"
+      ],
+      "respuesta_correcta": "HDD y SSD internos; pendrive, disco externo y tarjeta SD externos"
+    },
+    {
+      "id": 3,
+      "pregunta": "¿Qué tienen en común los formatos CD-RW, DVD-RW y BD-RE?",
+      "opciones": [
+        "Son discos ópticos regrabables",
+        "Son discos magnéticos de alta velocidad",
+        "Son memorias flash extraíbles",
+        "Solo permiten una única grabación"
+      ],
+      "respuesta_correcta": "Son discos ópticos regrabables"
+    }
+        ],
+      };
+
+      let seleccionadas = []; // Preguntas seleccionadas con opciones mezcladas
+      let respuestas = {}; // Respuestas del usuario (índice de opción seleccionada)
+      let tiempoRestante = 900; // 5 minutos en segundos
+      let examenTerminado = false;
+      let intervaloTimer = null;
+
+      /**
+       * Función para mezclar un array (Fisher-Yates shuffle)
+       */
+      function mezclarArray(array) {
+        const nuevoArray = [...array];
+        for (let i = nuevoArray.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [nuevoArray[i], nuevoArray[j]] = [nuevoArray[j], nuevoArray[i]];
+        }
+        return nuevoArray;
+      }
+
+      /**
+       * Mezcla las opciones de una pregunta y retorna:
+       * - opcionesMezcladas: array con las opciones en orden aleatorio
+       * - indiceCorrecto: nuevo índice donde se encuentra la respuesta correcta
+       */
+      function mezclarOpciones(preguntaOriginal) {
+        const opcionesOriginales = [...preguntaOriginal.opciones];
+        const respuestaCorrectaOriginal = preguntaOriginal.respuesta_correcta;
+
+        // Crear array de objetos con cada opción y si es correcta o no
+        const opcionesConFlag = opcionesOriginales.map((op) => ({
+          texto: op,
+          esCorrecta: op === respuestaCorrectaOriginal,
+        }));
+
+        // Mezclar las opciones
+        const opcionesMezcladasObj = mezclarArray(opcionesConFlag);
+
+        // Extraer solo los textos y encontrar el nuevo índice de la correcta
+        const opcionesMezcladas = opcionesMezcladasObj.map((obj) => obj.texto);
+        const indiceCorrecto = opcionesMezcladasObj.findIndex(
+          (obj) => obj.esCorrecta,
+        );
+
+        return {
+          opcionesMezcladas: opcionesMezcladas,
+          indiceCorrecto: indiceCorrecto,
+        };
+      }
+
+      /**
+       * Selecciona 5 preguntas aleatorias y mezcla sus opciones
+       */
+      function seleccionarPreguntasAleatorias() {
+        // Mezclar preguntas y tomar las primeras 5
+        const preguntasMezcladas = mezclarArray(preguntasData.preguntas);
+        const preguntasSeleccionadas = preguntasMezcladas.slice(0, 10);
+
+        // Para cada pregunta seleccionada, mezclar sus opciones
+        return preguntasSeleccionadas.map((pregunta) => {
+          const { opcionesMezcladas, indiceCorrecto } =
+            mezclarOpciones(pregunta);
+          return {
+            id: pregunta.id,
+            pregunta: pregunta.pregunta,
+            opciones: opcionesMezcladas,
+            respuesta_correcta: indiceCorrecto, // Guardamos el índice correcto después de mezclar
+          };
+        });
+      }
+
+      function mostrarPreguntas() {
+        const quiz = document.getElementById("quiz");
+        quiz.innerHTML = ""; // Limpiar contenido previo
+
+        seleccionadas.forEach((p, i) => {
+          let opcionesHTML = p.opciones
+            .map(
+              (op, idx) =>
+                `<label id="label_preg${i}_op${idx}">
+             <input type="radio" id="preg${i}_op${idx}" name="preg${i}" value="${idx}" 
+              onclick="respuestas[${i}] = ${idx}" /> ${op}
+           </label>`,
+            )
+            .join("");
+          quiz.innerHTML += `<p><strong>${p.pregunta}</strong></p>${opcionesHTML}<hr>`;
+        });
+      }
+
+      function iniciarTimer() {
+        intervaloTimer = setInterval(() => {
+          if (examenTerminado) return; // Detener si ya terminó
+
+          const minutos = Math.floor(tiempoRestante / 60);
+          const segundos = tiempoRestante % 60;
+          const formato = `${minutos}:${segundos.toString().padStart(2, "0")}`;
+          document.getElementById("timer").innerText = formato;
+
+          if (tiempoRestante <= 0) {
+            clearInterval(intervaloTimer);
+            finalizar();
+          }
+
+          tiempoRestante--;
+        }, 1000);
+      }
+
+      function iniciarExamen() {
+        // Mostrar hora de inicio
+        const ahora = new Date();
+        const horaFormato = ahora.toLocaleTimeString("es-ES");
+        document.getElementById("horaInicio").innerText = horaFormato;
+
+        // Seleccionar 5 preguntas aleatorias con opciones mezcladas
+        seleccionadas = seleccionarPreguntasAleatorias();
+        mostrarPreguntas();
+
+        // Iniciar timer
+        iniciarTimer();
+      }
+
+      function finalizar() {
+        if (examenTerminado) return;
+        examenTerminado = true;
+
+        // Detener el timer
+        clearInterval(intervaloTimer);
+
+        // Mostrar hora de finalización
+        const ahoraFin = new Date();
+        const horaFinFormato = ahoraFin.toLocaleTimeString("es-ES");
+        document.getElementById("horaFinalizacion").innerText = horaFinFormato;
+        document.getElementById("horaFinalizacionDiv").style.display = "block";
+
+        // Deshabilitar todos los radios
+        const radios = document.querySelectorAll("input[type='radio']");
+        radios.forEach((radio) => (radio.disabled = true));
+
+        // Ocultar el botón Finalizar
+        document.querySelector("button").style.display = "none";
+
+        let correctas = 0;
+
+        seleccionadas.forEach((p, i) => {
+          const respuestaCorrectaIdx = p.respuesta_correcta;
+
+          // Colorear la respuesta correcta de verde
+          const labelCorrect = document.getElementById(
+            `label_preg${i}_op${respuestaCorrectaIdx}`,
+          );
+          if (labelCorrect) {
+            labelCorrect.style.backgroundColor = "#90EE90";
+            labelCorrect.style.fontWeight = "bold";
+          }
+
+          // Verificar respuesta del usuario
+          const respuestaUsuario = respuestas[i];
+
+          if (respuestaUsuario !== undefined) {
+            if (respuestaUsuario !== respuestaCorrectaIdx) {
+              // Respuesta incorrecta: colorear la opción seleccionada de rojo
+              const labelIncorrect = document.getElementById(
+                `label_preg${i}_op${respuestaUsuario}`,
+              );
+              if (labelIncorrect) {
+                labelIncorrect.style.backgroundColor = "#FFB6C6";
+                labelIncorrect.style.fontWeight = "bold";
+                labelIncorrect.innerHTML +=
+                  " <span style='color: red; font-weight: bold;'> ← Incorrecto ❌</span>";
+              }
+              // Agregar indicador en la respuesta correcta
+              if (labelCorrect) {
+                labelCorrect.innerHTML +=
+                  " <span style='color: #485699; font-weight: bold;'> ← Respuesta correcta</span>";
+              }
+            } else {
+              // Respuesta correcta
+              if (labelCorrect) {
+                labelCorrect.innerHTML +=
+                  " <span style='color: green; font-weight: bold;'> ← Correcto ✅</span>";
+              }
+              correctas++;
+            }
+          } else {
+            // No respondió la pregunta, solo mostrar indicador de respuesta correcta
+            if (labelCorrect) {
+              labelCorrect.innerHTML +=
+                " <span style='color: red; font-weight: bold;'> ← Respuesta correcta (pregunta no respondida)</span>";
+            }
+          }
+        });
+
+        const porcentaje = Math.round((correctas / seleccionadas.length) * 100);
+        const mensaje =
+          // Cantidad minima para aprobar
+          (correctas >= 6 ? "✅ ¡Aprobado!" : "❌ Reprobado") +
+          ` - ${porcentaje}% (${correctas}/${seleccionadas.length} correctas)`;
+        document.getElementById("resultado").innerText = mensaje;
+      }
+
+      // Iniciar examen cuando la página carga
+      iniciarExamen();
+    </script>
+  </body>
+</html>
+
