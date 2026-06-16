@@ -893,7 +893,7 @@
       "opciones": [
         "Aumentar la velocidad del procesador",
         "Mantener alimentada la memoria CMOS para conservar configuración, fecha y hora",
-        "Proporcionar energia estable al chipset durante el arranque",
+        "Proporcionar energia estable al chipset durante el arranque y ante cortes bruscos de energia",
         "Permite cerrar el sistema operativo sin problemas ante un corte de energia"
       ],
       "respuesta_correcta": "Mantener alimentada la memoria CMOS para conservar configuración, fecha y hora"
@@ -904,7 +904,7 @@
       "opciones": [
         "Porque reinstala automáticamente el sistema operativo",
         "Porque borra la configuración almacenada en CMOS y restaura valores de fábrica",
-        "Porque cambia físicamente el chip BIOS por uno nuevo",
+        "Porque se puede cambiar físicamente el chip BIOS por uno nuevo, permitiendo cambiar la contraseña",
         "Porque desactiva permanentemente el POST"
       ],
       "respuesta_correcta": "Porque borra la configuración almacenada en CMOS y restaura valores de fábrica"
@@ -915,8 +915,8 @@
       "opciones": [
         "Si una BIOS se quema la otra pasa a cumplir dicha función",
         "Un sistema de BIOS principal y de respaldo para mayor seguridad",
-        "Son chips que dependen uno del otro para funcionar",
-        "Un doble canal de memoria RAM"
+        "Son chips que dependen uno del otro para funcionar, si uno falla el otro deja de operar",
+        "Un doble canal de gestión de transferencia de datos"
       ],
       "respuesta_correcta": "Un sistema de BIOS principal y de respaldo para mayor seguridad"
     },
@@ -952,7 +952,7 @@
         "Una unidad física capaz de ejecutar instrucciones",
         "Una memoria externa para guardar archivos",
         "Memoria cache interna del procesador",
-        "No existe el núcleo en una CPU"
+        "No existe el núcleo en una CPU, esta presente en la placa madre"
       ],
       "respuesta_correcta": "Una unidad física capaz de ejecutar instrucciones"
     },
@@ -972,9 +972,9 @@
       "pregunta": "¿Para qué sirve la memoria caché en una CPU?",
       "opciones": [
         "Para reemplazar completamente a la RAM",
-        "Para guardar archivos del usuario",
+        "Para guardar archivos del usuario encriptando contraseñas de acceso",
         "Para almacenar datos e instrucciones de acceso rápido",
-        "Para enfriar el procesador como orden de ejecución"
+        "Para registrar las temperaturas del procesador bajo estrés"
       ],
       "respuesta_correcta": "Para almacenar datos e instrucciones de acceso rápido"
     },
@@ -983,7 +983,7 @@
       "pregunta": "¿Por qué no alcanza con mirar solo el socket al elegir una CPU?",
       "opciones": [
         "Porque también importan el chipset, la BIOS/UEFI y el TDP",
-        "Porque el color del procesador define la compatibilidad",
+        "Porque el color y tamaño del procesador define la compatibilidad",
         "Porque todas las CPU modernas usan el mismo socket",
         "Porque la memoria caché reemplaza al chipset"
       ],
@@ -994,9 +994,9 @@
       "pregunta": "¿Cuál opción diferencia correctamente PGA, LGA y BGA?",
       "opciones": [
         "PGA tiene pines en la CPU, LGA tiene contactos en la motherboard y BGA va soldado a la placa",
-        "PGA va soldado, LGA tiene pines en la CPU y BGA tiene pines en la CPU",
+        "PGA va soldado, LGA tiene pines en la CPU y BGA tiene contactos en la motherboard",
         "PGA y LGA tiene contactos en la motherboard, BGA tiene pines en la CPU",
-        "PGA tiene pines en la CPU, LGA y BGA a soldado a la placa"
+        "PGA tiene pines en la CPU, LGA va soldado a la placa y BGA tiene contactos en la motherboard "
       ],
       "respuesta_correcta": "PGA tiene pines en la CPU, LGA tiene contactos en la motherboard y BGA va soldado a la placa"
     },
@@ -1005,9 +1005,9 @@
       "pregunta": "¿Qué función cumple el IHS en una CPU?",
       "opciones": [
         "Distribuir el calor hacia el disipador",
-        "Aumentar la velocidad",
-        "Controlar la conexión Wi-Fi",
-        "Controlar el voltaje de CPU"
+        "Aumentar la velocidad y estabilidad electrica",
+        "Controlar la conexión con la placa madre",
+        "Controlar el voltaje de CPU en relacion con la placa madre"
       ],
       "respuesta_correcta": "Distribuir el calor hacia el disipador"
     },
@@ -1027,8 +1027,8 @@
       "pregunta": "¿En qué se diferencia el turbo automático del overclock manual?",
       "opciones": [
         "El turbo automático aumenta la frecuencia según las condiciones y el overclock es manual",
-        "El turbo automático desactiva núcleos y el overclock reduce voltaje",
-        "El turbo automático solo existe en notebooks y el overclock solo en servidores",
+        "El turbo automático desactiva núcleos para dedicar mayor toda la potencia a un solo nucleo y el overclock reduce voltaje",
+        "El turbo automático solo existe en notebooks y el overclock solo en PC de escritorio",
         "El turbo automático cambia el socket y el overclock cambia el chipset"
       ],
       "respuesta_correcta": "El turbo automático aumenta la frecuencia según las condiciones y el overclock es manual"
@@ -1094,7 +1094,7 @@
       "opciones": [
         "Es una secuencia lógica de ejecución de instrucciones",
         "Es una pieza metálica que fija el disipador",
-        "Es un tipo de memoria externa",
+        "Es un tipo de memoria interna que conecta la CPU con la placa madre",
         "Es un conector para la fuente"
       ],
       "respuesta_correcta": "Es una secuencia lógica de ejecución de instrucciones"
@@ -1103,9 +1103,9 @@
       "id": 85,
       "pregunta": "¿Cuál es la relación correcta entre núcleos e hilos?",
       "opciones": [
-        "Cada hilo siempre necesita una placa madre distinta",
+        "Cada hilo siempre necesita de dos núcleos para poder operar",
         "Un núcleo puede manejar uno o más hilos según la tecnología de la CPU",
-        "Los hilos reemplazan completamente a los núcleos físicos",
+        "Los hilos reemplazan completamente a los núcleos físicos, mejorando la transferencia de datos",
         "Los núcleos solo existen en notebooks y los hilos en escritorio"
       ],
       "respuesta_correcta": "Un núcleo puede manejar uno o más hilos según la tecnología de la CPU"
