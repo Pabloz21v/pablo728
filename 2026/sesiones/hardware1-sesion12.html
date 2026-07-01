@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 12 - Memoria RAM</title>
+    <style>
+        /* CSS Integrado y Responsivo */
+        :root {
+            --bg-color: #f4f1ea; /* Tono suave amigable para la vista */
+            --text-color: #2b2b2b;
+            --primary-color: #1a365d;
+            --secondary-color: #2b6cb0;
+            --accent-color: #dd6b20;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        header {
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .intro-text {
+            font-style: italic;
+            color: #555;
+            background-color: #edf2f7;
+            padding: 15px;
+            border-left: 4px solid var(--secondary-color);
+            border-radius: 0 4px 4px 0;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.15rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-bottom: 25px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* Estilos de Tabla Responsiva */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 25px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px; /* Evita que se colapsen las columnas en móviles */
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        /* Bloque de notas o destacados */
+        .extra-block {
+            background-color: #fffaf0;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Formato de Cuestionario */
+        .quiz-list {
+            list-style-type: decimal;
+        }
+
+        .quiz-list li {
+            padding-left: 5px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .quiz-list li::marker {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .section-label {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-top: 15px;
+            display: block;
+        }
+
+        /* Ajustes para pantallas de escritorio (Desktop) */
+        @media (min-width: 768px) {
+            body {
+                padding: 40px 20px;
+            }
+            .container {
+                padding: 40px;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+            h2 {
+                font-size: 1.6rem;
+            }
+            h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+             <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion11.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 11
+      </a>
+      <a
+        href="hardware1-sesion13.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 13
+      </a>
+    </div>
+
+    <header>
+        <h1>SESIÓN 12 - MEMORIA RAM: LEGACY, MODERNA, NOTEBOOKS Y NUEVAS TECNOLOGÍAS</h1>
+    </header>
+
+    <h2>Objetivos específicos</h2>
+    <ul>
+        <li>Definir con precisión qué es la memoria RAM y cuál es su función en una computadora.</li>
+        <li>Diferenciar entre SRAM y DRAM, y entre memorias legacy y modernas.</li>
+        <li>Reconocer formatos DIMM, SO-DIMM y el nuevo estándar CAMM2, tanto removibles como soldados en notebook.</li>
+        <li>Identificar visualmente ranuras, muescas, chips, contactos, etiquetas del módulo y comprender la función crítica de sus pines.</li>
+        <li>Interpretar velocidad, latencia, capacidad, voltaje, canales de memoria y generación.</li>
+        <li>Comprender qué sucede cuando la RAM es insuficiente o se supera el límite soportado.</li>
+        <li>Relacionar RAM con CPU, chipset/controlador de memoria y motherboard.</li>
+        <li>Comprender conceptos y beneficios de single channel, dual channel, quad channel y overclock de memoria.</li>
+        <li>Analizar el comportamiento del sistema al combinar memorias RAM de diferentes frecuencias y capacidades, incluyendo configuraciones mixtas en notebooks.</li>
+    </ul>
+
+    <h2>Desarrollo teórico
+    </h2>
+
+    <h3>¿Qué es la memoria RAM y para qué sirve?</h3>
+    <p>RAM significa Random Access Memory, es decir, Memoria de Acceso Aleatorio. Se llama así porque el sistema puede acceder de manera directa a cualquier ubicación de memoria, sin recorrer secuencias largas.</p>
+    <p>La RAM es el espacio de trabajo temporal de la computadora. Cuando abres un programa, inicias el sistema operativo, editas una imagen, juegas o navegas por internet, gran parte de esos datos se cargan en la RAM para poder ser usados rápidamente por la CPU. Por eso se dice que la RAM es como una mesa de trabajo: cuanto más grande sea la mesa, más carpetas y herramientas puedes tener abiertas al mismo tiempo sin que se caigan o se amontonen.</p>
+    <p>La RAM no almacena datos de forma permanente. Si se corta la energía o apagas la PC, su contenido se borra por completo. Esto se llama almacenamiento volátil. Por eso, un archivo de texto no queda guardado solo por estar abierto en la pantalla; para conservarlo debes "Guardar" para que se envíe a un SSD o HDD (dispositivos no volátiles).</p>
+
+    <h3>¿Cómo almacena el dato de forma volátil?</h3>
+    <p>La mayoría de la RAM principal usada en PC es del tipo DRAM (RAM Dinámica). Cada bit de información se guarda mediante una combinación minúscula de 1 Transistor + 1 Capacitor. El capacitor es como una micro-batería que puede estar cargada (representando un 1) o descargada (representando un 0). Como los capacitores pierden su carga eléctrica en fracciones de segundo, la memoria debe "refrescarse" (recargarse) miles de veces por segundo. Por eso necesita energía constante.</p>
+    <p>En cambio, la SRAM (RAM Estática) usa celdas más complejas basadas en varios transistores (normalmente 4 o 6) y no necesita refrescarse constantemente. Es muchísimo más rápida, pero también más cara y ocupa más espacio físico. Por este motivo, no se usa como la RAM principal, sino como la memoria Caché que va dentro del propio procesador (CPU).</p>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Significado</th>
+                    <th>Velocidad</th>
+                    <th>Costo</th>
+                    <th>Uso principal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>SRAM</strong></td>
+                    <td>Static RAM</td>
+                    <td>Muy alta</td>
+                    <td>Alta</td>
+                    <td>Caché del CPU</td>
+                </tr>
+                <tr>
+                    <td><strong>DRAM</strong></td>
+                    <td>Dynamic RAM</td>
+                    <td>Alta</td>
+                    <td>Menor</td>
+                    <td>RAM principal del sistema</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Diferencia entre RAM, ROM y almacenamiento</h3>
+    <ul>
+        <li><strong>RAM:</strong> Rápida, temporal, volátil, usada mientras la PC está encendida trabajando.</li>
+        <li><strong>ROM/Firmware:</strong> No volátil, contiene las instrucciones grabadas de fábrica para que la computadora sepa cómo arrancar (BIOS/UEFI).</li>
+        <li><strong>SSD/HDD:</strong> Almacenamiento permanente y de gran capacidad donde se guardan el sistema operativo, los videojuegos, fotos y archivos.</li>
+    </ul>
+
+    <h3>Ancho de banda vs. Velocidad de transferencia: El ejemplo de la autopista</h3>
+    <p>A menudo confundimos la velocidad de la RAM con qué tan rápido "viaja" un dato, pero en realidad intervienen dos factores: la frecuencia de reloj (velocidad de transferencia) y el ancho de banda. Para entenderlo de forma didáctica, imaginemos una autopista donde se transportan cajas de mercadería en camiones:</p>
+    <ul>
+        <li><strong>La Velocidad de Transferencia (Frecuencia - MT/s o MHz):</strong> Es la velocidad a la que viajan los camiones por la autopista. Si la memoria funciona a una frecuencia alta, significa que los camiones se mueven muy rápido y hacen muchos viajes por segundo.</li>
+        <li><strong>El Ancho de Banda (GB/s):</strong> Es el volumen total de cajas que pueden llegar al depósito en un segundo. Este volumen no solo depende de qué tan rápido corran los camiones, sino de cuántos carriles tiene la autopista.</li>
+    </ul>
+    <p><strong>El dato clave:</strong> El "bus" de datos de un módulo de memoria RAM estándar tiene un ancho fijo de 64 bits (es decir, una autopista de 64 carriles).</p>
+    <p><strong>La fórmula:</strong> Para calcular el ancho de banda teórico de la RAM (cuántos datos reales se transmiten) se multiplica la velocidad de transferencia (MT/s) por los 64 bits de ancho del canal, y se divide por 8 (para pasar de bits a Bytes).</p>
+    <p><strong>Analogía:</strong> Si aumentas la velocidad de los camiones (más MT/s), llega más mercadería por segundo. Pero si además duplicas los carriles de la autopista (activando tecnologías de múltiples canales), el volumen de datos que la CPU puede recibir se multiplica drásticamente.</p>
+
+    <h3>Arquitecturas de Canales: Single, Dual y Quad Channel</h3>
+    <p>Los canales de memoria determinan cuántas "autopistas" de 64 bits comunican directamente a la RAM con el procesador.</p>
+    <ul>
+        <li><strong>Single Channel (Un solo canal):</strong> La CPU se comunica con la RAM a través de un único camino de 64 bits. Si tienes un solo módulo de RAM instalado, el sistema funcionará obligatoriamente en este modo, limitando el ancho de banda total.</li>
+        <li><strong>Dual Channel (Doble canal):</strong> Es el beneficio de usar dos módulos de RAM idénticos en las ranuras correctas. Al hacerlo, la placa madre abre una segunda autopista independiente de 64 bits, logrando un bus total de 128 bits.</li>
+    </ul>
+    <p><strong>El beneficio real:</strong> Al duplicar los carriles, el ancho de banda se duplica. La CPU puede leer y escribir datos al doble de velocidad efectiva. Esto se nota muchísimo en el rendimiento general del sistema, la carga de programas pesados y, sobre todo, en los videojuegos que utilizan los gráficos integrados del procesador.</p>
+    <p><strong>Quad Channel (Cuatro canales):</strong> Abre cuatro autopistas en paralelo, logrando un bus de 256 bits.</p>
+    <p><strong>Aclaración importante:</strong> Tener una placa madre común con 4 ranuras (slots) de RAM no significa que tenga Quad Channel. La mayoría de las PC de escritorio comunes son Dual Channel; las 4 ranuras están divididas en parejas (Canal A y Canal B, típicamente identificados en la serigrafía como A1/A2 y B1/B2). El verdadero Quad Channel requiere procesadores y placas madre especiales de gama alta (estaciones de trabajo o servidores) diseñados con cuatro canales físicos independientes.</p>
+
+    <h3>Partes visibles de un módulo RAM y la función de los pines</h3>
+    <p>Un módulo RAM tradicional (DIMM o SO-DIMM) cuenta con los siguientes componentes:</p>
+    <ul>
+        <li><strong>PCB (Placa de circuito impreso):</strong> La tableta plástica/circuito donde se sueldan todos los componentes.</li>
+        <li><strong>Chips de memoria:</strong> Los rectángulos negros de silicio que albergan las celdas DRAM.</li>
+        <li><strong>Muesca de alineación:</strong> Un corte mecánico en la zona de los contactos que evita que la memoria se coloque al revés o en una ranura de una generación incorrecta (por ejemplo, meter una DDR3 en un slot DDR4).</li>
+        <li><strong>Disipador térmico:</strong> Placas metálicas externas que ayudan a enfriar los chips en memorias de alto rendimiento.</li>
+        <li><strong>Contactos dorados (Pines):</strong> Son las pequeñas líneas divisorias de metal que se ubican en el borde inferior del módulo y hacen contacto directo con las láminas internas del slot de la placa madre. Están recubiertos de una fina capa de oro para evitar la corrosión y garantizar la máxima conductividad eléctrica.</li>
+    </ul>
+
+    <h3>¿Qué función cumplen los pines y qué ocurre si se dañan?</h3>
+    <p>Cada pin individual tiene una "misión" asignada por el circuito eléctrico. Se dividen principalmente en tres grupos funcionales:</p>
+    <ul>
+        <li><strong>Pines de Alimentación y Tierra:</strong> Suministran la energía eléctrica exacta (voltaje) que necesitan los chips para encenderse y mantener cargados los capacitores.</li>
+        <li><strong>Pines de Control y Reloj:</strong> Sincronizan los tiempos exactos en los que la memoria debe responder a las órdenes del procesador.</li>
+        <li><strong>Pines de Datos y Dirección:</strong> Son las líneas por donde viajan los "unos y ceros" (la información) y las coordenadas de en qué celda exacta se deben buscar o guardar.</li>
+        <li><strong>Reservados para una función a futuro:</strong> De igual forma que los pines de las CPU también existen estos pines con intenciones de darle función a futuro. Mientras tanto no cumplen ninguna tarea y se los puede llamar como: NC (No Conectado) o RFU (todavía no asignado)</li>
+    </ul>
+
+    <h3>¿Qué ocurre si un pin se rompe, se raya profundamente o se quema?</h3>
+    <p>El resultado dependerá enteramente de qué pin haya sido afectado:</p>
+    <ul>
+        <li>Si se daña un pin de datos o control crítico, la PC directamente no dará video al encender y emitirá pitidos de alerta (beeps) o encenderá una luz LED de error en la placa madre (LED de DRAM), indicando que no detecta la memoria.</li>
+        <li>Si el pin dañado pertenece a una línea de datos secundaria o pierde conductividad intermitente (por suciedad o sulfatación), la computadora puede encender, pero experimentará inestabilidad extrema. Esto se traduce en pantallas azules de la muerte (BSOD) aleatorias en Windows, congelamientos del sistema o el cierre repentino de programas y juegos debido a la corrupción de los datos almacenados.</li>
+        <li>Si se quema un pin de alimentación por un cortocircuito, puede quedar inutilizado el módulo por completo o incluso dañarse la ranura (slot) de la placa madre.</li>
+        <li>Si un pin NC (No Conectado) o RFU (todavía no asignado) se daña el módulo de RAM podrá seguir cumpliendo su función sin problemas.</li>
+   <ul> <li> El único riesgo seria que el daño del pin sea que se barrió y está haciendo contacto con un pin vecino, generando cortos, fallas de voltaje o inclusive quemarla.</li>
+        <li>Cuando el “futuro” llega, la función activaba para este pin no se ejecutará. Si somos afortunados solo perderemos esta nueva función, pero seguirá funcionando.</li>
+    </ul>
+       
+      </ul>
+    
+    
+
+    <h3>Formatos físicos y el nuevo estándar CAMM2</h3>
+    <p>Hasta hace muy poco, el mundo de la RAM se dividía rígidamente en módulos alargados para escritorio, pequeños módulos para notebooks y chips soldados directamente. Sin embargo, la tecnología evoluciona para romper estas limitaciones.</p>
+    <ul>
+        <li><strong>DIMM:</strong> Módulos grandes utilizados en computadoras de escritorio. Son removibles e intercambiables.</li>
+        <li><strong>SO-DIMM:</strong> Módulos compactos (aproximadamente la mitad del tamaño de un DIMM) diseñados para notebooks y mini-PCs. Son removibles, pero su diseño físico empieza a quedar limitado para las altísimas velocidades de las nuevas generaciones como DDR5.</li>
+        <li><strong>LPDDR Soldada:</strong> Chips soldados directamente a la placa madre. Se usa en Ultrabooks muy delgadas. Consumen muy poca energía y permiten frecuencias muy altas, pero tienen la enorme desventaja de que no se pueden actualizar ni reemplazar si fallan.</li>
+    </ul>
+
+    <h3>El nuevo estándar: CAMM2 (Compression Attached Memory Module)</h3>
+    <p>CAMM2 es el formato de memoria RAM más moderno de la industria, diseñado para reemplazar gradualmente al formato SO-DIMM en notebooks y abrirse paso en PCs de escritorio compactas.</p>
+    <p><strong>¿Cómo funciona?:</strong> A diferencia de los módulos tradicionales que se insertan parados o en ángulo en una ranura, una tarjeta CAMM2 es una placa delgada que se coloca de forma totalmente horizontal (plana) sobre la placa madre y se sujeta firmemente mediante tornillos. No usa pines que encastran en un slot, sino que utiliza una almohadilla de contactos por compresión (similar a cómo se colocan los procesadores modernos).</p>
+    <p><strong>¿Qué ventajas tiene?:</strong></p>
+    <ul>
+        <li><strong>Ahorro extremo de espacio:</strong> Es hasta un 57% más delgada que los slots SO-DIMM tradicionales, permitiendo notebooks potentes pero ultra-delgadas.</li>
+        <li><strong>Dual Channel en un solo módulo:</strong> Una sola tarjeta CAMM2 puede diseñarse para conectar internamente ambos canales de memoria con el procesador. Esto significa que no necesitas comprar dos módulos obligatoriamente para activar el Dual Channel.</li>
+        <li><strong>Mayor velocidad y eficiencia:</strong> Al estar atornillada directamente sobre la placa base, las pistas de circuito hacia la CPU son más cortas, reduciendo las interferencias y permitiendo velocidades de transferencia masivas con un menor consumo energético.</li>
+        <li><strong>Es totalmente removible:</strong> A diferencia de las memorias LPDDR soldadas, si necesitas más capacidad o el módulo se daña, simplemente desatornillas la tarjeta CAMM2 y colocas una nueva.</li>
+    </ul>
+
+    <h3>Mezcla de memorias RAM: Frecuencias y Capacidades distintas</h3>
+    <p>Una de las preguntas más frecuentes que debe responder un técnico es: ¿Se pueden colocar módulos de RAM diferentes en la misma computadora? La respuesta corta es sí, pero el comportamiento del sistema cambiará para garantizar la estabilidad.</p>
+
+    <h3>Comportamiento con distintas Frecuencias (Velocidades)</h3>
+    <p>Si instalas un módulo que funciona a 3200 MT/s junto a otro módulo más lento que funciona a 2400 MT/s, el controlador de memoria del procesador aplicará una regla estricta de seguridad: toda la memoria RAM funcionará a la velocidad del módulo más lento (en este caso, ambas funcionarán a 2400 MT/s).</p>
+    <p>El sistema hace esto porque la memoria lenta físicamente no puede soportar el ritmo de la rápida; por ende, para evitar errores informáticos y pantallas azules, se nivela hacia abajo.</p>
+
+    <h3>Comportamiento con distintas Capacidades de almacenamiento</h3>
+    <p>Es perfectamente posible combinar, por ejemplo, un módulo de 4 GB con uno de 8 GB para sumar un total de 12 GB. Sin embargo, esto altera el funcionamiento del Dual Channel. En lugar de operar en un Dual Channel simétrico puro, los sistemas modernos activan el modo Asymmetric Dual Channel (o Modo Flex):</p>
+    <ul>
+        <li>El sistema emparejará la capacidad del módulo más chico con una porción equivalente del módulo más grande. Siguiendo el ejemplo: los 4 GB del primer módulo se emparejarán con 4 GB del segundo módulo, creando una zona de 8 GB totales que funcionarán a máxima velocidad en Dual Channel (128 bits).</li>
+        <li>Los 4 GB restantes del módulo más grande quedarán asignados en un área separada que operará en Single Channel (64 bits).</li>
+    </ul>
+    <p><strong>¿Cómo afecta al uso diario?:</strong> La computadora gestionará los datos para usar primero la zona rápida en Dual Channel. Si abres demasiadas aplicaciones pesadas y superas los 8 GB de uso, el sistema empezará a volcar los datos en la zona de Single Channel, lo que bajará un poco el rendimiento de esas últimas tareas, pero seguirá siendo infinitamente más rápido que recurrir al almacenamiento del disco.</p>
+
+    <h3>Caso práctico en Notebooks: RAM soldada + Slot de expansión</h3>
+    <p>En la actualidad, muchas notebooks de gama media vienen de fábrica con una configuración mixta: traen una capacidad base de RAM soldada en la placa madre (por ejemplo, 8 GB) y añaden un slot SO-DIMM libre para que el usuario pueda ampliarla en el futuro.</p>
+    <p>Si decides expandir el equipo agregando un módulo en el slot libre que sea de mayor capacidad que la memoria soldada (por ejemplo, un módulo de 16 GB), el comportamiento será el siguiente:</p>
+    <ul>
+        <li><strong>Capacidad Total:</strong> La notebook reconocerá exitosamente la suma de ambas: 8 GB (soldados) + 16 GB (removibles) = 24 GB de memoria RAM totales.</li>
+        <li><strong>Modo de canales (Modo Flex):</strong> El procesador activará el modo asimétrico. Creará un bloque de 16 GB en Dual Channel (los 8 GB soldados en paralelo con 8 GB del módulo extra). Los 8 GB sobrantes del módulo de 16 GB funcionarán de forma individual en Single Channel.</li>
+        <li><strong>Frecuencias:</strong> Si la RAM soldada viene configurada a 3200 MT/s y le agregas un módulo comercial de 2666 MT/s, todo el ecosistema de la notebook (incluyendo la porción soldada) se verá obligado a reducir su velocidad y trabajar de manera uniforme a 2666 MT/s. Por ello, el técnico siempre debe averiguar la velocidad exacta de la RAM soldada para comprar un módulo de expansión que coincida perfectamente en frecuencia y latencia.</li>
+    </ul>
+
+    <h3>Generaciones de RAM y características principales (Actualizado)</h3>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Generación</th>
+                    <th>Formato escritorio</th>
+                    <th>Pines escritorio</th>
+                    <th>Pines notebook</th>
+                    <th>Voltaje típico</th>
+                    <th>Observación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>SDR SDRAM</strong></td>
+                    <td>DIMM</td>
+                    <td>168</td>
+                    <td>-</td>
+                    <td>3.3V</td>
+                    <td>Previa a DDR</td>
+                </tr>
+                <tr>
+                    <td><strong>DDR</strong></td>
+                    <td>DIMM</td>
+                    <td>184</td>
+                    <td>200</td>
+                    <td>2.5V</td>
+                    <td>No compatible físicamente con DDR2</td>
+                </tr>
+                <tr>
+                    <td><strong>DDR2</strong></td>
+                    <td>DIMM</td>
+                    <td>240</td>
+                    <td>200</td>
+                    <td>1.8V</td>
+                    <td>Muy presente en hardware legacy</td>
+                </tr>
+                <tr>
+                    <td><strong>DDR3</strong></td>
+                    <td>DIMM</td>
+                    <td>240</td>
+                    <td>204</td>
+                    <td>1.5V / 1.35V</td>
+                    <td>Común en empresas y escuelas</td>
+                </tr>
+                <tr>
+                    <td><strong>DDR4</strong></td>
+                    <td>DIMM</td>
+                    <td>288</td>
+                    <td>260</td>
+                    <td>1.2V</td>
+                    <td>Estándar dominante por años</td>
+                </tr>
+                <tr>
+                    <td><strong>DDR5</strong></td>
+                    <td>DIMM</td>
+                    <td>288</td>
+                    <td>262</td>
+                    <td>1.1V aprox.</td>
+                    <td>Mayor ancho de banda y nueva gestión eléctrica</td>
+                </tr>
+                <tr>
+                    <td><strong>CAMM2</strong></td>
+                    <td>(Nuevo)</td>
+                    <td>N/A</td>
+                    <td>Variable (Pines planos por compresión)</td>
+                    <td>1.1V / 1.05V</td>
+                    <td>Módulo plano atornillable. Reemplazo futuro de SO-DIMM. Soporta Dual Channel en una sola tarjeta.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Cuestionario</h2>
+
+    <ol class="quiz-list">
+        <li>¿Qué significan las siglas RAM?</li>
+        <li>¿Qué función cumple la memoria RAM?</li>
+        <li>¿Por qué se dice que la RAM es volátil?</li>
+        <li>¿Qué diferencia principal hay entre RAM y almacenamiento SSD/HDD?</li>
+        <li>Buscar imágenes de módulos DIMM DDR, DDR2, DDR3, DDR4 y DDR5 y compararlos visualmente.</li>
+        <li>Buscar imágenes de SO-DIMM DDR3, DDR4 y DDR5 para notebook.</li>
+        <li>Buscar imágenes de memoria RAM soldada en notebooks y de notebook con slot removible.</li>
+        <li>Buscar imagen de slot DIMM en una motherboard de escritorio y marcar dónde se coloca el módulo.</li>
+        <li>Buscar imagen de slot SO-DIMM y describir cómo se inserta en ángulo.</li>
+        <li>Buscar imagen del Modulo CAMM2 y donde se coloca</li>
+        <li>Buscar imágenes de contactos dorados de la RAM en primer plano y describir su función.</li>
+        <li>Buscar imágenes de etiquetas reales de módulos RAM e intentar leer capacidad, generación y velocidad.</li>
+        <li>Buscar capturas de BIOS/UEFI con opciones XMP, EXPO o DOCP.</li>
+        <li>¿Qué diferencia existe entre SRAM y DRAM?</li>
+        <li>Respecto al punto anterior ¿Cuál de esas dos se usa como memoria principal del sistema?</li>
+        <li>¿Qué función cumplen los contactos dorados del módulo?</li>
+        <li>¿De qué materiales suelen estar hechos o recubiertos esos contactos?</li>
+        <li>¿Qué es un slot DIMM?</li>
+        <li>¿Qué es un módulo SO-DIMM?</li>
+        <li>Identificación: ¿Cómo diferenciaría visualmente una RAM de escritorio de una RAM de notebook?</li>
+        <li>¿Qué ventaja y qué desventaja tiene la RAM soldada en notebook?</li>
+        <li>Notebook: ¿Qué problema presenta una notebook con RAM totalmente soldada?</li>
+        <li>Compatibilidad: Nombre cuatro factores que deben revisarse antes de comprar una RAM.</li>
+        <li>Comparación: Diferencie RAM, ROM y SSD en una oración para cada una.</li>
+        <li>Legacy: ¿Por qué sigue siendo importante conocer DDR2 y DDR3?</li>
+        <li>¿Qué ocurre si una PC se queda sin RAM disponible?</li>
+        <li>¿Qué es la memoria virtual o archivo de paginación?</li>
+        <li>Aplicación: Un alumno abre muchas pestañas, música, procesador de texto y videollamada en una PC con 4 GB. ¿Qué comportamiento esperaría?</li>
+        <li>¿Qué significa DDR?</li>
+        <li>¿Por qué DDR3 y DDR4 no son intercambiables?</li>
+        <li>Aplicación: Un equipo de oficina antiguo usa DDR3 y admite hasta 8 GB. ¿Qué ocurriría si se intenta instalar DDR4?</li>
+        <li>¿Qué indica una etiqueta como DDR4-3200?</li>
+        <li>¿Qué significa CL en una memoria?</li>
+        <li>¿Qué relación existe entre RAM, CPU y motherboard?</li>
+        <li>¿Por qué una placa madre puede limitar la velocidad o capacidad de la memoria?</li>
+        <li>¿Qué es el overclock de RAM y en qué entorno se configura habitualmente?</li>
+        <li>Canales: ¿Qué es dual channel y qué se necesita para aprovecharlo?</li>
+        
+
+        
+        <li>Analogía didáctica: Explica con tus palabras la relación entre la "velocidad de transferencia" y el "ancho de banda" utilizando el ejemplo de la autopista y los camiones.</li>
+        <li>Canales: ¿Cuál es el beneficio real en el rendimiento de una PC al activar el Dual Channel en comparación con el Single Channel?</li>
+        <li>Falsas concepciones: Si una placa madre de escritorio tiene 4 ranuras físicas para módulos RAM, ¿significa que funciona automáticamente en Quad Channel? Explica por qué.</li>
+        <li>Nuevas tecnologías: ¿Qué es el formato CAMM2 y cuáles son sus ventajas principales en comparación con el tradicional SO-DIMM de las notebooks?</li>
+        <li>Mezcla de frecuencias: Si instalas en una PC un módulo de RAM de 3200 MT/s y otro de 2400 MT/s, ¿a qué velocidad operará el sistema y por qué el controlador de memoria toma esa decisión?</li>
+        <li>Caso Práctico (Modo Flex): Una notebook viene con 8 GB de memoria RAM soldados a la placa madre a 3200 MT/s. El técnico le agrega un módulo de 16 GB a 2666 MT/s en el slot de expansión libre.
+            <br>a) ¿Cuánta memoria RAM total tendrá el equipo?
+            <br>b) ¿A qué velocidad máxima funcionará toda la memoria?
+            <br>c) ¿Cómo se organizarán los canales de memoria (Dual y Single Channel) bajo esta configuración asimétrica?
+        </li>
+    </ol>
+         <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion11.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 11
+      </a>
+      <a
+        href="hardware1-sesion13.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 13
+      </a>
+    </div>
+</div>
+
+</body>
+</html>
+
