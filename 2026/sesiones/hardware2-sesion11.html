@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="es-ES" data-theme="dark"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+<html lang="es-ES" style="background-color: rgb(15, 23, 41);" data-theme="light"><head><meta charset="utf-8">
     
-    
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hardware 2 · Refrigeración — Sesión Técnica</title>
     <style>
       :root {
@@ -1010,54 +1012,57 @@
 
       <div class="card">
         <h3>🧱 1.4 Tipos de Materiales de Interfaz Térmica (TIM)</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Tipo</th>
-              <th>Conductividad típica</th>
-              <th>Espesor</th>
-              <th>Usos recomendados</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Pasta térmica de silicona + cerámicas</td>
-              <td>4–8 W/mK (NT-H2, MX-6)</td>
-              <td>Aplicada, 10–40 µm</td>
-              <td>Uso general desktop/portátil</td>
-            </tr>
-            <tr>
-              <td>Pasta térmica metálica (Kryonaut, TFX)</td>
-              <td>12–14 W/mK</td>
-              <td>Aplicada, 15–50 µm</td>
-              <td>Overclock y cargas sostenidas</td>
-            </tr>
-            <tr>
-              <td>Thermal Pad (elastomérico)</td>
-              <td>1–12 W/mK</td>
-              <td>0,5 / 1,0 / 1,5 / 2,0 / 3,0 mm</td>
-              <td>VRM, VRAM, chipset, M.2</td>
-            </tr>
-            <tr>
-              <td>Metal Líquido (galio-indio)</td>
-              <td>≈40–80 W/mK</td>
-              <td>≈10 µm tras presión</td>
-              <td>Disipadores de cobre (NO aluminio)</td>
-            </tr>
-            <tr>
-              <td>PCM (Phase Change Pad)</td>
-              <td>8,5 W/mK (PTM7950)</td>
-              <td>0,20–0,25 mm</td>
-              <td>Cargas sostenidas, laptops, mantenimiento cero</td>
-            </tr>
-            <tr>
-              <td>Pad de grafito</td>
-              <td>1500 W/mK en plano</td>
-              <td>0,07–0,30 mm</td>
-              <td>Difusión lateral, M.2, tablets</td>
-            </tr>
-          </tbody>
-        </table>
+        <div style="overflow-x: auto">
+
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Conductividad típica</th>
+                <th>Espesor</th>
+                <th>Usos recomendados</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Pasta térmica de silicona + cerámicas</td>
+                <td>4–8 W/mK (NT-H2, MX-6)</td>
+                <td>Aplicada, 10–40 µm</td>
+                <td>Uso general desktop/portátil</td>
+              </tr>
+              <tr>
+                <td>Pasta térmica metálica (Kryonaut, TFX)</td>
+                <td>12–14 W/mK</td>
+                <td>Aplicada, 15–50 µm</td>
+                <td>Overclock y cargas sostenidas</td>
+              </tr>
+              <tr>
+                <td>Thermal Pad (elastomérico)</td>
+                <td>1–12 W/mK</td>
+                <td>0,5 / 1,0 / 1,5 / 2,0 / 3,0 mm</td>
+                <td>VRM, VRAM, chipset, M.2</td>
+              </tr>
+              <tr>
+                <td>Metal Líquido (galio-indio)</td>
+                <td>≈40–80 W/mK</td>
+                <td>≈10 µm tras presión</td>
+                <td>Disipadores de cobre (NO aluminio)</td>
+              </tr>
+              <tr>
+                <td>PCM (Phase Change Pad)</td>
+                <td>8,5 W/mK (PTM7950)</td>
+                <td>0,20–0,25 mm</td>
+                <td>Cargas sostenidas, laptops, mantenimiento cero</td>
+              </tr>
+              <tr>
+                <td>Pad de grafito</td>
+                <td>1500 W/mK en plano</td>
+                <td>0,07–0,30 mm</td>
+                <td>Difusión lateral, M.2, tablets</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
         <div class="callout warning">
           <span class="cbadge">WARN</span>
           <h4>⚠️ Metal Líquido en aluminio</h4>
