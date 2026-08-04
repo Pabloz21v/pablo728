@@ -1,0 +1,2402 @@
+<!DOCTYPE html>
+<html lang="es-ES" data-theme="dark"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+    
+    
+    <title>Hardware 2 · Refrigeración — Sesión Técnica</title>
+    <style>
+      :root {
+        --bg: #0f1729;
+        --card-bg: #1a2744;
+        --text: #f8fafc;
+        --blue: #3b82f6;
+        --cyan: #06b6d4;
+        --green: #10b981;
+        --yellow: #f59e0b;
+        --red: #ef4444;
+        --border-deco: #2dd4bf;
+        --muted: #94a3b8;
+        --header-grad-start: #1e3a5f;
+        --header-grad-end: #1a2744;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          'Segoe UI',
+          system-ui,
+          -apple-system,
+          Roboto,
+          Arial,
+          sans-serif;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      body {
+        padding: 24px 16px 64px;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      /* ====== NAV BUTTONS ====== */
+      .nav-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+      .nav-btn {
+        display: inline-block;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+        border: 1px solid transparent;
+        transition: filter 0.2s;
+      }
+      .nav-btn:hover {
+        filter: brightness(1.15);
+      }
+      .nav-btn.primary {
+        background: var(--blue);
+        color: #fff;
+      }
+      .nav-btn.secondary {
+        background: transparent;
+        color: var(--cyan);
+        border-color: var(--cyan);
+      }
+      .nav-btn.accent {
+        background: var(--green);
+        color: #0f1729;
+      }
+      .nav-btn.warn {
+        background: var(--yellow);
+        color: #0f1729;
+      }
+      .nav-buttons.bottom {
+        justify-content: center;
+        margin-top: 40px;
+      }
+
+      /* ====== HEADER ====== */
+      header.hero {
+        text-align: center;
+        padding: 40px 24px;
+        background: linear-gradient(135deg, #0a1224 0%, #15233f 100%);
+        border-radius: 16px;
+        border: 1px solid rgba(45, 212, 191, 0.25);
+        margin-bottom: 28px;
+      }
+      header.hero h1 {
+        font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+        margin: 0 0 10px;
+        background: linear-gradient(90deg, var(--blue), var(--cyan));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        line-height: 1.15;
+      }
+      header.hero h2 {
+        color: var(--cyan);
+        font-size: 1.2rem;
+        margin: 0 0 8px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+      }
+      header.hero h3 {
+        color: var(--muted);
+        font-size: 1rem;
+        margin: 0 0 18px;
+        font-weight: 400;
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .badge {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: rgba(6, 182, 212, 0.15);
+        color: var(--cyan);
+        font-size: 0.85rem;
+        font-weight: 600;
+        border: 1px solid rgba(6, 182, 212, 0.4);
+      }
+      .badge .dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--cyan);
+        margin-right: 8px;
+        vertical-align: middle;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+
+      /* ====== TOC ====== */
+      .toc {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 32px;
+        border: 1px solid rgba(45, 212, 191, 0.2);
+      }
+      .toc h2 {
+        margin-top: 0;
+        font-size: 1.15rem;
+        color: var(--cyan);
+        border-bottom: 1px solid rgba(45, 212, 191, 0.3);
+        padding-bottom: 10px;
+        margin-bottom: 16px;
+      }
+      .toc ol {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        columns: 2;
+        column-gap: 30px;
+      }
+      .toc li {
+        margin-bottom: 8px;
+        break-inside: avoid;
+      }
+      .toc a {
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 10px;
+        border-radius: 6px;
+        transition: background 0.2s;
+        font-size: 0.9rem;
+      }
+      .toc a:hover {
+        background: rgba(59, 130, 246, 0.15);
+        color: var(--cyan);
+      }
+      .toc a .num {
+        color: var(--blue);
+        font-weight: 700;
+        min-width: 24px;
+      }
+      .toc-info {
+        margin-top: 14px;
+        font-size: 0.78rem;
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      /* ====== SECTION TITLES ====== */
+      .section-title {
+        background: linear-gradient(90deg, var(--header-grad-start), var(--header-grad-end));
+        border-left: 5px solid var(--cyan);
+        border-radius: 0 10px 10px 0;
+        padding: 14px 20px;
+        margin: 48px 0 20px;
+        font-size: 1.4rem;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .section-title .icon {
+        font-size: 1.3rem;
+      }
+      .section-meta {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-bottom: 24px;
+        padding-left: 20px;
+        font-style: italic;
+      }
+
+      /* ====== CARDS ====== */
+      .card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+      .card h3 {
+        margin-top: 0;
+        color: var(--cyan);
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .card h4 {
+        margin-top: 18px;
+        color: var(--blue);
+        font-size: 1rem;
+      }
+      .card p {
+        margin: 8px 0;
+        color: #e2e8f0;
+      }
+      .card ul,
+      .card ol {
+        padding-left: 22px;
+        color: #e2e8f0;
+      }
+      .card li {
+        margin-bottom: 6px;
+      }
+      .card .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 12px;
+      }
+      @media (max-width: 680px) {
+        .card .grid-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ====== CALLOUTS ====== */
+      .callout {
+        background: rgba(6, 182, 212, 0.08);
+        border-left: 5px solid var(--cyan);
+        border-radius: 0 10px 10px 0;
+        padding: 16px 20px;
+        margin: 18px 0;
+      }
+      .callout .cbadge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 6px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+      }
+      .callout .cbadge.info {
+        background: var(--cyan);
+        color: #0f1729;
+      }
+      .callout h4 {
+        margin: 0 0 8px;
+        color: var(--cyan);
+        font-size: 1rem;
+      }
+      .callout p {
+        margin: 6px 0;
+        color: #e2e8f0;
+      }
+      .callout.warning {
+        background: rgba(239, 68, 68, 0.08);
+        border-left-color: var(--red);
+      }
+      .callout.warning .cbadge {
+        background: var(--red);
+        color: #fff;
+      }
+      .callout.warning h4 {
+        color: var(--red);
+      }
+      .callout.tip {
+        background: rgba(245, 158, 11, 0.08);
+        border-left-color: var(--yellow);
+      }
+      .callout.tip .cbadge {
+        background: var(--yellow);
+        color: #0f1729;
+      }
+      .callout.tip h4 {
+        color: var(--yellow);
+      }
+
+      /* ====== TABLES ====== */
+      .table-wrap {
+        overflow-x: auto;
+        margin: 18px 0;
+        border-radius: 10px;
+        border: 1px solid #334155;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card-bg);
+        font-size: 0.92rem;
+        min-width: 480px;
+      }
+      thead {
+        background: #0f172a;
+      }
+      thead th {
+        color: var(--cyan);
+        text-align: left;
+        padding: 12px 14px;
+        font-weight: 600;
+        border-bottom: 2px solid var(--cyan);
+      }
+      tbody td {
+        padding: 11px 14px;
+        border-bottom: 1px solid #334155;
+        color: #e2e8f0;
+      }
+      tbody tr:nth-child(even) {
+        background: rgba(255, 255, 255, 0.025);
+      }
+      tbody tr:hover {
+        background: rgba(59, 130, 246, 0.08);
+      }
+
+      /* ====== Q-LIST ====== */
+      .q-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .q-item {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 18px;
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .q-num {
+        flex: 0 0 38px;
+        height: 38px;
+        width: 38px;
+        border-radius: 50%;
+        background: var(--blue);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+      .q-body {
+        flex: 1;
+      }
+      .q-body .qtag {
+        display: inline-block;
+        font-size: 0.7rem;
+        padding: 2px 8px;
+        border-radius: 4px;
+        margin-right: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .qtag.multi {
+        background: var(--blue);
+        color: #fff;
+      }
+      .qtag.vf {
+        background: var(--green);
+        color: #0f1729;
+      }
+      .qtag.short {
+        background: var(--yellow);
+        color: #0f1729;
+      }
+      .qtag.scenario {
+        background: var(--red);
+        color: #fff;
+      }
+      .q-body h4 {
+        margin: 0 0 8px;
+        color: var(--text);
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+      .q-body p {
+        margin: 6px 0;
+        color: #e2e8f0;
+        font-size: 0.92rem;
+      }
+      .q-options {
+        margin: 8px 0;
+        padding-left: 0;
+        list-style: none;
+      }
+      .q-options li {
+        padding: 4px 0;
+        color: #cbd5e1;
+        font-size: 0.9rem;
+      }
+      .q-options li::before {
+        content: '▸ ';
+        color: var(--cyan);
+      }
+      .q-answer {
+        color: var(--green);
+        font-weight: 600;
+        font-size: 0.85rem;
+        display: block;
+        margin-top: 8px;
+      }
+
+      /* ====== PROGRESS BARS ====== */
+      .bar-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 8px 0;
+      }
+      .bar-label {
+        width: 90px;
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+      .bar-track {
+        flex: 1;
+        height: 10px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .bar-fill {
+        height: 100%;
+        border-radius: 5px;
+        transition: width 0.4s;
+      }
+      .bar-value {
+        font-size: 0.78rem;
+        color: var(--cyan);
+        min-width: 50px;
+        text-align: right;
+      }
+      .fill-copper {
+        background: linear-gradient(90deg, #f97316, #fb923c);
+        width: 90%;
+      }
+      .fill-aluminum {
+        background: linear-gradient(90deg, #94a3b8, #cbd5e1);
+        width: 55%;
+      }
+      .fill-paste {
+        background: linear-gradient(90deg, var(--blue), var(--cyan));
+        width: 8%;
+      }
+      .fill-ml {
+        background: linear-gradient(90deg, #a855f7, #ec4899);
+        width: 30%;
+      }
+      .fill-pcm {
+        background: linear-gradient(90deg, var(--green), #34d399);
+        width: 12%;
+      }
+      .fill-air {
+        background: linear-gradient(90deg, #64748b, #94a3b8);
+        width: 2%;
+      }
+
+      /* ====== THERMOMETER ====== */
+      .therm {
+        display: flex;
+        align-items: stretch;
+        gap: 14px;
+        background: var(--card-bg);
+        padding: 18px;
+        border-radius: 12px;
+        margin: 14px 0;
+      }
+      .therm-tube {
+        flex: 0 0 60px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 30px;
+        height: 220px;
+        position: relative;
+        border: 1px solid #334155;
+        display: flex;
+        flex-direction: column-reverse;
+        overflow: hidden;
+      }
+      .therm-mercury {
+        flex: 1;
+        display: flex;
+        flex-direction: column-reverse;
+      }
+      .therm-tick {
+        position: absolute;
+        left: 64px;
+        top: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        font-size: 0.7rem;
+        color: var(--muted);
+      }
+      .therm-tick span {
+        margin-bottom: 0;
+      }
+      .therm-info {
+        flex: 1;
+        font-size: 0.85rem;
+      }
+      .therm-info p {
+        margin: 6px 0;
+      }
+      .th-seg {
+        height: 25%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        color: #fff;
+        font-weight: 600;
+      }
+      .th-green {
+        background: var(--green);
+      }
+      .th-yellow {
+        background: var(--yellow);
+        color: #0f1729;
+      }
+      .th-orange {
+        background: #f97316;
+      }
+      .th-red {
+        background: var(--red);
+      }
+
+      /* ====== M.2 BARS ====== */
+      .m2-bars {
+        background: var(--card-bg);
+        padding: 18px;
+        border-radius: 12px;
+        margin: 14px 0;
+      }
+      .m2-bar {
+        margin-bottom: 14px;
+      }
+      .m2-bar-head {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        color: var(--text);
+        margin-bottom: 4px;
+      }
+      .m2-bar-track {
+        height: 14px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .m2-bar-fill {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding-left: 8px;
+        font-size: 0.72rem;
+        color: #fff;
+        font-weight: 600;
+      }
+
+      /* ====== DECISION TREE ====== */
+      .decision-tree {
+        background: var(--card-bg);
+        padding: 20px;
+        border-radius: 12px;
+        margin: 18px 0;
+        border: 1px solid var(--border-deco);
+      }
+      .dt-step {
+        margin: 10px 0;
+        padding-left: 20px;
+        border-left: 3px solid var(--cyan);
+      }
+      .dt-q {
+        color: var(--cyan);
+        font-weight: 600;
+        margin-bottom: 4px;
+        font-size: 0.95rem;
+      }
+      .dt-a {
+        color: #e2e8f0;
+        margin: 2px 0 2px 14px;
+        font-size: 0.9rem;
+      }
+      .dt-a::before {
+        content: '↳ ';
+        color: var(--green);
+      }
+
+      /* ====== FOOTER ====== */
+      footer {
+        margin-top: 50px;
+        padding-top: 24px;
+        border-top: 1px solid #334155;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      footer p {
+        margin: 4px 0;
+      }
+
+      /* ====== UTILITY ====== */
+      .ref {
+        color: var(--cyan);
+        font-size: 0.75rem;
+        vertical-align: super;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .ref::before {
+        content: '[';
+      }
+      .ref::after {
+        content: ']';
+      }
+      .highlight {
+        color: var(--yellow);
+        font-weight: 600;
+      }
+      .mono {
+        font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+        background: rgba(0, 0, 0, 0.35);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        color: var(--cyan);
+      }
+      code.inline {
+        font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+        background: rgba(0, 0, 0, 0.35);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.85em;
+        color: var(--cyan);
+      }
+
+      /* ====== RESPONSIVE ====== */
+      @media (max-width: 768px) {
+        body {
+          padding: 16px 12px 48px;
+        }
+        header.hero {
+          padding: 28px 18px;
+        }
+        .toc ol {
+          columns: 1;
+        }
+        .table-wrap {
+          margin-left: -12px;
+          margin-right: -12px;
+          border-radius: 6px;
+        }
+        .nav-buttons {
+          flex-direction: column;
+        }
+        .nav-btn {
+          width: 100%;
+          text-align: center;
+        }
+        .card,
+        .callout,
+        .therm,
+        .m2-bars,
+        .decision-tree {
+          padding: 16px;
+        }
+        .q-item {
+          flex-direction: column;
+        }
+        .q-num {
+          margin-bottom: 4px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+              <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion10.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 10
+      </a>
+      <a
+        href="hardware2-sesion12.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 12
+      </a>
+    </div>
+      <nav class="nav-buttons">
+        <a href="#sec0" class="nav-btn primary">📘 Inicio</a>
+        <a href="#sec1" class="nav-btn secondary">❄️ Fundamentos</a>
+        <a href="#sec2" class="nav-btn secondary">🌀 Aire / AIO</a>
+        <a href="#sec3" class="nav-btn secondary">💨 Flujo de Aire</a>
+        <a href="#sec4" class="nav-btn secondary">🔧 Aplicación</a>
+        <a href="#sec5" class="nav-btn secondary">💻 Notebooks</a>
+        <a href="#sec6" class="nav-btn secondary">🎯 Decisión</a>
+        <a href="#sec8" class="nav-btn accent">📝 Preguntas</a>
+      </nav>
+
+      
+      <header class="hero">
+        <!-- <span class="badge"><span class="dot"></span>Hardware 2 · Refrigeración · 280 min totales</span> -->
+        <h1>Sesión 11 — Refrigeración</h1>
+        <!-- <h2> Aire, Líquida y Torre para PC de Escritorio, Legacy y Notebook</h2> -->
+        <!-- <h3>
+          Clase teórico-práctica donde el alumno adquirirá los criterios para elegir el sistema de refrigeración
+          adecuado según presupuesto, necesidad, generación del hardware y compatibilidad física.
+        </h3> -->
+      </header>
+
+      
+      <section class="toc" id="toc">
+        <h2>📋 Tabla de Contenidos</h2>
+        <ol>
+          <li>
+            <a href="#sec0"><span class="num">0.</span> Introducción y Objetivos</a>
+          </li>
+          <li>
+            <a href="#sec1"><span class="num">1.</span> Fundamentos, Física e Interfases</a>
+          </li>
+          <li>
+            <a href="#sec2"><span class="num">2.</span> Refrigeración de CPU en Escritorio</a>
+          </li>
+          <li>
+            <a href="#sec3"><span class="num">3.</span> Flujo de Aire del Gabinete</a>
+          </li>
+          <li>
+            <a href="#sec4"><span class="num">4.</span> Aplicación Avanzada y Pads</a>
+          </li>
+          <li>
+            <a href="#sec5"><span class="num">5.</span> Refrigeración en Notebooks</a>
+          </li>
+          <li>
+            <a href="#sec6"><span class="num">6.</span> Comparativa y Guía de Decisión</a>
+          </li>
+          <li>
+            <a href="#sec7"><span class="num">7.</span> Glosario Técnico</a>
+          </li>
+          <li>
+            <a href="#sec8"><span class="num">8.</span> Preguntas</a>
+          </li>
+          <li>
+            <a href="#sec9"><span class="num">9.</span> Referencias</a>
+          </li>
+        </ol>
+        <!-- <div class="toc-info">Tip: revisá la sección 6 antes de resolver los escenarios de la evaluación final.</div> -->
+      </section>
+
+      
+      <h2 class="section-title" id="sec0">
+        <span class="icon">🎓</span>Sección 0 — Introducción y Objetivos de la Sesión
+      </h2>
+      <!-- <div class="section-meta">5 minutos · nivel: intermedio · prerequisito: conocimientos básicos de Hardware 1</div> -->
+
+      <div class="card">
+        <h3>🎯 ¿Qué vas a aprender hoy?</h3>
+        <p>
+          Al finalizar esta sesión vas a ser capaz de <span class="highlight">recomendar con criterio técnico</span> un
+          sistema de refrigeración para cualquier escenario de armado, manteniendo o mejorando PC. Ya no vas a elegir
+          por marca o tendencia: vas a justificar la decisión con los <span class="highlight">4 ejes decisores</span>.
+        </p>
+        <h4>Competencias terminales</h4>
+        <ul>
+          <li>Explicar la conducción/convección y el rol del TIM.</li>
+          <li>Diferenciar pastas, pads, metal líquido y PCM.</li>
+          <li>Comparar refrigeración por aire, AIO y custom loop.</li>
+          <li>Calcular flujo de aire y presión estática de un gabinete.</li>
+          <li>Aplicar correctamente pasta y dimensionar thermal pads.</li>
+          <li>Identificar thermal throttling y proponer soluciones.</li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        <span class="cbadge info">INFO</span>
+        <h4>📐 Los 4 Ejes Decisores (Presupuesto · Necesidad · Generación · Compatibilidad)</h4>
+        <p>Toda recomendación de refrigeración pasa por estos cuatro filtros. Ninguno es opcional.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Eje</th>
+              <th>Pregunta clave</th>
+              <th>Ejemplo de impacto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>💰 Presupuesto</strong></td>
+              <td>¿Cuánto puede gastar el cliente?</td>
+              <td>$30 → torre simple; $90 → AIO 240/280; $250 → AIO 360 + torre premium</td>
+            </tr>
+            <tr>
+              <td><strong>🛠️ Necesidad</strong></td>
+              <td>¿Ofimática / gaming / workstation / silencioso?</td>
+              <td>Workstation 24/7 → metal líquido o custom loop</td>
+            </tr>
+            <tr>
+              <td><strong>📅 Generación</strong></td>
+              <td>¿Qué socket y TDP tiene la CPU?</td>
+              <td>Ryzen 7000 AM5 = 65–170 W TDP, IHS plano, exige buena pasta</td>
+            </tr>
+            <tr>
+              <td><strong>🔗 Compatibilidad</strong></td>
+              <td>¿TDP, socket, altura, RAM clearance, radiador disponible?</td>
+              <td>Gabinete SFF no admite torre de 165 mm ni AIO 360</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      
+      <h2 class="section-title" id="sec1">
+        <span class="icon">🧊</span>Sección 1 — Fundamentos, Física Térmica e Interfases
+      </h2>
+  
+
+      <div class="card">
+        <h3>📚 1.1 Las tres formas de transferencia de calor</h3>
+        <div class="grid-2">
+          <div>
+            <h4>🔥 Conducción</h4>
+            <p>
+              Transferencia por contacto directo entre sólidos. Es el mecanismo dominante CPU → IHS → pasta → base del
+              disipador. .
+            </p>
+          </div>
+          <div>
+            <h4>💨 Convección</h4>
+            <p>
+              Transporte por movimiento de fluido (aire o líquido). Es lo que hace el ventilador y la bomba.
+            </p>
+          </div>
+          <div>
+            <h4>🌡️ Radiación</h4>
+            <p>
+              Emisión infrarroja. Despreciable bajo 100 °C en componentes de PC; pero explica por qué un gabinete sin
+              ventilación igual se calienta.
+            </p>
+          </div>
+          <div>
+            <h4>🧮 Ley de Fourier</h4>
+            <p>
+              <code class="inline">q = k · A · ΔT / e</code>. A mayor <span class="mono">k</span> (conductividad) y
+              menor espesor <span class="mono">e</span>, más calor fluye por unidad de tiempo.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🔬 1.2 La micro-superficie del silicio</h3>
+        <p>
+          El IHS (Integrated Heat Spreader) del procesador y la base metálica del disipador parecen lisos a simple
+          vista, pero al microscopio presentan valles de entre <strong>1 µm y 50 µm</strong>. Cuando se ponen en
+          contacto, solo el <strong>1–2 %</strong> de la superficie se toca realmente; el resto queda atrapado con
+          <strong>aire</strong>, cuya conductividad es bajísima.
+        </p>
+        <p>
+          Por eso la <strong>interface térmica (TIM)</strong> no es opcional: su trabajo es
+          <span class="highlight">rellenar esos valles y desplazar el aire</span>. Una buena pasta equivale a
+          multiplicar el área efectiva de contacto por más de 50.
+        </p>
+      </div>
+
+      <div class="callout">
+        <span class="cbadge info">CONCEPTO CLAVE</span>
+        <h4>🧪 Conductividad Térmica <span class="mono">W/mK</span></h4>
+        <p>
+          Es la cantidad de calor (vatios) que atraviesa 1 metro de grosor del material por cada grado Kelvin de
+          diferencia. Cuanto mayor, mejor conduce. <strong>Pero atención</strong>: la pasta térmica está entre los 4 y
+          14 W/mK, lo que parece poco comparado con el cobre (≈401), pero como su espesor final tras el montaje es de
+          <strong>micras</strong>, la resistencia térmica sigue siendo muy baja.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>📊 1.3 Comparativa de Conductividad de Materiales</h3>
+        <div class="bar-row">
+          <span class="bar-label">Cobre</span>
+          <div class="bar-track"><div class="bar-fill fill-copper"></div></div>
+          <span class="bar-value">401 W/mK</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Aluminio</span>
+          <div class="bar-track"><div class="bar-fill fill-aluminum"></div></div>
+          <span class="bar-value">237 W/mK</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Metal Líquido</span>
+          <div class="bar-track"><div class="bar-fill fill-ml"></div></div>
+          <span class="bar-value">≈40–80</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">PTM7950 PCM</span>
+          <div class="bar-track"><div class="bar-fill fill-pcm"></div></div>
+          <span class="bar-value">8,5 W/mK</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Pasta térmica</span>
+          <div class="bar-track"><div class="bar-fill fill-paste"></div></div>
+          <span class="bar-value">4–14</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Aire (gap)</span>
+          <div class="bar-track"><div class="bar-fill fill-air"></div></div>
+          <span class="bar-value">0,024</span>
+        </div>
+        <div class="callout tip">
+          <span class="cbadge">DATO</span>
+          <h4>Por qué una capa delgada de pasta sigue siendo mejor que cobre</h4>
+          <p>
+            El cobre como monopastilla plana no podría adaptarse a las micro-imperfecciones; quedaría aire entre ambos.
+            La pasta se adapta porque es un fluido de baja viscosidad inicial, luego se solidifica. El espesor final
+            suele ser de <strong>10–40 µm</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🧱 1.4 Tipos de Materiales de Interfaz Térmica (TIM)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Conductividad típica</th>
+              <th>Espesor</th>
+              <th>Usos recomendados</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Pasta térmica de silicona + cerámicas</td>
+              <td>4–8 W/mK (NT-H2, MX-6)</td>
+              <td>Aplicada, 10–40 µm</td>
+              <td>Uso general desktop/portátil</td>
+            </tr>
+            <tr>
+              <td>Pasta térmica metálica (Kryonaut, TFX)</td>
+              <td>12–14 W/mK</td>
+              <td>Aplicada, 15–50 µm</td>
+              <td>Overclock y cargas sostenidas</td>
+            </tr>
+            <tr>
+              <td>Thermal Pad (elastomérico)</td>
+              <td>1–12 W/mK</td>
+              <td>0,5 / 1,0 / 1,5 / 2,0 / 3,0 mm</td>
+              <td>VRM, VRAM, chipset, M.2</td>
+            </tr>
+            <tr>
+              <td>Metal Líquido (galio-indio)</td>
+              <td>≈40–80 W/mK</td>
+              <td>≈10 µm tras presión</td>
+              <td>Disipadores de cobre (NO aluminio)</td>
+            </tr>
+            <tr>
+              <td>PCM (Phase Change Pad)</td>
+              <td>8,5 W/mK (PTM7950)</td>
+              <td>0,20–0,25 mm</td>
+              <td>Cargas sostenidas, laptops, mantenimiento cero</td>
+            </tr>
+            <tr>
+              <td>Pad de grafito</td>
+              <td>1500 W/mK en plano</td>
+              <td>0,07–0,30 mm</td>
+              <td>Difusión lateral, M.2, tablets</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout warning">
+          <span class="cbadge">WARN</span>
+          <h4>⚠️ Metal Líquido en aluminio</h4>
+          <p>
+            El galio <strong>corroe el aluminio</strong> formando una aleación friable que destruye el disipador. Usá
+            metal líquido <span class="highlight">únicamente</span> sobre superficies de
+            <strong>cobre niquelado</strong>. Aunque manchar el cobre de gris no daña térmicamente, una gota que caiga
+            sobre pads o motherboard sí produce cortocircuitos por su
+            <span class="highlight">conductividad eléctrica</span>.
+          </p>
+        </div>
+        <h4>PCM — Honeywell PTM7950</h4>
+        <p>
+          Es un material de cambio de fase sólido a temperatura ambiente. A <strong>45 °C</strong> se vuelve viscoso y
+          fluye hacia los valles microscópicos. Permanentemente, sin degradarse, con conductividad declarada de
+          <strong>8,5 W/mK</strong> a
+          <a href="https://www.honeywell.com.cn/content/dam/honcn/documents/advanced-materials/electrical-materials/thermal-interface-materials/ptm7000-series/PTM7950-TDS-EN%202022.12.7.pdf" class="ref">1</a>. Es el estándar de fábrica actual en muchas GPU modernas y reemplaza pasta de larga duración en laptops.
+        </p>
+      </div>
+
+      
+      <h2 class="section-title" id="sec2">
+        <span class="icon">🌀</span>Sección 2 — Refrigeración de CPU en Escritorio
+      </h2>
+      
+<div class="card">
+        <h3>📦 2.1 Disipadores Stock (incluidos de fábrica)</h3>
+        <p>
+          El <span class="highlight">disipador stock</span> es el cooler que viene incluido en la caja de la CPU, sin
+          costo extra. Conocer sus límites es uno de los criterios más importantes al armar una PC: muchas
+          configuraciones de oficina y bajo TDP funcionan perfectamente con stock, pero un stock en una CPU de 125 W+
+          suele terminar en throttling inmediato y quejas por ruido. 
+        </p>
+
+        <h4>Intel — Serie Laminar (LGA1700 / LGA1851)</h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Modelo Disipador</th>
+                <th>CPU que lo incluye</th>
+                <th>TDP máx</th>
+                <th>Altura</th>
+                <th>Ruido (dBA = decibeles)</th>
+                <th>Característica</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Laminar RM1</strong></td>
+                <td>Core i3 / i5 / i7 12ª, 13ª y 14ª Gen (sin SKU K/KF)</td>
+                <td>65 W</td>
+                <td>47 mm</td>
+                <td>29 dBA @ 2400 RPM</td>
+                <td>Estándar. Base cobre + aletas aluminio. PWM 4-pin. 350 g</td>
+              </tr>
+              <tr>
+                <td><strong>Laminar RH1</strong></td>
+                <td>Core Ultra (variante ARGB opcional)</td>
+                <td>65 W</td>
+                <td>69 mm</td>
+                <td>16 dBA @ 1600 RPM</td>
+                <td>Más cobre, shroud metálico premium, casi inaudible</td>
+              </tr>
+              <tr>
+                <td><strong>Laminar RS1</strong></td>
+                <td>(Descontinuado) Pentium G7400 / Celeron G6900</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td>Solo histórico. NO comprar ni recomendar hoy.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    
+
+        <h4>AMD — Serie Wraith (AM4 / AM5)</h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Modelo Disipador</th>
+                <th>TDP soportado</th>
+                <th>Ruido (dBA = decibeles)</th>
+                <th>Característica</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Wraith Stealth</strong></td>
+                <td>≤ 65 W</td>
+                <td>~26 dBA</td>
+                <td>Básico, perfil bajo (HTPC). Ryzen 5 5500 / 7600 estándar.</td>
+              </tr>
+              <tr>
+                <td><strong>Wraith Spire</strong></td>
+                <td>~95 W</td>
+                <td>32 dBA @ 2800 RPM</td>
+                <td>Clásico Ryzen 7 1700/2700. Discontinuado para AM5 (2025).</td>
+              </tr>
+              <tr>
+                <td><strong>Wraith Max</strong></td>
+                <td>140 W</td>
+                <td>Variable</td>
+                <td>Histórico entusiasta, heatpipes, ventilador 80 mm lateral.</td>
+              </tr>
+              <tr>
+                <td><strong>Wraith Prism (AM5)</strong></td>
+                <td>hasta 105 W</td>
+                <td>~28 dBA</td>
+                <td>Estándar AM5 desde 2024. Dual-tower, 4 heatpipes, RGB.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout tip">
+          <span class="cbadge">CUÁNDO SÍ</span>
+          <h4>✅ Cuándo alcanza el cooler stock</h4>
+          <ul style="margin: 6px 0">
+            <li>CPU de <strong>≤ 65 W TDP</strong> (i3, i5 no K, Ryzen 5 entry-level).</li>
+            <li>Trabajo de oficina, navegación, suite ofimática, clases, multimedia.</li>
+            <li>Build con presupuesto tan limitado que el costo del cooler aftermarket impacta.</li>
+            <li>Equipo secundario: HTPC, NAS liviano, servidor de archivos.</li>
+            <li>Cuando el cliente acepta throttling leve bajo cargas esporádicas.</li>
+          </ul>
+        </div>
+
+        <div class="callout warning">
+          <span class="cbadge">CUÁNDO NO</span>
+          <h4>❌ Cuándo NO alcanza el stock</h4>
+          <ul style="margin: 6px 0">
+            <li>CPU con sufijo <strong>K, KF, X, X3D</strong> en cargas largas (TDP real &gt; 95 W).</li>
+            <li>Gaming de más de 4 horas seguidas, edición de video, render 3D, compilación.</li>
+            <li>Gabinete con ventilación pobre y temperatura ambiente superior a 28 °C.</li>
+            <li>Cliente que exige silencio absoluto (los stock sleeve-bearing suelen ser chillones).</li>
+            <li>Overclock deliberado (el stock está dimensionado para TDP nominal, margen nulo).</li>
+          </ul>
+        </div>
+
+        <div class="callout">
+          <span class="cbadge info">🔊 RUIDO</span>
+          
+          <p>
+            El <strong>Laminar RM1</strong> mide 29 dBA @ 2400 RPM, pero a plena carga su ventilador puede alcanzar
+            <strong>3150 RPM (≈ 38 dBA)</strong>, claramente audible si el gabinete está en un escritorio silencioso. Esta
+            es la causa #1 de devoluciones y reclamos "el cooler de la caja hace ruido". La solución: ajustar la curva
+            en BIOS/UEFI para limitar el RPM máximo al 70-80 %, o reemplazarlo por una torre de $30-45.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <!-- <h3>🌀 2.2 Teoría del ventilador: qué spec sheet leer antes de comprar</h3>
+        <p>
+          Antes de comprar o recomendar un cooler hay que leer su ficha técnica y entender cuatro specs clave:
+          <strong>caudal</strong>, <strong>presión estática</strong>, <strong>tipo de control</strong> y
+          <strong>tipo de rodamiento</strong>. Equivocarse en cualquiera significa gastar mal o no enfriar lo esperado.
+        </p>
+
+        <h4>A. Caudal (CFM) vs Presión Estática (mmH₂O)</h4>
+        <ul>
+          <li>
+            <strong>CFM (Cubic Feet per Minute)</strong>: volumen de aire movido en <em>espacio libre</em>, sin
+            resistencia. Bueno para extracción (rear/top exhaust sin filtro).
+          </li>
+          <li>
+            <strong>mmH₂O (milímetros de columna de agua)</strong>: capacidad de empujar aire contra una resistencia.
+            Bueno para radiadores, frentes con filtro antipolvo, stacks de aletas densos.
+          </li>
+        </ul>
+        <p>
+          Cada ventilador tiene una <span class="highlight">curva P/Q</span> en su datasheet: a mayor resistencia,
+          menor caudal. Regla práctica para selección:
+        </p>
+        <ul>
+          <li><strong>≥ 2,5 mmH₂O</strong> → adecuado para radiador AIO o filtro frontal.</li>
+          <li><strong>≥ 1,5 mmH₂O</strong> → adecuado para heatpipes densos (torre premium).</li>
+          <li><strong>≥ 70 CFM</strong> → buen caudal en espacio libre (exhaust).</li>
+        </ul>
+
+        <h4>B. Control PWM vs DC</h4>
+        <div class="grid-2">
+          <div>
+            <h4>🔌 DC (3-pin)</h4>
+            <p>
+              Voltaje variable 0-12 V regula RPM. Barato, sin telemetría precisa de RPM. Hoy solo se ve en
+              ventiladores antiguos o de uso específico (PSU, gabinetes industriales).
+            </p>
+          </div>
+          <div>
+            <h4>✅ PWM (4-pin)</h4>
+            <p>
+              Voltaje siempre 12 V; señal de control 25 kHz independiente (duty cycle 0-100 %). Telemetría exacta
+              (2 pulsos/rev). Permite curvas silenciosas finas.
+              <span class="highlight">Estándar obligatorio</span> en CPU cooler y ventiladores modernos de gabinete.
+            </p>
+          </div>
+        </div>
+
+        <h4>C. Rodamientos (bearings) — la fuente principal de ruido y vida útil</h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Vida útil</th>
+                <th>Ruido</th>
+                <th>Cuándo se usa / cuándo evitarlo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Sleeve (manga)</strong></td>
+                <td>30.000 – 40.000 h</td>
+                <td>Silencioso al inicio, crece con uso</td>
+                <td>Stock coolers. Solo en posición vertical. Se seca y muere.</td>
+              </tr>
+              <tr>
+                <td><strong>Ball (bolas)</strong></td>
+                <td>40.000 – 60.000 h</td>
+                <td>Más audible a altas RPM</td>
+                <td>Aguanta calor y orientación horizontal. Algo ruidoso.</td>
+              </tr>
+              <tr>
+                <td><strong>Rifle Bearing</strong></td>
+                <td>40.000 – 50.000 h</td>
+                <td>Mantiene silencio mejor que sleeve</td>
+                <td>Noctua, be quiet!. Recircula aceite. Mejor en horizontal.</td>
+              </tr>
+              <tr>
+                <td><strong>FDB / HDB (Fluid / Hydro Dynamic Bearing)</strong></td>
+                <td>100.000 – 300.000 h</td>
+                <td>Silencioso y estable por años</td>
+                <td><strong>Estándar premium actual</strong>: Noctua, be quiet! Silent Wings, Corsair.</td>
+              </tr>
+              <tr>
+                <td><strong>ML (Magnetic Levitation)</strong></td>
+                <td>200.000+ h</td>
+                <td>Excelente</td>
+                <td>Gama extrema (Corsair ML Pro). Sin contacto físico.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div> -->
+       
+
+        <h4>A. Tabla de confort acústico (dB(A))</h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Rango dB(A)</th>
+                <th>Percepción</th>
+                <th>Contexto típico</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&lt; 20</td>
+                <td>Inaudible a 1 m</td>
+                <td>Biblioteca, Noctua a baja carga</td>
+              </tr>
+              <tr>
+                <td>20 – 25</td>
+                <td>Muy silencioso, confortable</td>
+                <td>Oficina, sesión nocturna, RH1 a baja carga</td>
+              </tr>
+              <tr>
+                <td>25 – 30</td>
+                <td>Audible en silencio, aceptable</td>
+                <td>Stock RM1 @ 50 % PWM</td>
+              </tr>
+              <tr>
+                <td>30 – 35</td>
+                <td>Claramente audible</td>
+                <td>Gaming, AIO gama media</td>
+              </tr>
+              <tr>
+                <td>35 – 40</td>
+                <td>Ruidoso, difícil de ignorar</td>
+                <td>Stock cooler a pico, ventiladores sleeve baratos</td>
+              </tr>
+              <tr>
+                <td>&gt; 40</td>
+                <td>Molesto</td>
+                <td>No recomendado para oficina / dormitorio</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- <div class="callout tip">
+          <span class="cbadge">CONSEJO</span>
+          <h4>🎧 La frecuencia del tono importa tanto como el dB(A)</h4>
+          <p>
+            Dos ventiladores pueden medir el mismo dB(A) en el sonómetro y percibirse muy distinto. Un sleeve barato a
+            1500 RPM emite un <em>whine</em> agudo (800-1500 Hz) mucho más perceptible que un Noctua a 1800 RPM con tono
+            profundo (200-400 Hz). Las reseñas profesionales ponderan más la <strong>firma espectral</strong> que el
+            mero dB(A).
+          </p>
+        </div> -->
+
+        <h4>B. Cuándo reemplazar un ventilador stock</h4>
+        <ul>
+          <li><strong>Coil whine o vibración audible</strong>: cambiar de inmediato (rodamiento dañándose).</li>
+          <li>
+            <strong>RPM mínimo alto a pesar de curva baja en BIOS</strong>: sleeve seco, vida útil agotándose.
+          </li>
+          <li><strong>Menos de 3 años y ya hace ruido</strong>: stock sleeve es la causa → cambiar a FDB.</li>
+          <li><strong>Gabinete cerrado sin filtros</strong>: cambio anual de ventiladores (polvo acumulado).</li>
+          <li>
+            <strong>Laminar RM1 como referencia típica</strong>: vida útil 3-4 años en ambiente limpio, declina
+            después.
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>🌬️ 2.3 Refrigeración por Aire</h3>
+        <p>
+          Mecánica simple: heatpipes llevan el calor desde la base hasta un stack de aletas de aluminio que un
+          ventilador axial enfría. Ventajas:
+          <span class="highlight">cero mantenimiento, 5–10 años de vida útil, sin riesgo de goteo</span>. Limitación:
+          ocupa gabinete vertical y limita RAM con disipadores altos, dicho de otra forma, ocupa tanto espacio que limita el espacio para otros componentes.
+        </p>
+        <h4>Anatomía de un disipador torre</h4>
+        <ul>
+          <li><strong>Base</strong>: cobre o aluminio pulido. Cobre directa con la CPU o con heatpipes.</li>
+          <li>
+            <strong>Heatpipes</strong>: tubos sellados al vacío con fluido que se evapora y condensa. Son de
+            <strong>cobre sinterizado</strong> (microporos que actúan por capilaridad). 4–8 tubos según TDP objetivo.
+          </li>
+          <li>
+            <strong>Stack de aletas</strong>: aluminio por densidad/volumen; aletas finas = mayor área radiante, pero
+            también mayor restricción al flujo.
+          </li>
+          <li><strong>Ventilador(es)</strong>: 92 / 120 / 140 mm; en torre dual lleva 2.</li>
+        </ul>
+        <!-- <h4>Tipos de contacto base-CPU</h4> -->
+        <!-- <div class="grid-2">
+          <div>
+            <h4>🟢 CTH (Cold Touch Heatpipe)</h4>
+            <p>
+              Base de cobre pulido <span class="highlight">sin contacto directo</span>. El calor pasa al tubo y luego al
+              IHS de aluminio/aletas. Mejor calidad pero más caro.
+            </p>
+          </div>
+          <div>
+            <h4>🟡 DTH (Direct Touch Heatpipe)</h4>
+            <p>
+              Los tubos hacen contacto directo con el IHS. Menores costos, pero pueden generar patrones visibles en la
+              pasta térmica tras años de uso.
+            </p>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="card">
+        <h3>💧 2.4 Refrigeración Líquida AIO (All-In-One)</h3>
+        <p>
+          Una bomba empuja líquido refrigerante (agua destilada + aditivos inhibidores) por un circuito cerrado con tres
+          bloques: <span class="highlight">CPU → manguera → radiador → manguera → CPU</span>. El radiador tiene 1–3
+          ventiladores que expulsan el calor al exterior del gabinete.
+        </p>
+        <h4>Tamaños de radiador</h4>
+        <ul>
+          <li><strong>120 mm</strong>: básico, oficina, TDP &lt; 65 W.</li>
+          <li><strong>240 mm</strong>: estándar gaming mainstream; disipa 150–180 W fácilmente.</li>
+          <li><strong>280 mm</strong>: paso intermedio, ventiladores de 140 mm más silenciosos.</li>
+          <li><strong>360 mm</strong>: alta gama gaming y CPU de 200 W+.</li>
+          <li>
+            <strong>420 mm</strong>: workstations, requiere gabinetes específicos (Lian Li O11, Corsair 7000D, …).
+          </li>
+        </ul>
+        <div class="callout warning">
+          <span class="cbadge">WARN</span>
+          <h4>🛑 Permeación y vida útil del AIO</h4>
+          <p>
+            Las mangueras de goma nitrilo pierden pequeñas moléculas de agua por difusión molecular: fenómeno llamado
+            <em>permeación</em>. Un AIO de calidad dura <span class="highlight">5–7 años</span> antes de que el líquido
+            disminuya visiblemente y el rendimiento caiga. Marcas premium usan EPDM o PTFE (caucho). La evaporación lenta explica
+            por qué un AIO viejo hace ruido: la bomba gira más rápido para compensar la pérdida de caudal.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>📊 2.5 Aire vs AIO — Tabla comparativa</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Criterio</th>
+                <th>🌬️ Aire tower</th>
+                <th>💧 AIO 240–360</th>
+                <th>🛠️ Custom Loop</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Costo (USD)</td>
+                <td>$25 – 120</td>
+                <td>$90 – 250</td>
+                <td>$300 – 800+</td>
+              </tr>
+              <tr>
+                <td>Rendimiento (180 W CPU)</td>
+                <td>Bueno</td>
+                <td>Muy bueno</td>
+                <td>Excelente</td>
+              </tr>
+              <tr>
+                <td>Ruido típico</td>
+                <td>Bajo (24–32 dBA)</td>
+                <td>Medio (28–38 dBA)</td>
+                <td>Bajo si se dimensiona</td>
+              </tr>
+              <tr>
+                <td>Mantenimiento</td>
+                <td>Limpiar polvo cada 6 meses</td>
+                <td>Reemplazar a los 5–7 años</td>
+                <td>Rellenar + limpiar cada 12 meses</td>
+              </tr>
+              <tr>
+                <td>Riesgo</td>
+                <td>Cero</td>
+                <td>Goteo por sello (raro)</td>
+                <td>Goteo real si se monta mal</td>
+              </tr>
+              <tr>
+                <td>VRM/MOSFET cubre</td>
+                <td>Limitado, depende del airflow</td>
+                <td>Solo CPU</td>
+                <td>CPU + GPU + chipset si se desea</td>
+              </tr>
+            </tbody>
+          </table>
+         <div class="callout">
+          <span class="cbadge info">Custom Loop</span>
+          
+          <p>
+           Refrigeración personalizada, pueden buscar una imagen para ver de qué se trata, no vamos a profundizar este tipo de refrigeración, pero es bueno que sepan que existe.
+Visualizaran placas madre con tubos por todos lados, algunos luminosos o de colores llamativos refrigerando una gran cantidad de los componentes del equipo.
+
+          </p>
+        </div>
+        </div>
+      </div>
+
+      
+      <h2 class="section-title" id="sec3">
+        <span class="icon">💨</span>Sección 3 — Flujo de Aire del Gabinete y Presión
+      </h2>
+    
+      <div class="card">
+        <h3>📈 3.1 Presión positiva vs negativa</h3>
+        <div class="grid-2">
+          <div>
+            <h4>⬆️ Presión Positiva</h4>
+            <p>
+              Más aire entra que sale. El aire filtrado empuja hacia fuera el calor y la humedad.
+              <span class="highlight">Menos polvo acumulado dentro</span>.
+            </p>
+            <p><strong>Configuración típica</strong>: 3 frontales intake + 1 trasero exhaust.</p>
+         
+          </div>
+          <div>
+            <h4>⬇️ Presión Negativa</h4>
+            <p>
+              Más aire sale que entra. Crea vacío que absorbe polvo por cada ranura y filtro inexistente.
+              <span class="highlight">Más silencioso</span>, más calor residual.
+            </p>
+            <p><strong>Configuración típica</strong>: 1 trasero intake + 2 top exhaust.</p>
+          </div>
+        </div>
+        <div class="callout"><p><strong>Intake: </strong> Entrada de aire</p>
+            <p><strong>Exhaust:</strong>  Extractor / Salida de aire</p></div> 
+       
+      </div>
+
+      <!-- <div class="card">
+        <h3>🌀 3.2 Caudal (CFM) vs Presión Estática (mmH2O)</h3>
+        <p>Dos especificaciones distintas y un error frecuente es comprar el ventilador equivocado:</p>
+        <ul>
+          <li>
+            <strong>CFM (Cubic Feet per Minute)</strong>: volumen movido. Bueno para extraer aire limpio de zonas libres
+            (rear/top exhaust).
+          </li>
+          <li>
+            <strong>mmH2O (milímetros de columna de agua)</strong>: capacidad de empujar aire contra resistencia. Bueno
+            para radiadores, frentes con filtro, disipadores densos (intake frontal).
+          </li>
+        </ul>
+        <p>
+          La curva <em>Presión/Caudal (P/Q)</em> de cada ventilador muestra su rendimiento bajo distintas resistencias.
+          Cuanto más plano el techo de la curva, mejor ventilador.
+        </p>
+      </div> -->
+
+      <div class="card">
+        <h3>🌡️ 3.2 Termómetro de referencia para CPU en carga</h3>
+        <div class="therm">
+          <div class="therm-tube">
+            <div class="th-red" style="height: 25%">🔥</div>
+            <div class="th-orange" style="height: 25%">⚠️</div>
+            <div class="th-yellow" style="height: 25%">⚠️</div>
+            <div class="th-green" style="height: 25%">✅</div>
+          </div>
+          <div class="therm-info">
+            <p><strong>🟢 Verde: &lt; 70 °C</strong> — Óptimo. Margen amplio, sin throttling.</p>
+            <p><strong>🟡 Amarillo: 70–85 °C</strong> — Aceptable, no hay throttling pero conviene mejorar caso.</p>
+            <p><strong>🟠 Naranja: 85–95 °C</strong> — Throttling intermitente. Rendimiento cae 5–15 %.</p>
+            <p><strong>🔴 Rojo: &gt; 95 °C</strong> — Throttling agresivo. Riesgo de apagado por sobretemperatura.</p>
+            <!-- <p style="margin-top: 14px; font-size: 0.78rem; color: var(--muted)">
+              <em>CPU moderna desktop: Tjunction máx 100–115 °C. Recomendado sostener &lt; 80 °C en sesiones largas de gaming.</em>
+            </p> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>📊 3.4 Comparativa de Form Factors M.2 y Calor Generado</h3>
+        <div class="m2-bars">
+          <div class="m2-bar">
+            <div class="m2-bar-head"><span>M.2 2230 (NVMe corto, Steam Deck / mini PC)</span><span>3–5 W</span></div>
+            <div class="m2-bar-track">
+              <div class="m2-bar-fill" style="width: 15%; background: linear-gradient(90deg, var(--green), #34d399)">
+                Pocas pérdidas
+              </div>
+            </div>
+          </div>
+          <div class="m2-bar">
+            <div class="m2-bar-head"><span>M.2 2280 (estándar desktop)</span><span>5–9 W (PCIe 4.0)</span></div>
+            <div class="m2-bar-track">
+              <div class="m2-bar-fill" style="width: 45%; background: linear-gradient(90deg, var(--yellow), #fbbf24)">
+                Thermal throttling común
+              </div>
+            </div>
+          </div>
+          <div class="m2-bar">
+            <div class="m2-bar-head"><span>M.2 22110 (workstation, longest)</span><span>8–12 W (PCIe 5.0)</span></div>
+            <div class="m2-bar-track">
+              <div class="m2-bar-fill" style="width: 75%; background: linear-gradient(90deg, #f97316, var(--red))">
+                Requiere disipador robusto
+              </div>
+            </div>
+          </div>
+          <div class="m2-bar">
+            <div class="m2-bar-head"><span>AHCI SATA M.2 2280 (legado)</span><span>2–4 W</span></div>
+            <div class="m2-bar-track">
+              <div class="m2-bar-fill" style="width: 20%; background: linear-gradient(90deg, var(--cyan), var(--blue))">
+                Apenas necesita pad
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <h2 class="section-title" id="sec4">
+        <span class="icon">🔧</span>Sección 4 — Aplicación Avanzada, Pads y Refrigeración Secundaria
+      </h2>
+    
+      <div class="card">
+        <h3>🎯 4.1 Técnicas de aplicación de pasta térmica</h3>
+        <div class="grid-2">
+          <div>
+            <h4>• Gota central (recomendada)</h4>
+            <p>
+              Una gota del tamaño de un grano de arroz en el centro del IHS. La presión del disipador la distribuye en
+              forma radial. <span class="highlight">Ideal para IHS plano</span> (Intel LGA1700, AMD AM5).
+            </p>
+          </div>
+          <div>
+            <h4>• Línea / cruz</h4>
+            <p>
+              Vierta una línea fina horizontal sobre IHS convexo. <span class="highlight">Compatible con AM4</span> (IHS
+              levemente convexo).
+            </p>
+          </div>
+          <div>
+            <h4>• Cinco puntos</h4>
+            <p>Para CPUs con die grande multi-chiplet (Xeon, Threadripper).</p>
+          </div>
+          <div>
+            <h4>• Esparcido con espátula</h4>
+            <p>
+              Manual, pero puede atrapar burbujas. <span class="highlight">No recomendado para principiantes.</span>
+            </p>
+          </div>
+        </div>
+        <div class="callout tip">
+          <span class="cbadge">DATO</span>
+          <h4>💡 Filosofía moderna</h4>
+          <p>
+            Una buena pasta esparcida por la presión del disipador da prácticamente el mismo resultado que la aplicación
+            manual, solo si está nueva y de calidad. Las diferencias medidas entre métodos son típicamente
+            <strong>&lt; 1,5 °C</strong> en testing controlado 
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>📏 4.2 Dimensionamiento de Thermal Pads</h3>
+        <p>
+          Un pad demasiado grueso <span class="highlight">levanta el disipador del componente principal</span>, cortando
+          contacto crítico. Uno demasiado fino <span class="highlight">no llega al disipador y deja aire</span>. La
+          regla es:
+          <strong>mide el gap con el disipador puesto y elige el grosor que cubre ese gap con 0,1–0,2 mm extra</strong><br>
+          Cuando hablamos de <strong>GAP </strong>no referimos a la distancia de un elemento con el otro.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Componente</th>
+                <th>Grosor típico</th>
+                <th>Densidad / dureza</th>
+                <th>Notas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>VRM / MOSFET placa base</td>
+                <td>1,0 – 1,5 mm</td>
+                <td>Alta densidad (12–15 W/mK), Shore A 30–50</td>
+                <td>Debe ser duro para no colapsar</td>
+              </tr>
+              <tr>
+                <td>VRAM GDDR6 / GDDR6X (GPU)</td>
+                <td>1,0 – 1,5 mm (front) / 0,5–1,0 (back)</td>
+                <td>Media densidad (8–12 W/mK), Shore A 20–30</td>
+                <td>Blanda para absorber variación de altura</td>
+              </tr>
+              <tr>
+                <td>Chipset / PCH</td>
+                <td>1,0 mm</td>
+                <td>Media densidad</td>
+                <td>Verificar altura de capacitor</td>
+              </tr>
+              <tr>
+                <td>M.2 NVMe (controladora)</td>
+                <td>0,2 – 0,5 mm</td>
+                <td>Baja-media densidad (5–8 W/mK)</td>
+                <td>Más grueso = contraproducente</td>
+              </tr>
+              <tr>
+                <td>Sensor secundario CPU (aux)</td>
+                <td>0,5 mm</td>
+                <td>Alta conductividad (10+ W/mK)</td>
+                <td>Bloques auxiliares en placas workstation</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout warning">
+          <span class="cbadge">WARN</span>
+          <h4>⚠️ Consecuencias de un pad mal elegido</h4>
+          <ul style="margin: 6px 0">
+            <li>
+              <strong>Demasiado grueso</strong>: el disipador de la CPU pierde presión contra el IHS → temperaturas
+              suben <strong>10–20 °C</strong>.
+            </li>
+            <li><strong>Demasiado fino</strong>: queda un gap de aire → +5–15 °C en el chip secundario.</li>
+            <li><strong>Pila de pads</strong>: nunca apiles 2 pads; la interfaz interna introduce resistencia de contacto adicional y reduce la conductividad.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🛡️ 4.3 Refrigeración de componentes críticos secundarios</h3>
+        <ul>
+          <li>
+            <strong>VRM (Voltage Regulator Modules)</strong>: fases de poder que alimentan la CPU. MOSFETs que pueden
+            pasar de 90 °C. Se acoplan al disipador del VRM con thermal pads de
+            <span class="highlight">alta densidad</span> y baja compresibilidad; no conductores.
+          </li>
+          <li>
+            <strong>VRAM GDDR6X</strong>: 12 modules por GPU que se calientan <strong>95–105 °C</strong> en carga.
+            Micropads de 1,0–1,5 mm con Shore A 20–30.
+          </li>
+          <li>
+            <strong>SSD M.2 NVMe</strong>: la controladora (Phison E18, Samsung Elpis, Silicon Motion SM2264) genera
+            hasta <strong>9–12 W</strong> en PCIe 5.0. Disipadores pasivos de aluminio con thermal pad 0,2–0,5 mm; sin
+            él, throttling de <strong>30 %</strong> en escrituras largas.
+          </li>
+          <li><strong>PCH / Chipset</strong>: poco exigente pero conviene cubrirlo en placas con cargas intensivas de I/O.</li>
+        </ul>
+      </div>
+
+      
+      <h2 class="section-title" id="sec5"><span class="icon">💻</span>Sección 5 — Refrigeración en Notebooks</h2>
+     
+      <div class="card">
+        <h3>🔄 5.1 Pump-Out Effect</h3>
+        <p>
+          Las notebooks sufren ciclos térmicos muy agresivos: la CPU móvil salta entre 35 °C en reposo y 100 °C en carga.
+          La pasta térmica convencional se degrada rápido porque
+          <span class="highlight">se va "exprimiendo"</span> desde el centro del die hacia los bordes con cada
+          dilatación/contracción. En 12–18 meses pierde hasta un 30 % de capacidad.
+        </p>
+        <div class="callout tip">
+          <span class="cbadge">SOLUCIÓN</span>
+          <h4>🔧 ¿Qué pasta usar en notebooks?</h4>
+          <ul style="margin: 6px 0">
+            <li><strong>Thermal Grizzly Kryonaut Extreme</strong>: viscosidad 130–150 Pa·s; aguanta mejor.</li>
+            <li>
+              <strong>Honeywell PTM7950 (PCM)</strong>: cambio de fase sólido → viscoso a 45 °C. Estado estacionario en
+              la zona de contacto. <span class="highlight">Mantenimiento prácticamente cero</span>. Ideal para laptops y
+              GPU modernas.
+            </li>
+            <li>
+              <strong>Noctua NT-H2</strong>: alto rendimiento con estabilidad; razonable para laptops si se repasta cada
+              12–18 meses.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🛠️ 5.2 Mantenimiento de placa de laptop</h3>
+        <p>
+          Las laptops modernas son un sistema térmico <em>monolítico</em>: heatpipe plana de cobre pasa por CPU + GPU +
+          VRM, con pads térmicos en cada chip secundario. Los pads originales de fábrica suelen venir
+          <span class="highlight">aceitosos</span> o muy secos tras años.
+        </p>
+        <ul>
+          <li>Reemplazar pads aceitosos por thermal pads de <strong>1,0–1,5 mm </strong> en VRM/VRAM.</li>
+          <li>Sustituir pasta CPU y GPU con PCM PTM7950 o Kryonaut Extreme.</li>
+          <li>Limpiar el ventilador y disipador; cambiar pasta térmica cada <strong>12–18 meses</strong> según uso.</li>
+          <!-- <li>Reapretar tornillos siguiendo el orden numérico del fabricante, no en orden arbitrario.</li> -->
+        </ul>
+      </div>
+
+      <div class="callout warning">
+        <span class="cbadge">WARN</span>
+        <h4>⚠️ Pérdida de garantía</h4>
+        <p>
+          En laptops con sellos de garantía (tornillos Torx T5 con cabeza rota, etiquetas "warranty void"), abrir el
+          chasis <strong>anula la garantía del fabricante</strong>. Solo proceder cuando el equipo está fuera de garantía
+          o el cliente acepta el riesgo.
+        </p>
+      </div>
+
+      
+      <h2 class="section-title" id="sec6">
+        <span class="icon">🎯</span>Sección 6 — Cuadro Comparativo General y Guía de Decisión
+      </h2>
+      
+      <div class="card">
+        <h3>📋 6.1 Tabla resumen para decisión rápida</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Perfil del cliente</th>
+                <th>TDP CPU típico</th>
+                <th>Refrigeración recomendada</th>
+                <th>Rango de precio (USD)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Oficina básica (Intel i3 / Ryzen 3)</td>
+                <td>35–65 W</td>
+                <td>Torre simple stock o DeepCool AK400</td>
+                <td>$25–45</td>
+              </tr>
+              <tr>
+                <td>Gaming mainstream (i5 / Ryzen 5)</td>
+                <td>65–125 W</td>
+                <td>Torre dual / AIO 240</td>
+                <td>$50–110</td>
+              </tr>
+              <tr>
+                <td>Gaming alto (i7 / Ryzen 7)</td>
+                <td>125–180 W</td>
+                <td>AIO 280–360 o torre grande</td>
+                <td>$90–180</td>
+              </tr>
+              <tr>
+                <td>Workstation (i9 / Ryzen 9 / Xeon)</td>
+                <td>180–250 W</td>
+                <td>AIO 360 o custom loop</td>
+                <td>$180–300</td>
+              </tr>
+              <tr>
+                <td>Silencioso (SFF / HTPC)</td>
+                <td>35–95 W</td>
+                <td>Noctua NH-L9 / Thermalright AXP90 + ventiladores silenciosos</td>
+                <td>$60–120</td>
+              </tr>
+              <tr>
+                <td>Notebook mantenimiento</td>
+                <td>15–45 W</td>
+                <td>Repasting con PTM7950 + pads Thermalright Odyssey</td>
+                <td>$15–25</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🌳 6.2 Árbol de decisión rápida</h3>
+        <div class="decision-tree">
+          <div class="dt-step">
+            <div class="dt-q">1. ¿El cliente fue claro con su presupuesto?</div>
+            <div class="dt-a">No → ofrecer 3 opciones basico /bueno /optimo dentro de su uso.</div>
+          </div>
+          <div class="dt-step">
+            <div class="dt-q">2. ¿Qué TDP tiene la CPU?</div>
+            <div class="dt-a">
+              &lt; 65 W → torre simple suficiente. &gt; 125 W → AIO mínimo 240 mm. &gt; 180 W → AIO 360 mm o custom.
+            </div>
+          </div>
+          <div class="dt-step">
+            <div class="dt-q">3. ¿El gabinete admite el disipador?</div>
+            <div class="dt-a">
+              Verificar altura máxima torre (clearance CPU). Verificar soporte de radiador (top/front). Verificar
+              clearance RAM.
+            </div>
+          </div>
+          <div class="dt-step">
+            <div class="dt-q">4. ¿Necesidad de silencio?</div>
+            <div class="dt-a">
+              Sí → Noctua, ventilador de bajo RPM, pasta eficiente. No → AIO con bomba fuerte aceptable.
+            </div>
+          </div>
+          <div class="dt-step">
+            <div class="dt-q">5. ¿Es notebook?</div>
+            <div class="dt-a">Sí → ver Sección 5 + evaluar si está en garantía.</div>
+          </div>
+        </div>
+      </div>
+
+      
+      <h2 class="section-title" id="sec7"><span class="icon">📖</span>Sección 7 — Glosario Técnico</h2>
+
+      <div class="card">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>IHS</strong></td>
+                <td>
+                  Integrated Heat Spreader. La tapa metálica del procesador que distribuye el calor del die al
+                  disipador.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>TIM</strong></td>
+                <td>
+                  Thermal Interface Material. Cualquier material entre IHS y disipador (pasta, pad, metal líquido, PCM).
+                </td>
+              </tr>
+              <tr>
+                <td><strong>TDP</strong></td>
+                <td>Thermal Design Power. Watts que el sistema de refrigeración debe evacuar en uso típico.</td>
+              </tr>
+              <tr>
+                <td><strong>W/mK</strong></td>
+                <td>Vatios por metro-Kelvin. Unidad habitual de conductividad térmica.</td>
+              </tr>
+              <tr>
+                <td><strong>mmH2O</strong></td>
+                <td>Milímetros de columna de agua. Mide la presión estática de un ventilador.</td>
+              </tr>
+              <tr>
+                <td><strong>CFM</strong></td>
+                <td>Cubic Feet per Minute. Caudal de aire que mueve un ventilador en espacio libre.</td>
+              </tr>
+              <tr>
+                <td><strong>PCM</strong></td>
+                <td>Phase Change Material. Sólido a ambiente, fluido sobre su temperatura de transición.</td>
+              </tr>
+              <tr>
+                <td><strong>DTH</strong></td>
+                <td>Direct Touch Heatpipe. Heatpipes que tocan directamente la CPU.</td>
+              </tr>
+              <tr>
+                <td><strong>Pump-Out</strong></td>
+                <td>Efecto degradación de pasta por ciclos thermiques consecutivos.</td>
+              </tr>
+              <tr>
+                <td><strong>Throttling</strong></td>
+                <td>Reducción automática de frecuencia/clocks por alta temperatura.</td>
+              </tr>
+              <tr>
+                <td><strong>Heatpipe</strong></td>
+                <td>Tubo sellado al vacío con fluido que transporta calor por cambio de fase + capilaridad.</td>
+              </tr>
+              <tr>
+                <td><strong>Sinterizado</strong></td>
+                <td>
+                  Material con estructura porosa usada en el interior de heatpipes para retornar el líquido por
+                  capilaridad.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>AIO</strong></td>
+                <td>All-In-One. Sistema de refrigeración líquida cerrada de fábrica.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      
+      <h2 class="section-title" id="sec8"><span class="icon">📝</span>Sección 8 — Preguntas</h2>
+      
+
+
+      <div class="q-list">
+        <div class="q-item">
+          <div class="q-num">1</div>
+          <div class="q-body">
+            <span class="qtag multi">Opción Múltiple</span>
+            <h4>¿Cuál es la conductividad térmica declarada del Honeywell PTM7950?</h4>
+            <ul class="q-options">
+              <li>0,024 W/mK</li>
+              <li>4,5 W/mK</li>
+              <li>8,5 W/mK</li>
+              <li>401 W/mK</li>
+            </ul>
+            <!-- <span class="q-answer">✓ 8,5 W/mK — corresponde a la ficha técnica del fabricante.</span> -->
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">2</div>
+          <div class="q-body">
+            <span class="qtag vf">Verdadero / Falso</span>
+            <h4>"El metal líquido (galio-indio) puede usarse sobre cualquier disipador, incluso de aluminio".</h4>
+            <!-- <span class="q-answer">✗ Falso. El galio <strong>corroe el aluminio</strong> formando una amalgama friable que destruye el
+              bloque. Solo apto para disipadores con base de cobre niquelada o superficie similar.</span> -->
+          </div>
+        </div>
+
+        <!-- <div class="q-item">
+          <div class="q-num">3</div>
+          <div class="q-body">
+            <span class="qtag multi">Opción Múltiple</span>
+            <h4>En una motherboard con VRM cubierto por disipador pasivo, ¿qué grosor de thermal pad es apropiado?</h4>
+            <ul class="q-options">
+              <li>0,2 mm Shore A 60</li>
+              <li>1,0–1,5 mm Shore A 30–50 de alta densidad</li>
+              <li>3,0 mm Shore A 10</li>
+              <li>No necesita pad</li>
+            </ul>
+            <span class="q-answer">✓ 1,0–1,5 mm de alta densidad (12–15 W/mK) Shore A 30–50. Lo suficientemente duro para no colapsar bajo
+              la presión del disipador, lo suficientemente conductor para evacuar el calor MOSFET.</span>
+          </div>
+        </div> -->
+
+        <div class="q-item">
+          <div class="q-num">3</div>
+          <div class="q-body">
+            <span class="qtag short">Respuesta Corta</span>
+            <h4>¿Qué significa el efecto "Pump-Out" en laptops?</h4>
+            <!-- <p>Escribe en 2–3 líneas con tus palabras.</p> -->
+            <!-- <span class="q-answer">✓ Migración de pasta térmica desde el centro del IHS hacia los bordes, producida por los ciclos repetidos
+              de dilatation/contracción térmica de la pasta y la presión del sistema de montaje. Acelera la degradación
+              térmica en laptops con ciclos cortos de carga (idle → boost → idle).</span> -->
+          </div>
+        </div>
+
+        <!-- <div class="q-item">
+          <div class="q-num">4</div>
+          <div class="q-body">
+            <span class="qtag vf">Verdadero / Falso</span>
+            <h4>
+              "Para un Intel Core i5-13400 (TDP 65 W) en un gabinete micro-ATX con altura máxima 165 mm, la mejor
+              elección es un AIO 360 mm".
+            </h4>
+            <span class="q-answer">✗ Falso. Por presupuesto/eficiencia, un TDP de 65 W se cubre perfectamente con torre simple ($30–45). Un
+              AIO 360 implica $150+ y un radiador 360 mm no entra físicamente en la mayoría de micro-ATX, peor aún si la
+              altura torre está limitada a 165 mm.</span>
+          </div>
+        </div> -->
+
+        <div class="q-item">
+          <div class="q-num">4</div>
+          <div class="q-body">
+            <span class="qtag multi">Opción Múltiple</span>
+            <h4>
+              ¿Qué configuración de ventiladores ofrece el mejor balance presión positiva + térmica para un gabinete
+              mid-tower?
+            </h4>
+            <ul class="q-options">
+              <li>2 top exhaust + 1 rear exhaust</li>
+              <li>3 front intake + 1 rear exhaust (con filtros frontales)</li>
+              <li>1 front intake + 1 rear exhaust + 1 top exhaust simétrico</li>
+              <li>Solo rear exhaust: alta presión negativa</li>
+            </ul>
+            <!-- <span class="q-answer">✓ 3 front intake + 1 rear exhaust con filtros frontales: crea <strong>presión positiva ligera</strong>,
+              polvo se queda en los filtros y el flujo de aire recorre el gabinete siguiendo la convención
+              natural.</span> -->
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">5</div>
+          <div class="q-body">
+            <span class="qtag multi">Opción Múltiple</span>
+            <h4>
+              En una GPU moderna de referencia (Founders Edition), ¿qué grosor de thermal pad suelen traer los módulos
+              VRAM en la parte frontal?
+            </h4>
+            <ul class="q-options">
+              <li>0,2 mm</li>
+              <li>1,0–1,5 mm</li>
+              <li>3,0 mm</li>
+              <li>No traen pad</li>
+            </ul>
+            <!-- <span class="q-answer">✓ 1,0–1,5 mm, en pads blandos Shore A 20–30 con alta conductividad (8–12 W/mK). Ejemplo típico: RTX 3090
+              FE usa 1,5 mm.</span> -->
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">6</div>
+          <div class="q-body">
+            <span class="qtag short">Respuesta Corta</span>
+            <h4>¿Por qué se recomienda PCM Honeywell PTM7950 en laptops y GPU modernas?</h4>
+            <!-- <span class="q-answer">✓ Porque su material cambia de sólido a viscoso a 45 °C. Una vez en operación, llena los valles y se
+              mantiene estable sin degradarse por pump-out. Elimina el repasting anual, manteniendo el rendimiento de
+              fábrica durante años.</span> -->
+          </div>
+        </div>
+
+        
+        <div class="q-item">
+          <div class="q-num">7</div>
+          <div class="q-body">
+            <span class="qtag scenario">ESCENARIO 1</span>
+            <h4>
+              Cliente gamer con presupuesto $80 USD. Compra Intel Core i5-13400 (TDP 65 W, LGA1700) 
+              (el cliente elegirá un gabinete acorde a la refrigeración elegida). Para un clima como el de nuestra ciudad.
+            </h4>
+
+            <p>Recomendá refrigerador CPU + pasta térmica justificando con los 4 ejes.</p>
+            <!-- <span class="q-answer">✓ <strong>Aire tower tipo Thermalright Peerless Assassin 120 SE</strong> (~$45) + pasta
+              <strong>Thermalright TFX</strong> (~$10). <strong>Justificación</strong>: <em>Presupuesto</em>: entra
+              dentro de $80. <em>Necesidad</em>: gaming mainstream y CPU de 65 W TDP, torre cubre con margen.
+              <em>Generación</em>: LGA1700 IHS plano — gota central de TFX. <em>Compatibilidad</em>: el gabinete
+              mid-tower soporta torre de 157 mm de altura. <strong>Por qué no AIO</strong>: el presupuesto no admite AIO
+              240 ($90+), y con TDP 65 W el rendimiento marginal no lo justifica.</span> -->
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">8</div>
+          <div class="q-body">
+            <span class="qtag scenario">ESCENARIO 2</span>
+            <h4>
+              Cliente de oficina con presupuesto limitado (~$40 USD). Compra Intel Core i3-13100 (TDP 60 W) (el cliente elegirá un gabinete acorde a la refrigeración elegida). Trabaja con Excel, navegador y correo. Quiere silencio absoluto.
+            </h4>
+            <p>Recomendá refrigerador + pasta justificando.</p>
+            <!-- <span class="q-answer">✓ <strong>Disipador stock Intel (incluido en la caja)</strong> + pasta
+              <strong>Noctua NT-H2</strong> (~$15). <strong>Justificación</strong>: <em>Presupuesto</em>: stock = $0 +
+              NT-H2 = total $15. <em>Necesidad</em>: oficina sin carga sostenida, 60 W TDP holgado. <em>Generación</em>:
+              LGA1700, IHS plano. <em>Compatibilidad</em>: micro-ATX estándar admite el stock.
+              <strong>Por qué no torre premium</strong>: el cliente paga por silencio y los disipadores tower grandes
+              tienen más turbulencia. El stock con buenas RPM es más silencioso.</span> -->
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">9</div>
+          <div class="q-body">
+            <span class="qtag scenario">ESCENARIO 3</span>
+            <h4>
+              Cliente entusiasta con presupuesto $250 USD. Compra AMD Ryzen 9 7900X (TDP 170 W, AM5) (el cliente elegirá un gabinete acorde a la refrigeración elegida) Lo usa para edición de video 4K + gaming 4K. Exige
+              temperaturas &lt; 75 °C en render.
+            </h4>
+            <!-- <span class="q-answer">✓ <strong>Arctic Liquid Freezer III 360</strong> (~$130) + pasta
+              <strong>Thermal Grizzly Kryonaut</strong> (~$25). <strong>Justificación</strong>: <em>Presupuesto</em>:
+              con $130 de AIO + $25 pasta, queda espacio para fans premium. <em>Necesidad</em>: 170 W sostenido exige
+              AIO 360 y Kryonaut para máximo rendimiento. <em>Generación</em>: AM5 IHS plano, IHS centrado, correcto
+              para gota central con Kryonaut. <em>Compatibilidad</em>: el Corsair 7000X admite radiador 360 mm
+              frontal/superior sin clearance issues. <strong>Por qué Custom Loop no</strong>: excede presupuesto. Por
+              qué torre dual no: 170 W sostenidos ya empiezan a empujar torres premium.</span> -->
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">10</div>
+          <div class="q-body">
+            <span class="qtag scenario">ESCENARIO 4</span>
+            <h4>
+              Cliente quiere PC silenciosa para dormitorio. Presupuesto $200 USD. AMD Ryzen 7 7700X (TDP 105 W, AM5).
+               (el cliente elegirá un gabinete acorde a la refrigeración elegida). Reputación obsesiva con silencio (≤ 25 dBA en
+              idle = reposo).
+            </h4>
+            <!-- <span class="q-answer">✓ <strong>Noctua NH-L9a-AM5</strong> (~$55, 37 mm de altura) + pasta
+              <strong>Noctua NT-H2</strong> (~$15). Resto del presupuesto:
+              <strong>ventiladores Noctua NF-A9 PWM chromax</strong> (~$25 c/u) para case + radiador.
+              <strong>Justificación</strong>: <em>Presupuesto</em>: $55 + $15 + 2 fans $50 = $120, deja margen.
+              <em>Necesidad</em>: 105 W TDP en gabinete SFF implica throttling tolerable. Mejor priorizar silencio.
+              <em>Generación</em>: AM5 — compatibilidad confirmada con NH-L9a-AM5. <em>Compatibilidad</em>: 37 mm entra
+              en límite 60 mm del chasis. <strong>Por qué no AIO</strong>: chasis A4-H20 admite AIO 120 pero el radiador
+              + 25 dBA ideal implica aceptar 30+ dBA. Por qué torre más grande: no entra.</span> -->
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">11</div>
+          <div class="q-body">
+            <span class="qtag vf">Verdadero / Falso</span>
+            <h4>
+              "En un SSD M.2 NVMe PCIe 4.0 que sufre throttling, colocar un thermal pad de 1,5 mm obliga al SSD a
+              mejorar temperatura".
+            </h4>
+            <!-- <span class="q-answer">✗ Falso. 1,5 mm es excesivo: el disipador quedaría muy separado del chip y la presión bajaría. El grosor
+              apropiado para M.2 es 0,2–0,5 mm. Más grueso = contraproducente.</span> -->
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">12</div>
+          <div class="q-body">
+            <span class="qtag multi">Opción Múltiple + Justificación</span>
+            <h4>
+              Si un cliente necesita silencio absoluto y la CPU es un i7-13700K (TDP 125 W), ¿cuál es la mejor opción? Justificar.
+            </h4>
+            <ul class="q-options">
+              <li>AIO 240 mm + curva ventiladores agresiva</li>
+              <li>Torre grande dual (Noctua NH-D15) con ventiladores a bajas RPM</li>
+              <!-- <li>AIO 360 mm + ventiladores silenciosos a RPM media</li> -->
+              <li>Refrigeración pasiva</li>
+            </ul>
+            <!-- <span class="q-answer">✓ <strong>Torre grande dual Noctua NH-D15 + ventiladores a RPM baja</strong>: las torres no tienen bomba
+              mecánica, única fuente de ruido son ventiladores. Configurados a 600–800 RPM, son prácticamente inaudibles
+              (≈22 dBA) y disipan 125 W con margen.</span> -->
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">13</div>
+          <div class="q-body">
+            <span class="qtag short">Respuesta Corta</span>
+            <h4>¿Cuáles son las 4 ejes decisores que debe considerar todo técnico al recomendar refrigeración?</h4>
+            <!-- <span class="q-answer">✓ <strong>Presupuesto</strong>, <strong>Necesidad</strong> (uso real),
+              <strong>Generación</strong> (socket, TDP, IHS), <strong>Compatibilidad</strong> (gabinete, RAM,
+              radiador).</span> -->
+          </div>
+        </div>
+
+        <!-- <div class="q-item">
+          <div class="q-num">14</div>
+          <div class="q-body">
+            <span class="qtag vf">Verdadero / Falso</span>
+            <h4>"El grosor típico de Honeywell PTM7950 es 1,0 mm".</h4>
+            <span class="q-answer">✗ Falso. PTM7950 viene típicamente en <strong>0,20–0,25 mm</strong> de espesor. Es deliberadamente
+              delgado porque el material fluye bajo presión + calor.</span>
+          </div>
+        </div> -->
+
+        <!-- <div class="q-item">
+          <div class="q-num">14</div>
+          <div class="q-body">
+            <span class="qtag short">Respuesta Corta</span>
+            <h4>
+              ¿Qué diferencia clave existe entre un ventilador de "flujo de aire" (high airflow) y uno de "presión
+              estática" (high static pressure)?
+            </h4>
+            <span class="q-answer">✓ El ventilador de flujo mueve gran volumen en espacio libre (radiador fino, extracción libre). El de
+              presión estática está optimized para empujar contra resistencia (radiador denso, filtro antipolvo). Sus
+              curvas P/Q son distintas. Usar uno equivocado reduce rendimiento.</span>
+          </div>
+        </div> -->
+
+        <div class="q-item">
+          <div class="q-num">14</div>
+          <div class="q-body">
+            <span class="qtag scenario">ESCENARIO 5 (notebook)</span>
+            <h4>
+              Cliente tiene una laptop ASUS ROG Strix G15 del 2021 con CPU Ryzen 7 5800H. Temperaturas en gaming suben a
+              95–98 °C y hace throttling, toca revisar tanto CPU como GPU. Está fuera de garantía. Presupuesto $25 USD. ¿Qué solución ofrecerías?
+            </h4>
+            <!-- <span class="q-answer">✓ <strong>Repasting CPU + GPU con Honeywell PTM7950</strong> (cortes a medida del die, ~$15) + reemplazo
+              de pads originales por <strong>Thermalright Odyssey 1,0 mm</strong> en VRM/VRAM (~$10).
+              <strong>Justificación</strong>: <em>Presupuesto</em>: $25 ajustados. <em>Necesidad</em>: corregir
+              throttling en gaming. <em>Generación</em>: laptop 2021 con pasta degradada por efecto pump-out, PTM7950 es mantenimiento
+              cero. <em>Compatibilidad</em>: las dimensiones PTM7950 (0,25 mm) entran en el espacio entre die y heatpipe
+              plana.</span> -->
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">15</div>
+          <div class="q-body">
+            <span class="qtag multi">Opción Múltiple</span>
+            <h4>¿Cuál es la conductividad térmica aproximada del aluminio usado en disipadores?</h4>
+            <ul class="q-options">
+              <li>0,024 W/mK</li>
+              <li>≈ 50 W/mK</li>
+              <li>≈ 237 W/mK</li>
+              <li>≈ 401 W/mK</li>
+            </ul>
+            <!-- <span class="q-answer">✓ 237 W/mK. Aleaciones de aluminio 6061/6063 típicas en heatpipes/aletas andan en 200–240. Cobre sube a
+              401, acero a ~50, aire casi 0.</span> -->
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">16</div>
+          <div class="q-body">
+            <span class="qtag vf">Verdadero / Falso</span>
+            <h4>
+              "Stackear dos thermal pads (uno encima del otro) para alcanzar el grosor deseado es una práctica
+              aceptable".
+            </h4>
+            <!-- <span class="q-answer">✗ Falso. La interfaz entre dos pads añade resistencia de contacto ≈ como una capa de aire. Es preferible
+              comprar el grosor único correcto. La diferencia térmica puede alcanzar 5–10 °C entre pad único y
+              pila.</span> -->
+          </div>
+        </div>
+      </div>
+
+      
+      <!-- <h2 class="section-title" id="sec9"><span class="icon">📚</span>Sección 9 — Referencias</h2> -->
+
+      <!-- <div class="card">
+        <h3>🔗 Fuentes consultadas</h3>
+        <ul>
+          <li>
+            <strong>[1]</strong> Honeywell International. <em>PTM7950 Technical Data Sheet</em> (2022).
+            <a href="https://www.honeywell.com.cn/content/dam/honcn/documents/advanced-materials/electrical-materials/thermal-interface-materials/ptm7000-series/PTM7950-TDS-EN%202022.12.7.pdf" style="color: var(--cyan)">Datasheet oficial Honeywell PTM7950</a>
+          </li>
+          <li>
+            <strong>[2]</strong> Sheen Thermal.
+            <em>How to Measure and Select the Right Thermal Pad Thickness for Any Build</em> (2026).
+            <a href="https://www.sheenthermal.com/how-to-measure-and-select-the-right-thermal-pad-thickness-for-any-build.html" style="color: var(--cyan)">SheenThermal — guía dimensional pads</a>
+          </li>
+          <li>
+            <strong>[3]</strong> SmallFormFactor.net Forum.
+            <em>Review: Honeywell PTM 7950 Phase Change Pad vs Thermalright TFX Paste</em> (Diciembre 2023).
+            <a href="https://smallformfactor.net/forum/threads/review-test-honeywell-ptm-7950-phase-change-pad-vs-thermalright-tfx-paste.19161/" style="color: var(--cyan)">SFF Review PTM7950 vs TFX</a>
+          </li>
+          <li>
+            <strong>[4]</strong> Igor's Lab.
+            <em>Overhyped? — Honeywell PTM7950 Lab Test and as Game Changer for Graphics Cards</em> (Julio 2024).
+            <a href="https://www.igorslab.de/en/overhyped-honeywell-ptm7950-in-lab-test-and-as-game-changer-for-graphics-cards/" style="color: var(--cyan)">Igor's Lab — benchmark independiente</a>
+          </li>
+          <li>
+            <strong>[5]</strong> Profesional Review. <em>Mejores pastas térmicas del mercado</em> (2024).
+            <a href="https://www.profesionalreview.com/hardware/mejores-pastas-termicas/" style="color: var(--cyan)">Profesional Review — ranking 2024</a>
+          </li>
+          <li>
+            <strong>[6]</strong> Intel Corporation. <em>Intel® Laminar RM1 Cooler Specifications</em>, Support Article 000089190 (revisado 01/08/2024).
+            <a href="https://www.intel.com/content/www/us/en/support/articles/000089190/processors/intel-core-processors.html" style="color: var(--cyan)">Intel Support — Laminar RM1 datasheet</a>
+          </li>
+          <li>
+            <strong>[7]</strong> AMD. <em>Wraith Cooler Family — Ryzen Processor Cooling Solutions</em>.
+            <a href="https://www.amd.com/en/products/processors/ecosystem/cpu-cooler-solutions.html" style="color: var(--cyan)">AMD — Wraith Stealth/Spire/Max/Prism specs</a>
+          </li>
+          <li>
+            <strong>[8]</strong> Gamers Nexus. <em>Computer Case Fan Bearing Differences — FDB, Ball, Sleeve</em>.
+            <a href="https://gamersnexus.net/guides/779-computer-case-fan-bearing-differences" style="color: var(--cyan)">GamersNexus — guía de rodamientos</a>
+          </li>
+          <li>
+            <strong>[9]</strong> be quiet!. <em>A Comprehensive Guide to Different Types of Fan Bearings</em> (2023).
+            <a href="https://www.bequiet.com/en/insidebequiet/4452" style="color: var(--cyan)">be quiet! — guía técnica de rodamientos</a>
+          </li>
+          <li>
+            <strong>[10]</strong> Hwcooling.net. <em>Intel Laminar RM1 box cooler test</em> (Marzo 2022).
+            <a href="https://www.hwcooling.net/en/intel-laminar-rm1-box-cooler-test-why-not-throw-it-away/" style="color: var(--cyan)">HWCooling — test independiente RM1</a>
+          </li>
+        </ul>
+      </div> -->
+
+      
+      <nav class="nav-buttons bottom">
+        <a href="#toc" class="nav-btn primary">🔝 Volver al Índice</a>
+        <a href="#sec0" class="nav-btn secondary">⬆️ Inicio</a>
+        <a href="#sec8" class="nav-btn accent">📝 Preguntas</a>
+        <a href="#sec1" class="nav-btn warn">🔄 Releer Fundamentos</a>
+      </nav>
+
+      
+   
+                  <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion10.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 10
+      </a>
+      <a
+        href="hardware2-sesion12.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 12
+      </a>
+    </div>
+    </div>
+  
+
+<script type="module" src="Hardware%202%20%C2%B7%20Refrigeraci%C3%B3n%20%E2%80%94%20Sesi%C3%B3n%20T%C3%A9cnica_files/v4513226cdae34746b4dedf0b4dfa099e1781791509496_lcR9" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;4edd5f8ec12a48cfa682ab8261b80a79&quot;}" crossorigin="anonymous"></script>
+</body></html>

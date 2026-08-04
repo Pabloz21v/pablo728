@@ -1,0 +1,1035 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 13: Unidades de Procesamiento Gráfico (GPU)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            /* background-color: #2c3e50; */
+            color: white;
+            border-radius: 5px;
+        }
+        
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        
+        section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .ejemplo, .tip-docente, .actividad {
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .glosario {
+            background-color: #e8f4fc;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        
+        .cuestionario {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #95a5a6;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            section {
+                padding: 10px;
+            }
+            table {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+             <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion12.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 12
+      </a>
+      <a
+        href="hardware1-sesion14.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 14
+      </a>
+    </div>
+    <header>
+        <h1>SESIÓN 13 - UNIDADES DE PROCESAMIENTO GRÁFICO (GPU): DEDICADAS, INTEGRADAS, LEGACY Y NOTEBOOKS</h1>
+    </header>
+
+    <section>
+        <h2>1. ¿Qué es una GPU y por qué existe? </h2>
+        <p><strong>GPU</strong> significa <em>Graphics Processing Unit</em>, es decir, <strong>Unidad de Procesamiento Gráfico</strong>. Su trabajo principal es procesar y generar imágenes, video, gráficos en 2D y 3D, interfaces visuales y, en muchos casos, cálculos paralelos. Aunque hoy se las relaciona sobre todo con videojuegos, su utilidad también aparece en edición de video, diseño CAD, simulación, inteligencia artificial, reproducción multimedia y manejo de múltiples pantallas.</p>
+        
+        <p>La GPU existe porque la <strong>CPU</strong>, aunque es muy poderosa para tareas secuenciales y decisiones complejas, no está diseñada para resolver de forma eficiente miles o millones de operaciones gráficas simples al mismo tiempo. Dibujar un videojuego, aplicar filtros a un video o renderizar una escena 3D exige una enorme cantidad de operaciones repetitivas y paralelas.</p>
+        
+        <p><strong>Analogía 1:</strong> la CPU es como un <strong>profesor de matemática</strong> que resuelve pocos problemas complejos con mucho razonamiento; la GPU es como un <strong>aula llena de alumnos</strong> haciendo miles de cuentas simples al mismo tiempo.</p>
+        
+        <p><strong>Analogía 2:</strong> la CPU es como un <strong>escritor de libros</strong> que trabaja en textos complejos uno por uno; la GPU se parece a un <strong>acomodador de libros en una biblioteca</strong> que organiza grandes cantidades de elementos en paralelo, aunque cada acción individual sea más simple.</p>
+        
+        <p>Por eso decimos que la CPU optimiza la ejecución secuencial y la toma de decisiones, mientras que la GPU optimiza el <strong>paralelismo masivo</strong>.</p>
+    </section>
+
+    <section>
+        <h2>2. Los sinónimos de GPU</h2>
+        <ul>
+            <li><strong>Placa de video</strong> <em></em></li>
+            <li><strong>Tarjeta de video</strong> <em></em></li>
+            <li><strong>Tarjeta gráfica</strong> <em></em></li>
+            <li><strong>Placa gráfica</strong></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Diferencia estructural entre CPU y GPU </h2>
+        <table>
+            <tr>
+                <th><strong>Aspecto</strong></th>
+                <th><strong>CPU</strong></th>
+                <th><strong>GPU</strong></th>
+            </tr>
+            <tr>
+                <td>Objetivo principal</td>
+                <td>Tareas generales y secuenciales</td>
+                <td>Tareas gráficas y paralelas</td>
+            </tr>
+            <tr>
+                <td>Núcleos</td>
+                <td>Pocos, muy complejos y rápidos</td>
+                <td>Muchos, más simples y especializados</td>
+            </tr>
+            <tr>
+                <td>Caché</td>
+                <td>Muy importante y abundante</td>
+                <td>Existe, pero el enfoque está más en el paralelismo</td>
+            </tr>
+            <tr>
+                <td>Tipo de trabajo</td>
+                <td>Lógica, sistema operativo, control general</td>
+                <td>Renderizado, sombreado, píxeles, video y cómputo masivo</td>
+            </tr>
+            <tr>
+                <td>Memoria principal</td>
+                <td>RAM del sistema</td>
+                <td>VRAM propia o RAM compartida en iGPU (unidad de procesamiento gráfico integrada que viene dentro del mismo chip del procesador (CPU))</td>
+            </tr>
+        </table>
+        
+        <p>Una CPU moderna suele tener menos núcleos físicos que una GPU, pero cada núcleo es mucho más versátil. En cambio, una GPU dispone de muchísimas unidades de ejecución más simples, ideales para repetir cálculos semejantes sobre grandes volúmenes de datos visuales.</p>
+    </section>
+
+    <section>
+        <h2>4. Componentes físicos de una tarjeta de video dedicada </h2>
+        <ul>
+            <li><strong>PCB (Printed Circuit Board):</strong> placa base donde se montan todos los componentes. Puede ser corta o larga, simple o compleja, según la gama de la GPU.</li>
+            <li><strong>Die o silicio de la GPU:</strong> es el chip principal. Ahí están los núcleos de procesamiento gráfico. Suele quedar oculto bajo el disipador.</li>
+            <li><strong>VRAM:</strong> memoria de video dedicada. Se ubica alrededor del chip gráfico en muchas placas. Su función es almacenar texturas, buffers, cuadros, sombreadores y otros datos visuales.</li>
+            <li><strong>VRM (Voltage Regulator Module):</strong> conjunto de fases, bobinas, MOSFETs y capacitores que transforman la energía de la fuente en voltajes adecuados y estables para la GPU y la VRAM.</li>
+            <li><strong>Sistema de refrigeración:</strong> disipador, heatpipes, base de contacto, ventiladores y, en modelos especiales, refrigeración líquida.</li>
+            <li><strong>Conector PCI Express x16:</strong> borde con contactos metálicos que se inserta en la placa madre.</li>
+            <li><strong>Conectores de alimentación:</strong> 6 pines, 8 pines o 12+4 pines (12VHPWR/12V-2x6 según la generación).</li>
+            <li><strong>Bracket trasero:</strong> placa metálica que sobresale al gabinete y donde están las salidas de video.</li>
+            <li><strong>Salidas de video:</strong> HDMI, DisplayPort, DVI o VGA, según época y modelo.</li>
+            <li><strong>Backplate:</strong> placa trasera metálica o plástica en algunos modelos, que aporta rigidez, disipación o protección.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>5. Núcleos de GPU vs núcleos de CPU </h2>
+        <p>Es común comparar la cantidad de núcleos de una GPU con los de una CPU y crea que “más siempre significa mejor”. Debe aclararse que <strong>no son núcleos equivalentes</strong>. Un núcleo de CPU es muy distinto a una unidad de ejecución dentro de una GPU.</p>
+        <ul>
+            <li><strong>CPU:</strong> pocos núcleos complejos, gran capacidad de decisión y alta potencia por núcleo.</li>
+            <li><strong>GPU:</strong> muchísimas unidades de cálculo, muy eficientes para tareas paralelas.</li>
+            <li><strong>Nvidia:</strong> suele hablar de <em>CUDA Cores</em>.</li>
+            <li><strong>AMD:</strong> suele hablar de <em>Stream Processors</em> o Unidades de Cómputo agrupadas.</li>
+        </ul>
+        <p>Un mayor número de unidades gráficas no garantiza por sí solo mejor rendimiento, porque también importan la arquitectura, frecuencia, ancho de bus, cantidad de VRAM, eficiencia térmica y generación.</p>
+    </section>
+
+    <section>
+        <h2>6. VRAM: qué es y por qué es distinta de la RAM del sistema </h2>
+        <p>La <strong>VRAM</strong> es la memoria propia de una GPU dedicada. Se utiliza para almacenar datos gráficos que necesitan acceso extremadamente rápido: texturas, cuadros, mapas de profundidad, buffers, shaders y otros elementos visuales.</p>
+        
+        <p>En placas dedicadas modernas es común encontrar memorias <strong>GDDR5, GDDR6 o GDDR6X</strong>. Estas memorias están optimizadas para un ancho de banda muy alto. No deben confundirse con la DDR4 o DDR5 del sistema, ya que cumplen otra función y trabajan con otra organización interna.</p>
+        
+        <p>En una <strong>iGPU</strong>, en cambio, no suele existir VRAM dedicada real: el sistema reserva una parte de la RAM principal y la usa como memoria gráfica compartida. Por eso una iGPU depende mucho de la velocidad y del modo de canal de la RAM del sistema.</p>
+        
+        <div class="glosario">
+            <h3>Glosario y fórmula de ancho de banda de VRAM</h3>
+            <p><strong>Tipo de VRAM:</strong> tecnología del chip de memoria (DDR, GDDR, HBM). Define voltaje, organización interna y consumo.</p>
+            <p><strong>Velocidad (data-rate):</strong> cantidad de datos que el chip transfiere por segundo, medida en Gbps (gigabits por segundo) por pin.</p>
+            <p><strong>Ancho de bus:</strong> cantidad de bits que la memoria envía o lee en paralelo por ciclo (64, 128, 192, 256, 384 bits, etc.). Es la "carretera" entre GPU y VRAM.</p>
+            <p><strong>Ancho de banda:</strong> cantidad máxima de datos que circulan entre GPU y VRAM por segundo.
+                <br> Fórmula → Ancho de Banda (GB/s) = Velocidad (Gbps) × Ancho de bus (bits) ÷ 8.</p>
+            <p><em>Ejemplo: GDDR6 a 16 Gbps con bus de 256 bits → 16 × 256 ÷ 8 = 512 GB/s.</em></p>
+        </div>
+        
+        <h3>Tabla 1.1 — Tipos de VRAM, velocidad, ancho de bus y ancho de banda</h3>
+        <div style="overflow-x: auto">
+
+            <table>
+                <tr>
+                    <th><strong>Tipo de VRAM</strong></th>
+                    <th><strong>Velocidad (Gbps/pin)</strong></th>
+                    <th><strong>Ancho de bus</strong></th>
+                    <th><strong>Ancho de banda máximo</strong></th>
+                    <th><strong>Uso típico</strong></th>
+                </tr>
+                <tr>
+                    <td>DDR2</td>
+                    <td>0,8 – 1,6 Gbps</td>
+                    <td>64 – 256 bits</td>
+                    <td>12 – 51 GB/s</td>
+                    <td>GPUs entre 2004 y 2008</td>
+                </tr>
+                <tr>
+                    <td>DDR3</td>
+                    <td>1 – 2,5 Gbps</td>
+                    <td>64 – 384 bits</td>
+                    <td>17 – 120 GB/s</td>
+                    <td>GPUs 2009-2014 de gama baja</td>
+                </tr>
+                <tr>
+                    <td>GDDR3</td>
+                    <td>0,8 – 2,5 Gbps</td>
+                    <td>64 – 256 bits</td>
+                    <td>12 – 80 GB/s</td>
+                    <td>Transición DDR3→GDDR (2007-2010)</td>
+                </tr>
+                <tr>
+                    <td>GDDR5</td>
+                    <td>4 – 8 Gbps</td>
+                    <td>64 – 512 bits</td>
+                    <td>32 – 512 GB/s</td>
+                    <td>Estándar 2010-2018 (GTX 1060/1080, RX 580)</td>
+                </tr>
+                <tr>
+                    <td>GDDR5X</td>
+                    <td>8 – 14 Gbps</td>
+                    <td>256 – 384 bits</td>
+                    <td>320 – 672 GB/s</td>
+                    <td>GTX 1080 Ti, Titan Xp, Quadro</td>
+                </tr>
+                <tr>
+                    <td>GDDR6</td>
+                    <td>14 – 24 Gbps</td>
+                    <td>64 – 384 bits</td>
+                    <td>96 – 960 GB/s</td>
+                    <td>RTX serie 30, RX serie 6000, RTX 40 (128/192-bit)</td>
+                </tr>
+                <tr>
+                    <td>GDDR6X</td>
+                    <td>19 – 21 Gbps (PAM4)</td>
+                    <td>192 – 384 bits</td>
+                    <td>456 – 1008 GB/s</td>
+                    <td>RTX 3080/3090/4080, RTX 4090</td>
+                </tr>
+                <tr>
+                    <td>GDDR7</td>
+                    <td>32 – 48 Gbps (PAM3)</td>
+                    <td>128 – 512 bits</td>
+                    <td>hasta ~1,5 TB/s</td>
+                    <td>Estándar emergente 2024+</td>
+                </tr>
+                <tr>
+                    <td>HBM</td>
+                    <td>0,5 – 1 Gbps</td>
+                    <td>1024 bits por stack</td>
+                    <td>64 – 128 GB/s por stack</td>
+                    <td>AMD Radeon VII, Fiji</td>
+                </tr>
+                <tr>
+                    <td>HBM2</td>
+                    <td>1,6 – 3,6 Gbps</td>
+                    <td>1024 bits (hasta 8 stacks)</td>
+                    <td>hasta 410 GB/s por stack</td>
+                    <td>RX Vega, Tesla P100</td>
+                </tr>
+                <tr>
+                    <td>HBM2E</td>
+                    <td>3,6 Gbps</td>
+                    <td>1024 bits</td>
+                    <td>hasta 461 GB/s por stack</td>
+                    <td>Tesla A100 (40 GB)</td>
+                </tr>
+                <tr>
+                    <td>HBM3</td>
+                    <td>5,6 – 6,4 Gbps</td>
+                    <td>1024 bits</td>
+                    <td>hasta 819 GB/s por stack</td>
+                    <td>H100, data centers</td>
+                </tr>
+                <tr>
+                    <td>HBM3E</td>
+                    <td>8 – 9,2 Gbps</td>
+                    <td>1024 bits</td>
+                    <td>hasta 1229 GB/s por stack</td>
+                    <td>H200, MI300X</td>
+                </tr>
+                <tr>
+                    <td>HBM4 (en desarrollo)</td>
+                    <td>9,6 – 12 Gbps</td>
+                    <td>2048 bits</td>
+                    <td>duplica el ancho de bus</td>
+                    <td>Previsto 2026+</td>
+                </tr>
+            </table>
+      </div>
+     
+    </section>
+
+    <section>
+        <h2>7. VRM, consumo y TDP </h2>
+        <p>La GPU necesita energía estable. El <strong>VRM</strong> (Modulo Regulador de Voltaje - Voltage Regulator Module) toma los 12 V que llegan desde la fuente y los transforma en tensiones menores, adecuadas para el chip gráfico y la VRAM. Si el VRM es deficiente, la placa puede calentarse más, ser inestable o limitar el rendimiento.</p>
+        
+        <p>El <strong>TDP (Potencia de Diseño Térmico)</strong> es una referencia de la potencia térmica que el sistema de refrigeración debe poder disipar. No siempre equivale al consumo exacto, pero orienta sobre la exigencia térmica y eléctrica del modelo.</p>
+        <ul>
+            <li>Una iGPU suele tener consumo mucho más bajo.</li>
+            <li>Una dGPU de entrada puede consumir poco y alimentarse solo desde el slot PCIe.</li>
+            <li>Una dGPU potente necesita conectores extra y una fuente adecuada.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>8. Alimentación eléctrica, pines y precauciones </h2>
+        <p>Una tarjeta PCIe recibe una parte de su energía desde el slot de la placa madre, a través de sus <strong>pines de contacto</strong>, que suelen estar montados sobre un borde conductor con recubrimiento metálico resistente a la corrosión, habitualmente con baño superficial de oro. Según el consumo total, eso puede no alcanzar y la placa requiere alimentación adicional proveniente de la fuente de alimentación (PSU).</p>
+        <ul>
+            <li><strong>PCIe 6 pines:</strong> usado en modelos de consumo moderado.</li>
+            <li><strong>PCIe 8 pines:</strong> muy habitual en placas medianas y altas.</li>
+            <li><strong>12+4 pines / 12VHPWR:</strong> usado en generaciones recientes de alto consumo.</li>
+        </ul>
+        
+    <p><strong>Donde se coloca la GPU:</strong></p>
+<ul>
+<li>Identificar la ranura superior  PCIe, PCI o AGP dependiendo el modelo, siempre se coloca en la ranura superio mas cercana a CPU, estan suelen estar reforzadas parar soportar el peso de las GPU actuales. </li>
+<li>Abrí la traba de seguridad: En el extremo derecho de la ranura PCIe, PCI o AGP hay una pequeña pestaña plástica. Presioná esa pestaña hacia abajo o hacia atrás antes de meter la tarjeta.</li>
+<li>Empujá hasta el "clic": Alineá los contactos dorados de la GPU con la ranura y presioná firmemente hacia abajo hasta que escuches que la pestaña plástica se cierra sola con un "clic".</li>
+<li>Cables de la fuente: La mayoría de las tarjetas gráficas actuales necesitan energía extra. No olvidar conectar los cables PCIe (de 6, 8 o 12+4 pines) que vienen desde la fuente de alimentación directamente a la tarjeta gráfica</li>
+</ul>
+        <p><strong>Precauciones básicas:</strong></p>
+        <ul>
+            <li>No tocar los contactos dorados con los dedos.</li>
+            <li>No forzar el conector PCIe en una ranura incorrecta.</li>
+            <li>Verificar que los conectores de alimentación estén completamente insertados.</li>
+            <li>No usar adaptadores de baja calidad en placas de alto consumo.</li>
+            <li>Comprobar que la fuente entregue la potencia y conectores adecuados.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>9. Refrigeración de la GPU </h2>
+        <p>Las GPU generan bastante calor, especialmente bajo carga 3D. Por eso requieren soluciones térmicas eficientes:</p>
+        <ul>
+            <li><strong>Disipadores de aluminio o cobre:</strong> absorben el calor del chip.</li>
+            <li><strong>Heatpipes:</strong> transportan calor hacia zonas más amplias del disipador.</li>
+            <li><strong>Ventiladores:</strong> mueven aire para evacuar calor.</li>
+            <li><strong>Pads térmicos y pasta térmica:</strong> mejoran el contacto con chip, memorias y VRM.</li>
+            <li><strong>Refrigeración líquida:</strong> presente en modelos especiales o soluciones avanzadas.</li>
+        </ul>
+        
+        <p>Si la temperatura sube demasiado, la GPU puede bajar frecuencia automáticamente. Esto se conoce como <strong>throttling térmico</strong>.</p>
+    </section>
+
+    <section>
+        <h2>10. Gráficos integrados (iGPU) </h2>
+        <p>Una <strong>iGPU</strong> es una unidad gráfica integrada dentro del procesador principal o muy estrechamente unida a él. Ejemplos conocidos son <strong>Intel UHD</strong>, <strong>Iris Xe</strong> o <strong>AMD Radeon Graphics / Vega</strong> integradas en ciertos procesadores.</p>
+        
+        <p>Su ventaja principal es el <strong>bajo costo</strong>, el <strong>menor consumo eléctrico</strong> y la <strong>simplicidad </strong>. Para tareas de oficina, navegación, video, clases virtuales o trabajos escolares, suelen ser suficientes. Su limitación principal es que no tienen la potencia ni la VRAM dedicada de una dGPU.</p>
+        
+        <p>Como usan <strong>memoria compartida</strong>, “toman prestada” parte de la RAM del sistema. Esto reduce la RAM disponible para otras tareas y hace que el rendimiento dependa bastante de la velocidad de la RAM y del modo single/dual channel.</p>
+    </section>
+
+    <section>
+        <h2>11. Relación entre iGPU y la Sesión 12 de RAM </h2>
+        <p>Esta relación es muy importante: si la iGPU usa la RAM del sistema como memoria gráfica, entonces una RAM más lenta o trabajando en <strong>single channel</strong> limita mucho el rendimiento visual. En muchos equipos con iGPU, pasar de 1 módulo a 2 módulos equivalentes puede mejorar notablemente el desempeño gráfico.</p>
+        
+        <p>Esto permite conectar lo aprendido sobre <strong>dual channel</strong> con un caso real de rendimiento gráfico.</p>
+    </section>
+
+    <section>
+        <h2>12. Gráficos dedicados (dGPU) y conexión PCI Express </h2>
+        <p>Una <strong>dGPU</strong> es una tarjeta de video independiente, conectada habitualmente mediante una ranura <strong>PCI Express x16</strong>. A diferencia de una iGPU, posee su propio procesador gráfico, su propia VRAM y su propia etapa de alimentación.</p>
+        
+        <p>Las generaciones PCIe más comunes en este contexto son <strong>PCIe 3.0, 4.0 y 5.0</strong>. Aunque muchas placas y motherboards son compatibles entre generaciones, el ancho de banda disponible puede variar.</p>
+        
+        <p>Lo importante para Hardware 1 no es memorizar números extremos, sino entender que <strong>PCIe es la autopista de datos</strong> entre la GPU y el resto del sistema.</p>
+    </section>
+
+    <section>
+        <h2>13. Overclock de GPU: concepto, ventajas y desventajas </h2>
+        <p>El <strong>overclock</strong> consiste en aumentar manualmente la frecuencia de trabajo de la GPU y, en algunos casos, también la de la VRAM. Esto puede hacerse mediante software del fabricante o utilidades como MSI Afterburner, siempre que la tarjeta y el sistema lo permitan.</p>
+        
+        <p><strong>Formas comunes de overclock básico:</strong></p>
+        <ul>
+            <li>subir la frecuencia del núcleo gráfico;</li>
+            <li>subir la frecuencia de la memoria de video;</li>
+            <li>ajustar límites de potencia y curvas de ventilación;</li>
+            <li>comprobar estabilidad con pruebas gráficas.</li>
+        </ul>
+        
+        <p><strong>Ventajas:</strong></p>
+        <ul>
+            <li>mayor rendimiento en juegos o tareas gráficas;</li>
+            <li>mejor aprovechamiento del hardware existente;</li>
+            <li>aprendizaje técnico sobre temperatura, consumo y estabilidad.</li>
+        </ul>
+        
+        <p><strong>Desventajas y riesgos:</strong></p>
+        <ul>
+            <li>más temperatura;</li>
+            <li>más consumo eléctrico;</li>
+            <li>más ruido por ventiladores;</li>
+            <li>posible inestabilidad, fallos visuales o cierres;</li>
+            <li>desgaste mayor si se hace de forma extrema o sin control.</li>
+        </ul>
+        
+    </section>
+
+    <section>
+        <h2>14. Salidas de video y conectores </h2>
+        <p>Las GPU entregan imagen hacia los periféricos de salida mediante distintos conectores. Aquí la palabra “periféricos” se refiere principalmente a dispositivos conectados a la salida gráfica: monitores, televisores, proyectores, paneles industriales y, en algunos casos, visores de realidad virtual o capturadoras según el entorno.</p>
+        <div style="overflow-x: auto">
+
+            <table>
+                <tr>
+                    <th><strong>Conector</strong></th>
+                    <th><strong>Tipo</strong></th>
+                    <th><strong>Época/uso</strong></th>
+                    <th><strong>Observación</strong></th>
+                </tr>
+                <tr>
+                    <td>VGA</td>
+                    <td>Análogo</td>
+                    <td>Legacy</td>
+                    <td>Muy común en monitores antiguos y entornos industriales</td>
+                </tr>
+                <tr>
+                    <td>DVI</td>
+                    <td>Digital / mixto según variante</td>
+                    <td>Transición</td>
+                    <td>Frecuente en empresas y placas legacy</td>
+                </tr>
+                <tr>
+                    <td>HDMI</td>
+                    <td>Digital</td>
+                    <td>Muy difundido</td>
+                    <td>Usado en monitores y TV; transporta audio y video</td>
+                </tr>
+                <tr>
+                    <td>DisplayPort</td>
+                    <td>Digital</td>
+                    <td>Moderno</td>
+                    <td>Muy común en equipos de alto rendimiento y oficinas modernas</td>
+                </tr>
+            </table>
+      </div>
+        
+    </section>
+
+    <section>
+        <h2>15. Periféricos asociados a la GPU y su función </h2>
+        <ul>
+            <li><strong>Monitores:</strong> destino principal de la señal gráfica.</li>
+            <li><strong>Televisores:</strong> muy usados por HDMI.</li>
+            <li><strong>Proyectores:</strong> comunes en aulas, oficinas y salas de reuniones.</li>
+            <li><strong>Paneles industriales o monitores legacy:</strong> a veces solo aceptan VGA o DVI.</li>
+            <li><strong>Visores VR:</strong> requieren gran caudal de datos y baja latencia.</li>
+            <li><strong>Docking stations y adaptadores de video:</strong> actúan como intermediarios en ciertos equipos, aunque el tema de adaptadores se verá con más profundidad en otra clase.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>16. GPU en notebooks: iGPU, dGPU y chips soldados </h2>
+        <p>En notebooks aparecen varias configuraciones posibles:</p>
+        <ul>
+            <li><strong>Solo iGPU:</strong> la opción más económica y eficiente.</li>
+            <li><strong>CPU con iGPU + dGPU dedicada:</strong> muy común en notebooks gamer o de diseño.</li>
+            <li><strong>Chip gráfico soldado en placa:</strong> tanto la dGPU como muchas otras partes usan encapsulado <strong>BGA</strong>, lo que dificulta reparación o upgrade.</li>
+        </ul>
+        
+        <p>Las notebooks enfrentan tres grandes límites: <strong>espacio físico</strong>, <strong>consumo energético</strong> y <strong>disipación térmica</strong>. Por eso una GPU de notebook no debe compararse de forma directa con una de escritorio de nombre parecido.</p>
+    </section>
+
+    <section>
+        <h2>17. Throttling térmico y limitaciones en portátiles </h2>
+        <p>Cuando una GPU o CPU de notebook alcanza temperaturas altas, el sistema reduce automáticamente sus frecuencias para protegerse. Esto es el <strong>throttling térmico</strong>. En portátiles delgados puede aparecer incluso sin fallas, simplemente por diseño térmico ajustado.</p>
+        
+     </section>
+
+    <section>
+        <h2>18. Nvidia Optimus, AMD Switchable Graphics y MUX Switch </h2>
+        <p>Muchas notebooks usan <strong>gráficos híbridos</strong>. La idea es simple: para tareas livianas se usa la iGPU, que ahorra batería; para tareas pesadas se activa la dGPU.</p>
+        <p>Siempre y cuando la Notebook disponga de ambas opciones, iGPU y dGPU.</p>
+        <ul>
+            <li><strong>Nvidia Optimus:</strong> sistema de conmutación automática entre iGPU y dGPU.</li>
+            <li><strong>AMD Switchable Graphics:</strong> concepto equivalente en el ecosistema AMD.</li>
+            <li><strong>MUX Switch:</strong> multiplexor que puede permitir ruta más directa entre dGPU y pantalla.</li>
+            <li><strong>Advanced Optimus:</strong> mejora dinámica de esa conmutación en ciertos equipos modernos.</li>
+        </ul>
+        
+    </section>
+
+    <section>
+        <h2>19. GPU legacy en empresas e industrias </h2>
+        <p>Muchas empresas conservan GPUs antiguas por razones prácticas: software heredado, equipamiento industrial antiguo, monitores con entradas viejas, necesidad de bajo perfil (<em>low profile</em>) o simple continuidad operativa. No todo entorno necesita una GPU moderna para funcionar correctamente.</p>
+        
+        <p>En oficinas todavía pueden encontrarse placas como <strong>GeForce GT 210, GT 710, GT 1030</strong> o equivalentes AMD de entrada. En industria, el valor no siempre está en la potencia, sino en la compatibilidad con sistemas existentes.</p>
+    </section>
+
+    <section>
+        <h2>20. Del AGP al PCI Express </h2>
+        <p>Antes del dominio de PCI Express existió el bus <strong>AGP</strong> (<em>Accelerated Graphics Port</em>), diseñado específicamente para video. Fue muy importante en placas de fines de los 90 y comienzos de los 2000. Luego PCI Express se impuso por su mayor flexibilidad, velocidad y escalabilidad.</p>
+        
+        <p>Entender esta evolución ayuda a identificar por qué ciertos equipos viejos no aceptan placas modernas, aunque “entren” físicamente o parezcan similares.</p>
+        
+        <!-- <h3>Tabla 3.1 — Evolución de slots: AGP, PCI y PCI Express</h3>
+        <div style="overflow-x: auto">
+
+            <table>
+                <tr>
+                    <th><strong>Estándar</strong></th>
+                    <th><strong>Versión</strong></th>
+                    <th><strong>Carriles aprovechados</strong></th>
+                    <th><strong>Frecuencia reloj</strong></th>
+                    <th><strong>Ancho de bus (datos)</strong></th>
+                    <th><strong>Ancho de banda máximo</strong></th>
+                    <th><strong>Codificación</strong></th>
+                    <th><strong>Observación</strong></th>
+                </tr>
+                <tr>
+                    <td rowspan="4">PCI</td>
+                    <td>32-bit @33 MHz</td>
+                    <td>n/a (bus compartido)</td>
+                    <td>33 MHz</td>
+                    <td>32 bits</td>
+                    <td>133 MB/s</td>
+                    <td>Paralelo</td>
+                    <td>Configuración estándar histórica</td>
+                </tr>
+                <tr>
+                    <td>32-bit @66 MHz</td>
+                    <td>n/a</td>
+                    <td>66 MHz</td>
+                    <td>32 bits</td>
+                    <td>266 MB/s</td>
+                    <td>Paralelo</td>
+                    <td>Limitado a 3,3 V</td>
+                </tr>
+                <tr>
+                    <td>64-bit @33 MHz</td>
+                    <td>n/a</td>
+                    <td>33 MHz</td>
+                    <td>64 bits</td>
+                    <td>266 MB/s</td>
+                    <td>Paralelo</td>
+                    <td>Solo en servidores/workstations</td>
+                </tr>
+                <tr>
+                    <td>64-bit @66 MHz</td>
+                    <td>n/a</td>
+                    <td>66 MHz</td>
+                    <td>64 bits</td>
+                    <td>533 MB/s</td>
+                    <td>Paralelo</td>
+                    <td>Configuración más rápida del PCI clásico</td>
+                </tr>
+                <tr>
+                    <td rowspan="4">AGP</td>
+                    <td>1x (AGP 1.0)</td>
+                    <td>1×</td>
+                    <td>66 MHz</td>
+                    <td>32 bits</td>
+                    <td>266 MB/s</td>
+                    <td>Doble pump = 2×</td>
+                    <td>3,3 V; conector físico AGP</td>
+                </tr>
+                <tr>
+                    <td>2x (AGP 1.0)</td>
+                    <td>2×</td>
+                    <td>133 MHz</td>
+                    <td>32 bits</td>
+                    <td>533 MB/s</td>
+                    <td>4× efectivo (rising+falling edge)</td>
+                    <td>3,3 V</td>
+                </tr>
+                <tr>
+                    <td>4x (AGP 2.0)</td>
+                    <td>4×</td>
+                    <td>266 MHz</td>
+                    <td>32 bits</td>
+                    <td>1066 MB/s</td>
+                    <td>8× efectivo</td>
+                    <td>Reduce voltaje a 1,5 V</td>
+                </tr>
+                <tr>
+                    <td>8x (AGP 3.0)</td>
+                    <td>8×</td>
+                    <td>533 MHz</td>
+                    <td>32 bits</td>
+                    <td>2133 MB/s</td>
+                    <td>16× efectivo</td>
+                    <td>Solo 0,8 V en señalización</td>
+                </tr>
+                <tr>
+                    <td rowspan="5">PCI Express</td>
+                    <td>1.0 / 1.1</td>
+                    <td>x1</td>
+                    <td>2,5 GT/s</td>
+                    <td>1 lane (Serial)</td>
+                    <td>250 MB/s por lane</td>
+                    <td>8b/10b (20% overhead)</td>
+                    <td>x16 = 4 GB/s total</td>
+                </tr>
+                <tr>
+                    <td>1.0 / 1.1</td>
+                    <td>x4</td>
+                    <td>2,5 GT/s</td>
+                    <td>4 lanes</td>
+                    <td>1 GB/s</td>
+                    <td>8b/10b</td>
+                    <td>x16 = 4 GB/s total</td>
+                </tr>
+                <tr>
+                    <td>1.0 / 1.1</td>
+                    <td>x8</td>
+                    <td>2,5 GT/s</td>
+                    <td>8 lanes</td>
+                    <td>2 GB/s</td>
+                    <td>8b/10b</td>
+                    <td>x16 = 4 GB/s total</td>
+                </tr>
+                <tr>
+                    <td>1.0 / 1.1</td>
+                    <td>x16</td>
+                    <td>2,5 GT/s</td>
+                    <td>16 lanes</td>
+                    <td>4 GB/s</td>
+                    <td>8b/10b</td>
+                    <td>Slot típico de GPU</td>
+                </tr>
+                <tr>
+                    <td>2.0</td>
+                    <td>x1 / x4 / x8 / x16</td>
+                    <td>5,0 GT/s</td>
+                    <td>×1, ×4, ×8, ×16</td>
+                    <td>500 MB/s por lane (x16 = 8 GB/s)</td>
+                    <td>8b/10b</td>
+                    <td>Duplica Gen1</td>
+                </tr>
+                <tr>
+                    <td>3.0</td>
+                    <td>x1 / x4 / x8 / x16</td>
+                    <td>8,0 GT/s</td>
+                    <td>×1, ×4, ×8, ×16</td>
+                    <td>985 MB/s por lane (x16 ≈ 15,75 GB/s)</td>
+                    <td>128b/130b (~1,5% overhead)</td>
+                    <td>Común en placas de video medianas</td>
+                </tr>
+                <tr>
+                    <td>4.0</td>
+                    <td>x1 / x4 / x8 / x16</td>
+                    <td>16,0 GT/s</td>
+                    <td>×1, ×4, ×8, ×16</td>
+                    <td>1969 MB/s por lane (x16 ≈ 31,5 GB/s)</td>
+                    <td>128b/130b</td>
+                    <td>Estándar en GPUs 2020+</td>
+                </tr>
+                <tr>
+                    <td>5.0</td>
+                    <td>x1 / x4 / x8 / x16</td>
+                    <td>32,0 GT/s</td>
+                    <td>×1, ×4, ×8, ×16</td>
+                    <td>3938 MB/s por lane (x16 ≈ 63 GB/s)</td>
+                    <td>128b/130b</td>
+                    <td>Frecuente en GPUs de gama alta recientes</td>
+                </tr>
+            </table>
+      </div> -->
+        
+        <h3>Tabla 3.2 — Ancho de banda PCIe por número de carriles (resumen rápido)</h3>
+        <table>
+            <tr>
+                <th><strong>Generación</strong></th>
+                <th><strong>x1</strong></th>
+                <th><strong>x4</strong></th>
+                <th><strong>x8</strong></th>
+                <th><strong>x16</strong></th>
+            </tr>
+            <tr>
+                <td>PCIe 1.0</td>
+                <td>250 MB/s</td>
+                <td>1 GB/s</td>
+                <td>2 GB/s</td>
+                <td>4 GB/s</td>
+            </tr>
+            <tr>
+                <td>PCIe 2.0</td>
+                <td>500 MB/s</td>
+                <td>2 GB/s</td>
+                <td>4 GB/s</td>
+                <td>8 GB/s</td>
+            </tr>
+            <tr>
+                <td>PCIe 3.0</td>
+                <td>985 MB/s</td>
+                <td>3,94 GB/s</td>
+                <td>7,88 GB/s</td>
+                <td>15,75 GB/s</td>
+            </tr>
+            <tr>
+                <td>PCIe 4.0</td>
+                <td>1,97 GB/s</td>
+                <td>7,88 GB/s</td>
+                <td>15,75 GB/s</td>
+                <td>31,5 GB/s</td>
+            </tr>
+            <tr>
+                <td>PCIe 5.0</td>
+                <td>3,94 GB/s</td>
+                <td>15,75 GB/s</td>
+                <td>31,5 GB/s</td>
+                <td>63 GB/s</td>
+            </tr>
+        </table>
+   </section>
+
+    <section>
+        <h2>21. Problemas típicos del hardware GPU legacy </h2>
+        <ul>
+            <li><strong>Fin de soporte de drivers:</strong> el fabricante deja de actualizar controladores.</li>
+            <li><strong>Incompatibilidad con APIs modernas:</strong> por ejemplo, limitaciones con DirectX 12 o Vulkan.</li>
+            <li><strong>Capacitores envejecidos:</strong> especialmente en placas muy antiguas.</li>
+            <li><strong>Pasta térmica degradada:</strong> sube la temperatura por mala transferencia térmica.</li>
+            <li><strong>Ventiladores desgastados:</strong> generan ruido o dejan de refrigerar correctamente.</li>
+            <li><strong>Salidas de video obsoletas:</strong> dificultan el uso con monitores modernos o viceversa.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>22. Lectura de especificaciones técnicas de una GPU </h2>
+        <p>Ficha técnica básica. Los datos más importantes son:</p>
+        <ul>
+            <li><strong>Modelo y generación</strong></li>
+            <li><strong>VRAM:</strong> cantidad y tipo (GDDR5, GDDR6, etc.)</li>
+            <li><strong>Ancho de bus:</strong> 64-bit, 128-bit, 192-bit, 256-bit, etc.</li>
+            <li><strong>Frecuencia del núcleo y de la memoria</strong></li>
+            <li><strong>TDP o consumo estimado</strong></li>
+            <li><strong>Conectores de alimentación</strong></li>
+            <li><strong>Salidas de video disponibles</strong></li>
+            <li><strong>Longitud física y ocupación de slots</strong></li>
+        </ul>
+        
+        <p>Debe evitarse una lectura superficial del tipo “más GB de VRAM = mejor placa”. La calidad real depende del conjunto completo de especificaciones y del uso previsto.</p>
+    </section>
+
+    <section>
+        <h2>23. Diagnóstico básico y señales de falla </h2>
+         <ul>
+            <li>sin imagen;</li>
+            <li>artefactos en pantalla (píxeles extraños, líneas, colores anómalos);</li>
+            <li>pantallazos o cierres bajo carga gráfica;</li>
+            <li>ventiladores que no giran correctamente;</li>
+            <li>temperaturas excesivas y throttling;</li>
+            <li>placa no detectada por el sistema;</li>
+            <li>falta de alimentación PCIe extra.</li>
+        </ul>
+        
+        <p>La idea aquí es que el estudiante reconozca síntomas y piense hipótesis básicas, no que realice reparación avanzada.</p>
+    </section>
+
+    <section>
+        <h2>24. Ejemplos prácticos para reforzar el entendimiento</h2>
+        <ul>
+            <li><strong>Ejemplo 1:</strong> comparar una PC de oficina con iGPU frente a una PC gamer con dGPU y explicar por qué la segunda necesita más refrigeración, más potencia de fuente y VRAM propia.</li>
+            <li><strong>Ejemplo 2:</strong> mostrar una placa vieja con VGA/DVI y una moderna con HDMI/DisplayPort para visualizar la evolución de los conectores.</li>
+            <li><strong>Ejemplo 3:</strong> tomar una notebook con gráficos híbridos y analizar en qué situaciones conviene usar la iGPU y en cuáles la dGPU.</li>
+            <li><strong>Ejemplo 4:</strong> leer una ficha técnica de una GT 1030 y otra de una GPU moderna de gama media, comparando VRAM, ancho de bus, consumo y salidas.</li>
+            <li><strong>Ejemplo 5:</strong> explicar por qué una GPU con más VRAM no siempre rinde mejor que otra con menos VRAM pero arquitectura más avanzada.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>25. Cuestionario e identificación de componentes</h2>
+        <div class="cuestionario">
+            <ol>
+                <li><strong>Definición:</strong> ¿Qué significan las siglas GPU y cuál es su función principal?</li>
+                <li><strong>Comparación:</strong> Explique con sus palabras la diferencia entre CPU y GPU usando una de las analogías vistas en clase.</li>
+                <li><strong>Identificación visual:</strong> Busque una imagen de una placa de video dedicada y marque dónde se ubican la GPU, la VRAM y el conector PCIe.</li>
+                <li><strong>iGPU:</strong> ¿Qué significa que una iGPU use memoria compartida?</li>
+                <li><strong>Relación con RAM:</strong> ¿Por qué el dual channel mejora especialmente el rendimiento de una iGPU?</li>
+                <li><strong>dGPU:</strong> ¿Qué ventajas ofrece una placa dedicada frente a una iGPU?</li>
+                <li><strong>Conectores:</strong> Busque imágenes de VGA, DVI, HDMI y DisplayPort y ordénelos del más antiguo al más moderno en uso general.</li>
+                <li><strong>Salidas:</strong> ¿Qué conector suele transportar video y audio digital en un mismo cable?</li>
+                <li><strong>VRAM:</strong> ¿Qué diferencia básica existe entre VRAM dedicada y RAM compartida?</li>
+                <li><strong>Componentes:</strong> ¿Qué función cumple el VRM dentro de una tarjeta gráfica?</li>
+                <li><strong>Alimentación:</strong> ¿Por qué algunas placas necesitan conectores extra de 6 u 8 pines además del slot PCIe?</li>
+                <li><strong>Precaución:</strong> Mencione dos cuidados al manipular una tarjeta gráfica.</li>
+                <li><strong>TDP:</strong> ¿Qué información aporta el TDP de una GPU?</li>
+                <li><strong>Notebook:</strong> ¿Qué significa que una GPU de notebook esté soldada en formato BGA?</li>
+                <li><strong>Térmica:</strong> ¿Qué es el throttling térmico?</li>
+                <li><strong>Conmutación:</strong> ¿Para qué sirven Nvidia Optimus o AMD Switchable Graphics?</li>
+                <li><strong>MUX:</strong> ¿Qué ventaja puede ofrecer un MUX Switch en una notebook?</li>
+                <li><strong>Legacy:</strong> ¿Por qué una empresa podría seguir usando una GPU antigua en lugar de cambiarla?</li>
+                <li><strong>Evolución:</strong> ¿Qué bus era común antes de PCI Express para tarjetas gráficas?</li>
+                <li><strong>Drivers:</strong> ¿Qué problema genera el fin del soporte de controladores en una GPU legacy?</li>
+                <li><strong>APIs:</strong> ¿Por qué una GPU vieja puede tener problemas con DirectX 12 o Vulkan?</li>
+                <li><strong>Fallas:</strong> Nombre tres síntomas básicos que podrían indicar un problema en una GPU.</li>
+                <li><strong>Overclock:</strong> ¿Qué es el overclock de GPU y qué ventaja puede aportar?</li>
+                <li><strong>Overclock:</strong> Mencione dos riesgos o desventajas del overclock.</li>
+                <li><strong>Actividad visual:</strong> Busque una imagen de una GPU legacy low profile y explique en qué tipo de gabinete o entorno sería útil.</li>
+                <li><strong>Actividad visual:</strong> Busque una imagen de una notebook gamer abierta y señale sistema de refrigeración, heatpipes y zona probable de la GPU.</li>
+                <li><strong>Actividad visual:</strong> Busque una ficha técnica real de una GPU y extraiga: VRAM, ancho de bus, conectores de video y TDP.</li>
+                <li><strong>Reflexión final:</strong> ¿Por qué no siempre “más VRAM” significa “mejor placa de video”?</li>
+                <li><strong>Identificación de partes:</strong> observar una imagen de una dGPU y señalar PCB, ventiladores, disipador, VRAM, conector PCIe, conectores de alimentación y bracket.</li>
+                <li><strong>Comparación:</strong> observar imágenes de una iGPU y una dGPU y describir tres diferencias estructurales.</li>
+                <li><strong>Legacy:</strong> identificar una placa con salida VGA y relacionarla con un posible uso empresarial antiguo.</li>
+                <li><strong>Notebook:</strong> distinguir en imágenes una notebook con solo iGPU de otra con sistema híbrido gamer.</li>
+                <li><strong>Conectores:</strong> clasificar fotografías de VGA, DVI, HDMI y DisplayPort.</li>
+                <li><strong>Lectura técnica:</strong> interpretar una etiqueta o ficha de una tarjeta gráfica y extraer VRAM, TDP y salidas disponibles.</li>
+                <li><strong>¿Cuál de los siguientes conectores digitales puede transportar video y audio por el mismo cable?</strong>
+                    <ol type="A">
+                        <li>VGA</li>
+                        <li>DVI Single-Link</li>
+                        <li>HDMI</li>
+                        <li>Todos los anteriores</li>
+                    </ol>
+                </li>
+                <li><strong>Un monitor 4K a 60 Hz necesita ~8 Gbit/s de video digital sin comprimir. ¿Qué conector/es pueden entregarlo?</strong>
+                    <ol type="A">
+                        <li>VGA</li>
+                        <li>DVI Dual-Link (≈7,92 Gbit/s)</li>
+                        <li>HDMI 1.4 (10,2 Gbit/s)</li>
+                        <li>B y C son correctas</li>
+                    </ol>
+                </li>
+                <li><strong>¿Qué conector es capaz de soportar 8K @ 60 Hz sin compresión excesiva?</strong>
+                    <ol type="A">
+                        <li>HDMI 2.0 (18 Gbit/s)</li>
+                        <li>DisplayPort 1.4 (32,4 Gbit/s con DSC)</li>
+                        <li>HDMI 2.1 (48 Gbit/s)</li>
+                        <li>DVI Dual-Link (7,92 Gbit/s)</li>
+                    </ol>
+                </li>
+                <li><strong>Una placa de video AGP 8x ofrece un ancho de banda máximo de…</strong>
+                    <ol type="A">
+                        <li>266 MB/s</li>
+                        <li>533 MB/s</li>
+                        <li>1066 MB/s</li>
+                        <li>2133 MB/s</li>
+                    </ol>
+                </li>
+                <li><strong>Una ranura PCI de 64 bits a 66 MHz ofrece un ancho de banda de:</strong>
+                    <ol type="A">
+                        <li>133 MB/s</li>
+                        <li>266 MB/s</li>
+                        <li>533 MB/s</li>
+                        <li>1066 MB/s</li>
+                    </ol>
+                </li>
+                <li><strong>Una placa de video moderna usa PCIe 4.0 x16. ¿Cuál es su ancho de banda total?</strong>
+                    <ol type="A">
+                        <li>8 GB/s</li>
+                        <li>16 GB/s</li>
+                        <li>31,5 GB/s</li>
+                        <li>63 GB/s</li>
+                    </ol>
+                </li>
+                <li><strong>¿Qué combinación de generación y carriles equivale aproximadamente al ancho de banda de una ranura PCIe 3.0 x16 (~15,75 GB/s)?</strong>
+                    <ol type="A">
+                        <li>PCIe 4.0 x4 (≈7,88 GB/s)</li>
+                        <li>PCIe 5.0 x4 (≈15,75 GB/s)</li>
+                        <li>PCIe 4.0 x8 (≈15,75 GB/s)</li>
+                        <li>B y C son correctas</li>
+                    </ol>
+                </li>
+                <li><strong>Una GPU que utiliza GDDR6X con bus de 384 bits y velocidad de 21 Gbps/pin tiene, aproximadamente, un ancho de banda de memoria de:</strong>
+                    <ol type="A">
+                        <li>504 GB/s</li>
+                        <li>768 GB/s</li>
+                        <li>1008 GB/s</li>
+                        <li>1440 GB/s</li>
+                    </ol>
+                </li>
+                <li><strong>Aplicando la fórmula BW = Velocidad × Bus ÷ 8, una memoria GDDR6 a 16 Gbps con bus de 192 bits entrega:</strong>
+                    <ol type="A">
+                        <li>192 GB/s</li>
+                        <li>256 GB/s</li>
+                        <li>384 GB/s</li>
+                        <li>512 GB/s</li>
+                    </ol>
+                </li>
+                <li><strong>¿Por qué la memoria HBM logra anchos de banda mucho mayores que GDDR con buses "estrechos"?</strong>
+                    <ol type="A">
+                        <li>Porque usa buses de 1024 bits por stack con tecnología TSV (Through-Silicon Via), apilando chips en 3D</li>
+                        <li>Porque sus chips son físicamente más grandes</li>
+                        <li>Porque funciona a voltaje 0,8 V en todos los casos</li>
+                        <li>Porque usa codificación PAM-4 como GDDR6X</li>
+                    </ol>
+                </li>
+                <li><strong>¿Cuál de las siguientes afirmaciones describe mejor la diferencia de uso entre HBM3E y GDDR7?</strong>
+                    <ol type="A">
+                        <li>HBM3E se usa principalmente en data centers y GPUs profesionales; GDDR7 está orientada a GPUs de consumo y placas gaming</li>
+                        <li>Ambos se usan exclusivamente en smartphones</li>
+                        <li>GDDR7 tiene menor ancho de banda que HBM3 y por eso se reemplazó</li>
+                        <li>HBM3E es más barata que GDDR7</li>
+                    </ol>
+                </li>
+                <li><strong>Una GPU especifica: "GDDR6 14 Gbps, bus 128 bits". El ancho de banda de memoria es:</strong>
+                    <ol type="A">
+                        <li>14 GB/s</li>
+                        <li>28 GB/s</li>
+                        <li>56 GB/s</li>
+                        <li>224 GB/s</li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+   
+             <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-uno.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware1-sesion12.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 12
+      </a>
+      <a
+        href="hardware1-sesion14.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 14
+      </a>
+    </div>
+</body>
+</html>
