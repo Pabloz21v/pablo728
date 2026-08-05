@@ -744,7 +744,7 @@
             </table>
       </div> -->
         
-        <h3>Tabla 3.2 — Ancho de banda PCIe por número de carriles (resumen rápido)</h3>
+        <h3>Tabla 3.2 — Ancho de banda PCIe por número de carriles (Generación vs Carriles)</h3>
         <table>
             <tr>
                 <th><strong>Generación</strong></th>
@@ -789,6 +789,21 @@
                 <td>63 GB/s</td>
             </tr>
         </table>
+
+        <h2>¿Qué debo interpretar de esta tabla? </h2>
+        <ul>
+<li>Primero los x1, x4, x8 y x16, esto indica la cantidad de pistas por donde los datos se van a transferir.</li>
+<li>Luego los 1.0 – 2.0 – 3.0 – 4.0  – 5.0, esto indica las generaciones dicho de otra forma las mejoras.</li>
+<li>Ahora sin combinamos estos 2 valores (pistas y generaciones) podemos observar como la velocidad de transferencia de datos que pasar por estos slots se duplica si lo vemos desde una pista, ejemplo: la pista x1 y la mejora de generaciones.
+</li>
+<li>Y si analizamos en la misma generación como el aumentar las pistas se multiplica x4, x8 o x16 la velocidad de transferencia de datos.
+</li>
+<li>Finalizando esto es importante ya que una GPU puede ser x8 o x16 principalmente y de cualquier generación. Esto determinará que tan rápida puede ser a la hora de transferir datos de los GPU al resto de los componentes y viceversa.</li>
+
+        </ul>
+
+
+
    </section>
 
     <section>
@@ -851,135 +866,63 @@
         <div class="cuestionario">
             <ol>
                 <li><strong>Definición:</strong> ¿Qué significan las siglas GPU y cuál es su función principal?</li>
+                
                 <li><strong>Comparación:</strong> Explique con sus palabras la diferencia entre CPU y GPU usando una de las analogías vistas en clase.</li>
-                <li><strong>Identificación visual:</strong> Busque una imagen de una placa de video dedicada y marque dónde se ubican la GPU, la VRAM y el conector PCIe.</li>
-                <li><strong>iGPU:</strong> ¿Qué significa que una iGPU use memoria compartida?</li>
-                <li><strong>Relación con RAM:</strong> ¿Por qué el dual channel mejora especialmente el rendimiento de una iGPU?</li>
-                <li><strong>dGPU:</strong> ¿Qué ventajas ofrece una placa dedicada frente a una iGPU?</li>
-                <li><strong>Conectores:</strong> Busque imágenes de VGA, DVI, HDMI y DisplayPort y ordénelos del más antiguo al más moderno en uso general.</li>
-                <li><strong>Salidas:</strong> ¿Qué conector suele transportar video y audio digital en un mismo cable?</li>
-                <li><strong>VRAM:</strong> ¿Qué diferencia básica existe entre VRAM dedicada y RAM compartida?</li>
+                <li><strong>Sinónimos:</strong> Mencionar al menos 2 sinónimos para GPU.</li>
+                
+                <li><strong>Identificación visual:</strong> Busque una imagen de una placa de video dedicada Moderna y marque dónde se ubican los componentes fisicos de la GPU.</li>
+                <li><strong>Identificación visual:</strong> Busque una imagen de una placa de video dedicada Legacy y marque dónde se ubican los componentes fisicos de la GPU.</li>
+             <li><strong>Identificación visual:</strong> Busque una imagen de placas madre legacy y modernas para mostrar donde se encuntras los 3 slots para GPU (AGP, PCI y PCIe)</li>
+                 <li><strong>Identificación visual:</strong> Busque una imagen de GPU's con los 3 tipos buses (parte que se conecta a la placa madre -> AGP, PCI y PCIe)</li>
+                
+                <li><strong>Investigar:</strong> Buscar un CPU y GPU de este año y comprar la cantidad de nucleos.</li>
+                                <li><strong>Investigar:</strong> Buscar un CPU y GPU legacy (2000 aproximadamente) y comprar la cantidad de nucleos.</li>
+                              
+                                <li><strong>dGPU:</strong> ¿Qué ventajas ofrece una placa dedicada frente a una iGPU?</li>
+                                <li><strong>VRAM:</strong> ¿Qué diferencia básica existe entre VRAM dedicada y RAM compartida?</li>
+                            <li><strong>Conectores:</strong> Busque imágenes de los conectores VGA, DVI, HDMI y DisplayPort presentes en GPU's y ordénelos del más antiguo al más moderno en uso general.</li>
+                            <li><strong>Conectores:</strong> Busque imágenes de los cables que se conectan a los perifericos de las GPU ->VGA, DVI, HDMI y DisplayPort y ordénelos del más antiguo al más moderno en uso general.</li>
+                            
+                    <li><strong>iGPU:</strong> ¿Qué significa que una iGPU use memoria compartida?</li>
+                    <li><strong>Relación con RAM:</strong> ¿Por qué el dual channel mejora especialmente el rendimiento de una iGPU?</li>
+              
+                <!-- <li><strong>Salidas:</strong> ¿Qué conector suele transportar video y audio digital en un mismo cable?</li> -->
                 <li><strong>Componentes:</strong> ¿Qué función cumple el VRM dentro de una tarjeta gráfica?</li>
                 <li><strong>Alimentación:</strong> ¿Por qué algunas placas necesitan conectores extra de 6 u 8 pines además del slot PCIe?</li>
                 <li><strong>Precaución:</strong> Mencione dos cuidados al manipular una tarjeta gráfica.</li>
+                <li><strong>Colocar:</strong> ¿Como y donde se coloca la GPU en una placa madre de escritorio?</li>
+                
                 <li><strong>TDP:</strong> ¿Qué información aporta el TDP de una GPU?</li>
-                <li><strong>Notebook:</strong> ¿Qué significa que una GPU de notebook esté soldada en formato BGA?</li>
+                <li><strong>Notebook:</strong> ¿Qué significa que una dGPU de notebook esté soldada en formato BGA?</li>
                 <li><strong>Térmica:</strong> ¿Qué es el throttling térmico?</li>
+
+
                 <li><strong>Conmutación:</strong> ¿Para qué sirven Nvidia Optimus o AMD Switchable Graphics?</li>
-                <li><strong>MUX:</strong> ¿Qué ventaja puede ofrecer un MUX Switch en una notebook?</li>
+                <!-- <li><strong>MUX:</strong> ¿Qué ventaja puede ofrecer un MUX Switch en una notebook?</li> -->
                 <li><strong>Legacy:</strong> ¿Por qué una empresa podría seguir usando una GPU antigua en lugar de cambiarla?</li>
-                <li><strong>Evolución:</strong> ¿Qué bus era común antes de PCI Express para tarjetas gráficas?</li>
+                <!-- <li><strong>Evolución:</strong> ¿Qué bus era común antes de PCI Express para tarjetas gráficas?</li> -->
                 <li><strong>Drivers:</strong> ¿Qué problema genera el fin del soporte de controladores en una GPU legacy?</li>
-                <li><strong>APIs:</strong> ¿Por qué una GPU vieja puede tener problemas con DirectX 12 o Vulkan?</li>
+                <!-- <li><strong>APIs:</strong> ¿Por qué una GPU vieja puede tener problemas con DirectX 12 o Vulkan?</li> -->
                 <li><strong>Fallas:</strong> Nombre tres síntomas básicos que podrían indicar un problema en una GPU.</li>
                 <li><strong>Overclock:</strong> ¿Qué es el overclock de GPU y qué ventaja puede aportar?</li>
                 <li><strong>Overclock:</strong> Mencione dos riesgos o desventajas del overclock.</li>
-                <li><strong>Actividad visual:</strong> Busque una imagen de una GPU legacy low profile y explique en qué tipo de gabinete o entorno sería útil.</li>
+                <!-- <li><strong>Actividad visual:</strong> Busque una imagen de una GPU legacy low profile y explique en qué tipo de gabinete o entorno sería útil.</li> -->
                 <li><strong>Actividad visual:</strong> Busque una imagen de una notebook gamer abierta y señale sistema de refrigeración, heatpipes y zona probable de la GPU.</li>
-                <li><strong>Actividad visual:</strong> Busque una ficha técnica real de una GPU y extraiga: VRAM, ancho de bus, conectores de video y TDP.</li>
-                <li><strong>Reflexión final:</strong> ¿Por qué no siempre “más VRAM” significa “mejor placa de video”?</li>
-                <li><strong>Identificación de partes:</strong> observar una imagen de una dGPU y señalar PCB, ventiladores, disipador, VRAM, conector PCIe, conectores de alimentación y bracket.</li>
+                <!-- <li><strong>Actividad visual:</strong> Busque una ficha técnica real de una GPU y extraiga: VRAM, ancho de bus, conectores de video y TDP.</li> -->
+                <li><strong>Reflexión :</strong> ¿Por qué no siempre “más VRAM” significa “mejor placa de video”?</li>
+
+                <!-- <li><strong>Identificación de partes:</strong> observar una imagen de una dGPU y señalar PCB, ventiladores, disipador, VRAM, conector PCIe, conectores de alimentación y bracket.</li> -->
                 <li><strong>Comparación:</strong> observar imágenes de una iGPU y una dGPU y describir tres diferencias estructurales.</li>
-                <li><strong>Legacy:</strong> identificar una placa con salida VGA y relacionarla con un posible uso empresarial antiguo.</li>
-                <li><strong>Notebook:</strong> distinguir en imágenes una notebook con solo iGPU de otra con sistema híbrido gamer.</li>
-                <li><strong>Conectores:</strong> clasificar fotografías de VGA, DVI, HDMI y DisplayPort.</li>
-                <li><strong>Lectura técnica:</strong> interpretar una etiqueta o ficha de una tarjeta gráfica y extraer VRAM, TDP y salidas disponibles.</li>
-                <li><strong>¿Cuál de los siguientes conectores digitales puede transportar video y audio por el mismo cable?</strong>
-                    <ol type="A">
-                        <li>VGA</li>
-                        <li>DVI Single-Link</li>
-                        <li>HDMI</li>
-                        <li>Todos los anteriores</li>
-                    </ol>
-                </li>
-                <li><strong>Un monitor 4K a 60 Hz necesita ~8 Gbit/s de video digital sin comprimir. ¿Qué conector/es pueden entregarlo?</strong>
-                    <ol type="A">
-                        <li>VGA</li>
-                        <li>DVI Dual-Link (≈7,92 Gbit/s)</li>
-                        <li>HDMI 1.4 (10,2 Gbit/s)</li>
-                        <li>B y C son correctas</li>
-                    </ol>
-                </li>
-                <li><strong>¿Qué conector es capaz de soportar 8K @ 60 Hz sin compresión excesiva?</strong>
-                    <ol type="A">
-                        <li>HDMI 2.0 (18 Gbit/s)</li>
-                        <li>DisplayPort 1.4 (32,4 Gbit/s con DSC)</li>
-                        <li>HDMI 2.1 (48 Gbit/s)</li>
-                        <li>DVI Dual-Link (7,92 Gbit/s)</li>
-                    </ol>
-                </li>
-                <li><strong>Una placa de video AGP 8x ofrece un ancho de banda máximo de…</strong>
-                    <ol type="A">
-                        <li>266 MB/s</li>
-                        <li>533 MB/s</li>
-                        <li>1066 MB/s</li>
-                        <li>2133 MB/s</li>
-                    </ol>
-                </li>
-                <li><strong>Una ranura PCI de 64 bits a 66 MHz ofrece un ancho de banda de:</strong>
-                    <ol type="A">
-                        <li>133 MB/s</li>
-                        <li>266 MB/s</li>
-                        <li>533 MB/s</li>
-                        <li>1066 MB/s</li>
-                    </ol>
-                </li>
-                <li><strong>Una placa de video moderna usa PCIe 4.0 x16. ¿Cuál es su ancho de banda total?</strong>
-                    <ol type="A">
-                        <li>8 GB/s</li>
-                        <li>16 GB/s</li>
-                        <li>31,5 GB/s</li>
-                        <li>63 GB/s</li>
-                    </ol>
-                </li>
-                <li><strong>¿Qué combinación de generación y carriles equivale aproximadamente al ancho de banda de una ranura PCIe 3.0 x16 (~15,75 GB/s)?</strong>
-                    <ol type="A">
-                        <li>PCIe 4.0 x4 (≈7,88 GB/s)</li>
-                        <li>PCIe 5.0 x4 (≈15,75 GB/s)</li>
-                        <li>PCIe 4.0 x8 (≈15,75 GB/s)</li>
-                        <li>B y C son correctas</li>
-                    </ol>
-                </li>
-                <li><strong>Una GPU que utiliza GDDR6X con bus de 384 bits y velocidad de 21 Gbps/pin tiene, aproximadamente, un ancho de banda de memoria de:</strong>
-                    <ol type="A">
-                        <li>504 GB/s</li>
-                        <li>768 GB/s</li>
-                        <li>1008 GB/s</li>
-                        <li>1440 GB/s</li>
-                    </ol>
-                </li>
-                <li><strong>Aplicando la fórmula BW = Velocidad × Bus ÷ 8, una memoria GDDR6 a 16 Gbps con bus de 192 bits entrega:</strong>
-                    <ol type="A">
-                        <li>192 GB/s</li>
-                        <li>256 GB/s</li>
-                        <li>384 GB/s</li>
-                        <li>512 GB/s</li>
-                    </ol>
-                </li>
-                <li><strong>¿Por qué la memoria HBM logra anchos de banda mucho mayores que GDDR con buses "estrechos"?</strong>
-                    <ol type="A">
-                        <li>Porque usa buses de 1024 bits por stack con tecnología TSV (Through-Silicon Via), apilando chips en 3D</li>
-                        <li>Porque sus chips son físicamente más grandes</li>
-                        <li>Porque funciona a voltaje 0,8 V en todos los casos</li>
-                        <li>Porque usa codificación PAM-4 como GDDR6X</li>
-                    </ol>
-                </li>
-                <li><strong>¿Cuál de las siguientes afirmaciones describe mejor la diferencia de uso entre HBM3E y GDDR7?</strong>
-                    <ol type="A">
-                        <li>HBM3E se usa principalmente en data centers y GPUs profesionales; GDDR7 está orientada a GPUs de consumo y placas gaming</li>
-                        <li>Ambos se usan exclusivamente en smartphones</li>
-                        <li>GDDR7 tiene menor ancho de banda que HBM3 y por eso se reemplazó</li>
-                        <li>HBM3E es más barata que GDDR7</li>
-                    </ol>
-                </li>
-                <li><strong>Una GPU especifica: "GDDR6 14 Gbps, bus 128 bits". El ancho de banda de memoria es:</strong>
-                    <ol type="A">
-                        <li>14 GB/s</li>
-                        <li>28 GB/s</li>
-                        <li>56 GB/s</li>
-                        <li>224 GB/s</li>
-                    </ol>
-                </li>
+<li><strong>Generación vs Carriles</strong>Interpretar cual es la importancia del slot que vamos a usar para la GPU</li>
+<li><strong>Actividad visual</strong>Buscar placas madre con los diferentes slots PCIe por cantidad de carriles (x1, x4, x8 y x16)</li>
+
+                <!-- <li><strong>Legacy:</strong> identificar una placa con salida VGA y relacionarla con un posible uso empresarial antiguo.</li> -->
+                <!-- <li><strong>Notebook:</strong> distinguir en imágenes una notebook con solo iGPU de otra con sistema híbrido gamer.</li> -->
+                
+                <!-- <li><strong>Conectores:</strong> clasificar fotografías de VGA, DVI, HDMI y DisplayPort.</li> -->
+                <!-- <li><strong>Lectura técnica:</strong> interpretar una etiqueta o ficha de una tarjeta gráfica y extraer VRAM, TDP y salidas disponibles.</li> -->
+
+
             </ol>
         </div>
     </section>
