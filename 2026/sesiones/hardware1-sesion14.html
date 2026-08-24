@@ -1,0 +1,1110 @@
+     	
+     	<!DOCTYPE html>
+     	<html lang="es">
+    	<head>
+     	    <meta charset="UTF-8">
+     	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     	    <title>SESIÓN 14 - FUENTES DE ALIMENTACIÓN (PSU)</title>
+     	    <style>
+     	        :root {
+    	            --primary: #2563eb;
+    	            --primary-dark: #1d4ed8;
+                --accent: #f59e0b;
+    	            --accent-light: #fde68a;
+    	            --bg: #eef2f9;
+    	            --card-bg: #ffffff;
+    	            --text: #1f2937;
+                --text-light: #4b5563;
+    	            --border: #e2e8f0;
+                --success: #16a34a;
+    	            --danger: #dc2626;
+    	            --radius: 14px;
+    	            --shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+            }
+    	
+    	        * {
+                box-sizing: border-box;
+    	        }
+    	
+            html {
+    	            scroll-behavior: smooth;
+            }
+    	
+    	        body {
+                margin: 0;
+    	            padding: 20px;
+    	            font-family: 'Segoe UI', Tahoma, Verdana, Arial, sans-serif;
+                background: linear-gradient(180deg, #dbe6fb 0%, var(--bg) 320px);
+    	            color: var(--text);
+                line-height: 1.7;
+    	            font-size: 16px;
+           }
+    	
+    	        a { color: var(--primary); }
+    
+    	        /* --- Barra de navegacion superior/inferior --- */
+            body > div.nav-bar {
+    	            max-width: 980px;
+    	            margin: 0 auto 24px auto;
+                display: flex;
+    	            flex-wrap: wrap;
+                gap: 10px;
+    	        }
+    
+            body > div.nav-bar a {
+    	            margin-right: 0 !important;
+            box-shadow: var(--shadow);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+	            flex: 0 1 auto;
+	            text-align: center;
+            }
+    
+            body > div.nav-bar a:hover {
+                transform: translateY(-2px);
+	            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.16);
+	        }
+	
+	        /* --- Contenedor principal --- */
+	        .week-section {
+	            max-width: 980px;
+	            margin: 0 auto;
+                background: var(--card-bg);
+	            border-radius: var(--radius);
+	            box-shadow: var(--shadow);
+                padding: 32px clamp(16px, 5vw, 48px);
+	            border: 1px solid var(--border);
+	        }
+	
+	        .week14-header {
+	            font-size: clamp(1.25rem, 3vw, 1.7rem);
+	            color: #fff;
+	            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+	            padding: 18px 22px;
+	            border-radius: var(--radius);
+	            margin: -4px 0 28px 0;
+	            text-align: center;
+	            line-height: 1.4;
+	            box-shadow: var(--shadow);
+	        }
+	
+	        h3 {
+	            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+                color: var(--primary-dark);
+	            border-bottom: 3px solid var(--accent);
+	            padding-bottom: 8px;
+	            margin-top: 40px;
+	            margin-bottom: 16px;
+	        }
+	
+            h4 {
+   	            font-size: clamp(1rem, 2.2vw, 1.15rem);
+               color: #fff;
+               background: var(--primary);
+   	            padding: 10px 16px;
+              border-radius: 10px;
+   	            margin-top: 30px;
+   	            margin-bottom: 14px;
+              display: flex;
+               flex-wrap: wrap;
+             align-items: center;
+              gap: 8px;
+   	            justify-content: space-between;
+   	        }
+	
+	        h4 .timing {
+	            font-size: 0.75rem;
+	            font-weight: 600;
+	            background: rgba(255, 255, 255, 0.25);
+	            padding: 3px 10px;
+	            border-radius: 999px;
+	            white-space: nowrap;
+	        }
+	
+	        /* Subgrupos tematicos dentro de la seccion de preguntas */
+	        .question-group-title {
+	            font-size: clamp(0.95rem, 2vw, 1.05rem);
+	            color: var(--primary-dark);
+	            background: var(--accent-light);
+   	            border-left: 5px solid var(--accent);
+   	            padding: 8px 14px;
+   	            border-radius: 8px;
+   	            margin-top: 26px;
+   	            margin-bottom: 10px;
+   	            font-weight: 700;
+   	        }
+   	
+   	        p {
+   	            color: var(--text-light);
+   	            margin: 12px 0;
+   	        }
+   	
+   	        strong {
+   	            color: var(--text);
+   	        }
+   	
+   	        ul, ol {
+   	            padding-left: 1.4em;
+   	            color: var(--text-light);
+   	        }
+   	
+   	        ul li, ol li {
+   	            margin-bottom: 8px;
+   	        }
+   	
+   	        ol.exercises {
+   	            background: #f8fafc;
+   	            border: 1px solid var(--border);
+   	            border-radius: 10px;
+   	            padding: 16px 16px 16px 2.2em;
+   	            margin-bottom: 18px;
+   	        }
+   	
+   	        ol.exercises li {
+   	            margin-bottom: 10px;
+   	            padding-left: 4px;
+   	        }
+   	
+   	        ol.exercises li::marker {
+   	            font-weight: 700;
+   	            color: var(--primary);
+   	        }
+   	
+   	        /* --- Tablas responsivas --- */
+   	        .table-wrapper {
+   	            width: 100%;
+   	            overflow-x: auto;
+	            -webkit-overflow-scrolling: touch;
+	            margin: 16px 0 22px 0;
+	            border-radius: 10px;
+	            box-shadow: var(--shadow);
+	        }
+	
+	        table {
+	            border-collapse: collapse;
+	            width: 100%;
+	            min-width: 480px;
+	            background: var(--card-bg);
+	        }
+	
+	        table th, table td {
+	            border: 1px solid var(--border);
+	            padding: 10px 14px;
+	            text-align: left;
+	            font-size: 0.95rem;
+	        }
+	
+	        table th {
+	            background: var(--primary);
+               color: #fff;
+	            font-weight: 600;
+	        }
+	
+   	        table tr:nth-child(even) td {
+   	            background: #f5f8ff;
+   	        }
+   	
+   	        table tr:hover td {
+   	            background: #eaf1ff;
+   	        }
+   	
+   	        /* --- Cajas especiales --- */
+   	        .safety-box {
+   	            background: #fef2f2;
+   	            border: 1px solid #fecaca;
+   	            border-left: 6px solid var(--danger);
+   	            color: #7f1d1d;
+   	            padding: 14px 18px;
+   	            border-radius: 10px;
+   	            margin: 18px 0;
+   	            font-weight: 600;
+   	        }
+   	
+   	        .example-box {
+   	            background: #f0fdf4;
+   	            border: 1px solid #bbf7d0;
+   	            border-left: 6px solid var(--success);
+   	            padding: 16px 20px;
+   	            border-radius: 10px;
+   	            margin: 16px 0;
+   	        }
+   	
+   	        .example-box p {
+   	            color: var(--text);
+   	            margin: 8px 0;
+   	        }
+   	
+   	        /* --- Responsive: tablets y moviles --- */
+   	        @media (max-width: 768px) {
+   	            body {
+   	                padding: 12px;
+   	            }
+   	
+   	            .week-section {
+   	                padding: 22px 16px;
+   	                border-radius: 10px;
+   	            }
+   	
+   	            h4 {
+   	                flex-direction: column;
+   	                align-items: flex-start;
+   	            }
+   	
+   	            table th, table td {
+   	                padding: 8px 10px;
+   	                font-size: 0.85rem;
+   	            }
+   	        }
+   	
+   	        @media (max-width: 480px) {
+   	            body {
+   	                font-size: 15px;
+   	                padding: 8px;
+   	            }
+   	
+   	            body > div.nav-bar {
+   	                gap: 8px;
+   	            }
+   	
+   	            body > div.nav-bar a {
+   	                flex: 1 1 100%;
+   	                padding: 10px 12px !important;
+   	            }
+   	
+   	            .week-section {
+   	                padding: 16px 12px;
+   	            }
+   	
+   	            .week14-header {
+   	                padding: 14px 12px;
+   	            }
+   	
+   	            ol.exercises {
+   	                padding-left: 1.8em;
+   	            }
+   	        }
+   	
+   	    </style>
+   	</head>
+   	<body>
+   	             <div class="nav-bar">
+   	      <a
+   	        href="../materias/hardware-uno.html"
+   	        style="
+   	          padding: 10px 20px;
+   	          border-radius: 8px;
+   	          text-decoration: none;
+   	          font-weight: bold;
+   	          background: #4ade80;
+   	          color: #222;
+   	          display: inline-block;
+   	          margin-right: 10px;
+   	        "
+   	      >
+   	        Volver a Materia
+   	      </a>
+   	      <a
+   	        href="hardware1-sesion13.html"
+   	        style="
+   	          padding: 10px 20px;
+   	          border-radius: 8px;
+   	          text-decoration: none;
+   	          font-weight: bold;
+   	          background: #60a5fa;
+   	          color: #fff;
+   	          display: inline-block;
+   	          margin-right: 10px;
+   	        "
+   	      >
+   	        Ir a Sesión 13
+   	      </a>
+   	      <a
+   	        href="hardware1-sesion15.html"
+   	        style="
+   	          padding: 10px 20px;
+   	          border-radius: 8px;
+   	          text-decoration: none;
+   	          font-weight: bold;
+   	          background: #f9e282;
+   	          color: #222;
+   	          display: inline-block;
+   	        "
+   	      >
+   	        Ir a Sesión 15
+   	      </a>
+   	    </div>
+   	
+   	
+   	  <div class="week-section">
+   	  <h2 class="week14-header">SESIÓN 14 - FUENTES DE ALIMENTACIÓN (PSU): PC MODERNAS, LEGACY Y SISTEMAS DE ENERGÍA EN NOTEBOOKS</h2>
+   	
+   	
+  
+   	
+
+   	
+   	
+   	
+   	
+   	  <h4>A. ¿Qué es una PSU y por qué es fundamental? <span class="timing">(Bloque 1)</span></h4>
+   	  <p>
+   	    <strong>PSU</strong> significa <em>Power Supply Unit</em>, es decir, <strong>Unidad de Fuente de Alimentación</strong>. Su función es tomar la energía eléctrica que llega desde la red del edificio y convertirla en tensiones adecuadas, limpias y estables para los distintos componentes de la computadora.
+   	  </p>
+   	  <p>
+   	    La PC no puede usar directamente la corriente de la pared. La red domiciliaria entrega <strong>corriente alterna (AC)</strong>, mientras que la electrónica interna de la computadora necesita <strong>corriente continua (DC)</strong>, con valores mucho menores y cuidadosamente regulados.
+   	  </p>
+   	  <p>
+   	    Una fuente de mala calidad puede provocar inestabilidad, reinicios, ruido eléctrico, baja vida útil de componentes o incluso daños graves. Por eso la PSU no debe verse solo como “la caja que da energía”, sino como una pieza crítica para la salud del sistema.
+   	  </p>
+   	  <p><strong>Analogía didáctica:</strong> la red eléctrica puede compararse con una catarata poderosa e irregular; la fuente sería una <strong>represa</strong> que toma esa energía, la ordena y la reparte por distintos canales seguros, cada uno con la presión adecuada para su destino.</p>
+   	
+
+      <h3>Sinónimos de PSU </h3>
+    <h4>Términos más comunes y coloquiales</h4>
+    <ul>
+        <li><strong>Fuente de alimentación</strong> <em></em></li>
+        <li><strong>Fuente de poder</strong> <em></em></li>
+        <li><strong>Fuente de PC</strong> / <strong>Fuente de computadora</strong></li>
+        <li><strong>Fuente eléctrica</strong></li>
+    </ul>
+
+    <hr>
+
+    <h4>Términos técnicos y comerciales</h4>
+    <ul>
+        <li><strong>PSU</strong> <em>(Power Supply Unit - muy usado en fichas técnicas y ámbito gamer)</em></li>
+        <li><strong>Fuente ATX</strong> <em>(hace referencia al factor de forma estándar más común)</em></li>
+        <li><strong>Transformador interno</strong> <em>(uso técnico informal)</em></li>
+        <li><strong>Convertidor AC/DC</strong> <em>(término técnico basado en su función eléctrica)</em></li>
+    </ul>
+   	  <h4>B. Corriente alterna y corriente continua <span class="timing">(Bloque 1)</span></h4>
+   	  <ul>
+   	    <li><strong>AC (Alternating Current):</strong> corriente alterna. Cambia de dirección periódicamente. Es la que llega desde la red eléctrica.</li>
+   	    <li><strong>DC (Direct Current):</strong> corriente continua. Circula en una sola dirección y es la que usan los circuitos electrónicos.</li>
+   	  </ul>
+   	  <p>
+   	    La fuente realiza el trabajo de convertir una en otra y además estabilizarla. En la práctica, la energía que llega desde la pared es “demasiado grande e inestable” para los circuitos delicados del hardware, por lo que la PSU actúa como intermediaria y protectora.
+   	  </p>
+   	
+   	  <h4>C. Las cuatro etapas internas de conversión AC/DC <span class="timing">(Bloque 1)</span></h4>
+   	  <ol>
+   	    <li><strong>Transformación:</strong> adecuación inicial de la tensión de entrada a niveles manejables dentro de la fuente.</li>
+   	    <li><strong>Rectificación:</strong> conversión de AC en pulsos de DC.</li>
+   	    <li><strong>Filtrado:</strong> uso de capacitores y otros componentes para suavizar la señal y reducir el rizado eléctrico (<em>ripple</em>).</li>
+   	    <li><strong>Regulación o estabilización:</strong> ajuste fino para entregar salidas limpias, seguras y dentro de valores estables.</li>
+   	  </ol>
+   	  <p>
+   	    <strong>No solo convierte energía, también la limpia y la regula</strong>.
+   	  </p>
+   	
+   	  <h4>D. El cable de pared y la conexión de entrada de una PSU <span class="timing">(Bloque 1)</span></h4>
+   	  <p>
+   	    El cable que va desde la pared hasta la fuente suele ser un <strong>cable de alimentación AC</strong> con conector tipo <strong>IEC C13</strong> hacia la PSU y enchufe domiciliario del otro lado. El conector de la fuente donde se inserta se conoce normalmente como <strong>IEC C14</strong>.
+   	  </p>
+   	  <p>
+   	    Esta parte trabaja con tensión de red, por lo que merece máximo respeto. No debe manipularse con el equipo energizado ni con cables dañados, fichas flojas o aislación en mal estado.
+   	  </p>
+   	<p>Cuenta con tres pines protegidos (fase, neutro y tierra). </p>
+     <h3>Fase, Neutro y Tierra</h3>
+    <p>En un sistema eléctrico doméstico estándar, estos son los tres conductores fundamentales que permiten el funcionamiento seguro de los electrodomésticos.</p>
+
+    <h4>Funciones principales</h4>
+    <ul>
+        <li><strong>Fase:</strong> Transporta la corriente eléctrica desde la red pública hasta tu hogar. Es el cable que tiene voltaje o "carga" activa.</li>
+        <li><strong>Neutro:</strong> Crea el circuito de retorno para la corriente. Permite que la electricidad regrese a la fuente una vez que el aparato la consume.</li>
+        <li><strong>Tierra:</strong> Funciona como un canal de seguridad. Desvía los excesos de electricidad hacia el suelo en caso de una falla o cortocircuito, evitando fugas eléctricas.</li>
+    </ul>
+
+    <h4>Colores bajo la norma argentina (IRAM 2183)</h4>
+    <ul>
+        <li><strong>Marrón (o Negro/Rojo):</strong> Identifica al cable de <strong>Fase</strong>.</li>
+        <li><strong>Celeste:</strong> Identifica al cable <strong>Neutro</strong>.</li>
+        <li><strong>Verde con rayas amarillas:</strong> Identifica al cable de <strong>Tierra</strong>.</li>
+    </ul>
+
+
+
+   	  <h4>E. Líneas de voltaje y usos principales <span class="timing">(Bloque 1)</span></h4>
+      <p>Ahorar llegamos a los cables que salen de la PSU a los dintios componentes dentro de una PC</p>
+   	  <div class="table-wrapper">
+   	  <table>
+   	    <tr>
+   	      <th>Línea</th>
+   	      <th>Color típico</th>
+   	      <th>Uso principal</th>
+   	    </tr>
+   	    <tr>
+   	      <td>+12V</td>
+   	      <td>Amarillo</td>
+   	      <td>CPU, GPU, motores de discos, ventiladores, bombas</td>
+   	    </tr>
+   	    <tr>
+   	      <td>+5V</td>
+   	      <td>Rojo</td>
+   	      <td>USB, lógica de algunos dispositivos, SSD SATA y circuitos auxiliares</td>
+   	    </tr>
+   	    <tr>
+   	      <td>+3.3V</td>
+   	      <td>Naranja</td>
+   	      <td>RAM, chips de motherboard, ciertos controladores</td>
+   	    </tr>
+   	    <tr>
+   	      <td>-12V</td>
+   	      <td>Azul</td>
+   	      <td>Usos heredados o muy específicos</td>
+   	    </tr>
+   	    <tr>
+   	      <td>+5VSB</td>
+   	      <td>Violeta</td>
+   	      <td>Standby: permite encendido por botón, red o funciones de espera</td>
+   	    </tr>
+   	    <tr>
+   	      <td>GND / Masa</td>
+   	      <td>Negro</td>
+   	      <td>Referencia eléctrica común</td>
+   	    </tr>
+   	    <tr>
+   	      <td>PS-ON</td>
+   	      <td>Verde</td>
+   	      <td>Señal lógica de encendido en fuentes ATX</td>
+   	    </tr>
+   	  </table>
+   	  </div>
+   	  <p>
+   	    El código de colores ayuda al técnico a orientarse rápidamente, pero no reemplaza la lectura del esquema o la verificación correcta. Conectar mal líneas o forzar pines puede provocar cortocircuitos, daño de componentes o incluso destrucción inmediata del equipo.
+   	  </p>
+   	
+   	  <h4>F. Factores de forma modernos y legacy <span class="timing">(Bloque 2)</span></h4>
+   	  <ul>
+   	    <li><strong>AT (legacy):</strong> estándar antiguo con interruptor mecánico y conexión directa de alta tensión al frente del gabinete.</li>
+   	    <li><strong>ATX:</strong> estándar predominante en PC de escritorio modernas.</li>
+   	    <li><strong>SFX:</strong> formato reducido para gabinetes compactos.</li>
+   	    <li><strong>TFX:</strong> usado en equipos de perfil bajo y algunos entornos corporativos.</li>
+   	  </ul>
+   	  <p>
+   	    Conocer fuentes legacy sigue siendo importante porque muchas empresas y equipos viejos continúan en uso. Además, ayuda a comprender por qué el estándar ATX actual fue un gran avance en seguridad, control y comodidad de uso.
+	  </p>
+	
+	  <h4>G. Diferencia entre fuente AT y fuente ATX <span class="timing">(Bloque 2)</span></h4>
+	  <p>
+	    En una fuente <strong>AT</strong>, el encendido se hacía mediante un interruptor mecánico conectado directamente a la línea de alta tensión. Era funcional, pero más riesgoso y menos elegante desde el punto de vista electrónico.
+	  </p>
+	  <p>
+	    En una fuente <strong>ATX</strong>, el encendido se realiza por señal lógica: la motherboard envía la orden mediante la línea <strong>PS-ON</strong>. Esto permite que el sistema operativo apague el equipo, que exista modo de espera y que haya mayor integración con funciones modernas.
+	  </p>
+	
+	  <h4>H. Qué son los pines y qué significa “20+4”, “4+4” o “6+2” <span class="timing">(Bloque 2)</span></h4>
+	  <p>
+	    Un <strong>pin</strong> es un punto de conexión eléctrica. Puede presentarse como contacto metálico, terminal o cavidad con contacto interno, según el tipo de conector. Cuando vemos una nomenclatura como <strong>20+4</strong>, significa que el conector está compuesto por una parte principal y otra adicional separable para mejorar compatibilidad con distintos equipos.
+	  </p>
+	  <ul>
+	    <li><strong>20+4 pines:</strong> ATX principal para motherboard; puede funcionar como 20 pines en placas viejas o 24 en modernas.</li>
+	    <li><strong>4+4 pines:</strong> alimentación EPS/CPU.</li>
+	    <li><strong>6+2 pines:</strong> alimentación auxiliar PCIe para GPU.</li>
+	  </ul>
+	  <p>
+	    El signo “+” no significa suma eléctrica, sino <strong>modularidad física del conector</strong>.
+   	  </p>
+   	
+   	  <h4>I. Conectores eléctricos principales y su función <span class="timing">(Bloque 2)</span></h4>
+   	  <div class="table-wrapper">
+   	  <table>
+   	    <tr>
+   	      <th>Conector</th>
+   	      <th>Pines</th>
+   	      <th>Destino / Función</th>
+   	      <th>Observaciones</th>
+   	    </tr>
+   	    <tr>
+   	      <td>P8 / P9</td>
+   	      <td>6 + 6</td>
+   	      <td>Motherboards AT</td>
+   	      <td>Si los cables negros no iban enfrentados al centro, se podía dañar la placa</td>
+   	    </tr>
+   	    <tr>
+   	      <td>ATX principal</td>
+   	      <td>20+4</td>
+   	      <td>Alimentación general de la motherboard</td>
+   	      <td>Estándar vigente en escritorio</td>
+   	    </tr>
+   	    <tr>
+   	      <td>EPS / CPU</td>
+   	      <td>4+4</td>
+   	      <td>Alimentación dedicada del procesador</td>
+   	      <td>Entrega 12V cerca del socket CPU</td>
+   	    </tr>
+   	    <tr>
+   	      <td>PCIe auxiliar</td>
+   	      <td>6+2</td>
+   	      <td>Tarjetas gráficas dedicadas</td>
+   	      <td>Usado según consumo de la GPU</td>
+   	    </tr>
+   	    <tr>
+   	      <td>12VHPWR / 12V-2x6</td>
+   	      <td>12+4</td>
+   	      <td>GPU modernas de alto consumo</td>
+   	      <td>Asociado a ATX 3.0 y generaciones recientes</td>
+   	    </tr>
+   	    <tr>
+   	      <td>SATA Power</td>
+   	      <td>15</td>
+   	      <td>SSD, HDD modernos y accesorios</td>
+   	      <td>Reemplazó en gran parte a Molex</td>
+   	    </tr>
+   	    <tr>
+   	      <td>Molex</td>
+   	      <td>4</td>
+   	      <td>Discos IDE, Lectores de CD/DVD y periféricos legacy</td>
+   	      <td>Muy común en hardware antiguo</td>
+   	    </tr>
+   	    <tr>
+   	      <td>Berg</td>
+   	      <td>4 pequeño</td>
+   	      <td>Disquetera</td>
+   	      <td>Prácticamente en desuso</td>
+   	    </tr>
+   	  </table>
+   	  </div>
+   	
+   	  <h4>J. Materiales y contactos eléctricos <span class="timing">(Bloque 2)</span></h4>
+   	  <p>
+   	    Los pines y contactos de conectores eléctricos suelen fabricarse en aleaciones conductoras basadas en cobre, con distintos recubrimientos para mejorar conductividad, resistencia mecánica y protección frente a la corrosión. En zonas críticas pueden encontrarse baños de estaño, níquel o finas capas doradas según el diseño.
+   	  </p>
+   	  <p>
+   	    El contacto eléctrico debe ser firme, limpio y estable. Un mal contacto genera resistencia, calor, caída de tensión y posibles fallos.
+   	  </p>
+   	
+   	  <h4>K. Fuentes inmodulares, semimodulares y modulares <span class="timing">(Bloque 2)</span></h4>
+   	  <ul>
+	    <li><strong>Inmodulares:</strong> todos los cables salen fijos desde la fuente.</li>
+	    <li><strong>Semimodulares:</strong> algunos cables esenciales son fijos y otros desmontables.</li>
+	    <li><strong>100% modulares:</strong> todos los cables son independientes.</li>
+	  </ul>
+	  <p>
+	    La diferencia no está en la calidad eléctrica por sí sola, sino en la comodidad de armado, el flujo de aire y la organización interna del gabinete.
+	  </p>
+	
+	  <h4>L. Potencia de una PSU: por qué existen distintos wattajes <span class="timing">(Bloque 3)</span></h4>
+	  <p>
+	    No todas las PC consumen lo mismo. Una computadora de oficina con gráficos integrados requiere mucha menos energía que una estación con CPU potente y GPU dedicada. Por eso existen fuentes de distintas potencias nominales.
+	  </p>
+	  <ul>
+	    <li><strong>Baja potencia (300W - 450W):</strong> oficinas, terminales administrativas, equipos básicos.</li>
+	    <li><strong>Potencia media (500W - 650W):</strong> equipos de uso general, gaming moderado, trabajo escolar y técnico.</li>
+	    <li><strong>Potencia alta (700W - 850W+):</strong> PCs con GPU exigente, renderizado, estaciones de trabajo o múltiples discos.</li>
+	  </ul>
+	  <p>
+	    Elegir una PSU correcta no significa “poner la más grande posible”, sino <strong>una que acompañe el hardware con margen razonable, calidad y protecciones adecuadas</strong>.
+	  </p>
+	<!-- SECCIÓN: ¿QUÉ SIGNIFICA LA W? -->
+<section class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 max-w-2xl mx-auto font-sans">
+    <h3 class="text-2xl font-bold text-gray-900 mb-3 tracking-tight">¿Qué significa la "W"?</h3>
+    <p class="text-gray-600 mb-4 leading-relaxed">
+        La <strong class="text-gray-900 font-semibold">W</strong> significa <strong class="text-indigo-600 font-semibold">Watt</strong> (o Vatio en español). Es la unidad de medida utilizada para cuantificar la <strong class="text-gray-900 font-semibold">potencia eléctrica</strong>. En una fuente, indica la cantidad máxima de energía que el componente puede entregar a los circuitos de la computadora de forma continua.
+    </p>
+
+    <!-- Bloque de fórmula -->
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 text-center my-6">
+        <span class="text-xs text-gray-400 font-mono uppercase block mb-1">Fórmula Eléctrica Básica</span>
+        <span class="text-xl font-mono text-gray-800 font-bold">Watts (W) = Voltios (V) × Amperios (A)</span>
+    </div>
+
+    <h3 class="text-lg font-bold text-gray-900 mb-2">💡 Una analogía simple para entenderlo:</h3>
+    <ul class="list-disc pl-5 space-y-2 text-gray-600 text-sm leading-relaxed">
+        <li><strong>Voltaje (V):</strong> Es la fuerza con la que empuja el agua dentro de una manguera.</li>
+        <li><strong>Amperaje (A):</strong> Es el grosor de la manguera (cuánta agua pasa por segundo).</li>
+        <li><strong>Wattage (W):</strong> Es el caudal o volumen total de agua que sale combinando la fuerza y el grosor.</li>
+    </ul>
+</section>
+
+	  <h4>M. Eficiencia energética, PFC y certificación 80 Plus <span class="timing">(Bloque 3)</span></h4>
+	  <p>
+	    Una fuente no convierte toda la energía de la pared en energía útil para la PC. Parte se pierde en forma de calor. La <strong>eficiencia</strong> expresa qué proporción de la energía de entrada se aprovecha realmente.
+	  </p>
+	  <p>
+	    La certificación <strong>80 Plus</strong> indica que la fuente alcanza un nivel mínimo de eficiencia en distintas cargas. A mayor eficiencia, menos calor desperdiciado y mejor aprovechamiento energético.
+	  </p>
+	  <div class="table-wrapper">
+	  <table>
+	    <tr>
+	      <th>Sello 80 Plus</th>
+	      <th>Eficiencia típica a carga media</th>
+	      <th>Orientación general</th>
+	    </tr>
+	    <tr>
+	      <td>White / Standard</td>
+	      <td>80%</td>
+	      <td>Entrada / básica</td>
+	    </tr>
+	    <tr>
+	      <td>Bronze</td>
+	      <td>85%</td>
+	      <td>Gama media</td>
+	    </tr>
+	    <tr>
+	      <td>Gold</td>
+	      <td>90%</td>
+	      <td>Gama alta</td>
+	    </tr>
+	    <tr>
+   	      <td>Platinum / Titanium</td>
+   	      <td>92% - 94%</td>
+   	      <td>Workstations / servidores</td>
+   	    </tr>
+   	  </table>
+   	  </div>
+   	  <p>
+   	    El <strong>PFC</strong> (Power Factor Correction) mejora el aprovechamiento de la energía tomada desde la red.
+   	  </p>
+   	  <ul>
+   	    <li><strong>PFC pasivo:</strong> más simple, menos eficiente.</li>
+   	    <li><strong>PFC activo (APFC):</strong> más moderno, eficiente y normalmente con conmutación automática de rango de entrada.</li>
+   	  </ul>
+   	     <!-- SECCIÓN: INTERFACES DE INTERACCIÓN FÍSICA EN UNA PSU -->
+<section>
+    
+    <h4>Botones, selectores e interruptores de la PSU</h4>
+    
+    <p>
+        Además de los cables y la conversión de energía, la parte trasera de una Unidad de Fuente de Alimentación (PSU) expone una serie de componentes mecánicos y de control. Estos elementos permiten al usuario y al técnico interactuar directamente con el estado eléctrico y la configuración de refrigeración de la fuente.
+    </p>
+
+    <!-- Interruptor Principal -->
+    <article>
+        <h3>1. Interruptor de encendido y apagado (Switch I/O)</h3>
+        <p>
+            Es el botón mecánico basculante principal que corta de raíz la entrada de corriente alterna (AC) proveniente de la pared hacia los circuitos internos de la fuente. 
+        </p>
+        <ul>
+            <li><strong>Posición I (Input / On):</strong> Permite el paso de la corriente. La fuente queda en estado de espera (Standby), energizando la línea de +5VSB para que la motherboard pueda recibir la orden de arranque digital.</li>
+            <li><strong>Posición O (Output / Off):</strong> Interrumpe físicamente el circuito eléctrico de entrada. Es la posición obligatoria antes de manipular componentes internos de la PC, ya que asegura que no quede energía remanente activa.</li>
+        </ul>
+    </article>
+
+    <!-- Selector de Voltaje Legacy -->
+    <article>
+        <h3>2. Selector manual de voltaje de entrada (115V / 230V)</h3>
+        <p>
+            Presente de forma física en fuentes antiguas (Legacy) o modelos modernos de gama muy baja sin PFC Activo. Es una pequeña llave deslizante (generalmente de color rojo).
+        </p>
+        <p>
+            Permite adaptar el transformador interno a la red eléctrica del país: <strong>115V</strong> (común en regiones como Estados Unidos) o <strong>230V</strong> (común en Argentina y Europa). 
+        </p>
+        <p>
+            <strong>Nota de seguridad crítica:</strong> Configurar este selector en 115V y enchufar la fuente en una red de 220V/230V provoca la destrucción inmediata del componente por sobrevoltaje, acompañado de una explosión de capacitores y humo. Las fuentes modernas de calidad eliminan este botón gracias al PFC Activo, que detecta y regula el rango de voltaje automáticamente (Auto-Switching).
+        </p>
+    </article>
+
+    <!-- Botón Modo ECO / Smart Fan -->
+    <article>
+        <h3>3. Interruptor de Modo Eco / Modo Híbrido (Eco Mode / Zero RPM Switch)</h3>
+        <p>
+            Es un botón pulsador o interruptor que se encuentra exclusivamente en fuentes modernas de gama media-alta y alta con ventilación inteligente.
+        </p>
+        <ul>
+            <li><strong>Modo Eco Activado (On):</strong> Habilita el funcionamiento semipasivo. El ventilador de la fuente se mantiene completamente apagado (0 RPM) si la computadora está realizando tareas livianas (ofimática, navegación) o si el consumo es menor al 30% o 40% de su capacidad. El ventilador solo arranca cuando la temperatura o la carga de trabajo aumentan, reduciendo el ruido y la acumulación de polvo.</li>
+            <li><strong>Modo Eco Desactivado (Off):</strong> El ventilador de la fuente gira de forma constante desde el momento en que se enciende la PC, ajustando su velocidad gradualmente según la temperatura.</li>
+        </ul>
+    </article>
+
+    <!-- Indicador LED de Diagnóstico -->
+    <article>
+        <h3>4. Indicador LED de estado o diagnóstico (Power Indicator)</h3>
+        <p>
+            Aunque es poco común en fuentes genéricas, algunas fuentes de gama alta o destinadas a servidores incorporan una pequeña luz LED al lado del conector IEC C14 de entrada.
+        </p>
+        <ul>
+            <li><strong>Verde constante:</strong> Indica que la fuente está conectada a la red eléctrica correcta, superó los chequeos internos de autodiagnóstico y está lista para operar o ya entregando energía.</li>
+            <li><strong>Rojo o parpadeante:</strong> Alerta al usuario que se activó alguna de las protecciones internas (como SCP por cortocircuito u OVP por sobretensión), bloqueando el arranque para salvar el hardware de la PC.</li>
+        </ul>
+    </article>
+
+    <!-- Botón de Control RGB -->
+    <article>
+        <h3>5. Botón de control de iluminación (RGB Control Switch)</h3>
+        <p>
+            Se ubica en fuentes de perfil estético ("Gamer") que incluyen iluminación RGB en su ventilador interno, siempre y cuando no dependan de un software del sistema.
+        </p>
+        <p>
+            Al presionarlo de forma sucesiva, el usuario puede alternar manualmente entre diferentes efectos de iluminación, colores fijos o apagar por completo las luces de la fuente sin necesidad de abrir el gabinete.
+        </p>
+    </article>
+
+</section>
+   	  <h4>N. Protecciones eléctricas y por qué importan <span class="timing">(Bloque 3)</span></h4>
+   	  <p>
+   	    No todas las fuentes ofrecen el mismo nivel de protecciones. En modelos de buena calidad suelen estar presentes varias defensas electrónicas que pueden evitar daños mayores.
+   	  </p>
+   	  <ul>
+   	    <li><strong>OVP:</strong> protección contra sobretensión.</li>
+   	    <li><strong>UVP:</strong> protección contra tensión demasiado baja.</li>
+	    <li><strong>SCP:</strong> protección contra cortocircuito.</li>
+	    <li><strong>OPP:</strong> protección contra sobrepotencia.</li>
+	    <li><strong>OCP:</strong> protección contra sobrecorriente.</li>
+	  </ul>
+	  <p>
+	    Estas protecciones son importantes porque el fallo eléctrico no siempre da “segundas oportunidades”. Una mala fuente sin controles adecuados puede afectar motherboard, discos, GPU o estabilidad general.
+	  </p>
+	
+	  <h4>O. Sistema de alimentación en notebooks: cargador externo <span class="timing">(Bloque 4)</span></h4>
+	  <p>
+	    En notebooks, gran parte de la conversión principal de AC a DC ocurre <strong>fuera del equipo</strong>, dentro del cargador o adaptador. Esto ayuda a reducir calor y tamaño dentro de la notebook.
+	  </p>
+	  <p>
+	    La etiqueta del cargador suele mostrar dos áreas clave:
+	  </p>
+	  <ul>
+	    <li><strong>Input:</strong> (Entrada): Indica la corriente eléctrica de la pared que el cargador es capaz de recibir, por ejemplo 100-240V ~ 50-60Hz.</li>
+	    <li><strong>Output:</strong> (Salida): Indica la energía exacta y regulada que el cargador le entrega a la notebook para que funcione y cargue su batería. Es corriente continua (DC), por ejemplo 19V y 3,42A.</li>
+	  </ul>
+	  <p>
+	    La potencia se calcula con la fórmula: <strong>Watts = Volts × Amperes</strong>. Si un cargador entrega 19,5V y 4,62A, su potencia aproximada es 90W.
+	  </p>
+	
+	  <h4>P. Tipos de conectores de cargador en notebook <span class="timing">(Bloque 4)</span></h4>
+	  <ul>
+	    <li><strong>Punta de barril:</strong> conector cilíndrico tradicional. Puede variar en diámetro, longitud y pin central.</li>
+   	    <li><strong>Conector con pin de identificación:</strong> usado por algunas marcas para reconocer cargador original o compatible.</li>
+   	    <li><strong>USB-C Power Delivery:</strong> estándar moderno.</li>
+   	  </ul>
+   	  <p>
+   	    USB-C PD permite usar un mismo tipo de cable y conector para múltiples dispositivos, aunque no todos los cargadores USB-C sirven para cualquier notebook: depende de la potencia y del perfil que soporten.
+   	  </p>
+   	
+   	  <h4>Q. ¿Qué pasa si el voltaje o amperaje del cargador no coinciden? <span class="timing">(Bloque 4)</span></h4>
+   	  <p>
+   	    En términos generales, el <strong>voltaje</strong> debe coincidir con el requerido por la notebook. Una diferencia incorrecta puede impedir funcionamiento o causar daño. El <strong>amperaje</strong> disponible puede ser igual o mayor al requerido; si es menor, el cargador puede quedar corto, calentarse, no cargar correctamente o hacer que el equipo se apague bajo carga.
+   	  </p>
+   	  <p>
+   	    Regla útil: <strong>mismo voltaje, amperaje igual o superior, conector correcto y cargador de calidad</strong>.
+   	  </p>
+   	
+   	  <h4>R. Baterías de notebook: tipos y química <span class="timing">(Bloque 4)</span></h4>
+   	  <p>
+   	    Las notebooks actuales utilizan sobre todo baterías de <strong>ion de litio (Li-Ion)</strong> o <strong>polímero de litio (Li-Po)</strong>. Estas celdas trabajan con tensiones nominales cercanas a 3,7V por celda y se agrupan en serie o paralelo para alcanzar los valores requeridos por el equipo.
+   	  </p>
+   	  <ul>
+   	    <li><strong>Baterías extraíbles:</strong> más comunes en equipos de años anteriores.</li>
+   	    <li><strong>Baterías internas:</strong> muy frecuentes en notebooks modernas.</li>
+   	  </ul>
+   	  <p>
+   	    No se puede colocar cualquier batería en cualquier notebook. Deben coincidir físicamente, eléctricamente y a nivel de gestión electrónica.
+   	  </p>
+   	<!-- SECCIÓN: CELDAS Y ACOMODO DE BATERÍAS -->
+<section class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 max-w-2xl mx-auto font-sans text-gray-800">
+    
+    <!-- ¿Qué son las celdas? -->
+    <div class="mb-6">
+        <h3 class="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+            <span>🔋</span> ¿Qué son las celdas?
+        </h3>
+        <p class="text-sm text-gray-600 leading-relaxed">
+            Una celda es la <strong class="text-gray-900 font-semibold">unidad mínima de almacenamiento</strong> de energía. En las notebooks, cada celda de iones de litio (<span class="italic text-gray-500">Li-Ion</span>, con forma de pila cilíndrica) o polímero de litio (<span class="italic text-gray-500">Li-Po</span>, con forma de sobre plano) entrega un voltaje estándar de <strong class="text-indigo-600 font-semibold">3,7 Voltios</strong>. Como una notebook promedio necesita mucho más que 3,7V para encender, las celdas se tienen que "acomodar" y conectar entre sí para sumar fuerza o capacidad.
+        </p>
+    </div>
+
+    <!-- ¿Cómo se acomodan? -->
+    <div class="mb-6">
+        <h3 class="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+            <span>🔄</span> ¿Cómo se acomodan? (Conexiones en Serie y Paralelo)
+        </h2>
+        <p class="text-sm text-gray-600 mb-4 leading-relaxed">
+            Las celdas se agrupan combinando dos tipos de circuitos eléctricos para lograr el voltaje y la duración que el fabricante de la notebook necesita:
+        </p>
+
+        <div class="space-y-3">
+            <!-- Serie -->
+            <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+                <p class="text-sm text-gray-700 leading-relaxed mb-1">
+                    <strong class="text-gray-950 font-bold">Acomodadas en Serie (Aumenta el Voltaje):</strong> Se conecta el polo positivo de una celda con el negativo de la siguiente. Al hacer esto, los voltajes se suman, pero la duración (capacidad) sigue siendo la misma.
+                </p>
+                <span class="inline-block text-xs font-mono bg-gray-200 text-gray-700 px-2 py-0.5 rounded">
+                    Ejemplo: 3 celdas de 3,7V en serie = 11,1V totales.
+                </span>
+            </div>
+
+            <!-- Paralelo -->
+            <div class="bg-indigo-50/40 border border-indigo-100 rounded-xl p-4">
+                <p class="text-sm text-indigo-950 leading-relaxed">
+                    <strong class="text-indigo-950 font-bold">Acomodadas en Paralelo (Aumenta la Duración):</strong> Se conectan los polos positivos con los positivos, y los negativos con los negativos. Al hacer esto, el voltaje se mantiene igual (3,7V), pero la capacidad de almacenamiento se suma, haciendo que la batería dure más horas de uso.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nomenclatura técnica -->
+    <div class="bg-amber-50/50 border border-amber-200 rounded-xl p-4">
+        <h3 class="text-sm font-bold text-amber-900 uppercase tracking-wider mb-2">
+            La nomenclatura técnica (El sistema "S" y "P")
+        </h3>
+        <p class="text-sm text-amber-950 leading-relaxed mb-3">
+            En las etiquetas técnicas o programas de diagnóstico de hardware, el acomodo de las celdas se describe con una combinación de letras como <strong class="font-mono bg-amber-100 px-1 rounded text-amber-900">3S2P</strong> (una batería típica de 6 celdas):
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5 text-xs text-amber-900">
+            <li><strong>3S:</strong> Significa 3 celdas conectadas en Serie (3 × 3,7V = 11,1V).</li>
+            <li><strong>2P:</strong> Significa que hay 2 de esos grupos conectados en Paralelo para duplicar el tiempo de autonomía de la PC.</li>
+        </ul>
+    </div>
+
+</section>
+
+   	  <h4>S. Ciclos de carga, degradación y BMS <span class="timing">(Bloque 4)</span></h4>
+   	  <p>
+   	    Un <strong>ciclo de carga</strong> representa el equivalente a usar el 100% de la capacidad total de la batería, aunque no sea de una sola vez. Con el paso del tiempo y los ciclos, la batería pierde capacidad útil.
+   	  </p>
+   	  <p>
+   	    El <strong>BMS (Battery Management System)</strong> es el circuito de gestión interno. Controla temperatura, balanceo de celdas, sobrecarga, descarga profunda y comunica información de estado al sistema operativo. Gracias a este circuito, la notebook puede estimar porcentaje, salud y autonomía de la batería.
+   	  </p>
+   	
+   	  <h4>T. Circuito de conmutación y funcionamiento al desenchufar <span class="timing">(Bloque 4)</span></h4>
+   	  <p>
+   	    Dentro de la notebook existe un circuito de carga y conmutación, basado en controladores y MOSFETs, que decide de dónde proviene la energía en cada momento.
+   	  </p>
+   	  <ul>
+   	    <li><strong>Con cargador conectado:</strong> alimenta el equipo y, si corresponde, carga la batería.</li>
+   	    <li><strong>Sin cargador:</strong> conmuta a la batería de forma transparente, sin interrumpir el funcionamiento.</li>
+   	  </ul>
+   	  <p>
+   	    Esta transición es una diferencia central entre notebook y PC de escritorio: la notebook ya incorpora su propio “respaldo energético” en forma de batería, mientras que una PC de escritorio depende de UPS externa si se desea continuidad ante cortes.
+   	  </p>
+   	
+   	  <h4>U. Comparativa general: escritorio vs notebook <span class="timing">(Bloque 4)</span></h4>
+   	  <div class="table-wrapper">
+   	  <table>
+   	    <tr>
+   	      <th>Parámetro</th>
+   	      <th>PC de escritorio</th>
+   	      <th>Notebook</th>
+   	    </tr>
+   	    <tr>
+   	      <td>Ubicación de la fuente</td>
+   	      <td>Interna</td>
+   	      <td>Externa (cargador) + regulación interna</td>
+   	    </tr>
+   	    <tr>
+   	      <td>Conversión principal</td>
+   	      <td>En la PSU ATX/SFX/TFX</td>
+   	      <td>En el adaptador AC/DC</td>
+   	    </tr>
+   	    <tr>
+   	      <td>Voltajes entregados</td>
+   	      <td>Múltiples rieles</td>
+   	      <td>Línea principal única y regulación interna</td>
+   	    </tr>
+   	    <tr>
+   	      <td>Respaldo de energía</td>
+   	      <td>UPS opcional externa</td>
+   	      <td>Batería integrada</td>
+   	    </tr>
+   	    <tr>
+   	      <td>Actualización</td>
+   	      <td>Más sencilla</td>
+   	      <td>Más dependiente de compatibilidad específica</td>
+   	    </tr>
+   	  </table>
+   	  </div>
+   	
+   	 <h3>V. Cierre conceptual</h3>
+   	  <p>
+   	    Comprender la alimentación eléctrica es comprender la base de todo el hardware: sin energía adecuada no hay arranque, estabilidad ni seguridad. Tanto en PCs modernas como en equipos legacy o notebooks, el técnico debe saber <strong>leer, identificar, comparar y seleccionar</strong> fuentes, conectores y sistemas de energía con criterio. Una buena PSU no solo alimenta: también protege, estabiliza y condiciona la vida útil del equipo.
+   	  </p>
+   	
+
+   	<!-- SECCIÓN: CUESTIONARIO COMPLETO DE PREGUNTAS Y ACTIVIDADES - SESIÓN 14 -->
+<section>
+    <h3>6. Cuestionario e Identificación de Componentes</h3>
+
+    <!-- BLOQUE 1: FUNDAMENTOS ELÉCTRICOS Y CONVERSIÓN -->
+
+        <ol>
+            <li>
+                <strong>Definición:</strong> ¿Qué significan las siglas PSU y cuál es su función principal en una computadora?
+            </li>
+            <li>
+                <strong>Comparación:</strong> Explique con sus palabras la diferencia entre corriente alterna (AC) y corriente continua (DC). ¿Cuál llega de la calle y cuál usa el hardware?
+            </li>
+            <li>
+                <strong>Analogía:</strong> Explique la analogía de la represa vista  para describir el funcionamiento de una fuente de alimentación frente a la red eléctrica, u ofrecer una propia.
+            </li>
+            <li><strong>Sinónimo:</strong>  mencionar sinónimos y Términos técnicos de PSU.</li>
+            <li>
+                <strong>Etapas internas:</strong> Mencione las cuatro etapas internas de conversión AC/DC que realiza la PSU.
+            </li>
+            <li>¿Que es el cable conector IEC C13 e IEC C14?</li>
+            <li>Que función cumple las 3 patas del cable IEC C13 e IEC C14</li>
+
+            <li>
+                <strong>Calidad eléctrica:</strong> ¿Qué problemas técnicos puede provocar en los componentes de una PC el uso de una fuente de alimentación de mala calidad?
+            </li>
+             <li>
+                <strong>Seguridad eléctrica:</strong> De acuerdo con la norma argentina IRAM 2183, ¿de qué color es el cable de Fase y Neutro y qué función  cumple?
+            </li>
+            <li>
+                <strong>Seguridad eléctrica:</strong> De acuerdo con la norma argentina IRAM 2183, ¿de qué color es el cable de Tierra y qué función de seguridad cumple en el hogar?
+            </li>
+    
+
+            <li>
+                <strong>Línea de +12V:</strong> ¿Qué componentes principales de la computadora se alimentan de la línea de +12V (cable amarillo) y por qué se la considera el "músculo" de la fuente?
+            </li>
+            <li>
+                <strong>Líneas de +5V y +3.3V:</strong> ¿Para qué se utilizan las líneas de +5V (cable rojo) y +3.3V (cable naranja) dentro del gabinete?
+            </li>
+            <li>
+                <strong>Línea de Standby:</strong> ¿Qué función cumple la línea +5VSB (cable violeta) y qué permite hacer incluso cuando la PC está apagada?
+            </li>
+            <li>
+                <strong>Señal lógica:</strong> ¿Qué color de cable identifica a la línea PS-ON y qué utilidad técnica tiene para el arranque de la fuente?
+            </li>
+   
+            <li>
+                <strong>Evolución AT a ATX:</strong> ¿Cuál es la diferencia principal en el sistema de encendido entre una fuente legacy AT y una moderna fuente ATX?
+            </li>
+            <li>
+                <strong>Formatos compactos:</strong> Mencione dos factores de forma de fuentes de alimentación diseñados específicamente para gabinetes reducidos o de perfil bajo.
+            </li>
+            <li>
+                <strong>Nomenclatura física:</strong> Cuando vemos términos como "20+4" o "6+2" en los cables de la PSU, ¿qué significa exactamente el signo "+"?
+            </li>
+           
+            <li>
+                <strong>Materiales conductores:</strong> ¿De qué materiales suelen fabricarse los pines y contactos eléctricos de las fuentes, y qué recubrimiento se les aplica para evitar la corrosión?
+            </li>
+  
+
+ 
+            <li>
+                <strong>Interruptor I/O:</strong> Explique la diferencia de estado eléctrico en la PC entre colocar el interruptor trasero de la PSU en la posición "I" frente a la posición "O".
+            </li>
+            <li>
+                <strong>Selector de voltaje:</strong> ¿Qué riesgo crítico de seguridad corre el hardware si se configura manualmente el selector rojo trasero en "115V" y se conecta en una red de 220V?
+            </li>
+            <li>
+                <strong>Modo Eco:</strong> ¿Qué cambio experimenta el ventilador de la fuente cuando el usuario activa el interruptor de "Modo Eco" o Modo Híbrido?
+            </li>
+            <li>
+                <strong>Diagnóstico LED:</strong> ¿Qué le indica al técnico una luz LED trasera parpadeante o de color rojo en las fuentes que incorporan indicadores de estado?
+            </li>
+            <li>
+                <strong>Vataje nominal:</strong> ¿Por qué existen fuentes con distintas potencias en Watts y bajo qué criterio general se debe elegir el wattaje correcto para un equipo?
+            </li>
+            <li>
+                <strong>Eficiencia 80 Plus:</strong> ¿Qué mide la certificación 80 Plus y en qué formato se disipa el porcentaje de energía que la fuente toma de la pared pero no logra aprovechar?
+            </li>
+            <li>
+                <strong>Protecciones eléctricas:</strong> Mencione al menos tres siglas de protecciones internas de una PSU de buena calidad (como SCP, OVP, etc.) y explique por qué importan.
+            </li>
+ 
+            <li>
+                <strong>Ubicación de la fuente:</strong> ¿Por qué en las notebooks la conversión principal de AC a DC se realiza fuera del equipo mediante un adaptador externo?
+            </li>
+            <li>
+                <strong>Input y Output:</strong> Explique qué significan las especificaciones de "Input" y "Output" que figuran obligatoriamente en la etiqueta del cargador de una notebook.
+            </li>
+            <li>
+                <strong>Compatibilidad de cargadores:</strong> Enunciar la regla fundamental de compatibilidad (voltaje y amperaje) a seguir si necesitamos reemplazar el cargador original de una notebook.
+            </li>
+            <li>
+                <strong>Química de baterías:</strong> ¿Cuáles son las dos tecnologías químicas más utilizadas en las baterías de notebooks actuales?
+            </li>
+            <li>
+                <strong>¿Qué son las celdas?:</strong> Defina qué es una celda de batería y cuál es su voltaje nominal estándar en químicas basadas en Litio.
+            </li>
+            <li>
+                <strong>Serie vs Paralelo:</strong> Al agrupar las celdas internas de una batería, ¿qué parámetro eléctrico aumenta si se conectan en Serie y cuál si se conectan en Paralelo?
+            </li>
+            <li>
+                <strong>Nomenclatura de celdas:</strong> Si la batería de un equipo portátil indica que posee una estructura interna "3S2P", describa cómo están interconectadas sus celdas.
+            </li>
+            <li>
+                <strong>Circuito BMS:</strong> ¿Qué funciones de monitoreo y seguridad cumple el circuito BMS (Battery Management System) dentro de la batería de una notebook?
+            </li>
+            <li>
+                <strong>Transición energética:</strong> Explique cómo trabajan el chip IC de Carga y los transistores MOSFET para lograr que una notebook cambie de alimentación de forma transparente al desenchufar el cargador.
+            </li>
+ 
+            
+           
+        
+        
+          
+
+   	   	    <li>Buscar imágenes de <strong>fuente AT</strong> y <strong>fuente ATX</strong> para comparar conectores y formato.</li>
+   	    <li>Buscar imágenes de <strong>conector IEC C13/C14</strong> y del cable de alimentación que va de la pared a la PSU.</li>
+   	    <li>Buscar imágenes de <strong>ATX 24 pines (20+4) y que le suministra energía</strong>.</li>
+   	   
+        <li>Buscar imágenes de <strong>EPS 8 pines (4+4) y que le suministra energía</strong>.</li>
+   	   
+        <li>Buscar imágenes de <strong> PCIe 6+2 y que le suministra energía</strong>.</li>
+   	    <li>Buscar imágenes de <strong> SATA Power y que le suministra energía</strong>.</li>
+   	    <li>Buscar imágenes de <strong> Molex y que le suministra energía</strong>.</li>
+         <li>Buscar imágenes de <strong>Berg y que le suministra energía</strong>.</li>
+   	       <li>
+                <strong>Identificación de Conectores de GPU Modernos:</strong> Busque una imagen de una tarjeta gráfica de última generación asociada al estándar ATX 3.0. Identifique visualmente el conector de alimentación **12VHPWR / 12V-2x6** de 16 pines (12+4) y marque la ubicación de los 4 pequeños pines de señal lógica.
+            </li>
+   	    <li>Buscar imágenes de <strong>fuentes modulares</strong>.</li>
+          <li>Buscar imágenes de <strong>fuentes semimodulares </strong>.</li>
+            <li>Buscar imágenes de <strong>fuentes inmodulares</strong>.</li>
+   	    <li>Buscar imágenes de <strong>fuentes SFX y TFX</strong> para gabinetes compactos.</li>
+  <li>Buscar imágenes de <strong>una fuente ATX abierta e identifique ventilador, carcasa, mazo de cables, PCB y etiqueta.</strong> .</li>
+       
+   	    <li>Buscar imágenes de <strong>cargadores de notebook con punta de barril</strong> .</li>
+   	    
+        <li>Buscar imágenes de <strong>cargadores USB-C PD</strong>.</li>
+   	    <li>Buscar imágenes de <strong>baterías internas y extraíbles</strong> de notebook.</li>
+        <li>Buscar imágenes de <strong>baterías  ion de litio (Li-Ion) y polímero de litio (Li-Po)</strong> de notebook e identificar celdas.</li>
+
+   	
+   	
+   	 
+   	</div>
+   	<br>
+   	   
+   	             <div class="nav-bar">
+   	      <a
+   	        href="../materias/hardware-uno.html"
+   	        style="
+   	          padding: 10px 20px;
+   	          border-radius: 8px;
+   	          text-decoration: none;
+   	          font-weight: bold;
+   	          background: #4ade80;
+   	          color: #222;
+   	          display: inline-block;
+   	          margin-right: 10px;
+   	        "
+   	      >
+   	        Volver a Materia
+   	      </a>
+   	      <a
+   	        href="hardware1-sesion13.html"
+   	        style="
+   	          padding: 10px 20px;
+   	          border-radius: 8px;
+   	          text-decoration: none;
+   	          font-weight: bold;
+   	          background: #60a5fa;
+   	          color: #fff;
+   	          display: inline-block;
+   	          margin-right: 10px;
+   	        "
+   	      >
+   	        Ir a Sesión 13
+   	      </a>
+   	      <a
+   	        href="hardware1-sesion15.html"
+   	        style="
+        padding: 10px 20px;
+	          border-radius: 8px;
+   	          text-decoration: none;
+   	          font-weight: bold;
+   	          background: #f9e282;
+   	          color: #222;
+   	          display: inline-block;
+   	        "
+   	      >
+   	        Ir a Sesión 15
+   	      </a>
+   	    </div>
+   	</body>
+   	</html>
+
