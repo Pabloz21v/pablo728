@@ -644,18 +644,7 @@
         Ir a Sesión 13
       </a>
     </div>
-      <!-- ====== BOTONES DE NAVEGACIÓN SUPERIOR ====== -->
-      <nav class="nav-buttons">
-        <a href="#sec0" class="nav-btn primary">📘 Inicio</a>
-        <a href="#sec1" class="nav-btn secondary">🚌 Buses</a>
-        <a href="#sec2" class="nav-btn secondary">⚡ PCIe Gen</a>
-        <a href="#sec5" class="nav-btn secondary">🎮 Tarjetas Desktop</a>
-        <a href="#sec6" class="nav-btn secondary">📐 M.2</a>
-        <a href="#sec8" class="nav-btn secondary">💻 Notebooks</a>
-        <a href="#sec9" class="nav-btn secondary">🏛️ Legacy</a>
-        <a href="#sec11" class="nav-btn secondary">🌳 Árbol</a>
-        <a href="#sec14" class="nav-btn accent">📝 Evaluación</a>
-      </nav>
+   
 
       <!-- ====== HEADER PRINCIPAL ====== -->
       <header class="hero">
@@ -674,19 +663,10 @@
           <li><a href="#sec3"><span class="num">3.</span> Slot físico vs eléctrico</a></li>
           <li><a href="#sec4"><span class="num">4.</span> Bifurcation y lane sharing</a></li>
           <li><a href="#sec5"><span class="num">5.</span> Placas de expansión PCIe en escritorio</a></li>
-          <li><a href="#sec6"><span class="num">6.</span> M.2: la revolución</a></li>
-          <li><a href="#sec7"><span class="num">7.</span> Thermal M.2 NVMe y SSD heatsinks</a></li>
-          <li><a href="#sec8"><span class="num">8.</span> Expansión en notebooks</a></li>
-          <li><a href="#sec9"><span class="num">9.</span> Legacy y placas antiguas</a></li>
-          <li><a href="#sec10"><span class="num">10.</span> Tabla maestra por perfil</a></li>
-          <li><a href="#sec11"><span class="num">11.</span> Árbol de decisión</a></li>
-          <li><a href="#sec12"><span class="num">12.</span> Mini-guía notebooks</a></li>
-          <li><a href="#sec13"><span class="num">13.</span> Glosario técnico</a></li>
-          <li><a href="#sec14"><span class="num">14.</span> Evaluación final</a></li>
-          <li><a href="#sec15"><span class="num">15.</span> Referencias</a></li>
+          <li><a href="#sec8"><span class="num">6.</span> Expansión en notebooks</a></li>
+          <li><a href="#sec14"><span class="num">7.</span> Cuestionario</a></li>
         </ol>
-        <div class="toc-info">Tip: revisá la sección 11 antes de saltar a resolver los escenarios de cliente.</div>
-      </section>
+       </section>
 
       <!-- ====== SECCIÓN 0 — INTRODUCCIÓN ====== -->
       <h2 class="section-title" id="sec0">
@@ -695,24 +675,14 @@
       </h2>
      
       <div class="card">
-        <h3>🎯 ¿Qué vas a aprender hoy?</h3>
+        <h3>🎯 ¿Qué vamos a aprender?</h3>
         <p>
           Una <span class="highlight">placa de expansión</span> es cualquier tarjeta o módulo que se enchufa en un slot o
           bus del motherboard (o laptop) para agregar funcionalidad que la placa base no trae de fábrica, esta funcionalidad se ha dañado o el usuario desea ampliar los ya presentes: video
-          dedicado, Ethernet de 10 Gbps, WiFi+BT, Thunderbolt, captura de video, almacenamiento NVMe extra, RAID,
+          dedicado, Ethernet de 10 Gbps, WiFi+BT, Thunderbolt, captura de video, puertos USB, almacenamiento NVMe extra, RAID,
           sonido profesional, etc. 
         </p>
-        <h4>Competencias terminales</h4>
-        <ul>
-          <li>Diferenciar buses legacy (ISA / VLB / PCI / AGP / AMR / CNR) vs modernos (PCIe).</li>
-          <li>Identificar las generaciones PCIe 1.0 a 6.0 y su ancho de banda por lane.</li>
-          <li>Leer un manual de motherboard e identificar slots PCIe (x1/x4/x8/x16) y sus lanes eléctricas reales.</li>
-          <li>Elegir el slot correcto por cantidad de lanes eléctricas y compatibilidad mecánica.</li>
-          <li>Identificar el <strong>key</strong> (B, M, E, B+M) y form factor (2230/2280/22110) de un módulo M.2.</li>
-          <li>Dimensionar NIC Ethernet, WiFi combo, Thunderbolt, captura según necesidad y presupuesto.</li>
-          <li>Reconocer slots legacy en máquinas de 1990-2010.</li>
-          <li>Aplicar el árbol de decisión con los 4 ejes a cualquier cliente nuevo.</li>
-        </ul>
+    
       </div>
 
       <div class="callout">
@@ -762,13 +732,49 @@
       </h2>
       
       <div class="card">
-        <h3>🕰️ 1.1 Línea de tiempo de los buses de expansión</h3>
-        <ul>
-          <li><strong>PCI (1992)</strong>: 32-bit, 33 MHz o 66 MHz, 5 V / 3,3 V. <strong>133 MB/s pico a 33 MHz</strong>, hasta 533 MB/s a 66 MHz. <em>Plug &amp; play</em> y bus mastering. Estándar durante toda la década del 90 y mediados del 2000.</li>
-          <li><strong>AGP (1997)</strong>: puerto dedicado a GPU, derivado de PCI pero con point-to-point. Versiones AGP 1×/2×/4×/8×. AGP 8× = <strong>~2,1 GB/s</strong>. Conector marrón característico.</li>
-          <li><strong>PCIe 1.0 (2003)</strong>: serial punto a punto sobre lanes diferenciales. 2,5 GT/s por lane.</li>
-          <li><strong>PCIe 2.0 (2007)</strong>, <strong>3.0 (2010)</strong>, <strong>4.0 (2017)</strong>, <strong>5.0 (2019)</strong>, <strong>6.0 (2022)</strong>.</li>
-        </ul>
+      <table>
+  <thead>
+    <tr>
+      <th>Bus</th>
+      <th>Año</th>
+      <th>Tipo de Autopista</th>
+      <th>Velocidad Máxima</th>
+      <th>Característica Clave</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>PCI</strong></td>
+      <td>1992</td>
+      <td>Avenida ancha (paralelo)</td>
+      <td>133 a 533 MB/s</td>
+      <td>Primer estándar con Plug &amp; Play.</td>
+    </tr>
+    <tr>
+      <td><strong>AGP</strong></td>
+      <td>1997</td>
+      <td>Carril exclusivo (punto a punto)</td>
+      <td>~2,1 GB/s (en 8x)</td>
+      <td>Solo para placas de video; conector marrón.</td>
+    </tr>
+    <tr>
+      <td><strong>PCIe (1.0 a 6.0)</strong></td>
+      <td>2003+</td>
+      <td>Autopistas inteligentes (serial)</td>
+      <td>Se duplica por versión</td>
+      <td>Usa carriles (lanes); es el estándar actual.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Conceptos clave explicados:</h3>
+
+<ul>
+  <li><strong>Paralelo (PCI):</strong> Envía muchos datos al mismo tiempo usando varios cables a la vez. Es como un camión ancho que lleva muchas cajas juntas; si va muy rápido, las cajas se desacomodan (genera interferencia entre cables).</li>
+  <li><strong>Punto a Punto (AGP / PCIe):</strong> Es una conexión exclusiva y directa entre dos componentes, sin compartir el camino con nadie más. Es como un puente privado que evita embotellamientos de tráfico de datos.</li>
+  <li><strong>Serial (PCIe):</strong> Envía los datos uno detrás del otro en una sola fila. Es como un tren bala ultrarrápido; al ir en fila india por vías blindadas, no hay interferencias y puede alcanzar velocidades extremas.</li>
+</ul>
+
       </div>
 
    
@@ -796,25 +802,11 @@
         </p>
       </div>
 
-      <div class="card">
-        <h3>📊 2.2 GT/s vs GB/s — la diferencia crítica</h3>
-        <p>
-          El datasheet declara velocidad en <strong>GT/s</strong> (gigatransfers por segundo), pero el bandwidth/ancho de banda
-          utilizable es <strong>GB/s</strong>, afectado por el esquema de encoding:
-        </p>
-        <ul>
-          <li><strong>8b/10b (Gen1–Gen3)</strong>: por cada 8 bits de datos se transmiten 10 bits (2 bits de overhead). Eficiencia <strong>80 %</strong>.</li>
-          <li><strong>128b/130b (Gen4–Gen5)</strong>: 128 bits de datos en 130 transmitidos. Eficiencia <strong>~98,5 %</strong> (overhead ≈ 1,5 %).</li>
-          <li><strong>PAM4 + FLIT (Gen6)</strong>: modulación de amplitud de pulso con 4 niveles. Doble bits por ciclo a costa de mayor corrección de errores (FEC).</li>
-        </ul>
-        <p>
-          Ejemplo: PCIe 4.0 declara <strong>16 GT/s</strong>. Con encoding 128b/130b, throughput útil ≈
-          16 000 000 000 × 128 / 130 ≈ <strong>~15 754 MB/s/lane</strong> (= ~1,97 GB/s/lane).
-        </p>
-      </div>
+ 
 
       <div class="card">
         <h3>📈 2.3 Bandwidth PCIe por generación </h3>
+        <p>Se puede observar cómo se duplica la velocidad de transferencia de datos por cada salto generacional en un lane x16</p>
         <div class="bar-row">
           <span class="bar-label">PCIe 1.0</span>
           <div class="bar-track"><div class="bar-fill fill-gen1"></div></div>
@@ -857,7 +849,6 @@
               <th>Generación</th>
               <th>Año</th>
               <th>Velocidad por lane</th>
-              <th>Encoding</th>
               <th>Bandwidth x1</th>
               <th>Bandwidth x4</th>
               <th>Bandwidth x8</th>
@@ -865,12 +856,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>PCIe 1.0</td><td>2003</td><td>2,5 GT/s</td><td>8b/10b</td><td>~250 MB/s</td><td>~1 GB/s</td><td>~2 GB/s</td><td>~4 GB/s</td></tr>
-            <tr><td>PCIe 2.0</td><td>2007</td><td>5 GT/s</td><td>8b/10b</td><td>~500 MB/s</td><td>~2 GB/s</td><td>~4 GB/s</td><td>~8 GB/s</td></tr>
-            <tr><td>PCIe 3.0</td><td>2010</td><td>8 GT/s</td><td>8b/10b</td><td>~985 MB/s</td><td>~3,9 GB/s</td><td>~7,9 GB/s</td><td>~15,75 GB/s</td></tr>
-            <tr><td>PCIe 4.0</td><td>2017</td><td>16 GT/s</td><td>128b/130b</td><td>~1,97 GB/s</td><td>~7,9 GB/s</td><td>~15,8 GB/s</td><td>~31,5 GB/s</td></tr>
-            <tr><td>PCIe 5.0</td><td>2019</td><td>32 GT/s</td><td>128b/130b</td><td>~3,94 GB/s</td><td>~15,75 GB/s</td><td>~31,5 GB/s</td><td>~63 GB/s</td></tr>
-            <tr><td>PCIe 6.0</td><td>2022</td><td>64 GT/s PAM4</td><td>1b/1b + FEC</td><td>~7,88 GB/s</td><td>~31,5 GB/s</td><td>~63 GB/s</td><td>~128 GB/s</td></tr>
+            <tr><td>PCIe 1.0</td><td>2003</td><td>2,5 GT/s</td><td>~250 MB/s</td><td>~1 GB/s</td><td>~2 GB/s</td><td>~4 GB/s</td></tr>
+            <tr><td>PCIe 2.0</td><td>2007</td><td>5 GT/s</td><td>~500 MB/s</td><td>~2 GB/s</td><td>~4 GB/s</td><td>~8 GB/s</td></tr>
+            <tr><td>PCIe 3.0</td><td>2010</td><td>8 GT/s</td><td>~985 MB/s</td><td>~3,9 GB/s</td><td>~7,9 GB/s</td><td>~15,75 GB/s</td></tr>
+            <tr><td>PCIe 4.0</td><td>2017</td><td>16 GT/s</td><td>~1,97 GB/s</td><td>~7,9 GB/s</td><td>~15,8 GB/s</td><td>~31,5 GB/s</td></tr>
+            <tr><td>PCIe 5.0</td><td>2019</td><td>32 GT/s</td><td>~3,94 GB/s</td><td>~15,75 GB/s</td><td>~31,5 GB/s</td><td>~63 GB/s</td></tr>
+            <tr><td>PCIe 6.0</td><td>2022</td><td>64 GT/s PAM4</td><td>~7,88 GB/s</td><td>~31,5 GB/s</td><td>~63 GB/s</td><td>~128 GB/s</td></tr>
            </tbody>
         </table>
       </div>
@@ -881,8 +872,7 @@
         <p>
           Cada generación PCIe es backward-compatible con la anterior: una GPU RTX 4090 (PCIe 4.0 x16) instalada en un
           slot PCIe 3.0 x16 funciona, pero <span class="highlight">ambos corren al ritmo del slot más lento</span>.
-          La pérdida típica en gaming es 1-3 % (despreciable), pero en benchmarks sintéticos NVMe puede llegar al 10-15 %.
-        </p>
+         </p>
       </div>
 
       <div class="card">
@@ -907,63 +897,7 @@
         </p>
       </div>
 
-      <!-- SVG #2: Diagrama lanes CPU vs PCH -->
-      <figure class="figure" style="break-inside: avoid">
-        <svg viewBox="0 0 980 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lanes CPU vs PCH">
-          <defs>
-            <linearGradient id="cpu-g" x1="0" x2="1">
-              <stop offset="0" stop-color="#3b82f6" /><stop offset="1" stop-color="#06b6d4" />
-            </linearGradient>
-            <linearGradient id="pch-g" x1="0" x2="1">
-              <stop offset="0" stop-color="#10b981" /><stop offset="1" stop-color="#06b6d4" />
-            </linearGradient>
-          </defs>
-          <!-- CPU block -->
-          <rect x="40" y="40" width="220" height="100" rx="10" fill="url(#cpu-g)" />
-          <text x="150" y="78" fill="#0f1729" font-size="18" font-weight="700" text-anchor="middle">CPU</text>
-          <text x="150" y="100" fill="#0f1729" font-size="11" text-anchor="middle">16 a 28 lanes PCIe directas</text>
-          <text x="150" y="120" fill="#0f1729" font-size="10" text-anchor="middle">Sin sharing</text>
-          <!-- PCH block -->
-          <rect x="40" y="180" width="220" height="100" rx="10" fill="url(#pch-g)" />
-          <text x="150" y="218" fill="#0f1729" font-size="18" font-weight="700" text-anchor="middle">PCH (Chipset)</text>
-          <text x="150" y="240" fill="#0f1729" font-size="11" text-anchor="middle">8 a 28 lanes compartidas</text>
-          <text x="150" y="260" fill="#0f1729" font-size="10" text-anchor="middle">Compartidas con M.2 / SATA / USB</text>
-          <!-- Connections -->
-          <line x1="260" y1="70"  x2="430" y2="70"  stroke="#3b82f6" stroke-width="3" />
-          <text x="345" y="60" fill="#3b82f6" font-size="11" text-anchor="middle">x16</text>
-          <rect x="430" y="40" width="170" height="60" rx="6" fill="#1e293b" stroke="#3b82f6" />
-          <text x="515" y="65" fill="#f8fafc" font-size="13" font-weight="700" text-anchor="middle">GPU PCIe x16</text>
-          <text x="515" y="85" fill="#94a3b8" font-size="10" text-anchor="middle">Slot principal</text>
-
-          <line x1="260" y1="110" x2="430" y2="160" stroke="#3b82f6" stroke-width="3" />
-          <text x="345" y="135" fill="#3b82f6" font-size="11" text-anchor="middle">x4</text>
-          <rect x="430" y="130" width="170" height="60" rx="6" fill="#1e293b" stroke="#3b82f6" />
-          <text x="515" y="155" fill="#f8fafc" font-size="13" font-weight="700" text-anchor="middle">M.2 #1 (NVMe)</text>
-          <text x="515" y="175" fill="#94a3b8" font-size="10" text-anchor="middle">CPU lanes directas</text>
-
-          <line x1="260" y1="220" x2="430" y2="250" stroke="#10b981" stroke-width="2" />
-          <text x="345" y="245" fill="#10b981" font-size="11" text-anchor="middle">x4</text>
-          <rect x="430" y="220" width="170" height="60" rx="6" fill="#1e293b" stroke="#10b981" />
-          <text x="515" y="245" fill="#f8fafc" font-size="13" font-weight="700" text-anchor="middle">M.2 #2</text>
-          <text x="515" y="265" fill="#94a3b8" font-size="10" text-anchor="middle">Comparte PCH</text>
-
-          <line x1="600" y1="70"  x2="770" y2="70"  stroke="#10b981" stroke-width="2" />
-          <rect x="770" y="40" width="190" height="60" rx="6" fill="#1e293b" stroke="#10b981" />
-          <text x="865" y="65" fill="#f8fafc" font-size="13" font-weight="700" text-anchor="middle">SATA / USB</text>
-          <text x="865" y="85" fill="#94a3b8" font-size="10" text-anchor="middle">Desde PCH</text>
-
-          <line x1="600" y1="160" x2="770" y2="160" stroke="#10b981" stroke-width="2" />
-          <rect x="770" y="130" width="190" height="60" rx="6" fill="#1e293b" stroke="#10b981" />
-          <text x="865" y="155" fill="#f8fafc" font-size="13" font-weight="700" text-anchor="middle">Slots PCIe 2º</text>
-          <text x="865" y="175" fill="#94a3b8" font-size="10" text-anchor="middle">x1 / x4 (PCH)</text>
-
-          <line x1="600" y1="250" x2="770" y2="250" stroke="#10b981" stroke-width="2" />
-          <rect x="770" y="220" width="190" height="60" rx="6" fill="#1e293b" stroke="#10b981" />
-          <text x="865" y="245" fill="#f8fafc" font-size="13" font-weight="700" text-anchor="middle">Red integrada</text>
-          <text x="865" y="265" fill="#94a3b8" font-size="10" text-anchor="middle">1G / 2.5G Ethernet PCH</text>
-        </svg>
-        <figcaption>Figura 2 · Distribución típica de lanes en motherboard moderno: CPU entrega lanes directas a GPU y M.2 #1; PCH comparte el resto.</figcaption>
-      </figure>
+     
 
       <!-- ====== SECCIÓN 3 — SLOT FÍSICO vs ELÉCTRICO ====== -->
       <h2 class="section-title" id="sec3">
@@ -976,7 +910,7 @@
         <p>
           Slots PCIe vienen en cuatro largos mecánicos estandarizados. Un slot <em>mecánicamente</em> más largo
           admite tarjetas más cortas, pero el <strong>tamaño eléctrico</strong> (número de lanes eléctricas)
-          determina el bandwidth real.
+          determina el bandwidth/ancho de banda real.
         </p>
         <div class="table-wrap">
           <table>
@@ -1005,17 +939,14 @@
         </p>
         <ul>
           <li>
-            <strong>x16 abierto</strong> (más común): físicamente permite conectar cualquier card x1/x4/x8/x16. Es
+            <strong>abierto</strong>: físicamente permite conectar cualquier tarjetas x1/x4/x8/x16. Es
             el que se ve en motherboards gamer.
           </li>
           <li>
-            <strong>x16 cerrado</strong>: el final del slot trae pestañas; <em>solo</em> entran cards x16 completas.
-            Usado en servers/workstation para evitar insertar cards inadecuadas.
+            <strong>cerrado</strong>: el final del slot trae pestañas; <em>solo</em> entran tarjetas de su largo designado o inferior, pero nunca mayor.
+            Usado en servers/workstation para evitar insertar tarjetas inadecuadas.
           </li>
-          <li>
-            <strong>x8 abierto con cierre</strong>: físicamente parece x16 pero entrega electricidad x8. Útil para
-            bifurcar dos cards x8 en el mismo slot.
-          </li>
+        
         </ul>
         <p>
           Por eso las GPUs siempre van en x16 <em>físico</em> (la mayoría son x16 eléctricas reales) y las SSDs NVMe
@@ -1025,12 +956,12 @@
 
       <div class="callout tip">
         <span class="cbadge">CONSEJO</span>
-        <h4>🔑 Más lanes eléctricas = más ancho de banda (no downgradable)</h4>
+        <h4>🔑 Más lanes eléctricas = más ancho de banda </h4>
         <p>
           Una GPU que necesita x16 eléctrico, instalada en un slot con <strong>x8 eléctrico</strong>, pierde la mitad
           del bandwidth. Una SSD que requiere x4, instalada en un slot x16 eléctrico, usa solo x4 sin perder nada
-          (lanes sobrantes quedan sin uso). En resumen: <em>nunca</em> downgradear a la baja; <em>se puede</em>
-          upgradear el slot sobrante sin perder rendimiento.
+          (lanes sobrantes quedan sin uso). En resumen: <em>nunca</em> ocupar menos lanes de los necesarios ya que esta tarjeta funcionara a menor potencia y ancho de banda (no dispone de los necesarios); 
+          En cambio ocupar algunos carriles una un lane x16 solo desperdicia los no ocupados, la placa solo aprovecha lo necesario y no perdera rendimiento.
         </p>
       </div>
 
@@ -1071,7 +1002,7 @@
           <text x="560" y="105" fill="#e2e8f0" font-size="11">• x16 abierto: máximo flexible</text>
           <text x="560" y="125" fill="#e2e8f0" font-size="11">• x16 cerrado: solo x16 (server)</text>
           <text x="560" y="145" fill="#e2e8f0" font-size="11">• x8 abierto: hasta x8 (1 nivel)</text>
-          <text x="560" y="165" fill="#e2e8f0" font-size="11">• x4 abierto: hasta x4</text>
+          <!-- <text x="560" y="165" fill="#e2e8f0" font-size="11">• x4 abierto: hasta x4</text> -->
           <!-- <text x="560" y="185" fill="#10b981" font-size="10">Reglas: el moto <span style="color:#06b6d4">PCI-SIG</span> definen</text> -->
         </svg>
      </figure>
@@ -1113,6 +1044,23 @@
         <p>
           Es necesario <span class="highlight"> leer el manual antes de comprar la placa de expansión</span> para
           no descubrir tarde que la combinación SSD extra + multiplicador SATA no caben en el mismo PCH.
+        </p>
+      </div>
+
+       <div class="card">
+        <h3>🖥️ 4.3 M.2 en desktop: M2_1, M2_2 y lane sharing</h3>
+        <p>
+          Motherboards modernas traen 2-4 slots M.2, etiquetados como M2_1, M2_2, etc. Patrones típicos:
+        </p>
+        <ul>
+          <li><strong>M2_1</strong>: desde el CPU. M-key, hasta PCIe 4.0/5.0 directo (sin sharing). Máxima velocidad.</li>
+          <li><strong>M2_2</strong>: desde el PCH. M-key, hasta PCIe 3.0/4.0. Puede desactivar SATA0 o SATA1 al usarlo.</li>
+          <li><strong>M2_3</strong> (en placas premium Z790/X870E): PCH, muchas veces compartido con slot PCIe secundario.</li>
+          <li><strong>M2_4</strong> (alta gama): puede requerir disipación activa para SSDs Gen5.</li>
+        </ul>
+        <p>
+          Consideration: revisar si el slot tiene <strong>disipador M.2</strong> incluido. Casi todas las placas
+          modernas traen heatsink pre-instalado en M2_1; los demás pueden requerir solución aftermarket.
         </p>
       </div>
 
@@ -1289,129 +1237,10 @@
         <p>Este tema se profundizará en clases posteriores.</p>
       </div>
 
-      <!-- ====== SECCIÓN 6 — M.2 ====== -->
-      <h2 class="section-title" id="sec6">
-        <span class="icon">📐</span>Sección 6 — M.2: la revolución
-       
-      </h2>
-      
-      <div class="card">
-        <h3>💡 6.1 Concepto M.2</h3>
-        <p>
-          M.2  es un estándar para SSDs y expansión interna en formato
-          pequeño (ancho fijo 22 mm, largo variable). <span class="highlight">No confundir con mSATA</span> (similar
-          visualmente pero usa conector mini-PCIe y es legacy).
-        </p>
-        <p>
-          La potencia de M.2 es que un mismo slot físico puede servir para <strong>varios usos distintos</strong>
-          según el módulo insertado: SSD NVMe, SSD SATA, WiFi+BT combo, WWAN 4G/5G, acelerador IA. Esto lo hace el
-          estándar más versátil en motherboards y notebooks modernos.
-        </p>
-      </div>
+
 
       <div class="card">
-        <h3>🔑 6.2 Keys: el notch que define el protocolo</h3>
-        <p>
-          El <strong>key</strong> es una muesca física en el módulo M.2 que define (a) qué señales eléctricas
-          transporta y (b) en qué sockets puede enchufarse:
-        </p>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Key</th>
-                <th>Socket</th>
-                <th>Señales eléctricas</th>
-                <th>Uso común</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td><strong>M-key</strong></td><td>Socket 3</td><td>2× PCIe x4 ó SATA III</td><td>NVMe moderno, SATA M.2</td></tr>
-              <tr><td><strong>B-key</strong></td><td>Socket 2</td><td>2× PCIe x2 ó SATA III</td><td>M.2 SATA legacy, WWAN 4G/5G</td></tr>
-              <tr><td><strong>B+M key</strong></td><td>Socket 2</td><td>PCIe x2 + SATA III</td><td>Módulos compatibles dual</td></tr>
-              <tr><td><strong>E-key</strong></td><td>Socket 1</td><td>1× PCIe x1 + USB 2.0</td><td>WiFi 6/6E/7 + Bluetooth combo</td></tr>
-              <tr><td><strong>A+E key</strong></td><td>Socket 1</td><td>PCIe x2 + USB 2.0</td><td>Legacy WiFi (mini-PCIe replacement)</td></tr>
-            </tbody>
-          </table>
-        </div>
-       
-      </div>
-
-      <div class="m2-bars">
-        <h3 style="margin-top: 0; color: var(--cyan)">📏 6.3 Form Factor M.2 — visión relativa</h3>
-        <div class="m2-bar">
-          <div class="m2-bar-head"><span>2230 (22×30 mm)</span><span>WiFi / SSD portátil</span></div>
-          <div class="m2-bar-track"><div class="m2-bar-fill" style="width: 22%; background: linear-gradient(90deg,#06b6d4,#3b82f6)">▪</div></div>
-        </div>
-        <div class="m2-bar">
-          <div class="m2-bar-head"><span>2242 (22×42 mm)</span><span>WWAN / SSD industrial</span></div>
-          <div class="m2-bar-track"><div class="m2-bar-fill" style="width: 31%; background: linear-gradient(90deg,#06b6d4,#3b82f6)">▪▪</div></div>
-        </div>
-        <div class="m2-bar">
-          <div class="m2-bar-head"><span>2260 (22×60 mm)</span><span>SSD compacto</span></div>
-          <div class="m2-bar-track"><div class="m2-bar-fill" style="width: 44%; background: linear-gradient(90deg,#06b6d4,#3b82f6)">▪▪▪</div></div>
-        </div>
-        <div class="m2-bar">
-          <div class="m2-bar-head"><span><strong>2280 (22×80 mm)</strong> ← estándar desktop/laptop</span><span>NVMe mainstream</span></div>
-          <div class="m2-bar-track"><div class="m2-bar-fill" style="width: 58%; background: linear-gradient(90deg,#3b82f6,#1e40af)">▪▪▪▪</div></div>
-        </div>
-        <div class="m2-bar">
-          <div class="m2-bar-head"><span>22110 (22×110 mm)</span><span>Enterprise 2-8 TB</span></div>
-          <div class="m2-bar-track"><div class="m2-bar-fill" style="width: 80%; background: linear-gradient(90deg,#6366f1,#a855f7)">▪▪▪▪▪</div></div>
-        </div>
-        <div class="m2-bar">
-          <div class="m2-bar-head"><span>3042 / 3052 (30×42/52 mm)</span><span>WWAN 4G/5G móvil</span></div>
-          <div class="m2-bar-track"><div class="m2-bar-fill" style="width: 38%; background: linear-gradient(90deg,#10b981,#06b6d4)">▪▪▪</div></div>
-        </div>
-      </div>
-
-      <figure class="figure" style="break-inside: avoid">
-        <svg viewBox="0 0 980 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Esquema M.2 sizes">
-          <g fill="#1e293b" stroke="#06b6d4" stroke-width="2">
-            <rect x="60" y="80" width="80" height="40" rx="3" />
-            <rect x="180" y="80" width="120" height="40" rx="3" />
-            <rect x="340" y="80" width="170" height="40" rx="3" />
-            <rect x="560" y="80" width="220" height="40" rx="3" />
-            <rect x="820" y="80" width="120" height="40" rx="3" />
-          </g>
-          <g fill="#06b6d4" font-size="13" font-weight="700" text-anchor="middle">
-            <text x="100" y="105">2230</text>
-            <text x="240" y="105">2242</text>
-            <text x="425" y="105">2260</text>
-            <text x="670" y="105" fill="#fbbf24">2280 (estándar)</text>
-            <text x="880" y="105">22110</text>
-          </g>
-          <g fill="#94a3b8" font-size="10" text-anchor="middle">
-            <text x="100" y="140">WiFi / Steam Deck</text>
-            <text x="240" y="140">WWAN / industrial</text>
-            <text x="425" y="140">Compacto</text>
-            <text x="670" y="140">NVMe / SATA mainstream</text>
-            <text x="880" y="140">Enterprise</text>
-          </g>
-          <text x="490" y="180" fill="#06b6d4" font-size="12" text-anchor="middle">Ancho fijo: 22 mm en todos</text>
-        </svg>
-        <figcaption>Figura 4 · Comparación proporcional de form factors M.2. Todos comparten 22 mm de ancho; la longitud define el caso de uso.</figcaption>
-      </figure>
-
-      <div class="card">
-        <h3>🖥️ 6.4 M.2 en desktop: M2_1, M2_2 y lane sharing</h3>
-        <p>
-          Motherboards modernas traen 2-4 slots M.2, etiquetados como M2_1, M2_2, etc. Patrones típicos:
-        </p>
-        <ul>
-          <li><strong>M2_1</strong>: desde el CPU. M-key, hasta PCIe 4.0/5.0 directo (sin sharing). Máxima velocidad.</li>
-          <li><strong>M2_2</strong>: desde el PCH. M-key, hasta PCIe 3.0/4.0. Puede desactivar SATA0 o SATA1 al usarlo.</li>
-          <li><strong>M2_3</strong> (en placas premium Z790/X870E): PCH, muchas veces compartido con slot PCIe secundario.</li>
-          <li><strong>M2_4</strong> (alta gama): puede requerir disipación activa para SSDs Gen5.</li>
-        </ul>
-        <p>
-          Consideration: revisar si el slot tiene <strong>disipador M.2</strong> incluido. Casi todas las placas
-          modernas traen heatsink pre-instalado en M2_1; los demás pueden requerir solución aftermarket.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>📡 6.5 M.2 para usos no-SSD</h3>
+        <h3>📡 5.7 M.2 para usos no-SSD</h3>
         <ul>
           <li><strong>M.2 WiFi+BT cards</strong> (E-key 2230): Intel AX210 (WiFi 6E + BT 5.3), Intel BE200 (WiFi 7), MediaTek MT7922 (WiFi 6E, económico).</li>
           <li><strong>M.2 WWAN 5G</strong> (B-key 3042/3052): Qualcomm Snapdragon X65, X62; Fibocom FM350.</li>
@@ -1421,7 +1250,7 @@
       </div>
 
       <div class="card">
-        <h3>🔧 6.6 Adaptadores M.2 &harr; PCIe</h3>
+        <h3>🔧 5.8 Adaptadores M.2 &harr; PCIe</h3>
         <p>Para casos donde la placa base no tiene slot M.2 libre y queremos usar NVMe:</p>
         <ul>
           <li><strong>Adaptador M.2 NVMe → PCIe x4</strong> (~$10-25): bracket estándar con M.2 mounted y cable para PCIe bracket. Soporta SSDs Gen3 al máximo bandwidth.</li>
@@ -1430,73 +1259,18 @@
         </ul>
       </div>
 
-      <!-- ====== SECCIÓN 7 — THERMAL M.2 ====== -->
-      <h2 class="section-title" id="sec7">
-        <span class="icon">❄️</span>Sección 7 — Thermal M.2 NVMe y SSD heatsinks
-     
-      </h2>
-    
-      <div class="card">
-        <h3>🔥 7.1 Por qué un NVMe moderno requiere disipador</h3>
-        <p>
-          Un SSD NVMe PCIe 4.0 típico (Samsung 990 Pro, WD SN850X, Crucial T700 Gen5) genera entre
-          <strong>5 W y 12 W sostenidos</strong> en escritura secuencial. Sin disipador, el chip controlador
-          alcanza temperaturas de <strong>80-90 °C</strong> en segundos y entra en <strong>thermal throttling</strong>,
-          reduciendo la velocidad de escritura entre 30 % y 60 %.
-        </p>
-        <p>
-          PCIe 5.0 SSDs (Crucial T700, Samsung 9100 Pro) son todavía más exigentes: 12-14 W sostenidos requieren
-          <span class="highlight">disipación activa obligatoria</span> (heatsink con mini fan incluido, M.2
-          vertical cooler).
-        </p>
-      </div>
 
-      <div class="card">
-        <h3>🧊 7.2 Configuración térmica recomendada</h3>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Componente</th>
-                <th>Thermal pad</th>
-                <th>Disipador</th>
-                <th>Perfil de uso</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>M.2 NVMe Gen3 (1 TB)</td><td>0,2-0,5 mm / 6-8 W/mK</td><td>Aluminio chipset (opcional)</td><td>Oficina / daily</td></tr>
-              <tr><td>M.2 NVMe Gen4 (1-2 TB)</td><td>0,2-0,5 mm / 8-12 W/mK</td><td>Aluminio motherboard o aftermarket</td><td>Gaming / edición</td></tr>
-              <tr><td>M.2 NVMe Gen5 (≥ 2 TB)</td><td>0,2-0,5 mm / 12+ W/mK</td><td>Activo (c/ fan) o cobre pesado</td><td>Workstation / IA</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p>
-          Recomendación: thermal pads Thermalright Odyssey (12 W/mK, $5-10), Phanteks PH-NDC-GR9 (10 W/mK).
-          Disipador motherboard incluido suele ser suficiente para Gen3; para Gen4/5 recomendamos aftermarket.
-        </p>
-      </div>
 
-      <div class="callout tip">
-        <span class="cbadge">CONSEJO</span>
-        <h4>🛠️ Diferencia motherboard shield vs aftermarket</h4>
-        <p>
-          El <strong>M.2 shield</strong> de la motherboard es estético + funcional básico: aluminio thin, cubre SSD.
-          <strong>Aftermarket</strong> (Thermalright M.2 2280, EKWB, ID-Cooling) usa aluminio más grueso o cobre
-          + heatpipe + mini-fan. Gen5 <em>requiere</em> aftermarket activo o loss crítico en escrituras
-          continuas.
-        </p>
-      </div>
-
-      <!-- ====== SECCIÓN 8 — NOTEBOOKS ====== -->
+      <!-- ====== SECCIÓN 6 — NOTEBOOKS ====== -->
       <h2 class="section-title" id="sec8">
-        <span class="icon">💻</span>Sección 8 — Expansión en notebooks
+        <span class="icon">💻</span>Sección 6 — Expansión en notebooks
        
       </h2>
    
       <div class="card">
-        <h3>📶 8.1 M.2 2230 Wi-Fi + Bluetooth combo</h3>
+        <h3>📶 6.1 M.2 2230 Wi-Fi + Bluetooth combo</h3>
         <p>
-          El upgrade más común y con mayor impacto en laptops. Reemplaza una tarjeta Wi-Fi 5 integrada por
+          El upgrade/mejora más común y con mayor impacto en laptops. Reemplaza una tarjeta Wi-Fi 5 integrada por
           Wi-Fi 6E o Wi-Fi 7.
         </p>
         <ul>
@@ -1507,24 +1281,23 @@
       </div>
 
       <div class="card">
-        <h3>🗄️ 8.2 M.2 2280 NVMe/SATA SSD (principal)</h3>
+        <h3>🗄️ 6.2 M.2 2280 NVMe/SATA SSD (principal)</h3>
         <p>
           Slot principal de almacenamiento. Casi todas las laptops comerciales y gamer tienen al menos uno.
-          Compatible con M-key, hasta PCIe 4.0 (algunas workstations PCIe 5.0). Consumer mainstream suele
-          traer SSDs PCIe 3.0 que se pueden reemplazar.
+          Compatible con M-key, hasta PCIe 4.0 (algunas workstations PCIe 5.0).
         </p>
       </div>
 
       <div class="card">
-        <h3>🗄️ 8.3 M.2 2242/2230 SSD secundario</h3>
+        <h3>🗄️ 6.3 M.2 2242/2230 SSD secundario</h3>
         <p>
           Algunas laptops tienen un segundo slot más pequeño. Casos típicos: Lenovo ThinkPad T14/P14, Dell
-          Latitude 7420/7430, HP EliteBook 840/845 G10. Útil para upgrade sin perder el SSD original.
+          Latitude 7420/7430, HP EliteBook 840/845 G10. Útil para upgrade/mejorar sin perder el SSD original.
         </p>
       </div>
 
       <div class="card">
-        <h3>📜 8.4 mSATA (legacy)</h3>
+        <h3>📜 6.4 mSATA (legacy)</h3>
         <p>
           Slot interno de laptops pre-2015. Factor de forma mini-PCIe físicamente. SSDs mSATA: Samsung
           860 EVO mSATA (~$60 500GB), Transcend 370S. Bandeja de socket: <em>no confundir</em> con slot M.2.
@@ -1532,394 +1305,21 @@
       </div>
 
       <div class="card">
-        <h3>📡 8.5 mini-PCIe (legacy)</h3>
+        <h3>📡 6.5 mini-PCIe (legacy)</h3>
         <p>
           Slot de laptops 2007-2018. Usos históricos: WWAN Ericsson F3507 3G, tarjetas SSD mSATA, Wi-Fi 4/5.
           Hoy reemplazado por M.2 2230. Reconocerlo: conector 52-pin, motherboard label "mini-PCIe".
         </p>
       </div>
 
-      <div class="card">
-        <h3>💾 8.6 Lector SD/microSD interno</h3>
-        <p>
-          En laptops con <em>secondary SSD slot</em>, algunos usan M.2 2242 para tarjeta adaptadora SD (Sandisk
-          Dual SD Adapter). También existen lectores SD nativos USB-C en el chassis que usan lanes USB.
-        </p>
-      </div>
 
-      <div class="callout warning">
-        <span class="cbadge">WARN</span>
-        <h4>⚠️ 8.7 Advertencias importantes en notebooks</h4>
-        <ul>
-          <li>
-            <strong>Garantía</strong>: abrir el chasis (tornillos Torx T5 con cabeza rota, etiquetas
-            "warranty void") anula la garantía. Solo procede fuera de garantía o con consentimiento del cliente.
-          </li>
-          <li>
-            <strong>Whitelist BIOS</strong>: Apple (MacBook), Lenovo ThinkPad, Dell Latitude limitan SSD/Wi-Fi
-            a marcas/modelos certificados. Una tarjeta genérica no bootea. Solución: comprar la versión
-            certificada por el OEM o modificar BIOS bajo riesgo.
-          </li>
-          <li>
-            <strong>B+m keyed vs M-only</strong>: los slots M.2 de laptop suelen ser <em>M-only</em> (no B+M). Verificar
-            antes de comprar.
-          </li>
-          <li>
-            <strong>Batería interna</strong>: desconectar la batería antes de tocar componentes; cortocircuito
-            puede dañar SSD y datos.
-          </li>
-        </ul>
-      </div>
 
-      <!-- ====== SECCIÓN 9 — LEGACY ====== -->
-      <h2 class="section-title" id="sec9">
-        <span class="icon">🏛️</span>Sección 9 — Legacy y placas antiguas
-       
-      </h2>
-     
-      <div class="card">
-        <h3>🟤 9.1 AGP — Accelerated Graphics Port</h3>
-        <p>
-          Puerto dedicado a GPU, 1997-2008. Conector marrón único en motherboard, desplazado de los slots PCI.
-        </p>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>Versión</th><th>Año</th><th>Bandwidth</th><th>Voltaje</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>AGP 1×</td><td>1997</td><td>266 MB/s</td><td>3,3 V</td></tr>
-              <tr><td>AGP 2×</td><td>1998</td><td>533 MB/s</td><td>3,3 V</td></tr>
-              <tr><td>AGP 4×</td><td>2000</td><td>~1,07 GB/s</td><td>1,5 V</td></tr>
-              <tr><td>AGP 8×</td><td>2002</td><td>~2,1 GB/s</td><td>0,8 V</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p>
-          GPUs AGP usadas hoy con fines de colección o reemplazo: GeForce FX 5900/5950, Radeon 9800 XT /
-          X850 XT. Valores funcionales $30-100. Si el cliente tiene una PC con motherboard AGP/ Pentium 4 / Athlon
-          XP, lo correcto es <strong>migrar a plataforma AM5/LGA1851</strong> antes que agregar más hardware.
-        </p>
-      </div>
 
-      <div class="card">
-        <h3>🟦 9.2 PCI — Peripheral Component Interconnect clásico</h3>
-        <p>
-          Bus 32-bit, 33 MHz, 5 V o 3,3 V, <strong>~133 MB/s pico</strong>. Slot blanco o beige. Conectado por
-          puente norte al southbridge. Usos legacy: sonido Creative CT4520 / Audigy antiguas, SCSI Adaptec,
-          RAID Promise / HighPoint, modems.
-        </p>
-        <p>
-          En motherboard 2024 algunos modelos aún ofrecen <strong>1 slot PCI</strong> para compatibilidad con
-          tarjetas industriales heredadas. Para cliente casual que necesita más funcionalidad: migración a PCIe
-          es prácticamente siempre mejor solución.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>🟪 9.3 AMR / CNR / mini-PCI</h3>
-        <ul>
-          <li><strong>AMR (Audio Modem Riser)</strong>, 1998-2002. Slot específico para risers de modems de software y audio de bajo costo. Casi desaparecido.</li>
-          <li><strong>CNR (Communications and Networking Riser)</strong>, 2000-2005. Evolucionó AMR, más espacio, acercándose analógicamente a PCIe. Solo colección.</li>
-          <li><strong>Mini-PCI</strong>, 1999-2018. Slot interno laptops con tarjetas 30 mm. Sustituido por M.2 alrededor de 2013.</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>🟫 9.4 IDE/ATA paralelo (PATA)</h3>
-        <p>
-          Ribbon cable de 40 o 80 hilos, usado hasta 2007 para HDDs y CD/DVDs. Hasta <strong>133 MB/s</strong> en
-          ATA-7 (última versión). Los SSDs nunca fueron PATA por bottleneck del bus. Hoy en motherboards viejos
-          con sólo PATA, conviene reemplazar el disco o cambiar de plataforma.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>🏷️ 9.5 mSATA en laptops (pre-M.2)</h3>
-        <p>
-          Predecesor del M.2 en laptops. Factor mini-PCIe físico, ancho 30 mm × largo 50,8 mm. Socket propio
-          (no M.2). SSDs mSATA: Samsung 860 EVO, Transcend 370S. Capacidad máxima ~500 GB en formato práctico.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>💽 9.6 SCSI — workstation legacy</h3>
-        <p>
-          SCSI paralelo (Ultra-320) alcanza 320 MB/s en cable de 68 pines, hasta 16 devices. Hoy reemplazado
-          por SAS (serial). SSDs SCSI ya no se fabrican. Solo reparación de workstation legacy (Dell Precision
-          M6500, HP EliteBook 8540w).
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>📦 9.7 PCMCIA / CardBus (laptop)</h3>
-        <p>
-          Estándar laptop de los 90 hasta 2008. Hoy extinto. Solo industrial / militar (medición, control de
-          maquinaria). Hoy la conectividad se reemplazó con Thunderbolt y USB-C.
-        </p>
-      </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Slot</th>
-              <th>Años activos</th>
-              <th>Velocidad</th>
-              <th>Color típico</th>
-              <th>Reconocerlo en máquinas</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>ISA 8-bit</td><td>1981-90</td><td>~5 MB/s</td><td>Negro</td><td>Slots cortos</td></tr>
-            <tr><td>ISA 16-bit</td><td>1984-2000</td><td>~8 MB/s</td><td>Negro</td><td>Slots largos en 286/486</td></tr>
-            <tr><td>VLB</td><td>1992-95</td><td>~133 MB/s</td><td>Negro ISA</td><td>486 / Pentium I</td></tr>
-            <tr><td>PCI</td><td>1992-2010</td><td>~133 MB/s</td><td>Beige / blanco</td><td>Pentium II-IV, Athlon</td></tr>
-            <tr><td>AGP</td><td>1997-2008</td><td>~2,1 GB/s</td><td>Marrón</td><td>Pentium III-IV, Athlon XP</td></tr>
-            <tr><td>AMR</td><td>1998-2002</td><td>—</td><td>Negro corto</td><td>Pentium III</td></tr>
-            <tr><td>CNR</td><td>2000-2005</td><td>—</td><td>Negro ancho</td><td>Pentium 4</td></tr>
-            <tr><td>mini-PCIe</td><td>2003-2018</td><td>Hasta PCIe 2.0 x1</td><td>Laptop interno</td><td>Laptops 2003-2013</td></tr>
-            <tr><td>mSATA</td><td>2008-2014</td><td>SATA 6 Gbps</td><td>Laptop interno</td><td>Laptops 2009-2014</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- ====== SECCIÓN 10 — TABLA MAESTRA ====== -->
-      <h2 class="section-title" id="sec10">
-        <span class="icon">🎯</span>Sección 10 — Tabla maestra de selección por perfil
-       
-      </h2>
     
-      <div class="card">
-        <h3>🎯 10.1 Matriz por perfil de cliente</h3>
-        <p>Tabla donde el alumno puede ubicar el combo recomendado según el caso:</p>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Perfil</th>
-                <th>¿GPU dedicada?</th>
-                <th>Combo recomendado</th>
-                <th>Precio total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Oficina / home office</td><td>No (iGPU Ryzen G / UHD)</td><td>M.2 WiFi combo + opcional NIC 2.5G</td><td>$0-100</td></tr>
-              <tr><td>Gamer mainstream ($300-500)</td><td>Sí</td><td>RTX 4060 / RX 7600 + WiFi AX210 + SSD NVMe 1TB</td><td>$380-450</td></tr>
-              <tr><td>Enthusiast / high-end</td><td>Sí</td><td>RTX 4070 Ti / RX 7900 XT + SSD Gen4 + NIC 2.5G</td><td>$1000-1500</td></tr>
-              <tr><td>Editor video 4K freelance</td><td>Sí</td><td>RTX 4070 (≥ 12 GB VRAM) + 10G NIC + NVMe Gen4 + TB 3</td><td>$1500-2200</td></tr>
-              <tr><td>Editor 3D / VFX</td><td>Sí</td><td>RTX 4080 + 64-128 GB RAM + NVMe Gen4 RAID0</td><td>$2500-4500</td></tr>
-              <tr><td>Workstation (arquitectura/business)</td><td>Sí (Quadro/Radeon Pro)</td><td>RTX A4000 / Radeon Pro W7600 + 10G NIC + TB 4</td><td>$3000-6000</td></tr>
-              <tr><td>Servidor NAS / Home Lab</td><td>No</td><td>HBA SAS/SATA + NIC 2.5G/10G + IPMI/BMC remoto</td><td>$80-300</td></tr>
-              <tr><td>Streaming / captura YouTube</td><td>Sí</td><td>Elgato 4K60 Pro + GPU gaming + SSD rápido</td><td>$250-500</td></tr>
-              <tr><td>HTPC / SFF / Silence</td><td>Opcional (low-profile)</td><td>GPU LP + SSD NVMe 1TB + WiFi M.2</td><td>$200-450</td></tr>
-              <tr><td>Gamer legacy 2007-2012</td><td>Sí (PCIe 2.0 GPU)</td><td>Mantener plataforma DDR3 + SSD SATA + WiFi USB</td><td>$50-100</td></tr>
-              <tr><td>Oficina legacy 2000-2007</td><td>No</td><td>Ninguna expansión. Migrar a AM5/LGA1851</td><td>$0 + $350 migración</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- ====== SECCIÓN 11 — ÁRBOL DE DECISIÓN ====== -->
-      <h2 class="section-title" id="sec11">
-        <span class="icon">🌳</span>Sección 11 — Árbol de decisión rápida
-    
-      </h2>
-     
-      <div class="card">
-        <h3>🌳 11.1 Árbol de pregunta en cascada</h3>
-        <div class="decision-tree">
-          <div class="dt-step">
-            <div class="dt-q">1. ¿Es notebook o desktop?</div>
-            <div class="dt-a">Notebook → ir a sección 8 / 12. Desktop → pregunta 2.</div>
-          </div>
-          <div class="dt-step">
-            <div class="dt-q">2. ¿El motherboard tiene slots PCIe disponibles y M.2 libres?</div>
-            <div class="dt-a">Sí → pregunta 3. No → adaptador M.2 → PCIe o reemplazar SSD existente.</div>
-          </div>
-          <div class="dt-step">
-            <div class="dt-q">3. ¿Qué generación PCIe soporta el motherboard?</div>
-            <div class="dt-a">Gen3 → BW total ~16 GB/s x16. Gen4 → ~32 GB/s x16. Gen5 → ~63 GB/s x16. Pensar compatibilidad.</div>
-          </div>
-          <div class="dt-step">
-            <div class="dt-q">4. ¿El cliente necesita GPU externa?</div>
-            <div class="dt-a">Sí → GPU x16 PCIe ≥ 3.0 (RTX 4060 / RX 7600). No → pregunta 5.</div>
-          </div>
-          <div class="dt-step">
-            <div class="dt-q">5. ¿Necesita almacenamiento M.2 adicional?</div>
-            <div class="dt-a">Sí → M.2 NVMe Gen3/4/5 según presupuesto. No → SATA SSD suficiente → pregunta 6.</div>
-          </div>
-          <div class="dt-step">
-            <div class="dt-q">6. ¿Necesita red rápida &gt; 1 Gbps?</div>
-            <div class="dt-a">Sí → NIC 2.5G (~$30) o 10G (~$120) en PCIe x1/x4. No → onboard RJ45 suficiente → pregunta 7.</div>
-          </div>
-          <div class="dt-step">
-            <div class="dt-q">7. ¿Es sistema legacy / industrial?</div>
-            <div class="dt-a">Sí → sección 9 (AGP/PCI). No → finalizar selección con presupuesto.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SVG #5: Árbol de decisión compacto -->
-      <figure class="figure" style="break-inside: avoid">
-        <svg viewBox="0 0 980 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama árbol decisión">
-          <defs>
-            <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-              <path d="M0,0 L10,5 L0,10 z" fill="#06b6d4" />
-            </marker>
-          </defs>
-          <rect x="380" y="10" width="220" height="40" rx="8" fill="#1a2744" stroke="#3b82f6" stroke-width="2" />
-          <text x="490" y="35" fill="#3b82f6" font-size="13" font-weight="700" text-anchor="middle">¿Notebook o Desktop?</text>
-
-          <rect x="80" y="100" width="180" height="50" rx="8" fill="#1a2744" stroke="#06b6d4" />
-          <text x="170" y="125" fill="#06b6d4" font-size="12" font-weight="700" text-anchor="middle" dy=".3em">Notebook → Sec 8/12</text>
-          <line x1="450" y1="50" x2="200" y2="100" stroke="#06b6d4" stroke-width="2" marker-end="url(#arr)" />
-
-          <rect x="370" y="100" width="180" height="50" rx="8" fill="#1a2744" stroke="#10b981" />
-          <text x="460" y="120" fill="#10b981" font-size="12" font-weight="700" text-anchor="middle">Desktop</text>
-          <text x="460" y="138" fill="#94a3b8" font-size="10" text-anchor="middle">→ Pregunta 2</text>
-          <line x1="490" y1="50" x2="460" y2="100" stroke="#10b981" stroke-width="2" marker-end="url(#arr)" />
-
-          <rect x="640" y="100" width="220" height="50" rx="8" fill="#1a2744" stroke="#f59e0b" />
-          <text x="750" y="120" fill="#f59e0b" font-size="12" font-weight="700" text-anchor="middle">¿Legacy?</text>
-          <text x="750" y="138" fill="#94a3b8" font-size="10" text-anchor="middle">→ Sec 9</text>
-
-          <rect x="170" y="220" width="200" height="50" rx="8" fill="#1a2744" stroke="#06b6d4" />
-          <text x="270" y="245" fill="#06b6d4" font-size="12" font-weight="700" text-anchor="middle">¿GPU externa?</text>
-          <rect x="440" y="220" width="200" height="50" rx="8" fill="#1a2744" stroke="#3b82f6" />
-          <text x="540" y="245" fill="#3b82f6" font-size="12" font-weight="700" text-anchor="middle">¿Red &gt;1G?</text>
-          <rect x="710" y="220" width="220" height="50" rx="8" fill="#1a2744" stroke="#10b981" />
-          <text x="820" y="245" fill="#10b981" font-size="12" font-weight="700" text-anchor="middle">Recomendación final</text>
-
-          <line x1="460" y1="150" x2="270" y2="220" stroke="#06b6d4" stroke-width="1.5" marker-end="url(#arr)" />
-          <line x1="460" y1="150" x2="540" y2="220" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
-          <line x1="800" y1="150" x2="820" y2="220" stroke="#10b981" stroke-width="1.5" marker-end="url(#arr)" />
-        </svg>
-        <figcaption>Figura 5 · Árbol de decisión compacto para aplicar los 4 ejes decisores.</figcaption>
-      </figure>
-
-      <!-- ====== SECCIÓN 12 — MINI-GUÍA NOTEBOOKS ====== -->
-      <h2 class="section-title" id="sec12">
-        <span class="icon">📓</span>Sección 12 — Mini-guía práctica para notebooks
-     
-      </h2>
-     
-      <div class="card">
-        <h3>✅ 12.1 Antes de comprar — checklist</h3>
-        <ul>
-          <li>Confirmar slots M.2 disponibles (manual o comando Apple "System Report" / Windows "Device Manager").</li>
-          <li>Verificar whitelisting BIOS (Apple, Lenovo ThinkPad, Dell Latitude son los más restrictivos).</li>
-          <li>Confirmar longitud del slot: 2230 (WiFi / SSD corto) vs 2280 (SSD estándar).</li>
-          <li>Verificar RAM: DDR4 soldada (no upgrade) vs SO-DIMM DDR4/DDR5 (hasta 64 GB en 2 slots).</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>📈 12.2 Upgrades reales con mejor relación precio/rendimiento</h3>
-        <ul>
-          <li><strong>Wi-Fi 6E AX210 + BT 5.3</strong>: $20. Mayor salto perceptible para streaming/cloud.</li>
-          <li><strong>SSD NVMe 1 TB Gen4</strong>: $90-130 vs Gen3 $70-90. Ganancia solo si ya tienes Gen5 slot.</li>
-          <li><strong>RAM SO-DIMM 32 GB DDR5</strong>: $80. Mejora multitarea y VMs.</li>
-          <li><strong>HDD 2.5" → SSD SATA</strong> (si la laptop tiene bahía 2.5"): $50. 5× boot speed.</li>
-        </ul>
-      </div>
-
-      <div class="card">
-<p>
-          Solución para usuarios que quieren gaming/edición con GPU dedicada en laptop liviana.
-          Caja externa (Razer Core X, Mantiz Saturn, Sonnet Breakaway Box) que aloja GPU de escritorio
-          full-size + PSU 650–800 W, conectada por <strong>TB3/TB4</strong> al notebook.
-        </p>
-        <ul>
-          <li><strong>Requisitos</strong>: notebook con TB3 <em>y</em> drivers eGPU habilitados. Apple Intel Mac (2017-2019) y Windows soportan; macOS Apple Silicon no.</li>
-          <li><strong>Bandwidth real</strong>: TB3 = PCIe 3.0 x4 (~3,9 GB/s). TB4 = PCIe 3.0 x4 también. eGPU rinde ~70-80 % vs GPU interna.</li>
-          <li><strong>CPU limitation</strong>: CPU del laptop sigue siendo la misma; GPU externa no la reemplaza. Mejor para laptops iGPU poderosa (i7-12700H con iGPU UHD).</li>
-          <li><strong>Precio</strong>: caja eGPU abierta $300-500 + GPU $400-1500. Solo rentable si laptop es 2020+ con TB3/4 certificado.</li>
-        </ul>
-        <div class="callout tip">
-          <span class="cbadge">CONSEJO</span>
-          <h4>🎯 ¿Cuándo sí y cuándo no recomendar eGPU?</h4>
-          <p>
-            <strong>SÍ</strong>: laptop ultradelgada con iGPU potente + TB3/4 + uso híbrido oficina/edición ligera.
-            <strong>NO</strong>: laptop gamer que ya tiene dGPU (la interna rinde más), o laptop vieja sin TB. En ese
-            último caso, mejor vender la laptop y armar desktop.
-          </p>
-        </div>
-      </div>
-
-      <div class="card" style="break-inside: avoid;">
-        <h3>✅ 12.4 Checklist final antes de compra en notebook</h3>
-        <ul>
-          <li><strong>Ventilación</strong>: laptop gamer con 2 slots M.2 suele throttlear el segundo SSD. Verificar flujo de aire antes.</li>
-          <li><strong>Garantía OEM</strong>: si cliente tiene garantía activa, recomendar servicio oficial. Upgrade DIY puede invalidarla.</li>
-          <li><strong>Soldadura</strong>: RAM soldada no es upgradeable. CPUs soldered (MacBook, ultrabooks) tampoco cambian BIOS.</li>
-          <li><strong>Driver support</strong>: Intel AX211 requiere drivers Intel Wireless. Intel BE200 aún requiere Windows 11 23H2+.</li>
-          <li><strong>macOS</strong>: Apple Silicon (M1/M2/M3/M4) no acepta tarjetas PCIe externas. Solo TB3/4 USB-C nativo. Intel Mac (2017-2019) sí soporta eGPU TB3 (pero Apple discontinuó drivers en macOS 11+).</li>
-          <li><strong>PSU laptop vía PD</strong>: docks TB4 pueden entregar 60-100 W al laptop. Verificar que el cliente no quede corto de potencia.</li>
-        </ul>
-      </div>
-
-      <!-- ====== SECCIÓN 13 — GLOSARIO ====== -->
-      <h2 class="section-title" id="sec13">
-        <span class="icon">📚</span>Sección 13 — Glosario técnico
-        
-      </h2>
-     
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Término</th>
-              <th>Definición</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>AGP</strong></td><td>Accelerated Graphics Port. Bus dedicado a GPU en motherboards Pentium III/IV / Athlon XP (1997-2008).</td></tr>
-            <tr><td><strong>AMR / CNR</strong></td><td>Audio Modem Riser / Communications and Networking Riser. Slots riser corto obsoletos para modem/audio de bajo costo.</td></tr>
-            <tr><td><strong>AIC</strong></td><td>Add-In Card. Tarjeta que se enchufa en slot PCIe para extender funcionalidad (TB, USB, red).</td></tr>
-            <tr><td><strong>Backplane</strong></td><td>Placa pasiva posterior de servidor que recibe múltiples discos usando una controladora única.</td></tr>
-            <tr><td><strong>Bifurcación</strong></td><td>División de lanes de un slot PCIe en varios groups menores (x16 → 2× x8).</td></tr>
-            <tr><td><strong>BBU / supercap</strong></td><td>Unidad de respaldo de batería de RAID controller, protege cache DDR ante corte eléctrico.</td></tr>
-            <tr><td><strong>Bracket</strong></td><td>Chapa metálica que sostiene la tarjeta al chasis y la expone al panel trasero.</td></tr>
-            <tr><td><strong>Bus mastering</strong></td><td>Capacidad de un dispositivo PCI/PCIe de transferir datos a memoria sin intervención de CPU.</td></tr>
-            <tr><td><strong>CPU lanes</strong></td><td>Lanes PCIe que vienen directamente del procesador (típico 16-28). Sin compartir con chipset.</td></tr>
-            <tr><td><strong>DAC</strong></td><td>Digital-to-Analog Converter. Convierte señal digital en analógica (audio). Integrado en Sound Blaster y USB DACs.</td></tr>
-            <tr><td><strong>eGPU</strong></td><td>External GPU. Caja con GPU que se conecta por Thunderbolt 3/4 a notebook para gaming/edición.</td></tr>
-            <tr><td><strong>Encoding</strong></td><td>Esquema de codificación PCIe: 8b/10b (Gen1-3), 128b/130b (Gen4-5), PAM4 + FEC (Gen6).</td></tr>
-            <tr><td><strong>FEC</strong></td><td>Forward Error Correction. Corrección de errores en PCIe Gen5+/6 para integridad con PAM4.</td></tr>
-            <tr><td><strong>FLIT</strong></td><td>Flow Control Unit. Unidad de transferencia usada en PCIe Gen6 (tamaño fijo 256 bytes).</td></tr>
-            <tr><td><strong>Form factor</strong></td><td>Tamaño mecánico estandarizado. M.2 usa 22 mm ancho + largo variable (2230, 2280, 22110).</td></tr>
-            <tr><td><strong>GT/s</strong></td><td>GigaTransfers per second. Tasa de operaciones por segundo; NO es bandwidth utilizable.</td></tr>
-            <tr><td><strong>HBA</strong></td><td>Host Bus Adapter. Tarjeta que expone discos al SO sin hacer RAID (modo JBOD transparente).</td></tr>
-            <tr><td><strong>iGPU</strong></td><td>Gráficos integrados en CPU (Intel UHD, AMD Radeon Graphics, Apple M-series).</td></tr>
-            <tr><td><strong>ISA</strong></td><td>Industry Standard Architecture. Bus original 8-bit/16-bit del PC original (1981-2000).</td></tr>
-            <tr><td><strong>Key</strong></td><td>Muesca mecánica en módulo M.2 que define qué señales eléctricas lleva (B, M, E, B+M, A+E).</td></tr>
-            <tr><td><strong>Lane</strong></td><td>Conexión serial PCIe bidireccional full-duplex con par TX + par RX diferenciales.</td></tr>
-            <tr><td><strong>low-profile</strong></td><td>Bracket mitad de altura. Usado en SFF / HTPC / servidores rack 1U.</td></tr>
-            <tr><td><strong>mSATA</strong></td><td>Predecesor M.2 para SSDs en laptops 2008-2014. Factor mini-PCIe físico.</td></tr>
-            <tr><td><strong>mini-PCIe</strong></td><td>Slot interno laptop 2003-2018. Usado para Wi-Fi 4/5 y módulos mSATA. Reemplazado por M.2.</td></tr>
-            <tr><td><strong>NVMe</strong></td><td>Non-Volatile Memory Express. Protocolo optimizado para SSDs sobre PCIe (vs AHCI para SATA).</td></tr>
-            <tr><td><strong>Open slot</strong></td><td>Slot PCIe sin pestaña final. Acepta cualquier tarjeta mecánicamente menor.</td></tr>
-            <tr><td><strong>Closed slot</strong></td><td>Slot PCIe con pestaña final. Solo acepta tarjeta del mismo tamaño mecánico.</td></tr>
-            <tr><td><strong>PAM4</strong></td><td>Pulse Amplitude Modulation 4-level. Modulación PCIe Gen6+ con 4 niveles de voltaje.</td></tr>
-            <tr><td><strong>PCH</strong></td><td>Platform Controller Hub. Chipset Intel moderno (antigua southbridge). Reparte lanes a slots secundarios.</td></tr>
-            <tr><td><strong>PCI</strong></td><td>Peripheral Component Interconnect. Bus 32-bit, 33 MHz, 133 MB/s pico (1992-2010+).</td></tr>
-            <tr><td><strong>PCIe</strong></td><td>Peripheral Component Interconnect Express. Bus serial punto a punto (2003-presente).</td></tr>
-            <tr><td><strong>Riser card</strong></td><td>Adaptador que cambia factor de forma: vertical, horizontal, splitter, M.2 a PCIe.</td></tr>
-            <tr><td><strong>SO-DIMM</strong></td><td>Small Outline DIMM. RAM formato compacto para laptops y SFF.</td></tr>
-            <tr><td><strong>Spectral efficiency</strong></td><td>Eficiencia espectral PCIe. Gen1-3 = 80 %; Gen4-5 = ~98,5 %; Gen6 PAM4 = ~100 %.</td></tr>
-            <tr><td><strong>TB_HEADER</strong></td><td>Pin header en motherboard ASUS/Gigabyte workstation que activa Thunderbolt AIC.</td></tr>
-            <tr><td><strong>Thermal throttling</strong></td><td>Reducción automática de velocidad por exceso de temperatura. Común en NVMe Gen4/5.</td></tr>
-            <tr><td><strong>VESA Local Bus (VLB)</strong></td><td>Extensión 32-bit de ISA para GPU, 1992-1995. Solo motherboards 486 / Pentium I.</td></tr>
-            <tr><td><strong>VRAM</strong></td><td>Video RAM dedicada en GPU. Tamaño crítico para juegos 4K y edición 4K+.</td></tr>
-            <tr><td><strong>WWAN</strong></td><td>Wireless Wide Area Network. Módem celular 4G/5G interno (B-key 3042/3052).</td></tr>
-          </tbody>
-        </table>
-      </div>
 
       <!-- ====== SECCIÓN 14 — EVALUACIÓN ====== -->
       <h2 class="section-title" id="sec14">
-        <span class="icon">📝</span>Sección 14 — Evaluación final
+        <span class="icon">📝</span>7. Cuestionario
        
       </h2>
      
@@ -1942,9 +1342,7 @@
           <div class="q-body">
             <span class="qtag vf">V / F</span>
             <h4>Una tarjeta gráfica RTX 4090 instalada en un slot PCIe 3.0 x16 funcionará al máximo del bandwidth del slot, no al del Gen4 nativo de la tarjeta.</h4>
-            <p>Justificación: PCIe es backward-compatible; ambos extremos negocian al menor.</p>
-            <span class="q-answer">✅ Verdadero. La RTX 4090 correrá a Gen3 x16 = ~15,75 GB/s (no los ~31,5 GB/s del Gen4). En gaming la pérdida es 1-3%.</span>
-          </div>
+         </div>
         </div>
 
         <!-- Pregunta 2 -->
@@ -1953,7 +1351,6 @@
           <div class="q-body">
             <span class="qtag short">CORTA</span>
             <h4>¿Qué bandwidth total x16 entrega PCIe 5.0 y cómo se compara con PCIe 3.0?</h4>
-            <span class="q-answer">✅ PCIe 5.0 x16 = ~63 GB/s. PCIe 3.0 x16 = ~15,75 GB/s. PCIe 5.0 = 4× el bandwidth de Gen3 (63 ÷ 15,75 ≈ 4,0).</span>
           </div>
         </div>
 
@@ -1962,14 +1359,13 @@
           <div class="q-num">3</div>
           <div class="q-body">
             <span class="qtag multi">MULTI</span>
-            <h4>El bandwidth efectivo (GB/s) de una lane PCIe es siempre menor que el GT/s declarado porque:</h4>
-            <ul class="q-options">
-              <li>a) Hay reintentos que duplican tráfico</li>
-              <li>b) El encoding añade bits de overhead (8b/10b, 128b/130b, FEC)</li>
-              <li>c) PCIe no transmite en full-duplex</li>
-              <li>d) Sólo aplican estados de bajo consumo</li>
-            </ul>
-            <span class="q-answer">✅ b) El encoding reduce el throughput útil: 8b/10b pierde 20%, 128b/130b pierde ~1,5%, PAM4+FEC reduce por corrección de errores.</span>
+          <h4>Un bus serial (como PCIe) puede alcanzar velocidades mucho más extremas que un bus paralelo (como PCI) principalmente porque:</h4>
+<ul>
+  <li><strong>a)</strong> Envía muchos datos al mismo tiempo usando varios cables a la vez.</li>
+  <li><strong>b)</strong> Los datos viajan uno detrás del otro en fila india por vías blindadas, eliminando interferencias.</li>
+  <li><strong>c)</strong> Comparte el camino con todos los componentes del motherboard para evitar el tráfico.</li>
+  <li><strong>d)</strong> Es un conector exclusivo de color marrón diseñado únicamente para placas de video.</li>
+</ul>
           </div>
         </div>
 
@@ -1977,15 +1373,9 @@
         <div class="q-item">
           <div class="q-num">4</div>
           <div class="q-body">
-            <span class="qtag multi">MULTI</span>
-            <h4>En M.2, la muesca <strong>key</strong> del módulo define:</h4>
-            <ul class="q-options">
-              <li>a) Las señales eléctricas (PCIe lanes vs SATA vs USB 2.0)</li>
-              <li>b) Cuántos SSDs pueden usar simultáneamente el slot</li>
-              <li>c) Solo el color del PCB del fabricante</li>
-              <li>d) La velocidad máxima teórica</li>
-            </ul>
-            <span class="q-answer">✅ a) La posición del notch define si el módulo lleva PCIe x4 (M-key), PCIe x2 (B-key), WiFi/BT combo (E-key) o SATA III.</span>
+                <span class="qtag short">CORTA</span>
+           <h4>¿Qué componentes físicos (pares diferenciales) integran una sola línea o <em>lane</em> PCIe y qué tipo de comunicación permiten?</h4>
+
           </div>
         </div>
 
@@ -1995,7 +1385,6 @@
           <div class="q-body">
             <span class="qtag vf">V / F</span>
             <h4>B550 y Z790 permiten ocupar <strong>todos</strong> los slots M.2 y SATA simultáneamente sin restricciones.</h4>
-            <span class="q-answer">✅ Falso. Estos chipsets comparten lanes entre M.2 desde PCH y SATA. Por ejemplo "M2_2 ocupado → SATA0/1 deshabilitados" aparece en manuales B550.</span>
           </div>
         </div>
 
@@ -2003,10 +1392,14 @@
         <div class="q-item">
           <div class="q-num">6</div>
           <div class="q-body">
-            <span class="qtag short">CORTA</span>
-            <h4>¿Por qué un SSD NVMe PCIe 5.0 de 2 TB requiere heatsink con ventilador mientras uno Gen3 de 1 TB no?</h4>
-            <span class="q-answer">✅ Gen5 consume 12-14 W sostenidos vs ~5-6 W en Gen3. Sin disipación activa, el controlador throttla a 30-60% de la velocidad de escritura en segundos.</span>
-          </div>
+              <span class="qtag multi">MULTI</span>
+       <h4>Si una placa de expansión requiere 4 líneas eléctricas (x4) y se instala en un slot con un tamaño mecánico de x16 que ofrece x16 líneas eléctricas reales:</h4>
+<ul>
+  <li><strong>a)</strong> La placa pierde rendimiento porque las líneas sobrantes generan interferencia.</li>
+  <li><strong>b)</strong> El motherboard se bloquea por incompatibilidad de tamaño físico.</li>
+  <li><strong>c)</strong> La placa funciona a su máxima potencia y velocidad, simplemente dejando sin usar las líneas sobrantes del slot.</li>
+  <li><strong>d)</strong> La placa duplica su rendimiento al aprovechar la energía del slot x16.</li>
+</ul>  </div>
         </div>
 
         <!-- Pregunta 7 -->
@@ -2021,8 +1414,7 @@
               <li>c) Solo dos slots M.2 ya pre-instalados</li>
               <li>d) Chipset AMD o Intel reciente y nada más</li>
             </ul>
-            <span class="q-answer">✅ a) Requiere soporte de bifurcación declarado en BIOS/UEFI ("PCIE Subsystem Settings") y CPU/CPU/chipset con lanes suficientes. Sin esto la riser no detecta discos.</span>
-          </div>
+         </div>
         </div>
 
         <!-- Pregunta 8 — ESCENARIO -->
@@ -2035,7 +1427,6 @@
               <strong>Requisitos del cliente:</strong> Wi-Fi 6 estable para gaming online + 1 TB extra para biblioteca de juegos. No quiere gastar más de $400 total si es posible.
             </p>
             <p><strong>Aplicá los 4 ejes decisores y recomendá combo.</strong></p>
-            <span class="q-answer">✅ Combo recomendado: <strong>AX211 WiFi 6E + BT 5.3 (~$20)</strong> en M.2 E-key + <strong>SSD NVMe Gen3 1 TB (~$80)</strong> en M2_2. Total: ~$100. Resto del presupuesto queda libre para futuro upgrade GPU. <strong>Importante:</strong> verificar en el manual B550 que M2_2 no deshabilita SATA0/SATA1, ya que el cliente podría querer un HDD extra. La M-key del NVMe no entra en el slot E-key del WiFi, así que se usan dos slots distintos. <strong>ALTERNATIVA descartada:</strong> SSD PCIe 4.0 en M2_2 — solo aporta +5% rendimiento en juegos; Gen3 es suficiente.</span>
           </div>
         </div>
 
@@ -2043,13 +1434,14 @@
         <div class="q-item">
           <div class="q-num">9</div>
           <div class="q-body">
-            <span class="qtag scenario">ESCENARIO</span>
-            <h4>Oficina de diseño freelance, presupuesto $1800, motherboard ASUS X870E con dos slots PCIe x16 (uno en uso), 2× M.2 libres. Necesita nube privada rápida NAS a 10 Gbps y editar videos 4K en DaVinci Resolve.</h4>
-            <p>
-              <strong>Requisitos:</strong> Transferencia 10 GbE hacia NAS para evitar esperas de File → Save → Render. Edición 4K fluida con scrub de timeline sin stutter.
-            </p>
-            <p><strong>Aplicá los 4 ejes decisores y recomendá combo hardware.</strong></p>
-            <span class="q-answer">✅ Recomendación: <strong>GPU RTX 4070 12 GB (~$600)</strong> en slot PCIe x16 libre para edición con aceleración CUDA + <strong>NIC Intel X710 10 GbE SFP+ (~$180)</strong> en slot PCIe x4 desde PCH + <strong>2× SSD NVMe Gen4 2 TB en RAID0 (~$180 c/u)</strong> como scratch disk directa al CPU. Total ~$1140, deja $660 para cable DAC y módulo SFP+ compatible con el NAS. <strong>Notas críticas:</strong> confirmar que X870E tiene header TB si cliente quiere TB dock; verificar bifurcación habilitada si planean 2× M.2 NVMe simultáneos.</span>
+            <span class="qtag multi">MULTI</span>
+            <h4>Si configurás un slot PCIe x16 físico/eléctrico de una placa madre con la opción de bifurcación en "4× x4", ¿qué estás logrando exactamente a nivel de hardware?</h4>
+            <ul class="q-options">
+              <li>a) Que el slot multiplique por cuatro su energía eléctrica para alimentar tarjetas de video de alto consumo (TDP).</li>
+              <li>b) Dividir el canal de líneas eléctricas en cuatro grupos independientes de 4 carriles cada uno, ideal para alimentar tarjetas adaptadoras con múltiples SSDs M.2 NVMe.</li>
+              <li>c) Cancelar el uso del chipset (PCH) para que todos los puertos SATA de la computadora corran a velocidades de Gen5.</li>
+              <li>d) Duplicar el ancho de banda total del slot, transformando un carril PCIe 3.0 en uno con la velocidad de PCIe 5.0.</li>
+            </ul>
           </div>
         </div>
 
@@ -2058,12 +1450,10 @@
           <div class="q-num">10</div>
           <div class="q-body">
             <span class="qtag scenario">ESCENARIO</span>
-            <h4>Estudiante 2026 con notebook HP Pavilion 15 (2021). Laptop tiene Wi-Fi 5 AX201, un M.2 2280 con SSD 256 GB Gen3. Quiere Wi-Fi 6E y más espacio.</h4>
-            <p>
-              <strong>Requisitos:</strong> Mejor Wi-Fi señal en casa + pasar de 256 GB a 1 TB total. No tocar garantía mientras esté activa (HP cubre hasta 2026-06).
-            </p>
-            <p><strong>Aplicá los 4 ejes decisores y decidí qué hacer.</strong></p>
-            <span class="q-answer">✅ Decisión: <strong>NO intervenir por ahora</strong>. (1) El cliente todavía tiene garantía activa HP hasta 2026-06, abrir chasis la invalida. (2) Wi-Fi 5 AX201 funciona aceptable; upgrade Wi-Fi 6E solo da +20-30% throughput, no justifica anular garantía. (3) Mejor solución: <strong>USB-C NVMe enclosure (~$25)</strong> con SSD 1 TB externo = $125 total. Recomendación al caducar garantía: cambiar M.2 2280 y AX201 juntos. <strong>Costo evitado:</strong> $80 upgrade interno que el cliente perdería garantía por $400+.</span>
+   <h4>Un cliente de oficina tiene una computadora con un procesador antiguo sin gráficos integrados. Dispone de un presupuesto muy bajo (menos de $50 dólares) y sólo necesita que el equipo dé video para tareas administrativas de Office y navegación.</h4>
+<p><strong>Requisitos del cliente:</strong> Obtener salida de video gastando lo mínimo posible, sin requerimientos de potencia gráfica para videojuegos o edición profesional.</p>
+<p><strong>Aplicá los 4 ejes decisores y recomendá combo</strong></p>
+
           </div>
         </div>
 
@@ -2072,83 +1462,68 @@
           <div class="q-num">11</div>
           <div class="q-body">
             <span class="qtag vf">V / F</span>
-            <h4>Una SSD NVMe M.2 con M-key puede insertarse físicamente en un socket M.2 B-key y viceversa.</h4>
-            <span class="q-answer">✅ Falso. La posición de la muesca es físicamente distinta. M-key (pin 59-66) no encaja en B-key (pin 12-19). Solo los módulos <strong>B+M key</strong> (con dos muescas) son compatibles con ambos socket 2.</span>
-          </div>
+         <h4>Un slot PCIe con conector "cerrado" se caracteriza por tener pestañas al final del carril que permiten conectar físicamente tarjetas de cualquier largo mecánico (como x1, x4, x8 o x16) de forma flexible.</h4> </div>
         </div>
 
-        <!-- Pregunta 12 -->
+       <!-- Pregunta 12 -->
         <div class="q-item">
           <div class="q-num">12</div>
           <div class="q-body">
-            <span class="qtag multi">MULTI</span>
-            <h4>Un motherboard ofrece slot PCIe x16 <strong>mecánico</strong> con etiqueta "PCIe x16 (de PCH, runs at x4)". Significa:</h4>
-            <ul class="q-options">
-              <li>a) El slot es x16 eléctrico real</li>
-              <li>b) El slot usa 4 lanes del chipset, comparte con puertos SATA/USB</li>
-              <li>c) Solo sirve para tarjetas x1</li>
-              <li>d) La tarjeta funcionará a la mitad porque no es bifurcable</li>
-            </ul>
-            <span class="q-answer">✅ b) Slot largo mecánicamente para comodidad de GPUs/Capturadoras grandes, pero solo entrega 4 lanes eléctricas compartidas con el chipset. Para GPU es cuello de botella; ideal para NIC 2.5G/10G o captura x4.</span>
+                <span class="qtag short">CORTA</span>
+           <h4>¿Qué slot M.2 de una placa madre moderna ofrece la máxima velocidad, menor latencia y garantiza la ausencia total de lane sharing (carriles compartidos)? ¿Desde qué componente provienen sus líneas?</h4>
+
           </div>
         </div>
 
+         <!-- Pregunta 13 -->
+        <div class="q-item">
+          <div class="q-num">13</div>
+          <div class="q-body">
+            <span class="qtag multi">MULTI</span>
+            <h4>Si una notebook corporativa del año 2012 tiene un slot interno etiquetado físicamente como "mini-PCIe", pero el cliente quiere instalar un SSD M.2 NVMe moderno mediante un adaptador físico:</h4>
+            <ul class="q-options">
+              <li>a) Funcionará a velocidad Gen4 porque mini-PCIe es retrocompatible con M.2.</li>
+              <li>b) No funcionará, ya que mini-PCIe y mSATA pertenecen a arquitecturas y conectores legacy de laptops pre-2015, mecánicamente incompatibles con el formato M.2 actual.</li>
+              <li>c) El motherboard de la laptop se adaptará automáticamente duplicando sus pines</li>
+              <li>d) Funcionará únicamente si se actualiza la BIOS a una versión UEFI con mouse gráfico.</li>
+            </ul>
+          </div>
+        </div>
+
+
+        <!-- Pregunta 14 -->
+        <div class="q-item">
+          <div class="q-num">14</div>
+          <div class="q-body">
+            <span class="qtag multi">MULTI</span>
+            <h4>Un usuario entusiasta de la música quiere mejorar el audio de su computadora de escritorio, ¿cuál es la solución más común y recomendada por su relación señal/ruido?</h4>
+            <ul class="q-options">
+              <li>a) Una tarjeta de sonido interna PCIe x1 con drivers ASIO.</li>
+              <li>b) Un multiplicador SATA III conectado al PCH.</li>
+              <li>c) Un dispositivo USB DAC externo de entre $20 y $100 dólares.</li>
+              <li>d) Activar la opción de bifurcación (bifurcation) en la BIOS</li>
+            </ul>
+          </div>
+        </div>
+
+
+
+
+      
+
+
+    
+
       </div>
 
-      <div class="callout tip" style="margin-top: 28px;">
-        <span class="cbadge">CONSEJO</span>
-        <h4>🎓 Cierre pedagógico</h4>
-        <p>
-          Esta evaluación cierra el ciclo <strong>teoría → criterios → escenarios</strong>. Las preguntas 8, 9 y 10 son las
-          <em>core business</em>: representan el 80% de los encargos reales que recibe un integrador. Si el alumno puede
-          justificar las tres respuestas usando los 4 ejes decisores y el árbol de decisión, está listo para atender clientes.
-        </p>
-      </div>
 
-      <!-- ====== SECCIÓN 15 — REFERENCIAS ====== -->
-      <h2 class="section-title" id="sec15">
-        <span class="icon">📖</span>Sección 15 — Referencias y fuentes
-     
-      </h2>
+
+  
+
+
+
    
-      <div class="card">
-        <h3>📖 15.1 Fuentes citadas a lo largo de la sesión</h3>
-        <ol>
-          <li><a href="https://www.fs.com/blog/understanding-pcie-versions-lanes-and-slot-types-explained-28862.html" class="ref">1</a> FS.com — Understanding PCIe Versions, Lanes and Slot Types Explained.</li>
-          <li><a href="https://www.intel.com/content/www/us/en/gaming/resources/what-is-pcie-4-and-why-does-it-matter.html" class="ref">2</a> Intel — What is PCIe 4.0 and Why Does It Matter (32 GT/s Gen5 reference).</li>
-          <li><a href="https://www.atpinc.com/blog/what-is-m.2-M-B-BM-key-socket-3" class="ref">3</a> ATP Electronics — What is M.2: M, B, B+M Key and Socket 3.</li>
-          <li><a href="https://www.dell.com/support/kbdoc/en-us/000144170/how-to-distinguish-the-differences-between-m-2-cards" class="ref">4</a> Dell Support — How to distinguish differences between M.2 cards.</li>
-          <li><a href="https://www.hp.com/us-en/tech-takes/components/explainer/what-are-pcie-slots-pc.html" class="ref">5</a> HP Tech Takes — What Are PCIe Slots and What Are They Used For?</li>
-          <li>PCI-SIG — <em>PCI Express Base Specification Revision 6.0</em>, 2022 (especificación oficial PAM4 / FLIT).</li>
-          <li>PCI-SIG — <em>PCI Express M.2 Specification (NGFF)</em> y <em>PCIe 5.0 Spec</em> (documentos técnicos).</li>
-          <li>Mouser / Digikey datasheets: Intel AX211, AX210, BE200; Realtek RTL8125B; Aquantia AQC107.</li>
-          <li>Crucial T700, Samsung 990 PRO / 9100 PRO datasheets — disipación térmica NVMe Gen4/5.</li>
-          <li>Tom's Hardware, AnandTech, TechPowerUp reviews (RTX 4090 vs PCIe 3.0 bandwidth loss).</li>
-        </ol>
-      </div>
-
-      <div class="callout">
-        <span class="cbadge info">RECAP</span>
-        <h4>🎯 Resumen ejecutivo de la sesión</h4>
-        <p>
-          Los 4 ejes decisores (<strong>Presupuesto</strong>, <strong>Necesidad</strong>, <strong>Generación</strong>,
-          <strong>Compatibilidad</strong>) son la herramienta universal. Combinados con el árbol de decisión
-          (sección 11) y el conocimiento técnico de buses/sección/key, el alumno está capacitado para asesorar
-          correctamente cualquier cliente en PC escritorio, notebook o plataforma legacy.
-        </p>
-        <p style="margin-top:12px">
-          Próximo paso sugerido: revisar el <strong>catálogo actual de motherboards ASUS / MSI / Gigabyte</strong>
-          en la página del fabricante para ver las tablas M.2 / SATA sharing y aplicar lectura crítica.
-        </p>
-      </div>
-
-      <!-- ====== NAV BUTTONS INFERIOR ====== -->
-      <nav class="nav-buttons bottom">
-        <a href="#sec0" class="nav-btn primary">🔝 Volver al inicio</a>
-        <a href="#sec11" class="nav-btn secondary">🌳 Árbol de decisión</a>
-        <a href="#sec14" class="nav-btn accent">📝 Repasar evaluación</a>
-      </nav>
-
+<br>
    
 
       <div style="margin-bottom: 24px">
