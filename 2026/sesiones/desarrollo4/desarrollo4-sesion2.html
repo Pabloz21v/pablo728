@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesión 2 · Multimedia y Datos </title>
+  <meta name="description" content="Sesión 2: imágenes, audio, video, tablas de datos y atributos data-* aplicados al catálogo de productos del E-commerce.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>body{font-family:'Inter',Segoe UI,sans-serif;}</style>
+</head>
+<body>
+
+  <!-- ============ HEADER / NAVEGACIÓN ============ -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <span class="brand-badge">D4</span>
+        Desarrollo IV 
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <nav class="main-nav">
+        <a href="index.html">Inicio</a>
+        <a href="sesion1.html">Sesión 1</a>
+        <a href="sesion2.html" class="active">Sesión 2</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ ENCABEZADO DE SESIÓN ============ -->
+  <section class="session-hero">
+    <div class="container">
+      <p class="breadcrumb"><a href="index.html">Inicio</a> / Unidad 1 / Sesión 2</p>
+      <h1>Sesión 2 — HTML: Multimedia y Datos</h1>
+      <p class="lead" style="color:var(--text-dim); max-width:760px;">
+        Le damos contenido real al catálogo: imágenes optimizadas, video y audio nativos,
+        tablas de datos comparativas y atributos <code>data-*</code> para "esconder" información
+        que JavaScript va a usar más adelante.
+      </p>
+      <div class="meta-row">
+        <span><i class="fa-solid fa-clock"></i> 2 módulos (80-90 min)</span>
+        <span><i class="fa-solid fa-flask"></i> Modalidad: Laboratorio práctico</span>
+        <span><i class="fa-solid fa-diagram-project"></i> Proyecto: E-commerce / Catálogo Dinámico</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LAYOUT: TOC + CONTENIDO ============ -->
+  <div class="container layout">
+
+    <!-- TABLA DE CONTENIDOS -->
+    <aside class="toc">
+      <h4>En esta sesión</h4>
+      <ol>
+        <li><a href="#objetivos">Objetivos de aprendizaje</a></li>
+        <li><a href="#imagenes">Imágenes: img, figure, picture</a></li>
+        <li><a href="#audio-video">Audio y video nativos</a></li>
+        <li><a href="#tablas">Tablas de datos</a></li>
+        <li><a href="#atributos-data">Atributos data-*</a></li>
+        <li><a href="#codigo-referencia">Código de referencia</a></li>
+        <li><a href="#detecta-error">Detectá el error</a></li>
+        <li><a href="#quiz">Quiz rápido</a></li>
+        <li><a href="#actividad">Actividad de laboratorio</a></li>
+        <li><a href="#glosario">Glosario</a></li>
+      </ol>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <article class="content">
+
+      <!-- 1. OBJETIVOS -->
+      <section id="objetivos">
+        <h2><span class="step-no"><i class="fa-solid fa-bullseye"></i></span> Objetivos de aprendizaje</h2>
+        <p>Al finalizar esta sesión, vas a poder:</p>
+        <ul>
+          <li>Insertar imágenes con <code>&lt;img&gt;</code>, agruparlas con su leyenda usando <code>&lt;figure&gt;</code>/<code>&lt;figcaption&gt;</code> y ofrecer variantes responsivas con <code>&lt;picture&gt;</code>.</li>
+          <li>Incrustar <strong>audio y video</strong> nativos de HTML5 con controles y textos alternativos.</li>
+          <li>Construir una <strong>tabla de datos</strong> semánticamente correcta (<code>thead</code>, <code>tbody</code>, <code>th</code>, <code>scope</code>) para comparar productos.</li>
+          <li>Usar atributos <code>data-*</code> para guardar información "invisible" en el HTML que luego leerá JavaScript.</li>
+          <li>Ampliar el catálogo de tu E-commerce con contenido multimedia real y una tabla comparativa de productos.</li>
+        </ul>
+      </section>
+
+      <!-- 2. IMÁGENES -->
+      <section id="imagenes">
+        <h2><span class="step-no"><i class="fa-solid fa-image"></i></span> Imágenes: <code>&lt;img&gt;</code>, <code>&lt;figure&gt;</code> y <code>&lt;picture&gt;</code></h2>
+        <p>
+          Ya usamos <code>&lt;img&gt;</code> en la Sesión 1. Hoy sumamos dos herramientas para
+          presentar imágenes de forma profesional en el catálogo.
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Etiqueta</th><th>¿Para qué sirve?</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;img src="..." alt="..."&gt;</code></td><td>Inserta una imagen. <code>src</code> es la ruta/URL, <code>alt</code> el texto alternativo (obligatorio siempre).</td></tr>
+              <tr><td><code>&lt;figure&gt;...&lt;/figure&gt;</code></td><td>Agrupa una imagen (o video/tabla) junto con su leyenda como una <strong>unidad de contenido independiente</strong>.</td></tr>
+              <tr><td><code>&lt;figcaption&gt;</code></td><td>Leyenda/descripción visible de la <code>&lt;figure&gt;</code> que la contiene. Va dentro del figure.</td></tr>
+              <tr><td><code>&lt;picture&gt;</code></td><td>Contenedor que permite ofrecer <strong>distintas imágenes según el ancho de pantalla</strong> (una para mobile, otra para escritorio), mejorando la performance responsiva.</td></tr>
+              <tr><td><code>&lt;source media="..." srcset="..."&gt;</code></td><td>Dentro de <code>&lt;picture&gt;</code>, define qué imagen usar según una condición (ej: ancho mínimo de pantalla).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-comment-dots"></i> Analogía</div>
+          <code>&lt;picture&gt;</code> funciona como un <strong>mozo que te ofrece el menú según la mesa</strong>:
+          si estás en una mesa chica (celular), te trae el plato mini; si estás en una mesa grande
+          (escritorio), te trae el plato completo. El navegador decide solo, según el ancho de pantalla,
+          cuál "plato" (imagen) pedirle al mozo.
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-title"><i class="fa-solid fa-triangle-exclamation"></i> El <code>alt</code> no es opcional</div>
+          Sin <code>alt</code>, un lector de pantalla dice literalmente "imagen sin descripción" y un
+          buscador no entiende qué muestra la foto. En nuestro catálogo, el <code>alt</code> de cada
+          producto debería describir <strong>qué es y sus características visibles</strong>
+          (ej: <code>alt="Zapatillas deportivas rojas, modelo running"</code>), nunca dejarlo vacío
+          ni repetir el nombre del archivo.
+        </div>
+      </section>
+
+      <!-- 3. AUDIO Y VIDEO -->
+      <section id="audio-video">
+        <h2><span class="step-no"><i class="fa-solid fa-photo-film"></i></span> Audio y video nativos de HTML5</h2>
+        <p>
+          Antes de HTML5, incrustar video requería plugins externos (como Flash). Hoy el navegador
+          reproduce audio y video de forma <strong>nativa</strong>, sin instalar nada extra.
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Etiqueta / atributo</th><th>Función</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;video&gt;</code></td><td>Incrusta un video. Necesita al menos un <code>&lt;source&gt;</code> hijo con la ruta y el <code>type</code> MIME.</td></tr>
+              <tr><td><code>&lt;audio&gt;</code></td><td>Incrusta un archivo de sonido, misma lógica que <code>&lt;video&gt;</code> pero sin imagen.</td></tr>
+              <tr><td><code>&lt;source src="..." type="video/mp4"&gt;</code></td><td>Indica el archivo real y su formato. Se pueden poner varios <code>&lt;source&gt;</code> como alternativas de formato.</td></tr>
+              <tr><td><code>controls</code></td><td>Atributo booleano: muestra los controles nativos (play, pausa, volumen).</td></tr>
+              <tr><td><code>playsinline</code></td><td>En dispositivos móviles, evita que el video se abra a pantalla completa automáticamente.</td></tr>
+              <tr><td>Texto entre <code>&lt;video&gt;...&lt;/video&gt;</code></td><td>Mensaje alternativo que se muestra solo si el navegador <strong>no soporta</strong> la etiqueta.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-comment-dots"></i> Analogía</div>
+          El <code>&lt;source&gt;</code> dentro de <code>&lt;video&gt;</code> es como darle al navegador
+          <strong>varios formatos de un mismo documento</strong> (PDF y Word, por ejemplo): el navegador
+          abre el primero que sabe leer y, si no puede abrir ninguno, muestra el mensaje alternativo
+          que vos le escribiste "por las dudas".
+        </div>
+      </section>
+
+      <!-- 4. TABLAS DE DATOS -->
+      <section id="tablas">
+        <h2><span class="step-no"><i class="fa-solid fa-table"></i></span> Tablas de datos semánticas</h2>
+        <p>
+          Las tablas <strong>no se usan para maquetar diseño</strong> (eso lo vamos a hacer con
+          Flexbox/Grid en la próxima unidad); se usan exclusivamente cuando el contenido
+          <strong>es tabular por naturaleza</strong>: por ejemplo, comparar precio, stock y categoría
+          de varios productos.
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Etiqueta</th><th>Función</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;table&gt;</code></td><td>Contenedor principal de la tabla.</td></tr>
+              <tr><td><code>&lt;thead&gt;</code></td><td>Agrupa la fila (o filas) de encabezado.</td></tr>
+              <tr><td><code>&lt;tbody&gt;</code></td><td>Agrupa las filas con los datos "reales".</td></tr>
+              <tr><td><code>&lt;tr&gt;</code></td><td>Fila (table row).</td></tr>
+              <tr><td><code>&lt;th scope="col"&gt;</code></td><td>Celda de encabezado. <code>scope="col"</code> indica que encabeza una columna (mejora accesibilidad).</td></tr>
+              <tr><td><code>&lt;td&gt;</code></td><td>Celda de datos común (table data).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-lightbulb"></i> ¿Tabla o tarjetas?</div>
+          En el catálogo visual seguimos usando <code>&lt;article class="product-card"&gt;</code>
+          para mostrar los productos "en vidriera". La <code>&lt;table&gt;</code> la reservamos para
+          vistas de <strong>comparación de datos</strong> (por ejemplo, una sección "Comparar
+          especificaciones" o un panel administrativo interno).
+        </div>
+      </section>
+
+      <!-- 5. ATRIBUTOS DATA-* -->
+      <section id="atributos-data">
+        <h2><span class="step-no"><i class="fa-solid fa-tags"></i></span> Atributos personalizados <code>data-*</code></h2>
+        <p>
+          HTML5 permite crear <strong>atributos personalizados</strong> con el prefijo <code>data-</code>
+          para guardar información que no se muestra visualmente, pero que JavaScript va a poder leer
+          fácilmente más adelante (Unidad 2) con <code>dataset</code>.
+        </p>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            ejemplo-data-attr.html
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>&lt;article class="product-card"
+          data-id="7"
+          data-categoria="calzado"
+          data-stock="12"&gt;
+    &lt;h3&gt;Zapatillas Running&lt;/h3&gt;
+    &lt;p class="price"&gt;$38.000&lt;/p&gt;
+&lt;/article&gt;
+
+&lt;!-- Más adelante, en JavaScript (Unidad 2), vamos a poder leer: --&gt;
+&lt;!-- elemento.dataset.id          → "7"        --&gt;
+&lt;!-- elemento.dataset.categoria   → "calzado"  --&gt;
+&lt;!-- elemento.dataset.stock       → "12"       --&gt;</code></pre>
+        </div>
+
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-comment-dots"></i> Analogía</div>
+          Los atributos <code>data-*</code> son como el <strong>código de barras pegado abajo de un
+          producto de supermercado</strong>: el cliente no lo "ve" como información relevante al mirar
+          el producto en la góndola, pero la caja registradora (nuestro futuro JavaScript) lo escanea
+          y obtiene todo el precio, stock y categoría en un instante.
+        </div>
+      </section>
+
+      <!-- 6. CÓDIGO DE REFERENCIA -->
+      <section id="codigo-referencia">
+        <h2><span class="step-no"><i class="fa-solid fa-code"></i></span> Código de referencia (para VSC)</h2>
+        <p>
+          Ampliamos el <code>index.html</code> de la Sesión 1: sumamos una sección multimedia y una
+          tabla comparativa de productos.
+        </p>
+
+        <h3>📄 Fragmento a agregar dentro de <code>&lt;main&gt;&lt;/main&gt;</code></h3>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            index.html (fragmento)
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>&lt;!-- ============================================= --&gt;
+&lt;!-- SECCIÓN MULTIMEDIA: presentación de la tienda --&gt;
+&lt;!-- ============================================= --&gt;
+&lt;section id="presentacion"&gt;
+    &lt;h2&gt;Conocé TecnoStore&lt;/h2&gt;
+
+    &lt;!-- FIGURE + FIGCAPTION: imagen con leyenda --&gt;
+    &lt;figure&gt;
+        &lt;img src="local.jpg" alt="Fachada del local de TecnoStore en el centro de la ciudad"&gt;
+        &lt;figcaption&gt;Nuestro local a la calle, abierto de 9 a 20 hs.&lt;/figcaption&gt;
+    &lt;/figure&gt;
+
+    &lt;!-- PICTURE: distinta imagen según el ancho de pantalla --&gt;
+    &lt;picture&gt;
+        &lt;source media="(max-width: 600px)" srcset="banner-mobile.jpg"&gt;
+        &lt;source media="(min-width: 601px)" srcset="banner-desktop.jpg"&gt;
+        &lt;img src="banner-desktop.jpg" alt="Banner promocional de ofertas de primavera"&gt;
+    &lt;/picture&gt;
+
+    &lt;!-- VIDEO: presentación institucional --&gt;
+    &lt;video controls playsinline width="480"&gt;
+        &lt;source src="videos/presentacion.mp4" type="video/mp4"&gt;
+        Tu navegador no soporta la reproducción de este video.
+    &lt;/video&gt;
+
+    &lt;!-- AUDIO: jingle de la marca --&gt;
+    &lt;audio controls&gt;
+        &lt;source src="audio/jingle.mp3" type="audio/mpeg"&gt;
+        Tu navegador no soporta la reproducción de este audio.
+    &lt;/audio&gt;
+&lt;/section&gt;
+
+&lt;!-- ============================================= --&gt;
+&lt;!-- TABLA COMPARATIVA DE PRODUCTOS --&gt;
+&lt;!-- ============================================= --&gt;
+&lt;section id="comparativa"&gt;
+    &lt;h2&gt;Comparar productos&lt;/h2&gt;
+    &lt;table&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th scope="col"&gt;Producto&lt;/th&gt;
+                &lt;th scope="col"&gt;Precio&lt;/th&gt;
+                &lt;th scope="col"&gt;Stock&lt;/th&gt;
+                &lt;th scope="col"&gt;Categoría&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Notebook Lenovo&lt;/td&gt;
+                &lt;td&gt;$450.000&lt;/td&gt;
+                &lt;td&gt;5&lt;/td&gt;
+                &lt;td&gt;Tecnología&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Mouse Inalámbrico&lt;/td&gt;
+                &lt;td&gt;$15.000&lt;/td&gt;
+                &lt;td&gt;20&lt;/td&gt;
+                &lt;td&gt;Accesorios&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/section&gt;
+
+&lt;!-- ============================================= --&gt;
+&lt;!-- TARJETA DE PRODUCTO CON ATRIBUTOS data-* --&gt;
+&lt;!-- (útil desde la Unidad 2, cuando conectemos JS) --&gt;
+&lt;!-- ============================================= --&gt;
+&lt;article class="product-card"
+          data-id="3"
+          data-categoria="tecnologia"
+          data-stock="5"&gt;
+    &lt;img src="https://via.placeholder.com/200" alt="Teclado mecánico retroiluminado color negro"&gt;
+    &lt;h3&gt;Teclado Mecánico&lt;/h3&gt;
+    &lt;p class="price"&gt;$62.000&lt;/p&gt;
+    &lt;button type="button"&gt;Agregar al carrito&lt;/button&gt;
+&lt;/article&gt;</code></pre>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-forward"></i> Continuidad del proyecto</div>
+          Los atributos <code>data-id</code>, <code>data-categoria</code> y <code>data-stock</code> que
+          agregamos hoy son exactamente los campos que vamos a ver definidos en el archivo
+          <code>productos.json</code> a partir de la Unidad 2. Hoy los escribimos "a mano" en el HTML;
+          en unas semanas JavaScript va a generar estas mismas tarjetas automáticamente leyendo el JSON.
+        </div>
+      </section>
+
+      <!-- 7. DETECTÁ EL ERROR -->
+      <section id="detecta-error">
+        <h2><span class="step-no"><i class="fa-solid fa-bug"></i></span> Detectá el error: código para corregir en VSC</h2>
+        <p>
+          Copiá estos fragmentos en VSC y usá el <strong>Inspector (F12)</strong> y la
+          <strong>pestaña Console/Network</strong> del navegador para encontrar los errores antes de
+          revisar la solución.
+        </p>
+
+        <!-- EJERCICIO 1 -->
+        <div class="exercise">
+          <div class="ex-header">
+            <span class="pill">Con errores</span>
+            <h4>Ejercicio 1 — Imagen, figura y video</h4>
+          </div>
+          <div class="code-block buggy">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              buggy-3.html
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>&lt;figure&gt;
+  &lt;img src="zapatillas.jpg"&gt;
+  &lt;p&gt;Zapatillas modelo running, talle 42&lt;/p&gt;
+&lt;/figure&gt;
+
+&lt;video controls&gt;
+  &lt;source src="promo.mp4"&gt;
+  Tu navegador no soporta este video.
+&lt;/video&gt;
+
+&lt;audio&gt;
+  &lt;source src="jingle.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;</code></pre>
+          </div>
+          <p class="question">🔎 Encontrá al menos <strong>4 problemas</strong> en este fragmento.</p>
+          <details class="reveal">
+            <summary>Ver solución y explicación</summary>
+            <div class="reveal-body">
+              <ol>
+                <li>El <code>&lt;img&gt;</code> no tiene atributo <code>alt</code> (obligatorio siempre).</li>
+                <li>Dentro del <code>&lt;figure&gt;</code> se usó un <code>&lt;p&gt;</code> para la leyenda en lugar de <code>&lt;figcaption&gt;</code>, que es la etiqueta semánticamente correcta para describir el contenido de una figura.</li>
+                <li>El <code>&lt;source&gt;</code> del video no tiene el atributo <code>type="video/mp4"</code>: sin esa pista, algunos navegadores no saben cómo interpretar el archivo y no lo reproducen.</li>
+                <li>El <code>&lt;audio&gt;</code> no tiene el atributo <code>controls</code>: sin él, el usuario no ve ningún botón de play y no puede escucharlo (el reproductor existe en el DOM pero es invisible/inutilizable).</li>
+              </ol>
+              <p><strong>Tip de debugging:</strong> abrí la pestaña <em>Network</em> del Inspector (F12) y recargá la página: si un archivo multimedia no carga, vas a verlo marcado en rojo con un código de error, lo que te ayuda a diferenciar "error de sintaxis HTML" de "el archivo no existe en esa ruta".</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- EJERCICIO 2 -->
+        <div class="exercise">
+          <div class="ex-header">
+            <span class="pill">Con errores</span>
+            <h4>Ejercicio 2 — Tabla de datos y atributos data-*</h4>
+          </div>
+          <div class="code-block buggy">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              buggy-4.html
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>&lt;table&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Producto&lt;/td&gt;
+    &lt;td&gt;Precio&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Mouse&lt;/td&gt;
+      &lt;td&gt;$15.000&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;article class="product-card" data-id=8 data stock="3"&gt;
+  &lt;h3&gt;Auriculares&lt;/h3&gt;
+&lt;/article&gt;</code></pre>
+          </div>
+          <p class="question">🔎 Encontrá al menos <strong>4 problemas</strong> en este fragmento.</p>
+          <details class="reveal">
+            <summary>Ver solución y explicación</summary>
+            <div class="reveal-body">
+              <ol>
+                <li>La fila de encabezado usa <code>&lt;td&gt;</code> en lugar de <code>&lt;th scope="col"&gt;</code>: semánticamente esas celdas son <strong>encabezados</strong>, no datos comunes.</li>
+                <li>Falta envolver la fila de encabezado en un <code>&lt;thead&gt;</code>: queda "suelta" directamente dentro de <code>&lt;table&gt;</code>, mezclada estructuralmente con el <code>&lt;tbody&gt;</code>.</li>
+                <li><code>data-id=8</code> no tiene comillas alrededor del valor (Regla de oro N.° 4 de la Sesión 1, sigue aplicando siempre).</li>
+                <li><code>data stock="3"</code> tiene un <strong>espacio</strong> en lugar de un guion: debe ser <code>data-stock="3"</code>; tal como está escrito, el navegador lo interpreta como dos atributos distintos y rotos (<code>data</code> y <code>stock="3"</code>), y JavaScript no podrá leerlo luego como <code>dataset.stock</code>.</li>
+              </ol>
+              <p><strong>Tip de debugging:</strong> en el Inspector, seleccioná el elemento y mirá el panel derecho: los atributos mal escritos aparecen tal cual los tipeaste, sin agruparse bajo <code>data-*</code>, lo cual es una pista clara de que hay un typo.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 8. QUIZ RÁPIDO -->
+      <section id="quiz">
+        <h2><span class="step-no"><i class="fa-solid fa-circle-question"></i></span> Quiz rápido de autoevaluación</h2>
+
+        <div class="quiz">
+          <p class="q-title">1. ¿Qué etiqueta usarías para mostrar una imagen distinta en mobile y en escritorio?</p>
+          <div class="options">
+            <button data-correct="false" data-explain="img es una sola imagen fija, no permite alternativas por ancho de pantalla.">&lt;img&gt;</button>
+            <button data-correct="true" data-explain="Correcto: picture con varios source permite elegir imagen según el ancho de pantalla.">&lt;picture&gt;</button>
+            <button data-correct="false" data-explain="figure agrupa imagen + leyenda, pero no decide qué imagen mostrar según pantalla.">&lt;figure&gt;</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+
+        <div class="quiz">
+          <p class="q-title">2. ¿Dónde va la leyenda de una imagen dentro de un &lt;figure&gt;?</p>
+          <div class="options">
+            <button data-correct="false" data-explain="p es válido visualmente pero no es la etiqueta semánticamente pensada para esto.">&lt;p&gt;</button>
+            <button data-correct="true" data-explain="Correcto: figcaption es la etiqueta semántica para la leyenda de un figure.">&lt;figcaption&gt;</button>
+            <button data-correct="false" data-explain="alt es un atributo de img, no una etiqueta para leyendas visibles.">alt="..."</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+
+        <div class="quiz">
+          <p class="q-title">3. ¿Cómo se escribe correctamente un atributo personalizado para guardar el stock de un producto?</p>
+          <div class="options">
+            <button data-correct="false" data-explain="Falta el prefijo data- y las comillas.">stock=5</button>
+            <button data-correct="true" data-explain="Correcto: prefijo data-, guion, y valor entre comillas.">data-stock="5"</button>
+            <button data-correct="false" data-explain="El guion bajo no es válido para este prefijo; debe ser data- con guion medio.">data_stock="5"</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+      </section>
+
+      <!-- 9. ACTIVIDAD DE LABORATORIO -->
+      <section id="actividad">
+        <h2><span class="step-no"><i class="fa-solid fa-flask-vial"></i></span> Actividad de laboratorio</h2>
+        <p>
+          Consigna: ampliar el <code>index.html</code> creado en la Sesión 1, incorporando
+          <strong>todas</strong> las etiquetas multimedia y de datos vistas hoy.
+        </p>
+
+        <div class="lab-box">
+          <div class="lab-title"><i class="fa-solid fa-list-check fa-lg"></i><h3 class="mt-0">Checklist paso a paso</h3></div>
+          <p class="dim">Marcá cada paso a medida que lo completes. El progreso se guarda solo en este navegador.</p>
+
+          <div class="progress-wrap">
+            <div class="progress-bar-track"><div class="progress-bar-fill"></div></div>
+            <p class="progress-label">0 de 0 tareas completadas (0%)</p>
+          </div>
+
+          <ul class="checklist" data-storage-key="dev4-sesion2-checklist">
+            <li>
+              <input type="checkbox" id="s2-t1">
+              <label for="s2-t1">Abrir el <code>index.html</code> de la Sesión 1 y agregar una nueva <code>&lt;section id="presentacion"&gt;</code> dentro del <code>&lt;main&gt;</code>.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s2-t2">
+              <label for="s2-t2">Insertar un <code>&lt;figure&gt;</code> con una imagen de tu local/marca (podés usar una URL de placeholder) y su <code>&lt;figcaption&gt;</code> correspondiente.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s2-t3">
+              <label for="s2-t3">Insertar un <code>&lt;picture&gt;</code> con al menos dos <code>&lt;source&gt;</code> (uno para mobile con <code>max-width</code>, otro para escritorio con <code>min-width</code>) y su <code>&lt;img&gt;</code> de respaldo con <code>alt</code>.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s2-t4">
+              <label for="s2-t4">Incrustar un <code>&lt;video controls playsinline&gt;</code> con al menos un <code>&lt;source type="video/mp4"&gt;</code> y su mensaje alternativo de texto.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s2-t5">
+              <label for="s2-t5">Incrustar un <code>&lt;audio controls&gt;</code> con su <code>&lt;source type="audio/mpeg"&gt;</code>.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s2-t6">
+              <label for="s2-t6">Crear una <code>&lt;section id="comparativa"&gt;</code> con una <code>&lt;table&gt;</code> de al menos 4 productos, usando correctamente <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code> y <code>&lt;th scope="col"&gt;</code>.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s2-t7">
+              <label for="s2-t7">Agregar los atributos <code>data-id</code>, <code>data-categoria</code> y <code>data-stock</code> a <strong>cada</strong> <code>&lt;article class="product-card"&gt;</code> del catálogo (los de la Sesión 1 y los nuevos).</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s2-t8">
+              <label for="s2-t8">Verificar en el Inspector (pestaña Elements) que cada tarjeta de producto muestre correctamente sus atributos <code>data-*</code> en el panel de propiedades.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s2-t9">
+              <label for="s2-t9">Validar el documento completo en el <a href="https://validator.w3.org/#validate_by_input" target="_blank" rel="noopener">validador del W3C</a> y corregir todos los errores/warnings.</label>
+            </li>
+          </ul>
+        </div>
+
+        <div class="callout danger">
+          <div class="callout-title"><i class="fa-solid fa-clipboard-check"></i> Entregable de la clase</div>
+          Mostrale al docente el catálogo ampliado funcionando en el navegador (imagen, picture,
+          video y audio reproducibles, tabla comparativa visible) y el panel <em>Elements</em> del
+          Inspector mostrando los atributos <code>data-*</code> correctamente aplicados en cada
+          tarjeta de producto.
+        </div>
+      </section>
+
+      <!-- 10. GLOSARIO -->
+      <section id="glosario">
+        <h2><span class="step-no"><i class="fa-solid fa-spell-check"></i></span> Glosario rápido</h2>
+        <dl class="glossary">
+          <div class="g-item"><dt>alt</dt><dd>Texto alternativo de una imagen, esencial para accesibilidad y SEO.</dd></div>
+          <div class="g-item"><dt>figure / figcaption</dt><dd>Pareja de etiquetas para agrupar contenido multimedia con su leyenda descriptiva.</dd></div>
+          <div class="g-item"><dt>MIME type</dt><dd>Formato/tipo de archivo declarado (ej: <code>video/mp4</code>, <code>audio/mpeg</code>) que ayuda al navegador a interpretarlo.</dd></div>
+          <div class="g-item"><dt>scope="col"</dt><dd>Atributo de <code>&lt;th&gt;</code> que indica que esa celda encabeza una columna completa.</dd></div>
+          <div class="g-item"><dt>data-*</dt><dd>Prefijo estándar de HTML5 para atributos personalizados legibles luego por JavaScript vía <code>dataset</code>.</dd></div>
+          <div class="g-item"><dt>responsive images</dt><dd>Técnica de ofrecer distintas imágenes/tamaños según el dispositivo, usando <code>&lt;picture&gt;</code> o <code>srcset</code>.</dd></div>
+        </dl>
+      </section>
+
+      <!-- NAVEGACIÓN ENTRE SESIONES -->
+      <nav class="session-pager">
+        <a href="sesion1.html" class="pager-link">
+          <div class="p-label">Clase anterior</div>
+          <div class="p-title">← Sesión 1: HTML - Estructura</div>
+        </a>
+        <a href="index.html" class="pager-link next">
+          <div class="p-label">Volver</div>
+          <div class="p-title">Inicio del bloque →</div>
+        </a>
+      </nav>
+
+    </article>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      Desarrollo IV (Laboratorio) · Planificación Septiembre-Octubre · Unidad 1: Arquitectura Frontend y Maquetación Estándar
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

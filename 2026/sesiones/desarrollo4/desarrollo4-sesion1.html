@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sesión 1 ·  Desarrollo IV</title>
+  <meta name="description" content="Sesión 1: Sintaxis estricta de HTML5, documento base, etiquetas semánticas y formularios esenciales.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>body{font-family:'Inter',Segoe UI,sans-serif;}</style>
+</head>
+<body>
+
+  <!-- ============ HEADER / NAVEGACIÓN ============ -->
+  <!-- <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <span class="brand-badge">D4</span>
+        Desarrollo IV 
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <nav class="main-nav">
+        <a href="index.html">Inicio</a>
+        <a href="sesion1.html" class="active">Sesión 1</a>
+        <a href="sesion2.html">Sesión 2</a>
+      </nav>
+    </div>
+  </header> -->
+
+  <!-- ============ ENCABEZADO DE SESIÓN ============ -->
+
+
+  <!-- ============ LAYOUT: TOC + CONTENIDO ============ -->
+ <br>
+  <div class="container">
+ <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo4-sesion1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 1
+        </a>
+        <a
+          href="desarrollo4-sesion2.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 2
+        </a>
+      </div>
+        <section class="session-hero">
+    <div class="container">
+      <h1>Sesión 1 — HTML: Estructura y Sintaxis Estricta</h1>
+      
+      <div class="meta-row">
+      </div>
+    </div>
+  </section>
+    <!-- TABLA DE CONTENIDOS -->
+    <!-- <aside class="toc">
+      <h4>En esta sesión</h4>
+      <ol>
+        <li><a href="#objetivos">Objetivos de aprendizaje</a></li>
+        <li><a href="#que-es-html">¿Qué es HTML5?</a></li>
+        <li><a href="#documento-base">Documento base</a></li>
+        <li><a href="#sintaxis-estricta">Sintaxis estricta</a></li>
+        <li><a href="#etiquetas-semanticas">Etiquetas semánticas</a></li>
+        <li><a href="#formularios">Formularios esenciales</a></li>
+        <li><a href="#codigo-referencia">Código de referencia</a></li>
+        <li><a href="#detecta-error">Detectá el error</a></li>
+        <li><a href="#quiz">Quiz rápido</a></li>
+        <li><a href="#actividad">Actividad de laboratorio</a></li>
+        <li><a href="#glosario">Glosario</a></li>
+      </ol>
+    </aside> -->
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="content">
+
+      <!-- 1. OBJETIVOS -->
+      <div id="objetivos">
+        <h2><span class="step-no"><i class="fa-solid fa-bullseye"></i></span> Objetivos de aprendizaje</h2>
+        <p>Al finalizar esta sesión, vas a poder:</p>
+        <ul>
+          <li>Escribir documentos HTML5 <strong>válidos</strong>, respetando anidamiento correcto, cierre de etiquetas y atributos entre comillas.</li>
+          <li>Explicar la diferencia entre una etiqueta <strong>semántica</strong> y una genérica, y elegir correctamente cuál usar en cada caso.</li>
+          <li>Armar el <strong>esqueleto HTML completo</strong> de la página.</li>
+          <li>Crear un <strong>formulario básico</strong> (texto + botón de envío) usando las etiquetas correctas.</li>
+          <li>Detectar y corregir errores de sintaxis usando el <strong>Inspector del navegador</strong> y el <strong>validador oficial del W3C</strong>.</li>
+        </ul>
+      </div>
+
+      <!-- 2. QUÉ ES HTML5 -->
+      <section id="que-es-html">
+        <h2><span class="step-no"><i class="fa-solid fa-book"></i></span> ¿Qué es HTML5 y por qué "estricta"?</h2>
+        <p>
+          <strong>HTML (HyperText Markup Language)</strong> no es un lenguaje de programación: es un
+          <strong>lenguaje de marcado</strong>. Sirve para decirle al navegador <em>qué es</em> cada
+          parte del contenido (un título, un párrafo, una imagen, un botón), no para calcular ni
+          decidir cosas — eso lo hace JavaScript, más adelante en esta materia.
+        </p>
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-comment-dots"></i> Analogía</div>
+          Pensá el HTML como los <strong>planos de una casa</strong>: el plano indica dónde va la
+          puerta, dónde las ventanas, dónde la cocina. El CSS (que veremos después) es la
+          <strong>decoración y pintura</strong>, y el JavaScript son las <strong>instalaciones eléctricas
+          y la gente que vive y se mueve dentro de la casa</strong>. Si el plano está mal hecho, ni la
+          mejor pintura ni la mejor instalación eléctrica van a poder arreglarlo del todo.
+        </div>
+        <p>
+          Cuando decimos "sintaxis <strong>estricta</strong>" nos referimos a un conjunto de reglas
+          que HTML5 permite relajar (el navegador "perdona" muchos errores), pero que
+          <strong>nosotros, como profesionales, vamos a exigirnos cumplir siempre</strong>, porque:
+        </p>
+        <ul>
+          <li>Un documento bien formado es <strong>más fácil de mantener</strong> en equipo.</li>
+          <li>Facilita que <strong>CSS y JavaScript</strong> encuentren exactamente los elementos que necesitan.</li>
+          <li>Mejora la <strong>accesibilidad</strong> (lectores de pantalla) y el <strong>SEO</strong> (posicionamiento en buscadores).</li>
+          <li>Evita bugs "fantasma" que aparecen porque el navegador interpretó tu error de una forma que vos no esperabas.</li>
+        </ul>
+      </section>
+
+      <!-- 3. DOCUMENTO BASE -->
+      <section id="documento-base">
+        <h2><span class="step-no"><i class="fa-solid fa-file-code"></i></span> El documento base: !DOCTYPE, html, head, body
+        </h2>
+        <p>Todo documento HTML5 arranca con la misma "receta" de 4 piezas obligatorias:</p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>Pieza</th><th>¿Qué hace?</th><th>¿Se repite?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>&lt;!DOCTYPE html&gt;</code></td>
+                <td>Declara que el documento usa el estándar HTML5. Debe ser la <strong>primera línea</strong> del archivo, sin excepción.</td>
+                <td>Una sola vez, no es una etiqueta que se cierra.</td>
+              </tr>
+              <tr>
+                <td><code>&lt;html lang="es"&gt;</code></td>
+                <td>Elemento raíz: contiene <em>todo</em> el documento. El atributo <code>lang</code> declara el idioma para accesibilidad y SEO.</td>
+                <td>Una sola vez por documento.</td>
+              </tr>
+              <tr>
+                <td><code>&lt;head&gt;</code></td>
+                <td>Metadatos que el navegador necesita pero el usuario <strong>no ve</strong> directamente: <code>charset</code>, <code>viewport</code>, <code>title</code>, enlaces a CSS.</td>
+                <td>Una sola vez.</td>
+              </tr>
+              <tr>
+                <td><code>&lt;body&gt;</code></td>
+                <td>Todo el contenido <strong>visible</strong> de la página: textos, imágenes, formularios, botones.</td>
+                <td>Una sola vez.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-title"><i class="fa-solid fa-triangle-exclamation"></i> Dato clave</div>
+          Dentro de <code>&lt;head&gt;</code> siempre van (como mínimo) estas 3 líneas en nuestros proyectos:
+          <code>&lt;meta charset="UTF-8"&gt;</code> (permite tildes, ñ y símbolos como $),
+          <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code>
+          (habilita el diseño responsivo que usaremos en la Unidad 1) y <code>&lt;title&gt;</code>
+          (texto de la pestaña del navegador).
+        </div>
+      </section>
+
+      <!-- 4. SINTAXIS ESTRICTA -->
+      <section id="sintaxis-estricta">
+        <h2><span class="step-no"><i class="fa-solid fa-scale-balanced"></i></span> Las 5 reglas de oro de la sintaxis estricta</h2>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>#</th><th>Regla</th><th>Ejemplo correcto</th><th>Ejemplo incorrecto</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Toda etiqueta que se <strong>abre</strong> debe <strong>cerrarse</strong>.</td>
+                <td><code>&lt;p&gt;Hola&lt;/p&gt;</code></td>
+                <td><code>&lt;p&gt;Hola</code></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Las etiquetas <strong>"vacías" o auto-cerradas</strong> (sin contenido) no llevan cierre pero sí la barra final en XHTML/estilo estricto.</td>
+                <td><code>&lt;img src="foto.jpg" alt="..."&gt;</code> / <code>&lt;br&gt;</code></td>
+                <td><code>&lt;img src="foto.jpg"&gt;&lt;/img&gt;</code></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>El <strong>anidamiento</strong> debe respetar el orden: "el último en abrir es el primero en cerrar" (estructura de pila).</td>
+                <td><code>&lt;ul&gt;&lt;li&gt;Ítem&lt;/li&gt;&lt;/ul&gt;</code></td>
+                <td><code>&lt;ul&gt;&lt;li&gt;Ítem&lt;/ul&gt;&lt;/li&gt;</code></td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Los <strong>atributos van entre comillas</strong> (dobles, por convención).</td>
+                <td><code>class="product-card"</code></td>
+                <td><code>class=product-card</code></td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>No puede haber <strong>más de un</strong> <code>&lt;main&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code> o <code>&lt;body&gt;</code> visibles por documento.</td>
+                <td>Un solo <code>&lt;main&gt;</code> con todo el contenido central adentro.</td>
+                <td>Dos <code>&lt;main&gt;</code> en la misma página.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-layer-group"></i> Analogía: la matrioska</div>
+          Anidar etiquetas es como una <strong>muñeca rusa</strong>: no podés cerrar la muñeca grande
+          mientras la chica sigue afuera. Cada etiqueta "hija" tiene que quedar completamente cerrada
+          <em>antes</em> de cerrar a su "madre". Si te salteás este orden, el navegador reordena todo
+          por su cuenta (auto-corrección) y el resultado casi nunca es el que imaginabas.
+        </div>
+      </section>
+
+      <!-- 5. ETIQUETAS SEMÁNTICAS -->
+      <section id="etiquetas-semanticas">
+        <h2><span class="step-no"><i class="fa-solid fa-sitemap"></i></span> Etiquetas semánticas de estructura</h2>
+        <p>
+          "Semántico" significa que la etiqueta <strong>describe el significado</strong> de su
+          contenido, no solo su apariencia. Un <code>&lt;div&gt;</code> es una caja "muda": ni el
+          navegador, ni Google, ni un lector de pantalla saben qué hay adentro sin leer sus clases CSS.
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Etiqueta</th><th>¿Para qué se usa?</th><th>¿Cuántas por página?</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;header&gt;</code></td><td>Encabezado del sitio: logo, nombre de marca, slogan.</td><td>Una (a nivel documento)</td></tr>
+              <tr><td><code>&lt;nav&gt;</code></td><td>Bloque de enlaces de navegación principal.</td><td>Una o más, si hay varios menús</td></tr>
+              <tr><td><code>&lt;main&gt;</code></td><td>Contenido <strong>principal y único</strong> de la página.</td><td>Exactamente una</td></tr>
+              <tr><td><code>&lt;section&gt;</code></td><td>Agrupa contenido relacionado temáticamente (ej: "Catálogo").</td><td>Varias</td></tr>
+              <tr><td><code>&lt;article&gt;</code></td><td>Contenido independiente y autocontenido (ej: una tarjeta de producto, una noticia).</td><td>Varias</td></tr>
+              <tr><td><code>&lt;aside&gt;</code></td><td>Contenido secundario relacionado (ej: filtros, publicidad).</td><td>Varias</td></tr>
+              <tr><td><code>&lt;footer&gt;</code></td><td>Pie de página: copyright, datos de contacto.</td><td>Una (a nivel documento)</td></tr>
+              <tr><td><code>&lt;div&gt;</code></td><td>Contenedor <strong>sin significado</strong>, solo para agrupar visualmente (usar cuando ninguna semántica aplica).</td><td>Las que hagan falta</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-circle-check"></i> Regla práctica para decidir</div>
+          Preguntate: <em>"¿Lo que hay adentro tiene un significado propio dentro de la página
+          (menú, encabezado, pie, producto, noticia)?"</em> Si la respuesta es sí, hay una etiqueta
+          semántica para eso. Si es <em>solo</em> un contenedor visual sin significado propio
+          (por ejemplo, un wrapper para centrar contenido con CSS), ahí usás <code>&lt;div&gt;</code>.
+        </div>
+      </section>
+
+      <!-- 6. FORMULARIOS ESENCIALES -->
+      <section id="formularios">
+        <h2><span class="step-no"><i class="fa-solid fa-keyboard"></i></span> Formularios esenciales: form, text y submit</h2>
+        <p>
+          Los formularios son la puerta de entrada de datos del usuario hacia nuestra aplicación
+          (en unidades futuras: búsquedas del catálogo, registro de clientes, etc.). Hoy vemos la
+          versión mínima esencial.
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Etiqueta / atributo</th><th>Función</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;form&gt;</code></td><td>Contenedor que agrupa todos los campos de un mismo envío.</td></tr>
+              <tr><td><code>&lt;label for="id"&gt;</code></td><td>Texto descriptivo <strong>vinculado</strong> a un campo mediante el atributo <code>for</code>, que debe coincidir con el <code>id</code> del input. Fundamental para accesibilidad.</td></tr>
+              <tr><td><code>&lt;input type="text"&gt;</code></td><td>Campo de texto de una sola línea (ej: nombre, email de contacto).</td></tr>
+              <tr><td><code>&lt;input type="submit"&gt;</code> o <code>&lt;button type="submit"&gt;</code></td><td>Botón que envía el formulario.</td></tr>
+              <tr><td><code>name="..."</code></td><td>Identificador del campo que se envía junto con su valor (clave para procesarlo después con JS).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-comment-dots"></i> Analogía</div>
+          Un <code>&lt;label&gt;</code> sin su <code>for</code> correctamente vinculado al <code>id</code>
+          del input es como un cartel de "Caja 3" que está pegado en la pared equivocada del banco:
+          técnicamente está el cartel, pero no ayuda a nadie a saber a qué ventanilla corresponde.
+        </div>
+      </section>
+
+      <!-- 7. CÓDIGO DE REFERENCIA -->
+      <section id="codigo-referencia">
+        <h2><span class="step-no"><i class="fa-solid fa-code"></i></span> Código de referencia (para VSC)</h2>
+        <p>Este es el esqueleto HTML completo de nuestro proyecto E-commerce, listo para usar como base.</p>
+
+        <h3>📄 index.html</h3>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            index.html
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>&lt;!DOCTYPE html&gt;
+&lt;!--
+  DOCTYPE: obligatorio y SIEMPRE la primera línea del archivo.
+  Le indica al navegador que use el modo de renderizado HTML5 estándar.
+--&gt;
+&lt;html lang="es"&gt;
+&lt;!--
+  lang="es" es OBLIGATORIO para accesibilidad y SEO: ayuda a lectores
+  de pantalla y buscadores a saber en qué idioma está el contenido.
+--&gt;
+
+&lt;head&gt;
+    &lt;!-- METADATOS: el navegador los necesita, el usuario no los ve --&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;!-- UTF-8 permite tildes, ñ, $ sin que se rompan --&gt;
+
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;!-- Habilita el diseño responsivo en celulares (Unidad 1) --&gt;
+
+    &lt;meta name="keywords" content="palabra clave 1, palabra clave 2, palabra clave 3"&gt;
+    &lt;meta name="description" content="palabra clave 1, palabra clave 2, palabra clave 3"&gt;
+    &lt;!-- palabras clave para el CEO de google --&gt;
+
+    &lt;title&gt;TecnoStore | Catálogo Dinámico&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+    &lt;!-- HEADER: encabezado del sitio, SIEMPRE UNO SOLO --&gt;
+    &lt;header&gt;
+        &lt;h1&gt;TecnoStore&lt;/h1&gt;
+        &lt;p&gt;Tu catálogo de tecnología, siempre disponible&lt;/p&gt;
+    &lt;/header&gt;
+
+    &lt;!-- NAV: menú de navegación principal --&gt;
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#inicio"&gt;Inicio&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#catalogo"&gt;Catálogo&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#carrito"&gt;Carrito&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#contacto"&gt;Contacto&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+
+    &lt;!-- MAIN: contenido PRINCIPAL. Debe haber UN SOLO main por documento --&gt;
+    &lt;main&gt;
+
+        &lt;section id="catalogo"&gt;
+            &lt;h2&gt;Nuestros Productos&lt;/h2&gt;
+
+            &lt;!--
+              ARTICLE: cada producto es contenido independiente y
+              autocontenido -- podría publicarse solo y seguiría
+              teniendo sentido. Esta tarjeta la generaremos dinámicamente
+              en la Clase 2 (con imagen real) y más adelante desde JSON.
+            --&gt;
+            &lt;article class="product-card"&gt;
+                &lt;img src="https://via.placeholder.com/200" alt="Notebook Lenovo 15 pulgadas, color gris"&gt;
+                &lt;h3&gt;Notebook Lenovo&lt;/h3&gt;
+                &lt;p class="price"&gt;$450.000&lt;/p&gt;
+                &lt;button type="button"&gt;Agregar al carrito&lt;/button&gt;
+            &lt;/article&gt;
+
+            &lt;article class="product-card"&gt;
+                &lt;img src="https://via.placeholder.com/200" alt="Mouse inalámbrico Logitech color negro"&gt;
+                &lt;h3&gt;Mouse Inalámbrico&lt;/h3&gt;
+                &lt;p class="price"&gt;$15.000&lt;/p&gt;
+                &lt;button type="button"&gt;Agregar al carrito&lt;/button&gt;
+            &lt;/article&gt;
+
+        &lt;/section&gt;
+
+        &lt;!-- ASIDE: contenido secundario --&gt;
+        &lt;aside&gt;
+            &lt;h2&gt;Filtros&lt;/h2&gt;
+            &lt;p&gt;Próximamente: filtrar por categoría y precio.&lt;/p&gt;
+        &lt;/aside&gt;
+
+        &lt;!-- FORMULARIO ESENCIAL: buscador simple del catálogo --&gt;
+        &lt;section id="buscador"&gt;
+            &lt;h2&gt;Buscar producto&lt;/h2&gt;
+            &lt;form action="#" method="get"&gt;
+                &lt;label for="busqueda"&gt;¿Qué estás buscando?&lt;/label&gt;
+                &lt;input type="text" id="busqueda" name="busqueda" placeholder="Ej: notebook"&gt;
+                &lt;input type="submit" value="Buscar"&gt;
+            &lt;/form&gt;
+        &lt;/section&gt;
+
+    &lt;/main&gt;
+
+    &lt;!-- FOOTER: pie de página, SIEMPRE UNO SOLO --&gt;
+    &lt;footer&gt;
+        &lt;p&gt;&amp;copy; 2026 TecnoStore. Proyecto académico - Desarrollo IV.&lt;/p&gt;
+    &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+
+        <h3>🎨 css/style.css (mínimo, solo para visualizar la estructura)</h3>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            css/style.css
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>/*
+  OJO: este CSS es SOLO para visualizar los bloques semánticos.
+  El diseño real con Flexbox/Grid/Tailwind/Bootstrap se ve en las próximas clases.
+  Hoy el foco es 100% la ESTRUCTURA HTML.
+*/
+header, nav, main, section, article, aside, footer, form {
+    border: 1px dashed #999;
+    margin: 8px;
+    padding: 10px;
+}
+body { font-family: Arial, sans-serif; }</code></pre>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-forward"></i> Continuidad del proyecto</div>
+          Este mismo <code>index.html</code> es la base sobre la que en la <strong>Sesión 2</strong> vamos a
+          incorporar imágenes reales, video/audio de presentación y una tabla comparativa de productos.
+          Más adelante (Unidad 2) estas tarjetas <code>&lt;article class="product-card"&gt;</code> se van
+          a generar automáticamente con JavaScript desde un archivo <code>productos.json</code>.
+        </div>
+      </section>
+
+
+      <section >
+        <h1>Guía de Atajos de Emmet para HTML</h1>
+<p>El sistema integrado en Visual Studio Code para crear etiquetas de forma ultra rápida se llama <strong>Emmet</strong>. Viene activado por defecto; solo escribís la abreviación y presionás la tecla <strong>Tab</strong> (o Enter) para expandirla.</p>
+
+<h2>Estructura inicial</h2>
+<ul>
+    <li><strong>!</strong>: Genera todo el esqueleto básico de un documento HTML5.</li>
+</ul>
+
+<h2>Operadores principales</h2>
+<ul>
+    <li><strong>* (Multiplicación):</strong> Duplica elementos. <code>li*3</code> genera tres ítems de lista.</li>
+    <li><strong>&gt; (Hijo):</strong> Baja un nivel en la jerarquía. <code>ul&gt;li</code> mete la lista dentro del contenedor.</li>
+    <li><strong>+ (Hermano):</strong> Coloca elementos al mismo nivel. <code>h1+p</code> crea un título y un párrafo abajo.</li>
+    <li><strong>^ (Subir nivel):</strong> Vuelve al contenedor padre. <code>ul&gt;li^p</code> crea la lista con su ítem y saca el párrafo fuera de ella.</li>
+</ul>
+
+<h2>Atributos, Clases e IDs</h2>
+<ul>
+    <li><strong>. (Clase CSS):</strong> Añade una clase. <code>div.contenedor</code> o simplemente <code>.contenedor</code> crea un div con esa clase.</li>
+    <li><strong># (ID CSS):</strong> Añade un identificador único. <code>textarea#comentario</code> genera el campo con su ID.</li>
+    <li><strong>[] (Atributos personalizados):</strong> Define atributos específicos como <code>img[src="foto.jpg" alt="logo"]</code>.</li>
+</ul>
+
+<h2>Texto y Numeración</h2>
+<ul>
+    <li><strong>{} (Texto interno):</strong> Escribe contenido dentro de la etiqueta. <code>a{Hacé clic acá}</code> genera el enlace con ese texto.</li>
+    <li><strong>$ (Numerador automático):</strong> Combinado con <code>*</code>, numera de forma secuencial. <code>li{Ítem $}*3</code> genera tres filas numeradas del 1 al 3.</li>
+</ul>
+
+<h2>Ejemplo maestro (Todo combinado)</h2>
+<p>Si escribís esto y apretás <strong>Tab</strong>:</p>
+<pre><code>nav.menu&gt;ul&gt;li.item-$*3&gt;a[href="#"]{Enlace $}</code></pre>
+
+<p>El resultado automático en tu pantalla será:</p>
+<pre><code>&lt;nav class="menu"&gt;
+    &lt;ul&gt;
+        &lt;li class="item-1"&gt;&lt;a href="#"&gt;Enlace 1&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="item-2"&gt;&lt;a href="#"&gt;Enlace 2&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="item-3"&gt;&lt;a href="#"&gt;Enlace 3&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+
+      </section>
+      <!-- 8. DETECTÁ EL ERROR -->
+      <section id="detecta-error">
+        <h2><span class="step-no"><i class="fa-solid fa-bug"></i></span> Detectá el error: código para corregir en VSC</h2>
+        <p>
+          A continuación hay <strong>fragmentos con errores intencionales</strong> de sintaxis. Copialos
+          en VSC, abrí el archivo en el navegador y usá el <strong>Inspector (F12)</strong> y el
+          <a href="https://validator.w3.org/#validate_by_input" target="_blank" rel="noopener">validador del W3C</a>
+          para encontrar y corregir cada error antes de mirar la solución.
+        </p>
+
+        <!-- EJERCICIO 1 -->
+        <div class="exercise">
+          <div class="ex-header">
+            <span class="pill">Con errores</span>
+            <h4>Ejercicio 1 — Documento base y anidamiento</h4>
+          </div>
+          <div class="code-block buggy">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              buggy-1.html
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Mi Tienda&lt;/title&gt;
+&lt;meta charset=UTF-8&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;header&gt;
+  &lt;h1&gt;Mi Tienda&lt;/h1&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  &lt;section&gt;
+    &lt;h2&gt;Ofertas&lt;/h2&gt;
+    &lt;article class="product-card"&gt;
+      &lt;h3&gt;Zapatillas&lt;/h3&gt;
+  &lt;/section&gt;
+    &lt;/article&gt;
+
+  &lt;main&gt;
+    &lt;h2&gt;Contacto&lt;/h2&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </div>
+          <p class="question">
+            🔎 Encontrá al menos <strong>4 errores</strong> de sintaxis estricta en este fragmento.
+          </p>
+          <details class="reveal">
+            <summary>Ver solución y explicación</summary>
+            <div class="reveal-body">
+              <ol>
+                <li>Falta <code>&lt;!DOCTYPE html&gt;</code> como primera línea, y falta el atributo <code>lang="es"</code> en <code>&lt;html&gt;</code>.</li>
+                <li><code>charset=UTF-8</code> no tiene comillas → debe ser <code>charset="UTF-8"</code> (Regla de oro N.° 4).</li>
+                <li>El <code>&lt;section&gt;</code> se cierra <strong>antes</strong> que el <code>&lt;article&gt;</code> que contiene: el orden de cierre está invertido (Regla N.° 3, "pila"). Debe cerrarse primero <code>&lt;/article&gt;</code> y después <code>&lt;/section&gt;</code>.</li>
+                <li>Hay un <strong>segundo <code>&lt;main&gt;</code></strong> en el mismo documento: solo puede haber uno por página (Regla N.° 5). El bloque "Contacto" debería ser una <code>&lt;section&gt;</code> dentro del <code>&lt;main&gt;</code> ya existente, no un segundo <code>&lt;main&gt;</code>.</li>
+              </ol>
+              <p><strong>Tip de debugging:</strong> pegá el código en el validador del W3C y leé el primer error que reporta de arriba hacia abajo — a veces un solo error de anidamiento genera varios mensajes en cascada.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- EJERCICIO 2 -->
+        <div class="exercise">
+          <div class="ex-header">
+            <span class="pill">Con errores</span>
+            <h4>Ejercicio 2 — Semántica y formulario</h4>
+          </div>
+          <div class="code-block buggy">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              buggy-2.html
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>&lt;div class="header"&gt;
+  &lt;h1&gt;TecnoStore&lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div class="nav"&gt;
+  &lt;a href="#catalogo">Catálogo&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;section&gt;
+  &lt;img src="notebook.jpg"&gt;
+  &lt;h3&gt;Notebook Lenovo&lt;/h3&gt;
+&lt;/section
+
+&lt;form&gt;
+  &lt;input type="text" id="mail"&gt;
+  &lt;label&gt;Tu email&lt;/label&gt;
+  &lt;input type="submit" value=Enviar&gt;
+&lt;/form&gt;</code></pre>
+          </div>
+          <p class="question">
+            🔎 Este fragmento "funciona" en el navegador, pero tiene <strong>5 problemas</strong> de
+            semántica, accesibilidad y sintaxis. Encontralos.
+          </p>
+          <details class="reveal">
+            <summary>Ver solución y explicación</summary>
+            <div class="reveal-body">
+              <ol>
+                <li><code>&lt;div class="header"&gt;</code> debería ser <code>&lt;header&gt;</code>: hay contenido con significado propio (encabezado del sitio) y se está usando una etiqueta "muda".</li>
+                <li><code>&lt;div class="nav"&gt;</code> debería ser <code>&lt;nav&gt;</code> por la misma razón: es un menú de navegación.</li>
+                <li>La etiqueta <code>&lt;img&gt;</code> no tiene atributo <code>alt</code>: es obligatorio para accesibilidad (lectores de pantalla) y SEO.</li>
+                <li>El <code>&lt;/section&gt;</code> está mal escrito, le falta el <code>&gt;</code> de cierre (quedó <code>&lt;/section&gt</code>): esto puede "romper" todo lo que sigue en el documento.</li>
+                <li>El <code>&lt;label&gt;</code> no tiene el atributo <code>for="mail"</code> vinculado al <code>id="mail"</code> del input, y además el orden lógico ideal es <code>label</code> antes del <code>input</code>. Y el valor del atributo <code>value=Enviar</code> no está entre comillas.</li>
+              </ol>
+              <p><strong>Tip de debugging:</strong> abrí el Inspector (F12 → pestaña <em>Elements</em>) y compará el árbol DOM renderizado contra tu archivo fuente en VSC: si no coinciden, el navegador está "corrigiendo" un error tuyo por su cuenta.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 9. QUIZ RÁPIDO -->
+      <section id="quiz">
+        <h2><span class="step-no"><i class="fa-solid fa-circle-question"></i></span> Quiz rápido de autoevaluación</h2>
+
+        <div class="quiz">
+          <p class="q-title">1. ¿Cuántas etiquetas <code>&lt;main&gt;</code> puede tener un documento HTML5?</p>
+          <div class="options">
+            <button data-correct="true" data-explain="Exacto: main representa el contenido principal único de la página.">Exactamente una</button>
+            <button data-correct="false" data-explain="Solo puede haber una etiqueta main por documento.">Las que necesite el diseño</button>
+            <button data-correct="false" data-explain="Cero no es correcto: en nuestros proyectos siempre debe existir un main.">Ninguna, es opcional</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+
+        <div class="quiz">
+          <p class="q-title">2. ¿Qué etiqueta usarías para la tarjeta individual de un producto en el catálogo?</p>
+          <div class="options">
+            <button data-correct="false" data-explain="div es válido visualmente pero no aporta significado.">&lt;div&gt;</button>
+            <button data-correct="true" data-explain="Correcto: cada producto es contenido independiente y autocontenido.">&lt;article&gt;</button>
+            <button data-correct="false" data-explain="aside se usa para contenido secundario, no para el producto en sí.">&lt;aside&gt;</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+
+        <div class="quiz">
+          <p class="q-title">3. ¿Cuál de estas líneas respeta la sintaxis estricta?</p>
+          <div class="options">
+            <button data-correct="false" data-explain="Falta cerrar la comilla y la etiqueta.">&lt;input type="text" name=usuario&gt;</button>
+            <button data-correct="true" data-explain="Atributos entre comillas: perfecto.">&lt;input type="text" name="usuario"&gt;</button>
+            <button data-correct="false" data-explain="Un input no lleva etiqueta de cierre </input>.">&lt;input type="text" name="usuario"&gt;&lt;/input&gt;</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+      </section>
+
+      <!-- 10. ACTIVIDAD DE LABORATORIO -->
+      <section id="actividad">
+        <h2><span class="step-no"><i class="fa-solid fa-flask-vial"></i></span> Actividad</h2>
+        <p>
+          Consigna: crear el <strong>esqueleto HTML</strong> del proyecto E-commerce que usarán durante
+          todo el bimestre, aplicando <strong>todas</strong> las etiquetas vistas hoy.
+        </p>
+
+        <div class="lab-box">
+          <div class="lab-title"><i class="fa-solid fa-list-check fa-lg"></i><h3 class="mt-0">Checklist paso a paso</h3></div>
+          <p class="dim">Marcá cada paso a medida que lo completes en tu equipo. El progreso se guarda solo.</p>
+
+          <div class="progress-wrap">
+            <div class="progress-bar-track"><div class="progress-bar-fill"></div></div>
+            <p class="progress-label">0 de 0 tareas completadas (0%)</p>
+          </div>
+
+          <ul class="checklist" data-storage-key="dev4-sesion1-checklist">
+            <li>
+              <input type="checkbox" id="s1-t1">
+              <label for="s1-t1">Crear la carpeta del proyecto en VSC con la estructura: <code>index.html</code>, <code>css/style.css</code>, <code>js/</code>, <code>data/</code>.
+             
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="s1-t2">
+              <label for="s1-t2">Escribir el <code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;html lang="es"&gt;</code> y el <code>&lt;head&gt;</code> completo con <code>charset</code>, <code>viewport</code> y un <code>&lt;title&gt;</code> con el nombre de tu propia tienda.
+                <small>Elegí un nombre de marca distinto al del ejemplo (TecnoStore).</small>
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="s1-t3">
+              <label for="s1-t3">Armar el <code>&lt;header&gt;</code> con el nombre de la tienda y un slogan.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s1-t4">
+              <label for="s1-t4">Armar el <code>&lt;nav&gt;</code> con una lista <code>&lt;ul&gt;&lt;li&gt;&lt;a&gt;</code> de al menos 4 secciones (Inicio, Catálogo, Carrito, Contacto).</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s1-t5">
+              <label for="s1-t5">Crear el <code>&lt;main&gt;</code> único con una <code>&lt;section&gt;</code> "Catálogo" que contenga <strong>al menos 3</strong> <code>&lt;article class="product-card"&gt;</code> con productos propios de tu rubro (no notebooks/mouse del ejemplo).
+                <small>Cada article debe tener: img con alt descriptivo, h3, p.price y button "Agregar al carrito".</small>
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="s1-t6">
+              <label for="s1-t6">Agregar un <code>&lt;aside&gt;</code> con contenido secundario (filtros, promociones, etc.).</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s1-t7">
+              <label for="s1-t7">Crear el formulario de búsqueda: <code>&lt;form&gt;</code> con <code>&lt;label for="..."&gt;</code>, <code>&lt;input type="text" id="..." name="..."&gt;</code> y un botón <code>submit</code>.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s1-t8">
+              <label for="s1-t8">Armar el <code>&lt;footer&gt;</code> con copyright y nombre del proyecto.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s1-t9">
+              <label for="s1-t9">Vincular el CSS mínimo de bordes punteados y verificar visualmente que todos los bloques semánticos están correctamente anidados.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s1-t10">
+              <label for="s1-t10">Validar el documento completo en el <a href="https://validator.w3.org/#validate_by_input" target="_blank" rel="noopener">validador del W3C</a> y corregir todos los errores.</label>
+            </li>
+          </ul>
+        </div>
+
+        
+      </section>
+
+     
+
+     
+
+    </div>
+     <div style="margin-bottom: 24px">
+        <a
+          href="../materias/desarrollo-1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo4-sesion1.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 1
+        </a>
+        <a
+          href="desarrollo4-sesion2.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 2
+        </a>
+      </div>
+  </div>
+
+ 
+
+  <script src="js/main.js"></script>
+</body>
+</html>
