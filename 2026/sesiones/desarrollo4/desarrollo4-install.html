@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sesión 0 · Documentación e Instalación · Desarrollo I</title>
+  <meta name="description" content="Sesión 0: Importancia de la documentación técnica e instalación de las herramientas básicas de desarrollo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>body{font-family:'Inter',Segoe UI,sans-serif;}</style>
+</head>
+<body>
+
+  <br>
+  <div class="container">
+   <div style="margin-bottom: 24px">
+        <a
+          href="../../materias/desarrollo-4.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+      </div>
+
+    <section class="session-hero">
+      <div class="container">
+        <h1>Sesión 0 — Documentación e Instalación</h1>
+       
+      </div>
+    </section>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="content">
+
+      <!-- 1. OBJETIVO -->
+      <section id="objetivo">
+        <h2><span class="step-no"><i class="fa-solid fa-bullseye"></i></span> Objetivo</h2>
+        <p>
+          Introducir al estudiante en la importancia de la <strong>documentación técnica</strong>
+          y los pasos fundamentales para la <strong>instalación de entornos de desarrollo</strong>
+          y herramientas necesarias para la materia.
+        </p>
+      </section>
+
+      <!-- 2. IMPORTANCIA DE LA DOCUMENTACIÓN -->
+      <section id="importancia-documentacion">
+        <h2><span class="step-no"><i class="fa-solid fa-book"></i></span> ¿Por qué es importante la documentación?</h2>
+        <ul>
+          <li>Facilita la comprensión y el mantenimiento de proyectos.</li>
+          <li>Permite la colaboración efectiva entre desarrolladores.</li>
+          <li>Reduce errores y acelera la resolución de problemas.</li>
+          <li>Ejemplo: Manuales de usuario, guías de instalación, comentarios en el código.</li>
+        </ul>
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-comment-dots"></i> Recordá</div>
+          Documentar no es un paso extra: es parte del trabajo. Un buen README o una buena guía de
+          instalación le ahorran horas de confusión al próximo desarrollador (que muchas veces sos vos
+          mismo, unos meses después).
+        </div>
+        <div class="mt-0" style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="https://docs.python.org/es/3.13/index.html" target="_blank" rel="noopener noreferrer" class="btn">
+            <i class="fa-solid fa-book-open"></i> Documentación Python
+          </a>
+          <a href="https://docs.python.org/es/3.13/tutorial/index.html" target="_blank" rel="noopener noreferrer" class="btn secondary">
+            <i class="fa-solid fa-graduation-cap"></i> Tutorial Python (lectura)
+          </a>
+        </div>
+      </section>
+
+      <!-- 3. INSTALACIÓN DE HERRAMIENTAS BÁSICAS -->
+      <section id="instalacion-basica">
+        <h2><span class="step-no"><i class="fa-solid fa-download"></i></span> Instalación de Herramientas Básicas</h2>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>Herramienta</th><th>¿Para qué se usa?</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Editor de código</strong></td>
+                <td>Visual Studio Code y MySQL Workbench</td>
+              </tr>
+              <tr>
+                <td><strong>Control de versiones</strong></td>
+                <td>Git y GitHub.</td>
+              </tr>
+              <tr>
+                <td><strong>Lenguajes y entornos</strong></td>
+                <td>HTML, CSS (Bootstrap, Tailwind), JS(Node.js), Python(Flask), SQL.</td>
+              </tr>
+              <tr>
+                <td><strong>Terminal</strong></td>
+                <td>Uso básico de la terminal de comandos (CMD).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-title"><i class="fa-solid fa-triangle-exclamation"></i> Paso a paso: extensión de Python en VSC</div>
+          Una vez instalado Python, Node.js y VS Code, en el mismo Visual Studio Code hacé click en el botón de
+          <strong>Extensiones</strong> (columna de iconos del lado izquierdo). Escribí <code>python</code> y
+          <strong>solo instalá las extensiones firmadas por Microsoft</strong>: esto va a permitir ejecutar
+          código Python directamente desde el editor.
+        </div>
+
+        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer" class="btn">
+            <i class="fa-brands fa-python"></i> Instalar Python
+          </a>
+           <a href="https://nodejs.org/en" target="_blank" rel="noopener noreferrer" class="btn">
+            <i class="fa-brands fa-python"></i> Instalar Node.js
+          </a>
+          <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer" class="btn ">
+            <i class="fa-solid fa-code"></i> Descargar VS Code
+          </a>
+        </div>
+      </section>
+
+      <!-- 4. BUENAS PRÁCTICAS DE INSTALACIÓN -->
+      <section id="buenas-practicas">
+        <h2><span class="step-no"><i class="fa-solid fa-circle-check"></i></span> Buenas Prácticas de Instalación</h2>
+        <ul>
+          <li>Leer siempre la documentación oficial antes de instalar.</li>
+          <li>Verificar requisitos del sistema.</li>
+          <li>Preferir instaladores oficiales y evitar fuentes desconocidas.</li>
+          <li>Ejecutar pruebas básicas tras la instalación para confirmar el funcionamiento.</li>
+        </ul>
+      </section>
+
+      <!-- 5. MATERIAL DE APOYO -->
+      <section id="material-apoyo">
+        <h2><span class="step-no"><i class="fa-solid fa-video"></i></span> Material de apoyo</h2>
+        <ul>
+          <li>Páginas web y videos en YouTube ofrecen gran variedad de contenido para aprender.</li>
+        </ul>
+        <div>
+          <ul>
+            <li> <a href="https://www.w3schools.com/html/default.asp" target="_blank" rel="noopener noreferrer" class="btn secondary">
+            <i class="fa-solid fa-laptop-code"></i> Curso HTML (lectura y test)</a>
+         </li>
+         <li> </a><a href="https://lenguajehtml.com/html/" target="_blank" rel="noopener noreferrer" class="btn ">
+         <i class="fa-solid fa-laptop-code"></i> Curso HTML 2 (ruta estudio) 
+       </a></li>
+            <li> <a href="https://www.w3schools.com/css/default.asp" target="_blank" rel="noopener noreferrer" class="btn secondary">
+            <i class="fa-solid fa-laptop-code"></i> Curso CSS (lectura y test)
+          </a></li>
+            <li><a href="https://lenguajecss.com/css/" target="_blank" rel="noopener noreferrer" class="btn ">
+            <i class="fa-solid fa-laptop-code"></i> Curso CSS 2 (ruta estudio) 
+          </a></li>
+            <li> <a href="https://www.w3schools.com/js/default.asp" target="_blank" rel="noopener noreferrer" class="btn secondary">
+            <i class="fa-solid fa-laptop-code"></i> Curso JS (lectura y test)
+          </a></li>
+            <li><a href="https://lenguajejs.com/javascript/" target="_blank" rel="noopener noreferrer" class="btn ">
+            <i class="fa-solid fa-laptop-code"></i> Curso JS 2 (ruta estudio) 
+          </a></li>
+            <li>   <a href="https://www.youtube.com/watch?v=TkN2i-_4N4g" target="_blank" rel="noopener noreferrer" class="btn secondary" >
+            <i class="fa-brands fa-youtube"></i> Curso Python (YouTube)
+          </a></li>
+            <li>    <a href="https://www.w3schools.com/python/default.asp" target="_blank" rel="noopener noreferrer" class="btn ">
+            <i class="fa-solid fa-laptop-code"></i> Curso Python (lectura y test)
+          </a></li>
+          </ul>
+
+
+      
+        </div>
+      </section>
+
+      <!-- 6. CONCLUSIÓN -->
+      <section id="conclusion">
+        <h2><span class="step-no"><i class="fa-solid fa-flag-checkered"></i></span> Conclusión</h2>
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-lightbulb"></i> Para llevarte</div>
+          La documentación y la correcta instalación de herramientas son la base para un desarrollo
+          eficiente y seguro. Dominar estos aspectos iniciales facilita el aprendizaje y la resolución
+          de problemas a lo largo del curso.
+        </div>
+      </section>
+
+    </div>
+
+     <div style="margin-bottom: 24px">
+        <a
+          href="../../materias/desarrollo-4.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+      </div>
+  </div>
+
+</body>
+</html>
