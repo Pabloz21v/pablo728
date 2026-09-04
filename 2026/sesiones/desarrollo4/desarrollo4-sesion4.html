@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoStore | Catálogo Dinámico</title>
+
+    <!-- Importamos la hoja de estilos externa desde la subcarpeta css/ -->
+    <link rel="stylesheet" href="css/clase.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <h1>TecnoStore</h1>
+    </header>
+
+    <main>
+        <section id="catalogo">
+            <h2>Nuestros Productos</h2>
+
+            <!--
+              Este contenedor es el que vamos a convertir en un
+              Flex Container en el CSS. Cada article de adentro
+              es un "Flex Item" que se acomoda automáticamente.
+            -->
+            <div class="catalogo-grid">
+                <article class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="Notebook Lenovo 15 pulgadas">
+                    <h3>Notebook Lenovo</h3>
+                    <p class="price">$450.000</p>
+                    <button type="button">Agregar al carrito</button>
+                </article>
+
+                <article class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="Mouse inalámbrico negro">
+                    <h3>Mouse Inalámbrico</h3>
+                    <p class="price">$15.000</p>
+                    <button type="button">Agregar al carrito</button>
+                </article>
+
+                <article class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="Teclado mecánico retroiluminado">
+                    <h3>Teclado Mecánico</h3>
+                    <p class="price">$62.000</p>
+                    <button type="button">Agregar al carrito</button>
+                </article>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

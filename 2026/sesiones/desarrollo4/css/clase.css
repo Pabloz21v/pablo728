@@ -1,0 +1,76 @@
+/* Reset mínimo para trabajar más prolijo */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    color: #f1f1f1;
+    font-size: 16px; /* tamaño de fuente base legible (accesibilidad) */
+}
+
+/* ============================================= */
+/* CONTENEDOR FLEXIBLE: la grilla del catálogo    */
+/* ============================================= */
+.catalogo-grid {
+    display: flex;              /* activa Flexbox */
+    flex-direction: row;        /* eje principal horizontal */
+    flex-wrap: wrap;            /* permite pasar de línea en pantallas chicas */
+    justify-content: center;    /* distribuye tarjetas centradas en el eje principal */
+    align-items: stretch;       /* todas las tarjetas con la misma altura */
+    gap: 20px;                  /* espacio uniforme entre tarjetas, sin márgenes manuales */
+    padding: 20px;
+}
+
+/* ============================================= */
+/* CADA TARJETA ES UN FLEX ITEM                   */
+/* ============================================= */
+.product-card {
+    background-color: #1c1c1c;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 16px;
+    width: 240px;               /* ancho base de cada tarjeta */
+    display: flex;              /* Flexbox también DENTRO de la tarjeta */
+    flex-direction: column;     /* apila imagen, título, precio y botón */
+    align-items: center;
+    gap: 10px;
+}
+
+.product-card img {
+    max-width: 100%;
+    border-radius: 6px;
+}
+
+.product-card .price {
+    font-weight: bold;
+    color: #4fd1c5;             /* buen contraste sobre fondo oscuro */
+}
+
+.product-card button {
+    margin-top: auto;           /* empuja el botón al final de la tarjeta */
+    background-color: #4fd1c5;
+    color: #08131a;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 1rem;            /* botón cómodo de tocar en celulares */
+    cursor: pointer;
+}
+
+/* Responsive: en pantallas chicas, las tarjetas ocupan casi todo el ancho */
+/* max-width establece el ancho máximo que puede tener un elemento */
+
+@media (max-width: 768px) {
+    .product-card {
+        width: 100%;
+        max-width: 320px;
+        background-color: #00ff15;
+    }
+}
+@media (max-width: 600px) {
+    .product-card {
+        width: 100%;
+        max-width: 320px;
+        background-color: #e70505;
+    }
+}

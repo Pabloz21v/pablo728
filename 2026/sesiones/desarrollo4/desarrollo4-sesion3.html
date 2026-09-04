@@ -1,18 +1,1475 @@
-<div class="header">
-  <h1>TecnoStore</h1>
-</div>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 3 · CSS - Maquetación con Flexbox | Desarrollo IV</title>
+    <meta
+      name="description"
+      content="Sesión 3: hojas de estilo externas, jerarquía de prioridades CSS y layouts flexibles con Flexbox aplicados al catálogo de productos del E-commerce."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      body {
+        font-family:
+          "Inter",
+          Segoe UI,
+          sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ============ ENCABEZADO DE SESIÓN ============ -->
+    <section class="session-hero">
+      <div class="container">
+        <div style="margin-bottom: 24px">
+          <a
+            href="../../materias/desarrollo-4.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #4ade80;
+              color: #222;
+              display: inline-block;
+              margin-right: 10px;
+            "
+          >
+            Volver a Materia
+          </a>
+          <a
+            href="desarrollo4-sesion2.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #60a5fa;
+              color: #fff;
+              display: inline-block;
+              margin-right: 10px;
+            "
+          >
+            Ir a Sesión 2
+          </a>
+          <a
+            href="desarrollo4-sesion4.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #f9e282;
+              color: #222;
+              display: inline-block;
+            "
+          >
+            Ir a Sesión 4
+          </a>
+        </div>
+        <h1>Sesión 3 — CSS: Maquetación con Flexbox</h1>
+        <p class="lead" style="color: var(--text-dim); max-width: 760px">
+          Dejamos de "ensuciar" el HTML con estilos y aprendemos a separar
+          contenido y diseño con hojas de estilo externas. Después, ordenamos y
+          alineamos el catálogo con
+          <strong>CSS Flexbox</strong>: ejes, alineación, distribución y orden
+          de elementos.
+        </p>
+      </div>
+    </section>
 
-<div class="nav">
-  <a href="#catalogo">Catálogo</a>
-</div>
+    <!-- ============ LAYOUT: TOC + CONTENIDO ============ -->
+    <div class="container">
+      <!-- CONTENIDO PRINCIPAL -->
+      <article class="content">
+        <!-- 1. OBJETIVOS -->
+        <section id="objetivos">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-bullseye"></i></span>
+            Objetivos de aprendizaje
+          </h2>
+          <p>Al finalizar esta sesión, vas a poder:</p>
+          <ul>
+            <li>
+              Explicar por qué separar el CSS del HTML en un archivo externo, y
+              vincularlo correctamente desde <code>&lt;head&gt;</code>.
+            </li>
+            <li>
+              Escribir <strong>rutas relativas</strong> correctas para importar
+              una hoja de estilos ubicada en cualquier carpeta o subcarpeta del
+              proyecto.
+            </li>
+            <li>
+              Explicar la
+              <strong>jerarquía de prioridades de CSS</strong> (cascada,
+              especificidad y <code>!important</code>) para predecir qué regla
+              "gana" cuando hay conflictos.
+            </li>
+            <li>
+              Diferenciar <strong>eje principal y eje transversal</strong> en
+              Flexbox, y usar <code>justify-content</code>,
+              <code>align-items</code> y <code>flex-wrap</code> para alinear y
+              distribuir elementos.
+            </li>
+            <li>
+              Reordenar visualmente elementos con <code>order</code> sin alterar
+              el HTML.
+            </li>
+            <li>
+              Aplicar criterios básicos de
+              <strong>diseño web accesible e inclusivo</strong> (contraste,
+              tamaño de fuente, tipografías legibles) en el catálogo.
+            </li>
+            <li>
+              Maquetar con Flexbox la grilla de tarjetas de producto del
+              E-commerce, con una hoja de estilos externa correctamente
+              organizada en carpetas.
+            </li>
+          </ul>
+        </section>
 
-<section>
-  <img src="notebook.jpg">
-  <h3>Notebook Lenovo</h3>
-</section
+        <!-- 2. HOJAS DE ESTILO EXTERNAS -->
+        <section id="hojas-externas">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-file-code"></i></span>
+            Introducción a las hojas de estilo externas
+          </h2>
+          <p>Existen 3 formas de aplicar CSS a un documento HTML:</p>
 
-<form>
-  <input type="text" id="mail">
-  <label>Tu email</label>
-  <input type="submit" value=Enviar>
-</form>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Tipo</th>
+                  <th>Dónde se escribe</th>
+                  <th>¿Cuándo usarla?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Inline</strong></td>
+                  <td>
+                    Directamente en el atributo <code>style</code> de una
+                    etiqueta: <code>&lt;p style="color:red"&gt;</code>
+                  </td>
+                  <td>
+                    Casi nunca en un proyecto real. Es difícil de mantener y
+                    "ensucia" el HTML.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Interna (embed)</strong></td>
+                  <td>
+                    Dentro de una etiqueta <code>&lt;style&gt;</code> en el
+                    <code>&lt;head&gt;</code> del mismo documento.
+                  </td>
+                  <td>
+                    Prototipos rápidos o pruebas puntuales. No se reutiliza
+                    entre páginas.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Externa</strong> ✅</td>
+                  <td>
+                    En un archivo <code>.css</code> aparte, vinculado con
+                    <code>&lt;link&gt;</code>.
+                  </td>
+                  <td>
+                    <strong>Siempre</strong> en proyectos reales: un solo
+                    archivo de estilos sirve para todas las páginas del sitio.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout">
+            <div class="callout-title">
+              <i class="fa-solid fa-comment-dots"></i> Analogía
+            </div>
+            Separar el CSS del HTML es como separar el
+            <strong>guion de una obra de teatro</strong> del
+            <strong>manual de vestuario y escenografía</strong>: los actores (el
+            HTML) dicen sus líneas igual sin importar qué escenografía uses, y
+            podés cambiar toda la escenografía (el CSS) sin reescribir una sola
+            línea del guion. Si mezclás todo en un solo documento (estilos
+            inline), cualquier cambio de vestuario te obliga a reescribir la
+            obra entera.
+          </div>
+
+          <p>
+            Para vincular un archivo CSS externo se usa la etiqueta
+            <code>&lt;link&gt;</code> dentro del <code>&lt;head&gt;</code>:
+          </p>
+
+          <div class="code-block">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              index.html (fragmento del head)
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;TecnoStore&lt;/title&gt;
+
+    &lt;!-- rel="stylesheet" le dice al navegador que ese archivo es CSS --&gt;
+    &lt;!-- href apunta a la RUTA del archivo .css --&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;</code></pre>
+          </div>
+
+          <div class="callout warn">
+            <div class="callout-title">
+              <i class="fa-solid fa-triangle-exclamation"></i> Atributos clave
+              de &lt;link&gt;
+            </div>
+            <code>rel="stylesheet"</code> es <strong>obligatorio</strong>:
+            indica la relación del archivo con el documento.
+            <code>href</code> es la ruta al archivo. El
+            <code>&lt;link&gt;</code> es una etiqueta "vacía" (no se cierra con
+            <code>&lt;/link&gt;</code>), igual que <code>&lt;img&gt;</code> o
+            <code>&lt;meta&gt;</code>.
+          </div>
+        </section>
+
+        <!-- 3. RUTAS RELATIVAS -->
+        <section id="rutas-relativas">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-folder-tree"></i></span>
+            Guía: cómo acceder a un CSS ubicado en otra carpeta o subcarpeta
+          </h2>
+          <p>
+            El valor del atributo <code>href</code> es una
+            <strong>ruta relativa</strong>: describe "cómo llegar" desde el
+            archivo que estoy escribiendo (<code>index.html</code>) hasta el
+            archivo que quiero importar (<code>style.css</code>), recorriendo
+            carpetas.
+          </p>
+
+          <h3>Estructura de carpetas de referencia</h3>
+          <div class="folder-tree">
+            <span class="f-folder">📁 ecommerce-proyecto/</span><br />
+            ├── <span class="f-target">index.html</span>
+            <span class="f-dim">← el archivo que hace el import</span><br />
+            ├── <span class="f-folder">📁 css/</span><br />
+            │ └── <span class="f-file">style.css</span>
+            <span class="f-dim">← hoja de estilos principal</span><br />
+            ├── <span class="f-folder">📁 css/componentes/</span><br />
+            │ └── <span class="f-file">tarjetas.css</span>
+            <span class="f-dim">← subcarpeta dentro de css/</span><br />
+            ├── <span class="f-folder">📁 js/</span><br />
+            │ └── <span class="f-file">main.js</span><br />
+            └── <span class="f-folder">📁 data/</span><br />
+            &nbsp;&nbsp;&nbsp;└── <span class="f-file">productos.json</span>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Símbolo</th>
+                  <th>Significado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>carpeta/archivo.css</code></td>
+                  <td>
+                    "Entrá a la carpeta <code>carpeta</code> y ahí buscá
+                    <code>archivo.css</code>" (bajar un nivel).
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>../</code></td>
+                  <td>
+                    "Subí un nivel", es decir, ir a la carpeta
+                    <strong>contenedora</strong> (padre) de donde estoy.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>../../</code></td>
+                  <td>Subir <strong>dos</strong> niveles.</td>
+                </tr>
+                <tr>
+                  <td><code>./archivo.css</code></td>
+                  <td>
+                    "Buscá en la carpeta actual" (el <code>./</code> es
+                    opcional, es el valor por defecto).
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>/archivo.css</code></td>
+                  <td>
+                    Ruta <strong>absoluta</strong> desde la raíz del sitio (se
+                    usa poco en proyectos chicos; puede fallar si el sitio no
+                    está en la raíz del dominio).
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Ejemplos aplicados a la estructura de arriba</h3>
+          <div class="code-block">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              Ejemplos de rutas relativas
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>&lt;!-- Desde index.html (en la RAÍZ) hacia css/style.css --&gt;
+&lt;link rel="stylesheet" href="css/style.css"&gt;
+
+&lt;!-- Desde index.html hacia una SUBCARPETA de css/ --&gt;
+&lt;link rel="stylesheet" href="css/componentes/tarjetas.css"&gt;
+
+&lt;!-- Si tuviera un archivo en css/paginas/producto.html --&gt;
+&lt;!-- y quisiera importar css/style.css, debo SUBIR un nivel: --&gt;
+&lt;link rel="stylesheet" href="../style.css"&gt;
+
+&lt;!-- Y si necesitara subir DOS niveles desde una subcarpeta más profunda: --&gt;
+&lt;link rel="stylesheet" href="../../css/style.css"&gt;</code></pre>
+          </div>
+
+          <div class="callout tip">
+            <div class="callout-title">
+              <i class="fa-solid fa-lightbulb"></i> Truco para no perderte
+            </div>
+            Parate mentalmente
+            <strong>en la carpeta donde está el archivo HTML</strong> que estás
+            editando, y "caminá con el dedo" por el árbol de carpetas hasta
+            llegar al archivo CSS. Cada carpeta que bajás, la escribís con
+            <code>/</code>; cada carpeta que subís, la escribís con
+            <code>../</code>. Si te equivocás, el navegador no tira "error"
+            visible: simplemente <strong>no aplica ningún estilo</strong> — por
+            eso siempre hay que revisar la pestaña <em>Network</em> del
+            Inspector para confirmar que el archivo cargó (código 200) y no
+            falló (404).
+          </div>
+        </section>
+
+        <!-- 4. JERARQUÍA DE PRIORIDADES CSS -->
+        <section id="jerarquia">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-layer-group"></i></span>
+            Jerarquía de prioridades en CSS (cascada y especificidad)
+          </h2>
+          <p>
+            Cuando dos o más reglas CSS le dicen cosas distintas al mismo
+            elemento, el navegador necesita un criterio para decidir cuál
+            "gana". Ese criterio se llama <strong>cascada</strong>
+            y se resuelve, en orden, con estos 3 factores:
+          </p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Orden</th>
+                  <th>Factor</th>
+                  <th>¿Cómo funciona?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1.º</td>
+                  <td>
+                    <strong>Importancia</strong> (<code>!important</code>)
+                  </td>
+                  <td>
+                    Una regla marcada con <code>!important</code> gana casi
+                    siempre, sin importar la especificidad. Usar con muchísimo
+                    cuidado.
+                  </td>
+                </tr>
+                <tr>
+                  <td>2.º</td>
+                  <td><strong>Especificidad</strong></td>
+                  <td>
+                    Un puntaje que se calcula según qué tipo de selector se usó
+                    (ver escala abajo). A mayor puntaje, más prioridad.
+                  </td>
+                </tr>
+                <tr>
+                  <td>3.º</td>
+                  <td><strong>Orden de aparición</strong></td>
+                  <td>
+                    Si dos reglas tienen exactamente la misma especificidad,
+                    gana la que está escrita <strong>más abajo</strong> (la
+                    última que el navegador lee).
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Escala de especificidad (de menor a mayor prioridad)</h3>
+          <div class="priority-scale">
+            <div class="p-row">
+              <span class="p-rank">1</span>
+              <div class="p-content">
+                <strong>Selector de etiqueta (Tags)</strong>
+                <span
+                  >— ej: <code>p</code>, <code>article</code>,
+                  <code>button</code>, <code>h1</code></span
+                >
+              </div>
+            </div>
+            <div class="p-row">
+              <span class="p-rank">2</span>
+              <div class="p-content">
+                <strong>Selector de clase / atributo / pseudo-clase</strong>
+                <span
+                  >— ej: <code>.product-card</code>, <code>[type="text"]</code>,
+                  <code>:hover</code></span
+                >
+              </div>
+            </div>
+            <div class="p-row">
+              <span class="p-rank">3</span>
+              <div class="p-content">
+                <strong>Selector de ID</strong>
+                <span
+                  >— ej: <code>#carrito</code> (más específico que cualquier
+                  clase)</span
+                >
+              </div>
+            </div>
+            <div class="p-row">
+              <span class="p-rank">4</span>
+              <div class="p-content">
+                <strong>Estilos inline</strong>
+                <span
+                  >— ej: <code>style="color:red"</code> directamente en la
+                  etiqueta HTML</span
+                >
+              </div>
+            </div>
+            <div class="p-row top">
+              <span class="p-rank">★</span>
+              <div class="p-content">
+                <strong><code>!important</code></strong>
+                <span
+                  >— se salta la escala completa y gana casi siempre (usar solo
+                  como último recurso)</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="code-block">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              ejemplo-especificidad.css
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>/* Especificidad baja: selector de etiqueta */
+p { color: white; }
+
+/* Especificidad media: selector de clase → ESTA GANA sobre la anterior */
+.price { color: lightgreen; }
+
+/* Especificidad alta: selector de ID → ESTA GANA sobre la clase */
+#precio-destacado { color: gold; }
+
+/* Gana SIEMPRE (salvo otro !important más específico después) */
+.price { color: red !important; }</code></pre>
+          </div>
+
+          <div class="callout">
+            <div class="callout-title">
+              <i class="fa-solid fa-comment-dots"></i> Analogía
+            </div>
+            Pensá la especificidad como
+            <strong>rangos militares dando la misma orden</strong>: si un
+            soldado (etiqueta <code>p</code>) dice "color blanco" y un capitán
+            (clase <code>.price</code>) dice "color verde", se obedece al
+            capitán. Si además aparece un general (ID
+            <code>#precio-destacado</code>) diciendo "color dorado", se obedece
+            al general. Y si en algún momento aparece una orden con
+            <code>!important</code>, es como una orden directa del
+            <strong>comandante en jefe</strong>: pisa todos los rangos
+            anteriores.
+          </div>
+
+          <div class="callout danger">
+            <div class="callout-title">
+              <i class="fa-solid fa-circle-exclamation"></i> Por qué evitar el
+              abuso de !important
+            </div>
+            Si empezás a usar <code>!important</code> en todos lados para
+            "ganarle" a otra regla, perdés el control de la cascada: al final
+            nadie sabe qué regla realmente manda, y cada nuevo estilo se
+            convierte en una guerra de <code>!important</code> contra
+            <code>!important</code>. La solución profesional es escribir
+            selectores con la especificidad justa y necesaria, no "forzar" la
+            prioridad.
+          </div>
+        </section>
+
+        <!-- 5. INTRODUCCIÓN A FLEXBOX -->
+        <section id="flexbox-intro">
+          <h2>
+            <span class="step-no"
+              ><i class="fa-solid fa-arrows-left-right-to-line"></i
+            ></span>
+            Introducción a Flexbox: ejes, alineación y distribución
+          </h2>
+          <p>
+            <strong>Flexbox</strong> es un sistema de CSS pensado para acomodar
+            elementos en <strong>una sola fila o una sola columna</strong>,
+            controlando fácilmente cómo se alinean, distribuyen y ordenan. Es
+            ideal para: menús de navegación, grillas de tarjetas de producto, y
+            centrar contenido vertical y horizontalmente.
+          </p>
+
+          <div class="callout">
+            <div class="callout-title">
+              <i class="fa-solid fa-comment-dots"></i> Analogía general
+            </div>
+            Flexbox es como organizar
+            <strong>sillas en una fila de un cine</strong>: podés decidir si se
+            apiñan todas al principio, se separan con el mismo espacio entre
+            ellas, se estiran para ocupar toda la fila, o se acomodan
+            verticalmente centradas en su propia butaca. El "contenedor" (<code
+              >display: flex</code
+            >) es la fila de butacas; los "ítems" son cada silla.
+          </div>
+
+          <h3>Los dos ejes de Flexbox</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Eje</th>
+                  <th>Nombre técnico</th>
+                  <th>¿Qué controla?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>➡️ Horizontal (por defecto)</td>
+                  <td><strong>Eje principal</strong> (main axis)</td>
+                  <td>
+                    La dirección en la que se acomodan los ítems por defecto
+                    (<code>flex-direction: row</code>).
+                  </td>
+                </tr>
+                <tr>
+                  <td>⬇️ Vertical (por defecto)</td>
+                  <td><strong>Eje transversal</strong> (cross axis)</td>
+                  <td>La dirección perpendicular al eje principal.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="dim">
+            Importante: si cambiás <code>flex-direction</code> a
+            <code>column</code>, ¡los ejes se invierten! El eje principal pasa a
+            ser el vertical, y el transversal el horizontal.
+          </p>
+
+          <h3>Propiedades esenciales del contenedor</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Propiedad</th>
+                  <th>Valores comunes</th>
+                  <th>Función</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>display: flex;</code></td>
+                  <td>—</td>
+                  <td>
+                    Activa Flexbox en el contenedor. Sin esto, nada de lo
+                    siguiente funciona.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>flex-direction</code></td>
+                  <td>
+                    <code>row</code> · <code>row-reverse</code> ·
+                    <code>column</code> · <code>column-reverse</code>
+                  </td>
+                  <td>Define el eje principal y el sentido de acomodo.</td>
+                </tr>
+                <tr>
+                  <td><code>justify-content</code></td>
+                  <td>
+                    <code>flex-start</code> · <code>center</code> ·
+                    <code>flex-end</code> · <code>space-between</code> ·
+                    <code>space-around</code> · <code>space-evenly</code>
+                  </td>
+                  <td>
+                    Distribuye los ítems
+                    <strong>a lo largo del eje principal</strong>.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>align-items</code></td>
+                  <td>
+                    <code>stretch</code> · <code>center</code> ·
+                    <code>flex-start</code> · <code>flex-end</code>
+                  </td>
+                  <td>
+                    Alinea los ítems <strong>en el eje transversal</strong>.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>flex-wrap</code></td>
+                  <td><code>nowrap</code> · <code>wrap</code></td>
+                  <td>
+                    Permite que los ítems "salten de línea" cuando no entran
+                    todos en una sola fila (clave para responsive).
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>gap</code></td>
+                  <td>ej: <code>16px</code></td>
+                  <td>
+                    Espacio uniforme entre ítems, sin necesidad de márgenes
+                    manuales.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Propiedades esenciales de cada ítem</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Propiedad</th>
+                  <th>Función</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>order</code></td>
+                  <td>
+                    Cambia el <strong>orden visual</strong> de un ítem sin tocar
+                    el HTML. Por defecto todos valen <code>0</code>; un valor
+                    menor se muestra antes.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>flex-grow</code></td>
+                  <td>
+                    Cuánto "crece" un ítem para ocupar espacio libre extra, en
+                    proporción a los demás.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>flex-shrink</code></td>
+                  <td>
+                    Cuánto se "achica" un ítem si no hay espacio suficiente.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>align-self</code></td>
+                  <td>
+                    Sobrescribe el <code>align-items</code> del contenedor, solo
+                    para ese ítem puntual.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 6. DEMO INTERACTIVA -->
+        <section id="flexbox-demo">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-sliders"></i></span>
+            Interactiva: probá Flexbox en vivo
+          </h2>
+          <p>
+            Ejemplos, teoria y juegos de flexbox para practicar como ordenar
+            componentes en el html.
+          </p>
+
+          <ul>
+            <li>
+              <a
+                class="r-link"
+                href="https://codepen.io/enxaneta/full/adLPwv/"
+                target="_blank"
+                rel="noopener"
+                >FlexBox Ejemplo practico
+                <i class="fa-solid fa-arrow-up-right-from-square"></i
+              ></a>
+            </li>
+            <li>
+              <a
+                class="r-link"
+                href="https://www.w3schools.com/csS/css3_flexbox.asp"
+                target="_blank"
+                rel="noopener"
+                >FlexBox Teoria practica
+                <i class="fa-solid fa-arrow-up-right-from-square"></i
+              ></a>
+            </li>
+            <li>
+              <a
+                class="r-link"
+                href="https://flexboxfroggy.com/#es"
+                target="_blank"
+                rel="noopener"
+                >FlexBox juego
+                <i class="fa-solid fa-arrow-up-right-from-square"></i
+              ></a>
+            </li>
+          </ul>
+        </section>
+
+        <!-- 7. ACCESIBILIDAD -->
+        <section id="accesibilidad">
+          <h2>
+            <span class="step-no"
+              ><i class="fa-solid fa-universal-access"></i
+            ></span>
+            Diseño web accesible e inclusivo
+          </h2>
+          <p>
+            Un catálogo bien maquetado con Flexbox también debe ser
+            <strong>legible para todo el mundo</strong>: personas con baja
+            visión, daltonismo, dislexia o que usan el sitio desde un celular
+            viejo con pantalla chica. Estas son buenas prácticas mínimas que
+            vamos a aplicar desde hoy:
+          </p>
+          <ul>
+            <li>
+              <strong>Contraste de color suficiente</strong> entre texto y fondo
+              (por eso este material usa modo oscuro con textos claros de alto
+              contraste, nunca gris claro sobre blanco).
+            </li>
+            <li>
+              <strong>No depender solo del color</strong> para transmitir
+              información (ej: un producto "sin stock" no debe indicarse solo
+              con texto rojo; sumar un ícono o la palabra "Agotado").
+            </li>
+            <li>
+              <strong>Tamaño de fuente legible</strong>: mínimo recomendado 16px
+              para texto de cuerpo, permitir el zoom del navegador (nunca
+              deshabilitarlo).
+            </li>
+            <li>
+              <strong>Tipografías simples y con buen espaciado</strong> entre
+              letras, evitando fuentes decorativas para textos largos.
+            </li>
+            <li>
+              <strong>Textos alternativos</strong> (<code>alt</code>) en todas
+              las imágenes, como ya vimos en la Sesión 2.
+            </li>
+          </ul>
+
+          <div class="resource-grid">
+            <div class="resource-card">
+              <div class="r-icon"><i class="fa-solid fa-droplet"></i></div>
+              <h4>Color.Adobe</h4>
+              <p>
+                Muchas caracteristicas para que tu web sea amigable para todo la
+                gente.
+              </p>
+              <a
+                class="r-link"
+                href="https://webaim.org/resources/contrastchecker/"
+                target="_blank"
+                rel="noopener"
+                >Visitar sitio
+                <i class="fa-solid fa-arrow-up-right-from-square"></i
+              ></a>
+            </div>
+
+            <div class="resource-card">
+              <div class="r-icon"><i class="fa-solid fa-droplet"></i></div>
+              <h4>WebAIM Contrast Checker</h4>
+              <p>
+                Verificá si la combinación de color de texto y fondo cumple los
+                estándares de contraste WCAG.
+              </p>
+              <a
+                class="r-link"
+                href="https://webaim.org/resources/contrastchecker/"
+                target="_blank"
+                rel="noopener"
+                >Visitar sitio
+                <i class="fa-solid fa-arrow-up-right-from-square"></i
+              ></a>
+            </div>
+            <div class="resource-card">
+              <div class="r-icon"><i class="fa-solid fa-eye"></i></div>
+              <h4>Coblis — Color Blindness Simulator</h4>
+              <p>
+                Subí una imagen o captura de tu web y visualizala simulando
+                distintos tipos de daltonismo.
+              </p>
+              <a
+                class="r-link"
+                href="https://www.color-blindness.com/coblis-color-blindness-simulator/"
+                target="_blank"
+                rel="noopener"
+                >Visitar sitio
+                <i class="fa-solid fa-arrow-up-right-from-square"></i
+              ></a>
+            </div>
+            <div class="resource-card">
+              <div class="r-icon"><i class="fa-solid fa-palette"></i></div>
+              <h4>Colorable / Palettes accesibles</h4>
+              <p>
+                Herramienta para generar paletas de color que cumplan buen
+                contraste automáticamente.
+              </p>
+              <a
+                class="r-link"
+                href="https://colorable.jxnblk.com/"
+                target="_blank"
+                rel="noopener"
+                >Visitar sitio
+                <i class="fa-solid fa-arrow-up-right-from-square"></i
+              ></a>
+            </div>
+
+            <div class="resource-card">
+              <div class="r-icon">
+                <i class="fa-solid fa-book-open-reader"></i>
+              </div>
+              <h4>Fuente OpenDyslexic</h4>
+              <p>
+                Tipografía gratuita diseñada para mejorar la legibilidad de
+                personas con dislexia.
+              </p>
+              <a
+                class="r-link"
+                href="https://opendyslexic.org/"
+                target="_blank"
+                rel="noopener"
+                >Visitar sitio
+                <i class="fa-solid fa-arrow-up-right-from-square"></i
+              ></a>
+            </div>
+            <div class="resource-card">
+              <div class="r-icon"><i class="fa-solid fa-gauge-high"></i></div>
+              <h4>Google Lighthouse (Accessibility)</h4>
+              <p>
+                Auditoría automática de accesibilidad integrada en Chrome
+                DevTools (pestaña Lighthouse).
+              </p>
+              <a
+                class="r-link"
+                href="https://developer.chrome.com/docs/lighthouse/accessibility/"
+                target="_blank"
+                rel="noopener"
+                >Visitar sitio
+                <i class="fa-solid fa-arrow-up-right-from-square"></i
+              ></a>
+              <p>Documentación Accessky</p>
+              <a
+                class="r-link"
+                href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/accesskey"
+                target="_blank"
+                rel="noopener"
+                >Accesskey <i class="fa-solid fa-arrow-up-right-from-square"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="callout">
+            <div class="callout-title">
+              <i class="fa-solid fa-comment-dots"></i> Analogía
+            </div>
+            Diseñar de forma accesible es como construir una
+            <strong>rampa además de una escalera</strong> en la entrada de un
+            edificio: la escalera "funciona" para la mayoría, pero la rampa
+            permite que <em>todos</em> puedan entrar. En la web, el contraste
+            alto, las fuentes legibles y los textos alternativos son nuestras
+            "rampas".
+          </div>
+        </section>
+
+        <!-- 8. CÓDIGO DE REFERENCIA -->
+        <section id="codigo-referencia">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-code"></i></span> Código
+            de referencia (para VSC)
+          </h2>
+          <p>
+            Aplicamos todo lo visto: hoja de estilos externa en
+            <code>css/style.css</code>, importada desde <code>index.html</code>,
+            y la grilla de tarjetas de producto maquetada con Flexbox.
+          </p>
+
+          <h3>📄 index.html (fragmento relevante)</h3>
+          <div class="code-block">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              index.html
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;TecnoStore | Catálogo Dinámico&lt;/title&gt;
+
+    &lt;!-- Importamos la hoja de estilos externa desde la subcarpeta css/ --&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;header class="site-header"&gt;
+        &lt;h1&gt;TecnoStore&lt;/h1&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+        &lt;section id="catalogo"&gt;
+            &lt;h2&gt;Nuestros Productos&lt;/h2&gt;
+
+            &lt;!--
+              Este contenedor es el que vamos a convertir en un
+              Flex Container en el CSS. Cada article de adentro
+              es un "Flex Item" que se acomoda automáticamente.
+            --&gt;
+            &lt;div class="catalogo-grid"&gt;
+                &lt;article class="product-card"&gt;
+                    &lt;img src="https://via.placeholder.com/200" alt="Notebook Lenovo 15 pulgadas"&gt;
+                    &lt;h3&gt;Notebook Lenovo&lt;/h3&gt;
+                    &lt;p class="price"&gt;$450.000&lt;/p&gt;
+                    &lt;button type="button"&gt;Agregar al carrito&lt;/button&gt;
+                &lt;/article&gt;
+
+                &lt;article class="product-card"&gt;
+                    &lt;img src="https://via.placeholder.com/200" alt="Mouse inalámbrico negro"&gt;
+                    &lt;h3&gt;Mouse Inalámbrico&lt;/h3&gt;
+                    &lt;p class="price"&gt;$15.000&lt;/p&gt;
+                    &lt;button type="button"&gt;Agregar al carrito&lt;/button&gt;
+                &lt;/article&gt;
+
+                &lt;article class="product-card"&gt;
+                    &lt;img src="https://via.placeholder.com/200" alt="Teclado mecánico retroiluminado"&gt;
+                    &lt;h3&gt;Teclado Mecánico&lt;/h3&gt;
+                    &lt;p class="price"&gt;$62.000&lt;/p&gt;
+                    &lt;button type="button"&gt;Agregar al carrito&lt;/button&gt;
+                &lt;/article&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </div>
+
+          <h3>🎨 css/style.css (Flexbox aplicado al catálogo)</h3>
+          <div class="code-block">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              css/style.css
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>/* Reset mínimo para trabajar más prolijo */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    color: #f1f1f1;
+    font-size: 16px; /* tamaño de fuente base legible (accesibilidad) */
+}
+
+/* ============================================= */
+/* CONTENEDOR FLEXIBLE: la grilla del catálogo    */
+/* ============================================= */
+.catalogo-grid {
+    display: flex;              /* activa Flexbox */
+    flex-direction: row;        /* eje principal horizontal */
+    flex-wrap: wrap;            /* permite pasar de línea en pantallas chicas */
+    justify-content: center;    /* distribuye tarjetas centradas en el eje principal */
+    align-items: stretch;       /* todas las tarjetas con la misma altura */
+    gap: 20px;                  /* espacio uniforme entre tarjetas, sin márgenes manuales */
+    padding: 20px;
+}
+
+/* ============================================= */
+/* CADA TARJETA ES UN FLEX ITEM                   */
+/* ============================================= */
+.product-card {
+    background-color: #1c1c1c;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 16px;
+    width: 240px;               /* ancho base de cada tarjeta */
+    display: flex;              /* Flexbox también DENTRO de la tarjeta */
+    flex-direction: column;     /* apila imagen, título, precio y botón */
+    align-items: center;
+    gap: 10px;
+}
+
+.product-card img {
+    max-width: 100%;
+    border-radius: 6px;
+}
+
+.product-card .price {
+    font-weight: bold;
+    color: #4fd1c5;             /* buen contraste sobre fondo oscuro */
+}
+
+.product-card button {
+    margin-top: auto;           /* empuja el botón al final de la tarjeta */
+    background-color: #4fd1c5;
+    color: #08131a;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 1rem;            /* botón cómodo de tocar en celulares */
+    cursor: pointer;
+}
+
+/* Responsive: en pantallas chicas, las tarjetas ocupan casi todo el ancho */
+/* max-width establece el ancho máximo que puede tener un elemento */
+@
+@media (max-width: 768px) {
+    .product-card {
+        width: 100%;
+        max-width: 320px;
+        background-color: #00ff15;
+    }
+}
+@media (max-width: 600px) {
+    .product-card {
+        width: 100%;
+        max-width: 320px;
+        background-color: #e70505;
+    }
+}</code></pre>
+          </div>
+
+          <div class="callout tip">
+            <div class="callout-title">
+              <i class="fa-solid fa-forward"></i> Continuidad del proyecto
+            </div>
+            Con este CSS, el catálogo de tarjetas de producto ya se acomoda
+            solo, se centra, y salta de línea en pantallas chicas
+            <strong
+              >sin escribir ni un solo <code>&lt;br&gt;</code> ni tabla de
+              maquetación</strong
+            >. En la próxima clase de la unidad vamos a sumar
+            <strong>CSS Grid</strong> para layouts más complejos (por ejemplo,
+            la grilla completa del catálogo + panel de filtros).
+          </div>
+        </section>
+
+        <!-- 9. DETECTÁ EL ERROR -->
+        <section id="detecta-error">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-bug"></i></span> Detectá
+            el error: código para corregir en VSC
+          </h2>
+          <p>
+            Copiá estos fragmentos en VSC y usá el
+            <strong>Inspector (F12)</strong>, la pestaña
+            <strong>Network</strong> (para ver si el CSS carga) y la pestaña
+            <strong>Elements → Styles</strong>
+            (para ver qué regla está "ganando" en la cascada) para encontrar los
+            errores.
+          </p>
+
+          <!-- EJERCICIO 1 -->
+          <div class="exercise">
+            <div class="ex-header">
+              <span class="pill">Con errores</span>
+              <h4>Ejercicio 1 — Vinculación de la hoja de estilos</h4>
+            </div>
+            <div class="code-block buggy">
+              <div class="code-head">
+                <div class="dots"><span></span><span></span><span></span></div>
+                buggy-5.html (estructura del proyecto: index.html está en la
+                raíz, el CSS en css/style.css)
+                <button class="copy-btn">Copiar</button>
+              </div>
+              <pre><code>&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Mi Tienda&lt;/title&gt;
+  &lt;link rel="styleshet" href="style.css"&gt;
+&lt;/head&gt;</code></pre>
+            </div>
+            <p class="question">
+              🔎 El CSS no se aplica en el navegador. Encontrá los
+              <strong>2 errores</strong> (uno de sintaxis, uno de ruta) que lo
+              explican.
+            </p>
+            <details class="reveal">
+              <summary>Ver solución y explicación</summary>
+              <div class="reveal-body">
+                <ol>
+                  <li>
+                    El atributo dice <code>rel="styleshet"</code>: está mal
+                    escrito, debe ser exactamente <code>rel="stylesheet"</code>.
+                    Un typo en este valor hace que el navegador ignore el
+                    archivo silenciosamente (sin mostrar ningún error visible en
+                    pantalla).
+                  </li>
+                  <li>
+                    El <code>href="style.css"</code> apunta a la carpeta actual,
+                    pero según la estructura del proyecto el archivo real está
+                    en <code>css/style.css</code> (dentro de la subcarpeta
+                    <code>css/</code>). Debe corregirse a
+                    <code>href="css/style.css"</code>.
+                  </li>
+                </ol>
+              </div>
+            </details>
+          </div>
+
+          <!-- EJERCICIO 2 -->
+          <div class="exercise">
+            <div class="ex-header">
+              <span class="pill">Con errores</span>
+              <h4>Ejercicio 2 — Flexbox y especificidad</h4>
+            </div>
+            <div class="code-block buggy">
+              <div class="code-head">
+                <div class="dots"><span></span><span></span><span></span></div>
+                buggy-6.css
+                <button class="copy-btn">Copiar</button>
+              </div>
+              <pre><code>.catalogo-grid {
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+
+#catalogo-grid {
+  color: red !important;
+}
+
+.product-card {
+  color: white;
+}</code></pre>
+            </div>
+            <p class="question">
+              🔎 Las tarjetas no se acomodan en fila y el texto se ve rojo en
+              vez de blanco. Encontrá <strong>2 problemas</strong>: uno de
+              Flexbox, otro de jerarquía de prioridades.
+            </p>
+            <details class="reveal">
+              <summary>Ver solución y explicación</summary>
+              <div class="reveal-body">
+                <ol>
+                  <li>
+                    Al contenedor <code>.catalogo-grid</code> le falta la línea
+                    <code>display: flex;</code>. Sin esa propiedad,
+                    <code>flex-direction</code>, <code>justify-content</code> y
+                    <code>gap</code> no tienen ningún efecto: Flexbox no está
+                    activado.
+                  </li>
+                  <li>
+                    La regla
+                    <code>#catalogo-grid { color: red !important; }</code> gana
+                    por dos motivos combinados: los selectores de
+                    <strong>ID</strong> tienen más especificidad que los de
+                    <strong>clase</strong>, y además usa
+                    <code>!important</code>, que se salta casi toda la cascada.
+                    Aunque exista un typo conceptual (mezclar selector de id con
+                    nombre de clase), si en el HTML real hay un elemento con
+                    <code>id="catalogo-grid"</code>, esa regla le va a "ganar"
+                    al <code>.product-card { color: white; }</code>. La solución
+                    es eliminar el <code>!important</code> innecesario y no
+                    duplicar selectores de distinta especificidad para el mismo
+                    estilo.
+                  </li>
+                </ol>
+                <p>
+                  <strong>Tip de debugging:</strong> en el Inspector, pestaña
+                  <em>Elements</em>, seleccioná la tarjeta y mirá el panel
+                  <em>Styles</em>: las reglas tachadas son las que "perdieron"
+                  la cascada, y podés ver exactamente cuál las tachó y por qué.
+                </p>
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <!-- 10. QUIZ RÁPIDO -->
+        <section id="quiz">
+          <h2>
+            <span class="step-no"
+              ><i class="fa-solid fa-circle-question"></i
+            ></span>
+            Quiz rápido de autoevaluación
+          </h2>
+
+          <div class="quiz">
+            <p class="q-title">
+              1. Si <code>index.html</code> está en la raíz del proyecto y el
+              CSS está en <code>css/style.css</code>, ¿qué <code>href</code> es
+              correcto?
+            </p>
+            <div class="options">
+              <button
+                data-correct="false"
+                data-explain="../ sube un nivel, pero acá style.css está ADENTRO de una subcarpeta, no afuera."
+              >
+                ../style.css
+              </button>
+              <button
+                data-correct="true"
+                data-explain="Correcto: hay que bajar a la carpeta css y ahí buscar style.css."
+              >
+                css/style.css
+              </button>
+              <button
+                data-correct="false"
+                data-explain="Sin la carpeta css/, el navegador buscaría style.css en la raíz, donde no existe."
+              >
+                style.css
+              </button>
+            </div>
+            <p class="feedback"></p>
+          </div>
+
+          <div class="quiz">
+            <p class="q-title">
+              2. ¿Qué propiedad distribuye los elementos a lo largo del eje
+              principal de un contenedor flex?
+            </p>
+            <div class="options">
+              <button
+                data-correct="false"
+                data-explain="align-items trabaja sobre el eje transversal, no el principal."
+              >
+                align-items
+              </button>
+              <button
+                data-correct="true"
+                data-explain="Correcto: justify-content controla la distribución en el eje principal."
+              >
+                justify-content
+              </button>
+              <button
+                data-correct="false"
+                data-explain="flex-wrap controla si los ítems saltan de línea, no la distribución."
+              >
+                flex-wrap
+              </button>
+            </div>
+            <p class="feedback"></p>
+          </div>
+
+          <div class="quiz">
+            <p class="q-title">
+              3. Según la jerarquía de prioridades CSS, ¿qué selector tiene MÁS
+              especificidad?
+            </p>
+            <div class="options">
+              <button
+                data-correct="false"
+                data-explain="Los selectores de etiqueta tienen la especificidad más baja."
+              >
+                article
+              </button>
+              <button
+                data-correct="false"
+                data-explain="Las clases tienen más especificidad que las etiquetas, pero menos que un ID."
+              >
+                .product-card
+              </button>
+              <button
+                data-correct="true"
+                data-explain="Correcto: un selector de ID (#...) tiene más especificidad que clases y etiquetas."
+              >
+                #catalogo
+              </button>
+            </div>
+            <p class="feedback"></p>
+          </div>
+        </section>
+
+        <!-- 11. ACTIVIDAD DE LABORATORIO -->
+        <section id="actividad">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-flask-vial"></i></span>
+            Actividad de laboratorio
+          </h2>
+          <p>
+            Consigna: convertir el catálogo estático de las Sesiones 1 y 2 en
+            una <strong>grilla flexible</strong>, separando correctamente el CSS
+            en un archivo externo bien organizado en carpetas.
+          </p>
+
+          <div class="lab-box">
+            <div class="lab-title">
+              <i class="fa-solid fa-list-check fa-lg"></i>
+              <h3 class="mt-0">Checklist paso a paso</h3>
+            </div>
+            <p class="dim">
+              Marcá cada paso a medida que lo completes. El progreso se guarda
+              solo en este navegador.
+            </p>
+
+            <div class="progress-wrap">
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill"></div>
+              </div>
+              <p class="progress-label">0 de 0 tareas completadas (0%)</p>
+            </div>
+
+            <ul class="checklist" data-storage-key="dev4-sesion3-checklist">
+              <li>
+                <input type="checkbox" id="s3-t1" />
+                <label for="s3-t1"
+                  >Si todavía no existe, crear la carpeta <code>css/</code> en
+                  la raíz del proyecto y mover/crear ahí el archivo
+                  <code>style.css</code>.</label
+                >
+              </li>
+              <li>
+                <input type="checkbox" id="s3-t2" />
+                <label for="s3-t2"
+                  >En el <code>&lt;head&gt;</code> de <code>index.html</code>,
+                  agregar (o corregir) el
+                  <code
+                    >&lt;link rel="stylesheet" href="css/style.css"&gt;</code
+                  >
+                  con la ruta correcta.</label
+                >
+              </li>
+              <li>
+                <input type="checkbox" id="s3-t3" />
+                <label for="s3-t3"
+                  >Verificar en la pestaña <em>Network</em> del Inspector que
+                  <code>style.css</code> carga con código 200 (no 404).</label
+                >
+              </li>
+              <li>
+                <input type="checkbox" id="s3-t4" />
+                <label for="s3-t4"
+                  >Envolver las tarjetas
+                  <code>&lt;article class="product-card"&gt;</code> del catálogo
+                  dentro de un contenedor
+                  <code>&lt;div class="catalogo-grid"&gt;</code>.</label
+                >
+              </li>
+              <li>
+                <input type="checkbox" id="s3-t5" />
+                <label for="s3-t5"
+                  >En <code>style.css</code>, convertir
+                  <code>.catalogo-grid</code> en un Flex Container:
+                  <code>display: flex</code>, <code>flex-wrap: wrap</code>,
+                  <code>justify-content</code> y <code>gap</code>.</label
+                >
+              </li>
+              <li>
+                <input type="checkbox" id="s3-t6" />
+                <label for="s3-t6"
+                  >Convertir cada <code>.product-card</code> en un Flex
+                  Container interno (columna) para apilar imagen, título, precio
+                  y botón prolijamente, con el botón siempre al final (<code
+                    >margin-top: auto</code
+                  >).</label
+                >
+              </li>
+              <li>
+                <input type="checkbox" id="s3-t7" />
+                <label for="s3-t7"
+                  >Usar <code>order</code> en al menos una tarjeta para
+                  demostrar que podés cambiar el orden visual sin tocar el HTML
+                  (y luego dejarlo comentado o en 0 si no querés ese efecto
+                  final).</label
+                >
+              </li>
+              <li>
+                <input type="checkbox" id="s3-t8" />
+                <label for="s3-t8"
+                  >Aplicar al menos 2 criterios de accesibilidad: tamaño de
+                  fuente base ≥16px y una combinación de color con buen
+                  contraste (verificar con WebAIM Contrast Checker).</label
+                >
+              </li>
+              <li>
+                <input type="checkbox" id="s3-t9" />
+                <label for="s3-t9"
+                  >Probar el catálogo achicando la ventana del navegador (o el
+                  modo responsive del Inspector) y confirmar que las tarjetas
+                  saltan de línea correctamente gracias a
+                  <code>flex-wrap</code>.</label
+                >
+              </li>
+              <li>
+                <input type="checkbox" id="s3-t10" />
+                <label for="s3-t10"
+                  >Revisar en el Inspector (Elements → Styles) que ninguna regla
+                  usa <code>!important</code> innecesario, y que la
+                  especificidad de tus selectores es la mínima necesaria.</label
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+      </article>
+      <div style="margin-bottom: 24px">
+        <a
+          href="../../materias/desarrollo-4.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="desarrollo4-sesion2.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 2
+        </a>
+        <a
+          href="desarrollo4-sesion4.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 4
+        </a>
+      </div>
+    </div>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
