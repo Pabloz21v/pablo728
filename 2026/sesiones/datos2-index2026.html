@@ -1,0 +1,1705 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examen</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        padding: 15px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: clamp(24px, 5vw, 32px);
+        color: #333;
+      }
+
+      .encabezado {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-bottom: 25px;
+        font-size: clamp(14px, 4vw, 18px);
+      }
+
+      @media (min-width: 620px) {
+        .encabezado {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .encabezado div {
+        background-color: white;
+        padding: 12px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .encabezado strong {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+      }
+
+      .encabezado p {
+        margin: 5px 0;
+        font-size: clamp(12px, 3.5vw, 16px);
+      }
+
+      #timer {
+        font-size: clamp(20px, 6vw, 28px) !important;
+        color: red;
+        font-weight: bold;
+      }
+
+      #quiz {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      #quiz p {
+        margin: 15px 0 10px 0;
+        font-size: clamp(14px, 4vw, 16px);
+        font-weight: bold;
+        color: #333;
+      }
+
+      label {
+        display: block;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: clamp(13px, 3.5vw, 15px);
+        background-color: #f9f9f9;
+        transition: background-color 0.3s;
+      }
+
+      label:hover {
+        background-color: #efefef;
+      }
+
+      label input[type="radio"] {
+        margin-right: 10px;
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+      }
+
+      button {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        font-size: clamp(14px, 4vw, 16px);
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      button:active {
+        background-color: #004085;
+      }
+
+      #resultado {
+        text-align: center;
+        font-size: clamp(16px, 4vw, 20px);
+        font-weight: bold;
+        color: #333;
+        background-color: white;
+        padding: 15px;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      hr {
+        margin: 15px 0;
+        border: none;
+        border-top: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Examen</h1>
+    <div class="encabezado">
+      <div>
+        <strong>Hora de inicio:</strong>
+        <p id="horaInicio"></p>
+      </div>
+      <div>
+        <strong>Tiempo restante:</strong>
+        <p id="timer"></p>
+      </div>
+      <div id="horaFinalizacionDiv" style="display: none">
+        <strong>Hora de finalización:</strong>
+        <p id="horaFinalizacion"></p>
+      </div>
+    </div>
+    <div id="quiz"></div>
+    <button onclick="finalizar()">Finalizar</button>
+    <p id="resultado"></p>
+
+    <script>
+      const preguntasData = {
+        preguntas: [
+        {
+    "id": 1,
+    "pregunta": "¿Qué es una base de datos?",
+    "opciones": [
+      "Una colección organizada de información o datos almacenados de manera estructurada.",
+      "Un programa para editar imágenes y videos.",
+      "Un lenguaje de programación para crear aplicaciones web.",
+      "Un dispositivo físico de almacenamiento interno."
+    ],
+    "respuesta_correcta": "Una colección organizada de información o datos almacenados de manera estructurada."
+  },
+  {
+    "id": 2,
+    "pregunta": "¿Cuál de los siguientes es un tipo de base de datos?",
+    "opciones": [
+      "Bases de Datos Relacionales y NoSQL",
+      "Bases de Datos de Imágenes y Sonidos",
+      "Bases de Datos de Redes Sociales",
+      "Bases de Datos de Videojuegos"
+    ],
+    "respuesta_correcta": "Bases de Datos Relacionales y NoSQL"
+  },
+  {
+    "id": 3,
+    "pregunta": "¿Qué comando se utiliza para crear una base de datos en MySQL?",
+    "opciones": [
+      "CREATE DATABASE nombre_DDBB;",
+      "DROP DATABASE nombre_DDBB;",
+      "USE nombre_DDBB;",
+      "CREATE TABLE nombre_DDBB;"
+    ],
+    "respuesta_correcta": "CREATE DATABASE nombre_DDBB;"
+  },
+  {
+    "id": 4,
+    "pregunta": "¿Qué comando se utiliza para eliminar una base de datos en MySQL?",
+    "opciones": [
+      "DROP DATABASE nombre_DDBB;",
+      "DELETE DATABASE nombre_DDBB;",
+      "REMOVE DATABASE nombre_DDBB;",
+      "CREATE DATABASE nombre_DDBB;"
+    ],
+    "respuesta_correcta": "DROP DATABASE nombre_DDBB;"
+  },
+  {
+    "id": 5,
+    "pregunta": "¿Qué comando se utiliza para posicionarse en una base de datos en MySQL?",
+    "opciones": [
+      "USE nombre_DDBB;",
+      "SELECT nombre_DDBB;",
+      "OPEN nombre_DDBB;",
+      "CONNECT nombre_DDBB;"
+    ],
+    "respuesta_correcta": "USE nombre_DDBB;"
+  },
+  {
+    "id": 6,
+    "pregunta": "¿Qué tipo de dato se utiliza en MySQL para almacenar texto con una longitud máxima definida?",
+    "opciones": [
+      "VARCHAR()",
+      "INT",
+      "DOUBLE",
+      "TEXT"
+    ],
+    "respuesta_correcta": "VARCHAR()"
+  },
+  {
+    "id": 7,
+    "pregunta": "¿Qué tipo de dato se utiliza en MySQL para almacenar números enteros?",
+    "opciones": [
+      "INT",
+      "VARCHAR",
+      "DOUBLE",
+      "TEXT"
+    ],
+    "respuesta_correcta": "INT"
+  },
+  {
+    "id": 8,
+    "pregunta": "¿Qué comando se utiliza para insertar datos en una tabla en MySQL?",
+    "opciones": [
+      "INSERT INTO tabla (col1, col2) VALUES (valor1, valor2);",
+      "ADD INTO tabla (col1, col2) VALUES (valor1, valor2);",
+      "UPDATE tabla SET col1 = valor1;",
+      "CREATE INTO tabla (col1, col2) VALUES (valor1, valor2);"
+    ],
+    "respuesta_correcta": "INSERT INTO tabla (col1, col2) VALUES (valor1, valor2);"
+  },
+  {
+    "id": 9,
+    "pregunta": "¿Qué es una PRIMARY KEY en una tabla de base de datos?",
+    "opciones": [
+      "Un campo que identifica de forma única cada registro y no puede ser NULL.",
+      "Un campo que puede repetirse en varios registros.",
+      "Un campo que siempre debe ser de tipo texto.",
+      "Un campo que permite valores nulos."
+    ],
+    "respuesta_correcta": "Un campo que identifica de forma única cada registro y no puede ser NULL."
+  },
+  {
+    "id": 10,
+    "pregunta": "¿Qué significa la restricción NOT NULL en una columna?",
+    "opciones": [
+      "Que el campo debe tener un valor siempre.",
+      "Que el campo puede quedar vacío.",
+      "Que el campo solo acepta números.",
+      "Que el campo es clave primaria."
+    ],
+    "respuesta_correcta": "Que el campo debe tener un valor siempre."
+  },
+  {
+    "id": 11,
+    "pregunta": "¿Qué comando se utiliza para modificar registros existentes en una tabla?",
+    "opciones": [
+      "UPDATE tabla SET columna = valor WHERE condición;",
+      "INSERT INTO tabla SET columna = valor WHERE condición;",
+      "MODIFY tabla SET columna = valor WHERE condición;",
+      "CHANGE tabla SET columna = valor WHERE condición;"
+    ],
+    "respuesta_correcta": "UPDATE tabla SET columna = valor WHERE condición;"
+  },
+  {
+    "id": 12,
+    "pregunta": "¿Qué cláusula se utiliza para filtrar registros en una consulta SQL?",
+    "opciones": [
+      "WHERE",
+      "FILTER",
+      "HAVING",
+      "SELECT"
+    ],
+    "respuesta_correcta": "WHERE"
+  },
+  {
+    "id": 13,
+    "pregunta": "¿Qué operador SQL se utiliza para indicar que ambas condiciones deben cumplirse?",
+    "opciones": [
+      "AND",
+      "OR",
+      "NOT",
+      "XOR"
+    ],
+    "respuesta_correcta": "AND"
+  },
+  {
+    "id": 14,
+    "pregunta": "¿Qué operador SQL se utiliza para indicar que al menos una condición debe cumplirse?",
+    "opciones": [
+      "OR",
+      "AND",
+      "NOT",
+      "XOR"
+    ],
+    "respuesta_correcta": "OR"
+  },
+  {
+    "id": 15,
+    "pregunta": "¿Qué operador SQL invierte el valor lógico de una condición?",
+    "opciones": [
+      "NOT",
+      "AND",
+      "OR",
+      "XOR"
+    ],
+    "respuesta_correcta": "NOT"
+  },
+  {
+    "id": 16,
+    "pregunta": "¿Qué comando se utiliza para eliminar registros de una tabla en MySQL?",
+    "opciones": [
+      "DELETE FROM tabla WHERE condición;",
+      "REMOVE FROM tabla WHERE condición;",
+      "DROP FROM tabla WHERE condición;",
+      "TRUNCATE FROM tabla WHERE condición;"
+    ],
+    "respuesta_correcta": "DELETE FROM tabla WHERE condición;"
+  },
+  {
+    "id": 17,
+    "pregunta": "¿Qué comando se utiliza para vaciar toda una tabla pero manteniendo su estructura?",
+    "opciones": [
+      "TRUNCATE TABLE tabla;",
+      "DELETE TABLE tabla;",
+      "DROP TABLE tabla;",
+      "CLEAR TABLE tabla;"
+    ],
+    "respuesta_correcta": "TRUNCATE TABLE tabla;"
+  },
+  {
+    "id": 18,
+    "pregunta": "¿Qué comando se utiliza para eliminar una tabla si existe?",
+    "opciones": [
+      "DROP TABLE IF EXISTS tabla;",
+      "DELETE TABLE IF EXISTS tabla;",
+      "REMOVE TABLE IF EXISTS tabla;",
+      "TRUNCATE TABLE IF EXISTS tabla;"
+    ],
+    "respuesta_correcta": "DROP TABLE IF EXISTS tabla;"
+  },
+  {
+    "id": 19,
+    "pregunta": "¿Qué comando se utiliza para renombrar una tabla en MySQL?",
+    "opciones": [
+      "RENAME TABLE tabla_vieja TO tabla_nueva;",
+      "ALTER TABLE tabla_vieja RENAME tabla_nueva;",
+      "CHANGE TABLE tabla_vieja TO tabla_nueva;",
+      "UPDATE TABLE tabla_vieja TO tabla_nueva;"
+    ],
+    "respuesta_correcta": "RENAME TABLE tabla_vieja TO tabla_nueva;"
+  },
+  {
+    "id": 20,
+    "pregunta": "¿Qué significa AUTO_INCREMENT en una columna de una tabla MySQL?",
+    "opciones": [
+      "Que genera automáticamente valores consecutivos para esa columna.",
+      "Que el valor de la columna se incrementa manualmente.",
+      "Que la columna solo acepta valores únicos.",
+      "Que la columna no puede tener valores nulos."
+    ],
+    "respuesta_correcta": "Que genera automáticamente valores consecutivos para esa columna."
+  },
+  {
+    "id": 21,
+    "pregunta": "¿Qué tipo de dato se utiliza en MySQL para almacenar números con decimales?",
+    "opciones": [
+      "DOUBLE",
+      "INT",
+      "VARCHAR",
+      "TEXT"
+    ],
+    "respuesta_correcta": "DOUBLE"
+  },
+  {
+    "id": 22,
+    "pregunta": "¿Qué comando se utiliza para mostrar todas las bases de datos en MySQL?",
+    "opciones": [
+      "SHOW DATABASES;",
+      "LIST DATABASES;",
+      "DISPLAY DATABASES;",
+      "SELECT DATABASES;"
+    ],
+    "respuesta_correcta": "SHOW DATABASES;"
+  },
+  {
+    "id": 23,
+    "pregunta": "¿Qué comando se utiliza para mostrar todas las tablas de la base de datos activa en MySQL?",
+    "opciones": [
+      "SHOW TABLES;",
+      "LIST TABLES;",
+      "DISPLAY TABLES;",
+      "SELECT TABLES;"
+    ],
+    "respuesta_correcta": "SHOW TABLES;"
+  },
+  {
+    "id": 24,
+    "pregunta": "¿Qué espero obtener con esta consulta? SELECT * FROM alumnos WHERE edad > 18 AND promedio >= 6",
+    "opciones": [
+      "Todos los alumnos con edad mayor a 18 y promedio mayor o igual a 6",
+      "Todos los alumnos con edad mayor o igual a 18 y promedio mayor o igual a 6",
+      "Todos los alumnos con edad mayor a 18 y promedio mayor a 6",
+      "Todos los alumnos con edad mayor o igual 18 y promedio mayor a 6"
+    ],
+    "respuesta_correcta": "Todos los alumnos con edad mayor a 18 y promedio mayor o igual a 6"
+  },
+  {
+    "id": 25,
+    "pregunta": "¿Qué espero obtener con esta consulta? SELECT * FROM alumnos WHERE edad > 18 OR promedio > 6",
+    "opciones": [
+      "Todos los alumnos con edad mayor a 18 o promedio mayor a 6",
+      "Todos los alumnos con edad mayor o igual a 18 o promedio mayor o igual a 6",
+      "Todos los alumnos con edad mayor a 18 o promedio mayor o igual a 6",
+      "Todos los alumnos con edad mayor o igual 18 o promedio mayor a 6"
+    ],
+    "respuesta_correcta": "Todos los alumnos con edad mayor a 18 o promedio mayor a 6"
+  },
+  {
+    "id": 26,
+    "pregunta": "¿Qué espero obtener con esta consulta? SELECT * FROM alumnos WHERE NOT edad = 20",
+    "opciones": [
+      "Todos los alumnos cuya edad NO sea 20",
+      "Todos los alumnos cuya edad sea 20",
+      "Todos los alumnos cuya edad sea mayor a 20",
+      "Todos los alumnos cuya edad sea menor a 20"
+    ],
+    "respuesta_correcta": "Todos los alumnos cuya edad NO sea 20"
+  },
+  {
+    "id": 27,
+    "pregunta": "¿Cuál es el comando correcto si quiere actualizar el nombre de Mario a Pepe de una persona con ID 3 en la tabla Clientes?",
+    "opciones": [
+      "UPDATE clientes SET nombre = 'Pepe' WHERE id = 3;",
+      "UPDATE clientes SET nombre = 'Mario' WHERE id = 3;",
+      "UPDATE clientes SET id = 3 WHERE nombre = 'Pepe';",
+      "UPDATE clientes SET nombre = 'Pepe' WHERE id = 3"
+    ],
+    "respuesta_correcta": "UPDATE clientes SET nombre = 'Pepe' WHERE id = 3;"
+  },
+  {
+    "id": 28,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? INSERT INTO alumnos (nombre, edad) VALUES ('Ana', 20)",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta el nombre de la tabla.",
+      "Falta la palabra VALUES.",
+      "Falta el tipo de dato."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 29,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? CREATE TABLE alumnos (id INT PRIMARY KEY, nombre VARCHAR(50), edad INT)",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la coma después de INT.",
+      "Falta el tipo de dato en la columna nombre.",
+      "Falta la palabra NOT NULL."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 30,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE edad > 18 AND",
+    "opciones": [
+      "Falta la segunda condición después de AND.",
+      "Falta el punto y coma al final.",
+      "Falta la tabla en la consulta.",
+      "Falta la palabra WHERE."
+    ],
+    "respuesta_correcta": "Falta la segunda condición después de AND."
+  },
+  {
+    "id": 31,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? DELETE FROM alumnos WHERE id = 2",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra WHERE.",
+      "Falta el nombre de la tabla.",
+      "Falta la condición."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 32,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? UPDATE alumnos SET edad = 23 WHERE id = 2",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra SET.",
+      "Falta el nombre de la tabla.",
+      "Falta la condición WHERE."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 33,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? TRUNCATE alumnos",
+    "opciones": [
+      "Falta la palabra TABLE y el punto y coma al final.",
+      "Falta la palabra FROM.",
+      "Falta la palabra DELETE.",
+      "Falta la condición WHERE."
+    ],
+    "respuesta_correcta": "Falta la palabra TABLE y el punto y coma al final."
+  },
+  {
+    "id": 34,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? DROP TABLE IF EXISTS alumnos",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra DELETE.",
+      "Falta la palabra FROM.",
+      "Falta la condición WHERE."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 35,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? RENAME TABLE alumnos TO estudiantes",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra ALTER.",
+      "Falta la palabra CHANGE.",
+      "Falta la palabra UPDATE."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 36,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? CREATE DATABASE escuela",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra TABLE.",
+      "Falta la palabra USE.",
+      "Falta la palabra DROP."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 37,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? USE escuela",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra DATABASE.",
+      "Falta la palabra SELECT.",
+      "Falta la palabra FROM."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 38,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? INSERT INTO alumnos (nombre, edad) VALUES ('Ana', 20), ('Luis', 22), ('María', 21)",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra INTO.",
+      "Falta la palabra SET.",
+      "Falta la palabra WHERE."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 39,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE edad > 18 AND promedio >= 6",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra WHERE.",
+      "Falta la palabra FROM.",
+      "Falta la palabra SELECT."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 40,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE edad > 18 OR promedio > 6",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra AND.",
+      "Falta la palabra NOT.",
+      "Falta la palabra FROM."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 41,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE NOT edad = 20",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra AND.",
+      "Falta la palabra OR.",
+      "Falta la palabra FROM."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 42,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE (edad > 18 AND promedio >= 6) OR nombre = 'Ana'",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra NOT.",
+      "Falta la palabra FROM.",
+      "Falta la palabra SELECT."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 43,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SHOW DATABASES",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra TABLE.",
+      "Falta la palabra FROM.",
+      "Falta la palabra SELECT."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 44,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SHOW TABLES",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra DATABASES.",
+      "Falta la palabra FROM.",
+      "Falta la palabra SELECT."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 45,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? CREATE TABLE alumnos (id INT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(50), edad INT, promedio DOUBLE)",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra NOT NULL.",
+      "Falta la palabra UNIQUE.",
+      "Falta la palabra FOREIGN KEY."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 46,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? INSERT INTO alumnos (nombre, edad, promedio) VALUES ('Juan', 20, 8.5), ('Ana', 22, 9.3), ('Pedro', 19, 7.2)",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra INTO.",
+      "Falta la palabra SET.",
+      "Falta la palabra WHERE."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 47,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT nombre, promedio FROM alumnos WHERE promedio > 6",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra FROM.",
+      "Falta la palabra WHERE.",
+      "Falta la palabra SELECT."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 48,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? DELETE FROM alumnos WHERE id = 2",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra FROM.",
+      "Falta la palabra WHERE.",
+      "Falta la palabra DELETE."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 49,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? TRUNCATE TABLE alumnos",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra FROM.",
+      "Falta la palabra DELETE.",
+      "Falta la palabra WHERE."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 50,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? DROP TABLE IF EXISTS alumnos",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra FROM.",
+      "Falta la palabra DELETE.",
+      "Falta la palabra WHERE."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 51,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? RENAME TABLE alumnos TO estudiantes",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra ALTER.",
+      "Falta la palabra CHANGE.",
+      "Falta la palabra UPDATE."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 52,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? UPDATE alumnos SET edad = 23 WHERE id = 2",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra SET.",
+      "Falta la palabra FROM.",
+      "Falta la palabra DELETE."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 53,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE edad > 18 AND promedio >= 6",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra FROM.",
+      "Falta la palabra WHERE.",
+      "Falta la palabra SELECT."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 54,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE edad > 18 OR promedio > 6",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra AND.",
+      "Falta la palabra NOT.",
+      "Falta la palabra FROM."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 55,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE NOT edad = 20",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra AND.",
+      "Falta la palabra OR.",
+      "Falta la palabra FROM."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 56,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE (edad > 18 AND promedio >= 6) OR nombre = 'Ana'",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra NOT.",
+      "Falta la palabra FROM.",
+      "Falta la palabra SELECT."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 57,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SHOW DATABASES",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra TABLE.",
+      "Falta la palabra FROM.",
+      "Falta la palabra SELECT."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 58,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SHOW TABLES",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra DATABASES.",
+      "Falta la palabra FROM.",
+      "Falta la palabra SELECT."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 59,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? CREATE TABLE alumnos (id INT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(50), edad INT, promedio DOUBLE)",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra NOT NULL.",
+      "Falta la palabra UNIQUE.",
+      "Falta la palabra FOREIGN KEY."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 60,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? INSERT INTO alumnos (nombre, edad, promedio) VALUES ('Juan', 20, 8.5), ('Ana', 22, 9.3), ('Pedro', 19, 7.2)",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra INTO.",
+      "Falta la palabra SET.",
+      "Falta la palabra WHERE."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 61,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT nombre, promedio FROM alumnos WHERE promedio > 6",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra FROM.",
+      "Falta la palabra WHERE.",
+      "Falta la palabra SELECT."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 62,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? DELETE FROM alumnos WHERE id = 2",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra FROM.",
+      "Falta la palabra WHERE.",
+      "Falta la palabra DELETE."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 63,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? TRUNCATE TABLE alumnos",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra FROM.",
+      "Falta la palabra DELETE.",
+      "Falta la palabra WHERE."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 64,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? DROP TABLE IF EXISTS alumnos",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra FROM.",
+      "Falta la palabra DELETE.",
+      "Falta la palabra WHERE."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+  {
+    "id": 65,
+    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? RENAME TABLE alumnos TO estudiantes",
+    "opciones": [
+      "Falta el punto y coma al final.",
+      "Falta la palabra ALTER.",
+      "Falta la palabra CHANGE.",
+      "Falta la palabra UPDATE."
+    ],
+    "respuesta_correcta": "Falta el punto y coma al final."
+  },
+
+//   {
+// "id": 15,
+// "pregunta": "¿Qué indica INT en una columna?",
+// "opciones": [
+// "Que almacena un número entero",
+// "Que almacena texto",
+// "Que almacena decimales",
+// "Que almacena fechas"
+// ],
+// "respuesta_correcta": "Que almacena un número entero"
+// },
+// {
+// "id": 16,
+// "pregunta": "¿Cuál es el comando correcto para eliminar una tabla?",
+// "opciones": [
+// "DROP TABLE alumnos;",
+// "DELETE TABLE alumnos;",
+// "REMOVE TABLE alumnos;",
+// "TRUNCATE alumnos;"
+// ],
+// "respuesta_correcta": "DROP TABLE alumnos;"
+// },
+// {
+// "id": 17,
+// "pregunta": "En INSERT INTO alumnos (nombre, apellido, edad, domicilio) VALUES ('Tony', 'Stark', 1967, 'Avenida siempre viva 123'); ¿Cómo se ingresan los datos de tipo VARCHAR?",
+// "opciones": [
+// "Entre comillas",
+// "Sin comillas",
+// "Con punto y coma",
+// "Con paréntesis"
+// ],
+// "respuesta_correcta": "Entre comillas"
+// },
+// {
+// "id": 18,
+// "pregunta": "¿Qué comando se utiliza para agregar datos a una tabla?",
+// "opciones": [
+// "INSERT INTO",
+// "UPDATE",
+// "SELECT",
+// "CREATE"
+// ],
+// "respuesta_correcta": "INSERT INTO"
+// },
+// {
+// "id": 19,
+// "pregunta": "¿Qué sucede si se ingresa un tipo de dato que no corresponde en un INSERT?",
+// "opciones": [
+// "Sale error y no registra los cambios",
+// "Se guarda igual",
+// "Se convierte automáticamente",
+// "Se ignora la columna"
+// ],
+// "respuesta_correcta": "Sale error y no registra los cambios"
+// },
+// {
+// "id": 20,
+// "pregunta": "En CREATE TABLE, ¿cómo se separan las columnas?",
+// "opciones": [
+// "Con coma",
+// "Con punto y coma",
+// "Con dos puntos",
+// "Con espacio"
+// ],
+// "respuesta_correcta": "Con coma"
+// },
+// {
+// "id": 21,
+// "pregunta": "¿Qué es PRIMARY KEY?",
+// "opciones": [
+// "Un campo que identifica de forma única cada registro de una tabla",
+// "Un campo que puede repetirse",
+// "Un campo que puede ser NULL",
+// "Un campo de texto"
+// ],
+// "respuesta_correcta": "Un campo que identifica de forma única cada registro de una tabla"
+// },
+// {
+// "id": 22,
+// "pregunta": "¿PRIMARY KEY puede repetirse?",
+// "opciones": [
+// "No",
+// "Sí",
+// "Solo en tablas grandes",
+// "Solo si es INT"
+// ],
+// "respuesta_correcta": "No"
+// },
+// {
+// "id": 23,
+// "pregunta": "¿PRIMARY KEY puede ser NULL?",
+// "opciones": [
+// "No",
+// "Sí",
+// "A veces",
+// "Solo si es VARCHAR"
+// ],
+// "respuesta_correcta": "No"
+// },
+// {
+// "id": 24,
+// "pregunta": "¿Cuál es un ejemplo típico de PRIMARY KEY?",
+// "opciones": [
+// "DNI",
+// "Color de ojos",
+// "Nombre",
+// "Edad"
+// ],
+// "respuesta_correcta": "DNI"
+// },
+// {
+// "id": 25,
+// "pregunta": "¿Qué indica NOT NULL?",
+// "opciones": [
+// "Que el campo debe tener un valor siempre",
+// "Que el campo puede estar vacío",
+// "Que el campo es clave",
+// "Que el campo es decimal"
+// ],
+// "respuesta_correcta": "Que el campo debe tener un valor siempre"
+// },
+// {
+// "id": 26,
+// "pregunta": "En CREATE TABLE deportista (id INT PRIMARY KEY NOT NULL, nombre VARCHAR(50) NOT NULL, goles INT NOT NULL); ¿Qué columna es PRIMARY KEY?",
+// "opciones": [
+// "id",
+// "nombre",
+// "goles",
+// "Todas"
+// ],
+// "respuesta_correcta": "id"
+// },
+// {
+// "id": 27,
+// "pregunta": "¿Qué comando inserta varias filas en una sola sentencia?",
+// "opciones": [
+// "INSERT INTO tabla (col1, col2) VALUES (v1, v2), (v3, v4);",
+// "INSERT INTO tabla VALUES (v1);",
+// "UPDATE tabla SET col1 = v1;",
+// "SELECT * FROM tabla;"
+// ],
+// "respuesta_correcta": "INSERT INTO tabla (col1, col2) VALUES (v1, v2), (v3, v4);"
+// },
+// {
+// "id": 28,
+// "pregunta": "¿Qué hace SELECT * FROM alumnos;?",
+// "opciones": [
+// "Selecciona todo de la tabla alumnos",
+// "Selecciona solo el id",
+// "Elimina alumnos",
+// "Actualiza alumnos"
+// ],
+// "respuesta_correcta": "Selecciona todo de la tabla alumnos"
+// },
+// {
+// "id": 29,
+// "pregunta": "¿Qué hace UPDATE alumnos SET edad = 23 WHERE id = 2;?",
+// "opciones": [
+// "Actualiza la edad a 23 donde el id sea 2",
+// "Actualiza el id a 2 donde la edad sea 23",
+// "Inserta una edad 23",
+// "Elimina el registro con id 2"
+// ],
+// "respuesta_correcta": "Actualiza la edad a 23 donde el id sea 2"
+// },
+// {
+// "id": 30,
+// "pregunta": "¿Por qué es importante usar WHERE en UPDATE?",
+// "opciones": [
+// "Para evitar modificar todos los registros",
+// "Para ordenar los registros",
+// "Para eliminar la tabla",
+// "Para crear una base de datos"
+// ],
+// "respuesta_correcta": "Para evitar modificar todos los registros"
+// },
+// {
+// "id": 31,
+// "pregunta": "¿Qué operador significa 'mayor que'?",
+// "opciones": [
+// ">",
+// "<",
+// "=",
+// "<>"
+// ],
+// "respuesta_correcta": ">"
+// },
+// {
+// "id": 32,
+// "pregunta": "¿Qué operador significa 'distinto de'?",
+// "opciones": [
+// "<>",
+// "=",
+// ">",
+// "<"
+// ],
+// "respuesta_correcta": "<>"
+// },
+// {
+// "id": 33,
+// "pregunta": "¿Qué hace SELECT * FROM alumnos WHERE edad > 21;?",
+// "opciones": [
+// "Muestra los alumnos con edad mayor a 21",
+// "Muestra los alumnos con edad menor a 21",
+// "Muestra los alumnos con edad igual a 21",
+// "Elimina los alumnos mayores a 21"
+// ],
+// "respuesta_correcta": "Muestra los alumnos con edad mayor a 21"
+// },
+// {
+// "id": 34,
+// "pregunta": "¿Qué hace SELECT * FROM alumnos WHERE NOT edad = 20;?",
+// "opciones": [
+// "Muestra los alumnos cuya edad no sea 20",
+// "Muestra los alumnos con edad 20",
+// "Muestra los alumnos con edad mayor a 20",
+// "Elimina los alumnos con edad 20"
+// ],
+// "respuesta_correcta": "Muestra los alumnos cuya edad no sea 20"
+// },
+// {
+// "id": 35,
+// "pregunta": "¿Qué interpretación corresponde a SELECT * FROM alumnos WHERE (edad > 18 AND promedio >= 6) OR nombre = 'Ana';?",
+// "opciones": [
+// "Selecciona alumnos mayores de 18 con promedio mayor o igual a 6, o cuyo nombre sea Ana",
+// "Selecciona alumnos mayores de 18 y con promedio mayor o igual a 6, y además llamados Ana",
+// "Selecciona alumnos menores de 18 o cuyo nombre sea Ana",
+// "Selecciona alumnos con promedio mayor o igual a 6 solamente"
+// ],
+// "respuesta_correcta": "Selecciona alumnos mayores de 18 con promedio mayor o igual a 6, o cuyo nombre sea Ana"
+// },
+// {
+// "id": 36,
+// "pregunta": "¿Qué comando muestra todas las bases de datos?",
+// "opciones": [
+// "SHOW DATABASES;",
+// "SHOW TABLES;",
+// "USE;",
+// "SELECT DATABASES;"
+// ],
+// "respuesta_correcta": "SHOW DATABASES;"
+// },
+// {
+// "id": 37,
+// "pregunta": "¿Qué comando muestra las tablas de la base de datos activa?",
+// "opciones": [
+// "SHOW TABLES;",
+// "SHOW DATABASES;",
+// "USE;",
+// "SELECT TABLES;"
+// ],
+// "respuesta_correcta": "SHOW TABLES;"
+// },
+// {
+// "id": 38,
+// "pregunta": "¿Qué hace AUTO_INCREMENT?",
+// "opciones": [
+// "Genera automáticamente valores consecutivos",
+// "Borra registros",
+// "Crea una base de datos",
+// "Ordena los registros"
+// ],
+// "respuesta_correcta": "Genera automáticamente valores consecutivos"
+// },
+// {
+// "id": 39,
+// "pregunta": "¿Qué tipo de dato permite almacenar números con decimales?",
+// "opciones": [
+// "DOUBLE",
+// "INT",
+// "VARCHAR",
+// "DATE"
+// ],
+// "respuesta_correcta": "DOUBLE"
+// },
+// {
+// "id": 40,
+// "pregunta": "En CREATE TABLE alumnos (id INT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(50), edad INT, promedio DOUBLE); ¿Qué columna se omite normalmente en INSERT INTO alumnos (nombre, edad, promedio)?",
+// "opciones": [
+// "id",
+// "nombre",
+// "edad",
+// "promedio"
+// ],
+// "respuesta_correcta": "id"
+// },
+// {
+// "id": 41,
+// "pregunta": "¿Cuál es el comando correcto para renombrar una tabla?",
+// "opciones": [
+// "RENAME TABLE alumnos TO estudiantes;",
+// "CHANGE TABLE alumnos TO estudiantes;",
+// "ALTER NAME alumnos TO estudiantes;",
+// "UPDATE TABLE alumnos TO estudiantes;"
+// ],
+// "respuesta_correcta": "RENAME TABLE alumnos TO estudiantes;"
+// },
+// {
+// "id": 42,
+// "pregunta": "¿Qué hace DELETE FROM alumnos WHERE id = 2;?",
+// "opciones": [
+// "Borra la fila cuyo id es 2",
+// "Borra toda la tabla",
+// "Borra la columna id",
+// "Actualiza el id 2"
+// ],
+// "respuesta_correcta": "Borra la fila cuyo id es 2"
+// },
+// {
+// "id": 43,
+// "pregunta": "¿Qué hace TRUNCATE TABLE alumnos;?",
+// "opciones": [
+// "Vacía toda la tabla pero mantiene su estructura",
+// "Borra la tabla",
+// "Borra una sola fila",
+// "Renombra la tabla"
+// ],
+// "respuesta_correcta": "Vacía toda la tabla pero mantiene su estructura"
+// },
+// {
+// "id": 44,
+// "pregunta": "¿Qué hace DROP TABLE IF EXISTS alumnos;?",
+// "opciones": [
+// "Elimina la tabla si existe",
+// "Vacía la tabla",
+// "Borra una fila",
+// "Crea la tabla"
+// ],
+// "respuesta_correcta": "Elimina la tabla si existe"
+// },
+// {
+// "id": 45,
+// "pregunta": "¿Cuál es la diferencia entre DELETE y TRUNCATE?",
+// "opciones": [
+// "DELETE borra filas según una condición; TRUNCATE vacía toda la tabla",
+// "DELETE crea tablas; TRUNCATE actualiza registros",
+// "DELETE elimina la base de datos; TRUNCATE elimina columnas",
+// "DELETE y TRUNCATE son exactamente iguales"
+// ],
+// "respuesta_correcta": "DELETE borra filas según una condición; TRUNCATE vacía toda la tabla"
+// },
+// {
+// "id": 46,
+// "pregunta": "¿Qué comando selecciona las columnas nombre y promedio de alumnos con promedio mayor a 6?",
+// "opciones": [
+// "SELECT nombre, promedio FROM alumnos WHERE promedio > 6;",
+// "SELECT * FROM alumnos WHERE promedio > 6;",
+// "SELECT nombre, promedio FROM alumnos;",
+// "UPDATE alumnos SET promedio > 6;"
+// ],
+// "respuesta_correcta": "SELECT nombre, promedio FROM alumnos WHERE promedio > 6;"
+// },
+// {
+// "id": 47,
+// "pregunta": "¿Qué operador lógico exige que ambas condiciones se cumplan?",
+// "opciones": [
+// "AND",
+// "OR",
+// "NOT",
+// "XOR"
+// ],
+// "respuesta_correcta": "AND"
+// },
+// {
+// "id": 48,
+// "pregunta": "¿Qué operador lógico exige que al menos una condición se cumpla?",
+// "opciones": [
+// "OR",
+// "AND",
+// "NOT",
+// "XOR"
+// ],
+// "respuesta_correcta": "OR"
+// },
+// {
+// "id": 49,
+// "pregunta": "¿Qué operador invierte el valor lógico de una condición?",
+// "opciones": [
+// "NOT",
+// "AND",
+// "OR",
+// "="
+// ],
+// "respuesta_correcta": "NOT"
+// },
+// {
+// "id": 50,
+// "pregunta": "¿Cuál es el error en UPDATE alumnos SET edad = 23;?",
+// "opciones": [
+// "Falta WHERE y modificaría todos los registros",
+// "Falta SET",
+// "Falta VALUES",
+// "Falta FROM"
+// ],
+// "respuesta_correcta": "Falta WHERE y modificaría todos los registros"
+// },
+// {
+// "id": 51,
+// "pregunta": "¿Cuál es el error en INSERT alumnos (nombre) VALUES ('Ana');?",
+// "opciones": [
+// "Falta INTO",
+// "Falta SET",
+// "Falta WHERE",
+// "Falta UPDATE"
+// ],
+// "respuesta_correcta": "Falta INTO"
+// },
+// {
+// "id": 52,
+// "pregunta": "¿Cuál es la sentencia correcta para actualizar el nombre de Mario a Pepe de una persona con ID 3 en la tabla Clientes?",
+// "opciones": [
+// "UPDATE clientes SET nombre = 'Pepe' WHERE id = 3;",
+// "UPDATE clientes SET nombre = 'Mario' WHERE id = 3;",
+// "UPDATE clientes SET id = 3 WHERE nombre = 'Pepe';",
+// "UPDATE clientes SET nombre = 'Pepe';"
+// ],
+// "respuesta_correcta": "UPDATE clientes SET nombre = 'Pepe' WHERE id = 3;"
+// },
+// {
+// "id": 53,
+// "pregunta": "¿Qué se espera obtener con SELECT * FROM alumnos WHERE edad > 18 AND promedio >= 6?",
+// "opciones": [
+// "Todos los alumnos con edad mayor a 18 y promedio mayor o igual a 6",
+// "Todos los alumnos con edad mayor o igual a 18 y promedio mayor o igual a 6",
+// "Todos los alumnos con edad mayor a 18 y promedio mayor a 6",
+// "Todos los alumnos con edad mayor o igual a 18 y promedio mayor a 6"
+// ],
+// "respuesta_correcta": "Todos los alumnos con edad mayor a 18 y promedio mayor o igual a 6"
+// },
+// {
+// "id": 54,
+// "pregunta": "¿Qué se espera obtener con SELECT * FROM alumnos WHERE edad > 18 OR promedio > 6?",
+// "opciones": [
+// "Todos los alumnos con edad mayor a 18 o promedio mayor a 6",
+// "Todos los alumnos con edad mayor o igual a 18 o promedio mayor o igual a 6",
+// "Todos los alumnos con edad mayor a 18 o promedio mayor o igual a 6",
+// "Todos los alumnos con edad mayor o igual a 18 o promedio mayor a 6"
+// ],
+// "respuesta_correcta": "Todos los alumnos con edad mayor a 18 o promedio mayor a 6"
+// },
+// {
+// "id": 55,
+// "pregunta": "¿Qué sentencia falta para agregar registros a una tabla? _________ alumnos (nombre, edad) VALUES ('Ana', 20)",
+// "opciones": [
+// "INSERT INTO",
+// "CREATE INTO",
+// "PUT INTO",
+// "INSERT IN"
+// ],
+// "respuesta_correcta": "INSERT INTO"
+// },
+// {
+// "id": 56,
+// "pregunta": "En MySQL Workbench, ¿qué indica una tilde verde en el output?",
+// "opciones": [
+// "Éxito en la ejecución",
+// "Error en la ejecución",
+// "Advertencia",
+// "Consulta lenta"
+// ],
+// "respuesta_correcta": "Éxito en la ejecución"
+// },
+// {
+// "id": 57,
+// "pregunta": "En MySQL Workbench, ¿qué indica una cruz roja en el output?",
+// "opciones": [
+// "Error en la ejecución",
+// "Éxito en la ejecución",
+// "Advertencia",
+// "Consulta vacía"
+// ],
+// "respuesta_correcta": "Error en la ejecución"
+// },
+// {
+// "id": 58,
+// "pregunta": "¿Qué comando selecciona todos los productos con precio mayor a 100?",
+// "opciones": [
+// "SELECT * FROM productos WHERE precio > 100;",
+// "SELECT * FROM productos WHERE precio < 100;",
+// "SELECT precio FROM productos;",
+// "DELETE FROM productos WHERE precio > 100;"
+// ],
+// "respuesta_correcta": "SELECT * FROM productos WHERE precio > 100;"
+// },
+// {
+// "id": 59,
+// "pregunta": "¿Qué comando filtra productos con stock menor a 50 y precio menor a 500?",
+// "opciones": [
+// "SELECT * FROM productos WHERE stock < 50 AND precio < 500;",
+// "SELECT * FROM productos WHERE stock < 50 OR precio < 500;",
+// "SELECT * FROM productos WHERE stock > 50 AND precio > 500;",
+// "SELECT * FROM productos WHERE stock = 50 AND precio = 500;"
+// ],
+// "respuesta_correcta": "SELECT * FROM productos WHERE stock < 50 AND precio < 500;"
+// },
+// {
+// "id": 60,
+// "pregunta": "¿Qué comando filtra productos que NO tengan stock mayor a 20?",
+// "opciones": [
+// "SELECT * FROM productos WHERE NOT stock > 20;",
+// "SELECT * FROM productos WHERE stock > 20;",
+// "SELECT * FROM productos WHERE NOT stock = 20;",
+// "SELECT * FROM productos WHERE stock <> 20;"
+// ],
+// "respuesta_correcta": "SELECT * FROM productos WHERE NOT stock > 20;"
+// },
+// {
+// "id": 61,
+// "pregunta": "¿Qué hace DROP TABLE IF EXISTS inventario;?",
+// "opciones": [
+// "Elimina la tabla inventario si existe",
+// "Vacía la tabla inventario",
+// "Crea la tabla inventario",
+// "Renombra la tabla inventario"
+// ],
+// "respuesta_correcta": "Elimina la tabla inventario si existe"
+// },
+// {
+// "id": 62,
+// "pregunta": "¿Qué hace RENAME TABLE productos TO inventario;?",
+// "opciones": [
+// "Renombra la tabla productos como inventario",
+// "Elimina la tabla productos",
+// "Crea la tabla inventario",
+// "Copia la tabla productos"
+// ],
+// "respuesta_correcta": "Renombra la tabla productos como inventario"
+// },
+// {
+// "id": 63,
+// "pregunta": "En una tabla con id AUTO_INCREMENT PRIMARY KEY, ¿qué ocurre si se inserta un registro sin indicar el id?",
+// "opciones": [
+// "Se genera automáticamente un valor consecutivo",
+// "Da error",
+// "Se inserta NULL",
+// "Se repite el id 0"
+// ],
+// "respuesta_correcta": "Se genera automáticamente un valor consecutivo"
+// },
+// {
+// "id": 64,
+// "pregunta": "¿Cuál es la sintaxis correcta para crear una tabla con PRIMARY KEY?",
+// "opciones": [
+// "CREATE TABLE alumnos (id INT PRIMARY KEY, nombre VARCHAR(50));",
+// "CREATE TABLE alumnos (id INT, PRIMARY KEY nombre);",
+// "CREATE TABLE alumnos (PRIMARY KEY id INT);",
+// "CREATE TABLE alumnos (id PRIMARY KEY INT);"
+// ],
+// "respuesta_correcta": "CREATE TABLE alumnos (id INT PRIMARY KEY, nombre VARCHAR(50));"
+// },
+// {
+// "id": 65,
+// "pregunta": "¿Cuál es el tipo de dato para texto en MySQL según la teoría?",
+// "opciones": [
+// "VARCHAR",
+// "INT",
+// "DOUBLE",
+// "PRIMARY"
+// ],
+// "respuesta_correcta": "VARCHAR"
+// },
+// {
+// "id": 66,
+// "pregunta": "¿Qué significa que un campo sea NOT NULL?",
+// "opciones": [
+// "Que no puede quedar vacío",
+// "Que puede repetirse",
+// "Que es clave primaria",
+// "Que es decimal"
+// ],
+// "respuesta_correcta": "Que no puede quedar vacío"
+// },
+// {
+// "id": 67,
+// "pregunta": "¿Qué hace SELECT * FROM alumnos WHERE promedio > 9 OR edad < 20;?",
+// "opciones": [
+// "Muestra alumnos con promedio mayor a 9 o edad menor a 20",
+// "Muestra alumnos con promedio mayor a 9 y edad menor a 20",
+// "Muestra alumnos con promedio menor a 9 o edad mayor a 20",
+// "Muestra alumnos con promedio mayor a 9 y edad mayor a 20"
+// ],
+// "respuesta_correcta": "Muestra alumnos con promedio mayor a 9 o edad menor a 20"
+// },
+// {
+// "id": 68,
+// "pregunta": "¿Qué hace SELECT * FROM alumnos WHERE NOT promedio > 8;?",
+// "opciones": [
+// "Muestra alumnos con promedio no mayor a 8",
+// "Muestra alumnos con promedio mayor a 8",
+// "Muestra alumnos con promedio igual a 8",
+// "Elimina los alumnos con promedio mayor a 8"
+// ],
+// "respuesta_correcta": "Muestra alumnos con promedio no mayor a 8"
+// },
+// {
+// "id": 69,
+// "pregunta": "¿Cuál es la diferencia entre DROP DATABASE y DROP TABLE?",
+// "opciones": [
+// "DROP DATABASE elimina una base de datos completa; DROP TABLE elimina una tabla",
+// "DROP DATABASE elimina una tabla; DROP TABLE elimina una base de datos",
+// "Ambas eliminan solo registros",
+// "DROP DATABASE crea una base de datos"
+// ],
+// "respuesta_correcta": "DROP DATABASE elimina una base de datos completa; DROP TABLE elimina una tabla"
+// },
+// {
+// "id": 70,
+// "pregunta": "¿Qué comando se usa para seleccionar una base de datos antes de trabajar en ella?",
+// "opciones": [
+// "USE nombreBD;",
+// "SHOW DATABASES;",
+// "SHOW TABLES;",
+// "SELECT nombreBD;"
+// ],
+// "respuesta_correcta": "USE nombreBD;"
+// }
+        ],
+      };
+
+      let seleccionadas = []; // Preguntas seleccionadas con opciones mezcladas
+      let respuestas = {}; // Respuestas del usuario (índice de opción seleccionada)
+      let tiempoRestante = 900; // 5 minutos en segundos
+      let examenTerminado = false;
+      let intervaloTimer = null;
+
+      /**
+       * Función para mezclar un array (Fisher-Yates shuffle)
+       */
+      function mezclarArray(array) {
+        const nuevoArray = [...array];
+        for (let i = nuevoArray.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [nuevoArray[i], nuevoArray[j]] = [nuevoArray[j], nuevoArray[i]];
+        }
+        return nuevoArray;
+      }
+
+      /**
+       * Mezcla las opciones de una pregunta y retorna:
+       * - opcionesMezcladas: array con las opciones en orden aleatorio
+       * - indiceCorrecto: nuevo índice donde se encuentra la respuesta correcta
+       */
+      function mezclarOpciones(preguntaOriginal) {
+        const opcionesOriginales = [...preguntaOriginal.opciones];
+        const respuestaCorrectaOriginal = preguntaOriginal.respuesta_correcta;
+
+        // Crear array de objetos con cada opción y si es correcta o no
+        const opcionesConFlag = opcionesOriginales.map((op) => ({
+          texto: op,
+          esCorrecta: op === respuestaCorrectaOriginal,
+        }));
+
+        // Mezclar las opciones
+        const opcionesMezcladasObj = mezclarArray(opcionesConFlag);
+
+        // Extraer solo los textos y encontrar el nuevo índice de la correcta
+        const opcionesMezcladas = opcionesMezcladasObj.map((obj) => obj.texto);
+        const indiceCorrecto = opcionesMezcladasObj.findIndex(
+          (obj) => obj.esCorrecta,
+        );
+
+        return {
+          opcionesMezcladas: opcionesMezcladas,
+          indiceCorrecto: indiceCorrecto,
+        };
+      }
+
+      /**
+       * Selecciona 5 preguntas aleatorias y mezcla sus opciones
+       */
+      function seleccionarPreguntasAleatorias() {
+        // Mezclar preguntas y tomar las primeras 5
+        const preguntasMezcladas = mezclarArray(preguntasData.preguntas);
+        const preguntasSeleccionadas = preguntasMezcladas.slice(0, 10);
+
+        // Para cada pregunta seleccionada, mezclar sus opciones
+        return preguntasSeleccionadas.map((pregunta) => {
+          const { opcionesMezcladas, indiceCorrecto } =
+            mezclarOpciones(pregunta);
+          return {
+            id: pregunta.id,
+            pregunta: pregunta.pregunta,
+            opciones: opcionesMezcladas,
+            respuesta_correcta: indiceCorrecto, // Guardamos el índice correcto después de mezclar
+          };
+        });
+      }
+
+      function mostrarPreguntas() {
+        const quiz = document.getElementById("quiz");
+        quiz.innerHTML = ""; // Limpiar contenido previo
+
+        seleccionadas.forEach((p, i) => {
+          let opcionesHTML = p.opciones
+            .map(
+              (op, idx) =>
+                `<label id="label_preg${i}_op${idx}">
+             <input type="radio" id="preg${i}_op${idx}" name="preg${i}" value="${idx}" 
+              onclick="respuestas[${i}] = ${idx}" /> ${op}
+           </label>`,
+            )
+            .join("");
+          quiz.innerHTML += `<p><strong>${p.pregunta}</strong></p>${opcionesHTML}<hr>`;
+        });
+      }
+
+      function iniciarTimer() {
+        intervaloTimer = setInterval(() => {
+          if (examenTerminado) return; // Detener si ya terminó
+
+          const minutos = Math.floor(tiempoRestante / 60);
+          const segundos = tiempoRestante % 60;
+          const formato = `${minutos}:${segundos.toString().padStart(2, "0")}`;
+          document.getElementById("timer").innerText = formato;
+
+          if (tiempoRestante <= 0) {
+            clearInterval(intervaloTimer);
+            finalizar();
+          }
+
+          tiempoRestante--;
+        }, 1000);
+      }
+
+      function iniciarExamen() {
+        // Mostrar hora de inicio
+        const ahora = new Date();
+        const horaFormato = ahora.toLocaleTimeString("es-ES");
+        document.getElementById("horaInicio").innerText = horaFormato;
+
+        // Seleccionar 5 preguntas aleatorias con opciones mezcladas
+        seleccionadas = seleccionarPreguntasAleatorias();
+        mostrarPreguntas();
+
+        // Iniciar timer
+        iniciarTimer();
+      }
+
+      function finalizar() {
+        if (examenTerminado) return;
+        examenTerminado = true;
+
+        // Detener el timer
+        clearInterval(intervaloTimer);
+
+        // Mostrar hora de finalización
+        const ahoraFin = new Date();
+        const horaFinFormato = ahoraFin.toLocaleTimeString("es-ES");
+        document.getElementById("horaFinalizacion").innerText = horaFinFormato;
+        document.getElementById("horaFinalizacionDiv").style.display = "block";
+
+        // Deshabilitar todos los radios
+        const radios = document.querySelectorAll("input[type='radio']");
+        radios.forEach((radio) => (radio.disabled = true));
+
+        // Ocultar el botón Finalizar
+        document.querySelector("button").style.display = "none";
+
+        let correctas = 0;
+
+        seleccionadas.forEach((p, i) => {
+          const respuestaCorrectaIdx = p.respuesta_correcta;
+
+          // Colorear la respuesta correcta de verde
+          const labelCorrect = document.getElementById(
+            `label_preg${i}_op${respuestaCorrectaIdx}`,
+          );
+          if (labelCorrect) {
+            labelCorrect.style.backgroundColor = "#90EE90";
+            labelCorrect.style.fontWeight = "bold";
+          }
+
+          // Verificar respuesta del usuario
+          const respuestaUsuario = respuestas[i];
+
+          if (respuestaUsuario !== undefined) {
+            if (respuestaUsuario !== respuestaCorrectaIdx) {
+              // Respuesta incorrecta: colorear la opción seleccionada de rojo
+              const labelIncorrect = document.getElementById(
+                `label_preg${i}_op${respuestaUsuario}`,
+              );
+              if (labelIncorrect) {
+                labelIncorrect.style.backgroundColor = "#FFB6C6";
+                labelIncorrect.style.fontWeight = "bold";
+                labelIncorrect.innerHTML +=
+                  " <span style='color: red; font-weight: bold;'> ← Incorrecto ❌</span>";
+              }
+              // Agregar indicador en la respuesta correcta
+              if (labelCorrect) {
+                labelCorrect.innerHTML +=
+                  " <span style='color: #485699; font-weight: bold;'> ← Respuesta correcta</span>";
+              }
+            } else {
+              // Respuesta correcta
+              if (labelCorrect) {
+                labelCorrect.innerHTML +=
+                  " <span style='color: green; font-weight: bold;'> ← Correcto ✅</span>";
+              }
+              correctas++;
+            }
+          } else {
+            // No respondió la pregunta, solo mostrar indicador de respuesta correcta
+            if (labelCorrect) {
+              labelCorrect.innerHTML +=
+                " <span style='color: red; font-weight: bold;'> ← Respuesta correcta (pregunta no respondida)</span>";
+            }
+          }
+        });
+
+        const porcentaje = Math.round((correctas / seleccionadas.length) * 100);
+        const mensaje =
+          // Cantidad minima para aprobar
+          (correctas >= 6 ? "✅ ¡Aprobado!" : "❌ Reprobado") +
+          ` - ${porcentaje}% (${correctas}/${seleccionadas.length} correctas)`;
+        document.getElementById("resultado").innerText = mensaje;
+      }
+
+      // Iniciar examen cuando la página carga
+      iniciarExamen();
+    </script>
+  </body>
+</html>
