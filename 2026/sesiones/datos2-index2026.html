@@ -165,1338 +165,761 @@
     <script>
       const preguntasData = {
         preguntas: [
-        {
-    "id": 1,
-    "pregunta": "¿Qué es una base de datos?",
-    "opciones": [
-      "Una colección organizada de información o datos almacenados de manera estructurada.",
-      "Un programa para editar imágenes y videos.",
-      "Un lenguaje de programación para crear aplicaciones web.",
-      "Un dispositivo físico de almacenamiento interno."
-    ],
-    "respuesta_correcta": "Una colección organizada de información o datos almacenados de manera estructurada."
-  },
-  {
-    "id": 2,
-    "pregunta": "¿Cuál de los siguientes es un tipo de base de datos?",
-    "opciones": [
-      "Bases de Datos Relacionales y NoSQL",
-      "Bases de Datos de Imágenes y Sonidos",
-      "Bases de Datos de Redes Sociales",
-      "Bases de Datos de Videojuegos"
-    ],
-    "respuesta_correcta": "Bases de Datos Relacionales y NoSQL"
-  },
-  {
-    "id": 3,
-    "pregunta": "¿Qué comando se utiliza para crear una base de datos en MySQL?",
-    "opciones": [
-      "CREATE DATABASE nombre_DDBB;",
-      "DROP DATABASE nombre_DDBB;",
-      "USE nombre_DDBB;",
-      "CREATE TABLE nombre_DDBB;"
-    ],
-    "respuesta_correcta": "CREATE DATABASE nombre_DDBB;"
-  },
-  {
-    "id": 4,
-    "pregunta": "¿Qué comando se utiliza para eliminar una base de datos en MySQL?",
-    "opciones": [
-      "DROP DATABASE nombre_DDBB;",
-      "DELETE DATABASE nombre_DDBB;",
-      "REMOVE DATABASE nombre_DDBB;",
-      "CREATE DATABASE nombre_DDBB;"
-    ],
-    "respuesta_correcta": "DROP DATABASE nombre_DDBB;"
-  },
-  {
-    "id": 5,
-    "pregunta": "¿Qué comando se utiliza para posicionarse en una base de datos en MySQL?",
-    "opciones": [
-      "USE nombre_DDBB;",
-      "SELECT nombre_DDBB;",
-      "OPEN nombre_DDBB;",
-      "CONNECT nombre_DDBB;"
-    ],
-    "respuesta_correcta": "USE nombre_DDBB;"
-  },
-  {
-    "id": 6,
-    "pregunta": "¿Qué tipo de dato se utiliza en MySQL para almacenar texto con una longitud máxima definida?",
-    "opciones": [
-      "VARCHAR()",
-      "INT",
-      "DOUBLE",
-      "TEXT"
-    ],
-    "respuesta_correcta": "VARCHAR()"
-  },
-  {
-    "id": 7,
-    "pregunta": "¿Qué tipo de dato se utiliza en MySQL para almacenar números enteros?",
-    "opciones": [
-      "INT",
-      "VARCHAR",
-      "DOUBLE",
-      "TEXT"
-    ],
-    "respuesta_correcta": "INT"
-  },
-  {
-    "id": 8,
-    "pregunta": "¿Qué comando se utiliza para insertar datos en una tabla en MySQL?",
-    "opciones": [
-      "INSERT INTO tabla (col1, col2) VALUES (valor1, valor2);",
-      "ADD INTO tabla (col1, col2) VALUES (valor1, valor2);",
-      "UPDATE tabla SET col1 = valor1;",
-      "CREATE INTO tabla (col1, col2) VALUES (valor1, valor2);"
-    ],
-    "respuesta_correcta": "INSERT INTO tabla (col1, col2) VALUES (valor1, valor2);"
-  },
-  {
-    "id": 9,
-    "pregunta": "¿Qué es una PRIMARY KEY en una tabla de base de datos?",
-    "opciones": [
-      "Un campo que identifica de forma única cada registro y no puede ser NULL.",
-      "Un campo que puede repetirse en varios registros.",
-      "Un campo que siempre debe ser de tipo texto.",
-      "Un campo que permite valores nulos."
-    ],
-    "respuesta_correcta": "Un campo que identifica de forma única cada registro y no puede ser NULL."
-  },
-  {
-    "id": 10,
-    "pregunta": "¿Qué significa la restricción NOT NULL en una columna?",
-    "opciones": [
-      "Que el campo debe tener un valor siempre.",
-      "Que el campo puede quedar vacío.",
-      "Que el campo solo acepta números.",
-      "Que el campo es clave primaria."
-    ],
-    "respuesta_correcta": "Que el campo debe tener un valor siempre."
-  },
-  {
-    "id": 11,
-    "pregunta": "¿Qué comando se utiliza para modificar registros existentes en una tabla?",
-    "opciones": [
-      "UPDATE tabla SET columna = valor WHERE condición;",
-      "INSERT INTO tabla SET columna = valor WHERE condición;",
-      "MODIFY tabla SET columna = valor WHERE condición;",
-      "CHANGE tabla SET columna = valor WHERE condición;"
-    ],
-    "respuesta_correcta": "UPDATE tabla SET columna = valor WHERE condición;"
-  },
-  {
-    "id": 12,
-    "pregunta": "¿Qué cláusula se utiliza para filtrar registros en una consulta SQL?",
-    "opciones": [
-      "WHERE",
-      "FILTER",
-      "HAVING",
-      "SELECT"
-    ],
-    "respuesta_correcta": "WHERE"
-  },
-  {
-    "id": 13,
-    "pregunta": "¿Qué operador SQL se utiliza para indicar que ambas condiciones deben cumplirse?",
-    "opciones": [
-      "AND",
-      "OR",
-      "NOT",
-      "XOR"
-    ],
-    "respuesta_correcta": "AND"
-  },
-  {
-    "id": 14,
-    "pregunta": "¿Qué operador SQL se utiliza para indicar que al menos una condición debe cumplirse?",
-    "opciones": [
-      "OR",
-      "AND",
-      "NOT",
-      "XOR"
-    ],
-    "respuesta_correcta": "OR"
-  },
-  {
-    "id": 15,
-    "pregunta": "¿Qué operador SQL invierte el valor lógico de una condición?",
-    "opciones": [
-      "NOT",
-      "AND",
-      "OR",
-      "XOR"
-    ],
-    "respuesta_correcta": "NOT"
-  },
-  {
-    "id": 16,
-    "pregunta": "¿Qué comando se utiliza para eliminar registros de una tabla en MySQL?",
-    "opciones": [
-      "DELETE FROM tabla WHERE condición;",
-      "REMOVE FROM tabla WHERE condición;",
-      "DROP FROM tabla WHERE condición;",
-      "TRUNCATE FROM tabla WHERE condición;"
-    ],
-    "respuesta_correcta": "DELETE FROM tabla WHERE condición;"
-  },
-  {
-    "id": 17,
-    "pregunta": "¿Qué comando se utiliza para vaciar toda una tabla pero manteniendo su estructura?",
-    "opciones": [
-      "TRUNCATE TABLE tabla;",
-      "DELETE TABLE tabla;",
-      "DROP TABLE tabla;",
-      "CLEAR TABLE tabla;"
-    ],
-    "respuesta_correcta": "TRUNCATE TABLE tabla;"
-  },
-  {
-    "id": 18,
-    "pregunta": "¿Qué comando se utiliza para eliminar una tabla si existe?",
-    "opciones": [
-      "DROP TABLE IF EXISTS tabla;",
-      "DELETE TABLE IF EXISTS tabla;",
-      "REMOVE TABLE IF EXISTS tabla;",
-      "TRUNCATE TABLE IF EXISTS tabla;"
-    ],
-    "respuesta_correcta": "DROP TABLE IF EXISTS tabla;"
-  },
-  {
-    "id": 19,
-    "pregunta": "¿Qué comando se utiliza para renombrar una tabla en MySQL?",
-    "opciones": [
-      "RENAME TABLE tabla_vieja TO tabla_nueva;",
-      "ALTER TABLE tabla_vieja RENAME tabla_nueva;",
-      "CHANGE TABLE tabla_vieja TO tabla_nueva;",
-      "UPDATE TABLE tabla_vieja TO tabla_nueva;"
-    ],
-    "respuesta_correcta": "RENAME TABLE tabla_vieja TO tabla_nueva;"
-  },
-  {
-    "id": 20,
-    "pregunta": "¿Qué significa AUTO_INCREMENT en una columna de una tabla MySQL?",
-    "opciones": [
-      "Que genera automáticamente valores consecutivos para esa columna.",
-      "Que el valor de la columna se incrementa manualmente.",
-      "Que la columna solo acepta valores únicos.",
-      "Que la columna no puede tener valores nulos."
-    ],
-    "respuesta_correcta": "Que genera automáticamente valores consecutivos para esa columna."
-  },
-  {
-    "id": 21,
-    "pregunta": "¿Qué tipo de dato se utiliza en MySQL para almacenar números con decimales?",
-    "opciones": [
-      "DOUBLE",
-      "INT",
-      "VARCHAR",
-      "TEXT"
-    ],
-    "respuesta_correcta": "DOUBLE"
-  },
-  {
-    "id": 22,
-    "pregunta": "¿Qué comando se utiliza para mostrar todas las bases de datos en MySQL?",
-    "opciones": [
-      "SHOW DATABASES;",
-      "LIST DATABASES;",
-      "DISPLAY DATABASES;",
-      "SELECT DATABASES;"
-    ],
-    "respuesta_correcta": "SHOW DATABASES;"
-  },
-  {
-    "id": 23,
-    "pregunta": "¿Qué comando se utiliza para mostrar todas las tablas de la base de datos activa en MySQL?",
-    "opciones": [
-      "SHOW TABLES;",
-      "LIST TABLES;",
-      "DISPLAY TABLES;",
-      "SELECT TABLES;"
-    ],
-    "respuesta_correcta": "SHOW TABLES;"
-  },
-  {
-    "id": 24,
-    "pregunta": "¿Qué espero obtener con esta consulta? SELECT * FROM alumnos WHERE edad > 18 AND promedio >= 6",
-    "opciones": [
-      "Todos los alumnos con edad mayor a 18 y promedio mayor o igual a 6",
-      "Todos los alumnos con edad mayor o igual a 18 y promedio mayor o igual a 6",
-      "Todos los alumnos con edad mayor a 18 y promedio mayor a 6",
-      "Todos los alumnos con edad mayor o igual 18 y promedio mayor a 6"
-    ],
-    "respuesta_correcta": "Todos los alumnos con edad mayor a 18 y promedio mayor o igual a 6"
-  },
-  {
-    "id": 25,
-    "pregunta": "¿Qué espero obtener con esta consulta? SELECT * FROM alumnos WHERE edad > 18 OR promedio > 6",
-    "opciones": [
-      "Todos los alumnos con edad mayor a 18 o promedio mayor a 6",
-      "Todos los alumnos con edad mayor o igual a 18 o promedio mayor o igual a 6",
-      "Todos los alumnos con edad mayor a 18 o promedio mayor o igual a 6",
-      "Todos los alumnos con edad mayor o igual 18 o promedio mayor a 6"
-    ],
-    "respuesta_correcta": "Todos los alumnos con edad mayor a 18 o promedio mayor a 6"
-  },
-  {
-    "id": 26,
-    "pregunta": "¿Qué espero obtener con esta consulta? SELECT * FROM alumnos WHERE NOT edad = 20",
-    "opciones": [
-      "Todos los alumnos cuya edad NO sea 20",
-      "Todos los alumnos cuya edad sea 20",
-      "Todos los alumnos cuya edad sea mayor a 20",
-      "Todos los alumnos cuya edad sea menor a 20"
-    ],
-    "respuesta_correcta": "Todos los alumnos cuya edad NO sea 20"
-  },
-  {
-    "id": 27,
-    "pregunta": "¿Cuál es el comando correcto si quiere actualizar el nombre de Mario a Pepe de una persona con ID 3 en la tabla Clientes?",
-    "opciones": [
-      "UPDATE clientes SET nombre = 'Pepe' WHERE id = 3;",
-      "UPDATE clientes SET nombre = 'Mario' WHERE id = 3;",
-      "UPDATE clientes SET id = 3 WHERE nombre = 'Pepe';",
-      "UPDATE clientes SET nombre = 'Pepe' WHERE id = 3"
-    ],
-    "respuesta_correcta": "UPDATE clientes SET nombre = 'Pepe' WHERE id = 3;"
-  },
-  {
-    "id": 28,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? INSERT INTO alumnos (nombre, edad) VALUES ('Ana', 20)",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta el nombre de la tabla.",
-      "Falta la palabra VALUES.",
-      "Falta el tipo de dato."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 29,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? CREATE TABLE alumnos (id INT PRIMARY KEY, nombre VARCHAR(50), edad INT)",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la coma después de INT.",
-      "Falta el tipo de dato en la columna nombre.",
-      "Falta la palabra NOT NULL."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 30,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE edad > 18 AND",
-    "opciones": [
-      "Falta la segunda condición después de AND.",
-      "Falta el punto y coma al final.",
-      "Falta la tabla en la consulta.",
-      "Falta la palabra WHERE."
-    ],
-    "respuesta_correcta": "Falta la segunda condición después de AND."
-  },
-  {
-    "id": 31,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? DELETE FROM alumnos WHERE id = 2",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra WHERE.",
-      "Falta el nombre de la tabla.",
-      "Falta la condición."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 32,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? UPDATE alumnos SET edad = 23 WHERE id = 2",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra SET.",
-      "Falta el nombre de la tabla.",
-      "Falta la condición WHERE."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 33,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? TRUNCATE alumnos",
-    "opciones": [
-      "Falta la palabra TABLE y el punto y coma al final.",
-      "Falta la palabra FROM.",
-      "Falta la palabra DELETE.",
-      "Falta la condición WHERE."
-    ],
-    "respuesta_correcta": "Falta la palabra TABLE y el punto y coma al final."
-  },
-  {
-    "id": 34,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? DROP TABLE IF EXISTS alumnos",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra DELETE.",
-      "Falta la palabra FROM.",
-      "Falta la condición WHERE."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 35,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? RENAME TABLE alumnos TO estudiantes",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra ALTER.",
-      "Falta la palabra CHANGE.",
-      "Falta la palabra UPDATE."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 36,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? CREATE DATABASE escuela",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra TABLE.",
-      "Falta la palabra USE.",
-      "Falta la palabra DROP."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 37,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? USE escuela",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra DATABASE.",
-      "Falta la palabra SELECT.",
-      "Falta la palabra FROM."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 38,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? INSERT INTO alumnos (nombre, edad) VALUES ('Ana', 20), ('Luis', 22), ('María', 21)",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra INTO.",
-      "Falta la palabra SET.",
-      "Falta la palabra WHERE."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 39,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE edad > 18 AND promedio >= 6",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra WHERE.",
-      "Falta la palabra FROM.",
-      "Falta la palabra SELECT."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 40,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE edad > 18 OR promedio > 6",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra AND.",
-      "Falta la palabra NOT.",
-      "Falta la palabra FROM."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 41,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE NOT edad = 20",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra AND.",
-      "Falta la palabra OR.",
-      "Falta la palabra FROM."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 42,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE (edad > 18 AND promedio >= 6) OR nombre = 'Ana'",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra NOT.",
-      "Falta la palabra FROM.",
-      "Falta la palabra SELECT."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 43,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SHOW DATABASES",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra TABLE.",
-      "Falta la palabra FROM.",
-      "Falta la palabra SELECT."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 44,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SHOW TABLES",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra DATABASES.",
-      "Falta la palabra FROM.",
-      "Falta la palabra SELECT."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 45,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? CREATE TABLE alumnos (id INT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(50), edad INT, promedio DOUBLE)",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra NOT NULL.",
-      "Falta la palabra UNIQUE.",
-      "Falta la palabra FOREIGN KEY."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 46,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? INSERT INTO alumnos (nombre, edad, promedio) VALUES ('Juan', 20, 8.5), ('Ana', 22, 9.3), ('Pedro', 19, 7.2)",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra INTO.",
-      "Falta la palabra SET.",
-      "Falta la palabra WHERE."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 47,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT nombre, promedio FROM alumnos WHERE promedio > 6",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra FROM.",
-      "Falta la palabra WHERE.",
-      "Falta la palabra SELECT."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 48,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? DELETE FROM alumnos WHERE id = 2",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra FROM.",
-      "Falta la palabra WHERE.",
-      "Falta la palabra DELETE."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 49,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? TRUNCATE TABLE alumnos",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra FROM.",
-      "Falta la palabra DELETE.",
-      "Falta la palabra WHERE."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 50,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? DROP TABLE IF EXISTS alumnos",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra FROM.",
-      "Falta la palabra DELETE.",
-      "Falta la palabra WHERE."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 51,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? RENAME TABLE alumnos TO estudiantes",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra ALTER.",
-      "Falta la palabra CHANGE.",
-      "Falta la palabra UPDATE."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 52,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? UPDATE alumnos SET edad = 23 WHERE id = 2",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra SET.",
-      "Falta la palabra FROM.",
-      "Falta la palabra DELETE."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 53,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE edad > 18 AND promedio >= 6",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra FROM.",
-      "Falta la palabra WHERE.",
-      "Falta la palabra SELECT."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 54,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE edad > 18 OR promedio > 6",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra AND.",
-      "Falta la palabra NOT.",
-      "Falta la palabra FROM."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 55,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE NOT edad = 20",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra AND.",
-      "Falta la palabra OR.",
-      "Falta la palabra FROM."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 56,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT * FROM alumnos WHERE (edad > 18 AND promedio >= 6) OR nombre = 'Ana'",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra NOT.",
-      "Falta la palabra FROM.",
-      "Falta la palabra SELECT."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 57,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SHOW DATABASES",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra TABLE.",
-      "Falta la palabra FROM.",
-      "Falta la palabra SELECT."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 58,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SHOW TABLES",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra DATABASES.",
-      "Falta la palabra FROM.",
-      "Falta la palabra SELECT."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 59,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? CREATE TABLE alumnos (id INT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(50), edad INT, promedio DOUBLE)",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra NOT NULL.",
-      "Falta la palabra UNIQUE.",
-      "Falta la palabra FOREIGN KEY."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 60,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? INSERT INTO alumnos (nombre, edad, promedio) VALUES ('Juan', 20, 8.5), ('Ana', 22, 9.3), ('Pedro', 19, 7.2)",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra INTO.",
-      "Falta la palabra SET.",
-      "Falta la palabra WHERE."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 61,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? SELECT nombre, promedio FROM alumnos WHERE promedio > 6",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra FROM.",
-      "Falta la palabra WHERE.",
-      "Falta la palabra SELECT."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 62,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? DELETE FROM alumnos WHERE id = 2",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra FROM.",
-      "Falta la palabra WHERE.",
-      "Falta la palabra DELETE."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 63,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? TRUNCATE TABLE alumnos",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra FROM.",
-      "Falta la palabra DELETE.",
-      "Falta la palabra WHERE."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 64,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? DROP TABLE IF EXISTS alumnos",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra FROM.",
-      "Falta la palabra DELETE.",
-      "Falta la palabra WHERE."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
-  {
-    "id": 65,
-    "pregunta": "¿Qué error hay en la siguiente sentencia SQL? RENAME TABLE alumnos TO estudiantes",
-    "opciones": [
-      "Falta el punto y coma al final.",
-      "Falta la palabra ALTER.",
-      "Falta la palabra CHANGE.",
-      "Falta la palabra UPDATE."
-    ],
-    "respuesta_correcta": "Falta el punto y coma al final."
-  },
+          {
+            id: 1,
+            pregunta: "¿Qué es una base de datos?",
+            opciones: [
+              "Una colección organizada de información almacenada de manera estructurada para acceder y gestionarla fácilmente",
+              "Un programa exclusivo para editar imágenes",
+              "Un tipo de red social para compartir archivos",
+              "Un dispositivo físico de almacenamiento externo",
+            ],
+            respuesta_correcta:
+              "Una colección organizada de información almacenada de manera estructurada para acceder y gestionarla fácilmente",
+          },
+          {
+            id: 2,
+            pregunta:
+              "¿Cuáles son los dos tipos principales de bases de datos mencionados en la teoría?",
+            opciones: [
+              "Relacionales y NoSQL",
+              "Relacionales y de Grafos",
+              "NoSQL y Documentales",
+              "Relacionales y Jerárquicas",
+            ],
+            respuesta_correcta: "Relacionales y NoSQL",
+          },
+          {
+            id: 3,
+            pregunta:
+              "¿Qué tipo de base de datos utiliza tablas y SQL para las consultas?",
+            opciones: [
+              "Bases de Datos Relacionales",
+              "Bases de Datos NoSQL",
+              "Bases de Datos de Grafos",
+              "Bases de Datos Documentales",
+            ],
+            respuesta_correcta: "Bases de Datos Relacionales",
+          },
+          {
+            id: 4,
+            pregunta:
+              "¿Cuál es el comando correcto para crear una base de datos llamada 'colegio'?",
+            opciones: [
+              "CREATE DATABASE colegio;",
+              "CREATE colegio DATABASE;",
+              "NEW DATABASE colegio;",
+              "DATABASE CREATE colegio;",
+            ],
+            respuesta_correcta: "CREATE DATABASE colegio;",
+          },
+          {
+            id: 5,
+            pregunta:
+              "¿Cuál es el comando correcto para eliminar una base de datos llamada 'colegio'?",
+            opciones: [
+              "DROP DATABASE colegio;",
+              "DELETE DATABASE colegio;",
+              "REMOVE colegio;",
+              "DROP colegio DATABASE;",
+            ],
+            respuesta_correcta: "DROP DATABASE colegio;",
+          },
+          {
+            id: 6,
+            pregunta:
+              "¿Qué comando se utiliza para posicionarse (seleccionar) una base de datos antes de trabajar en ella?",
+            opciones: [
+              "USE nombre_basedatos;",
+              "SELECT nombre_basedatos;",
+              "OPEN nombre_basedatos;",
+              "GO nombre_basedatos;",
+            ],
+            respuesta_correcta: "USE nombre_basedatos;",
+          },
+          {
+            id: 7,
+            pregunta:
+              "¿Qué carácter nunca se debe olvidar al finalizar una línea de código SQL?",
+            opciones: [
+              "Punto y coma (;)",
+              "Punto (.)",
+              "Dos puntos (:)",
+              "Coma (,)",
+            ],
+            respuesta_correcta: "Punto y coma (;)",
+          },
+          {
+            id: 8,
+            pregunta:
+              "¿Cuál es la sintaxis correcta para crear una tabla 'alumnos' con las columnas nombre, apellido, edad y domicilio?",
+            opciones: [
+              "CREATE TABLE alumnos (nombre VARCHAR(25), apellido VARCHAR(25), edad INT, domicilio VARCHAR(80));",
+              "CREATE alumnos TABLE (nombre VARCHAR(25); apellido VARCHAR(25); edad INT; domicilio VARCHAR(80));",
+              "TABLE CREATE alumnos (nombre VARCHAR(25), apellido VARCHAR(25), edad INT, domicilio VARCHAR(80));",
+              "CREATE TABLE alumnos [nombre VARCHAR(25), apellido VARCHAR(25), edad INT, domicilio VARCHAR(80)];",
+            ],
+            respuesta_correcta:
+              "CREATE TABLE alumnos (nombre VARCHAR(25), apellido VARCHAR(25), edad INT, domicilio VARCHAR(80));",
+          },
+          {
+            id: 9,
+            pregunta: "¿Qué indica el tipo de dato VARCHAR(50) en una columna?",
+            opciones: [
+              "Que la columna almacenará texto con un máximo de 50 caracteres",
+              "Que la columna almacenará números enteros de hasta 50 dígitos",
+              "Que la columna admitirá como máximo 50 registros",
+              "Que la columna es automáticamente una clave primaria",
+            ],
+            respuesta_correcta:
+              "Que la columna almacenará texto con un máximo de 50 caracteres",
+          },
+          {
+            id: 10,
+            pregunta:
+              "¿Qué tipo de dato se utiliza para indicar que una columna almacenará valores numéricos enteros?",
+            opciones: ["INT", "VARCHAR", "TEXT", "BOOLEAN"],
+            respuesta_correcta: "INT",
+          },
+          {
+            id: 11,
+            pregunta:
+              "¿Cuál es el comando correcto para eliminar la tabla 'alumnos'?",
+            opciones: [
+              "DROP TABLE alumnos;",
+              "DELETE TABLE alumnos;",
+              "REMOVE TABLE alumnos;",
+              "TRUNCATE alumnos;",
+            ],
+            respuesta_correcta: "DROP TABLE alumnos;",
+          },
+          {
+            id: 12,
+            pregunta:
+              "¿Cuál es la sentencia correcta para insertar un alumno con nombre 'Tony', apellido 'Stark', edad 1967 y domicilio 'Avenida siempre viva 123' en la tabla alumnos?",
+            opciones: [
+              "INSERT INTO alumnos (nombre, apellido, edad, domicilio) VALUES ('Tony', 'Stark', 1967, 'Avenida siempre viva 123');",
+              "INSERT alumnos VALUES ('Tony', 'Stark', 1967, 'Avenida siempre viva 123');",
+              "INSERT INTO alumnos (nombre, apellido, edad, domicilio) SET ('Tony', 'Stark', 1967, 'Avenida siempre viva 123');",
+              "ADD INTO alumnos (nombre, apellido, edad, domicilio) VALUES ('Tony', 'Stark', 1967, 'Avenida siempre viva 123');",
+            ],
+            respuesta_correcta:
+              "INSERT INTO alumnos (nombre, apellido, edad, domicilio) VALUES ('Tony', 'Stark', 1967, 'Avenida siempre viva 123');",
+          },
+          {
+            id: 13,
+            pregunta:
+              "Si una columna es de tipo VARCHAR, ¿cómo se debe escribir el valor de texto a ingresar en un INSERT?",
+            opciones: [
+              "Rodeado de comillas simples, por ejemplo 'Tony'",
+              "Sin comillas, por ejemplo Tony",
+              "Rodeado de corchetes, por ejemplo [Tony]",
+              "Rodeado de paréntesis, por ejemplo (Tony)",
+            ],
+            respuesta_correcta:
+              "Rodeado de comillas simples, por ejemplo 'Tony'",
+          },
+          {
+            id: 14,
+            pregunta:
+              "El tipo de dato VARCHAR(), ¿para que es y que utilidad tiene los parentesis?",
+            opciones: [
+              "Indicar que se debe ingresar textos con un limite de caracteres indicado dentro del parentesis",
+              "Indicar que se debe ingresar numeros enteros con un limite de digitos dentro del parentesis",
+              "Indicar que se debe ingresar numeros decimales con un limite de decimales dentro del parentesis",
+              "Ninguna es correcta",
+            ],
+            respuesta_correcta:
+              "Indicar que se debe ingresar textos con un limite de caracteres indicado dentro del parentesis",
+          },
+          {
+            id: 15,
+            pregunta: "¿Cuál es la función principal de PRIMARY KEY?",
+            opciones: [
+              "Identificar de forma única cada registro de una tabla",
+              "Ordenar alfabéticamente los registros",
+              "Permitir valores repetidos en una columna",
+              "Definir el tipo de letra de una columna",
+            ],
+            respuesta_correcta:
+              "Identificar de forma única cada registro de una tabla",
+          },
+          {
+            id: 16,
+            pregunta:
+              "¿Puede una columna definida como PRIMARY KEY contener valores NULL?",
+            opciones: [
+              "No, nunca puede ser NULL",
+              "Sí, siempre puede ser NULL",
+              "Solo si la tabla no tiene NOT NULL",
+              "Solo en la primera fila insertada",
+            ],
+            respuesta_correcta: "No, nunca puede ser NULL",
+          },
+          {
+            id: 17,
+            pregunta: "¿Qué hace la restricción NOT NULL en una columna?",
+            opciones: [
+              "Obliga a que la columna siempre tenga un valor al insertar un registro",
+              "Permite dejar la columna vacía sin problema",
+              "Elimina la columna de la tabla automáticamente",
+              "Convierte la columna en clave primaria",
+            ],
+            respuesta_correcta:
+              "Obliga a que la columna siempre tenga un valor al insertar un registro",
+          },
+          {
+            id: 18,
+            pregunta:
+              "¿Cuál de las siguientes es la sentencia correcta para crear la tabla 'deportista' con id como PRIMARY KEY NOT NULL, nombre NOT NULL y goles NOT NULL?",
+            opciones: [
+              "CREATE TABLE deportista (id INT PRIMARY KEY NOT NULL, nombre VARCHAR(50) NOT NULL, goles INT NOT NULL);",
+              "CREATE TABLE deportista (id INT, nombre VARCHAR(50), goles INT) PRIMARY KEY;",
+              "CREATE deportista TABLE (id PRIMARY, nombre NOT NULL VARCHAR(50), goles INT);",
+              "CREATE TABLE deportista NOT NULL (id INT PRIMARY KEY, nombre VARCHAR(50), goles INT);",
+            ],
+            respuesta_correcta:
+              "CREATE TABLE deportista (id INT PRIMARY KEY NOT NULL, nombre VARCHAR(50) NOT NULL, goles INT NOT NULL);",
+          },
+          {
+            id: 19,
+            pregunta:
+              "¿Cuál es la sintaxis correcta para insertar varias filas en una sola sentencia INSERT?",
+            opciones: [
+              "INSERT INTO tabla (col1, col2) VALUES (v1, v2), (v3, v4);",
+              "INSERT INTO tabla (col1, col2) VALUES (v1, v2) AND (v3, v4);",
+              "INSERT INTO tabla (col1, col2) VALUES (v1, v2) VALUES (v3, v4);",
+              "INSERT tabla (col1, col2) = (v1, v2), (v3, v4);",
+            ],
+            respuesta_correcta:
+              "INSERT INTO tabla (col1, col2) VALUES (v1, v2), (v3, v4);",
+          },
+          {
+            id: 20,
+            pregunta:
+              "¿Cuál es el comando correcto si se quiere actualizar el nombre de Mario a Pepe de una persona con ID 3 en la tabla clientes?",
+            opciones: [
+              "Update ID 3 = Pepe;",
+              "UPDATE clientes SET edad = Pepe WHERE id = 3;",
+              "UPDATE clientes SET nombre = Pepe WHERE id = 3;",
+              "UPDATE clientes SET nombre = Mario TO Pepe WHERE id = 3;",
+            ],
+            respuesta_correcta:
+              "UPDATE clientes SET nombre = Pepe WHERE id = 3;",
+          },
+          {
+            id: 21,
+            pregunta: "¿Qué sucede si se ejecuta un UPDATE sin usar WHERE?",
+            opciones: [
+              "Se modifican todos los registros de la tabla",
+              "No se modifica ningún registro",
+              "Se modifica solo el primer registro de la tabla",
+              "Se genera un error de sintaxis obligatorio",
+            ],
+            respuesta_correcta: "Se modifican todos los registros de la tabla",
+          },
+          {
+            id: 22,
+            pregunta:
+              "¿Cuál es la interpretación correcta de: SELECT * FROM alumnos WHERE edad > 21;?",
+            opciones: [
+              "Selecciona todos los alumnos con edad mayor a 21",
+              "Selecciona todos los alumnos con edad menor a 21",
+              "Selecciona todos los alumnos con edad igual a 21",
+              "Selecciona todos los alumnos sin importar la edad",
+            ],
+            respuesta_correcta:
+              "Selecciona todos los alumnos con edad mayor a 21",
+          },
+          {
+            id: 23,
+            pregunta:
+              "¿Qué operador se debe usar en WHERE para indicar 'distinto de'?",
+            opciones: ["<>", "=", ">=", "<="],
+            respuesta_correcta: "<>",
+          },
+          {
+            id: 24,
+            pregunta: "¿Qué hace el operador NOT dentro de una cláusula WHERE?",
+            opciones: [
+              "Invierte el valor lógico de la condición (si es verdadero pasa a falso y viceversa)",
+              "Suma dos condiciones para obtener un total",
+              "Multiplica los valores de la columna filtrada",
+              "Ordena los resultados de forma descendente",
+            ],
+            respuesta_correcta:
+              "Invierte el valor lógico de la condición (si es verdadero pasa a falso y viceversa)",
+          },
+          {
+            id: 25,
+            pregunta:
+              "¿Cuál es la interpretación correcta de: SELECT * FROM alumnos WHERE NOT edad = 20;?",
+            opciones: [
+              "Muestra todos los alumnos cuya edad NO sea 20",
+              "Muestra todos los alumnos cuya edad sea 20",
+              "Muestra todos los alumnos sin la columna edad",
+              "Muestra solo los alumnos con edad mayor a 20",
+            ],
+            respuesta_correcta: "Muestra todos los alumnos cuya edad NO sea 20",
+          },
+          {
+            id: 26,
+            pregunta:
+              "¿Qué obtenemos con la consulta: SELECT * FROM alumnos WHERE (edad > 18 AND promedio >= 6) OR nombre = 'Ana';?",
+            opciones: [
+              "Los alumnos mayores de 18 con promedio mayor o igual a 6, o los alumnos llamados Ana",
+              "Solo los alumnos llamados Ana",
+              "Solo los alumnos mayores de 18 sin importar el promedio",
+              "Los alumnos mayores de 18, con promedio mayor a 6 y que además se llamen Ana",
+            ],
+            respuesta_correcta:
+              "Los alumnos mayores de 18 con promedio mayor o igual a 6, o los alumnos llamados Ana",
+          },
+          {
+            id: 27,
+            pregunta:
+              "¿Qué obtenemos con la consulta: SELECT * FROM alumnos WHERE edad > 18 AND promedio >= 6;?",
+            opciones: [
+              "Todos los alumnos con edad mayor a 18 y promedio mayor o igual a 6",
+              "Todos los alumnos con edad mayor a 18 o promedio mayor o igual a 6",
+              "Todos los alumnos con edad mayor o igual a 18 y promedio mayor a 6",
+              "Todos los alumnos sin ninguna condición",
+            ],
+            respuesta_correcta:
+              "Todos los alumnos con edad mayor a 18 y promedio mayor o igual a 6",
+          },
+          {
+            id: 28,
+            pregunta:
+              "¿Qué obtenemos con la consulta: SELECT * FROM alumnos WHERE edad > 18 OR promedio > 6;?",
+            opciones: [
+              "Todos los alumnos con edad mayor a 18 y promedio mayor a 6",
+              "Todos los alumnos con edad mayor a 18 o promedio mayor a 6",
+              "Solo los alumnos con promedio mayor a 6",
+              "Ningún alumno, la consulta es inválida",
+            ],
+            respuesta_correcta:
+              "Todos los alumnos con edad mayor a 18 o promedio mayor a 6",
+          },
+          {
+            id: 29,
+            pregunta:
+              "¿Cuál es la sentencia correcta para crear la tabla 'cursos' con id PRIMARY KEY, nombre NOT NULL y duracion_meses NOT NULL?",
+            opciones: [
+              "CREATE TABLE cursos (id INT PRIMARY KEY, nombre VARCHAR(50) NOT NULL, duracion_meses INT NOT NULL);",
+              "CREATE TABLE cursos (id PRIMARY KEY INT, nombre NOT NULL VARCHAR(50), duracion_meses NOT NULL INT);",
+              "CREATE cursos TABLE (id INT PRIMARY, nombre VARCHAR(50), duracion_meses INT);",
+              "TABLE CREATE cursos (id INT PRIMARY KEY, nombre VARCHAR(50), duracion_meses INT NOT NULL);",
+            ],
+            respuesta_correcta:
+              "CREATE TABLE cursos (id INT PRIMARY KEY, nombre VARCHAR(50) NOT NULL, duracion_meses INT NOT NULL);",
+          },
+          {
+            id: 30,
+            pregunta:
+              "Si se desea cambiar la duración de un curso específico (id = 2) a 9 meses, ¿cuál es la sentencia correcta?",
+            opciones: [
+              "UPDATE cursos SET duracion_meses = 9 WHERE id = 2;",
+              "UPDATE cursos duracion_meses = 9 WHERE id = 2;",
+              "SET cursos duracion_meses = 9 WHERE id = 2;",
+              "UPDATE cursos SET duracion_meses = 9;",
+            ],
+            respuesta_correcta:
+              "UPDATE cursos SET duracion_meses = 9 WHERE id = 2;",
+          },
+          {
+            id: 31,
+            pregunta:
+              "¿Cuál es la sentencia correcta para mostrar solo los cursos con una duración mayor a 6 meses?",
+            opciones: [
+              "SELECT * FROM cursos WHERE duracion_meses > 6;",
+              "SELECT * FROM cursos SET duracion_meses > 6;",
+              "SHOW cursos WHERE duracion_meses > 6;",
+              "SELECT cursos WHERE duracion_meses > 6;",
+            ],
+            respuesta_correcta:
+              "SELECT * FROM cursos WHERE duracion_meses > 6;",
+          },
+          {
+            id: 32,
+            pregunta:
+              "¿Qué comando muestra todas las bases de datos existentes?",
+            opciones: [
+              "SHOW DATABASES;",
+              "SHOW TABLES;",
+              "USE DATABASES;",
+              "LIST DATABASES;",
+            ],
+            respuesta_correcta: "SHOW DATABASES;",
+          },
+          {
+            id: 33,
+            pregunta:
+              "¿Qué comando muestra las tablas de la base de datos activa?",
+            opciones: [
+              "SHOW TABLES;",
+              "SHOW DATABASES;",
+              "LIST TABLES;",
+              "SELECT TABLES;",
+            ],
+            respuesta_correcta: "SHOW TABLES;",
+          },
+          {
+            id: 34,
+            pregunta:
+              "¿Qué hace la palabra clave AUTO_INCREMENT en una columna?",
+            opciones: [
+              "Genera automáticamente valores consecutivos, sumando 1 al valor anterior",
+              "Genera valores aleatorios en la columna",
+              "Duplica automáticamente los registros existentes",
+              "Elimina automáticamente los registros repetidos",
+            ],
+            respuesta_correcta:
+              "Genera automáticamente valores consecutivos, sumando 1 al valor anterior",
+          },
+          {
+            id: 35,
+            pregunta: "¿Para qué tipo de dato se recomienda usar DOUBLE?",
+            opciones: [
+              "Para números que pueden llevar decimales, como un promedio o un precio",
+              "Para texto de longitud variable",
+              "Para valores booleanos (verdadero/falso)",
+              "Para fechas y horas",
+            ],
+            respuesta_correcta:
+              "Para números que pueden llevar decimales, como un promedio o un precio",
+          },
+          {
+            id: 36,
+            pregunta:
+              "¿Cuál es la sentencia correcta para crear la tabla 'alumnos' con id autoincremental como clave primaria, nombre, edad y promedio?",
+            opciones: [
+              "CREATE TABLE alumnos (id INT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(50), edad INT, promedio DOUBLE);",
+              "CREATE TABLE alumnos (id INT PRIMARY KEY AUTO_INCREMENT NOT, nombre VARCHAR(50), edad DOUBLE, promedio INT);",
+              "CREATE alumnos TABLE (id AUTO_INCREMENT, nombre VARCHAR(50), edad INT, promedio DOUBLE) PRIMARY KEY;",
+              "CREATE TABLE alumnos (id INT, nombre VARCHAR(50) AUTO_INCREMENT PRIMARY KEY, edad INT, promedio DOUBLE);",
+            ],
+            respuesta_correcta:
+              "CREATE TABLE alumnos (id INT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(50), edad INT, promedio DOUBLE);",
+          },
+          {
+            id: 37,
+            pregunta:
+              "Al insertar un nuevo registro en una tabla con columna AUTO_INCREMENT como PRIMARY KEY, ¿qué se debe hacer con esa columna en el INSERT INTO?",
+            opciones: [
+              "No incluirla en la lista de columnas, ya que se genera automáticamente",
+              "Incluirla siempre con el valor 0",
+              "Incluirla siempre con un valor de texto",
+              "Repetir el mismo valor en cada inserción",
+            ],
+            respuesta_correcta:
+              "No incluirla en la lista de columnas, ya que se genera automáticamente",
+          },
+          {
+            id: 38,
+            pregunta:
+              "¿Qué obtenemos con la consulta: SELECT nombre, promedio FROM alumnos WHERE promedio > 6;?",
+            opciones: [
+              "El nombre y promedio de los alumnos cuyo promedio es mayor a 6",
+              "Todos los datos de los alumnos cuyo promedio es mayor a 6",
+              "El nombre y promedio de todos los alumnos sin excepción",
+              "Solo el promedio de los alumnos cuyo nombre empiece con la letra A",
+            ],
+            respuesta_correcta:
+              "El nombre y promedio de los alumnos cuyo promedio es mayor a 6",
+          },
+          {
+            id: 39,
+            pregunta:
+              "¿Qué obtenemos con: SELECT * FROM alumnos WHERE edad > 20 AND promedio > 8;?",
+            opciones: [
+              "Los alumnos que cumplen ambas condiciones: edad mayor a 20 y promedio mayor a 8",
+              "Los alumnos que cumplen al menos una de las condiciones",
+              "Los alumnos que no cumplen ninguna condición",
+              "Todos los alumnos de la tabla sin excepción",
+            ],
+            respuesta_correcta:
+              "Los alumnos que cumplen ambas condiciones: edad mayor a 20 y promedio mayor a 8",
+          },
+          {
+            id: 40,
+            pregunta:
+              "¿Qué obtenemos con: SELECT * FROM alumnos WHERE promedio > 9 OR edad < 20;?",
+            opciones: [
+              "Los alumnos que cumplen al menos una de las dos condiciones (promedio mayor a 9 o edad menor a 20)",
+              "Los alumnos que cumplen ambas condiciones al mismo tiempo",
+              "Solo los alumnos con promedio mayor a 9",
+              "Solo los alumnos con edad menor a 20",
+            ],
+            respuesta_correcta:
+              "Los alumnos que cumplen al menos una de las dos condiciones (promedio mayor a 9 o edad menor a 20)",
+          },
+          {
+            id: 41,
+            pregunta:
+              "¿Qué obtenemos con: SELECT * FROM alumnos WHERE NOT promedio > 8;?",
+            opciones: [
+              "Los alumnos cuyo promedio NO es mayor a 8 (es decir, 8 o menos)",
+              "Los alumnos cuyo promedio es mayor a 8",
+              "Todos los alumnos sin excepción",
+              "Ningún alumno, la consulta es inválida",
+            ],
+            respuesta_correcta:
+              "Los alumnos cuyo promedio NO es mayor a 8 (es decir, 8 o menos)",
+          },
+          {
+            id: 42,
+            pregunta:
+              "¿Cuál es la sentencia correcta para borrar el alumno con id = 2 de la tabla alumnos?",
+            opciones: [
+              "DELETE FROM alumnos WHERE id = 2;",
+              "DELETE alumnos id = 2;",
+              "REMOVE FROM alumnos WHERE id = 2;",
+              "DROP FROM alumnos WHERE id = 2;",
+            ],
+            respuesta_correcta: "DELETE FROM alumnos WHERE id = 2;",
+          },
+          {
+            id: 43,
+            pregunta:
+              "¿Cuál es la diferencia principal entre DELETE y TRUNCATE?",
+            opciones: [
+              "DELETE borra registros específicos con WHERE, mientras que TRUNCATE vacía toda la tabla manteniendo su estructura",
+              "DELETE elimina la tabla completa y TRUNCATE borra solo una fila",
+              "Ambos comandos hacen exactamente lo mismo",
+              "TRUNCATE elimina la base de datos completa",
+            ],
+            respuesta_correcta:
+              "DELETE borra registros específicos con WHERE, mientras que TRUNCATE vacía toda la tabla manteniendo su estructura",
+          },
+          {
+            id: 44,
+            pregunta:
+              "¿Cuál es la sentencia correcta para vaciar completamente la tabla 'alumnos' sin eliminar su estructura?",
+            opciones: [
+              "TRUNCATE TABLE alumnos;",
+              "DELETE TABLE alumnos;",
+              "DROP TABLE alumnos;",
+              "CLEAR TABLE alumnos;",
+            ],
+            respuesta_correcta: "TRUNCATE TABLE alumnos;",
+          },
+          {
+            id: 45,
+            pregunta: "¿Qué hace el comando DROP TABLE IF EXISTS alumnos;?",
+            opciones: [
+              "Elimina la tabla 'alumnos' solo si esta existe, evitando un error si no existe",
+              "Elimina la base de datos completa si la tabla existe",
+              "Vacía la tabla sin eliminarla si existe",
+              "Crea la tabla 'alumnos' si no existe",
+            ],
+            respuesta_correcta:
+              "Elimina la tabla 'alumnos' solo si esta existe, evitando un error si no existe",
+          },
+          {
+            id: 46,
+            pregunta:
+              "¿Cuál es la sentencia correcta para renombrar la tabla 'alumnos' a 'estudiantes'?",
+            opciones: [
+              "RENAME TABLE alumnos TO estudiantes;",
+              "RENAME alumnos AS estudiantes;",
+              "TABLE RENAME alumnos TO estudiantes;",
+              "UPDATE alumnos RENAME estudiantes;",
+            ],
+            respuesta_correcta: "RENAME TABLE alumnos TO estudiantes;",
+          },
+          {
+            id: 47,
+            pregunta:
+              "¿Cuál es la sentencia correcta para crear la base de datos 'cursoDB' y seleccionarla para trabajar?",
+            opciones: [
+              "CREATE DATABASE cursoDB; USE cursoDB;",
+              "CREATE cursoDB DATABASE; SELECT cursoDB;",
+              "NEW DATABASE cursoDB; OPEN cursoDB;",
+              "DATABASE cursoDB CREATE; USE cursoDB;",
+            ],
+            respuesta_correcta: "CREATE DATABASE cursoDB; USE cursoDB;",
+          },
+          {
+            id: 48,
+            pregunta:
+              "¿Cuál es la sentencia correcta para crear la tabla 'productos' con id autoincremental (PRIMARY KEY), nombre VARCHAR(40), precio DOUBLE y stock INT?",
+            opciones: [
+              "CREATE TABLE productos (id INT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(40), precio DOUBLE, stock INT);",
+              "CREATE TABLE productos (id INT PRIMARY KEY, nombre INT(40), precio VARCHAR, stock DOUBLE);",
+              "CREATE productos TABLE (id AUTO_INCREMENT, nombre VARCHAR(40), precio DOUBLE, stock INT) PRIMARY KEY;",
+              "CREATE TABLE productos (nombre VARCHAR(40), id INT AUTO_INCREMENT, precio INT, stock DOUBLE);",
+            ],
+            respuesta_correcta:
+              "CREATE TABLE productos (id INT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(40), precio DOUBLE, stock INT);",
+          },
+          {
+            id: 49,
+            pregunta:
+              "¿Cuál es la sentencia correcta para filtrar productos con stock menor a 50 y precio menor a 500?",
+            opciones: [
+              "SELECT * FROM productos WHERE stock < 50 AND precio < 500;",
+              "SELECT * FROM productos WHERE stock < 50 OR precio < 500;",
+              "SELECT * FROM productos WHERE stock > 50 AND precio > 500;",
+              "SELECT * FROM productos SET stock < 50 AND precio < 500;",
+            ],
+            respuesta_correcta:
+              "SELECT * FROM productos WHERE stock < 50 AND precio < 500;",
+          },
+          {
+            id: 50,
+            pregunta:
+              "¿Cuál es la sentencia correcta para filtrar los productos que NO tengan stock mayor a 20?",
+            opciones: [
+              "SELECT * FROM productos WHERE NOT stock > 20;",
+              "SELECT * FROM productos WHERE stock > 20;",
+              "SELECT * FROM productos WHERE NOT stock < 20;",
+              "DELETE FROM productos WHERE NOT stock > 20;",
+            ],
+            respuesta_correcta: "SELECT * FROM productos WHERE NOT stock > 20;",
+          },
+          {
+            id: 51,
+            pregunta:
+              "Después de vaciar la tabla 'productos' con TRUNCATE, ¿cuál es la sentencia correcta para renombrarla como 'inventario'?",
+            opciones: [
+              "RENAME TABLE productos TO inventario;",
+              "RENAME productos TO inventario;",
+              "ALTER productos TO inventario;",
+              "UPDATE TABLE productos RENAME inventario;",
+            ],
+            respuesta_correcta: "RENAME TABLE productos TO inventario;",
+          },
+          {
+            id: 52,
+            pregunta:
+              "¿Qué comando se utiliza para modificar registros existentes en una tabla?",
+            opciones: [
+              "UPDATE tabla SET columna = valor WHERE condición;",
+              "INSERT INTO tabla SET columna = valor WHERE condición;",
+              "MODIFY tabla SET columna = valor WHERE condición;",
+              "CHANGE tabla SET columna = valor WHERE condición;",
+            ],
+            respuesta_correcta:
+              "UPDATE tabla SET columna = valor WHERE condición;",
+          },
+          {
+            id: 53,
+            pregunta:
+              "¿Qué cláusula se utiliza para filtrar registros en una consulta SQL?",
+            opciones: ["WHERE", "FILTER", "HAVING", "SELECT"],
+            respuesta_correcta: "WHERE",
+          },
+          {
+            id: 54,
+            pregunta:
+              "¿Qué operador SQL se utiliza para indicar que ambas condiciones deben cumplirse?",
+            opciones: ["AND", "OR", "NOT", "Ninguna de las mencionadas"],
+            respuesta_correcta: "AND",
+          },
+          {
+            id: 55,
+            pregunta:
+              "¿Qué operador SQL se utiliza para indicar que al menos una condición debe cumplirse?",
+            opciones: ["OR", "AND", "NOT", "Ninguna de las mencionadas"],
+            respuesta_correcta: "OR",
+          },
+          {
+            id: 56,
+            pregunta:
+              "¿Qué operador SQL invierte el valor lógico de una condición?",
+            opciones: ["NOT", "AND", "OR", "XOR"],
+            respuesta_correcta: "NOT",
+          },
+          {
+            id: 57,
+            pregunta:
+              "¿Qué comando se utiliza para eliminar registros de una tabla en MySQL?",
+            opciones: [
+              "DELETE FROM tabla WHERE condición;",
+              "REMOVE FROM tabla WHERE condición;",
+              "DROP FROM tabla WHERE condición;",
+              "TRUNCATE FROM tabla WHERE condición;",
+            ],
+            respuesta_correcta: "DELETE FROM tabla WHERE condición;",
+          },
+          {
+            id: 58,
+            pregunta:
+              "¿Qué comando se utiliza para vaciar toda una tabla pero manteniendo su estructura?",
+            opciones: [
+              "TRUNCATE TABLE tabla;",
+              "DELETE TABLE tabla;",
+              "DROP TABLE tabla;",
+              "CLEAR TABLE tabla;",
+            ],
+            respuesta_correcta: "TRUNCATE TABLE tabla;",
+          },
+          {
+            id: 59,
+            pregunta:
+              "¿Qué espero obtener con esta consulta? SELECT * FROM alumnos WHERE edad > 18 AND promedio >= 6",
+            opciones: [
+              "Todos los alumnos con edad mayor a 18 y promedio mayor o igual a 6",
+              "Todos los alumnos con edad mayor o igual a 18 y promedio mayor o igual a 6",
+              "Todos los alumnos con edad mayor a 18 y promedio mayor a 6",
+              "Todos los alumnos con edad mayor o igual 18 y promedio mayor a 6",
+            ],
+            respuesta_correcta:
+              "Todos los alumnos con edad mayor a 18 y promedio mayor o igual a 6",
+          },
+          {
+            id: 60,
+            pregunta:
+              "¿Qué espero obtener con esta consulta? SELECT * FROM alumnos WHERE edad > 18 OR promedio > 6",
+            opciones: [
+              "Todos los alumnos con edad mayor a 18 o promedio mayor a 6",
+              "Todos los alumnos con edad mayor o igual a 18 o promedio mayor o igual a 6",
+              "Todos los alumnos con edad mayor a 18 o promedio mayor o igual a 6",
+              "Todos los alumnos con edad mayor o igual 18 o promedio mayor a 6",
+            ],
+            respuesta_correcta:
+              "Todos los alumnos con edad mayor a 18 o promedio mayor a 6",
+          },
 
-//   {
-// "id": 15,
-// "pregunta": "¿Qué indica INT en una columna?",
-// "opciones": [
-// "Que almacena un número entero",
-// "Que almacena texto",
-// "Que almacena decimales",
-// "Que almacena fechas"
-// ],
-// "respuesta_correcta": "Que almacena un número entero"
-// },
-// {
-// "id": 16,
-// "pregunta": "¿Cuál es el comando correcto para eliminar una tabla?",
-// "opciones": [
-// "DROP TABLE alumnos;",
-// "DELETE TABLE alumnos;",
-// "REMOVE TABLE alumnos;",
-// "TRUNCATE alumnos;"
-// ],
-// "respuesta_correcta": "DROP TABLE alumnos;"
-// },
-// {
-// "id": 17,
-// "pregunta": "En INSERT INTO alumnos (nombre, apellido, edad, domicilio) VALUES ('Tony', 'Stark', 1967, 'Avenida siempre viva 123'); ¿Cómo se ingresan los datos de tipo VARCHAR?",
-// "opciones": [
-// "Entre comillas",
-// "Sin comillas",
-// "Con punto y coma",
-// "Con paréntesis"
-// ],
-// "respuesta_correcta": "Entre comillas"
-// },
-// {
-// "id": 18,
-// "pregunta": "¿Qué comando se utiliza para agregar datos a una tabla?",
-// "opciones": [
-// "INSERT INTO",
-// "UPDATE",
-// "SELECT",
-// "CREATE"
-// ],
-// "respuesta_correcta": "INSERT INTO"
-// },
-// {
-// "id": 19,
-// "pregunta": "¿Qué sucede si se ingresa un tipo de dato que no corresponde en un INSERT?",
-// "opciones": [
-// "Sale error y no registra los cambios",
-// "Se guarda igual",
-// "Se convierte automáticamente",
-// "Se ignora la columna"
-// ],
-// "respuesta_correcta": "Sale error y no registra los cambios"
-// },
-// {
-// "id": 20,
-// "pregunta": "En CREATE TABLE, ¿cómo se separan las columnas?",
-// "opciones": [
-// "Con coma",
-// "Con punto y coma",
-// "Con dos puntos",
-// "Con espacio"
-// ],
-// "respuesta_correcta": "Con coma"
-// },
-// {
-// "id": 21,
-// "pregunta": "¿Qué es PRIMARY KEY?",
-// "opciones": [
-// "Un campo que identifica de forma única cada registro de una tabla",
-// "Un campo que puede repetirse",
-// "Un campo que puede ser NULL",
-// "Un campo de texto"
-// ],
-// "respuesta_correcta": "Un campo que identifica de forma única cada registro de una tabla"
-// },
-// {
-// "id": 22,
-// "pregunta": "¿PRIMARY KEY puede repetirse?",
-// "opciones": [
-// "No",
-// "Sí",
-// "Solo en tablas grandes",
-// "Solo si es INT"
-// ],
-// "respuesta_correcta": "No"
-// },
-// {
-// "id": 23,
-// "pregunta": "¿PRIMARY KEY puede ser NULL?",
-// "opciones": [
-// "No",
-// "Sí",
-// "A veces",
-// "Solo si es VARCHAR"
-// ],
-// "respuesta_correcta": "No"
-// },
-// {
-// "id": 24,
-// "pregunta": "¿Cuál es un ejemplo típico de PRIMARY KEY?",
-// "opciones": [
-// "DNI",
-// "Color de ojos",
-// "Nombre",
-// "Edad"
-// ],
-// "respuesta_correcta": "DNI"
-// },
-// {
-// "id": 25,
-// "pregunta": "¿Qué indica NOT NULL?",
-// "opciones": [
-// "Que el campo debe tener un valor siempre",
-// "Que el campo puede estar vacío",
-// "Que el campo es clave",
-// "Que el campo es decimal"
-// ],
-// "respuesta_correcta": "Que el campo debe tener un valor siempre"
-// },
-// {
-// "id": 26,
-// "pregunta": "En CREATE TABLE deportista (id INT PRIMARY KEY NOT NULL, nombre VARCHAR(50) NOT NULL, goles INT NOT NULL); ¿Qué columna es PRIMARY KEY?",
-// "opciones": [
-// "id",
-// "nombre",
-// "goles",
-// "Todas"
-// ],
-// "respuesta_correcta": "id"
-// },
-// {
-// "id": 27,
-// "pregunta": "¿Qué comando inserta varias filas en una sola sentencia?",
-// "opciones": [
-// "INSERT INTO tabla (col1, col2) VALUES (v1, v2), (v3, v4);",
-// "INSERT INTO tabla VALUES (v1);",
-// "UPDATE tabla SET col1 = v1;",
-// "SELECT * FROM tabla;"
-// ],
-// "respuesta_correcta": "INSERT INTO tabla (col1, col2) VALUES (v1, v2), (v3, v4);"
-// },
-// {
-// "id": 28,
-// "pregunta": "¿Qué hace SELECT * FROM alumnos;?",
-// "opciones": [
-// "Selecciona todo de la tabla alumnos",
-// "Selecciona solo el id",
-// "Elimina alumnos",
-// "Actualiza alumnos"
-// ],
-// "respuesta_correcta": "Selecciona todo de la tabla alumnos"
-// },
-// {
-// "id": 29,
-// "pregunta": "¿Qué hace UPDATE alumnos SET edad = 23 WHERE id = 2;?",
-// "opciones": [
-// "Actualiza la edad a 23 donde el id sea 2",
-// "Actualiza el id a 2 donde la edad sea 23",
-// "Inserta una edad 23",
-// "Elimina el registro con id 2"
-// ],
-// "respuesta_correcta": "Actualiza la edad a 23 donde el id sea 2"
-// },
-// {
-// "id": 30,
-// "pregunta": "¿Por qué es importante usar WHERE en UPDATE?",
-// "opciones": [
-// "Para evitar modificar todos los registros",
-// "Para ordenar los registros",
-// "Para eliminar la tabla",
-// "Para crear una base de datos"
-// ],
-// "respuesta_correcta": "Para evitar modificar todos los registros"
-// },
-// {
-// "id": 31,
-// "pregunta": "¿Qué operador significa 'mayor que'?",
-// "opciones": [
-// ">",
-// "<",
-// "=",
-// "<>"
-// ],
-// "respuesta_correcta": ">"
-// },
-// {
-// "id": 32,
-// "pregunta": "¿Qué operador significa 'distinto de'?",
-// "opciones": [
-// "<>",
-// "=",
-// ">",
-// "<"
-// ],
-// "respuesta_correcta": "<>"
-// },
-// {
-// "id": 33,
-// "pregunta": "¿Qué hace SELECT * FROM alumnos WHERE edad > 21;?",
-// "opciones": [
-// "Muestra los alumnos con edad mayor a 21",
-// "Muestra los alumnos con edad menor a 21",
-// "Muestra los alumnos con edad igual a 21",
-// "Elimina los alumnos mayores a 21"
-// ],
-// "respuesta_correcta": "Muestra los alumnos con edad mayor a 21"
-// },
-// {
-// "id": 34,
-// "pregunta": "¿Qué hace SELECT * FROM alumnos WHERE NOT edad = 20;?",
-// "opciones": [
-// "Muestra los alumnos cuya edad no sea 20",
-// "Muestra los alumnos con edad 20",
-// "Muestra los alumnos con edad mayor a 20",
-// "Elimina los alumnos con edad 20"
-// ],
-// "respuesta_correcta": "Muestra los alumnos cuya edad no sea 20"
-// },
-// {
-// "id": 35,
-// "pregunta": "¿Qué interpretación corresponde a SELECT * FROM alumnos WHERE (edad > 18 AND promedio >= 6) OR nombre = 'Ana';?",
-// "opciones": [
-// "Selecciona alumnos mayores de 18 con promedio mayor o igual a 6, o cuyo nombre sea Ana",
-// "Selecciona alumnos mayores de 18 y con promedio mayor o igual a 6, y además llamados Ana",
-// "Selecciona alumnos menores de 18 o cuyo nombre sea Ana",
-// "Selecciona alumnos con promedio mayor o igual a 6 solamente"
-// ],
-// "respuesta_correcta": "Selecciona alumnos mayores de 18 con promedio mayor o igual a 6, o cuyo nombre sea Ana"
-// },
-// {
-// "id": 36,
-// "pregunta": "¿Qué comando muestra todas las bases de datos?",
-// "opciones": [
-// "SHOW DATABASES;",
-// "SHOW TABLES;",
-// "USE;",
-// "SELECT DATABASES;"
-// ],
-// "respuesta_correcta": "SHOW DATABASES;"
-// },
-// {
-// "id": 37,
-// "pregunta": "¿Qué comando muestra las tablas de la base de datos activa?",
-// "opciones": [
-// "SHOW TABLES;",
-// "SHOW DATABASES;",
-// "USE;",
-// "SELECT TABLES;"
-// ],
-// "respuesta_correcta": "SHOW TABLES;"
-// },
-// {
-// "id": 38,
-// "pregunta": "¿Qué hace AUTO_INCREMENT?",
-// "opciones": [
-// "Genera automáticamente valores consecutivos",
-// "Borra registros",
-// "Crea una base de datos",
-// "Ordena los registros"
-// ],
-// "respuesta_correcta": "Genera automáticamente valores consecutivos"
-// },
-// {
-// "id": 39,
-// "pregunta": "¿Qué tipo de dato permite almacenar números con decimales?",
-// "opciones": [
-// "DOUBLE",
-// "INT",
-// "VARCHAR",
-// "DATE"
-// ],
-// "respuesta_correcta": "DOUBLE"
-// },
-// {
-// "id": 40,
-// "pregunta": "En CREATE TABLE alumnos (id INT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(50), edad INT, promedio DOUBLE); ¿Qué columna se omite normalmente en INSERT INTO alumnos (nombre, edad, promedio)?",
-// "opciones": [
-// "id",
-// "nombre",
-// "edad",
-// "promedio"
-// ],
-// "respuesta_correcta": "id"
-// },
-// {
-// "id": 41,
-// "pregunta": "¿Cuál es el comando correcto para renombrar una tabla?",
-// "opciones": [
-// "RENAME TABLE alumnos TO estudiantes;",
-// "CHANGE TABLE alumnos TO estudiantes;",
-// "ALTER NAME alumnos TO estudiantes;",
-// "UPDATE TABLE alumnos TO estudiantes;"
-// ],
-// "respuesta_correcta": "RENAME TABLE alumnos TO estudiantes;"
-// },
-// {
-// "id": 42,
-// "pregunta": "¿Qué hace DELETE FROM alumnos WHERE id = 2;?",
-// "opciones": [
-// "Borra la fila cuyo id es 2",
-// "Borra toda la tabla",
-// "Borra la columna id",
-// "Actualiza el id 2"
-// ],
-// "respuesta_correcta": "Borra la fila cuyo id es 2"
-// },
-// {
-// "id": 43,
-// "pregunta": "¿Qué hace TRUNCATE TABLE alumnos;?",
-// "opciones": [
-// "Vacía toda la tabla pero mantiene su estructura",
-// "Borra la tabla",
-// "Borra una sola fila",
-// "Renombra la tabla"
-// ],
-// "respuesta_correcta": "Vacía toda la tabla pero mantiene su estructura"
-// },
-// {
-// "id": 44,
-// "pregunta": "¿Qué hace DROP TABLE IF EXISTS alumnos;?",
-// "opciones": [
-// "Elimina la tabla si existe",
-// "Vacía la tabla",
-// "Borra una fila",
-// "Crea la tabla"
-// ],
-// "respuesta_correcta": "Elimina la tabla si existe"
-// },
-// {
-// "id": 45,
-// "pregunta": "¿Cuál es la diferencia entre DELETE y TRUNCATE?",
-// "opciones": [
-// "DELETE borra filas según una condición; TRUNCATE vacía toda la tabla",
-// "DELETE crea tablas; TRUNCATE actualiza registros",
-// "DELETE elimina la base de datos; TRUNCATE elimina columnas",
-// "DELETE y TRUNCATE son exactamente iguales"
-// ],
-// "respuesta_correcta": "DELETE borra filas según una condición; TRUNCATE vacía toda la tabla"
-// },
-// {
-// "id": 46,
-// "pregunta": "¿Qué comando selecciona las columnas nombre y promedio de alumnos con promedio mayor a 6?",
-// "opciones": [
-// "SELECT nombre, promedio FROM alumnos WHERE promedio > 6;",
-// "SELECT * FROM alumnos WHERE promedio > 6;",
-// "SELECT nombre, promedio FROM alumnos;",
-// "UPDATE alumnos SET promedio > 6;"
-// ],
-// "respuesta_correcta": "SELECT nombre, promedio FROM alumnos WHERE promedio > 6;"
-// },
-// {
-// "id": 47,
-// "pregunta": "¿Qué operador lógico exige que ambas condiciones se cumplan?",
-// "opciones": [
-// "AND",
-// "OR",
-// "NOT",
-// "XOR"
-// ],
-// "respuesta_correcta": "AND"
-// },
-// {
-// "id": 48,
-// "pregunta": "¿Qué operador lógico exige que al menos una condición se cumpla?",
-// "opciones": [
-// "OR",
-// "AND",
-// "NOT",
-// "XOR"
-// ],
-// "respuesta_correcta": "OR"
-// },
-// {
-// "id": 49,
-// "pregunta": "¿Qué operador invierte el valor lógico de una condición?",
-// "opciones": [
-// "NOT",
-// "AND",
-// "OR",
-// "="
-// ],
-// "respuesta_correcta": "NOT"
-// },
-// {
-// "id": 50,
-// "pregunta": "¿Cuál es el error en UPDATE alumnos SET edad = 23;?",
-// "opciones": [
-// "Falta WHERE y modificaría todos los registros",
-// "Falta SET",
-// "Falta VALUES",
-// "Falta FROM"
-// ],
-// "respuesta_correcta": "Falta WHERE y modificaría todos los registros"
-// },
-// {
-// "id": 51,
-// "pregunta": "¿Cuál es el error en INSERT alumnos (nombre) VALUES ('Ana');?",
-// "opciones": [
-// "Falta INTO",
-// "Falta SET",
-// "Falta WHERE",
-// "Falta UPDATE"
-// ],
-// "respuesta_correcta": "Falta INTO"
-// },
-// {
-// "id": 52,
-// "pregunta": "¿Cuál es la sentencia correcta para actualizar el nombre de Mario a Pepe de una persona con ID 3 en la tabla Clientes?",
-// "opciones": [
-// "UPDATE clientes SET nombre = 'Pepe' WHERE id = 3;",
-// "UPDATE clientes SET nombre = 'Mario' WHERE id = 3;",
-// "UPDATE clientes SET id = 3 WHERE nombre = 'Pepe';",
-// "UPDATE clientes SET nombre = 'Pepe';"
-// ],
-// "respuesta_correcta": "UPDATE clientes SET nombre = 'Pepe' WHERE id = 3;"
-// },
-// {
-// "id": 53,
-// "pregunta": "¿Qué se espera obtener con SELECT * FROM alumnos WHERE edad > 18 AND promedio >= 6?",
-// "opciones": [
-// "Todos los alumnos con edad mayor a 18 y promedio mayor o igual a 6",
-// "Todos los alumnos con edad mayor o igual a 18 y promedio mayor o igual a 6",
-// "Todos los alumnos con edad mayor a 18 y promedio mayor a 6",
-// "Todos los alumnos con edad mayor o igual a 18 y promedio mayor a 6"
-// ],
-// "respuesta_correcta": "Todos los alumnos con edad mayor a 18 y promedio mayor o igual a 6"
-// },
-// {
-// "id": 54,
-// "pregunta": "¿Qué se espera obtener con SELECT * FROM alumnos WHERE edad > 18 OR promedio > 6?",
-// "opciones": [
-// "Todos los alumnos con edad mayor a 18 o promedio mayor a 6",
-// "Todos los alumnos con edad mayor o igual a 18 o promedio mayor o igual a 6",
-// "Todos los alumnos con edad mayor a 18 o promedio mayor o igual a 6",
-// "Todos los alumnos con edad mayor o igual a 18 o promedio mayor a 6"
-// ],
-// "respuesta_correcta": "Todos los alumnos con edad mayor a 18 o promedio mayor a 6"
-// },
-// {
-// "id": 55,
-// "pregunta": "¿Qué sentencia falta para agregar registros a una tabla? _________ alumnos (nombre, edad) VALUES ('Ana', 20)",
-// "opciones": [
-// "INSERT INTO",
-// "CREATE INTO",
-// "PUT INTO",
-// "INSERT IN"
-// ],
-// "respuesta_correcta": "INSERT INTO"
-// },
-// {
-// "id": 56,
-// "pregunta": "En MySQL Workbench, ¿qué indica una tilde verde en el output?",
-// "opciones": [
-// "Éxito en la ejecución",
-// "Error en la ejecución",
-// "Advertencia",
-// "Consulta lenta"
-// ],
-// "respuesta_correcta": "Éxito en la ejecución"
-// },
-// {
-// "id": 57,
-// "pregunta": "En MySQL Workbench, ¿qué indica una cruz roja en el output?",
-// "opciones": [
-// "Error en la ejecución",
-// "Éxito en la ejecución",
-// "Advertencia",
-// "Consulta vacía"
-// ],
-// "respuesta_correcta": "Error en la ejecución"
-// },
-// {
-// "id": 58,
-// "pregunta": "¿Qué comando selecciona todos los productos con precio mayor a 100?",
-// "opciones": [
-// "SELECT * FROM productos WHERE precio > 100;",
-// "SELECT * FROM productos WHERE precio < 100;",
-// "SELECT precio FROM productos;",
-// "DELETE FROM productos WHERE precio > 100;"
-// ],
-// "respuesta_correcta": "SELECT * FROM productos WHERE precio > 100;"
-// },
-// {
-// "id": 59,
-// "pregunta": "¿Qué comando filtra productos con stock menor a 50 y precio menor a 500?",
-// "opciones": [
-// "SELECT * FROM productos WHERE stock < 50 AND precio < 500;",
-// "SELECT * FROM productos WHERE stock < 50 OR precio < 500;",
-// "SELECT * FROM productos WHERE stock > 50 AND precio > 500;",
-// "SELECT * FROM productos WHERE stock = 50 AND precio = 500;"
-// ],
-// "respuesta_correcta": "SELECT * FROM productos WHERE stock < 50 AND precio < 500;"
-// },
-// {
-// "id": 60,
-// "pregunta": "¿Qué comando filtra productos que NO tengan stock mayor a 20?",
-// "opciones": [
-// "SELECT * FROM productos WHERE NOT stock > 20;",
-// "SELECT * FROM productos WHERE stock > 20;",
-// "SELECT * FROM productos WHERE NOT stock = 20;",
-// "SELECT * FROM productos WHERE stock <> 20;"
-// ],
-// "respuesta_correcta": "SELECT * FROM productos WHERE NOT stock > 20;"
-// },
-// {
-// "id": 61,
-// "pregunta": "¿Qué hace DROP TABLE IF EXISTS inventario;?",
-// "opciones": [
-// "Elimina la tabla inventario si existe",
-// "Vacía la tabla inventario",
-// "Crea la tabla inventario",
-// "Renombra la tabla inventario"
-// ],
-// "respuesta_correcta": "Elimina la tabla inventario si existe"
-// },
-// {
-// "id": 62,
-// "pregunta": "¿Qué hace RENAME TABLE productos TO inventario;?",
-// "opciones": [
-// "Renombra la tabla productos como inventario",
-// "Elimina la tabla productos",
-// "Crea la tabla inventario",
-// "Copia la tabla productos"
-// ],
-// "respuesta_correcta": "Renombra la tabla productos como inventario"
-// },
-// {
-// "id": 63,
-// "pregunta": "En una tabla con id AUTO_INCREMENT PRIMARY KEY, ¿qué ocurre si se inserta un registro sin indicar el id?",
-// "opciones": [
-// "Se genera automáticamente un valor consecutivo",
-// "Da error",
-// "Se inserta NULL",
-// "Se repite el id 0"
-// ],
-// "respuesta_correcta": "Se genera automáticamente un valor consecutivo"
-// },
-// {
-// "id": 64,
-// "pregunta": "¿Cuál es la sintaxis correcta para crear una tabla con PRIMARY KEY?",
-// "opciones": [
-// "CREATE TABLE alumnos (id INT PRIMARY KEY, nombre VARCHAR(50));",
-// "CREATE TABLE alumnos (id INT, PRIMARY KEY nombre);",
-// "CREATE TABLE alumnos (PRIMARY KEY id INT);",
-// "CREATE TABLE alumnos (id PRIMARY KEY INT);"
-// ],
-// "respuesta_correcta": "CREATE TABLE alumnos (id INT PRIMARY KEY, nombre VARCHAR(50));"
-// },
-// {
-// "id": 65,
-// "pregunta": "¿Cuál es el tipo de dato para texto en MySQL según la teoría?",
-// "opciones": [
-// "VARCHAR",
-// "INT",
-// "DOUBLE",
-// "PRIMARY"
-// ],
-// "respuesta_correcta": "VARCHAR"
-// },
-// {
-// "id": 66,
-// "pregunta": "¿Qué significa que un campo sea NOT NULL?",
-// "opciones": [
-// "Que no puede quedar vacío",
-// "Que puede repetirse",
-// "Que es clave primaria",
-// "Que es decimal"
-// ],
-// "respuesta_correcta": "Que no puede quedar vacío"
-// },
-// {
-// "id": 67,
-// "pregunta": "¿Qué hace SELECT * FROM alumnos WHERE promedio > 9 OR edad < 20;?",
-// "opciones": [
-// "Muestra alumnos con promedio mayor a 9 o edad menor a 20",
-// "Muestra alumnos con promedio mayor a 9 y edad menor a 20",
-// "Muestra alumnos con promedio menor a 9 o edad mayor a 20",
-// "Muestra alumnos con promedio mayor a 9 y edad mayor a 20"
-// ],
-// "respuesta_correcta": "Muestra alumnos con promedio mayor a 9 o edad menor a 20"
-// },
-// {
-// "id": 68,
-// "pregunta": "¿Qué hace SELECT * FROM alumnos WHERE NOT promedio > 8;?",
-// "opciones": [
-// "Muestra alumnos con promedio no mayor a 8",
-// "Muestra alumnos con promedio mayor a 8",
-// "Muestra alumnos con promedio igual a 8",
-// "Elimina los alumnos con promedio mayor a 8"
-// ],
-// "respuesta_correcta": "Muestra alumnos con promedio no mayor a 8"
-// },
-// {
-// "id": 69,
-// "pregunta": "¿Cuál es la diferencia entre DROP DATABASE y DROP TABLE?",
-// "opciones": [
-// "DROP DATABASE elimina una base de datos completa; DROP TABLE elimina una tabla",
-// "DROP DATABASE elimina una tabla; DROP TABLE elimina una base de datos",
-// "Ambas eliminan solo registros",
-// "DROP DATABASE crea una base de datos"
-// ],
-// "respuesta_correcta": "DROP DATABASE elimina una base de datos completa; DROP TABLE elimina una tabla"
-// },
-// {
-// "id": 70,
-// "pregunta": "¿Qué comando se usa para seleccionar una base de datos antes de trabajar en ella?",
-// "opciones": [
-// "USE nombreBD;",
-// "SHOW DATABASES;",
-// "SHOW TABLES;",
-// "SELECT nombreBD;"
-// ],
-// "respuesta_correcta": "USE nombreBD;"
-// }
+          {
+            id: 61,
+            pregunta:
+              "¿Qué error hay en la siguiente sentencia SQL? TRUNCATE alumnos",
+            opciones: [
+              "Falta la palabra TABLE y el punto y coma al final.",
+              "Falta la palabra FROM.",
+              "Falta la palabra DELETE.",
+              "Falta la condición WHERE.",
+            ],
+            respuesta_correcta:
+              "Falta la palabra TABLE y el punto y coma al final.",
+          },
+
+          {
+            id: 62,
+            pregunta:
+              "¿Qué sucede si se ingresa un tipo de dato que no corresponde en un INSERT?",
+            opciones: [
+              "Sale error y no registra los cambios",
+              "Se guarda igual, pero a futuro puede dar poblemas logicos",
+              "Se convierte automáticamente",
+              "Se ignora la columna agregando los otros valores, menos el incorrecto",
+            ],
+            respuesta_correcta: "Sale error y no registra los cambios",
+          },
+
+          {
+            id: 63,
+            pregunta: "¿PRIMARY KEY puede repetirse?",
+            opciones: [
+              "No",
+              "Sí",
+              "Solo si el tipo dato ingresado es de texto",
+              "Solo si es INT",
+            ],
+            respuesta_correcta: "No",
+          },
         ],
       };
 
@@ -1700,6 +1123,34 @@
 
       // Iniciar examen cuando la página carga
       iniciarExamen();
+
+       document.addEventListener("keydown", function(event) {
+  // Desactivar la tecla "Backspace" (código 8)
+  if (event.key === "Backspace" || event.keyCode === 8) {
+    event.preventDefault();
+    console.log("Tecla Backspace desactivada");
+  }
+
+  // Usar la tecla "B" para volver atrás (código 66)
+  if (event.key === "b" || event.key === "B" || event.keyCode === 66) {
+    event.preventDefault();
+    window.history.back(); // Vuelve a la página anterior
+  }
+});
+
+      document.addEventListener("keydown", function (event) {
+        // Desactivar F5 (opcional)
+        if (event.key === "F5" || event.keyCode === 116) {
+          event.preventDefault();
+          console.log("F5 desactivada");
+        }
+
+        // Usar la tecla "R" para actualizar la página
+        if (event.key === "r" || event.key === "R" || event.keyCode === 82) {
+          event.preventDefault();
+          location.reload();
+        }
+      });
     </script>
   </body>
 </html>

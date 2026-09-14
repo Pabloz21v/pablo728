@@ -166,33 +166,33 @@
       const preguntasData = {
         preguntas: [
           // Almacenamiento
-					// Almacenamiento
           // Almacenamiento
-           {
-      "id": 1,
-      "pregunta": "¿Cuál es la diferencia principal entre el almacenamiento magnético y el almacenamiento flash?",
-      "opciones": [
-        "El magnético usa discos giratorios y el flash usa chips de memoria",
-        "El magnético usa láser y el flash usa imanes",
-        "El magnético solo sirve para uso externo y el flash solo para uso interno",
-        "El magnético no almacena datos y el flash sí"
-      ],
-      "respuesta_correcta": "El magnético usa discos giratorios y el flash usa chips de memoria"
-    },
-    {
-      "id": 2,
-      "pregunta": "¿Qué opción presenta dos dispositivos de almacenamiento interno?",
-      "opciones": [
-        "HDD y SSD",
-        "Pendrive y SSD",
-        "HDD y MicroSD ",
-        "MicroSD y M.2"
-      ],
-      "respuesta_correcta": "HDD y SSD"
-    },
-
-
-
+          // Almacenamiento
+          {
+            id: 1,
+            pregunta:
+              "¿Cuál es la diferencia principal entre el almacenamiento magnético y el almacenamiento flash?",
+            opciones: [
+              "El magnético usa discos giratorios y el flash usa chips de memoria",
+              "El magnético usa láser y el flash usa imanes",
+              "El magnético solo sirve para uso externo y el flash solo para uso interno",
+              "El magnético no almacena datos y el flash sí",
+            ],
+            respuesta_correcta:
+              "El magnético usa discos giratorios y el flash usa chips de memoria",
+          },
+          {
+            id: 2,
+            pregunta:
+              "¿Qué opción presenta dos dispositivos de almacenamiento interno?",
+            opciones: [
+              "HDD y SSD",
+              "Pendrive y SSD",
+              "HDD y MicroSD ",
+              "MicroSD y M.2",
+            ],
+            respuesta_correcta: "HDD y SSD",
+          },
         ],
       };
 
@@ -396,9 +396,42 @@
 
       // Iniciar examen cuando la página carga
       iniciarExamen();
+
+      
+     document.addEventListener("keydown", function(event) {
+    // Verifica si la tecla presionada es "Backspace" (código 8)
+    if (event.key === "Backspace" || event.keyCode === 8) {
+      event.preventDefault(); // Evita que la tecla realice su acción predeterminada (como borrar en un campo de texto)
+    }
+  });
+
+ document.addEventListener("keydown", function(event) {
+  // Desactivar la tecla "Backspace" (código 8)
+  if (event.key === "Backspace" || event.keyCode === 8) {
+    event.preventDefault();
+    console.log("Tecla Backspace desactivada");
+  }
+
+  // Usar la tecla "B" para volver atrás (código 66)
+  if (event.key === "b" || event.key === "B" || event.keyCode === 66) {
+    event.preventDefault();
+    window.history.back(); // Vuelve a la página anterior
+  }
+});
+
+      document.addEventListener("keydown", function (event) {
+        // Desactivar F5 (opcional)
+        if (event.key === "F5" || event.keyCode === 116) {
+          event.preventDefault();
+          console.log("F5 desactivada");
+        }
+
+        // Usar la tecla "R" para actualizar la página
+        if (event.key === "r" || event.key === "R" || event.keyCode === 82) {
+          event.preventDefault();
+          location.reload();
+        }
+      });
     </script>
   </body>
 </html>
-
-
-
