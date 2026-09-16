@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .pagina {
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    grid-template-rows: auto 1fr auto;
+
+    /* Cada palabra entre comillas es una CELDA.
+       Repetir el mismo nombre en celdas contiguas
+       hace que esa área "ocupe" todas esas celdas. */
+    grid-template-areas:
+        "header header header"
+        "nav    main   aside"
+        "footer footer footer";
+}
+
+/* Cada elemento hijo se asigna a un área por su NOMBRE */
+header  { grid-area: header; }
+nav     { grid-area: nav; }
+main    { grid-area: main; }
+aside   { grid-area: aside; }
+footer  { grid-area: footer; }
+
+    </style>
+  </head>
+  <body>
+     <div style="margin-bottom: 24px">
+            <a
+              href="../../materias/desarrollo-4.html"
+              style="
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+                background: #4ade80;
+                color: #222;
+                display: inline-block;
+                margin-right: 10px;
+              "
+            >
+              Volver a Materia
+            </a>
+            <a
+              href="desarrollo4-sesion5.html"
+              style="
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+                background: #60a5fa;
+                color: #fff;
+                display: inline-block;
+                margin-right: 10px;
+              "
+            >
+              Ir a Sesión 5
+            </a>
+            <a
+              href="desarrollo4-sesion7.html"
+              style="
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+                background: #f9e282;
+                color: #222;
+                display: inline-block;
+              "
+            >
+              Ir a Sesión 7
+            </a>
+          </div>
+          <br>
+    <div class="pagina">
+      <header   style="background-color: red;">A</header  >
+      <nav      class="producto-destacado " style="background-color: green;">B</nav     >
+      <main     style="background-color: yellow;">C</main         >
+      <aside    style="background-color: blue;">D</aside   >
+      <div      class="banner-promocional" style="background-color: orange;">E (nadie me quiere)</div  >
+      <footer   style="background-color: rgb(0, 238, 255);">F</footer  >
+    </div>
+    <br>
+     <div style="margin-bottom: 24px">
+            <a
+              href="../../materias/desarrollo-4.html"
+              style="
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+                background: #4ade80;
+                color: #222;
+                display: inline-block;
+                margin-right: 10px;
+              "
+            >
+              Volver a Materia
+            </a>
+            <a
+              href="desarrollo4-sesion5.html"
+              style="
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+                background: #60a5fa;
+                color: #fff;
+                display: inline-block;
+                margin-right: 10px;
+              "
+            >
+              Ir a Sesión 5
+            </a>
+            <a
+              href="desarrollo4-sesion7.html"
+              style="
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+                background: #f9e282;
+                color: #222;
+                display: inline-block;
+              "
+            >
+              Ir a Sesión 7
+            </a>
+          </div>
+  </body>
+  
+</html>

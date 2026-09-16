@@ -1,52 +1,888 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TecnoStore | Catálogo Dinámico</title>
-
-    <!-- Importamos la hoja de estilos externa desde la subcarpeta css/ -->
-    <link rel="stylesheet" href="css/clase.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesión 4 · CSS - Grillas con Grid Layout | Desarrollo IV</title>
+  <meta name="description" content="Sesión 4: maquetación bidimensional avanzada con CSS Grid - columnas, filas, áreas de rejilla y diseño adaptativo nativo aplicado al catálogo del E-commerce.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>body{font-family:'Inter',Segoe UI,sans-serif;}</style>
 </head>
 <body>
 
-    <header class="site-header">
-        <h1>TecnoStore</h1>
-    </header>
 
-    <main>
-        <section id="catalogo">
-            <h2>Nuestros Productos</h2>
 
-            <!--
-              Este contenedor es el que vamos a convertir en un
-              Flex Container en el CSS. Cada article de adentro
-              es un "Flex Item" que se acomoda automáticamente.
-            -->
-            <div class="catalogo-grid">
-                <article class="product-card">
-                    <img src="https://via.placeholder.com/200" alt="Notebook Lenovo 15 pulgadas">
-                    <h3>Notebook Lenovo</h3>
-                    <p class="price">$450.000</p>
-                    <button type="button">Agregar al carrito</button>
-                </article>
+  <!-- ============ ENCABEZADO DE SESIÓN ============ -->
+  <section class="session-hero">
+    <div class="container">
+      <div style="margin-bottom: 24px">
+          <a
+            href="../../materias/desarrollo-4.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #4ade80;
+              color: #222;
+              display: inline-block;
+              margin-right: 10px;
+            "
+          >
+            Volver a Materia
+          </a>
+          <a
+            href="desarrollo4-sesion3.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #60a5fa;
+              color: #fff;
+              display: inline-block;
+              margin-right: 10px;
+            "
+          >
+            Ir a Sesión 3
+          </a>
+          <a
+            href="desarrollo4-sesion5.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #f9e282;
+              color: #222;
+              display: inline-block;
+            "
+          >
+            Ir a Sesión 5
+          </a>
+        </div>
+     
+      <h1>Sesión 4 — CSS: Grillas con Grid Layout</h1>
+      <p class="lead" style="color:var(--text-dim); max-width:760px;">
+        Flexbox nos ordena en <strong>una</strong> dimensión (fila o columna). Hoy damos el salto a
+        <strong>dos dimensiones a la vez</strong> con <strong>CSS Grid</strong>: filas y columnas
+        simultáneas, áreas de rejilla con nombre propio, y diseño adaptativo nativo sin escribir
+        un solo <code>@media</code>.
+      </p>
+      
+    </div>
+  </section>
 
-                <article class="product-card">
-                    <img src="https://via.placeholder.com/200" alt="Mouse inalámbrico negro">
-                    <h3>Mouse Inalámbrico</h3>
-                    <p class="price">$15.000</p>
-                    <button type="button">Agregar al carrito</button>
-                </article>
+  <!-- ============ LAYOUT: TOC + CONTENIDO ============ -->
+  <div class="container">
 
-                <article class="product-card">
-                    <img src="https://via.placeholder.com/200" alt="Teclado mecánico retroiluminado">
-                    <h3>Teclado Mecánico</h3>
-                    <p class="price">$62.000</p>
-                    <button type="button">Agregar al carrito</button>
-                </article>
+    
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <article class="content">
+
+      <!-- 1. OBJETIVOS -->
+      <section id="objetivos">
+        <h2><span class="step-no"><i class="fa-solid fa-bullseye"></i></span> Objetivos de aprendizaje</h2>
+        <p>Al finalizar esta sesión, vas a poder:</p>
+        <ul>
+          <li>Explicar la diferencia entre un layout de <strong>una dimensión</strong> (Flexbox) y uno de <strong>dos dimensiones</strong> (Grid), y decidir cuándo usar cada uno.</li>
+          <li>Definir una rejilla con <code>grid-template-columns</code> y <code>grid-template-rows</code>, usando unidades fijas, <code>fr</code> y funciones como <code>repeat()</code> y <code>minmax()</code>.</li>
+          <li>Ubicar ítems en celdas específicas con <code>grid-column</code> y <code>grid-row</code>.</li>
+          <li>Diseñar layouts completos usando <strong>áreas de rejilla nombradas</strong> con <code>grid-template-areas</code> y <code>grid-area</code>.</li>
+          <li>Construir un diseño <strong>adaptativo nativo</strong> con <code>repeat(auto-fit, minmax(...))</code>, sin necesidad de <code>@media queries</code> para la grilla de productos.</li>
+          <li>Maquetar la estructura completa de la página del E-commerce (header, nav, catálogo, aside, footer) con Grid.</li>
+        </ul>
+      </section>
+
+      <!-- 2. FLEXBOX VS GRID -->
+      <section id="flex-vs-grid">
+        <h2><span class="step-no"><i class="fa-solid fa-code-compare"></i></span> Flexbox vs. Grid: ¿cuándo uso cada uno?</h2>
+        <p>
+          En la Sesión 3 usamos Flexbox para acomodar las tarjetas de producto en una fila que se
+          reacomoda sola. Grid no reemplaza a Flexbox: son <strong>complementarios</strong> y de
+          hecho se combinan todo el tiempo en un mismo proyecto.
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th></th><th>Flexbox</th><th>CSS Grid</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Dimensión</strong></td><td>Una sola: fila <em>o</em> columna</td><td>Dos a la vez: filas <strong>y</strong> columnas simultáneas</td></tr>
+              <tr><td><strong>Ideal para</strong></td><td>Menús, barras de botones, centrar contenido, una fila de tarjetas</td><td>Layouts de página completos, grillas de productos con muchas filas y columnas</td></tr>
+              <tr><td><strong>Control</strong></td><td>El contenido "empuja" el tamaño de cada ítem</td><td>Se define la estructura de la rejilla <em>primero</em>, y los ítems se acomodan dentro</td></tr>
+              <tr><td><strong>Ejemplo en el proyecto</strong></td><td>Los botones dentro de una tarjeta de producto</td><td>La estructura general de la página: header + nav + catálogo + aside + footer</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-comment-dots"></i> Analogía</div>
+          Flexbox es como acomodar <strong>una fila de personas</strong> en el cine. CSS Grid es como
+          dibujar <strong>el plano completo de la sala</strong>: primero trazás filas y columnas de
+          butacas (la rejilla), y después decidís en qué butaca exacta (fila X, columna Y) se sienta
+          cada persona. Un plano de sala puede además tener, adentro de una butaca especial (palco),
+          una fila de asientos ordenada con Flexbox: por eso se combinan.
+        </div>
+      </section>
+
+      <!-- 3. LA LÓGICA DE GRID -->
+      <section id="grid-basico">
+        <h2><span class="step-no"><i class="fa-solid fa-table-cells"></i></span> La lógica de Grid: filas y columnas</h2>
+        <p>
+          Todo empieza igual que con Flexbox: hay que activarlo en un contenedor con
+          <code>display: grid;</code>. A partir de ahí, en lugar de un solo eje, definimos una
+          <strong>grilla completa</strong> con dos propiedades clave:
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Propiedad</th><th>Función</th></tr></thead>
+            <tbody>
+              <tr><td><code>display: grid;</code></td><td>Activa Grid en el contenedor. Sin esto, ninguna otra propiedad de Grid tiene efecto.</td></tr>
+              <tr><td><code>grid-template-columns</code></td><td>Define <strong>cuántas columnas</strong> tiene la rejilla y <strong>qué ancho</strong> tiene cada una.</td></tr>
+              <tr><td><code>grid-template-rows</code></td><td>Define <strong>cuántas filas</strong> tiene la rejilla y <strong>qué alto</strong> tiene cada una.</td></tr>
+              <tr><td><code>gap</code></td><td>Espacio uniforme entre filas y columnas (equivalente a <code>row-gap</code> + <code>column-gap</code>).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            ejemplo-grid-basico.css
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>.contenedor {
+    display: grid;
+
+    /* 3 columnas: la primera de 150px fijos,
+       la segunda ocupa el doble de espacio libre que la tercera */
+    grid-template-columns: 150px 2fr 1fr;
+
+    /* 2 filas: la primera de 80px fijos, la segunda automática
+       (se ajusta a lo que el contenido necesite) */
+    grid-template-rows: 80px auto;
+
+    gap: 16px;
+}</code></pre>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-title"><i class="fa-solid fa-triangle-exclamation"></i> Cada "palabra" es una columna/fila</div>
+          En <code>grid-template-columns: 150px 2fr 1fr;</code> hay <strong>3 valores separados por
+          espacios</strong> → eso significa <strong>3 columnas</strong>. Si necesitás 5 columnas
+          iguales, en vez de escribir <code>1fr 1fr 1fr 1fr 1fr</code> podés abreviar con
+          <code>repeat(5, 1fr)</code> (lo vemos en detalle más abajo).
+        </div>
+      </section>
+
+      <!-- 4. DEMO INTERACTIVA COLUMNAS/FILAS -->
+      <section id="grid-demo">
+        <h2><span class="step-no"><i class="fa-solid fa-sliders"></i></span> Demo interactiva: columnas, filas y gap</h2>
+        <p>
+          Elegí una configuración de columnas y filas, ajustá el espaciado, y observá exactamente
+          qué le pasa a la rejilla y qué código CSS la produce.
+        </p>
+
+        <div class="grid-demo">
+          <div class="demo-controls">
+            <div class="control-group">
+              <label for="demo-cols">grid-template-columns</label>
+              <select id="demo-cols">
+                <option value="1fr 1fr 1fr" selected>1fr 1fr 1fr (3 columnas iguales)</option>
+                <option value="150px 2fr 1fr">150px 2fr 1fr (fija + proporciones)</option>
+                <option value="repeat(4, 1fr)">repeat(4, 1fr) (4 columnas iguales)</option>
+                <option value="repeat(auto-fit, minmax(120px, 1fr))">repeat(auto-fit, minmax(120px, 1fr)) (adaptativo)</option>
+              </select>
             </div>
-        </section>
-    </main>
+            <div class="control-group">
+              <label for="demo-rows">grid-template-rows</label>
+              <select id="demo-rows">
+                <option value="auto auto" selected>auto auto (2 filas automáticas)</option>
+                <option value="80px auto">80px auto (primera fija)</option>
+                <option value="100px 100px">100px 100px (ambas fijas)</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label for="demo-gap">gap: <span class="range-value">16px</span></label>
+              <input type="range" id="demo-gap" min="0" max="40" value="16">
+            </div>
+          </div>
 
+          <div class="demo-stage">
+            <div class="demo-box">1</div>
+            <div class="demo-box">2</div>
+            <div class="demo-box">3</div>
+            <div class="demo-box">4</div>
+            <div class="demo-box">5</div>
+            <div class="demo-box">6</div>
+          </div>
+
+          <div class="demo-code">.contenedor { display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; gap: 16px; }</div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-lightbulb"></i> Qué observar</div>
+          Probá la opción <code>repeat(auto-fit, minmax(120px, 1fr))</code> y después achicá la
+          ventana del navegador (o el modo responsive del Inspector (minima vista desde mobile M - 375px)): vas a ver que las cajas se
+          reacomodan solas, sin que nosotros hayamos escrito ningún <code>@media</code>. Esa es la
+          base del "diseño adaptativo nativo" que profundizamos más abajo.
+        </div>
+      </section>
+
+      <!-- 5. UNIDAD FR Y MINMAX -->
+      <section id="unidad-fr">
+        <h2><span class="step-no"><i class="fa-solid fa-ruler-combined"></i></span> La unidad fr y la función minmax()</h2>
+        <p>
+          <code>fr</code> significa <strong>"fracción del espacio libre disponible"</strong>. Es la
+          unidad más usada en Grid porque permite proporciones flexibles sin calcular porcentajes a mano.
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Código</th><th>¿Qué significa?</th></tr></thead>
+            <tbody>
+              <tr><td><code>grid-template-columns: 1fr 1fr;</code></td><td>2 columnas, cada una con el <strong>mismo</strong> espacio disponible (50% y 50%).</td></tr>
+              <tr><td><code>grid-template-columns: 2fr 1fr;</code></td><td>2 columnas: la primera ocupa <strong>el doble</strong> de espacio que la segunda (aprox. 66% y 33%).</td></tr>
+              <tr><td><code>grid-template-columns: 200px 1fr;</code></td><td>La primera columna es <strong>fija</strong> (200px); la segunda ocupa <strong>todo el resto</strong> del espacio libre.</td></tr>
+              <tr><td><code>repeat(3, 1fr)</code></td><td>Abreviación de <code>1fr 1fr 1fr</code>: repite el patrón 3 veces.</td></tr>
+              <tr><td><code>minmax(120px, 1fr)</code></td><td>La columna nunca es <strong>más chica</strong> que 120px, pero puede crecer hasta ocupar <code>1fr</code> (el espacio libre disponible).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-comment-dots"></i> Analogía</div>
+          <code>fr</code> es como repartir una <strong>pizza</strong> entre amigos según "porciones
+          de hambre" en vez de tamaños fijos: si decís <code>2fr 1fr</code>, es como decir "a este
+          amigo dale el doble de porción que al otro", sin importar el tamaño total de la pizza.
+          <code>minmax(120px, 1fr)</code> agrega una condición: "esta porción nunca puede ser más
+          chica que un bocado mínimo de 120px, pero después sí puede crecer todo lo que el hambre
+          disponible permita."
+        </div>
+      </section>
+
+      <!-- 6. POSICIONAR ÍTEMS -->
+      <section id="posicionar">
+        <h2><span class="step-no"><i class="fa-solid fa-crosshairs"></i></span> Posicionar ítems específicos en la rejilla</h2>
+        <p>
+          Por defecto, Grid ubica cada ítem en la siguiente celda libre, en orden. Pero podemos
+          decirle explícitamente a un ítem <strong>en qué línea empieza y en cuál termina</strong>,
+          incluso haciendo que ocupe <strong>varias celdas</strong> (como combinar celdas en una tabla de Excel).
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Propiedad (en el ítem)</th><th>Función</th></tr></thead>
+            <tbody>
+              <tr><td><code>grid-column: 1 / 3;</code></td><td>El ítem ocupa <strong>desde la línea 1 hasta la línea 3</strong> de columnas (es decir, abarca 2 columnas).</td></tr>
+              <tr><td><code>grid-row: 1 / 3;</code></td><td>El ítem ocupa <strong>desde la línea 1 hasta la línea 3</strong> de filas (abarca 2 filas).</td></tr>
+              <tr><td><code>grid-column: span 2;</code></td><td>Forma abreviada: "ocupá 2 columnas a partir de donde estés", sin especificar números de línea exactos.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-title"><i class="fa-solid fa-triangle-exclamation"></i> Ojo con la numeración de líneas</div>
+          Las <strong>líneas</strong> de la rejilla se numeran empezando en <code>1</code>, y son las
+          líneas <em>divisorias</em> entre columnas, no las columnas en sí. Una rejilla de 3 columnas
+          tiene <strong>4 líneas</strong> (antes de la 1.ª, entre la 1.ª y 2.ª, entre la 2.ª y 3.ª, y
+          después de la 3.ª). Por eso <code>grid-column: 1 / 3;</code> abarca las columnas 1 y 2, no
+          "las columnas 1 a 3".
+        </div>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            ejemplo-posicionamiento.css
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>.contenedor {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 150px);
+    gap: 12px;
+}
+
+/* Este producto destacado ocupa 2 columnas de ancho */
+.producto-destacado {
+    grid-column: span 2; /* abarca 2 columnas a partir de su posición */
+}
+
+/* Este banner ocupa toda la fila (las 3 columnas) */
+.banner-promocional {
+    grid-column: 1 / 4; /* desde la línea 1 hasta la línea 4: las 3 columnas completas */
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- 7. ÁREAS DE REJILLA -->
+      <section id="areas">
+        <h2><span class="step-no"><i class="fa-solid fa-diagram-project"></i></span> Áreas de rejilla con nombre (<code>grid-template-areas</code>)</h2>
+        <p>
+          En vez de contar líneas y columnas a mano, Grid permite <strong>dibujar el layout con
+          nombres</strong>, literalmente como un mapa de texto. Es la forma más legible y más usada
+          en proyectos reales para maquetar una página completa.
+        </p>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            ejemplo-areas.css
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>.pagina {
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    grid-template-rows: auto 1fr auto;
+
+    /* Cada palabra entre comillas es una CELDA.
+       Repetir el mismo nombre en celdas contiguas
+       hace que esa área "ocupe" todas esas celdas. */
+    grid-template-areas:
+        "header header header"
+        "nav    main   aside"
+        "footer footer footer";
+}
+
+/* Cada elemento hijo se asigna a un área por su NOMBRE */
+header  { grid-area: header; }
+nav     { grid-area: nav; }
+main    { grid-area: main; }
+aside   { grid-area: aside; }
+footer  { grid-area: footer; }</code></pre>
+        </div>
+
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-comment-dots"></i> Analogía</div>
+          <code>grid-template-areas</code> es como dibujar el <strong>plano de una casa con
+          fibrón</strong> directamente en el CSS: escribís "cocina cocina living" / "living living
+          living" / "baño dormitorio dormitorio" y el navegador construye la casa exactamente como
+          la dibujaste. Cada palabra repetida en celdas contiguas se "fusiona" en una sola habitación
+          más grande.
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-title"><i class="fa-solid fa-triangle-exclamation"></i> Regla estricta del "mapa"</div>
+          Todas las filas de <code>grid-template-areas</code> deben tener <strong>la misma cantidad
+          de palabras</strong> (columnas), y cada nombre debe formar <strong>siempre un rectángulo
+          completo</strong> (no se pueden repetir nombres en celdas que no sean contiguas, ni dejar
+          "agujeros" con forma de L). Si te equivocás, el navegador tira un error de sintaxis en la
+          consola y esa regla completa se ignora.
+        </div>
+      </section>
+
+      <!-- 8. DEMO ÁREAS RESPONSIVAS -->
+      <section id="areas-demo">
+        <h2><span class="step-no"><i class="fa-solid fa-mobile-screen-button"></i></span> Demo interactiva: el mismo HTML, dos layouts distintos</h2>
+        <p>
+          Este es el "truco de magia" más importante de Grid: con el <strong>mismo HTML</strong>
+          (header, nav, main, aside, footer, en ese orden), solo cambiando el CSS de
+          <code>grid-template-areas</code> logramos layouts totalmente distintos para escritorio y
+          para celular. Probá los dos botones:
+        </p>
+
+        <div class="area-demo">
+          <div class="demo-toolbar">
+            <button data-mode="desktop" class="active"><i class="fa-solid fa-display"></i> Vista Escritorio</button>
+            <button data-mode="mobile"><i class="fa-solid fa-mobile-screen"></i> Vista Móvil</button>
+          </div>
+
+          <div style="overflow-x: auto">
+
+            <div class="area-stage">
+              <div class="area-box header">header</div>
+              <div class="area-box nav">nav</div>
+              <div class="area-box main">main</div>
+              <div class="area-box aside">aside</div>
+              <div class="area-box footer">footer</div>
+            </div>
+      </div>
+
+          <div class="demo-code">.contenedor { display: grid; grid-template-columns: 200px 1fr 200px; grid-template-rows: auto 1fr auto; grid-template-areas: "header header header" "nav main aside" "footer footer footer"; }</div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-lightbulb"></i> La clave está en el CSS, no en el HTML</div>
+          Fijate que el orden de las etiquetas en el HTML <strong>nunca cambió</strong>: solo
+          redefinimos qué área ocupa cada una según el ancho de pantalla, típicamente combinando
+          esto con un <code>@media</code> que reescribe <code>grid-template-columns</code>,
+          <code>grid-template-rows</code> y <code>grid-template-areas</code> para pantallas chicas.
+        </div>
+      </section>
+
+      <!-- 9. DISEÑO ADAPTATIVO NATIVO -->
+      <section id="adaptativo">
+        <h2><span class="step-no"><i class="fa-solid fa-wand-magic-sparkles"></i></span> Diseño adaptativo nativo: repeat(auto-fit, minmax(...))</h2>
+        <p>
+          La combinación más poderosa de Grid para grillas de productos es esta fórmula, que logra
+          un catálogo responsivo <strong>sin escribir un solo <code>@media</code></strong>:
+        </p>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            ejemplo-adaptativo.css
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>.catalogo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}</code></pre>
+        </div>
+
+        <p>Desglosemos exactamente qué hace cada parte:</p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Parte</th><th>¿Qué hace?</th></tr></thead>
+            <tbody>
+              <tr><td><code>repeat(...)</code></td><td>Repite el patrón que le sigue tantas veces como sea necesario.</td></tr>
+              <tr><td><code>auto-fit</code></td><td>Le dice al navegador: "calculá vos solo cuántas columnas entran" según el ancho disponible.</td></tr>
+              <tr><td><code>minmax(220px, 1fr)</code></td><td>Cada columna nunca es más chica que 220px (así ninguna tarjeta queda aplastada), pero se estira con <code>1fr</code> para repartir el espacio libre restante entre las columnas que sí entraron.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-comment-dots"></i> Analogía</div>
+          Es como acomodar <strong>sillas de un aula sin medir con regla</strong>: le decís al
+          conserje "poné sillas de al menos 220px de ancho cada una, tantas como entren en el
+          salón, y si sobra espacio, repartilo en partes iguales entre todas". En una pantalla
+          grande entran 4 sillas por fila; en un celular, el mismo criterio hace que entre 1 sola
+          por fila, <strong>sin que nadie tenga que ir a recalcular nada</strong>.
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-lightbulb"></i> auto-fit vs. auto-fill</div>
+          <code>auto-fit</code> "colapsa" las columnas vacías y estira las que sí tienen contenido
+          para llenar el espacio. <code>auto-fill</code> mantiene los espacios de columnas vacías
+          visibles (útil si necesitás que las tarjetas <em>no</em> se agranden aunque haya lugar).
+          Para catálogos de productos, <code>auto-fit</code> es casi siempre la opción correcta.
+        </div>
+      </section>
+
+      <!-- 10. CÓDIGO DE REFERENCIA -->
+      <section id="codigo-referencia">
+        <h2><span class="step-no"><i class="fa-solid fa-code"></i></span> Código de referencia (para VSC)</h2>
+        <p>
+          Maquetamos la <strong>página completa</strong> del E-commerce con Grid: estructura general
+          por áreas nombradas, y la grilla interna del catálogo con diseño adaptativo nativo.
+        </p>
+
+        <h3>📄 index.html (fragmento relevante)</h3>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            index.html
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;TecnoStore | Catálogo  Din\u00e1mico&lt;/title&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;!-- El elemento con id="pagina" es nuestro CONTENEDOR GRID
+         de la estructura completa: header, nav, main, aside, footer --&gt;
+    &lt;div id="pagina"&gt;
+
+        &lt;header&gt;&lt;h1&gt;TecnoStore&lt;/h1&gt;&lt;/header&gt;
+
+        &lt;nav&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#catalogo"&gt;Catálogo &lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#carrito"&gt;Carrito&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+
+        &lt;main&gt;
+            &lt;section id="catalogo"&gt;
+                &lt;h2&gt;Nuestros Productos&lt;/h2&gt;
+
+                &lt;!-- Este SEGUNDO contenedor grid es la grilla adaptativa
+                     de tarjetas de producto (grid dentro de grid) --&gt;
+                &lt;div class="catalogo-grid"&gt;
+                    &lt;article class="product-card"&gt;
+                        &lt;img src="https://via.placeholder.com/200" alt="Notebook Lenovo"&gt;
+                        &lt;h3&gt;Notebook Lenovo&lt;/h3&gt;
+                        &lt;p class="price"&gt;$450.000&lt;/p&gt;
+                        &lt;button type="button"&gt;Agregar al carrito&lt;/button&gt;
+                    &lt;/article&gt;
+
+                    &lt;article class="product-card"&gt;
+                        &lt;img src="https://via.placeholder.com/200" alt="Mouse inal\u00e1mbrico"&gt;
+                        &lt;h3&gt;Mouse Inal\u00e1mbrico&lt;/h3&gt;
+                        &lt;p class="price"&gt;$15.000&lt;/p&gt;
+                        &lt;button type="button"&gt;Agregar al carrito&lt;/button&gt;
+                    &lt;/article&gt;
+
+                    &lt;article class="product-card"&gt;
+                        &lt;img src="https://via.placeholder.com/200" alt="Teclado mec\u00e1nico"&gt;
+                        &lt;h3&gt;Teclado Mec\u00e1nico&lt;/h3&gt;
+                        &lt;p class="price"&gt;$62.000&lt;/p&gt;
+                        &lt;button type="button"&gt;Agregar al carrito&lt;/button&gt;
+                    &lt;/article&gt;
+                &lt;/div&gt;
+            &lt;/section&gt;
+
+            &lt;aside&gt;
+                &lt;h2&gt;Filtros&lt;/h2&gt;
+                &lt;p&gt;Filtrar por categoria y precio.&lt;/p&gt;
+            &lt;/aside&gt;
+        &lt;/main&gt;
+
+        &lt;footer&gt;&lt;p&gt;&amp;copy; 2026 TecnoStore.&lt;/p&gt;&lt;/footer&gt;
+
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+
+        <h3>🎨 css/style.css (estructura general con áreas + catálogo adaptativo)</h3>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            css/style.css
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    color: #f1f1f1;
+    font-size: 16px;
+}
+
+/* ============================================= */
+/* GRID #1: estructura general de la página        */
+/* ============================================= */
+#pagina {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "header header"
+        "nav    main"
+        "footer footer";
+    min-height: 100vh; /* la página ocupa como mínimo toda la pantalla */
+    gap: 16px;
+}
+
+header { grid-area: header; background: #1c1c1c; padding: 16px; }
+nav     { grid-area: nav;    background: #161616; padding: 16px; }
+main    { grid-area: main;   padding: 0 16px; }
+footer  { grid-area: footer; background: #1c1c1c; padding: 16px; text-align: center; }
+
+/* Dentro de <main>, el aside NO forma parte del grid de #pagina:
+   para incluirlo en la estructura general, se agregaría una
+   columna/área extra "aside" (queda de ejercicio en el laboratorio) */
+
+/* ============================================= */
+/* GRID #2: catálogo de productos, DISEÑO ADAPTATIVO */
+/* ============================================= */
+.catalogo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.product-card {
+    background-color: #1c1c1c;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 16px;
+    display: grid;               /* Grid también DENTRO de la tarjeta */
+    grid-template-rows: auto auto auto auto;
+    justify-items: center;
+    gap: 10px;
+}
+
+.product-card img { max-width: 100%; border-radius: 6px; }
+.product-card .price { font-weight: bold; color: #4fd1c5; }
+.product-card button {
+    background-color: #4fd1c5;
+    color: #08131a;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Único @media necesario: en pantallas chicas,
+   la barra de navegación pasa a ocupar todo el ancho arriba
+   (la grilla del catálogo YA es responsiva sin @media) */
+@media (max-width: 700px) {
+    #pagina {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "nav"
+            "main"
+            "footer";
+    }
+}</code></pre>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-forward"></i> Continuidad del proyecto</div>
+          Notá el "Grid dentro de Grid": la página completa es un contenedor Grid
+          (<code>#pagina</code>), y adentro, el catálogo de productos es <strong>otro</strong>
+          contenedor Grid independiente (<code>.catalogo-grid</code>). Anidar grids así es
+          completamente normal y es la forma profesional de maquetar sitios complejos.
+        </div>
+      </section>
+
+      <!-- 11. DETECTÁ EL ERROR -->
+      <section id="detecta-error">
+        <h2><span class="step-no"><i class="fa-solid fa-bug"></i></span> Detectá el error: código para corregir en VSC</h2>
+        <p>
+          Copiá estos fragmentos en VSC y usá el <strong>Inspector (F12) → pestaña Elements →
+          panel "Layout"</strong> (muestra visualmente las líneas de la rejilla) y la
+          <strong>Console</strong> para encontrar los errores.
+        </p>
+
+        <!-- EJERCICIO 1 -->
+        <div class="exercise">
+          <div class="ex-header">
+            <span class="pill">Con errores</span>
+            <h4>Ejercicio 1 — Columnas, filas y unidad fr</h4>
+          </div>
+          <div class="code-block buggy">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              buggy-7.css
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>.catalogo-grid {
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.producto-destacado {
+  grid-column: 1 / 1;
+}</code></pre>
+          </div>
+          <p class="question">
+            🔎 Las tarjetas no forman ninguna grilla, y la tarjeta destacada no se agranda como se
+            espera. Encontrá <strong>2 problemas</strong>.
+          </p>
+          <details class="reveal">
+            <summary>Ver solución y explicación</summary>
+            <div class="reveal-body">
+              <ol>
+                <li>Al contenedor <code>.catalogo-grid</code> le falta <code>display: grid;</code>. Sin esa línea, <code>grid-template-columns</code> y <code>gap</code> no tienen ningún efecto (el navegador sigue tratando al contenedor como un bloque normal).</li>
+                <li><code>grid-column: 1 / 1;</code> le dice a la tarjeta que empiece y termine en la <strong>misma línea</strong> (línea 1 a línea 1), lo cual da un ancho de <strong>cero</strong> (visualmente el navegador "ignora" ese rango inválido y la tarjeta ocupa su tamaño mínimo). Para que abarque 2 columnas, debería ser <code>grid-column: 1 / 3;</code> o, más simple, <code>grid-column: span 2;</code>.</li>
+              </ol>
+              <p><strong>Tip de debugging:</strong> en el Inspector, seleccioná el contenedor y activá el ícono de grilla (junto al nombre del elemento en el panel Elements): si el contenedor no tiene <code>display: grid</code> activo, ese ícono ni aparece.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- EJERCICIO 2 -->
+        <div class="exercise">
+          <div class="ex-header">
+            <span class="pill">Con errores</span>
+            <h4>Ejercicio 2 — grid-template-areas mal formado</h4>
+          </div>
+          <div class="code-block buggy">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              buggy-8.css
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>#pagina {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-areas:
+    "header header header"
+    "nav main"
+    "footer footer footer";
+}
+
+header { grid-area: header; }
+nav    { grid-area: navegacion; }
+main   { grid-area: main; }
+footer { grid-area: footer; }</code></pre>
+          </div>
+          <p class="question">
+            🔎 La consola del navegador muestra un warning y el layout no se ve como se espera.
+            Encontrá <strong>2 problemas</strong>.
+          </p>
+          <details class="reveal">
+            <summary>Ver solución y explicación</summary>
+            <div class="reveal-body">
+              <ol>
+                <li>La segunda fila del "mapa" (<code>"nav main"</code>) tiene <strong>2 palabras</strong>, pero la primera y la tercera fila tienen <strong>3</strong>. Todas las filas de <code>grid-template-areas</code> deben tener la misma cantidad de columnas: debería ser <code>"nav main main"</code> o similar, respetando las 3 columnas definidas en <code>grid-template-columns</code>.</li>
+                <li>El selector <code>nav</code> usa <code>grid-area: navegacion;</code>, pero en el "mapa" de <code>grid-template-areas</code> el nombre usado es <code>nav</code>. Los nombres deben coincidir <strong>exactamente</strong>; si no coinciden, ese elemento no se ubica en ninguna área y el navegador lo posiciona por defecto, rompiendo el diseño.</li>
+              </ol>
+              <p><strong>Tip de debugging:</strong> abrí la <em>Console</em> del Inspector: los errores de <code>grid-template-areas</code> mal formado se reportan ahí como "Invalid property value" o similar, señalando la línea exacta del CSS.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 12. QUIZ RÁPIDO -->
+      <section id="quiz">
+        <h2><span class="step-no"><i class="fa-solid fa-circle-question"></i></span> Quiz rápido de autoevaluación</h2>
+
+        <div class="quiz">
+          <p class="q-title">1. ¿Cuál es la diferencia principal entre Flexbox y Grid?</p>
+          <div class="options">
+            <button data-correct="false" data-explain="Ambos permiten alinear contenido; esa no es la diferencia clave.">Flexbox no permite alinear contenido y Grid sí</button>
+            <button data-correct="true" data-explain="Correcto: Flexbox trabaja en una dimensión (fila o columna); Grid trabaja en dos a la vez (filas y columnas).">Flexbox trabaja en una dimensión; Grid trabaja en dos dimensiones simultáneas</button>
+            <button data-correct="false" data-explain="Grid es totalmente compatible con diseño responsivo, incluso sin @media.">Grid no es responsivo y Flexbox sí</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+
+        <div class="quiz">
+          <p class="q-title">2. ¿Qué hace <code>grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));</code>?</p>
+          <div class="options">
+            <button data-correct="false" data-explain="No fija una cantidad exacta: el navegador calcula cuántas entran.">Crea siempre exactamente 3 columnas fijas</button>
+            <button data-correct="true" data-explain="Correcto: calcula automáticamente cuántas columnas de al menos 220px entran, y las estira para llenar el espacio.">Calcula automáticamente cuántas columnas de al menos 220px entran, sin usar @media</button>
+            <button data-correct="false" data-explain="minmax no fija un tamaño único; define un rango mínimo-máximo.">Fuerza a todas las columnas a tener exactamente 220px</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+
+        <div class="quiz">
+          <p class="q-title">3. En <code>grid-template-areas</code>, ¿qué pasa si dos filas tienen distinta cantidad de palabras?</p>
+          <div class="options">
+            <button data-correct="true" data-explain="Correcto: todas las filas deben tener el mismo número de columnas/palabras, o la regla se invalida.">Es un error: todas las filas deben tener la misma cantidad de columnas</button>
+            <button data-correct="false" data-explain="Grid no completa automáticamente los espacios faltantes con celdas vacías en este caso.">El navegador completa automáticamente los espacios faltantes</button>
+            <button data-correct="false" data-explain="No se ignora sin aviso: genera un error de sintaxis visible en la consola.">No pasa nada, es válido y common</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+      </section>
+
+      <!-- 13. ACTIVIDAD DE LABORATORIO -->
+      <section id="actividad">
+        <h2><span class="step-no"><i class="fa-solid fa-flask-vial"></i></span> Actividad de laboratorio</h2>
+        <p>
+          Consigna: maquetar la <strong>estructura completa</strong> de la página del E-commerce con
+          CSS Grid (áreas nombradas) y convertir el catálogo de productos en una grilla
+          <strong>adaptativa nativa</strong>.
+        </p>
+
+        <div class="lab-box">
+          <div class="lab-title"><i class="fa-solid fa-list-check fa-lg"></i><h3 class="mt-0">Checklist paso a paso</h3></div>
+          <p class="dim">Marcá cada paso a medida que lo completes. El progreso se guarda solo en este navegador.</p>
+
+          <div class="progress-wrap">
+            <div class="progress-bar-track"><div class="progress-bar-fill"></div></div>
+            <p class="progress-label">0 de 0 tareas completadas (0%)</p>
+          </div>
+
+          <ul class="checklist" data-storage-key="dev4-sesion4-checklist">
+            <li>
+              <input type="checkbox" id="s4-t1">
+              <label for="s4-t1">Envolver todo el contenido de <code>&lt;body&gt;</code> en un contenedor <code>&lt;div id="pagina"&gt;</code> que incluya <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code> y <code>&lt;footer&gt;</code> como hijos directos.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s4-t2">
+              <label for="s4-t2">En <code>style.css</code>, convertir <code>#pagina</code> en un contenedor Grid con <code>grid-template-columns</code>, <code>grid-template-rows</code> y <code>grid-template-areas</code> (header / nav / main / footer).</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s4-t3">
+              <label for="s4-t3">Asignar <code>grid-area</code> a cada etiqueta semántica (<code>header</code>, <code>nav</code>, <code>main</code>, <code>footer</code>) usando exactamente los mismos nombres del "mapa" de <code>grid-template-areas</code>.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s4-t4">
+              <label for="s4-t4">Dentro de <code>&lt;main&gt;</code>, envolver las tarjetas de producto en un <code>&lt;div class="catalogo-grid"&gt;</code> y convertirlo en un Grid con <code>repeat(auto-fit, minmax(220px, 1fr))</code>.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s4-t5">
+              <label for="s4-t5">Hacer que <strong>al menos una</strong> tarjeta de producto (por ejemplo, una "oferta destacada") use <code>grid-column: span 2;</code> para ocupar el doble de ancho que las demás.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s4-t6">
+              <label for="s4-t6">Agregar un único <code>@media (max-width: 700px)</code> que redefina <code>grid-template-columns</code> y <code>grid-template-areas</code> de <code>#pagina</code> para que en celular las secciones se apilen verticalmente.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s4-t7">
+              <label for="s4-t7">Probar el catálogo achicando la ventana del navegador y confirmar que la grilla adaptativa cambia de cantidad de columnas <strong>sin</strong> ningún <code>@media</code> adicional para esa parte.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s4-t8">
+              <label for="s4-t8">Verificar en el Inspector (Elements → ícono de grilla junto a cada contenedor) que tanto <code>#pagina</code> como <code>.catalogo-grid</code> muestran correctamente sus líneas de grilla superpuestas.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s4-t9">
+              <label for="s4-t9">Revisar la <em>Console</em> del navegador y confirmar que no hay warnings de <code>grid-template-areas</code> inválido.</label>
+            </li>
+          </ul>
+        </div>
+
+       
+      </section>
+
+      
+
+      
+
+    
+    <div style="margin-bottom: 24px">
+            <a
+              href="../../materias/desarrollo-4.html"
+              style="
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+                background: #4ade80;
+                color: #222;
+                display: inline-block;
+                margin-right: 10px;
+              "
+            >
+              Volver a Materia
+            </a>
+            <a
+              href="desarrollo4-sesion3.html"
+              style="
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+                background: #60a5fa;
+                color: #fff;
+                display: inline-block;
+                margin-right: 10px;
+              "
+            >
+              Ir a Sesión 3
+            </a>
+            <a
+              href="desarrollo4-sesion5.html"
+              style="
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+                background: #f9e282;
+                color: #222;
+                display: inline-block;
+              "
+            >
+              Ir a Sesión 5
+            </a>
+          </div>
+  </div>
+
+
+  <script src="js/main.js"></script>
 </body>
 </html>

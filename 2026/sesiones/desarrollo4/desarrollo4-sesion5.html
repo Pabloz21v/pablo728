@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoStore | Catálogo  Din\u00e1mico</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    color: #f1f1f1;
+    font-size: 16px;
+}
+
+/* ============================================= */
+/* GRID #1: estructura general de la página        */
+/* ============================================= */
+#pagina {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "header header"
+        "nav    main"
+        "footer footer";
+    min-height: 100vh; /* la página ocupa como mínimo toda la pantalla */
+    gap: 16px;
+}
+
+header { grid-area: header; background: #1c1c1c; padding: 16px; }
+nav     { grid-area: nav;    background: #161616; padding: 16px; }
+main    { grid-area: main;   padding: 0 16px; }
+footer  { grid-area: footer; background: #1c1c1c; padding: 16px; text-align: center; }
+
+/* Dentro de 
+, el aside NO forma parte del grid de #pagina:
+   para incluirlo en la estructura general, se agregaría una
+   columna/área extra "aside" (queda de ejercicio en el laboratorio) */
+
+/* ============================================= */
+/* GRID #2: catálogo de productos, DISEÑO ADAPTATIVO */
+/* ============================================= */
+.catalogo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.product-card {
+    background-color: #1c1c1c;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 16px;
+    display: grid;               /* Grid también DENTRO de la tarjeta */
+    grid-template-rows: auto auto auto auto;
+    justify-items: center;
+    gap: 10px;
+}
+
+.product-card img { max-width: 100%; border-radius: 6px; }
+.product-card .price { font-weight: bold; color: #4fd1c5; }
+.product-card button {
+    background-color: #4fd1c5;
+    color: #08131a;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Único @media necesario: en pantallas chicas,
+   la barra de navegación pasa a ocupar todo el ancho arriba
+   (la grilla del catálogo YA es responsiva sin @media) */
+@media (max-width: 700px) {
+    #pagina {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "nav"
+            "main"
+            "footer";
+    }
+}
+
+    </style>
+</head>
+<body>
+ <div style="margin-bottom: 24px">
+            <a
+              href="../../materias/desarrollo-4.html"
+              style="
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+                background: #4ade80;
+                color: #222;
+                display: inline-block;
+                margin-right: 10px;
+              "
+            >
+              Volver a Materia
+            </a>
+            <a
+              href="desarrollo4-sesion4.html"
+              style="
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+                background: #60a5fa;
+                color: #fff;
+                display: inline-block;
+                margin-right: 10px;
+              "
+            >
+              Ir a Sesión 4
+            </a>
+            <a
+              href="desarrollo4-sesion6.html"
+              style="
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+                background: #f9e282;
+                color: #222;
+                display: inline-block;
+              "
+            >
+              Ir a Sesión 6
+            </a>
+          </div>
+          <br>
+    <!-- El elemento con id="pagina" es nuestro CONTENEDOR GRID
+         de la estructura completa: header, nav, main, aside, footer -->
+    <div id="pagina">
+
+        <header><h1>TecnoStore</h1></header>
+
+        <nav>
+            <ul>
+                <li><a href="#catalogo">Catálogo </a></li>
+                <li><a href="#carrito">Carrito</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="catalogo">
+                <h2>Nuestros Productos</h2>
+
+                <!-- Este SEGUNDO contenedor grid es la grilla adaptativa
+                     de tarjetas de producto (grid dentro de grid) -->
+                <div class="catalogo-grid">
+                    <article class="product-card">
+                        <img src="https://via.placeholder.com/200" alt="Notebook Lenovo">
+                        <h3>Notebook Lenovo</h3>
+                        <p class="price">$450.000</p>
+                        <button type="button">Agregar al carrito</button>
+                    </article>
+
+                    <article class="product-card">
+                        <img src="https://via.placeholder.com/200" alt="Mouse inal\u00e1mbrico">
+                        <h3>Mouse Inal\u00e1mbrico</h3>
+                        <p class="price">$15.000</p>
+                        <button type="button">Agregar al carrito</button>
+                    </article>
+
+                    <article class="product-card">
+                        <img src="https://via.placeholder.com/200" alt="Teclado mec\u00e1nico">
+                        <h3>Teclado Mec\u00e1nico</h3>
+                        <p class="price">$62.000</p>
+                        <button type="button">Agregar al carrito</button>
+                    </article>
+                </div>
+            </section>
+
+            <aside>
+                <h2>Filtros</h2>
+                <p>Filtrar por categoria y precio.</p>
+            </aside>
+        </main>
+
+        <footer><p>&copy; 2026 TecnoStore.</p></footer>
+
+    </div>
+    <br>
+     <div style="margin-bottom: 24px">
+            <a
+              href="../../materias/desarrollo-4.html"
+              style="
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+                background: #4ade80;
+                color: #222;
+                display: inline-block;
+                margin-right: 10px;
+              "
+            >
+              Volver a Materia
+            </a>
+            <a
+              href="desarrollo4-sesion4.html"
+              style="
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+                background: #60a5fa;
+                color: #fff;
+                display: inline-block;
+                margin-right: 10px;
+              "
+            >
+              Ir a Sesión 4
+            </a>
+            <a
+              href="desarrollo4-sesion6.html"
+              style="
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+                background: #f9e282;
+                color: #222;
+                display: inline-block;
+              "
+            >
+              Ir a Sesión 6
+            </a>
+          </div>
+</body>
+</html>

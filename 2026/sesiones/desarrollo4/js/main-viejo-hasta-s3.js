@@ -6,6 +6,14 @@
    No depende de ningún framework: JavaScript puro (ES6+).
    ====================================================================== */
 
+/* ======================================================================
+   Desarrollo IV (Laboratorio) — Script compartido
+   Funciones: menú móvil, tabla de contenidos activa (scroll-spy),
+   checklist con progreso persistido (localStorage), quiz rápido,
+   botón "copiar código" y toast de feedback.
+   No depende de ningún framework: JavaScript puro (ES6+).
+   ====================================================================== */
+
 document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initCopyButtons();
@@ -13,8 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initChecklist();
   initQuiz();
   initFlexDemo();
-  initGridDemo();
-  initAreaDemo();
 });
 
 /* ---------- Menú responsive (hamburguesa) ---------- */
@@ -191,100 +197,6 @@ function initFlexDemo() {
   render(); // estado inicial
 }
 
-/* ---------- Demo interactivo de CSS Grid: columnas, filas y gap (Sesión 4) ----------
-   Permite a los alumnos cambiar en vivo grid-template-columns, grid-template-rows
-   y gap, viendo el resultado y el código CSS equivalente. */
-function initGridDemo() {
-  const demo = document.querySelector('.grid-demo');
-  if (!demo) return;
-
-  const stage = demo.querySelector('.demo-stage');
-  const codeOut = demo.querySelector('.demo-code');
-  const cols = demo.querySelector('#demo-cols');
-  const rows = demo.querySelector('#demo-rows');
-  const gap = demo.querySelector('#demo-gap');
-  const gapValue = demo.querySelector('.range-value');
-
-  function render() {
-    const c = cols.value;
-    const r = rows.value;
-    const g = gap.value;
-
-    stage.style.display = 'grid';
-    stage.style.gridTemplateColumns = c;
-    stage.style.gridTemplateRows = r;
-    stage.style.gap = g + 'px';
-
-    if (gapValue) gapValue.textContent = g + 'px';
-
-    if (codeOut) {
-      codeOut.textContent =
-        `.contenedor {\n` +
-        `  display: grid;\n` +
-        `  grid-template-columns: ${c};\n` +
-        `  grid-template-rows: ${r};\n` +
-        `  gap: ${g}px;\n` +
-        `}`;
-    }
-  }
-
-  [cols, rows, gap].forEach((input) => {
-    if (input) input.addEventListener('input', render);
-  });
-
-  render(); // estado inicial
-}
-
-/* ---------- Demo interactivo de grid-template-areas (Sesión 4) ----------
-   Botones "Escritorio" / "Móvil" que redefinen las áreas de rejilla
-   en vivo, mostrando cómo un mismo HTML se reordena solo cambiando CSS. */
-function initAreaDemo() {
-  const demo = document.querySelector('.area-demo');
-  if (!demo) return;
-
-  const stage = demo.querySelector('.area-stage');
-  const codeOut = demo.querySelector('.demo-code');
-  const buttons = demo.querySelectorAll('.demo-toolbar button');
-
-  const layouts = {
-    desktop: {
-      columns: '200px 1fr 200px',
-      rows: 'auto 1fr auto',
-      areas: `"header header header"\n    "nav main aside"\n    "footer footer footer"`
-    },
-    mobile: {
-      columns: '1fr',
-      rows: 'auto auto auto auto auto',
-      areas: `"header"\n    "nav"\n    "main"\n    "aside"\n    "footer"`
-    }
-  };
-
-  function render(mode) {
-    const layout = layouts[mode];
-    stage.style.gridTemplateColumns = layout.columns;
-    stage.style.gridTemplateRows = layout.rows;
-    stage.style.gridTemplateAreas = layout.areas.replace(/\n\s*/g, ' ');
-
-    buttons.forEach((b) => b.classList.toggle('active', b.dataset.mode === mode));
-
-    if (codeOut) {
-      codeOut.textContent =
-        `.contenedor {\n` +
-        `  display: grid;\n` +
-        `  grid-template-columns: ${layout.columns};\n` +
-        `  grid-template-rows: ${layout.rows};\n` +
-        `  grid-template-areas:\n    ${layout.areas};\n` +
-        `}`;
-    }
-  }
-
-  buttons.forEach((btn) => {
-    btn.addEventListener('click', () => render(btn.dataset.mode));
-  });
-
-  render('desktop'); // estado inicial
-}
-
 /* ---------- Toast simple de feedback ---------- */
 function showToast(message) {
   let toast = document.querySelector('.toast');
@@ -298,3 +210,5 @@ function showToast(message) {
   clearTimeout(window.__toastTimeout);
   window.__toastTimeout = setTimeout(() => toast.classList.remove('show'), 2600);
 }
+
+
