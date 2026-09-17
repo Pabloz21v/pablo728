@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo: Componentes preestablecidos de Bootstrap</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { padding: 0; font-family: system-ui, sans-serif; }
+    .demo-section { padding: 20px 16px; }
+    h6.demo-label { color: #9aa7b4; font-size: 0.75rem; text-transform: uppercase; letter-spacing: .05em; margin: 0 0 10px; }
+  </style>
+</head>
+<body>
+
+  <!--
+    ============================================================
+    COMPONENTE 1: BARRA DE NAVEGACIÓN (navbar)
+    navbar-expand-lg: en pantallas grandes se ve expandida (horizontal);
+    en pantallas chicas se colapsa automáticamente en un botón "hamburguesa".
+    ============================================================
+  -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">TecnoStore</a>
+      <!-- Este botón SOLO se ve en pantallas chicas (Bootstrap lo oculta en lg y superior) -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navDemo">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navDemo">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Catálogo</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Carrito</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="demo-section">
+    <!--
+      ============================================================
+      COMPONENTE 2: TARJETAS (cards)
+      La clase .card ya trae borde, radio de esquinas y separación
+      interna (padding) predefinidos: no hay que escribir ese CSS.
+      ============================================================
+    -->
+    <h6 class="demo-label">Componente · card (tarjeta de producto)</h6>
+    <div class="row g-3 mb-4">
+      <div class="col-12 col-md-4">
+        <div class="card">
+          <img src="https://placehold.co/300x160/2c3e50/ffffff?text=Notebook" class="card-img-top" alt="Notebook Lenovo 15 pulgadas">
+          <div class="card-body">
+            <h5 class="card-title">Notebook Lenovo</h5>
+            <p class="card-text">$450.000</p>
+            <button type="button" class="btn btn-primary">Agregar al carrito</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="card">
+          <img src="https://placehold.co/300x160/2c3e50/ffffff?text=Mouse" class="card-img-top" alt="Mouse inalámbrico negro">
+          <div class="card-body">
+            <h5 class="card-title">Mouse Inalámbrico</h5>
+            <p class="card-text">$15.000</p>
+            <button type="button" class="btn btn-primary">Agregar al carrito</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="card">
+          <img src="https://placehold.co/300x160/2c3e50/ffffff?text=Teclado" class="card-img-top" alt="Teclado mecánico retroiluminado">
+          <div class="card-body">
+            <h5 class="card-title">Teclado Mecánico</h5>
+            <p class="card-text">$62.000</p>
+            <button type="button" class="btn btn-primary">Agregar al carrito</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--
+      ============================================================
+      COMPONENTE 3: MODAL
+      El modal existe SIEMPRE en el HTML, pero permanece oculto
+      (display:none) hasta que un elemento con data-bs-toggle="modal"
+      lo activa. No hace falta escribir JavaScript propio.
+      ============================================================
+    -->
+    <h6 class="demo-label">Componente · modal (ventana emergente)</h6>
+    <button type="button" class="btn btn-outline-info mb-4" data-bs-toggle="modal" data-bs-target="#modalDemo">
+      Ver detalle del producto
+    </button>
+
+    <div class="modal fade" id="modalDemo" tabindex="-1" aria-labelledby="modalDemoLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalDemoLabel">Notebook Lenovo</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <p>15" · 16GB RAM · 512GB SSD. Ideal para trabajo y estudio.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Comprar ahora</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bundle con Popper: OBLIGATORIO para que el navbar-toggler y el modal funcionen -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

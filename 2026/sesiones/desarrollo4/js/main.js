@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFlexDemo();
   initGridDemo();
   initAreaDemo();
+  initIframeDemos();
 });
 
 /* ---------- Menú responsive (hamburguesa) ---------- */
@@ -283,6 +284,27 @@ function initAreaDemo() {
   });
 
   render('desktop'); // estado inicial
+}
+
+/* ---------- Simulador de ancho para demos embebidas en <iframe> (Sesión 5) ----------
+   Cada .iframe-demo tiene botones con data-width (en px) que cambian el ancho
+   del iframe embebido, simulando distintos tamaños de pantalla SIN necesidad
+   de que el alumno redimensione la ventana real del navegador. */
+function initIframeDemos() {
+  document.querySelectorAll('.iframe-demo').forEach((demo) => {
+    const iframe = demo.querySelector('iframe');
+    const buttons = demo.querySelectorAll('.demo-toolbar button');
+    if (!iframe || !buttons.length) return;
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const width = btn.dataset.width;
+        iframe.style.maxWidth = width === 'full' ? '1100px' : width + 'px';
+        buttons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  });
 }
 
 /* ---------- Toast simple de feedback ---------- */

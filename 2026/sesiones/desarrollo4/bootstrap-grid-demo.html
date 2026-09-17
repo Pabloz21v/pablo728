@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo: Sistema de grilla Bootstrap (row / col)</title>
+  <!-- Bootstrap 5 vía CDN: una sola hoja de estilos y un solo script hacen
+       disponibles TODAS las clases utilitarias y componentes del framework -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { padding: 16px; font-family: system-ui, sans-serif; }
+    .grid-box {
+      background: linear-gradient(135deg, #4fd1c5, #38b2ac);
+      color: #08131a;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 14px 10px;
+      text-align: center;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+    }
+    .grid-box.alt { background: linear-gradient(135deg, #b794f4, #9f7aea); }
+    h6.demo-label { color: #9aa7b4; font-size: 0.75rem; text-transform: uppercase; letter-spacing: .05em; margin: 22px 0 10px; }
+  </style>
+</head>
+<body>
+
+  <!--
+    ============================================================
+    EJEMPLO 1: la rejilla clásica de 12 columnas
+    Bootstrap divide el ancho disponible en 12 "unidades" imaginarias.
+    col-4 + col-4 + col-4 = 12 → exactamente 3 columnas iguales.
+    ============================================================
+  -->
+  <h6 class="demo-label">Ejemplo 1 · row + col-4 (tres columnas iguales, 4+4+4=12)</h6>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-4"><div class="grid-box">col-4</div></div>
+      <div class="col-4"><div class="grid-box">col-4</div></div>
+      <div class="col-4"><div class="grid-box">col-4</div></div>
+    </div>
+  </div>
+
+  <!--
+    ============================================================
+    EJEMPLO 2: columnas de distinto ancho (no todas iguales)
+    col-8 + col-4 = 12: la primera ocupa 2/3 del ancho, la segunda 1/3.
+    ============================================================
+  -->
+  <h6 class="demo-label">Ejemplo 2 · col-8 + col-4 (columnas de distinto ancho, 8+4=12)</h6>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-8"><div class="grid-box alt">col-8</div></div>
+      <div class="col-4"><div class="grid-box alt">col-4</div></div>
+    </div>
+  </div>
+
+  <!--
+    ============================================================
+    EJEMPLO 3: EL CASO MÁS IMPORTANTE — grilla RESPONSIVA
+    Cada tarjeta usa TRES clases de columna a la vez:
+      col-12  → en pantallas chicas (celular) ocupa el 100% del ancho
+      col-md-6 → a partir de "md" (≈768px) ocupa 6/12 = 50% (2 por fila)
+      col-lg-3 → a partir de "lg" (≈992px) ocupa 3/12 = 25% (4 por fila)
+    Achicá esta ventana (o el iframe desde la página principal)
+    y mirá cómo las tarjetas cambian de posición SOLAS.
+    ============================================================
+  -->
+  <h6 class="demo-label">Ejemplo 3 · grilla RESPONSIVA: col-12 col-sm-6 col-lg-3</h6>
+  <div class="container-fluid">
+    <div class="row g-3">
+      <div class="col-12 col-sm-6 col-lg-3"><div class="grid-box">Producto 1</div></div>
+      <div class="col-12 col-sm-6 col-lg-3"><div class="grid-box">Producto 2</div></div>
+      <div class="col-12 col-sm-6 col-lg-3"><div class="grid-box">Producto 3</div></div>
+      <div class="col-12 col-sm-6 col-lg-3"><div class="grid-box">Producto 4</div></div>
+    </div>
+  </div>
+
+  <!-- Bootstrap Bundle (incluye Popper): necesario para componentes con JS como el modal -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
