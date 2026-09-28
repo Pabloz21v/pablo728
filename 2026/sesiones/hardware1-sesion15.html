@@ -733,10 +733,12 @@ textarea.ans.is-filled { border-color: var(--ok); }
 </script>
 </head>
 <body>
+  
 <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
 <div class="read-progress" id="read-progress" aria-hidden="true"></div>
 
 <header class="topbar">
+  
   <a class="topbar__brand" href="#inicio">
     <span class="brand-badge" aria-hidden="true"><span>HW1</span></span>
     <span>
@@ -782,10 +784,8 @@ textarea.ans.is-filled { border-color: var(--ok); }
         </li>
         <li><a href="#s2">2. Fundamentos térmicos</a>
           <ul class="sub">
-            <li><a href="#s2-1">2.1 TDP, Tjunction y Tmax</a></li>
+            <li><a href="#s2-1">2.1 TDP y Tmax</a></li>
             <li><a href="#s2-2">2.2 Throttling y apagado térmico</a></li>
-            <li><a href="#s2-3">2.3 Cálculo térmico (Rθ)</a></li>
-            <li><a href="#s2-4">2.4 Consecuencias del sobrecalentamiento</a></li>
           </ul>
         </li>
         <li><a href="#s3">3. Interfaces térmicas (TIM)</a>
@@ -806,42 +806,77 @@ textarea.ans.is-filled { border-color: var(--ok); }
             <li><a href="#s4-6">4.6 Resumen de conexiones</a></li>
           </ul>
         </li>
-        <li><a href="#s5">5. Acústica, ruido y mantenimiento</a>
+        <li><a href="#s5">5. Mantenimiento</a>
           <ul class="sub">
-            <li><a href="#s5-1">5.1 Ruido y curvas de ventilador</a></li>
-            <li><a href="#s5-2">5.2 Tipos de rodamientos</a></li>
-            <li><a href="#s5-3">5.3 Mantenimiento preventivo</a></li>
-            <li><a href="#s5-4">5.4 Recambio de TIM por componente</a></li>
+          
+            <li><a href="#s5-3">5.1 Mantenimiento preventivo</a></li>
+            <li><a href="#s5-4">5.2 Recambio de TIM por componente</a></li>
           </ul>
         </li>
         <li><a href="#s6">6. Actividades y evaluación</a>
           <ul class="sub">
-            <li><a href="#s6-1">6.1 Actividades de búsqueda</a></li>
-            <li><a href="#s6-2">6.2 Cuestionario de refuerzo</a></li>
+            <li><a href="#s6-1">6.1 Cuestionario y búsqueda e identificación de imágenes</a></li>
           </ul>
         </li>
-        <li><a href="#anexos">Anexos: glosario y guía docente</a></li>
+
       </ol>
-      <div class="sidebar__tools">
-        <button class="btn" type="button" data-sidebar-action="print">🖨 Imprimir</button>
-        <button class="btn" type="button" data-sidebar-action="expand">⇕ Abrir todo</button>
-        <button class="btn" type="button" data-sidebar-action="collapse">⇕ Cerrar todo</button>
-      </div>
+     
     </nav>
   </aside>
 
   <!-- ================= CONTENIDO ================= -->
   <main class="content" id="contenido">
-
+<div class="nav-bar">
+   	      <a
+   	        href="../materias/hardware-uno.html"
+   	        style="
+   	          padding: 10px 20px;
+   	          border-radius: 8px;
+   	          text-decoration: none;
+   	          font-weight: bold;
+   	          background: #4ade80;
+   	          color: #222;
+   	          display: inline-block;
+   	          margin-right: 10px;
+   	        "
+   	      >
+   	        Volver a Materia
+   	      </a>
+   	      <a
+   	        href="hardware1-sesion14.html"
+   	        style="
+   	          padding: 10px 20px;
+   	          border-radius: 8px;
+   	          text-decoration: none;
+   	          font-weight: bold;
+   	          background: #60a5fa;
+   	          color: #fff;
+   	          display: inline-block;
+   	          margin-right: 10px;
+   	        "
+   	      >
+   	        Ir a Sesión 14
+   	      </a>
+   	      <a
+   	        href="hardware1-sesion16.html"
+   	        style="
+        padding: 10px 20px;
+	          border-radius: 8px;
+   	          text-decoration: none;
+   	          font-weight: bold;
+   	          background: #f9e282;
+   	          color: #222;
+   	          display: inline-block;
+   	        "
+   	      >
+   	        Ir a Sesión 16
+   	      </a>
+   	    </div>
+        <br>
     <section class="hero" aria-labelledby="titulo-sesion">
       <p class="hero__eyebrow">Hardware 1 · Sesión 15</p>
       <h1 id="titulo-sesion">Gabinetes, Factor de Forma y Sistemas de Refrigeración</h1>
-      <p class="hero__sub">
-        Material completo de estudio: arquitectura y compatibilidad del gabinete, termodinámica aplicada
-        al hardware, interfaces térmicas, disipación activa y pasiva en PC de escritorio y notebooks,
-        acústica y mantenimiento térmico preventivo y correctivo. Incluye diagramas, tablas comparativas,
-        ejercicios de cálculo y cuestionario de entrega al docente.
-      </p>
+      
       
     </section>
     <!-- ============================================================
@@ -977,91 +1012,8 @@ textarea.ans.is-filled { border-color: var(--ok); }
           </table>
         </div>
 
-        <div class="warn">
-          <span class="warn__title">Ojo con el "nombre" del formato</span>
-          <p>
-            Muchos gabinetes se anuncian como <em>"ATX Mid Tower"</em> y aceptan placas E-ATX o Mini-ITX.
-            La compatibilidad real depende de las medidas que el fabricante pública y el técnico debe
-            corroborar <strong>midiendo o con las fichas técnicas</strong>, no suponer.
 
-          </p>
-        </div>
-
-        <h4>Las cuatro medidas críticas de compatibilidad</h4>
-        <div class="card-grid">
-          <div class="card">
-            <p class="card__k">MEDIDA 1</p>
-            <h4>Largo máximo de GPU</h4>
-            <p>
-              Distancia entre el bracket trasero y el obstáculo siguiente (bahías, frente, radiador, bomba).
-              Ej.: <em>Soporte para GPU de hasta 330 mm (radiador frontal montado: 300 mm)</em>. Una GPU de 3 ranuras
-              además necesita que las <em> tapas de ranura PCIe </em> sean removibles y que el <em>cubierta</em> de la
-              fuente no bloquee los ventiladores inferiores.
-            </p>
-          </div>
-          <div class="card">
-            <p class="card__k">MEDIDA 2</p>
-            <h4>Alto máximo de disipador de CPU</h4>
-            <p>
-              Distancia de la superficie del zócalo hasta el panel lateral. Se mide <strong>desde la base del
-              disipador hasta la punta de los heatpipes o el borde de los ventiladores</strong>, no desde la
-              altura nominal del bloque. Ej.: <em>La altura del disipador de la CPU está limitada a 165 mm</em>.
-                Dicho de otra forma, el disipador con su cooler es tan alto que choca con el otro extremo el gabinete e impide ser cerrado.
-            </p>
-          </div>
-          <div class="card">
-            <p class="card__k">MEDIDA 3</p>
-            <h4>Tamaño y cantidad de radiadores / coolers</h4>
-            <p>
-              Se expresa en milímetros en múltiplos de 120/140: 120, 240, 280, 360, 420. Verifique siempre
-              el <strong>espesor</strong> admitido (30 mm slim, 45 mm standard, 60 mm+ grueso) y el
-              <strong>patrón de agujeros</strong> (fan spacing) que debe coincidir con los del gabinete para atornillarlos.
-            </p>
-          </div>
-          <div class="card">
-            <p class="card__k">MEDIDA 4</p>
-            <h4>Clearance del disipador de CPU y memorias</h4>
-            <p>
-            Los disipadores torre de gran porte se superponen a los módulos RAM DIMM más cercanos. Los
-              módulos RAM con <em>heatspreader</em> alto (tipo "trident") pueden impedir el montaje. En Mini-ITX
-              este es el conflicto número uno. Dicho de otra forma el disipador de la CPU es tan grande que chocaría con los módulos RAM
-
-            </p>
-          </div>
-        </div>
-
-        <h4>Tabla 1.2 · Compatibilidad cruzada (gabinete → placa)</h4>
-        <div class="table-wrap">
-          <table>
-            <caption>Qué placa madre entra en qué gabinete. La relación no es simétrica.</caption>
-            <thead>
-              <tr><th>Gabinete</th><th>E-ATX</th><th>ATX</th><th>Micro-ATX</th><th>Mini-ITX</th><th>Ejemplo real</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Tower E-ATX (Full)</td><td class="tag-yes">Sí</td><td class="tag-yes">Sí</td><td class="tag-yes">Sí</td><td class="tag-yes">Sí</td><td>Torre de 2 cámaras con 8 ranuras</td></tr>
-              <tr><td>Tower ATX (Mid)</td><td class="tag-mid">A veces*</td><td class="tag-yes">Sí</td><td class="tag-yes">Sí</td><td class="tag-yes">Sí</td><td>Mid tower típica de 7 ranuras</td></tr>
-              <tr><td>Tower Micro-ATX / Mini</td><td class="tag-no">No</td><td class="tag-no">No</td><td class="tag-yes">Sí</td><td class="tag-yes">Sí</td><td>Gabinetes compactos de 4 ranuras</td></tr>
-              <tr><td>Cubo / SFF</td><td class="tag-no">No</td><td class="tag-no">No</td><td class="tag-mid">A veces*</td><td class="tag-yes">Sí</td><td>Cube ITX con placa horizontal</td></tr>
-              <tr><td>Slim / HTPC / 1U-2U</td><td class="tag-no">No</td><td class="tag-no">No</td><td class="tag-no">No</td><td class="tag-mid">Sí (low-profile)</td><td>Requiere riser y disipador de perfil bajo</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="activity__goal">
-          * "A veces" indica que el fabricante declara soporte E-ATX solo si se quita la cubierta de goma
-          pasacables o si no se instala el radiador frontal. Es la zona gris donde se producen la mayoría de
-          los conflictos de montaje.
-        </p>
-
-        <div class="tip">
-          <span class="tip__title">Regla del técnico</span>
-          <p>
-            Antes de comprar, sumar estas cuatro medidas y compararlas con las tres restricciones del gabinete:
-            <strong>1)</strong> largo de GPU, <strong>2)</strong> alto de disipador, <strong>3)</strong> espesor
-            del conjunto radiador + ventiladores. Si cualquiera de las tres queda igualada al límite (sin margen),
-            considérela incompatible: los ventiladores, los cables y las tarjetas de 3 ranuras ocupan espacio
-            que las fichas técnicas no contabilizan.
-          </p>
-        </div>
+      
       </article>
       <article class="sub" id="s1-2">
         <h3>1.2 Estructura, materiales y tipos de panel</h3>
@@ -1133,21 +1085,12 @@ textarea.ans.is-filled { border-color: var(--ok); }
           </table>
         </div>
 
-        <div class="warn">
-          <span class="warn__title">Presión positiva vs. ciego</span>
-          <p>
-            Un frente ciego con tres ventiladores de admisión rinde <strong>peor</strong> que un frente
-            mesh con dos, porque la restricción hace que los ventiladores trabajen contra presión y el aire
-            real que entra es menor al nominal (CFM). Cuando el frente es ciego, la configuración
-            razonable es <em>más extracción que admisión</em> (presión negativa), asumiendo mayor ingreso
-            de polvo por las aberturas no filtradas.
-          </p>
-        </div>
+        
 
         <h4>Partes estructurales de un chasis moderno</h4>
         <div class="term">
           <dl class="term__row">
-            <dt>Bandeja de la placa (mobo tray)</dt>
+            <dt>Bandeja de la placa madre (mobo tray)</dt>
             <dd>Chapa donde se atornillan los standoffs y la placa madre. Define el factor de forma admitido. Debe tener el recorte para el <em>backplate</em> del disipador.</dd>
           </dl>
           <dl class="term__row">
@@ -1180,17 +1123,7 @@ textarea.ans.is-filled { border-color: var(--ok); }
           </dl>
         </div>
 
-        <div class="tip">
-          <span class="tip__title">Cómo evaluar un gabinete en 60 segundos</span>
-          <ol>
-            <li>Mire el frente: ¿mesh o ciego? ¿entra aire por los laterales?</li>
-            <li>Mire el techo: ¿admite radiador de 240/360 con espacio para ventiladores y motherboard?</li>
-            <li>Cuente los grommets y mida la cámara trasera: menos de 20 mm será un problema.</li>
-            <li>Verifique que los filtros se retiren desde afuera.</li>
-            <li>Verifique posición de la fuente: abajo (moderno) y con rejilla inferior despejada.</li>
-            <li>Busque el largo máximo de GPU y el alto máximo de disipador en la ficha técnica.</li>
-          </ol>
-        </div>
+        
       </article>
 
       <article class="sub" id="s1-3">
@@ -1198,13 +1131,11 @@ textarea.ans.is-filled { border-color: var(--ok); }
 
         <p>
           La evolución de las bahías cuenta la historia completa del almacenamiento hogareño: se pasó de
-          muchos discos ópticos y mecánicos a muy pocas unidades NVMe soldadas o atornilladas
-          directamente a la placa madre. Reconocer ambos mundos es imprescindible para dar servicio a
-          equipos de distintas generaciones.
+          muchos discos ópticos y discos mecánicos 3.5" a muy pocas unidades NVMe soldadas o atornilladas
+          directamente a la placa madre. 
         </p>
 
-        <p><strong>El apóstrofo de las pulgadas</strong> en la jerga técnica se escribe <code>"</code> (comilla) y equivale a pulgada: 5,25", 3,5" y 2,5".</p>
-
+        
         <h4>Tabla 1.4 · Bahías: Legacy vs. Moderno</h4>
         <div class="table-wrap">
           <table>
@@ -1268,16 +1199,6 @@ textarea.ans.is-filled { border-color: var(--ok); }
 
         
 
-        <div class="warn">
-          <span class="warn__title">M.2 y la temperatura: adelanto de la sección 4</span>
-          <p>
-            Un SSD NVMe PCIe 4.0/5.0 puede superar los 70–80 °C bajo escritura sostenida y entrar en
-            <em>thermal throttling</em>, cayendo a menos de la mitad de su velocidad. Casi todas las
-            placas madres modernas incluyen <strong>disipadores M.2 (heatsink)</strong> con un
-            <strong>thermal pad</strong> preinstalado; si el pad se retira y no se reemplaza, el
-            rendimiento se degrada aunque el sistema "funcione".
-          </p>
-        </div>
       </article>
 
       <article class="sub" id="s1-4">
@@ -1289,68 +1210,19 @@ textarea.ans.is-filled { border-color: var(--ok); }
           operación.
         </p>
 
-        <h4>Diagrama 1.2 · Layout interno moderno vs. legacy</h4>
-        <figure class="diagram">
-          <div class="diagram__head"><b>Moderno (fuente abajo, shroud, frente mesh)</b><span>vista lateral izquierda</span></div>
-          <div class="diagram__body"><pre class="ascii">   FRENTE (mesh)                                             TRASERO
- ┌──────┬──────────────────────────────────────────────────────────┐
- │  ▲   │  ┌───────────┐                                            │
- │  ▲   │  │  AIO 2×120│        ┌────────────┐          ┌───────┐   │  ▲
- │  ▲   │  │  radiador │        │  DISIPADOR │          │ GPU   │   │  ▲  ventilador
- │ ADM  │  └─────┬─────┘        │  CPU TORRE │          │ 3 ran.│   │ EXT extracción
- │ air  │        │ tubos        │  + vent    │          └───────┘   │  (exhaust)
- │      │        ▼              └────────────┘                      │
- │      │   ┌──────────┐   ┌─────────────────────┐   ┌───────────┐  │
- │ fan1 │   │ DIMM RAM │   │  PLACA MADRE ATX    │   │  GPU fan  │  │
- │ fan2 │   └──────────┘   └─────────────────────┘   └───────────┘  │
- │ fan3 │                                                           │
- │      │  ┌─────────────────────────────────────────────┐          │
- │  ▼   │  │  SHROUD: cubre la fuente y los cables       │  ▼  ▼   │  ventiladores
- └──────┴──│  ▓ PSU 850 W (ventilador hacia ABAJO)        │──────────┘  base (intake)
-           └─────────────────────────────────────────────┘
-             ▲ filtro antipolvo magnético en la base, extraíble
-
- Flujo: aire frío entra FRENTE + BASE → calienta → sube y sale por TRASERO + TECHO.
- Presión positiva: 3 intake adelante / 2 exhaust (frente-trasero) + 1 techo opcional.</pre></div>
-          <figcaption>Chasis moderno: fuente abajo, shroud, gestión de cables trasera y radiador frontal.</figcaption>
-        </figure>
-
-        <figure class="diagram">
-          <div class="diagram__head"><b>Legacy (fuente arriba, sin shroud, bahías fijas)</b><span>vista lateral izquierda</span></div>
-          <div class="diagram__body"><pre class="ascii">   FRENTE                                                   TRASERO
- ┌──────────────────────────────────────────────────────────────────┐
- │ ┌───────────────┐  ┌──────────────┐                              │
- │ │  PSU 500 W    │  │  Bahía 5,25" │  ← fuente arriba extrae aire  │
- │ │  ▲ ventilador │  │  (DVD/lecr.) │    caliente del interior      │
- │ └───────────────┘  ├──────────────┤                              │
- │                    │  Bahía 3,5"  │   ← discos y lectores arriba  │
- │  ┌──────────────┐  ├──────────────┤                              │
- │  │ Bahía 3,5" ×3│  │  Bahía 3,5"  │                              │
- │  ├──────────────┤  └──────────────┘                              │
- │  │ Bahía 3,5" ×3│                                                 │
- │  └──────────────┘    ┌────────────────────┐                    │
- │                      │  PLACA MADRE ATX   │    ┌────────────┐    │
- │   ┌───────┐          │  CPU + disipador   │    │ GPU + fan  │    │
- │   │  ADM  │          └────────────────────┘    └────────────┘    │
- │   │ fan   │                                                       │
- │   └───────┘                                                       │
- └──────────────────────────────────────────────────────────────────┘
- Sin shroud: los cables atraviesan el flujo de aire. Fuente arriba calienta
- el aire antes de que llegue al disipador de CPU (peor caso en carga).</pre></div>
-          <figcaption>Chasis legacy: fuente en la parte superior, bahías fijas y cableado atravesando el flujo.</figcaption>
-        </figure>
+  
 
         <h4>Secuencia de montaje (y el porqué de cada paso)</h4>
         <ol>
           <li>
             <strong>Preparación del espacio de trabajo.</strong> Mesa amplia, iluminada y libre de
-            electricidad estática. Pulsera antiestática o, en su defecto, tocar el chasis metálico
+            electricidad estática. Usar pulsera antiestática o, en su defecto, tocar el chasis metálico
             <em>con la fuente desenchufada</em> antes de manipular componentes. Retirar anillos,
             relojes y pulseras metálicas.
           </li>
           <li>
             <strong>Verificar los standoffs.</strong> Los <em>standoffs</em> (separadores hexagonales
-            hembra-hembra) impiden que la parte inferior de la placa madre toque la chapa conductora.
+            macho-hembra) impiden que la parte inferior de la placa madre toque la chapa conductora.
             <strong>Se coloca únicamente el número y la posición que indique el manual para el factor de
             forma usado</strong>. Un standoff de más, debajo de la zona de circuitos, produce un
             cortocircuito; uno de menos flexiona la placa al atornillar.
@@ -1385,8 +1257,7 @@ textarea.ans.is-filled { border-color: var(--ok); }
             Esto evita flexiones de la placa y permite verificar que el soporte y la pasta queden bien.
           </li>
           <li>
-            <strong>Colocar la placa madre</strong> sobre los standoffs verificados, atornillando en
-            diagonal (traza de X) con los tornillos de rosca fina correspondientes, sin ajustar a fondo
+            <strong>Colocar la placa madre</strong> sobre los standoffs verificados, atornillando con los tornillos de rosca fina correspondientes, sin ajustar a fondo
             hasta que estén todos puestos.
           </li>
           <li>
@@ -1414,17 +1285,17 @@ textarea.ans.is-filled { border-color: var(--ok); }
           <li><strong>Flujo de aire:</strong> un manojo de cables frente al ventilador de admisión crea una barrera física que reduce el caudal efectivo. Ordenar los cables puede bajar 3–6 °C la temperatura de la GPU y del chipset.</li>
           <li><strong>Integridad eléctrica:</strong> cables tensos o pinzados por el panel lateral pueden fracturar el conductor internamente (falla intermitente muy difícil de diagnosticar).</li>
           <li><strong>Servicio:</strong> cada intervención futura (cambio de TIM, limpieza) se vuelve más rápida y con menos riesgo de arrancar conectores accidentalmente.</li>
-          <li><strong>Técnica:</strong> pasar los cables por detrás de la bandeja usando los grommets; fijar con <em>cintas de velcro</em> (nunca precintos de plástico desechables si se prevé mantenimiento); separar físicamente los cables de datos de los de alimentación cuando sea posible; respetar el radio mínimo de curvatura de los cables de la fuente (no hacer dobleces en ángulo recto sobre el conector, especialmente en los de 24 pines y 12VHPWR).</li>
+          <li><strong>Técnica:</strong> pasar los cables por detrás de la bandeja usando los grommets / ojales ; fijar con <em>cintas de velcro</em> (nunca precintos de plástico desechables si se prevé mantenimiento); separar físicamente los cables de datos de los de alimentación cuando sea posible; respetar el radio mínimo de curvatura de los cables de la fuente (no hacer dobleces en ángulo recto sobre el conector, especialmente en los de 24 pines y 12VHPWR).</li>
         </ul>
 
         <div class="danger">
           <span class="danger__title">Advertencia eléctrica general</span>
           <p>
-            Trabaje siempre con la fuente <strong>desconectada de la red y con el switch trasero en 0</strong>.
-            Presione luego el botón de encendido del gabinete 3–5 segundos para descargar los condensadores
+            Trabajar siempre con la fuente <strong>desconectada de la red y con el switch trasero en 0</strong>.
+            Presionar luego el botón de encendido del gabinete 3–5 segundos para descargar los condensadores
             de la fuente (residual de tensión). Los condensadores de una fuente pueden conservar carga
-            peligrosa incluso desconectada: <strong>no abra una fuente de alimentación</strong> sin
-            capacitación específica.
+            peligrosa incluso desconectada: <strong>no abrir una fuente de alimentación</strong> sin
+            capacitación específica o las protecciones correspondientes.
           </p>
         </div>
       </article>
@@ -1438,27 +1309,10 @@ textarea.ans.is-filled { border-color: var(--ok); }
           <strong>polaridad</strong>.
         </p>
 
-        <h4>Diagrama 1.3 · Panel frontal: qué va a dónde</h4>
-        <figure class="diagram">
-          <div class="diagram__head"><b>Botones y LEDs → header F_PANEL / PANEL1</b><span>placa madre</span></div>
-          <div class="diagram__body"><pre class="ascii">  CABLES DEL GABINETE                 HEADER DE LA PLACA MADRE (F_PANEL / PANEL)
- ┌────────────────────┐              ┌──────────────────────────────────────────┐
- │ (POWER SW) 2 pines │── sin ◄──►──│  PWR_BTN   [ +  - ]   (sin polaridad)    │
- │  → botón encendido │  pol       │  PWR_LED   [ +  - ]  (LED → polaridad)   │
- ├────────────────────┤            │  HDD_LED   [ +  - ]  (LED → polaridad)   │
- │ (RESET SW) 2 pines │── sin ─────│  RESET SW  [ +  - ]  (sin polaridad)     │
- ├────────────────────┤  pol       │                                          │
- │ (POWER LED) ±      │──────±─────│  El pin (+) lleva el ánodo del LED       │
- │ (HDD LED)   ±      │──────±─────│  El pin (-) va a masa (GND)              │
- └────────────────────┘            └──────────────────────────────────────────┘
-                                              │
- → Si un LED no enciende: invertir el conector (probable polaridad opuesta).
-   Los SWITCHES no tienen polaridad: cualquiera de las dos posiciones funciona.
-   Los LED SÍ tienen polaridad: un diodo sólo conduce en un sentido.</pre></div>
-          <figcaption>Relación entre los cables del panel frontal y el header de la placa madre.</figcaption>
-        </figure>
+        
 
         <h4>Tabla 1.5 · Conexiones del panel frontal</h4>
+        <p>La polaridad es importante porque determina que la corriente circule en el sentido correcto y que cada señal llegue al pin que corresponde</p>
         <div class="table-wrap">
           <table>
             <caption>Nombre del conector, función, polaridad y header de destino.</caption>
@@ -1561,67 +1415,18 @@ textarea.ans.is-filled { border-color: var(--ok); }
                 <td>Alimentación y control de los ventiladores</td>
                 <td>Con polaridad</td>
                 <td><code>SYS_FAN</code>, <code>CHA_FAN</code>, <code>FAN1..n</code></td>
-                <td>Ver sección 1.6: 3 pines (DC) vs. 4 pines (PWM).</td>
+                <td> 3 pines (DC) vs. 4 pines (PWM).</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <h4>Detalle del header de audio frontal (HD Audio / AC'97)</h4>
-        <figure class="diagram">
-          <div class="diagram__head"><b>Diagrama 1.4 · Pinout del header AAFP / F_AUDIO (10-1 pines)</b><span>numeración típica</span></div>
-          <div class="diagram__body"><pre class="ascii">  Pinout HD Audio / AAFP (Intel Front Panel Audio)
-   ┌─────┬─────┐      Vista del header en la placa madre
-   │  1  │  2  │      Pin 1 = MIC IN (micrófono)
-   │  3  │  4  │      Pin 2 = GND
-   │  5  │  6  │      Pin 3 = MIC BIAS (alimentación del mic)
-   │  7  │  8  │      Pin 4 = PRESENCE# (detección de jack)  ← HD Audio
-   │  9  │ 10* │      Pin 5 = LINE OUT R  (auricular derecho)
-   └─────┴─────┘      Pin 6 = LINE OUT R return
-     *pin 10 ausente  Pin 7 = SENSE1 (solo Ac97/GND)
-      (key)           Pin 8 = KEY (pin ciego de posición)
-                      Pin 9 = LINE OUT L  (auricular izquierdo)
-                     Pin 10 = LINE OUT L return  (ausente en botón key)
- ┌──────────────────────────────────────────────────────────────┐
- │ TRUCO DE TALLER: el conector del gabinete tiene un agujero   │
- │ obturado (key) que coincide con el pin 8 ciego de la placa.  │
- │ Si no entra "de frente", NO FORZAR: está al revés o se       │
- │ intenta conectar en el header equivocado (p. ej. F_USB).     │
- │ Un audio frontal mal conectado NO daña la placa, pero        │
- │ puede producir zumbido, canal único o silencio total.        │
- └──────────────────────────────────────────────────────────────┘</pre></div>
-          <figcaption>Distribución de pines del header de audio frontal. La numeración puede variar: siempre verificar la serigrafía de la placa madre.</figcaption>
-        </figure>
 
-        <h4>Detalle del header USB 2.0 (F_USB) y USB 3.x</h4>
-        <figure class="diagram">
-          <div class="diagram__head"><b>Diagrama 1.5 · Pinout USB 2.0 (2×5, 9 pines activos)</b><span>VCC = +5 V</span></div>
-          <div class="diagram__body"><pre class="ascii">  BUS DEL GABINETE (2 puertos)          HEADER F_USB EN LA PLACA
- ┌──────────────────────┐              ┌───────────────────────────────┐
- │ Cable USB 2.0 (9 hilos)│───────────►│ 1 VCC  │ 2 VCC   (+5 V)      │
- └──────────────────────┘              │ 3 D-   │ 4 D-    (datos -)   │
-     ▲                                 │ 5 D+   │ 6 D+    (datos +)   │
-     └── Hay un pin ciego/obturado     │ 7 GND  │ 8 GND   (masa)      │
-         (pin 10) para evitar la       │ 9 KEY  │ 10 —    (ausente)   │
-         inversión del conector.       └───────────────────────────────┘
- ┌───────────────────────────────────────────────────────────────────┐
- │ ATENCIÓN: si el cable se enchufa desplazado una fila, VCC cae     │
- │ en GND y GND en VCC → inversión de polaridad. Se suele quemar la  │
- │ controladora USB o el pen drive conectado. Verificar el pin 1     │
- │ marcado con flecha antes de enchufar cualquier conector.          │
- └───────────────────────────────────────────────────────────────────┘
-
-  USB 3.0/3.1 (19–20 pines, azul): 8 hilos de SuperSpeed (2 pares TX/RX)
-  + 4 de USB 2.0 (D+/D- duplicados) + GND + detección + 1 pin ciego.
-  Más resistente a errores por la traba lateral, pero se rompe al tirar
-  del cable en lugar de liberar primero la lengüeta.</pre></div>
-          <figcaption>Comparación de headers USB 2.0 y USB 3.x con énfasis en el error de desplazamiento de una fila.</figcaption>
-        </figure>
-
+       
         <div class="tip">
           <span class="tip__title">Método para no equivocarse nunca</span>
           <ol>
-            <li>Localice en el <strong>manual de la placa madre</strong> el diagrama del header (nunca adivine por el color).</li>
+            <li>Localizar en el <strong>manual de la placa madre</strong> el diagrama del header (nunca adivinar por el color).</li>
             <li>Busque el <strong>pin 1</strong>, siempre identificado con un cuadrado, un triángulo o una flecha en la serigrafía.</li>
             <li>En el conector del gabinete, el cable de color más intenso o la flecha marca el pin 1 / la polaridad positiva.</li>
             <li>Conecte con la máquina apagada y desenchufada; nunca "en caliente".</li>
@@ -1698,97 +1503,7 @@ textarea.ans.is-filled { border-color: var(--ok); }
           </table>
         </div>
 
-        <div class="warn">
-          <span class="warn__title">Límite de corriente: el dato que casi nadie mira</span>
-          <p>
-            Cada header de ventilador soporta por lo general <strong>1 A</strong> (12 W en la línea de 12 V)
-            mientras que los headers de bomba admiten más. Un ventilador de 120 mm de alto caudal consume
-            ~0,25–0,35 A; tres ventiladores con un <em>splitter</em> de 3 en 1 pueden superar el límite si
-            son de alto rendimiento. Si la suma se acerca al límite, use un <strong>hub alimentado</strong>
-            (con conectores SATA o Molex que toman la energía directamente de la fuente, no del header).
-          </p>
-        </div>
 
-        <h4>Tabla 1.7 · Tipos de alimentación de ventiladores: Molex, 3 pines y 4 pines</h4>
-        <div class="table-wrap">
-          <table>
-            <caption>Diferencias eléctricas y de control entre los tres sistemas de conexión.</caption>
-            <thead>
-              <tr>
-                <th>Conector</th>
-                <th>Pines y señal</th>
-                <th>Control de velocidad</th>
-                <th>Lectura de RPM</th>
-                <th>Época / estado</th>
-                <th>Precauciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Molex 4 pines</strong><br>(AMP Mate-N-Lok, <em>"el gordo"</em>)</td>
-                <td>4 pines: 12 V (amarillo) / GND (negro) / GND (negro) / 5 V (rojo). A veces sin el de 5 V</td>
-                <td class="tag-no">Ninguno: gira siempre al 100 %</td>
-                <td class="tag-no">No</td>
-                <td>Legacy y pre-2000; aún usado en fuentes antiguas y <em>splitters</em></td>
-                <td>Tras conectarlo hay que encender y apagar físicamente para cambiar de toma; no conserva configuración. En algunos Molex el ventilador gira a 7 V (12 V – 5 V) con un truco de recableado: riesgo eléctrico, no recomendado en práctica escolar</td>
-              </tr>
-              <tr>
-                <td><strong>3 pines</strong><br>(DC / voltaje)</td>
-                <td>Pin 1 = GND, Pin 2 = +12 V, Pin 3 = TACH (señal de RPM)</td>
-                <td>Por <strong>variación de voltaje</strong> (de ~5 V a 12 V). Los ventiladores tienen una tensión de arranque mínima: por debajo de ~4–5 V pueden no girar</td>
-                <td class="tag-yes">Sí (pin de tacómetro)</td>
-                <td>Aún común en ventiladores económicos y en kits LED analógicos</td>
-                <td>Si se conecta un ventilador de 3 pines en un header de 4 pines, funciona igual (el pin de PWM queda sin uso) siempre que el header esté configurado en modo DC. En muchas BIOS modernas el modo predeterminado es PWM y el ventilador de 3 pines quedará a máximo si no se cambia a DC.</td>
-              </tr>
-              <tr>
-                <td><strong>4 pines</strong><br>(PWM)</td>
-                <td>Pin 1 = GND, Pin 2 = +12 V (fijo), Pin 3 = TACH, Pin 4 = PWM (señal de control)</td>
-                <td>Por <strong>modulación de ancho de pulso</strong>: los 12 V se mantienen constantes y se corta la alimentación miles de veces por segundo proporcionalmente al ciclo de trabajo</td>
-                <td class="tag-yes">Sí</td>
-                <td>Estándar moderno</td>
-                <td>Ventaja clave: no hay voltaje de arranque mínimo, el ventilador puede girar a muy bajas RPM sin detenerse. Un ventilador de 4 pines en un header de 3 pines gira al 100 % porque el pin PWM queda al aire.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <figure class="diagram">
-          <div class="diagram__head"><b>Diagrama 1.6 · Pinout comparado: 3 pines vs. 4 pines PWM</b><span>vista frontal del conector</span></div>
-          <div class="diagram__body"><pre class="ascii">    VENTILADOR 3 PINES (DC)              VENTILADOR 4 PINES (PWM)
- ┌──┬──┬──┐    (grapa lateral)       ┌──┬──┬──┬──┐   (grapa lateral)
- │1 │2 │3 │                          │1 │2 │3 │4 │
- └──┴──┴──┘                          └──┴──┴──┴──┘
-   │  │  └── TACH  (RPM, lectura)      │  │  │  └── PWM   (control 25 kHz)
-   │  └───── +12 V (regulable)         │  │  └───── TACH  (RPM, lectura)
-   └──────── GND                       │  └──────── +12 V (FIJO, siempre)
-                                       └─────────── GND
-
-  CONTROL 3-PIN (DC):  12 V ████████████████████████  100 %
-                       12 V ██████████████            ~58 %  ← baja el voltaje
-                       12 V ████                       ~20 %  ← se detiene < ~4,5V
-
-  CONTROL 4-PIN (PWM): 12 V ████████████████████████  siempre 12 V
-                       PWM  ┌─┐ ┌─ ┌──┐ ┌─ ┌───┐     on/off rápido
-                       Vel. ██████████████  ~58 %    (no se detiene a bajo %)
-
-  ┌───────────────────────────────────────────────────────────────────┐
-  │ Regla: el pin 1 es GND en ambos. El "pin 2 rojo" no siempre es    │
-  │ +12 V en los cables de gabinete: seguir la serigrafía / manual.   │
-  │ Un ventilador de 4 pines en header de 3 pines → 100 % de giro.    │
-  │ Un ventilador de 3 pines en header de 4 pines → control en modo DC│
-  └───────────────────────────────────────────────────────────────────┘</pre></div>
-          <figcaption>Comparación de señal y comportamiento entre control por voltaje (DC) y control PWM.</figcaption>
-        </figure>
-
-        <div class="note">
-          <span class="note__title">Cálculo de un splitter</span>
-          <p>
-            Tres ventiladores de 0,30 A sobre un header de 1 A: 0,90 A → funciona, pero sin margen y con
-            arranque simultáneo (pico de corriente). Cinco ventiladores: 1,50 A → <strong>excede</strong> el
-            límite. Solución correcta: <em>hub</em> alimentado por SATA/Molex con un solo cable de control
-            (PWM) y de lectura de RPM (TACH) al header de la placa madre.
-          </p>
-        </div>
       </article>
     <!-- ============================================================
          SECCIÓN 2 — FUNDAMENTOS TÉRMICOS
@@ -1797,15 +1512,14 @@ textarea.ans.is-filled { border-color: var(--ok); }
       <h2 id="s2-t"><span class="num">2</span> Fundamentos térmicos y consecuencias</h2>
 
       <p>
-        Todo componente electrónico consume energía eléctrica y la transforma casi por completo en
-        <strong>calor</strong>. La electrónica de silicio no falla por voltaje: falla por
-        <strong>temperatura</strong>. Comprender la termodinámica aplicada permite analizar y resolver
+        Todo componente electrónico consume energía eléctrica y parte de ella se transforma en
+        <strong>calor</strong>. Comprender la termodinámica aplicada permite analizar y resolver
         cualquier caso de sobrecalentamiento en lugar de aplicar soluciones intuitivas que no
         corresponden a la causa.
       </p>
 
       <article class="sub" id="s2-1">
-        <h3>2.1 TDP, Tjunction y Tmax</h3>
+        <h3>2.1 TDP y Tmax</h3>
 
         <div class="term">
           <dl class="term__row">
@@ -1818,15 +1532,7 @@ textarea.ans.is-filled { border-color: var(--ok); }
               es la referencia para dimensionar el disipador.
             </dd>
           </dl>
-          <dl class="term__row">
-            <dt>Tjunction / T<sub>j</sub></dt>
-            <dd>
-              Temperatura de la <strong>unión (junction) del silicio</strong>, es decir, del propio
-              transistor dentro del encapsulado. Es la temperatura que realmente importa y la que los
-              sensores internos (DTS, <em>Digital Thermal Sensor</em>) reportan. Nunca es igual a la
-              temperatura del ambiente ni a la de la superficie del disipador.
-            </dd>
-          </dl>
+        
           <dl class="term__row">
             <dt>T<sub>jmax</sub> / Tmax</dt>
             <dd>
@@ -1836,22 +1542,7 @@ textarea.ans.is-filled { border-color: var(--ok); }
               105–125 °C.
             </dd>
           </dl>
-          <dl class="term__row">
-            <dt>T<sub>case</sub> (T<sub>c</sub>)</dt>
-            <dd>Temperatura de la <strong>superficie del encapsulado</strong> (el IHS metálico de la CPU o el reflejo en la GPU). Es medible con termocupla o cámara térmica. Es mayor que la del disipador y mucho menor que la T<sub>j</sub>.</dd>
-          </dl>
-          <dl class="term__row">
-            <dt>T<sub>amb</sub> (temperatura ambiente / del aire)</dt>
-            <dd>Temperatura del aire que entra al sistema. Es el <strong>piso absoluto</strong>: ningún disipador puede bajar de la temperatura ambiente a menos que use refrigeración activa por cambio de fase o criogénica. Subir 5 °C la temperatura del aula eleva 5 °C todas las temperaturas internas.</dd>
-          </dl>
-          <dl class="term__row">
-            <dt>T<sub>sensor</sub> / temperatura reportada</dt>
-            <dd>Lectura del programa o la BIOS. Suele ser la T<sub>j</sub> o un punto cercano dentro del die. En GPU se distinguen <strong>temperatura de núcleo (core)</strong> y <strong>hotspot / junction</strong>: el hotspot es el sensor más caliente y es el que gobierna el throttling; suele estar 10–20 °C por encima del promedio.</dd>
-          </dl>
-          <dl class="term__row">
-            <dt>Curva de potencia (PL1 / PL2 / PPT / PBO)</dt>
-            <dd>Límites de potencia sostenida (PL1) y de pico (PL2) que el firmware puede ajustar. Una CPU con PL2 alto disipará más watts en ráfagas cortas que lo que indica su TDP nominal: el disipador debe dimensionarse por el pico, no por el valor nominal.</dd>
-          </dl>
+        
         </div>
 
         <h4>Tabla 2.1 · Valores térmicos de referencia</h4>
@@ -1863,8 +1554,7 @@ textarea.ans.is-filled { border-color: var(--ok); }
                 <th>Componente</th>
                 <th>TDP típico</th>
                 <th>T<sub>jmax</sub> / límite</th>
-                <th>Temperatura recomendada de trabajo</th>
-                <th>Sensor de referencia</th>
+          
               </tr>
             </thead>
             <tbody>
@@ -1872,57 +1562,49 @@ textarea.ans.is-filled { border-color: var(--ok); }
                 <td>CPU de escritorio (6–8 núcleos)</td>
                 <td>65–125 W (picos mayores con turbo)</td>
                 <td>95–105 °C</td>
-                <td>Idle 30–45 °C · Carga 60–85 °C</td>
-                <td>T<sub>j</sub> (DTS)</td>
+           
               </tr>
               <tr>
                 <td>CPU de alto rendimiento / HEDT</td>
                 <td>180–280 W (PL2 más alto)</td>
                 <td>95–115 °C</td>
-                <td>Idle 35–50 °C · Carga 70–90 °C</td>
-                <td>T<sub>j</sub> (DTS)</td>
+           
               </tr>
               <tr>
                 <td>GPU de escritorio</td>
                 <td>75–450 W</td>
-                <td>83–95 °C (hotspot)</td>
-                <td>Core 55–80 °C · Hotspot &lt; 95 °C</td>
-                <td>Core + hotspot/junction + memoria</td>
+                <td>83–95 °C </td>
+            
               </tr>
               <tr>
                 <td>SSD NVMe M.2</td>
                 <td>3–15 W (picos 20 W)</td>
                 <td>70–85 °C (según modelo)</td>
-                <td>30–65 °C sostenido</td>
-                <td>Controlador / NAND</td>
+          
               </tr>
               <tr>
                 <td>VRM (fases de alimentación)</td>
                 <td>10–40 W disipados</td>
                 <td>105–125 °C</td>
-                <td>&lt; 90 °C con disipador</td>
-                <td>Sensor de la placa / termocupla</td>
+           
               </tr>
               <tr>
                 <td>Memorias DDR4/DDR5 con overclock</td>
                 <td>3–10 W por módulo</td>
                 <td>85–95 °C (módulo)</td>
-                <td>&lt; 60 °C, y más bajas en DDR5 (inestabilidad a alta temperatura)</td>
-                <td>Sensor del módulo (SPD/TS) si existe</td>
+           
               </tr>
               <tr>
                 <td>Chipset (PCH / chipset secundario)</td>
                 <td>4–15 W</td>
                 <td>~100 °C</td>
-                <td>40–70 °C</td>
-                <td>Sensor del chipset</td>
+             
               </tr>
               <tr>
                 <td>Notebook (CPU/GPU móvil)</td>
                 <td>15–65 W compartidos</td>
                 <td>95–105 °C</td>
-                <td>Carga sostenida 75–95 °C (es esperable que sea alta)</td>
-                <td>T<sub>j</sub> + límites del firmware del OEM</td>
+             
               </tr>
             </tbody>
           </table>
@@ -1949,358 +1631,26 @@ textarea.ans.is-filled { border-color: var(--ok); }
           diagnosticar por qué un equipo "va lento" sin ningún error visible.
         </p>
 
-        <figure class="diagram">
-          <div class="diagram__head"><b>Diagrama 2.1 · Escalera de protección térmica</b><span>secuencia automática del firmware</span></div>
-          <div class="diagram__body"><pre class="ascii">  T (junction)   ESTADO DEL SISTEMA                      RESPUESTA AUTOMÁTICA
- ────────────────────────────────────────────────────────────────────────────────
-  Ambiente (~25°C)  Reposo                    Todo nominal. Ventiladores en curva mínima.
-
-  ~50–70 °C         Carga normal               Control de ventilación sube RPM según curva.
-
-  Tj  =  T_throttle  ▓▓▓ ENTRADA A THROTTLING  1) Baja el multiplicador / frecuencia
-  (típ. 5–10 °C     ▓▓▓  "Thermal Throttle"    2) Baja el voltaje (V/f curve)
-   antes del máximo) ▓▓▓                        3) Ventiladores al 100 % (override)
-                                                 → El rendimiento cae de forma escalonada
-
-  Tj  =  T_shutdown  ■■■ APAGADO DE EMERGENCIA  1) Se corta la alimentación de la CPU/GPU
-  (Tjmax)           ■■■  Thermal Shutdown      2) El sistema se apaga o reinicia
-                                               3) Evento registrado en el log de la BIOS
- ────────────────────────────────────────────────────────────────────────────────
-
-  En GPU: primero baja el reloj (boosting), después el límite de potencia,
-  y luego el Thermal Shutdown del núcleo (protección del die y de las memorias).
-
-  En SSD NVMe: primero se limita la velocidad de escritura; con daño
-  prolongado puede perder datos, no apagarse.
-
-  Consecuencia práctica: un equipo que "se apaga solo en los juegos" casi siempre
-  tiene un problema de contacto térmico o de flujo de aire, NO un problema
-  de la fuente. Y un equipo lento sin apagarse suele estar throttling.</pre></div>
-          <figcaption>Escalera de protección térmica aplicada a CPU, GPU y SSD.</figcaption>
-        </figure>
+      
 
         <h4>Throttling (limitación térmica)</h4>
         <ul>
-          <li><strong>Qué es:</strong> el firmware reduce el reloj y el voltaje del componente para bajar la generación de calor. Es una protección <em>activa y automática</em>, no una falla.</li>
-          <li><strong>Cómo se manifiesta:</strong> caída de FPS estable tras unos minutos de juego, "tirones" periódicos, renderizados que tardan más tiempo, fans a máxima velocidad sin mejoría.</li>
-          <li><strong>Cómo se confirma:</strong> monitorizar la frecuencia y la temperatura simultáneamente. Si la temperatura está en el límite <em>y</em> la frecuencia baja del valor nominal → throttling confirmado. Corresponde revisar contacto térmico (TIM), presión de montaje, polvo en el disipador o curva de ventilador.</li>
-          <li><strong>Capas adicionales:</strong> <em>current throttling</em> (límite de corriente), <em>power throttling</em> (límite de potencia) y <em>prochot</em> (señal externa de limitación). En notebooks son tan importantes como el límite térmico: limitan el rendimiento antes de llegar a temperatura crítica.</li>
-        </ul>
+          <li><strong>Qué es:</strong> el sistema reduce el la frecuencia y/o voltaje del componente para bajar la generación de calor. Es una protección <em>activa y automática</em>, no una falla.</li>
+          <li><strong>Cómo se manifiesta:</strong> caída de FPS (fotogramas por segundo) estable tras unos minutos de juego, "tirones" periódicos, renderizados que tardan más tiempo, fans a máxima velocidad sin mejoría.</li>
+         </ul>
 
         <h4>Thermal Shutdown (apagado térmico)</h4>
         <ul>
           <li><strong>Qué es:</strong> corte duro de la alimentación cuando el sensor supera T<sub>jmax</sub>. Es la última barrera. Se activa cuando el throttling ya resultó insuficiente o cuando el sensor de temperatura falla.</li>
           <li><strong>Qué NO es:</strong> no es una falla de software ni un apagado normal. Un apagado sin mensaje y sin eventos en el sistema operativo es una <strong>señal de alarma térmica o eléctrica</strong>.</li>
-          <li><strong>Diagnóstico:</strong> revisar la temperatura en la BIOS antes de cargar el SO; revisar el log de eventos de la BIOS (muchas placas guardan "CPU Over Temperature Error"); revisar que el disipador haga contacto real y que no haya pasta seca.</li>
           <li><strong>Otras protecciones relacionadas:</strong> OCP (protección por sobrecorriente) y OVP (por sobrevoltaje) de la fuente; OTP (por temperatura) de la fuente. Un apagado por OTP de la fuente se confunde frecuentemente con apagado térmico del CPU, porque la fuente está arriba en los chasis legacy y se calienta con el aire del gabinete.</li>
         </ul>
 
-        <h4>Tabla 2.2 · Síntomas, causa probable y acción de taller</h4>
-        <div class="table-wrap">
-          <table>
-            <caption>Guía de diagnóstico térmico: de la observación a la intervención.</caption>
-            <thead>
-              <tr>
-                <th>Síntoma observado</th>
-                <th>Causa térmica probable</th>
-                <th>Verificación</th>
-                <th>Acción correctiva</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Temperatura alta en reposo (70 °C+)</td>
-                <td>Contacto térmico sin presión o pasta seca; disipador mal anclado; bomba AIO detenida</td>
-                <td>Tocar el disipador: tibio con T<sub>j</sub> alta = no hay transferencia; un radiador frío con bomba supuestamente activa indica bomba caída</td>
-                <td>Desmontar, limpiar y reaplicar TIM; verificar clips/tornillos y presión de la bomba</td>
-              </tr>
-              <tr>
-                <td>Fans al 100 % permanentemente</td>
-                <td>Curva mal configurada; sensor reportando temperatura falsa; disipador insuficiente para el TDP</td>
-                <td>Comparar temperatura reportada con termómetro externo o cámara térmica</td>
-                <td>Reconfigurar curva en BIOS; actualizar BIOS; escalar el disipador</td>
-              </tr>
-              <tr>
-                <td>Apagados sin mensaje en carga</td>
-                <td>Thermal shutdown del CPU, OTP de la fuente o VRM al límite</td>
-                <td>Log de la BIOS + monitoreo continuo de temperaturas</td>
-                <td>Corregir contacto térmico, mejorar flujo de aire, revisar fuente y su ventilador</td>
-              </tr>
-              <tr>
-                <td>Apagados en reposo o al arrancar</td>
-                <td>Más probable causa eléctrica (fuente, cortocircuito, standoff mal puesto) que térmica</td>
-                <td>Medir voltajes, revisar montaje</td>
-                <td>Revisar montaje y fuente; no atribuir automáticamente al calor</td>
-              </tr>
-              <tr>
-                <td>Rendimiento que cae tras 5–15 min de uso intenso</td>
-                <td>Throttling térmico sostenido</td>
-                <td>Registrar frecuencia + T<sub>j</sub> con software de monitoreo</td>
-                <td>Limpieza, recambio de TIM, revisión de curva y de presión de aire</td>
-              </tr>
-              <tr>
-                <td>Throttling con temperaturas normales</td>
-                <td>Límite de potencia (PL) o de corriente, no térmico</td>
-                <td>Observar la causa reportada por el software (<em>thermal</em>, <em>power</em>, <em>current</em>)</td>
-                <td>Ajustar límites del firmware o mejorar la entrega de energía (VRM, fuente)</td>
-              </tr>
-              <tr>
-                <td>Olor a plástico caliente o a quemado</td>
-                <td>Sobrecalentamiento de VRM, conectores de alimentación o cables subdimensionados</td>
-                <td>Inspección visual y térmica en la zona del conector</td>
-                <td>DETENER el uso. Reemplazar el conector o el cable. Verificar contactos flojos: son la causa de puntos calientes</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        
       </article>
 
-      <article class="sub" id="s2-3">
-        <h3>2.3 Cálculo térmico: resistencia térmica y dimensionado</h3>
-
-        <p>
-          La transferencia de calor puede modelarse con la <strong>ley de Ohm térmica</strong>. Es el
-          cálculo central de la sesión: permite decidir si un disipador alcanza, estimar la temperatura
-          final y explicar por qué el mismo componente se comporta distinto en dos equipos.
-        </p>
-
-        <figure class="diagram">
-          <div class="diagram__head"><b>Diagrama 2.2 · Analogía térmica ↔ eléctrica</b><span>modelo de resistencia térmica</span></div>
-          <div class="diagram__body"><pre class="ascii">   ELÉCTRICO                              TÉRMICO
- ────────────────────────────         ────────────────────────────────
-  V  (voltios, potencial)              ΔT (diferencia de temperatura, °C)
-  I  (corriente, amperios)             P  (potencia disipada, W)
-  R  (resistencia, Ω)                  Rθ (resistencia térmica, °C/W)
-
-        Ley de Ohm:  V = I × R       ⟺      ΔT = P × Rθ
-
- ┌──────────────────────── CADENA DE RESISTENCIAS TÉRMICAS ────────────────────────┐
- │                                                                                 │
- │  [JUNCTION del silicio]  ── Rθ(juntura-a-case) ──► [IHS / case]                 │
- │  Tj = 85 °C                                         Tc = 60 °C                  │
- │        (interno, incluye TIM interno del fabricante)                            │
- │                                                                                 │
- │  [IHS / case] ── Rθ(TIM externo/pasta) ──► [base del disipador]                 │
- │  Tc = 60 °C                                Tb = 55 °C                           │
- │        (la interfaz que aplica el técnico: ES LA VARIABLE DE CONTROL)           │
- │                                                                                 │
- │  [base del disipador] ── Rθ(disipador-a-aire) ──► [AIRE]                        │
- │  Tb = 55 °C                                        Ta = 25 °C                   │
- │        (calidad del bloque, heatpipes, aletas, caudal de ventilador)             │
- │                                                                                 │
- │  Tj = Ta + P × (Rθ_jc + Rθ_TIM + Rθ_sa)                                         │
- └─────────────────────────────────────────────────────────────────────────────────┘
-  Total Rθ típico de una CPU de escritorio bien refrigerada: 0,15 a 0,35 °C/W
-  De ese total, el TIM externo debería aportar sólo 0,02–0,06 °C/W.</pre></div>
-          <figcaption>Cadena de resistencias térmicas desde la unión del silicio hasta el aire ambiente.</figcaption>
-        </figure>
-
-        <h4>Formulario de cálculo</h4>
-        <pre class="code">Tj  = Ta + P · Rθ            Temperatura de juntura estimada
-P   = (Tj − Ta) / Rθ          Potencia máxima disipable a esa temperatura
-Rθ  = (Tj − Ta) / P           Resistencia térmica del conjunto requerida
-
-Rθ_total = Rθ_jc + Rθ_TIM + Rθ_sa     (juntura→case, case→disipador, disipador→aire)
-
-Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
-  Margen disponible: ΔT = 100 − 25 = 75 °C
-  Rθ_total necesaria = 75 °C / 95 W = 0,79 °C/W
-  Si el disipador aporta 0,55 y el TIM 0,04 y la juntura 0,10 → 0,69 °C/W  ✔ ALCANZA
-  Tj esperada = 25 + 95 × 0,69 = 90,6 °C  (margen de ~9 °C: ajustado pero válido)
-  El mismo equipo en un gabinete a 35 °C ambiente → Tj = 100,6 °C  ✘ THROTTLING</pre>
-
-        <div class="note">
-          <span class="note__title">Ejercicio resuelto I — el aire del gabinete importa</span>
-          <p>
-            Un CPU disipa 125 W y su conjunto disipador + TIM presenta Rθ_efectiva de 0,26 °C/W
-            (0,10 de juntura + 0,03 de pasta + 0,13 de disipador a aire). Calcule la T<sub>j</sub> con
-            temperatura ambiente <strong>a)</strong> de 22 °C y <strong>b)</strong> de 38 °C (aula sin
-            aire acondicionado).
-          </p>
-          <p>
-            <strong>a)</strong> T<sub>j</sub> = 22 + 125 × 0,26 = <strong>54,5 °C</strong>.
-            <strong>b)</strong> T<sub>j</sub> = 38 + 125 × 0,26 = <strong>70,5 °C</strong>.
-          </p>
-          <p>
-            La misma máquina, con los mismos componentes, sube <strong>16 °C</strong> solo por la
-            temperatura del aula. De ahí la importancia didáctica de medir y registrar la temperatura
-            ambiente junto con la del componente: sin ese dato, cualquier comparación de temperaturas
-            entre equipos carece de valor.
-          </p>
-        </div>
-
-        <div class="lab">
-          <span class="lab__title">Actividad de cálculo en taller</span>
-          <p>
-            Complete la tabla con el CPU del equipo que está interviniendo, usando software de monitoreo
-            para obtener P (potencia), T<sub>j</sub> (temperatura máxima en carga) y una medición de
-            T<sub>amb</sub> con termómetro de ambiente. Luego calcule Rθ y compárela con los valores
-            de referencia de la Tabla 2.3.
-          </p>
-        </div>
-
-        <h4>Tabla 2.3 · Valores de Rθ de referencia</h4>
-        <div class="table-wrap">
-          <table>
-            <caption>Resistencia térmica orientativa según tipo de solución de refrigeración.</caption>
-            <thead>
-              <tr>
-                <th>Solución</th>
-                <th>Rθ disipador→aire (aprox.)</th>
-                <th>Potencia que maneja cómodamente</th>
-                <th>Observación</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Disipador stock de bajo perfil</td><td>0,45–0,70 °C/W</td><td>hasta 65 W</td><td>Se satura rápido; sensible al polvo</td></tr>
-              <tr><td>Torre simple 120 mm (4 heatpipes)</td><td>0,18–0,28 °C/W</td><td>95–150 W</td><td>Mejor relación precio/rendimiento</td></tr>
-              <tr><td>Torre doble 120/140 mm (6–7 heatpipes)</td><td>0,10–0,17 °C/W</td><td>150–250 W</td><td>Requiere gabinete con buen flujo de aire</td></tr>
-              <tr><td>AIO 240/280 mm</td><td>0,08–0,15 °C/W</td><td>150–250 W</td><td>Depende del montaje y de la temperatura del aire de entrada del radiador</td></tr>
-              <tr><td>AIO 360/420 mm</td><td>0,06–0,11 °C/W</td><td>200–350 W</td><td>El límite pasa a ser la superficie de contacto del die (IHS)</td></tr>
-              <tr><td>Custom loop (radiador múltiple)</td><td>0,04–0,09 °C/W</td><td>300 W+</td><td>Mantenimiento periódico obligatorio</td></tr>
-              <tr><td>Notebook — disipador + turbina</td><td>0,35–0,80 °C/W</td><td>15–65 W compartidos</td><td>Comparte heatpipes entre CPU y GPU: la carga se suma</td></tr>
-              <tr><td>GPU con 2–3 ventiladores</td><td>0,25–0,45 °C/W</td><td>150–350 W</td><td>El hotspot manda; las memorias pueden ser el limitante</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="tip">
-          <span class="tip__title">Interpretación de resultados</span>
-          <ul>
-            <li>Si Rθ calculada es <strong>mucho peor</strong> que la de la tabla para ese tipo de disipador (por ejemplo 0,6 °C/W en una torre de 6 heatpipes), el problema <strong>no es el disipador</strong>: es el contacto térmico, el flujo de aire o la presión de montaje.</li>
-            <li>Si Rθ es coherente pero T<sub>j</sub> sigue alta, la causa es la <strong>temperatura ambiente</strong> (aire de entrada) o la <strong>potencia real</strong> (PL2/turbo superando el TDP nominal).</li>
-            <li>El TIM externo rara vez es el factor dominante (aporta 0,02–0,06 °C/W), pero un TIM inexistente, seco o con una burbuja de aire puede aportar <strong>0,3–1,0 °C/W</strong>: por eso un cambio de pasta puede bajar 20 °C cuando el contacto estaba realmente mal.</li>
-          </ul>
-        </div>
-      </article>
-      <article class="sub" id="s2-4">
-        <h3>2.4 Consecuencias del sobrecalentamiento: qué se daña y por qué</h3>
-
-        <p>
-          El calor no "quema" el silicio de manera instantánea salvo en casos extremos. Su acción es
-          <strong>acumulativa y silenciosa</strong>: acelera mecanismos físicos de degradación que
-          reducen la vida útil del componente, primero de forma reversible (rendimiento) y luego
-          irreversible (falla permanente).
-        </p>
-
-        <h4>Electromigración</h4>
-        <p>
-          Es el <strong>transporte de átomos metálicos</strong> del conductor por el impacto de los
-          electrones en movimiento. Con alta densidad de corriente y alta temperatura, los átomos de
-          cobre o aluminio de las pistas y vías internas del chip <em>migran</em> desde su lugar y
-          aparecen huecos (vacíos) y engrosamientos. Resultado: aumenta la resistencia eléctrica,
-          aparecen fallas intermitentes, aumenta aún más la temperatura local (círculo vicioso) y,
-          finalmente, <strong>la pista se corta</strong> y el componente muere. La electromigración
-          es exponencial con la temperatura: según la ley de Arrhenius, cada 10 °C de aumento puede
-          <strong>duplicar</strong> aproximadamente la velocidad de degradación.
-        </p>
-
-        <h4>Degradación del silicio y del encapsulado</h4>
-        <ul>
-          <li><strong>Estrés térmico y fatiga mecánica:</strong> los ciclos de encendido/enfriamiento hacen que materiales con distinto coeficiente de expansión (silicio, soldadura, IHS de cobre niquelado, PCB de resina) se dilaten y contraigan a distinto ritmo. Aparecen microfisuras en las uniones y <em>delaminación</em> entre el die y el IHS.</li>
-          <li><strong>Soldadura de la unión (solder / TIM interno):</strong> en CPU modernas el die está unido al IHS con soldadura o TIM interno. El calor extremo degrada esa capa y aumenta la Rθ_jc de forma permanente: la CPU "de fábrica" empieza a calentar más y ya no hay pasta externa que lo resuelva.</li>
-          <li><strong>Efectos de los transistores:</strong> la temperatura sube la corriente de fuga, lo que sube el consumo, lo que sube la temperatura. Es una realimentación positiva que hace que el punto de equilibrio térmico se desplace.</li>
-          <li><strong>Llama "silicon degradation" o "degradación por voltaje+temperatura":</strong> combinación de alto voltaje y alta temperatura que acorta la vida del transistor y obliga a subir voltaje para mantener la frecuencia, con lo que el proceso se acelera.</li>
-        </ul>
-
-        <h4>Fallas en condensadores y VRMs</h4>
-        <ul>
-          <li><strong>Condensadores electrolíticos (legacy):</strong> el calor evapora el electrolito. El condensador se hincha y revienta ("estallido"), o simplemente pierde capacidad y aparece ruido en la alimentación. Es la falla histórica de las placas madres de los años 2000, hoy menos frecuente por el uso de condensadores sólidos de polímero, más resistentes pero no inmunes.</li>
-          <li><strong>Condensadores sólidos / de polímero:</strong> toleran mejor el calor pero reducen su vida útil de forma exponencial con la temperatura (regla empírica: por cada 10 °C menos, la vida útil se duplica).</li>
-          <li><strong>VRM (regulador de voltaje):</strong> es el subsistema más castigado porque trabaja convertiendo voltaje y disipando calor, a menudo sin disipador. Sus MOSFETs tienen una resistencia de canal (R<sub>DS(on)</sub>) que <strong>sube con la temperatura</strong>, y a mayor resistencia, mayor pérdida en forma de calor: la misma realimentación. A 100–125 °C los VRM degradan su capacidad de respuesta y la placa entrega voltajes inestables.</li>
-          <li><strong>Bobinados y chokes:</strong> a alta temperatura el barniz aislante se deteriora y aparece el típico "silbido" (<em>coil whine</em>) o cortocircuitos entre espiras.</li>
-        </ul>
-
-        <h4>BSODs, inestabilidad y errores lógicos</h4>
-        <p>
-          Antes de dañarse físicamente, el sistema falla de forma lógica porque el silicio, a temperatura
-          elevada, <strong>no cumple la temporización (timing) para la que fue diseñado</strong>. Los
-          caminos críticos se vuelven más lentos y las operaciones se completan fuera de tiempo.
-        </p>
-        <ul>
-          <li><strong>Pantallas azules (BSOD) irregulares:</strong> errores de memoria, de instrucción ilegal, de acceso a memoria no válida, sin un patrón reproducible y sin relación con el software que se ejecuta.</li>
-          <li><strong>Errores de memoria en pruebas de estrés:</strong> un módulo RAM caliente produce corrupciones que desaparecen cuando el equipo se enfría. Idéntico comportamiento se ve en GPU al corromper texturas o mostrar artefactos.</li>
-          <li><strong>Corrupción de datos:</strong> escrituras a disco o a la memoria no confirmadas que terminan en archivos dañados, y (en casos extremos) pérdida de datos por apagados abruptos durante operaciones de escritura.</li>
-          <li><strong>Reinicios silenciosos:</strong> el equipo se reinicia y no genera ningún <em>dump</em> de memoria porque no hay un "error del sistema operativo": hay un corte térmico o eléctrico. El diagnóstico se hace en el log de la BIOS, no en Windows/Linux.</li>
-        </ul>
-
-        <div class="table-wrap">
-          <table>
-            <caption>Mecanismos de degradación y su relación con la temperatura.</caption>
-            <thead>
-              <tr>
-                <th>Mecanismo</th>
-                <th>Qué daña</th>
-                <th>Reversibilidad</th>
-                <th>Signos tempranos</th>
-                <th>Prevención que lo evita</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Electromigración</td>
-                <td>Pistas y vías internas del die</td>
-                <td>Irreversible</td>
-                <td>Fallas intermitentes, mayor voltaje necesario</td>
-                <td>Mantener T<sub>j</sub> por debajo del 80 % del T<sub>jmax</sub> y no abusar del voltaje</td>
-              </tr>
-              <tr>
-                <td>Fatiga térmica (dilatación diferencial)</td>
-                <td>Soldaduras, unión die–IHS, PCB (microfisuras, <em>BGA cold joints</em>)</td>
-                <td>Irreversible</td>
-                <td>Equipo que funciona y luego deja de funcionar al calentarse</td>
-                <td>Evitar ciclos térmicos extremos; evitar apagados duros reiterados</td>
-              </tr>
-              <tr>
-                <td>Degradación del TIM interno</td>
-                <td>Capa die–IHS de la CPU/GPU</td>
-                <td>Parcialmente reversible (reballing/delid, técnicamente avanzado)</td>
-                <td>Temperatura en reposo que sube con el tiempo sin causa externa</td>
-                <td>Refrigeración adecuada sostenida en el tiempo</td>
-              </tr>
-              <tr>
-                <td>Electrolito / polímero</td>
-                <td>Condensadores</td>
-                <td>Irreversible (se reemplaza el condensador)</td>
-                <td>Tapa hinchada, fuga marrón, inestabilidad del sistema</td>
-                <td>Ventilación interna, no bloquear el flujo sobre el VRM</td>
-              </tr>
-              <tr>
-                <td>Degradación del R<sub>DS(on)</sub> y conducción</td>
-                <td>MOSFET del VRM</td>
-                <td>Irreversible</td>
-                <td>Calor en la zona del zócalo, inestabilidad con overclock</td>
-                <td>Disipador de VRM limpio y en contacto; buen flujo de aire sobre la placa</td>
-              </tr>
-              <tr>
-                <td>Aislamiento y soldadura de chokes</td>
-                <td>Bobinados, terminales</td>
-                <td>Irreversible</td>
-                <td>Zumbido eléctrico, olor, inestabilidad</td>
-                <td>No exceder la potencia de la placa; revisar conectores de alimentación</td>
-              </tr>
-              <tr>
-                <td>Degradación de la NAND y del controlador</td>
-                <td>SSD (M.2 y SATA)</td>
-                <td>Irreversible (pérdida de datos)</td>
-                <td>Throttling de escritura, SMART con errores, caídas de velocidad</td>
-                <td>Heatsink M.2, roce de aire directo sobre el módulo, respaldo de datos</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="danger">
-          <span class="danger__title">Síntesis: por qué el calor es el enemigo más costoso</span>
-          <p>
-            El sobrecalentamiento <strong>no suele destruir de inmediato</strong>: degrada. Un equipo que
-            trabaja 10 °C por encima de lo debido puede funcionar años con rendimiento reducido y fallar
-            antes de tiempo, sin que su dueño pueda asociar la falla a la causa real. Ese es el
-            fundamento de todo el mantenimiento preventivo que se describe en la sección 5: mantener el
-            sistema dentro de su ventana térmica es el mantenimiento más rentable que existe.
-          </p>
-        </div>
-      </article>
+   
+      
     </section>
     <!-- ============================================================
          SECCIÓN 3 — INTERFACES DE TRANSFERENCIA TÉRMICA (TIM)
@@ -2314,6 +1664,9 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
         calor. Aunque parece un detalle menor, es el punto donde el técnico tiene el mayor control sobre
         el resultado final y donde se cometen más errores.
       </p>
+<p>Estas interfaces tienen la tarea de facilitar la transferencia de calor del componente,
+   sea CPU, GPU, chips, etc al elemento que estará en contacto (disipador) que cumplirá 
+   la tarea de reducir la temperatura del componente. </p>
 
       <article class="sub" id="s3-1">
         <h3>3.1 Función microfísica: por qué hace falta un TIM</h3>
@@ -2321,62 +1674,21 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
         <p>
           Una superficie de cobre o aluminio, aunque parezca espejo, es microscópicamente
           <strong>rugosa</strong>. Al apoyar el disipador sobre el IHS de la CPU, el contacto real ocurre
-          sólo en los picos de las irregularidades: entre el 5 % y el 20 % de la superficie nominal.
+          sólo en los picos de las irregularidades: entre el 5 % y el 20 % de la superficie.
           El resto queda ocupado por <strong>microcámaras de aire</strong>.
         </p>
 
-        <figure class="diagram">
-          <div class="diagram__head"><b>Diagrama 3.1 · Contacto microscópico SIN y CON TIM</b><span>vista ampliada</span></div>
-          <div class="diagram__body"><pre class="ascii">  SIN TIM  (superficies "planas" apoyadas)          CON TIM  (material rellena huecos)
- ┌───────────────────────────────────────┐    ┌───────────────────────────────────────┐
- │  DISIPADOR (cobre/aluminio)           │    │  DISIPADOR                            │
- │  ▄▄▄ ▄▄▄ ▄▄▄ ▄▄▄ ▄▄▄ ▄▄▄ ▄▄▄ ▄▄▄      │    │  ▄▄▄ ▄▄▄ ▄▄▄ ▄▄▄ ▄▄▄ ▄▄▄ ▄▄▄ ▄▄▄      │
- │   ^   ^   ^   ^   ^   ^   ^   ^       │    │  █████████████████████████████████    │ ← pasta
- │   │aire│aire│aire│aire│aire│aire│     │    │  █████████████████████████████████    │   fluida
- │   v   v   v   v   v   v   v   v       │    │  █████████████████████████████████    │   rellena
- │  ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀      │    │  ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀      │
- │  IHS de la CPU                        │    │  IHS de la CPU                        │
- └───────────────────────────────────────┘    └───────────────────────────────────────┘
-   Contacto real: 5–20 %                       Contacto efectivo: 90–100 %
-   Conductividad efectiva: ~0,03 W/m·K          Conductividad efectiva: 1–70 W/m·K
-   (el aire es un EXCELENTE AISLANTE)          (la pasta "moja" las asperezas)
-
-  ┌───────────────────────────────────────────────────────────────────────────────┐
-  │ El aire tiene una conductividad térmica de ~0,026 W/m·K: es de los peores    │
-  │ conductores que existen. Un TIM de 8 W/m·K es ~300 veces mejor que el aire.   │
-  │ La función del TIM NO es "enfriar": es ELIMINAR las bolsas de aire aislantes  │
-  │ y garantizar un camino continuo de conducción entre ambas superficies.        │
-  └───────────────────────────────────────────────────────────────────────────────┘</pre></div>
-          <figcaption>Comparación del contacto real entre superficies sin TIM y con TIM aplicado correctamente.</figcaption>
-        </figure>
+       
 
         <h4>La capa de TIM más fina posible es la mejor capa</h4>
         <p>
-          La resistencia térmica de una capa es proporcional a su espesor: <code>Rθ = L / (k · A)</code>,
-          donde <code>L</code> es el espesor, <code>k</code> la conductividad del material y
-          <code>A</code> el área de contacto. Por lo tanto, <strong>cuanto más fina la capa, mejor</strong>,
+          <strong>Cuanto más fina la capa, mejor</strong>,
           siempre que siga cubriendo la totalidad de la superficie y rellenando las asperezas. Lo que se
           necesita no es mucha pasta, sino <strong>contacto completo + espesor mínimo</strong>: el
           mejor TIM del mundo aplicado con una capa gruesa rinde peor que una pasta común aplicada fina.
         </p>
 
-        <div class="note">
-          <span class="note__title">Conceptos que el alumno debe manejar</span>
-          <div class="table-wrap">
-            <table>
-              <caption>Magnitudes y unidades de los TIM.</caption>
-              <thead><tr><th>Magnitud</th><th>Unidad</th><th>Qué significa</th><th>Valores típicos</th></tr></thead>
-              <tbody>
-                <tr><td>Conductividad térmica (k)</td><td>W/m·K</td><td>Capacidad del material de conducir calor</td><td>Aire 0,026 · Silicona 1–3 · Cerámica 3–8 · Metálica 5–12 · Metal líquido 20–73 · Cobre 401</td></tr>
-                <tr><td>Resistencia térmica de interfaz</td><td>°C·cm²/W</td><td>Lo que realmente aporta la capa al sistema</td><td>0,01–0,06 (bien aplicada) · 0,3–1,0 (mal contacto)</td></tr>
-                <tr><td>Viscosidad</td><td>relativa (pastosa / fluida)</td><td>Facilidad de extenderse y de rellenar huecos</td><td>PASTA densa: dura años; fluida: se extiende sola bajo presión</td></tr>
-                <tr><td><em>Pump-out</em></td><td>cualitativo</td><td>Expulsión de la pasta fuera de la zona caliente por los ciclos térmicos</td><td>Frecuente en pasta económica en GPUs y notebooks</td></tr>
-                <tr><td><em>Bleed / separación de aceite</em></td><td>cualitativo</td><td>La fase líquida de la pasta migra y deja una parte seca</td><td>Signo de TIM agotado: hay que reemplazarlo</td></tr>
-                <tr><td>Espesor (pads)</td><td>mm</td><td>Altura de la almohadilla, debe coincidir con la separación real</td><td>0,5 / 1,0 / 1,5 / 2,0 / 3,0 mm</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        
       </article>
 
       <article class="sub" id="s3-2">
@@ -2389,9 +1701,7 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
             <thead>
               <tr>
                 <th>Tipo</th>
-                <th>Composición</th>
-                <th>Conductividad (k)</th>
-                <th>Conductividad eléctrica</th>
+             
                 <th>Ventajas</th>
                 <th>Riesgos / desventajas</th>
                 <th>Uso recomendado</th>
@@ -2400,54 +1710,42 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
             <tbody>
               <tr>
                 <td><strong>Silicona / Óxido de Zinc</strong> (blanca)</td>
-                <td>Aceite de silicona + óxido de zinc</td>
-                <td>~0,7–1,5 W/m·K</td>
-                <td class="tag-no">No</td>
+              
                 <td>Barata, no conduce electricidad, estable, fácil de limpiar, ideal para práctica</td>
                 <td>Rendimiento bajo; se seca con los años; se bombea (<em>pump-out</em>) con los ciclos térmicos</td>
                 <td>Aula, equipos legacy, discos y chipsets, memorias, VRM. <strong>La opción segura para aprender</strong></td>
               </tr>
               <tr>
                 <td><strong>Cerámica</strong></td>
-                <td>Rellenos cerámicos (nitruro de aluminio, óxido de aluminio, nitruro de boro) en base siliconada</td>
-                <td>~3–8 W/m·K</td>
-                <td class="tag-no">No</td>
+              
                 <td>Buena conductividad, sin riesgo eléctrico, normalmente no curada (no electrifica la zona), durabilidad alta</td>
                 <td>Más densa y difícil de extender; puede secarse y endurecer; algo más costosa</td>
                 <td>CPU y GPU de uso general, notebooks, donde la seguridad eléctrica es prioritaria</td>
               </tr>
               <tr>
                 <td><strong>Metálica / con carbón</strong></td>
-                <td>Partículas de plata, aluminio, cobre o compuestos de carbón</td>
-                <td>~5–12 W/m·K</td>
-                <td class="tag-mid">Parcial: muchas son eléctricamente conductoras (plata, cobre)</td>
+             
                 <td>Muy buen rendimiento, larga vida útil, no se bombea fácilmente</td>
                 <td><strong>PELIGRO:</strong> si desborda sobre pines del zócalo, condensadores, pistas SMD o contactos de GPU, provoca cortocircuito y daño permanente. Difíciles de limpiar (algunas requieren alcohol isopropílico y mucha paciencia)</td>
                 <td>CPU/GPU de alto rendimiento por parte de técnicos con experiencia. <strong>No recomendada en práctica inicial ni en equipos con componentes expuestos</strong></td>
               </tr>
               <tr>
                 <td><strong>Metal líquido</strong><br>(galio: GaInSn)</td>
-                <td>Aleación de galio, indio y estaño (líquida a temperatura ambiente; NO contiene mercurio)</td>
-                <td>~20–73 W/m·K</td>
-                <td class="tag-no">Sí, <strong>conduce la electricidad</strong></td>
+             
                 <td>Conductividad térmica excepcional: puede bajar 5–15 °C respecto de una pasta de gama alta</td>
                 <td>1) <strong>CORROE EL ALUMINIO</strong> (forma amalgama y destruye el disipador).<br>2) Se derrama con facilidad y conduce: un derrame sobre el PCB arruina el componente.<br>3) Se "come" el estaño de la soldadura con el tiempo y puede teñir el cobre.<br>4) Requiere barreras de protección (pintura, esmalte) y aplicación experta.</td>
                 <td>Solo <strong>CPU con IHS de cobre/níquel</strong> y disipador con base de cobre, con aplicación profesional. <strong>Prohibido en clase y nunca sobre aluminio</strong></td>
               </tr>
               <tr>
                 <td><strong>Grafito / grafeno (pasta o pad)</strong></td>
-                <td>Lámina de grafito comprimido o pasta con grafeno</td>
-                <td>~5–20 W/m·K (plano)</td>
-                <td class="tag-no">No (aunque el grafito es conductor en el plano)</td>
+            
                 <td>No se bombea, durabilidad muy alta, no seca, es reutilizable en algunos formatos</td>
                 <td>La lámina es delicada (se rasga); en formato pasta es abrasiva</td>
                 <td>Notebooks y equipos que se desarman poco. Buena opción en mantenimiento preventivo a largo plazo</td>
               </tr>
               <tr>
                 <td><strong>TIM de cambio de fase / PTM</strong></td>
-                <td>Polímero con cambio de fase (tipo PTM7950): sólido en frío, fluido a ~45–60 °C</td>
-                <td>Efectiva ~5–8 W/m·K</td>
-                <td class="tag-no">No</td>
+            
                 <td>Rendimiento casi de metal líquido <strong>sin riesgos eléctricos</strong>; no se bombea; durabilidad excepcional</td>
                 <td>Más cara; requiere una primera etapa de "asentamiento" térmico; no se puede vender como genérica con calidad garantizada</td>
                 <td>Notebooks y GPU: la mejor opción cuando se interviene una sola vez y se desea durabilidad</td>
@@ -2483,7 +1781,7 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
         <div class="tip">
           <span class="tip__title">Aplicación correcta: cuánta pasta y cómo</span>
           <ul>
-            <li><strong>Cantidad:</strong> una "arveja" (grano de chícharo) en el centro del IHS rectangular, o una línea fina si el die es alargado (algunos CPU HEDT). En GPU, el die suele ser rectangular grande: se recomienda extender con espátula o tarjeta plástica en capa fina y uniforme.</li>
+            <li><strong>Cantidad:</strong> una "arveja" en el centro del IHS rectangular, o una línea fina si el die es alargado (algunos CPU HEDT). En GPU, el die suele ser rectangular grande: se recomienda extender con espátula o tarjeta plástica en capa fina y uniforme.</li>
             <li><strong>Métodos válidos:</strong> <em>método del punto</em> (la presión del disipador extiende la pasta sola), <em>línea</em> y <em>extendido con espátula</em>. Todos funcionan si la cantidad es la correcta.</li>
             <li><strong>No usar:</strong> dedos (grasa de la piel), cotonete con pelusa (deja fibras: son aislantes), cantidad excesiva (derrama lateral y aísla en lugar de conducir en los bordes del IHS) ni muy poca (quedan zonas sin cubrir).</li>
             <li><strong>Después de montar:</strong> atornillar en cruz (patrón X) y de a poco, para que la pasta se distribuya sin dejar burbujas. En el caso de AMD AM4/AM5, no levantar el disipador para "chequear": la pasta actúa como pegamento y puede extraer la CPU del zócalo (riesgo de doblar pines).</li>
@@ -2500,27 +1798,7 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
           <strong>espesor controlado</strong>.
         </p>
 
-        <figure class="diagram">
-          <div class="diagram__head"><b>Diagrama 3.2 · Cuándo usar cada interfaz según la separación</b><span>corte transversal</span></div>
-          <div class="diagram__body"><pre class="ascii">  SEPARACIÓN MUY PEQUEÑA (µm)      SEPARACIÓN MEDIA (0,3–1 mm)     SEPARACIÓN GRANDE (1–4 mm)
-  ───────────────────────────────   ───────────────────────────    ──────────────────────────
-  ██████████████ DISIPADOR          ██████████████ DISIPADOR        ██████████████ DISIPADOR
-   ──────────── pasta ─────────     ▓▓▓▓▓▓▓▓▓▓▓▓▓▓ THERMAL PAD      ~~~ THERMAL PUTTY ~~~
-  ██████████████ CHIP (die)         ██████████████ CHIP             ██████████████ CHIP
-
-  → CPU / GPU / chipset             → Memorias VRAM de GPU,        → VRAM y VRM de notebook,
-    (superficies casi planas)         VRM con disipador macizo,      chips con alturas distintas,
-    PASTA TÉRMICA                     SSD M.2 con heatsink           huecos irregulares
-    o lámina de metal líquido        PAD TÉRMICO (espesor exacto)   PUTTY (se adapta a todo)
-
- ┌───────────────────────────────────────────────────────────────────────────────────────┐
- │ REGLA DE ORO del espesor de pads: si se usa un pad MÁS GRUESO que la separación      │
- │ real, el chip no recibe presión y queda sin contacto (peor que nada). Si se usa uno   │
- │ MÁS FINO, no llega a tocar: no hay transferencia. El espesor debe ser EL EXACTO.      │
- │ Los fabricantes suelen usar medidas "raras" (1,25 mm; 1,75 mm) justamente por esto.    │
- └───────────────────────────────────────────────────────────────────────────────────────┘</pre></div>
-          <figcaption>Criterio de selección de interfaz según la separación entre chip y disipador.</figcaption>
-        </figure>
+       
 
         <h4>Tabla 3.2 · Alternativas a la pasta: características y uso</h4>
         <div class="table-wrap">
@@ -2556,7 +1834,7 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
               <tr>
                 <td><strong>Almohadilla de Grafeno</strong></td>
                 <td>Lámina de grafito laminado o film de grafeno</td>
-                <td>Muy alta en el plano (300–1500 W/m·K en el plano; baja en el eje Z)</td>
+                <td>Muy alta en el plano (300–1500 W/m·K)</td>
                 <td>CPU/GPU en el reemplazo de pads de VRAM, alternativas de larga duración en notebooks</td>
                 <td>Excelente conducción lateral, durabilidad enorme, no se bombea ni seca, no conduce electricidad (los films recubiertos)</td>
                 <td>Se rasga con facilidad; hay que respetar el sentido de la orientación (el grafito conduce mucho mejor en el plano que transversalmente); no reemplaza a un pad grueso en un hueco grande</td>
@@ -2647,14 +1925,14 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
     <section class="block" id="s4" aria-labelledby="s4-t">
       <h2 id="s4-t"><span class="num">4</span> Métodos y componentes de disipación</h2>
 
-      <p>
-        Existen tres mecanismos físicos de transferencia de calor y todos se aprovechan en una PC:
-        <strong>conducción</strong> (contacto directo entre sólidos: TIM, base del disipador),
-        <strong>convección</strong> (el aire o el líquido se llevan el calor: ventiladores, radiadores,
-        bombas) y <strong>radiación</strong> (emisión infrarroja: marginal dentro de un gabinete, pero
-        real en superficies oscuras calientes). La refrigeración práctica combina conducción y
-        convección.
-      </p>
+    
+      <ul>
+        <li>    <strong>Conducción</strong> (contacto directo entre sólidos: TIM, base del disipador)</li>
+        <li>   <strong>Convección</strong> (el aire o el líquido se llevan el calor: ventiladores, radiadores,
+        bombas).</li>
+        <li> La refrigeración práctica combina conducción y
+        convección.</li>
+      </ul>
 
       <article class="sub" id="s4-1">
         <h3>4.1 Refrigeración pasiva vs. activa</h3>
@@ -2714,20 +1992,20 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
                 <th>Componente</th>
                 <th>Elemento de disipación típico</th>
                 <th>Interfaz térmica involucrada</th>
-                <th>Consecuencia si falla</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>CPU</td><td>Disipador por aire (torre/bloque) o waterblock de AIO/custom loop</td><td>Pasta o metal líquido sobre el IHS; a veces delid (contacto directo al die)</td><td>Throttling inmediato, apagados, degradación a largo plazo</td></tr>
-              <tr><td>GPU (die)</td><td>Disipador multi-heatpipe + 2–3 ventiladores, waterblock</td><td>Pasta o PTM sobre el die</td><td>Artefactos, caída de FPS, apagado</td></tr>
-              <tr><td>VRAM de la GPU</td><td>Placa frontal del disipador de la GPU (contacto en bloque)</td><td><strong>Thermal pads</strong> del espesor exacto</td><td>Errores de video, artefactos, falla de memoria permanente</td></tr>
-              <tr><td>VRM de GPU y de placa madre</td><td>Bloque de aletas macizo, a veces con su propio ventilador</td><td>Pads o putty</td><td>Inestabilidad, apagados, degradación de los MOSFET</td></tr>
-              <tr><td>Chipset (PCH)</td><td>Disipador pasivo pequeño (a veces con ventilador en placas antiguas)</td><td>Pasta o pad</td><td>Recalienta el entorno del zócalo; inestabilidad de dispositivos</td></tr>
-              <tr><td>SSD NVMe M.2</td><td>Placa metálica del disipador M.2 de la placa madre</td><td><strong>Thermal pad</strong> (a menudo el problema es que falta o está muy fino)</td><td>Throttling de escritura, caída de velocidad de hasta el 70 %, menor vida útil</td></tr>
-              <tr><td>Memorias DDR4/DDR5</td><td><em>Heatspreader</em> del módulo; en overclock, ventilador directo o waterblock</td><td>Pad o pasta entre chips y heatspreader (interna, del fabricante)</td><td>Errores de memoria a alta temperatura, inestabilidad en DDR5</td></tr>
-              <tr><td>Fuente (PSU)</td><td>Su propio ventilador interno + chasis como disipador</td><td>Pasta y pads internos (de fábrica)</td><td>Apagado por OTP; falla de componentes internos</td></tr>
-              <tr><td>Disco HDD 3,5"</td><td>El propio chasis del gabinete y el flujo de aire</td><td>Ninguna (no requiere)</td><td>Mayor tasa de error; se recomienda mantenerlo &lt; 45 °C</td></tr>
-              <tr><td>Notebook: CPU, GPU, VRM y VRAM</td><td>Heatpipes + aletas + turbina</td><td>Pasta/PTM en los dies y pads/putty en el resto</td><td>Throttling agresivo, ruido extremo, apagados</td></tr>
+              <tr><td>CPU</td><td>Disipador por aire (torre/bloque) o waterblock de AIO/custom loop</td><td>Pasta o metal líquido sobre el IHS; a veces delid (contacto directo al die)</td>
+                </tr>
+              <tr><td>GPU (die)</td><td>Disipador multi-heatpipe + 2–3 ventiladores, waterblock</td><td>Pasta o PTM sobre el die</td></tr>
+              <tr><td>VRAM de la GPU</td><td>Placa frontal del disipador de la GPU (contacto en bloque)</td><td><strong>Thermal pads</strong> del espesor exacto</td></tr>
+              <tr><td>VRM de GPU y de placa madre</td><td>Bloque de aletas macizo, a veces con su propio ventilador</td><td>Pads o putty</td></tr>
+              <tr><td>Chipset (PCH)</td><td>Disipador pasivo pequeño (a veces con ventilador en placas antiguas)</td><td>Pasta o pad</td></tr>
+              <tr><td>SSD NVMe M.2</td><td>Placa metálica del disipador M.2 de la placa madre</td><td><strong>Thermal pad</strong> (a menudo el problema es que falta o está muy fino)</td></tr>
+              <tr><td>Memorias DDR4/DDR5</td><td><em>Heatspreader</em> del módulo; en overclock, ventilador directo o waterblock</td><td>Pad o pasta entre chips y heatspreader (interna, del fabricante)</td></tr>
+              <tr><td>Fuente (PSU)</td><td>Su propio ventilador interno + chasis como disipador</td><td>Pasta y pads internos (de fábrica)</td></tr>
+              <tr><td>Disco HDD 3,5"</td><td>El propio chasis del gabinete y el flujo de aire</td><td>Ninguna (no requiere)</td></tr>
+              <tr><td>Notebook: CPU, GPU, VRM y VRAM</td><td>Heatpipes + aletas + turbina</td><td>Pasta/PTM en los dies y pads/putty en el resto</td></tr>
             </tbody>
           </table>
         </div>
@@ -2753,109 +2031,12 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
           <strong>mecha o estructura capilar</strong> (<em>wick</em>).
         </p>
 
-        <figure class="diagram">
-          <div class="diagram__head"><b>Diagrama 4.1 · Ciclo interno de un heatpipe</b><span>evaporación por calor ↔ condensación por enfriamiento</span></div>
-          <div class="diagram__body"><pre class="ascii">                    ZONA CALIENTE (evaporador)                ZONA FRÍA (condensador)
-                    sobre el die de la CPU                     aletas + ventilador
-                 ┌──────────────────────────┐      ┌──────────────────────────────────┐
-                 │      ╔═══ TUBO SELLADO ═══╗│      │                                  │
-  Meta líquido ──┼──► (1) El líquido se    ║│      │  (4) El VAPOR entrega su calor    │
-  en toda la     │      EVAPORA al absorber ║│      │      a las paredes del tubo.      │
-  mecha capilar  │      el calor del die.   ║│      │                                   │
-                 │      ║  vapor ═════════►║│═════►│      El vapor CONDENSA y vuelve a  │
-                 │      ╚═══════════════════╝│      │      ser líquido.                 │
-                 │  (2) La PRESIÓN sube y    │      │                                   │
-                 │  empuja el vapor hacia    │◄═════│  (5) La MECHA CAPILAR (wick)      │
-                 │  el extremo frío.         │líquido│     succiona el líquido de vuelta │
-                 └──────────────────────────┘      │      por capilaridad, sin bomba.  │
-                                                    └──────────────────────────────────┘
+       
 
-  ┌───────────────────────────────────────────────────────────────────────────────────┐
-  │ PROPIEDADES CONSECUENTES:                                                        │
-  │ • La conductividad térmica EFECTIVA de un heatpipe es 10.000–100.000 W/m·K, es    │
-  │   decir, 25–250 veces mayor que el cobre macizo (401 W/m·K).                      │
-  │ • El calor se transporta CASI SIN SALTO TÉRMICO: la caída es de 1–3 °C entre     │
-  │   extremos, mientras que un tubo de cobre macizo tendría decenas de grados.       │
-  │ • La POSICIÓN IMPORTA: si la zona caliente queda POR ENCIMA de la fría, la mecha │
-  │   capilar debe trabajar contra la gravedad y pierde eficacia. Nunca montar un     │
-  │   disipador "al revés" (heatpipes hacia abajo) si se puede evitar.                │
-  │ • Si el tubo se aplasta, se pincha o se dobla con un ángulo muy cerrado, la mecha │
-  │   capilar se interrumpe y esa rama deja de funcionar: el disipador "muere" sin    │
-  │   signos visibles.                                                                │
-  │ • No se pueden "recargar" ni reparar: son elementos sellados de fábrica.          │
-  └───────────────────────────────────────────────────────────────────────────────────┘</pre></div>
-          <figcaption>Ciclo térmico dentro de un heatpipe: evaporación, transporte por presión y retorno capilar del líquido.</figcaption>
-        </figure>
-
-        <div class="note">
-          <span class="note__title">Nomenclatura de un disipador</span>
-          <p>
-            <em>"Torre de 6 heatpipes de 6 mm con ventilador de 120 mm"</em> significa: 6 tubos de calor
-            de 6 mm de diámetro que atraviesan el bloque de aletas (el calor se reparte entre todos), y
-            un ventilador de 120 mm de diámetro. A igual cantidad de heatpipes, más diámetro = más
-            capacidad. A igual diseño, más superficie de aletas = más capacidad <strong>siempre que el
-            ventilador tenga presión estática suficiente para forzar el aire a través de ellas</strong>.
-          </p>
-        </div>
-
-        <h4>Presión estática (mmH<sub>2</sub>O) vs. flujo de aire (CFM)</h4>
-        <div class="table-wrap">
-          <table>
-            <caption>Las dos métricas de un ventilador y cuándo importa cada una.</caption>
-            <thead>
-              <tr>
-                <th>Métrica</th>
-                <th>Unidad</th>
-                <th>Qué mide</th>
-                <th>Importa cuando…</th>
-                <th>Valores típicos</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Flujo de aire</strong></td>
-                <td>CFM (pies³/min) o m³/h</td>
-                <td>Volumen de aire movido por unidad de tiempo</td>
-                <td>El camino del aire es <strong>libre</strong>: ventiladores de gabinete, rejillas amplias, salidas sin obstáculos</td>
-                <td>120 mm: 40–90 CFM · 140 mm: 60–110 CFM</td>
-              </tr>
-              <tr>
-                <td><strong>Presión estática</strong></td>
-                <td>mmH<sub>2</sub>O (o inH<sub>2</sub>O, Pa)</td>
-                <td>Capacidad de empujar aire contra una resistencia u obstáculo</td>
-                <td><strong>Hay obstáculos</strong>: aletas densas de un disipador, radiador de AIO, filtros antipolvo, mesh apretado, conductos de notebook</td>
-                <td>120 mm gama media: 1,0–2,5 mmH<sub>2</sub>O · gama alta: 3–8 mmH<sub>2</sub>O (hasta ~10 en ventiladores de servidor)</td>
-              </tr>
-              <tr>
-                <td><strong>Ruido</strong></td>
-                <td>dBA</td>
-                <td>Presión sonora a 1 m (logarítmica: +10 dBA ≈ duplicación percibida)</td>
-                <td>Ambientes de trabajo, estudio, grabación</td>
-                <td>&lt; 20 dBA inaudible · 25–30 silencioso · 35+ audible · 45+ molesto</td>
-              </tr>
-              <tr>
-                <td><strong>RPM</strong></td>
-                <td>rpm</td>
-                <td>Velocidad de rotación</td>
-                <td>Referencia rápida, pero <strong>no</strong> indica rendimiento: un ventilador grande a bajas RPM puede mover más aire que uno chico a altas RPM, con menos ruido</td>
-                <td>500–3000 rpm típico; los de servidor llegan a 10.000+</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="tip">
-          <span class="tip__title">Cómo elegir por aplicación</span>
-          <ul>
-            <li><strong>Ventilador de gabinete con rejilla abierta:</strong> priorizar CFM. Los de 140 mm dan más caudal con menos ruido.</li>
-            <li><strong>Ventilador de disipador de CPU o de radiador:</strong> priorizar <strong>presión estática</strong>. Un ventilador de alto CFM y baja presión apenas pasa aire por un radiador denso: el aire "rebota" y se devuelve.</li>
-            <li><strong>Filtros antipolvo:</strong> cada filtro agrega resistencia. Un ventilador de baja presión puede perder la mitad del caudal con filtro sucio (de ahí la importancia de la limpieza periódica).</li>
-          </ul>
-        </div>
 
         <h4>¿Dónde y cómo se conecta un disipador por aire?</h4>
         <ul>
-          <li><strong>Ventilador del disipador → <code>CPU_FAN</code></strong> (obligatorio). Si el disipador tiene dos ventiladores, el segundo va a <code>CPU_OPT</code> o se conecta con el <em>splitter</em> incluido (un solo cable de control a la placa).</li>
+          <li><strong>Ventilador del disipador → <code>CPU_FAN</code></strong> (obligatorio). Si el disipador tiene dos ventiladores, el segundo va a <code>CPU_OPT</code></li>
           <li><strong>Tipo de conector: 4 pines PWM</strong> en todos los disipadores modernos; algunos económicos siguen siendo de 3 pines.</li>
           <li><strong>Alimentación:</strong> el header de la placa madre entrega hasta ~1 A. Un disipador con dos ventiladores de alto rendimiento ya consume ~0,6–0,7 A: no conviene agregar nada más a ese header.</li>
           <li><strong>Fijación al zócalo:</strong> clips de plástico (stock y algunos económicos), tornillos con backplate (torres), o el sistema de retención del zócalo (Intel LGA con <em>ILM</em>; AMD AM4/AM5 con clip de palanca).</li>
@@ -2910,38 +2091,7 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
           </table>
         </div>
 
-        <figure class="diagram">
-          <div class="diagram__head"><b>Diagrama 4.2 · Circuito de refrigeración líquida</b><span>AIO arriba vs. custom loop</span></div>
-          <div class="diagram__body"><pre class="ascii">  AIO (circuito cerrado, todo sellado)                CUSTOM LOOP (circuito abierto)
- ┌─────────────────────────────────────────┐   ┌───────────────────────────────────────────┐
- │   RADIADOR (arriba del gabinete)        │   │   RADIADOR 360 mm (frente)                │
- │  ╔═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╗       │   │  ╔═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╗        │
- │  ║fan║fan║fan║fan║fan║fan║fan║fan║       │   │  ║fan║fan║fan║fan║fan║fan║fan║fan║        │
- │  ╚═╤═╩═╤═╩═╤═╩═╤═╩═╤═╩═╤═╩═╤═╩═╤═╝       │   │  ╚═╤═╩═╤═╩═╤═╩═╤═╩═╤═╩═╤═╩═╤═╩═╤═╝        │
- │    │   │                 │   │          │   │    │   │                 │   │           │
- │    └───┴── mangueras ────┴───┘          │   │    └───┴─── tubería ────┴───┘           │
- │              │  ▲                       │   │         │            ▲                  │
- │              ▼  │                       │   │         ▼            │                  │
- │      ┌───────────────┐                  │   │   ┌──────────────┐   │                  │
- │      │ BLOQUE + BOMBA│ ← BOMBA al 100%  │   │   │  BLOQUE CPU  │   │                  │
- │      │  sobre la CPU │    (AIO_PUMP)    │   │   └──────┬───────┘   │                  │
- │      └───────────────┘                  │   │          │           │                  │
- │      Si el radiador está ABAJO, la      │   │   ┌──────▼───────┐   │                  │
- │      bomba puede aspirar aire atrapado: │   │   │  BLOQUE GPU  │   │                  │
- │      ruido y pérdida de rendimiento.    │   │   └──────┬───────┘   │                  │
- └─────────────────────────────────────────┘   │          │           │                  │
-                                               │   ┌──────▼───────────┴──────┐          │
-                                               │   │  BOMBA + DEPÓSITO       │          │
-                                               │   │  (en el punto más bajo) │          │
-                                               │   └─────────────────────────┘          │
-                                               │   Rellene SOLO en el depósito; el       │
-                                               │   aire se purga circulando el líquido.  │
-                                               └───────────────────────────────────────────┘
-  Regla del aire: EL AIRE SIEMPRE SUBE. La bomba debe quedar por debajo de la
-  superficie del líquido y las mangueras del radiador deben entrar por su parte
-  inferior, de modo que las burbujas no se alojen en la bomba.</pre></div>
-          <figcaption>Esquema comparativo de un AIO y de un custom loop, con la regla de posicionamiento del aire.</figcaption>
-        </figure>
+       
 
         <div class="danger">
           <span class="danger__title">Riesgos reales de la refrigeración líquida</span>
@@ -2981,43 +2131,7 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
           un diseño donde cada milímetro y cada interfaz térmica importan de forma crítica.
         </p>
 
-        <figure class="diagram">
-          <div class="diagram__head"><b>Diagrama 4.3 · Despiece térmico de un notebook moderno</b><span>vista inferior, tapa quitada</span></div>
-          <div class="diagram__body"><pre class="ascii">                     ADMISIÓN DE AIRE FRÍO (por la base y el teclado)
-                                   ▼▼▼        ▼▼▼
-     ┌─────────────────────────────────────────────────────────────────────┐
-     │  ┌────────┐   HEATPIPES COMPARTIDOS (CPU + GPU)   ┌─────────┐        │
-     │  │  CPU   │═══╗   ╔═══════════════════════════════╗ ║  GPU    │        │
-     │  │ (die)  │   ║   ║  ▲ tubos que transportan el  ║ ║  (die)  │        │
-     │  └────────┘   ╚═══╝  calor de AMBOS chips al    ╚═╝◄─┘        │        │
-     │                     mismo radiador                           │        │
-     │  Pads: VRAM y VRM en la base del disipador (alturas distintas)│        │
-     │                                                               │        │
-     │        ┌───────────────────────────────────────────┐          │        │
-     │        │  ALETAS (radiador de láminas de cobre)    │          │        │
-     │        │  ▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤      │          │        │
-     │        └───────────────────▲───────────────────────┘          │        │
-     │                            │ presuriza aire                 │        │
-     │        ┌───────────────────┴───────────────────────┐          │        │
-     │        │  TURBINA BLOWER  (ventilador tangencial)  │          │        │
-     │        │  ● aspira por arriba y expulsa por la     │          │        │
-     │        │    boca lateral con ALTA PRESIÓN ESTÁTICA │          │        │
-     │        └───────────────────┬───────────────────────┘          │        │
-     └────────────────────────────┼──────────────────────────────────────────┘
-                                  ▼  SALIDA DE AIRE CALIENTE (lateral/posterior)
-                                     ▲▲▲
-                       No bloquearla nunca con la falda o una superficie blanda.
-
- ┌────────────────────────────────────────────────────────────────────────────────┐
- │ PUNTOS CRÍTICOS DEL MANTENIMIENTO EN NOTEBOOKS:                                │
- │ 1) Polvo compactado entre las aletas (se vuelve una ALFOMBRA: bloquea todo).    │
- │ 2) Pasta seca o pad deteriorado sobre CPU/GPU (la temperatura sube 15–30 °C).   │
- │ 3) Pads de espesor incorrecto sobre VRAM/VRM: o no tocan o no comprimen.       │
- │ 4) Heatpipe aplastado o desprendido de la aleta (pierde eficacia por completo). │
- │ 5) Admisión obstruida por la funda, el colchón o la mesa.                       │
- └────────────────────────────────────────────────────────────────────────────────┘</pre></div>
-          <figcaption>Anatomía térmica de un notebook: heatpipes compartidos, aletas y turbina blower.</figcaption>
-        </figure>
+  
 
         <h4>Componentes clave y su comportamiento</h4>
         <div class="term">
@@ -3120,44 +2234,7 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
           térmicos: el die, las memorias, los VRM y la propia placa (PCB) que hace de disipador lateral.
         </p>
 
-        <figure class="diagram">
-          <div class="diagram__head"><b>Diagrama 4.4 · Corte de una GPU moderna de 3 ranuras</b><span>corte transversal</span></div>
-          <div class="diagram__body"><pre class="ascii">        AIRE FRÍO (admisión desde abajo, 3 ventiladores)  ▼▼▼
- ┌───────────────────────────────────────────────────────────────────────────┐
- │  ╔═════════════════════════════════════════════════════════════════════╗  │
- │  ║ 1. SHROUD (cubierta plástica)                                        ║  │
- │  ║ 2. VENTILADORES (2–3 axiales, 80–100 mm) → empujan aire a presión    ║  │
- │  ║ 3. BLOQUE DE ALETAS (aluminio): superficie de intercambio            ║  │
- │  ║ 4. HEATPIPES (4–7, aplanadas) que SUBEN el calor del die a las aletas║  │
- │  ║ 5. PLACA FRONTAL DE CONTACTO (cobre niquelado)                       ║  │
- │  ╚═════════════════════════════════════════════════════════════════════╝  │
- │                    │                          │                          │
- │            ┌───────▼────────┐         ┌───────▼────────┐   ← PASTA / PTM  │
- │            │  DIE DE GPU    │         │ CHIPS DE VRAM  │   ← PADS (1 mm)  │
- │            │  (direct-die)  │         │ (6–12 chips)   │                  │
- │            └───────┬────────┘         └───────┬────────┘                  │
- │                    │                          │                          │
- │  ┌─────────────────▼──────────────────────────▼──────────────────────┐    │
- │  │  PCB (placa del circuito impreso): disipa hacia arriba y abajo     │    │
- │  │  VRM (fases)  ──── pads/pasta ──── placa frontal del disipador     │    │
- │  └────────────────────────────────────────────────────────────────────┘    │
- │        AIRE CALIENTE expulsado por el lateral y por la parte trasera      │
- └───────────────────────────────────────────────────────────────────────────┘
-
- ┌──────────────────────────────────────────────────────────────────────────────┐
- │ PROBLEMAS TÉRMICOS FRECUENTES EN GPU:                                        │
- │ • Core a 70 °C pero HOTSPOT a 100 °C → contacto del die deficiente (pasta    │
- │   seca, "pump-out") o presión desigual del bloque. El hotspot manda: throttling│
- │   y protección.                                                              │
- │ • Temperatura de memoria alta (GDDR6X: hasta 110 °C admisibles, pero degrada │
- │   la memoria) → pads secos, delgados o mal alineados.                        │
- │ • GPU nueva con temperaturas altas → puede ser normal si el TDP es alto y el  │
- │   gabinete tiene mal flujo de admisión inferior.                              │
- │ • GPU con 300+ W en gabinete de frente ciego → el aire caliente recircula y  │
- │   vuelve a entrar: sube todo el sistema.                                      │
- └──────────────────────────────────────────────────────────────────────────────┘</pre></div>
-          <figcaption>Anatomía térmica de una tarjeta gráfica y sus puntos críticos.</figcaption>
-        </figure>
+       
 
         <div class="table-wrap">
           <table>
@@ -3174,16 +2251,7 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
           </table>
         </div>
 
-        <div class="tip">
-          <span class="tip__title">Prueba de estabilidad tras intervenir una GPU</span>
-          <p>
-            Ejecutar una prueba de carga de 15–20 minutos monitorizando <strong>core, hotspot y
-            memoria</strong> simultáneamente. Criterios de aceptación: delta entre core y hotspot
-            &lt; 15–20 °C, memoria por debajo del límite del modelo, sin artefactos ni cierres de
-            aplicación, y frecuencias sostenidas sin caída progresiva. Si el hotspot sigue alto pero el
-            core está bien, el problema es el contacto del die (volver a aplicar) y no el disipador.
-          </p>
-        </div>
+       
       </article>
 
       <article class="sub" id="s4-6">
@@ -3219,213 +2287,20 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
           </table>
         </div>
 
-        <div class="note">
-          <span class="note__title">Regla práctica para recordar los tres tipos de alimentación</span>
-          <ul>
-            <li><strong>Molex (legacy, 4 pines grandes):</strong> enchufar y girar. Sin control, sin lectura. Cuidado con la polaridad si se recablea.</li>
-            <li><strong>3 pines (DC):</strong> GND / +12 V regulable / TACH. Control por voltaje. Se detiene por debajo de su tensión de arranque.</li>
-            <li><strong>4 pines (PWM):</strong> GND / +12 V fijo / TACH / PWM. Control por pulsos. Gira muy lento sin detenerse.</li>
-          </ul>
-        </div>
+       
       </article>
     </section>
     <!-- ============================================================
          SECCIÓN 5 — ACÚSTICA, RUIDO Y MANTENIMIENTO
          ============================================================ -->
     <section class="block" id="s5" aria-labelledby="s5-t">
-      <h2 id="s5-t"><span class="num">5</span> Acústica, ruido y mantenimiento</h2>
+      <h2 id="s5-t"><span class="num">5</span> Mantenimiento</h2>
 
-      <article class="sub" id="s5-1">
-        <h3>5.1 Control de ruido: origen, curvas de ventilador y antivibraciones</h3>
+    
 
-        <p>
-          El ruido de una PC tiene tres orígenes distintos y cada uno se resuelve de forma diferente.
-          Diagnosticar la fuente correcta es el primer paso: no se soluciona con el mismo cambio un
-          ruido de rodamiento que un ruido de turbulencia.
-        </p>
-
-        <figure class="diagram">
-          <div class="diagram__head"><b>Diagrama 5.1 · Fuentes de ruido y flujo de aire en el gabinete</b><span>vista esquemática</span></div>
-          <div class="diagram__body"><pre class="ascii">   ORÍGENES DEL RUIDO
- ┌──────────────────────────────┬──────────────────────────────┬─────────────────────────┐
- │ A) AERODINÁMICO              │ B) MECÁNICO                  │ C) ELÉCTRICO / ESTRUCTURAL│
- │  • turbulencia por obstáculos│  • rodamiento gastado        │  • coil whine (bobinas) │
- │  • rejillas apretadas        │  • aspas desbalanceadas      │  • vibración transmitida│
- │  • silbido del mesh/filtro   │  • roce con cables           │    al chasis (resonancia)│
- │  → mejora con diseño y RPM   │  → requiere cambio de fan    │  → requiere amortiguación│
- └──────────────────────────────┴──────────────────────────────┴─────────────────────────┘
-
-   RUTA DEL AIRE Y PUNTOS DE RUIDO
-            ┌─────────────────── TECHO (extracción, opcional) ──────────────────┐
-            │                        ▲  ▲  ▲                                    │
-   ┌────────┤  SYS_FAN (extracción) │  │  │                          ┌───────┐ │
-   │  admisión│                       │  │                            │ GPU   │ │
-   │  FRONTAL ├──►  ─────────────────►│  │                            │ fans  │ │  ← ruido
-   │  (mesh)  │     flujo laminar           ───────────────────────►  └───────┘ │   aerodinámico
-   │ ▲ ▲ ▲   │                                                          │       │
-   │ │ │ │   │   disipador CPU (turbulencia controlada entre aletas)      │       │
-   └─┴─┴─┴───┤                                                          │       │
-             │  ┌─────────────────────────┐                              │       │
-             │  │ PSU (su propio fan)     │ ← suele ser el más audible   │       │
-             │  └─────────────────────────┘   en reposo (baja calidad)    │       │
-             └─────────────────────────────────────────────────────────────────────┘
-                   ▼ admisión inferior (base)
-
- ┌───────────────────────────────────────────────────────────────────────────────────┐
- │ PRINCIPIOS DE SILENCIAMIENTO (en orden de efectividad):                           │
- │ 1. MENOS obstáculos: rejillas amplias, mesh limpio, cables ordenados.             │
- │ 2. VENTILADORES MÁS GRANDES a menos RPM (140 mm a 800 rpm ≈ 120 mm a 1400 rpm,   │
- │    con mucho menos ruido para el mismo caudal).                                  │
- │ 3. AMORTIGUACIÓN: grommets de silicona, arandelas blandas, montaje no rígido.     │
- │ 4. CURVA DE VENTILADOR adecuada: no girar al 100 % "por si acaso".               │
- │ 5. AISLAMIENTO acústico del panel (sube las temperaturas 2–5 °C: es un trade-off).│
- │ Nota: el ruido (dB) es logarítmico. Dos fuentes iguales suman ~+3 dB,            │
- │ no el doble; y un ventilador al doble de RPM produce ~+15 dB (¡muy audible!).     │
- └───────────────────────────────────────────────────────────────────────────────────┘</pre></div>
-          <figcaption>Fuentes de ruido en un gabinete y principios de silenciamiento por orden de efectividad.</figcaption>
-        </figure>
-
-        <h4>Curvas de ventilador (Fan Curves) en BIOS y software</h4>
-        <p>
-          Una <strong>curva de ventilador</strong> relaciona la temperatura del sensor con la velocidad
-          del ventilador (RPM o % de PWM). Se configura en la BIOS/UEFI o con software del fabricante.
-          La curva correcta da el caudal necesario en cada momento y evita tanto el ruido innecesario
-          como el sobrecalentamiento.
-        </p>
-
-        <figure class="diagram">
-          <div class="diagram__head"><b>Diagrama 5.2 · Curva de ventilador bien configurada</b><span>% PWM vs. temperatura</span></div>
-          <div class="diagram__body"><pre class="ascii">  % PWM
-  100 ┤                                                     ●────────────  (máximo)
-   90 ┤                                                   ╱
-   80 ┤                                                ╱
-   70 ┤                                             ╱    zona de protección:
-   60 ┤                                          ╱       rampa agresiva
-   50 ┤                                       ╱
-   40 ┤                                    ╱             zona de trabajo:
-   30 ┤                             ●────╱              rampa suave
-   20 ┤                  ●──────╱
-   10 ┤   ●────────────╱                                  zona silenciosa:
-    0 ┼────┬────┬────┬────┬────┬────┬────┬────┬────┬────►
-        30   40   50   60   70   80   90  100  °C
-
- ┌────────────────────────────────────────────────────────────────────────────────┐
- │ CÓMO LEER LA CURVA:                                                            │
- │ • Punto de arranque (30 °C): velocidad mínima (20 %). Silencio en reposo.      │
- │ • Zona silenciosa (30–50 °C): pendiente casi plana. RPM bajas.                 │
- │ • Zona de trabajo (50–75 °C): rampa moderada; aquí vive el uso normal.         │
- │ • Zona de protección (75–100 °C): rampa agresiva hasta 100 %. No importa el    │
- │   ruido: importa no llegar al límite.                                          │
- │ • HISTÉRESIS / tiempo de respuesta: un valor de 3–8 °C o 3–5 s evita que el    │
- │   ventilador "sople" y "corte" cada vez que la temperatura oscila.             │
- │ • INERCIA: los cambios de RPM no deben ser instantáneos (ruido de aceleración).│
- ├────────────────────────────────────────────────────────────────────────────────┤
- │ ERRORES FRECUENTES:                                                            │
- │ ✘ Curva plana al 100 %: ruido permanente e innecesario y desgaste del rodamiento│
- │ ✘ Curva demasiado baja: throttling en carga veraniega.                          │
- │ ✘ Modo PWM seleccionado con un ventilador de 3 pines (o al revés): el control no│
- │   funciona y el ventilador puede quedar al 100 % o detenido.                    │
- │ ✘ Curva atada al sensor equivocado (p. ej. ventiladores de gabinete ligados a la│
- │   temperatura del CPU cuando el problema es la GPU).                            │
- └────────────────────────────────────────────────────────────────────────────────┘
-
-  Referencias de control habituales: CPU_FAN → temperatura de CPU;
-  SYS_FAN → temperatura del chipset o "System"; AIO_PUMP → 100 % fijo (sin curva).</pre></div>
-          <figcaption>Anatomía de una curva de ventilador con zonas, histéresis y errores típicos.</figcaption>
-        </figure>
-
-        <h4>Técnica: antivibración y reducción de ruido</h4>
-        <ul>
-          <li><strong>Grommets de silicona:</strong> arandelas o pasadores blandos entre el ventilador y el chasis. Cortan la transmisión de vibración que hace resonar la chapa metálica (el chasis actúa como caja de resonancia).</li>
-          <li><strong>Pads antivibración en discos mecánicos:</strong> los HDD de 3,5" vibran y transmiten <em>hum</em> de baja frecuencia. Se fijan con arandelas de goma o en jaulas suspendidas.</li>
-          <li><strong>Montaje sin tensión:</strong> no forzar tornillos ni hacer que el ventilador apoye torcido; las aspas deben estar libres y centradas respecto del marco.</li>
-          <li><strong>Espuma acústica o bitumen:</strong> reduce el ruido pero <strong>sube 2–5 °C</strong> las temperaturas internas por aislar térmicamente el chasis. Es una decisión de compromiso que debe explicarse al usuario.</li>
-          <li><strong>Separación de los puntos de anclaje:</strong> un radiador con 3 ventiladores en un solo marco rígido vibra más que con grommets independientes.</li>
-          <li><strong>Cuidado con el polvo:</strong> un ventilador con polvo acumulado en las aspas queda desbalanceado y produce un ruido pulsante que ningún grommet corrige.</li>
-        </ul>
-      </article>
-
-      <article class="sub" id="s5-2">
-        <h3>5.2 Tipos de rodamientos de ventiladores</h3>
-
-        <div class="table-wrap">
-          <table>
-            <caption>Comparación de los sistemas de rodamiento usados en ventiladores.</caption>
-            <thead>
-              <tr>
-                <th>Tipo</th>
-                <th>Funcionamiento</th>
-                <th>Vida útil (horas)</th>
-                <th>Ruido</th>
-                <th>Posición de montaje</th>
-                <th>Signo de falla / observación</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Sleeve Bearing</strong> (buje / casquillo)</td>
-                <td>Eje apoyado en un buje de metal poroso impregnado de aceite; el lubricante forma la película</td>
-                <td>10.000–30.000 h (las más bajas)</td>
-                <td>Muy bajo al principio</td>
-                <td class="tag-no">Solo horizontal. Montado en vertical (por ejemplo en el frente) el aceite escurre y se seca</td>
-                <td>Ruido de "raspado" o chirrido al arrancar; se detiene en bajas RPM. Es el rodamiento más económico y el primero en fallar</td>
-              </tr>
-              <tr>
-                <td><strong>Hydraulic Bearing</strong> (hidráulico / rifle)</td>
-                <td>Eje dentro de un canal con aceite y ranuras helicoidales que recirculan el lubricante</td>
-                <td>30.000–60.000 h</td>
-                <td>Bajo</td>
-                <td>Mejor que el sleeve en vertical; aun así prefiere horizontal</td>
-                <td>Es una evolución del sleeve. Menos sensible a la orientación, pero sigue degradándose con el calor</td>
-              </tr>
-              <tr>
-                <td><strong>FDB — Fluid Dynamic Bearing</strong> (rodamiento fluido-dinámico)</td>
-                <td>Eje flotando sobre una película de aceite generada por la propia rotación (sin contacto metal-metal)</td>
-                <td>80.000–150.000 h</td>
-                <td>Muy bajo y estable en todo el rango de RPM</td>
-                <td class="tag-yes">Cualquier orientación</td>
-                <td>Excelente relación ruido/duración. Es el estándar de gama alta. Si aparece ruido, el lubricante se agotó por temperatura extrema</td>
-              </tr>
-              <tr>
-                <td><strong>Ball Bearing</strong> (rodamiento a bolillas)</td>
-                <td>Dos conjuntos de bolillas con jaula (uno o dos cojinetes)</td>
-                <td>50.000–80.000 h</td>
-                <td class="tag-mid">Más alto (clic-tac-tac característico)</td>
-                <td class="tag-yes">Cualquier orientación</td>
-                <td>Muy resistente al polvo y al calor; el ruido aumenta con el tiempo. Preferido en ambientes industriales y servidores</td>
-              </tr>
-              <tr>
-                <td><strong>Dual Ball / Magnetic Levitation (MagLev)</strong></td>
-                <td>Dos rodamientos o suspensión magnética del eje</td>
-                <td>100.000+ h</td>
-                <td>Bajo; el MagLev elimina el contacto</td>
-                <td class="tag-yes">Cualquier orientación</td>
-                <td>Alta resistencia, mayor costo. El MagLev puede tener un leve zumbido electrónico</td>
-              </tr>
-              <tr>
-                <td><strong>Vapo / Nano / sin nombre comercial</strong></td>
-                <td>Denominaciones de marketing (mezcla de hidráulico y FDB)</td>
-                <td>Según fabricante</td>
-                <td>Variable</td>
-                <td>Variable</td>
-                <td>Desconfiar de las horas declaradas sin respaldo: comparar con el tipo real de rodamiento indicado en la ficha técnica</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="note">
-          <span class="note__title">Cómo elegir el rodamiento en cada trabajo</span>
-          <ul>
-            <li><strong>Ventilador de frente, vertical y visible:</strong> FDB (o hidráulico si el presupuesto es limitado). Evitar sleeve puro.</li>
-            <li><strong>Ambiente con mucho polvo o calor:</strong> ball bearing, aunque suene algo más.</li>
-            <li><strong>Turbina de notebook:</strong> son siempre <em>blower</em> sobre rodamiento fino, propietarias del modelo, con recambio específico (y a menudo se venden como conjunto de disipador y turbina).</li>
-            <li><strong>Trabajos escolares:</strong> explicar que el mismo ventilador montado vertical u horizontal tiene vida útil distinta, y que el ruido percibido cambia con el rodamiento antes que con el CFM declarado.</li>
-          </ul>
-        </div>
-      </article>
+     
       <article class="sub" id="s5-3">
-        <h3>5.3 Protocolo de mantenimiento preventivo</h3>
+        <h3>5.1 Protocolo de mantenimiento preventivo</h3>
 
         <p>
           El mantenimiento preventivo es un <strong>conjunto de procedimientos periódicos</strong> que
@@ -3454,7 +2329,7 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
           <span class="danger__title">Reglas de seguridad eléctrica y de entorno</span>
           <ul>
             <li><strong>Desconectar de la red</strong> antes de abrir cualquier equipo. Luego, presionar el botón de encendido 3–5 segundos con el cable de red desconectado para descargar condensadores.</li>
-            <li><strong>No abrir fuentes de alimentación</strong> ni monitores CRT: sus condensadores conservan tensión letal incluso desconectados. Es trabajo de personal capacitado.</li>
+            <li><strong>No abrir fuentes de alimentación</strong>: sus condensadores conservan tensión letal incluso desconectados. Es trabajo de personal capacitado.</li>
             <li><strong>No usar aire comprimido en aerosol con el envase inclinado o invertido:</strong> puede expulsar el propelente líquido, que es inflamable y corrosivo. Mantener el envase vertical, con ráfagas cortas.</li>
             <li><strong>Nunca soplar con la boca:</strong> la humedad de la respiración es conductora y puede dañar componentes.</li>
             <li><strong>Sujetar las aspas de los ventiladores</strong> antes de soplar aire: el aire comprimido hace girar el ventilador a velocidad excesiva y genera un pico de tensión en el motor (además de dañar el rodamiento).</li>
@@ -3502,7 +2377,7 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
           <li><strong>Sujetar las aspas de cada ventilador</strong> y soplar con aire comprimido a unos 10–15 cm de distancia, en ráfagas cortas. Trabajar de arriba hacia abajo y de adentro hacia afuera.</li>
           <li><strong>Polvo en las aletas del disipador:</strong> es el punto más crítico. Usar pincel para soltar el polvo y aire comprimido para extraerlo. Si el polvo forma una capa compacta entre aletas, se puede retirar el disipador del zócalo para una limpieza profunda (aprovechando para renovar el TIM).</li>
           <li><strong>Radiadores de AIO:</strong> soplar siempre en el <strong>sentido de salida del aire</strong> (desde el lado del ventilador hacia la aleta) y nunca en contra, para no empujar el polvo hacia el interior del chasis. El radiador se limpia en la misma sesión que sus ventiladores.</li>
-          <li><strong>Zona de la fuente:</strong> sin abrirla. Con aire comprimido corto desde el lado del ventilador. Si el polvo es extremo, la fuente se reemplaza o se entrega a personal capacitado.</li>
+          <li><strong>Zona de la fuente:</strong> sin abrirla. Con aire comprimido corto desde el lado del ventilador. Si el polvo es extremo, puede abrirla para evaluar su estado y limpiarla (siempre con equipos de proteccion electrica, alto riesgo!)</li>
           <li><strong>Fuente, bahías y fondos:</strong> aspirar residuos sueltos. El aspirador no toca la placa madre ni los contactos.</li>
           <li><strong>Revisión visual y de conexiones</strong> (mientras está abierto). Buscar:
             <ul>
@@ -3558,63 +2433,22 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
         </div>
       </article>
       <article class="sub" id="s5-4">
-        <h3>5.4 Recambio de interfaces térmicas: procedimiento completo</h3>
+        <h3>5.2 Recambio de interfaces térmicas: procedimiento completo</h3>
 
-        <figure class="diagram">
-          <div class="diagram__head"><b>Diagrama 5.3 · Flujo de decisión del recambio de TIM</b><span>árbol de decisión</span></div>
-          <div class="diagram__body"><pre class="ascii">                    ┌───────────────────────────────┐
-                    │  ¿Hay síntoma térmico o toca   │
-                    │  el mantenimiento programado?  │
-                    └───────────────┬───────────────┘
-                           NO ──────┘────── SÍ
-                            │                │
-                            ▼                ▼
-                    Documentar y        ┌──────────────────────────────┐
-                    no intervenir       │ Identificar el COMPONENTE    │
-                    (no se cambia       │ y su separación chip↔disipador│
-                    TIM "porque sí")    └──────────────┬───────────────┘
-                                                       │
-                       ┌───────────────────────────────┼────────────────────────────────┐
-                       ▼                               ▼                                ▼
-              CPU / die de GPU                 VRAM, VRM, M.2, chipset          Notebook (conjunto)
-              (separación ≈ µm)                (separación ≥ 0,5 mm)            (alturas múltiples)
-                       │                               │                                │
-                       ▼                               ▼                                ▼
-              ┌──────────────────┐            ┌──────────────────┐            ┌──────────────────────┐
-              │ PASTA de calidad │            │ PAD del espesor  │            │ PASTA/PTM en los dies│
-              │ o PTM7950        │            │ exacto, o PUTTY  │            │ + PADS/PUTTY en VRAM │
-              │ (metal líquido   │            │ (nunca apilar    │            │ y VRM. Medir TODO el │
-              │  solo si segura) │            │  dos pads)       │            │ conjunto antes de    │
-              └────────┬─────────┘            └────────┬─────────┘            │ cerrar               │
-                       │                               │                      └──────────┬───────────┘
-                       └───────────────┬───────────────┴─────────────────────────────────┘
-                                       ▼
-                        ┌──────────────────────────────────────┐
-                        │ 1. DESMONTAR (en cruz, guardar tornillos) │
-                        │ 2. INSPECCIONAR LA HUELLA (¡diagnóstico!) │
-                        │ 3. LIMPIAR con IPA 99 % + microfibra      │
-                        │ 4. APLICAR: fina, completa, sin tocar     │
-                        │ 5. MONTAR: presión uniforme en cruz       │
-                        │ 6. VERIFICAR 15–20 min de carga           │
-                        └──────────────────────────────────────┘
-                                       ▼
-                        ¿Bajó la temperatura y se eliminó el throttling?
-                          SÍ → documento el resultado y cierro el trabajo
-                          NO → revisar: espesor de pads, presión, flujo de
-                               aire del gabinete, potencia real del componente</pre></div>
-          <figcaption>Árbol de decisión del recambio de interfaz térmica según el componente.</figcaption>
-        </figure>
+      
 
         <h4>Procedimiento general de recambio (válido para cualquier componente)</h4>
         <ol>
           <li><strong>Registro previo:</strong> anotar temperatura de reposo, temperatura máxima en carga, temperatura ambiente, ruido y comportamiento (¿hay throttling?). Sin este dato no se puede demostrar la mejora.</li>
-          <li><strong>Desmontaje:</strong> aflojar los tornillos <strong>en cruz, un cuarto de vuelta cada vez</strong>. Guardar los tornillos clasificados por longitud y ubicación. En zócalos Intel, liberar la palanca del <em>ILM</em> según manual; en AMD AM4/AM5, girar suavemente el disipador antes de levantarlo (la pasta fría es adhesiva y puede arrancar la CPU).</li>
+          <li><strong>Desmontaje:</strong> aflojar los tornillos <strong>en cruz, un cuarto de vuelta cada vez</strong>. Guardar los tornillos clasificados por longitud y ubicación. En zócalos Intel, liberar la palanca del <em>ILM</em> según manual; en AMD AM4/AM5, girar suavemente el disipador antes de levantarlo (la pasta fría es adhesiva y puede arrancar la CPU). </li>
+          <li><strong>Tecnicas sugeridas por su profe: </strong>si es posible calentar el disipador via encendido de la PC y abrir muchos programas, o con una pistola de calor [poco tiempo] calentar el disipador con el equipo desconectado, permite aflojar la pasta termica si está muy pegada al CPU</li>
+    
           <li><strong>Inspección de la huella:</strong> <em>antes de limpiar</em>, observar la marca de la pasta. Huella completa y uniforme = aplicación correcta; huella parcial o desplazada = causa del problema (documentar con foto).</li>
           <li><strong>Limpieza:</strong> retirar la mayor parte de la pasta con espátula plástica, luego humedecer el paño de microfibra con IPA 99 % y limpiar hasta que el metal quede limpio y sin brillo graso. No dejar residuos en los bordes del IHS ni sobre el PCB. En el caso de pads, retirarlos completos con pinzas y eliminar cualquier resto de adhesivo.</li>
           <li><strong>Aplicación:</strong> cantidad correspondiente al método elegido y al tamaño del die. Extender si el die es grande (GPU, HEDT) o dejar el punto/línea si el IHS es estándar. En pads: cortar a medida del chip, con el borde alineado, y no tocar la cara de contacto.</li>
           <li><strong>Montaje:</strong> bajar el disipador <strong>en un solo movimiento vertical</strong> (no deslizarlo sobre la pasta ya distribuida) y atornillar en cruz, en varias pasadas, hasta la presión de fábrica (final de recorrido de los resortes o tope).</li>
           <li><strong>Verificación:</strong> encender, comprobar que no hay anomalías, y correr 15–20 minutos de carga monitorizando temperaturas. Comparar con el registro previo y documentar.</li>
-          <li><strong>Cierre:</strong> volver a armar, conectar todos los cables, probar el equipo en condiciones reales de uso y entregar el registro al usuario o al docente.</li>
+          <li><strong>Cierre:</strong> volver a armar, conectar todos los cables, probar el equipo en condiciones reales de uso y entregar el registro al usuario.</li>
         </ol>
 
         <h4>Recambio por componente</h4>
@@ -3727,397 +2561,242 @@ Ejemplo de presupuesto térmico (CPU de 95 W, Tjmax 100 °C, Ta = 25 °C):
         </div>
       </article>
     </section>
-    <!-- ============================================================
+   
+
+<!-- ============================================================
          SECCIÓN 6 — ACTIVIDADES DIDÁCTICAS Y EVALUACIÓN
          ============================================================ -->
     <section class="block" id="s6" aria-labelledby="s6-t">
-      <h2 id="s6-t"><span class="num">6</span> Actividades didácticas y evaluación</h2>
+      <h2 id="s6-t"><span class="num">6</span> Actividades</h2>
 
       <article class="sub" id="s6-1">
-        <h3>6.1 Actividades de búsqueda e identificación de imágenes</h3>
+        <h3>6.1 Cuestionario y búsqueda e identificación de imágenes</h3>
 
-        <p>
-          Estas actividades se resuelven con <strong>búsqueda de imágenes en internet o en el taller
-          físico</strong>. El objetivo es fijar el reconocimiento visual: en la práctica profesional, la
-          identificación se hace por la forma del conector, no por su nombre. Cada actividad debe
-          entregarse con la <strong>imagen pegada, la fuente (URL o número de equipo del taller) y una
-          justificación técnica de 3–5 líneas</strong> que explique cómo se reconoce lo identificado.
-        </p>
+        
+ <h3>A. Gabinetes, factores de forma y compatibilidad</h3>
+  <ul>
+    <li><strong>1.</strong> Defina qué es el <em>gabinete</em> o <em>chasis</em> de una PC y explique por qué no debe considerarse una simple "caja". Mencione las tres funciones simultáneas que cumple (estructural, eléctrica y térmica).</li>
+    <li><strong>2.</strong> ¿Qué es el <strong>factor de forma</strong> (<em>form factor</em>)?</li>
+    <li><strong>3.</strong> ¿Se puede colocar cualquier placa madre en cualquier gabiente? ¿Por qué se dice que la compatibilidad es "hacia abajo"?</li>
+    <li><strong>4.</strong> Que indica los nombres E-ATX, ATX, Micro-ATX y Mini-ITX en gabinetes. </li>
+    <li><strong>5.</strong> ¿Qué limitaciones concretas enfrenta un usuario que elige un gabinete Mini-ITX?</li>
+    <li><strong>6.</strong> ¿Por qué se afirma que una mala elección de gabinete puede degradar el rendimiento del sistema completo sin que ningún componente esté individualmente defectuoso?</li>
+  </ul>
 
-        <div class="warn">
-          <span class="warn__title">Consigna general</span>
-          <p>
-            Las imágenes deben provenir de <strong>fuentes verificables</strong> (sitio del fabricante,
-            manual de placa madre, tiendas especializadas). No se aceptan imágenes de bancos genéricos ni
-            ilustraciones artísticas sin detalle técnico. Cuando el recurso sea del taller, indicar
-            marca y modelo del equipo.
-          </p>
-        </div>
+  <!-- ============================================================
+       BLOQUE B — ESTRUCTURA Y MATERIALES
+       ============================================================ -->
+  <h3>B. Estructura, materiales y partes del chasis</h3>
+  <ul>
+    <li><strong>7.</strong> ¿Que ofrecen los distintos materiales de los gabinetes?</li>
+   <li><strong>8.</strong> Describa la función de cada una de las siguientes partes estructurales: bandeja de la placa madre (mobo tray), shroud de la fuente, bahías modulares, bandeja trasera de gestión de cables, filtros antipolvo, paneles de amortiguación acústica, bracket de expansión PCIe y soportes antivibración.</li>
+    <li><strong>9.</strong> ¿Qué es un <em>standoff</em> y por qué es crítico colocar únicamente el número y la posición que indica el manual para el factor de forma usado? Describa el error clásico y su consecuencia.</li>
+    <li><strong>10.</strong> Explique la diferencia entre un bracket de expansión PCIe renovable y uno <em>breakaway</em>. ¿Cuál conviene y por qué?</li>
+  </ul>
 
-        <div class="activity">
-          <h4>Actividad 1 — Conectores del panel frontal</h4>
-          <p class="activity__goal">Reconocimiento de 8 conectores y su ubicación en la placa madre.</p>
-          <ol>
-            <li>Busque imágenes de los siguientes conectores: <strong>Power SW</strong>, <strong>Reset SW</strong>, <strong>Power LED</strong>, <strong>HDD LED</strong>, <strong>Speaker</strong>, <strong>HD Audio</strong>, <strong>USB 2.0</strong> y <strong>USB 3.0/3.1</strong>.</li>
-            <li>Para cada uno, registre en la tabla: cantidad de pines, si tiene polaridad, palabras impresas en el conector y el nombre del header donde se conecta.</li>
-            <li>Señale con una flecha (en la imagen) el <strong>pin 1</strong> y explique cómo lo reconoció.</li>
-            <li>Caso de error: busque una imagen de un header <code>F_USB</code> y explique qué ocurriría si el conector se inserta desplazado una fila.</li>
-          </ol>
-          <div class="table-wrap">
-            <table>
-              <caption>Planilla de registro — Actividad 1 (completar).</caption>
-              <thead>
-                <tr><th>Conector</th><th>Pines</th><th>¿Polaridad?</th><th>Palabras en el conector</th><th>Header destino</th><th>Fuente / imagen</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Power SW</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>Reset SW</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>Power LED</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>HDD LED</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>Speaker</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>HD Audio</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>USB 2.0</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>USB 3.0/3.1</td><td></td><td></td><td></td><td></td><td></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+  <!-- ============================================================
+       BLOQUE C — BAHÍAS DE ALMACENAMIENTO
+       ============================================================ -->
+  <h3>C. Bahías de almacenamiento: legacy vs. moderno</h3>
+  <ul>
+    <li><strong>11.</strong> ¿Por qué las bahías de 3,5" externas se consideran obsoletas y en qué casos aún se siguen utilizando?</li>
+    <li><strong>12.</strong> Explique por qué el formato M.2 (2280) se considera predominante en equipos modernos.</li>
+    <li><strong>13.</strong> ¿Qué ventaja térmica aportan las bahías modulares o desmontables en un chasis moderno y cómo se relacionan con el flujo de aire del gabinete?</li>
+  </ul>
 
-        <div class="activity">
-          <h4>Actividad 2 — Headers de ventilación y conectores de alimentación</h4>
-          <p class="activity__goal">Diferenciar headers de placa madre y los tres tipos de alimentación de ventiladores.</p>
-          <ol>
-            <li>Busque imágenes de una placa madre moderna e identifique y rotule: <code>CPU_FAN</code>, <code>CPU_OPT</code>, <code>SYS_FAN</code>/<code>CHA_FAN</code>, <code>AIO_PUMP</code>, <code>ARGB</code> (5 V) y <code>RGB_HEADER</code> (12 V).</li>
-            <li>Busque imágenes de: <strong>conector Molex de 4 pines</strong>, <strong>ventilador de 3 pines (DC)</strong> y <strong>ventilador de 4 pines (PWM)</strong>. Compare los conectores y marque el pin de control en cada uno.</li>
-            <li>Investigue un modelo real de placa madre (indique marca y modelo) y copie de su manual: la cantidad de headers de ventilación, la corriente máxima por header y si <code>CPU_OPT</code> es esclavo de <code>CPU_FAN</code>.</li>
-          </ol>
-        </div>
+  <!-- ============================================================
+       BLOQUE D — MONTAJE Y CABLE MANAGEMENT
+       ============================================================ -->
+  <h3>D. Proceso de montaje y cable management</h3>
+  <ul>
+    <li><strong>14.</strong> Enumere y justifique los 10 pasos del proceso de montaje de una PC de escritorio.</li>
+     <li><strong>15.</strong> Explique la función técnica del <em>cable management</em> (no decorativa). Mencione al menos cuatro consecuencias concretas de un buen ordenamiento de cables (térmicas, eléctricas y de servicio).</li>
+    <li><strong>16.</strong> ¿Por qué no deben usarse precintos de plástico desechables si se prevé mantenimiento futuro? ¿Qué alternativa se recomienda y por qué?</li>
+      <li><strong>17.</strong> Enumere las reglas de seguridad eléctrica generales antes de manipular componentes dentro del gabinete. Explique por qué se debe presionar el botón de encendido 3–5 segundos después de desconectar la fuente.</li>
+    <li><strong>18.</strong> ¿Por qué NO se debe abrir una fuente de alimentación sin capacitación específica? ¿Qué elemento interno conserva carga peligrosa incluso desconectado?</li>
+    <li><strong>19.</strong> ¿Qué precauciones deben tomarse con los cables de alimentación PCIe de la GPU (6/8 pines o 12VHPWR)? ¿Por qué se desaconsejan los adaptadores de dudosa calidad?</li>
+  </ul>
 
-        <div class="activity">
-          <h4>Actividad 3 — Disipadores: tipos y partes</h4>
-          <p class="activity__goal">Identificar tipos de disipadores, heatpipes y ventiladores.</p>
-          <ol>
-            <li>Busque una imagen de cada tipo: <strong>stock de bajo perfil</strong>, <strong>top-down o de flor</strong>, <strong>torre simple</strong>, <strong>torre doble</strong> y <strong>pasivo grande (fanless)</strong>. Indique en cada imagen: cantidad de heatpipes, diámetro del ventilador y posición del flujo de aire.</li>
-            <li>Busque un <strong>corte o radiografía de un heatpipe</strong> y explique el recorrido del líquido y del vapor con sus propias palabras.</li>
-            <li>Compare dos disipadores reales del mercado (marca y modelo) según: <strong>presión estática</strong> del ventilador, <strong>CFM</strong>, <strong>nivel de ruido declarado</strong> y <strong>TDP soportado</strong>. Concluya cuál elegiría para una CPU de 125 W y por qué.</li>
-            <li>Busque imágenes de un <strong>AIO de 240 mm</strong> y de un <strong>custom loop con depósito</strong>. Rotule bomba, bloque, radiador, depósito, tuberías y racores.</li>
-          </ol>
-        </div>
+  <!-- ============================================================
+       BLOQUE E — PANEL FRONTAL Y CONEXIONES
+       ============================================================ -->
+  <h3>E. Panel frontal: botones, LEDs, audio y USB</h3>
+  <ul>
+    <li><strong>20.</strong> ¿Cuál es la importancia de saber que conectar en el panel frontal?</li>
+    <li><strong>21.</strong> ¿Cuál conexiones consideras de vital importancia, las cuales es necesario estén conectadas en el panel frontal?</li>
+    <li><strong>22.</strong> ¿Qué significa que un conector tenga <strong>polaridad</strong>?</li>
+     <li><strong>23.</strong> Describa el método de cinco pasos para no equivocarse al conectar el panel frontal (localizar en manual, identificar pin 1, reconocer polaridad, conectar en frío, revisar antes de culpar componentes).</li>
+  </ul>
 
-        <div class="activity">
-          <h4>Actividad 4 — Pasta térmica vs. thermal pad vs. putty</h4>
-          <p class="activity__goal">Distinguir interfaces térmicas por formato, uso y presentación comercial.</p>
-          <ol>
-            <li>Busque imágenes de: pasta de <strong>silicona/óxido de zinc</strong>, <strong>cerámica</strong>, <strong>metálica</strong>, <strong>metal líquido</strong>, <strong>thermal pad</strong> de varios espesores, <strong>thermal putty</strong>, <strong>almohadilla de grafeno</strong> y <strong>lámina PTM7950</strong>.</li>
-            <li>Para cada uno indique: presentación (jeringa, lámina, masilla), rango de conductividad térmica y <strong>dónde se aplica</strong>.</li>
-            <li>Busque dos imágenes del <strong>mismo componente</strong> intervenido: una con pasta aplicada en exceso y otra con la cantidad correcta. Explique la diferencia técnica, no estética.</li>
-            <li>Investigue en la ficha técnica de un pad: espesores disponibles y rango de compresión admitido. Explique por qué no se deben apilar dos pads.</li>
-          </ol>
-        </div>
+  <!-- ============================================================
+       BLOQUE F — HEADERS DE VENTILACIÓN
+       ============================================================ -->
+  <h3>F. Headers de ventilación en la placa madre</h3>
+  <ul>
+    <li><strong>24.</strong> ¿Cuál es la importancia de los siguiente headers?: CPU_FAN, CPU_OPT, SYS_FAN/CHA_FAN, AIO_PUMP/W_PUMP+, PUMP_FAN, ARGB/D_LED y RGB_HEADER.</li>
+    <li><strong>25.</strong> ¿Por qué conectar el ventilador del disipador de CPU en un header equivocado puede impedir el arranque del equipo o mostrar "CPU Fan Error"?</li>
+    <li><strong>26.</strong> Explique la diferencia entre un header <strong>CPU_FAN</strong> y un header <strong>CPU_OPT</strong>. ¿Por qué el segundo suele ser "esclavo" del primero?</li>
+    </ul>
 
-        <div class="activity">
-          <h4>Actividad 5 — Despiece térmico de una notebook</h4>
-          <p class="activity__goal">Interpretar la arquitectura térmica real de un equipo portátil.</p>
-          <ol>
-            <li>Busque el <strong>manual de servicio (service manual)</strong> o una guía de desarmado de un modelo concreto de notebook. Indique marca y modelo.</li>
-            <li>Copie o pegue la imagen del despiece y rotule: <strong>CPU</strong>, <strong>GPU</strong>, <strong>heatpipes compartidos</strong>, <strong>aletas</strong>, <strong>turbina blower</strong>, <strong>salida de aire</strong>, <strong>entrada de aire</strong>, <strong>pads de VRAM y VRM</strong>.</li>
-            <li>Registre los <strong>espesores de thermal pads</strong> que indica el manual para cada componente, y ordene de menor a mayor.</li>
-            <li>Explique por qué el disipador es una pieza única y qué ocurre si un solo pad tiene el espesor incorrecto.</li>
-            <li>Investigue una <strong>base externa</strong> para ese modelo y evalúe críticamente su efectividad según la posición de la admisión y la salida del equipo.</li>
-          </ol>
-        </div>
+  <!-- ============================================================
+       BLOQUE G — FUNDAMENTOS TÉRMICOS
+       ============================================================ -->
+  <h3>G. Fundamentos térmicos: TDP, Tmax, throttling y apagado</h3>
+  <ul>
+    <li><strong>27.</strong> Defina <strong>TDP (Thermal Design Power)</strong> y explique por qué no es equivalente al consumo eléctrico exacto. ¿Para qué se usa como referencia?</li>
+    <li><strong>28.</strong> Defina <strong>T<sub>jmax</sub> / Tmax</strong> y mencione los valores típicos para: CPU de escritorio, GPU, SSD NVMe, VRM de placa madre y chipset.</li>
+    <li><strong>29.</strong> Explique por qué "temperatura alta no siempre equivale a falla". ¿Cuándo se manifiesta realmente un problema térmico?</li>
+    <li><strong>30.</strong> Defina <strong>throttling</strong> y describa cómo se manifiesta en la práctica</li>
+    <li><strong>31.</strong> Defina <strong>thermal shutdown</strong></li>
+  </ul>
 
-        <div class="activity">
-          <h4>Actividad 6 — Casos visuales de falla (evidencia fotográfica)</h4>
-          <p class="activity__goal">Reconocer patrones de falla térmica y eléctrica.</p>
-          <p>Busque una imagen real de cada caso, adjúntela y explique <strong>cómo se reconoce</strong> y <strong>qué la provoca</strong>:</p>
-          <ol>
-            <li>Condensador electrolítico hinchado o reventado.</li>
-            <li>Conector de alimentación PCIe/12 V con signos de calor (plástico decolorado o derretido).</li>
-            <li>Pasta térmica seca y agrietada, con huella incompleta sobre el IHS.</li>
-            <li>Polvo compactado formando una "alfombra" entre las aletas de un radiador o de un disipador de notebook.</li>
-            <li>Pad de VRAM desintegrado o muy comprimido.</li>
-            <li>Ventilador con aspas desbalanceadas o con juego axial (si encuentra un video o imagen comparativa de RPM y ruido, mejor).</li>
-          </ol>
-        </div>
+  <!-- ============================================================
+       BLOQUE H — TIM: INTERFACES TÉRMICAS
+       ============================================================ -->
+  <h3>H. Interfaces de transferencia térmica (TIM)</h3>
+  <ul>
+    <li><strong>32.</strong> Defina qué es un <strong>TIM</strong> y explique la función microfísica: ¿por qué hace falta una interfaz entre el IHS y el disipador si ambas superficies parecen espejos?</li>
+    <li><strong>33.</strong> ¿Qué es la pasta térmica y que ofrece?.</li>
+     <li><strong>34.</strong> Explique los tres peligros concretos del <strong>metal líquido (galio)</strong>. ¿Sobre qué metales SÍ se puede aplicar?</li>
+    <li><strong>35.</strong> Describa el método de aplicación de pasta térmica: cantidad, métodos válidos (punto, línea, extendido), errores a evitar (dedos, cotonete, exceso, defecto) y patrón de atornillado del disipador.</li>
+    <li><strong>36.</strong> ¿Qué es un <strong>thermal pad</strong> y en qué casos se usa en lugar de pasta térmica? Mencione al menos cinco aplicaciones típicas.</li>
+    <li><strong>37.</strong> ¿Qué es el <strong>thermal putty</strong> y por qué se recomienda en notebooks con chips de alturas desiguales? ¿Qué ventaja tiene frente a un pad de espesor fijo?</li>
+     <li><strong>38.</strong> ¿Cómo se elige un pad del espesor correcto? Describa los cuatro pasos: manual de servicio, medición con calibre o masilla, margen de compresión del 10–25 % y prohibición de apilar pads.</li>
+  </ul>
 
-        <div class="lab">
-          <span class="lab__title">Criterios de evaluación comunes a las actividades 1 a 6</span>
-          <ul>
-            <li><strong>Pertinencia de la imagen:</strong> corresponde exactamente a lo pedido y permite identificar el elemento (30 %).</li>
-            <li><strong>Corrección técnica del registro:</strong> pines, polaridad, espesores, conexiones y valores correctos (40 %).</li>
-            <li><strong>Justificación:</strong> explica el criterio de reconocimiento y la consecuencia de un error (20 %).</li>
-            <li><strong>Fuentes citadas y presentación:</strong> orden, claridad, referencias verificables (10 %).</li>
-          </ul>
-        </div>
+  <!-- ============================================================
+       BLOQUE I — MÉTODOS Y COMPONENTES DE DISIPACIÓN
+       ============================================================ -->
+  <h3>I. Métodos y componentes de disipación</h3>
+  <ul>
+    <li><strong>39.</strong> Explique la diferencia entre <strong>refrigeración pasiva</strong> y <strong>refrigeración activa</strong>. ¿Por qué casi todos los sistemas reales son híbridos? Dé un ejemplo de cada tipo.</li>
+    <li><strong>40.</strong> Enumere los componentes que requieren disipación e indique su elemento de disipación e interfaz térmica involucrada.</li>
+    <li><strong>41.</strong> Describa los tipos de disipadores por aire: stock/bajo perfil, torre y blower/radial. </li>
+    <li><strong>42.</strong> Explique el funcionamiento de un <strong>heatpipe</strong></li>
+      <li><strong>43.</strong> Describa los tipos de disipadores líquidos <strong>AIO vs Custom Loop</strong>: componentes, complejidad de instalación, mantenimiento, rendimiento, riesgo de fuga, conexión eléctrica y posición del radiador.</li>
+   
+     <li><strong>44.</strong> Cuales con los conectores más importantes para las refrigeraciones liquitas y de aire.</li>
+    <li><strong>45.</strong> Describa las particularidades térmicas de un <strong>notebook</strong>: uso de turbina blower, heatpipes compartidos CPU/GPU, contacto direct-die, criticidad del espesor de pads, TIM recomendado y límites de firmware (perfiles OEM).</li>
+</ul>
+
+  <!-- ============================================================
+       BLOQUE J — MANTENIMIENTO
+       ============================================================ -->
+  <h3>J. Mantenimiento preventivo y recambio de TIM</h3>
+  <ul>
+    <li><strong>46.</strong> ¿Porque es importante usar los EPP?</li>
+    
+    <li><strong>47.</strong> Para que usamos la pulsera antiestática, guantes de nitrilo, anteojos de protección y barbijo/mascarilla.</li>
+    <li><strong>48.</strong> Enumere al menos cinco reglas de seguridad eléctrica y de entorno de trabajo.</li>
+    <li><strong>49.</strong> Mencionar las herramientas y consumibles esenciales  para trabajar</li>
+    <li><strong>50.</strong> Describa el protocolo paso a paso de limpieza de filtros y remoción de polvo. Explique por qué se debe registrar el estado inicial antes de intervenir.</li>
+    <li><strong>51.</strong> ¿Por qué se deben sujetar las aspas de los ventiladores antes de soplar con aire comprimido? ¿Qué daño se evita?</li>
+<li><strong>52.</strong> Cual es la frecuencia de mantenimiento preventivo según ambiente adverso para: limpieza interna, cambio de pasta CPU, cambio de TIM GPU, cambio de TIM/pads notebook, cambio de refrigerante. ¿Que patrón observas?</li>
+
+    <li><strong>53.</strong> Enumere las señales de que hay que intervenir "YA" sin esperar al calendario (subida de temperatura en reposo, ruido nuevo, fans al 100 %, apagados sin error, caída de rendimiento, olor a quemado).</li>
+    
+    <li><strong>54.</strong> Explique por qué la intervención en un notebook es "la más crítica en cuanto a espesores". ¿Qué ocurre si un pad es más fino de lo necesario y qué si es más grueso?</li>
+    <li><strong>55.</strong> ¿Por qué NO se debe usar metal líquido en notebooks? Mencione al menos dos razones técnicas.</li>
+     <li><strong>56.</strong> ¿Qué precauciones deben tomarse al desarmar un notebook?.</li>
+  </ul>
+
+  <!-- ============================================================
+       BLOQUE K — ACTIVIDADES DE BÚSQUEDA E IDENTIFICACIÓN DE IMÁGENES
+       ============================================================ -->
+  <h3>K. Actividades de búsqueda e identificación de imágenes</h3>
+  <ul>
+    <li><strong>57.</strong> Buscar imágenes de <strong>gabinetes E-ATX, ATX, Micro-ATX y Mini-ITX</strong> y describir la diferencia observada</li>
+     <li><strong>58.</strong> Buscar imágenes de las partes internas de un chasis: <strong>bandeja de placa madre</strong>, <strong>shroud de fuente</strong>, <strong>bahías modulares</strong>, <strong>bandeja de gestión de cables</strong>, <strong>filtros antipolvo</strong> y <strong>bracket PCIe</strong>. Etiquetar cada una.</li>
+    <li><strong>59.</strong> Buscar imágenes de <strong>standoffs</strong> (separadores hexagonales)</li>
+    <li><strong>60.</strong> Buscar imágenes de <strong>bahías de 5,25" con lectora de DVD</strong>, <strong>bahía de 3,5" con HDD</strong>, <strong>bahía de 2,5" con SSD SATA</strong></li>
+
+    <li><strong>61.</strong> Buscar imágenes del <strong>panel frontal de un gabinete</strong> (botones, LEDs, puertos USB, audio) y de los <strong>conectores internos</strong> (Power SW, Reset SW, Power LED, HDD LED, Speaker, HD Audio, USB 2.0, USB 3.0, USB-C).</li>
+    
+   <li><strong>62.</strong> Buscar imágenes de los headers de ventilación: <strong>CPU_FAN</strong>, <strong>CPU_OPT</strong>, <strong>SYS_FAN/CHA_FAN</strong>, <strong>AIO_PUMP/W_PUMP+</strong>, <strong>PUMP_FAN</strong>. Comparar cantidad de pines y serigrafía.</li>
+    <li><strong>63.</strong> Buscar imágenes de un <strong>disipador stock</strong>, uno <strong>top-down (de flor)</strong>, uno <strong>de torre</strong>, uno <strong>de doble torre</strong> y uno <strong>pasivo grande (fanless)</strong>. Comparar tamaño, cantidad de heatpipes y flujo de aire.</li>
+    <li><strong>64.</strong> Buscar imágenes de un <strong>heatpipe </strong>. </li>
+    <li><strong>65.</strong> Buscar imágenes de un <strong>AIO (All-In-One)</strong> y de un <strong>Custom Loop completo</strong> (bloque, bomba, depósito, radiador, racores, tuberías). Comparar cantidad de componentes y complejidad.</li>
+    <li><strong>66.</strong> Buscar imágenes de un <strong>radiador de AIO de 240/280/360/420 mm</strong> y comparar superficie y capacidad de disipación.</li>
+    <li><strong>67.</strong> Buscar imágenes de una <strong>turbina blower de notebook</strong> y de un <strong>disipador de notebook con heatpipes compartidos CPU/GPU</strong>. </li>
+    
+    <li><strong>68.</strong> Buscar imágenes de una <strong>GPU desarmada</strong> mostrando el die, los chips de VRAM, los VRM, el PCB y el backplate. Identificar dónde va pasta y dónde van pads.</li>
+   <li><strong>69.</strong> Buscar imágenes de una <strong>Pasta termica</strong></li>
+   
+    <li><strong>70.</strong> Buscar imágenes de <strong>thermal pads de distintos espesores</strong> (0,5 / 1,0 / 1,5 / 2,0 / 3,0 mm) y de <strong>thermal putty</strong> (masa moldeable). Comparar formatos y aplicaciones.</li>
+    <li><strong>71.</strong> Buscar imágenes de <strong>PTM7950</strong> (lámina de cambio de fase) y de una <strong>almohadilla de grafeno</strong>. </li>
+    <li><strong>72.</strong> Buscar imágenes de una <strong>pulsera antiestática</strong>, <strong>guantes de nitrilo</strong>, <strong>anteojos de protección</strong> y <strong>barbijo</strong>.</li>
+   
+    <li><strong>73.</strong> Buscar imágenes de las herramientas: <strong>espátula plástica</strong>, <strong>alcohol isopropílico 99 %</strong>, <strong>paño de microfibra</strong>, <strong>aire comprimido en lata</strong>, <strong>pincel antiestático</strong>, <strong>pinzas antiestáticas</strong>, <strong>multímetro</strong> y <strong>bandeja antiestática</strong>.</li>
+   
+    <li><strong>74.</strong> Buscar imágenes de un <strong>filtro antipolvo magnético</strong> de base y de un <strong>filtro frontal extraíble</strong>. Explicar cómo se limpian y por qué deben poder retirarse sin abrir el gabinete.</li>
+   
+     <li><strong>75.</strong> Buscar imágenes de <strong>condensadores hinchados o con fuga</strong> en una placa madre o fuente. Explicar qué indica cada signo en una revisión visual.</li>
+
+  </ul>
+        
+
+     
+
+
+ 
+
+       
       </article>
-      <article class="sub" id="s6-2">
-        <h3>6.2 Cuestionario de refuerzo </h3>
-
-        <div class="note">
-          <span class="note__title">Cómo se responde este cuestionario</span>
-          <ul>
-            <li>Se responde <strong>íntegramente con el material de este documento</strong>. Cuando sea necesario complementar, se debe citar la fuente consultada.</li>
-            <li><strong>No hay corrección automática:</strong> el sistema no indica si la respuesta es correcta o incorrecta, porque el objetivo es que el alumno desarrolle el razonamiento completo y que el docente evalúe el criterio técnico.</li>
-            <li>Se responde en los campos de texto. Se puede <strong>guardar el avance</strong> y continuar más tarde en el mismo navegador (botón <em>Guardar</em> del panel inferior).</li>
-            <li>Al finalizar, se entrega con <strong>Descargar (.md)</strong> o <strong>Descargar (.json)</strong>, o mediante el botón <strong>Enviar al docente</strong>, que registra la entrega en la base de datos de la cátedra.</li>
-            <li>En las preguntas de casos prácticos, se espera: <strong>hipótesis → verificación → acción correctiva concreta</strong>. Una respuesta que sólo diga "hay que limpiar la PC" no acredita el punto.</li>
-          </ul>
-        </div>
-
-        <h4>Rúbrica de corrección del cuestionario</h4>
-        <div class="table-wrap">
-          <table>
-            <caption>Criterios con los que el docente corrige la entrega.</caption>
-            <thead><tr><th>Nivel</th><th>Descripción</th><th>Puntaje relativo</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Correcto y fundamentado</strong></td><td>Respuesta técnicamente correcta, con la magnitud o la relación física explicada y aplicada al caso</td><td class="tag-yes">100 %</td></tr>
-              <tr><td><strong>Correcto pero superficial</strong></td><td>Respuesta correcta de nombre o procedimiento, sin explicación del porqué</td><td class="tag-mid">60–75 %</td></tr>
-              <tr><td><strong>Parcial</strong></td><td>Identifica el problema pero no la causa o no propone verificación</td><td class="tag-mid">30–50 %</td></tr>
-              <tr><td><strong>Incorrecto o riesgo de daño</strong></td><td>Confunde componentes o propone un procedimiento peligroso (p. ej. metal líquido sobre aluminio)</td><td class="tag-no">0 %</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h4>Datos del trabajo</h4>
-        <form class="student-form" id="student-form" autocomplete="on">
-          <label class="field">
-            <span>Nombre</span>
-            <input type="text" id="f-nombre" name="nombre" placeholder="Nombre" required>
-          </label>
-          <label class="field">
-            <span>Apellido</span>
-            <input type="text" id="f-apellido" name="apellido" placeholder="Apellido" required>
-          </label>
-          <label class="field">
-            <span>Curso / comisión</span>
-            <input type="text" id="f-curso" name="curso" placeholder="Ej.: 3.º A · Comisión 4">
-          </label>
-          <label class="field">
-            <span>Legajo / DNI</span>
-            <input type="text" id="f-legajo" name="legajo" placeholder="N.º de legajo o documento">
-          </label>
-          <label class="field">
-            <span>Fecha</span>
-            <input type="date" id="f-fecha" name="fecha">
-          </label>
-          <label class="field">
-            <span>Docente</span>
-            <input type="text" id="f-docente" name="docente" placeholder="Apellido del docente">
-          </label>
-        </form>
-
-        <p class="q__hint">Las respuestas se guardan automáticamente mientras se escribe. Puede volver a esta página en el mismo navegador y retomar la entrega.</p>
-
-        <!-- Contenedor donde quiz.js construye todas las preguntas -->
-        <div id="quiz-root" data-rendered="false">
-          <noscript>
-            <div class="warn">
-              <span class="warn__title">JavaScript desactivado</span>
-              <p>
-                El cuestionario se genera con JavaScript para poder guardar y exportar las respuestas.
-                Active JavaScript en el navegador para verlo y completarlo. El resto del documento funciona
-                sin JavaScript.
-              </p>
-            </div>
-          </noscript>
-        </div>
-
-        <!-- Panel de guardado y entrega -->
-        <div class="save-bar no-print" id="save-bar">
-          <span class="save-bar__status" id="save-status">Sin cambios pendientes.</span>
-          <button class="btn btn--primary" type="button" id="btn-save">💾 Guardar</button>
-          <button class="btn" type="button" id="btn-download-md">⬇ .md</button>
-          <button class="btn" type="button" id="btn-download-json">⬇ .json</button>
-          <button class="btn" type="button" id="btn-submit">📤 Enviar al docente</button>
-          <button class="btn btn--ghost" type="button" id="btn-reset">🗑 Borrar todo</button>
-        </div>
-
-        <div class="lab">
-          <span class="lab__title">Estado de la entrega</span>
-          <dl class="kv">
-            <dt>Respuestas completadas</dt>
-            <dd><span id="stat-answered">0</span> de <span id="stat-total">0</span></dd>
-            <dt>Progreso</dt>
-            <dd><span id="stat-percent">0 %</span></dd>
-            <dt>Último guardado</dt>
-            <dd><span id="stat-saved">—</span></dd>
-          </dl>
-        </div>
-
-        <div class="tip">
-          <span class="tip__title">Sobre la entrega por "Enviar al docente"</span>
-          <p>
-            El botón envía el cuestionario completo (datos del alumno + todas las respuestas + fecha y hora)
-            al registro de entregas de la cátedra y muestra un código de comprobante. Si el envío falla por
-            falta de conexión, use la descarga <code>.md</code> o <code>.json</code> y adjúntela en el aula
-            virtual: el contenido es el mismo.
-          </p>
-        </div>
-      </article>
+    
     </section>
 
-    <!-- ============================================================
-         ANEXOS
-         ============================================================ -->
-    <section class="block" id="anexos" aria-labelledby="anexos-t">
-      <h2 id="anexos-t"><span class="num">+</span> Anexos: glosario, formulario y guía docente</h2>
-
-      <article class="sub" id="anexo-glosario">
-        <h3>Glosario de la sesión</h3>
-        <div class="table-wrap">
-          <table>
-            <caption>Términos que el alumno debe poder definir sin consultar el documento.</caption>
-            <thead><tr><th>Término</th><th>Definición</th></tr></thead>
-            <tbody>
-              <tr><td>Factor de forma</td><td>Norma de dimensiones y posiciones que debe compartir la placa madre con el gabinete.</td></tr>
-              <tr><td>Standoff</td><td>Separador metálico que eleva la placa madre para que no toque el chasis conductor.</td></tr>
-              <tr><td>I/O Shield</td><td>Escudo de puertos trasero que cubre el hueco entre la placa madre y el chasis.</td></tr>
-              <tr><td>Shroud</td><td>Cubierta que oculta la fuente y los cables, característica del diseño moderno.</td></tr>
-              <tr><td>MESH</td><td>Frente o panel de malla que prioriza el paso del aire por sobre el aislamiento.</td></tr>
-              <tr><td>TDP</td><td>Potencia de diseño térmico: calor que el disipador debe poder evacuar.</td></tr>
-              <tr><td>T<sub>junction</sub></td><td>Temperatura de la unión del silicio: la temperatura que realmente limita el componente.</td></tr>
-              <tr><td>T<sub>jmax</sub></td><td>Temperatura máxima de unión antes de que el firmware reduzca o corte.</td></tr>
-              <tr><td>Thermal Throttling</td><td>Reducción automática de frecuencia y voltaje para bajar la temperatura.</td></tr>
-              <tr><td>Thermal Shutdown</td><td>Corte de alimentación de emergencia al alcanzar T<sub>jmax</sub>.</td></tr>
-              <tr><td>Rθ (resistencia térmica)</td><td>Oposición al paso del calor, en °C/W. Se suma a lo largo de la cadena.</td></tr>
-              <tr><td>Electromigración</td><td>Migración de átomos del conductor por corriente y temperatura; degrada las pistas del chip.</td></tr>
-              <tr><td>TIM</td><td>Interfaz de transferencia térmica: elimina las bolsas de aire entre superficies.</td></tr>
-              <tr><td>Pump-out</td><td>Expulsión de la pasta fuera de la zona caliente por los ciclos térmicos.</td></tr>
-              <tr><td>PTM7950</td><td>Material de cambio de fase: sólido en frío, fluido en caliente; duradera y sin riesgo eléctrico.</td></tr>
-              <tr><td>Heatpipe</td><td>Tubo sellado con cambio de fase y mecha capilar que transporta calor casi sin salto térmico.</td></tr>
-              <tr><td>Mejora capilar (wick)</td><td>Estructura porosa interior del heatpipe que devuelve el líquido al evaporador.</td></tr>
-              <tr><td>Presión estática</td><td>Capacidad de un ventilador de empujar aire contra un obstáculo (mmH<sub>2</sub>O).</td></tr>
-              <tr><td>CFM</td><td>Caudal de aire movido por el ventilador (pies cúbicos por minuto).</td></tr>
-              <tr><td>AIO</td><td>Sistema de refrigeración líquida sellado (bloque + bomba + radiador + mangueras).</td></tr>
-              <tr><td>Custom loop</td><td>Circuito líquido a medida, armado por el usuario, con depósito y purga de aire.</td></tr>
-              <tr><td>Corrosión galvánica</td><td>Corrosión acelerada por mezclar metales distintos (cobre y aluminio) en un circuito líquido.</td></tr>
-              <tr><td>Blower (turbina)</td><td>Ventilador tangencial de notebook que genera alta presión estática en poco espacio.</td></tr>
-              <tr><td>Direct-Die</td><td>Montaje del disipador directamente sobre el die, sin IHS intermedio.</td></tr>
-              <tr><td>FDB</td><td>Fluid Dynamic Bearing: rodamiento donde el eje flota sobre una película de aceite.</td></tr>
-              <tr><td>Fan curve</td><td>Curva que relaciona temperatura del sensor con velocidad del ventilador.</td></tr>
-              <tr><td>Histerésis (en curvas)</td><td>Margen que evita que el ventilador acelere y corte continuamente por oscilaciones de temperatura.</td></tr>
-              <tr><td>Coil whine</td><td>Zumbido eléctrico producido por la vibración de bobinas bajo carga.</td></tr>
-              <tr><td>IPA 99 %</td><td>Alcohol isopropílico de alta pureza: el limpiador admitido sobre componentes electrónicos.</td></tr>
-              <tr><td>EPP</td><td>Equipo de protección personal (pulsera ESD, guantes, anteojos, mascarilla).</td></tr>
-              <tr><td>RAEE</td><td>Residuo de aparato eléctrico y electrónico: destino final de componentes descartados.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </article>
-
-      <article class="sub" id="anexo-formulario">
-        <h3>Formulario y equivalencias</h3>
-        <pre class="code">TEMPERATURA Y RESISTENCIA TÉRMICA
-  Tj = Ta + P · Rθ                      P = (Tj − Ta) / Rθ        Rθ = (Tj − Ta) / P
-  Rθ_total = Rθ_jc + Rθ_TIM + Rθ_sa     Rθ de una capa = L / (k · A)
-  Regla de Arrhenius (aprox.): +10 °C ⇒ vida útil del componente y del capacitor ≈ mitad
-
-CAPACIDAD DE EVACUACIÓN
-  Conducción: Q = k · A · ΔT / L         Convección: Q = h · A · ΔT  (h depende del flujo de aire)
-
-AIRE
-  1 CFM = 1,699 m³/h                     1 mmH₂O ≈ 9,807 Pa
-  Caudal total (aprox., sin obstáculos) ≈ CFM por ventilador × cantidad
-
-UNIDADES FRECUENTES
-  1 pulgada (") = 25,4 mm                1 mm = 0,0394"
-  Pulgada de los ventiladores: 120 mm ≈ 4,72" · 140 mm ≈ 5,51"
-  Conductividad térmica k: aire 0,026 · pasta 1–12 · metal líquido 20–73 · cobre 401 W/m·K
-
-REFERENCIAS RÁPIDAS
-  Intel LGA1700 / AMD AM5: Tjmax 95–110 °C según modelo exacto
-  GPU: hotspot admisible hasta ~95 °C; GDDR6X hasta ~110 °C
-  M.2 NVMe: throttling típico desde 70–80 °C
-
-NO OLVIDAR
-  · Un disipador NUNCA puede bajar de la temperatura ambiente del aire que recibe.
-  · La temperatura del aire DENTRO del gabinete es la que importa para el disipador,
-    no la temperatura de la habitación.
-  · El TIM no enfría: llena huecos. Su espesor debe ser el mínimo posible.</pre>
-      </article>
-
-      <article class="sub" id="anexo-docente">
-        <h3>Guía docente: sugerencias de dictado</h3>
-        <ol>
-          <li><strong>Bloque 1 (1 h):</strong> recorrido de un gabinete abierto. Los alumnos deben encontrar físicamente standoffs, grommets, filtros, shroud y headers, y dibujar el flujo de aire con flechas.</li>
-          <li><strong>Bloque 2 (1 h):</strong> fundamentos térmicos y cálculo de Rθ con los datos reales de un equipo del taller. Comparar dos equipos y explicar la diferencia de temperaturas.</li>
-          <li><strong>Bloque 3 (1 h):</strong> taller de TIM. Los alumnos aplican pasta, cierran, abren y leen la huella: es el mejor ejercicio de la sesión. Registrar temperaturas antes y después.</li>
-          <li><strong>Bloque 4 (1 h):</strong> despiece de notebook. Trabajar en grupos con un equipo descartado; clasificar los pads por espesor y discutir el error de medida.</li>
-          <li><strong>Trabajo práctico domiciliario:</strong> actividades de búsqueda de imágenes (sección 6.1).</li>
-          <li><strong>Evaluación:</strong> cuestionario de la sección 6.2, entregado por descarga o por el botón "Enviar al docente". El docente recibe las respuestas por alumno sin que el sistema le indique puntaje, y aplica la rúbrica.</li>
-          <li><strong>Errores conceptuales a vigilar:</strong> creer que "más pasta = más frío"; confundir CFM con presión estática; pensar que el metal líquido es apto para cualquier disipador; creer que el gabinete no afecta el rendimiento; olvidar la polaridad de los LEDs y del ARGB (5 V vs. 12 V).</li>
-        </ol>
-
-        <div class="lab">
-          <span class="lab__title">Checklist de seguridad para las prácticas de taller</span>
-          <ul>
-            <li>¿Se desconectó la energía y se pulsó el botón de encendido para descargar?</li>
-            <li>¿Cada alumno tiene pulsera ESD o toca el chasis antes de tomar componentes?</li>
-            <li>¿Se usan guantes al manipular pasta, IPA y metal líquido?</li>
-            <li>¿Se usan anteojos y mascarilla al soplar aire comprimido?</li>
-            <li>¿El aire comprimido se aplica con las aspas sujetas y el envase vertical?</li>
-            <li>¿Los tornillos se clasifican por longitud antes de desarmar?</li>
-            <li>¿Hay una sola persona manipulando el componente en la mesa y no hay bebidas ni líquidos sobre el área?</li>
-            <li>¿Los residuos (pastas, guantes, IPA, componentes) se disponen correctamente?</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="sub" id="anexo-bibliografia">
-        <h3>Referencias técnicas para consulta</h3>
-        <ul>
-          <li>Manual de placa madre (del modelo trabajado): pinout de todos los headers, límites de corriente y diagrama de la BIOS.</li>
-          <li>Manual de gabinete: longitudes máximas de GPU, alturas de disipador, compatibilidad de radiadores y factores de forma admitidos.</li>
-          <li><em>Service manual</em> del notebook: espesores de pads por componente, orden de desarmado y torque de tornillos.</li>
-          <li>Hoja de datos (datasheet) del CPU y de la GPU: T<sub>jmax</sub>, límites de potencia y comportamiento térmico del firmware.</li>
-          <li>Ficha técnica de cada disipador y ventilador: TDP soportado, CFM, presión estática, dBA y tipo de rodamiento.</li>
-          <li>Ficha técnica de cada TIM: conductividad, rango de compresión (pads) y advertencias de seguridad.</li>
-        </ul>
-        <div class="print-notes">
-          <p><strong>Nota para la entrega impresa:</strong> al imprimir este documento los campos de respuesta se imprimen en blanco para completar a mano. Las preguntas y tablas conservan su formato.</p>
-        </div>
-      </article>
-    </section>
+<div class="nav-bar">
+   	      <a
+   	        href="../materias/hardware-uno.html"
+   	        style="
+   	          padding: 10px 20px;
+   	          border-radius: 8px;
+   	          text-decoration: none;
+   	          font-weight: bold;
+   	          background: #4ade80;
+   	          color: #222;
+   	          display: inline-block;
+   	          margin-right: 10px;
+   	        "
+   	      >
+   	        Volver a Materia
+   	      </a>
+   	      <a
+   	        href="hardware1-sesion14.html"
+   	        style="
+   	          padding: 10px 20px;
+   	          border-radius: 8px;
+   	          text-decoration: none;
+   	          font-weight: bold;
+   	          background: #60a5fa;
+   	          color: #fff;
+   	          display: inline-block;
+   	          margin-right: 10px;
+   	        "
+   	      >
+   	        Ir a Sesión 14
+   	      </a>
+   	      <a
+   	        href="hardware1-sesion16.html"
+   	        style="
+        padding: 10px 20px;
+	          border-radius: 8px;
+   	          text-decoration: none;
+   	          font-weight: bold;
+   	          background: #f9e282;
+   	          color: #222;
+   	          display: inline-block;
+   	        "
+   	      >
+   	        Ir a Sesión 16
+   	      </a>
+   	    </div>
 <!--INSERT-->
   </main>
+  
 </div>
 
-<footer class="site-footer">
-  <div class="site-footer__inner">
-    <div>
-      <h3>Sesión 15</h3>
-      <p>Gabinetes, Factor de Forma y Sistemas de Refrigeración (Moderno, Legacy y Notebook).</p>
-      <p>Materia: <strong>Hardware 1</strong> — Hardware y Mantenimiento.</p>
-    </div>
-    <div>
-      <h3>Accesos rápidos</h3>
-      <ul>
-        <li><a href="#s1">1. Gabinetes y ensamblaje</a></li>
-        <li><a href="#s2">2. Fundamentos térmicos</a></li>
-        <li><a href="#s3">3. Interfaces térmicas (TIM)</a></li>
-        <li><a href="#s4">4. Disipación</a></li>
-        <li><a href="#s5">5. Acústica y mantenimiento</a></li>
-        <li><a href="#s6">6. Actividades y cuestionario</a></li>
-      </ul>
-    </div>
-    <div>
-      <h3>Herramientas de la página</h3>
-      <ul>
-        <li>Modo claro / oscuro</li>
-        <li>Guardado local de respuestas</li>
-        <li>Descarga en <code>.md</code> y <code>.json</code></li>
-        <li>Envío al docente por API de tablas</li>
-        <li>Vista de impresión optimizada</li>
-      </ul>
-    </div>
-    <p class="copy">
-      Documento didáctico de uso interno de cátedra. Las marcas, medidas y especificaciones citadas son
-      referencias técnicas de la industria y pueden variar entre fabricantes: <strong>siempre verifique el manual
-      de la placa madre y del gabinete antes de conectar o montar</strong>. Fin del documento.
-    </p>
-  </div>
-</footer>
+
 
 <button class="to-top" id="to-top" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
