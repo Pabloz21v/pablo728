@@ -1,0 +1,2946 @@
+<!doctype html>
+<html lang="es-ES" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Sesión técnica y didáctica sobre gabinetes de escritorio (legacy): formatos, compatibilidad, refrigeración positiva y negativa, gestión de cables y criterios de selección para el cliente."
+    />
+    <title>
+      Sesión 13 —  Gabinetes de Escritorio
+    </title>
+
+    <style>
+      /* ==========================================================================
+   SISTEMA DE ESTILOS — "Estilo Técnico Avanzado"
+   Sesión de Gabinetes de Escritorio (Legacy) — Modo oscuro
+   Basado en la paleta y los componentes del modelo de formato institucional.
+   ========================================================================== */
+
+      :root {
+        --bg: #0f1729;
+        --card-bg: #1a2744;
+        --text: #f8fafc;
+        --blue: #3b82f6;
+        --cyan: #06b6d4;
+        --green: #10b981;
+        --yellow: #f59e0b;
+        --red: #ef4444;
+        --border-deco: #2dd4bf;
+        --muted: #94a3b8;
+        --header-grad-start: #1e3a5f;
+        --header-grad-end: #1a2744;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 20px;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          Roboto,
+          Arial,
+          sans-serif;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body {
+        padding: 24px 16px 64px;
+      }
+
+      .container {
+        max-width: 1040px;
+        margin: 0 auto;
+      }
+
+      /* --------------------------------------------------------------- NAV */
+      .top-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+
+      .nav-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-decoration: none;
+        border: 1px solid transparent;
+        transition:
+          filter 0.2s,
+          transform 0.2s;
+      }
+
+      .nav-btn:hover {
+        filter: brightness(1.15);
+        transform: translateY(-1px);
+      }
+
+      .nav-btn.back {
+        background: #4ade80;
+        color: #222;
+      }
+
+      .nav-btn.prev {
+        background: #60a5fa;
+        color: #fff;
+      }
+
+      .nav-btn.next {
+        background: #f9e282;
+        color: #222;
+      }
+
+      .nav-buttons.bottom {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 40px;
+      }
+
+      /* ------------------------------------------------------------ HEADER */
+      header.hero {
+        text-align: center;
+        padding: 40px 24px;
+        background: linear-gradient(135deg, #0a1224 0%, #15233f 100%);
+        border-radius: 16px;
+        border: 1px solid rgba(45, 212, 191, 0.25);
+        margin-bottom: 28px;
+      }
+
+      header.hero h1 {
+        font-size: clamp(1.7rem, 4.5vw, 2.7rem);
+        margin: 0 0 10px;
+        background: linear-gradient(90deg, var(--blue), var(--cyan));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        line-height: 1.15;
+      }
+
+      header.hero h2 {
+        color: var(--cyan);
+        font-size: 1.15rem;
+        margin: 0 0 8px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+      }
+
+      header.hero h3 {
+        color: var(--muted);
+        font-size: 1rem;
+        margin: 0 auto 18px;
+        font-weight: 400;
+        max-width: 740px;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: rgba(6, 182, 212, 0.15);
+        color: var(--cyan);
+        font-size: 0.85rem;
+        font-weight: 600;
+        border: 1px solid rgba(6, 182, 212, 0.4);
+      }
+
+      .badge .dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--cyan);
+        margin-right: 8px;
+        vertical-align: middle;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+
+      /* --------------------------------------------------------------- TOC */
+      .toc {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 32px;
+        border: 1px solid rgba(45, 212, 191, 0.2);
+      }
+
+      .toc h2 {
+        margin: 0 0 16px;
+        font-size: 1.15rem;
+        color: var(--cyan);
+        border-bottom: 1px solid rgba(45, 212, 191, 0.3);
+        padding-bottom: 10px;
+      }
+
+      .toc ol {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        columns: 2;
+        column-gap: 30px;
+      }
+
+      .toc li {
+        margin-bottom: 8px;
+        break-inside: avoid;
+      }
+
+      .toc a {
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 10px;
+        border-radius: 6px;
+        transition: background 0.2s;
+        font-size: 0.9rem;
+      }
+
+      .toc a:hover {
+        background: rgba(59, 130, 246, 0.15);
+        color: var(--cyan);
+      }
+
+      .toc a .num {
+        color: var(--blue);
+        font-weight: 700;
+        min-width: 26px;
+      }
+
+      .toc-info {
+        margin-top: 14px;
+        font-size: 0.78rem;
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      /* ----------------------------------------------------------- SECTIONS */
+      .section-title {
+        background: linear-gradient(
+          90deg,
+          var(--header-grad-start),
+          var(--header-grad-end)
+        );
+        border-left: 5px solid var(--cyan);
+        border-radius: 0 10px 10px 0;
+        padding: 14px 20px;
+        margin: 48px 0 20px;
+        font-size: clamp(1.1rem, 3vw, 1.4rem);
+        color: var(--text);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .section-title .icon {
+        font-size: 1.3rem;
+      }
+
+      .section-title .time-badge {
+        margin-left: auto;
+      }
+
+      .section-meta {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-bottom: 24px;
+        padding-left: 20px;
+        font-style: italic;
+      }
+
+      /* --------------------------------------------------------------- CARDS */
+      .card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+
+      .card h3 {
+        margin-top: 0;
+        color: var(--cyan);
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .card h4 {
+        margin-top: 18px;
+        color: var(--blue);
+        font-size: 1rem;
+      }
+
+      .card p {
+        margin: 8px 0;
+        color: #e2e8f0;
+      }
+
+      .card ul,
+      .card ol {
+        padding-left: 22px;
+        color: #e2e8f0;
+      }
+
+      .card li {
+        margin-bottom: 6px;
+      }
+
+      .card .grid-2,
+      .card .grid-3 {
+        display: grid;
+        gap: 14px;
+        margin-top: 12px;
+      }
+
+      .card .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .card .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .mini-card {
+        background: rgba(0, 0, 0, 0.22);
+        border: 1px solid rgba(45, 212, 191, 0.18);
+        border-radius: 10px;
+        padding: 14px;
+      }
+
+      .mini-card h4 {
+        margin: 0 0 6px;
+        color: var(--cyan);
+        font-size: 0.95rem;
+      }
+
+      .mini-card p {
+        margin: 0;
+        font-size: 0.88rem;
+        color: #cbd5e1;
+      }
+
+      .mini-card ul {
+        margin: 6px 0 0;
+        font-size: 0.86rem;
+        padding-left: 18px;
+      }
+
+      /* ----------------------------------------------------------- CALLOUTS */
+      .callout {
+        background: rgba(6, 182, 212, 0.08);
+        border-left: 5px solid var(--cyan);
+        border-radius: 0 10px 10px 0;
+        padding: 16px 20px;
+        margin: 18px 0;
+      }
+
+      .callout .cbadge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 6px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+      }
+
+      .callout .cbadge.info {
+        background: var(--cyan);
+        color: #0f1729;
+      }
+
+      .callout h4 {
+        margin: 0 0 8px;
+        color: var(--cyan);
+        font-size: 1rem;
+      }
+
+      .callout p {
+        margin: 6px 0;
+        color: #e2e8f0;
+      }
+
+      .callout ul,
+      .callout ol {
+        color: #e2e8f0;
+        padding-left: 22px;
+      }
+
+      .callout.warning {
+        background: rgba(239, 68, 68, 0.08);
+        border-left-color: var(--red);
+      }
+
+      .callout.warning .cbadge {
+        background: var(--red);
+        color: #fff;
+      }
+
+      .callout.warning h4 {
+        color: var(--red);
+      }
+
+      .callout.tip {
+        background: rgba(245, 158, 11, 0.08);
+        border-left-color: var(--yellow);
+      }
+
+      .callout.tip .cbadge {
+        background: var(--yellow);
+        color: #0f1729;
+      }
+
+      .callout.tip h4 {
+        color: var(--yellow);
+      }
+
+      .callout.success {
+        background: rgba(16, 185, 129, 0.08);
+        border-left-color: var(--green);
+      }
+
+      .callout.success .cbadge {
+        background: var(--green);
+        color: #0f1729;
+      }
+
+      .callout.success h4 {
+        color: var(--green);
+      }
+
+      /* -------------------------------------------------------------- TABLES */
+      .table-wrap {
+        overflow-x: auto;
+        margin: 18px 0;
+        border-radius: 10px;
+        border: 1px solid #334155;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card-bg);
+        font-size: 0.92rem;
+        min-width: 460px;
+      }
+
+      thead {
+        background: #0f172a;
+      }
+
+      thead th {
+        color: var(--cyan);
+        text-align: left;
+        padding: 12px 14px;
+        font-weight: 600;
+        border-bottom: 2px solid var(--cyan);
+        white-space: nowrap;
+      }
+
+      tbody td {
+        padding: 11px 14px;
+        border-bottom: 1px solid #334155;
+        color: #e2e8f0;
+        vertical-align: top;
+      }
+
+      tbody tr:nth-child(even) {
+        background: rgba(255, 255, 255, 0.025);
+      }
+
+      tbody tr:hover {
+        background: rgba(59, 130, 246, 0.08);
+      }
+
+      /* ------------------------------------------------------- DECISION TREE */
+      .decision-tree {
+        background: var(--card-bg);
+        padding: 20px;
+        border-radius: 12px;
+        margin: 18px 0;
+        border: 1px solid var(--border-deco);
+      }
+
+      .dt-step {
+        margin: 10px 0;
+        padding-left: 20px;
+        border-left: 3px solid var(--cyan);
+      }
+
+      .dt-q {
+        color: var(--cyan);
+        font-weight: 600;
+        margin-bottom: 4px;
+        font-size: 0.95rem;
+      }
+
+      .dt-a {
+        color: #e2e8f0;
+        margin: 2px 0 2px 14px;
+        font-size: 0.9rem;
+      }
+
+      .dt-a::before {
+        content: "↳ ";
+        color: var(--green);
+      }
+
+      /* --------------------------------------------------------- BARS / METERS */
+      .bar-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 8px 0;
+      }
+
+      .bar-label {
+        width: 120px;
+        font-size: 0.78rem;
+        color: var(--muted);
+        flex-shrink: 0;
+      }
+
+      .bar-track {
+        flex: 1;
+        height: 10px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .bar-fill {
+        height: 100%;
+        border-radius: 5px;
+      }
+
+      .bar-value {
+        font-size: 0.78rem;
+        color: var(--cyan);
+        min-width: 74px;
+        text-align: right;
+        flex-shrink: 0;
+      }
+
+      .fill-lvl1 {
+        background: linear-gradient(90deg, #f97316, #fb923c);
+        width: 18%;
+      }
+      .fill-lvl2 {
+        background: linear-gradient(90deg, var(--yellow), #facc15);
+        width: 42%;
+      }
+      .fill-lvl3 {
+        background: linear-gradient(90deg, var(--cyan), var(--blue));
+        width: 68%;
+      }
+      .fill-lvl4 {
+        background: linear-gradient(90deg, var(--blue), #6366f1);
+        width: 88%;
+      }
+      .fill-lvl5 {
+        background: linear-gradient(90deg, #6366f1, #a855f7);
+        width: 98%;
+      }
+
+      /* ------------------------------------------------------------ FIGURES */
+      .figure {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 16px;
+        margin: 18px 0;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        overflow-x: auto;
+      }
+
+      .figure svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        min-width: 320px;
+      }
+
+      .figure figcaption {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-top: 8px;
+        font-style: italic;
+        text-align: center;
+      }
+
+      .time-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 6px;
+        background: rgba(245, 158, 11, 0.15);
+        color: var(--yellow);
+        font-size: 0.78rem;
+        font-weight: 600;
+        border: 1px solid rgba(245, 158, 11, 0.4);
+      }
+
+      /* ------------------------------------------------------ UTIL / INLINE */
+      .ref {
+        color: var(--cyan);
+        font-size: 0.75rem;
+        vertical-align: super;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .highlight {
+        color: var(--yellow);
+        font-weight: 600;
+      }
+
+      .ok {
+        color: var(--green);
+        font-weight: 600;
+      }
+
+      .no {
+        color: var(--red);
+        font-weight: 600;
+      }
+
+      .mono,
+      code.inline {
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        background: rgba(0, 0, 0, 0.35);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        color: var(--cyan);
+      }
+
+      .qtag {
+        display: inline-block;
+        font-size: 0.7rem;
+        padding: 2px 8px;
+        border-radius: 4px;
+        margin-right: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .qtag.multi {
+        background: var(--blue);
+        color: #fff;
+      }
+      .qtag.vf {
+        background: var(--green);
+        color: #0f1729;
+      }
+      .qtag.short {
+        background: var(--yellow);
+        color: #0f1729;
+      }
+      .qtag.scenario {
+        background: var(--red);
+        color: #fff;
+      }
+
+      /* --------------------------------------------------- CUESTIONARIO / QUIZ */
+      .q-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .q-item {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 18px;
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .q-num {
+        flex: 0 0 38px;
+        height: 38px;
+        width: 38px;
+        border-radius: 50%;
+        background: var(--blue);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+
+      .q-body {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .q-body h4 {
+        margin: 0 0 8px;
+        color: var(--text);
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+
+      .q-body p {
+        margin: 6px 0;
+        color: #e2e8f0;
+        font-size: 0.92rem;
+      }
+
+      .q-options {
+        margin: 10px 0 0;
+        padding-left: 0;
+        list-style: none;
+      }
+
+      .q-options li {
+        margin-bottom: 6px;
+      }
+
+      .opt {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        width: 100%;
+        text-align: left;
+        background: rgba(0, 0, 0, 0.22);
+        border: 1px solid #334155;
+        color: #cbd5e1;
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-family: inherit;
+        line-height: 1.4;
+        cursor: pointer;
+        transition:
+          background 0.15s,
+          border-color 0.15s;
+      }
+
+      .opt:hover:not(:disabled) {
+        background: rgba(59, 130, 246, 0.12);
+        border-color: var(--blue);
+      }
+
+      .opt:disabled {
+        cursor: default;
+      }
+
+      .opt .mark {
+        flex: 0 0 22px;
+        font-weight: 700;
+        color: var(--cyan);
+      }
+
+      .opt.correct {
+        background: rgba(16, 185, 129, 0.16);
+        border-color: var(--green);
+        color: #d1fae5;
+      }
+
+      .opt.correct .mark {
+        color: var(--green);
+      }
+
+      .opt.wrong {
+        background: rgba(239, 68, 68, 0.16);
+        border-color: var(--red);
+        color: #fee2e2;
+      }
+
+      .opt.wrong .mark {
+        color: var(--red);
+      }
+
+      .opt.correct .mark::before {
+        content: "✓";
+      }
+
+      .opt.wrong .mark::before {
+        content: "✕";
+      }
+
+      .feedback {
+        margin-top: 10px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        display: none;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.good {
+        color: var(--green);
+      }
+
+      .feedback.bad {
+        color: var(--red);
+      }
+
+      .answer-box {
+        margin-top: 10px;
+        background: rgba(16, 185, 129, 0.08);
+        border-left: 4px solid var(--green);
+        border-radius: 0 8px 8px 0;
+        padding: 12px 14px;
+        font-size: 0.9rem;
+        color: #d1fae5;
+        display: none;
+      }
+
+      .answer-box.show {
+        display: block;
+      }
+
+      .answer-box strong {
+        color: var(--green);
+      }
+
+      .reveal-btn {
+        margin-top: 10px;
+        background: transparent;
+        color: var(--cyan);
+        border: 1px solid var(--cyan);
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .reveal-btn:hover {
+        background: rgba(6, 182, 212, 0.14);
+      }
+
+      .quiz-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        background: linear-gradient(
+          90deg,
+          var(--header-grad-start),
+          var(--header-grad-end)
+        );
+        border: 1px solid rgba(45, 212, 191, 0.3);
+        border-radius: 12px;
+        padding: 14px 18px;
+        margin: 18px 0 22px;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      }
+
+      .quiz-toolbar .score-label {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .quiz-toolbar .score-value {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--cyan);
+      }
+
+      .quiz-toolbar .spacer {
+        flex: 1;
+      }
+
+      .tb-btn {
+        background: var(--blue);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 9px 16px;
+        font-family: inherit;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: filter 0.2s;
+      }
+
+      .tb-btn:hover {
+        filter: brightness(1.15);
+      }
+
+      .tb-btn.ghost {
+        background: transparent;
+        border: 1px solid var(--cyan);
+        color: var(--cyan);
+      }
+
+      /* ------------------------------------------------------------- FOOTER */
+      footer {
+        margin-top: 50px;
+        padding-top: 24px;
+        border-top: 1px solid #334155;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      footer p {
+        margin: 4px 0;
+      }
+
+      /* -------------------------------------------------------- RESPONSIVE */
+      @media (max-width: 860px) {
+        .card .grid-3 {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 16px 12px 48px;
+        }
+        header.hero {
+          padding: 28px 18px;
+        }
+        .toc ol {
+          columns: 1;
+        }
+        .table-wrap {
+          margin-left: -12px;
+          margin-right: -12px;
+          border-radius: 6px;
+        }
+        .top-nav {
+          flex-direction: column;
+        }
+        .nav-btn {
+          width: 100%;
+          text-align: center;
+        }
+        .card,
+        .callout,
+        .decision-tree,
+        .figure {
+          padding: 16px;
+        }
+        .card .grid-2,
+        .card .grid-3 {
+          grid-template-columns: 1fr;
+        }
+        .q-item {
+          flex-direction: column;
+        }
+        .q-num {
+          margin-bottom: 4px;
+        }
+        .bar-label {
+          width: 92px;
+        }
+        .bar-value {
+          min-width: 62px;
+        }
+        .quiz-toolbar {
+          position: static;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- ===================== NAVEGACIÓN SUPERIOR ===================== -->
+      <nav class="top-nav" aria-label="Navegación entre sesiones">
+        <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion12.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 12
+      </a>
+      <a
+        href="hardware2-sesion14.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 14
+      </a>
+    </div>
+      </nav>
+
+      <!-- ===================== HEADER PRINCIPAL ===================== -->
+      <header class="hero">
+        <h1>Sesión 13 —  Gabinetes de Escritorio</h1>
+        <h2>
+          Sesión técnica y didáctica: formatos, compatibilidad, refrigeración,
+          cableado y presupuesto
+        </h2>
+        
+        
+      </header>
+
+      <!-- ===================== TABLA DE CONTENIDOS ===================== -->
+      <section class="toc" id="toc" aria-label="Tabla de contenidos">
+        <h2>📋 Tabla de Contenidos</h2>
+        <ol>
+          <li>
+            <a href="#sec0"
+              ><span class="num">0.</span> Introducción y objetivos</a
+            >
+          </li>
+          <li>
+            <a href="#sec1"
+              ><span class="num">1.</span> ¿Qué es un gabinete? Anatomía y
+              nomenclatura</a
+            >
+          </li>
+          <li>
+            <a href="#sec2"
+              ><span class="num">2.</span> Formatos: de AT/Baby-AT al ATX
+              moderno</a
+            >
+          </li>
+          <li>
+            <a href="#sec3"
+              ><span class="num">3.</span> ¿Por qué un gabinete cuesta lo que
+              cuesta?</a
+            >
+          </li>
+          <li>
+            <a href="#sec4"><span class="num">4.</span> Los 4 ejes decisores</a>
+          </li>
+          <li>
+            <a href="#sec5"
+              ><span class="num">5.</span> Generación y compatibilidad
+              eléctrica</a
+            >
+          </li>
+          <li>
+            <a href="#sec6"
+              ><span class="num">6.</span> Flujo de aire: presión positiva y
+              negativa</a
+            >
+          </li>
+          <li>
+            <a href="#sec7"
+              ><span class="num">7.</span> Limitaciones físicas: GPU, coolers y
+              radiadores</a
+            >
+          </li>
+          <li>
+            <a href="#sec8"
+              ><span class="num">8.</span> Panel frontal: ¿se pueden usar todas
+              sus conexiones?</a
+            >
+          </li>
+          <li>
+            <a href="#sec9"
+              ><span class="num">9.</span> Gestión de cables y espacio
+              interior</a
+            >
+          </li>
+          <li>
+            <a href="#sec10"
+              ><span class="num">10.</span> Qué placa madre entra según el
+              formato</a
+            >
+          </li>
+          <li>
+            <a href="#sec11"
+              ><span class="num">11.</span> Gabinetes legacy: reconocer y
+              reciclar</a
+            >
+          </li>
+          <li>
+            <a href="#sec12"
+              ><span class="num">12.</span> Árbol de decisión y checklist de
+              venta</a
+            >
+          </li>
+          <li>
+            <a href="#sec14"
+              ><span class="num">13.</span> Cuestionario</a
+            >
+          </li>
+        </ol>
+        
+      </section>
+
+      <!-- ===================== SECCIÓN 0 ===================== -->
+      <h2 class="section-title" id="sec0">
+        <span class="icon">🎓</span>Sección 0 — Introducción y objetivos
+      </h2>
+      <p class="section-meta">
+        Por qué el gabinete no es “una caja”: es un subsistema mecánico,
+        eléctrico y térmico.
+      </p>
+
+      <div class="card">
+        <h3>🎯 ¿Qué vamos a aprender?</h3>
+        <p>
+          El <span class="highlight">gabinete</span> (o <em>chasis</em>) es la
+          estructura que sostiene la placa madre, la fuente, las unidades de
+          almacenamiento y las placas de expansión; pero también es el
+          <strong>sistema de ventilación</strong> y el
+          <strong>límite físico</strong> de todo el armado. Un gabinete mal
+          elegido no se nota al comprar: se nota al intentar montar la GPU, al
+          ver temperaturas de 90 °C, o al descubrir que el panel frontal tiene
+          un USB-C que nunca se podrá conectar.
+        </p>
+        <p>
+          Este material está pensado para que puedas
+          <strong>recomendar con criterio</strong>: no “el gabinete más lindo”,
+          sino el que cumple los requisitos del cliente dentro de su presupuesto
+          y que no obliga a cambiar componentes después.
+        </p>
+        <div
+          class="card grid-2"
+          style="
+            background: transparent;
+            box-shadow: none;
+            border: none;
+            padding: 0;
+          "
+        >
+          <div class="mini-card">
+            <h4>✅ Objetivos de conocimiento</h4>
+            <ul>
+              <li>
+                Identificar formatos de gabinete y su placa madre compatible.
+              </li>
+              <li>
+                Reconocer los factores que alteran el precio del gabinete.
+              </li>
+              <li>
+                Calcular limitaciones reales (largo de GPU, altura de cooler,
+                radiadores).
+              </li>
+              <li>
+                Distinguir refrigeración positiva y negativa y cuándo conviene
+                cada una.
+              </li>
+              <li>
+                Evaluar el panel frontal y saber si todas sus conexiones son
+                aprovechables.
+              </li>
+              <li>
+                Interpretar la etiqueta legacy (AT, Baby-AT, LPX, NLX) y decidir
+                si se recicla o se reemplaza.
+              </li>
+            </ul>
+          </div>
+          <div class="mini-card">
+            <h4>✅ Objetivos de habilidad</h4>
+            <ul>
+              <li>
+                Traducir un requerimiento del cliente a una lista de
+                verificación técnica.
+              </li>
+              <li>Justificar una recomendación con los 4 ejes decisores.</li>
+              <li>
+                Detectar incompatibilidades antes de la compra (no después del
+                montaje).
+              </li>
+              <li>
+                Priorizar entre estética, silencio, flujo de aire y precio.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <span class="cbadge info">INFO</span>
+        <h4>
+          📐 Los 4 Ejes Decisores (Presupuesto · Necesidad · Generación ·
+          Compatibilidad)
+        </h4>
+        <p>
+          Toda recomendación de gabinete pasa por estos cuatro filtros. Ninguno
+          es opcional.
+        </p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Eje</th>
+              <th>Pregunta clave</th>
+              <th>Ejemplo de impacto en el gabinete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>💰 Presupuesto</strong></td>
+              <td>¿Cuánto puede gastar el cliente?</td>
+              <td>
+                $25 genérico de chapa vs. $90 con 3 ventiladores vs. $200
+                aluminio con panel de vidrio
+              </td>
+            </tr>
+            <tr>
+              <td><strong>🛠️ Necesidad</strong></td>
+              <td>¿Qué tarea concreta debe resolverse?</td>
+              <td>
+                Oficina silenciosa → mATX sellado; gaming → malla frontal + 3
+                fans; NAS → muchas bahías 3,5″
+              </td>
+            </tr>
+            <tr>
+              <td><strong>📅 Generación</strong></td>
+              <td>¿Qué estándar soporta la fuente y la placa?</td>
+              <td>
+                Gabinete legacy AT solo acepta fuente AT y placas Baby-AT:
+                incompatible con ATX
+              </td>
+            </tr>
+            <tr>
+              <td><strong>🔗 Compatibilidad</strong></td>
+              <td>¿Entra todo lo que el cliente quiere poner?</td>
+              <td>
+                GPU de 330 mm no entra en un Mid-Tower de 300 mm; radiador 360
+                no entra en un SFF
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ===================== SECCIÓN 1 ===================== -->
+      <h2 class="section-title" id="sec1">
+        <span class="icon">🧰</span>Sección 1 — ¿Qué es un gabinete? Anatomía y
+        nomenclatura
+      </h2>
+      <p class="section-meta">
+        Vocabulario mínimo para poder conversar con el cliente y con la ficha
+        técnica.
+      </p>
+
+      <div class="card">
+        <h3>🔩 1.1 Partes del gabinete</h3>
+        <ul>
+          <li>
+            <strong>Chasis / estructura:</strong> esqueleto de acero (o
+            aluminio) que da rigidez. Es el corazón del precio.
+          </li>
+          <li>
+            <strong
+              >Bandeja de la placa madre (<em>motherboard tray</em>):</strong
+            >
+            plancha donde se atornilla la placa; define el formato soportado.
+          </li>
+          <li>
+            <strong>Bandeja de fuente (PSU shroud / bahía):</strong> puede ser
+            superior (legacy) o inferior (moderno).
+          </li>
+          <li>
+            <strong>Bahías internas:</strong> 3,5″ (discos duros), 2,5″ (SSD),
+            5,25″ (lectoras ópticas, ya en desuso).
+          </li>
+          <li>
+            <strong>Slots de expansión traseros:</strong> normalmente 4 (mATX) o
+            7 (ATX); determinan cuántas placas PCIe quedan accesibles.
+          </li>
+          <li>
+            <strong>Frente (frontal):</strong> puede ser malla (<em>mesh</em>),
+            sólido, vidrio o acrílico. Define el aire de entrada.
+          </li>
+          <li>
+            <strong>Panel lateral:</strong> vidrio templado, acrílico o chapa.
+            Afecta peso y rigidez (una chapa rigidiza más que un vidrio).
+          </li>
+          <li>
+            <strong>Panel trasero:</strong> salida de aire, rejilla de fuente,
+            soporte del disipador del CPU y 1 ventilador de escape típico.
+          </li>
+          <li>
+            <strong>Panel frontal de I/O:</strong> botón de encendido, USB,
+            audio. Se conecta a <em>headers</em> de la placa madre.
+          </li>
+          <li>
+            <strong>Cableado interno:</strong> los
+            <em>front panel headers</em> (Power SW, Reset SW, HDD LED, +PWR LED,
+            -PWR LED), USB y HD Audio.
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>📚 1.2 Tamaños comerciales (nomenclatura habitual)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Denominación</th>
+                <th>Placa madre típica</th>
+                <th>Bahías / expansión</th>
+                <th>Uso típico</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Full Tower</strong></td>
+                <td>E-ATX, ATX</td>
+                <td>≥ 3 bahías 3,5″ + 7–10 slots</td>
+                <td>Workstation, servidores, loops de agua grandes</td>
+              </tr>
+              <tr>
+                <td><strong>Mid Tower</strong></td>
+                <td>ATX, mATX</td>
+                <td>2–3 bahías + 7 slots</td>
+                <td>El más vendido: gaming y oficina potente</td>
+              </tr>
+              <tr>
+                <td><strong>Mini Tower</strong></td>
+                <td>mATX, Mini-ITX</td>
+                <td>1–2 bahías + 4 slots</td>
+                <td>Equipos compactos de oficina</td>
+              </tr>
+              <tr>
+                <td><strong>SFF / Mini-ITX</strong></td>
+                <td>Mini-ITX (170 × 170 mm)</td>
+                <td>0–1 bahías + 1–2 slots con <em>riser</em></td>
+                <td>HTPC, LAN box, escritorios chicos</td>
+              </tr>
+              <tr>
+                <td><strong>Cube</strong></td>
+                <td>mATX / Mini-ITX</td>
+                <td>Bahías apiladas</td>
+                <td>NAS casero, home server</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Antes de recomendar cualquier modelo hay que responder tres preguntas:
+          <strong>¿qué placa madre entra?</strong>,
+          <strong>¿qué largo de GPU soporta?</strong> y
+          <strong>¿qué altura de disipador de CPU admite?</strong> Esos tres
+          números están siempre en la ficha técnica del fabricante.
+        </p>
+      </div>
+
+      <!-- ===================== SECCIÓN 2 ===================== -->
+      <h2 class="section-title" id="sec2">
+        <span class="icon">🕰️</span>Sección 2 — Formatos: de AT/Baby-AT al ATX
+        moderno
+      </h2>
+      <p class="section-meta">
+        Historia aplicada: por qué un gabinete viejo puede ser un problema o una
+        oportunidad.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Formato</th>
+              <th>Época</th>
+              <th>Característica clave</th>
+              <th>Compatibilidad hoy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>AT (Full AT)</strong></td>
+              <td>1984–1997</td>
+              <td>
+                Fuente AT con interruptor de línea, panel frontal con llave,
+                botón Power que corta 220 V.
+              </td>
+              <td>
+                <span class="no">Obsoleto.</span> No acepta ATX ni fuente ATX.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Baby-AT</strong></td>
+              <td>1985–1997</td>
+              <td>
+                Versión reducida; placa con conector de teclado DIN en el
+                lateral.
+              </td>
+              <td><span class="no">Obsoleto.</span> Solo placas Baby-AT.</td>
+            </tr>
+            <tr>
+              <td><strong>LPX / NLX</strong></td>
+              <td>1996–2000</td>
+              <td>
+                Placa “low profile” con <em>riser card</em>; fuente de formato
+                reducido.
+              </td>
+              <td>
+                <span class="no">Raro y poco útil.</span> Riser propietario.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>ATX</strong></td>
+              <td>1995 → hoy</td>
+              <td>
+                Fuente 24 pines, I/O integrada en la placa, ventilación inferior
+                frontal, <em>soft power</em>.
+              </td>
+              <td>
+                <span class="ok">Estándar vigente</span> (con revisiones).
+              </td>
+            </tr>
+            <tr>
+              <td><strong>microATX</strong></td>
+              <td>1997 → hoy</td>
+              <td>
+                Placa más chica (244 × 244 mm); mismos agujeros que ATX
+                adaptados.
+              </td>
+              <td>
+                <span class="ok">Compatible</span> dentro de gabinetes ATX.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Mini-ITX</strong></td>
+              <td>2001 → hoy</td>
+              <td>170 × 170 mm, 1 slot PCIe.</td>
+              <td>
+                <span class="ok">Compatible</span> en casi todo gabinete
+                ATX/mATX.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>BTX</strong></td>
+              <td>2004–2008</td>
+              <td>
+                Propuesta de Intel para mejorar refrigeración; nunca se adoptó
+                masivamente.
+              </td>
+              <td><span class="no">Fallido.</span> No confundir con ATX.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warning">
+        <span class="cbadge">Advertencia</span>
+        <h4>⚠️ El error clásico del principiante</h4>
+        <p>
+          Comprar una placa madre ATX para un gabinete <em>legacy</em> AT o LPX.
+          Los separadores (standoffs) no coinciden, la fuente no entra y el
+          panel trasero no alinea. <strong>Regla:</strong> primero se define el
+          formato del gabinete, después la placa; o al revés, pero nunca se
+          asume que “todo entra”.
+        </p>
+      </div>
+
+      <div class="callout tip">
+        <span class="cbadge">CONSEJO</span>
+        <h4>🔑 Regla de oro de compatibilidad descendente</h4>
+        <p>
+          Un gabinete ATX <strong>acepta</strong> placas ATX, microATX y
+          Mini-ITX. Un gabinete microATX <strong>acepta</strong> microATX y
+          Mini-ITX (no ATX). Un gabinete Mini-ITX <strong>solo</strong> acepta
+          Mini-ITX. Es decir: el gabinete puede ser “más grande” que la placa,
+          nunca “más chico”.
+        </p>
+      </div>
+
+      <!-- ===================== SECCIÓN 3 ===================== -->
+      <h2 class="section-title" id="sec3">
+        <span class="icon">💵</span>Sección 3 — ¿Por qué un gabinete cuesta lo
+        que cuesta?
+      </h2>
+      <p class="section-meta">
+        Entender el precio es entender qué le estás vendiendo al cliente.
+      </p>
+
+      <div class="card">
+        <h3>📊 3.1 Factores que alteran el precio</h3>
+        <ul>
+          <li>
+            <strong>Material y espesor de chapa:</strong> acero SECC de 0,5 mm
+            (barato, vibra) vs. 0,8–1,0 mm (rígido, silencioso) vs.
+            aluminio (liviano, caro, buena disipación, menos rígido).
+          </li>
+          <li>
+            <strong>Cantidad y calidad de ventiladores incluidos:</strong> cada
+            ventilador de 120 mm PWM de marca suma entre $8 y $25. Tres
+            ventiladores ya son ~$60 del precio final.
+          </li>
+          <li>
+            <strong>Tipo de panel lateral:</strong> chapa &lt; acrílico &lt;
+            vidrio templado (más peso, más costo, más frágil al transporte).
+          </li>
+          <li>
+            <strong>Diseño del frontal:</strong> malla metálica (mejor flujo)
+            vs. frontal sellado con luces (peor flujo, más estética).
+          </li>
+          <li>
+            <strong>Filtros antipolvo:</strong> magnéticos y desmontables suman
+            costo pero alargan la vida del equipo.
+          </li>
+          <li>
+            <strong>Ingeniería de cableado:</strong> bandeja con canales,
+            agujeros con burlete de goma (<em>grommets</em>), espacio detrás de
+            la bandeja (≥ 20 mm).
+          </li>
+          <li>
+            <strong>Soportes antivibración:</strong> para discos mecánicos y
+            para la fuente.
+          </li>
+          <li>
+            <strong>Bahías y modularidad:</strong> jaulas desmontables, soportes
+            para radiadores de 240/280/360 mm.
+          </li>
+          <li>
+            <strong>Facilidad de montaje:</strong> tornillos de mariposa, bahías
+            sin herramienta, cubierta de fuente (<em>shroud</em>).
+          </li>
+          <li>
+            <strong>Marca, garantía y soporte:</strong> un gabinete premium
+            puede costar 4× uno genérico sin cambiar ni una pieza de hardware.
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>📈 3.2 Escala de precio referencial (USD)</h3>
+        <div class="bar-row">
+          <span class="bar-label">Genérico 0,5 mm</span>
+          <div class="bar-track"><div class="bar-fill fill-lvl1"></div></div>
+          <span class="bar-value">$20–35</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Oficina 0,6 mm</span>
+          <div class="bar-track"><div class="bar-fill fill-lvl2"></div></div>
+          <span class="bar-value">$35–60</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Gamer malla + 2 fans</span>
+          <div class="bar-track"><div class="bar-fill fill-lvl3"></div></div>
+          <span class="bar-value">$60–100</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Gamer alto + vidrio</span>
+          <div class="bar-track"><div class="bar-fill fill-lvl4"></div></div>
+          <span class="bar-value">$100–180</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Premium / aluminio</span>
+          <div class="bar-track"><div class="bar-fill fill-lvl5"></div></div>
+          <span class="bar-value">$180–300+</span>
+        </div>
+        <p style="font-size: 0.78rem; color: var(--muted)">
+          Valores referenciales del mercado minorista: sirven para ubicar
+          rangos, no como presupuesto exacto.
+        </p>
+      </div>
+
+      <div class="callout success">
+        <span class="cbadge">CLAVE</span>
+        <h4>✅ El gabinete no mejora el rendimiento… pero lo degrada</h4>
+        <p>
+          Un gabinete caro no hace que la PC sea más rápida. Un gabinete barato
+          mal ventilado
+          <strong>sí</strong> hace que el CPU y la GPU bajen su frecuencia (<em
+            >thermal throttling</em
+          >) y que la PC sea, en la práctica, más lenta. Es un gasto “invisible”
+          que protege toda la inversión.
+        </p>
+      </div>
+
+      <!-- ===================== SECCIÓN 4 ===================== -->
+      <h2 class="section-title" id="sec4">
+        <span class="icon">🧭</span>Sección 4 — Los 4 ejes decisores aplicados
+        al gabinete
+      </h2>
+      <p class="section-meta">
+        Presupuesto · Necesidad · Generación · Compatibilidad: la misma matriz,
+        ahora con números.
+      </p>
+
+      <div class="card">
+        <h3>
+          🧩 4.1 Análisis de componentes que se van a agregar (el paso que casi
+          todos saltean)
+        </h3>
+        <p>
+          Antes de elegir el gabinete hay que
+          <strong>listar cada componente</strong> y anotar sus dimensiones.
+          Algunos componentes no solo ocupan su lugar:
+          <span class="highlight">anulan slots y bahías</span>.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Componente</th>
+                <th>Medida crítica</th>
+                <th>Qué puede anular</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>GPU de 2,5–3,5 slots</strong></td>
+                <td>Largo (mm) y espesor en slots</td>
+                <td>
+                  Slots PCIe contiguos, bahías de 2,5″ frontales, entrada de
+                  aire inferior
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Disipador torre de CPU</strong></td>
+                <td>Altura (mm) desde el socket</td>
+                <td>Panel lateral, primer slot PCIe, ventilador trasero</td>
+              </tr>
+              <tr>
+                <td><strong>Refrigeración líquida AIO</strong></td>
+                <td>Radiador 120/240/280/360 mm</td>
+                <td>
+                  Bahías frontales o techo, largo de GPU (si va al frente)
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Fuente larga (160–200 mm)</strong></td>
+                <td>Largo y profundidad</td>
+                <td>Espacio para cables, bahía inferior, largo de GPU</td>
+              </tr>
+              <tr>
+                <td><strong>Discos 3,5″</strong></td>
+                <td>Cantidad de bahías</td>
+                <td>Ruta de aire frontal</td>
+              </tr>
+              <tr>
+                <td><strong>Placas PCIe adicionales</strong></td>
+                <td>Slots libres reales</td>
+                <td>Se pierden por GPU de 3 slots o por cooler grande</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="callout warning">
+        <span class="cbadge">Advertencia</span>
+        <h4>⚠️ El caso más frecuente en el mostrador</h4>
+        <p>
+          “Quiero poner una RTX de 3 slots y abajo una tarjeta de red”. Si la
+          GPU ocupa 3 slots y el gabinete tiene 7, quedan 4… pero si el cooler
+          del CPU es torre grande, el primer slot x1 queda tapado.
+          <strong
+            >Siempre contar slots libres reales, no los de la ficha
+            técnica.</strong
+          >
+        </p>
+      </div>
+
+      <!-- ===================== SECCIÓN 5 ===================== -->
+      <h2 class="section-title" id="sec5">
+        <span class="icon">🔌</span>Sección 5 — Generación y compatibilidad
+        eléctrica
+      </h2>
+      <p class="section-meta">
+        La fuente de alimentación es la pieza que más “ata” un gabinete a una
+        generación.
+      </p>
+
+      <div class="card">
+        <h3>
+          ⚡ 5.1 Fuente AT vs. ATX: la frontera que no se puede cruzar sin
+          adaptar
+        </h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Aspecto</th>
+                <th>Fuente AT (legacy)</th>
+                <th>Fuente ATX / ATX 3.x</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Conector principal</td>
+                <td>2 × 6 pines (P8/P9)</td>
+                <td>20 → 24 pines (una sola pieza)</td>
+              </tr>
+              <tr>
+                <td>Encendido</td>
+                <td>Interruptor mecánico que corta 220 V</td>
+                <td>Señal PS_ON# desde la placa (soft power)</td>
+              </tr>
+              <tr>
+                <td>Ventilación</td>
+                <td>Ventila hacia afuera, del lado del interruptor</td>
+                <td>Ventila hacia adentro (aspira desde abajo)</td>
+              </tr>
+              <tr>
+                <td>Compatibilidad</td>
+                <td>
+                  <span class="no">No entra</span> en gabinete ATX moderno
+                </td>
+                <td><span class="no">No entra</span> en gabinete AT/Baby-AT</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Existe la tentación de usar un <em>adaptador AT → ATX</em>: existen,
+          pero son un riesgo (polaridades, ausencia de protecciones modernas y
+          <em>rails</em> débiles). Para trabajo profesional, la recomendación es
+          <strong>no reutilizar fuentes legacy</strong> en equipos con hardware
+          actual.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🧮 5.2 Checks eléctricos antes de cerrar la compra</h3>
+        <ul>
+          <li>
+            <strong>Formato de la fuente:</strong> ATX, SFX, SFX-L, TFX o
+            Flex-ATX. Un gabinete SFF casi siempre pide SFX.
+          </li>
+          
+         
+          <li>
+            <strong>Largo físico:</strong> fuente de 180 mm en gabinete que
+            admite 160 mm = no entra y además aplasta el cableado.
+          </li>
+          
+          <li>
+            <strong>Cableado:</strong> el largo del cableado impacta si no se gestionan adecuadamente y si la fuente es no-modular la misma impide retirar cables no aprovechados.
+          </li>
+          <li>
+            <strong>Posición:</strong> fuente inferior (moderna, aspira aire
+            frío del piso) vs. superior (legacy, aspira aire caliente del CPU).
+          </li>
+        </ul>
+      </div>
+
+      <!-- ===================== SECCIÓN 6 ===================== -->
+      <h2 class="section-title" id="sec6">
+        <span class="icon">🌀</span>Sección 6 — Flujo de aire: presión positiva
+        y negativa
+      </h2>
+      <p class="section-meta">
+        El tema que el cliente no pregunta pero que determina la vida del
+        hardware.
+      </p>
+
+      <div class="card">
+        <h3>🌬️ 6.1 ¿Qué es la refrigeración positiva y negativa?</h3>
+        <p>
+          Se decide según el
+          <strong>balance entre el aire que entra y el que sale</strong>, medido
+          en caudal (CFM) o revoluciones equivalentes:
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Balance</th>
+                <th>Qué ocurre dentro</th>
+                <th>Cuándo conviene</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Presión positiva</strong></td>
+                <td>Entrada &gt; salida</td>
+                <td>
+                  Se genera cuando los ventiladores instalados para introducir aire frío (intake) tienen mayor flujo o capacidad que los ventiladores destinados a expulsar aire caliente (exhaust)
+                  <br>
+                  Al haber más aire entrando, el interior del gabinete se 
+                  "infla" ligeramente con presión de aire. Este exceso busca salir por cualquier pequeña rendija, ranura o perforación del chasis.
+                  <br>
+                   <strong>Ventaja principal:</strong> Evita que entre polvo. Como el aire siempre empuja hacia afuera a través de las rejillas abiertas, el polvo solo puede ingresar por donde están los ventiladores de entrada. Si colocás filtros magnéticos en esas entradas, tu PC se mantendrá limpia por mucho más tiempo.
+               <br>
+               
+               <strong>Desventaja: </strong>
+               El aire caliente puede tardar un poco más en salir si no hay un buen flujo dirigido, lo que podría generar zonas de calor atrapado.
+                </td>
+                <td>
+                  Ambientes con polvo, oficinas, talleres. Es la opción
+                  <span class="ok">recomendada por defecto</span>.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Presión negativa</strong></td>
+                <td>Salida &gt; entrada</td>
+                <td>
+                  Se genera cuando los ventiladores destinados a <strong> expulsar el aire caliente</strong> sacan más volumen de aire del que los ventiladores de entrada logran introduci
+                Al expulsar tanto aire, se crea un efecto de "vacío" o succión dentro del gabinete. Para compensar esa falta de aire, el chasis aspira aire de forma pasiva desde cualquier agujero, ranura PCI libre o junta del gabinete.
+                <br>
+                <strong>Ventaja principal: </strong>Excelente expulsión de calor. El aire caliente de componentes de alto consumo (como la placa de video o el procesador) se elimina de inmediato, lo que suele ofrecer temperaturas máximas ligeramente más bajas.
+                <br>
+<strong>Desventaja:</strong> Tu PC se convertirá en una aspiradora de polvo. Como el aire entra de forma descontrolada por cualquier rendija que no tiene filtro, el interior del gabinete se llenará de suciedad y pelusa muy rápidamente, exigiendo una limpieza constante.
+                </td>
+                <td>
+                  Gabinetes sellados al frente, o cuando solo hay un ventilador
+                  de escape. Acumula polvo.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Presión neutra</strong></td>
+                <td>Entrada = salida</td>
+                <td>Máximo caudal teórico, pero muy sensible a cambios.</td>
+                <td>
+                  Gabinetes premium con muchas posiciones y filtros; difícil de
+                  sostener.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🧊 6.2 Disposición y elección de los ventiladores</h3>
+        <ul>
+          <li>
+            <strong>Frente:</strong> 2 o 3 ventiladores de 120/140 mm como
+            <em>intake</em> (entrada), atravesando filtro.
+          </li>
+          <li>
+            <strong>Trasero:</strong> 1 ventilador de 120 mm como
+            <em>exhaust</em> (escape), alineado con la zona del CPU.
+          </li>
+          <li>
+            <strong>Techo:</strong> 1–2 ventiladores de escape; útiles en
+            gabinetes con GPU potente porque el aire caliente sube.
+          </li>
+          <li>
+            <strong>Inferior:</strong> en gabinetes modernos, entrada de aire
+            dedicada a la fuente y a la GPU (si hay rejilla y filtro).
+          </li>
+          <li>
+            <strong>Lateral:</strong> en gabinetes legacy solía haber un
+            ventilador lateral apuntando al CPU; hoy se evita porque desordena
+            el flujo y hace ruido.
+          </li>
+        lador de alto <em>CFM</em>.
+          </li>
+          <li>
+            <strong>PWM:</strong> preferir control por PWM (4 pines) para bajar
+            revoluciones en carga ligera: silencio sin perder caudal.
+          </li>
+        </ul>
+      </div>
+
+      <figure class="figure">
+        <svg
+          viewBox="0 0 980 300"
+          xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-label="Esquema comparativo de refrigeración positiva y negativa en un gabinete"
+        >
+          <!-- POSITIVA -->
+          <rect
+            x="40"
+            y="60"
+            width="360"
+            height="200"
+            rx="10"
+            fill="#1e293b"
+            stroke="#10b981"
+            stroke-width="2"
+          />
+          <text
+            x="220"
+            y="42"
+            fill="#10b981"
+            font-size="15"
+            font-weight="700"
+            text-anchor="middle"
+          >
+            PRESIÓN POSITIVA
+          </text>
+          <!-- fans frontales -->
+          <circle
+            cx="60"
+            cy="110"
+            r="14"
+            fill="none"
+            stroke="#10b981"
+            stroke-width="2"
+          />
+          <circle
+            cx="60"
+            cy="160"
+            r="14"
+            fill="none"
+            stroke="#10b981"
+            stroke-width="2"
+          />
+          <circle
+            cx="60"
+            cy="210"
+            r="14"
+            fill="none"
+            stroke="#10b981"
+            stroke-width="2"
+          />
+          <!-- flujo -->
+          <line
+            x1="80"
+            y1="110"
+            x2="200"
+            y2="110"
+            stroke="#06b6d4"
+            stroke-width="2"
+            marker-end="url(#arrowC)"
+          />
+          <line
+            x1="80"
+            y1="160"
+            x2="200"
+            y2="160"
+            stroke="#06b6d4"
+            stroke-width="2"
+            marker-end="url(#arrowC)"
+          />
+          <line
+            x1="80"
+            y1="210"
+            x2="200"
+            y2="210"
+            stroke="#06b6d4"
+            stroke-width="2"
+            marker-end="url(#arrowC)"
+          />
+          <text x="230" y="115" fill="#94a3b8" font-size="11">
+            3 fans entrada (filtrados)
+          </text>
+          <text x="230" y="165" fill="#94a3b8" font-size="11">
+            2 fans salida
+          </text>
+          <text x="230" y="215" fill="#94a3b8" font-size="11">
+            El aire sale por todas las rejillas
+          </text>
+          <!-- escape -->
+          <circle
+            cx="380"
+            cy="140"
+            r="12"
+            fill="none"
+            stroke="#f59e0b"
+            stroke-width="2"
+          />
+          <circle
+            cx="380"
+            cy="185"
+            r="12"
+            fill="none"
+            stroke="#f59e0b"
+            stroke-width="2"
+          />
+          <text
+            x="220"
+            y="248"
+            fill="#10b981"
+            font-size="11"
+            text-anchor="middle"
+          >
+            Entrada &gt; Salida → menos polvo
+          </text>
+
+          <!-- NEGATIVA -->
+          <rect
+            x="560"
+            y="60"
+            width="360"
+            height="200"
+            rx="10"
+            fill="#1e293b"
+            stroke="#ef4444"
+            stroke-width="2"
+          />
+          <text
+            x="740"
+            y="42"
+            fill="#ef4444"
+            font-size="15"
+            font-weight="700"
+            text-anchor="middle"
+          >
+            PRESIÓN NEGATIVA
+          </text>
+          <circle
+            cx="900"
+            cy="120"
+            r="12"
+            fill="none"
+            stroke="#ef4444"
+            stroke-width="2"
+          />
+          <circle
+            cx="900"
+            cy="150"
+            r="12"
+            fill="none"
+            stroke="#ef4444"
+            stroke-width="2"
+          />
+          <circle
+            cx="900"
+            cy="180"
+            r="12"
+            fill="none"
+            stroke="#ef4444"
+            stroke-width="2"
+          />
+          <line
+            x1="880"
+            y1="120"
+            x2="700"
+            y2="120"
+            stroke="#06b6d4"
+            stroke-width="2"
+            marker-end="url(#arrowC)"
+          />
+          <line
+            x1="880"
+            y1="150"
+            x2="700"
+            y2="150"
+            stroke="#06b6d4"
+            stroke-width="2"
+            marker-end="url(#arrowC)"
+          />
+          <line
+            x1="880"
+            y1="180"
+            x2="700"
+            y2="180"
+            stroke="#06b6d4"
+            stroke-width="2"
+            marker-end="url(#arrowC)"
+          />
+          <text x="580" y="115" fill="#fca5a5" font-size="11">
+            Sin fans de entrada
+          </text>
+          <text x="580" y="165" fill="#94a3b8" font-size="11">
+            3 fans salida
+          </text>
+          <text x="580" y="215" fill="#fca5a5" font-size="11">
+            El aire entra por ranuras sin filtrar
+          </text>
+          <text
+            x="740"
+            y="248"
+            fill="#ef4444"
+            font-size="11"
+            text-anchor="middle"
+          >
+            Salida &gt; Entrada → más polvo
+          </text>
+
+          <defs>
+            <marker
+              id="arrowC"
+              markerWidth="8"
+              markerHeight="8"
+              refX="6"
+              refY="4"
+              orient="auto"
+            >
+              <path d="M0,0 L8,4 L0,8 z" fill="#06b6d4" />
+            </marker>
+          </defs>
+        </svg>
+        <figcaption>
+          Comparación de presión positiva (entrada dominante, aire filtrado) y
+          negativa (escape dominante, entrada por filtraciones).
+        </figcaption>
+      </figure>
+
+      <div class="callout tip">
+        <span class="cbadge">CONSEJO</span>
+        <h4>🔑 Regla práctica de configuración</h4>
+        <p>
+          Para un Mid-Tower típico:
+          <strong>2 entrada frontal + 1 escape trasero</strong> ya es presión
+          positiva y alcanza para cualquier CPU de gama media. Si se agrega
+          techo, que sean 2 de escape y 3 de entrada al frente, manteniendo
+          siempre más aire entrando que saliendo.
+        </p>
+      </div>
+
+      <!-- ===================== SECCIÓN 7 ===================== -->
+      <h2 class="section-title" id="sec7">
+        <span class="icon">📏</span>Sección 7 — Limitaciones físicas: GPU,
+        disipadores y radiadores
+      </h2>
+      <p class="section-meta">
+        Los milímetros son la causa #1 de devoluciones y de enojos.
+      </p>
+
+      <div class="card">
+        <h3>🎮 7.1 Largo de GPU y clearance</h3>
+        <p><strong>Clearance:</strong>en el armado de una PC se refiere al espacio libre necesario para que todos los componentes encajen físicamente dentro del gabinete sin chocarse, forzar los cables o impedir el cierre de las tapas</p>
+        <p>
+          La ficha técnica del gabinete declara el
+          <strong>largo máximo de GPU</strong>. Pero hay un detalle que casi
+          nunca se publica: si la fuente es larga o hay bahías de 2,5″ al
+          frente, ese máximo se reduce <strong>2–4 cm</strong> en la práctica.
+        </p>
+        <ul>
+          <li>GPU de 2 ventiladores: 200–270 mm.</li>
+          <li>GPU de 3 ventiladores: 300–340 mm.</li>
+          <li>Modelos tope de gama: 350–360 mm con bloque de 3,5 slots.</li>
+        </ul>
+        <p>
+          Medir con regla dentro del gabinete (o revisar foros y reviews del
+          modelo exacto) es más fiable que confiar solo en el número del
+          fabricante.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🧊 7.2 Altura máxima del cooler de CPU y radiadores</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Elemento</th>
+                <th>Medida a verificar</th>
+                <th>Consecuencia si no entra</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Disipador torre 120 mm</td>
+                <td>~155–160 mm de alto</td>
+                <td>Tapa el panel lateral o el primer slot PCIe</td>
+              </tr>
+              <tr>
+                <td>Disipador torre doble</td>
+                <td>~165–175 mm</td>
+                <td>
+                  No cierra el panel; empuja el ventilador trasero hacia afuera
+                </td>
+              </tr>
+              <tr>
+                <td>Radiador 240 mm</td>
+                <td>Frente o techo: 240 × 120 × 27 mm + fans</td>
+                <td>Bloquea bahías frontales o toca los VRM de la placa</td>
+              </tr>
+              <tr>
+                <td>Radiador 360 mm</td>
+                <td>Solo en gabinetes premium con soporte de 360</td>
+                <td>No hay dónde montarlo; obliga a cambiar de gabinete</td>
+              </tr>
+              <tr>
+                <td>Radiador en techo</td>
+                <td>Verificar grosor + fans vs. altura de la placa</td>
+                <td>
+                  Choca con el disipador de VRM o con los cables EPS de CPU
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="callout">
+        <span class="cbadge info">INFO</span>
+        <h4>📐 Los tres números que hay que pedir SIEMPRE</h4>
+        <p>
+          1) Largo máximo de GPU. 2) Altura máxima de disipador de CPU. 3)
+          Soporte de radiador (mm). Con esos tres datos, el 90 % de los errores
+          de compatibilidad desaparecen.
+        </p>
+      </div>
+
+      <!-- ===================== SECCIÓN 8 ===================== -->
+      <h2 class="section-title" id="sec8">
+        <span class="icon">🔘</span>Sección 8 — Panel frontal: ¿se pueden
+        aprovechar todas sus conexiones?
+      </h2>
+      <p class="section-meta">
+        No siempre. Y es una de las decepciones más comunes del cliente.
+      </p>
+
+      <div class="card">
+        <h3>🧷 8.1 Qué ofrece el panel frontal</h3>
+        <ul>
+          <li>
+            <strong>Botón de encendido y de reinicio. </strong> 
+          </li>
+          <li>
+            <strong>Puertos USB:</strong> 2.0, 3.0/3.1 (5–10 Gbps) y USB-C
+            (10–20 Gbps).
+          </li>
+          <li><strong>Audio HD:</strong> jack de auriculares y micrófono.</li>
+          <li>
+            <strong
+              >Lectores de tarjetas de almacenamiento.</strong
+            >
+          </li>
+          <li>
+            <strong>Potenciómetro de fans o controladora RGB</strong> (gabinetes
+            gamer).
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout warning">
+        <span class="cbadge">Advertencia</span>
+        <h4>⚠️ El gabinete puede tener USB-C… y la placa madre no</h4>
+        <p>
+          Un panel frontal con <strong>USB-C 3.2 Gen 2</strong> necesita un
+          conector interno específico (<em>20-pin Key-A header</em> o USB 3.2
+          Gen2 Type-E). Si la placa madre no lo tiene, ese puerto queda
+          <strong>muerto para siempre</strong>. Lo mismo ocurre con paneles de 4
+          USB que solo tienen un cable de 19 pines: se aprovechan 2 puertos y
+          los otros 2 quedan sin conexión.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>✅ 8.2 Checklist del panel frontal</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Conector del panel</th>
+                <th>Requiere en la placa madre</th>
+                <th>¿Aprovechable?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>USB 2.0 (9 pines)</td>
+                <td>Header USB 2.0 interno</td>
+                <td><span class="ok">Sí</span>, casi universal</td>
+              </tr>
+              <tr>
+                <td>USB 3.x (19/20 pines)</td>
+                <td>Header USB 3.0 interno</td>
+                <td><span class="ok">Sí</span> en placas desde ~2012</td>
+              </tr>
+              <tr>
+                <td>USB-C (Type-E)</td>
+                <td>Header USB 3.2 Gen2 Type-E</td>
+                <td><span class="no">Solo</span> en placas que lo incluyen</td>
+              </tr>
+              <tr>
+                <td>HD Audio (10-1 pines)</td>
+                <td>Header AAFP/FP_AUDIO</td>
+                <td><span class="ok">Sí</span> en casi todas</td>
+              </tr>
+              <tr>
+                <td>RGB de ventiladores</td>
+                <td>Header ARGB 3 pines / RGB 4 pines</td>
+                <td><span class="no">Depende</span> del modelo de placa</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          <strong>Conclusión para la venta:</strong> no prometer “todos los
+          puertos funcionando” sin haber revisado la placa madre. Mostrar el
+          manual o la foto del header antes de cobrar.
+        </p>
+      </div>
+
+      <!-- ===================== SECCIÓN 9 ===================== -->
+      <h2 class="section-title" id="sec9">
+        <span class="icon">🧵</span>Sección 9 — Gestión de cables y espacio
+        interior
+      </h2>
+      <p class="section-meta">
+        Un gabinete bien cableado enfría mejor, suena menos y se limpia más
+        rápido.
+      </p>
+
+      <div class="card">
+        <h3>🪢 9.1 Por qué importa el cable management</h3>
+        <ul>
+          <li>
+            <strong>Flujo de aire:</strong> cables sueltos frente a los
+            ventiladores reducen el caudal útil hasta un 15–20 %.
+          </li>
+          <li>
+            <strong>Temperaturas:</strong> menos obstrucción = menos puntos
+            calientes alrededor de la GPU.
+          </li>
+          <li>
+            <strong>Mantenimiento:</strong> poder abrir y limpiar filtros sin
+            desconectar todo.
+          </li>
+          <li>
+            <strong>Estética y reventa:</strong> un interior ordenado transmite
+            trabajo profesional.
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>🛠️ 9.2 Qué debe tener un gabinete para cablear bien</h3>
+        <ul>
+          <li>
+            <strong>Espacio detrás de la bandeja:</strong> ≥ 20 mm (ideal 25 mm)
+            para el mazo de 24 pines.
+          </li>
+          <li>
+            <strong>Agujeros pasacables con burlete:</strong> evitando cortar el
+            aislamiento del cable.
+          </li>
+          <li>
+            <strong>Puntos de anclaje:</strong> bridas, velcro o canales
+            integrados.
+          </li>
+          <li>
+            <strong>Cubierta de fuente (shroud):</strong> esconde el mazo de
+            cables de la PSU y la PSU en si.
+          </li>
+          <li>
+            <strong>Bahías desmontables:</strong> liberan espacio delante del
+            ventilador frontal.
+          </li>
+          <li>
+            <strong>Ventilador trasero alineado</strong> con el disipador del
+            CPU, sin cables en medio.
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout tip">
+        <span class="cbadge">CONSEJO</span>
+        <h4>🔑 Orden correcto de armado (evita rehacer trabajo)</h4>
+        <p>
+          1) Montar fuente y pasar cables gruesos. 2) Montar placa madre fuera o
+          dentro con cuidado. 3) Instalar disipador de CPU. 4) Cablear paneles (Power SW, LED, audio, USB).
+          5) Instalar GPU al final.  6) Probar encendido
+          <strong>con el panel lateral todavía abierto</strong>. 7) Si todo esta OK, cerrarla.
+        </p>
+      </div>
+
+      <!-- ===================== SECCIÓN 10 ===================== -->
+      <h2 class="section-title" id="sec10">
+        <span class="icon">🧩</span>Sección 10 — Qué placa madre entra según el
+        formato del gabinete
+      </h2>
+      <p class="section-meta">
+        La pregunta que cierra (o abre) cualquier presupuesto.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Formato del gabinete</th>
+              <th>Placas admitidas</th>
+              <th>Slots típicos</th>
+              <th>Fuente típica</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Full Tower ATX</td>
+              <td>E-ATX, ATX, microATX, Mini-ITX</td>
+              <td>7–10</td>
+              <td>ATX (hasta 200 mm)</td>
+            </tr>
+            <tr>
+              <td>Mid Tower ATX</td>
+              <td>ATX, microATX, Mini-ITX</td>
+              <td>7</td>
+              <td>ATX</td>
+            </tr>
+            <tr>
+              <td>Mini Tower microATX</td>
+              <td>microATX, Mini-ITX</td>
+              <td>4</td>
+              <td>ATX o SFX</td>
+            </tr>
+            <tr>
+              <td>SFF / Mini-ITX</td>
+              <td>Solo Mini-ITX</td>
+              <td>1–2 (con riser)</td>
+              <td>SFX / SFX-L</td>
+            </tr>
+            <tr>
+              <td>Cube NAS</td>
+              <td>microATX o Mini-ITX</td>
+              <td>1–2</td>
+              <td>SFX o ATX según modelo</td>
+            </tr>
+            <tr>
+              <td>Legacy AT / Baby-AT</td>
+              <td>Solo placas AT / Baby-AT</td>
+              <td>6–8 (ISA/PCI)</td>
+              <td><span class="no">Solo fuente AT</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <span class="cbadge info">INFO</span>
+        <h4>📐 Cómo verificar en 30 segundos</h4>
+        <p>
+          Contar los <strong>standoffs</strong> y comparar el patrón con el de
+          la placa madre. Si sobran agujeros, el gabinete es más grande
+          (correcto). Si falta un agujero donde la placa lo necesita, la placa
+          <strong>no</strong> entra. Nunca forzar un standoff “de más”.
+        </p>
+        </div>
+      <div class="callout warning">
+        <span class="cbadge">Advertencia</span>
+        <p>Tampoco dejar standoff de más cuando la placa entra más que cómoda en el gabinete, debido a que dicho standoff toca las 
+          soldaduras de la placa del lado posterior, energizándolas y generado cortos o apagones repentinos.
+        <strong>Usar tantos standoff como la placa madre lo requiera, ni uno más ni uno menos. </strong></p>
+      </div>
+
+      
+
+      <!-- ===================== SECCIÓN 11 ===================== -->
+      <h2 class="section-title" id="sec11">
+        <span class="icon">♻️</span>Sección 11 — Gabinetes legacy: reconocer y
+        reciclar
+      </h2>
+      <p class="section-meta">
+        Oficio real de taller: qué hacer cuando llega una torre de 1998.
+      </p>
+
+      <div class="card">
+        <h3>🔍 11.1 Cómo reconocer un gabinete legacy</h3>
+        <ul>
+          
+          <li>
+            <strong>Bahías de 5,25″ abundantes y ninguna de 2,5″</strong>: todos
+            los discos eran de 3,5″ o unidades ópticas.
+          </li>
+          <li>
+            <strong>Sin filtros antipolvo y sin agujeros de cableado:</strong>
+            se armaba “como venía”.
+          </li>
+          <li>
+            <strong>Ventilador lateral hacia el CPU</strong> o ninguno en el
+            frontal.
+          </li>
+          <li>
+            <strong>Sin soporte para radiadores ni cubierta de fuente.</strong>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>♻️ 11.2 ¿Se puede reciclar? Matriz de decisión</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Escenario</th>
+                <th>¿Reciclar el gabinete?</th>
+                <th>Alternativa recomendada</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Torre AT (pre-1997) + cliente quiere PC nueva</td>
+                <td><span class="no">No</span></td>
+                <td>Gabinete ATX nuevo (formato y fuente incompatibles)</td>
+              </tr>
+              <tr>
+                <td>Mid Tower ATX de 2010 con chapa buena</td>
+                <td><span class="ok">Sí</span>, con reservas</td>
+                <td>
+                  Reutilizar si soporta GPU actual y se agregan fans/filtros
+                </td>
+              </tr>
+              <tr>
+                <td>Gabinete de oficina sellado sin entrada de aire</td>
+                <td><span class="no">No</span> para gaming</td>
+                <td>
+                  Sirve solo para equipos de muy baja carga (oficina/terminal)
+                </td>
+              </tr>
+              <tr>
+                <td>Cube viejo con bahías 3,5″ intactas</td>
+                <td><span class="ok">Sí</span></td>
+                <td>Ideal para NAS casero con placa Mini-ITX/mATX</td>
+              </tr>
+              <tr>
+                <td>Gabinete con fuente integrada de 300 W</td>
+                <td><span class="no">No</span></td>
+                <td>Las fuentes integradas rara vez alimentan GPU moderna</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+      <!-- ===================== SECCIÓN 12 ===================== -->
+      <h2 class="section-title" id="sec12">
+        <span class="icon">🌳</span>Sección 12 — Árbol de decisión y checklist
+        de venta
+      </h2>
+      <p class="section-meta">
+        Del requerimiento del cliente a una recomendación defendible.
+      </p>
+
+      <div class="decision-tree">
+        <div class="dt-step">
+          <p class="dt-q">1) ¿Qué formato tiene la placa madre del cliente?</p>
+          <p class="dt-a">
+            ATX → Mid/Full Tower · microATX → Mini Tower o Mid · Mini-ITX → SFF,
+            Cube o cualquier ATX.
+          </p>
+        </div>
+        <div class="dt-step">
+          <p class="dt-q">
+            2) ¿Va a instalar GPU dedicada? ¿De qué largo y cuántos slots?
+          </p>
+          <p class="dt-a">
+            Sí, 300+ mm → gabinete con soporte ≥ 330 mm · Sin GPU → cualquier
+            gabinete compacto.
+          </p>
+        </div>
+        <div class="dt-step">
+          <p class="dt-q">
+            3) ¿Cuánta refrigeración necesita? ¿Aire o líquida?
+          </p>
+          <p class="dt-a">
+            Aire → mínimo 2 entrada + 1 escape con malla frontal · Líquida
+            240/360 → verificar soporte de radiador.
+          </p>
+        </div>
+        <div class="dt-step">
+          <p class="dt-q">
+            4) ¿Cuántas unidades de almacenamiento y qué tamaño?
+          </p>
+          <p class="dt-a">
+            NAS con 4× 3,5″ → Cube o Full Tower con jaulas · 1 NVMe + 1 SSD →
+            cualquier gabinete moderno.
+          </p>
+        </div>
+        <div class="dt-step">
+          <p class="dt-q">5) ¿El ambiente tiene polvo o es sala limpia?</p>
+          <p class="dt-a">
+            Con polvo → filtros magnéticos + presión positiva obligatoria.
+          </p>
+        </div>
+        <div class="dt-step">
+          <p class="dt-q">6) ¿Cuánto puede gastar realmente?</p>
+          <p class="dt-a">
+            Priorizar chapa firme y ventilación antes que vidrio templado y
+            luces RGB.
+          </p>
+        </div>
+        <div class="dt-step">
+          <p class="dt-q">7) ¿Silencio o máximo caudal?</p>
+          <p class="dt-a">
+            Silencio → paneles con aislante y fans PWM de baja rotación · Máximo
+            caudal → malla frontal y 3+ fans.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>📝 12.1 Checklist de 10 puntos antes de cobrar</h3>
+        <ol>
+          <li>
+            Formato de la placa madre confirmado y standoffs coincidentes.
+          </li>
+          <li>
+            Largo máximo de GPU ≥ largo real de la GPU (+ 20 mm de margen).
+          </li>
+          <li>Altura del disipador de CPU dentro del máximo del gabinete.</li>
+          <li>Soporte de radiador verificado, si hay líquida.</li>
+          <li>Formato y largo de la fuente correctos (ATX / SFX).</li>
+          <li>Bahías suficientes para los discos del cliente.</li>
+          <li>Panel frontal: ¿todos los headers existen en la placa madre?</li>
+          <li>Slots PCIe libres reales tras instalar la GPU.</li>
+          <li>Entrada de aire filtrada y al menos 2 ventiladores incluidos.</li>
+          <li>Espacio detrás de la bandeja para cableado (≥ 20 mm).</li>
+        </ol>
+      </div>
+
+      <!-- ===================== SECCIÓN 14 — CUESTIONARIO ===================== -->
+      <h2 class="section-title" id="sec14">
+        <span class="icon">📝</span>Sección 13 — Cuestionario
+      </h2>
+      
+
+      <div class="callout">
+        <span class="cbadge info">REGLAS</span>
+        <h4>📐 Cómo usar esta evaluación</h4>
+        <p>
+          Las preguntas marcadas
+          <span class="qtag vf" style="margin: 0 4px">VF</span> son
+          Verdadero/Falso. Las
+          <span class="qtag short" style="margin: 0 4px">CORTA</span> piden
+          respuesta escrita (comparala con la respuesta modelo). Las
+          <span class="qtag multi" style="margin: 0 4px">MULTI</span> son opción
+          múltiple con corrección automática. Las
+          <span class="qtag scenario" style="margin: 0 4px">ESCENARIO</span>
+          aplican los 4 ejes decisores a un cliente concreto.
+        </p>
+      </div>
+
+      <div class="callout">
+
+        <ol>
+          <li>   La refrigeración por <strong>presión positiva</strong> se logra cuando el caudal de aire que <em>entra</em> al gabinete (fans frontales, filtrados) es mayor que el que <em>sale</em>, y por eso conviene en ambientes con polvo. Justificar positiva o negativamente. </strong> </li>
+        
+          <li>            Explica con tus palabras qué es la <strong>refrigeración negativa</strong> y en qué caso concreto puede ser la única opción posible. </li>
+          <li>            La ficha técnica de un gabinete dice “GPU máxima: 330 mm”. El cliente quiere instalar una GPU de 336 mm y una fuente de 180 mm. ¿Qué corresponde hacer? </li>
+          <li>Un gabinete <strong>microATX</strong> puede aceptar una placa madre <strong>ATX</strong> completa, porque el gabinete siempre admite placas de mayor tamaño. ¿Es correcta esta afirmación? </li>
+        <li>¿Cuál es la importancia de conocer las medidas reales del gabinete a la hora de elegir y colocar los componentes como GPU y disipadores? </li>
+        <li>            ¿Cuáles son los <strong>tres números</strong> que hay que pedir siempre de la ficha técnica del gabinete antes de recomendar un armado? </li>
+          <li>            El gabinete elegido trae un panel frontal con USB-C 3.2 Gen 2, pero la placa madre del cliente no tiene header interno Type-E (USB 3.2 Gen2). ¿Qué ocurre? </li>
+           <li>   Cliente gamer: tiene placa madre ATX, GPU de 3 ventiladores de 320 mm (2,5 slots), CPU con disipador torre de 160 mm y quiere agregar 2 SSD de 2,5″. Ambiente con polvo (vive frente a una obra). Presupuesto de gabinete: 60–100 dólares. ¿Qué gabinete sugerirías?</li>
+          <li>            ¿Cuál es la importancia sobre la <strong>gestión de cables</strong>?¿Como impacta positivamente la buena administración de los mismos? </li>
+          <li>        
+                    Un gabinete caro y premium hace que la computadora sea <strong>más rápida</strong>, y un gabinete barato no afecta en nada el rendimiento. ¿Es correcta esta afirmación? Justificar.
+        </li>
+          <li>   Para un Mid Tower típico, ¿qué configuración mínima de ventiladores garantiza presión positiva y por qué?, y ¿y para presión negativa?
+                   </li>
+          <li>Cliente de oficina: placa madre microATX, sin GPU dedicada (usa video integrado), mucho ruido de fondo en la oficina y un escritorio angosto (no más de 40 cm de profundidad). Presupuesto bajo: hasta $45. ¿Cuál gabinete sugerirías? </li>
+          <li>            Dos gabinetes idénticos en diseño: uno con chapa de acero de <strong>0,5 mm</strong> y otro de <strong>0,9 mm</strong>. ¿Qué diferencia práctica se percibe? </li>
+                      <li>Cualquier Mid Tower permite montar un radiador de <strong>360 mm</strong>, porque los radiadores se adaptan a cualquier posición del gabinete. Justificar positiva o negativamente la afirmación. ¿Existe el riesgo de que choque con otros componentes como el VRM o cables EPS del CPU?</li>
+                       <li>Cliente que quiere aprovechar al máximo su presupuesto: necesita una PC para edición de video 4K, con GPU de 350 mm, refrigeración líquida de 360 mm y 4 discos de 3,5″. Su gabinete actual es un Mid Tower de 2011 sin soporte de radiador y con 2 bahías. ¿Qué gabinete sugerirías y por qué?</li>
+        <li>Al comprar el gabinete más grande y colocar en ella la placa madre más grande, ¿me asegura disponer de todos los slots al colocar una GPU de 2,5–3,5 slots y una Torre de disipación grande?</li>    </ol>
+      </div>
+    
+
+      <!-- ===================== NAVEGACIÓN INFERIOR ===================== -->
+      <nav
+        class="nav-buttons bottom"
+        aria-label="Navegación inferior entre sesiones"
+      >
+        <div style="margin-bottom: 24px">
+      <a
+        href="../materias/hardware-dos.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #4ade80;
+          color: #222;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Volver a Materia
+      </a>
+      <a
+        href="hardware2-sesion12.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #60a5fa;
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+        "
+      >
+        Ir a Sesión 12
+      </a>
+      <a
+        href="hardware2-sesion14.html"
+        style="
+          padding: 10px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          background: #f9e282;
+          color: #222;
+          display: inline-block;
+        "
+      >
+        Ir a Sesión 14
+      </a>
+    </div>
+      </nav>
+
+      
+    </div>
+
+    <script>
+      /* =========================================================================
+   Cuestionario interactivo — Gabinetes de Escritorio (Legacy)
+   Preguntas autocorregibles (MULTI / V-F) + respuestas modelo (CORTA / ESCENARIO)
+   ========================================================================= */
+
+      (function () {
+        "use strict";
+
+        var QUESTIONS = [
+        
+          
+        ];
+
+        var AUTO_TYPES = ["multi", "vf"];
+
+        var container = document.getElementById("quiz-container");
+        var scoreValue = document.getElementById("score-value");
+        var revealAllBtn = document.getElementById("reveal-all");
+        var resetBtn = document.getElementById("reset-quiz");
+
+        var answered = {}; // id -> true (autocorregibles)
+        var correctCount = 0;
+        var totalAuto = 0;
+
+        var TAGS = {
+          multi: { label: "MULTI", cls: "multi" },
+          vf: { label: "V / F", cls: "vf" },
+          short: { label: "CORTA", cls: "short" },
+          scenario: { label: "ESCENARIO", cls: "scenario" },
+        };
+
+        function esc(str) {
+          return String(str)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+        }
+
+        function updateScore() {
+          scoreValue.textContent = correctCount + " / " + totalAuto;
+        }
+
+        function buildOption(q, opt, index, isAuto) {
+          var li = document.createElement("li");
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "opt";
+
+          var mark = document.createElement("span");
+          mark.className = "mark";
+          mark.textContent = String.fromCharCode(65 + index);
+
+          var txt = document.createElement("span");
+          txt.className = "opt-text";
+          txt.innerHTML = opt.text;
+
+          btn.appendChild(mark);
+          btn.appendChild(txt);
+
+          if (isAuto) {
+            btn.addEventListener("click", function () {
+              if (answered[q.id]) return;
+              answered[q.id] = true;
+
+              var allOpts = li.parentNode.querySelectorAll(".opt");
+              for (var i = 0; i < allOpts.length; i++) {
+                allOpts[i].disabled = true;
+              }
+
+              if (opt.correct) {
+                btn.classList.add("correct");
+                correctCount++;
+              } else {
+                btn.classList.add("wrong");
+                // resaltar la correcta
+                for (var j = 0; j < allOpts.length; j++) {
+                  if (q.options[j] && q.options[j].correct) {
+                    allOpts[j].classList.add("correct");
+                  }
+                }
+              }
+              showFeedback(li.closest(".q-item"), opt.correct, q.explanation);
+              updateScore();
+            });
+          }
+
+          li.appendChild(btn);
+          return li;
+        }
+
+        function showFeedback(qItem, isCorrect, explanation) {
+          var fb = document.createElement("p");
+          fb.className = "feedback show " + (isCorrect ? "good" : "bad");
+          fb.innerHTML =
+            (isCorrect ? "✅ ¡Correcto! " : "❌ Revisá este concepto. ") +
+            (explanation || "");
+          var existing = qItem.querySelector(".feedback");
+          if (existing) existing.remove();
+          var body = qItem.querySelector(".q-body");
+          body.appendChild(fb);
+        }
+
+        function buildQuestion(q) {
+          var isAuto = AUTO_TYPES.indexOf(q.type) > -1;
+          var item = document.createElement("div");
+          item.className = "q-item";
+          item.id = "q" + q.id;
+
+          var num = document.createElement("div");
+          num.className = "q-num";
+          num.textContent = q.id;
+
+          var body = document.createElement("div");
+          body.className = "q-body";
+
+          var tag = document.createElement("span");
+          tag.className = "qtag " + TAGS[q.type].cls;
+          tag.textContent = TAGS[q.type].label;
+          body.appendChild(tag);
+
+          var h4 = document.createElement("h4");
+          h4.innerHTML = q.question;
+          body.appendChild(h4);
+
+          if (q.requirements) {
+            var req = document.createElement("p");
+            req.innerHTML =
+              "<strong>Requisitos del cliente:</strong> " + q.requirements;
+            body.appendChild(req);
+          }
+
+          if (isAuto) {
+            totalAuto++;
+            var ul = document.createElement("ul");
+            ul.className = "q-options";
+            for (var i = 0; i < q.options.length; i++) {
+              ul.appendChild(buildOption(q, q.options[i], i, true));
+            }
+            body.appendChild(ul);
+          } else {
+            var btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "reveal-btn";
+            btn.textContent = "Ver respuesta modelo";
+
+            var box = document.createElement("div");
+            box.className = "answer-box";
+            box.innerHTML = "<strong>Respuesta modelo:</strong> " + q.answer;
+
+            btn.addEventListener("click", function () {
+              box.classList.add("show");
+              btn.disabled = true;
+              btn.textContent = "Respuesta mostrada";
+              btn.style.opacity = "0.6";
+              btn.style.cursor = "default";
+            });
+
+            body.appendChild(btn);
+            body.appendChild(box);
+          }
+
+          item.appendChild(num);
+          item.appendChild(body);
+          return item;
+        }
+
+        function render() {
+          container.innerHTML = "";
+          answered = {};
+          correctCount = 0;
+          totalAuto = 0;
+          for (var i = 0; i < QUESTIONS.length; i++) {
+            container.appendChild(buildQuestion(QUESTIONS[i]));
+          }
+          updateScore();
+        }
+
+        revealAllBtn.addEventListener("click", function () {
+          var boxes = container.querySelectorAll(".answer-box");
+          for (var i = 0; i < boxes.length; i++) boxes[i].classList.add("show");
+
+          var btns = container.querySelectorAll(".reveal-btn");
+          for (var j = 0; j < btns.length; j++) {
+            btns[j].disabled = true;
+            btns[j].textContent = "Respuesta mostrada";
+            btns[j].style.opacity = "0.6";
+            btns[j].style.cursor = "default";
+          }
+
+          // Marcar también las opciones correctas de las autocorregibles sin responder
+          for (var k = 0; k < QUESTIONS.length; k++) {
+            var q = QUESTIONS[k];
+            if (AUTO_TYPES.indexOf(q.type) === -1) continue;
+            if (answered[q.id]) continue;
+            var item = document.getElementById("q" + q.id);
+            if (!item) continue;
+            var opts = item.querySelectorAll(".opt");
+            for (var m = 0; m < opts.length; m++) {
+              opts[m].disabled = true;
+              if (q.options[m] && q.options[m].correct)
+                opts[m].classList.add("correct");
+            }
+          }
+        });
+
+        resetBtn.addEventListener("click", function () {
+          render();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        render();
+      })();
+    </script>
+  </body>
+</html>
