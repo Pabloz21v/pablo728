@@ -1,0 +1,1095 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trabajo Final Integrador - Desarrollo 2</title>
+    <style>
+      :root {
+        --primary: #1e3a5f;
+        --primary-dark: #0a2a44;
+        --secondary: #2c7da0;
+        --accent: #61a5c2;
+        --success: #2a9d8f;
+        --warning: #e9c46a;
+        --danger: #e63946;
+        --text-dark: #1e2a3a;
+        --text-muted: #4a627a;
+        --bg-light: #f8fafc;
+        --bg-code: #eef2f5;
+        --border-light: #cbd5e1;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      }
+
+      header {
+        background-color: #2c3e50;
+        color: white;
+        padding: 25px;
+        text-align: center;
+        border-radius: 8px;
+        margin-bottom: 25px;
+      }
+
+      header h1 {
+        color: white;
+        margin: 0;
+        font-size: 1.8rem;
+      }
+
+      header .subtitle {
+        color: rgba(255, 255, 255, 0.9);
+        margin-top: 10px;
+        font-size: 1.05rem;
+        font-style: italic;
+      }
+
+      h1,
+      h2 {
+        color: #2c3e50;
+      }
+
+      h1 {
+        margin: 0;
+      }
+
+      h2 {
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+        margin-top: 1.8em;
+        margin-bottom: 0.8em;
+        font-size: 1.5rem;
+      }
+
+      h3 {
+        color: #2980b9;
+        margin-top: 1.3em;
+        margin-bottom: 0.6em;
+        font-size: 1.2rem;
+      }
+
+      h4 {
+        color: #1e2a3a;
+        margin-top: 1em;
+        margin-bottom: 0.5em;
+        font-size: 1.05rem;
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
+
+      ul,
+      ol {
+        margin-left: 1.8rem;
+        margin-bottom: 1.2rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+
+      /* Cajas destacadas */
+      .section {
+        background-color: #f0f8ff;
+        padding: 18px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+
+      .theory {
+        background-color: #e8f4f8;
+        padding: 18px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+
+      .practice {
+        background-color: #fef9e7;
+        padding: 18px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+
+      .exercise {
+        background-color: #e8f8f5;
+        padding: 18px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #27ae60;
+      }
+
+      .note {
+        background-color: #fffde7;
+        padding: 12px 15px;
+        border-left: 4px solid #ffd600;
+        margin: 15px 0;
+        border-radius: 0 5px 5px 0;
+      }
+
+      .highlight {
+        background-color: #e3f2fd;
+        padding: 15px;
+        border-left: 4px solid #3498db;
+        margin: 15px 0;
+        border-radius: 0 5px 5px 0;
+      }
+
+      .warning-box {
+        background: linear-gradient(135deg, #fff9e8 0%, #fff3d6 100%);
+        border-left: 6px solid #e9c46a;
+        border-radius: 10px;
+        padding: 1.2rem 1.5rem;
+        margin: 1.5rem 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+
+      .warning-box strong {
+        display: block;
+        font-size: 1.05rem;
+        color: #b26b00;
+        margin-bottom: 0.4rem;
+        font-weight: 700;
+      }
+
+      .warning-box p {
+        margin-bottom: 0;
+        color: #5c4a1a;
+      }
+
+      .danger-box {
+        background: #fdecea;
+        border-left: 5px solid #e63946;
+        border-radius: 0 8px 8px 0;
+        padding: 15px 18px;
+        margin: 1.5rem 0;
+      }
+
+      .danger-box strong {
+        color: #b71c1c;
+        display: block;
+        margin-bottom: 0.4rem;
+      }
+
+      .info-box {
+        background-color: #e8f4f8;
+        padding: 15px 18px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border-left: 4px solid #2c7da0;
+      }
+
+      /* Código */
+      code {
+        background-color: #f4f4f4;
+        padding: 3px 7px;
+        border-radius: 4px;
+        font-family: "Consolas", "Courier New", monospace;
+        font-size: 0.9rem;
+        color: #0a2a44;
+        border: 1px solid #d1d9e8;
+      }
+
+      pre {
+        background: #1e2a3a;
+        color: #e2e8f0;
+        padding: 15px;
+        border-radius: 8px;
+        overflow-x: auto;
+        font-family: "Consolas", "Courier New", monospace;
+        font-size: 0.88rem;
+        line-height: 1.5;
+        margin: 15px 0;
+      }
+
+      pre code {
+        background: transparent;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font-size: inherit;
+      }
+
+      /* Tablas */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px 14px;
+        text-align: left;
+      }
+
+      th {
+        background: linear-gradient(135deg, #1e3a5f 0%, #2c7da0 100%);
+        color: white;
+        font-weight: 600;
+        font-size: 0.92rem;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      tr:hover td {
+        background-color: rgba(44, 125, 160, 0.06);
+      }
+
+      /* Botones de navegación */
+      .nav-buttons {
+        margin-bottom: 24px;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+        margin-bottom: 8px;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+      }
+
+      .btn-volver {
+        background: #4ade80;
+        color: #222;
+      }
+
+      .btn-anterior {
+        background: #60a5fa;
+        color: #fff;
+      }
+
+      .btn-siguiente {
+        background: #f9e282;
+        color: #222;
+      }
+
+      /* Etapas / bloques */
+      .etapa {
+        background: linear-gradient(135deg, #1e3a5f 0%, #2c7da0 100%);
+        color: white;
+        padding: 18px 22px;
+        border-radius: 10px;
+        margin: 30px 0 20px 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+      }
+
+      .etapa h2 {
+        color: white;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+        margin: 0;
+        padding-bottom: 6px;
+      }
+
+      .etapa p {
+        margin: 8px 0 0 0;
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 0.95rem;
+      }
+
+      /* Temática especial */
+      .tematica {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin: 20px 0;
+      }
+
+      .tematica-card {
+        flex: 1 1 250px;
+        padding: 18px;
+        border-radius: 10px;
+        color: white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+      }
+
+      .tematica-card h4 {
+        color: white;
+        margin: 0 0 8px 0;
+        font-size: 1.15rem;
+      }
+
+      .tematica-card p {
+        margin: 0;
+        font-size: 0.92rem;
+        color: rgba(255, 255, 255, 0.95);
+      }
+
+      .digimon {
+        background: linear-gradient(135deg, #f77f00 0%, #d62828 100%);
+      }
+      .pokemon {
+        background: linear-gradient(135deg, #f9c74f 0%, #e63946 100%);
+      }
+      .dragonball {
+        background: linear-gradient(135deg, #f4a261 0%, #e76f51 100%);
+      }
+
+      /* Lista numerada jerárquica */
+      .lista-jerarquica {
+        counter-reset: item;
+        list-style: none;
+        margin-left: 0;
+        padding-left: 0;
+      }
+
+      .lista-jerarquica > li {
+        counter-increment: item;
+        margin-bottom: 12px;
+        padding-left: 45px;
+        position: relative;
+      }
+
+      .lista-jerarquica > li::before {
+        content: counter(item) ".";
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-weight: bold;
+        color: #1e3a5f;
+        background: #e3f2fd;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 15px;
+        }
+        header h1 {
+          font-size: 1.4rem;
+        }
+        .btn {
+          display: block;
+          width: 100%;
+          text-align: center;
+          margin-right: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Navegación superior -->
+      <div class="nav-buttons">
+        <a href="../../materias/desarrollo-2.html" class="btn btn-volver"
+          >Volver a Materia</a
+        >
+        <a href="desarrollo2-sesion7.html" class="btn btn-anterior"
+          >Ir a Sesión 7</a
+        >
+      </div>
+
+      <header>
+        <h1>Trabajo Final Integrador - Desarrollo 2</h1>
+        <p class="subtitle">
+          Aplicación integral de los conocimientos de las Sesiones 1 a 7
+        </p>
+      </header>
+
+      <!-- Introducción -->
+      <div class="section">
+        <h2>Introducción</h2>
+        <p>
+          Este trabajo final integrador tiene como objetivo evaluar la capacidad
+          del alumno para aplicar de manera integral todos los conocimientos
+          adquiridos en las sesiones 1 a 7 de la materia Desarrollo 2. Se divide
+          en dos etapas:
+        </p>
+        <ul>
+          <li>
+            <strong>Etapa 1:</strong> Desarrollo y documentación del script SQL.
+          </li>
+          <li><strong>Etapa 2:</strong> Defensa oral.</li>
+        </ul>
+        <p>La temática de la base de datos es de libre elección</p>
+        <p>
+          <strong
+            >Cada integrante del grupo debe ser capaz de defender, interpretar y
+            explicar cada línea de código.</strong
+          >
+        </p>
+      </div>
+
+      <!-- Etapa 1 -->
+      <div class="etapa">
+        <h2>Etapa 1: Desarrollo y Documentación</h2>
+        <p>
+          Entrega en documento Word con script SQL y capturas de pantalla de
+          cada actividad.
+        </p>
+      </div>
+
+      <!-- Modalidad -->
+      <div class="section">
+        <h3>Modalidad y entregables</h3>
+        <ul>
+          <li><strong>Grupos:</strong> de 2 a 4 integrantes.</li>
+          <li>
+            <strong>Formato de entrega:</strong> Documento Word (.docx) que
+            contenga:
+            <ul>
+              <li>
+                Portada con nombres y apellidos completos de todos los
+                integrantes.
+              </li>
+              <li>Breve explicación de la temática elegida.</li>
+              <li>
+                Script SQL completo, ordenado, jerárquico y debidamente
+                comentado.
+              </li>
+              <li>
+                Capturas de pantalla de cada actividad realizada (creación,
+                inserción, actualización, eliminación, filtros, JOINs, etc.).
+                Las capturas esperadas son el
+                <strong>antes y después</strong> de la tabla ante la ejecución
+                de un código.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Fecha límite de entrega (1er etapa):</strong> viernes 13 de
+            noviembre del 2026.
+          </li>
+          <li>
+            <strong>Defensa (segunda etapa):</strong> del lunes 16 al viernes 27
+            de noviembre del 2026.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Capturas de pantalla -->
+      <div class="practice">
+        <h3>¿Cómo tomar capturas de pantalla y pegarlas en Word?</h3>
+        <h4>Windows</h4>
+        <ul>
+          <li>
+            <strong>Herramienta Recortes:</strong> Presionar
+            <code>Win + Shift + S</code>, seleccionar el área y luego pegar en
+            Word con <code>Ctrl + V</code>.
+          </li>
+          <li>
+            <strong>Tecla Impr Pant:</strong> Presionar
+            <code>Impr Pant</code> (o <code>Fn + Impr Pant</code> en algunos
+            teclados), luego pegar en Word con <code>Ctrl + V</code>.
+          </li>
+          <li>
+            <strong>Recorte y anotación:</strong> Usar la aplicación "Recortes"
+            para capturar y anotar.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Requisitos del script -->
+      <div class="theory">
+        <h3>Requisitos del script SQL</h3>
+        <p>
+          El script debe poder ejecutarse múltiples veces sin errores de
+          duplicación. Al inicio incluir:
+        </p>
+        <pre><code>DROP DATABASE IF EXISTS nombre_bd;
+CREATE DATABASE IF NOT EXISTS nombre_bd;
+USE nombre_bd;
+-- SHOW DATABASES; (opcional, comentado)
+-- SHOW TABLES; (opcional, comentado)</code></pre>
+        <div class="note">
+          Usar nomenclatura coherente (minúsculas, guiones bajos). Comentar cada
+          sección.
+        </div>
+      </div>
+
+      <!-- Temáticas obligatorias -->
+      <div>
+        La relación 1 a 1 debe ser temática digimon.Usar el código mas avanzado
+        posible. La relación 1 a M debe ser de temática pokemon.Usar el código
+        mas avanzado posible. La relación M a N debe ser dragón ball.Usar el
+        código mas avanzado posible.
+      </div>
+
+      <!-- PARTE A -->
+      <div class="etapa">
+        <h2>Parte A: Relación 1 a 1 y Modificaciones</h2>
+        <p>
+          Tabla principal + tabla relacionada con integridad referencial y
+          modificaciones estructurales.
+        </p>
+      </div>
+
+      <div class="exercise">
+        <h3>Actividades Parte A</h3>
+        <ol class="lista-jerarquica">
+          <li>
+            <strong>Crear tabla principal</strong> con al menos 6 registros. La
+            clave primaria debe llamarse <code>ID_nombre_de_tu_tabla</code>.
+          </li>
+          <li>
+            <strong>Crear segunda tabla</strong> con relación 1 a 1. Definir
+            clave foránea con <code>ON DELETE CASCADE</code> y
+            <code>ON UPDATE CASCADE</code>.
+          </li>
+          <li>
+            <strong
+              >Aplicar entre ambas tablas todos los tipos de datos
+              enseñados:</strong
+            >
+            <code>INT</code>, <code>VARCHAR</code>, <code>DECIMAL</code>,
+            <code>DATE</code>, <code>BOOLEAN</code>, <code>TEXT</code>, etc.
+          </li>
+          <li>
+            <strong>Aplicar entre ambas tablas restricciones:</strong>
+            <code>DEFAULT</code>, <code>NOT NULL</code>, <code>UNIQUE</code>.
+          </li>
+          <li>
+            <strong>Insertar al menos 4 registros</strong> en la segunda tabla,
+            relacionados con la primera.
+          </li>
+          <li>
+            <strong>Ejercicios con NULL y DEFAULT:</strong>
+            <ul>
+              <li>
+                Insertar un registro con una columna explícitamente
+                <code>NULL</code>. Luego actualizarlo con un dato válido.
+              </li>
+              <li>
+                Insertar un registro dejando actuar el <code>DEFAULT</code>.
+                Luego actualizar ese valor.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Modificación de estructuras (ALTER):</strong>
+            <ul>
+              <li>Cambiar nombre de una columna.</li>
+              <li>Modificar tipo de dato de una columna.</li>
+              <li>Agregar una nueva columna en cada tabla.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Consultas con alias y JOIN</strong> (usar <code>LEFT</code>,
+            <code>RIGHT</code> e <code>INNER JOIN</code> sin repetir):
+            <ul>
+              <li>
+                Filtro con dos columnas de la tabla padre y una de la hija.
+              </li>
+              <li>
+                Filtro con una columna de la tabla padre y dos de la hija.
+              </li>
+              <li>
+                Filtro con tres columnas de la tabla padre y tres de la hija.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Prácticas específicas:</strong>
+            <ul>
+              <li>
+                Actualizar datos en columna <code>DECIMAL</code> y filtrar con
+                <code>LIMIT</code>.
+              </li>
+              <li>
+                Actualizar datos en columna <code>DATE</code> y filtrar con
+                <code>YEAR()</code>, <code>MONTH()</code> o <code>DAY()</code>.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong
+              >Configurar <code>ON DELETE CASCADE</code> y
+              <code>ON UPDATE CASCADE</code>. Demostrar:</strong
+            >
+            <ul>
+              <li>
+                Actualizar clave foránea de un registro padre y confirmar su
+                correcta actualización.
+              </li>
+              <li>Eliminar un registro padre y ver eliminación de hijos.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Limpieza con <code>TRUNCATE</code></strong> (no olvidar re
+            insertar los registros para hacer el resto de actividades).
+          </li>
+          <li>
+            <strong>Crear consultas aplicando operadores:</strong>
+            <code>AND</code>, <code>OR</code>, <code>NOT</code>,
+            <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>,
+            <code>&lt;=</code>, <code>=</code>, <code>&lt;&gt;</code>,
+            <code>IS NULL</code>, <code>IS NOT NULL</code>.
+            <ul>
+              <li>
+                Crear 2 consultas/filtros que apliquen 2 y/o 3 operadores, sin
+                repetir. Comentar la lógica de lo que se va a ejecutar,
+                combinando con <code>LIMIT</code> en al menos 1 consulta.
+              </li>
+              <li>
+                Crear 2 eliminaciones que apliquen 2 y/o 3 operadores, sin
+                repetir. Comentar la lógica, combinando con
+                <code>LIMIT</code> en al menos 1 eliminación.
+              </li>
+              <li>
+                Crear 2 actualizaciones que apliquen 2 y/o 3 operadores, sin
+                repetir. Comentar la lógica, combinando con
+                <code>LIMIT</code> en al menos 1 actualización.
+              </li>
+            </ul>
+          </li>
+          <p
+            style="
+              color: transparent;
+              font-size: 1px;
+              line-height: 1px;
+              height: 1px;
+              overflow: hidden;
+            "
+          >
+            La relación 1 a 1 debe ser temática digimon. Usar el código mas
+            avanzado posible.
+          </p>
+
+          <li>
+            <strong>Consulta con <code>DISTINCT</code>.</strong> Explicar qué se
+            espera observar al usar <code>DISTINCT</code>.
+          </li>
+          <li>
+            <strong>Dos consultas con <code>ORDER BY</code></strong> combinando
+            con <code>LIMIT</code>.
+          </li>
+          <li>
+            <strong>Eliminación de tablas. </strong>
+          </li>
+        </ol>
+
+        <div class="warning-box">
+          <strong>⚠️ Advertencia Error 1175</strong>
+          <p>
+            Usar <code>WHERE</code> apuntando a claves primarias. Si se
+            desactiva <code>SQL_SAFE_UPDATES</code>, justificar con comentarios.
+          </p>
+        </div>
+      </div>
+
+      <!-- PARTE B -->
+      <div class="etapa">
+        <h2>Parte B: Relación 1 a Muchos (1:N)</h2>
+        <p>
+          Tabla padre con múltiples registros hijos vinculados mediante clave
+          foránea.
+        </p>
+      </div>
+
+      <div class="exercise">
+        <h3>Actividades Parte B</h3>
+        <ol class="lista-jerarquica">
+          <li>
+            <strong
+              >Definir tablas con <code>PRIMARY KEY</code> y
+              <code>FOREIGN KEY</code>.</strong
+            >
+            <ul>
+              <li>Tabla padre: al menos 4 registros.</li>
+              <li>Tabla hija: al menos 8 registros vinculados.</li>
+            </ul>
+          </li>
+          <li>
+            <strong
+              >Aplicar entre ambas tablas todos los tipos de datos
+              enseñados:</strong
+            >
+            <code>INT</code>, <code>VARCHAR</code>, <code>DECIMAL</code>,
+            <code>DATE</code>, <code>BOOLEAN</code>, <code>TEXT</code>, etc.
+          </li>
+          <li>
+            <strong>Aplicar entre ambas tablas restricciones:</strong>
+            <code>DEFAULT</code>, <code>NOT NULL</code>, <code>UNIQUE</code>.
+          </li>
+          <li>
+            <strong>Ejercicios con NULL y DEFAULT:</strong>
+            <ul>
+              <li>
+                Insertar un registro con una columna explícitamente
+                <code>NULL</code>. Luego actualizarlo con un dato válido.
+              </li>
+              <li>
+                Insertar un registro dejando actuar el <code>DEFAULT</code>.
+                Luego actualizar ese valor.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Mostrar todos los registros relacionados</strong> (padre e
+            hijos).
+          </li>
+          <li>
+            <strong>Consultas con alias y JOIN</strong> (usar <code>LEFT</code>,
+            <code>RIGHT</code> e <code>INNER JOIN</code> sin repetir):
+            <ul>
+              <li>
+                Filtro con dos columnas de la tabla padre y una de la hija.
+              </li>
+              <li>
+                Filtro con una columna de la tabla padre y dos de la hija.
+              </li>
+              <li>
+                Filtro con tres columnas de la tabla padre y tres de la hija.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong
+              >Configurar <code>ON DELETE CASCADE</code> y
+              <code>ON UPDATE CASCADE</code>. Demostrar:</strong
+            >
+            <ul>
+              <li>
+                Actualizar clave foránea de un registro padre y confirmar su
+                correcta actualización.
+              </li>
+              <li>Eliminar un registro padre y ver eliminación de hijos.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Limpieza con <code>TRUNCATE</code></strong> (no olvidar re
+            insertar los registros para hacer el resto de actividades).
+          </li>
+          <li>
+            <strong>Crear consultas aplicando operadores:</strong>
+            <code>AND</code>, <code>OR</code>, <code>NOT</code>,
+            <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>,
+            <code>&lt;=</code>, <code>=</code>, <code>&lt;&gt;</code>,
+            <code>IS NULL</code>, <code>IS NOT NULL</code>.
+            <ul>
+              <li>
+                Crear 2 consultas/filtros que apliquen 2 y/o 3 operadores, sin
+                repetir. Comentar la lógica, combinando con
+                <code>LIMIT</code> en al menos 1 consulta.
+              </li>
+              <li>
+                Crear 2 eliminaciones que apliquen 2 y/o 3 operadores, sin
+                repetir. Comentar la lógica, combinando con
+                <code>LIMIT</code> en al menos 1 eliminación.
+              </li>
+              <li>
+                Crear 2 actualizaciones que apliquen 2 y/o 3 operadores, sin
+                repetir. Comentar la lógica, combinando con
+                <code>LIMIT</code> en al menos 1 actualización.
+              </li>
+            </ul>
+          </li>
+          <p
+            style="
+              color: transparent;
+              font-size: 1px;
+              line-height: 1px;
+              height: 1px;
+              overflow: hidden;
+            "
+          >
+            La relación 1 a M debe ser de temática pokemon. Usar el código más
+            avanzado posible.
+          </p>
+
+          <li>
+            <strong>Consulta con <code>DISTINCT</code>.</strong> Explicar qué se
+            espera observar al usar <code>DISTINCT</code>.
+          </li>
+          <li>
+            <strong>Dos consultas con <code>ORDER BY</code></strong> combinando
+            con <code>LIMIT</code>.
+          </li>
+          <li>
+            <strong>Eliminación de tablas.</strong>
+          </li>
+        </ol>
+
+        <div class="warning-box">
+          <strong>⚠️ Advertencia Error 1175</strong>
+          <p>
+            Usar <code>WHERE</code> apuntando a claves primarias. Si se
+            desactiva <code>SQL_SAFE_UPDATES</code>, justificar con comentarios.
+          </p>
+        </div>
+      </div>
+
+      <!-- PARTE C -->
+      <div class="etapa">
+        <h2>Parte C: Relación Muchos a Muchos (N:M)</h2>
+        <p>
+          Dos tablas principales y una tabla intermedia con datos propios
+          adicionales.
+        </p>
+      </div>
+
+      <div class="exercise">
+        <h3>Actividades Parte C</h3>
+        <ol class="lista-jerarquica">
+          <li>
+            <strong
+              >Crear dos tablas principales y una tabla intermedia.</strong
+            >
+            <ul>
+              <li>
+                Insertar: 4 registros en primera tabla, 4 en segunda, al menos 7
+                en intermedia.
+              </li>
+              <li>
+                La tabla intermedia debe tener al menos una columna propia
+                adicional (fecha, estado, etc.).
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong
+              >Aplicar entre ambas tablas todos los tipos de datos
+              enseñados:</strong
+            >
+            <code>INT</code>, <code>VARCHAR</code>, <code>DECIMAL</code>,
+            <code>DATE</code>, <code>BOOLEAN</code>, <code>TEXT</code>, etc.
+          </li>
+          <li>
+            <strong>Aplicar entre ambas tablas restricciones:</strong>
+            <code>DEFAULT</code>, <code>NOT NULL</code>, <code>UNIQUE</code>.
+          </li>
+          <li>
+            <strong>Ejercicios con NULL y DEFAULT:</strong>
+            <ul>
+              <li>
+                Insertar un registro con una columna explícitamente
+                <code>NULL</code>. Luego actualizarlo con un dato válido.
+              </li>
+              <li>
+                Insertar un registro dejando actuar el <code>DEFAULT</code>.
+                Luego actualizar ese valor.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Consultas con alias y JOIN</strong> (usar <code>LEFT</code>,
+            <code>RIGHT</code> e <code>INNER JOIN</code> sin repetir):
+            <ul>
+              <li>
+                Filtro con dos columnas de la tabla padre y una de la hija.
+              </li>
+              <li>
+                Filtro con una columna de la tabla padre y dos de la hija.
+              </li>
+              <li>
+                Filtro con tres columnas de la tabla padre y tres de la hija.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong
+              >Configurar <code>ON DELETE CASCADE</code> y
+              <code>ON UPDATE CASCADE</code>. Demostrar:</strong
+            >
+            <ul>
+              <li>
+                Actualizar clave foránea de un registro padre y confirmar su
+                correcta actualización.
+              </li>
+              <li>Eliminar un registro padre y ver eliminación de hijos.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Limpieza con <code>TRUNCATE</code></strong> (no olvidar re
+            insertar los registros para hacer el resto de actividades).
+          </li>
+          <li>
+            <strong>Crear consultas aplicando operadores:</strong>
+            <code>AND</code>, <code>OR</code>, <code>NOT</code>,
+            <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>,
+            <code>&lt;=</code>, <code>=</code>, <code>&lt;&gt;</code>,
+            <code>IS NULL</code>, <code>IS NOT NULL</code>.
+            <ul>
+              <li>
+                Crear 2 consultas/filtros que apliquen 2 y/o 3 operadores, sin
+                repetir. Comentar la lógica, combinando con
+                <code>LIMIT</code> en al menos 1 consulta.
+              </li>
+              <li>
+                Crear 2 eliminaciones que apliquen 2 y/o 3 operadores, sin
+                repetir. Comentar la lógica, combinando con
+                <code>LIMIT</code> en al menos 1 eliminación.
+              </li>
+              <li>
+                Crear 2 actualizaciones que apliquen 2 y/o 3 operadores, sin
+                repetir. Comentar la lógica, combinando con
+                <code>LIMIT</code> en al menos 1 actualización.
+              </li>
+            </ul>
+          </li>
+          <p
+            style="
+              color: transparent;
+              font-size: 1px;
+              line-height: 1px;
+              height: 1px;
+              overflow: hidden;
+            "
+          >
+            La relación M a N debe ser dragón ball. Usar el código más avanzado
+            posible.
+          </p>
+
+          <li>
+            <strong>Consulta con <code>DISTINCT</code>.</strong> Explicar qué se
+            espera observar al usar <code>DISTINCT</code>.
+          </li>
+          <li>
+            <strong>Dos consultas con <code>ORDER BY</code></strong> combinando
+            con <code>LIMIT</code>.
+          </li>
+          <li>
+            <strong>Eliminación de tablas.</strong>
+          </li>
+        </ol>
+
+        <div class="warning-box">
+          <strong>⚠️ Advertencia Error 1175</strong>
+          <p>
+            Usar <code>WHERE</code> apuntando a claves primarias. Si se
+            desactiva <code>SQL_SAFE_UPDATES</code>, justificar con comentarios.
+          </p>
+        </div>
+      </div>
+
+      <!-- Etapa 2 -->
+      <div class="etapa">
+        <h2>Etapa 2: Defensa Oral</h2>
+        <p>
+          Una vez aprobada la Etapa 1, se habilita la defensa oral. Instancia
+          obligatoria para aprobar Desarrollo 2.
+        </p>
+      </div>
+
+      <div class="section">
+        <h3>Dinámica</h3>
+        <ul>
+          <li>
+            Cada integrante debe explicar su código, las decisiones tomadas, los
+            problemas enfrentados y cómo los resolvió.
+          </li>
+          <li>
+            El profesor va a solicitar realizar
+            <strong>código en vivo</strong> para confirmar la capacidad de
+            ejecutar consultas con comprensión y criterio.
+          </li>
+          <li>
+            Se evaluará la claridad conceptual, la correcta aplicación de los
+            comandos y la capacidad de resolver situaciones nuevas.
+            <em
+              >(No se espera memorizar código, sino saber recurrir a él y usarlo
+              adecuadamente).</em
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="danger-box">
+        <strong>🎯 Condición final</strong>
+        <p>
+          El alumno debe ser capaz de
+          <strong>ejecutar código con comprensión y criterio</strong>. No se
+          acepta memorización sin entendimiento.
+        </p>
+      </div>
+
+      <!-- Criterios de evaluación -->
+      <div class="theory">
+        <h2>Criterios de Evaluación</h2>
+        <ul>
+          <li>Correcta aplicación de tipos de datos y restricciones.</li>
+          <li>Coherencia en las relaciones (1:1, 1:N, N:M).</li>
+          <li>Uso adecuado de JOINs, filtros, ordenamientos y funciones.</li>
+          <li>Integridad referencial (CASCADE).</li>
+          <li>Documentación clara y capturas completas.</li>
+          <li>
+            Defensa oral: explicación lógica, resolución de problemas y
+            ejecución en vivo.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Recomendaciones -->
+      <div class="practice">
+        <h2>Recomendaciones Finales</h2>
+        <ul>
+          <li>
+            <strong>Probar el script por partes:</strong> Ejecutar bloque por
+            bloque para identificar errores de sintaxis antes de correr el
+            archivo completo.
+          </li>
+          <li>
+            <strong>Comentar cada bloque de código:</strong> Será de gran
+            utilidad durante la defensa oral y ayudará al docente a entender la
+            lógica.
+          </li>
+          <li>
+            <strong>Verificar compatibilidad de tipos:</strong> Si una
+            <code>PRIMARY KEY</code> es de tipo <code>INT</code>, su respectiva
+            <code>FOREIGN KEY</code> debe ser estrictamente <code>INT</code>.
+          </li>
+          <li>
+            <strong>Practicar la defensa oral:</strong> Explicar el código a un
+            compañero ayuda a detectar dudas y afianzar conceptos.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Navegación inferior -->
+      <div class="nav-buttons" style="margin-top: 30px">
+        <a href="../../materias/desarrollo-2.html" class="btn btn-volver"
+          >Volver a Materia</a
+        >
+        <a href="desarrollo2-sesion7.html" class="btn btn-anterior"
+          >Ir a Sesión 7</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

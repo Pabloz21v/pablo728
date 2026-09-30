@@ -282,10 +282,9 @@ hr {
 }
     </style>
   </head>
-  <body style="">
+  <body >
     <h1>TP 2: Integrador de MySQL</h1>
-    <!-- <p class="subtitle">Trabajo práctico integrador de contenidos y preparación para defensa y examen oral</p> -->
-
+   
 <h2>Fechas:</h2>
 <ul><li><strong>Fecha límite de entrega de trabajo:</strong>  viernes 19 de junio.</li>
 <li><strong>Fecha de defensa:</strong>  cuando quieran (incluso en mi horario de PEP de 15 a 18:30hs de lunes a viernes), pero antes 26 de junio.</li>
@@ -296,9 +295,6 @@ hr {
       <li>
         <strong>Temática:</strong> Libertad total para elegir la temática de las bases de datos y tablas, tal como se
         realizó en el TP1. 
-        <!-- Se sugiere elegir escenarios reales y coherentes (por ejemplo: gestión de biblioteca, sistema
-        de reservas médicas, e-commerce, etc.). Aunque los nombres de las tablas y columnas sean libres, la aplicación
-        de los requisitos técnicos es estricta. -->
       </li>
       <li>
         <strong>Uso de Inteligencia Artificial:</strong> Está permitido el apoyo con herramientas de IA (ChatGPT,
@@ -332,7 +328,6 @@ hr {
         Aplicación estricta de restricciones estructurales: <code>PRIMARY KEY</code>, <code>FOREIGN KEY</code>,
         <code>NOT NULL</code>, <code>UNIQUE</code> y <code>DEFAULT</code>.
       </li>
-      <!-- <li>Manipulación de datos mediante inserciones, modificaciones y borrados lógicos y físicos.</li> -->
       <li>
         Construcción de filtros avanzados y ordenamientos (<code>WHERE</code>, <code>ORDER BY</code>,
         <code>DISTINCT</code>, <code>IS NULL</code>, <code>IS NOT NULL</code>).
@@ -343,8 +338,7 @@ hr {
       <li>Manejo de integridad referencial con <code>ON UPDATE CASCADE</code> y <code>ON DELETE CASCADE</code>.</li>
       <li>
         Agrupación de datos y uso de funciones específicas: 
-        <!-- <code>COUNT()</code>, -->
-         <!-- <code>GROUP BY</code>, -->
+     
         <code>YEAR()</code>, <code>MONTH()</code>, <code>DAY()</code>.
       </li>
     </ul>
@@ -369,7 +363,6 @@ hr {
     </ul>
 
     <h2>4. Parte A: Relación 1 a 1 y Modificaciones</h2>
-    <!-- <p>En esta sección aplicarán restricciones y manipularán la estructura de las tablas. Sigan estos pasos:</p> -->
     <ol>
       <li>
         Crear una tabla principal con la temática escogida que contenga al menos <strong>6 registros</strong>. La
@@ -500,7 +493,6 @@ hr {
       </li>
       <li>
         Diseñar dos consultas que aplique la cláusula <code>ORDER BY</code>.
-        <!-- analítica que combine la función <code>COUNT()</code> y la cláusula <code>GROUP BY</code>. -->
       </li>
     </ul>
 
@@ -543,11 +535,7 @@ hr {
         Aplicar ordenamientos con <code>ORDER BY</code> tanto de forma ascendente (<code>ASC</code>) como descendente
         (<code>DESC</code>).
       </li>
-      <!-- <li>
-        Ejecutar una eliminación de datos usando <code>DELETE</code> 
-         Se exige explicar brevemente mediante un comentario en el código cuál es la diferencia técnica entre ambas
-        sentencias. 
-      </li> -->
+     
     </ul>
 
     <h2>8. Entrega  </h2>
@@ -558,71 +546,10 @@ hr {
         Una breve explicación (en formato texto o comentario inicial) de la temática elegida para facilitar la revisión
         del docente.
       </li>
-      <!-- <li>
-        El script SQL completo, ordenado, con correcta indentación y uso de punto y coma al final de cada instrucción.
-      </li>
-      <li>
-        Separación clara mediante comentarios indicando qué bloque corresponde a la Parte A, Parte B, Parte C y Parte D.
-      </li>
-      <li>
-        Evidencia textual (comentarios explicativos en el código) de que el grupo comprende qué hace cada comando
-        ejecutado.
-      </li> -->
+      
     </ul>
 
-    <!-- <h2>9. Criterios de Evaluación</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Criterio de Evaluación</th>
-          <th>Descripción de lo evaluado</th>
-          <th>Peso Orientativo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Estructura y Modelado</strong></td>
-          <td>
-            Creación lógica de bases de datos y tablas, correcta implementación de relaciones (1:1, 1:N, N:M), uso
-            adecuado de PK y FK.
-          </td>
-          <td>20%</td>
-        </tr>
-        <tr>
-          <td><strong>Tipos de Datos y Restricciones</strong></td>
-          <td>Asignación precisa de tipos de datos y restricciones (NOT NULL, UNIQUE, DEFAULT).</td>
-          <td>15%</td>
-        </tr>
-        <tr>
-          <td><strong>Operaciones CRUD</strong></td>
-          <td>Llenado coherente de datos, actualizaciones correctas, manejo de borrados y truncados.</td>
-          <td>15%</td>
-        </tr>
-        <tr>
-          <td><strong>Consultas, Filtros y Agrupaciones</strong></td>
-          <td>Uso impecable de WHERE, operadores lógicos, funciones de fecha, ORDER BY y DISTINCT
-            , COUNT y GROUP BY 
-            .</td>
-          <td>20%</td>
-        </tr>
-        <tr>
-          <td><strong>Relaciones y JOIN</strong></td>
-          <td>
-            Sintaxis correcta en uniones de tablas (LEFT, RIGHT, INNER JOIN), manejo de alias y aplicación de ON UPDATE
-            CASCADE.
-          </td>
-          <td>15%</td>
-        </tr>
-        <tr>
-          <td><strong>Defensa oral y Comprensión</strong></td>
-          <td>
-            Capacidad técnica para explicar el código entregado, responder preguntas y realizar modificaciones en vivo.
-          </td>
-          <td>15%</td>
-        </tr>
-      </tbody>
-    </table> -->
-
+  
     <h2>9. Recomendaciones Finales</h2>
     <ul>
       <li>
@@ -633,70 +560,13 @@ hr {
         <strong>Comenten su código:</strong> Les será de gran utilidad durante la defensa oral y ayudará al docente a
         entender su lógica.
       </li>
-      <!-- <li><strong>Mantengan la coherencia:</strong> Respeten la nomenclatura elegida a lo largo de todo el trabajo.</li> -->
       <li>
         <strong>Verifiquen compatibilidad:</strong> Si una <code>PRIMARY KEY</code> es de tipo <code>INT</code>, su
         respectiva <code>FOREIGN KEY</code> debe ser estrictamente <code>INT</code>.
       </li>
     </ul>
 
-    <!-- <div class="highlight-box">
-      <strong>Recordatorio Fundamental:</strong> Si los integrantes del grupo no pueden explicar cómo funciona el código
-      entregado o qué función cumple determinada instrucción,
-      <strong>el trabajo práctico no se considerará resuelto</strong>, independientemente de que el script ejecute sin
-      errores.
-    </div> -->
 
-    <!-- <h2>11. Resumen: Contenidos que deben aparecer sí o sí</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Categoría</th>
-          <th>Comandos y estructuras de aplicación obligatoria</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Comandos Básicos (DDL)</strong></td>
-          <td>
-            <code>CREATE</code>, <code>USE</code>, <code>DROP</code>, <code>TRUNCATE</code>, <code>RENAME</code>,
-            <code>ALTER</code>
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Tipos de Datos y Restricciones</strong></td>
-          <td>
-            <code>INT</code>, <code>VARCHAR</code>, <code>DECIMAL</code>, <code>DATE</code>, <code>PRIMARY KEY</code>,
-            <code>FOREIGN KEY</code>, <code>UNIQUE</code>, <code>NOT NULL</code>, <code>DEFAULT</code>
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Manipulación de Datos (DML)</strong></td>
-          <td><code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code></td>
-        </tr>
-        <tr>
-          <td><strong>Consultas y Filtros Básicos</strong></td>
-          <td>
-            <code>WHERE</code>, operadores (&gt;, &lt;, =, &lt;&gt;, AND, OR, NOT), <code>IS NULL</code>,
-            <code>IS NOT NULL</code>, <code>ORDER BY</code>, <code>DISTINCT</code>
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Relaciones y Combinaciones</strong></td>
-          <td>
-            Relaciones 1:1, 1:N, N:M, <code>LEFT JOIN</code>, <code>INNER JOIN</code>, <code>RIGHT JOIN</code>, Uso de
-            Alias (<code>AS</code>)
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Operaciones Avanzadas</strong></td>
-          <td>
-            <code>ON UPDATE CASCADE</code>, <code>COUNT()</code>, <code>GROUP BY</code>, Funciones de fecha
-            (<code>YEAR()</code>, <code>MONTH()</code>, <code>DAY()</code>)
-          </td>
-        </tr>
-      </tbody>
-    </table> -->
   
 
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
