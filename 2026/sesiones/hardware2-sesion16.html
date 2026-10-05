@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="es-ES" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 16 — RAID: Arreglos de Discos</title>
+    <style>
+      :root {
+        --bg: #0f1729;
+        --card-bg: #1a2744;
+        --text: #f8fafc;
+        --blue: #3b82f6;
+        --cyan: #06b6d4;
+        --green: #10b981;
+        --yellow: #f59e0b;
+        --red: #ef4444;
+        --border-deco: #2dd4bf;
+        --muted: #94a3b8;
+        --header-grad-start: #1e3a5f;
+        --header-grad-end: #1a2744;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          'Segoe UI',
+          system-ui,
+          -apple-system,
+          Roboto,
+          Arial,
+          sans-serif;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      body {
+        padding: 24px 16px 64px;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      /* NAV BUTTONS */
+      .nav-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+      .nav-btn {
+        display: inline-block;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+        border: 1px solid transparent;
+        transition: filter 0.2s;
+      }
+      .nav-btn:hover {
+        filter: brightness(1.15);
+      }
+      .nav-btn.primary {
+        background: var(--blue);
+        color: #fff;
+      }
+      .nav-btn.secondary {
+        background: transparent;
+        color: var(--cyan);
+        border-color: var(--cyan);
+      }
+      .nav-btn.accent {
+        background: var(--green);
+        color: #0f1729;
+      }
+      .nav-btn.warn {
+        background: var(--yellow);
+        color: #0f1729;
+      }
+      .nav-buttons.bottom {
+        justify-content: center;
+        margin-top: 40px;
+      }
+
+      /* HEADER */
+      header.hero {
+        text-align: center;
+        padding: 40px 24px;
+        background: linear-gradient(135deg, #0a1224 0%, #15233f 100%);
+        border-radius: 16px;
+        border: 1px solid rgba(45, 212, 191, 0.25);
+        margin-bottom: 28px;
+      }
+      header.hero h1 {
+        font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+        margin: 0 0 10px;
+        background: linear-gradient(90deg, var(--blue), var(--cyan));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        line-height: 1.15;
+      }
+      header.hero h2 {
+        color: var(--cyan);
+        font-size: 1.2rem;
+        margin: 0 0 8px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+      }
+      header.hero h3 {
+        color: var(--muted);
+        font-size: 1rem;
+        margin: 0 0 18px;
+        font-weight: 400;
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      .badge {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: rgba(6, 182, 212, 0.15);
+        color: var(--cyan);
+        font-size: 0.85rem;
+        font-weight: 600;
+        border: 1px solid rgba(6, 182, 212, 0.4);
+      }
+      .badge.alt {
+        background: rgba(245, 158, 11, 0.15);
+        color: var(--yellow);
+        border-color: rgba(245, 158, 11, 0.4);
+      }
+      .badge.alt2 {
+        background: rgba(16, 185, 129, 0.15);
+        color: var(--green);
+        border-color: rgba(16, 185, 129, 0.4);
+      }
+      .badge .dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--cyan);
+        margin-right: 8px;
+        vertical-align: middle;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.4; }
+      }
+
+      /* TOC */
+      .toc {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 32px;
+        border: 1px solid rgba(45, 212, 191, 0.2);
+      }
+      .toc h2 {
+        margin-top: 0;
+        font-size: 1.15rem;
+        color: var(--cyan);
+        border-bottom: 1px solid rgba(45, 212, 191, 0.3);
+        padding-bottom: 10px;
+        margin-bottom: 16px;
+      }
+      .toc ol {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        columns: 2;
+        column-gap: 30px;
+      }
+      .toc li {
+        margin-bottom: 8px;
+        break-inside: avoid;
+      }
+      .toc a {
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 10px;
+        border-radius: 6px;
+        transition: background 0.2s;
+        font-size: 0.9rem;
+      }
+      .toc a:hover {
+        background: rgba(59, 130, 246, 0.15);
+        color: var(--cyan);
+      }
+      .toc a .num {
+        color: var(--blue);
+        font-weight: 700;
+        min-width: 24px;
+      }
+      .toc-info {
+        margin-top: 14px;
+        font-size: 0.78rem;
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      /* SECTION TITLES */
+      .section-title {
+        background: linear-gradient(90deg, var(--header-grad-start), var(--header-grad-end));
+        border-left: 5px solid var(--cyan);
+        border-radius: 0 10px 10px 0;
+        padding: 14px 20px;
+        margin: 48px 0 20px;
+        font-size: 1.4rem;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .section-title .icon {
+        font-size: 1.3rem;
+      }
+      .section-meta {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-bottom: 24px;
+        padding-left: 20px;
+        font-style: italic;
+      }
+
+      /* CARDS */
+      .card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+      .card h3 {
+        margin-top: 0;
+        color: var(--cyan);
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .card h4 {
+        margin-top: 18px;
+        color: var(--blue);
+        font-size: 1rem;
+      }
+      .card p {
+        margin: 8px 0;
+        color: #e2e8f0;
+      }
+      .card ul, .card ol {
+        padding-left: 22px;
+        color: #e2e8f0;
+      }
+      .card li {
+        margin-bottom: 6px;
+      }
+      .card .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 12px;
+      }
+      @media (max-width: 680px) {
+        .card .grid-2 { grid-template-columns: 1fr; }
+      }
+
+      /* CALLOUTS */
+      .callout {
+        background: rgba(6, 182, 212, 0.08);
+        border-left: 5px solid var(--cyan);
+        border-radius: 0 10px 10px 0;
+        padding: 16px 20px;
+        margin: 18px 0;
+      }
+      .callout .cbadge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 6px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+      }
+      .callout .cbadge.info {
+        background: var(--cyan);
+        color: #0f1729;
+      }
+      .callout h4 {
+        margin: 0 0 8px;
+        color: var(--cyan);
+        font-size: 1rem;
+      }
+      .callout p {
+        margin: 6px 0;
+        color: #e2e8f0;
+      }
+      .callout.warning {
+        background: rgba(239, 68, 68, 0.08);
+        border-left-color: var(--red);
+      }
+      .callout.warning .cbadge {
+        background: var(--red);
+        color: #fff;
+      }
+      .callout.warning h4 { color: var(--red); }
+      .callout.tip {
+        background: rgba(245, 158, 11, 0.08);
+        border-left-color: var(--yellow);
+      }
+      .callout.tip .cbadge {
+        background: var(--yellow);
+        color: #0f1729;
+      }
+      .callout.tip h4 { color: var(--yellow); }
+      .callout.success {
+        background: rgba(16, 185, 129, 0.08);
+        border-left-color: var(--green);
+      }
+      .callout.success .cbadge {
+        background: var(--green);
+        color: #0f1729;
+      }
+      .callout.success h4 { color: var(--green); }
+
+      /* TABLES */
+      .table-wrap {
+        overflow-x: auto;
+        margin: 18px 0;
+        border-radius: 10px;
+        border: 1px solid #334155;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card-bg);
+        font-size: 0.92rem;
+        min-width: 480px;
+      }
+      thead { background: #0f172a; }
+      thead th {
+        color: var(--cyan);
+        text-align: left;
+        padding: 12px 14px;
+        font-weight: 600;
+        border-bottom: 2px solid var(--cyan);
+      }
+      tbody td {
+        padding: 11px 14px;
+        border-bottom: 1px solid #334155;
+        color: #e2e8f0;
+      }
+      tbody tr:nth-child(even) { background: rgba(255, 255, 255, 0.025); }
+      tbody tr:hover { background: rgba(59, 130, 246, 0.08); }
+      tbody tr.total-row td {
+        background: rgba(16, 185, 129, 0.12);
+        color: var(--green);
+        font-weight: 700;
+        border-top: 2px solid var(--green);
+      }
+
+      /* Q-LIST */
+      .q-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .q-item {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 18px;
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .q-num {
+        flex: 0 0 38px;
+        height: 38px;
+        width: 38px;
+        border-radius: 50%;
+        background: var(--blue);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+      .q-body { flex: 1; }
+      .q-body .qtag {
+        display: inline-block;
+        font-size: 0.7rem;
+        padding: 2px 8px;
+        border-radius: 4px;
+        margin-right: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .qtag.multi   { background: var(--blue);   color: #fff; }
+      .qtag.vf      { background: var(--green);  color: #0f1729; }
+      .qtag.short   { background: var(--yellow); color: #0f1729; }
+      .qtag.scenario{ background: var(--red);    color: #fff; }
+      .q-body h4 {
+        margin: 8px 0 8px;
+        color: var(--text);
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+      .q-body p {
+        margin: 6px 0;
+        color: #e2e8f0;
+        font-size: 0.92rem;
+      }
+      .q-options {
+        margin: 8px 0;
+        padding-left: 0;
+        list-style: none;
+      }
+      .q-options li {
+        padding: 4px 0;
+        color: #cbd5e1;
+        font-size: 0.9rem;
+      }
+      .q-options li::before {
+        content: '▸ ';
+        color: var(--cyan);
+      }
+      .q-answer {
+        color: var(--green);
+        font-weight: 600;
+        font-size: 0.85rem;
+        display: block;
+        margin-top: 10px;
+        padding-top: 8px;
+        border-top: 1px dashed rgba(16, 185, 129, 0.35);
+      }
+
+      /* BARS */
+      .bar-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 8px 0;
+      }
+      .bar-label {
+        width: 110px;
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+      .bar-track {
+        flex: 1;
+        height: 10px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .bar-fill {
+        height: 100%;
+        border-radius: 5px;
+      }
+      .bar-value {
+        font-size: 0.78rem;
+        color: var(--cyan);
+        min-width: 90px;
+        text-align: right;
+      }
+      .fill-r0 { background: linear-gradient(90deg, var(--blue), var(--cyan)); width: 100%; }
+      .fill-r1 { background: linear-gradient(90deg, var(--green), #34d399); width: 50%; }
+      .fill-r5 { background: linear-gradient(90deg, var(--yellow), #fbbf24); width: 75%; }
+      .fill-r6 { background: linear-gradient(90deg, #f97316, var(--yellow)); width: 66%; }
+      .fill-r10 { background: linear-gradient(90deg, #6366f1, #a855f7); width: 50%; }
+
+      /* RAID DISK DIAGRAMS */
+      .raid-diagram {
+        background: var(--bg);
+        border: 1px solid rgba(45, 212, 191, 0.25);
+        border-radius: 12px;
+        padding: 18px;
+        margin: 16px 0;
+      }
+      .disk-visual {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        justify-content: center;
+        margin: 12px 0;
+      }
+      .disk-unit {
+        width: 76px;
+        background: #0b1220;
+        border: 2px solid var(--blue);
+        border-radius: 8px;
+        padding: 6px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        text-align: center;
+      }
+      .disk-unit .disk-name {
+        font-size: 0.7rem;
+        color: var(--muted);
+        margin-bottom: 2px;
+        font-weight: 700;
+      }
+      .disk-block {
+        height: 26px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #0f1729;
+      }
+      .blk-a { background: var(--blue); color: #fff; }
+      .blk-b { background: var(--cyan); }
+      .blk-c { background: #818cf8; color: #fff; }
+      .blk-mirror { background: var(--green); }
+      .blk-parity { background: var(--yellow); }
+      .blk-parity2 { background: var(--red); color: #fff; }
+      .blk-empty { background: rgba(255,255,255,0.05); color: var(--muted); }
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 10px;
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+      .legend span.sw {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 3px;
+        margin-right: 5px;
+        vertical-align: middle;
+      }
+
+      /* ACTIVITY CARDS */
+      .activity-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin-bottom: 16px;
+        border-left: 5px solid var(--blue);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+      .activity-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .activity-head h3 {
+        margin: 0;
+        color: var(--text);
+        font-size: 1.05rem;
+      }
+      .activity-tools {
+        font-size: 0.78rem;
+        color: var(--cyan);
+        margin: 6px 0;
+      }
+
+      /* EXERCISE BOX */
+      .exercise {
+        background: rgba(59, 130, 246, 0.07);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin: 16px 0;
+      }
+      .exercise h4 {
+        margin-top: 0;
+        color: var(--blue);
+      }
+      .exercise .formula {
+        font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+        background: rgba(0,0,0,0.35);
+        padding: 10px 14px;
+        border-radius: 8px;
+        color: var(--cyan);
+        display: block;
+        margin: 10px 0;
+        font-size: 0.9rem;
+        overflow-x: auto;
+      }
+      .exercise .result {
+        color: var(--green);
+        font-weight: 700;
+      }
+
+      .time-badge {
+        display: inline-block;
+        margin-left: auto;
+        padding: 4px 10px;
+        border-radius: 6px;
+        background: rgba(245, 158, 11, 0.15);
+        color: var(--yellow);
+        font-size: 0.78rem;
+        font-weight: 600;
+        border: 1px solid rgba(245, 158, 11, 0.4);
+        white-space: nowrap;
+      }
+
+      /* UTIL */
+      .highlight { color: var(--yellow); font-weight: 600; }
+      .mono, code.inline {
+        font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+        background: rgba(0, 0, 0, 0.35);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        color: var(--cyan);
+      }
+
+      /* FOOTER */
+      footer {
+        margin-top: 50px;
+        padding-top: 24px;
+        border-top: 1px solid #334155;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      footer p { margin: 4px 0; }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        body { padding: 16px 12px 48px; }
+        header.hero { padding: 28px 18px; }
+        .toc ol { columns: 1; }
+        .table-wrap {
+          margin-left: -12px;
+          margin-right: -12px;
+          border-radius: 6px;
+        }
+        .nav-buttons { flex-direction: column; }
+        .nav-btn { width: 100%; text-align: center; }
+        .card, .callout, .exercise, .activity-card, .raid-diagram { padding: 16px; }
+        .q-item { flex-direction: column; }
+        .q-num { margin-bottom: 4px; }
+        .bar-label { width: 90px; }
+        .disk-unit { width: 62px; }
+        .activity-head { flex-direction: column; align-items: flex-start; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-dos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="hardware2-sesion15.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 15
+        </a>
+        <a
+          href="hardware2-sesion17.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 17
+        </a>
+      </div>
+
+      <!-- ====== HEADER PRINCIPAL ====== -->
+      <header class="hero">
+        <h1>Sesión 16 — RAID: Arreglos de Discos </h1>
+        <h2>Concepto, Niveles, Cálculos de Capacidad/Velocidad y Configuración Simulada</h2>
+        <h3>
+          Curso: Hardware Industrial · Todo el trabajo práctico se realiza con calculadoras online,
+          simuladores y una máquina virtual — <strong>sin equipos físicos</strong>.
+        
+      </header>
+
+      <!-- ====== TABLA DE CONTENIDOS ====== -->
+      <section class="toc" id="toc">
+        <h2>📋 Tabla de Contenidos</h2>
+        <ol>
+          <li><a href="#sec0"><span class="num">0.</span> Introducción y Objetivos</a></li>
+          <li><a href="#sec1"><span class="num">1.</span> Concepto de RAID</a></li>
+          <li><a href="#sec2"><span class="num">2.</span> Niveles RAID 0, 1, 5, 6 y 10</a></li>
+          <li><a href="#sec3"><span class="num">3.</span> Cálculos: capacidad, velocidad y tolerancia</a></li>
+          <li><a href="#sec4"><span class="num">4.</span> Hardware vs Software, Hot-Spare, Rebuild y BBU</a></li>
+          <li><a href="#sec5"><span class="num">5.</span> Seguridad y mantenimiento</a></li>
+          <li><a href="#sec6"><span class="num">6.</span> Taller: actividades virtuales</a></li>
+          <li><a href="#sec7"><span class="num">7.</span> Secuencia didáctica (160 min)</a></li>
+          <li><a href="#sec8"><span class="num">8.</span> Recursos y enlaces</a></li>
+          <li><a href="#sec9"><span class="num">9.</span> Cuestionario final</a></li>
+        </ol>
+        <p class="toc-info">Todos los enlaces de recursos abren en pestaña nueva. Recomendado: usar auriculares y tener la VM ya instalada antes de clase.</p>
+      </section>
+
+      <!-- ====== SECCIÓN 0 — INTRODUCCIÓN ====== -->
+      <h2 class="section-title" id="sec0">
+        <span class="icon">🎓</span>Sección 0 — Introducción y Objetivos
+      </h2>
+
+      <div class="card">
+        <h3>🎯 ¿Qué vamos a aprender?</h3>
+        <p>
+          <span class="highlight">RAID</span> (Redundant Array of Independent Disks) es una técnica que combina
+          varios discos físicos en una sola unidad lógica para lograr, según el nivel elegido, más
+          <strong>velocidad</strong>, más <strong>seguridad ante fallos</strong> o ambas cosas a la vez. Ya vimos
+          hardware industrial y servidores: hoy damos un paso más y entendemos <em>cómo se organiza el
+          almacenamiento</em> dentro de esos equipos para que un servidor nunca se detenga por la rotura de un
+          único disco.
+        </p>
+        <p>
+          Como no contamos con controladoras RAID físicas en el aula, todo el trabajo se hace con una
+          <strong>calculadora RAID online</strong>, discos virtuales creados en <strong>Oracle VirtualBox</strong>
+          y simulaciones narradas de fallos. Al finalizar la sesión vas a poder calcular capacidad y tolerancia
+          a fallos de cualquier arreglo, y vas a saber justificar qué nivel RAID conviene según presupuesto,
+          rendimiento y criticidad de los datos.
+        </p>
+      </div>
+
+      <div class="callout">
+        <span class="cbadge info">OBJETIVOS DE APRENDIZAJE</span>
+        <h4>📐 Al finalizar la sesión el estudiante podrá...</h4>
+        <ul>
+          <li>Definir qué es RAID y diferenciar <em>striping</em>, <em>mirroring</em> y <em>paridad</em>.</li>
+          <li>Explicar con analogías simples los niveles RAID 0, 1, 5, 6 y 10.</li>
+          <li>Calcular capacidad útil, velocidad teórica y tolerancia a fallos de un arreglo dado.</li>
+          <li>Distinguir RAID por hardware vs RAID por software y sus ventajas/desventajas.</li>
+          <li>Explicar hot-spare, rebuild, estado degradado y la función de la batería BBU.</li>
+          <li>Configurar un arreglo RAID por software en una VM y simular la pérdida y reconstrucción de un disco.</li>
+          <li>Aplicar criterios de seguridad de la información y buenas prácticas de mantenimiento en sistemas RAID.</li>
+        </ul>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Bloque</th>
+              <th>Duración</th>
+              <th>Enfoque</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>🟢 Apertura</td><td>10 min</td><td>Pregunta disparadora + objetivos</td></tr>
+            <tr><td>🔵 Teoría</td><td>45 min</td><td>Concepto, niveles y cálculos</td></tr>
+            <tr><td>🟡 Taller virtual</td><td>80 min</td><td>5 actividades con calculadora, VM y simulaciones</td></tr>
+            <tr><td>🔴 Evaluación</td><td>15 min</td><td>Cuestionario guiado en clase</td></tr>
+            <tr><td>⚪ Cierre</td><td>10 min</td><td>Síntesis + tarea de búsqueda de imágenes</td></tr>
+            <tr class="total-row"><td>TOTAL</td><td>160 min</td><td>Sesión completa</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ====== SECCIÓN 1 — CONCEPTO DE RAID ====== -->
+      <h2 class="section-title" id="sec1">
+        <span class="icon">💽</span>Sección 1 — Concepto de RAID
+      </h2>
+
+      <div class="card">
+        <h3>🧩 1.1 ¿Qué problema resuelve RAID?</h3>
+        <p>
+          Un disco individual tiene dos límites: una <strong>velocidad máxima</strong> de lectura/escritura y una
+          <strong>vida útil finita</strong> (cualquier disco, tarde o temprano, falla). RAID ataca ambos problemas
+          combinando 2 o más discos físicos en un solo volumen lógico que el sistema operativo ve como "un disco
+          grande". Según cómo se combinen los datos, se gana velocidad, seguridad, o ambas.
+        </p>
+        <p>
+          Pensalo como <span class="highlight">repartir el trabajo entre varias personas</span>: si dos personas
+          escriben la mitad de un informe cada una, terminan más rápido (más velocidad), pero si una persona se
+          enferma, falta su mitad. Si en cambio las dos personas escriben el informe completo cada una por las
+          dudas, el trabajo tarda lo mismo que si lo hiciera una sola, pero si una se enferma, la otra copia
+          está intacta (más seguridad).
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🔤 1.2 Las tres técnicas base</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Técnica</th><th>Qué hace</th><th>Efecto</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Striping</strong> (fraccionamiento)</td>
+                <td>Divide los datos en bloques y los reparte entre todos los discos</td>
+                <td>⬆️ Velocidad · ⬇️ Seguridad (sin redundancia)</td>
+              </tr>
+              <tr>
+                <td><strong>Mirroring</strong> (espejado)</td>
+                <td>Copia exactamente los mismos datos en dos o más discos</td>
+                <td>⬆️ Seguridad · ⬇️ Capacidad útil (se pierde la mitad)</td>
+              </tr>
+              <tr>
+                <td><strong>Paridad</strong> (parity)</td>
+                <td>Calcula un dato matemático extra (XOR) que permite reconstruir un disco perdido</td>
+                <td>⬆️ Seguridad con menor costo de capacidad que el mirroring</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Los niveles RAID que vamos a estudiar (0, 1, 5, 6 y 10) son simplemente distintas combinaciones de estas
+          tres técnicas.
+        </p>
+      </div>
+
+      <div class="callout tip">
+        <span class="cbadge">CONSEJO</span>
+        <h4>🔑 RAID no es lo mismo que backup</h4>
+        <p>
+          RAID protege contra la <strong>falla física de un disco</strong>, pero no contra un error humano
+          (borrar un archivo), un ransomware o un incendio: si algo corrompe o borra el archivo, esa
+          corrupción se replica igual en todos los discos del arreglo. Por eso todo servidor con RAID
+          <em>también</em> necesita una política de backups aparte.
+        </p>
+      </div>
+
+      <!-- ====== SECCIÓN 2 — NIVELES RAID ====== -->
+      <h2 class="section-title" id="sec2">
+        <span class="icon">🧬</span>Sección 2 — Niveles RAID 0, 1, 5, 6 y 10
+      </h2>
+
+      <div class="card">
+        <h3>🏎️ 2.1 RAID 0 — Striping puro (velocidad sin red de seguridad)</h3>
+        <p>
+          <strong>Analogía:</strong> dos amigos reparten un mazo de 52 cartas para ordenarlo: cada uno ordena 26
+          cartas al mismo tiempo, así terminan el doble de rápido. Pero si uno de los dos pierde sus cartas, el
+          mazo completo queda incompleto e inútil.
+        </p>
+        <div class="raid-diagram">
+          <div class="disk-visual">
+            <div class="disk-unit">
+              <span class="disk-name">Disco 1</span>
+              <div class="disk-block blk-a">A1</div>
+              <div class="disk-block blk-a">A3</div>
+            </div>
+            <div class="disk-unit">
+              <span class="disk-name">Disco 2</span>
+              <div class="disk-block blk-b">A2</div>
+              <div class="disk-block blk-b">A4</div>
+            </div>
+          </div>
+          <div class="legend"><span><span class="sw" style="background:var(--blue)"></span>Datos fraccionados (striping), sin copia ni paridad</span></div>
+        </div>
+        <p><strong>Mínimo de discos:</strong> 2 · <strong>Capacidad útil:</strong> 100% (n × tamaño de disco) · <strong>Tolerancia a fallos:</strong> 0 (ninguna).</p>
+        <p><strong>Uso típico:</strong> edición de video, caché temporal, escenarios donde la velocidad importa más que los datos.</p>
+      </div>
+
+      <div class="card">
+        <h3>🪞 2.2 RAID 1 — Mirroring (la fotocopia de seguridad)</h3>
+        <p>
+          <strong>Analogía:</strong> fotocopiás cada hoja importante y guardás el original en una carpeta y la
+          copia en otra carpeta distinta. Si perdés una carpeta, tenés la otra intacta. Tarda lo mismo escribir
+          una hoja que dos (no ganás velocidad de escritura), pero ganaste tranquilidad.
+        </p>
+        <div class="raid-diagram">
+          <div class="disk-visual">
+            <div class="disk-unit">
+              <span class="disk-name">Disco 1</span>
+              <div class="disk-block blk-mirror">A1</div>
+              <div class="disk-block blk-mirror">A2</div>
+            </div>
+            <div class="disk-unit">
+              <span class="disk-name">Disco 2 (espejo)</span>
+              <div class="disk-block blk-mirror">A1</div>
+              <div class="disk-block blk-mirror">A2</div>
+            </div>
+          </div>
+          <div class="legend"><span><span class="sw" style="background:var(--green)"></span>Copia idéntica en ambos discos (mirroring)</span></div>
+        </div>
+        <p><strong>Mínimo de discos:</strong> 2 · <strong>Capacidad útil:</strong> 50% del total · <strong>Tolerancia a fallos:</strong> 1 disco de cada par.</p>
+        <p><strong>Uso típico:</strong> sistemas operativos de servidores, bases de datos críticas pequeñas.</p>
+      </div>
+
+      <div class="card">
+        <h3>🧮 2.3 RAID 5 — Paridad distribuida (el "resumen" del grupo)</h3>
+        <p>
+          <strong>Analogía:</strong> un trabajo grupal de 4 integrantes. Cada uno escribe su parte, pero además
+          uno del grupo (rotando en cada entrega) redacta un "resumen" que permite reconstruir la parte de
+          cualquier compañero ausente, con solo leer lo que escribieron los demás. Si falta un solo integrante
+          el día de la entrega, el grupo reconstruye su parte con el resumen. Si faltan dos, no alcanza.
+        </p>
+        <div class="raid-diagram">
+          <div class="disk-visual">
+            <div class="disk-unit"><span class="disk-name">Disco 1</span>
+              <div class="disk-block blk-a">A1</div><div class="disk-block blk-b">B1</div><div class="disk-block blk-c">C1</div><div class="disk-block blk-parity">Dp</div>
+            </div>
+            <div class="disk-unit"><span class="disk-name">Disco 2</span>
+              <div class="disk-block blk-a">A2</div><div class="disk-block blk-b">B2</div><div class="disk-block blk-parity">Cp</div><div class="disk-block blk-c">D1</div>
+            </div>
+            <div class="disk-unit"><span class="disk-name">Disco 3</span>
+              <div class="disk-block blk-a">A3</div><div class="disk-block blk-parity">Bp</div><div class="disk-block blk-b">C2</div><div class="disk-block blk-c">D2</div>
+            </div>
+            <div class="disk-unit"><span class="disk-name">Disco 4</span>
+              <div class="disk-block blk-parity">Ap</div><div class="disk-block blk-a">B3</div><div class="disk-block blk-b">C3</div><div class="disk-block blk-c">D3</div>
+            </div>
+          </div>
+          <div class="legend">
+            <span><span class="sw" style="background:var(--blue)"></span>Datos</span>
+            <span><span class="sw" style="background:var(--yellow)"></span>Paridad (rota entre discos, distinta fila cada vez)</span>
+          </div>
+        </div>
+        <p><strong>Mínimo de discos:</strong> 3 · <strong>Capacidad útil:</strong> (n-1) × tamaño de disco · <strong>Tolerancia a fallos:</strong> 1 disco.</p>
+        <p><strong>Uso típico:</strong> servidores de archivos, NAS de oficina — buen equilibrio costo/seguridad/rendimiento.</p>
+      </div>
+
+      <div class="card">
+        <h3>🧮➕ 2.4 RAID 6 — Doble paridad (dos resúmenes por las dudas)</h3>
+        <p>
+          <strong>Analogía:</strong> el mismo trabajo grupal de RAID 5, pero ahora <strong>dos</strong> integrantes
+          distintos escriben resúmenes (con fórmulas diferentes). Así, si faltan <em>dos</em> compañeros el mismo
+          día, el grupo igual puede reconstruir ambas partes faltantes.
+        </p>
+        <div class="raid-diagram">
+          <div class="disk-visual">
+            <div class="disk-unit"><span class="disk-name">Disco 1</span>
+              <div class="disk-block blk-a">A1</div><div class="disk-block blk-b">B1</div><div class="disk-block blk-parity">Cp</div><div class="disk-block blk-parity2">Dq</div>
+            </div>
+            <div class="disk-unit"><span class="disk-name">Disco 2</span>
+              <div class="disk-block blk-a">A2</div><div class="disk-block blk-parity">Bp</div><div class="disk-block blk-parity2">Cq</div><div class="disk-block blk-b">D1</div>
+            </div>
+            <div class="disk-unit"><span class="disk-name">Disco 3</span>
+              <div class="disk-block blk-parity">Ap</div><div class="disk-block blk-parity2">Bq</div><div class="disk-block blk-a">C1</div><div class="disk-block blk-b">D2</div>
+            </div>
+            <div class="disk-unit"><span class="disk-name">Disco 4</span>
+              <div class="disk-block blk-parity2">Aq</div><div class="disk-block blk-a">B2</div><div class="disk-block blk-b">C2</div><div class="disk-block blk-c">D3</div>
+            </div>
+          </div>
+          <div class="legend">
+            <span><span class="sw" style="background:var(--blue)"></span>Datos</span>
+            <span><span class="sw" style="background:var(--yellow)"></span>Paridad P</span>
+            <span><span class="sw" style="background:var(--red)"></span>Paridad Q</span>
+          </div>
+        </div>
+        <p><strong>Mínimo de discos:</strong> 4 · <strong>Capacidad útil:</strong> (n-2) × tamaño de disco · <strong>Tolerancia a fallos:</strong> 2 discos simultáneos.</p>
+        <p><strong>Uso típico:</strong> arreglos grandes (muchos discos) donde la probabilidad de una segunda falla durante el rebuild es alta.</p>
+      </div>
+
+      <div class="card">
+        <h3>🤝 2.5 RAID 10 (1+0) — Lo mejor de ambos mundos</h3>
+        <p>
+          <strong>Analogía:</strong> dos equipos de trabajo, cada uno formado por dos compañeros idénticos que se
+          copian el trabajo entre sí (mirroring, como RAID 1). Además, el trabajo total se reparte entre los dos
+          <em>equipos</em> para ir más rápido (striping, como RAID 0). Es rápido <strong>y</strong> seguro, pero
+          usás el doble de discos de los que realmente aprovechás en capacidad.
+        </p>
+        <div class="raid-diagram">
+          <div class="disk-visual">
+            <div class="disk-unit"><span class="disk-name">Disco 1 (par A)</span><div class="disk-block blk-mirror">A1</div></div>
+            <div class="disk-unit"><span class="disk-name">Disco 2 (par A)</span><div class="disk-block blk-mirror">A1</div></div>
+            <div class="disk-unit"><span class="disk-name">Disco 3 (par B)</span><div class="disk-block blk-a">A2</div></div>
+            <div class="disk-unit"><span class="disk-name">Disco 4 (par B)</span><div class="disk-block blk-a">A2</div></div>
+          </div>
+          <div class="legend"><span>Par A y Par B son espejos (RAID 1) — los datos se fraccionan (RAID 0) entre los dos pares</span></div>
+        </div>
+        <p><strong>Mínimo de discos:</strong> 4 (siempre en pares) · <strong>Capacidad útil:</strong> 50% del total · <strong>Tolerancia a fallos:</strong> hasta 1 disco por cada par espejado (puede tolerar más de 1 disco total, si no son del mismo par).</p>
+        <p><strong>Uso típico:</strong> bases de datos transaccionales de alto rendimiento, virtualización, donde no se puede sacrificar ni velocidad ni seguridad.</p>
+      </div>
+
+      <div class="card">
+        <h3>📊 2.6 Rendimiento relativo comparado (referencia visual)</h3>
+        <p>Barra comparativa aproximada de rendimiento combinado (lectura+escritura) respecto de un solo disco, con igual cantidad de discos:</p>
+        <div class="bar-row"><span class="bar-label">RAID 0</span><div class="bar-track"><div class="bar-fill fill-r0"></div></div><span class="bar-value">Máximo</span></div>
+        <div class="bar-row"><span class="bar-label">RAID 1</span><div class="bar-track"><div class="bar-fill fill-r1"></div></div><span class="bar-value">Medio</span></div>
+        <div class="bar-row"><span class="bar-label">RAID 5</span><div class="bar-track"><div class="bar-fill fill-r5"></div></div><span class="bar-value">Alto (lectura)</span></div>
+        <div class="bar-row"><span class="bar-label">RAID 6</span><div class="bar-track"><div class="bar-fill fill-r6"></div></div><span class="bar-value">Medio-alto</span></div>
+        <div class="bar-row"><span class="bar-label">RAID 10</span><div class="bar-track"><div class="bar-fill fill-r10"></div></div><span class="bar-value">Alto</span></div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Nivel</th>
+              <th>Mín. discos</th>
+              <th>Capacidad útil</th>
+              <th>Tolerancia a fallos</th>
+              <th>Rendimiento lectura</th>
+              <th>Rendimiento escritura</th>
+              <th>Uso típico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>RAID 0</strong></td><td>2</td><td>n × tamaño (100%)</td><td>Ninguna</td><td>Muy alto</td><td>Muy alto</td><td>Edición, caché, escenarios sin datos críticos</td></tr>
+            <tr><td><strong>RAID 1</strong></td><td>2</td><td>50%</td><td>1 disco</td><td>Alto</td><td>Igual a 1 disco</td><td>SO de servidor, bases pequeñas</td></tr>
+            <tr><td><strong>RAID 5</strong></td><td>3</td><td>(n-1) × tamaño</td><td>1 disco</td><td>Alto</td><td>Medio (penalidad de paridad)</td><td>NAS/servidor de archivos de oficina</td></tr>
+            <tr><td><strong>RAID 6</strong></td><td>4</td><td>(n-2) × tamaño</td><td>2 discos</td><td>Alto</td><td>Medio-bajo (doble paridad)</td><td>Arreglos grandes, alta disponibilidad</td></tr>
+            <tr><td><strong>RAID 10</strong></td><td>4 (pares)</td><td>50%</td><td>1 por par (puede ser &gt;1 total)</td><td>Muy alto</td><td>Muy alto</td><td>Bases de datos transaccionales, virtualización</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ====== SECCIÓN 3 — CÁLCULOS ====== -->
+      <h2 class="section-title" id="sec3">
+        <span class="icon">🧮</span>Sección 3 — Cálculos: capacidad, velocidad y tolerancia
+      </h2>
+
+      <div class="card">
+        <h3>📐 3.1 Fórmulas básicas</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Nivel</th><th>Capacidad útil</th><th>Discos que pueden fallar</th></tr></thead>
+            <tbody>
+              <tr><td>RAID 0</td><td>n × S</td><td>0</td></tr>
+              <tr><td>RAID 1</td><td>(n / 2) × S</td><td>1 por cada par</td></tr>
+              <tr><td>RAID 5</td><td>(n - 1) × S</td><td>1</td></tr>
+              <tr><td>RAID 6</td><td>(n - 2) × S</td><td>2</td></tr>
+              <tr><td>RAID 10</td><td>(n / 2) × S</td><td>1 por cada par (mínimo)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:0.85rem;color:var(--muted)">Donde <code class="inline">n</code> = cantidad total de discos y <code class="inline">S</code> = tamaño de cada disco (todos del mismo tamaño).</p>
+      </div>
+
+      <div class="exercise">
+        <h4>✅ Ejercicio resuelto 1 — Capacidad útil en RAID 5</h4>
+        <p>Un servidor de archivos usa <strong>4 discos de 2 TB</strong> en RAID 5. Calculá la capacidad útil y el porcentaje de "costo" en paridad.</p>
+        <span class="formula">Capacidad útil = (n - 1) × S = (4 - 1) × 2 TB = 3 × 2 TB</span>
+        <p>Capacidad útil = <span class="result">6 TB</span> de los 8 TB físicos instalados.</p>
+        <p>Costo de paridad = 8 TB - 6 TB = 2 TB → <span class="result">25% del espacio total</span> se destina a redundancia.</p>
+      </div>
+
+      <div class="exercise">
+        <h4>✅ Ejercicio resuelto 2 — Capacidad útil en RAID 10</h4>
+        <p>Una base de datos transaccional usa <strong>6 discos de 1 TB</strong> en RAID 10 (3 pares espejados). Calculá capacidad útil.</p>
+        <span class="formula">Capacidad útil = (n / 2) × S = (6 / 2) × 1 TB = 3 × 1 TB</span>
+        <p>Capacidad útil = <span class="result">3 TB</span> de los 6 TB físicos instalados (50% de eficiencia, igual que RAID 1).</p>
+      </div>
+
+      <div class="exercise">
+        <h4>✅ Ejercicio resuelto 3 — Capacidad, tolerancia y velocidad teórica en RAID 6</h4>
+        <p>Un NAS empresarial usa <strong>8 discos de 4 TB</strong>, cada uno con velocidad de lectura de 180 MB/s, configurados en RAID 6.</p>
+        <span class="formula">Capacidad útil = (n - 2) × S = (8 - 2) × 4 TB = 6 × 4 TB = 24 TB</span>
+        <span class="formula">Velocidad teórica de lectura ≈ n × velocidad de 1 disco = 8 × 180 MB/s = 1440 MB/s</span>
+        <p>Capacidad útil = <span class="result">24 TB</span> · Tolerancia = <span class="result">2 discos simultáneos</span> · Lectura teórica ≈ <span class="result">1,44 GB/s</span>.</p>
+        <p style="font-size:0.85rem;color:var(--muted)">Nota: en escritura, RAID 6 tiene "penalidad de paridad" (cada escritura implica leer y recalcular dos paridades), por lo que la velocidad real de escritura es menor a la teórica de lectura.</p>
+      </div>
+
+      <div class="callout warning">
+        <span class="cbadge">WARN</span>
+        <h4>⚠️ Capacidad útil ≠ capacidad "disponible para el usuario"</h4>
+        <p>
+          Además de restar la paridad/espejo, los fabricantes miden 1 TB = 1000³ bytes, pero el sistema operativo
+          calcula en base 1024³ (TiB real). Por eso un disco "de 2 TB" siempre aparece en el sistema operativo
+          como aproximadamente 1,81 TiB. Este descuento adicional es normal y no es un error de la controladora.
+        </p>
+      </div>
+
+      <!-- ====== SECCIÓN 4 — HW vs SW, HOT-SPARE, REBUILD, BBU ====== -->
+      <h2 class="section-title" id="sec4">
+        <span class="icon">🛠️</span>Sección 4 — Hardware vs Software, Hot-Spare, Rebuild y BBU
+      </h2>
+
+      <div class="card">
+        <h3>⚙️ 4.1 RAID por Hardware vs RAID por Software</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Aspecto</th><th>RAID por Hardware</th><th>RAID por Software</th></tr></thead>
+            <tbody>
+              <tr><td>¿Quién calcula la paridad?</td><td>Chip dedicado en la controladora RAID</td><td>El CPU del servidor (mdadm, Storage Spaces, ZFS)</td></tr>
+              <tr><td>Costo</td><td>Controladora dedicada: $300-600+ USD</td><td>Gratis (incluido en el sistema operativo)</td></tr>
+              <tr><td>Rendimiento con carga alta</td><td>No consume CPU del servidor</td><td>Consume ciclos de CPU (más notorio en RAID 5/6)</td></tr>
+              <tr><td>Caché con batería (BBU)</td><td>Sí, en modelos de gama media/alta</td><td>Depende del sistema (ej. ZFS ZIL con SSD dedicado)</td></tr>
+              <tr><td>Portabilidad del arreglo</td><td>Atado a esa controladora (o compatible)</td><td>Portable entre discos/máquinas (más flexible)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Existe un término medio llamado <strong>HBA (Host Bus Adapter)</strong>: expone los discos "en crudo" sin
+          armar RAID, dejando que el sistema operativo (Linux con <code class="inline">mdadm</code>, o ZFS) arme el
+          arreglo por software. Es el enfoque recomendado hoy en día para NAS caseros y muchos servidores Linux.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🔁 4.2 Hot-spare, rebuild y estado degradado</h3>
+        <ul>
+          <li><strong>Hot-spare:</strong> un disco extra, instalado pero inactivo, listo para reemplazar automáticamente a cualquier disco que falle, sin intervención humana inmediata.</li>
+          <li><strong>Estado degradado:</strong> cuando un disco falla en RAID 1/5/6/10, el arreglo sigue funcionando pero <em>sin margen de error</em>: ya perdió su redundancia (o parte de ella) y sigue funcionando más lento porque debe recalcular datos "al vuelo".</li>
+          <li><strong>Rebuild (reconstrucción):</strong> proceso de recalcular y reescribir los datos del disco faltante en el disco nuevo (hot-spare o reemplazo manual). Puede tardar de horas a días según el tamaño del disco y el tráfico del servidor.</li>
+        </ul>
+      </div>
+
+      <div class="callout warning">
+        <span class="cbadge">WARN</span>
+        <h4>⚠️ El rebuild es el momento de mayor riesgo</h4>
+        <p>
+          Durante un rebuild, todos los discos restantes trabajan al máximo (se leen por completo para reconstruir
+          el que falta), lo que aumenta la probabilidad de que <strong>otro disco falle</strong> justo en ese
+          momento. En RAID 5 (tolera solo 1 disco) esto puede significar pérdida total de datos; es una de las
+          razones por las que RAID 6 se prefiere en arreglos grandes.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🔋 4.3 BBU — Battery Backup Unit (batería de respaldo de caché)</h3>
+        <p>
+          Las controladoras RAID por hardware usan una <strong>memoria caché</strong> para acelerar escrituras: el
+          dato se confirma como "escrito" apenas llega a la caché (RAM de la controladora), aunque todavía no
+          bajó físicamente al disco. Si hay un corte de energía en ese instante, esos datos en caché se pierden.
+        </p>
+        <p>
+          La <strong>BBU</strong> es una batería (o, en modelos modernos, un supercapacitor + memoria flash,
+          llamado <em>FBWC/CacheVault</em>) que mantiene esos datos en la caché el tiempo suficiente para volcarlos
+          al disco apenas vuelve la energía, evitando corrupción de datos ante cortes eléctricos.
+        </p>
+      </div>
+
+      <!-- ====== SECCIÓN 5 — SEGURIDAD Y MANTENIMIENTO ====== -->
+      <h2 class="section-title" id="sec5">
+        <span class="icon">🛡️</span>Sección 5 — Seguridad y mantenimiento
+      </h2>
+
+      <div class="card">
+        <h3>🔐 5.1 RAID y seguridad de la información</h3>
+        <ul>
+          <li><strong>RAID no reemplaza al backup:</strong> protege contra falla de hardware, no contra borrado accidental, ransomware o corrupción lógica (regla 3-2-1: 3 copias, 2 medios distintos, 1 fuera del sitio).</li>
+          <li><strong>Borrado seguro de discos dados de baja:</strong> un disco que salió de un arreglo RAID puede seguir teniendo datos legibles con herramientas forenses. Antes de descartarlo o venderlo, debe aplicarse borrado seguro (wipe) o destrucción física.</li>
+          <li><strong>Cifrado en reposo:</strong> RAID no cifra los datos por sí mismo; si el servidor maneja información sensible, se debe sumar cifrado (BitLocker, LUKS) sobre el volumen RAID.</li>
+          <li><strong>Control de acceso físico:</strong> los racks de discos deben estar en gabinetes o salas con acceso restringido; un disco robado físicamente expone todos sus datos si no está cifrado.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>🧰 5.2 Mantenimiento y puesta en funcionamiento (simulado)</h3>
+        <p>Procedimiento guiado que vamos a simular en la VM durante el taller, sin tocar hardware real:</p>
+        <ol>
+          <li><strong>Planificación:</strong> definir nivel RAID según los 4 ejes (presupuesto, necesidad, generación/compatibilidad y disponibilidad de discos).</li>
+          <li><strong>Creación de discos virtuales</strong> en VirtualBox (mismo tamaño y "modelo" simulando discos reales).</li>
+          <li><strong>Configuración del arreglo:</strong> vía BIOS/UEFI (RAID por hardware/firmware) o por software con <code class="inline">mdadm</code> dentro de una distribución Linux.</li>
+          <li><strong>Verificación de salud:</strong> revisar estado "Optimal/Healthy" antes de poner el arreglo en producción.</li>
+          <li><strong>Monitoreo continuo:</strong> configurar alertas SMART y del propio RAID para detectar fallas tempranas (sectores reasignados, temperatura, errores de lectura).</li>
+          <li><strong>Plan de reemplazo:</strong> tener a mano un disco de repuesto compatible (mismo tamaño o mayor) para minimizar el tiempo en estado degradado.</li>
+        </ol>
+      </div>
+
+      <div class="callout tip">
+        <span class="cbadge">CONSEJO</span>
+        <h4>🔑 Discos "del mismo lote" fallan parecido</h4>
+        <p>
+          Comprar todos los discos de un arreglo el mismo día, del mismo modelo y lote, es cómodo pero riesgoso:
+          si el lote tiene un defecto de fabricación, varios discos pueden fallar en fechas cercanas, justo durante
+          un rebuild. Buena práctica profesional: mezclar levemente lotes/fechas de compra en arreglos grandes.
+        </p>
+      </div>
+
+      <!-- ====== SECCIÓN 6 — TALLER: ACTIVIDADES VIRTUALES ====== -->
+      <h2 class="section-title" id="sec6">
+        <span class="icon">💻</span>Sección 6 — Taller: actividades virtuales (80 min)
+      </h2>
+      <p class="section-meta">Todas las actividades se resuelven con recursos gratuitos online y la VM del curso. Ningún paso requiere hardware físico.</p>
+
+      <div class="activity-card">
+        <div class="activity-head">
+          <h3>🧮 Actividad 1 — Calculadora RAID online</h3>
+          <span class="time-badge">⏱ 15 min</span>
+        </div>
+        <p class="activity-tools">Herramienta: raid-calculator.com</p>
+        <p>
+          En parejas, ingresen en la calculadora distintas combinaciones de cantidad de discos, tamaño y nivel
+          RAID (0, 1, 5, 6 y 10) y registren la capacidad útil que arroja para cada caso. Comparen el resultado
+          de la calculadora con el cálculo manual hecho con las fórmulas de la Sección 3: deben coincidir.
+        </p>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-head">
+          <h3>📊 Actividad 2 — Completar la tabla comparativa</h3>
+          <span class="time-badge">⏱ 10 min</span>
+        </div>
+        <p class="activity-tools">Herramienta: papel/planilla + tabla de la Sección 2.6</p>
+        <p>
+          Sin mirar el apunte, cada estudiante completa de memoria una tabla en blanco con: nivel RAID, discos
+          mínimos, capacidad útil (fórmula), tolerancia a fallos y un caso de uso real. Se corrige en conjunto
+          contra la tabla del apunte.
+        </p>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-head">
+          <h3>🖥️ Actividad 3 — Configuración de un arreglo en la VM</h3>
+          <span class="time-badge">⏱ 25 min</span>
+        </div>
+        <p class="activity-tools">Herramienta: Oracle VirtualBox + distribución Linux liviana</p>
+        <p>Pasos guiados:</p>
+        <ol>
+          <li>Crear 4 discos duros virtuales idénticos (ej. 2 GB cada uno) en VirtualBox y asociarlos a la VM Linux del curso.</li>
+          <li>Dentro de la VM, usar <code class="inline">mdadm</code> para armar un arreglo <strong>RAID 5</strong> con los 4 discos virtuales.</li>
+          <li>Verificar el estado del arreglo con <code class="inline">cat /proc/mdstat</code> y confirmar que figura como "active".</li>
+          <li>Formatear el arreglo, montarlo y copiar un archivo de prueba para confirmar que funciona como una sola unidad.</li>
+        </ol>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-head">
+          <h3>💥 Actividad 4 — Simulación narrada de fallo y rebuild</h3>
+          <span class="time-badge">⏱ 20 min</span>
+        </div>
+        <p class="activity-tools">Herramienta: VM del curso (comando de fallo simulado en mdadm)</p>
+        <p>
+          El docente narra un escenario ("son las 3 AM, un disco del NAS del servidor deja de responder") mientras
+          se marca un disco virtual como <em>faulted</em> en <code class="inml">mdadm</code>. En grupos, los
+          estudiantes describen paso a paso, usando los conceptos de la Sección 4: (1) qué estado queda el
+          arreglo, (2) qué datos sigue pudiendo leer el sistema y cómo, (3) qué pasos seguiría un técnico para
+          reemplazar el disco, y (4) qué ocurre durante el rebuild. Luego se ejecuta el reemplazo real en la VM
+          y se observa el progreso del rebuild en pantalla.
+        </p>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-head">
+          <h3>🗣️ Actividad 5 — Debate: elegir el nivel correcto</h3>
+          <span class="time-badge">⏱ 10 min</span>
+        </div>
+        <p class="activity-tools">Herramienta: escenarios de clientes (ver Sección 9)</p>
+        <p>
+          Se divide el curso en grupos y a cada uno se le entrega un caso de cliente distinto (presupuesto,
+          cantidad de discos disponibles y criticidad de los datos). Cada grupo debate 3-4 minutos y defiende ante
+          la clase qué nivel RAID recomendaría y por qué, aplicando los criterios de capacidad, tolerancia y
+          rendimiento vistos en la sesión.
+        </p>
+      </div>
+
+      <div class="activity-card" style="border-left-color: var(--green)">
+        <div class="activity-head">
+          <h3>🔎 Actividad extra (cierre/tarea) — Búsqueda de imágenes de equipos</h3>
+          <span class="time-badge">⏱ Cierre / tarea</span>
+        </div>
+        <p class="activity-tools">Herramienta: buscador de imágenes (navegador)</p>
+        <p>
+          Cada estudiante busca y guarda en un documento al menos <strong>4 imágenes</strong> de los siguientes
+          equipos vistos en la sesión, con una línea identificando qué es cada uno: (1) una controladora RAID por
+          hardware con BBU, (2) un servidor con bahías de discos hot-swap, (3) un disco duro empresarial SAS
+          abierto o en despiece, y (4) una NAS doméstica con varios discos. Se comparte la próxima clase.
+        </p>
+      </div>
+
+      <!-- ====== SECCIÓN 7 — SECUENCIA DIDÁCTICA ====== -->
+      <h2 class="section-title" id="sec7">
+        <span class="icon">⏱️</span>Sección 7 — Secuencia didáctica (160 minutos exactos)
+      </h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Minutos</th><th>Bloque</th><th>Actividad</th><th>Recurso</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0–5</td><td>🟢 Apertura</td><td>Bienvenida + pregunta disparadora: "¿Qué harían si el disco del servidor de la escuela se rompe mañana?"</td><td>Pizarra / debate corto</td></tr>
+            <tr><td>5–10</td><td>🟢 Apertura</td><td>Presentación de objetivos de la sesión y de los 5 niveles a estudiar</td><td>Esta página web</td></tr>
+            <tr><td>10–20</td><td>🔵 Teoría</td><td>Concepto de RAID + striping / mirroring / paridad, con analogía del trabajo grupal</td><td>Sección 1</td></tr>
+            <tr><td>20–30</td><td>🔵 Teoría</td><td>RAID 0 y RAID 1: analogías, diagramas de discos y fórmulas</td><td>Sección 2.1–2.2</td></tr>
+            <tr><td>30–45</td><td>🔵 Teoría</td><td>RAID 5 y RAID 6: paridad distribuida, doble paridad, diagramas</td><td>Sección 2.3–2.4</td></tr>
+            <tr><td>45–55</td><td>🔵 Teoría</td><td>RAID 10, hardware vs software, hot-spare, rebuild y BBU</td><td>Sección 2.5 y 4</td></tr>
+            <tr><td>55–70</td><td>🟡 Taller</td><td>Actividad 1 — Calculadora RAID online</td><td>raid-calculator.com</td></tr>
+            <tr><td>70–80</td><td>🟡 Taller</td><td>Actividad 2 — Tabla comparativa de memoria</td><td>Planilla propia</td></tr>
+            <tr><td>80–105</td><td>🟡 Taller</td><td>Actividad 3 — Configuración de RAID 5 en la VM con mdadm</td><td>VirtualBox + Linux</td></tr>
+            <tr><td>105–125</td><td>🟡 Taller</td><td>Actividad 4 — Simulación narrada de fallo y rebuild</td><td>VM del curso</td></tr>
+            <tr><td>125–135</td><td>🟡 Taller</td><td>Actividad 5 — Debate de elección de nivel por escenario de cliente</td><td>Tarjetas de casos</td></tr>
+            <tr><td>135–150</td><td>🔴 Evaluación</td><td>Cuestionario guiado (selección de preguntas de la Sección 9)</td><td>Sección 9</td></tr>
+            <tr><td>150–160</td><td>⚪ Cierre</td><td>Síntesis grupal de los 5 niveles + consigna de la actividad de búsqueda de imágenes</td><td>Actividad extra</td></tr>
+            <tr class="total-row"><td colspan="3">TOTAL</td><td>160 minutos</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ====== SECCIÓN 8 — RECURSOS Y ENLACES ====== -->
+      <h2 class="section-title" id="sec8">
+        <span class="icon">🔗</span>Sección 8 — Recursos y enlaces
+      </h2>
+
+      <div class="card">
+        <h3>🌐 Recursos virtuales usados en esta sesión</h3>
+        <ul>
+          <li><a class="mono" href="https://www.raid-calculator.com/default.aspx" target="_blank" rel="noopener">raid-calculator.com</a> — Calculadora online de capacidad útil por nivel RAID (Actividad 1).</li>
+          <li><a class="mono" href="https://www.virtualbox.org/" target="_blank" rel="noopener">Oracle VirtualBox</a> — Software gratuito de virtualización para crear discos virtuales y la VM del curso (Actividades 3 y 4).</li>
+          <li><a class="mono" href="https://raid.wiki.kernel.org/index.php/Linux_Raid" target="_blank" rel="noopener">Linux RAID Wiki (mdadm)</a> — Documentación oficial del software RAID en Linux.</li>
+          <li><a class="mono" href="https://www.smartmontools.org/" target="_blank" rel="noopener">smartmontools</a> — Herramienta gratuita para monitorear la salud SMART de los discos.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>📚 Lecturas complementarias sugeridas</h3>
+        <ul>
+          <li>Documentación del fabricante de la controladora RAID (ejemplo: Broadcom/LSI MegaRAID) sobre configuración de BBU/CacheVault.</li>
+          <li>Manual de la motherboard/servidor sobre configuración de RAID en BIOS/UEFI (modo AHCI vs RAID).</li>
+          <li>Artículos introductorios sobre la regla de backup 3-2-1, para reforzar que RAID y backup son conceptos distintos.</li>
+        </ul>
+      </div>
+
+      <!-- ====== SECCIÓN 9 — CUESTIONARIO FINAL ====== -->
+      <h2 class="section-title" id="sec9">
+        <span class="icon">📝</span>Sección 9 — Cuestionario final
+      </h2>
+
+      <div class="callout">
+        <span class="cbadge info">REGLAS</span>
+        <h4>📐 Cómo usar esta evaluación</h4>
+        <p>
+          Las preguntas marcadas <span class="qtag vf" style="margin: 0 4px;">VF</span> son Verdadero/Falso.
+          Las <span class="qtag short" style="margin: 0 4px;">CORTA</span> piden respuesta en una línea.
+          Las <span class="qtag multi" style="margin: 0 4px;">MULTI</span> son opción múltiple.
+          Las <span class="qtag scenario" style="margin: 0 4px;">ESCENARIO</span> plantean un requisito real de
+          cliente y piden aplicar los criterios de la sesión. Cada pregunta incluye la respuesta esperada para
+          agilizar la corrección en clase.
+        </p>
+      </div>
+
+      <div class="q-list">
+
+        <div class="q-item">
+          <div class="q-num">1</div>
+          <div class="q-body">
+            <span class="qtag vf">V / F</span>
+            <h4>RAID 0 mejora la velocidad de lectura/escritura pero no ofrece ninguna tolerancia a fallos.</h4>
+            <span class="q-answer">Respuesta: Verdadero.</span>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">2</div>
+          <div class="q-body">
+            <span class="qtag short">CORTA</span>
+            <h4>¿Cuál es la capacidad útil de un RAID 5 armado con 5 discos de 4 TB cada uno?</h4>
+            <span class="q-answer">Respuesta: (5-1) × 4 TB = 16 TB.</span>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">3</div>
+          <div class="q-body">
+            <span class="qtag multi">MULTI</span>
+            <h4>¿Qué nivel RAID permite la pérdida simultánea de hasta 2 discos en el mismo arreglo?</h4>
+            <ul class="q-options">
+              <li>a) RAID 0</li>
+              <li>b) RAID 1</li>
+              <li>c) RAID 5</li>
+              <li>d) RAID 6</li>
+            </ul>
+            <span class="q-answer">Respuesta correcta: d) RAID 6.</span>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">4</div>
+          <div class="q-body">
+            <span class="qtag vf">V / F</span>
+            <h4>RAID reemplaza completamente la necesidad de hacer backups del servidor.</h4>
+            <span class="q-answer">Respuesta: Falso. RAID protege contra fallas físicas de disco, no contra borrado accidental, corrupción o ransomware.</span>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">5</div>
+          <div class="q-body">
+            <span class="qtag short">CORTA</span>
+            <h4>¿Qué función cumple un disco configurado como "hot-spare" en un arreglo RAID?</h4>
+            <span class="q-answer">Respuesta: Es un disco extra, instalado pero inactivo, que reemplaza automáticamente a cualquier disco que falle, sin intervención humana inmediata.</span>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">6</div>
+          <div class="q-body">
+            <span class="qtag multi">MULTI</span>
+            <h4>¿Qué ocurre con un arreglo RAID 5 cuando falla uno de sus discos?</h4>
+            <ul class="q-options">
+              <li>a) El arreglo se apaga por completo y se pierden todos los datos.</li>
+              <li>b) El arreglo sigue funcionando en estado degradado, reconstruyendo los datos faltantes "al vuelo" con la paridad.</li>
+              <li>c) El arreglo se convierte automáticamente en RAID 0.</li>
+              <li>d) No pasa nada, el rendimiento se mantiene exactamente igual.</li>
+            </ul>
+            <span class="q-answer">Respuesta correcta: b).</span>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">7</div>
+          <div class="q-body">
+            <span class="qtag short">CORTA</span>
+            <h4>¿Para qué sirve la BBU (Battery Backup Unit) de una controladora RAID?</h4>
+            <span class="q-answer">Respuesta: Mantiene los datos de la caché de escritura (RAM de la controladora) ante un corte de energía, evitando que se pierdan o corrompan antes de bajar al disco.</span>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">8</div>
+          <div class="q-body">
+            <span class="qtag vf">V / F</span>
+            <h4>El proceso de "rebuild" es el momento de mayor riesgo de un arreglo RAID, porque exige lectura intensiva de todos los discos restantes.</h4>
+            <span class="q-answer">Respuesta: Verdadero.</span>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">9</div>
+          <div class="q-body">
+            <span class="qtag multi">MULTI</span>
+            <h4>¿Cuál es la principal ventaja del RAID por software (por ejemplo, con mdadm) frente al RAID por hardware?</h4>
+            <ul class="q-options">
+              <li>a) Es más rápido en todos los casos porque no depende del CPU.</li>
+              <li>b) No requiere ninguna configuración.</li>
+              <li>c) Es gratuito y portable entre discos/máquinas, sin depender de una controladora específica.</li>
+              <li>d) Siempre incluye batería BBU integrada.</li>
+            </ul>
+            <span class="q-answer">Respuesta correcta: c).</span>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">10</div>
+          <div class="q-body">
+            <span class="qtag scenario">ESCENARIO</span>
+            <h4>Un cliente arma un NAS casero con 4 discos de 3 TB. Su presupuesto es ajustado, ya tiene los 4 discos comprados, y su prioridad es no perder fotos familiares aunque se le rompa un disco, sin gastar en discos adicionales.</h4>
+            <p><strong>Requisitos del cliente:</strong> máxima capacidad posible sin sacrificar tolerancia a al menos 1 disco, usando exactamente los 4 discos que ya tiene.</p>
+            <p><strong>Aplicá los criterios de la sesión y recomendá un nivel RAID, justificando con el cálculo de capacidad útil.</strong></p>
+            <span class="q-answer">Respuesta esperada: RAID 5 con los 4 discos de 3 TB → capacidad útil (4-1)×3 TB = 9 TB, tolera 1 disco. Da más capacidad útil que RAID 10 o RAID 6 (que darían 6 TB) mientras protege ante 1 falla, ajustándose al presupuesto y a los discos ya comprados.</span>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">11</div>
+          <div class="q-body">
+            <span class="qtag scenario">ESCENARIO</span>
+            <h4>Una empresa monta un servidor de base de datos transaccional de alto tráfico (ventas online 24/7). Presupuesto alto, 8 discos disponibles de 1 TB, y no pueden permitirse ni lentitud ni pérdida de datos ante una falla.</h4>
+            <p><strong>Requisitos del cliente:</strong> máximo rendimiento de lectura/escritura + tolerancia a fallos, el costo de capacidad no es un problema.</p>
+            <p><strong>Aplicá los criterios de la sesión y recomendá un nivel RAID, justificando con el cálculo de capacidad útil.</strong></p>
+            <span class="q-answer">Respuesta esperada: RAID 10 con los 8 discos (4 pares espejados) → capacidad útil (8/2)×1 TB = 4 TB, con rendimiento de lectura/escritura muy alto (striping) y tolerancia a fallos por par (mirroring), ideal para bases de datos transaccionales críticas.</span>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">12</div>
+          <div class="q-body">
+            <span class="qtag scenario">ESCENARIO</span>
+            <h4>Un estudio de edición de video necesita un disco de trabajo temporal solo para renderizar proyectos durante el día; todo se respalda cada noche en otro servidor. El presupuesto es bajo y tienen 2 discos SSD sueltos.</h4>
+            <p><strong>Requisitos del cliente:</strong> máxima velocidad posible para renderizar más rápido; los datos son descartables porque ya están respaldados aparte.</p>
+            <p><strong>Aplicá los criterios de la sesión y recomendá un nivel RAID, justificando la elección.</strong></p>
+            <span class="q-answer">Respuesta esperada: RAID 0 con los 2 SSD → capacidad útil = 100% (n × S) y máxima velocidad de striping. Es aceptable no tener tolerancia a fallos porque el dato ya se respalda todas las noches en otro servidor.</span>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">13</div>
+          <div class="q-body">
+            <span class="qtag short">CORTA</span>
+            <h4>¿Por qué se recomienda RAID 6 en lugar de RAID 5 en arreglos con muchos discos (por ejemplo, 10 o más)?</h4>
+            <span class="q-answer">Respuesta: Porque a mayor cantidad de discos, el rebuild tarda más y aumenta la probabilidad de que falle un segundo disco durante ese proceso; RAID 6 tolera 2 fallas simultáneas, mientras que RAID 5 solo tolera 1.</span>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">14</div>
+          <div class="q-body">
+            <span class="qtag multi">MULTI</span>
+            <h4>¿Cuál de las siguientes NO es una técnica base usada por los niveles RAID?</h4>
+            <ul class="q-options">
+              <li>a) Striping (fraccionamiento)</li>
+              <li>b) Mirroring (espejado)</li>
+              <li>c) Paridad (parity)</li>
+              <li>d) Compresión sin pérdida (lossless)</li>
+            </ul>
+            <span class="q-answer">Respuesta correcta: d).</span>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">15</div>
+          <div class="q-body">
+            <span class="qtag vf">V / F</span>
+            <h4>En RAID 10, la capacidad útil siempre es igual al 50% de la capacidad física total instalada.</h4>
+            <span class="q-answer">Respuesta: Verdadero (mientras se arme siempre en pares espejados, como es la norma).</span>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">16</div>
+          <div class="q-body">
+            <span class="qtag scenario">ESCENARIO</span>
+            <h4>Un cliente pequeño (kiosco con sistema de facturación) tiene un solo servidor viejo con un único disco libre además del que ya usa, y un presupuesto casi nulo. Pregunta si "conviene armar RAID" con ese único disco adicional.</h4>
+            <p><strong>Requisitos del cliente:</strong> evitar perder la base de facturación si se rompe el disco principal, gastando lo mínimo posible.</p>
+            <p><strong>Aplicá los criterios de la sesión y recomendá una solución, indicando si un solo disco adicional alcanza para armar un RAID con tolerancia a fallos.</strong></p>
+            <span class="q-answer">Respuesta esperada: Sí alcanza — con 2 discos en total se puede armar RAID 1 (mirroring), que tolera la falla de 1 disco con el mínimo de 2 discos posible. Es la opción de menor costo que da redundancia real; además debe sumarse un backup aparte, ya que RAID 1 no reemplaza la copia de seguridad.</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 24px">
+          <a
+            href="../materias/hardware-dos.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #4ade80;
+              color: #222;
+              display: inline-block;
+              margin-right: 10px;
+            "
+          >
+            Volver a Materia
+          </a>
+          <a
+            href="hardware2-sesion15.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #60a5fa;
+              color: #fff;
+              display: inline-block;
+              margin-right: 10px;
+            "
+          >
+            Ir a Sesión 15
+          </a>
+          <a
+            href="hardware2-sesion17.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #f9e282;
+              color: #222;
+              display: inline-block;
+            "
+          >
+            Ir a Sesión 17
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>

@@ -1,7 +1,11 @@
-hay_stock = False
+#primer item
+nota=int(input("ingrese nota"))
 
-# "not hay_stock" se lee como "si NO hay stock"
-if not hay_stock:
-    print("Lo sentimos, el producto está agotado.")
-else:
-    print("Añadiendo producto al carrito de compras.")
+
+while nota <= 10 and nota >= 0:
+    if nota <6:
+        print("desap")
+        break
+    else:
+        print("aprob")
+        break

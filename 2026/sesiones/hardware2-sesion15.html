@@ -1,0 +1,2604 @@
+<!doctype html>
+<html lang="es-ES" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sesión 15 — Hardware de Servidor + Memorias y Redundancia</title>
+    <style>
+      :root {
+        --bg: #0f1729;
+        --card-bg: #1a2744;
+        --text: #f8fafc;
+        --blue: #3b82f6;
+        --cyan: #06b6d4;
+        --green: #10b981;
+        --yellow: #f59e0b;
+        --red: #ef4444;
+        --border-deco: #2dd4bf;
+        --muted: #94a3b8;
+        --header-grad-start: #1e3a5f;
+        --header-grad-end: #1a2744;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          Roboto,
+          Arial,
+          sans-serif;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      body {
+        padding: 24px 16px 64px;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      /* NAV BUTTONS */
+      .nav-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+      .nav-btn {
+        display: inline-block;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+        border: 1px solid transparent;
+        transition: filter 0.2s;
+      }
+      .nav-btn:hover {
+        filter: brightness(1.15);
+      }
+      .nav-btn.primary {
+        background: var(--blue);
+        color: #fff;
+      }
+      .nav-btn.secondary {
+        background: transparent;
+        color: var(--cyan);
+        border-color: var(--cyan);
+      }
+      .nav-btn.accent {
+        background: var(--green);
+        color: #0f1729;
+      }
+      .nav-btn.warn {
+        background: var(--yellow);
+        color: #0f1729;
+      }
+      .nav-buttons.bottom {
+        justify-content: center;
+        margin-top: 40px;
+      }
+
+      /* HEADER */
+      header.hero {
+        text-align: center;
+        padding: 40px 24px;
+        background: linear-gradient(135deg, #0a1224 0%, #15233f 100%);
+        border-radius: 16px;
+        border: 1px solid rgba(45, 212, 191, 0.25);
+        margin-bottom: 28px;
+      }
+      header.hero h1 {
+        font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+        margin: 0 0 10px;
+        background: linear-gradient(90deg, var(--blue), var(--cyan));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        line-height: 1.15;
+      }
+      header.hero h2 {
+        color: var(--cyan);
+        font-size: 1.2rem;
+        margin: 0 0 8px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+      }
+      header.hero h3 {
+        color: var(--muted);
+        font-size: 1rem;
+        margin: 0 0 18px;
+        font-weight: 400;
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .badge {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: rgba(6, 182, 212, 0.15);
+        color: var(--cyan);
+        font-size: 0.85rem;
+        font-weight: 600;
+        border: 1px solid rgba(6, 182, 212, 0.4);
+        margin: 4px;
+      }
+      .badge .dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--cyan);
+        margin-right: 8px;
+        vertical-align: middle;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+
+      /* TOC */
+      .toc {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 32px;
+        border: 1px solid rgba(45, 212, 191, 0.2);
+      }
+      .toc h2 {
+        margin-top: 0;
+        font-size: 1.15rem;
+        color: var(--cyan);
+        border-bottom: 1px solid rgba(45, 212, 191, 0.3);
+        padding-bottom: 10px;
+        margin-bottom: 16px;
+      }
+      .toc ol {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        columns: 2;
+        column-gap: 30px;
+      }
+      .toc li {
+        margin-bottom: 8px;
+        break-inside: avoid;
+      }
+      .toc a {
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 10px;
+        border-radius: 6px;
+        transition: background 0.2s;
+        font-size: 0.9rem;
+      }
+      .toc a:hover {
+        background: rgba(59, 130, 246, 0.15);
+        color: var(--cyan);
+      }
+      .toc a .num {
+        color: var(--blue);
+        font-weight: 700;
+        min-width: 24px;
+      }
+      .toc-info {
+        margin-top: 14px;
+        font-size: 0.78rem;
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      /* SECTION TITLES */
+      .section-title {
+        background: linear-gradient(
+          90deg,
+          var(--header-grad-start),
+          var(--header-grad-end)
+        );
+        border-left: 5px solid var(--cyan);
+        border-radius: 0 10px 10px 0;
+        padding: 14px 20px;
+        margin: 48px 0 20px;
+        font-size: 1.4rem;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .section-title .icon {
+        font-size: 1.3rem;
+      }
+      .section-meta {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-bottom: 24px;
+        padding-left: 20px;
+        font-style: italic;
+      }
+
+      /* CARDS */
+      .card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+      .card h3 {
+        margin-top: 0;
+        color: var(--cyan);
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .card h4 {
+        margin-top: 18px;
+        color: var(--blue);
+        font-size: 1rem;
+      }
+      .card p {
+        margin: 8px 0;
+        color: #e2e8f0;
+      }
+      .card ul,
+      .card ol {
+        padding-left: 22px;
+        color: #e2e8f0;
+      }
+      .card li {
+        margin-bottom: 6px;
+      }
+      .card .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 12px;
+      }
+      @media (max-width: 680px) {
+        .card .grid-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* CALLOUTS */
+      .callout {
+        background: rgba(6, 182, 212, 0.08);
+        border-left: 5px solid var(--cyan);
+        border-radius: 0 10px 10px 0;
+        padding: 16px 20px;
+        margin: 18px 0;
+      }
+      .callout .cbadge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 6px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+      }
+      .callout .cbadge.info {
+        background: var(--cyan);
+        color: #0f1729;
+      }
+      .callout h4 {
+        margin: 0 0 8px;
+        color: var(--cyan);
+        font-size: 1rem;
+      }
+      .callout p {
+        margin: 6px 0;
+        color: #e2e8f0;
+      }
+      .callout.warning {
+        background: rgba(239, 68, 68, 0.08);
+        border-left-color: var(--red);
+      }
+      .callout.warning .cbadge {
+        background: var(--red);
+        color: #fff;
+      }
+      .callout.warning h4 {
+        color: var(--red);
+      }
+      .callout.tip {
+        background: rgba(245, 158, 11, 0.08);
+        border-left-color: var(--yellow);
+      }
+      .callout.tip .cbadge {
+        background: var(--yellow);
+        color: #0f1729;
+      }
+      .callout.tip h4 {
+        color: var(--yellow);
+      }
+      .callout.ok {
+        background: rgba(16, 185, 129, 0.08);
+        border-left-color: var(--green);
+      }
+      .callout.ok .cbadge {
+        background: var(--green);
+        color: #0f1729;
+      }
+      .callout.ok h4 {
+        color: var(--green);
+      }
+
+      /* TABLES */
+      .table-wrap {
+        overflow-x: auto;
+        margin: 18px 0;
+        border-radius: 10px;
+        border: 1px solid #334155;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card-bg);
+        font-size: 0.92rem;
+        min-width: 480px;
+      }
+      thead {
+        background: #0f172a;
+      }
+      thead th {
+        color: var(--cyan);
+        text-align: left;
+        padding: 12px 14px;
+        font-weight: 600;
+        border-bottom: 2px solid var(--cyan);
+      }
+      tbody td {
+        padding: 11px 14px;
+        border-bottom: 1px solid #334155;
+        color: #e2e8f0;
+      }
+      tbody tr:nth-child(even) {
+        background: rgba(255, 255, 255, 0.025);
+      }
+      tbody tr:hover {
+        background: rgba(59, 130, 246, 0.08);
+      }
+
+      /* Q-LIST */
+      .q-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .q-item {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 18px;
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .q-num {
+        flex: 0 0 38px;
+        height: 38px;
+        width: 38px;
+        border-radius: 50%;
+        background: var(--blue);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+      .q-body {
+        flex: 1;
+      }
+      .q-body .qtag {
+        display: inline-block;
+        font-size: 0.7rem;
+        padding: 2px 8px;
+        border-radius: 4px;
+        margin-right: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .qtag.multi {
+        background: var(--blue);
+        color: #fff;
+      }
+      .qtag.vf {
+        background: var(--green);
+        color: #0f1729;
+      }
+      .qtag.short {
+        background: var(--yellow);
+        color: #0f1729;
+      }
+      .qtag.scenario {
+        background: var(--red);
+        color: #fff;
+      }
+      .q-body h4 {
+        margin: 0 0 8px;
+        color: var(--text);
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+      .q-body p {
+        margin: 6px 0;
+        color: #e2e8f0;
+        font-size: 0.92rem;
+      }
+      .q-options {
+        margin: 8px 0;
+        padding-left: 0;
+        list-style: none;
+      }
+      .q-options li {
+        padding: 4px 0;
+        color: #cbd5e1;
+        font-size: 0.9rem;
+      }
+      .q-options li::before {
+        content: "▸ ";
+        color: var(--cyan);
+      }
+      .q-answer {
+        color: var(--green);
+        font-weight: 600;
+        font-size: 0.85rem;
+        display: block;
+        margin-top: 8px;
+      }
+
+      /* BARS */
+      .bar-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 8px 0;
+      }
+      .bar-label {
+        width: 130px;
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+      .bar-track {
+        flex: 1;
+        height: 10px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .bar-fill {
+        height: 100%;
+        border-radius: 5px;
+      }
+      .bar-value {
+        font-size: 0.78rem;
+        color: var(--cyan);
+        min-width: 70px;
+        text-align: right;
+      }
+      .fill-a {
+        background: linear-gradient(90deg, var(--blue), var(--cyan));
+      }
+      .fill-b {
+        background: linear-gradient(90deg, var(--green), #34d399);
+      }
+      .fill-c {
+        background: linear-gradient(90deg, var(--yellow), #facc15);
+      }
+      .fill-d {
+        background: linear-gradient(90deg, var(--red), #f87171);
+      }
+
+      /* SEQUENCE TIMELINE */
+      .timeline-stage {
+        font-weight: 700;
+      }
+      .stage-apertura {
+        color: var(--yellow);
+      }
+      .stage-teoria {
+        color: var(--blue);
+      }
+      .stage-taller {
+        color: var(--green);
+      }
+      .stage-evaluacion {
+        color: var(--red);
+      }
+      .stage-cierre {
+        color: var(--cyan);
+      }
+
+      /* ACTIVITY CARDS */
+      .activity-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-top: 4px solid var(--green);
+      }
+      .activity-card h3 {
+        margin-top: 0;
+        color: var(--green);
+        font-size: 1.05rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .activity-card p,
+      .activity-card li {
+        color: #e2e8f0;
+      }
+      .activity-card ol,
+      .activity-card ul {
+        padding-left: 22px;
+      }
+
+      /* DECISION TREE / EXERCISE BOX */
+      .decision-tree {
+        background: var(--card-bg);
+        padding: 20px;
+        border-radius: 12px;
+        margin: 18px 0;
+        border: 1px solid var(--border-deco);
+      }
+      .dt-step {
+        margin: 10px 0;
+        padding-left: 20px;
+        border-left: 3px solid var(--cyan);
+      }
+      .dt-q {
+        color: var(--cyan);
+        font-weight: 600;
+        margin-bottom: 4px;
+        font-size: 0.95rem;
+      }
+      .dt-a {
+        color: #e2e8f0;
+        margin: 2px 0 2px 14px;
+        font-size: 0.9rem;
+      }
+      .dt-a::before {
+        content: "↳ ";
+        color: var(--green);
+      }
+      .exercise-result {
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin-top: 10px;
+        color: var(--green);
+        font-weight: 600;
+      }
+
+      /* FOOTER */
+      footer {
+        margin-top: 50px;
+        padding-top: 24px;
+        border-top: 1px solid #334155;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      footer p {
+        margin: 4px 0;
+      }
+
+      /* UTIL */
+      .ref {
+        color: var(--cyan);
+        font-size: 0.75rem;
+        vertical-align: super;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .ref::before {
+        content: "[";
+      }
+      .ref::after {
+        content: "]";
+      }
+      .highlight {
+        color: var(--yellow);
+        font-weight: 600;
+      }
+      .mono,
+      code.inline {
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        background: rgba(0, 0, 0, 0.35);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        color: var(--cyan);
+      }
+
+      /* SVG figures */
+      .figure {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 16px;
+        margin: 18px 0;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .figure figcaption {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-top: 8px;
+        font-style: italic;
+        text-align: center;
+      }
+      .time-badge {
+        display: inline-block;
+        margin-left: auto;
+        padding: 4px 10px;
+        border-radius: 6px;
+        background: rgba(245, 158, 11, 0.15);
+        color: var(--yellow);
+        font-size: 0.78rem;
+        font-weight: 600;
+        border: 1px solid rgba(245, 158, 11, 0.4);
+      }
+      .link-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .link-list li {
+        margin-bottom: 10px;
+        padding: 10px 14px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .link-list a {
+        color: var(--cyan);
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .link-list a:hover {
+        text-decoration: underline;
+      }
+      .link-list span {
+        color: var(--muted);
+        font-size: 0.85rem;
+        display: block;
+        margin-top: 2px;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        body {
+          padding: 16px 12px 48px;
+        }
+        header.hero {
+          padding: 28px 18px;
+        }
+        .toc ol {
+          columns: 1;
+        }
+        .table-wrap {
+          margin-left: -12px;
+          margin-right: -12px;
+          border-radius: 6px;
+        }
+        .nav-buttons {
+          flex-direction: column;
+        }
+        .nav-btn {
+          width: 100%;
+          text-align: center;
+        }
+        .card,
+        .callout,
+        .decision-tree,
+        .figure,
+        .activity-card {
+          padding: 16px;
+        }
+        .q-item {
+          flex-direction: column;
+        }
+        .q-num {
+          margin-bottom: 4px;
+        }
+        .bar-label {
+          width: 100px;
+        }
+        .section-title {
+          font-size: 1.15rem;
+          padding: 12px 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-dos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="hardware2-sesion14.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 14
+        </a>
+        <a
+          href="hardware2-sesion16.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 16
+        </a>
+      </div>
+      <!-- ====== HEADER PRINCIPAL ====== -->
+      <header class="hero">
+       
+        <h1>Sesión 15 — Hardware de Servidor + Memorias y Redundancia</h1>
+        <h2>
+          PC de Escritorio vs Servidor · Xeon/EPYC · RAS · Rack/Blade · ECC ·
+          RDIMM/LRDIMM · Redundancia
+        </h2>
+        <h3>
+          Trabajamos con datasheets
+          oficiales HPE y Dell, diagramas técnicos, simulaciones narradas y una
+          máquina virtual en Oracle VirtualBox. 
+        </h3>
+       
+      </header>
+
+      <!-- ====== TABLA DE CONTENIDOS ====== -->
+      <section class="toc" id="toc">
+        <h2>📋 Tabla de Contenidos</h2>
+        <ol>
+          <li>
+            <a href="#sec0"
+              ><span class="num">0.</span> Introducción y Objetivos</a
+            >
+          </li>
+          <li>
+            <a href="#secuencia"
+              ><span class="num">1.</span> Secuencia Didáctica (160 min)</a
+            >
+          </li>
+          <li>
+            <a href="#sec2"
+              ><span class="num">2.</span> PC de Escritorio vs Servidor</a
+            >
+          </li>
+          <li>
+            <a href="#sec3"
+              ><span class="num">3.</span> Procesadores: Xeon vs EPYC</a
+            >
+          </li>
+          <li>
+            <a href="#sec4"
+              ><span class="num">4.</span> Fiabilidad RAS y Multiprocesador</a
+            >
+          </li>
+          <li>
+            <a href="#sec5"
+              ><span class="num">5.</span> Rack 1U/2U/4U y Blade</a
+            >
+          </li>
+          <li>
+            <a href="#sec6"
+              ><span class="num">6.</span> Refrigeración en Data Center</a
+            >
+          </li>
+          <li>
+            <a href="#sec7"><span class="num">7.</span> Memorias ECC</a>
+          </li>
+          <li>
+            <a href="#sec8"
+              ><span class="num">8.</span> UDIMM, RDIMM y LRDIMM</a
+            >
+          </li>
+          <li>
+            <a href="#sec9"
+              ><span class="num">9.</span> Redundancia: Fuentes y
+              Ventiladores</a
+            >
+          </li>
+          <li>
+            <a href="#sec10"><span class="num">10.</span> Seguridad y EPP</a>
+          </li>
+          <li>
+            <a href="#sec11"
+              ><span class="num">11.</span> Mantenimiento y Puesta en Marcha</a
+            >
+          </li>
+          <li>
+            <a href="#sec12"
+              ><span class="num">12.</span> Ejercicios Numéricos Resueltos</a
+            >
+          </li>
+          <li>
+            <a href="#sec13"
+              ><span class="num">13.</span> Actividades Virtuales (Taller)</a
+            >
+          </li>
+          <li>
+            <a href="#sec14"><span class="num">14.</span> Recursos y Enlaces</a>
+          </li>
+          <li>
+            <a href="#sec15"><span class="num">15.</span> Cuestionario Final</a>
+          </li>
+          <li>
+            <a href="#sec16"><span class="num">16.</span> Cierre</a>
+          </li>
+        </ol>
+        <p class="toc-info">
+          💡 Usa el índice para navegar directamente a cada bloque. Toda la
+          sesión funciona sin hardware físico.
+        </p>
+      </section>
+
+      <!-- ====== SECCIÓN 0 — INTRODUCCIÓN ====== -->
+      <h2 class="section-title" id="sec0">
+        <span class="icon">🎓</span>Sección 0 — Introducción y Objetivos
+      </h2>
+
+      <div class="card">
+        <h3>🎯 ¿Qué vamos a aprender?</h3>
+        <p>
+          En la sesión anterior vimos
+          <span class="highlight">hardware industrial</span>, equipos
+          <span class="highlight">fanless</span> y gestión de energía. Hoy
+          subimos un escalón: vamos a estudiar el hardware que sostiene los
+          servicios de una empresa las 24 horas del día, los 365 días del año:
+          el <span class="highlight">servidor</span>. No hay equipos físicos
+          disponibles en el taller, así que todo el trabajo se hace con
+          <strong>datasheets oficiales</strong>,
+          <strong>diagramas técnicos</strong>,
+          <strong>simulaciones narradas</strong> y una
+          <strong>máquina virtual</strong> en VirtualBox.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>📌 Objetivos de la sesión</h3>
+        <ul>
+          <li>
+            Diferenciar una PC de escritorio de un servidor según componentes,
+            propósito y exigencias.
+          </li>
+          <li>
+            Comparar las familias de procesadores
+            <strong>Intel Xeon Scalable</strong> y <strong>AMD EPYC</strong>.
+          </li>
+          <li>
+            Explicar el concepto <strong>RAS</strong> (Reliability,
+            Availability, Serviceability) y la escalabilidad multiprocesador.
+          </li>
+          <li>
+            Reconocer los formatos de chasis <strong>Rack 1U/2U/4U</strong> y
+            <strong>Blade</strong>, y cuándo se usa cada uno.
+          </li>
+          <li>
+            Comprender cómo se refrigera un Data Center y por qué es crítico.
+          </li>
+          <li>
+            Identificar componentes de un servidor real a partir de un diagrama
+            o una hoja de datos (HPE / Dell).
+          </li>
+          <li>
+            Explicar el funcionamiento e importancia de la memoria
+            <strong>ECC</strong>.
+          </li>
+          <li>
+            Diferenciar los tipos de módulo de memoria
+            <strong>Unbuffered, RDIMM y LRDIMM</strong>.
+          </li>
+          <li>
+            Calcular la capacidad de memoria de un servidor
+            <strong>dual-socket</strong>.
+          </li>
+          <li>
+            Explicar la <strong>redundancia</strong> de fuentes hot-swap y
+            ventiladores, y simular un fallo de fuente.
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        <span class="cbadge info">INFO</span>
+        <h4>🖥️ Recursos virtuales verificados para esta sesión</h4>
+        <p>
+          Hoja de datos <strong>HPE ProLiant DL380 Gen11</strong>, hoja de datos
+          <strong>Dell PowerEdge</strong> (series R), y el simulador de
+          virtualización <strong>Oracle VirtualBox</strong> para instalar un
+          sistema operativo. Todos son de acceso gratuito desde las páginas
+          oficiales de los fabricantes (ver Sección 14).
+        </p>
+      </div>
+
+      <!-- ====== SECCIÓN SECUENCIA DIDÁCTICA ====== -->
+      <h2 class="section-title" id="secuencia">
+        <span class="icon">🗓️</span>Secuencia Didáctica — 160 minutos
+      </h2>
+      <p class="section-meta">
+        Apertura 15' + Teoría 50' + Taller 70' + Evaluación 15' + Cierre 10' =
+        160'
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Etapa</th>
+              <th>Actividad</th>
+              <th>Minutos</th>
+              <th>Acumulado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="timeline-stage stage-apertura">Apertura</td>
+              <td>
+                Repaso de la sesión anterior (fanless, hardware industrial) +
+                pregunta disparadora: "¿Por qué una PC de oficina no puede
+                reemplazar a un servidor de un banco?"
+              </td>
+              <td>15'</td>
+              <td>15'</td>
+            </tr>
+            <tr>
+              <td class="timeline-stage stage-teoria">Teoría</td>
+              <td>PC de escritorio vs servidor + procesadores Xeon/EPYC</td>
+              <td>15'</td>
+              <td>30'</td>
+            </tr>
+            <tr>
+              <td class="timeline-stage stage-teoria">Teoría</td>
+              <td>
+                RAS, escalabilidad multiprocesador, formatos Rack/Blade y
+                refrigeración en Data Center
+              </td>
+              <td>20'</td>
+              <td>50'</td>
+            </tr>
+            <tr>
+              <td class="timeline-stage stage-teoria">Teoría</td>
+              <td>
+                Memoria ECC, tipos UDIMM/RDIMM/LRDIMM y redundancia de
+                fuentes/ventiladores
+              </td>
+              <td>15'</td>
+              <td>65'</td>
+            </tr>
+            <tr>
+              <td class="timeline-stage stage-taller">Taller</td>
+              <td>
+                Actividad 1 — Datasheet Challenge: identificación de componentes
+                1U vs 2U (HPE / Dell)
+              </td>
+              <td>15'</td>
+              <td>80'</td>
+            </tr>
+            <tr>
+              <td class="timeline-stage stage-taller">Taller</td>
+              <td>
+                Actividad 2 — Cálculo de memoria dual-socket (ejercicios
+                numéricos guiados)
+              </td>
+              <td>15'</td>
+              <td>95'</td>
+            </tr>
+            <tr>
+              <td class="timeline-stage stage-taller">Taller</td>
+              <td>
+                Actividad 3 — Tour guiado por el diagrama interno de un servidor
+                rack
+              </td>
+              <td>10'</td>
+              <td>105'</td>
+            </tr>
+            <tr>
+              <td class="timeline-stage stage-taller">Taller</td>
+              <td>
+                Actividad 4 — Simulación de fallo de fuente por caso narrado
+                (rol de técnico en guardia)
+              </td>
+              <td>15'</td>
+              <td>120'</td>
+            </tr>
+            <tr>
+              <td class="timeline-stage stage-taller">Taller</td>
+              <td>
+                Actividad 5 — Instalación de un sistema operativo en una VM
+                (Oracle VirtualBox)
+              </td>
+              <td>15'</td>
+              <td>135'</td>
+            </tr>
+            <tr>
+              <td class="timeline-stage stage-evaluacion">Evaluación</td>
+              <td>
+                Chequeo formativo oral/rápido con 5 preguntas de escenario
+                (aplicación de conceptos con un cliente concreto)
+              </td>
+              <td>15'</td>
+              <td>150'</td>
+            </tr>
+            <tr>
+              <td class="timeline-stage stage-cierre">Cierre</td>
+              <td>
+                Síntesis de la clase, asignación de tarea (búsqueda de imágenes
+                de los equipos vistos) y adelanto de la próxima sesión
+              </td>
+              <td>10'</td>
+              <td>160'</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ====== SECCIÓN 2 — PC ESCRITORIO VS SERVIDOR ====== -->
+      <h2 class="section-title" id="sec2">
+        <span class="icon">🖥️</span>Sección 2 — PC de Escritorio vs Servidor
+      </h2>
+
+      <div class="card">
+        <h3>
+          ⚔️ La diferencia no es "más potencia", es otro objetivo de diseño
+        </h3>
+        <p>
+          Una PC de escritorio está diseñada para que
+          <strong>una persona</strong> trabaje comodamente algunas horas al día.
+          Un servidor está diseñado para atender a
+          <strong>cientos o miles de usuarios simultáneos</strong>,
+          <span class="highlight">sin apagarse nunca</span> y permitiendo
+          repararlo sin detener el servicio.
+        </p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Aspecto</th>
+              <th>PC de Escritorio</th>
+              <th>Servidor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>CPU</strong></td>
+              <td>1 socket, consumer (Core i5/i7, Ryzen)</td>
+              <td>1, 2 o 4 sockets, Xeon Scalable / EPYC</td>
+            </tr>
+            <tr>
+              <td><strong>Memoria RAM</strong></td>
+              <td>Sin ECC, tipo UDIMM, 16-64 GB</td>
+              <td>ECC obligatoria, RDIMM/LRDIMM, hasta varios TB</td>
+            </tr>
+            <tr>
+              <td><strong>Almacenamiento</strong></td>
+              <td>1-2 discos SATA/NVMe fijos</td>
+              <td>Múltiples bahías hot-swap con RAID</td>
+            </tr>
+            <tr>
+              <td><strong>Fuente de poder</strong></td>
+              <td>1 fuente, sin redundancia</td>
+              <td>2 o más fuentes hot-swap redundantes</td>
+            </tr>
+            <tr>
+              <td><strong>Disponibilidad esperada</strong></td>
+              <td>Apagados/reinicios diarios aceptables</td>
+              <td>99.9%-99.999% (24/7/365)</td>
+            </tr>
+            <tr>
+              <td><strong>Gestión remota</strong></td>
+              <td>No integrada</td>
+              <td>iLO (HPE) / iDRAC (Dell) fuera de banda</td>
+            </tr>
+            <tr>
+              <td><strong>Chasis</strong></td>
+              <td>Torre, mini-ITX, all-in-one</td>
+              <td>Rack 1U-4U o Blade</td>
+            </tr>
+            <tr>
+              <td><strong>Refrigeración</strong></td>
+              <td>2-4 ventiladores, sin redundancia</td>
+              <td>Múltiples ventiladores redundantes de alto caudal</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout tip">
+        <span class="cbadge">CONSEJO</span>
+        <h4>🔑 Regla de oro para explicarle a un cliente</h4>
+        <p>
+          Una PC de escritorio se rompe y el usuario se queda sin trabajar un
+          rato. Un servidor se rompe y
+          <em>miles de personas se quedan sin sistema</em> (banco, hospital,
+          tienda online). Por eso cada componente de un servidor está pensado
+          para <strong>fallar sin detener el servicio</strong>.
+        </p>
+      </div>
+
+      <!-- ====== SECCIÓN 3 — XEON VS EPYC ====== -->
+      <h2 class="section-title" id="sec3">
+        <span class="icon">🧠</span>Sección 3 — Procesadores de Servidor: Intel
+        Xeon vs AMD EPYC
+      </h2>
+
+      <div class="card">
+        <h3>🔷 Intel Xeon Scalable</h3>
+        <p>
+          Familia de procesadores de Intel para servidores y workstations. Se
+          identifican por su nombre en código (Sapphire Rapids, Emerald Rapids)
+          y usan el socket <code class="inline">LGA 4677</code>. Permiten
+          configuraciones de <strong>1, 2 o 4 sockets</strong> en la misma placa
+          según el modelo.
+        </p>
+        <h4>🔶 AMD EPYC</h4>
+        <p>
+          Familia de AMD basada en la arquitectura Zen. Los modelos actuales
+          (Genoa, Bergamo) usan el socket
+          <code class="inline">SP5</code> y se destacan por ofrecer
+          <strong>más núcleos y más canales de memoria por socket</strong> que
+          Intel en varios segmentos, además de más lanes PCIe 5.0 nativos.
+        </p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th>Intel Xeon Scalable (4ª/5ª Gen)</th>
+              <th>AMD EPYC (Genoa/Bergamo)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Socket</td>
+              <td>LGA 4677</td>
+              <td>SP5</td>
+            </tr>
+            <tr>
+              <td>Núcleos máx. por socket</td>
+              <td>Hasta 64 (Sapphire Rapids)</td>
+              <td>Hasta 128 (Bergamo, núcleos densos)</td>
+            </tr>
+            <tr>
+              <td>Canales de memoria</td>
+              <td>8 canales por socket</td>
+              <td>12 canales por socket</td>
+            </tr>
+            <tr>
+              <td>Lanes PCIe nativos</td>
+              <td>80 lanes PCIe 5.0 (típico)</td>
+              <td>128 lanes PCIe 5.0 (típico)</td>
+            </tr>
+            <tr>
+              <td>Configuraciones multi-socket</td>
+              <td>1S / 2S / 4S / 8S según modelo</td>
+              <td>1S / 2S</td>
+            </tr>
+            <tr>
+              <td>Uso típico</td>
+              <td>
+                Data center general, virtualización, IA con aceleradores Intel
+              </td>
+              <td>Cloud, HPC, densidad de núcleos, virtualización masiva</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warning">
+        <span class="cbadge">WARN</span>
+        <h4>⚠️ No existe "el mejor", existe el adecuado</h4>
+        <p>
+          La elección entre Xeon y EPYC depende del
+          <strong>software certificado</strong> por el proveedor (algunas
+          aplicaciones empresariales sólo certifican una plataforma), del
+          <strong>presupuesto</strong> y de si la carga de trabajo necesita más
+          núcleos (EPYC) o mejor rendimiento por núcleo en tareas específicas
+          (frecuentemente Xeon en cargas orientadas a IA con aceleradores
+          Intel).
+        </p>
+      </div>
+
+      <!-- ====== SECCIÓN 4 — RAS Y MULTIPROCESADOR ====== -->
+      <h2 class="section-title" id="sec4">
+        <span class="icon">🛡️</span>Sección 4 — Fiabilidad RAS, Escalabilidad y
+        Multiprocesador
+      </h2>
+
+      <div class="card">
+        <h3>🧩 4.1 RAS: Reliability, Availability, Serviceability</h3>
+        <ul>
+          <li>
+            <strong>Reliability (Fiabilidad):</strong> el sistema entrega
+            resultados correctos y no falla de forma inesperada. La memoria ECC
+            es el ejemplo clásico: corrige errores de bit sin que el usuario lo
+            note.
+          </li>
+          <li>
+            <strong>Availability (Disponibilidad):</strong> el servicio sigue
+            funcionando incluso si un componente falla, gracias a la
+            <strong>redundancia</strong> (fuentes, ventiladores, discos en
+            RAID).
+          </li>
+          <li>
+            <strong>Serviceability (Mantenibilidad):</strong> se puede reparar o
+            reemplazar una pieza
+            <strong>sin apagar el servidor</strong> (hot-swap de discos, fuentes
+            y ventiladores), reduciendo el tiempo de inactividad a cero.
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>📈 4.2 Escalabilidad y multiprocesador</h3>
+        <p>
+          Un servidor <strong>multiprocesador (multi-socket)</strong> tiene más
+          de un CPU físico en la misma placa, conectados por un bus de alta
+          velocidad (Intel UPI o AMD Infinity Fabric). Cada CPU con su banco de
+          memoria forma un <strong>nodo NUMA</strong> (Non-Uniform Memory
+          Access): acceder a la memoria del propio nodo es más rápido que
+          acceder a la memoria del otro socket.
+        </p>
+        <p>
+          La <strong>escalabilidad vertical</strong> (scale-up) consiste en
+          agregar más CPU, RAM o discos a un mismo servidor. La
+          <strong>escalabilidad horizontal</strong> (scale-out) consiste en
+          agregar más servidores al clúster. Los servidores dual-socket son el
+          punto de partida típico de la escalabilidad vertical en empresas
+          medianas.
+        </p>
+      </div>
+
+      <!-- ====== SECCIÓN 5 — RACK Y BLADE ====== -->
+      <h2 class="section-title" id="sec5">
+        <span class="icon">🗄️</span>Sección 5 — Rack 1U/2U/4U y Blade
+      </h2>
+
+      <div class="card">
+        <h3>📏 5.1 La unidad de rack (U)</h3>
+        <p>
+          Una <strong>U (Unidad de Rack)</strong> equivale a
+          <code class="inline">1,75 pulgadas</code>
+          (~4,45 cm) de altura. Un rack estándar de 42U puede alojar, por
+          ejemplo, 42 servidores de 1U o 21 de 2U.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Formato</th>
+                <th>Altura</th>
+                <th>Uso típico</th>
+                <th>Ejemplo real</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1U</strong></td>
+                <td>4,45 cm</td>
+                <td>Máxima densidad; web, apps, balanceadores</td>
+                <td>Dell PowerEdge R660, HPE DL360</td>
+              </tr>
+              <tr>
+                <td><strong>2U</strong></td>
+                <td>8,89 cm</td>
+                <td>Balance entre bahías de disco y expansión PCIe</td>
+                <td>HPE ProLiant DL380 Gen11, Dell PowerEdge R750/R760</td>
+              </tr>
+              <tr>
+                <td><strong>4U</strong></td>
+                <td>17,8 cm</td>
+                <td>
+                  Máxima expansión: GPU, muchos discos, torre de workstation en
+                  rack
+                </td>
+                <td>Dell PowerEdge T-series racktizada, servidores GPU</td>
+              </tr>
+              <tr>
+                <td><strong>Blade</strong></td>
+                <td>Vertical, en chasis compartido</td>
+                <td>Máxima densidad de cómputo en poco espacio</td>
+                <td>HPE Synergy, Dell PowerEdge MX</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🔲 5.2 Servidores Blade: todo comparte chasis</h3>
+        <p>
+          Un servidor <strong>Blade</strong> es una placa delgada sin fuente ni
+          ventiladores propios: se inserta en un
+          <strong>chasis compartido</strong> que provee alimentación,
+          refrigeración, red y gestión a todas las blades instaladas. Esto
+          reduce cableado y espacio, pero exige que el chasis (y su redundancia)
+          esté siempre en buen estado, porque de él dependen <em>todas</em> las
+          blades.
+        </p>
+      </div>
+
+      <!-- Figura SVG: comparación de alturas de rack -->
+      <figure class="figure" style="break-inside: avoid">
+        <svg
+          viewBox="0 0 900 220"
+          xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-label="Comparación de alturas de rack 1U 2U 4U y Blade"
+        >
+          <rect
+            x="40"
+            y="150"
+            width="120"
+            height="20"
+            rx="2"
+            fill="#1e293b"
+            stroke="#3b82f6"
+            stroke-width="2"
+          />
+          <text
+            x="100"
+            y="140"
+            fill="#3b82f6"
+            font-size="13"
+            font-weight="700"
+            text-anchor="middle"
+          >
+            1U
+          </text>
+          <text
+            x="100"
+            y="190"
+            fill="#94a3b8"
+            font-size="10"
+            text-anchor="middle"
+          >
+            4,45 cm
+          </text>
+
+          <rect
+            x="220"
+            y="110"
+            width="120"
+            height="60"
+            rx="2"
+            fill="#1e293b"
+            stroke="#06b6d4"
+            stroke-width="2"
+          />
+          <text
+            x="280"
+            y="100"
+            fill="#06b6d4"
+            font-size="13"
+            font-weight="700"
+            text-anchor="middle"
+          >
+            2U
+          </text>
+          <text
+            x="280"
+            y="190"
+            fill="#94a3b8"
+            font-size="10"
+            text-anchor="middle"
+          >
+            8,89 cm
+          </text>
+
+          <rect
+            x="400"
+            y="50"
+            width="120"
+            height="120"
+            rx="2"
+            fill="#1e293b"
+            stroke="#10b981"
+            stroke-width="2"
+          />
+          <text
+            x="460"
+            y="40"
+            fill="#10b981"
+            font-size="13"
+            font-weight="700"
+            text-anchor="middle"
+          >
+            4U
+          </text>
+          <text
+            x="460"
+            y="190"
+            fill="#94a3b8"
+            font-size="10"
+            text-anchor="middle"
+          >
+            17,8 cm
+          </text>
+
+          <rect
+            x="580"
+            y="50"
+            width="220"
+            height="120"
+            rx="8"
+            fill="#1e293b"
+            stroke="#f59e0b"
+            stroke-width="2"
+          />
+          <rect
+            x="592"
+            y="60"
+            width="24"
+            height="100"
+            fill="#0f172a"
+            stroke="#f59e0b"
+          />
+          <rect
+            x="620"
+            y="60"
+            width="24"
+            height="100"
+            fill="#0f172a"
+            stroke="#f59e0b"
+          />
+          <rect
+            x="648"
+            y="60"
+            width="24"
+            height="100"
+            fill="#0f172a"
+            stroke="#f59e0b"
+          />
+          <rect
+            x="676"
+            y="60"
+            width="24"
+            height="100"
+            fill="#0f172a"
+            stroke="#f59e0b"
+          />
+          <rect
+            x="704"
+            y="60"
+            width="24"
+            height="100"
+            fill="#0f172a"
+            stroke="#f59e0b"
+          />
+          <rect
+            x="732"
+            y="60"
+            width="24"
+            height="100"
+            fill="#0f172a"
+            stroke="#f59e0b"
+          />
+          <text
+            x="690"
+            y="40"
+            fill="#f59e0b"
+            font-size="13"
+            font-weight="700"
+            text-anchor="middle"
+          >
+            CHASIS BLADE
+          </text>
+          <text
+            x="690"
+            y="190"
+            fill="#94a3b8"
+            font-size="10"
+            text-anchor="middle"
+          >
+            Varias blades, 1 chasis compartido
+          </text>
+        </svg>
+        <figcaption>
+          Comparación visual de altura relativa entre formatos 1U, 2U, 4U y un
+          chasis Blade con varias placas.
+        </figcaption>
+      </figure>
+
+      <!-- ====== SECCIÓN 6 — REFRIGERACIÓN DATA CENTER ====== -->
+      <h2 class="section-title" id="sec6">
+        <span class="icon">❄️</span>Sección 6 — Refrigeración en Data Center
+      </h2>
+
+      <div class="card">
+        <h3>🌬️ 6.1 Flujo de aire: de frente hacia atrás</h3>
+        <p>
+          Los servidores rack respiran de <strong>adelante hacia atrás</strong>:
+          aire frío entra por el frente (donde están discos y bahías) y aire
+          caliente sale por atrás (donde están fuentes y puertos). Por eso los
+          racks se organizan en
+          <strong>pasillos fríos y pasillos calientes</strong> (cold aisle / hot
+          aisle).
+        </p>
+        <ul>
+          <li>
+            <strong>Pasillo frío:</strong> el aire acondicionado (CRAC/CRAH)
+            inyecta aire frío que los servidores aspiran por el frente.
+          </li>
+          <li>
+            <strong>Pasillo caliente:</strong> el aire caliente que sale de los
+            servidores se contiene y se envía de vuelta al sistema de
+            refrigeración, sin mezclarse con el aire frío.
+          </li>
+          <li>
+            <strong>Contención (containment):</strong> paneles o puertas que
+            separan físicamente ambos pasillos para maximizar la eficiencia
+            energética.
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout tip">
+        <span class="cbadge">CONSEJO</span>
+        <h4>🔑 Ventiladores redundantes N+1</h4>
+        <p>
+          Un servidor 2U típico trae 4 a 6 ventiladores; si trae "N+1" significa
+          que puede perder <strong>uno</strong>
+          y seguir refrigerando correctamente. Si pierde más de uno, el sistema
+          reduce el rendimiento del CPU (throttling) para no sobrecalentarse, o
+          se apaga por protección.
+        </p>
+      </div>
+
+      <!-- ====== SECCIÓN 7 — MEMORIA ECC ====== -->
+      <h2 class="section-title" id="sec7">
+        <span class="icon">🧬</span>Sección 7 — Memorias ECC
+      </h2>
+
+      <div class="card">
+        <h3>🔍 7.1 ¿Qué es ECC y por qué importa?</h3>
+        <p>
+          <strong>ECC (Error-Correcting Code)</strong> es memoria que agrega
+          bits extra de control para
+          <strong>detectar y corregir errores</strong> que ocurren de forma
+          espontánea en la RAM (por ejemplo, por radiación cósmica o
+          interferencia eléctrica, los llamados <em>soft errors</em>). El
+          esquema más común es <strong>SEC-DED</strong> (Single Error
+          Correction, Double Error Detection): corrige automáticamente un error
+          de 1 bit y detecta (sin corregir) errores de 2 bits, avisando al
+          sistema.
+        </p>
+        <p>
+          En una PC de escritorio con pocos GB de RAM, la probabilidad de que
+          ocurra un error así en la sesión de uso es muy baja. En un servidor
+          con
+          <strong>cientos de GB o varios TB de RAM funcionando 24/7</strong>, la
+          probabilidad estadística de un error de bit sube enormemente: sin ECC,
+          ese error podría corromper datos de un cliente o colgar el sistema
+          operativo sin aviso.
+        </p>
+      </div>
+
+      <div class="callout warning">
+        <span class="cbadge">WARN</span>
+        <h4>⚠️ ECC no es opcional en servidores de producción</h4>
+        <p>
+          Un motherboard de servidor solo acepta módulos ECC; instalar RAM sin
+          ECC (la típica de PC) simplemente
+          <strong>no funciona</strong> o el sistema no la reconoce
+          correctamente, según la plataforma.
+        </p>
+      </div>
+
+      <!-- ====== SECCIÓN 8 — UDIMM / RDIMM / LRDIMM ====== -->
+      <h2 class="section-title" id="sec8">
+        <span class="icon">💾</span>Sección 8 — Tipos de Módulo: Unbuffered,
+        RDIMM y LRDIMM
+      </h2>
+
+      <div class="card">
+        <h3>📦 8.1 Tres formas de conectar la memoria al controlador</h3>
+        <p>
+          Cuantos más chips de memoria se conectan al mismo canal, más "carga
+          eléctrica" soporta el controlador de memoria del CPU. Cada tipo de
+          módulo resuelve ese problema de forma distinta:
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Buffer/Registro</th>
+                <th>Capacidad típica por módulo</th>
+                <th>Uso típico</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>UDIMM</strong> (Unbuffered)</td>
+                <td>Ninguno; conexión directa</td>
+                <td>Hasta 32 GB</td>
+                <td>
+                  PC de escritorio, notebooks, servidores de entrada muy básicos
+                </td>
+              </tr>
+              <tr>
+                <td><strong>RDIMM</strong> (Registered)</td>
+                <td>
+                  Un registro entre los chips DRAM y el controlador, que
+                  retransmite las señales de control
+                </td>
+                <td>Hasta 128 GB</td>
+                <td>
+                  Servidores estándar; permite más módulos por canal sin perder
+                  estabilidad eléctrica
+                </td>
+              </tr>
+              <tr>
+                <td><strong>LRDIMM</strong> (Load-Reduced)</td>
+                <td>
+                  Buffer que también reduce la carga de datos, no solo de
+                  control
+                </td>
+                <td>256 GB o más por módulo</td>
+                <td>
+                  Servidores con máxima densidad de memoria (varios TB por
+                  socket), 2 o más DIMMs por canal
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <span class="cbadge">CONSEJO</span>
+        <h4>🔑 Regla práctica para el taller</h4>
+        <p>
+          Si el datasheet dice "hasta 2 DIMMs por canal (2DPC) a máxima
+          capacidad", casi siempre exige
+          <strong>LRDIMM</strong>. Si solo se necesita 1 DIMM por canal (1DPC)
+          con capacidades moderadas, <strong>RDIMM</strong> es suficiente y más
+          económico.
+        </p>
+      </div>
+
+      <!-- ====== SECCIÓN 9 — REDUNDANCIA ====== -->
+      <h2 class="section-title" id="sec9">
+        <span class="icon">🔁</span>Sección 9 — Redundancia: Fuentes Hot-Swap y
+        Ventiladores
+      </h2>
+
+      <div class="card">
+        <h3>🔌 9.1 Fuentes redundantes hot-swap</h3>
+        <p>
+          Un servidor de producción suele traer
+          <strong>2 fuentes de poder</strong> (o más), cada una capaz de
+          alimentar todo el servidor por sí sola. Si una falla, la otra toma la
+          carga <strong>sin interrumpir el servicio</strong>, y la fuente
+          fallada se puede extraer y reemplazar en caliente (<em>hot-swap</em>),
+          sin apagar nada.
+        </p>
+        <ul>
+          <li>
+            <strong>Redundancia N+1:</strong> se necesitan "N" fuentes para
+            alimentar el servidor y se agrega 1 de repuesto activa. Ejemplo: si
+            el servidor necesita 1 fuente, se instalan 2 (1+1).
+          </li>
+          <li>
+            <strong>Redundancia N+N (2N):</strong> se duplica toda la capacidad
+            necesaria, usada en configuraciones críticas de máxima
+            disponibilidad.
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>🌀 9.2 Ventiladores redundantes</h3>
+        <p>
+          Igual que las fuentes, los ventiladores de un servidor están
+          sobredimensionados en cantidad: si uno falla, los sensores del
+          controlador de gestión (iLO/iDRAC) lo detectan, aumentan la velocidad
+          de los ventiladores restantes y generan una
+          <strong>alerta</strong> para que el técnico programe el reemplazo sin
+          apuro ni riesgo de sobrecalentamiento inmediato.
+        </p>
+      </div>
+
+      <!-- ====== SECCIÓN 10 — SEGURIDAD Y EPP ====== -->
+      <h2 class="section-title" id="sec10">
+        <span class="icon">🦺</span>Sección 10 — Seguridad y EPP (Equipo de
+        Protección Personal)
+      </h2>
+
+      <div class="card">
+        <h3>🧤 10.1 EPP recomendado al manipular servidores</h3>
+        <ul>
+          <li>
+            <strong>Pulsera antiestática (ESD wrist strap):</strong> conectada a
+            tierra, evita descargas electrostáticas que dañan componentes
+            electrónicos sensibles.
+          </li>
+          <li>
+            <strong>Calzado de seguridad:</strong> con puntera reforzada, para
+            proteger los pies ante la caída de un equipo (un servidor 2U puede
+            pesar más de 20 kg).
+          </li>
+          <li>
+            <strong>Guantes:</strong> para evitar cortes con bordes metálicos de
+            chasis o rieles.
+          </li>
+          <li>
+            <strong>Gafas de protección:</strong> al soplar aire comprimido para
+            limpiar polvo o al manipular baterías/BBU.
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout warning">
+        <span class="cbadge">WARN</span>
+        <h4>⚠️ Protocolo de trabajo seguro en el rack</h4>
+        <p>
+          Levantar o instalar un servidor de más de 20 kg
+          <strong>siempre entre dos personas</strong> o con un elevador de rack.
+          Antes de retirar cualquier componente eléctrico no diseñado para
+          hot-swap, aplicar <strong>lockout/tagout</strong> (bloqueo y
+          etiquetado) para evitar que alguien reconecte la energía por error
+          mientras se trabaja.
+        </p>
+      </div>
+
+      <!-- ====== SECCIÓN 11 — MANTENIMIENTO ====== -->
+      <h2 class="section-title" id="sec11">
+        <span class="icon">🔧</span>Sección 11 — Mantenimiento y Puesta en
+        Marcha (simulados)
+      </h2>
+
+      <div class="card">
+        <h3>✅ 11.1 Checklist de puesta en marcha simulada</h3>
+        <ol>
+          <li>
+            Revisar los <strong>LEDs de estado</strong> frontales y traseros
+            (verde = OK, amarillo/rojo = advertencia o falla).
+          </li>
+          <li>
+            Conectarse remotamente al procesador de gestión (<strong
+              >iLO</strong
+            >
+            en HPE, <strong>iDRAC</strong> en Dell) y revisar el registro de
+            eventos.
+          </li>
+          <li>
+            Confirmar que ambas fuentes reportan estado "OK" y que no hay
+            ventiladores en alerta.
+          </li>
+          <li>
+            Verificar la versión de <strong>firmware</strong> del servidor y del
+            controlador de almacenamiento; comparar con la última versión
+            disponible en la web del fabricante.
+          </li>
+          <li>
+            Documentar cualquier hallazgo en la bitácora de mantenimiento del
+            Data Center.
+          </li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h3>🔄 11.2 Reemplazo simulado de un disco en caliente (hot-swap)</h3>
+        <ol>
+          <li>
+            El sistema de gestión reporta el disco en la bahía 3 como
+            "Predictive Failure" (falla inminente).
+          </li>
+          <li>
+            Se verifica en el controlador RAID que el arreglo sigue protegido
+            (por ejemplo, RAID 5 o RAID 10 con redundancia).
+          </li>
+          <li>
+            Se retira el disco fallado extrayendo la bandeja, sin apagar el
+            servidor.
+          </li>
+          <li>
+            Se inserta el disco nuevo; el RAID comienza automáticamente la
+            reconstrucción (<em>rebuild</em>).
+          </li>
+          <li>
+            Se confirma en el software de gestión que el rebuild finalizó y el
+            arreglo volvió a estado "óptimo".
+          </li>
+        </ol>
+      </div>
+
+      <!-- ====== SECCIÓN 12 — EJERCICIOS NUMÉRICOS ====== -->
+      <h2 class="section-title" id="sec12">
+        <span class="icon">🧮</span>Sección 12 — Ejercicios Numéricos Resueltos
+      </h2>
+
+      <div class="decision-tree">
+        <h3 style="margin-top: 0; color: var(--cyan)">
+          Ejercicio 1 — Capacidad máxima con 1 DIMM por canal (1DPC)
+        </h3>
+        <div class="dt-step">
+          <div class="dt-q">
+            Datos: servidor dual-socket, 8 canales de memoria por socket,
+            módulos RDIMM de 32 GB, 1 DIMM por canal.
+          </div>
+          <div class="dt-a">Sockets: 2</div>
+          <div class="dt-a">Canales por socket: 8</div>
+          <div class="dt-a">Capacidad por módulo: 32 GB</div>
+        </div>
+        <div class="dt-step">
+          <div class="dt-q">Cálculo:</div>
+          <div class="dt-a">
+            Total de módulos = 2 sockets × 8 canales × 1 DIMM = 16 módulos
+          </div>
+          <div class="dt-a">Capacidad total = 16 módulos × 32 GB = 512 GB</div>
+        </div>
+        <div class="exercise-result">
+          ✅ Resultado: el servidor queda configurado con 512 GB de RAM en
+          total.
+        </div>
+      </div>
+
+      <div class="decision-tree">
+        <h3 style="margin-top: 0; color: var(--cyan)">
+          Ejercicio 2 — Capacidad máxima con 2 DIMMs por canal (2DPC) y LRDIMM
+        </h3>
+        <div class="dt-step">
+          <div class="dt-q">
+            Datos: mismo servidor dual-socket de 8 canales por socket, ahora con
+            módulos LRDIMM de 64 GB, 2 DIMMs por canal.
+          </div>
+          <div class="dt-a">Sockets: 2</div>
+          <div class="dt-a">Canales por socket: 8</div>
+          <div class="dt-a">DIMMs por canal: 2</div>
+          <div class="dt-a">Capacidad por módulo: 64 GB</div>
+        </div>
+        <div class="dt-step">
+          <div class="dt-q">Cálculo:</div>
+          <div class="dt-a">
+            Total de módulos = 2 sockets × 8 canales × 2 DIMMs = 32 módulos
+          </div>
+          <div class="dt-a">
+            Capacidad total = 32 módulos × 64 GB = 2048 GB = 2 TB
+          </div>
+        </div>
+        <div class="exercise-result">
+          ✅ Resultado: 2 TB de RAM en total. Nota: a 2DPC con esta densidad, el
+          datasheet exige LRDIMM (no RDIMM) para mantener la estabilidad
+          eléctrica del canal.
+        </div>
+      </div>
+
+      <div class="decision-tree">
+        <h3 style="margin-top: 0; color: var(--cyan)">
+          Ejercicio 3 — Redundancia de fuentes N+1
+        </h3>
+        <div class="dt-step">
+          <div class="dt-q">
+            Datos: el servidor consume, bajo carga máxima real, 750 W. Trae 2
+            fuentes de 800 W cada una, en configuración redundante.
+          </div>
+        </div>
+        <div class="dt-step">
+          <div class="dt-q">Análisis:</div>
+          <div class="dt-a">
+            Si una fuente falla, la fuente restante debe poder sostener sola el
+            consumo total.
+          </div>
+          <div class="dt-a">Capacidad de 1 sola fuente = 800 W</div>
+          <div class="dt-a">Consumo real necesario = 750 W</div>
+          <div class="dt-a">
+            800 W ≥ 750 W → la fuente restante alcanza para sostener toda la
+            carga
+          </div>
+        </div>
+        <div class="exercise-result">
+          ✅ Resultado: la configuración N+1 es válida; si falla una fuente, la
+          otra sostiene el 100% de la carga sin interrupciones.
+        </div>
+      </div>
+
+      <div class="decision-tree">
+        <h3 style="margin-top: 0; color: var(--cyan)">
+          Ejercicio 4 — Cálculo de consumo y dimensionado de UPS
+        </h3>
+        <div class="dt-step">
+          <div class="dt-q">
+            Datos: un rack tiene 4 servidores de 750 W cada uno bajo carga
+            máxima y 1 switch de red de 150 W. La UPS a elegir trabaja con un
+            factor de potencia de 0,9.
+          </div>
+        </div>
+        <div class="dt-step">
+          <div class="dt-q">Paso 1 — Consumo total en vatios (W):</div>
+          <div class="dt-a">Consumo servidores = 4 × 750 W = 3000 W</div>
+          <div class="dt-a">
+            Consumo total = 3000 W + 150 W (switch) = 3150 W
+          </div>
+        </div>
+        <div class="dt-step">
+          <div class="dt-q">
+            Paso 2 — Convertir a VA (Volt-Amperios) usando el factor de
+            potencia:
+          </div>
+          <div class="dt-a">
+            VA necesarios = Potencia (W) ÷ Factor de potencia = 3150 ÷ 0,9 ≈
+            3500 VA
+          </div>
+        </div>
+        <div class="dt-step">
+          <div class="dt-q">
+            Paso 3 — Agregar margen de seguridad (15% recomendado para
+            crecimiento futuro):
+          </div>
+          <div class="dt-a">VA con margen = 3500 × 1,15 ≈ 4025 VA</div>
+        </div>
+        <div class="exercise-result">
+          ✅ Resultado: se debe elegir una UPS de al menos 4000-4025 VA (en el
+          mercado, el escalón comercial más cercano suele ser una UPS de 5000 VA
+          para dejar margen real de crecimiento).
+        </div>
+      </div>
+
+      <!-- ====== SECCIÓN 13 — ACTIVIDADES VIRTUALES (TALLER) ====== -->
+      <h2 class="section-title" id="sec13">
+        <span class="icon">🧪</span>Sección 13 — Actividades Virtuales (Taller —
+        70 minutos)
+      </h2>
+      <p class="section-meta">
+        Ninguna actividad requiere hardware físico: se trabaja con datasheets,
+        diagramas, casos narrados y una VM.
+      </p>
+
+      <div class="activity-card">
+        <h3>
+          1️⃣ Datasheet Challenge: 1U vs 2U
+          <span class="time-badge">⏱️ 15 min</span>
+        </h3>
+        <p>
+          Trabajo en parejas. Cada pareja abre las hojas de datos oficiales de
+          <strong>HPE ProLiant DL380 Gen11</strong> (2U) y de un modelo 1U
+          equivalente (por ejemplo, HPE ProLiant DL360 o Dell PowerEdge R660).
+        </p>
+        <ol>
+          <li>
+            Completar una tabla comparativa: cantidad máxima de bahías de disco,
+            slots PCIe disponibles, capacidad máxima de RAM y cantidad de
+            fuentes redundantes.
+          </li>
+          <li>
+            Responder: ¿en qué caso de uso conviene el 1U y en cuál el 2U?
+          </li>
+          <li>Compartir la conclusión con el resto de la clase.</li>
+        </ol>
+      </div>
+
+      <div class="activity-card">
+        <h3>
+          2️⃣ Cálculo de memoria dual-socket
+          <span class="time-badge">⏱️ 15 min</span>
+        </h3>
+        <p>
+          Trabajo individual. Cada estudiante recibe una consigna distinta
+          (número de sockets, canales, tipo y capacidad de módulo) y debe
+          repetir el procedimiento de los Ejercicios 1 y 2
+        </p>
+        <ol>
+          <li>Calcular la capacidad total de RAM resultante.</li>
+          <li>Determinar si con esa densidad se necesita RDIMM o LRDIMM.</li>
+          <li>
+            Verificar la respuesta con el datasheet oficial del servidor
+            asignado.
+          </li>
+        </ol>
+      </div>
+
+      <div class="activity-card">
+        <h3>
+          3️⃣ Tour guiado por el diagrama de un servidor
+          <span class="time-badge">⏱️ 10 min</span>
+        </h3>
+        <p>
+          El docente proyecta el diagrama interno (vista superior) de un HPE
+          ProLiant DL380 Gen11 desde su datasheet oficial y va señalando cada
+          zona mientras los estudiantes la etiquetan en su propia copia impresa
+          o digital.
+        </p>
+        <ol>
+          <li>Bahías de disco hot-swap (frente).</li>
+          <li>Slots DIMM organizados por socket y canal.</li>
+          <li>Fuentes de poder redundantes (parte trasera).</li>
+          <li>Ventiladores redundantes (zona central).</li>
+          <li>Slots PCIe de expansión (parte trasera).</li>
+        </ol>
+      </div>
+
+      <div class="activity-card">
+        <h3>
+          4️⃣ Simulación de fallo de fuente por caso narrado
+          <span class="time-badge">⏱️ 15 min</span>
+        </h3>
+        <p>
+          Juego de rol: el docente narra un incidente en tiempo real y los
+          estudiantes, en el papel de técnicos de guardia, deben decidir los
+          pasos correctos.
+        </p>
+        <div class="callout">
+          <span class="cbadge info">CASO</span>
+          <p>
+            "Son las 3:00 AM. El sistema de monitoreo envía una alerta:
+            <strong>Power Supply 2 — Failed</strong> en un servidor de
+            producción con 2 fuentes redundantes. El servicio sigue funcionando
+            con normalidad."
+          </p>
+        </div>
+        <ol>
+          <li>
+            ¿El servicio está en riesgo inmediato? Justificar usando el concepto
+            de redundancia N+1.
+          </li>
+          <li>¿Qué EPP se debe usar antes de acercarse al rack?</li>
+          <li>
+            Describir el procedimiento de reemplazo hot-swap de la fuente
+            fallada, paso a paso.
+          </li>
+          <li>
+            ¿Es necesario programar una ventana de mantenimiento para este
+            reemplazo? ¿Por qué sí o por qué no?
+          </li>
+        </ol>
+      </div>
+
+      <div class="activity-card">
+        <h3>
+          5️⃣ Instalación de un sistema operativo en Oracle VirtualBox
+          <span class="time-badge">⏱️ 15 min</span>
+        </h3>
+        <p>
+          Cada estudiante, en su propia computadora, instala Oracle VirtualBox
+          (si no lo tiene) y crea una máquina virtual nueva.
+        </p>
+        <ol>
+          <li>
+            Crear una VM nueva: asignar 2 vCPU, 4 GB de RAM y 20 GB de disco
+            virtual.
+          </li>
+          <li>
+            Montar la imagen ISO de un sistema operativo liviano (por ejemplo,
+            una distribución Linux ligera).
+          </li>
+          <li>
+            Completar el instalador hasta la primera pantalla del sistema
+            operativo instalado.
+          </li>
+          <li>
+            Relacionar la actividad con lo visto: la VM "simula" cómo un
+            hipervisor de servidor reparte los recursos físicos entre varias
+            máquinas virtuales.
+          </li>
+        </ol>
+      </div>
+
+      <div class="activity-card" style="border-top-color: var(--cyan)">
+        <h3>
+          🖼️ Actividad complementaria — Búsqueda de imágenes de los equipos
+          explorados
+        </h3>
+        <p>
+          Para reforzar el reconocimiento visual, cada estudiante debe buscar y
+          guardar imágenes reales de los siguientes equipos vistos en la sesión
+          (usando los sitios oficiales de HPE y Dell o buscadores de imágenes):
+        </p>
+        <ul>
+          <li>Un servidor rack 1U (frente y parte trasera).</li>
+          <li>
+            Un servidor rack 2U con las bahías de disco abiertas (HPE ProLiant
+            DL380 Gen11 o Dell PowerEdge R750/R760).
+          </li>
+          <li>Un chasis Blade con varias blades instaladas.</li>
+          <li>
+            Un módulo de memoria RDIMM y uno LRDIMM (comparar visualmente el
+            tamaño del buffer/chip adicional).
+          </li>
+          <li>Una fuente de poder redundante hot-swap extraída de su bahía.</li>
+        </ul>
+        <p>
+          Armar una presentación breve (o carpeta de imágenes) etiquetando cada
+          foto con el nombre del componente y una característica clave aprendida
+          en la clase.
+        </p>
+      </div>
+
+      <!-- ====== SECCIÓN 14 — RECURSOS Y ENLACES ====== -->
+      <h2 class="section-title" id="sec14">
+        <span class="icon">🔗</span>Sección 14 — Recursos y Enlaces
+      </h2>
+
+      <div class="card">
+        <h3>📚 Recursos oficiales usados en esta sesión</h3>
+        <ul class="link-list">
+          <li>
+            <a
+              href="https://www.hpe.com/psnow/doc/psn1012891562enw"
+              target="_blank"
+              rel="noopener"
+              >HPE ProLiant DL380 Gen11 — Datasheet oficial (HPE PSNow)</a
+            >
+            <span
+              >Hoja de datos técnica con diagramas, bahías de disco, slots PCIe,
+              memoria y fuentes redundantes.</span
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.dell.com/en-us/shop/servers-storage-and-networking/sf/poweredge-rack-servers"
+              target="_blank"
+              rel="noopener"
+              >Dell PowerEdge Rack Servers — Página oficial Dell</a
+            >
+            <span
+              >Catálogo y datasheets de servidores rack 1U/2U (series R) para
+              comparar con HPE.</span
+            >
+          </li>
+          <li>
+            <a href="https://www.virtualbox.org/" target="_blank" rel="noopener"
+              >Oracle VirtualBox — Descarga oficial</a
+            >
+            <span
+              >Software gratuito de virtualización usado para la Actividad 5
+              (instalación de un OS en una VM).</span
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- ====== SECCIÓN 15 — CUESTIONARIO FINAL ====== -->
+      <h2 class="section-title" id="sec15">
+        <span class="icon">📝</span>Sección 15 — Cuestionario Final (16
+        preguntas)
+      </h2>
+
+      <div class="callout">
+        <span class="cbadge info">REGLAS</span>
+        <h4>📐 Cómo usar esta evaluación</h4>
+        <p>
+          Las preguntas marcadas
+          <span class="qtag vf" style="margin: 0 4px">V / F</span> son
+          Verdadero/Falso. Las
+          <span class="qtag short" style="margin: 0 4px">CORTA</span> piden
+          respuesta en una línea. Las
+          <span class="qtag multi" style="margin: 0 4px">MULTI</span> son opción
+          múltiple. Las
+          <span class="qtag scenario" style="margin: 0 4px">ESCENARIO</span>
+          aplican lo aprendido a un cliente concreto.
+        </p>
+      </div>
+
+      <div class="q-list">
+        <div class="q-item">
+          <div class="q-num">1</div>
+          <div class="q-body">
+            <span class="qtag vf">V / F</span>
+            <h4>
+              Un servidor con procesador de gestión iLO o iDRAC puede reportar
+              el estado de sus fuentes y ventiladores incluso si el sistema
+              operativo aún no arrancó.
+            </h4>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">2</div>
+          <div class="q-body">
+            <span class="qtag short">CORTA</span>
+            <h4>
+              ¿Qué significa la sigla RAS aplicada al hardware de servidores?
+              Nombra sus tres componentes.
+            </h4>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">3</div>
+          <div class="q-body">
+            <span class="qtag multi">MULTI</span>
+            <h4>
+              ¿Cuál de las siguientes opciones describe correctamente la memoria
+              ECC?
+            </h4>
+            <ul class="q-options">
+              <li>a) Duplica la velocidad de la memoria RAM convencional.</li>
+              <li>
+                b) Permite detectar y, en el caso de 1 bit, corregir errores
+                espontáneos en los datos almacenados.
+              </li>
+              <li>
+                c) Es un tipo de memoria exclusiva para tarjetas gráficas.
+              </li>
+              <li>d) Elimina la necesidad de usar módulos RDIMM o LRDIMM.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">4</div>
+          <div class="q-body">
+            <span class="qtag vf">V / F</span>
+            <h4>
+              Un servidor 1U ofrece mayor densidad por rack, pero típicamente
+              menos bahías de disco y slots de expansión que un 2U equivalente.
+            </h4>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">5</div>
+          <div class="q-body">
+            <span class="qtag short">CORTA</span>
+            <h4>
+              ¿Cuál es la diferencia principal entre una redundancia de fuentes
+              configurada como N+1 y una configurada como N+N (2N)?
+            </h4>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">6</div>
+          <div class="q-body">
+            <span class="qtag multi">MULTI</span>
+            <h4>
+              ¿Cuál de las siguientes NO es un tipo de módulo de memoria usado
+              en servidores?
+            </h4>
+            <ul class="q-options">
+              <li>a) RDIMM</li>
+              <li>b) LRDIMM</li>
+              <li>c) UDIMM</li>
+              <li>d) GDDR6</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">7</div>
+          <div class="q-body">
+            <span class="qtag scenario">ESCENARIO</span>
+            <h4>
+              Cliente: una pequeña oficina contable necesita su primer
+              "servidor" propio, con presupuesto ajustado, para compartir
+              archivos entre 8 personas y correr un solo programa de facturación
+              liviano.
+            </h4>
+            <p>
+              <strong>Requisitos del cliente:</strong> mínimo costo posible, sin
+              necesidad de alta disponibilidad crítica, un solo procesador es
+              suficiente.
+            </p>
+            <p>
+              <strong
+                >Aplicá los conceptos de la sesión y recomendá formato de
+                chasis, tipo de procesador (gama) y si realmente necesita
+                redundancia de fuentes.</strong
+              >
+            </p>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">8</div>
+          <div class="q-body">
+            <span class="qtag scenario">ESCENARIO</span>
+            <h4>
+              Cliente: un proveedor de nube (cloud) necesita instalar la mayor
+              cantidad posible de servidores de cómputo en el menor espacio de
+              rack posible, compartiendo fuentes y refrigeración entre ellos.
+            </h4>
+            <p>
+              <strong>Requisitos del cliente:</strong> máxima densidad de
+              cómputo, gestión centralizada, aceptan compartir infraestructura
+              de energía y ventilación entre servidores.
+            </p>
+            <p>
+              <strong
+                >Aplicá los conceptos de la sesión y recomendá el formato de
+                chasis adecuado, justificando por qué.</strong
+              >
+            </p>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">9</div>
+          <div class="q-body">
+            <span class="qtag scenario">ESCENARIO</span>
+            <h4>
+              Cliente: una empresa de análisis de datos necesita un servidor
+              dual-socket con 1 TB de RAM total. El motherboard tiene 8 canales
+              de memoria por socket y solo permite 1 DIMM por canal (1DPC).
+            </h4>
+            <p>
+              <strong>Requisitos del cliente:</strong> alcanzar exactamente 1 TB
+              de RAM respetando la restricción de 1DPC.
+            </p>
+            <p>
+              <strong
+                >Calculá qué capacidad de módulo (en GB) se necesita por DIMM y
+                qué tipo de módulo (RDIMM o LRDIMM) recomendarías.</strong
+              >
+            </p>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">10</div>
+          <div class="q-body">
+            <span class="qtag scenario">ESCENARIO</span>
+            <h4>
+              Cliente: un banco exige que el mantenimiento de discos de sus
+              servidores de producción se pueda realizar en cualquier momento
+              del día, sin ventanas de mantenimiento y sin interrumpir la
+              atención a los cajeros automáticos.
+            </h4>
+            <p>
+              <strong>Requisitos del cliente:</strong> disponibilidad 24/7 real,
+              sin excepciones.
+            </p>
+            <p>
+              <strong
+                >¿Qué característica de RAS aplica directamente a este requisito
+                y qué tecnología de disco lo permite?</strong
+              >
+            </p>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">11</div>
+          <div class="q-body">
+            <span class="qtag scenario">ESCENARIO</span>
+            <h4>
+              Cliente: durante el horario laboral, el sistema de monitoreo de un
+              servidor de producción con dos fuentes redundantes reporta la
+              falla de una de ellas. El servicio sigue funcionando con
+              normalidad.
+            </h4>
+            <p>
+              <strong>Requisitos del cliente:</strong> resolver la falla sin
+              generar ningún corte de servicio ni riesgo para el personal
+              técnico.
+            </p>
+            <p>
+              <strong
+                >Describí el procedimiento correcto, incluyendo el EPP
+                necesario.</strong
+              >
+            </p>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">12</div>
+          <div class="q-body">
+            <span class="qtag vf">V / F</span>
+            <h4>
+              Los procesadores AMD EPYC de la línea Genoa/Bergamo típicamente
+              ofrecen más canales de memoria por socket (12) que un Intel Xeon
+              Scalable típico (8).
+            </h4>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">13</div>
+          <div class="q-body">
+            <span class="qtag short">CORTA</span>
+            <h4>
+              Mencioná dos elementos de EPP (Equipo de Protección Personal)
+              recomendados al manipular un servidor en un rack, y explicá para
+              qué sirve cada uno.
+            </h4>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">14</div>
+          <div class="q-body">
+            <span class="qtag multi">MULTI</span>
+            <h4>
+              ¿Qué tipo de módulo de memoria permite alcanzar mayor capacidad
+              total por canal, gracias a un buffer que reduce la carga eléctrica
+              de los datos?
+            </h4>
+            <ul class="q-options">
+              <li>a) UDIMM</li>
+              <li>b) RDIMM</li>
+              <li>c) LRDIMM</li>
+              <li>d) SODIMM</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">15</div>
+          <div class="q-body">
+            <span class="qtag short">CORTA</span>
+            <h4>
+              ¿Por qué un chasis Blade comparte fuentes de alimentación y
+              ventiladores entre varios servidores, y qué riesgo implica esa
+              decisión de diseño?
+            </h4>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">16</div>
+          <div class="q-body">
+            <span class="qtag multi">MULTI</span>
+            <h4>
+              En un Data Center con contención de pasillo frío/caliente (cold
+              aisle / hot aisle), ¿cuál es el objetivo principal de esa
+              organización?
+            </h4>
+            <ul class="q-options">
+              <li>
+                a) Separar el aire frío entrante del aire caliente saliente para
+                maximizar la eficiencia de la refrigeración.
+              </li>
+              <li>
+                b) Aumentar el ruido ambiente para detectar fallas de
+                ventiladores más rápido.
+              </li>
+              <li>
+                c) Reducir la cantidad de servidores que se pueden instalar por
+                rack.
+              </li>
+              <li>
+                d) Eliminar por completo la necesidad de ventiladores
+                redundantes.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== SECCIÓN 16 — CIERRE ====== -->
+      <h2 class="section-title" id="sec16">
+        <span class="icon">🏁</span>Sección 16 — Cierre
+      </h2>
+
+      <div class="card">
+        <h3>🔚 Síntesis de la clase</h3>
+        <p>
+          Hoy aprendimos que un servidor no es "una PC más grande": es un equipo
+          diseñado desde el primer tornillo para
+          <strong>no fallar</strong> (RAS), para
+          <strong>escalar</strong> (multiprocesador, memoria ECC de alta
+          densidad) y para <strong>repararse sin apagarse</strong> (redundancia
+          hot-swap de fuentes, ventiladores y discos). Vimos también cómo el
+          formato físico (1U, 2U, 4U, Blade) y la refrigeración del Data Center
+          son decisiones de ingeniería, no estética.
+        </p>
+      </div>
+
+      <div class="callout ok">
+        <span class="cbadge info">TAREA</span>
+        <h4>📌 Para la próxima clase</h4>
+        <p>
+          Completar la
+          <strong>Actividad complementaria de búsqueda de imágenes</strong>
+          (Sección 13) si no se terminó en clase, y repasar los 4 ejercicios
+          numéricos resueltos de la Sección 12: en la próxima sesión se
+          profundizará en <strong>almacenamiento en servidores</strong> (RAID,
+          controladores, discos SAS/SATA/NVMe enterprise).
+        </p>
+      </div>
+
+   
+      <div style="margin-bottom: 24px">
+        <a
+          href="../materias/hardware-dos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Volver a Materia
+        </a>
+        <a
+          href="hardware2-sesion14.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #60a5fa;
+            color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+          "
+        >
+          Ir a Sesión 14
+        </a>
+        <a
+          href="hardware2-sesion16.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f9e282;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Ir a Sesión 16
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
