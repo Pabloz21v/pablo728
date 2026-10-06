@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Sesión 1 de Hardware Industrial: Equipos fanless y robustos + gestión de energía. Plan de clase listo para dictar, 160 minutos, 100% virtual."
+      content="Sesión 1 de Hardware Industrial: Equipos fanless y robustos + gestión de energía"
     />
     <title>Sesión 14 — Equipos Fanless y Robustos + Gestión de Energía</title>
 
@@ -978,33 +978,29 @@
               ><span class="num">10.</span> Mantenimiento y puesta en marcha</a
             >
           </li>
-          <li>
-            <a href="#sec11"
-              ><span class="num">11.</span> Secuencia didáctica (160 min)</a
-            >
-          </li>
+         
           <li>
             <a href="#sec12"
-              ><span class="num">12.</span> Actividades prácticas virtuales</a
+              ><span class="num">11.</span> Actividades</a
             >
           </li>
           <li>
             <a href="#sec13"
-              ><span class="num">13.</span> Evaluación: 5 escenarios</a
+              ><span class="num">12.</span> Evaluación: 5 escenarios</a
             >
           </li>
           <li>
             <a href="#sec14"
-              ><span class="num">14.</span> Cuestionario final (18 preguntas)</a
+              ><span class="num">13.</span> Cuestionario</a
             >
           </li>
           <li>
             <a href="#sec15"
-              ><span class="num">15.</span> Actividad de búsqueda de imágenes</a
+              ><span class="num">14.</span> Actividad de búsqueda de imágenes</a
             >
           </li>
           <li>
-            <a href="#sec16"><span class="num">16.</span> Recursos y enlaces</a>
+            <a href="#sec16"><span class="num">15.</span> Recursos y enlaces</a>
           </li>
         </ol>
        
@@ -1728,7 +1724,7 @@
         </ul>
         <p>
           <strong>¿Qué se usa ahí?</strong> Paneles HMI con CPU fanless,
-          gabinetes con grado IP54–IP65, fuentes con rango amplio de entrada y
+          gabinetes con grado IP54–IP65 y
           filtros antiparásitos, respaldo con UPS industrial online y
           comunicación industrial con cables apantallados y 
           bien sujetos para que la vibración no los
@@ -1926,6 +1922,15 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
       </p>
 
       <div class="card">
+        <h3>6.0 Energía y la industria</h3>
+        <p>Muchas industrias requieren que sus equipos se encuentren operando 24/7,
+           por eso necesitan de suministros auxiliares de energía en caso de cortes 
+           o interrupciones inesperadas, la interrupción de algún proceso a causa de 
+           un corte de energía se puede traducir en una gran pérdida de dinero por 
+           parte de la empresa, o la interrupción de sus procesos,
+            por un periodo prolongado el cual es perjudicial (se tiene que desechar lo producido)
+            hasta retomar la actividad.
+</p>
         <h3>🔋 6.1 ¿Para qué sirve una UPS y qué tipos existen?</h3>
         <p>
           Una <strong>UPS</strong> (Uninterruptible Power Supply, o SAI) es un
@@ -1940,7 +1945,7 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
               <tr>
                 <th>Tipo</th>
                 <th>Cómo funciona</th>
-                <th>Salida ante corte</th>
+                
                 <th>Uso típico</th>
                 <th>Costo</th>
               </tr>
@@ -1950,9 +1955,9 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
                 <td><strong>Offline / Standby</strong></td>
                 <td>
                   Pasa la red tal cual; conmuta a batería cuando detecta el
-                  corte (conmutación ~5–15 ms)
+                  corte (conmutación en ~5–15 ms)
                 </td>
-                <td>Ondas cuadradas o senoidal aproximada (según modelo)</td>
+             
                 <td>PC de casa, router</td>
                 <td>Bajo</td>
               </tr>
@@ -1962,7 +1967,7 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
                   Regula la tensión con un autotransformador (AVR) y conmuta a
                   batería ante el corte
                 </td>
-                <td>Conmutación similar; buena tolerancia a variaciones</td>
+             
                 <td>Oficina, carro de carga, kiosco liviano</td>
                 <td>Medio</td>
               </tr>
@@ -1970,12 +1975,10 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
                 <td><strong>Online (doble conversión)</strong></td>
                 <td>
                   Convierte AC → DC → AC siempre: la salida es
-                  <em>regenerada</em> y limpia, sin importar la entrada
-                </td>
-                <td>
-                  <strong>0 ms: sin transferencia</strong>, la salida nunca se
+                  <em>regenerada</em> y limpia, sin importar la entrada, <strong>0 ms: sin transferencia</strong>, la salida nunca se
                   corta
                 </td>
+               
                 <td>
                   Servidores, PLC de proceso crítico, equipos médicos, planta
                 </td>
@@ -1993,264 +1996,7 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
         </p>
       </div>
 
-      <figure class="figure">
-        <div class="figure-scroll">
-          <svg
-            viewBox="0 0 940 220"
-            role="img"
-            aria-label="Comparación UPS interactiva vs UPS online"
-          >
-            <text
-              x="230"
-              y="24"
-              fill="#f59e0b"
-              font-size="14"
-              font-weight="700"
-              text-anchor="middle"
-            >
-              UPS INTERACTIVA
-            </text>
-            <rect
-              x="60"
-              y="45"
-              width="90"
-              height="44"
-              rx="6"
-              fill="#1e293b"
-              stroke="#f59e0b"
-            />
-            <text
-              x="105"
-              y="72"
-              fill="#e2e8f0"
-              font-size="12"
-              text-anchor="middle"
-            >
-              Red
-            </text>
-            <line
-              x1="150"
-              y1="67"
-              x2="230"
-              y2="67"
-              stroke="#f59e0b"
-              stroke-width="3"
-            />
-            <text
-              x="190"
-              y="58"
-              fill="#94a3b8"
-              font-size="9"
-              text-anchor="middle"
-            >
-              conmuta
-            </text>
-            <rect
-              x="230"
-              y="45"
-              width="110"
-              height="44"
-              rx="6"
-              fill="#1e293b"
-              stroke="#f59e0b"
-            />
-            <text
-              x="285"
-              y="66"
-              fill="#e2e8f0"
-              font-size="11"
-              text-anchor="middle"
-            >
-              AVR +
-            </text>
-            <text
-              x="285"
-              y="80"
-              fill="#e2e8f0"
-              font-size="11"
-              text-anchor="middle"
-            >
-              batería
-            </text>
-            <line
-              x1="340"
-              y1="67"
-              x2="420"
-              y2="67"
-              stroke="#ef4444"
-              stroke-width="3"
-              stroke-dasharray="6 5"
-            />
-            <text
-              x="380"
-              y="58"
-              fill="#ef4444"
-              font-size="10"
-              text-anchor="middle"
-            >
-              ~10 ms
-            </text>
-            <rect
-              x="420"
-              y="45"
-              width="90"
-              height="44"
-              rx="6"
-              fill="#1e293b"
-              stroke="#3b82f6"
-            />
-            <text
-              x="465"
-              y="72"
-              fill="#e2e8f0"
-              font-size="12"
-              text-anchor="middle"
-            >
-              Equipo
-            </text>
-            <text
-              x="285"
-              y="120"
-              fill="#94a3b8"
-              font-size="11"
-              text-anchor="middle"
-            >
-              Hay un instante sin energía (microcorte)
-            </text>
-            <text
-              x="285"
-              y="140"
-              fill="#10b981"
-              font-size="11"
-              text-anchor="middle"
-            >
-              OK para PC, carro de carga, kiosco
-            </text>
-
-            <text
-              x="740"
-              y="24"
-              fill="#10b981"
-              font-size="14"
-              font-weight="700"
-              text-anchor="middle"
-            >
-              UPS ONLINE
-            </text>
-            <rect
-              x="560"
-              y="45"
-              width="80"
-              height="44"
-              rx="6"
-              fill="#1e293b"
-              stroke="#10b981"
-            />
-            <text
-              x="600"
-              y="72"
-              fill="#e2e8f0"
-              font-size="12"
-              text-anchor="middle"
-            >
-              Red
-            </text>
-            <line
-              x1="640"
-              y1="67"
-              x2="700"
-              y2="67"
-              stroke="#10b981"
-              stroke-width="3"
-            />
-            <rect
-              x="700"
-              y="38"
-              width="90"
-              height="58"
-              rx="6"
-              fill="#1e293b"
-              stroke="#10b981"
-            />
-            <text
-              x="745"
-              y="62"
-              fill="#e2e8f0"
-              font-size="10"
-              text-anchor="middle"
-            >
-              AC→DC→AC
-            </text>
-            <text
-              x="745"
-              y="78"
-              fill="#e2e8f0"
-              font-size="10"
-              text-anchor="middle"
-            >
-              siempre activo
-            </text>
-            <line
-              x1="790"
-              y1="67"
-              x2="850"
-              y2="67"
-              stroke="#10b981"
-              stroke-width="3"
-            />
-            <text
-              x="820"
-              y="58"
-              fill="#10b981"
-              font-size="10"
-              text-anchor="middle"
-            >
-              0 ms
-            </text>
-            <rect
-              x="850"
-              y="45"
-              width="70"
-              height="44"
-              rx="6"
-              fill="#1e293b"
-              stroke="#3b82f6"
-            />
-            <text
-              x="885"
-              y="72"
-              fill="#e2e8f0"
-              font-size="11"
-              text-anchor="middle"
-            >
-              Equipo
-            </text>
-            <text
-              x="745"
-              y="120"
-              fill="#94a3b8"
-              font-size="11"
-              text-anchor="middle"
-            >
-              Sin transferencia: la salida nunca se interrumpe
-            </text>
-            <text
-              x="745"
-              y="140"
-              fill="#10b981"
-              font-size="11"
-              text-anchor="middle"
-            >
-              Obligatoria en procesos críticos
-            </text>
-          </svg>
-        </div>
-        <figcaption>
-          Figura 2 — Interactiva: conmuta a batería (~10 ms de microcorte).
-          Online: doble conversión permanente, salida regenerada y sin
-          microcorte. El tipo se elige por cuánto tolera el equipo.
-        </figcaption>
-      </figure>
+    
 
       <div class="card">
         <h3>🔌 6.2 Redundancia de fuentes: 1+1 y N+1</h3>
@@ -2263,7 +2009,7 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
         <ul>
           <li>
             <strong>1+1:</strong> una fuente activa y una de respaldo. Ejemplo:
-            servidor con dos fuentes de 800 W, cada una capaz de alimentar todo
+            servidor con dos fuentes (PSU) de 800 W, cada una capaz de alimentar todo
             el equipo sola.
           </li>
           <li>
@@ -2282,6 +2028,8 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
           misma zapatilla son redundancia de mentira: si esa toma falla, se caen
           las dos.
         </p>
+        <p>Lo que acá se busca es estar cubierto ante la falla de una PSU
+        logrando que los equipos puedan continuar trabajando.</p>
       </div>
 
       <div class="card">
@@ -2301,7 +2049,7 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
             </thead>
             <tbody>
               <tr>
-                <td>Medición por toma (kWh, A, W)</td>
+                <td>Medición por toma (kWh = kilovatio-hora, A, W)</td>
                 <td>
                   Permite saber qué equipo consume qué y planificar presupuesto
                   eléctrico
@@ -2674,10 +2422,10 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
             <strong>Riesgo térmico:</strong> chasis de equipos fanless a 55–60
             °C, superficies de hornos y motores.
           </li>
-          <li>
+          <!-- <li>
             <strong>Riesgo mecánico:</strong> partes móviles de la máquina que
             no estén detenidas.
-          </li>
+          </li> -->
           <li>
             <strong>Riesgo químico/ambiental:</strong> vapores, polvos y
             humedad.
@@ -2913,252 +2661,11 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
         </ol>
       </div>
 
-      <!-- ====== SECCIÓN 11 — SECUENCIA DIDÁCTICA ====== -->
-      <h2 class="section-title" id="sec11">
-        <span class="icon">🗓️</span>Sección 11 — Secuencia didáctica (160
-        minutos exactos)
-      </h2>
-      <p class="section-meta">
-        Apertura 10 + Teoría 50 + Taller 75 + Evaluación 15 + Cierre 10 =
-        <strong>160 minutos</strong>
-      </p>
-
-      <div class="table-wrap">
-        <table id="sequence-table">
-          <thead>
-            <tr>
-              <th>Bloque</th>
-              <th>Min.</th>
-              <th>Reloj</th>
-              <th>Actividad</th>
-              <th>Rol docente / recursos</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td rowspan="2">
-                <strong>Apertura</strong><br /><span
-                  style="color: var(--muted); font-size: 0.8rem"
-                  >10 min</span
-                >
-              </td>
-              <td class="t-center">5</td>
-              <td>0–5</td>
-              <td>
-                Presentación del problema: "Una PC de oficina vivió 2 semanas en
-                la planta y se apagó sola". ¿Qué le pasó?
-              </td>
-              <td>
-                Docente abre el caso; proyector. Hipótesis de los alumnos en el
-                chat/pizarrón.
-              </td>
-            </tr>
-            <tr>
-              <td class="t-center">5</td>
-              <td>5–10</td>
-              <td>
-                Lluvia de ideas: "¿cuántos ventiladores tiene tu PC?" → enlazar
-                con polvo, calor y energía.
-              </td>
-              <td>Enunciar objetivos y reglas del taller virtual.</td>
-            </tr>
-
-            <tr>
-              <td rowspan="5">
-                <strong>Teoría</strong><br /><span
-                  style="color: var(--muted); font-size: 0.8rem"
-                  >50 min</span
-                >
-              </td>
-              <td class="t-center">12</td>
-              <td>10–22</td>
-              <td>
-                Computación industrial vs. consumo; definición de fanless y sus
-                3 mecanismos (conducción, difusión, convección).
-              </td>
-              <td>
-                Secciones 1 del sitio. Analogía de la nevera térmica. Preguntas
-                guiadas.
-              </td>
-            </tr>
-            <tr>
-              <td class="t-center">12</td>
-              <td>22–34</td>
-              <td>
-                Ambientes sucios: efecto del polvo, grasa y humedad. Grado IP
-                (IEC 60529), vibración y temperatura extendida.
-              </td>
-              <td>
-                Secciones 2 y 3. Abrir la tabla IP oficial de IEC en pantalla.
-              </td>
-            </tr>
-            <tr>
-              <td class="t-center">10</td>
-              <td>34–44</td>
-              <td>
-                Casos de uso: ALUAR, automatización, kioscos. Análisis
-                industrial vs. escritorio (5 filtros).
-              </td>
-              <td>Secciones 4 y 5. Presentar la plantilla de comparación.</td>
-            </tr>
-            <tr>
-              <td class="t-center">10</td>
-              <td>44–54</td>
-              <td>
-                Energía: UPS online vs. interactiva, redundancia 1+1 / N+1, PDU
-                inteligentes, carga masiva.
-              </td>
-              <td>
-                Secciones 6 y 7. Resolver en vivo el Ejercicio 1 (con las
-                calculadoras del sitio).
-              </td>
-            </tr>
-            <tr>
-              <td class="t-center">6</td>
-              <td>54–60</td>
-              <td>
-                Seguridad, EPP y LOTO (6 pasos). Riesgos de intervenir UPS con
-                baterías.
-              </td>
-              <td>
-                Sección 9. Explicar con caso práctico: "¿por qué un candado por
-                persona?".
-              </td>
-            </tr>
-
-            <tr>
-              <td rowspan="5">
-                <strong>Taller</strong><br /><span
-                  style="color: var(--muted); font-size: 0.8rem"
-                  >75 min</span
-                >
-              </td>
-              <td class="t-center">15</td>
-              <td>60–75</td>
-              <td>
-                <strong>Actividad 1:</strong> Leer ficha técnica y decidir el
-                grado IP correcto para 4 ambientes.
-              </td>
-              <td>
-                Entrega de 4 fichas (PDF/jpg). Trabajo en parejas, puesta en
-                común rápida.
-              </td>
-            </tr>
-            <tr>
-              <td class="t-center">15</td>
-              <td>75–90</td>
-              <td>
-                <strong>Actividad 2:</strong> Estudio de caso ALUAR —
-                identificar riesgos y elevar un listado de requerimientos.
-              </td>
-              <td>
-                Guía con preguntas. Foco en calor, polvo conductor y cortes de
-                energía.
-              </td>
-            </tr>
-            <tr>
-              <td class="t-center">15</td>
-              <td>90–105</td>
-              <td>
-                <strong>Actividad 3:</strong> Tabla comparativa equipo
-                industrial vs. escritorio (mín. 8 variables) + justificación.
-              </td>
-              <td>
-                Plantilla de la Sección 5. Se evalúa la justificación, no el
-                dato.
-              </td>
-            </tr>
-            <tr>
-              <td class="t-center">15</td>
-              <td>105–120</td>
-              <td>
-                <strong>Actividad 4:</strong> Dimensionado con el UPS Selector /
-                Load Calculator de Eaton (web).
-              </td>
-              <td>
-                Recurso: upsselector.eaton.com. Capturar pantalla del resultado
-                y comparar con el cálculo manual.
-              </td>
-            </tr>
-            <tr>
-              <td class="t-center">15</td>
-              <td>120–135</td>
-              <td>
-                <strong>Actividad 5:</strong> Carro de carga — calcular consumo
-                y dimensionar UPS con la calculadora del sitio.
-              </td>
-              <td>
-                Sección 8. Comparar resultado manual vs. calculadora online
-                (Actividad 6 de refuerzo).
-              </td>
-            </tr>
-
-            <tr>
-              <td rowspan="2">
-                <strong>Evaluación</strong><br /><span
-                  style="color: var(--muted); font-size: 0.8rem"
-                  >15 min</span
-                >
-              </td>
-              <td class="t-center">10</td>
-              <td>135–145</td>
-              <td>
-                Responder las <strong>5 preguntas de escenario</strong> (Sección
-                13): cliente real, aplicar los 5 filtros.
-              </td>
-              <td>
-                Individual, en el formato que use la escuela (formulario o
-                cuaderno digital).
-              </td>
-            </tr>
-            <tr>
-              <td class="t-center">5</td>
-              <td>145–150</td>
-              <td>
-                Puesta en común y autoevaluación: cada uno indica qué filtro le
-                costó más aplicar.
-              </td>
-              <td>Docente registra errores frecuentes para el repaso.</td>
-            </tr>
-
-            <tr>
-              <td rowspan="2">
-                <strong>Cierre</strong><br /><span
-                  style="color: var(--muted); font-size: 0.8rem"
-                  >10 min</span
-                >
-              </td>
-              <td class="t-center">7</td>
-              <td>150–157</td>
-              <td>
-                Repaso de los 5 filtros y asignación de tareas simuladas de
-                mantenimiento (Sección 10) + Cuestionario de 18 preguntas.
-              </td>
-              <td>
-                Recordar la actividad de búsqueda de imágenes (Sección 15).
-              </td>
-            </tr>
-            <tr>
-              <td class="t-center">3</td>
-              <td>157–160</td>
-              <td>Anticipo de la próxima sesión y cierre.</td>
-              <td>Verificación: total de bloques = 160 min.</td>
-            </tr>
-            <tr style="background: rgba(16, 185, 129, 0.12)">
-              <td colspan="2" class="t-center"><strong>TOTAL</strong></td>
-              <td class="t-center"><strong>160</strong></td>
-              <td colspan="2">
-                <strong>10 + 50 + 75 + 15 + 10 = 160 minutos exactos</strong>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
+     
       <!-- ====== SECCIÓN 12 — ACTIVIDADES ====== -->
       <h2 class="section-title" id="sec12">
-        <span class="icon">🧪</span>Sección 12 — Actividades prácticas virtuales
-        (sin hardware)
+        <span class="icon">🧪</span>Sección 11 — Actividades 
+      
       </h2>
       <p class="section-meta">
         6 actividades que se resuelven solo con datasheets, simuladores web e
@@ -3168,7 +2675,7 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
       <div class="activity">
         <div class="act-head">
           <h4>🔎 Actividad 1 — Decidir el grado IP correcto</h4>
-          <span class="pill time">15 min</span>
+         
           <span class="pill tool">Tabla IP de IEC</span>
         </div>
         <p>
@@ -3204,7 +2711,7 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
       <div class="activity">
         <div class="act-head">
           <h4>🏭 Actividad 2 — Estudio de caso ALUAR (planta de aluminio)</h4>
-          <span class="pill time">15 min</span>
+        
           <span class="pill tool">Análisis de caso</span>
         </div>
         <p>
@@ -3233,7 +2740,7 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
       <div class="activity">
         <div class="act-head">
           <h4>📊 Actividad 3 — Tabla comparativa industrial vs. escritorio</h4>
-          <span class="pill time">15 min</span>
+        
           <span class="pill tool">Plantilla de ficha</span>
         </div>
         <p>
@@ -3254,7 +2761,7 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
       <div class="activity">
         <div class="act-head">
           <h4>🔌 Actividad 4 — Dimensionado con el UPS Selector de Eaton</h4>
-          <span class="pill time">15 min</span>
+       
           <span class="pill tool">upsselector.eaton.com</span>
         </div>
         <p>
@@ -3293,7 +2800,7 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
       <div class="activity">
         <div class="act-head">
           <h4>🔋 Actividad 5 — Carro de carga: consumo y UPS</h4>
-          <span class="pill time">15 min</span>
+        
           <span class="pill tool">Calculadora del sitio</span>
         </div>
         <p>
@@ -3322,7 +2829,7 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
       <div class="activity">
         <div class="act-head">
           <h4>🧩 Actividad 6 — Refugio de gabinete: decidir la arquitectura</h4>
-          <span class="pill time">Refuerzo / tarea</span>
+         
           <span class="pill tool">Decisión técnica</span>
         </div>
         <p>
@@ -3338,9 +2845,9 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
         </p>
       </div>
 
-      <!-- ====== SECCIÓN 13 — EVALUACIÓN ESCENARIOS ====== -->
+      <!-- ====== SECCIÓN 12 — EVALUACIÓN ESCENARIOS ====== -->
       <h2 class="section-title" id="sec13">
-        <span class="icon">📝</span>Sección 13 — Evaluación: 5 preguntas de
+        <span class="icon">📝</span>Sección 12 — Evaluación: 5 preguntas de
         escenario real
       </h2>
       <p class="section-meta">
@@ -3461,10 +2968,9 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
         </div>
       </div>
 
-      <!-- ====== SECCIÓN 14 — CUESTIONARIO ====== -->
+      <!-- ====== SECCIÓN 13 — CUESTIONARIO ====== -->
       <h2 class="section-title" id="sec14">
-        <span class="icon">🧠</span>Sección 14 — Cuestionario final (18
-        preguntas)
+        <span class="icon">🧠</span>Sección 13 — Cuestionario
       </h2>
       <p class="section-meta">
         V/F · opción múltiple · respuesta corta · escenarios · 2 numéricos
@@ -3787,9 +3293,9 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
         </div>
       </div>
 
-      <!-- ====== SECCIÓN 15 — BÚSQUEDA DE IMÁGENES ====== -->
+      <!-- ====== SECCIÓN 14 — BÚSQUEDA DE IMÁGENES ====== -->
       <h2 class="section-title" id="sec15">
-        <span class="icon">🖼️</span>Sección 15 — Actividad de búsqueda de
+        <span class="icon">🖼️</span>Sección 14 — Actividad de búsqueda de
         imágenes
       </h2>
       <p class="section-meta">
@@ -3799,7 +3305,7 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
       <div class="activity">
         <div class="act-head">
           <h4>🔍 Buscar, seleccionar y describir 8 imágenes</h4>
-          <span class="pill time">20 min</span>
+        
           <span class="pill tool">Navegador web</span>
         </div>
         <p>
@@ -3850,9 +3356,9 @@ es el tiempo total que un equipo puede operar antes de desgastarse por completo 
         </p>
       </div>
 
-      <!-- ====== SECCIÓN 16 — RECURSOS ====== -->
+      <!-- ====== SECCIÓN 15 — RECURSOS ====== -->
       <h2 class="section-title" id="sec16">
-        <span class="icon">🔗</span>Sección 16 — Recursos y enlaces
+        <span class="icon">🔗</span>Sección 15 — Recursos y enlaces
       </h2>
       <p class="section-meta">Solo recursos gratuitos y verificados</p>
 
