@@ -1227,63 +1227,17 @@
       <header class="hero">
         <h1>Sesión 18 - Almacenamiento Masivo Industrial y Backup</h1>
         <h2>Cold storage · Cintas LTO · SAN y Fibre Channel · Regla 3-2-1-1-0 · Veeam y Acronis</h2>
-        <h3>
-          Material de lectura y taller para una sesión de 160 minutos. Diseñarás un puesto completo (UPS +
-          servidor + RAID + NAS + política de backup), demostrarás una restauración de prueba y firmarás el acta
-          de puesta en servicio.
-        </h3>
+      
         
       </header>
 
-      <!-- ====== FICHA DE LA SESIÓN ====== -->
-      <section class="card" aria-label="Ficha de la sesión">
-        <h3>🗂️ Ficha rápida de la sesión</h3>
-        <div class="facts">
-          <div class="fact">
-            <span class="f-label">Duración</span>
-            <span class="f-value">160 minutos (5 bloques)</span>
-          </div>
-          <div class="fact">
-            <span class="f-label">Modalidad</span>
-            <span class="f-value">Virtual: simuladores, software gratuito y documentos</span>
-          </div>
-          <div class="fact">
-            <span class="f-label">Prerrequisitos</span>
-            <span class="f-value">Hardware industrial, servidores, RAID y NAS</span>
-          </div>
-          <div class="fact">
-            <span class="f-label">Recursos verificados</span>
-            <span class="f-value">Roadmap LTO (lto.org/roadmap) y Veeam CE (veeam.com)</span>
-          </div>
-          <div class="fact">
-            <span class="f-label">Reto integrador</span>
-            <span class="f-value">Puesto completo + restauración de prueba + acta</span>
-          </div>
-          <div class="fact">
-            <span class="f-label">Evaluación</span>
-            <span class="f-value">Rúbrica de 30 puntos + 5 preguntas de escenario</span>
-          </div>
-        </div>
-        <div class="callout tip" style="margin-bottom: 0">
-          <span class="cbadge">PARA EL ESTUDIANTE</span>
-          <h4>📚 Esta página es tu material de estudio, no un resumen</h4>
-          <p>
-            Todo lo que necesitas para resolver el taller y el reto está escrito acá, con tablas, fórmulas y
-            ejemplos numéricos resueltos. Léela en orden, detente en las <em>Zonas de riesgo</em> (seguridad) y
-            usá los desplegables <strong>“Ver respuesta”</strong> para autoevaluarte antes de la puesta en común.
-          </p>
-          <p>
-            Al final hay una <strong>actividad de búsqueda de imágenes</strong>, un <strong>glosario</strong> y un
-            <strong>checklist de cierre</strong> para entregar el acta firmada.
-          </p>
-        </div>
-      </section>
+      
 
       <!-- ====== TABLA DE CONTENIDOS ====== -->
       <nav class="toc" id="toc" aria-label="Tabla de contenidos">
         <h2>📋 Tabla de Contenidos</h2>
         <ol>
-          <li><a href="#sec0"><span class="num">0.</span> Encuadre, objetivos y agenda de 160 min</a></li>
+          <li><a href="#sec0"><span class="num">0.</span> Encuadre, objetivos </a></li>
           <li><a href="#sec1"><span class="num">1.</span> Almacenamiento masivo: jerarquías y medios</a></li>
           <li><a href="#sec2"><span class="num">2.</span> Cold storage y archivado a largo plazo</a></li>
           <li><a href="#sec3"><span class="num">3.</span> Cintas LTO: capacidad, vigencia y uso offline</a></li>
@@ -1293,7 +1247,7 @@
           <li><a href="#sec7"><span class="num">7.</span> Software de backup: Veeam y Acronis</a></li>
           <li><a href="#sec8"><span class="num">8.</span> Seguridad: EPP, LOTO y seguridad de datos</a></li>
           <li><a href="#sec9"><span class="num">9.</span> Puesta en servicio: restauración y acta</a></li>
-          <li><a href="#sec10"><span class="num">10.</span> Secuencia didáctica minuto a minuto</a></li>
+          
           <li><a href="#sec11"><span class="num">11.</span> Taller: 4 actividades + reto integrador</a></li>
           <li><a href="#sec12"><span class="num">12.</span> Ejercicios numéricos resueltos (consumo y UPS)</a></li>
           <li><a href="#sec13"><span class="num">13.</span> Plantilla de política y rúbrica (30 puntos)</a></li>
@@ -1301,17 +1255,14 @@
           <li><a href="#sec15"><span class="num">15.</span> Actividad de búsqueda de imágenes</a></li>
           <li><a href="#sec16"><span class="num">16.</span> Glosario, recursos y checklist final</a></li>
         </ol>
-        <p class="toc-info">
-          Sugerencia de uso: bloques 1-9 = teoría (40 min) · bloques 10-13 = taller y reto (60 min) ·
-          bloques 14-16 = evaluación, cierre y tareas (50 min).
-        </p>
+     
       </nav>
 
       <main id="contenido">
         <!-- ====== SECCIÓN 0 — ENCUADRE ====== -->
         <h2 class="section-title" id="sec0">
           <span class="icon">🎓</span>Sección 0 — Encuadre, objetivos y agenda
-          <span class="time-badge">10 min de apertura</span>
+         
         </h2>
         <p class="section-meta">
           Bloque de apertura: activación de saberes previos, objetivos, reglas de seguridad y criterios de evaluación.
@@ -1332,10 +1283,7 @@
             RPO/RTO, a operar Veeam y Acronis y a <strong>demostrar con una prueba real que la copia sirve</strong>.
           </p>
           <div class="kpis">
-            <div class="kpi">
-              <span class="k-val">160</span>
-              <span class="k-lab">minutos totales</span>
-            </div>
+            
             <div class="kpi">
               <span class="k-val">3-2-1-1-0</span>
               <span class="k-lab">regla de oro del respaldo</span>
@@ -1437,19 +1385,7 @@
           </div>
         </div>
 
-        <div class="callout">
-          <span class="cbadge info">ACTIVACIÓN</span>
-          <h4>🔥 Disparador de los primeros 5 minutos</h4>
-          <p>
-            Respondan en el chat o en el foro: <em>“¿Cuál es el archivo más importante que tenés en tu
-            computadora y qué pasaría si desapareciera hoy?”</em> Después calculen: si en la empresa se cobra por
-            hora de trabajo parado, ¿cuánto cuesta una hora de facturación caída?
-          </p>
-          <p>
-            Guardá tus respuestas: al final de la sesión las vas a comparar con tu propia política de backup del
-            reto integrador.
-          </p>
-        </div>
+       
 
         <div class="callout tip">
           <span class="cbadge">LOS 4 EJES DECISORES</span>
@@ -1890,7 +1826,7 @@
         </p>
 
         <div class="card">
-          <h3>🧩 LTO en 60 segundos: cuatro piezas</h3>
+          <h3>🧩 LTO: cuatro piezas</h3>
           <div class="grid-2">
             <div class="mini">
               <h5>1️⃣ El cartucho (media)</h5>
@@ -2641,7 +2577,7 @@
             <span class="cbadge info">LABORATORIO</span>
             <h4>🧰 Cómo se usa en esta sesión (sin equipos físicos)</h4>
             <ol style="margin-bottom: 0">
-              <li>El docente provee una VM de laboratorio y una carpeta de datos con archivos de prueba (planos, CSV, imágenes).</li>
+              <li>Se provee una VM de laboratorio y una carpeta de datos con archivos de prueba (planos, CSV, imágenes).</li>
               <li>Cada equipo crea un <strong>repositorio</strong> en una carpeta de red o disco USB virtual.</li>
               <li>Se configura un <strong>job</strong> con copia incremental diaria y un punto de restauración.</li>
               <li>Se ejecuta el job, se observa el log y se anota el tiempo total (dato para el RTO).</li>
@@ -2957,203 +2893,12 @@
           </div>
         </div>
 
-        <!-- ====== SECCIÓN 10 — SECUENCIA DIDÁCTICA ====== -->
-        <h2 class="section-title" id="sec10">
-          <span class="icon">⏱️</span>Sección 10 — Secuencia didáctica minuto a minuto
-          <span class="time-badge">160 minutos exactos</span>
-        </h2>
-        <p class="section-meta">
-          Apertura 10 + teoría 40 + taller 60 + evaluación 30 + cierre 20 = <strong>160 minutos</strong>. La suma es
-          exacta y verificable en la columna acumulada.
-        </p>
-
-        <div class="card">
-          <h3>🕒 Distribución en cinco bloques</h3>
-          <div class="timeline">
-            <div class="tl-row">
-              <span class="tl-name">Apertura</span>
-              <div class="tl-track"><div class="tl-fill tl-a" style="width: 6.25%">10</div></div>
-              <span class="tl-min">10 min</span>
-            </div>
-            <div class="tl-row">
-              <span class="tl-name">Teoría</span>
-              <div class="tl-track"><div class="tl-fill tl-b" style="width: 25%">40</div></div>
-              <span class="tl-min">40 min</span>
-            </div>
-            <div class="tl-row">
-              <span class="tl-name">Taller</span>
-              <div class="tl-track"><div class="tl-fill tl-c" style="width: 37.5%">60</div></div>
-              <span class="tl-min">60 min</span>
-            </div>
-            <div class="tl-row">
-              <span class="tl-name">Evaluación</span>
-              <div class="tl-track"><div class="tl-fill tl-d" style="width: 18.75%">30</div></div>
-              <span class="tl-min">30 min</span>
-            </div>
-            <div class="tl-row">
-              <span class="tl-name">Cierre</span>
-              <div class="tl-track"><div class="tl-fill tl-e" style="width: 12.5%">20</div></div>
-              <span class="tl-min">20 min</span>
-            </div>
-          </div>
-          <div class="kpis">
-            <div class="kpi">
-              <span class="k-val">10+40+60+30+20</span>
-              <span class="k-lab">suma de bloques</span>
-            </div>
-            <div class="kpi">
-              <span class="k-val">160</span>
-              <span class="k-lab">total exacto</span>
-            </div>
-            <div class="kpi">
-              <span class="k-val">60%</span>
-              <span class="k-lab">práctica activa (taller + eval.)</span>
-            </div>
-            <div class="kpi">
-              <span class="k-val">15</span>
-              <span class="k-lab">preguntas mínimas de práctica</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>📋 Tabla de secuencia didáctica completa</h3>
-          <div class="table-wrap">
-            <table>
-              <caption>
-                Plan minuto a minuto — Sesión de cierre S5 (acumulado verificado hasta 160 min)
-              </caption>
-              <thead>
-                <tr>
-                  <th>Bloque</th>
-                  <th>Min.</th>
-                  <th>Acum.</th>
-                  <th>Actividad del docente</th>
-                  <th>Actividad del estudiante</th>
-                  <th>Recurso</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>A · Apertura</strong></td>
-                  <td class="tnum">10</td>
-                  <td class="tnum">10</td>
-                  <td>Presenta el escenario de la empresa ficticia, dispara la pregunta de activación y enuncia los criterios de evaluación.</td>
-                  <td>Responde el disparador, comparte en el foro, anota el escenario y forma los equipos.</td>
-                  <td>Pizarra / chat · esta página web</td>
-                </tr>
-                <tr>
-                  <td rowspan="3"><strong>B · Teoría</strong></td>
-                  <td class="tnum">15</td>
-                  <td class="tnum">25</td>
-                  <td>Explica tiers, cold storage, vida útil de medios y bit rot; muestra el gráfico de vida útil.</td>
-                  <td>Escucha, completa la tabla de tiers en su carpeta y responde preguntas rápidas.</td>
-                  <td>Sección 1-2 de esta página</td>
-                </tr>
-                <tr>
-                  <td class="tnum">15</td>
-                  <td class="tnum">40</td>
-                  <td>Recorre el roadmap LTO, las reglas de compatibilidad entre generaciones y el uso de WORM/air gap.</td>
-                  <td>Lee el roadmap oficial, arma mentalmente el cálculo de una cinta LTO-9 y consulta dudas.</td>
-                  <td><span class="mono">lto.org/roadmap</span></td>
-                </tr>
-                <tr>
-                  <td class="tnum">10</td>
-                  <td class="tnum">50</td>
-                  <td>Introduce SAN vs. NAS vs. DAS, Fibre Channel, zoning y multipath; presenta la regla 3-2-1-1-0 y RPO/RTO.</td>
-                  <td>Identifica las piezas del esquema FC y escribe su propia definición de RPO y RTO.</td>
-                  <td>Sección 4-6 de esta página</td>
-                </tr>
-                <tr>
-                  <td rowspan="4"><strong>C · Taller</strong></td>
-                  <td class="tnum">15</td>
-                  <td class="tnum">65</td>
-                  <td>Entrega y explica la ficha de cinta LTO; circula por los equipos y corrige desvíos de cálculo.</td>
-                  <td>Completa la ficha de cinta LTO con capacidad nativa, cantidad de cartuchos y vida útil.</td>
-                  <td>Ficha imprimible / hoja de cálculo</td>
-                </tr>
-                <tr>
-                  <td class="tnum">15</td>
-                  <td class="tnum">80</td>
-                  <td>Guía el diseño de la política 3-2-1 con RPO/RTO y custodia de claves.</td>
-                  <td>Diseña la política 3-2-1-1-0 de la empresa ficticia con RPO y RTO justificados.</td>
-                  <td>Plantilla de la sección 13</td>
-                </tr>
-                <tr>
-                  <td class="tnum">20</td>
-                  <td class="tnum">100</td>
-                  <td>Acompaña la simulación en Veeam CE: job, repositorio, ejecución y lectura de logs.</td>
-                  <td>Ejecuta una copia en Veeam, lee el log, anota el tiempo y captura pantalla como evidencia.</td>
-                  <td>Veeam Backup &amp; Replication CE</td>
-                </tr>
-                <tr>
-                  <td class="tnum">10</td>
-                  <td class="tnum">110</td>
-                  <td>Resuelve en conjunto los dos ejercicios numéricos y verifica resultados.</td>
-                  <td>Resuelve el cálculo de consumo energético y el dimensionado del UPS; corrige con el solucionario.</td>
-                  <td>Sección 12 de esta página</td>
-                </tr>
-                <tr>
-                  <td rowspan="2"><strong>D · Evaluación</strong></td>
-                  <td class="tnum">20</td>
-                  <td class="tnum">130</td>
-                  <td>Presenta el reto integrador por equipos y aplica la rúbrica de 30 puntos.</td>
-                  <td>Expone el puesto completo (UPS + servidor + RAID + NAS + política), demuestra la restauración y entrega el acta.</td>
-                  <td>Rúbrica de la sección 13</td>
-                </tr>
-                <tr>
-                  <td class="tnum">10</td>
-                  <td class="tnum">140</td>
-                  <td>Supervisa la prueba individual de 5 preguntas de escenario.</td>
-                  <td>Resuelve 5 preguntas de escenario aplicando los 4 ejes decisores.</td>
-                  <td>Cuestionario de la sección 14</td>
-                </tr>
-                <tr>
-                  <td rowspan="3"><strong>E · Cierre</strong></td>
-                  <td class="tnum">10</td>
-                  <td class="tnum">150</td>
-                  <td>Puesta en común: compara las políticas de cada equipo y señala aciertos y riesgos.</td>
-                  <td>Autoevalúa y coevalúa con la rúbrica; propone una mejora concreta a otro equipo.</td>
-                  <td>Rúbrica · pizarra</td>
-                </tr>
-                <tr>
-                  <td class="tnum">5</td>
-                  <td class="tnum">155</td>
-                  <td>Presenta la actividad de búsqueda de imágenes y el glosario.</td>
-                  <td>Anota las consignas de la búsqueda de imágenes y completa el glosario.</td>
-                  <td>Sección 15-16 de esta página</td>
-                </tr>
-                <tr>
-                  <td class="tnum">5</td>
-                  <td class="tnum">160</td>
-                  <td>Cierra la materia: repaso de los temas del año y entrega del acta firmada.</td>
-                  <td>Firma el acta de puesta en servicio y entrega los pendientes comprometidos.</td>
-                  <td>Checklist final</td>
-                </tr>
-                <tr class="tot-row">
-                  <td colspan="2">TOTAL</td>
-                  <td class="tnum">160</td>
-                  <td colspan="3">Apertura 10 + Teoría 40 + Taller 60 + Evaluación 30 + Cierre 20 = 160 min</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="callout tip" style="margin-bottom: 0">
-            <span class="cbadge">GESTIÓN DEL TIEMPO</span>
-            <h4>⏳ Si el taller se atrasa, no recortes la evaluación</h4>
-            <p>
-              El taller de Veeam suele llevar más tiempo del previsto en la primera ejecución. Si ocurre, el docente
-              puede reducir la puesta en común (bloque E, 10 min) a 5 y devolver 5 minutos al taller. Lo que
-              <strong>nunca</strong> se recorta es la prueba de restauración ni la evaluación de escenarios: son las
-              dos evidencias que prueban que el aprendizaje ocurrió.
-            </p>
-          </div>
-        </div>
+      
 
         <!-- ====== SECCIÓN 11 — TALLER ====== -->
         <h2 class="section-title" id="sec11">
           <span class="icon">🛠️</span>Sección 11 — Taller: actividades y reto integrador
-          <span class="time-badge">60 min</span>
+         
         </h2>
         <p class="section-meta">
           Cuatro actividades graduadas que llevan al reto final. Cada una deja una evidencia que se adjunta al acta.

@@ -1,0 +1,2456 @@
+<!doctype html>
+<html lang="es-ES" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Consigna de investigación y exposición oral de Hardware Industrial: equipos fanless y robustos, gestión de energía, servidores, memorias ECC y redundancia, RAID, NAS, almacenamiento masivo, cintas LTO y SAN. Guía de investigación, búsqueda de imágenes, guion de 20 minutos, rúbrica y cronograma de defensas."
+    />
+    <title>
+      Consigna de Exposición — Hardware Industrial
+    </title>
+
+    <style>
+      /* ==========================================================================
+   CONSIGNA DE INVESTIGACIÓN Y EXPOSICIÓN ORAL — HARDWARE INDUSTRIAL
+   Estilo técnico avanzado (modo oscuro) — consistente con las sesiones 14 a 18
+   ========================================================================== */
+
+      :root {
+        --bg: #0f1729;
+        --card-bg: #1a2744;
+        --text: #f8fafc;
+        --blue: #3b82f6;
+        --cyan: #06b6d4;
+        --green: #10b981;
+        --yellow: #f59e0b;
+        --red: #ef4444;
+        --border-deco: #2dd4bf;
+        --muted: #94a3b8;
+        --header-grad-start: #1e3a5f;
+        --header-grad-end: #1a2744;
+        --surface-2: #16223c;
+        --line: #334155;
+        --soft: #e2e8f0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 20px;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          Roboto,
+          Arial,
+          sans-serif;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      body {
+        padding: 24px 16px 64px;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      /* ============ PROGRESO DE LECTURA + VOLVER ARRIBA ============ */
+      #read-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0%;
+        background: linear-gradient(
+          90deg,
+          var(--blue),
+          var(--cyan),
+          var(--green)
+        );
+        z-index: 60;
+        transition: width 0.1s linear;
+      }
+      #to-top {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: 1px solid rgba(45, 212, 191, 0.5);
+        background: var(--card-bg);
+        color: var(--cyan);
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: none;
+        z-index: 60;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      }
+      #to-top.show {
+        display: block;
+      }
+      #to-top:hover {
+        filter: brightness(1.2);
+      }
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        background: var(--cyan);
+        color: #0f1729;
+        padding: 10px 16px;
+        border-radius: 0 0 8px 0;
+        font-weight: 700;
+        z-index: 70;
+      }
+      .skip-link:focus {
+        left: 0;
+      }
+
+      /* ============ NAV BUTTONS ============ */
+      .nav-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+      .nav-btn {
+        display: inline-block;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+        border: 1px solid transparent;
+        transition: filter 0.2s;
+        font-family: inherit;
+        cursor: pointer;
+      }
+      .nav-btn:hover {
+        filter: brightness(1.15);
+      }
+      .nav-btn.primary {
+        background: var(--blue);
+        color: #fff;
+      }
+      .nav-btn.secondary {
+        background: transparent;
+        color: var(--cyan);
+        border-color: var(--cyan);
+      }
+      .nav-btn.accent {
+        background: var(--green);
+        color: #0f1729;
+      }
+      .nav-btn.warn {
+        background: var(--yellow);
+        color: #0f1729;
+      }
+      .nav-btn.ghost {
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        border-color: var(--line);
+      }
+      .nav-buttons.bottom {
+        justify-content: center;
+        margin-top: 40px;
+      }
+
+      /* ============ HEADER ============ */
+      header.hero {
+        text-align: center;
+        padding: 40px 24px;
+        background: linear-gradient(135deg, #0a1224 0%, #15233f 100%);
+        border-radius: 16px;
+        border: 1px solid rgba(45, 212, 191, 0.25);
+        margin-bottom: 28px;
+      }
+      header.hero .eyebrow {
+        display: inline-block;
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--border-deco);
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+      header.hero h1 {
+        font-size: clamp(1.7rem, 4.5vw, 2.7rem);
+        margin: 0 0 10px;
+        background: linear-gradient(90deg, var(--blue), var(--cyan));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        line-height: 1.15;
+      }
+      header.hero h2 {
+        color: var(--cyan);
+        font-size: 1.1rem;
+        margin: 0 0 12px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+      }
+      header.hero h3 {
+        color: var(--muted);
+        font-size: 1rem;
+        margin: 0 auto 18px;
+        font-weight: 400;
+        max-width: 780px;
+      }
+      .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+      }
+      .badge {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: rgba(6, 182, 212, 0.15);
+        color: var(--cyan);
+        font-size: 0.82rem;
+        font-weight: 600;
+        border: 1px solid rgba(6, 182, 212, 0.4);
+      }
+      .badge.green {
+        background: rgba(16, 185, 129, 0.15);
+        color: var(--green);
+        border-color: rgba(16, 185, 129, 0.4);
+      }
+      .badge.yellow {
+        background: rgba(245, 158, 11, 0.15);
+        color: var(--yellow);
+        border-color: rgba(245, 158, 11, 0.4);
+      }
+      .badge.red {
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--red);
+        border-color: rgba(239, 68, 68, 0.4);
+      }
+      .badge .dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: currentColor;
+        margin-right: 8px;
+        vertical-align: middle;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+
+      /* ============ TOC ============ */
+      .toc {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 32px;
+        border: 1px solid rgba(45, 212, 191, 0.2);
+      }
+      .toc h2 {
+        margin-top: 0;
+        font-size: 1.15rem;
+        color: var(--cyan);
+        border-bottom: 1px solid rgba(45, 212, 191, 0.3);
+        padding-bottom: 10px;
+        margin-bottom: 16px;
+      }
+      .toc ol {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        columns: 2;
+        column-gap: 30px;
+      }
+      .toc li {
+        margin-bottom: 8px;
+        break-inside: avoid;
+      }
+      .toc a {
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 10px;
+        border-radius: 6px;
+        transition: background 0.2s;
+        font-size: 0.9rem;
+      }
+      .toc a:hover {
+        background: rgba(59, 130, 246, 0.15);
+        color: var(--cyan);
+      }
+      .toc a .num {
+        color: var(--blue);
+        font-weight: 700;
+        min-width: 24px;
+      }
+      .toc-info {
+        margin-top: 14px;
+        font-size: 0.78rem;
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      /* ============ SECTION TITLES ============ */
+      .section-title {
+        background: linear-gradient(
+          90deg,
+          var(--header-grad-start),
+          var(--header-grad-end)
+        );
+        border-left: 5px solid var(--cyan);
+        border-radius: 0 10px 10px 0;
+        padding: 14px 20px;
+        margin: 48px 0 20px;
+        font-size: 1.4rem;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        scroll-margin-top: 20px;
+      }
+      .section-title .icon {
+        font-size: 1.3rem;
+      }
+      .section-title .time-badge {
+        margin-left: auto;
+      }
+      .section-meta {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin: -8px 0 24px;
+        padding-left: 20px;
+        font-style: italic;
+      }
+
+      /* ============ CARDS ============ */
+      .card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+      .card h3 {
+        margin-top: 0;
+        color: var(--cyan);
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .card h4 {
+        margin-top: 18px;
+        color: var(--blue);
+        font-size: 1rem;
+      }
+      .card p {
+        margin: 8px 0;
+        color: var(--soft);
+      }
+      .card ul,
+      .card ol {
+        padding-left: 22px;
+        color: var(--soft);
+      }
+      .card li {
+        margin-bottom: 6px;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 12px;
+      }
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-top: 12px;
+      }
+      .mini {
+        background: var(--surface-2);
+        border-radius: 10px;
+        padding: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .mini h5 {
+        margin: 0 0 6px;
+        color: var(--cyan);
+        font-size: 0.92rem;
+      }
+      .mini p,
+      .mini ul {
+        margin: 0;
+        font-size: 0.88rem;
+        color: #cbd5e1;
+      }
+      .mini ul {
+        padding-left: 18px;
+      }
+
+      /* ============ CALLOUTS ============ */
+      .callout {
+        background: rgba(6, 182, 212, 0.08);
+        border-left: 5px solid var(--cyan);
+        border-radius: 0 10px 10px 0;
+        padding: 16px 20px;
+        margin: 18px 0;
+      }
+      .callout .cbadge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 6px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+        background: var(--cyan);
+        color: #0f1729;
+      }
+      .callout h4 {
+        margin: 0 0 8px;
+        color: var(--cyan);
+        font-size: 1rem;
+      }
+      .callout p {
+        margin: 6px 0;
+        color: var(--soft);
+      }
+      .callout ul,
+      .callout ol {
+        color: var(--soft);
+        padding-left: 22px;
+      }
+      .callout.warning {
+        background: rgba(239, 68, 68, 0.08);
+        border-left-color: var(--red);
+      }
+      .callout.warning .cbadge {
+        background: var(--red);
+        color: #fff;
+      }
+      .callout.warning h4 {
+        color: var(--red);
+      }
+      .callout.tip {
+        background: rgba(245, 158, 11, 0.08);
+        border-left-color: var(--yellow);
+      }
+      .callout.tip .cbadge {
+        background: var(--yellow);
+        color: #0f1729;
+      }
+      .callout.tip h4 {
+        color: var(--yellow);
+      }
+      .callout.ok {
+        background: rgba(16, 185, 129, 0.08);
+        border-left-color: var(--green);
+      }
+      .callout.ok .cbadge {
+        background: var(--green);
+        color: #0f1729;
+      }
+      .callout.ok h4 {
+        color: var(--green);
+      }
+
+      /* ============ TABLES ============ */
+      .table-wrap {
+        overflow-x: auto;
+        margin: 18px 0;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        -webkit-overflow-scrolling: touch;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card-bg);
+        font-size: 0.92rem;
+        min-width: 480px;
+      }
+      thead {
+        background: #0f172a;
+      }
+      thead th {
+        color: var(--cyan);
+        text-align: left;
+        padding: 12px 14px;
+        font-weight: 600;
+        border-bottom: 2px solid var(--cyan);
+        vertical-align: top;
+      }
+      tbody td {
+        padding: 11px 14px;
+        border-bottom: 1px solid var(--line);
+        color: var(--soft);
+        vertical-align: top;
+      }
+      tbody tr:nth-child(even) {
+        background: rgba(255, 255, 255, 0.025);
+      }
+      tbody tr:hover {
+        background: rgba(59, 130, 246, 0.08);
+      }
+      caption {
+        caption-side: top;
+        text-align: left;
+        color: var(--muted);
+        font-size: 0.82rem;
+        padding: 8px 14px;
+        font-style: italic;
+      }
+      .tnum {
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+      .tot-row td {
+        background: rgba(16, 185, 129, 0.12);
+        font-weight: 700;
+        color: #fff;
+      }
+
+      /* ============ FICHA DE LA CONSIGNA ============ */
+      .facts {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 12px;
+        margin: 18px 0 8px;
+      }
+      .fact {
+        background: var(--surface-2);
+        border-radius: 10px;
+        padding: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-top: 3px solid var(--blue);
+      }
+      .fact:nth-child(2) {
+        border-top-color: var(--cyan);
+      }
+      .fact:nth-child(3) {
+        border-top-color: var(--green);
+      }
+      .fact:nth-child(4) {
+        border-top-color: var(--yellow);
+      }
+      .fact:nth-child(5) {
+        border-top-color: var(--red);
+      }
+      .fact:nth-child(6) {
+        border-top-color: var(--border-deco);
+      }
+      .fact .f-label {
+        display: block;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+      .fact .f-value {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      /* ============ OBJETIVOS / CHECKS ============ */
+      .check-list {
+        list-style: none;
+        padding-left: 0;
+      }
+      .check-list li {
+        position: relative;
+        padding-left: 30px;
+        margin-bottom: 10px;
+      }
+      .check-list li::before {
+        content: "✔";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--green);
+        font-weight: 700;
+      }
+      .x-list li::before {
+        content: "✖";
+        color: var(--red);
+      }
+      .checklist {
+        list-style: none;
+        padding: 0;
+        margin: 12px 0;
+      }
+      .checklist li {
+        margin-bottom: 8px;
+      }
+      .checklist label {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        background: rgba(255, 255, 255, 0.035);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 8px;
+        padding: 10px 12px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: var(--soft);
+        transition: background 0.2s;
+      }
+      .checklist label:hover {
+        background: rgba(59, 130, 246, 0.1);
+      }
+      .checklist input {
+        margin-top: 4px;
+        accent-color: var(--green);
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+      }
+      .checklist input:checked + span {
+        color: var(--muted);
+        text-decoration: line-through;
+      }
+
+      /* ============ PASOS NUMERADOS ============ */
+      .steps {
+        counter-reset: step;
+        list-style: none;
+        padding-left: 0;
+        margin: 14px 0;
+      }
+      .steps li {
+        counter-increment: step;
+        position: relative;
+        padding-left: 46px;
+        margin-bottom: 12px;
+        min-height: 30px;
+      }
+      .steps li::before {
+        content: counter(step);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(59, 130, 246, 0.18);
+        border: 1px solid var(--blue);
+        color: var(--cyan);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.85rem;
+      }
+
+      /* ============ Q-LIST ============ */
+      .q-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .q-item {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 18px;
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .q-num {
+        flex: 0 0 38px;
+        height: 38px;
+        width: 38px;
+        border-radius: 50%;
+        background: var(--blue);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+      .q-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .q-body .qtag {
+        display: inline-block;
+        font-size: 0.7rem;
+        padding: 2px 8px;
+        border-radius: 4px;
+        margin-right: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .qtag.multi {
+        background: var(--blue);
+        color: #fff;
+      }
+      .qtag.vf {
+        background: var(--green);
+        color: #0f1729;
+      }
+      .qtag.short {
+        background: var(--yellow);
+        color: #0f1729;
+      }
+      .qtag.scenario {
+        background: var(--red);
+        color: #fff;
+      }
+      .qtag.num {
+        background: var(--border-deco);
+        color: #0f1729;
+      }
+      .qtag.visual {
+        background: #6366f1;
+        color: #fff;
+      }
+      .q-body h4 {
+        margin: 0 0 8px;
+        color: var(--text);
+        font-size: 1rem;
+        line-height: 1.45;
+        font-weight: 600;
+      }
+      .q-body p {
+        margin: 6px 0;
+        color: var(--soft);
+        font-size: 0.92rem;
+      }
+      .q-body ul {
+        margin: 8px 0;
+        padding-left: 0;
+        list-style: none;
+      }
+      .q-body ul li {
+        padding: 4px 0;
+        color: #cbd5e1;
+        font-size: 0.9rem;
+      }
+      .q-body ul li::before {
+        content: "▸ ";
+        color: var(--cyan);
+      }
+
+      /* ============ RESPUESTAS / DESPLEGABLES ============ */
+      details.answer,
+      details.fold {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        border-radius: 8px;
+        padding: 8px 12px;
+        margin-top: 10px;
+      }
+      details.fold {
+        background: rgba(59, 130, 246, 0.08);
+        border-color: rgba(59, 130, 246, 0.35);
+      }
+      details > summary {
+        cursor: pointer;
+        font-weight: 700;
+        color: var(--green);
+        font-size: 0.86rem;
+        list-style: none;
+      }
+      details.fold > summary {
+        color: var(--cyan);
+      }
+      details > summary::-webkit-details-marker {
+        display: none;
+      }
+      details > summary::before {
+        content: "▸ ";
+      }
+      details[open] > summary::before {
+        content: "▾ ";
+      }
+      details > summary:hover {
+        filter: brightness(1.2);
+      }
+      details .ans-body {
+        font-size: 0.9rem;
+        color: var(--soft);
+        margin-top: 8px;
+        border-top: 1px dashed rgba(255, 255, 255, 0.15);
+        padding-top: 8px;
+      }
+      details .ans-body ul,
+      details .ans-body ol {
+        padding-left: 20px;
+        margin: 6px 0;
+      }
+      details .ans-body li {
+        margin-bottom: 4px;
+      }
+      details .ans-body strong {
+        color: var(--green);
+      }
+
+      /* ============ BARRAS ============ */
+      .bar-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 8px 0;
+      }
+      .bar-label {
+        width: 130px;
+        font-size: 0.78rem;
+        color: var(--muted);
+        flex: 0 0 auto;
+      }
+      .bar-track {
+        flex: 1;
+        height: 10px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .bar-fill {
+        height: 100%;
+        border-radius: 5px;
+      }
+      .bar-value {
+        font-size: 0.78rem;
+        color: var(--cyan);
+        min-width: 108px;
+        text-align: right;
+        flex: 0 0 auto;
+        font-variant-numeric: tabular-nums;
+      }
+      .fill-a {
+        background: linear-gradient(90deg, var(--blue), var(--cyan));
+      }
+      .fill-b {
+        background: linear-gradient(90deg, var(--green), #34d399);
+      }
+      .fill-c {
+        background: linear-gradient(90deg, var(--yellow), #facc15);
+      }
+      .fill-d {
+        background: linear-gradient(90deg, var(--red), #f87171);
+      }
+      .fill-e {
+        background: linear-gradient(90deg, #6366f1, #a855f7);
+      }
+      .bars-box {
+        background: var(--surface-2);
+        padding: 18px;
+        border-radius: 12px;
+        margin: 14px 0;
+      }
+
+      /* ============ TIMELINE / GUION ============ */
+      .timeline {
+        margin: 18px 0;
+      }
+      .tl-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+      .tl-name {
+        flex: 0 0 170px;
+        font-size: 0.85rem;
+        color: var(--text);
+        font-weight: 600;
+      }
+      .tl-track {
+        flex: 1;
+        height: 26px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      .tl-fill {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 8px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #0f1729;
+      }
+      .tl-min {
+        flex: 0 0 66px;
+        text-align: right;
+        font-size: 0.8rem;
+        color: var(--cyan);
+        font-variant-numeric: tabular-nums;
+      }
+      .tl-a {
+        background: linear-gradient(90deg, #6366f1, #818cf8);
+      }
+      .tl-b {
+        background: linear-gradient(90deg, var(--blue), var(--cyan));
+      }
+      .tl-c {
+        background: linear-gradient(90deg, var(--green), #34d399);
+      }
+      .tl-d {
+        background: linear-gradient(90deg, var(--yellow), #fbbf24);
+      }
+      .tl-e {
+        background: linear-gradient(90deg, var(--border-deco), #5eead4);
+      }
+
+      /* ============ KPI ============ */
+      .kpis {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+        margin: 16px 0;
+      }
+      .kpi {
+        background: var(--surface-2);
+        border-radius: 10px;
+        padding: 14px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .kpi .k-val {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--cyan);
+        line-height: 1.2;
+      }
+      .kpi .k-lab {
+        display: block;
+        font-size: 0.76rem;
+        color: var(--muted);
+        margin-top: 4px;
+      }
+
+      /* ============ HOJAS DE TRABAJO / FICHAS ============ */
+      .worksheet {
+        border: 1px dashed rgba(45, 212, 191, 0.55);
+        border-radius: 10px;
+        padding: 16px;
+        margin: 14px 0;
+        background: rgba(45, 212, 191, 0.04);
+      }
+      .worksheet .ws-title {
+        display: block;
+        color: var(--border-deco);
+        font-weight: 700;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .fill-line {
+        display: block;
+        border-bottom: 1px dotted var(--muted);
+        min-height: 22px;
+        margin: 8px 0;
+      }
+      .tag-mini {
+        display: inline-block;
+        font-size: 0.7rem;
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: rgba(59, 130, 246, 0.16);
+        border: 1px solid rgba(59, 130, 246, 0.4);
+        color: #bfdbfe;
+        margin: 0 4px 4px 0;
+        font-weight: 600;
+      }
+      .tag-mini.g {
+        background: rgba(16, 185, 129, 0.14);
+        border-color: rgba(16, 185, 129, 0.4);
+        color: #a7f3d0;
+      }
+      .tag-mini.y {
+        background: rgba(245, 158, 11, 0.14);
+        border-color: rgba(245, 158, 11, 0.4);
+        color: #fde68a;
+      }
+      .tag-mini.r {
+        background: rgba(239, 68, 68, 0.14);
+        border-color: rgba(239, 68, 68, 0.4);
+        color: #fecaca;
+      }
+
+      /* ============ BÚSQUEDA DE IMÁGENES ============ */
+      .img-task {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 12px;
+        margin-top: 12px;
+      }
+      .img-task-item {
+        background: rgba(255, 255, 255, 0.035);
+        border: 1px dashed rgba(45, 212, 191, 0.35);
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 0.87rem;
+        color: var(--soft);
+      }
+      .img-task-item strong {
+        display: block;
+        color: var(--cyan);
+        margin-bottom: 4px;
+        font-size: 0.92rem;
+      }
+
+      /* ============ FÓRMULAS / MONO ============ */
+      .formula {
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        background: rgba(0, 0, 0, 0.38);
+        border-left: 3px solid var(--cyan);
+        padding: 10px 14px;
+        border-radius: 6px;
+        color: var(--cyan);
+        font-size: 0.88rem;
+        margin: 10px 0;
+        overflow-x: auto;
+        white-space: pre;
+      }
+      .mono,
+      code.inline {
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        background: rgba(0, 0, 0, 0.35);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        color: var(--cyan);
+      }
+      .highlight {
+        color: var(--yellow);
+        font-weight: 600;
+      }
+      .ok-txt {
+        color: var(--green);
+        font-weight: 600;
+      }
+      .bad-txt {
+        color: var(--red);
+        font-weight: 600;
+      }
+
+      /* ============ FIGURAS SVG ============ */
+      .figure {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 16px;
+        margin: 18px 0;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        overflow-x: auto;
+      }
+      .figure svg {
+        width: 100%;
+        height: auto;
+        display: block;
+        min-width: 560px;
+      }
+      .figure figcaption {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-top: 8px;
+        font-style: italic;
+        text-align: center;
+      }
+      .time-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 6px;
+        background: rgba(245, 158, 11, 0.15);
+        color: var(--yellow);
+        font-size: 0.78rem;
+        font-weight: 600;
+        border: 1px solid rgba(245, 158, 11, 0.4);
+      }
+
+      /* ============ SORTEADOR Y CRONÓMETRO ============ */
+      .tool {
+        background: var(--surface-2);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 12px;
+        padding: 18px;
+        margin: 18px 0;
+      }
+      .tool-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      .tool label {
+        display: block;
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+      .tool input,
+      .tool select {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 9px 10px;
+        color: var(--text);
+        font-size: 0.9rem;
+        font-family: inherit;
+      }
+      .tool input:focus,
+      .tool select:focus {
+        outline: none;
+        border-color: var(--cyan);
+      }
+      .tool button {
+        background: var(--cyan);
+        color: #0f1729;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 18px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+        font-family: inherit;
+        margin-right: 8px;
+      }
+      .tool button:hover {
+        filter: brightness(1.12);
+      }
+      .tool button.alt {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text);
+      }
+      .tool-out {
+        margin-top: 14px;
+        background: rgba(16, 185, 129, 0.08);
+        border-left: 4px solid var(--green);
+        border-radius: 0 8px 8px 0;
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        color: var(--soft);
+      }
+      .tool-out strong {
+        color: var(--green);
+      }
+      .draw-result {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--cyan);
+        line-height: 1.4;
+      }
+      .draw-result .tem {
+        color: var(--yellow);
+      }
+      .timer-clock {
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 2.4rem;
+        font-weight: 700;
+        color: var(--cyan);
+        letter-spacing: 2px;
+        line-height: 1.1;
+        font-variant-numeric: tabular-nums;
+      }
+      .timer-clock.warn-time {
+        color: var(--yellow);
+      }
+      .timer-clock.bad-time {
+        color: var(--red);
+        animation: pulse 1.2s infinite;
+      }
+      .timer-bar {
+        height: 14px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 7px;
+        overflow: hidden;
+        margin: 12px 0 6px;
+      }
+      .timer-fill {
+        height: 100%;
+        width: 0%;
+        border-radius: 7px;
+        background: linear-gradient(90deg, var(--green), #34d399);
+        transition:
+          width 0.3s linear,
+          background 0.4s;
+      }
+      .timer-fill.warn {
+        background: linear-gradient(90deg, var(--yellow), #facc15);
+      }
+      .timer-fill.bad {
+        background: linear-gradient(90deg, var(--red), #f87171);
+      }
+      .timer-meta {
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      .draw-history {
+        margin-top: 12px;
+        font-size: 0.85rem;
+        color: var(--soft);
+      }
+      .draw-history ol {
+        padding-left: 22px;
+        margin: 8px 0 0;
+      }
+      .draw-history li {
+        margin-bottom: 4px;
+      }
+
+      /* ============ LISTA DE ENLACES ============ */
+      .link-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .link-list li {
+        margin-bottom: 10px;
+        padding: 10px 14px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .link-list a {
+        color: var(--cyan);
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .link-list a:hover {
+        text-decoration: underline;
+      }
+      .link-list span {
+        color: var(--muted);
+        font-size: 0.85rem;
+        display: block;
+        margin-top: 2px;
+      }
+
+      /* ============ FOOTER ============ */
+      footer {
+        margin-top: 50px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      footer p {
+        margin: 4px 0;
+      }
+      a.link {
+        color: var(--cyan);
+      }
+
+      /* ============ RESPONSIVE ============ */
+      @media (max-width: 860px) {
+        .grid-3 {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 768px) {
+        body {
+          padding: 16px 12px 48px;
+        }
+        header.hero {
+          padding: 28px 18px;
+        }
+        .toc ol {
+          columns: 1;
+        }
+        .table-wrap {
+          margin-left: -12px;
+          margin-right: -12px;
+          border-radius: 6px;
+        }
+        .nav-buttons {
+          flex-direction: column;
+        }
+        .nav-btn {
+          width: 100%;
+          text-align: center;
+        }
+        .card,
+        .callout,
+        .bars-box,
+        .figure,
+        .worksheet,
+        .tool {
+          padding: 16px;
+        }
+        .grid-2,
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+        .q-item {
+          flex-direction: column;
+        }
+        .q-num {
+          margin-bottom: 4px;
+        }
+        .bar-label {
+          width: 90px;
+          font-size: 0.72rem;
+        }
+        .bar-value {
+          min-width: 84px;
+          font-size: 0.72rem;
+        }
+        .section-title {
+          font-size: 1.15rem;
+          gap: 8px;
+        }
+        .section-title .time-badge {
+          margin-left: 0;
+        }
+        .tl-name {
+          flex: 0 0 96px;
+          font-size: 0.76rem;
+        }
+        .tl-min {
+          flex: 0 0 52px;
+          font-size: 0.74rem;
+        }
+        .tl-track {
+          height: 22px;
+        }
+        .timer-clock {
+          font-size: 1.9rem;
+        }
+        #to-top {
+          width: 42px;
+          height: 42px;
+        }
+      }
+      @media (max-width: 420px) {
+        .bar-row {
+          flex-wrap: wrap;
+        }
+        .bar-track {
+          flex: 1 1 100%;
+          order: 2;
+        }
+        .bar-value {
+          order: 3;
+          text-align: left;
+          min-width: 0;
+        }
+      }
+
+      /* ============ IMPRESIÓN ============ */
+      @media print {
+        :root {
+          --bg: #ffffff;
+          --card-bg: #ffffff;
+          --text: #111827;
+          --surface-2: #f3f4f6;
+          --line: #cbd5e1;
+          --muted: #4b5563;
+        }
+        body {
+          background: #fff;
+          color: #111827;
+          padding: 0;
+        }
+        #read-progress,
+        #to-top,
+        .nav-buttons,
+        .tool {
+          display: none !important;
+        }
+        .card,
+        .callout,
+        .figure,
+        .worksheet,
+        .q-item,
+        .toc {
+          box-shadow: none;
+          border: 1px solid #cbd5e1;
+          break-inside: avoid;
+        }
+        .card p,
+        .card li,
+        .callout p,
+        .callout li,
+        .q-body p,
+        .q-body ul li,
+        tbody td {
+          color: #111827 !important;
+        }
+        .section-title {
+          background: #e2e8f0;
+          color: #0f1729;
+        }
+        header.hero h1 {
+          color: #1e3a5f;
+          -webkit-text-fill-color: #1e3a5f;
+        }
+        .bar-track,
+        .tl-track,
+        .timer-bar {
+          border: 1px solid #cbd5e1;
+        }
+        a {
+          color: #1d4ed8;
+        }
+        details > summary {
+          color: #065f46;
+        }
+        details {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+    <div id="read-progress" aria-hidden="true"></div>
+    <button
+      id="to-top"
+      type="button"
+      title="Volver arriba"
+      aria-label="Volver arriba"
+    >
+      ↑
+    </button>
+
+    <div class="container">
+      <nav class="nav-buttons" aria-label="Navegación entre sesiones">
+        <a
+          href="../materias/hardware-dos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Volver a Materia
+        </a>
+       
+      </nav>
+
+      <!-- ====== HEADER PRINCIPAL ====== -->
+      <header class="hero">
+        <span class="eyebrow">Hardware II · Trabajo de investigación</span>
+        <h1>Consigna de Exposición Oral  </h1>
+        <h1>Hardware Industrial</h1>
+        <h2>
+          Fanless y robustos · Gestión de energía ·
+          Servidores · Memorias ECC y redundancia · RAID · NAS · Almacenamiento
+          masivo y LTO.
+        </h2>
+        
+        <div class="badge-row">
+          <span class="badge yellow"><span class="dot"></span>Investigación grupal</span>
+          <span class="badge"><span class="dot"></span>Defensa oral individual</span>
+          <span class="badge green"><span class="dot"></span>20 minutos por exposición</span>
+          <span class="badge red"><span class="dot"></span>Sin entrega escrita</span>
+        </div>
+      </header>
+
+      <!-- ====== FICHA RÁPIDA ====== -->
+      <section class="card" aria-label="Ficha rápida de la consigna">
+        <h3>🗂️ Ficha rápida de la consigna</h3>
+        <div class="facts">
+          <div class="fact">
+            <span class="f-label">Qué investigar</span>
+            <span class="f-value"
+              >Hardware industrial</span
+            >
+          </div>
+          <div class="fact">
+            <span class="f-label">Tiempo de exposición</span>
+            <span class="f-value">20 minutos</span>
+          </div>
+          <div class="fact">
+            <span class="f-label">Fechas de defensa</span>
+            <span class="f-value">16 al 27 de noviembre 2026</span>
+          </div>
+          <div class="fact">
+            <span class="f-label">Modalidad</span>
+            <span class="f-value"
+              >Investigación grupal · defensa oral individual</span
+            >
+          </div>
+          <div class="fact">
+            <span class="f-label">Entregable</span>
+            <span class="f-value"
+              >No se entrega nada</span
+            >
+          </div>
+          <div class="fact">
+            <span class="f-label">Material para exponer</span>
+            <span class="f-value"
+              >PowerPoint, afiche, etc.</span
+            >
+          </div>
+          <div class="fact">
+            <span class="f-label">Defensa Oral</span>
+            <span class="f-value"
+              >Se evalúan los conocimientos expuestos.</span
+            >
+          </div>
+        </div>
+     
+      </section>
+
+      <!-- ====== TABLA DE CONTENIDOS ====== -->
+      <nav class="toc" id="toc" aria-label="Tabla de contenidos">
+        <h2>📋 Tabla de Contenidos</h2>
+        <ol>
+          
+          <li>
+            <a href="#sec1"
+              ><span class="num">1.</span> Objetivos y criterios de
+              evaluación</a
+            >
+          </li>
+          <li>
+            <a href="#sec2"
+              ><span class="num">2.</span> ¿Qué hace "industrial" a un
+              hardware?</a
+            >
+          </li>
+          <li>
+            <a href="#sec3"
+              ><span class="num">3.</span> Los 8 temas a investigar</a
+            >
+          </li>
+          <li>
+            <a href="#sec4"
+              ><span class="num">4.</span> Guía de investigación</a
+            >
+          </li>
+       
+        
+          </li>
+       
+        </ol>
+       
+      </nav>
+
+      <main id="contenido">
+        
+        
+
+      
+
+        <div class="card">
+          <h3>⚙️ Las 6 reglas del trabajo</h3>
+          <ul class="check-list">
+            <li>
+              <strong>Investigación grupal, defensa individual.</strong> Pueden
+              investigar y armar el material, pero cada
+              integrante expone <em>por su cuenta</em>.
+            </li>
+            <li>
+              <strong>No se entrega trabajo escrito.</strong> No hay carpeta, ni
+              monografía, ni informe.
+            </li>
+            <li>
+              <strong
+                >La evaluación es una exposición oral de 20 minutos.</strong
+              >
+              
+            </li>
+            <li>
+              <strong>Se permiten PowerPoint y herramientas típicas</strong>
+              (Google Slides, Canva, Prezi, PDF con imágenes, afiche o pizarra).
+            
+            </li>
+            <li>
+              <strong>El apoyo visual no lleva la teoría escrita.</strong> Nada
+              de diapositivas con párrafos ni de leer lo que está en pantalla.
+              Solo <em>palabras clave</em> e <em>imágenes</em>.
+            </li>
+            <li>
+              <strong>Hay que buscar imágenes reales</strong> Reconocer visualmente el hardware es un objetivo
+              calificado.
+            </li>
+          </ul>
+        </div>
+
+        <div class="callout warning">
+          <span class="cbadge">ATENCIÓN</span>
+          <h4>⚠️ Lo que NO se evalúa</h4>
+          <p>
+            El foco <strong>no</strong> es la teoría eléctrica (tensiones,
+            fases, corrientes, cálculo de potencia trifásica, protecciones). Si
+            aparece un dato eléctrico, basta con el dato de placa necesario para
+            entender el equipo. Lo que se evalúa es
+            <strong
+              >qué es, para qué sirve, qué ofrece y cómo se reconoce</strong
+            >
+            cada hardware.
+          </p>
+        </div>
+
+        <div class="callout ok">
+          <span class="cbadge">LO QUE SE BUSCA</span>
+          <h4>✅ Las tres preguntas que tienen que quedar respondidas</h4>
+          <ol>
+            <li>
+              <strong>¿Para qué sirve?</strong> El problema real que resuelve
+              ese hardware en una planta, un datacenter, una PyME o una escuela.
+            </li>
+            <li>
+              <strong>¿Qué tiene de particular?</strong> El rasgo de diseño que
+              lo vuelve "industrial" y no de consumo: robustez, rango de
+              temperatura, protección, redundancia, ciclos de trabajo, vida
+              útil, repuestos.
+            </li>
+            <li>
+              <strong>¿Cómo se identifica visualmente?</strong> Qué se mira en
+              la foto para saber que es ese equipo y no otro: bahías,
+              conectores, disipadores, displays, forma del chasis.
+            </li>
+          </ol>
+        </div>
+
+        <!-- ====== SECCIÓN 1 — OBJETIVOS ====== -->
+        <h2 class="section-title" id="sec1">
+          <span class="icon">📌</span>Sección 1 — Objetivos y criterios de
+          evaluación
+        </h2>
+       
+
+        <div class="card">
+          <h3>🎯 Objetivos de aprendizaje</h3>
+          <ul class="check-list">
+            <li>
+              <strong>Explicar el propósito</strong> de cada familia de hardware
+              industrial: para qué se usa, en qué contexto y por qué existe.
+            </li>
+            <li>
+              <strong>Justificar por qué es industrial</strong>, citando
+              características concretas (no impresiones: "está bien hecho" no es
+              un argumento técnico).
+            </li>
+            <li>
+              <strong>Reconocer visualmente</strong> equipos y componentes a
+              partir de fotografías reales, señalando detalles observables.
+            </li>
+            <li>
+              <strong>Usar el vocabulario técnico correcto</strong> (fanless,
+              ECC, RDIMM, RAID 5, etc).
+            </li>
+            <li>
+              <strong>Describir las prestaciones que ofrece</strong> cada
+              equipo: capacidades, tolerancia a fallas, formato, condiciones
+              ambientales y compatibilidad.
+            </li>
+            <li>
+              <strong>Leer un dato de ficha técnica</strong> (datasheet) y
+              traducirlo a lenguaje comprensible para un cliente o un jefe de
+              planta.
+            </li>
+            <li>
+              <strong>Exponer con apoyo visual mínimo</strong>, con palabras clave.
+            </li>
+          </ul>
+        </div>
+
+        
+
+        <!-- ====== SECCIÓN 2 — ¿QUÉ HACE INDUSTRIAL A UN HARDWARE? ====== -->
+        <h2 class="section-title" id="sec2">
+          <span class="icon">🏭</span>Sección 2 — ¿Qué hace "industrial" a un
+          hardware?
+        </h2>
+       
+
+        <div class="card">
+          <h3>⚔️ Industrial no significa "más caro ni más potente"</h3>
+          <p>
+            Un hardware de consumo está diseñado para una persona, en un
+            ambiente cómodo, con apagados diarios y con la posibilidad de
+            reiniciar si algo falla. Un hardware industrial está diseñado para
+            <strong
+              >condiciones hostiles, uso continuo y fallar sin detener la
+              producción</strong
+            >. La diferencia no es "más potencia": es
+            <span class="highlight">otro objetivo de diseño</span>.
+          </p>
+        </div>
+
+ 
+      
+
+        <!-- ====== SECCIÓN 3 — TEMAS ====== -->
+        <h2 class="section-title" id="sec3">
+          <span class="icon">🗂️</span>Sección 3 — Los 8 temas a investigar
+        </h2>
+        
+
+
+        <div class="card">
+          <h3>1️⃣ Equipos fanless y robustos</h3>
+          <p>
+            <strong>Qué investigar:</strong> qué es un equipo <em>fanless</em>,
+            cómo se disipa el calor sin ventilador (conducción, convección,
+            chasis como disipador), ventajas y límites (CPU de bajo consumo,
+            rendimiento limitado), y en qué puestos conviene.
+          </p>
+          <p>
+            <strong>Equipos a buscar:</strong> mini-PC industrial fanless, panel
+            PC sin ventilador, HMI de máquina, Kioscos digitales.
+          </p>
+          <p style="margin-bottom: 0">
+            <strong>Palabras clave:</strong>
+            <span class="tag-mini">fanless</span>
+            <span class="tag-mini">disipación pasiva</span>
+            <span class="tag-mini">chasis como disipador</span>
+            <span class="tag-mini">TDP bajo</span>
+            <span class="tag-mini">sin partes móviles</span>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>2️⃣ Certificaciones de resistencia (IP, MIL-STD, temperatura)</h3>
+          <p>
+            <strong>Qué investigar:</strong> qué significan los grados
+            <strong>IP</strong> (primer dígito = polvo, segundo = agua), qué es
+            <strong>MIL-STD-810</strong> (golpes, vibración, choque térmico) y
+            qué es un rango de temperatura de operación. Aprender a leer la
+            etiqueta del equipo.
+          </p>
+          <p>
+            <strong>Equipos a buscar:</strong> notebook ruggedizada (Panasonic
+            Toughbook, Getac), tablet industrial IP65/IP67, panel PC IP66,
+            gabinete NEMA 4X, switch industrial de riel DIN.
+          </p>
+          <p style="margin-bottom: 0">
+            <strong>Palabras clave:</strong>
+            <span class="tag-mini">IP65 / IP67 / IP69K</span>
+            <span class="tag-mini">MIL-STD-810</span>
+            <span class="tag-mini">NEMA 4X</span>
+            <span class="tag-mini">rango de temperatura</span>
+            <span class="tag-mini">antivibración</span>
+            <span class="tag-mini">sellado</span>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>3️⃣ Gestión de energía industrial: UPS, PDU y carga masiva</h3>
+          <p>
+            <strong>Qué investigar:</strong> para qué sirve una
+            <strong>UPS</strong> (respaldo y calidad de energía), diferencia
+            entre UPS offline, line-interactive y online de doble conversión;
+            qué es un <strong>PDU</strong> de rack; por qué se usa un carro de
+            carga para notebooks o tablets en una escuela o una planta.
+          </p>
+          <p>
+            <strong>Equipos a buscar:</strong> UPS de rack y de torre, PDU
+            horizontal y vertical, carro/armario de carga de notebooks, sistema de monitoreo de UPS por USB/red.
+          </p>
+          <p style="margin-bottom: 0">
+            <strong>Palabras clave:</strong>
+            <span class="tag-mini">UPS online</span>
+            <span class="tag-mini">respaldo (autonomía)</span>
+            <span class="tag-mini">PDU</span>
+         <span class="tag-mini"> Redundancia de fuentes: 1+1 y N+1</span>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>4️⃣ Servidores: rack, blade y chasis</h3>
+          <p>
+            <strong>Qué investigar:</strong> diferencia entre una PC de
+            escritorio y un servidor; formatos <strong>rack 1U/2U/4U</strong> y
+            <strong>blade</strong>; procesadores de servidor (Xeon, EPYC);
+            gestión remota fuera de banda (iLO, iDRAC); fuentes y ventiladores
+            redundantes hot-swap.
+          </p>
+          <p>
+            <strong>Equipos a buscar:</strong> HPE ProLiant DL380 Gen11, Dell
+            PowerEdge R760, servidor 1U (DL360 / R660), chasis blade (HPE
+            Synergy, Dell PowerEdge MX), riel de rack, bahía hot-swap.
+          </p>
+          <p style="margin-bottom: 0">
+            <strong>Palabras clave:</strong>
+            <span class="tag-mini">Unidad de rack (U)</span>
+            <span class="tag-mini">Hot-swap de discos, fuentes y ventiladores</span>
+            <span class="tag-mini">iLO / iDRAC</span>
+            <span class="tag-mini">RAS</span>
+            <span class="tag-mini">Ventiladores redundantes N+1</span>
+            <span class="tag-mini">Servidor Blade</span>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>5️⃣ Memorias de servidor: ECC, RDIMM y redundancia</h3>
+          <p>
+            <strong>Qué investigar:</strong> qué es la memoria
+            <strong>ECC</strong> y por qué no es opcional en producción;
+            diferencia entre <strong>UDIMM, RDIMM y LRDIMM</strong>;
+            <em>rank</em> y canales de memoria soportados en servidores (y los CPU que lo soportan).
+          </p>
+          <p>
+            <strong>Equipos a buscar:</strong> módulo RDIMM DDR5 con registro,
+            LRDIMM con búfer, comparación física con una UDIMM de escritorio,
+            slots DIMM de una motherboard de servidor.
+          </p>
+          <p style="margin-bottom: 0">
+            <strong>Palabras clave:</strong>
+            <span class="tag-mini">ECC</span>
+            <span class="tag-mini">SEC-DED</span>
+            <span class="tag-mini">UDIMM / RDIMM / LRDIMM</span>
+            <span class="tag-mini">1DPC / 2DPC</span>
+            <span class="tag-mini">soft error</span>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>6️⃣ RAID: controladoras, niveles y tolerancia a fallas</h3>
+          <p>
+            <strong>Qué investigar:</strong> qué es un arreglo
+            <strong>RAID</strong> y qué <em>no</em> resuelve (no es un backup);
+            niveles <strong>0, 1, 5, 6 y 10</strong> con su tolerancia y
+            capacidad útil; RAID por hardware vs por software;
+            <em>hot-spare</em>, <em>rebuild</em> y para qué sirve la
+            <strong>BBU</strong> de una controladora.
+          </p>
+          <p>
+            <strong>Equipos a buscar:</strong> controladora Broadcom MegaRAID o
+            LSI HBA, conector de batería BBU, bahía hot-swap, panel trasero de
+            una controladora con puertos SAS.
+          </p>
+          <p style="margin-bottom: 0">
+            <strong>Palabras clave:</strong>
+            <span class="tag-mini">RAID 0 / 1 / 5 / 6 / 10</span>
+            <span class="tag-mini">Striping, Mirroring, Paridad</span>
+            <span class="tag-mini">capacidad útil</span>
+            <span class="tag-mini">hot-spare</span>
+            <span class="tag-mini">rebuild</span>
+            <span class="tag-mini">BBU</span>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>7️⃣ NAS y almacenamiento en red (DAS, NAS y SAN)</h3>
+          <p>
+            <strong>Qué investigar:</strong> diferencia entre
+            <strong>DAS, NAS y SAN</strong>; protocolos de archivos (SMB/CIFS,
+            NFS, AFP), tipos de almacenamientos para NAS.
+          </p>
+          <p>
+            <strong>Equipos a buscar:</strong> NAS de 2, 4 y 8 bahías (Synology
+            DS223j / DS923+ / DS1823xs+, QNAP TS-464), NAS rack, disco HDD para
+            NAS (WD Red Pro, Seagate IronWolf), SSD NVMe M.2.
+          </p>
+          <p style="margin-bottom: 0">
+            <strong>Palabras clave:</strong>
+            <span class="tag-mini">DAS / NAS / SAN</span>
+            <span class="tag-mini">SMB/CIFS, NFS, AFP</span>
+        <span class="tag-mini">Almacenamientos para NAS</span>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>8️⃣ Almacenamiento masivo industrial y backup</h3>
+          <p>
+            <strong>Qué investigar:</strong> qué es el <em>cold storage</em>;
+            cintas <strong>LTO</strong> (generaciones, capacidad, uso offline);
+             la regla de respaldo <strong>3-2-1-1-0</strong>;
+            <strong>RPO y RTO</strong>; software de copia (Veeam, Acronis).
+          </p>
+          <p>
+            <strong>Equipos a buscar:</strong> cartucho de cinta LTO-9, unidad
+            LTO (drive), biblioteca de cintas con brazo robótico, cabina de discos (array), gabinete de archivo de
+            cintas.
+          </p>
+          <p style="margin-bottom: 0">
+            <strong>Palabras clave:</strong>
+            <span class="tag-mini">cold storage</span>
+            <span class="tag-mini">LTO / LTFS</span>
+            <span class="tag-mini">air gap</span>
+            <span class="tag-mini">WORM / inmutable</span>
+            <span class="tag-mini">3-2-1-1-0</span>
+            <span class="tag-mini">RPO / RTO</span>
+          </p>
+        </div>
+
+        <div class="callout ok">
+          <span class="cbadge">SI TU TEMA ES MUY GRANDE</span>
+          <h4>✅ Cómo recortar sin perder nota</h4>
+          <p>
+            Si el tema sorteado es amplio (por ejemplo el 8), elegí
+            <strong>dos o tres equipos</strong> y explicá esos con profundidad,
+            en lugar de nombrar diez de memoria. Una exposición de 20 minutos
+            con 4 equipos bien explicados y bien fotografiados vale más que una
+            lista de nombres.
+          </p>
+        </div>
+
+        <!-- ====== SECCIÓN 4 — GUÍA DE INVESTIGACIÓN ====== -->
+        <h2 class="section-title" id="sec4">
+          <span class="icon">🔎</span>Sección 4 — Guía de investigación
+        </h2>
+        <p class="section-meta">
+          Estas preguntas son el esqueleto de la investigación. Si las respondés
+          todas, tenés la exposición armada. No se entregan por escrito: se
+          contestan en el momento de exponer.
+        </p>
+
+        <div class="callout">
+          <span class="cbadge info">INFO</span>
+          <h4>📐 Cómo usar esta lista</h4>
+          <p>
+            Copiala en tu cuaderno o en un documento de trabajo y escribí la
+            respuesta de cada una en dos o tres líneas. Esas notas son para
+            estudiar: <strong>no van al PowerPoint</strong>.
+          </p>
+        </div>
+
+        <div class="q-list">
+          <div class="q-item">
+            <div class="q-num">1</div>
+            <div class="q-body">
+              <span class="qtag short">DEFINICIÓN</span>
+              <h4>
+                ¿Qué es exactamente este hardware? Definilo en una frase, sin
+                usar la palabra "cosas" ni "aparato".
+              </h4>
+            </div>
+          </div>
+
+          <div class="q-item">
+            <div class="q-num">2</div>
+            <div class="q-body">
+              <span class="qtag scenario">PROPÓSITO</span>
+              <h4>
+                ¿Para qué sirve? ¿Qué problema concreto resuelve y a quién
+                (planta, datacenter, PyME, escuela)?
+              </h4>
+            </div>
+          </div>
+
+          
+
+          <div class="q-item">
+            <div class="q-num">3</div>
+            <div class="q-body">
+              <span class="qtag vf">INDUSTRIAL</span>
+              <h4>
+                ¿Qué característica concreta lo hace "industrial"? Nombrá al
+                menos <strong>tres rasgos verificables</strong> (no adjetivos).
+              </h4>
+            </div>
+          </div>
+
+          <div class="q-item">
+            <div class="q-num">4</div>
+            <div class="q-body">
+              <span class="qtag num">DATOS</span>
+              <h4>
+                ¿Qué prestaciones ofrece? Citá tres datos de ficha técnica
+                (capacidad, velocidad, rango de temperatura, ciclos, potencia,
+                cantidad de bahías…).
+              </h4>
+            </div>
+          </div>
+
+          <div class="q-item">
+            <div class="q-num">5</div>
+            <div class="q-body">
+              <span class="qtag visual">VISUAL</span>
+              <h4>
+                ¿Cómo se reconoce en una fotografía? ¿Qué detalle observable
+                (conectores, disipadores, bahías, display, muescas) lo
+                distingue?
+              </h4>
+            </div>
+          </div>
+
+          <div class="q-item">
+            <div class="q-num">6</div>
+            <div class="q-body">
+              <span class="qtag short">MODELOS</span>
+              <h4>
+                ¿Qué marcas y modelos reales existen hoy? Nombrá al menos dos
+                modelos con su nombre exacto de catálogo.
+              </h4>
+            </div>
+          </div>
+
+          <div class="q-item">
+            <div class="q-num">7</div>
+            <div class="q-body">
+              <span class="qtag scenario">FALLA</span>
+              <h4>
+                ¿Qué pasa cuando falla? ¿Se puede reemplazar en caliente? ¿El
+                servicio se interrumpe? ¿Existe redundancia?
+              </h4>
+            </div>
+          </div>
+
+        
+
+         
+        </div>
+
+      </main>
+
+      <nav class="nav-buttons bottom" aria-label="Navegación final">
+        <a
+          href="../materias/hardware-dos.html"
+          style="
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #4ade80;
+            color: #222;
+            display: inline-block;
+          "
+        >
+          Volver a Materia
+        </a>
+       
+    
+      </nav>
+
+     
+    </div>
+
+    <script>
+      /* =============================================================================
+   CONSIGNA DE EXPOSICIÓN ORAL — HARDWARE INDUSTRIAL
+   Interactividad de la página:
+     1) Barra de progreso de lectura y botón "volver arriba"
+     2) Desplazamiento suave con anclas y resaltado del destino
+     3) Botones para abrir / cerrar todas las respuestas esperadas
+     4) Sorteador de temas entre los grupos
+     5) Cronómetro de exposición de 20 minutos
+   ============================================================================= */
+
+      (function () {
+        "use strict";
+
+        /* ---------------------------------------------------------------------------
+     DATOS: los 8 temas oficiales de la consigna
+     --------------------------------------------------------------------------- */
+        var TEMAS = [
+          "1. Equipos fanless y robustos",
+          "2. Certificaciones de resistencia (IP, MIL-STD, temperatura)",
+          "3. Gestión de energía: UPS, PDU y carga masiva",
+          "4. Servidores: rack, blade y chasis",
+          "5. Memorias de servidor: ECC, RDIMM y redundancia",
+          "6. RAID: controladoras, niveles y tolerancia a fallas",
+          "7. NAS y almacenamiento en red (DAS, NAS y SAN)",
+          "8. Almacenamiento masivo industrial y backup (LTO, SAN, 3-2-1-1-0)",
+        ];
+
+        /* ---------------------------------------------------------------------------
+     1) BARRA DE PROGRESO + BOTÓN VOLVER ARRIBA
+     --------------------------------------------------------------------------- */
+        var barra = document.getElementById("read-progress");
+        var btnTop = document.getElementById("to-top");
+
+        function actualizarScroll() {
+          var raiz = document.documentElement;
+          var max = raiz.scrollHeight - raiz.clientHeight;
+          var pct = max > 0 ? (raiz.scrollTop / max) * 100 : 0;
+          if (barra) barra.style.width = pct.toFixed(2) + "%";
+          if (btnTop) {
+            if (raiz.scrollTop > 500) {
+              btnTop.classList.add("show");
+            } else {
+              btnTop.classList.remove("show");
+            }
+          }
+        }
+
+        window.addEventListener("scroll", actualizarScroll, { passive: true });
+        window.addEventListener("resize", actualizarScroll);
+        actualizarScroll();
+
+        if (btnTop) {
+          btnTop.addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+        }
+
+        /* ---------------------------------------------------------------------------
+     2) DESPLAZAMIENTO SUAVE Y RESALTADO DEL DESTINO
+     --------------------------------------------------------------------------- */
+        var anclas = document.querySelectorAll('a[href^="#"]');
+        Array.prototype.forEach.call(anclas, function (enlace) {
+          enlace.addEventListener("click", function (ev) {
+            var destino = enlace.getAttribute("href");
+            if (!destino || destino === "#") return;
+            var objetivo = document.querySelector(destino);
+            if (!objetivo) return;
+            ev.preventDefault();
+            objetivo.scrollIntoView({ behavior: "smooth", block: "start" });
+
+            var transicionPrevia = objetivo.style.transition;
+            objetivo.style.transition = "box-shadow .4s ease";
+            objetivo.style.boxShadow = "0 0 0 3px rgba(45, 212, 191, .55)";
+            window.setTimeout(function () {
+              objetivo.style.boxShadow = "none";
+              objetivo.style.transition = transicionPrevia;
+            }, 1200);
+
+            if (history.replaceState) history.replaceState(null, "", destino);
+          });
+        });
+
+        /* ---------------------------------------------------------------------------
+     3) BOTONES PARA ABRIR / CERRAR TODAS LAS RESPUESTAS
+     --------------------------------------------------------------------------- */
+        var respuestas = document.querySelectorAll("details.answer");
+        var contenedorBotones = document.getElementById("banco-controles");
+
+        if (respuestas.length && contenedorBotones) {
+          var btnAbrir = document.createElement("button");
+          btnAbrir.type = "button";
+          btnAbrir.className = "nav-btn secondary";
+          btnAbrir.textContent = "👁️ Mostrar todas las respuestas";
+
+          var btnCerrar = document.createElement("button");
+          btnCerrar.type = "button";
+          btnCerrar.className = "nav-btn ghost";
+          btnCerrar.textContent = "🙈 Ocultar todas las respuestas";
+
+          btnAbrir.addEventListener("click", function () {
+            Array.prototype.forEach.call(respuestas, function (det) {
+              det.open = true;
+            });
+          });
+          btnCerrar.addEventListener("click", function () {
+            Array.prototype.forEach.call(respuestas, function (det) {
+              det.open = false;
+            });
+          });
+
+          contenedorBotones.appendChild(btnAbrir);
+          contenedorBotones.appendChild(btnCerrar);
+        }
+
+        /* ---------------------------------------------------------------------------
+     4) SORTEADOR DE TEMAS
+     --------------------------------------------------------------------------- */
+        var campoCantidad = document.getElementById("draw-group-count");
+        var campoModo = document.getElementById("draw-mode");
+        var btnSortear = document.getElementById("draw-btn");
+        var btnReiniciar = document.getElementById("draw-reset-btn");
+        var salida = document.getElementById("draw-out");
+        var historial = document.getElementById("draw-history");
+        var listaHistorial = document.getElementById("draw-history-list");
+        var sorteos = [];
+
+        function ordenAleatorio(lista) {
+          var copia = lista.slice();
+          for (var i = copia.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var aux = copia[i];
+            copia[i] = copia[j];
+            copia[j] = aux;
+          }
+          return copia;
+        }
+
+        function pintarHistorial() {
+          if (!historial || !listaHistorial) return;
+          if (!sorteos.length) {
+            historial.hidden = true;
+            listaHistorial.textContent = "";
+            return;
+          }
+          historial.hidden = false;
+          listaHistorial.textContent = "";
+          sorteos.forEach(function (texto) {
+            var li = document.createElement("li");
+            li.textContent = texto;
+            listaHistorial.appendChild(li);
+          });
+        }
+
+        function sortear() {
+          if (!salida) return;
+
+          var cantidad = campoCantidad ? parseInt(campoCantidad.value, 10) : 4;
+          if (isNaN(cantidad) || cantidad < 1) cantidad = 1;
+          if (cantidad > 20) cantidad = 20;
+
+          var sinRepetir = !campoModo || campoModo.value === "sin-repetir";
+          if (sinRepetir && cantidad > TEMAS.length) {
+            cantidad = TEMAS.length;
+            if (campoCantidad) campoCantidad.value = String(TEMAS.length);
+          }
+          if (cantidad <= 0) return;
+
+          var asignados = [];
+          var disponibles = ordenAleatorio(TEMAS);
+          var i;
+
+          if (sinRepetir) {
+            for (i = 0; i < cantidad; i++) {
+              asignados.push(disponibles[i]);
+            }
+          } else {
+            for (i = 0; i < cantidad; i++) {
+              asignados.push(TEMAS[Math.floor(Math.random() * TEMAS.length)]);
+            }
+          }
+
+          salida.textContent = "";
+
+          var encabezado = document.createElement("p");
+          encabezado.style.margin = "0 0 8px";
+          encabezado.innerHTML =
+            "<strong>Resultado del sorteo" +
+            (sinRepetir ? " (sin repetir temas)" : " (tema libre)") +
+            ":</strong>";
+          salida.appendChild(encabezado);
+
+          var lista = document.createElement("div");
+          lista.className = "draw-result";
+          asignados.forEach(function (tema, indice) {
+            var linea = document.createElement("div");
+            linea.textContent = "Grupo " + (indice + 1) + " → ";
+            var spanTema = document.createElement("span");
+            spanTema.className = "tem";
+            spanTema.textContent = tema;
+            linea.appendChild(spanTema);
+            lista.appendChild(linea);
+          });
+          salida.appendChild(lista);
+
+          var nota = document.createElement("p");
+          nota.style.cssText =
+            "margin:10px 0 0; font-size:0.84rem; color:var(--muted);";
+          nota.textContent =
+            "Anotá tu tema y anotalo también en el registro de la clase: el orden de exposición se define en el momento de la defensa.";
+          salida.appendChild(nota);
+
+          // Guardamos la instancia del sorteo para el historial de la sesión
+          var resumen = [];
+          asignados.forEach(function (tema, indice) {
+            resumen.push("G" + (indice + 1) + " → " + tema);
+          });
+          sorteos.unshift(resumen.join(" · "));
+          if (sorteos.length > 6) sorteos.pop();
+          pintarHistorial();
+        }
+
+        if (btnSortear) btnSortear.addEventListener("click", sortear);
+
+        if (btnReiniciar) {
+          btnReiniciar.addEventListener("click", function () {
+            sorteos = [];
+            pintarHistorial();
+            if (salida) {
+              salida.textContent = "";
+              var fuerte = document.createElement("strong");
+              fuerte.textContent = "Listo para sortear. ";
+              salida.appendChild(fuerte);
+              salida.appendChild(
+                document.createTextNode(
+                  "Definí la cantidad de grupos y presioná “Sortear temas”.",
+                ),
+              );
+            }
+            if (campoCantidad) campoCantidad.value = "6";
+            if (campoModo) campoModo.value = "sin-repetir";
+          });
+        }
+
+        /* ---------------------------------------------------------------------------
+     5) CRONÓMETRO DE EXPOSICIÓN — 20 MINUTOS
+     --------------------------------------------------------------------------- */
+        var DURACION_INICIAL = 20 * 60; // segundos
+        var UMBRAL_AVISO = 18 * 60; // a los 18 minutos consumidos queda alerta final
+        var META_AVISO = 10 * 60; // información a los 10 minutos consumidos
+
+        var reloj = document.getElementById("timer-clock");
+        var relleno = document.getElementById("timer-fill");
+        var metaTexto = document.getElementById("timer-meta");
+        var btnIniciar = document.getElementById("timer-start");
+        var btnPausar = document.getElementById("timer-pause");
+        var btnReset = document.getElementById("timer-reset");
+        var btnMenos = document.getElementById("timer-minus");
+        var btnMas = document.getElementById("timer-plus");
+
+        var duracionTotal = DURACION_INICIAL;
+        var segundosRestantes = DURACION_INICIAL;
+        var intervalo = null;
+        var corriendo = false;
+
+        function formatear(totalSegundos) {
+          var seg = Math.max(0, Math.round(totalSegundos));
+          var min = Math.floor(seg / 60);
+          var resto = seg % 60;
+          return (
+            (min < 10 ? "0" : "") + min + ":" + (resto < 10 ? "0" : "") + resto
+          );
+        }
+
+        function pintarReloj() {
+          if (reloj) reloj.textContent = formatear(segundosRestantes);
+
+          var consumido = duracionTotal - segundosRestantes;
+          var pct = duracionTotal > 0 ? (consumido / duracionTotal) * 100 : 0;
+          if (pct < 0) pct = 0;
+          if (pct > 100) pct = 100;
+          if (relleno) relleno.style.width = pct.toFixed(2) + "%";
+
+          var claseTiempo = "";
+          var claseRelleno = "";
+
+          if (segundosRestantes <= 0) {
+            claseTiempo = "bad-time";
+            claseRelleno = "bad";
+          } else if (segundosRestantes <= DURACION_INICIAL - UMBRAL_AVISO) {
+            claseTiempo = "bad-time";
+            claseRelleno = "bad";
+          } else if (consumido >= META_AVISO) {
+            claseTiempo = "warn-time";
+            claseRelleno = "warn";
+          }
+
+          if (reloj) reloj.className = "timer-clock " + claseTiempo;
+          if (relleno) relleno.className = "timer-fill " + claseRelleno;
+
+          if (metaTexto) {
+            if (segundosRestantes <= 0) {
+              metaTexto.innerHTML =
+                "<strong>⏰ Tiempo cumplido.</strong> Se corta la exposición y se pasa a las preguntas.";
+            } else if (claseTiempo === "bad-time") {
+              metaTexto.innerHTML =
+                "⚠️ <strong>Alerta final:</strong> quedan menos de 2 minutos. Cerrá con las tres ideas fuerza.";
+            } else if (claseTiempo === "warn-time") {
+              metaTexto.innerHTML =
+                "🟡 Pasaste los 10 minutos: revisá que no te quedes sin el bloque de identificación visual.";
+            } else {
+              metaTexto.innerHTML =
+                "Duración total: " +
+                Math.round(duracionTotal / 60) +
+                " min · aviso a los 10 min · alerta final a los 2 min restantes.";
+            }
+          }
+        }
+
+        function detenerIntervalo() {
+          if (intervalo) {
+            window.clearInterval(intervalo);
+            intervalo = null;
+          }
+          corriendo = false;
+        }
+
+        function iniciar() {
+          if (corriendo) return;
+          if (segundosRestantes <= 0) return;
+          corriendo = true;
+          intervalo = window.setInterval(function () {
+            segundosRestantes -= 1;
+            if (segundosRestantes <= 0) {
+              segundosRestantes = 0;
+              pintarReloj();
+              detenerIntervalo();
+              return;
+            }
+            pintarReloj();
+          }, 1000);
+        }
+
+        function pausar() {
+          detenerIntervalo();
+        }
+
+        function reiniciar() {
+          detenerIntervalo();
+          duracionTotal = DURACION_INICIAL;
+          segundosRestantes = DURACION_INICIAL;
+          pintarReloj();
+        }
+
+        function ajustarMinuto(delta) {
+          detenerIntervalo();
+          duracionTotal += delta;
+          if (duracionTotal < 60) duracionTotal = 60;
+          if (duracionTotal > 60 * 60) duracionTotal = 60 * 60;
+          segundosRestantes = duracionTotal;
+          pintarReloj();
+        }
+
+        if (reloj) {
+          pintarReloj();
+          if (btnIniciar) btnIniciar.addEventListener("click", iniciar);
+          if (btnPausar) btnPausar.addEventListener("click", pausar);
+          if (btnReset) btnReset.addEventListener("click", reiniciar);
+          if (btnMenos) {
+            btnMenos.addEventListener("click", function () {
+              ajustarMinuto(-60);
+            });
+          }
+          if (btnMas) {
+            btnMas.addEventListener("click", function () {
+              ajustarMinuto(60);
+            });
+          }
+        }
+
+        /* ---------------------------------------------------------------------------
+     6) ETIQUETA DE DESPLAZAMIENTO EN TABLAS PARA PANTALLAS CHICAS
+     --------------------------------------------------------------------------- */
+        var envoltorios = document.querySelectorAll(".table-wrap");
+        Array.prototype.forEach.call(envoltorios, function (envoltorio) {
+          var tabla = envoltorio.querySelector("table");
+          if (!tabla) return;
+          function revisar() {
+            if (
+              tabla.scrollWidth > envoltorio.clientWidth + 4 &&
+              window.innerWidth <= 768
+            ) {
+              envoltorio.setAttribute("tabindex", "0");
+              envoltorio.setAttribute(
+                "aria-label",
+                "Tabla desplazable horizontalmente. Desliza para ver todas las columnas.",
+              );
+            } else {
+              envoltorio.removeAttribute("tabindex");
+              envoltorio.removeAttribute("aria-label");
+            }
+          }
+          revisar();
+          window.addEventListener("resize", revisar);
+        });
+      })();
+    </script>
+  </body>
+</html>

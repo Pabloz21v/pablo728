@@ -741,11 +741,9 @@
           <li><a href="#sec4"><span class="num">4.</span> Hardware vs Software, Hot-Spare, Rebuild y BBU</a></li>
           <li><a href="#sec5"><span class="num">5.</span> Seguridad y mantenimiento</a></li>
           <li><a href="#sec6"><span class="num">6.</span> Taller: actividades virtuales</a></li>
-          <li><a href="#sec7"><span class="num">7.</span> Secuencia didáctica (160 min)</a></li>
           <li><a href="#sec8"><span class="num">8.</span> Recursos y enlaces</a></li>
           <li><a href="#sec9"><span class="num">9.</span> Cuestionario final</a></li>
         </ol>
-        <p class="toc-info">Todos los enlaces de recursos abren en pestaña nueva. Recomendado: usar auriculares y tener la VM ya instalada antes de clase.</p>
       </section>
 
       <!-- ====== SECCIÓN 0 — INTRODUCCIÓN ====== -->
@@ -786,25 +784,7 @@
         </ul>
       </div>
 
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Bloque</th>
-              <th>Duración</th>
-              <th>Enfoque</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>🟢 Apertura</td><td>10 min</td><td>Pregunta disparadora + objetivos</td></tr>
-            <tr><td>🔵 Teoría</td><td>45 min</td><td>Concepto, niveles y cálculos</td></tr>
-            <tr><td>🟡 Taller virtual</td><td>80 min</td><td>5 actividades con calculadora, VM y simulaciones</td></tr>
-            <tr><td>🔴 Evaluación</td><td>15 min</td><td>Cuestionario guiado en clase</td></tr>
-            <tr><td>⚪ Cierre</td><td>10 min</td><td>Síntesis + tarea de búsqueda de imágenes</td></tr>
-            <tr class="total-row"><td>TOTAL</td><td>160 min</td><td>Sesión completa</td></tr>
-          </tbody>
-        </table>
-      </div>
+ 
 
       <!-- ====== SECCIÓN 1 — CONCEPTO DE RAID ====== -->
       <h2 class="section-title" id="sec1">
@@ -1202,14 +1182,13 @@
 
       <!-- ====== SECCIÓN 6 — TALLER: ACTIVIDADES VIRTUALES ====== -->
       <h2 class="section-title" id="sec6">
-        <span class="icon">💻</span>Sección 6 — Taller: actividades virtuales (80 min)
+        <span class="icon">💻</span>Sección 6 — Taller: actividades virtuales
       </h2>
       <p class="section-meta">Todas las actividades se resuelven con recursos gratuitos online y la VM del curso. Ningún paso requiere hardware físico.</p>
 
       <div class="activity-card">
         <div class="activity-head">
           <h3>🧮 Actividad 1 — Calculadora RAID online</h3>
-          <span class="time-badge">⏱ 15 min</span>
         </div>
         <p class="activity-tools">Herramienta: raid-calculator.com</p>
         <p>
@@ -1222,7 +1201,6 @@
       <div class="activity-card">
         <div class="activity-head">
           <h3>📊 Actividad 2 — Completar la tabla comparativa</h3>
-          <span class="time-badge">⏱ 10 min</span>
         </div>
         <p class="activity-tools">Herramienta: papel/planilla + tabla de la Sección 2.6</p>
         <p>
@@ -1235,7 +1213,6 @@
       <div class="activity-card">
         <div class="activity-head">
           <h3>🖥️ Actividad 3 — Configuración de un arreglo en la VM</h3>
-          <span class="time-badge">⏱ 25 min</span>
         </div>
         <p class="activity-tools">Herramienta: Oracle VirtualBox + distribución Linux liviana</p>
         <p>Pasos guiados:</p>
@@ -1250,7 +1227,6 @@
       <div class="activity-card">
         <div class="activity-head">
           <h3>💥 Actividad 4 — Simulación narrada de fallo y rebuild</h3>
-          <span class="time-badge">⏱ 20 min</span>
         </div>
         <p class="activity-tools">Herramienta: VM del curso (comando de fallo simulado en mdadm)</p>
         <p>
@@ -1266,7 +1242,6 @@
       <div class="activity-card">
         <div class="activity-head">
           <h3>🗣️ Actividad 5 — Debate: elegir el nivel correcto</h3>
-          <span class="time-badge">⏱ 10 min</span>
         </div>
         <p class="activity-tools">Herramienta: escenarios de clientes (ver Sección 9)</p>
         <p>
@@ -1291,34 +1266,7 @@
         </p>
       </div>
 
-      <!-- ====== SECCIÓN 7 — SECUENCIA DIDÁCTICA ====== -->
-      <h2 class="section-title" id="sec7">
-        <span class="icon">⏱️</span>Sección 7 — Secuencia didáctica (160 minutos exactos)
-      </h2>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Minutos</th><th>Bloque</th><th>Actividad</th><th>Recurso</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>0–5</td><td>🟢 Apertura</td><td>Bienvenida + pregunta disparadora: "¿Qué harían si el disco del servidor de la escuela se rompe mañana?"</td><td>Pizarra / debate corto</td></tr>
-            <tr><td>5–10</td><td>🟢 Apertura</td><td>Presentación de objetivos de la sesión y de los 5 niveles a estudiar</td><td>Esta página web</td></tr>
-            <tr><td>10–20</td><td>🔵 Teoría</td><td>Concepto de RAID + striping / mirroring / paridad, con analogía del trabajo grupal</td><td>Sección 1</td></tr>
-            <tr><td>20–30</td><td>🔵 Teoría</td><td>RAID 0 y RAID 1: analogías, diagramas de discos y fórmulas</td><td>Sección 2.1–2.2</td></tr>
-            <tr><td>30–45</td><td>🔵 Teoría</td><td>RAID 5 y RAID 6: paridad distribuida, doble paridad, diagramas</td><td>Sección 2.3–2.4</td></tr>
-            <tr><td>45–55</td><td>🔵 Teoría</td><td>RAID 10, hardware vs software, hot-spare, rebuild y BBU</td><td>Sección 2.5 y 4</td></tr>
-            <tr><td>55–70</td><td>🟡 Taller</td><td>Actividad 1 — Calculadora RAID online</td><td>raid-calculator.com</td></tr>
-            <tr><td>70–80</td><td>🟡 Taller</td><td>Actividad 2 — Tabla comparativa de memoria</td><td>Planilla propia</td></tr>
-            <tr><td>80–105</td><td>🟡 Taller</td><td>Actividad 3 — Configuración de RAID 5 en la VM con mdadm</td><td>VirtualBox + Linux</td></tr>
-            <tr><td>105–125</td><td>🟡 Taller</td><td>Actividad 4 — Simulación narrada de fallo y rebuild</td><td>VM del curso</td></tr>
-            <tr><td>125–135</td><td>🟡 Taller</td><td>Actividad 5 — Debate de elección de nivel por escenario de cliente</td><td>Tarjetas de casos</td></tr>
-            <tr><td>135–150</td><td>🔴 Evaluación</td><td>Cuestionario guiado (selección de preguntas de la Sección 9)</td><td>Sección 9</td></tr>
-            <tr><td>150–160</td><td>⚪ Cierre</td><td>Síntesis grupal de los 5 niveles + consigna de la actividad de búsqueda de imágenes</td><td>Actividad extra</td></tr>
-            <tr class="total-row"><td colspan="3">TOTAL</td><td>160 minutos</td></tr>
-          </tbody>
-        </table>
-      </div>
+     
 
       <!-- ====== SECCIÓN 8 — RECURSOS Y ENLACES ====== -->
       <h2 class="section-title" id="sec8">
