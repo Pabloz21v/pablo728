@@ -1,0 +1,1286 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Sesión 6 · CSS - Frameworks Utilitarios con Tailwind | Desarrollo IV
+    </title>
+    <meta
+      name="description"
+      content="Sesión 6: desarrollo ágil basado en clases utilitarias con Tailwind CSS - espaciados, tipografías, colores y breakpoints directamente sobre el HTML."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      body {
+        font-family:
+          "Inter",
+          Segoe UI,
+          sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ============ HEADER / NAVEGACIÓN ============ -->
+
+    <!-- ============ ENCABEZADO DE SESIÓN ============ -->
+    <section class="session-hero">
+      <div class="container">
+        <div style="margin-bottom: 24px">
+          <a
+            href="../../materias/desarrollo-4.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #4ade80;
+              color: #222;
+              display: inline-block;
+              margin-right: 10px;
+            "
+          >
+            Volver a Materia
+          </a>
+          <a
+            href="desarrollo4-sesion5.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #60a5fa;
+              color: #fff;
+              display: inline-block;
+              margin-right: 10px;
+            "
+          >
+            Ir a Sesión 5
+          </a>
+          <a
+            href="desarrollo4-sesion7.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #f9e282;
+              color: #222;
+              display: inline-block;
+            "
+          >
+            Ir a Sesión 7
+          </a>
+        </div>
+        <h1>Sesión 6 — CSS: Frameworks Utilitarios con Tailwind CSS</h1>
+        <p class="lead" style="color: var(--text-dim); max-width: 760px">
+          Cerramos la sección CSS con un tercer enfoque de maquetado: en vez de
+          escribir selectores CSS propios (Sesiones 3 y 4) o usar componentes ya
+          armados (Bootstrap, Sesión 5), Tailwind propone
+          <strong>clases utilitarias diminutas</strong> que se combinan
+          directamente en el HTML para construir cualquier diseño a medida.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ LAYOUT: TOC + CONTENIDO ============ -->
+    <div class="container">
+      <!-- TABLA DE CONTENIDOS -->
+
+      <!-- CONTENIDO PRINCIPAL -->
+      <article class="content">
+        <!-- 1. OBJETIVOS -->
+        <section id="objetivos">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-bullseye"></i></span>
+            Objetivos de aprendizaje
+          </h2>
+          <p>Al finalizar esta sesión, vas a poder:</p>
+          <ul>
+            <li>
+              Explicar el enfoque <strong>"utility-first"</strong> de Tailwind
+              CSS y en qué se diferencia de escribir CSS propio o de usar
+              componentes de Bootstrap.
+            </li>
+            <li>
+              Vincular Tailwind a un proyecto mediante CDN para practicar y
+              prototipar.
+            </li>
+            <li>
+              Aplicar clases utilitarias de
+              <strong>espaciado</strong> (<code>p-*</code>, <code>m-*</code>,
+              <code>gap-*</code>) siguiendo la escala numérica de Tailwind.
+            </li>
+            <li>
+              Aplicar clases utilitarias de <strong>tipografía</strong> (tamaño,
+              peso, alineación) directamente sobre las etiquetas HTML.
+            </li>
+            <li>
+              Aplicar clases utilitarias de <strong>color</strong> (fondo,
+              texto, borde) usando la paleta y escala de intensidad de Tailwind.
+            </li>
+            <li>
+              Construir diseños <strong>responsivos</strong> con prefijos de
+              breakpoint (<code>sm:</code>, <code>md:</code>, <code>lg:</code>)
+              sin escribir ningún <code>@media</code>.
+            </li>
+            <li>
+              Decidir con criterio propio cuándo conviene CSS propio, Bootstrap
+              o Tailwind según el proyecto.
+            </li>
+          </ul>
+        </section>
+
+        <!-- 2. QUÉ ES UTILITY-FIRST -->
+        <section id="que-es-utility-first">
+          <h2>
+            <span class="step-no"
+              ><i class="fa-solid fa-screwdriver-wrench"></i
+            ></span>
+            ¿Qué es el enfoque "utility-first"?
+          </h2>
+          <p>
+            En las Sesiones 3 y 4 escribimos nuestras propias clases CSS
+            (<code>.product-card</code>,
+            <code>.catalogo-grid</code>) y les definimos el comportamiento en un
+            archivo <code>.css</code> aparte. En la Sesión 5 usamos las clases
+            <em>ya armadas</em> de Bootstrap (<code>card</code>,
+            <code>navbar</code>), que traen varias propiedades combinadas en una
+            sola palabra.
+          </p>
+          <p>
+            <strong>Tailwind CSS</strong> propone un tercer camino: miles de
+            clases
+            <strong>diminutas y de un solo propósito</strong> ("utilidades"),
+            que se combinan directamente en el atributo <code>class</code> del
+            HTML para lograr cualquier diseño, sin escribir casi nunca un
+            archivo <code>.css</code> propio.
+          </p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>CSS propio (Sesiones 3-4)</th>
+                  <th>Bootstrap (Sesión 5)</th>
+                  <th>Tailwind (hoy)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Unidad de trabajo</strong></td>
+                  <td>Reglas CSS completas</td>
+                  <td>
+                    Componentes completos (<code>card</code>,
+                    <code>navbar</code>)
+                  </td>
+                  <td>
+                    Micro-utilidades de un solo propósito (<code>p-4</code>,
+                    <code>text-xl</code>)
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Dónde se escribe el estilo</strong></td>
+                  <td>Archivo <code>.css</code> aparte</td>
+                  <td>Archivo <code>.css</code> del framework (no se toca)</td>
+                  <td>
+                    Directamente en el atributo <code>class</code> del HTML
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Apariencia final</strong></td>
+                  <td>100% personalizada</td>
+                  <td>
+                    Reconocible como "sitio con Bootstrap" si no se personaliza
+                  </td>
+                  <td>100% personalizada, sin aspecto "de fábrica"</td>
+                </tr>
+                <tr>
+                  <td><strong>Ejemplo de uso</strong></td>
+                  <td><code>.product-card { padding: 16px; }</code></td>
+                  <td><code>class="card"</code></td>
+                  <td><code>class="p-4 rounded-xl bg-slate-800"</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout">
+            <div class="callout-title">
+              <i class="fa-solid fa-comment-dots"></i> Analogía
+            </div>
+            Si Bootstrap es comprar una
+            <strong>comida ya preparada</strong> (una hamburguesa completa,
+            lista), Tailwind es más parecido a un
+            <strong>mostrador de ingredientes sueltos</strong> (pan, carne,
+            queso, lechuga, salsa) que vos combinás vos mismo en el momento, en
+            el orden y cantidad que quieras, armando tu propia receta sin
+            cocinar cada ingrediente desde cero (como sí hacías con CSS 100%
+            propio).
+          </div>
+
+          <div class="callout tip">
+            <div class="callout-title">
+              <i class="fa-solid fa-lightbulb"></i> No reemplaza lo anterior, lo
+              combina
+            </div>
+            Tailwind también usa Flexbox y Grid por debajo (clases como
+            <code>flex</code> o <code>grid grid-cols-3</code> son atajos
+            directos a lo que ya aprendiste en las Sesiones 3 y 4). Entender la
+            lógica de Flexbox/Grid es lo que te permite hoy leer y predecir qué
+            hace cada clase de Tailwind sin memorizar todo de cero.
+          </div>
+        </section>
+
+        <!-- 3. INSTALACIÓN -->
+        <section id="instalacion">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-download"></i></span>
+            Vincular Tailwind al proyecto
+          </h2>
+          <p>
+            Para practicar y prototipar rápido, existe un
+            <strong>script de CDN</strong> ("Play CDN") que compila las clases
+            utilitarias al vuelo, sin instalar nada:
+          </p>
+          <div class="table-wrap">
+            <a
+              class="r-link"
+              href="https://tailwindcss.com/docs/installation/play-cdn"
+              target="_blank"
+              rel="noopener"
+              >->Link a pagina oficial de framework Tailwind
+              <i class="fa-solid fa-arrow-up-right-from-square"></i
+            ></a>
+          </div>
+
+          <div class="table-wrap">
+            <a
+              class="r-link"
+              href="https://www.youtube.com/watch?v=R5EXap3vNDA"
+              target="_blank"
+              rel="noopener"
+              >->Video introductorio a Tailwind (Youtube)
+              <i class="fa-solid fa-arrow-up-right-from-square"></i
+            ></a>
+          </div>
+          <div class="code-block">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              index.html (fragmento del head)
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;TecnoStore&lt;/title&gt;
+
+    &lt;!-- Play CDN de Tailwind: ideal para aprender y prototipar --&gt;
+    &lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre>
+          </div>
+
+          <div class="callout warn">
+            <div class="callout-title">
+              <i class="fa-solid fa-triangle-exclamation"></i> CDN vs.
+              instalación real de proyecto
+            </div>
+            A diferencia de Bootstrap, la forma profesional de usar Tailwind en
+            un proyecto en producción es instalarlo como herramienta de
+            compilación (genera un único archivo
+            <code>.css</code> final, mucho más liviano). El
+            <strong>Play CDN</strong> que usamos hoy es la variante pensada
+            exclusivamente para <strong>aprender y prototipar</strong>: es más
+            pesado y no se recomienda para un sitio publicado real.
+          </div>
+        </section>
+
+        <!-- 4. ESPACIADOS -->
+        <section id="espaciados">
+          <h2>
+            <span class="step-no"
+              ><i class="fa-solid fa-arrows-up-down-left-right"></i
+            ></span>
+            Espaciados: padding y margin con escala numérica
+          </h2>
+          <p>
+            Tailwind no permite escribir cualquier número de píxeles: usa una
+            <strong>escala predefinida</strong> de espaciado, donde cada número
+            representa un múltiplo de <code>0.25rem</code> (4px). Esto genera
+            consistencia visual en todo el sitio sin que el equipo tenga que
+            ponerse de acuerdo manualmente en los valores.
+          </p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Clase</th>
+                  <th>Valor real</th>
+                  <th>Prefijo según el lado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>p-1</code></td>
+                  <td>4px</td>
+                  <td rowspan="4">
+                    <code>p</code> = todos los lados · <code>px</code>/<code
+                      >py</code
+                    >
+                    = horizontal/vertical ·
+                    <code>pt</code>/<code>pr</code>/<code>pb</code>/<code
+                      >pl</code
+                    >
+                    = un lado específico
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>p-2</code></td>
+                  <td>8px</td>
+                </tr>
+                <tr>
+                  <td><code>p-4</code></td>
+                  <td>16px</td>
+                </tr>
+                <tr>
+                  <td><code>p-8</code></td>
+                  <td>32px</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            La misma lógica de prefijos aplica a <code>margin</code>, cambiando
+            la letra inicial de <code>p</code> a <code>m</code>:
+          </p>
+
+          <div class="spacing-scale">
+            <div class="s-row">
+              <span class="s-label">p-1</span>
+              <div class="s-bar" style="width: 4px"></div>
+              <span class="s-value">4px · 0.25rem</span>
+            </div>
+            <div class="s-row">
+              <span class="s-label">p-2</span>
+              <div class="s-bar" style="width: 8px"></div>
+              <span class="s-value">8px · 0.5rem</span>
+            </div>
+            <div class="s-row">
+              <span class="s-label">p-4</span>
+              <div class="s-bar" style="width: 16px"></div>
+              <span class="s-value">16px · 1rem</span>
+            </div>
+            <div class="s-row">
+              <span class="s-label">p-6</span>
+              <div class="s-bar" style="width: 24px"></div>
+              <span class="s-value">24px · 1.5rem</span>
+            </div>
+            <div class="s-row">
+              <span class="s-label">p-8</span>
+              <div class="s-bar" style="width: 32px"></div>
+              <span class="s-value">32px · 2rem</span>
+            </div>
+            <div class="s-row">
+              <span class="s-label">p-12</span>
+              <div class="s-bar" style="width: 48px"></div>
+              <span class="s-value">48px · 3rem</span>
+            </div>
+          </div>
+
+          <div class="callout">
+            <div class="callout-title">
+              <i class="fa-solid fa-comment-dots"></i> Analogía
+            </div>
+            Es como elegir el tamaño de un café: no pedís "187ml exactos",
+            elegís entre
+            <strong>chico, mediano o grande</strong> de un menú predefinido. La
+            escala de Tailwind (1, 2, 4, 6, 8, 12...) es ese menú de tamaños de
+            espaciado: limitado a propósito, para que todo el sitio quede
+            visualmente coherente.
+          </div>
+
+          <div class="code-block">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              ejemplo-espaciado.html
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>&lt;!-- padding en todos los lados: 16px --&gt;
+&lt;div class="p-4"&gt;Contenido&lt;/div&gt;
+
+&lt;!-- padding horizontal 24px, vertical 8px --&gt;
+&lt;div class="px-6 py-2"&gt;Botón&lt;/div&gt;
+
+&lt;!-- margen inferior de 16px entre tarjetas --&gt;
+&lt;article class="mb-4"&gt;Tarjeta de producto&lt;/article&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 5. TIPOGRAFÍAS -->
+        <section id="tipografias">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-font"></i></span>
+            Tipografías: tamaño, peso y alineación
+          </h2>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Categoría</th>
+                  <th>Clases</th>
+                  <th>Función</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Tamaño</strong></td>
+                  <td>
+                    <code>text-sm</code> · <code>text-base</code> ·
+                    <code>text-lg</code> · <code>text-xl</code> ·
+                    <code>text-3xl</code>
+                  </td>
+                  <td>
+                    Escala de tamaños de fuente predefinida, de menor a mayor.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Peso</strong></td>
+                  <td>
+                    <code>font-normal</code> · <code>font-semibold</code> ·
+                    <code>font-bold</code>
+                  </td>
+                  <td>
+                    Grosor del texto (equivalente a <code>font-weight</code>).
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Alineación</strong></td>
+                  <td>
+                    <code>text-left</code> · <code>text-center</code> ·
+                    <code>text-right</code>
+                  </td>
+                  <td>Alineación horizontal del texto.</td>
+                </tr>
+                <tr>
+                  <td><strong>Interlineado</strong></td>
+                  <td>
+                    <code>leading-tight</code> · <code>leading-normal</code> ·
+                    <code>leading-loose</code>
+                  </td>
+                  <td>Separación vertical entre líneas de texto.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="code-block">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              ejemplo-tipografia.html
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>&lt;h2 class="text-3xl font-bold text-center"&gt;
+    Nuestros Productos
+&lt;/h2&gt;
+
+&lt;p class="text-base font-normal leading-normal"&gt;
+    Descripción del producto con interlineado cómodo de leer.
+&lt;/p&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 6. COLORES -->
+        <section id="colores">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-palette"></i></span>
+            Colores: paleta y escala de intensidad
+          </h2>
+          <p>
+            Cada clase de color de Tailwind sigue el patrón
+            <code>propiedad-color-intensidad</code>. La
+            <strong>intensidad</strong> va de <code>50</code> (casi blanco) a
+            <code>950</code> (casi negro), en pasos de 100.
+          </p>
+
+          <div class="color-swatches">
+            <div class="swatch" style="background: #99f6e4">teal-200</div>
+            <div class="swatch" style="background: #2dd4bf">teal-400</div>
+            <div class="swatch dark-text-override" style="background: #0d9488">
+              teal-600
+            </div>
+            <div class="swatch dark-text-override" style="background: #115e59">
+              teal-800
+            </div>
+            <div class="swatch" style="background: #ddd6fe">violet-200</div>
+            <div class="swatch dark-text-override" style="background: #7c3aed">
+              violet-600
+            </div>
+            <div class="swatch" style="background: #fed7aa">orange-200</div>
+            <div class="swatch dark-text-override" style="background: #ea580c">
+              orange-600
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Clase</th>
+                  <th>Propiedad que afecta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>bg-teal-500</code></td>
+                  <td>Color de <strong>fondo</strong> (background-color).</td>
+                </tr>
+                <tr>
+                  <td><code>text-teal-500</code></td>
+                  <td>Color del <strong>texto</strong>.</td>
+                </tr>
+                <tr>
+                  <td><code>border-teal-500</code></td>
+                  <td>
+                    Color del <strong>borde</strong> (requiere también una clase
+                    <code>border</code> que active el ancho del borde).
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout warn">
+            <div class="callout-title">
+              <i class="fa-solid fa-triangle-exclamation"></i> Ojo con el
+              contraste (conexión con la Sesión 3)
+            </div>
+            Elegir colores con Tailwind es muy rápido, pero la responsabilidad
+            de un
+            <strong>contraste accesible</strong> entre texto y fondo sigue
+            siendo nuestra: por ejemplo, <code>text-slate-400</code> sobre
+            <code>bg-slate-300</code> puede tener contraste insuficiente. Los
+            criterios de diseño inclusivo de la Sesión 3 (WebAIM Contrast
+            Checker, tamaño de fuente legible) siguen aplicando exactamente
+            igual acá.
+          </div>
+        </section>
+
+        <!-- 7. DEMO CONSTRUCTOR DE CLASES -->
+        <section id="utility-demo">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-sliders"></i></span>
+            Demo interactiva: constructor de clases utilitarias
+          </h2>
+          <p>
+            Combiná distintas utilidades de espaciado, tipografía, color y
+            redondeado, y mirá cómo cambia el botón de vista previa junto con la
+            cadena exacta de clases equivalente.
+          </p>
+
+          <div class="utility-demo">
+            <div class="demo-controls">
+              <div class="control-group">
+                <label for="demo-padding">Espaciado (padding)</label>
+                <select id="demo-padding">
+                  <option value="p-2" selected>p-2</option>
+                  <option value="p-4">p-4</option>
+                  <option value="p-6">p-6</option>
+                  <option value="p-8">p-8</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label for="demo-text-size">Tamaño de texto</label>
+                <select id="demo-text-size">
+                  <option value="text-sm">text-sm</option>
+                  <option value="text-base" selected>text-base</option>
+                  <option value="text-xl">text-xl</option>
+                  <option value="text-3xl">text-3xl</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label for="demo-bg-color">Color de fondo</label>
+                <select id="demo-bg-color">
+                  <option value="bg-teal-500" selected>bg-teal-500</option>
+                  <option value="bg-violet-500">bg-violet-500</option>
+                  <option value="bg-orange-500">bg-orange-500</option>
+                  <option value="bg-rose-500">bg-rose-500</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label for="demo-rounded">Redondeado</label>
+                <select id="demo-rounded">
+                  <option value="rounded-none">rounded-none</option>
+                  <option value="rounded-md" selected>rounded-md</option>
+                  <option value="rounded-xl">rounded-xl</option>
+                  <option value="rounded-full">rounded-full</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="demo-stage">
+              <span class="preview-chip">Agregar al carrito</span>
+            </div>
+
+            <div class="demo-code">
+              &lt;button class="p-2 text-base bg-teal-500 rounded-md text-white
+              font-bold"&gt; Agregar al carrito &lt;/button&gt;
+            </div>
+          </div>
+
+          <div class="callout tip">
+            <div class="callout-title">
+              <i class="fa-solid fa-lightbulb"></i> Qué observar
+            </div>
+            Fijate que cada propiedad visual (espaciado, texto, color, bordes)
+            se controla con una clase <strong>independiente</strong>: podés
+            cambiar el color sin tocar el tamaño, o el espaciado sin tocar el
+            redondeado. Esa independencia es la esencia de "utility-first".
+          </div>
+        </section>
+
+        <!-- 8. BREAKPOINTS -->
+        <section id="breakpoints">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-ruler"></i></span>
+            Breakpoints responsivos: prefijos antes de la clase
+          </h2>
+          <p>
+            Tailwind también sigue la filosofía
+            <strong>mobile-first</strong> (igual que Bootstrap, Sesión 5): una
+            clase <em>sin</em> prefijo aplica siempre, y agregar un prefijo de
+            breakpoint hace que esa clase <strong>sobrescriba</strong> a la
+            anterior a partir de ese ancho mínimo.
+          </p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Prefijo</th>
+                  <th>Ancho mínimo</th>
+                  <th>Ejemplo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>(sin prefijo)</td>
+                  <td>0px (siempre)</td>
+                  <td>
+                    <code>grid-cols-1</code> → 1 columna en cualquier pantalla
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>sm:</code></td>
+                  <td>≥ 640px</td>
+                  <td>
+                    <code>sm:text-lg</code> → texto más grande a partir de 640px
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>md:</code></td>
+                  <td>≥ 768px</td>
+                  <td>
+                    <code>md:grid-cols-2</code> → 2 columnas a partir de 768px
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>lg:</code></td>
+                  <td>≥ 1024px</td>
+                  <td>
+                    <code>lg:grid-cols-4</code> → 4 columnas a partir de 1024px
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>xl:</code></td>
+                  <td>≥ 1280px</td>
+                  <td>
+                    <code>xl:p-12</code> → más padding en pantallas muy grandes
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="code-block">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              ejemplo-breakpoints.html
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>&lt;!-- Grilla de productos 100% responsiva, SIN escribir @media --&gt;
+&lt;div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"&gt;
+    &lt;div class="bg-slate-800 p-4 rounded-xl"&gt;Producto 1&lt;/div&gt;
+    &lt;div class="bg-slate-800 p-4 rounded-xl"&gt;Producto 2&lt;/div&gt;
+    &lt;div class="bg-slate-800 p-4 rounded-xl"&gt;Producto 3&lt;/div&gt;
+    &lt;div class="bg-slate-800 p-4 rounded-xl"&gt;Producto 4&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Texto que crece en pantallas medianas en adelante --&gt;
+&lt;h2 class="text-xl md:text-3xl font-bold"&gt;Catálogo&lt;/h2&gt;
+
+&lt;!-- Oculto en celular, visible desde "md" --&gt;
+&lt;p class="hidden md:block"&gt;Filtros avanzados disponibles&lt;/p&gt;</code></pre>
+          </div>
+
+          <div class="callout">
+            <div class="callout-title">
+              <i class="fa-solid fa-comment-dots"></i> Analogía (conexión con la
+              Sesión 4)
+            </div>
+            <code>grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4</code> es
+            exactamente el mismo concepto que
+            <code>repeat(auto-fit, minmax(...))</code> de CSS Grid puro (Sesión
+            4), solo que en vez de que el navegador "calcule solo" cuántas
+            columnas entran, acá nosotros
+            <strong>le indicamos explícitamente</strong> cuántas columnas
+            queremos en cada rango de ancho. Son dos estrategias válidas para el
+            mismo problema.
+          </div>
+        </section>
+
+        <!-- 9. DEMO BREAKPOINTS -->
+        <section id="breakpoints-demo">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-display"></i></span>
+            Demo interactiva: grilla responsiva con Tailwind
+          </h2>
+          <p>
+            Esta demo carga <strong>Tailwind real</strong> en un recuadro
+            aislado. Usá los botones para simular distintos anchos y observá la
+            grilla de productos y el texto que aparece solo a partir de cierto
+            breakpoint.
+          </p>
+
+          <div class="iframe-demo">
+            <div class="demo-toolbar">
+              <span class="tb-label">Simular ancho:</span>
+              <button data-width="1100" class="active">
+                <i class="fa-solid fa-desktop"></i> Escritorio (lg)
+              </button>
+              <button data-width="700">
+                <i class="fa-solid fa-tablet-screen-button"></i> Tablet (md)
+              </button>
+              <button data-width="380">
+                <i class="fa-solid fa-mobile-screen"></i> Celular (xs)
+              </button>
+            </div>
+            <div class="frame-wrap">
+              <iframe
+                src="tailwind-breakpoints-demo.html"
+                title="Demo de breakpoints con Tailwind"
+                style="height: 460px"
+              ></iframe>
+            </div>
+            <p class="frame-hint">
+              En el ancho "Celular" vas a ver 1 columna y el párrafo "hidden
+              md:block" desaparece; en "Tablet" aparecen 2 columnas y el
+              párrafo; en "Escritorio", 4 columnas.
+            </p>
+          </div>
+        </section>
+
+        <!-- 10. RESUMEN COMPARATIVO DE LA UNIDAD -->
+        <section id="comparacion-final">
+          <h2>
+            <span class="step-no"
+              ><i class="fa-solid fa-flag-checkered"></i
+            ></span>
+            Resumen comparativo: las 3 formas de maquetar que vimos en la Unidad
+            1
+          </h2>
+          <p>
+            Con esto cerramos la Unidad 1. Ya conocés tres enfoques distintos
+            para resolver el mismo problema de maquetado, y podés elegir con
+            criterio según el contexto del proyecto:
+          </p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Enfoque</th>
+                  <th>Sesión</th>
+                  <th>Cuándo conviene</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>CSS propio</strong> (Flexbox / Grid)</td>
+                  <td>3 y 4</td>
+                  <td>
+                    Layouts muy personalizados, control total, proyectos donde
+                    el diseño es protagonista.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Bootstrap</strong></td>
+                  <td>5</td>
+                  <td>
+                    Prototipos rápidos, paneles administrativos, formularios
+                    estándar, equipos que priorizan velocidad sobre un diseño
+                    100% único.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Tailwind</strong></td>
+                  <td>6</td>
+                  <td>
+                    Diseños a medida con velocidad de desarrollo alta, equipos
+                    que quieren evitar archivos <code>.css</code> enormes y
+                    difíciles de mantener.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 11. CÓDIGO DE REFERENCIA -->
+        <section id="codigo-referencia">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-code"></i></span> Código
+            de referencia (para VSC)
+          </h2>
+          <p>
+            Maquetamos una tarjeta de producto completa
+            <strong>100% con clases utilitarias</strong> de Tailwind, sin
+            escribir ningún archivo <code>.css</code> propio.
+          </p>
+
+          <div class="code-block">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              tarjeta-tailwind.html
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;TecnoStore&lt;/title&gt;
+    &lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body class="bg-slate-900 text-slate-100 p-6"&gt;
+
+    &lt;!-- Grilla de tarjetas, responsiva: 1 → 2 → 3 columnas --&gt;
+    &lt;div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto"&gt;
+
+        &lt;!-- Tarjeta de producto, 100% maquetada con utilidades --&gt;
+        &lt;article class="bg-slate-800 rounded-xl p-4 flex flex-col items-center gap-2 shadow-lg"&gt;
+            &lt;img src="https://via.placeholder.com/200"
+                 alt="Notebook Lenovo 15 pulgadas"
+                 class="rounded-md w-full"&gt;
+            &lt;h3 class="text-lg font-bold"&gt;Notebook Lenovo&lt;/h3&gt;
+            &lt;p class="text-teal-400 font-semibold text-xl"&gt;$450.000&lt;/p&gt;
+            &lt;button class="mt-auto w-full py-2 px-4 bg-teal-500 hover:bg-teal-600
+                           text-slate-900 font-bold rounded-md transition-colors"&gt;
+                Agregar al carrito
+            &lt;/button&gt;
+        &lt;/article&gt;
+
+    &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </div>
+
+          <div class="callout tip">
+            <div class="callout-title">
+              <i class="fa-solid fa-forward"></i> Lo que viene
+            </div>
+            Con el cierre de esta sesión, terminamos la Unidad 1 (Arquitectura
+            Frontend y Maquetación). En la Unidad 2 vamos a tomar una de estas
+            interfaces ya maquetadas y conectarla con
+            <strong>JavaScript</strong> y un archivo
+            <code>productos.json</code> para que el catálogo deje de ser
+            estático y pase a generarse dinámicamente.
+          </div>
+        </section>
+
+        <!-- 12. DETECTÁ EL ERROR -->
+        <section id="detecta-error">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-bug"></i></span> Detectá
+            el error: código para corregir en VSC
+          </h2>
+          <p>
+            Copiá estos fragmentos en VSC (recordá vincular el CDN de Tailwind)
+            y usá las herramientas de desarrollo (F12 → panel Elements/Styles)
+            para identificar qué clase no está aplicando el efecto esperado.
+          </p>
+
+          <!-- EJERCICIO 1 -->
+          <div class="exercise">
+            <div class="ex-header">
+              <span class="pill">Con errores</span>
+              <h4>Ejercicio 1 — Espaciado y color</h4>
+            </div>
+            <div class="code-block buggy">
+              <div class="code-head">
+                <div class="dots"><span></span><span></span><span></span></div>
+                buggy-11.html
+                <button class="copy-btn">Copiar</button>
+              </div>
+              <pre><code>&lt;button class="padding-4 bg-teal rounded-md text-white"&gt;
+  Agregar al carrito
+&lt;/button&gt;
+
+&lt;p class="text-size-xl font-bold"&gt;
+  Oferta especial
+&lt;/p&gt;</code></pre>
+            </div>
+            <p class="question">
+              🔎 El botón no tiene ni espaciado ni color de fondo, y el texto no
+              cambia de tamaño. Encontrá los <strong>3 problemas</strong> (todos
+              son nombres de clase incorrectos).
+            </p>
+            <details class="reveal">
+              <summary>Ver solución y explicación</summary>
+              <div class="reveal-body">
+                <ol>
+                  <li>
+                    <code>padding-4</code> no existe como clase de Tailwind; la
+                    clase correcta es <code>p-4</code> (prefijo corto, sin la
+                    palabra completa "padding").
+                  </li>
+                  <li>
+                    <code>bg-teal</code> está incompleto: a todo color de
+                    Tailwind le falta la
+                    <strong>intensidad numérica</strong> (50 a 950). Debería
+                    ser, por ejemplo, <code>bg-teal-500</code>.
+                  </li>
+                  <li>
+                    <code>text-size-xl</code> no existe: la clase de tamaño de
+                    texto es directamente <code>text-xl</code> (sin la palabra
+                    "size" en el medio).
+                  </li>
+                </ol>
+                <p>
+                  <strong>Tip de debugging:</strong> con las herramientas de
+                  desarrollo abiertas (F12), seleccioná el elemento y mirá el
+                  panel de estilos aplicados: si una clase escrita en el HTML no
+                  genera ninguna regla CSS visible en ese panel, es señal segura
+                  de que el nombre de la clase no existe tal cual está escrito.
+                </p>
+              </div>
+            </details>
+          </div>
+
+          <!-- EJERCICIO 2 -->
+          <div class="exercise">
+            <div class="ex-header">
+              <span class="pill">Con errores</span>
+              <h4>Ejercicio 2 — Breakpoints mal aplicados</h4>
+            </div>
+            <div class="code-block buggy">
+              <div class="code-head">
+                <div class="dots"><span></span><span></span><span></span></div>
+                buggy-12.html
+                <button class="copy-btn">Copiar</button>
+              </div>
+              <pre><code>&lt;div class="grid cols-1 md-grid-cols-2 lg:grid-cols-4 gap-4"&gt;
+  &lt;div class="bg-slate-800 p-4"&gt;Producto 1&lt;/div&gt;
+  &lt;div class="bg-slate-800 p-4"&gt;Producto 2&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            <p class="question">
+              🔎 La grilla no se acomoda como se espera en ningún tamaño de
+              pantalla. Encontrá los
+              <strong>2 problemas</strong> de sintaxis.
+            </p>
+            <details class="reveal">
+              <summary>Ver solución y explicación</summary>
+              <div class="reveal-body">
+                <ol>
+                  <li>
+                    <code>cols-1</code> está incompleto: la clase correcta es
+                    <code>grid-cols-1</code> (le falta el prefijo
+                    <code>grid-</code>).
+                  </li>
+                  <li>
+                    <code>md-grid-cols-2</code> usa un
+                    <strong>guion medio</strong> para separar el breakpoint de
+                    la clase, pero Tailwind exige <strong>dos puntos</strong>:
+                    debe ser <code>md:grid-cols-2</code>. Sin los dos puntos,
+                    Tailwind no reconoce esa cadena como una variante responsiva
+                    y la ignora por completo.
+                  </li>
+                </ol>
+                <p>
+                  <strong>Tip de debugging:</strong> los prefijos de breakpoint
+                  <strong>siempre</strong> llevan <code>:</code> (dos puntos)
+                  inmediatamente después, nunca un guion. Es uno de los errores
+                  de tipeo más comunes al empezar con Tailwind.
+                </p>
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <!-- 13. QUIZ RÁPIDO -->
+        <section id="quiz">
+          <h2>
+            <span class="step-no"
+              ><i class="fa-solid fa-circle-question"></i
+            ></span>
+            Quiz rápido de autoevaluación
+          </h2>
+
+          <div class="quiz">
+            <p class="q-title">
+              1. ¿Cuál es la idea central del enfoque "utility-first"?
+            </p>
+            <div class="options">
+              <button
+                data-correct="false"
+                data-explain="Utility-first es lo opuesto: evita escribir CSS propio en archivos aparte."
+              >
+                Escribir un único archivo CSS gigante con todos los estilos del
+                sitio
+              </button>
+              <button
+                data-correct="true"
+                data-explain="Correcto: Tailwind ofrece clases diminutas de un solo propósito que se combinan en el HTML."
+              >
+                Combinar clases diminutas de un solo propósito directamente en
+                el HTML
+              </button>
+              <button
+                data-correct="false"
+                data-explain="Eso describe más bien el enfoque de Bootstrap (componentes completos ya armados)."
+              >
+                Usar componentes completos y predefinidos como único recurso
+              </button>
+            </div>
+            <p class="feedback"></p>
+          </div>
+
+          <div class="quiz">
+            <p class="q-title">
+              2. ¿Qué separador se usa entre un breakpoint y la clase en
+              Tailwind?
+            </p>
+            <div class="options">
+              <button
+                data-correct="false"
+                data-explain="El guion medio no es el separador correcto para breakpoints en Tailwind."
+              >
+                Un guion medio: md-grid-cols-2
+              </button>
+              <button
+                data-correct="true"
+                data-explain="Correcto: los dos puntos son el separador obligatorio entre el prefijo de breakpoint y la clase."
+              >
+                Dos puntos: md:grid-cols-2
+              </button>
+              <button
+                data-correct="false"
+                data-explain="El guion bajo tampoco es un separador válido para breakpoints en Tailwind."
+              >
+                Un guion bajo: md_grid-cols-2
+              </button>
+            </div>
+            <p class="feedback"></p>
+          </div>
+
+          <div class="quiz">
+            <p class="q-title">
+              3. La clase <code>bg-teal</code> (sin número) para aplicar un
+              color de fondo...
+            </p>
+            <div class="options">
+              <button
+                data-correct="true"
+                data-explain="Correcto: a todo color de Tailwind le falta especificar la intensidad numérica (ej: bg-teal-500)."
+              >
+                Está incompleta: falta la intensidad numérica del color
+              </button>
+              <button
+                data-correct="false"
+                data-explain="No usa una intensidad por defecto automática; la clase completa es obligatoria."
+              >
+                Es válida y aplica automáticamente una intensidad media
+              </button>
+              <button
+                data-correct="false"
+                data-explain="No es un alias de ningún otro color; simplemente está incompleta."
+              >
+                Es un alias válido de bg-teal-500
+              </button>
+            </div>
+            <p class="feedback"></p>
+          </div>
+        </section>
+
+        <!-- 14. ACTIVIDAD  -->
+        <section id="actividad">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-flask-vial"></i></span>
+            Actividad
+          </h2>
+          <p>
+            Consigna: maquetar una
+            <strong>grilla de tarjetas de producto</strong>
+            <strong>100% con clases utilitarias</strong> de Tailwind, combinando
+            espaciado, tipografía, color y breakpoints responsivos, sin escribir
+            ningún archivo <code>.css</code> propio.
+          </p>
+
+          <div class="lab-box">
+            <div class="lab-title">
+              <i class="fa-solid fa-list-check fa-lg"></i>
+              <h3 class="mt-0">Checklist paso a paso</h3>
+            </div>
+            <p class="dim">Marcá cada paso a medida que lo completes.</p>
+
+            <div class="progress-wrap">
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill"></div>
+              </div>
+              <p class="progress-label">0 de 0 tareas completadas (0%)</p>
+            </div>
+
+            <ul class="checklist" data-storage-key="dev4-sesion6-checklist">
+              <li>
+                <input type="checkbox" id="s6-t1" />
+                <label for="s6-t1"
+                  >Crear un nuevo archivo <code>catalogo-tailwind.html</code> y
+                  vincular el Play CDN de Tailwind en el
+                  <code>&lt;head&gt;</code>.</label
+                >
+              </li>
+              <li>
+                <input type="checkbox" id="s6-t2" />
+                <label for="s6-t2"
+                  >Aplicar <code>bg-slate-900 text-slate-100</code> al
+                  <code>&lt;body&gt;</code> para establecer el modo oscuro de la
+                  página.</label
+                >
+              </li>
+              <li>
+                <input type="checkbox" id="s6-t3" />
+                <label for="s6-t3"
+                  >Crear un contenedor con
+                  <code
+                    >grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6</code
+                  >
+                  para alojar al menos 3 tarjetas de producto.</label
+                >
+              </li>
+              <li>
+                <input type="checkbox" id="s6-t4" />
+                <label for="s6-t4"
+                  >Maquetar cada tarjeta con <code>bg-slate-800</code>,
+                  <code>rounded-xl</code>, <code>p-4</code> y
+                  <code>flex flex-col</code> para apilar imagen, título, precio
+                  y botón.</label
+                >
+              </li>
+              <li>
+                <input type="checkbox" id="s6-t5" />
+                <label for="s6-t5"
+                  >Aplicar al menos 3 utilidades tipográficas distintas (ej:
+                  <code>text-lg font-bold</code> en el título,
+                  <code>text-xl font-semibold</code> en el precio).</label
+                >
+              </li>
+              <li>
+                <input type="checkbox" id="s6-t6" />
+                <label for="s6-t6"
+                  >Elegir un color de acento propio de la paleta de Tailwind
+                  (por ejemplo <code>teal</code>, <code>violet</code> u
+                  <code>orange</code>) y aplicarlo de forma consistente en
+                  precios y botones con <code>bg-*-500</code> y
+                  <code>text-*-500</code>.</label
+                >
+              </li>
+              <li>
+                <input type="checkbox" id="s6-t7" />
+                <label for="s6-t7"
+                  >Agregar al menos un elemento con
+                  <code>hidden md:block</code> (por ejemplo, una etiqueta "Envío
+                  gratis" que solo se vea a partir de cierto ancho).</label
+                >
+              </li>
+              <li>
+                <input type="checkbox" id="s6-t8" />
+                <label for="s6-t8"
+                  >Verificar con las herramientas de desarrollo (F12 → modo de
+                  simulación de dispositivos) que la grilla cambia de 1 a 2 y a
+                  3 columnas en los distintos breakpoints, y que ninguna clase
+                  escrita quedó sin aplicar efecto (clase "fantasma" por
+                  typo).</label
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- NAVEGACIÓN ENTRE SESIONES -->
+
+        <div style="margin-bottom: 24px">
+          <a
+            href="../../materias/desarrollo-4.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #4ade80;
+              color: #222;
+              display: inline-block;
+              margin-right: 10px;
+            "
+          >
+            Volver a Materia
+          </a>
+          <a
+            href="desarrollo4-sesion5.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #60a5fa;
+              color: #fff;
+              display: inline-block;
+              margin-right: 10px;
+            "
+          >
+            Ir a Sesión 5
+          </a>
+          <a
+            href="desarrollo4-sesion7.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #f9e282;
+              color: #222;
+              display: inline-block;
+            "
+          >
+            Ir a Sesión 7
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

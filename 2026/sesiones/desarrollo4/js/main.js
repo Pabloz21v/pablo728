@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initGridDemo();
   initAreaDemo();
   initIframeDemos();
+  initUtilityDemo();
 });
 
 /* ---------- Menú responsive (hamburguesa) ---------- */
@@ -305,6 +306,56 @@ function initIframeDemos() {
       });
     });
   });
+}
+
+/* ---------- Demo "constructor de clases utilitarias" (Tailwind, Sesión 6) ----------
+   El alumno combina selects de padding, tamaño de fuente, color de fondo
+   y redondeado; el resultado se aplica EN VIVO a un chip de vista previa,
+   y se muestra la cadena exacta de clases utilitarias equivalente. */
+function initUtilityDemo() {
+  const demo = document.querySelector('.utility-demo');
+  if (!demo) return;
+
+  const chip = demo.querySelector('.preview-chip');
+  const codeOut = demo.querySelector('.demo-code');
+  const padding = demo.querySelector('#demo-padding');
+  const textSize = demo.querySelector('#demo-text-size');
+  const bgColor = demo.querySelector('#demo-bg-color');
+  const rounded = demo.querySelector('#demo-rounded');
+
+  // Mapas clase-Tailwind → estilo CSS real equivalente, para que el
+  // preview se vea igual sin depender de que Tailwind esté cargado.
+  const paddingMap = { 'p-2': '8px', 'p-4': '16px', 'p-6': '24px', 'p-8': '32px' };
+  const textMap = { 'text-sm': '14px', 'text-base': '16px', 'text-xl': '20px', 'text-3xl': '30px' };
+  const bgMap = {
+    'bg-teal-500': '#14b8a6',
+    'bg-violet-500': '#8b5cf6',
+    'bg-orange-500': '#f97316',
+    'bg-rose-500': '#f43f5e'
+  };
+  const roundedMap = { 'rounded-none': '0px', 'rounded-md': '6px', 'rounded-xl': '12px', 'rounded-full': '9999px' };
+
+  function render() {
+    const p = padding.value;
+    const t = textSize.value;
+    const b = bgColor.value;
+    const r = rounded.value;
+
+    chip.style.padding = paddingMap[p];
+    chip.style.fontSize = textMap[t];
+    chip.style.backgroundColor = bgMap[b];
+    chip.style.borderRadius = roundedMap[r];
+
+    if (codeOut) {
+      codeOut.textContent = `<button class="${p} ${t} ${b} ${r} text-white font-bold">\n  Agregar al carrito\n</button>`;
+    }
+  }
+
+  [padding, textSize, bgColor, rounded].forEach((select) => {
+    if (select) select.addEventListener('change', render);
+  });
+
+  render(); // estado inicial
 }
 
 /* ---------- Toast simple de feedback ---------- */

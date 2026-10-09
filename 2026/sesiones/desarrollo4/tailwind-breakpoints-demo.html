@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo: breakpoints responsivos con Tailwind CSS</title>
+  <!-- Tailwind vía CDN (play-cdn): compila las clases utilitarias
+       directamente en el navegador, ideal para practicar y prototipar.
+       En un proyecto de producción real se instalaría como paquete
+       de build, pero el CDN es perfecto para aprender la lógica. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+</head>
+<body class="bg-slate-900 text-slate-100 p-4 font-sans">
+
+  <!--
+    ============================================================
+    EJEMPLO: grilla de tarjetas 100% con clases utilitarias.
+    grid-cols-1        → en pantallas chicas: 1 columna
+    md:grid-cols-2     → a partir de "md" (768px): 2 columnas
+    lg:grid-cols-4     → a partir de "lg" (1024px): 4 columnas
+    Achicá el ancho (o el iframe desde la página principal) y
+    mirá cómo las tarjetas se reacomodan SOLAS.
+    ============================================================
+  -->
+  <h3 class="text-xs uppercase tracking-wide text-slate-400 mb-3">
+    grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+    <div class="bg-teal-500 text-slate-900 font-bold rounded-xl p-6 text-center">
+      Producto 1
+    </div>
+    <div class="bg-teal-500 text-slate-900 font-bold rounded-xl p-6 text-center">
+      Producto 2
+    </div>
+    <div class="bg-teal-500 text-slate-900 font-bold rounded-xl p-6 text-center">
+      Producto 3
+    </div>
+    <div class="bg-teal-500 text-slate-900 font-bold rounded-xl p-6 text-center">
+      Producto 4
+    </div>
+
+  </div>
+
+  <!--
+    ============================================================
+    EJEMPLO: tipografía y visibilidad responsivas
+    text-base       → tamaño de fuente base en pantallas chicas
+    md:text-xl      → tamaño más grande a partir de "md"
+    hidden md:block → oculto en celular, visible desde "md" en adelante
+    ============================================================
+  -->
+  <h3 class="text-xs uppercase tracking-wide text-slate-400 mt-8 mb-3">
+    text-base md:text-xl · hidden md:block
+  </h3>
+  <div class="bg-slate-800 border border-slate-700 rounded-xl p-4">
+    <p class="text-base md:text-xl font-semibold text-violet-300">
+      Este texto crece en pantallas medianas y grandes.
+    </p>
+    <p class="hidden md:block text-sm text-slate-400 mt-2">
+      Este párrafo solo es visible a partir del breakpoint "md" (≥768px).
+    </p>
+  </div>
+
+</body>
+</html>
