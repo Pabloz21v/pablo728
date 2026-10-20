@@ -1,0 +1,2093 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesión 7 · JavaScript, DOM y JSON - CRUD de E-commerce | Desarrollo IV</title>
+  <meta name="description" content="Sesión 7: JavaScript vanilla, manipulación del DOM y consumo de JSON para construir un e-commerce funcional con CRUD completo (Crear, Leer, Actualizar, Eliminar).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>body{font-family:'Inter',Segoe UI,sans-serif;}</style>
+</head>
+<body>
+
+  <!-- ============ HEADER / NAVEGACIÓN ============ -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <span class="brand-badge">D4</span>
+        Desarrollo IV · Laboratorio
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <nav class="main-nav">
+        <a href="index.html">Inicio</a>
+        <a href="sesion1.html">Sesión 1</a>
+        <a href="sesion2.html">Sesión 2</a>
+        <a href="sesion3.html">Sesión 3</a>
+        <a href="sesion4.html">Sesión 4</a>
+        <a href="sesion5.html">Sesión 5</a>
+        <a href="sesion6.html">Sesión 6</a>
+        <a href="sesion7.html" class="active">Sesión 7</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ ENCABEZADO DE SESIÓN ============ -->
+  <section class="session-hero">
+    <div class="container">
+      <p class="breadcrumb"><a href="index.html">Inicio</a> / Unidad 2 / Sesión 7 (inicio de unidad)</p>
+      <h1>Sesión 7 — JavaScript, DOM y JSON: CRUD completo de E-commerce</h1>
+      <p class="lead" style="color:var(--text-dim); max-width:760px;">
+        Arrancamos la <strong>Unidad 2</strong>. Hasta ahora maquetamos interfaces estáticas con
+        HTML y CSS (propio, Bootstrap, Tailwind). Hoy esas interfaces <strong>cobran vida</strong>:
+        vamos a usar JavaScript para leer un catálogo desde un JSON, dibujarlo en pantalla,
+        buscarlo/filtrarlo, y construir las cuatro operaciones básicas de cualquier sistema de
+        datos — <strong>Crear, Leer, Actualizar y Eliminar</strong> (CRUD) — sobre un e-commerce
+        funcional de principio a fin.
+      </p>
+      <div class="meta-row">
+        <span><i class="fa-solid fa-diagram-project"></i> Entregable: catálogo dinámico con CRUD completo (sin backend)</span>
+        <span><i class="fa-solid fa-flag"></i> Inicio de la Unidad 2</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LAYOUT: TOC + CONTENIDO ============ -->
+  <div class="container layout">
+
+    <!-- TABLA DE CONTENIDOS -->
+    <aside class="toc">
+      <h4>En esta sesión</h4>
+      <ol>
+        <li><a href="#objetivos">Objetivos y qué vamos a construir</a></li>
+        <li><a href="#esqueleto-html">Esqueleto HTML base</a></li>
+        <li><a href="#enlace-html-css-js">Cómo se enlazan HTML, CSS y JS</a></li>
+        <li><a href="#json-base">El JSON de productos</a></li>
+        <li><a href="#fase1">Fase 1 — Fundamentos de JS aplicados</a></li>
+        <li><a href="#fase2">Fase 2 — Manipulación del DOM: renderizado</a></li>
+        <li><a href="#fase3">Fase 3 — Eventos e interactividad</a></li>
+        <li><a href="#fase4">Fase 4 — Consumo y manejo del JSON</a></li>
+        <li><a href="#fase5">Fase 5 — CRUD completo integrado</a></li>
+        <li><a href="#demo-viva">Demo en vivo: e-commerce CRUD funcional</a></li>
+        <li><a href="#fase6">Fase 6 — Integración final y refactor</a></li>
+        <li><a href="#codigo-final">Código final completo (para copiar)</a></li>
+        <li><a href="#detecta-error">Detectá el error</a></li>
+        <li><a href="#debugging">Guía de depuración y errores comunes</a></li>
+        <li><a href="#quiz">Quiz rápido</a></li>
+        <li><a href="#actividad">Actividad de laboratorio</a></li>
+        <li><a href="#desafios">Desafíos extra opcionales</a></li>
+        <li><a href="#glosario">Glosario</a></li>
+      </ol>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <article class="content">
+
+      <!-- 1. OBJETIVOS -->
+      <section id="objetivos">
+        <h2><span class="step-no"><i class="fa-solid fa-bullseye"></i></span> Objetivos y qué vamos a construir</h2>
+        <p>Al finalizar esta sesión, vas a poder:</p>
+        <ul>
+          <li>Declarar y usar <strong>variables, tipos de datos y operadores</strong> de JavaScript aplicados a un catálogo de productos.</li>
+          <li><strong>Enlazar</strong> los tres archivos (HTML, CSS y JS) y <strong>cablear</strong> un botón, un input o un formulario a una función de JavaScript usando <code>id</code>, <code>class</code> y <code>addEventListener</code>.</li>
+          <li>Seleccionar y crear elementos del <strong>DOM</strong> con JavaScript puro (sin librerías).</li>
+          <li>Capturar <strong>eventos</strong> de clicks y formularios, evitando recargas de página.</li>
+          <li>Tratar un array de objetos (JSON) como una <strong>base de datos simulada</strong>: buscar, filtrar y recorrer datos.</li>
+          <li>Implementar un <strong>CRUD completo</strong> (Create, Read, Update, Delete) que mantiene un solo array como estado central de la aplicación.</li>
+          <li>Depurar errores comunes de JavaScript usando <code>console.log</code> y las herramientas de desarrollo (F12).</li>
+        </ul>
+
+        <div class="fase-grid">
+          <div class="fase-chip"><i class="fa-solid fa-code"></i><strong>Fase 1-2</strong><span>JS + DOM</span></div>
+          <div class="fase-chip"><i class="fa-solid fa-hand-pointer"></i><strong>Fase 3</strong><span>Eventos</span></div>
+          <div class="fase-chip"><i class="fa-solid fa-database"></i><strong>Fase 4</strong><span>JSON</span></div>
+          <div class="fase-chip"><i class="fa-solid fa-rotate"></i><strong>Fase 5-6</strong><span>CRUD final</span></div>
+        </div>
+
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-comment-dots"></i> ¿Qué vamos a construir, exactamente?</div>
+          Un <strong>catálogo de productos</strong> (igual en espíritu al que ya maquetaste en las
+          Sesiones 3 a 6) que: (1) se dibuja solo a partir de un array de objetos JavaScript,
+          (2) se puede <strong>buscar</strong> por nombre y <strong>filtrar</strong> por categoría,
+          (3) tiene un formulario para <strong>agregar</strong> productos nuevos, (4) permite
+          <strong>editar</strong> cualquier producto existente, y (5) permite <strong>eliminarlo</strong>
+          con confirmación. Todo esto <strong>sin backend ni base de datos real</strong>: el array
+          vive en la memoria del navegador mientras la página está abierta.
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-lightbulb"></i> Conexión con lo ya aprendido</div>
+          No vamos a maquetar de cero: vas a <strong>reutilizar</strong> las clases CSS que ya
+          conocés (<code>producto-card</code> es conceptualmente lo mismo que <code>.session-card</code>
+          en esta misma web) y, si en la Sesión 6 maquetaste tu tarjeta con Tailwind, podés
+          mantener esas mismas clases utilitarias en el HTML que hoy generamos <em>desde JavaScript</em>.
+        </div>
+      </section>
+
+      <!-- 2. ESQUELETO HTML -->
+      <section id="esqueleto-html">
+        <h2><span class="step-no"><i class="fa-solid fa-file-code"></i></span> Esqueleto HTML base (sin estilos)</h2>
+        <p>
+          Antes de escribir JavaScript necesitamos un HTML mínimo con los "ganchos" (contenedores
+          vacíos) donde JS va a insertar contenido. Fijate que <strong>no hay ninguna tarjeta de
+          producto escrita a mano</strong>: todas se generan dinámicamente.
+        </p>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            catalogo.html
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;TecnoStore - Catálogo&lt;/title&gt;
+    &lt;link rel="stylesheet" href="estilos.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;header&gt;
+        &lt;h1&gt;TecnoStore&lt;/h1&gt;
+    &lt;/header&gt;
+
+    &lt;!-- Barra de búsqueda y filtro: elementos que JS va a "escuchar" --&gt;
+    &lt;section class="barra-filtros"&gt;
+        &lt;input type="text" id="buscador" placeholder="Buscar producto..."&gt;
+        &lt;select id="filtro-categoria"&gt;
+            &lt;option value="todas"&gt;Todas las categorías&lt;/option&gt;
+            &lt;option value="electronica"&gt;Electrónica&lt;/option&gt;
+            &lt;option value="accesorios"&gt;Accesorios&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;button id="btn-nuevo"&gt;+ Nuevo producto&lt;/button&gt;
+    &lt;/section&gt;
+
+    &lt;!-- Formulario de alta/edición: oculto hasta que se necesite --&gt;
+    &lt;form id="form-producto" class="form-producto"&gt;
+        &lt;h3 id="form-titulo"&gt;Nuevo producto&lt;/h3&gt;
+        &lt;label for="input-nombre"&gt;Nombre&lt;/label&gt;
+        &lt;input type="text" id="input-nombre" required&gt;
+
+        &lt;label for="input-descripcion"&gt;Descripción&lt;/label&gt;
+        &lt;textarea id="input-descripcion"&gt;&lt;/textarea&gt;
+
+        &lt;label for="input-precio"&gt;Precio&lt;/label&gt;
+        &lt;input type="number" id="input-precio" step="0.01" required&gt;
+
+        &lt;label for="input-stock"&gt;Stock&lt;/label&gt;
+        &lt;input type="number" id="input-stock" required&gt;
+
+        &lt;label for="input-categoria"&gt;Categoría&lt;/label&gt;
+        &lt;select id="input-categoria"&gt;
+            &lt;option value="electronica"&gt;Electrónica&lt;/option&gt;
+            &lt;option value="accesorios"&gt;Accesorios&lt;/option&gt;
+        &lt;/select&gt;
+
+        &lt;button type="submit"&gt;Guardar&lt;/button&gt;
+        &lt;button type="button" id="btn-cancelar"&gt;Cancelar&lt;/button&gt;
+    &lt;/form&gt;
+
+    &lt;!-- GANCHO VACÍO: acá JS va a inyectar una &lt;article&gt; por cada producto --&gt;
+    &lt;main id="contenedor-productos" class="producto-grid"&gt;&lt;/main&gt;
+
+    &lt;script src="productos.js"&gt;&lt;/script&gt;
+    &lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-title"><i class="fa-solid fa-triangle-exclamation"></i> Orden de los scripts</div>
+          Los <code>&lt;script&gt;</code> van <strong>al final del <code>&lt;body&gt;</code></strong>
+          (igual que vimos con Bootstrap en la Sesión 5): así el HTML ya existe en el DOM cuando
+          JavaScript intenta buscarlo con <code>querySelector</code>. Si los ponés en el
+          <code>&lt;head&gt;</code> sin más cuidado, muchas veces JS no va a encontrar los
+          elementos todavía y vas a obtener <code>null</code>.
+        </div>
+      </section>
+
+      <!-- 3. CÓMO SE ENLAZAN HTML, CSS Y JS -->
+      <section id="enlace-html-css-js">
+        <h2><span class="step-no"><i class="fa-solid fa-link"></i></span> Cómo se enlazan HTML, CSS y JavaScript</h2>
+        <p>
+          Ya sabés seleccionar elementos del DOM y escuchar eventos. Pero queda la pregunta que más
+          traba cuando se arma la primera web: <strong>¿dónde escribo cada cosa y cómo hago que
+          este botón haga algo?</strong> Un botón no "sabe" JavaScript: hay que <em>cablearlo</em>.
+          En esta sección vas a ver el cableado completo, pieza por pieza, y con una demo real
+          incluida en esta misma página.
+        </p>
+
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-comment-dots"></i> La idea en una frase</div>
+          <strong>HTML</strong> es la estructura, <strong>CSS</strong> la apariencia y
+          <strong>JS</strong> el comportamiento. Se comunican por dos canales y solo dos: el
+          <strong>atributo <code>class</code></strong> conecta HTML con CSS, y el
+          <strong>atributo <code>id</code></strong> conecta HTML con JavaScript. Si los nombres no
+          coinciden exactamente, el enlace no existe: no aparece ningún error de sintaxis,
+          simplemente <em>no pasa nada</em>.
+        </div>
+
+        <h3>1. Tres archivos, tres responsabilidades, dos etiquetas de enlace</h3>
+        <div class="folder-tree">
+          <div><span class="f-folder">catalogo/</span></div>
+          <div>├── <span class="f-target">catalogo.html</span> <span class="f-dim">← estructura + los ganchos (id y class)</span></div>
+          <div>├── <span class="f-file">estilos.css</span> <span class="f-dim">← apariencia; se engancha por class</span></div>
+          <div>└── <span class="f-file">app.js</span> <span class="f-dim">← comportamiento; se engancha por id</span></div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Archivo</th><th>Qué aporta</th><th>Cómo se enlaza</th><th>Si falta</th></tr></thead>
+            <tbody>
+              <tr><td><code>.html</code></td><td>La estructura: cajas, textos, botones, inputs.</td><td>Es el archivo que abrís en el navegador; contiene los dos enlaces.</td><td>No hay página.</td></tr>
+              <tr><td><code>.css</code></td><td>La apariencia: colores, tamaños, grillas, estados.</td><td><code>&lt;link rel="stylesheet" href="estilos.css"&gt;</code> dentro del <code>&lt;head&gt;</code>.</td><td>La web se ve como un documento de texto sin estilos.</td></tr>
+              <tr><td><code>.js</code></td><td>El comportamiento: leer inputs, reaccionar a clicks, crear HTML.</td><td><code>&lt;script src="app.js"&gt;&lt;/script&gt;</code> al final del <code>&lt;body&gt;</code>.</td><td>La web se ve bien pero <strong>no reacciona a nada</strong>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            catalogo.html — las dos líneas que hacen todo el enlace
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;TecnoStore&lt;/title&gt;
+
+  &lt;!-- ENLACE 1: el CSS. Va en el &lt;head&gt; --&gt;
+  &lt;link rel="stylesheet" href="estilos.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;!-- Los elementos con id son los "ganchos" que JS va a buscar --&gt;
+  &lt;input type="text" id="nombre" placeholder="Tu nombre"&gt;
+  &lt;button id="btn-saludar"&gt;Saludar&lt;/button&gt;
+  &lt;p id="salida"&gt;Todavía no saludaste a nadie.&lt;/p&gt;
+
+  &lt;!-- ENLACE 2: el JS. Va al final del &lt;body&gt; --&gt;
+  &lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-title"><i class="fa-solid fa-triangle-exclamation"></i> Las rutas tienen que existir</div>
+          <code>href="estilos.css"</code> significa "en la <strong>misma carpeta</strong> que este
+          HTML". Si tu CSS está dentro de una carpeta <code>css/</code>, la ruta correcta es
+          <code>href="css/estilos.css"</code>, y si el JS está en <code>js/</code>, entonces
+          <code>src="js/app.js"</code>. Abrí <strong>F12 → pestaña Network</strong> y recargá: si
+          ves un <code>404</code> en <code>estilos.css</code> o <code>app.js</code>, el navegador
+          está buscando el archivo en un lugar donde no está — y por eso "no funciona nada".
+        </div>
+
+        <h3>2. El contrato de nombres: <code>id</code> y <code>class</code></h3>
+        <p>
+          Un mismo elemento HTML tiene dos identificadores, y cada uno le habla a un lenguaje
+          distinto. Mirá el mismo botón visto desde los tres archivos:
+        </p>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            un mismo nombre escrito en los tres archivos
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>&lt;!-- 1) HTML: el botón lleva id (para JS) y class (para CSS) --&gt;
+&lt;button id="btn-saludar" class="btn-primario"&gt;Saludar&lt;/button&gt;
+
+/* 2) CSS: se engancha por la CLASE, con un punto delante */
+.btn-primario {
+  background: #4fd1c5;
+  color: #06141a;
+  border-radius: 8px;
+}
+.btn-primario:hover { filter: brightness(1.1); }
+
+// 3) JS: se engancha por el ID, con una almohadilla delante
+const boton = document.querySelector('#btn-saludar'); // ← mismo nombre, sin class
+
+boton.addEventListener('click', () =&gt; {
+  // acá va lo que tiene que pasar al tocar el botón
+});</code></pre>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-lightbulb"></i> La regla del nombre exacto</div>
+          En el HTML escribís <code>id="btn-saludar"</code> (sin símbolos). En JavaScript lo buscás
+          como <code>'#btn-saludar'</code> (<strong>con</strong> <code>#</code>). En el HTML escribís
+          <code>class="btn-primario"</code>. En CSS lo estilás como <code>.btn-primario</code>
+          (<strong>con</strong> <code>.</code>). Es el mismo criterio que ya usás para los selectores
+          CSS desde la Sesión 1: <code>#</code> es id y <code>.</code> es class.
+        </div>
+
+        <h3>3. Qué propiedad de JS lee cada control de HTML</h3>
+        <p>
+          Esta es la tabla que resuelve el 90% de las dudas de "cómo conecto el HTML con JS". Cada
+          control tiene <strong>una propiedad</strong> para leerlo y <strong>un evento</strong> que
+          avisa cuándo cambió:
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Elemento HTML</th><th>Cómo lo leo / modifico</th><th>Evento típico</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;button id="btn"&gt;</code></td><td><code>document.querySelector('#btn')</code> y le agrego un listener (no se "lee" ningún valor: solo se escucha el click).</td><td><code>click</code></td></tr>
+              <tr><td><code>&lt;input type="text"&gt;</code></td><td><code>input.value</code> — el texto escrito, siempre como <strong>string</strong>.</td><td><code>input</code> (cada tecla) / <code>change</code> (al salir del campo)</td></tr>
+              <tr><td><code>&lt;input type="number"&gt;</code></td><td><code>input.value</code> + <code>parseFloat()</code> o <code>parseInt()</code> para convertirlo en número.</td><td><code>input</code> / <code>change</code></td></tr>
+              <tr><td><code>&lt;input type="checkbox"&gt;</code></td><td><code>input.checked</code> — <code>true</code> o <code>false</code>.</td><td><code>change</code></td></tr>
+              <tr><td><code>&lt;select&gt;</code></td><td><code>select.value</code> — el <code>value</code> de la <code>&lt;option&gt;</code> elegida.</td><td><code>change</code></td></tr>
+              <tr><td><code>&lt;textarea&gt;</code></td><td><code>textarea.value</code> — el texto completo del área.</td><td><code>input</code></td></tr>
+              <tr><td><code>&lt;form&gt;</code></td><td><code>form.addEventListener('submit', …)</code> + <code>event.preventDefault()</code> como primera línea.</td><td><code>submit</code></td></tr>
+              <tr><td><code>&lt;h3&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;span&gt;</code></td><td><code>el.textContent = 'texto'</code> — escribe el contenido (seguro, no interpreta HTML).</td><td>—</td></tr>
+              <tr><td><code>&lt;img&gt;</code></td><td><code>img.setAttribute('src', url)</code> y <code>img.setAttribute('alt', texto)</code>.</td><td>—</td></tr>
+              <tr><td>Cualquier elemento</td><td><code>el.classList.add('x')</code> / <code>.remove('x')</code> / <code>.toggle('x')</code> — así JS activa una regla CSS.</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>4. La receta de 4 pasos para conectar cualquier control</h3>
+        <p>
+          No hace falta memorizar nada más: todos los enlaces de esta sesión (y de tu proyecto
+          final) siguen siempre los mismos cuatro pasos.
+        </p>
+        <ol class="wiring-flow">
+          <li>
+            <span class="wf-num">1</span>
+            <div class="wf-body">
+              <strong>Poné un <code>id</code> en el HTML</strong>
+              <span>A cada elemento que JS tenga que encontrar: <code>&lt;button id="btn-saludar"&gt;</code>. El id es único: no se repite en la página.</span>
+            </div>
+          </li>
+          <li>
+            <span class="wf-num">2</span>
+            <div class="wf-body">
+              <strong>Traé el elemento con <code>querySelector</code></strong>
+              <span><code>const boton = document.querySelector('#btn-saludar');</code> — mismo nombre, con <code>#</code>. Se hace una sola vez, al inicio del archivo.</span>
+            </div>
+          </li>
+          <li>
+            <span class="wf-num">3</span>
+            <div class="wf-body">
+              <strong>Escuchá el evento con <code>addEventListener</code></strong>
+              <span><code>boton.addEventListener('click', () =&gt; { … });</code> — el código de adentro no corre ahora, corre <strong>cuando el usuario actúa</strong>. Ese es el enlace.</span>
+            </div>
+          </li>
+          <li>
+            <span class="wf-num">4</span>
+            <div class="wf-body">
+              <strong>Dentro del callback: leé el input y escribí el DOM</strong>
+              <span>Leés con <code>input.value</code>, cambiás con <code>salida.textContent</code> y activás una clase CSS con <code>salida.classList.add('destacado')</code>.</span>
+            </div>
+          </li>
+        </ol>
+
+        <h3>5. El ciclo completo: qué pasa cuando el usuario hace clic</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>#</th><th>Quién actúa</th><th>Qué ocurre</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td><strong>HTML</strong></td><td>El navegador lee el archivo y construye el árbol del DOM. Cada <code>id</code> queda registrado.</td></tr>
+              <tr><td>2</td><td><strong>CSS</strong></td><td>Aplica un estilo a cada elemento según su <code>class</code>/selector. El botón se ve como botón.</td></tr>
+              <tr><td>3</td><td><strong>JS</strong></td><td>Al cargar, busca los elementos por <code>id</code> y les cuelga un <code>addEventListener</code>. Ahí queda "cableado".</td></tr>
+              <tr><td>4</td><td><strong>Usuario</strong></td><td>Hace clic. El navegador emite el evento <code>click</code> sobre ese elemento.</td></tr>
+              <tr><td>5</td><td><strong>JS</strong></td><td>Su callback se ejecuta: lee <code>.value</code>, calcula, y escribe en el DOM (<code>textContent</code>, <code>classList</code>, <code>createElement</code>).</td></tr>
+              <tr><td>6</td><td><strong>CSS</strong></td><td>El navegador repinta solo la parte que cambió, aplicando los estilos correspondientes al nuevo contenido o a la nueva clase.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-lightbulb"></i> Por qué conviene cambiar <em>clases</em> y no estilos sueltos</div>
+          Cuando JS hace <code>salida.classList.add('destacado')</code>, los colores y tamaños siguen
+          viviendo en el CSS. Si mañana querés cambiar el diseño, editás una sola regla CSS y todos
+          los elementos cambian. Si en cambio hacés <code>salida.style.background = '#4fd1c5'</code>
+          desde JS, el estilo queda "incrustado" en el archivo equivocado y se vuelve difícil de
+          mantener. Regla práctica: <strong>JS decide <em>cuándo</em>, CSS decide <em>cómo se ve</em></strong>.
+        </div>
+
+        <h3>6. Véalo en vivo: el mismo botón, cableado paso a paso</h3>
+        <p>
+          La demo de abajo es <strong>real</strong>: es el patrón de 4 pasos corriendo en esta misma
+          página. Tocá los botones y mirá cómo cada paso queda registrado abajo, indicando qué capa
+          intervino (<strong>EVENTO</strong> → <strong>JS</strong> → <strong>CSS</strong>).
+        </p>
+
+        <div class="wiring-demo">
+          <div class="wiring-grid">
+            <div class="wiring-panel" data-layer="html">
+              <div class="wiring-panel-head"><span class="w-tag html">1 · HTML</span> estructura y ganchos</div>
+              <pre class="wiring-code">&lt;input id="wd-nombre" type="text"&gt;
+
+&lt;button id="wd-saludar"&gt;Saludar&lt;/button&gt;
+&lt;button id="wd-destacar"&gt;Destacar&lt;/button&gt;
+
+&lt;p id="wd-salida"&gt;…&lt;/p&gt;</pre>
+            </div>
+            <div class="wiring-panel" data-layer="css">
+              <div class="wiring-panel-head"><span class="w-tag css">2 · CSS</span> apariencia por clase</div>
+              <pre class="wiring-code">#wd-salida {
+  color: #9aa7b4;
+}
+
+#wd-salida.destacado {
+  color: #06141a;
+  background: #4fd1c5;
+  font-weight: 800;
+}</pre>
+            </div>
+            <div class="wiring-panel" data-layer="js">
+              <div class="wiring-panel-head"><span class="w-tag js">3 · JS</span> eventos que enlazan</div>
+              <pre class="wiring-code">const entrada = document.querySelector('#wd-nombre');
+const salida  = document.querySelector('#wd-salida');
+
+document.querySelector('#wd-saludar')
+  .addEventListener('click', () =&gt; {
+    salida.textContent = 'Hola, ' + entrada.value;
+  });
+
+document.querySelector('#wd-destacar')
+  .addEventListener('click', () =&gt; {
+    salida.classList.toggle('destacado');
+  });</pre>
+            </div>
+          </div>
+
+          <div class="wiring-stage">
+            <p class="wiring-stage-label"><i class="fa-solid fa-play"></i> Resultado en el navegador — probalo</p>
+            <div class="demo-widget">
+              <div class="field">
+                <label for="wd-nombre">Tu nombre (input)</label>
+                <input type="text" id="wd-nombre" placeholder="Escribí algo..." autocomplete="off">
+              </div>
+              <button type="button" id="wd-saludar">Saludar</button>
+              <button type="button" id="wd-destacar" class="ghost">Destacar</button>
+            </div>
+            <p id="wd-salida" class="demo-salida">Todavía no saludaste a nadie.</p>
+          </div>
+
+          <div class="wiring-log-wrap">
+            <div class="wiring-log-head">
+              <span><i class="fa-solid fa-terminal"></i> Registro de ejecución</span>
+              <button type="button" class="wiring-log-clear">Limpiar</button>
+            </div>
+            <ol class="wiring-log">
+              <li class="lg-empty">Todavía no hay nada registrado. Escribí tu nombre y tocá "Saludar".</li>
+            </ol>
+            <p class="wiring-hint">
+              Fijate el orden: primero el <strong>evento</strong>, después el <strong>JS</strong> leyendo
+              <code>.value</code> y escribiendo <code>.textContent</code>, y al final el <strong>CSS</strong>
+              repintando. Ese es todo el enlace entre HTML, CSS y JavaScript.
+            </p>
+          </div>
+        </div>
+
+        <h3>7. Ejemplo mínimo completo: los tres archivos, de punta a punta</h3>
+        <p>
+          Un contador es el "hola mundo" del enlace entre lenguajes: tiene un input, un botón, un
+          texto que cambia y un estado que vive en una variable. Copiá los tres archivos en la misma
+          carpeta y abrilo en el navegador.
+        </p>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            contador.html
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Contador&lt;/title&gt;
+  &lt;link rel="stylesheet" href="estilos.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main class="tarjeta"&gt;
+    &lt;h1&gt;Contador&lt;/h1&gt;
+
+    &lt;!-- (1) El texto que JS va a modificar: tiene id --&gt;
+    &lt;p id="valor" class="valor"&gt;0&lt;/p&gt;
+
+    &lt;!-- (2) Los controles que JS va a escuchar: cada uno con su id --&gt;
+    &lt;button id="btn-menos" class="btn"&gt;−1&lt;/button&gt;
+    &lt;button id="btn-mas" class="btn"&gt;+1&lt;/button&gt;
+    &lt;button id="btn-reset" class="btn ghost"&gt;Reiniciar&lt;/button&gt;
+
+    &lt;hr&gt;
+
+    &lt;!-- (3) Un input: el usuario escribe, JS lee .value --&gt;
+    &lt;label for="paso"&gt;¿De a cuánto salto?&lt;/label&gt;
+    &lt;input id="paso" type="number" value="1" min="1"&gt;
+  &lt;/main&gt;
+
+  &lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            estilos.css
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>/* El CSS solo conoce clases, ids y etiquetas: nunca sabe que existe JS */
+body {
+  background: #0d1117;
+  color: #e6edf3;
+  font-family: system-ui, sans-serif;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+.tarjeta {
+  background: #161b22;
+  border: 1px solid #2a313c;
+  border-radius: 12px;
+  padding: 28px;
+  text-align: center;
+  min-width: 260px;
+}
+.valor {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #4fd1c5;
+  margin: 8px 0 16px;
+  transition: color .2s;
+}
+
+/* Esta clase NO se usa en el HTML: la agrega JavaScript */
+.valor.negativo { color: #f56565; }
+
+.btn {
+  background: #4fd1c5;
+  color: #06141a;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn.ghost { background: #1c232c; color: #e6edf3; border: 1px solid #2a313c; }
+.btn:hover { filter: brightness(1.1); }</code></pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            app.js
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>// PASO 1 — ESTADO: una variable que guarda el dato real
+let valor = 0;
+
+// PASO 2 — GANCHOS: traigo los elementos del HTML por su id (una sola vez)
+const pantalla = document.querySelector('#valor');
+const btnMas   = document.querySelector('#btn-mas');
+const btnMenos = document.querySelector('#btn-menos');
+const btnReset = document.querySelector('#btn-reset');
+const inputPaso = document.querySelector('#paso');
+
+// PASO 3 — RENDER: la única función que escribe en el DOM
+function pintar() {
+  pantalla.textContent = valor;                                  // escribe el número
+  pantalla.classList.toggle('negativo', valor &lt; 0);              // activa CSS si es negativo
+}
+
+// PASO 4 — EVENTOS: cada control queda cableado a una acción
+btnMas.addEventListener('click', () =&gt; {
+  valor += leerPaso();   // lee el input y suma
+  pintar();              // vuelve a dibujar
+});
+
+btnMenos.addEventListener('click', () =&gt; {
+  valor -= leerPaso();
+  pintar();
+});
+
+btnReset.addEventListener('click', () =&gt; {
+  valor = 0;
+  pintar();
+});
+
+// Lee el input y devuelve un NÚMERO (los inputs siempre dan texto)
+function leerPaso() {
+  const n = parseInt(inputPaso.value, 10);
+  return isNaN(n) || n &lt; 1 ? 1 : n;   // si no es válido, salto de 1
+}
+
+// PRIMER DIBUJADO al cargar la página
+pintar();</code></pre>
+        </div>
+
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-comment-dots"></i> Leé el ejemplo en tres colores</div>
+          Todo lo del ejemplo cae en uno de estos tres grupos: <strong>estado</strong>
+          (<code>let valor</code> — el dato), <strong>enlace</strong> (<code>querySelector</code> +
+          <code>addEventListener</code> — las cuatro conexiones entre HTML y JS) y
+          <strong>pintado</strong> (<code>pintar()</code> — el único lugar que toca el DOM). Si en tu
+          proyecto podés señalar esas tres partes, el cableado está bien hecho.
+        </div>
+
+        <h3>8. Si falta una pieza, esto es lo que ves</h3>
+        <p>
+          Los errores de enlace son los más frustrantes porque <strong>no siempre tiran error en
+          consola</strong>. Esta tabla es tu primer lugar de consulta:
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Síntoma</th><th>Qué falta</th><th>Cómo se arregla</th></tr></thead>
+            <tbody>
+              <tr><td>La página se ve sin estilos (todo texto negro sobre blanco)</td><td>El <code>&lt;link&gt;</code> al CSS no está, está mal escrito o la ruta no existe</td><td>Revisar <code>href</code> y la ruta real del archivo (<code>css/estilos.css</code> vs <code>estilos.css</code>); verificar en F12 → Network que no haya <code>404</code></td></tr>
+              <tr><td>El botón no hace <strong>nada</strong> al hacer clic</td><td>Falta el <code>&lt;script&gt;</code>, o el <code>id</code> del botón no coincide con el del <code>querySelector</code></td><td>Comparar letra por letra: <code>id="btn-saludar"</code> ↔ <code>'#btn-saludar'</code> (mismo guion, mismo singular)</td></tr>
+              <tr><td>Consola: <em>"Cannot read properties of null (reading 'addEventListener')"</em></td><td><code>querySelector</code> devolvió <code>null</code>: no encontró el elemento</td><td>Id mal escrito, o el <code>&lt;script&gt;</code> está en el <code>&lt;head&gt;</code> y corre antes de que exista el HTML</td></tr>
+              <tr><td>El input siempre llega vacío o el precio se muestra <code>NaN</code></td><td>Se leyó el elemento en vez de su valor, o no se convirtió el texto a número</td><td>Usar <code>input.value</code> (no <code>input</code>) y <code>parseFloat(input.value)</code></td></tr>
+              <tr><td>El formulario recarga la página</td><td><code>event.preventDefault()</code> ausente en el listener de <code>'submit'</code></td><td>Primera línea del callback: <code>event.preventDefault();</code></td></tr>
+              <tr><td>JS cambia la clase pero no se ve ningún cambio visual</td><td>La clase no existe en el CSS, o el selector CSS está mal escrito (<code>.destacado</code> vs <code>destacado</code>)</td><td>Escribir la regla en el CSS con el mismo nombre exacto, incluido el punto</td></tr>
+              <tr><td>Los cambios "desaparecen" al recargar</td><td>No hay persistencia: el estado vive en memoria</td><td>Es lo esperado en esta sesión; se resuelve con <code>localStorage</code> o un backend (ver desafíos)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="exercise">
+          <div class="ex-header">
+            <span class="pill" style="background:rgba(104,211,145,.15); color:var(--success);">Ejercicio</span>
+            <h4>Ejercicio 0 — Cablear un botón desde cero</h4>
+          </div>
+          <p class="question">
+            Creá tres archivos vacíos (<code>index.html</code>, <code>estilos.css</code>,
+            <code>app.js</code>) en la misma carpeta y escribí el código mínimo para que: (1) haya un
+            botón que diga "Cambiar color", (2) al tocarlo, un <code>&lt;p&gt;</code> con un texto
+            pase a tener fondo cian. Respetá los 4 pasos y <strong>usá una clase CSS</strong> para el
+            color, no un estilo escrito desde JS.
+          </p>
+          <details class="reveal">
+            <summary>Ver solución</summary>
+            <div class="reveal-body">
+              <p><strong>1) HTML</strong> — los ganchos y los dos enlaces:</p>
+<pre><code>&lt;link rel="stylesheet" href="estilos.css"&gt;
+...
+&lt;p id="mensaje"&gt;Este texto va a cambiar de color&lt;/p&gt;
+&lt;button id="btn-color"&gt;Cambiar color&lt;/button&gt;
+...
+&lt;script src="app.js"&gt;&lt;/script&gt;</code></pre>
+              <p><strong>2) CSS</strong> — la clase que JS va a activar:</p>
+<pre><code>.resaltado { background: #4fd1c5; color: #06141a; padding: 8px; }</code></pre>
+              <p><strong>3) JS</strong> — el cableado de 4 pasos:</p>
+<pre><code>const mensaje = document.querySelector('#mensaje');
+const boton   = document.querySelector('#btn-color');
+
+boton.addEventListener('click', () =&gt; {
+  mensaje.classList.toggle('resaltado');
+});</code></pre>
+              <p><strong>Por qué funciona:</strong> el <code>id</code> es el mismo en el HTML y en el
+              <code>querySelector</code> (<code>#mensaje</code>, <code>#btn-color</code>); el
+              <code>addEventListener</code> es el cable que une el clic con la función; y la clase
+              <code>resaltado</code> existe en el CSS con el mismo nombre, así que cuando JS la
+              activa el navegador aplica el estilo. Si cambiás <code>'resaltado'</code> por
+              <code>'resaltadoo'</code> en el JS, el botón sigue funcionando pero <em>no se ve
+              ningún cambio</em>: esa es la prueba de que el enlace es por nombre, no por magia.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 4. JSON BASE -->
+      <section id="json-base">
+        <h2><span class="step-no"><i class="fa-solid fa-database"></i></span> El JSON de productos: nuestra "base de datos" simulada</h2>
+        <p>
+          Un archivo <strong>JSON</strong> (<em>JavaScript Object Notation</em>) es simplemente un
+          array de objetos escrito en un formato de texto universal. Cada objeto representa
+          <strong>un producto</strong>, y todos los objetos del array comparten las mismas
+          propiedades (claves), aunque con valores distintos.
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Propiedad</th><th>Tipo de dato</th><th>Función</th></tr></thead>
+            <tbody>
+              <tr><td><code>id</code></td><td>number</td><td>Identificador único: nunca se repite entre productos, se usa para buscar/editar/eliminar.</td></tr>
+              <tr><td><code>nombre</code></td><td>string</td><td>Texto visible como título de la tarjeta.</td></tr>
+              <tr><td><code>descripcion</code></td><td>string</td><td>Texto breve debajo del nombre.</td></tr>
+              <tr><td><code>precio</code></td><td>number</td><td>Valor numérico (nunca con el símbolo <code>$</code> incluido: eso se agrega al mostrarlo).</td></tr>
+              <tr><td><code>stock</code></td><td>number</td><td>Cantidad disponible; útil para alertas de "stock bajo".</td></tr>
+              <tr><td><code>imagen</code></td><td>string (URL)</td><td>Dirección de la imagen del producto.</td></tr>
+              <tr><td><code>categoria</code></td><td>string</td><td>Usada para el filtro por categoría.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            productos.json (14 productos de ejemplo)
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>[
+  {
+    "id": 1,
+    "nombre": "Auriculares Bluetooth Pro",
+    "descripcion": "Auriculares inalámbricos con cancelación de ruido",
+    "precio": 79.99,
+    "stock": 25,
+    "imagen": "https://ejemplo.com/auriculares.jpg",
+    "categoria": "electronica"
+  },
+  {
+    "id": 2,
+    "nombre": "Teclado Mecánico RGB",
+    "descripcion": "Teclado gaming con switches mecánicos",
+    "precio": 129.99,
+    "stock": 12,
+    "imagen": "https://ejemplo.com/teclado.jpg",
+    "categoria": "electronica"
+  },
+  {
+    "id": 3,
+    "nombre": "Monitor 27 pulgadas 4K",
+    "descripcion": "Monitor UHD para diseño y gaming",
+    "precio": 449.99,
+    "stock": 8,
+    "imagen": "https://ejemplo.com/monitor.jpg",
+    "categoria": "electronica"
+  },
+  {
+    "id": 4,
+    "nombre": "Mouse Inalámbrico Ergonómico",
+    "descripcion": "Mouse vertical para reducir fatiga en la muñeca",
+    "precio": 34.5,
+    "stock": 40,
+    "imagen": "https://ejemplo.com/mouse.jpg",
+    "categoria": "electronica"
+  },
+  {
+    "id": 5,
+    "nombre": "Mochila Urbana Antirrobo",
+    "descripcion": "Compartimento acolchado para notebook de 15.6\"",
+    "precio": 39.9,
+    "stock": 14,
+    "imagen": "https://ejemplo.com/mochila.jpg",
+    "categoria": "accesorios"
+  },
+  {
+    "id": 6,
+    "nombre": "Lámpara LED de Escritorio",
+    "descripcion": "Luz regulable con puerto USB integrado",
+    "precio": 22.0,
+    "stock": 30,
+    "imagen": "https://ejemplo.com/lampara.jpg",
+    "categoria": "hogar"
+  },
+  {
+    "id": 7,
+    "nombre": "Silla Gamer Ergonómica",
+    "descripcion": "Soporte lumbar ajustable y reposabrazos 3D",
+    "precio": 189.0,
+    "stock": 5,
+    "imagen": "https://ejemplo.com/silla.jpg",
+    "categoria": "hogar"
+  },
+  {
+    "id": 8,
+    "nombre": "Parlante Bluetooth Portátil",
+    "descripcion": "Resistente al agua, 12 horas de batería",
+    "precio": 45.0,
+    "stock": 22,
+    "imagen": "https://ejemplo.com/parlante.jpg",
+    "categoria": "electronica"
+  },
+  {
+    "id": 9,
+    "nombre": "Funda Protectora para Notebook",
+    "descripcion": "Neopreno acolchado, varios tamaños",
+    "precio": 15.75,
+    "stock": 50,
+    "imagen": "https://ejemplo.com/funda.jpg",
+    "categoria": "accesorios"
+  },
+  {
+    "id": 10,
+    "nombre": "Webcam Full HD",
+    "descripcion": "1080p con micrófono integrado, ideal videollamadas",
+    "precio": 55.0,
+    "stock": 4,
+    "imagen": "https://ejemplo.com/webcam.jpg",
+    "categoria": "electronica"
+  },
+  {
+    "id": 11,
+    "nombre": "Hub USB-C 7 en 1",
+    "descripcion": "HDMI, USB 3.0, lector SD y carga rápida",
+    "precio": 28.9,
+    "stock": 18,
+    "imagen": "https://ejemplo.com/hub.jpg",
+    "categoria": "accesorios"
+  },
+  {
+    "id": 12,
+    "nombre": "Soporte Ajustable para Notebook",
+    "descripcion": "Aluminio plegable, mejora la ventilación",
+    "precio": 19.99,
+    "stock": 27,
+    "imagen": "https://ejemplo.com/soporte.jpg",
+    "categoria": "accesorios"
+  },
+  {
+    "id": 13,
+    "nombre": "Disco SSD Externo 1TB",
+    "descripcion": "Transferencia USB 3.2 de alta velocidad",
+    "precio": 89.0,
+    "stock": 10,
+    "imagen": "https://ejemplo.com/ssd.jpg",
+    "categoria": "electronica"
+  },
+  {
+    "id": 14,
+    "nombre": "Organizador de Cables",
+    "descripcion": "Set de 10 clips adhesivos para escritorio",
+    "precio": 7.5,
+    "stock": 60,
+    "imagen": "https://ejemplo.com/organizador.jpg",
+    "categoria": "hogar"
+  }
+]</code></pre>
+        </div>
+
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-comment-dots"></i> Analogía</div>
+          Pensá el JSON como una <strong>planilla de Excel exportada a texto</strong>: cada fila es
+          un producto (un objeto <code>{ }</code>), y cada columna es una propiedad
+          (<code>nombre</code>, <code>precio</code>...). El array <code>[ ]</code> que envuelve
+          todo es simplemente "la planilla completa": una lista ordenada de filas.
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-lightbulb"></i> Tu propio proyecto</div>
+          Para tu entregable final vas a <strong>diseñar tu propio JSON</strong> con la temática
+          que elijas (librería, indumentaria, comida, videojuegos...). Mantené siempre las mismas
+          7 propiedades base (<code>id</code>, <code>nombre</code>, <code>descripcion</code>,
+          <code>precio</code>, <code>stock</code>, <code>imagen</code>, <code>categoria</code>):
+          todo el código JavaScript de esta sesión funciona igual sin importar la temática, porque
+          solo le importan los <strong>nombres de las propiedades</strong>, no su contenido.
+        </div>
+      </section>
+
+      <!-- 5. FASE 1 -->
+      <section id="fase1">
+        <h2><span class="step-no">1</span> Fase 1 — Fundamentos de JavaScript aplicados</h2>
+        <p>
+          No vamos a ver JavaScript "en abstracto": cada concepto se aplica directo sobre el
+          catálogo de productos.
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Concepto</th><th>Uso en el proyecto</th></tr></thead>
+            <tbody>
+              <tr><td><code>let</code></td><td>Para el array <code>productos</code>: su contenido <strong>cambia</strong> con cada Create/Update/Delete.</td></tr>
+              <tr><td><code>const</code></td><td>Para referencias a elementos del DOM y funciones: no se van a reasignar.</td></tr>
+              <tr><td><strong>string</strong></td><td><code>nombre</code>, <code>descripcion</code>, <code>categoria</code> — texto entre comillas.</td></tr>
+              <tr><td><strong>number</strong></td><td><code>precio</code>, <code>stock</code>, <code>id</code> — valores numéricos, sin comillas.</td></tr>
+              <tr><td><strong>array</strong></td><td>La lista completa de productos: <code>[ {...}, {...}, {...} ]</code>.</td></tr>
+              <tr><td><strong>object</strong></td><td>Cada producto individual: <code>{ id: 1, nombre: "...", precio: 79.99 }</code>.</td></tr>
+              <tr><td>Operadores de comparación (<code>===</code>, <code>&lt;=</code>)</td><td>Para filtros: <code>p.categoria === "electronica"</code>, <code>p.stock &lt;= 5</code>.</td></tr>
+              <tr><td>Operadores aritméticos (<code>*</code>, <code>+</code>)</td><td>Cálculos de precio total: <code>precio * cantidad</code>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            fundamentos.js
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>// "let" porque este array se va a modificar con Create/Update/Delete
+let productos = [
+  { id: 1, nombre: "Auriculares Bluetooth Pro", precio: 79.99, stock: 25, categoria: "electronica" },
+  { id: 2, nombre: "Teclado Mecánico RGB", precio: 129.99, stock: 12, categoria: "electronica" }
+];
+
+// Acceder a una propiedad de un objeto específico del array
+console.log(productos[0].nombre);   // "Auriculares Bluetooth Pro"
+console.log(productos[1].precio);   // 129.99
+
+// Operador aritmético: calcular el precio con IVA (21%)
+const precioConIva = productos[0].precio * 1.21;
+console.log(precioConIva.toFixed(2)); // "96.79"
+
+// Operador de comparación: ¿hay poco stock?
+const stockBajo = productos[1].stock &lt;= 5;
+console.log(stockBajo); // false (12 no es &lt;= 5)</code></pre>
+        </div>
+
+        <div class="exercise">
+          <div class="ex-header">
+            <span class="pill" style="background:rgba(104,211,145,.15); color:var(--success);">Ejercicio</span>
+            <h4>Ejercicio 1 — Declarar y acceder al catálogo</h4>
+          </div>
+          <p class="question">
+            Copiá en la consola del navegador (F12 → Console) un array <code>let productos</code>
+            con 3 objetos de tu propio JSON. Después escribí dos líneas con <code>console.log</code>:
+            una que muestre el <strong>nombre</strong> del segundo producto, y otra que calcule e
+            imprima el <strong>precio total</strong> de comprar 3 unidades del primer producto.
+          </p>
+          <details class="reveal">
+            <summary>Ver solución</summary>
+            <div class="reveal-body">
+<pre><code>let productos = [
+  { id: 1, nombre: "Mouse Inalámbrico", precio: 34.5, stock: 40, categoria: "electronica" },
+  { id: 2, nombre: "Mochila Urbana", precio: 39.9, stock: 14, categoria: "accesorios" },
+  { id: 3, nombre: "Lámpara LED", precio: 22.0, stock: 30, categoria: "hogar" }
+];
+
+console.log(productos[1].nombre); // "Mochila Urbana"
+
+const totalTresUnidades = productos[0].precio * 3;
+console.log(totalTresUnidades); // 103.5</code></pre>
+              <p><strong>Por qué funciona:</strong> <code>productos[1]</code> accede al segundo
+              objeto del array (recordá: los índices empiezan en <code>0</code>), y
+              <code>.nombre</code> accede a esa propiedad puntual. La multiplicación
+              <code>precio * 3</code> es un operador aritmético normal, igual que en matemática.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 6. FASE 2 -->
+      <section id="fase2">
+        <h2><span class="step-no">2</span> Fase 2 — Manipulación del DOM: renderizado</h2>
+        <p>
+          El <strong>DOM</strong> (Document Object Model) es la representación del HTML como un
+          árbol de objetos que JavaScript puede leer y modificar. Vamos a usarlo para
+          <strong>generar</strong> las tarjetas de producto en lugar de escribirlas a mano.
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Método / propiedad</th><th>Qué hace</th></tr></thead>
+            <tbody>
+              <tr><td><code>document.querySelector('#id')</code></td><td>Devuelve el <strong>primer</strong> elemento que coincide con el selector CSS indicado.</td></tr>
+              <tr><td><code>document.querySelectorAll('.clase')</code></td><td>Devuelve <strong>todos</strong> los elementos que coinciden, como una lista recorrible.</td></tr>
+              <tr><td><code>document.createElement('div')</code></td><td>Crea un elemento HTML <strong>nuevo</strong>, todavía no visible (no está en el DOM).</td></tr>
+              <tr><td><code>elemento.appendChild(hijo)</code> / <code>.append(...)</code></td><td>Inserta un elemento <strong>dentro</strong> de otro, haciéndolo visible.</td></tr>
+              <tr><td><code>elemento.textContent = "texto"</code></td><td>Inserta texto plano de forma <strong>segura</strong> (no interpreta HTML).</td></tr>
+              <tr><td><code>elemento.setAttribute('src', url)</code></td><td>Define un atributo HTML, típico para <code>src</code> de imágenes o <code>href</code>.</td></tr>
+              <tr><td><code>elemento.classList.add('clase')</code></td><td>Agrega una clase CSS al elemento (así se conecta JS con tus estilos).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-title"><i class="fa-solid fa-triangle-exclamation"></i> <code>textContent</code> vs. <code>innerHTML</code></div>
+          <code>textContent</code> inserta el texto <strong>tal cual</strong>, sin interpretarlo
+          como HTML (más seguro con datos que vienen de un formulario). <code>innerHTML</code>
+          interpreta etiquetas, y es necesario cuando armás una estructura completa de golpe como
+          texto — pero nunca debería usarse con datos sin validar que vengan de un usuario
+          desconocido, porque podría inyectar HTML/JS no deseado.
+        </div>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            app.js — función renderizarCatalogo()
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>const contenedor = document.querySelector('#contenedor-productos');
+
+function renderizarCatalogo(productos) {
+  // 1. Limpiar el contenedor antes de volver a dibujar (evita duplicados)
+  contenedor.innerHTML = '';
+
+  // 2. Recorrer el array con forEach y crear una tarjeta por producto
+  productos.forEach((producto) =&gt; {
+    const tarjeta = document.createElement('article');
+    // CLASE "producto-card" — EL INSTRUCTOR APLICARÁ ESTILOS CSS AQUÍ
+    tarjeta.classList.add('producto-card');
+
+    const imagen = document.createElement('img');
+    imagen.classList.add('producto-imagen');
+    imagen.setAttribute('src', producto.imagen);
+    imagen.setAttribute('alt', producto.nombre);
+
+    const nombre = document.createElement('h3');
+    nombre.classList.add('producto-nombre');
+    nombre.textContent = producto.nombre;
+
+    const precio = document.createElement('p');
+    precio.classList.add('producto-precio');
+    precio.textContent = `$${producto.precio.toFixed(2)}`;
+
+    // 3. Insertar los hijos dentro de la tarjeta, y la tarjeta en el contenedor
+    tarjeta.append(imagen, nombre, precio);
+    contenedor.appendChild(tarjeta);
+  });
+}
+
+renderizarCatalogo(productos); // primer dibujado al cargar la página</code></pre>
+        </div>
+
+        <div class="exercise">
+          <div class="ex-header">
+            <span class="pill" style="background:rgba(104,211,145,.15); color:var(--success);">Ejercicio</span>
+            <h4>Ejercicio 2 — Agregar descripción y stock a la tarjeta</h4>
+          </div>
+          <p class="question">
+            Extendé la función <code>renderizarCatalogo</code> del ejemplo anterior para que cada
+            tarjeta incluya también un <code>&lt;p class="producto-descripcion"&gt;</code> y un
+            <code>&lt;p class="producto-stock"&gt;</code> con el texto <code>"Stock: X u."</code>.
+          </p>
+          <details class="reveal">
+            <summary>Ver solución</summary>
+            <div class="reveal-body">
+<pre><code>function renderizarCatalogo(productos) {
+  contenedor.innerHTML = '';
+
+  productos.forEach((producto) =&gt; {
+    const tarjeta = document.createElement('article');
+    tarjeta.classList.add('producto-card');
+
+    const imagen = document.createElement('img');
+    imagen.classList.add('producto-imagen');
+    imagen.setAttribute('src', producto.imagen);
+    imagen.setAttribute('alt', producto.nombre);
+
+    const nombre = document.createElement('h3');
+    nombre.classList.add('producto-nombre');
+    nombre.textContent = producto.nombre;
+
+    // NUEVO: descripción
+    const descripcion = document.createElement('p');
+    descripcion.classList.add('producto-descripcion');
+    descripcion.textContent = producto.descripcion;
+
+    const precio = document.createElement('p');
+    precio.classList.add('producto-precio');
+    precio.textContent = `$${producto.precio.toFixed(2)}`;
+
+    // NUEVO: stock
+    const stock = document.createElement('p');
+    stock.classList.add('producto-stock');
+    stock.textContent = `Stock: ${producto.stock} u.`;
+
+    tarjeta.append(imagen, nombre, descripcion, precio, stock);
+    contenedor.appendChild(tarjeta);
+  });
+}</code></pre>
+              <p><strong>Por qué funciona:</strong> cada nuevo elemento sigue el mismo patrón de 3
+              pasos (crear → asignar clase y contenido → agregar al padre). <code>append()</code>
+              acepta múltiples hijos de una sola vez, en el orden en que queremos que aparezcan.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 7. FASE 3 -->
+      <section id="fase3">
+        <h2><span class="step-no">3</span> Fase 3 — Eventos e interactividad</h2>
+        <p>
+          Un sitio dinámico <strong>reacciona</strong> a lo que hace el usuario. Para eso usamos
+          <code>addEventListener</code>, que "escucha" una acción (click, submit, input) y ejecuta
+          una función cuando ocurre.
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Evento / método</th><th>Cuándo se usa</th></tr></thead>
+            <tbody>
+              <tr><td><code>'click'</code></td><td>Botones: Agregar, Editar, Eliminar.</td></tr>
+              <tr><td><code>'submit'</code></td><td>Cuando se envía un <code>&lt;form&gt;</code> (al tocar "Guardar").</td></tr>
+              <tr><td><code>'input'</code></td><td>Cada tecla que se escribe en un campo de texto (ideal para búsqueda en vivo).</td></tr>
+              <tr><td><code>event.preventDefault()</code></td><td>Evita el comportamiento por defecto del navegador (recargar la página al enviar un form).</td></tr>
+              <tr><td><code>event.target</code></td><td>Referencia al elemento exacto que disparó el evento (útil con varios botones iguales).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            app.js — eventos de búsqueda y de formulario
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>const buscador = document.querySelector('#buscador');
+const formulario = document.querySelector('#form-producto');
+
+// 'input' dispara en cada tecla: búsqueda en tiempo real
+buscador.addEventListener('input', () =&gt; {
+  console.log('Usuario escribió:', buscador.value);
+});
+
+// 'submit' + preventDefault: evita que la página se recargue
+formulario.addEventListener('submit', (event) =&gt; {
+  event.preventDefault();
+  console.log('Formulario enviado sin recargar la página');
+});
+
+// event.target: identificar QUÉ botón exacto se clickeó
+document.querySelectorAll('.btn-eliminar').forEach((boton) =&gt; {
+  boton.addEventListener('click', (event) =&gt; {
+    console.log('Se clickeó el botón dentro de:', event.target.closest('.producto-card'));
+  });
+});</code></pre>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-lightbulb"></i> Truco clave: <code>dataset</code></div>
+          Para que un botón "Eliminar" sepa <strong>a qué producto</strong> pertenece, guardamos el
+          <code>id</code> del producto como atributo <code>data-id</code> en la tarjeta
+          (<code>tarjeta.dataset.id = producto.id</code>), y después lo leemos con
+          <code>event.target.closest('.producto-card').dataset.id</code>. Es la misma técnica de
+          atributos <code>data-*</code> que vimos en la Sesión 2.
+        </div>
+
+        <div class="exercise">
+          <div class="ex-header">
+            <span class="pill" style="background:rgba(104,211,145,.15); color:var(--success);">Ejercicio</span>
+            <h4>Ejercicio 3 — Botón "Eliminar" funcional</h4>
+          </div>
+          <p class="question">
+            Dentro de la función <code>renderizarCatalogo</code>, agregale a cada tarjeta un botón
+            con clase <code>btn-eliminar</code> que, al hacer click, muestre en consola el
+            <code>id</code> del producto correspondiente (todavía sin borrarlo del array).
+          </p>
+          <details class="reveal">
+            <summary>Ver solución</summary>
+            <div class="reveal-body">
+<pre><code>productos.forEach((producto) =&gt; {
+  const tarjeta = document.createElement('article');
+  tarjeta.classList.add('producto-card');
+  tarjeta.dataset.id = producto.id; // guardamos el id en el propio elemento
+
+  const nombre = document.createElement('h3');
+  nombre.classList.add('producto-nombre');
+  nombre.textContent = producto.nombre;
+
+  const btnEliminar = document.createElement('button');
+  btnEliminar.classList.add('btn-eliminar');
+  btnEliminar.textContent = 'Eliminar';
+  btnEliminar.addEventListener('click', () =&gt; {
+    console.log('Click en eliminar, id del producto:', producto.id);
+  });
+
+  tarjeta.append(nombre, btnEliminar);
+  contenedor.appendChild(tarjeta);
+});</code></pre>
+              <p><strong>Por qué funciona:</strong> como el <code>addEventListener</code> se define
+              <em>dentro</em> del <code>forEach</code>, la variable <code>producto</code> queda
+              "atrapada" (closure) para cada botón: cada uno recuerda su propio producto exacto,
+              sin necesidad de leer <code>dataset</code> en este caso puntual.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 8. FASE 4 -->
+      <section id="fase4">
+        <h2><span class="step-no">4</span> Fase 4 — Consumo y manejo del JSON</h2>
+        <p>
+          Con el array de productos ya renderizado y los eventos básicos funcionando, ahora
+          tratamos el JSON como lo que es: una <strong>base de datos en memoria</strong> que
+          podemos consultar con los métodos de array de JavaScript.
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Método</th><th>Devuelve</th><th>Uso típico</th></tr></thead>
+            <tbody>
+              <tr><td><code>array.find(fn)</code></td><td>El <strong>primer</strong> elemento que cumple la condición, o <code>undefined</code>.</td><td>Buscar un producto por <code>id</code> para mostrar su detalle.</td></tr>
+              <tr><td><code>array.findIndex(fn)</code></td><td>La <strong>posición</strong> (número) del primer elemento que cumple la condición, o <code>-1</code>.</td><td>Ubicar un producto para reemplazarlo (Update).</td></tr>
+              <tr><td><code>array.filter(fn)</code></td><td>Un <strong>nuevo array</strong> con todos los elementos que cumplen la condición.</td><td>Filtrar por categoría, por precio, o eliminar un producto (Delete).</td></tr>
+              <tr><td><code>array.forEach(fn)</code></td><td>Nada (<code>undefined</code>); solo <strong>ejecuta</strong> algo por cada elemento.</td><td>Renderizar cada producto en el DOM.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            consultas.js
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>// Buscar UN producto puntual por id (para mostrar detalle o editar)
+const producto = productos.find((p) =&gt; p.id === 3);
+console.log(producto); // { id: 3, nombre: "Monitor 27 pulgadas 4K", ... }
+
+// Encontrar la POSICIÓN de un producto (necesario para reemplazarlo)
+const indice = productos.findIndex((p) =&gt; p.id === 3);
+console.log(indice); // 2 (es el tercer elemento, índice 0-based)
+
+// Filtrar por categoría
+const soloElectronica = productos.filter((p) =&gt; p.categoria === 'electronica');
+
+// Filtrar por rango de precio
+const economicos = productos.filter((p) =&gt; p.precio &lt; 50);
+
+// Combinar dos condiciones: categoría Y texto de búsqueda
+const texto = 'teclado';
+const resultado = productos.filter((p) =&gt;
+  p.categoria === 'electronica' &amp;&amp; p.nombre.toLowerCase().includes(texto)
+);</code></pre>
+        </div>
+
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-comment-dots"></i> Analogía</div>
+          <code>find</code> es como buscar <strong>una persona por DNI</strong> en una fila: te
+          quedás con la primera que coincide y dejás de buscar. <code>filter</code> es como pedir
+          "todas las personas mayores de 18": te armás una <strong>fila nueva</strong> solamente
+          con quienes cumplen la condición, sin tocar la fila original.
+        </div>
+
+        <div class="exercise">
+          <div class="ex-header">
+            <span class="pill" style="background:rgba(104,211,145,.15); color:var(--success);">Ejercicio</span>
+            <h4>Ejercicio 4 — Filtrar por categoría y por precio</h4>
+          </div>
+          <p class="question">
+            Usando el array <code>productos</code> del JSON base (14 productos), escribí dos
+            líneas: una que obtenga solo los productos de categoría <code>"hogar"</code>, y otra
+            que obtenga los productos con precio <strong>menor o igual a 30</strong>.
+          </p>
+          <details class="reveal">
+            <summary>Ver solución</summary>
+            <div class="reveal-body">
+<pre><code>const productosHogar = productos.filter((p) =&gt; p.categoria === 'hogar');
+console.log(productosHogar); // Lámpara LED, Silla Gamer, Organizador de Cables
+
+const productosBaratos = productos.filter((p) =&gt; p.precio &lt;= 30);
+console.log(productosBaratos); // Mouse (34.5 NO entra), Lámpara (22.0), Organizador (7.5)...</code></pre>
+              <p><strong>Por qué funciona:</strong> <code>filter</code> recorre todo el array y
+              evalúa la condición (una función que devuelve <code>true</code> o <code>false</code>)
+              para cada producto, devolviendo solo los que dieron <code>true</code>. El array
+              original <code>productos</code> queda intacto.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 9. FASE 5: CRUD -->
+      <section id="fase5">
+        <h2><span class="step-no">5</span> Fase 5 — CRUD completo integrado</h2>
+        <p>
+          Llegó el momento central de la sesión: vamos a construir las <strong>4 operaciones</strong>
+          que cualquier sistema de datos necesita. Las cuatro comparten la misma lógica: modificar
+          el array <code>productos</code> y después llamar a <code>renderizarCatalogo(productos)</code>
+          para que la pantalla refleje el nuevo estado.
+        </p>
+
+        <h3 id="crud-create">5.1 CREATE — Agregar producto</h3>
+        <p>
+          Capturamos los valores del formulario, generamos un <code>id</code> único con
+          <code>Date.now()</code> (devuelve la cantidad de milisegundos desde 1970: prácticamente
+          nunca se repite), y agregamos el nuevo objeto al array con <code>push</code>.
+        </p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            crud.js — Create
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>function agregarProducto(datos) {
+  const nuevoProducto = {
+    id: Date.now(),      // id único basado en la fecha/hora actual
+    ...datos             // spread: copia nombre, descripcion, precio, stock, categoria
+  };
+  productos.push(nuevoProducto); // agrega al final del array
+  renderizarCatalogo(productos); // vuelve a dibujar TODO el catálogo
+}
+
+// Ejemplo de uso con datos de un formulario ya validados
+agregarProducto({
+  nombre: 'Cargador Rápido USB-C',
+  descripcion: '30W, compatible con la mayoría de celulares',
+  precio: 18.99,
+  stock: 35,
+  categoria: 'electronica'
+});</code></pre>
+        </div>
+
+        <h3 id="crud-read">5.2 READ — Leer / listar productos</h3>
+        <p>
+          Ya la cubrimos en la Fase 2 con <code>renderizarCatalogo</code>, y en la Fase 4 con
+          <code>find</code>/<code>filter</code>. Es importante remarcar que <strong>toda</strong>
+          operación CRUD termina volviendo a leer (renderizar) el array para mantener la pantalla
+          sincronizada con los datos reales.
+        </p>
+
+        <h3 id="crud-update">5.3 UPDATE — Editar producto existente</h3>
+        <p>
+          Buscamos la <strong>posición</strong> del producto con <code>findIndex</code> y
+          reemplazamos ese elemento del array combinando sus datos viejos con los nuevos usando el
+          operador <em>spread</em> (<code>...</code>).
+        </p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            crud.js — Update
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>function editarProducto(id, datosActualizados) {
+  const index = productos.findIndex((p) =&gt; p.id === id);
+
+  if (index !== -1) {
+    // Spread: mezcla el objeto viejo con los campos nuevos (los nuevos pisan a los viejos)
+    productos[index] = { ...productos[index], ...datosActualizados };
+    renderizarCatalogo(productos);
+  } else {
+    console.error('No se encontró ningún producto con id', id);
+  }
+}
+
+// Ejemplo: solo cambiamos el precio y el stock, el resto queda igual
+editarProducto(2, { precio: 109.99, stock: 20 });</code></pre>
+        </div>
+
+        <h3 id="crud-delete">5.4 DELETE — Eliminar producto</h3>
+        <p>
+          Pedimos confirmación con <code>confirm()</code> (una ventana nativa del navegador) y
+          usamos <code>filter</code> para crear un array nuevo <strong>sin</strong> el producto
+          eliminado.
+        </p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            crud.js — Delete
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>function eliminarProducto(id) {
+  const confirmado = confirm('¿Seguro que deseas eliminar este producto?');
+  if (!confirmado) return; // el usuario canceló: no hacemos nada
+
+  productos = productos.filter((p) =&gt; p.id !== id); // nuevo array sin ese producto
+  renderizarCatalogo(productos);
+}
+
+eliminarProducto(5); // elimina el producto con id 5, si existe</code></pre>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-title"><i class="fa-solid fa-triangle-exclamation"></i> ¿Por qué <code>eliminarProducto</code> necesita <code>let</code>?</div>
+          <code>filter</code> siempre devuelve un array <strong>nuevo</strong>; no modifica el
+          original. Por eso, para que <code>productos = productos.filter(...)</code> sea válido, el
+          array tiene que haberse declarado con <code>let</code> y no con <code>const</code> (una
+          <code>const</code> no se puede reasignar).
+        </div>
+
+        <div class="exercise">
+          <div class="ex-header">
+            <span class="pill" style="background:rgba(104,211,145,.15); color:var(--success);">Ejercicio</span>
+            <h4>Ejercicio 5 — Validar antes de crear</h4>
+          </div>
+          <p class="question">
+            Modificá la función <code>agregarProducto</code> para que, si el <code>nombre</code>
+            viene vacío o el <code>precio</code> no es un número válido, muestre un
+            <code>alert()</code> con el mensaje "Completá todos los campos obligatorios" y
+            <strong>no</strong> agregue el producto al array.
+          </p>
+          <details class="reveal">
+            <summary>Ver solución</summary>
+            <div class="reveal-body">
+<pre><code>function agregarProducto(datos) {
+  // Validación: cortamos la función temprano si los datos son inválidos
+  if (!datos.nombre || datos.nombre.trim() === '' || isNaN(datos.precio)) {
+    alert('Completá todos los campos obligatorios');
+    return; // "return" sin valor corta la ejecución de la función acá mismo
+  }
+
+  const nuevoProducto = { id: Date.now(), ...datos };
+  productos.push(nuevoProducto);
+  renderizarCatalogo(productos);
+}</code></pre>
+              <p><strong>Por qué funciona:</strong> un <code>return</code> temprano (a veces
+              llamado "guard clause") evita que el resto de la función se ejecute si los datos no
+              son válidos, sin necesidad de anidar todo el código dentro de un <code>if</code>.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 10. DEMO EN VIVO -->
+      <section id="demo-viva">
+        <h2><span class="step-no"><i class="fa-solid fa-display"></i></span> Demo en vivo: e-commerce CRUD funcional</h2>
+        <p>
+          Esta demo <strong>no es una simulación visual</strong>: es JavaScript real corriendo en
+          esta misma página, con el mismo patrón que acabás de aprender. Buscá, filtrá, agregá,
+          editá y eliminá productos para ver el CRUD completo en acción antes de escribir tu propio
+          código.
+        </p>
+
+        <div class="ecommerce-demo">
+          <div class="demo-toolbar">
+            <input type="text" class="input-buscar" placeholder="🔎 Buscar producto por nombre...">
+            <select class="filtro-categoria">
+              <option value="todas">Todas las categorías</option>
+              <option value="electronica">Electrónica</option>
+              <option value="accesorios">Accesorios</option>
+            </select>
+            <button class="btn-agregar btn-agregar-toggle">+ Nuevo producto</button>
+          </div>
+          <p class="result-count"></p>
+
+          <form class="form-producto">
+            <h4 class="form-titulo form-full">Nuevo producto</h4>
+            <div>
+              <label>Nombre</label>
+              <input type="text" class="input-nombre" required>
+            </div>
+            <div>
+              <label>Categoría</label>
+              <select class="input-categoria">
+                <option value="electronica">Electrónica</option>
+                <option value="accesorios">Accesorios</option>
+                <option value="hogar">Hogar</option>
+              </select>
+            </div>
+            <div class="form-full">
+              <label>Descripción</label>
+              <textarea class="input-descripcion"></textarea>
+            </div>
+            <div>
+              <label>Precio (USD)</label>
+              <input type="number" class="input-precio" step="0.01" required>
+            </div>
+            <div>
+              <label>Stock</label>
+              <input type="number" class="input-stock" required>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-guardar">Guardar</button>
+              <button type="button" class="btn-cancelar">Cancelar</button>
+            </div>
+          </form>
+
+          <div class="producto-grid"></div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-lightbulb"></i> Mirá el código fuente</div>
+          Toda la lógica de esta demo está en <code>js/main.js</code>, dentro de la función
+          <code>initEcommerceDemo()</code>: usa exactamente los mismos nombres de clase genéricos
+          (<code>producto-card</code>, <code>btn-editar</code>, <code>form-producto</code>, etc.)
+          que vas a usar en tu propio proyecto, así podés abrir las herramientas de desarrollo
+          (F12 → pestaña Sources) y leerla como referencia real.
+        </div>
+      </section>
+
+      <!-- 11. FASE 6 -->
+      <section id="fase6">
+        <h2><span class="step-no">6</span> Fase 6 — Integración final y refactorización</h2>
+        <p>
+          Con las 4 operaciones funcionando por separado, el último paso es <strong>organizar</strong>
+          el código en responsabilidades claras, para que sea fácil de mantener y de extender.
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Responsabilidad</th><th>Contiene</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Datos</strong></td><td>El array <code>productos</code> (o el JSON cargado) — el "estado" de la aplicación.</td></tr>
+              <tr><td><strong>Lógica</strong></td><td>Las funciones CRUD (<code>agregarProducto</code>, <code>editarProducto</code>, <code>eliminarProducto</code>) y de consulta (<code>filter</code>, <code>find</code>) — <strong>nunca</strong> tocan el DOM directamente, solo el array.</td></tr>
+              <tr><td><strong>Renderizado</strong></td><td>La única función <code>renderizarCatalogo(productos)</code> — la <strong>única</strong> responsable de tocar el DOM.</td></tr>
+              <tr><td><strong>Eventos</strong></td><td>Los <code>addEventListener</code> que conectan clicks y formularios con las funciones de lógica.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <div class="callout-title"><i class="fa-solid fa-comment-dots"></i> Regla de oro</div>
+          <strong>Ninguna función de lógica debería tocar el DOM directamente</strong>, y
+          <strong>ninguna función de renderizado debería modificar el array de datos</strong>. Esta
+          separación (a veces llamada "separación de responsabilidades") es lo que evita que un
+          proyecto pequeño se vuelva imposible de depurar cuando crece.
+        </div>
+
+        <h3>Manejo básico de errores</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Situación</th><th>Cómo manejarla</th></tr></thead>
+            <tbody>
+              <tr><td>Producto no encontrado al editar/eliminar</td><td><code>findIndex</code> devuelve <code>-1</code>: comprobar con <code>if (index !== -1)</code> antes de continuar.</td></tr>
+              <tr><td>Formulario con campos vacíos</td><td>Validar con <code>if (!nombre || isNaN(precio))</code> antes de modificar el array.</td></tr>
+              <tr><td>Precio o stock no numéricos</td><td><code>isNaN(valor)</code> detecta si algo no es un número válido tras <code>parseFloat</code>/<code>parseInt</code>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 12. CÓDIGO FINAL COMPLETO -->
+      <section id="codigo-final">
+        <h2><span class="step-no"><i class="fa-solid fa-code"></i></span> Código final completo (listo para copiar)</h2>
+        <p>
+          Todo lo anterior, unificado en un solo archivo <code>app.js</code> funcional, para pegar
+          junto al esqueleto HTML de la sección 2 de esta sesión.
+        </p>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            app.js (completo e integrado)
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>// ====== 1. DATOS: estado central de la aplicación ======
+let productos = [
+  { id: 1, nombre: 'Auriculares Bluetooth Pro', descripcion: 'Cancelación de ruido activa', precio: 79.99, stock: 25, imagen: 'auriculares.jpg', categoria: 'electronica' },
+  { id: 2, nombre: 'Teclado Mecánico RGB', descripcion: 'Switches mecánicos', precio: 129.99, stock: 12, imagen: 'teclado.jpg', categoria: 'electronica' },
+  { id: 3, nombre: 'Monitor 27" 4K', descripcion: 'UHD para diseño y gaming', precio: 449.99, stock: 8, imagen: 'monitor.jpg', categoria: 'electronica' }
+];
+
+// ====== 2. REFERENCIAS AL DOM (una sola vez, al inicio) ======
+const contenedor = document.querySelector('#contenedor-productos');
+const buscador = document.querySelector('#buscador');
+const filtroCategoria = document.querySelector('#filtro-categoria');
+const formulario = document.querySelector('#form-producto');
+const formTitulo = document.querySelector('#form-titulo');
+const btnNuevo = document.querySelector('#btn-nuevo');
+const btnCancelar = document.querySelector('#btn-cancelar');
+let editandoId = null;
+
+// ====== 3. RENDERIZADO: única función que toca el DOM ======
+function renderizarCatalogo(lista) {
+  contenedor.innerHTML = '';
+
+  if (lista.length === 0) {
+    contenedor.innerHTML = '&lt;p class="empty-state"&gt;No hay productos para mostrar.&lt;/p&gt;';
+    return;
+  }
+
+  lista.forEach((producto) =&gt; {
+    const tarjeta = document.createElement('article');
+    tarjeta.classList.add('producto-card'); // EL INSTRUCTOR APLICARÁ ESTILOS CSS AQUÍ
+    tarjeta.dataset.id = producto.id;
+
+    const imagen = document.createElement('img');
+    imagen.classList.add('producto-imagen');
+    imagen.setAttribute('src', producto.imagen);
+    imagen.setAttribute('alt', producto.nombre);
+
+    const nombre = document.createElement('h3');
+    nombre.classList.add('producto-nombre');
+    nombre.textContent = producto.nombre;
+
+    const descripcion = document.createElement('p');
+    descripcion.classList.add('producto-descripcion');
+    descripcion.textContent = producto.descripcion;
+
+    const precio = document.createElement('p');
+    precio.classList.add('producto-precio');
+    precio.textContent = `$${producto.precio.toFixed(2)}`;
+
+    const stock = document.createElement('p');
+    stock.classList.add('producto-stock');
+    stock.textContent = `Stock: ${producto.stock} u.`;
+
+    const btnEditar = document.createElement('button');
+    btnEditar.classList.add('btn-editar');
+    btnEditar.textContent = 'Editar';
+    btnEditar.addEventListener('click', () =&gt; abrirFormularioEdicion(producto.id));
+
+    const btnEliminar = document.createElement('button');
+    btnEliminar.classList.add('btn-eliminar');
+    btnEliminar.textContent = 'Eliminar';
+    btnEliminar.addEventListener('click', () =&gt; eliminarProducto(producto.id));
+
+    tarjeta.append(imagen, nombre, descripcion, precio, stock, btnEditar, btnEliminar);
+    contenedor.appendChild(tarjeta);
+  });
+}
+
+// ====== 4. LECTURA CON FILTROS (búsqueda + categoría combinadas) ======
+function aplicarFiltros() {
+  const texto = buscador.value.trim().toLowerCase();
+  const categoria = filtroCategoria.value;
+
+  const filtrados = productos.filter((p) =&gt; {
+    const coincideTexto = p.nombre.toLowerCase().includes(texto);
+    const coincideCategoria = categoria === 'todas' || p.categoria === categoria;
+    return coincideTexto &amp;&amp; coincideCategoria;
+  });
+
+  renderizarCatalogo(filtrados);
+}
+
+// ====== 5. CREATE ======
+function agregarProducto(datos) {
+  if (!datos.nombre || isNaN(datos.precio) || isNaN(datos.stock)) {
+    alert('Completá todos los campos obligatorios');
+    return;
+  }
+  const nuevoProducto = { id: Date.now(), ...datos };
+  productos.push(nuevoProducto);
+  aplicarFiltros();
+}
+
+// ====== 6. UPDATE ======
+function editarProducto(id, datosActualizados) {
+  const index = productos.findIndex((p) =&gt; p.id === id);
+  if (index === -1) {
+    console.error('Producto no encontrado:', id);
+    return;
+  }
+  productos[index] = { ...productos[index], ...datosActualizados };
+  aplicarFiltros();
+}
+
+// ====== 7. DELETE ======
+function eliminarProducto(id) {
+  if (!confirm('¿Seguro que deseas eliminar este producto?')) return;
+  productos = productos.filter((p) =&gt; p.id !== id);
+  aplicarFiltros();
+}
+
+// ====== 8. FORMULARIO: abrir en modo Create o Update ======
+function abrirFormularioCreacion() {
+  editandoId = null;
+  formTitulo.textContent = 'Nuevo producto';
+  formulario.reset();
+  formulario.classList.add('open');
+}
+
+function abrirFormularioEdicion(id) {
+  const producto = productos.find((p) =&gt; p.id === id);
+  if (!producto) return;
+  editandoId = id;
+  formTitulo.textContent = `Editando: ${producto.nombre}`;
+  document.querySelector('#input-nombre').value = producto.nombre;
+  document.querySelector('#input-descripcion').value = producto.descripcion;
+  document.querySelector('#input-precio').value = producto.precio;
+  document.querySelector('#input-stock').value = producto.stock;
+  document.querySelector('#input-categoria').value = producto.categoria;
+  formulario.classList.add('open');
+}
+
+function cerrarFormulario() {
+  formulario.classList.remove('open');
+  formulario.reset();
+  editandoId = null;
+}
+
+// ====== 9. EVENTOS: conectan la interfaz con la lógica ======
+formulario.addEventListener('submit', (event) =&gt; {
+  event.preventDefault();
+
+  const datos = {
+    nombre: document.querySelector('#input-nombre').value.trim(),
+    descripcion: document.querySelector('#input-descripcion').value.trim(),
+    precio: parseFloat(document.querySelector('#input-precio').value),
+    stock: parseInt(document.querySelector('#input-stock').value, 10),
+    categoria: document.querySelector('#input-categoria').value
+  };
+
+  if (editandoId === null) {
+    agregarProducto(datos);
+  } else {
+    editarProducto(editandoId, datos);
+  }
+  cerrarFormulario();
+});
+
+btnNuevo.addEventListener('click', abrirFormularioCreacion);
+btnCancelar.addEventListener('click', cerrarFormulario);
+buscador.addEventListener('input', aplicarFiltros);
+filtroCategoria.addEventListener('change', aplicarFiltros);
+
+// ====== 10. PRIMER RENDER AL CARGAR LA PÁGINA ======
+renderizarCatalogo(productos);</code></pre>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-forward"></i> Continuidad del proyecto</div>
+          Este <code>app.js</code> funciona con <strong>cualquier</strong> JSON que respete las 7
+          propiedades base. Para tu proyecto final, reemplazá el array inicial por tu propio
+          catálogo (podés incluso guardarlo en un archivo <code>productos.js</code> aparte con
+          <code>const productosIniciales = [...]</code>) y reutilizá las clases CSS que ya
+          maquetaste en las Sesiones 3 a 6.
+        </div>
+      </section>
+
+      <!-- 13. DETECTÁ EL ERROR -->
+      <section id="detecta-error">
+        <h2><span class="step-no"><i class="fa-solid fa-bug"></i></span> Detectá el error: código para corregir en VSC</h2>
+        <p>
+          Copiá estos fragmentos en VSC y usá las herramientas de desarrollo (F12 → Console) para
+          encontrar los errores antes de revelar la solución.
+        </p>
+
+        <!-- EJERCICIO 1 -->
+        <div class="exercise">
+          <div class="ex-header">
+            <span class="pill">Con errores</span>
+            <h4>Ejercicio 1 — El array no se actualiza</h4>
+          </div>
+          <div class="code-block buggy">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              buggy-13.js
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>const productos = [
+  { id: 1, nombre: "Mouse", precio: 20 },
+  { id: 2, nombre: "Teclado", precio: 50 }
+];
+
+function eliminarProducto(id) {
+  if (!confirm('¿Eliminar?')) return;
+  productos = productos.filter((p) =&gt; p.id !== id);
+  renderizarCatalogo(productos);
+}
+
+eliminarProducto(1);</code></pre>
+          </div>
+          <p class="question">
+            🔎 Al ejecutar esto, la consola tira un error y nada se elimina. Encontrá el
+            <strong>1 problema</strong>.
+          </p>
+          <details class="reveal">
+            <summary>Ver solución y explicación</summary>
+            <div class="reveal-body">
+              <ol>
+                <li>El array se declaró con <code>const productos</code>, pero dentro de
+                <code>eliminarProducto</code> se intenta <strong>reasignar</strong> con
+                <code>productos = productos.filter(...)</code>. Una variable <code>const</code>
+                nunca puede reasignarse: hay que declararla con <code>let productos = [...]</code>.</li>
+              </ol>
+              <p><strong>Tip de debugging:</strong> este error aparece en la Console como
+              <code>Uncaught TypeError: Assignment to constant variable.</code> — en cuanto veas
+              "constant variable" en un mensaje de error, revisá si en algún lugar del código
+              estás reasignando una variable declarada con <code>const</code>.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- EJERCICIO 2 -->
+        <div class="exercise">
+          <div class="ex-header">
+            <span class="pill">Con errores</span>
+            <h4>Ejercicio 2 — El formulario recarga la página</h4>
+          </div>
+          <div class="code-block buggy">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              buggy-14.js
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>const formulario = document.querySelector('#form-producto');
+
+formulario.addEventListener('submit', (event) =&gt; {
+  const nombre = document.querySelector('#input-nombre').value;
+  agregarProducto({ nombre, precio: 10, stock: 5, categoria: 'electronica' });
+});</code></pre>
+          </div>
+          <p class="question">
+            🔎 Cada vez que se hace click en "Guardar", la página <strong>se recarga por
+            completo</strong> y se pierde todo lo agregado. Encontrá el <strong>1 problema</strong>.
+          </p>
+          <details class="reveal">
+            <summary>Ver solución y explicación</summary>
+            <div class="reveal-body">
+              <ol>
+                <li>Falta <code>event.preventDefault()</code> al inicio del callback. Sin esa
+                línea, el comportamiento <strong>por defecto</strong> del navegador al enviar un
+                <code>&lt;form&gt;</code> es recargar la página (o navegar a la URL indicada en
+                <code>action</code>), destruyendo cualquier cambio hecho en memoria.</li>
+              </ol>
+              <p><strong>Tip de debugging:</strong> si notás que la página "parpadea" o se reinicia
+              justo al enviar un formulario, es casi siempre un <code>event.preventDefault()</code>
+              faltante en el listener de <code>'submit'</code>.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- EJERCICIO 3 -->
+        <div class="exercise">
+          <div class="ex-header">
+            <span class="pill">Con errores</span>
+            <h4>Ejercicio 3 — Editar siempre falla</h4>
+          </div>
+          <div class="code-block buggy">
+            <div class="code-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              buggy-15.js
+              <button class="copy-btn">Copiar</button>
+            </div>
+            <pre><code>function editarProducto(id, datosActualizados) {
+  const index = productos.findIndex((p) =&gt; p.id = id);
+  productos[index] = { ...productos[index], ...datosActualizados };
+  renderizarCatalogo(productos);
+}</code></pre>
+          </div>
+          <p class="question">
+            🔎 Esta función siempre termina editando el <strong>último</strong> producto del
+            array, sin importar qué <code>id</code> se le pase. Encontrá el <strong>1
+            problema</strong> (es un error muy común y difícil de ver a simple vista).
+          </p>
+          <details class="reveal">
+            <summary>Ver solución y explicación</summary>
+            <div class="reveal-body">
+              <ol>
+                <li>Dentro del <code>findIndex</code> se escribió <code>p.id = id</code> (un
+                <strong>solo</strong> signo igual, que es <em>asignación</em>) en vez de
+                <code>p.id === id</code> (triple igual, <em>comparación</em>). Como una asignación
+                siempre "devuelve" el valor asignado (y <code>id</code> suele ser un número
+                distinto de cero), la condición se evalúa como verdadera para el <strong>último</strong>
+                elemento recorrido, haciendo que <code>findIndex</code> devuelva el último índice.</li>
+              </ol>
+              <p><strong>Tip de debugging:</strong> este es uno de los bugs más silenciosos de
+              JavaScript porque <strong>no tira ningún error</strong> en consola. La única forma de
+              detectarlo es revisar con atención cada comparación dentro de un <code>find</code>/
+              <code>filter</code>/<code>findIndex</code>, o agregar un <code>console.log(p.id, id)</code>
+              dentro del callback para ver qué se está comparando realmente.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 14. GUÍA DE DEPURACIÓN -->
+      <section id="debugging">
+        <h2><span class="step-no"><i class="fa-solid fa-magnifying-glass"></i></span> Guía de depuración y errores comunes</h2>
+        <p>
+          Cuando algo "no funciona", la causa casi siempre está en uno de estos puntos. Usá
+          <code>console.log</code> para "espiar" valores en cualquier punto del código, y el
+          <code>debugger</code> para pausar la ejecución exacta donde algo falla.
+        </p>
+
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div>
+            tecnicas-debugging.js
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <pre><code>// console.log en puntos clave: "fotografía" del valor en ese momento
+function agregarProducto(datos) {
+  console.log('Datos recibidos:', datos); // ¿llegan los datos esperados?
+  productos.push({ id: Date.now(), ...datos });
+  console.log('Array actualizado:', productos); // ¿se agregó correctamente?
+  renderizarCatalogo(productos);
+}
+
+// debugger: pausa la ejecución en ese punto exacto (con F12 abierto)
+function eliminarProducto(id) {
+  debugger; // la ejecución se detiene acá; podés inspeccionar variables paso a paso
+  productos = productos.filter((p) =&gt; p.id !== id);
+  renderizarCatalogo(productos);
+}</code></pre>
+        </div>
+
+        <div class="table-wrap debug-table">
+          <table class="data-table">
+            <thead><tr><th>Síntoma</th><th>Causa probable</th><th>Cómo corregirlo</th></tr></thead>
+            <tbody>
+              <tr><td>La consola dice <em>"Cannot read properties of null"</em></td><td><code>querySelector</code> no encontró el elemento (typo en el id/clase, o el script corre antes de que exista el HTML)</td><td>Revisar que el id/clase coincida exactamente y que el <code>&lt;script&gt;</code> esté al final del <code>&lt;body&gt;</code></td></tr>
+              <tr><td>El formulario recarga la página</td><td>Falta <code>event.preventDefault()</code></td><td>Agregarlo como primera línea dentro del listener de <code>'submit'</code></td></tr>
+              <tr><td>Las tarjetas se duplican cada vez que filtro</td><td>Falta limpiar el contenedor antes de volver a dibujar</td><td>Agregar <code>contenedor.innerHTML = ''</code> al inicio de <code>renderizarCatalogo</code></td></tr>
+              <tr><td><em>"Assignment to constant variable"</em></td><td>Se declaró el array con <code>const</code> pero se intenta reasignar (típico en Delete)</td><td>Declarar el array con <code>let productos = [...]</code></td></tr>
+              <tr><td>Editar siempre afecta el producto incorrecto</td><td>Uso de <code>=</code> en vez de <code>===</code> dentro de una comparación</td><td>Revisar cada condición de <code>find</code>/<code>filter</code>/<code>findIndex</code> y usar siempre <code>===</code></td></tr>
+              <tr><td>El precio se muestra como <code>NaN</code></td><td>El valor del input llegó como texto vacío o con letras, y <code>parseFloat</code> no pudo convertirlo</td><td>Validar con <code>isNaN(precio)</code> antes de guardar, y marcar el campo como <code>required</code></td></tr>
+              <tr><td><em>"p.id is not a function"</em> o similar</td><td>Se está llamando como función algo que es un dato (ej. <code>p.id()</code> en vez de <code>p.id</code>)</td><td>Revisar que no sobren paréntesis al acceder a una propiedad simple</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-lightbulb"></i> El flujo de debugging recomendado</div>
+          1) Abrí las herramientas de desarrollo (F12) → pestaña <strong>Console</strong>. 2) Leé el
+          mensaje de error completo: casi siempre indica el <strong>archivo y número de línea</strong>
+          exactos. 3) Agregá <code>console.log</code> justo antes de esa línea para ver qué valor
+          tiene cada variable involucrada. 4) Si el error persiste, revisá la pestaña
+          <strong>Elements</strong> para confirmar que el HTML generado por JS es el que esperabas.
+        </div>
+      </section>
+
+      <!-- 15. QUIZ -->
+      <section id="quiz">
+        <h2><span class="step-no"><i class="fa-solid fa-circle-question"></i></span> Quiz rápido de autoevaluación</h2>
+
+        <div class="quiz">
+          <p class="q-title">1. ¿Qué método de array devuelve un nuevo array con los elementos que cumplen una condición?</p>
+          <div class="options">
+            <button data-correct="false" data-explain="find devuelve solo UN elemento (el primero que coincide), no un array.">find()</button>
+            <button data-correct="true" data-explain="Correcto: filter() siempre devuelve un array nuevo, incluso si está vacío.">filter()</button>
+            <button data-correct="false" data-explain="forEach no devuelve nada: solo ejecuta una acción por cada elemento.">forEach()</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+
+        <div class="quiz">
+          <p class="q-title">2. ¿Qué línea evita que un formulario recargue la página al enviarse?</p>
+          <div class="options">
+            <button data-correct="false" data-explain="stopPropagation detiene la propagación del evento, no el comportamiento por defecto del navegador.">event.stopPropagation()</button>
+            <button data-correct="true" data-explain="Correcto: preventDefault() cancela la acción por defecto del navegador (recargar/navegar).">event.preventDefault()</button>
+            <button data-correct="false" data-explain="No existe un método con ese nombre en el objeto event.">event.stopDefault()</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+
+        <div class="quiz">
+          <p class="q-title">3. Si <code>productos</code> se declaró con <code>const</code>, ¿qué pasa al intentar <code>productos = productos.filter(...)</code>?</p>
+          <div class="options">
+            <button data-correct="true" data-explain="Correcto: una const nunca puede reasignarse, aunque el nuevo valor sea también un array.">Lanza un error: "Assignment to constant variable"</button>
+            <button data-correct="false" data-explain="const sí distingue entre reasignar la variable (prohibido) y modificar su contenido interno (permitido en objetos/arrays, pero esto es una reasignación).">Funciona sin problemas, igual que con let</button>
+            <button data-correct="false" data-explain="JavaScript no convierte automáticamente una const en let.">Se convierte automáticamente en let</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+
+        <div class="quiz">
+          <p class="q-title">4. ¿Cuál es la función de <code>findIndex</code> dentro de la operación Update?</p>
+          <div class="options">
+            <button data-correct="false" data-explain="findIndex no modifica nada: solo devuelve una posición (número).">Modifica directamente el producto encontrado</button>
+            <button data-correct="true" data-explain="Correcto: findIndex ubica la posición exacta del producto en el array, necesaria para reemplazarlo con productos[index] = ...">Devuelve la posición del producto en el array, para poder reemplazarlo</button>
+            <button data-correct="false" data-explain="Esa es la función de filter, no de findIndex.">Elimina el producto encontrado del array</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+      </section>
+
+      <!-- 16. ACTIVIDAD DE LABORATORIO -->
+      <section id="actividad">
+        <h2><span class="step-no"><i class="fa-solid fa-flask-vial"></i></span> Actividad de laboratorio</h2>
+        <p>
+          <strong>Entregable de la clase:</strong> un catálogo de e-commerce con <strong>CRUD
+          completo</strong> funcionando sobre tu propio JSON de productos, maquetado con las
+          clases CSS que ya construiste en sesiones anteriores.
+        </p>
+
+        <div class="lab-box">
+          <div class="lab-title"><i class="fa-solid fa-list-check fa-lg"></i><h3 class="mt-0">Checklist paso a paso</h3></div>
+          <p class="dim">Marcá cada paso a medida que lo completes.</p>
+
+          <div class="progress-wrap">
+            <div class="progress-bar-track"><div class="progress-bar-fill"></div></div>
+            <p class="progress-label">0 de 0 tareas completadas (0%)</p>
+          </div>
+
+          <ul class="checklist" data-storage-key="dev4-sesion7-checklist">
+            <li>
+              <input type="checkbox" id="s7-t1">
+              <label for="s7-t1">Diseñar tu propio array de <strong>al menos 8 productos</strong> con la temática elegida, respetando las 7 propiedades base (<code>id</code>, <code>nombre</code>, <code>descripcion</code>, <code>precio</code>, <code>stock</code>, <code>imagen</code>, <code>categoria</code>).</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s7-t2">
+              <label for="s7-t2">Crear <code>catalogo.html</code> con el esqueleto base: buscador, filtro de categoría, botón "Nuevo producto", formulario oculto y contenedor vacío <code>#contenedor-productos</code>.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s7-t3">
+              <label for="s7-t3">Implementar <code>renderizarCatalogo(productos)</code> usando <code>createElement</code>/<code>append</code>/<code>textContent</code>, con las clases <code>producto-card</code>, <code>producto-nombre</code>, <code>producto-precio</code>, etc.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s7-t4">
+              <label for="s7-t4">Implementar la búsqueda por texto (<code>input</code>) y el filtro por categoría (<code>change</code>), combinando ambas condiciones con <code>filter</code>.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s7-t5">
+              <label for="s7-t5">Implementar <strong>CREATE</strong>: el formulario agrega un producto nuevo al array (con <code>Date.now()</code> como <code>id</code>) y re-renderiza, validando campos obligatorios.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s7-t6">
+              <label for="s7-t6">Implementar <strong>UPDATE</strong>: el botón "Editar" pre-llena el formulario con los datos existentes y, al guardar, reemplaza el producto en el array usando <code>findIndex</code>.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s7-t7">
+              <label for="s7-t7">Implementar <strong>DELETE</strong>: el botón "Eliminar" pide confirmación con <code>confirm()</code> y usa <code>filter</code> para quitar el producto del array.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s7-t8">
+              <label for="s7-t8">Aplicar estilos CSS propios (reutilizando tu hoja de estilos de las Sesiones 3 a 6) a las clases genéricas generadas por JS, sin tocar la lógica.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s7-t9">
+              <label for="s7-t9">Verificar con las herramientas de desarrollo (F12 → Console) que no aparece ningún error al cargar la página, buscar, crear, editar y eliminar productos.</label>
+            </li>
+            <li>
+              <input type="checkbox" id="s7-t10">
+              <label for="s7-t10">Probar el flujo completo al menos una vez: crear un producto nuevo, editarlo, filtrarlo por categoría y finalmente eliminarlo.</label>
+            </li>
+          </ul>
+        </div>
+
+        <div class="callout danger">
+          <div class="callout-title"><i class="fa-solid fa-clipboard-check"></i> Entregable de la clase</div>
+          Mostrale al docente el catálogo funcionando de punta a punta: búsqueda y filtro en vivo,
+          alta de un producto nuevo, edición de uno existente, y eliminación con confirmación —
+          todo sin recargar la página ni mostrar errores en la consola.
+        </div>
+      </section>
+
+      <!-- 17. DESAFÍOS EXTRA -->
+      <section id="desafios">
+        <h2><span class="step-no"><i class="fa-solid fa-rocket"></i></span> Desafíos extra opcionales</h2>
+        <p>Para quienes terminen antes o quieran profundizar:</p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Desafío</th><th>Pista técnica</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Carrito de compras</strong></td><td>Un segundo array <code>carrito</code>; un botón "Agregar al carrito" que haga <code>push</code> de una copia del producto; mostrar el total sumando <code>reduce()</code>.</td></tr>
+              <tr><td><strong>Persistencia con <code>localStorage</code></strong></td><td>Guardar el array con <code>localStorage.setItem('productos', JSON.stringify(productos))</code> después de cada cambio, y leerlo con <code>JSON.parse(localStorage.getItem('productos'))</code> al cargar la página (mismo patrón que usa el checklist de esta web).</td></tr>
+              <tr><td><strong>Paginación</strong></td><td>Usar <code>array.slice(inicio, fin)</code> para mostrar solo un grupo de productos por "página", con botones "Anterior"/"Siguiente" que recalculan <code>inicio</code> y <code>fin</code>.</td></tr>
+              <tr><td><strong>Ordenar por precio</strong></td><td><code>productos.sort((a, b) =&gt; a.precio - b.precio)</code> para menor a mayor (y <code>b.precio - a.precio</code> para el orden inverso).</td></tr>
+              <tr><td><strong>Alerta visual de stock bajo</strong></td><td>Agregar una clase condicional (<code>classList.add('low')</code>) cuando <code>producto.stock &lt;= 5</code>, como en la demo en vivo de esta sesión.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title"><i class="fa-solid fa-lightbulb"></i> Por qué son opcionales</div>
+          Ninguno de estos desafíos es obligatorio para aprobar el entregable de hoy, pero todos
+          reutilizan exactamente los mismos conceptos ya vistos (array, DOM, eventos, JSON):
+          son la forma natural de seguir practicando sin aprender nada completamente nuevo.
+        </div>
+      </section>
+
+      <!-- 18. GLOSARIO -->
+      <section id="glosario">
+        <h2><span class="step-no"><i class="fa-solid fa-spell-check"></i></span> Glosario rápido</h2>
+        <dl class="glossary">
+          <div class="g-item"><dt>DOM</dt><dd>Representación del HTML como un árbol de objetos que JavaScript puede leer y modificar.</dd></div>
+          <div class="g-item"><dt>JSON</dt><dd>Formato de texto para representar datos como objetos y arrays, usado como "base de datos" simulada.</dd></div>
+          <div class="g-item"><dt>CRUD</dt><dd>Create, Read, Update, Delete: las cuatro operaciones básicas sobre un conjunto de datos.</dd></div>
+          <div class="g-item"><dt>Evento</dt><dd>Una acción del usuario (click, submit, input) que JavaScript puede "escuchar" con addEventListener.</dd></div>
+          <div class="g-item"><dt>Callback</dt><dd>Función que se pasa como argumento a otra función, para ejecutarse en un momento posterior (ej: dentro de forEach o addEventListener).</dd></div>
+          <div class="g-item"><dt>Spread (<code>...</code>)</dt><dd>Operador que copia las propiedades de un objeto (o elementos de un array) dentro de otro nuevo.</dd></div>
+          <div class="g-item"><dt>Estado (state)</dt><dd>Los datos que determinan lo que se muestra en pantalla en un momento dado; en esta sesión, el array <code>productos</code>.</dd></div>
+          <div class="g-item"><dt>Renderizar</dt><dd>Generar o actualizar el HTML visible a partir de los datos actuales del estado.</dd></div>
+        </dl>
+      </section>
+
+      <!-- NAVEGACIÓN ENTRE SESIONES -->
+      <nav class="session-pager">
+        <a href="sesion6.html" class="pager-link">
+          <div class="p-label">Clase anterior</div>
+          <div class="p-title">← Sesión 6: CSS - Frameworks Utilitarios con Tailwind</div>
+        </a>
+        <a href="index.html" class="pager-link next">
+          <div class="p-label">Unidad 2 en construcción</div>
+          <div class="p-title">Volver al inicio del bloque →</div>
+        </a>
+      </nav>
+
+    </article>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      Desarrollo IV (Laboratorio) · Planificación Septiembre-Octubre · Unidad 2: JavaScript, DOM y JSON
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

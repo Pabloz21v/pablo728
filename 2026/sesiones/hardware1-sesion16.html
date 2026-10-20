@@ -2852,11 +2852,7 @@ Regla práctica: DUPLICAR la generación DUPLICA el ancho de banda.</pre
  │  pasa por el mismo enlace de 40 Gb/s compartido.                                   │
  └───────────────────────────────────────────────────────────────────────────────────┘
 
-  EXPRESSCARD (LEGACY) — 34 / 54 mm, interfaz PCIe x1 y USB 2.0 (o PC Card).
-   ┌──────────────────┐    Se usaba para: tarjetas de red móvil (3G/4G), adaptadores
-   │  ▓▓▓▓▓▓▓▓▓▓▓▓    │    USB, lectores de tarjetas, controladoras de eSATA.
-   │  ▓▓▓▓▓▓▓▓▓▓▓▓    │    Sustituida por M.2 (interno) y por USB/Thunderbolt (externo).
-   └──────────────────┘    La ranura desapareció de los notebooks actuales.</pre
+</pre
                 >
               </div>
               <figcaption>
@@ -2882,20 +2878,7 @@ Regla práctica: DUPLICAR la generación DUPLICA el ancho de banda.</pre
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td><strong>ExpressCard /34 y /54</strong></td>
-                    <td class="tag-no">Legacy (discontinuada)</td>
-                    <td>PCIe x1 + USB 2.0 (o PC Card en las primeras)</td>
-                    <td>PCIe 1.0 x1 ≈ 0,25 GB/s</td>
-                    <td>
-                      Módems móviles, adaptadores USB, eSATA, lectores, tarjetas
-                      de sonido
-                    </td>
-                    <td>
-                      Ya no se fabrica. Requiere controlador específico y la
-                      ranura física (hoy inexistente)
-                    </td>
-                  </tr>
+                 
                   <tr>
                     <td><strong>M.2 Key E</strong> (y Key A+E)</td>
                     <td class="tag-yes">Vigente</td>
@@ -3700,74 +3683,6 @@ Regla práctica: DUPLICAR la generación DUPLICA el ancho de banda.</pre
               <strong>Id. de hardware</strong> (<em>Hardware Ids</em>).
             </p>
 
-            <figure class="diagram">
-              <div class="diagram__head">
-                <b>Diagrama 3.2 · Anatomía de un Hardware ID</b
-                ><span>VEN_ / DEV_ / SUBSYS_ / REV_</span>
-              </div>
-              <div class="diagram__body">
-                <pre class="ascii">
-  EJEMPLO DE UN ID. DE HARDWARE COMPLETO
- ┌────────────────────────────────────────────────────────────────────────────────────┐
- │  PCI\VEN_8086&DEV_15BC&SUBSYS_86941043&REV_10                                      │
- └────────────────────────────────────────────────────────────────────────────────────┘
-      │        │              │              │
-      │        │              │              └── REV_10   → revisión (versión) del silicio
-      │        │              │                             Útil para saber si hay una
-      │        │              │                             revisión posterior con
-      │        │              │                             correcciones.
-      │        │              │
-      │        │              └── SUBSYS_86941043
-      │        │                   "8694" = ID del SUBSISTEMA (el modelo exacto
-      │        │                   dentro del fabricante) y "1043" = el fabricante
-      │        │                   que ensambló la tarjeta (1043 suele ser un
-      │        │                   fabricante de placas y tarjetas).
-      │        │                   IMPORTANTE: dos tarjetas con el MISMO chip pero
-      │        │                   distinto SUBSYS pueden necesitar drivers distintos.
-      │        │
-      │        └── DEV_15BC → DEVICE ID: identifica el MODELO/CIRCUITO concreto.
-      │                        Cada chip (o cada variante) tiene su propio número.
-      │
-      └── VEN_8086 → VENDOR ID: identifica al FABRICANTE del chip.
-                     8086 = un fabricante de procesadores y chipsets muy conocido.
-                     Otros: 10DE (fabricante de chips gráficos), 1002 (otro),
-                     14E4 (red), 8086... El Vendor ID es asignado oficialmente.
-
-  ┌────────────────────────────────────────────────────────────────────────────────────┐
-  │ REGLA DE LECTURA:                                                                    │
-  │  • Mismo VEN + mismo DEV  = es el mismo circuito.                                    │
-  │  • Distinto VEN o DEV     = es otro circuito (aunque el producto se parezca).         │
-  │  • Mismo VEN+DEV y distinto SUBSYS = misma base, distinta implementación:             │
-  │    puede cambiar la función, las salidas o el driver recomendado.                    │
-  │                                                                                       │
-  │  EN TALLER: para buscar el driver se usan VEN + DEV (a veces también SUBSYS).          │
-  │  Un buscador de identificadores PCI permite traducir ese par de números al            │
-  │  nombre del dispositivo. Lo importante: el ID es objetivo y no depende del            │
-  │  sistema operativo ni del idioma.                                                    │
-  └────────────────────────────────────────────────────────────────────────────────────┘
-
-  OTROS FORMATOS DE IDENTIFICACIÓN QUE APARECEN EN EL SISTEMA
- ─────────────────────────────────────────────────────────────
-  USB\VID_046D&PID_C52B&REV_2400
-       │        │
-       │        └── PID = Product ID  (en USB el equivalente al DEV_ de PCI)
-       └── VID = Vendor ID           (en USB el equivalente al VEN_ de PCI)
-
-  ACPI\VEN_INT&DEV_34B9       → dispositivo identificado por tabla de firmware
-  HDAUDIO\FUNC_01&VEN_10EC&DEV_0897  → códec de audio
-  BTHENUM\...                 → dispositivo Bluetooth
-  SWD\...                     → componente de software, no hardware físico
-
-  CONCLUSIÓN: el prefijo indica el BUS (PCI, USB, ACPI, HDAUDIO, BTHENUM), y dentro
-  de cada bus los identificadores son VEN/VID (fabricante) y DEV/PID (modelo).</pre
-                >
-              </div>
-              <figcaption>
-                Desglose de un identificador de hardware completo, con el
-                significado de cada campo y los formatos equivalentes en otros
-                buses.
-              </figcaption>
-            </figure>
 
             <h4>Procedimiento para identificar un dispositivo sin driver</h4>
             <ol>
@@ -3929,21 +3844,7 @@ Regla práctica: DUPLICAR la generación DUPLICA el ancho de banda.</pre
               </table>
             </div>
 
-            <div class="tip">
-              <span class="tip__title">Ejercicio mental de taller</span>
-              <p>
-                Un equipo muestra <em>"Dispositivo desconocido"</em> con el
-                identificador <code>PCI\VEN_10EC&amp;DEV_8168</code>. Con sólo
-                leer los números, ¿qué se puede afirmar? Que es un dispositivo
-                PCI, de un fabricante cuyo Vendor ID es <code>10EC</code> (un
-                fabricante de circuitos de red y audio muy difundido) y que el
-                circuito es el <code>8168</code>, un controlador de red Ethernet
-                muy común. Conclusión inmediata: falta el driver de la tarjeta
-                de red. Saber esto
-                <strong>sin tener la máquina delante</strong> es exactamente el
-                valor profesional de entender los Vendor y Device IDs.
-              </p>
-            </div>
+         
 
             <div class="note">
               <span class="note__title"
@@ -4525,175 +4426,12 @@ Regla práctica: DUPLICAR la generación DUPLICA el ancho de banda.</pre
         <section class="block" id="s4" aria-labelledby="s4-t">
           <h2 id="s4-t"><span class="num">4</span> Cuestionario</h2>
 
-          <p>
-            El cuestionario reúne, <strong>en una sola lista ordenada</strong>,
-            las actividades de búsqueda e identificación de imágenes y todas las
-            preguntas de refuerzo: conceptuales, técnicas, de cálculo y casos
-            prácticos de taller. Se responde en base al documento completo.
-          </p>
+          
 
-          <div class="note">
-            <span class="note__title">Cómo se responde este cuestionario</span>
-            <ul>
-              <li>
-                Se responde
-                <strong>íntegramente con el material de este documento</strong>.
-              </li>
-              <li>
-                <strong>No hay corrección automática:</strong> el sistema no
-                indica si una respuesta es correcta o incorrecta, ni muestra la
-                solución. El objetivo es desarrollar el razonamiento completo y
-                entregarlo al docente, que lo corrige.
-              </li>
-              <li>
-                Se responde en los campos de texto. Se puede
-                <strong>guardar el avance</strong> y continuar más tarde en el
-                mismo navegador.
-              </li>
-              <li>
-                Al finalizar, se entrega con <strong>Descargar (.md)</strong> o
-                <strong>Descargar (.json)</strong>, o mediante el botón
-                <strong>Enviar al docente</strong>, que registra la entrega y
-                muestra un código de comprobante.
-              </li>
-              <li>
-                En las actividades de imágenes, adjunte la imagen (o pegue el
-                enlace) junto con la justificación técnica pedida.
-              </li>
-              <li>
-                En los casos prácticos, se espera la estructura
-                <strong
-                  >hipótesis → verificación → acción correctiva concreta</strong
-                >. Una respuesta que sólo indique "hay que actualizar el driver"
-                no acredita el punto.
-              </li>
-            </ul>
-          </div>
 
-          <h4>Datos del trabajo</h4>
-          <form class="student-form" id="student-form" autocomplete="on">
-            <label class="field">
-              <span>Nombre</span>
-              <input
-                type="text"
-                id="f-nombre"
-                name="nombre"
-                placeholder="Nombre"
-                required
-              />
-            </label>
-            <label class="field">
-              <span>Apellido</span>
-              <input
-                type="text"
-                id="f-apellido"
-                name="apellido"
-                placeholder="Apellido"
-                required
-              />
-            </label>
-            <label class="field">
-              <span>Curso / comisión</span>
-              <input
-                type="text"
-                id="f-curso"
-                name="curso"
-                placeholder="Ej.: 3.º A · Comisión 4"
-              />
-            </label>
-            <label class="field">
-              <span>Legajo / DNI</span>
-              <input
-                type="text"
-                id="f-legajo"
-                name="legajo"
-                placeholder="N.º de legajo o documento"
-              />
-            </label>
-            <label class="field">
-              <span>Fecha</span>
-              <input type="date" id="f-fecha" name="fecha" />
-            </label>
-            <label class="field">
-              <span>Docente</span>
-              <input
-                type="text"
-                id="f-docente"
-                name="docente"
-                placeholder="Apellido del docente"
-              />
-            </label>
-          </form>
+         
 
-          <p class="q__hint">
-            Las respuestas se guardan automáticamente mientras se escribe. Puede
-            volver a esta página en el mismo navegador y retomar la entrega.
-          </p>
 
-          <!-- Contenedor donde quiz16.js construye la lista completa del cuestionario -->
-          <div id="quiz-root" data-rendered="false">
-            <noscript>
-              <div class="warn">
-                <span class="warn__title">JavaScript desactivado</span>
-                <p>
-                  El cuestionario se genera con JavaScript para poder guardar y
-                  exportar las respuestas. Active JavaScript en el navegador
-                  para verlo y completarlo. El resto del documento funciona sin
-                  JavaScript.
-                </p>
-              </div>
-            </noscript>
-          </div>
-
-          <!-- Panel de guardado y entrega -->
-          <div class="save-bar no-print" id="save-bar">
-            <span class="save-bar__status" id="save-status"
-              >Sin cambios pendientes.</span
-            >
-            <button class="btn btn--primary" type="button" id="btn-save">
-              💾 Guardar
-            </button>
-            <button class="btn" type="button" id="btn-download-md">
-              ⬇ .md
-            </button>
-            <button class="btn" type="button" id="btn-download-json">
-              ⬇ .json
-            </button>
-            <button class="btn" type="button" id="btn-submit">
-              📤 Enviar al docente
-            </button>
-            <button class="btn btn--ghost" type="button" id="btn-reset">
-              🗑 Borrar todo
-            </button>
-          </div>
-
-          <div class="lab">
-            <span class="lab__title">Estado de la entrega</span>
-            <dl class="kv">
-              <dt>Respuestas completadas</dt>
-              <dd>
-                <span id="stat-answered">0</span> de
-                <span id="stat-total">0</span>
-              </dd>
-              <dt>Progreso</dt>
-              <dd><span id="stat-percent">0 %</span></dd>
-              <dt>Último guardado</dt>
-              <dd><span id="stat-saved">—</span></dd>
-            </dl>
-          </div>
-
-          <div class="tip">
-            <span class="tip__title"
-              >Sobre la entrega por "Enviar al docente"</span
-            >
-            <p>
-              El botón envía el cuestionario completo (datos del alumno + todas
-              las respuestas + fecha y hora) al registro de entregas y muestra
-              un código de comprobante. Si el envío falla por falta de conexión,
-              use la descarga <code>.md</code> o <code>.json</code> y adjúntela
-              en el aula virtual: el contenido es el mismo.
-            </p>
-          </div>
         </section>
 
         <!-- ============================================================
@@ -4856,13 +4594,7 @@ Regla práctica: DUPLICAR la generación DUPLICA el ancho de banda.</pre
                       enlace.
                     </td>
                   </tr>
-                  <tr>
-                    <td>ExpressCard</td>
-                    <td>
-                      Factor de expansión legacy de notebooks (34 y 54 mm) con
-                      PCIe x1 y USB.
-                    </td>
-                  </tr>
+                 
                   <tr>
                     <td>M.2 Key E</td>
                     <td>
