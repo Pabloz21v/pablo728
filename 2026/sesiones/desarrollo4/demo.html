@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-commerce CRUD · Demo en vivo | Desarrollo IV - Sesión 7</title>
+    <meta
+      name="description"
+      content="Demo funcional de e-commerce con CRUD completo (Crear, Leer, Actualizar, Eliminar) en JavaScript vanilla, manipulación del DOM y consumo de JSON. Desarrollo IV - Sesión 7."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+    />
+    <style>
+      /* ======================================================================
+         DEMO E-COMMERCE CRUD — hoja de estilos única (self-contained)
+         Extraída de style-s7.css (bloque 17l) + tokens de diseño
+         ====================================================================== */
+
+      /* ---------- 1. VARIABLES DE DISEÑO ---------- */
+      :root {
+        --bg: #0d1117;
+        --bg-alt: #11161d;
+        --surface: #161b22;
+        --surface-2: #1c232c;
+        --border: #2a313c;
+        --text: #e6edf3;
+        --text-dim: #9aa7b4;
+        --text-faint: #6b7684;
+        --accent: #4fd1c5;
+        --accent-2: #b794f4;
+        --accent-3: #f6ad55;
+        --danger: #f56565;
+        --success: #68d391;
+        --warning: #f6e05e;
+        --code-bg: #0a0e14;
+        --radius: 10px;
+        --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+        --max-width: 1180px;
+        --header-h: 64px;
+      }
+
+      /* ---------- 2. RESET ---------- */
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); }
+      html, body { margin: 0; padding: 0; }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      img, video { max-width: 100%; display: block; }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      h1, h2, h3, h4 { line-height: 1.25; color: #fff; margin: 0 0 12px; }
+      ul { padding-left: 1.2rem; }
+      code { font-family: "Fira Code", Consolas, monospace; }
+
+      /* ---------- 3. LAYOUT ---------- */
+      .container { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
+
+      /* ---------- 4. HEADER ---------- */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        min-height: var(--header-h);
+        display: flex;
+        align-items: center;
+        background: rgba(13, 17, 23, 0.92);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border);
+      }
+      .site-header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 14px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: #fff; font-size: 1.05rem; }
+      .brand:hover { text-decoration: none; }
+      .brand .brand-badge {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: #08131a;
+        font-weight: 800;
+        border-radius: 8px;
+        padding: 4px 8px;
+        font-size: 0.85rem;
+      }
+      .main-nav { display: flex; align-items: center; gap: 22px; }
+      .main-nav a {
+        color: var(--text-dim);
+        font-size: 0.95rem;
+        font-weight: 500;
+        padding: 8px 4px;
+        border-bottom: 2px solid transparent;
+        transition: color 0.2s, border-color 0.2s;
+      }
+      .main-nav a:hover { color: #fff; text-decoration: none; border-bottom-color: var(--accent); }
+      .nav-toggle {
+        display: none;
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        font-size: 1.2rem;
+        padding: 6px 10px;
+        cursor: pointer;
+      }
+
+      /* ---------- 5. HERO ---------- */
+      .hero {
+        padding: 56px 0 38px;
+        border-bottom: 1px solid var(--border);
+        background:
+          radial-gradient(circle at 15% 20%, rgba(79, 209, 197, 0.12), transparent 45%),
+          radial-gradient(circle at 85% 0%, rgba(183, 148, 244, 0.12), transparent 45%);
+      }
+      .eyebrow {
+        display: inline-block;
+        color: var(--accent);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+        margin-bottom: 10px;
+      }
+      .hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+      .hero p.lead { color: var(--text-dim); font-size: 1.05rem; max-width: 760px; margin: 0; }
+      .badge-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text-dim);
+        border-radius: 999px;
+        padding: 6px 14px;
+        font-size: 0.82rem;
+      }
+      .badge.accent { color: var(--accent); border-color: rgba(79, 209, 197, 0.4); }
+      .badge.violet { color: var(--accent-2); border-color: rgba(183, 148, 244, 0.4); }
+
+      /* ---------- 6. SECCIONES ---------- */
+      .content { padding: 40px 0 70px; }
+      .content section { margin-bottom: 56px; }
+      .content h2 {
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 12px;
+        margin-bottom: 18px;
+      }
+      .content h2 .step-no {
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        color: var(--accent);
+        font-size: 0.85rem;
+        border-radius: 8px;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .content h3 { font-size: 1.15rem; margin-top: 26px; }
+      .content p { color: #d3dae2; }
+      .content p.dim { color: var(--text-dim); }
+      .content code {
+        background: var(--code-bg);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        padding: 1px 6px;
+        font-size: 0.86em;
+        color: var(--accent);
+      }
+
+      .callout {
+        border-left: 4px solid var(--accent);
+        background: rgba(79, 209, 197, 0.08);
+        border-radius: 0 8px 8px 0;
+        padding: 14px 18px;
+        margin: 18px 0;
+        font-size: 0.94rem;
+      }
+      .callout.tip { border-color: var(--success); background: rgba(104, 211, 145, 0.08); }
+      .callout.warn { border-color: var(--warning); background: rgba(246, 224, 94, 0.08); }
+      .callout strong { color: #fff; }
+      .callout .callout-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 4px;
+        font-size: 0.9rem;
+      }
+
+      /* ---------- 7. DEMO: E-COMMERCE CRUD (bloque 17l del original) ---------- */
+      .ecommerce-demo {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--surface);
+        padding: 22px;
+        margin: 20px 0;
+      }
+      .ecommerce-demo .demo-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 12px;
+        align-items: center;
+      }
+      .ecommerce-demo .demo-toolbar input[type="text"],
+      .ecommerce-demo .demo-toolbar select {
+        background: var(--surface-2);
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 9px 12px;
+        font-size: 0.88rem;
+        font-family: inherit;
+      }
+      .ecommerce-demo .demo-toolbar input[type="text"] { flex: 1; min-width: 180px; }
+      .ecommerce-demo .demo-toolbar input[type="text"]:focus,
+      .ecommerce-demo .demo-toolbar select:focus,
+      .ecommerce-demo .form-producto input:focus,
+      .ecommerce-demo .form-producto textarea:focus,
+      .ecommerce-demo .form-producto select:focus {
+        outline: 2px solid var(--accent);
+        outline-offset: 1px;
+      }
+      .ecommerce-demo .result-count { font-size: 0.8rem; color: var(--text-faint); margin: 0 0 16px; }
+
+      /* Barra de estado derivada del array (products / units / value) */
+      .ecommerce-demo .demo-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+      .ecommerce-demo .demo-stat {
+        flex: 1 1 130px;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 14px;
+      }
+      .ecommerce-demo .demo-stat span {
+        display: block;
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-faint);
+      }
+      .ecommerce-demo .demo-stat strong {
+        font-size: 1.15rem;
+        color: #fff;
+        font-weight: 800;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .ecommerce-demo .form-producto {
+        display: none;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        background: var(--surface-2);
+        border: 1px dashed var(--border);
+        border-radius: 8px;
+        padding: 18px;
+        margin-bottom: 20px;
+      }
+      .ecommerce-demo .form-producto.open { display: grid; }
+      .ecommerce-demo .form-producto .form-full { grid-column: 1 / -1; }
+      .ecommerce-demo .form-producto .form-titulo { margin: 0 0 4px; color: #fff; font-size: 1rem; }
+      .ecommerce-demo .form-producto label {
+        display: block;
+        font-size: 0.74rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--text-faint);
+        margin-bottom: 5px;
+      }
+      .ecommerce-demo .form-producto input,
+      .ecommerce-demo .form-producto textarea,
+      .ecommerce-demo .form-producto select {
+        width: 100%;
+        background: var(--surface);
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 9px 12px;
+        font-size: 0.88rem;
+        font-family: inherit;
+      }
+      .ecommerce-demo .form-producto textarea { resize: vertical; min-height: 56px; }
+      .ecommerce-demo .form-actions { grid-column: 1 / -1; display: flex; gap: 10px; }
+
+      .ecommerce-demo .producto-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 18px;
+      }
+      .ecommerce-demo .producto-card {
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        transition: border-color 0.2s, transform 0.2s;
+      }
+      .ecommerce-demo .producto-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+      /* Contenedor de imagen con respaldo si picsum no responde */
+      .ecommerce-demo .producto-media {
+        position: relative;
+        height: 140px;
+        border-radius: 8px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #1f2a35, #101720);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .ecommerce-demo .producto-media::before {
+        content: "🛍️";
+        position: absolute;
+        font-size: 2rem;
+        opacity: 0.45;
+      }
+      .ecommerce-demo .producto-imagen {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .ecommerce-demo .producto-nombre { margin: 0; font-size: 1rem; color: #fff; }
+      .ecommerce-demo .producto-descripcion { margin: 0; font-size: 0.82rem; color: var(--text-dim); flex-grow: 1; }
+      .ecommerce-demo .producto-precio { margin: 0; font-weight: 800; color: var(--accent); font-size: 1.1rem; }
+      .ecommerce-demo .producto-stock { margin: 0; font-size: 0.78rem; color: var(--text-faint); }
+      .ecommerce-demo .producto-stock.low { color: var(--danger); font-weight: 700; }
+      .ecommerce-demo .card-actions { display: flex; gap: 8px; margin-top: 6px; }
+      .ecommerce-demo .card-actions button { flex: 1; }
+
+      .ecommerce-demo button {
+        border: none;
+        border-radius: 8px;
+        padding: 9px 14px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: inherit;
+        transition: border-color 0.2s, filter 0.2s, color 0.2s;
+      }
+      .ecommerce-demo .btn-agregar,
+      .ecommerce-demo .btn-guardar { background: linear-gradient(135deg, var(--accent), #38b2ac); color: #06141a; }
+      .ecommerce-demo .btn-cancelar { background: var(--surface); border: 1px solid var(--border); color: var(--text); }
+      .ecommerce-demo .btn-editar { background: var(--surface); border: 1px solid var(--border); color: var(--accent-2); }
+      .ecommerce-demo .btn-eliminar { background: var(--surface); border: 1px solid var(--border); color: var(--danger); }
+      .ecommerce-demo .btn-editar:hover { border-color: var(--accent-2); }
+      .ecommerce-demo .btn-eliminar:hover { border-color: var(--danger); }
+      .ecommerce-demo .btn-agregar:hover,
+      .ecommerce-demo .btn-guardar:hover { filter: brightness(1.08); }
+      .ecommerce-demo .btn-cancelar:hover { color: #fff; border-color: var(--accent); }
+      .ecommerce-demo .empty-state {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--text-faint);
+        font-size: 0.9rem;
+        border: 1px dashed var(--border);
+        border-radius: 8px;
+      }
+      .ecommerce-demo .empty-state strong { color: var(--text); display: block; margin-bottom: 4px; }
+
+      /* ---------- 8. FASES CRUD ---------- */
+      .fase-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 18px 0; }
+      .fase-chip {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px;
+        text-align: center;
+      }
+      .fase-chip i { color: var(--accent); font-size: 1.3rem; margin-bottom: 6px; display: block; }
+      .fase-chip strong { display: block; color: #fff; font-size: 0.88rem; }
+      .fase-chip span { font-size: 0.76rem; color: var(--text-faint); }
+
+      /* ---------- 9. BLOQUE DE CÓDIGO ---------- */
+      .code-block {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        margin: 18px 0;
+        background: var(--code-bg);
+      }
+      .code-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--surface-2);
+        border-bottom: 1px solid var(--border);
+        padding: 8px 14px;
+        font-size: 0.78rem;
+        color: var(--text-dim);
+        font-family: "Fira Code", Consolas, monospace;
+      }
+      .code-head .dots { display: flex; gap: 5px; }
+      .code-head .dots span { width: 9px; height: 9px; border-radius: 50%; background: var(--border); }
+      .code-head .dots span:nth-child(1) { background: #f56565; }
+      .code-head .dots span:nth-child(2) { background: #f6e05e; }
+      .code-head .dots span:nth-child(3) { background: #68d391; }
+      .copy-btn {
+        margin-left: auto;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text-dim);
+        border-radius: 6px;
+        font-size: 0.72rem;
+        padding: 4px 10px;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .copy-btn:hover { color: #fff; border-color: var(--accent); }
+      .code-block pre { margin: 0; padding: 16px 18px; overflow-x: auto; }
+      .code-block pre code {
+        background: none;
+        border: none;
+        padding: 0;
+        color: #cbd5e1;
+        font-size: 0.82rem;
+        line-height: 1.65;
+      }
+
+      /* ---------- 10. TOAST ---------- */
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        transform: translate(-50%, 120%);
+        background: var(--surface-2);
+        border: 1px solid var(--accent);
+        color: #fff;
+        font-size: 0.88rem;
+        font-weight: 600;
+        padding: 12px 20px;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        z-index: 300;
+        max-width: calc(100% - 32px);
+        transition: transform 0.28s ease, opacity 0.28s ease;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .toast.show { transform: translate(-50%, 0); opacity: 1; }
+
+      /* ---------- 11. FOOTER ---------- */
+      .site-footer {
+        border-top: 1px solid var(--border);
+        padding: 28px 0 40px;
+        color: var(--text-faint);
+        font-size: 0.85rem;
+      }
+      .site-footer .container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; }
+      .site-footer strong { color: var(--text-dim); }
+
+      /* ---------- 12. RESPONSIVE ---------- */
+      @media (max-width: 900px) {
+        .ecommerce-demo .form-producto { grid-template-columns: 1fr; }
+        .fase-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 700px) {
+        .nav-toggle { display: inline-flex; }
+        .main-nav {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: var(--bg-alt);
+          border-bottom: 1px solid var(--border);
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 14px 20px 20px;
+          gap: 6px;
+          display: none;
+          box-shadow: var(--shadow);
+        }
+        .main-nav.open { display: flex; }
+        .hero { padding: 38px 0 28px; }
+        .site-header { position: sticky; }
+        .ecommerce-demo { padding: 16px; }
+        .content h2 { font-size: 1.3rem; }
+      }
+      @media (max-width: 600px) {
+        .ecommerce-demo .demo-toolbar { flex-direction: column; align-items: stretch; }
+        .ecommerce-demo .producto-grid { grid-template-columns: 1fr; }
+        .ecommerce-demo .card-actions { flex-direction: column; }
+      }
+    </style>
+  </head>
+  <body>
+
+
+   
+
+    <main class="content">
+      <div class="container">
+        <!-- ============ 1. DEMO EN VIVO ============ -->
+        <section id="demo-viva">
+          <h2>
+            <span class="step-no"><i class="fa-solid fa-display" aria-hidden="true"></i></span>
+            Demo en vivo: e-commerce CRUD funcional
+          </h2>
+          <p>
+            Esta demo <strong>no es una simulación visual</strong>: es JavaScript
+            real corriendo en esta misma página. Buscá, filtrá, agregá, editá y
+            eliminá productos para ver el CRUD completo en acción.
+          </p>
+
+          <div class="ecommerce-demo">
+            <div class="demo-toolbar">
+              <input
+                type="text"
+                class="input-buscar"
+                placeholder="🔎 Buscar producto por nombre..."
+                aria-label="Buscar producto por nombre"
+              />
+              <select class="filtro-categoria" aria-label="Filtrar por categoría">
+                <option value="todas">Todas las categorías</option>
+                <option value="electronica">Electrónica</option>
+                <option value="accesorios">Accesorios</option>
+                <option value="hogar">Hogar</option>
+              </select>
+              <button class="btn-agregar btn-agregar-toggle" type="button">
+                <i class="fa-solid fa-plus" aria-hidden="true"></i> Nuevo producto
+              </button>
+            </div>
+
+            <p class="result-count" aria-live="polite"></p>
+
+            <div class="demo-stats" aria-hidden="true">
+              <div class="demo-stat"><span>Productos</span><strong class="stat-productos">0</strong></div>
+              <div class="demo-stat"><span>Unidades en stock</span><strong class="stat-unidades">0</strong></div>
+              <div class="demo-stat"><span>Valor del inventario</span><strong class="stat-valor">$0</strong></div>
+              <div class="demo-stat"><span>Stock bajo (≤ 5)</span><strong class="stat-bajo">0</strong></div>
+            </div>
+
+            <form class="form-producto" novalidate>
+              <h4 class="form-titulo form-full">Nuevo producto</h4>
+              <div>
+                <label for="p-nombre">Nombre</label>
+                <input type="text" id="p-nombre" class="input-nombre" required />
+              </div>
+              <div>
+                <label for="p-categoria">Categoría</label>
+                <select id="p-categoria" class="input-categoria">
+                  <option value="electronica">Electrónica</option>
+                  <option value="accesorios">Accesorios</option>
+                  <option value="hogar">Hogar</option>
+                </select>
+              </div>
+              <div class="form-full">
+                <label for="p-descripcion">Descripción</label>
+                <textarea id="p-descripcion" class="input-descripcion"></textarea>
+              </div>
+              <div>
+                <label for="p-precio">Precio (USD)</label>
+                <input type="number" id="p-precio" class="input-precio" step="0.01" min="0" required />
+              </div>
+              <div>
+                <label for="p-stock">Stock</label>
+                <input type="number" id="p-stock" class="input-stock" min="0" required />
+              </div>
+              <div class="form-full">
+                <label for="p-imagen">URL de imagen (opcional — si se deja vacío se usa una aleatoria)</label>
+                <input type="url" id="p-imagen" class="input-imagen" placeholder="https://..." />
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn-guardar">Guardar</button>
+                <button type="button" class="btn-cancelar">Cancelar</button>
+              </div>
+            </form>
+
+            <div class="producto-grid"></div>
+          </div>
+
+          
+        </section>
+
+      
+
+      
+      </div>
+    </main>
+
+   
+
+    <script>
+      /* ======================================================================
+         DEMO E-COMMERCE CRUD FUNCIONAL (Sesión 7)
+         Extraído de js/main-s7.js -> initEcommerceDemo()
+         Patrón: estado central + funciones puras CRUD + render único.
+         ====================================================================== */
+
+      document.addEventListener('DOMContentLoaded', () => {
+        initEcommerceDemo();
+      });
+
+      /* ---------- Demo E-COMMERCE CRUD FUNCIONAL ---------- */
+      function initEcommerceDemo() {
+        const root = document.querySelector('.ecommerce-demo');
+        if (!root) return;
+
+        const CLAVE_STORAGE = 'd4s7-productos-v1';
+
+        // Catálogo inicial: el mismo array de la demo original
+        const PRODUCTOS_INICIALES = [
+          { id: 1, nombre: 'Auriculares Bluetooth Pro', descripcion: 'Cancelación de ruido activa', precio: 79.99, stock: 25, imagen: 'https://picsum.photos/seed/auriculares/600/400', categoria: 'electronica' },
+          { id: 2, nombre: 'Teclado Mecánico RGB', descripcion: 'Switches mecánicos, retroiluminado', precio: 129.99, stock: 3, imagen: 'https://picsum.photos/seed/teclado/600/400', categoria: 'electronica' },
+          { id: 3, nombre: 'Monitor 27" 4K', descripcion: 'UHD para diseño y gaming', precio: 449.99, stock: 8, imagen: 'https://picsum.photos/seed/monitor/600/400', categoria: 'electronica' },
+          { id: 4, nombre: 'Mochila Urbana', descripcion: 'Compartimento acolchado para notebook', precio: 39.5, stock: 14, imagen: 'https://picsum.photos/seed/mochila/600/400', categoria: 'accesorios' }
+        ];
+
+        // 1. ESTADO CENTRAL: un único array de objetos "productos"
+        let productosDemo = cargarProductos();
+
+        const grid = root.querySelector('.producto-grid');
+        const buscador = root.querySelector('.input-buscar');
+        const filtroCategoria = root.querySelector('.filtro-categoria');
+        const resultCount = root.querySelector('.result-count');
+        const btnMostrarForm = root.querySelector('.btn-agregar-toggle');
+        const form = root.querySelector('.form-producto');
+        const formTitulo = form.querySelector('.form-titulo');
+        const btnCancelar = form.querySelector('.btn-cancelar');
+        const statProductos = root.querySelector('.stat-productos');
+        const statUnidades = root.querySelector('.stat-unidades');
+        const statValor = root.querySelector('.stat-valor');
+        const statBajo = root.querySelector('.stat-bajo');
+        let editandoId = null; // null = modo "crear" ; número = modo "editar"
+
+        /* Persistencia opcional: el estado sobrevive al recargado */
+        function cargarProductos() {
+          try {
+            const guardado = localStorage.getItem(CLAVE_STORAGE);
+            if (!guardado) return [...PRODUCTOS_INICIALES];
+            const lista = JSON.parse(guardado);
+            return Array.isArray(lista) ? lista : [...PRODUCTOS_INICIALES];
+          } catch (err) {
+            return [...PRODUCTOS_INICIALES];
+          }
+        }
+
+        function guardarProductos() {
+          try {
+            localStorage.setItem(CLAVE_STORAGE, JSON.stringify(productosDemo));
+          } catch (err) {
+            /* modo privado o cuota llena: la demo sigue funcionando en memoria */
+          }
+        }
+
+        // 2. RENDERIZADO: recorre el array y reconstruye el DOM
+        function renderizarCatalogoDemo(lista) {
+          grid.innerHTML = ''; // limpiamos antes de redibujar
+
+          if (lista.length === 0) {
+            const vacio = document.createElement('p');
+            vacio.className = 'empty-state';
+            vacio.innerHTML = '<strong>No hay productos para mostrar</strong>Probá con otra búsqueda o agregá uno nuevo.';
+            grid.appendChild(vacio);
+            resultCount.textContent = '0 productos';
+            actualizarEstadisticas();
+            return;
+          }
+
+          lista.forEach((producto) => {
+            // createElement + classList.add: construcción 100% por JS
+            const tarjeta = document.createElement('article');
+            tarjeta.classList.add('producto-card');
+            tarjeta.dataset.id = producto.id;
+
+            const media = document.createElement('div');
+            media.classList.add('producto-media');
+
+            const img = document.createElement('img');
+            img.classList.add('producto-imagen');
+            img.setAttribute('src', producto.imagen);
+            img.setAttribute('alt', producto.nombre);
+            img.setAttribute('loading', 'lazy');
+            // Si la imagen externa falla, queda el respaldo del contenedor
+            img.addEventListener('error', () => img.remove());
+
+            media.appendChild(img);
+
+            const nombre = document.createElement('h4');
+            nombre.classList.add('producto-nombre');
+            nombre.textContent = producto.nombre; // textContent: nunca innerHTML con datos de usuario
+
+            const desc = document.createElement('p');
+            desc.classList.add('producto-descripcion');
+            desc.textContent = producto.descripcion || 'Sin descripción';
+
+            const precio = document.createElement('p');
+            precio.classList.add('producto-precio');
+            precio.textContent = '$' + producto.precio.toFixed(2);
+
+            const stock = document.createElement('p');
+            stock.classList.add('producto-stock');
+            if (producto.stock <= 5) stock.classList.add('low');
+            stock.textContent =
+              producto.stock <= 5
+                ? '⚠ Stock bajo: ' + producto.stock + ' u.'
+                : 'Stock: ' + producto.stock + ' u.';
+
+            const acciones = document.createElement('div');
+            acciones.classList.add('card-actions');
+
+            const btnEditar = document.createElement('button');
+            btnEditar.type = 'button';
+            btnEditar.classList.add('btn-editar');
+            btnEditar.textContent = 'Editar';
+            btnEditar.addEventListener('click', () => abrirFormularioEdicion(producto.id));
+
+            const btnEliminar = document.createElement('button');
+            btnEliminar.type = 'button';
+            btnEliminar.classList.add('btn-eliminar');
+            btnEliminar.textContent = 'Eliminar';
+            btnEliminar.addEventListener('click', () => eliminarProductoDemo(producto.id));
+
+            acciones.append(btnEditar, btnEliminar);
+            tarjeta.append(media, nombre, desc, precio, stock, acciones);
+            grid.appendChild(tarjeta);
+          });
+
+          resultCount.textContent =
+            lista.length + ' producto' + (lista.length === 1 ? '' : 's');
+          actualizarEstadisticas();
+        }
+
+        // Estadísticas derivadas del estado (se recalculan en cada render)
+        function actualizarEstadisticas() {
+          const unidades = productosDemo.reduce((acc, p) => acc + p.stock, 0);
+          const valor = productosDemo.reduce((acc, p) => acc + p.precio * p.stock, 0);
+          const bajos = productosDemo.filter((p) => p.stock <= 5).length;
+
+          statProductos.textContent = String(productosDemo.length);
+          statUnidades.textContent = String(unidades);
+          statValor.textContent =
+            '$' + valor.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          statBajo.textContent = String(bajos);
+        }
+
+        // 3. READ con filtros: búsqueda por texto + filtro de categoría combinados
+        function aplicarFiltros() {
+          const texto = buscador.value.trim().toLowerCase();
+          const categoria = filtroCategoria.value;
+
+          const filtrados = productosDemo.filter((p) => {
+            const coincideTexto =
+              p.nombre.toLowerCase().includes(texto) ||
+              (p.descripcion || '').toLowerCase().includes(texto);
+            const coincideCategoria = categoria === 'todas' || p.categoria === categoria;
+            return coincideTexto && coincideCategoria;
+          });
+
+          renderizarCatalogoDemo(filtrados);
+        }
+
+        // 4. CREATE / UPDATE comparten el mismo formulario
+        function abrirFormularioCreacion() {
+          editandoId = null;
+          formTitulo.textContent = 'Nuevo producto';
+          form.reset();
+          form.classList.add('open');
+          form.querySelector('.input-nombre').focus();
+        }
+
+        function abrirFormularioEdicion(id) {
+          const producto = productosDemo.find((p) => p.id === id); // READ puntual por id
+          if (!producto) return;
+          editandoId = id;
+          formTitulo.textContent = 'Editando: ' + producto.nombre;
+          form.querySelector('.input-nombre').value = producto.nombre;
+          form.querySelector('.input-descripcion').value = producto.descripcion || '';
+          form.querySelector('.input-precio').value = producto.precio;
+          form.querySelector('.input-stock').value = producto.stock;
+          form.querySelector('.input-categoria').value = producto.categoria;
+          form.querySelector('.input-imagen').value = producto.imagen || '';
+          form.classList.add('open');
+          form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          form.querySelector('.input-nombre').focus();
+        }
+
+        function cerrarFormulario() {
+          form.classList.remove('open');
+          form.reset();
+          editandoId = null;
+        }
+
+        form.addEventListener('submit', (event) => {
+          event.preventDefault(); // evita que el formulario recargue la página
+
+          const nombre = form.querySelector('.input-nombre').value.trim();
+          const descripcion = form.querySelector('.input-descripcion').value.trim();
+          const precio = parseFloat(form.querySelector('.input-precio').value);
+          const stock = parseInt(form.querySelector('.input-stock').value, 10);
+          const categoria = form.querySelector('.input-categoria').value;
+          const imagenManual = form.querySelector('.input-imagen').value.trim();
+
+          // Validación mínima antes de tocar el estado
+          if (!nombre || isNaN(precio) || isNaN(stock) || precio < 0 || stock < 0) {
+            showToast('Completá nombre, precio y stock correctamente');
+            return;
+          }
+
+          const imagenUsada = imagenManual || 'https://picsum.photos/seed/' + Date.now() + '/600/400';
+
+          if (editandoId === null) {
+            // CREATE: Date.now() como generador simple de id único
+            productosDemo.push({
+              id: Date.now(),
+              nombre,
+              descripcion,
+              precio,
+              stock,
+              categoria,
+              imagen: imagenUsada
+            });
+            showToast('Producto agregado ✅');
+          } else {
+            // UPDATE: findIndex localiza la posición exacta a reemplazar
+            const index = productosDemo.findIndex((p) => p.id === editandoId);
+            if (index !== -1) {
+              productosDemo[index] = {
+                ...productosDemo[index],
+                nombre,
+                descripcion,
+                precio,
+                stock,
+                categoria,
+                imagen: imagenUsada
+              };
+              showToast('Producto actualizado ✏️');
+            }
+          }
+
+          guardarProductos();
+          cerrarFormulario();
+          aplicarFiltros(); // re-renderiza respetando el filtro/búsqueda activos
+        });
+
+        function eliminarProductoDemo(id) {
+          const producto = productosDemo.find((p) => p.id === id);
+          const etiqueta = producto ? '"' + producto.nombre + '"' : 'este producto';
+          if (!confirm('¿Seguro que deseas eliminar ' + etiqueta + '?')) return;
+
+          productosDemo = productosDemo.filter((p) => p.id !== id); // DELETE
+          guardarProductos();
+          showToast('Producto eliminado 🗑️');
+          aplicarFiltros();
+        }
+
+        btnMostrarForm.addEventListener('click', () => {
+          if (form.classList.contains('open') && editandoId === null) {
+            cerrarFormulario();
+          } else {
+            abrirFormularioCreacion();
+          }
+        });
+
+        btnCancelar.addEventListener('click', cerrarFormulario);
+        buscador.addEventListener('input', aplicarFiltros);
+        filtroCategoria.addEventListener('change', aplicarFiltros);
+
+        // Escape cierra el formulario abierto
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && form.classList.contains('open')) cerrarFormulario();
+        });
+
+        renderizarCatalogoDemo(productosDemo); // primer render al cargar la página
+      }
+
+      /* ---------- Toast simple de feedback ---------- */
+      function showToast(message) {
+        let toast = document.querySelector('.toast');
+        if (!toast) {
+          toast = document.createElement('div');
+          toast.className = 'toast';
+          toast.setAttribute('role', 'status');
+          toast.setAttribute('aria-live', 'polite');
+          document.body.appendChild(toast);
+        }
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(window.__toastTimeout);
+        window.__toastTimeout = setTimeout(() => toast.classList.remove('show'), 2600);
+      }
+    </script>
+  </body>
+</html>

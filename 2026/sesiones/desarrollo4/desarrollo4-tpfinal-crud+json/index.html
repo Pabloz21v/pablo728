@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP-Final Integrador · Ingeniería inversa de un CRUD + JSON | Desarrollo IV</title>
+    <meta
+      name="description"
+      content="Trabajo Práctico Final Integrador de Desarrollo IV: ingeniería inversa de un mini ecommerce con CRUD en JavaScript puro, consumo de un JSON con fetch y armado del DOM. Laboratorio interactivo, guía de defensa oral y código completo disponible para copiar."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      body {
+        font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ================= HEADER / NAVEGACIÓN ================= -->
+    <header class="site-header">
+      <div class="container">
+        <a href="#top" class="brand">
+          <span class="brand-badge">D4</span>
+          Desarrollo IV
+        </a>
+        <button
+          class="nav-toggle"
+          id="nav-toggle"
+          aria-label="Abrir menú de navegación"
+          aria-expanded="false"
+          aria-controls="main-nav"
+        >
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+          <a href="#consigna">Consigna</a>
+          <a href="#ingenieria-inversa">Ingeniería inversa</a>
+
+          <a href="#codigo">Código</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- ================= PORTADA ================= -->
+      <section class="hero">
+        <div class="container">
+          <span class="eyebrow">Trabajo Práctico Final Integrador</span>
+          <h1>
+            Ingeniería inversa de un CRUD<br />
+            y consumo de un JSON propio
+          </h1>
+          <p class="lead">
+            Te damos un <strong>mini ecommerce funcionando</strong> (150 líneas de
+            HTML + CSS + JavaScript puro, sin frameworks). Tu trabajo es
+            <strong>desarmarlo, entenderlo y volver a armarlo</strong> en una página
+            propia, con estética a elección, que implemente <strong>CRUD completo</strong> y
+            consuma el <strong>JSON que vos mismo armaste</strong>.
+          </p>
+          <p class="lead">
+            Al final de esta página está el código fuente
+            <strong>100% disponible para copiar y descargar</strong>, más la guía de
+            defensa oral para aprobar la materia.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#consigna" class="btn">
+              <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+              Ver la consigna
+            </a>
+            
+            <a href="#codigo" class="btn ghost">
+              <i class="fa-solid fa-code" aria-hidden="true"></i>
+              Ir al código final
+            </a>
+          </div>
+
+          <div class="badge-row">
+            <span class="badge accent"><i class="fa-solid fa-database" aria-hidden="true"></i> CRUD: crear · leer · editar · borrar</span>
+            <span class="badge violet"><i class="fa-solid fa-file-code" aria-hidden="true"></i>  JSON propio</span>
+            <span class="badge warn"><i class="fa-solid fa-sitemap" aria-hidden="true"></i> Comprensión del DOM</span>
+            <span class="badge"><i class="fa-solid fa-comments" aria-hidden="true"></i> Defensa oral</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= LAYOUT: TOC + CONTENIDO ================= -->
+      <div class="container">
+        <div class="">
+          <!-- ---------- TABLA DE CONTENIDOS ---------- -->
+         
+
+          <!-- ---------- CONTENIDO PRINCIPAL ---------- -->
+          <article class="content">
+            <!-- ============ 1. OBJETIVOS ============ -->
+            <section id="objetivos">
+              <h2>
+                <span class="step-no"><i class="fa-solid fa-bullseye" aria-hidden="true"></i></span>
+                Objetivos de aprendizaje
+              </h2>
+              <p>Al finalizar este TP vas a poder:</p>
+              <ul>
+                <li>
+                  <strong>Leer código ajeno de principio a fin</strong> e identificar sus
+                  partes: datos (JSON), lógica (CRUD) y presentación (DOM + CSS).
+                </li>
+                <li>
+                  Explicar qué son las operaciones <strong>CRUD</strong> y en qué línea de
+                  código vive cada una.
+                </li>
+                <li>
+                  <strong>Armar tu propio JSON</strong> y consumirlo con JavaScript.
+                </li>
+                <li>
+                  Explicar cómo esos datos se transforman en elementos visibles de la
+                  página usando la <strong>API del DOM</strong>
+                  (<code>createElement</code>, <code>textContent</code>,
+                  <code>appendChild</code>).
+                </li>
+                <li>
+                  Justificar con criterio propio la elección de <strong>CSS nativo,
+                  Bootstrap o Tailwind</strong> para tu estética.
+                </li>
+                <li>
+                  <strong>Defender oralmente</strong> tu página: mostrar el CRUD
+                  funcionando y responder cómo viaja un dato desde el JSON hasta la
+                  pantalla.
+                </li>
+              </ul>
+
+            
+            </section>
+
+            <!-- ============ 2. CONSIGNA ============ -->
+            <section id="consigna">
+              <h2>
+                <span class="step-no"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i></span>
+                La consigna del TP-Final Integrador
+              </h2>
+
+              <div class="callout warn">
+                <div class="callout-title">
+                  <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Condición de aprobación
+                </div>
+                <p>
+                  Entregar y <strong>defender oralmente</strong> una página web creada,
+                 que incorpore <strong>CRUD</strong> y el
+                  <strong>consumo del JSON armado por él mismo</strong>.
+                </p>
+                <p>
+                  Se evalúa además la <strong>capacidad de explicar</strong> cómo se
+                  consume el JSON y cómo esos datos se organizan para visualizarse en la
+                  web (<strong>comprensión básica del DOM</strong>).
+                </p>
+                <p><strong>FECHA Entrega TP:</strong> Preferentemente durante la segunda semana de diciembre (del 9 a 15 de diciembre) así me dan tiempo de ver sus códigos</p>
+                <p><strong>FECHA Defensa oral:</strong> Durante la tercer y cuarta semana de diciembre (del 16 a 17 de diciembre)</p>
+             </div>
+
+              <h3>Qué hay que hacer, en orden</h3>
+              <div class="flow">
+                <div class="flow-step">
+                  <h4>1. Ingeniería inversa</h4>
+                  <p>
+                    Recibir el archivo <code>ecommerce-codigo-ing-invertida.html</code>,
+                    desarmarlo y entender qué hace cada bloque: estilos, JSON, CRUD y DOM.
+                    (usar todas las herramientas que consideres para realizar esta etapa)
+                  </p>
+                </div>
+                <div class="flow-step">
+                  <h4>2. Armá tu JSON</h4>
+                  <p>
+                    Creá <code>TÚ JSON</code> de la tematica de tu preferencia,
+                    categorías y precios. Ese archivo es <strong>"tu base de datos"</strong>.
+                  </p>
+                </div>
+                <div class="flow-step">
+                  <h4>3. Reconstruí el CRUD</h4>
+                  <p>
+                    Con en HTML y CSS de tu web incoporar: agregar (C), listar (R), editar (U) y eliminar (D). 
+                  </p>
+                </div>
+                <div class="flow-step">
+                  <h4>4. Defendé</h4>
+                  <p>
+                    Mostrá el CRUD funcionando y explicá el recorrido
+                    JSON → JavaScript → DOM con tu codigo.
+                  </p>
+                </div>
+              </div>
+
+              
+
+            
+            </section>
+
+            <!-- ============ 3. INGENIERÍA INVERSA ============ -->
+            <section id="ingenieria-inversa">
+              <h2>
+                <span class="step-no"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i></span>
+                ¿Qué es hacer ingeniería inversa?
+              </h2>
+
+              <p>
+                Programar normalmente es ir <strong>de la idea al código</strong>. La
+                ingeniería inversa va al revés: te dan el código terminado y tenés que
+                reconstruir <strong>la idea</strong> que hay detrás. No es "adivinar", es un
+                procedimiento ordenado.
+              </p>
+
+
+              <h3>El método en 5 pasos (usalo como guion)</h3>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Paso</th>
+                      <th>Qué hacés</th>
+                      <th>Dónde se ve en nuestro archivo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>1. Inventario</strong></td>
+                      <td>Listás las partes sin leer la lógica: <code>&lt;style&gt;</code>, <code>&lt;body&gt;</code>, <code>&lt;script&gt;</code>.</td>
+                      <td>Tres bloques bien separados en el archivo.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>2. Datos</strong></td>
+                      <td>Buscás el JSON / array: son <em>los datos del sistema</em>.</td>
+                      <td>Constante <code>productosJSON</code> (4 objetos).</td>
+                    </tr>
+                    <tr>
+                      <td><strong>3. Lógica</strong></td>
+                      <td>Buscás las funciones y agrupás por responsabilidad.</td>
+                      <td>Helpers, control del formulario, CRUD, eventos.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>4. Flujo</strong></td>
+                      <td>Seguís un dato desde que se guarda hasta que se ve.</td>
+                      <td><code>crearProducto()</code> → <code>leerProductos()</code> → tarjeta.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>5. Rearmado</strong></td>
+                      <td>Lo reconstruís con tus datos, tu JSON y tu diseño.</td>
+                      <td>Es el TP que entregás.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+
+            </section>
+
+
+
+
+
+            <!-- ============ 11. CÓDIGO ============ -->
+            <section id="codigo">
+              <h2>
+                <span class="step-no"><i class="fa-solid fa-code" aria-hidden="true"></i></span>
+                El código, completo y disponible
+              </h2>
+
+              <p>
+                Todo lo que ves en esta página está disponible para copiar. El archivo que hay
+                que hacer ingeniería inversa es el siguiente, tal cual se entregó:
+                <strong>442 líneas</strong>, un solo HTML con el CSS y el JS adentro.
+              </p>
+
+              <div class="download-card">
+                <div class="dc-icon"><i class="fa-solid fa-file-code" aria-hidden="true"></i></div>
+                <div class="dc-text">
+                  <strong>ecommerce-codigo-ing-invertida.html</strong>
+                  <span id="codigo-original-meta">Cargando metadatos…</span>
+                </div>
+                <div class="dc-actions">
+                  <a class="btn small" href="original/ecommerce-codigo-ing-invertida.html" download>
+                    <i class="fa-solid fa-download" aria-hidden="true"></i> Descargar archivo
+                  </a>
+                  <a class="btn small secondary" href="original/ecommerce-codigo-ing-invertida.html" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i> Abrir en pestaña
+                  </a>
+                </div>
+              </div>
+
+              <h3>Probalo acá mismo </h3>
+              <div class="demo-frame">
+                <div class="frame-toolbar">
+                  <span class="tb-label">Ancho:</span>
+                  <button data-width="full" class="active">Escritorio</button>
+                  <button data-width="768">Tablet</button>
+                  <button data-width="390">Celular</button>
+                </div>
+                <div class="frame-wrap">
+                  <iframe
+                    src="original/ecommerce-codigo-ing-invertida.html"
+                    title="Mini ecommerce original funcionando: demo del código a analizar"
+                    loading="lazy"
+                  ></iframe>
+                </div>
+                <p class="frame-hint">
+                  Esta es la página original sin modificar. Agregá, editá y borrá productos para
+                  ver el CRUD en acción. Ojo: al recargar, vuelven los 4 productos del array.
+                </p>
+              </div>
+
+
+            </section>
+          </article>
+        </div>
+      </div>
+    </main>
+
+  
+
+    <script src="js/main.js" defer></script>
+    <script src="js/crud-demo.js" defer></script>
+  </body>
+</html>

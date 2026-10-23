@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "nombre": "Remera básica",
+    "categoria": "Indumentaria",
+    "precio": 8500,
+    "stock": 15,
+    "imagen": "images/producto-remera.svg"
+  },
+  {
+    "id": 2,
+    "nombre": "Gorra negra",
+    "categoria": "Accesorios",
+    "precio": 6200,
+    "stock": 8,
+    "imagen": "images/producto-gorra.svg"
+  },
+  {
+    "id": 3,
+    "nombre": "Buzo canguro",
+    "categoria": "Indumentaria",
+    "precio": 18900,
+    "stock": 5,
+    "imagen": "images/producto-buzo.svg"
+  },
+  {
+    "id": 4,
+    "nombre": "Zapatillas urbanas",
+    "categoria": "Calzado",
+    "precio": 32000,
+    "stock": 3,
+    "imagen": "images/producto-zapatillas.svg"
+  },
+  {
+    "id": 5,
+    "nombre": "Mochila urbana",
+    "categoria": "Accesorios",
+    "precio": 24500,
+    "stock": 6,
+    "imagen": "images/producto-mochila.svg"
+  },
+  {
+    "id": 6,
+    "nombre": "Medias pack x3",
+    "categoria": "Indumentaria",
+    "precio": 3900,
+    "stock": 22,
+    "imagen": "images/producto-medias.svg"
+  }
+]
