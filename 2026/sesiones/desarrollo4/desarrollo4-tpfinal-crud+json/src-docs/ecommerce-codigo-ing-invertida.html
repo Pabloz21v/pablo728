@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Ecommerce</title>
+
+  <style>
+    /* ============================================================
+       ESTILOS (súper básicos)
+       ============================================================ */
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #222;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background: #2c3e50;
+      color: #fff;
+    }
+    header h1 { font-size: 20px; margin: 0; }
+
+    button {
+      cursor: pointer;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      background: #3498db;
+      color: #fff;
+      font-size: 14px;
+    }
+    button:hover         { background: #2980b9; }
+    button.peligro       { background: #e74c3c; }
+    button.peligro:hover { background: #c0392b; }
+    button.secundario    { background: #95a5a6; }
+    button.exito         { background: #27ae60; }
+    button.exito:hover   { background: #229954; }
+
+    main {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    section {
+      background: #fff;
+      padding: 16px;
+      border-radius: 6px;
+    }
+
+    /* ---------- Grilla de tarjetas ---------- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .card img       { width: 100%; height: 100px; object-fit: cover; border-radius: 4px; }
+    .card h3        { margin: 0; font-size: 15px; }
+    .card .precio   { font-weight: bold; color: #27ae60; margin: 0; }
+    .card .acciones { display: flex; gap: 4px; margin-top: 4px; }
+    .card .acciones button { flex: 1; font-size: 12px; padding: 6px; }
+
+    /* ---------- Formulario ---------- */
+    form     { display: flex; flex-direction: column; gap: 10px; max-width: 400px; }
+    label    { display: flex; flex-direction: column; font-size: 14px; gap: 4px; }
+    input    { padding: 6px; border: 1px solid #ccc; border-radius: 4px; }
+    .botones { display: flex; gap: 8px; }
+
+    /* El atributo [hidden] ya oculta el elemento, pero por si acaso
+       algún CSS de sección lo pisa, lo reforzamos: */
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🛒 Mini Ecommerce</h1>
+    <button id="btn-nuevo" class="exito">+ Agregar producto</button>
+  </header>
+
+  <main>
+
+    <!-- ============ LISTA DE PRODUCTOS ============ -->
+    <section>
+      <h2>Productos</h2>
+      <div id="lista-productos" class="grid"></div>
+    </section>
+
+    <!-- ============ FORMULARIO CRUD (oculto por defecto) ============ -->
+    <section id="seccion-form" hidden>
+      <h2 id="titulo-form">Agregar producto</h2>
+
+      <form id="form-producto">
+        <input type="hidden" id="producto-id">
+
+        <label>Nombre
+          <input id="nombre" required>
+        </label>
+
+        <label>Precio
+          <input id="precio" type="number" min="0" required>
+        </label>
+
+        <label>Imagen (URL)
+          <input id="imagen" placeholder="https://...">
+        </label>
+
+        <label>Stock
+          <input id="stock" type="number" min="0" value="1" required>
+        </label>
+
+        <div class="botones">
+          <button type="submit">Guardar</button>
+          <button type="button" id="btn-cancelar" class="secundario">Cancelar</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <script>
+    /* ============================================================
+       MINI ECOMMERCE - CRUD en memoria sobre un JSON
+       ------------------------------------------------------------
+       MAPA DEL CRUD (una función por operación):
+         CREATE  →  crearProducto(datos)
+         READ    →  leerProductos()
+         UPDATE  →  actualizarProducto(id, datos)
+         DELETE  →  eliminarProducto(id)
+
+       MAPA DE LA UI:
+         Botón "+ Agregar producto"   →  mostrarFormularioCreacion()
+         Botón "Editar" de la tarjeta →  mostrarFormularioEdicion(id)
+         Botón "X" de la tarjeta      →  eliminarProducto(id)
+         Botón "Cancelar" del form    →  ocultarFormulario()
+         Submit del form              →  crearProducto() o actualizarProducto()
+
+       Regla de oro:
+         Cada función del CRUD modifica el array `productos`
+         y vuelve a llamar a `leerProductos()` para refrescar el DOM.
+       ============================================================ */
+
+    // ------------------------------------------------------------
+    // 1. "BASE DE DATOS": el JSON original
+    // ------------------------------------------------------------
+    const productosJSON = [
+      {
+        id: 1,
+        nombre: "Remera básica",
+        precio: 8500,
+        imagen: "https://picsum.photos/seed/remera/300/200",
+        stock: 15
+      },
+      {
+        id: 2,
+        nombre: "Gorra negra",
+        precio: 6200,
+        imagen: "https://picsum.photos/seed/gorra/300/200",
+        stock: 8
+      },
+      {
+        id: 3,
+        nombre: "Buzo canguro",
+        precio: 18900,
+        imagen: "https://picsum.photos/seed/buzo/300/200",
+        stock: 5
+      },
+      {
+        id: 4,
+        nombre: "Zapatillas urbanas",
+        precio: 32000,
+        imagen: "https://picsum.photos/seed/zapatillas/300/200",
+        stock: 3
+      }
+    ];
+
+    // Copia de trabajo: sobre esta se hace el CRUD
+    let productos = [...productosJSON];
+
+    // Contador para IDs de productos nuevos
+    let proximoId = 5;
+
+    // ------------------------------------------------------------
+    // 2. REFERENCIAS AL DOM
+    // ------------------------------------------------------------
+    const listaProductos = document.getElementById("lista-productos");
+    const seccionForm    = document.getElementById("seccion-form");
+    const formProducto   = document.getElementById("form-producto");
+    const inputId        = document.getElementById("producto-id");
+    const inputNombre    = document.getElementById("nombre");
+    const inputPrecio    = document.getElementById("precio");
+    const inputImagen    = document.getElementById("imagen");
+    const inputStock     = document.getElementById("stock");
+    const tituloForm     = document.getElementById("titulo-form");
+    const btnNuevo       = document.getElementById("btn-nuevo");
+    const btnCancelar    = document.getElementById("btn-cancelar");
+
+    /* ============================================================
+       3. HELPERS  (apoyo para no repetir código)
+       ============================================================ */
+
+    // Busca un producto por id y lo devuelve (o null si no existe)
+    function buscarProductoPorId(id) {
+      let encontrado = null;
+      productos.forEach(function (p) {
+        if (p.id === id) {
+          encontrado = p;
+        }
+      });
+      return encontrado;
+    }
+
+    // Busca la POSICIÓN de un producto en el array (-1 si no existe)
+    function buscarIndicePorId(id) {
+      let indice = -1;
+      productos.forEach(function (p, i) {
+        if (p.id === id) {
+          indice = i;
+        }
+      });
+      return indice;
+    }
+
+    // Construye el DOM de UNA sola tarjeta a partir de un producto
+    function crearTarjetaProducto(producto) {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const img = document.createElement("img");
+      img.src = producto.imagen || "https://via.placeholder.com/300x200";
+      img.alt = producto.nombre;
+
+      const titulo = document.createElement("h3");
+      titulo.textContent = producto.nombre;
+
+      const precio = document.createElement("p");
+      precio.className = "precio";
+      precio.textContent = "$" + producto.precio;
+
+      const stock = document.createElement("small");
+      stock.textContent = "Stock: " + producto.stock;
+
+      // --- Solo Editar y Eliminar. Nada de "Agregar" acá. ---
+      const acciones = document.createElement("div");
+      acciones.className = "acciones";
+
+      const btnEditar = document.createElement("button");
+      btnEditar.textContent = "Editar";
+      btnEditar.className = "secundario";
+      btnEditar.addEventListener("click", function () {
+        mostrarFormularioEdicion(producto.id);
+      });
+
+      const btnEliminar = document.createElement("button");
+      btnEliminar.textContent = "X";
+      btnEliminar.className = "peligro";
+      btnEliminar.addEventListener("click", function () {
+        eliminarProducto(producto.id);
+      });
+
+      acciones.appendChild(btnEditar);
+      acciones.appendChild(btnEliminar);
+
+      card.appendChild(img);
+      card.appendChild(titulo);
+      card.appendChild(precio);
+      card.appendChild(stock);
+      card.appendChild(acciones);
+
+      return card;
+    }
+
+    /* ============================================================
+       4. CONTROL DEL FORMULARIO (mostrar / ocultar / precargar)
+       ============================================================ */
+
+    // Deja el formulario vacío y en modo "Crear"
+    function limpiarFormulario() {
+      formProducto.reset();
+      inputId.value = "";
+      tituloForm.textContent = "Agregar producto";
+    }
+
+    // Muestra el formulario vacío para CREAR un producto nuevo
+    function mostrarFormularioCreacion() {
+      limpiarFormulario();
+      seccionForm.hidden = false;
+      inputNombre.focus();
+      seccionForm.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Muestra el formulario con los datos de un producto para EDITARLO
+    function mostrarFormularioEdicion(id) {
+      const producto = buscarProductoPorId(id);
+      if (!producto) return;
+
+      inputId.value     = producto.id;
+      inputNombre.value = producto.nombre;
+      inputPrecio.value = producto.precio;
+      inputImagen.value = producto.imagen || "";
+      inputStock.value  = producto.stock;
+
+      tituloForm.textContent = "Editar producto";
+      seccionForm.hidden = false;
+      inputNombre.focus();
+      seccionForm.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Oculta el formulario y lo deja limpio
+    function ocultarFormulario() {
+      seccionForm.hidden = true;
+      limpiarFormulario();
+    }
+
+    /* ============================================================
+       5. CRUD  (una función por operación)
+       ============================================================ */
+
+    // ----------------------------------------
+    // CREATE → crearProducto(datos)
+    // ----------------------------------------
+    function crearProducto(datos) {
+      const nuevoProducto = {
+        id: proximoId,
+        nombre: datos.nombre,
+        precio: datos.precio,
+        imagen: datos.imagen,
+        stock:  datos.stock
+      };
+
+      proximoId = proximoId + 1;
+      productos.push(nuevoProducto);
+
+      leerProductos();
+    }
+
+    // ----------------------------------------
+    // READ → leerProductos()
+    // ----------------------------------------
+    function leerProductos() {
+      listaProductos.innerHTML = "";
+
+      if (productos.length === 0) {
+        listaProductos.innerHTML = "<p>No hay productos cargados.</p>";
+        return;
+      }
+
+      productos.forEach(function (producto) {
+        const tarjeta = crearTarjetaProducto(producto);
+        listaProductos.appendChild(tarjeta);
+      });
+    }
+
+    // ----------------------------------------
+    // UPDATE → actualizarProducto(id, datos)
+    // ----------------------------------------
+    function actualizarProducto(id, datos) {
+      const producto = buscarProductoPorId(id);
+      if (!producto) return;
+
+      producto.nombre = datos.nombre;
+      producto.precio = datos.precio;
+      producto.imagen = datos.imagen;
+      producto.stock  = datos.stock;
+
+      leerProductos();
+    }
+
+    // ----------------------------------------
+    // DELETE → eliminarProducto(id)
+    // ----------------------------------------
+    function eliminarProducto(id) {
+      if (!confirm("¿Eliminar este producto?")) return;
+
+      const indice = buscarIndicePorId(id);
+      if (indice === -1) return;
+
+      productos.splice(indice, 1);
+      leerProductos();
+    }
+
+    /* ============================================================
+       6. EVENTOS  (atan las acciones del usuario al CRUD)
+       ============================================================ */
+
+    // Botón "+ Agregar producto" del header → abre el form vacío
+    btnNuevo.addEventListener("click", function () {
+      mostrarFormularioCreacion();
+    });
+
+    // Botón "Cancelar" del form → cierra y limpia
+    btnCancelar.addEventListener("click", function () {
+      ocultarFormulario();
+    });
+
+    // Submit del form → decide entre CREATE y UPDATE según haya id
+    formProducto.addEventListener("submit", function (evento) {
+      evento.preventDefault();
+
+      const datos = {
+        nombre: inputNombre.value.trim(),
+        precio: Number(inputPrecio.value),
+        imagen: inputImagen.value.trim(),
+        stock:  Number(inputStock.value)
+      };
+
+      if (inputId.value) {
+        actualizarProducto(Number(inputId.value), datos);  // UPDATE
+      } else {
+        crearProducto(datos);                              // CREATE
+      }
+
+      ocultarFormulario();
+    });
+
+    /* ============================================================
+       7. INICIO
+       ============================================================ */
+    leerProductos(); // READ inicial
+  </script>
+</body>
+</html>

@@ -1,0 +1,3149 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Sesión 16 · Placas de Expansión y Controladores (Drivers) — Hardware 1
+    </title>
+    <meta
+      name="description"
+      content="Material de estudio completo de la Sesión 16 de Hardware 1: buses y placas de expansión en desktop y notebook, y controladores de dispositivos (drivers), Vendor/Device ID y buenas prácticas de instalación."
+    />
+    <meta name="author" content="Cátedra Hardware 1" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <style>
+      /* ============================================================
+   Sesión 15 - Hardware 1
+   Gabinetes, Factor de Forma y Sistemas de Refrigeración
+   Hoja de estilos principal (temas claro / oscuro)
+   ============================================================ */
+
+      /* ---------- 1. Variables de tema ---------- */
+      :root {
+        --bg: #f4f6fb;
+        --bg-alt: #eaeef7;
+        --surface: #ffffff;
+        --surface-2: #f7f9fd;
+        --surface-3: #eef2f9;
+        --text: #16202e;
+        --text-soft: #3c4a5f;
+        --muted: #64748b;
+        --border: #d8e0ee;
+        --border-strong: #b9c5da;
+        --accent: #b3161f;
+        --accent-soft: #fdeaec;
+        --accent-2: #1d4ed8;
+        --accent-2-soft: #e8eefc;
+        --ok: #0f7b52;
+        --ok-soft: #e6f6ef;
+        --warn: #a8620a;
+        --warn-soft: #fdf3e2;
+        --danger: #b3161f;
+        --danger-soft: #fdeaec;
+        --code-bg: #101725;
+        --code-text: #e6ecf6;
+        --ascii-bg: #0e1523;
+        --ascii-text: #b8f2d8;
+        --shadow:
+          0 1px 2px rgba(16, 23, 37, 0.06), 0 8px 24px rgba(16, 23, 37, 0.07);
+        --shadow-sm: 0 1px 2px rgba(16, 23, 37, 0.08);
+        --radius: 14px;
+        --radius-sm: 8px;
+        --sidebar-w: 300px;
+        --mono:
+          "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono",
+          monospace;
+        --sans:
+          "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+          sans-serif;
+        --fan: #c8102e;
+      }
+
+      [data-theme="dark"] {
+        --bg: #0b111c;
+        --bg-alt: #0f1725;
+        --surface: #131c2c;
+        --surface-2: #182236;
+        --surface-3: #1e2a41;
+        --text: #e8eefb;
+        --text-soft: #c7d3e8;
+        --muted: #93a3bd;
+        --border: #263248;
+        --border-strong: #38476476;
+        --accent: #ff6b74;
+        --accent-soft: #35171d;
+        --accent-2: #7aa2ff;
+        --accent-2-soft: #16233c;
+        --ok: #4fdba6;
+        --ok-soft: #12302a;
+        --warn: #f5b95c;
+        --warn-soft: #33260f;
+        --danger: #ff6b74;
+        --danger-soft: #35171d;
+        --code-bg: #070c14;
+        --code-text: #dbe6f7;
+        --ascii-bg: #060b13;
+        --ascii-text: #8ff0c8;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 10px 30px rgba(0, 0, 0, 0.35);
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      /* ---------- 2. Reset y base ---------- */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 92px;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 17px;
+        line-height: 1.72;
+        letter-spacing: 0.001em;
+        overflow-x: hidden;
+        transition:
+          background-color 0.25s ease,
+          color 0.25s ease;
+      }
+
+      img,
+      svg,
+      video {
+        max-width: 100%;
+        height: auto;
+      }
+
+      a {
+        color: var(--accent-2);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+      }
+      a:hover {
+        border-bottom-color: currentColor;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        line-height: 1.25;
+        color: var(--text);
+        margin: 0 0 0.6em;
+        font-weight: 700;
+      }
+      h2 {
+        font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.05rem);
+        letter-spacing: -0.01em;
+      }
+      h3 {
+        font-size: clamp(1.18rem, 1rem + 0.7vw, 1.5rem);
+        margin-top: 1.7em;
+      }
+      h4 {
+        font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.2rem);
+        margin-top: 1.4em;
+      }
+      h5 {
+        font-size: 1rem;
+        margin-top: 1.2em;
+        color: var(--text-soft);
+      }
+
+      p {
+        margin: 0 0 1em;
+      }
+      ul,
+      ol {
+        margin: 0 0 1em;
+        padding-left: 1.35em;
+      }
+      li {
+        margin-bottom: 0.4em;
+      }
+      li > ul,
+      li > ol {
+        margin-top: 0.4em;
+      }
+      strong {
+        font-weight: 700;
+      }
+      code {
+        font-family: var(--mono);
+        font-size: 0.88em;
+        background: var(--surface-3);
+        padding: 0.12em 0.38em;
+        border-radius: 5px;
+        border: 1px solid var(--border);
+      }
+      kbd {
+        font-family: var(--mono);
+        font-size: 0.82em;
+        background: var(--surface-3);
+        border: 1px solid var(--border-strong);
+        border-bottom-width: 2px;
+        border-radius: 5px;
+        padding: 0.1em 0.4em;
+      }
+
+      ::selection {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      /* ---------- 3. Barra superior ---------- */
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 60;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.55rem clamp(0.75rem, 2vw, 1.5rem);
+        background: color-mix(in srgb, var(--surface) 88%, transparent);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .topbar__brand {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-weight: 700;
+        font-size: 0.95rem;
+        letter-spacing: -0.01em;
+        color: var(--text);
+        border-bottom: 0;
+        white-space: nowrap;
+      }
+      .topbar__brand:hover {
+        border-bottom: 0;
+      }
+
+      .brand-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        flex: 0 0 auto;
+        background: linear-gradient(140deg, var(--accent), #7a0d14);
+        color: #fff;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        box-shadow: var(--shadow-sm);
+      }
+      .brand-badge span {
+        display: block;
+        transform: translateY(-1px);
+      }
+      .topbar__brand small {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: 500;
+        color: var(--muted);
+      }
+
+      .topbar__spacer {
+        flex: 1 1 auto;
+      }
+
+      .topbar__actions {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-family: var(--sans);
+        font-size: 0.86rem;
+        font-weight: 600;
+        padding: 0.5rem 0.8rem;
+        border-radius: 999px;
+        background: var(--surface-2);
+        color: var(--text);
+        border: 1px solid var(--border);
+        cursor: pointer;
+        transition:
+          background-color 0.18s ease,
+          border-color 0.18s ease,
+          transform 0.12s ease;
+        white-space: nowrap;
+      }
+      .btn:hover {
+        background: var(--surface-3);
+        border-color: var(--border-strong);
+      }
+      .btn:active {
+        transform: translateY(1px);
+      }
+      .btn--primary {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+      .btn--primary:hover {
+        background: #96121a;
+        border-color: #96121a;
+      }
+      [data-theme="dark"] .btn--primary:hover {
+        background: #ff838a;
+        border-color: #ff838a;
+        color: #2a0508;
+      }
+      .btn--ghost {
+        background: transparent;
+      }
+      .btn[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .btn__label {
+        display: inline;
+      }
+
+      .read-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0;
+        background: linear-gradient(90deg, var(--accent), #ff9aa1);
+        z-index: 90;
+        transition: width 0.12s linear;
+      }
+
+      /* ---------- 4. Layout ---------- */
+      .layout {
+        display: grid;
+        grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+        gap: clamp(1rem, 2.5vw, 2.5rem);
+        align-items: start;
+        max-width: 1560px;
+        margin: 0 auto;
+        padding: clamp(1rem, 2vw, 1.75rem) clamp(0.85rem, 2.5vw, 2rem) 4rem;
+      }
+
+      /* Modo lectura: oculta el índice y centra el contenido en un ancho cómodo */
+      .layout.is-focus {
+        grid-template-columns: minmax(0, 900px);
+        justify-content: center;
+      }
+      .layout.is-focus .sidebar {
+        display: none;
+      }
+
+      /* ---------- 5. Índice lateral ---------- */
+      .sidebar {
+        position: sticky;
+        top: 74px;
+        max-height: calc(100vh - 92px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1rem 0.85rem 1.2rem;
+        box-shadow: var(--shadow);
+        scrollbar-width: thin;
+      }
+      .sidebar__title {
+        font-size: 0.74rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--muted);
+        font-weight: 700;
+        margin: 0 0.5rem 0.7rem;
+      }
+      .sidebar nav ol {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        counter-reset: none;
+      }
+      .sidebar nav > ol > li {
+        margin: 0 0 0.1rem;
+      }
+      .sidebar a {
+        display: block;
+        padding: 0.38rem 0.55rem;
+        border-radius: var(--radius-sm);
+        color: var(--text-soft);
+        font-size: 0.875rem;
+        line-height: 1.35;
+        border-bottom: 0;
+        font-weight: 500;
+      }
+      .sidebar a:hover {
+        background: var(--surface-3);
+        color: var(--text);
+      }
+      .sidebar a.is-active {
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .sidebar .sub {
+        list-style: none;
+        padding-left: 0.5rem;
+        margin: 0.1rem 0 0.35rem;
+        border-left: 2px solid var(--border);
+      }
+      .sidebar .sub a {
+        font-size: 0.8rem;
+        padding: 0.26rem 0.5rem;
+        color: var(--muted);
+      }
+      .sidebar__tools {
+        display: flex;
+        gap: 0.4rem;
+        flex-wrap: wrap;
+        margin-top: 0.9rem;
+        padding-top: 0.8rem;
+        border-top: 1px dashed var(--border);
+      }
+      .sidebar__tools .btn {
+        font-size: 0.76rem;
+        padding: 0.38rem 0.6rem;
+      }
+
+      /* ---------- 6. Contenido ---------- */
+      .content {
+        min-width: 0;
+      }
+
+      .hero {
+        background:
+          radial-gradient(
+            1200px 300px at 10% -10%,
+            rgba(179, 22, 31, 0.14),
+            transparent 65%
+          ),
+          linear-gradient(150deg, var(--surface), var(--surface-2));
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: clamp(1.3rem, 3vw, 2.6rem);
+        box-shadow: var(--shadow);
+        margin-bottom: 1.6rem;
+      }
+      .hero__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--accent-soft);
+        padding: 0.3rem 0.7rem;
+        border-radius: 999px;
+        margin-bottom: 0.9rem;
+      }
+      .hero h1 {
+        font-size: clamp(1.55rem, 1.15rem + 2.4vw, 2.6rem);
+        letter-spacing: -0.02em;
+        margin-bottom: 0.5rem;
+      }
+      .hero__sub {
+        color: var(--muted);
+        font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.08rem);
+        max-width: 62ch;
+      }
+      .hero__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1.2rem;
+      }
+      .chip {
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 0.3rem 0.7rem;
+        border-radius: 999px;
+        background: var(--surface-3);
+        border: 1px solid var(--border);
+        color: var(--text-soft);
+      }
+      .chip--ok {
+        background: var(--ok-soft);
+        color: var(--ok);
+        border-color: transparent;
+      }
+      .chip--warn {
+        background: var(--warn-soft);
+        color: var(--warn);
+        border-color: transparent;
+      }
+      .chip--danger {
+        background: var(--danger-soft);
+        color: var(--danger);
+        border-color: transparent;
+      }
+
+      section.block {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: clamp(1.1rem, 2.4vw, 2.1rem);
+        margin-bottom: 1.4rem;
+        box-shadow: var(--shadow);
+      }
+      section.block > h2 {
+        display: flex;
+        align-items: baseline;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        padding-bottom: 0.7rem;
+        border-bottom: 2px solid var(--border);
+        margin-bottom: 1.2rem;
+      }
+      section.block > h2 .num {
+        font-family: var(--mono);
+        font-size: 0.72em;
+        color: #fff;
+        background: var(--accent);
+        padding: 0.18em 0.55em;
+        border-radius: 8px;
+        font-weight: 700;
+        flex: 0 0 auto;
+      }
+      section.block > h3 {
+        border-left: 4px solid var(--accent);
+        padding-left: 0.6rem;
+      }
+
+      article.sub {
+        margin-bottom: 1.9rem;
+      }
+      article.sub:last-child {
+        margin-bottom: 0;
+      }
+
+      /* ---------- 7. Cajas, avisos y tarjetas ---------- */
+      .note,
+      .tip,
+      .warn,
+      .danger,
+      .lab {
+        border-radius: var(--radius-sm);
+        padding: 0.85rem 1rem 0.85rem 1rem;
+        margin: 1.1rem 0;
+        border: 1px solid var(--border);
+        border-left-width: 5px;
+        background: var(--surface-2);
+        font-size: 0.95rem;
+      }
+      .note {
+        border-left-color: var(--accent-2);
+        background: var(--accent-2-soft);
+      }
+      .tip {
+        border-left-color: var(--ok);
+        background: var(--ok-soft);
+      }
+      .warn {
+        border-left-color: var(--warn);
+        background: var(--warn-soft);
+      }
+      .danger {
+        border-left-color: var(--danger);
+        background: var(--danger-soft);
+      }
+      .lab {
+        border-left-color: var(--muted);
+        background: var(--surface-3);
+      }
+      .note > :last-child,
+      .tip > :last-child,
+      .warn > :last-child,
+      .danger > :last-child,
+      .lab > :last-child {
+        margin-bottom: 0;
+      }
+      .note__title,
+      .tip__title,
+      .warn__title,
+      .danger__title,
+      .lab__title {
+        display: block;
+        font-weight: 700;
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 0.35rem;
+      }
+      .note__title {
+        color: var(--accent-2);
+      }
+      .tip__title {
+        color: var(--ok);
+      }
+      .warn__title {
+        color: var(--warn);
+      }
+      .danger__title {
+        color: var(--danger);
+      }
+      .lab__title {
+        color: var(--muted);
+      }
+
+      .card-grid {
+        display: grid;
+        gap: 0.85rem;
+        margin: 1.1rem 0;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+      .card {
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 0.9rem 1rem;
+      }
+      .card h4 {
+        margin: 0.1rem 0 0.4rem;
+        font-size: 1rem;
+      }
+      .card p:last-child,
+      .card ul:last-child {
+        margin-bottom: 0;
+      }
+      .card__k {
+        font-family: var(--mono);
+        font-size: 0.74rem;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+      }
+
+      .kv {
+        display: grid;
+        grid-template-columns: max-content minmax(0, 1fr);
+        gap: 0.3rem 0.8rem;
+        font-size: 0.93rem;
+      }
+      .kv dt {
+        font-weight: 700;
+        color: var(--text-soft);
+      }
+      .kv dd {
+        margin: 0;
+      }
+
+      /* ---------- 8. Tablas responsivas ---------- */
+      .table-wrap {
+        margin: 1.1rem 0;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--surface);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .table-wrap__hint {
+        display: none;
+        font-size: 0.74rem;
+        color: var(--muted);
+        padding: 0.35rem 0.7rem;
+        border-bottom: 1px dashed var(--border);
+        background: var(--surface-2);
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        min-width: 560px;
+        font-size: 0.88rem;
+        line-height: 1.5;
+      }
+      caption {
+        caption-side: top;
+        text-align: left;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--muted);
+        padding: 0.55rem 0.75rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--surface-2);
+        letter-spacing: 0.02em;
+      }
+      th,
+      td {
+        padding: 0.55rem 0.7rem;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid var(--border);
+      }
+      thead th {
+        background: var(--surface-3);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-soft);
+        position: sticky;
+        top: 0;
+        z-index: 1;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--surface-2);
+      }
+      tbody tr:hover {
+        background: var(--accent-2-soft);
+      }
+      table code {
+        white-space: nowrap;
+      }
+      td.num,
+      th.num {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+      .tag-yes {
+        color: var(--ok);
+        font-weight: 700;
+      }
+      .tag-no {
+        color: var(--danger);
+        font-weight: 700;
+      }
+      .tag-mid {
+        color: var(--warn);
+        font-weight: 700;
+      }
+
+      /* ---------- 9. Diagramas ASCII ---------- */
+      .diagram {
+        margin: 1.2rem 0;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--ascii-bg);
+        overflow: hidden;
+      }
+      .diagram__head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.45rem 0.7rem;
+        background: rgba(255, 255, 255, 0.06);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #9fb3d1;
+      }
+      .diagram__head b {
+        color: #e8eefb;
+        font-weight: 600;
+      }
+      .diagram__body {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 0.6rem 0.7rem;
+      }
+      pre.ascii {
+        margin: 0;
+        font-family: var(--mono);
+        color: var(--ascii-text);
+        white-space: pre;
+        font-size: 0.74rem;
+        line-height: 1.32;
+        letter-spacing: 0;
+      }
+      pre.ascii--lg {
+        font-size: 0.8rem;
+      }
+      pre.ascii--sm {
+        font-size: 0.64rem;
+      }
+      .diagram figcaption {
+        padding: 0.5rem 0.7rem;
+        font-size: 0.78rem;
+        color: #93a8c6;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .diagram--tall {
+        display: none;
+      }
+
+      /* ---------- 10. Código e interfaces ---------- */
+      pre.code {
+        background: var(--code-bg);
+        color: var(--code-text);
+        border-radius: var(--radius-sm);
+        padding: 0.8rem 1rem;
+        overflow-x: auto;
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        line-height: 1.55;
+        margin: 1rem 0;
+        border: 1px solid var(--border);
+      }
+      pre.code .c {
+        color: #7d90ad;
+      }
+
+      .term {
+        display: grid;
+        gap: 0.5rem;
+        margin: 1rem 0;
+      }
+      .term__row {
+        display: grid;
+        gap: 0.25rem 0.9rem;
+        grid-template-columns: minmax(140px, 190px) minmax(0, 1fr);
+        padding: 0.6rem 0.8rem;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--accent-2);
+        border-radius: var(--radius-sm);
+        font-size: 0.93rem;
+      }
+      .term__row dt {
+        font-weight: 700;
+      }
+      .term__row dd {
+        margin: 0;
+        color: var(--text-soft);
+      }
+
+      /* ---------- 11. Acordeones ---------- */
+      details.acc {
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--surface-2);
+        margin: 0.7rem 0;
+        overflow: hidden;
+      }
+      details.acc > summary {
+        cursor: pointer;
+        padding: 0.7rem 0.9rem;
+        font-weight: 600;
+        font-size: 0.95rem;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: var(--surface-3);
+      }
+      details.acc > summary::-webkit-details-marker {
+        display: none;
+      }
+      details.acc > summary::before {
+        content: "▸";
+        color: var(--accent);
+        font-size: 0.9em;
+        transition: transform 0.15s ease;
+      }
+      details.acc[open] > summary::before {
+        transform: rotate(90deg);
+      }
+      details.acc > summary:hover {
+        color: var(--accent);
+      }
+      details.acc .acc__body {
+        padding: 0.9rem 1rem 0.3rem;
+      }
+      details.acc .acc__body > :last-child {
+        margin-bottom: 0.8rem;
+      }
+
+      /* ---------- 12. Actividades y cuestionario ---------- */
+      .activity {
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-left: 5px solid var(--accent-2);
+        border-radius: var(--radius-sm);
+        padding: 1rem 1.1rem;
+        margin: 1.2rem 0;
+      }
+      .activity > h4 {
+        margin-top: 0;
+      }
+      .activity__goal {
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .qgroup {
+        margin: 1.6rem 0 0;
+      }
+      .qgroup__head {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        background: linear-gradient(100deg, var(--accent), #7c1017);
+        color: #fff;
+        border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+        padding: 0.65rem 1rem;
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+      .qgroup__head .badge {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 999px;
+        padding: 0.15rem 0.55rem;
+        font-weight: 600;
+      }
+      .qlist {
+        border: 1px solid var(--border);
+        border-top: 0;
+        border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+        padding: 0.4rem 0.5rem 0.6rem;
+        background: var(--surface);
+      }
+
+      .q {
+        padding: 0.85rem 0.6rem;
+        border-bottom: 1px dashed var(--border);
+      }
+      .q:last-child {
+        border-bottom: 0;
+      }
+      .q__text {
+        display: flex;
+        gap: 0.6rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-size: 0.96rem;
+      }
+      .q__n {
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: #fff;
+        background: var(--accent-2);
+        border-radius: 6px;
+        padding: 0.1rem 0.45rem;
+        height: fit-content;
+        flex: 0 0 auto;
+        margin-top: 0.25em;
+      }
+      .q__body {
+        padding-left: 0;
+      }
+      .q--open .q__body {
+        padding-left: 2.35rem;
+      }
+      .q__hint {
+        font-size: 0.84rem;
+        color: var(--muted);
+        margin: -0.15rem 0 0.5rem;
+        padding-left: 2.35rem;
+      }
+      .q__choice {
+        display: grid;
+        gap: 0.3rem;
+        padding-left: 2.35rem;
+        margin-bottom: 0.5rem;
+      }
+      .q__choice label {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        font-size: 0.93rem;
+        cursor: pointer;
+      }
+      .q__choice input {
+        margin-top: 0.35em;
+        accent-color: var(--accent-2);
+      }
+      .q__marks {
+        display: flex;
+        gap: 0.3rem;
+        flex-wrap: wrap;
+      }
+
+      .answer-area {
+        position: relative;
+      }
+      textarea.ans {
+        width: 100%;
+        min-height: 84px;
+        resize: vertical;
+        font-family: var(--sans);
+        font-size: 0.93rem;
+        line-height: 1.6;
+        color: var(--text);
+        background: var(--surface-2);
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius-sm);
+        padding: 0.6rem 0.7rem;
+        transition:
+          border-color 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+      textarea.ans::placeholder {
+        color: var(--muted);
+        opacity: 0.85;
+      }
+      textarea.ans:focus {
+        outline: none;
+        border-color: var(--accent-2);
+        box-shadow: 0 0 0 3px var(--accent-2-soft);
+        background: var(--surface);
+      }
+      textarea.ans.is-filled {
+        border-color: var(--ok);
+      }
+      .answer-area .counter {
+        position: absolute;
+        right: 0.5rem;
+        bottom: 0.35rem;
+        font-size: 0.68rem;
+        color: var(--muted);
+        pointer-events: none;
+      }
+      .q--open textarea.ans {
+        margin-left: 2.35rem;
+        width: calc(100% - 2.35rem);
+      }
+
+      /* Campos del encabezado del alumno */
+      .student-form {
+        display: grid;
+        gap: 0.8rem;
+        margin: 1.2rem 0 0;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .field > span {
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--muted);
+      }
+      .field input,
+      .field select {
+        font-family: var(--sans);
+        font-size: 0.93rem;
+        padding: 0.55rem 0.65rem;
+        color: var(--text);
+        background: var(--surface-2);
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius-sm);
+      }
+      .field input:focus,
+      .field select:focus {
+        outline: none;
+        border-color: var(--accent-2);
+        box-shadow: 0 0 0 3px var(--accent-2-soft);
+      }
+
+      .save-bar {
+        position: sticky;
+        bottom: 0.6rem;
+        z-index: 40;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        margin-top: 1.2rem;
+        padding: 0.6rem 0.8rem;
+        background: color-mix(in srgb, var(--surface) 92%, transparent);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        box-shadow: var(--shadow);
+      }
+      .save-bar__status {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-right: auto;
+      }
+      .save-bar__status b {
+        color: var(--ok);
+      }
+
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 1.2rem;
+        transform: translate(-50%, 150%);
+        background: var(--code-bg);
+        color: var(--code-text);
+        border-radius: 999px;
+        padding: 0.6rem 1.1rem;
+        font-size: 0.86rem;
+        font-weight: 600;
+        box-shadow: var(--shadow);
+        z-index: 120;
+        transition: transform 0.3s ease;
+        max-width: min(92vw, 460px);
+        text-align: center;
+      }
+      .toast.is-visible {
+        transform: translate(-50%, 0);
+      }
+
+      /* ---------- 13. Pie de página ---------- */
+      .site-footer {
+        border-top: 1px solid var(--border);
+        background: var(--bg-alt);
+        padding: 2rem clamp(1rem, 3vw, 2.5rem) 3rem;
+        margin-top: 1rem;
+      }
+      .site-footer__inner {
+        max-width: 1560px;
+        margin: 0 auto;
+        display: grid;
+        gap: 1.2rem;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        font-size: 0.88rem;
+      }
+      .site-footer h3 {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+        margin-bottom: 0.5rem;
+      }
+      .site-footer ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .site-footer a {
+        color: var(--text-soft);
+        border-bottom: 0;
+      }
+      .site-footer a:hover {
+        color: var(--accent);
+      }
+      .site-footer .copy {
+        grid-column: 1 / -1;
+        color: var(--muted);
+        font-size: 0.8rem;
+        padding-top: 1rem;
+        border-top: 1px dashed var(--border);
+      }
+
+      /* ---------- 14. Drawer móvil / back-to-top ---------- */
+      .drawer-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(6, 10, 18, 0.55);
+        z-index: 70;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease;
+      }
+      .drawer-backdrop.is-open {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .to-top {
+        position: fixed;
+        right: 1rem;
+        bottom: 4.6rem;
+        z-index: 55;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text);
+        font-size: 1rem;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+      }
+      .to-top.is-visible {
+        display: inline-flex;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        background: var(--accent);
+        color: #fff;
+        padding: 0.5rem 0.9rem;
+        z-index: 200;
+        border-radius: 0 0 8px 0;
+      }
+      .skip-link:focus {
+        left: 0;
+      }
+
+      .visually-hidden {
+        position: absolute !important;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+
+      /* ---------- 15. Impresión ---------- */
+      @media print {
+        :root {
+          --bg: #fff;
+          --surface: #fff;
+          --surface-2: #fff;
+          --surface-3: #fff;
+          --text: #000;
+          --muted: #444;
+          --border: #999;
+        }
+        .topbar,
+        .sidebar,
+        .drawer-backdrop,
+        .to-top,
+        .read-progress,
+        .save-bar,
+        .toast,
+        .no-print {
+          display: none !important;
+        }
+        .layout {
+          display: block;
+          padding: 0;
+          max-width: none;
+        }
+        section.block {
+          box-shadow: none;
+          border: 0;
+          page-break-inside: auto;
+          padding: 0;
+          margin-bottom: 1rem;
+        }
+        .diagram {
+          background: #fff;
+          border: 1px solid #999;
+        }
+        pre.ascii {
+          color: #111;
+        }
+        .diagram__head,
+        .diagram figcaption {
+          color: #333;
+          background: #f2f2f2;
+        }
+        table {
+          min-width: 0;
+          font-size: 0.78rem;
+        }
+        textarea.ans {
+          border: 1px solid #999;
+          background: #fff;
+          min-height: 70px;
+        }
+        a {
+          color: #000;
+        }
+        .print-notes {
+          display: block !important;
+        }
+      }
+      .print-notes {
+        display: none;
+      }
+
+      /* ============================================================
+   Sesión 15 - Hardware 1 | Ajustes responsivos y accesibilidad
+   ============================================================ */
+
+      /* ---------- Laptops grandes / tablets horizontales ---------- */
+      @media (max-width: 1280px) {
+        :root {
+          --sidebar-w: 268px;
+        }
+        body {
+          font-size: 16.5px;
+        }
+      }
+
+      /* ---------- Tablets: el índice pasa a panel deslizable ---------- */
+      @media (max-width: 1024px) {
+        .layout {
+          display: block;
+          padding: 0.9rem 0.9rem 3.5rem;
+        }
+
+        .sidebar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: min(84vw, 330px);
+          max-height: none;
+          border-radius: 0 var(--radius) var(--radius) 0;
+          z-index: 80;
+          transform: translateX(-104%);
+          transition: transform 0.26s ease;
+          padding: 1rem 0.9rem 1.4rem;
+          padding-top: max(1rem, env(safe-area-inset-top));
+        }
+        .sidebar.is-open {
+          transform: translateX(0);
+        }
+
+        .menu-toggle {
+          display: inline-flex !important;
+        }
+
+        .layout.is-focus {
+          display: block;
+        }
+        .layout.is-focus .sidebar {
+          display: none !important;
+        }
+
+        .table-wrap__hint {
+          display: block;
+        }
+
+        section.block {
+          padding: 1.05rem 0.9rem 1.25rem;
+        }
+        section.block > h2 {
+          gap: 0.45rem;
+        }
+      }
+
+      /* ---------- Móviles ---------- */
+      @media (max-width: 720px) {
+        html {
+          scroll-padding-top: 76px;
+        }
+        body {
+          font-size: 16px;
+          line-height: 1.68;
+        }
+
+        .topbar {
+          padding: 0.45rem 0.6rem;
+          gap: 0.4rem;
+        }
+        .topbar__brand small {
+          display: none;
+        }
+        .topbar__brand {
+          font-size: 0.86rem;
+        }
+        .brand-badge {
+          width: 30px;
+          height: 30px;
+          border-radius: 9px;
+          font-size: 0.64rem;
+        }
+        .btn__label--lg {
+          display: none;
+        }
+        .topbar__actions .btn {
+          padding: 0.45rem 0.6rem;
+          font-size: 0.8rem;
+        }
+
+        .hero {
+          padding: 1.15rem 0.9rem 1.3rem;
+          border-radius: 12px;
+        }
+        .hero__eyebrow {
+          font-size: 0.68rem;
+          letter-spacing: 0.08em;
+        }
+        .hero__meta .chip {
+          font-size: 0.72rem;
+          padding: 0.25rem 0.55rem;
+        }
+
+        section.block {
+          border-radius: 12px;
+          padding: 0.95rem 0.8rem 1.1rem;
+          margin-bottom: 1rem;
+        }
+        section.block > h2 {
+          font-size: 1.28rem;
+        }
+        section.block > h2 .num {
+          font-size: 0.68em;
+        }
+        section.block > h3 {
+          font-size: 1.08rem;
+          padding-left: 0.5rem;
+        }
+
+        .card-grid {
+          grid-template-columns: 1fr;
+        }
+        .kv {
+          grid-template-columns: 1fr;
+          gap: 0.1rem;
+        }
+        .kv dt {
+          margin-top: 0.45rem;
+        }
+
+        .term__row {
+          grid-template-columns: 1fr;
+        }
+        .term__row dt {
+          font-size: 0.86rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: var(--accent-2);
+        }
+
+        /* Diagramas ASCII: permitir scroll y reducir cuerpo de letra */
+        .diagram__body {
+          padding: 0.55rem 0.5rem;
+        }
+        pre.ascii {
+          font-size: 0.6rem;
+          line-height: 1.35;
+        }
+        pre.ascii--lg {
+          font-size: 0.66rem;
+        }
+        pre.ascii--sm {
+          font-size: 0.55rem;
+        }
+        .diagram__head {
+          font-size: 0.64rem;
+          padding: 0.4rem 0.55rem;
+        }
+
+        /* En móvil, mostrar la variante vertical del diagrama comparativo */
+        .diagram--desk {
+          display: none;
+        }
+        .diagram--tall {
+          display: block;
+        }
+
+        /* Cuestionario en pantallas angostas */
+        .q {
+          padding: 0.8rem 0.35rem;
+        }
+        .q--open .q__body,
+        .q__hint,
+        .q__choice {
+          padding-left: 0;
+        }
+        .q--open textarea.ans {
+          margin-left: 0;
+          width: 100%;
+        }
+        .qgroup__head {
+          border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+          font-size: 0.88rem;
+          padding: 0.55rem 0.7rem;
+        }
+
+        .save-bar {
+          border-radius: 14px;
+          padding: 0.55rem 0.7rem;
+          gap: 0.4rem;
+        }
+        .save-bar__status {
+          width: 100%;
+          margin-right: 0;
+          order: -1;
+          font-size: 0.76rem;
+        }
+        .save-bar .btn {
+          flex: 1 1 auto;
+          justify-content: center;
+          font-size: 0.8rem;
+        }
+
+        .to-top {
+          right: 0.75rem;
+          bottom: 6.2rem;
+        }
+        caption {
+          font-size: 0.74rem;
+          padding: 0.45rem 0.55rem;
+        }
+        th,
+        td {
+          padding: 0.5rem 0.55rem;
+        }
+      }
+
+      /* ---------- Móviles pequeños ---------- */
+      @media (max-width: 460px) {
+        .layout {
+          padding: 0.7rem 0.6rem 3rem;
+        }
+        body {
+          font-size: 15.6px;
+        }
+        .hero h1 {
+          font-size: 1.42rem;
+        }
+        pre.ascii {
+          font-size: 0.52rem;
+          letter-spacing: -0.01em;
+        }
+        .diagram__head b {
+          display: none;
+        }
+        .sidebar__tools .btn {
+          flex: 1 1 auto;
+          justify-content: center;
+        }
+        .activity {
+          padding: 0.85rem 0.75rem;
+        }
+      }
+
+      /* ---------- Landscape de poca altura ---------- */
+      @media (max-height: 520px) and (orientation: landscape) {
+        .sidebar {
+          padding-top: 0.6rem;
+        }
+        .sidebar a {
+          padding: 0.3rem 0.5rem;
+        }
+      }
+
+      /* ---------- Preferencias del usuario ---------- */
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+        }
+      }
+
+      @media (prefers-contrast: more) {
+        :root {
+          --border: #7b8aa3;
+          --muted: #3f4b5e;
+        }
+        [data-theme="dark"] {
+          --border: #66799a;
+          --muted: #c8d4e8;
+        }
+      }
+
+      /* ---------- Pantallas muy anchas ---------- */
+      @media (min-width: 1600px) {
+        :root {
+          --sidebar-w: 330px;
+        }
+        body {
+          font-size: 18px;
+        }
+        pre.ascii {
+          font-size: 0.8rem;
+        }
+      }
+
+      /* ---------- Control de visibilidad del botón de menú ---------- */
+      .menu-toggle {
+        display: none;
+      }
+    </style>
+    <script>
+      /* Anti-parpadeo: aplica el tema guardado antes del primer pintado */
+      (function () {
+        try {
+          var saved = localStorage.getItem("hw1-theme");
+          if (!saved) {
+            saved =
+              window.matchMedia &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+          }
+          document.documentElement.setAttribute("data-theme", saved);
+        } catch (e) {
+          /* sin acceso a localStorage */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+    <div class="read-progress" id="read-progress" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="topbar__brand" href="#inicio">
+        <span class="brand-badge" aria-hidden="true"><span>HW1</span></span>
+        <span>
+          Sesión 16
+          <small>Hardware 1 · Hardware y Mantenimiento</small>
+        </span>
+      </a>
+      <span class="topbar__spacer"></span>
+      <nav class="topbar__actions" aria-label="Acciones del documento">
+        <button
+          class="btn menu-toggle"
+          id="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="indice-lateral"
+        >
+          <span aria-hidden="true">☰</span>
+          <span class="btn__label">Índice</span>
+        </button>
+        <button
+          class="btn"
+          id="btn-focus-mode"
+          type="button"
+          title="Modo lectura: oculta el índice"
+        >
+          <span aria-hidden="true">📖</span>
+          <span class="btn__label btn__label--lg">Lectura</span>
+        </button>
+        <button
+          class="btn"
+          id="btn-print"
+          type="button"
+          title="Imprimir o guardar como PDF"
+        >
+          <span aria-hidden="true">🖨</span>
+          <span class="btn__label btn__label--lg">PDF</span>
+        </button>
+        <button
+          class="btn btn--primary"
+          id="btn-theme"
+          type="button"
+          aria-live="polite"
+          title="Cambiar entre modo claro y oscuro"
+        >
+          <span aria-hidden="true" id="theme-icon">🌙</span>
+          <span class="btn__label" id="theme-label">Oscuro</span>
+        </button>
+      </nav>
+    </header>
+
+    <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+
+    <div class="layout" id="inicio">
+      <!-- ================= ÍNDICE LATERAL ================= -->
+      <aside
+        class="sidebar"
+        id="indice-lateral"
+        aria-label="Índice de la sesión"
+      >
+        <p class="sidebar__title">Contenido de la sesión</p>
+        <nav>
+          <ol>
+            <li>
+              <a href="#s1">1. Buses y placas de expansión</a>
+              <ul class="sub">
+                <li><a href="#s1-4">1.1 Placas de expansión (desktop)</a></li>
+                <li><a href="#s1-5">1.2 Expansión en notebooks</a></li>
+                <li><a href="#s1-6">1.3 Brackets, risers y adaptadores</a></li>
+              </ul>
+            </li>
+            
+            <li><a href="#s3">2. Cuestionario</a></li>
+          </ol>
+         
+        </nav>
+      </aside>
+
+      <!-- ================= CONTENIDO ================= -->
+      <main class="content" id="contenido">
+        <div class="nav-bar">
+          <a
+            href="../materias/hardware-uno.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #4ade80;
+              color: #222;
+              display: inline-block;
+              margin-right: 10px;
+            "
+          >
+            Volver a Materia
+          </a>
+          <a
+            href="hardware1-sesion15.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #60a5fa;
+              color: #222;
+              display: inline-block;
+              margin-right: 10px;
+            "
+          >
+            Ir a Sesión 15
+          </a>
+          <!-- <a
+            href="hardware1-sesion17.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #f9e282;
+              color: #222;
+              display: inline-block;
+            "
+          >
+            Ir a Sesión 17
+          </a> -->
+        </div>
+        <br>
+        <section class="hero" aria-labelledby="titulo-sesion">
+          <p class="hero__eyebrow">Hardware 1 · Sesión 16</p>
+          <h1 id="titulo-sesion">
+            Placas de Expansión 
+          </h1>
+        </section>
+
+        
+        <!-- ============================================================
+         SECCIÓN 1 — PLACAS DE EXPANSIÓN
+         ============================================================ -->
+        <section class="block" id="s1" aria-labelledby="s1-t">
+          <h2 id="s1-t">
+            <span class="num">1</span> Placas de expansión (Desktop y
+            Notebook)
+          </h2>
+
+          <p>
+            Una <strong>placa de expansión</strong> (o tarjeta de expansión) es
+            un circuito impreso que se inserta en una ranura de la placa madre
+            —o se conecta por un puerto externo— para agregar una función que la
+            placa madre no ofrece, esta se haya roto o para ofrecerla con mejor calidad y
+            rendimiento que la integrada en la misma placa madre. Comprender qué ranura, puerto y/o generación usa cada tarjeta
+             determina si funcionará la placa de expansión añadida.
+          </p>
+
+
+
+          <article class="sub" id="s1-4">
+            <h3>1.1 Placas de expansión de escritorio (excluyendo GPU)</h3>
+
+            <p>
+              Las tarjetas de expansión se
+              instalan habitualmente en un equipo de escritorio, con su ranura
+              recomendada y el criterio técnico para elegirla. La
+              <strong>placa de video se excluye</strong> por haber sido tratada
+              anteriormente.
+            </p>
+
+            <h4>Tarjetas de red</h4>
+            <div class="table-wrap">
+              <table>
+                <caption>
+                  Opciones de conectividad de red por tarjeta de expansión.
+                </caption>
+                <thead>
+                  <tr>
+                    <th>Tarjeta</th>
+                    <th>Ranura típica</th>
+                    <th>Ancho de banda de la interfaz</th>
+                    <th>Cuándo se elige sobre la integrada</th>
+                    <th>Observaciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Ethernet RJ-45 1 GbE</strong></td>
+                    <td>PCIe x1</td>
+                    <td>1 Gb/s ≈ 125 MB/s (muy por debajo de x1)</td>
+                    <td>
+                      Cuando la integrada falla, o para sumar un segundo puerto
+                    </td>
+                    <td>
+                      La interfaz PCIe x1 sobra; incluso PCI antiguo alcanzaba.
+                      La calidad la define el controlador
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Ethernet 2,5 / 5 / 10 GbE</strong></td>
+                    <td>PCIe x1 (2,5–5 G) y <strong>x4</strong> (10 G)</td>
+                    <td>10 GbE = 10 Gb/s ≈ 1,25 GB/s</td>
+                    <td>
+                      Redes locales rápidas, NAS, transferencia masiva, switches
+                      10 G
+                    </td>
+                    <td>
+                      Una tarjeta 10 GbE en una ranura x1 queda limitada a ≈ 1
+                      GB/s útil: la ranura sí importa aquí
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Fibra óptica (SFP / SFP+)</strong></td>
+                    <td>PCIe x4 o x8</td>
+                    <td>1 G / 10 G por módulo; 25 G y más en gama alta</td>
+                    <td>
+                      Distancias largas, inmunidad a interferencias
+                      electromagnéticas, enlaces de alta velocidad
+                    </td>
+                    <td>
+                      Requiere el módulo transceptor adecuado (SFP, SFP+, SFP28)
+                      y el tipo de fibra correcto (monomodo o multimodo)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Wi-Fi y Bluetooth</strong></td>
+                    <td>PCIe x1, o <strong>M.2 Key E</strong> con adaptador</td>
+                    <td>Muy por debajo de x1</td>
+                    <td>
+                      Equipos sin Wi-Fi integrado, o para actualizar a un
+                      estándar más nuevo
+                    </td>
+                    <td>
+                      En tarjetas de escritorio el Wi-Fi suele ser un módulo M.2
+                      Key E montado sobre la propia tarjeta PCIe. Las antenas
+                      externas son indispensables: sin ellas el rendimiento cae
+                      drásticamente
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4>Tarjetas de sonido dedicadas</h4>
+            <div class="note">
+              <span class="note__title"
+                >¿Tiene sentido una tarjeta de sonido?</span
+              >
+              <p>
+                La respuesta depende del uso. Las tarjetas integradas actuales
+                (códecs HD Audio) son adecuadas para uso general y para la
+                mayoría de los juegos. Una tarjeta dedicada aporta valor real
+                cuando se necesita:
+                <strong>entradas y salidas de mayor calidad</strong>
+                (convertidores digital-analógicos superiores),
+                <strong
+                  >entradas de instrumento o de micrófono con
+                  preamplificador</strong
+                >, <strong>conexión MIDI</strong>,
+                <strong>monitoreo sin latencia por hardware</strong>, o
+                <strong>salidas múltiples independientes</strong>
+                para monitoreo. En esos casos la diferencia es objetiva y
+                medible.
+              </p>
+              <p>
+                En cambio, si la necesidad es "escuchar mejor en parlantes
+                económicos" o "más volumen", suele ser más efectivo invertir en
+                los parlantes o auriculares que en la tarjeta. Es un buen
+                ejercicio de análisis costo-beneficio para el alumno.
+              </p>
+            </div>
+          
+
+            <h4>Controladoras de almacenamiento: SATA, RAID y NVMe</h4>
+            <div class="table-wrap">
+              <table>
+                <caption>
+                  Cuándo se necesita una controladora de almacenamiento
+                  adicional.
+                </caption>
+                <thead>
+                  <tr>
+                    <th>Tarjeta</th>
+                    <th>Ranura mínima</th>
+                    <th>Para qué sirve</th>
+                    <th>Punto crítico</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>Controladora SATA adicional</strong> (2, 4 u 8
+                      puertos)
+                    </td>
+                    <td>PCIe x1 (para puertos SATA III basta) hasta x4</td>
+                    <td>
+                      Agregar puertos SATA cuando la placa madre no tiene
+                      suficientes; recuperar equipos con el controlador
+                      integrado dañado
+                    </td>
+                    <td>
+                      Cada disco SATA III necesita ≈ 0,6 GB/s:
+                      <strong
+                        >cuatro discos a pleno ya superan una ranura x1</strong
+                      >. Para muchos discos se requiere x4 o más
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Controladora RAID</strong></td>
+                    <td>PCIe x4 o x8</td>
+                    <td>
+                      Crear arreglos con redundancia o rendimiento (RAID 0, 1,
+                      5, 6, 10) con administración propia y gestión de caché
+                    </td>
+                    <td>
+                      Dos conceptos distintos:
+                      <strong>RAID por hardware</strong> (la tarjeta hace el
+                      trabajo, el sistema ve un solo volumen) y
+                      <strong>RAID por software</strong> (lo hace el sistema
+                      operativo o la UEFI). No rinden ni se comportan igual.
+                      Requiere batería o capacitor de respaldo para escribir con
+                      seguridad
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Controladora NVMe por PCIe</strong> (adaptador de
+                      M.2 en ranura PCIe o tarjeta con varios M.2)
+                    </td>
+                    <td>PCIe x4 mínimo, x8/x16 para varios discos</td>
+                    <td>
+                      Instalar uno o más SSD NVMe cuando no hay suficientes
+                      ranuras M.2; obtener el máximo rendimiento sin pasar por
+                      el PCH
+                    </td>
+                    <td>
+                      <strong
+                        >Requiere soporte de arranque (boot) desde PCIe</strong
+                      >
+                      si se desea usar como disco de sistema. En equipos con
+                      BIOS legacy no arranca
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4>Capturadoras de video</h4>
+            <div class="table-wrap">
+              <table>
+                <caption>
+                  Tarjetas capturadoras según su uso y su exigencia de bus.
+                </caption>
+                <thead>
+                  <tr>
+                    <th>Tipo</th>
+                    <th>Ranura</th>
+                    <th>Uso</th>
+                    <th>Requisito técnico</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Capturadora básica de compuesto/S-Video</td>
+                    <td>PCIe x1 (o USB)</td>
+                    <td>Digitalizar video analógico antiguo</td>
+                    <td>
+                      Ancho de banda mínimo; la calidad depende del chip de
+                      conversión
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Capturadora HDMI de 1080p</td>
+                    <td>PCIe x1</td>
+                    <td>Captura de consolas y cámaras</td>
+                    <td>Suficiente x1 para 1080p60 sin compresión alta</td>
+                  </tr>
+                  <tr>
+                    <td>Capturadora 4K / alta tasa de bits</td>
+                    <td><strong>PCIe x4</strong></td>
+                    <td>
+                      Streaming profesional, grabación sin compresión, varias
+                      señales simultáneas
+                    </td>
+                    <td>
+                      El video 4K sin comprimir excede lo que ofrece x1: la
+                      tarjeta necesita x4 para rendir
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Capturadora multipuerto / profesional</td>
+                    <td>PCIe x8 o x16</td>
+                    <td>Producción multicámara, switcher por hardware</td>
+                    <td>
+                      Requiere ancho de banda sostenido y, en muchos casos,
+                      salida a monitor para monitoreo sin latencia
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4>Puertos industriales: RS-232 (serie) y LPT (paralelo)</h4>
+            <p>
+              Aunque desaparecieron de los equipos de consumo, los puertos
+              <strong>serie RS-232</strong> y
+              <strong>paralelo LPT</strong> siguen siendo imprescindibles en
+              entornos industriales, en equipamiento de laboratorio, en
+              balanzas, en controladores lógicos y en máquinas de control
+              numérico. Como las placas madre modernas ya no los incluyen, la
+              solución es una <strong>tarjeta de expansión</strong>.
+            </p>
+          
+
+            <div class="tip">
+              <span class="tip__title"
+                >Tabla 2.4 · Qué ranura elegir para cada tipo de tarjeta</span
+              >
+              <div class="table-wrap">
+                <table>
+                  <caption>
+                    Criterio rápido de selección de ranura según el tipo de
+                    tarjeta.
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th>Tipo de tarjeta</th>
+                      <th>Ranura PCIe recomendada</th>
+                      <th>Motivo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Red 1 GbE o Wi-Fi</td>
+                      <td>x1</td>
+                      <td>Ancho de banda muy inferior a x1</td>
+                    </tr>
+                    <tr>
+                      <td>Sonido dedicado</td>
+                      <td>x1</td>
+                      <td>Requisito de ancho de banda mínimo</td>
+                    </tr>
+                    <tr>
+                      <td>Puertos serie/paralelo</td>
+                      <td>x1</td>
+                      <td>Velocidades de pocos kilobits por segundo</td>
+                    </tr>
+                    <tr>
+                      <td>Controladora SATA (2 discos)</td>
+                      <td>x1</td>
+                      <td>Hasta ≈ 1,2 GB/s agregados, entra en x1</td>
+                    </tr>
+                    <tr>
+                      <td>Controladora SATA (4+ discos) o RAID</td>
+                      <td><strong>x4 o superior</strong></td>
+                      <td>Cada disco SATA III exige ≈ 0,6 GB/s</td>
+                    </tr>
+                    <tr>
+                      <td>Red 10 GbE o fibra</td>
+                      <td><strong>x4</strong></td>
+                      <td>
+                        1,25 GB/s ya excede el ancho de una ranura x1 real
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Adaptador NVMe o varios M.2</td>
+                      <td><strong>x4 / x8 / x16</strong></td>
+                      <td>Cada NVMe PCIe 4.0 x4 pide ≈ 7,9 GB/s</td>
+                    </tr>
+                    <tr>
+                      <td>Capturadora 1080p</td>
+                      <td>x1</td>
+                      <td>El flujo comprimido cabe en x1</td>
+                    </tr>
+                    <tr>
+                      <td>Capturadora 4K sin compresión</td>
+                      <td><strong>x4</strong></td>
+                      <td>El flujo de video excede x1</td>
+                    </tr>
+                    <tr>
+                      <td>Placa de adquisición / FPGA</td>
+                      <td><strong>x8 o x16</strong></td>
+                      <td>Transferencia sostenida de grandes volúmenes</td>
+                    </tr>
+                    <tr>
+                      <td>GPU</td>
+                      <td>x16</td>
+                      <td>Ancho de banda máximo y 75 W de la ranura</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </article>
+          <article class="sub" id="s1-5">
+            <h3>1.2 Expansión en notebooks</h3>
+
+            <p>
+              Un notebook no tiene ranuras PCIe internas accesibles. Su
+              expansión se resuelve con
+              <strong>factores de forma en miniatura</strong>, con
+              <strong>puertos de alta velocidad</strong>
+              para equipamiento externo y con un límite térmico y de energía que
+              condiciona todo.
+            </p>
+
+            <h4>Los factores de forma M.2 y sus medidas</h4>
+            <p>
+              El estándar <strong>M.2</strong> es hoy la vía de expansión
+              interna del notebook. Su nomenclatura de cuatro dígitos esconde
+              dos medidas:
+              <strong
+                >los dos primeros dígitos son el ancho y los dos últimos el
+                largo, en milímetros</strong
+              >. De ahí salen los formatos habituales:
+            </p>
+            <ul>
+              <li>
+                <strong>2230</strong> — 22 × 30 mm. El más corto. Se usa para
+                módulos Wi-Fi y para SSD de gama baja o de equipos muy
+                compactos.
+              </li>
+              <li>
+                <strong>2242</strong> — 22 × 42 mm. SSD y algunos módulos
+                económicos.
+              </li>
+              <li>
+                <strong>2260</strong> — 22 × 60 mm. Poco frecuente en notebooks.
+              </li>
+              <li>
+                <strong>2280</strong> — 22 × 80 mm.
+                <strong>El estándar de facto</strong>: casi todos los SSD NVMe
+                de consumo y buena parte de los SATA M.2.
+              </li>
+              <li>
+                <strong>22110</strong> — 22 × 110 mm. Más largo que el anterior;
+                aparece en equipos de estación de trabajo y servidores, y en SSD
+                de alta capacidad.
+              </li>
+            </ul>
+            <p>
+              Un ejemplo práctico: un SSD 2280 <strong>no</strong> entra en una
+              ranura que sólo admite 2242. El módulo queda con el extremo libre,
+              sin el tornillo de retención, apoyado sobre la placa: es una causa
+              habitual de <strong>errores intermitentes</strong>, porque el
+              contacto se pierde con las vibraciones o la dilatación térmica.
+            </p>
+
+            <h4>Las llaves de la muesca: el detalle que evita daños</h4>
+            <p>
+              Además del largo, M.2 define
+              <strong>llaves</strong> (<em>keys</em>): una muesca colocada en
+              una posición distinta según el tipo de señal que la ranura
+              transporta. Las cuatro que aparecen en la práctica son:
+            </p>
+            <ul>
+              <li>
+                <strong>Key A</strong> y <strong>Key E</strong>: PCIe x1. Se destinan a módulos <strong>Wi-Fi y Bluetooth</strong>;
+                por eso muchas tarjetas usan la combinación "Key A+E" para poder
+                entrar en cualquiera de las dos.
+              </li>
+              <li>
+                <strong>Key B</strong>: PCIe x2. Se usó para módems
+                móviles y algunos SSD SATA antiguos. Hoy es poco frecuente.
+              </li>
+              <li>
+                <strong>Key M</strong>: PCIe x4. Es
+                <strong>la llave de los SSD</strong>, tanto NVMe como SATA M.2.
+              </li>
+            </ul>
+            <div class="danger">
+              <span class="danger__title">Nunca forzar un módulo M.2</span>
+              <p>
+                Una llave equivocada no significa sólo que "no entra": significa
+                <strong>voltajes y señales distintas</strong> en contactos que
+                no fueron diseñados para eso. Forzar un módulo Key E en una
+                ranura Key M daña los contactos dorados y puede aplicar tensión
+                a líneas de la placa. Existen adaptadores entre llaves, pero no
+                garantizan que el equipo reconozca el dispositivo: la ranura Key
+                M de la placa principal no está preparada para una tarjeta de
+                red, por más que el adaptador permita insertarla físicamente.
+              </p>
+            </div>
+
+            <h4>Expansión externa: Thunderbolt, USB4 y docks</h4>
+            <p>
+              Como la notebook no tiene ranuras, la ampliación se resuelve por
+              un puerto. El caso más potente es
+              <strong>Thunderbolt 3/4 y USB4</strong>, que sobre un conector
+              USB-C transportan simultáneamente
+              <strong>señales PCIe "tunelizadas"</strong>, video DisplayPort y
+              datos USB, con un total de 40 Gb/s (≈ 5 GB/s)
+              <em>compartidos</em> entre todo eso.
+            </p>
+            <p>
+              Ese "túnel PCIe" es lo que permite conectar un
+              <strong>dock</strong> con red, USB, video y audio adicionales, o
+              incluso una <strong>GPU externa (eGPU)</strong> en su propia caja
+              con ranura PCIe. La contrapartida es que todo el tráfico de la GPU
+              viaja por el mismo enlace de 40 Gb/s compartido con el resto: por
+              eso una eGPU rinde típicamente entre un
+              <strong>10 % y un 20 % menos</strong> que la misma tarjeta
+              instalada internamente, y a veces bastante menos según la carga y
+              si hay un monitor conectado al dock.
+            </p>
+
+            <h4>ExpressCard: la vía que ya no existe</h4>
+            <p>
+              Antes de M.2 y de Thunderbolt, los notebooks se ampliaban con
+              <strong>ExpressCard</strong>, en dos tamaños:
+              <strong>/34 y /54</strong> (el número es el ancho en milímetros).
+              Transportaba <strong>PCIe x1 y USB 2.0</strong> —en las primeras
+              versiones, incluso PC Card— y servía para módems móviles 3G/4G,
+              adaptadores USB, lectores de tarjetas, controladoras de eSATA y
+              tarjetas de sonido. Se discontinuó y la ranura desapareció de los
+              notebooks actuales: sus dos reemplazos funcionales fueron
+              <strong>M.2</strong> (interno) y <strong>USB/Thunderbolt</strong>
+              (externo).
+            </p>
+
+            <h4>Tabla 1.5 · Vías de expansión en notebooks</h4>
+            <div class="table-wrap">
+              <table>
+                <caption>
+                  Comparación de las formas de ampliar un notebook.
+                </caption>
+                <thead>
+                  <tr>
+                    <th>Vía</th>
+                    <th>Época</th>
+                    <th>Tipo de señal</th>
+                    <th>Ancho de banda</th>
+                    <th>Uso típico</th>
+                    <th>Limitaciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>ExpressCard /34 y /54</strong></td>
+                    <td class="tag-no">Legacy (discontinuada)</td>
+                    <td>PCIe x1 + USB 2.0 (o PC Card en las primeras)</td>
+                    <td>PCIe 1.0 x1 ≈ 0,25 GB/s</td>
+                    <td>
+                      Módems móviles, adaptadores USB, eSATA, lectores, tarjetas
+                      de sonido
+                    </td>
+                    <td>
+                      Ya no se fabrica. Requiere controlador específico y la
+                      ranura física (hoy inexistente)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>M.2 Key E</strong> (y Key A+E)</td>
+                    <td class="tag-yes">Vigente</td>
+                    <td>PCIe x1 + USB (para Bluetooth)</td>
+                    <td>≈ 0,5 – 1 GB/s según generación</td>
+                    <td>Módulos Wi-Fi + Bluetooth, módulos de red móvil</td>
+                    <td>
+                      Formatos 2230 y 1630; requiere antenas (los hilos
+                      coaxiales dentro de la tapa). No apto para SSD
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>M.2 Key M</strong></td>
+                    <td class="tag-yes">Vigente</td>
+                    <td>PCIe x4 o SATA</td>
+                    <td>Hasta ≈ 7,9 GB/s (PCIe 4.0 x4)</td>
+                    <td>
+                      SSD NVMe y SSD SATA M.2 (según longitud 2230/2242/2280)
+                    </td>
+                    <td>
+                      Requiere <strong>thermal pad y a veces heatsink</strong>:
+                      el límite térmico es el problema real (ver Sesión 15). No
+                      funciona una tarjeta de red en esta llave
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>M.2 Key B</strong></td>
+                    <td class="tag-mid">Poco frecuente</td>
+                    <td>PCIe x2 + SATA + USB</td>
+                    <td>≈ 1 GB/s</td>
+                    <td>Módems móviles y algunos SSD SATA antiguos</td>
+                    <td>
+                      Comparte carriles; formatos 2242/2252. Poco disponible en
+                      notebooks de consumo
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Thunderbolt 3 / 4 y USB4</strong></td>
+                    <td class="tag-yes">Vigente</td>
+                    <td>
+                      PCIe "tunelizado" + DisplayPort + USB, sobre conector
+                      USB-C
+                    </td>
+                    <td>40 Gb/s ≈ 5 GB/s (compartidos con video y datos)</td>
+                    <td>
+                      Docks de expansión, almacenamiento externo de alta
+                      velocidad, monitores, <strong>GPU externa (eGPU)</strong>
+                    </td>
+                    <td>
+                      El ancho de banda se comparte; una eGPU rinde menos que la
+                      misma GPU instalada internamente. Requiere que el equipo
+                      tenga el controlador y el puerto con ese soporte genuino
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>USB 3.x / USB-C "común"</strong></td>
+                    <td class="tag-yes">Vigente</td>
+                    <td>USB</td>
+                    <td>5 – 20 Gb/s (según versión)</td>
+                    <td>Docks simples, almacenamiento externo, periféricos</td>
+                    <td>
+                      Un conector USB-C
+                      <strong>no garantiza</strong> Thunderbolt ni DisplayPort:
+                      sólo transporta lo que el equipo soporte. Es la confusión
+                      más común en el mostrador
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+            <div class="note">
+              <span class="note__title"
+                >Comparación con el escritorio: por qué el notebook es más
+                restrictivo</span
+              >
+              <div class="table-wrap">
+                <table>
+                  <caption>
+                    Diferencias estructurales de la expansión entre notebook y
+                    escritorio.
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th>Aspecto</th>
+                      <th>Escritorio</th>
+                      <th>Notebook</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Ranuras estándar</td>
+                      <td>Varias PCIe x1/x4/x16 libres y accesibles</td>
+                      <td>Ninguna ranura de expansión interna</td>
+                    </tr>
+                    <tr>
+                      <td>Almacenamiento</td>
+                      <td>Bahías 2,5"/3,5" + varias M.2</td>
+                      <td>Una M.2, en longitudes limitadas y/o puerto SATA</td>
+                    </tr>
+                    <tr>
+                      <td>Red y audio</td>
+                      <td>Tarjeta instalable y reemplazable</td>
+                      <td>
+                        Módulo M.2 Key E soldado o en ranura, según el modelo
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>GPU</td>
+                      <td>Reemplazable en PCIe x16</td>
+                      <td>Soldada; sólo GPU externa por Thunderbolt</td>
+                    </tr>
+                    <tr>
+                      <td>Actualización de energía</td>
+                      <td>Fuente reemplazable por otra de más potencia</td>
+                      <td>
+                        Cargador de fábrica y batería; sin margen de potencia
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Energía disponible para expansión</td>
+                      <td>75 W por ranura x16 más conectores auxiliares</td>
+                      <td>
+                        Presupuesto térmico y eléctrico compartido con el
+                        sistema completo
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Tiempo de intervención</td>
+                      <td>Minutos; panel lateral</td>
+                      <td>
+                        Desarmado completo, con riesgo de clips y garantía
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </article>
+
+          <article class="sub" id="s1-6">
+            <h3>1.3 Brackets, risers y adaptadores</h3>
+
+            <p>
+              Estos tres elementos resuelven problemas de
+              <strong>geometría, espacio y energía</strong>. Son los
+              responsables de la mayoría de los armados que "no cierran", y
+              conocerlos evita compras equivocadas y daños.
+            </p>
+
+            <h4>
+              El bracket: la pieza que casi nadie mira y que detiene un armado
+            </h4>
+            <p>
+              El <strong>bracket</strong> (o "chapa", "pestaña") es la pieza
+              metálica en forma de L que se atornilla al gabinete y que sostiene
+              la tarjeta por su parte trasera, donde quedan los conectores a la
+              vista. Existe en dos alturas normalizadas:
+            </p>
+            <ul>
+              <li>
+                <strong>Estándar</strong> (<em>full height</em>): unos
+                <strong>120 mm</strong> de alto. Es el que traen casi todas las
+                tarjetas y el que corresponde a los gabinetes de torre.
+              </li>
+              <li>
+                <strong>Bajo perfil</strong> (<em>low profile</em>): unos
+                <strong>80 mm</strong>. Se usa en gabinetes slim, en equipos de
+                oficina de baja altura, en HTPC y en servidores de 1U o 2U.
+              </li>
+            </ul>
+            <p>
+              El error más frecuente en el mostrador es
+              <strong
+                >comprar una tarjeta full height para un gabinete slim</strong
+              >. La tarjeta entra en la ranura y funciona, pero el panel lateral
+              no cierra: el bracket es más alto que el espacio disponible. La
+              solución correcta es que la mayoría de las tarjetas full height
+              <strong
+                >incluyen un segundo bracket de bajo perfil dentro de la
+                caja</strong
+              >, que se cambia con dos o tres tornillos.
+            </p>
+            <div class="danger">
+              <span class="danger__title"
+                >No se recorta un bracket metálico</span
+              >
+              <p>
+                Es una tentación comprensible y un error caro. Al cortar o
+                doblar el bracket se deforman los soportes de la tarjeta, se
+                pierde el anclaje al gabinete y la tarjeta queda apoyada
+                únicamente en el conector: el peso y las vibraciones terminan
+                dañando la ranura o los contactos. Además hay una limitación que
+                el cambio de bracket <strong>no</strong> resuelve: si la tarjeta
+                tiene los conectores apilados verticalmente, no entra en el
+                perfil bajo aunque se le cambie la chapa.
+              </p>
+            </div>
+
+            <h4>El riser: un cable extensor que no es neutro</h4>
+            <p>
+              Un <strong>riser</strong> (o cable extensor) es un cable flexible
+              con un conector macho que va a la ranura de la placa madre y un
+              conector hembra que recibe la tarjeta. Su uso típico es el
+              <strong>montaje vertical de la tarjeta gráfica</strong>, que se ve
+              a través del panel de vidrio, y los equipos de formato pequeño
+              donde la tarjeta no cabe en posición horizontal.
+            </p>
+            <p>
+              La ventaja del montaje vertical no es sólo estética: al no colgar
+              el peso de la tarjeta directamente de la ranura, se reduce el
+              esfuerzo mecánico sobre el zócalo de la placa madre, un problema
+              real con tarjetas grandes y pesadas. Los risers vienen en largos
+              muy variables —de unos 5 cm hasta 60 cm— y en distintas
+              orientaciones: rectos, con curva de 90°, con la entrada hacia
+              arriba o hacia abajo.
+            </p>
+            <p>
+              Ahora bien, un riser
+              <strong>no es un simple cable pasivo</strong>. Introduce un tramo
+              extra de conductores y dos conectores adicionales en un enlace de
+              alta frecuencia, y eso tiene consecuencias. Hay tres reglas que no
+              se pueden violar:
+            </p>
+            <ol>
+              <li>
+                <strong>Cuanto más corto, mejor.</strong> Un riser largo degrada
+                la señal. El síntoma típico es que el enlace
+                <em>se negocia a menos carriles o a menor velocidad</em>: el
+                sistema reporta x8 o x4 cuando debería reportar x16, o una
+                generación inferior a la esperada.
+              </li>
+              <li>
+                <strong>La generación debe corresponder.</strong> Un riser de
+                PCIe 3.0 usado en un enlace PCIe 4.0 o 5.0 es
+                <strong>la causa más común</strong> de los tres síntomas
+                clásicos: "no da video", "no arranca" o "se cae a x4". El riser
+                debe ser explícitamente de la generación de la placa y de la
+                tarjeta, o superior.
+              </li>
+              <li>
+                <strong>El riser no agrega energía.</strong> Transporta la señal
+                y los 75 W que entrega la ranura, nada más. Si la tarjeta
+                necesita más potencia, debe tener su propio conector auxiliar
+                conectado a la fuente.
+              </li>
+            </ol>
+
+            <h4>El riser alimentado</h4>
+            <p>
+              Existe una variante con un conector adicional —SATA o Molex— que
+              <strong>inyecta energía de la fuente directamente al cable</strong
+              >, de modo que no toda la potencia tiene que viajar por los
+              contactos de la ranura. Se usa cuando dos cosas ocurren a la vez:
+            </p>
+            <ul>
+              <li>
+                la tarjeta consume cerca del
+                <strong>límite de 75 W de la ranura</strong>, o
+              </li>
+              <li>
+                el riser es largo y la <strong>caída de tensión</strong> en el
+                cable es significativa.
+              </li>
+            </ul>
+          
+
+            <h4>Adaptadores: cuándo sirven y cuándo no</h4>
+            <p>
+              El adaptador más útil es el de <strong>M.2 a PCIe</strong>, que
+              permite instalar un SSD NVMe en una placa madre sin ranuras M.2.
+              Su condición crítica está en el <strong>firmware</strong>: si se
+              quiere usar como disco de sistema, el equipo debe poder
+              <strong>arrancar desde PCIe</strong>. En equipos con BIOS legacy
+              no arranca, aunque el sistema operativo ya instalado sí detecte el
+              disco.
+            </p>
+            <p>
+              En el otro extremo están los adaptadores que prometen traducir
+              entre buses incompatibles, como
+              <strong>PCIe a PCI</strong>. Sólo funcionan si llevan un
+              <strong>chip puente</strong> que traduzca el protocolo; los de
+              bajo costo son inestables. Un conector pasivo no puede traducir
+              dos protocolos distintos, por más que los contactos entren.
+            </p>
+
+            <div class="table-wrap">
+              <table>
+                <caption>
+                  Resumen de brackets, risers y adaptadores: cuándo se usan y
+                  qué cuidar.
+                </caption>
+                <thead>
+                  <tr>
+                    <th>Elemento</th>
+                    <th>Cuándo se usa</th>
+                    <th>Punto crítico</th>
+                    <th>Error típico</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Bracket estándar (full height)</strong></td>
+                    <td>Gabinetes de torre y de altura completa</td>
+                    <td>
+                      Altura ≈ 120 mm; es el estándar de casi todas las tarjetas
+                    </td>
+                    <td>
+                      Comprarlo para un gabinete slim: la tarjeta no cierra el
+                      panel
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Bracket low profile</strong></td>
+                    <td>
+                      Gabinetes slim, HTPC, equipos de oficina de baja altura,
+                      servidores 1U/2U
+                    </td>
+                    <td>
+                      Altura ≈ 80 mm; la tarjeta debe ser compatible con perfil
+                      bajo (sus conectores también)
+                    </td>
+                    <td>
+                      Creer que cualquier tarjeta se adapta: una tarjeta con
+                      conectores apilados verticalmente puede no caber aunque
+                      tenga el bracket bajo
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Riser PCIe (extensor)</strong></td>
+                    <td>
+                      Montaje vertical de la GPU, equipos de formato pequeño
+                      (SFF), cubos, montajes con la placa acostada, racks
+                    </td>
+                    <td>
+                      <strong>Generación correcta y longitud mínima.</strong> Un
+                      riser de generación inferior en un enlace superior es la
+                      causa más habitual de falla
+                    </td>
+                    <td>
+                      Comprar un riser económico sin especificar generación y
+                      culpar a la GPU del fallo
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Riser alimentado</strong></td>
+                    <td>
+                      Tarjetas cercanas al límite de energía de la ranura;
+                      risers largos con caída de tensión; montajes múltiples
+                    </td>
+                    <td>
+                      La energía extra viene de la fuente, no de la ranura: hay
+                      que conectarla y dimensionar correctamente
+                    </td>
+                    <td>
+                      No conectar la alimentación del riser y creer que la
+                      tarjeta "está rota"
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Adaptador M.2 a PCIe</strong></td>
+                    <td>
+                      Instalar un SSD NVMe cuando la placa no tiene ranura M.2,
+                      o sumar discos
+                    </td>
+                    <td>
+                      El sistema debe poder
+                      <strong>arrancar desde PCIe</strong> si se usa como disco
+                      de sistema
+                    </td>
+                    <td>
+                      Esperar que arranque en un equipo con BIOS legacy, o
+                      esperar rendimiento completo en una ranura x1
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Adaptador PCIe a PCI</strong> (y otros)</td>
+                    <td>Reutilizar una tarjeta antigua en una placa moderna</td>
+                    <td>
+                      Requiere chip puente (bridge) que traduzca el protocolo;
+                      los de bajo costo son inestables
+                    </td>
+                    <td>
+                      Suponer que un conector pasivo puede traducir dos
+                      protocolos distintos
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Adaptador M.2 Key M a Key E</strong> (o al revés)
+                    </td>
+                    <td>
+                      Reutilizar un módulo Wi-Fi en una ranura M.2 de SSD, o
+                      similar
+                    </td>
+                    <td>
+                      La llave y las señales no coinciden: la ranura Key M no
+                      está preparada para red
+                    </td>
+                    <td>
+                      Forzar el módulo o esperar que funcione por el solo hecho
+                      de tener adaptador
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="warn">
+              <span class="warn__title"
+                >Cómo elegir un riser sin equivocarse</span
+              >
+              <ol>
+                <li>
+                  <strong
+                    >Verifique la generación de la ranura y de la
+                    tarjeta.</strong
+                  >
+                  Si la placa madre es PCIe 4.0 y la GPU también, el riser debe
+                  ser explícitamente 4.0 (o superior).
+                </li>
+                <li>
+                  <strong
+                    >Elija el largo más corto que resuelva el montaje.</strong
+                  >
+                  Cada centímetro extra degrada la señal.
+                </li>
+                <li>
+                  <strong
+                    >Revise la orientación y el ángulo del conector.</strong
+                  >
+                  Existen risers rectos, con curva de 90° y con la entrada hacia
+                  arriba o hacia abajo; el ángulo equivocado hace que el cable
+                  no entre.
+                </li>
+                <li>
+                  <strong
+                    >Después de instalar, verifique el ancho del enlace.</strong
+                  >
+                  Si el sistema reporta x4 en lugar de x16, el riser es el
+                  primer sospechoso.
+                </li>
+                <li>
+                  <strong>Pruebe primero sin riser.</strong> Es la forma más
+                  rápida de saber si el problema es el cable o la tarjeta.
+                </li>
+              </ol>
+            </div>
+          </article>
+        </section>
+     
+        <!-- ============================================================
+         SECCIÓN 4 — CUESTIONARIO
+         ============================================================ -->
+        <section class="block" id="s3" aria-labelledby="s3-t">
+          <h2 id="s3-t"><span class="num">2</span> Cuestionario</h2>
+
+       
+          <ul>
+            <li><strong>1.</strong> Defina qué es una <em>placa de expansión</em> (o tarjeta de expansión) y explique en qué tres situaciones se justifica instalar una en lugar de usar la función integrada de la placa madre.</li>
+            <li><strong>2.</strong> ¿Por qué entender "qué ranura usa cada tarjeta y de dónde vienen sus líneas" es la clave para saber si una tarjeta de expansión va a funcionar a pleno?</li>
+         
+            <li><strong>3.</strong> ¿En qué casos concretos aporta valor real una tarjeta de sonido dedicada frente al códec HD Audio integrado? ¿Cuándo conviene, en cambio, invertir en los parlantes o auriculares?</li>
+            <li><strong>4.</strong> ¿Cuándo es necesario sumar una <strong>controladora SATA adicional</strong> y qué ranura mínima requiere?.</li>
+            <li><strong>5.</strong> ¿Para qué sirve una <strong>controladora NVMe por PCIe</strong>?</li>
+         
+            <li><strong>6.</strong> ¿Qué uso ofrecen las Capturadoras de video?</li>
+            <li><strong>7.</strong> ¿Por qué siguen siendo imprescindibles los puertos <strong>RS-232 (serie)</strong> y <strong>LPT (paralelo)</strong> en entornos industriales y de laboratorio si las placas madre modernas ya no los incluyen? ¿Cómo se resuelve esa necesidad?</li>
+         
+            <li><strong>8.</strong> ¿Por qué un notebook no puede expandirse con placas PCIe internas como un equipo de escritorio? ¿Con qué tres elementos se resuelve su expansión?</li>
+          
+             <li><strong>9.</strong> Describa las cuatro llaves (<em>keys</em>) M.2 tratadas en la sesión 
+              (A, E, B y M): y a qué dispositivo está destinada.</li>
+            <li><strong>10.</strong> ¿Por qué nunca debe forzarse un módulo M.2 Key E en una ranura Key M, aunque existan adaptadores físicos entre llaves?</li>
+          
+            <li><strong>11.</strong> ¿Qué tres tipos de señal transportan simultáneamente <strong>Thunderbolt 3/4 y USB4</strong> sobre un mismo conector USB-C, y cuál es el ancho de banda total disponible?</li>
+            <li><strong>12.</strong> ¿Por qué una <strong>GPU externa (eGPU)</strong> conectada por Thunderbolt rinde menos que la misma tarjeta instalada internamente en un equipo de escritorio?</li>
+            <li><strong>13.</strong> ¿Por qué un conector USB-C <strong>no garantiza</strong> por sí solo soporte Thunderbolt ni DisplayPort? Explique por qué esta es "la confusión más común en el mostrador".</li>
+            <li><strong>14.</strong> Describa qué fue <strong>ExpressCard</strong> (tamaños /34 y /54), cuáles fueron sus dos reemplazos funcionales tras su discontinuación.</li>
+      
+            <li><strong>15.</strong> Defina qué es un <strong>bracket</strong> de tarjeta de expansión y describa sus dos alturas normalizadas, indicando a qué tipo de gabinete corresponde cada una.</li>
+            <li><strong>16.</strong> ¿Cuál es el error más frecuente al elegir el bracket de una tarjeta y cuál es la solución correcta que suelen incluir las tarjetas full height?</li>
+            <li><strong>17.</strong> ¿Por qué no se debe recortar o doblar un bracket metálico para que entre en un gabinete más pequeño? Mencione las consecuencias mecánicas.</li>
+            <li><strong>18.</strong> Defina qué es un <strong>riser</strong> PCIe y cuál es su uso típico. ¿Por qué reduce el esfuerzo mecánico sobre el zócalo de la placa madre?</li>
+            <li><strong>19.</strong> Enumere las tres reglas que no se pueden violar al usar un riser PCIe (longitud, generación y energía).</li>
+            
+            <li><strong>20.</strong> ¿En qué dos situaciones conviene usar un <strong>riser alimentado</strong> en lugar de uno pasivo?</li>
+            <li><strong>21.</strong> ¿Por qué un adaptador <strong>PCIe a PCI</strong> de bajo costo suele ser inestable? ¿Qué componente interno necesita para funcionar correctamente?</li>
+            <li><strong>22.</strong> Siguiendo el recuadro de buenas prácticas, enumere los cinco pasos para elegir un riser sin equivocarse.</li>
+          
+            <li><strong>23.</strong> Buscar imágenes de <strong>tarjetas de expansión PCIe</strong> de red (Ethernet 1 GbE) e identificar el tipo de ranura que usa.</li>
+             <li><strong>24.</strong> Buscar imágenes de <strong>tarjetas de expansión PCIe</strong> de red (2,5/5/10 GbE) e identificar el tipo de ranura que usa.</li>
+             <li><strong>25.</strong> Buscar imágenes de <strong>tarjetas de expansión PCIe</strong> de red (Wi-Fi/Bluetooth con antenas) e identificar el tipo de ranura que usa.</li>
+            
+             <li><strong>26.</strong> Buscar imágenes de una <strong>tarjeta de sonido dedicada</strong> Identificar sus conectores.</li>
+                <li><strong>27.</strong> Buscar imágenes de una <strong>controladora SATA</strong>. Identificar sus conectores.</li>
+                  <li><strong>28.</strong> Buscar imágenes de una <strong>controladora RAID</strong>. Identificar sus conectores.</li>
+          
+                  <li><strong>29.</strong> Buscar imágenes de una <strong>controladora NVMe por PCIe (adaptador M.2)</strong>. Identificar sus conectores.</li>
+           
+                  <li><strong>30.</strong> Buscar imágenes de <strong>capturadoras de video</strong> (básica) e identificar sus conectores.</li>
+          <li><strong>31.</strong> Buscar imágenes de <strong>capturadoras de video</strong> (HDMI 1080p) e identificar sus conectores.</li>
+          <li><strong>32.</strong> Buscar imágenes de <strong>capturadoras de video</strong> (4K) e identificar sus conectores.</li>
+          
+             <li><strong>33.</strong> Buscar imágenes de una GPU externa (eGPU)</strong>. Identificar el conector.</li>
+            <li><strong>34.</strong> Buscar imágenes de una tarjeta <strong>ExpressCard /34 y /54</strong> </li>
+            <li><strong>35.</strong> Buscar imágenes de un <strong>riser PCIe</strong> (recto). </li>
+           <li><strong>36.</strong> Buscar imágenes de un <strong>riser PCIe</strong> (con curva de 90°). </li>
+           <li><strong>37.</strong> Buscar imágenes de un <strong>riser alimentado</strong> con conector SATA. </li>
+           <li><strong>38.</strong> Buscar imágenes de un <strong>riser alimentado</strong> con conector Molex. </li>
+         
+          </ul>
+
+         
+
+          
+
+         
+
+        
+
+        
+
+         
+
+          
+        </section>
+
+        
+        <div class="nav-bar">
+          <a
+            href="../materias/hardware-uno.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #4ade80;
+              color: #222;
+              display: inline-block;
+              margin-right: 10px;
+            "
+          >
+            Volver a Materia
+          </a>
+          <a
+            href="hardware1-sesion15.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #60a5fa;
+              color: #222;
+              display: inline-block;
+              margin-right: 10px;
+            "
+          >
+            Ir a Sesión 15
+          </a>
+          <!-- <a
+            href="hardware1-sesion17.html"
+            style="
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;
+              background: #f9e282;
+              color: #222;
+              display: inline-block;
+            "
+          >
+            Ir a Sesión 17
+          </a> -->
+        </div>
+      </main>
+    </div>
+
+  
+
+    <button
+      class="to-top"
+      id="to-top"
+      type="button"
+      aria-label="Volver arriba"
+      title="Volver arriba"
+    >
+      ↑
+    </button>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="js/main.js" defer></script>
+    <script src="js/quiz16.js" defer></script>
+    <script>
+      /* ============================================================
+   Hardware 1 — Sesión 15 / 16
+   main.js — Tema claro/oscuro, índice, drawer móvil, scroll-spy,
+             impresión, acordeones, progreso de lectura.
+   ============================================================ */
+      (function () {
+        "use strict";
+
+        const THEME_KEY = "hw1-theme";
+        const THEME_KEY_LEGACY = ["hw1-s15-theme", "hw1-s16-theme"];
+        const FOCUS_KEY = "hw1-focus";
+        const FOCUS_KEY_LEGACY = ["hw1-s15-focus", "hw1-s16-focus"];
+        const root = document.documentElement;
+
+        function readStored(keys) {
+          const list = [].concat(keys || []);
+          for (let i = 0; i < list.length; i++) {
+            try {
+              const v = localStorage.getItem(list[i]);
+              if (v) return v;
+            } catch (e) {
+              /* ignore */
+            }
+          }
+          return null;
+        }
+
+        /* ------------------------------------------------------------
+     1. Tema claro / oscuro
+     ------------------------------------------------------------ */
+        const themeBtn = document.getElementById("btn-theme");
+        const themeIcon = document.getElementById("theme-icon");
+        const themeLabel = document.getElementById("theme-label");
+
+        function applyTheme(theme) {
+          root.setAttribute("data-theme", theme);
+          const isDark = theme === "dark";
+          if (themeIcon) themeIcon.textContent = isDark ? "☀️" : "🌙";
+          if (themeLabel) themeLabel.textContent = isDark ? "Claro" : "Oscuro";
+          if (themeBtn) {
+            themeBtn.setAttribute(
+              "title",
+              isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro",
+            );
+            themeBtn.setAttribute(
+              "aria-label",
+              isDark ? "Activar modo claro" : "Activar modo oscuro",
+            );
+          }
+          try {
+            localStorage.setItem(THEME_KEY, theme);
+          } catch (e) {
+            /* ignore */
+          }
+        }
+
+        function currentTheme() {
+          return root.getAttribute("data-theme") === "dark" ? "dark" : "light";
+        }
+
+        applyTheme(currentTheme());
+
+        if (themeBtn) {
+          themeBtn.addEventListener("click", function () {
+            applyTheme(currentTheme() === "dark" ? "light" : "dark");
+          });
+        }
+
+        /* ------------------------------------------------------------
+     2. Modo lectura (oculta el índice y amplía el contenido)
+     ------------------------------------------------------------ */
+        const focusBtn = document.getElementById("btn-focus-mode");
+        const layout = document.querySelector(".layout");
+
+        function applyFocus(on) {
+          if (!layout) return;
+          layout.classList.toggle("is-focus", on);
+          if (focusBtn) {
+            focusBtn.classList.toggle("btn--primary", on);
+            focusBtn.setAttribute("aria-pressed", on ? "true" : "false");
+            focusBtn.setAttribute(
+              "title",
+              on ? "Salir del modo lectura" : "Modo lectura: oculta el índice",
+            );
+          }
+          try {
+            localStorage.setItem(FOCUS_KEY, on ? "1" : "0");
+          } catch (e) {
+            /* ignore */
+          }
+        }
+
+        let focusStored =
+          readStored([FOCUS_KEY].concat(FOCUS_KEY_LEGACY)) || "0";
+        applyFocus(focusStored === "1");
+
+        if (focusBtn) {
+          focusBtn.addEventListener("click", function () {
+            applyFocus(!layout.classList.contains("is-focus"));
+          });
+        }
+
+        /* ------------------------------------------------------------
+     3. Drawer del índice en móvil
+     ------------------------------------------------------------ */
+        const sidebar = document.getElementById("indice-lateral");
+        const menuToggle = document.getElementById("menu-toggle");
+        const backdrop = document.getElementById("drawer-backdrop");
+
+        function openDrawer() {
+          if (!sidebar) return;
+          sidebar.classList.add("is-open");
+          if (backdrop) {
+            backdrop.hidden = false;
+            requestAnimationFrame(function () {
+              backdrop.classList.add("is-open");
+            });
+          }
+          if (menuToggle) menuToggle.setAttribute("aria-expanded", "true");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeDrawer() {
+          if (!sidebar) return;
+          sidebar.classList.remove("is-open");
+          if (backdrop) {
+            backdrop.classList.remove("is-open");
+            window.setTimeout(function () {
+              backdrop.hidden = true;
+            }, 220);
+          }
+          if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+          document.body.style.overflow = "";
+        }
+
+        if (menuToggle) {
+          menuToggle.addEventListener("click", function () {
+            if (sidebar.classList.contains("is-open")) {
+              closeDrawer();
+            } else {
+              openDrawer();
+            }
+          });
+        }
+        if (backdrop) backdrop.addEventListener("click", closeDrawer);
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") closeDrawer();
+        });
+
+        /* Cerrar el drawer al navegar dentro del índice (en pantallas chicas) */
+        if (sidebar) {
+          sidebar.addEventListener("click", function (e) {
+            const link = e.target.closest('a[href^="#"]');
+            if (link && window.matchMedia("(max-width: 1024px)").matches)
+              closeDrawer();
+          });
+        }
+
+        /* ------------------------------------------------------------
+     4. Progreso de lectura + botón "volver arriba"
+     ------------------------------------------------------------ */
+        const progressBar = document.getElementById("read-progress");
+        const toTop = document.getElementById("to-top");
+        let rafPending = false;
+
+        function onScroll() {
+          if (rafPending) return;
+          rafPending = true;
+          requestAnimationFrame(function () {
+            const doc = document.documentElement;
+            const max = doc.scrollHeight - doc.clientHeight;
+            const pct = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+            if (progressBar) progressBar.style.width = pct.toFixed(2) + "%";
+            if (toTop)
+              toTop.classList.toggle("is-visible", doc.scrollTop > 600);
+            rafPending = false;
+          });
+        }
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+
+        if (toTop) {
+          toTop.addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+        }
+
+        /* ------------------------------------------------------------
+     5. Scroll-spy del índice lateral
+     ------------------------------------------------------------ */
+        const tocLinks = Array.prototype.slice.call(
+          document.querySelectorAll('.sidebar a[href^="#"]'),
+        );
+
+        const linkByHash = {};
+        tocLinks.forEach(function (a) {
+          const hash = a.getAttribute("href");
+          if (hash && hash.length > 1) {
+            // El primer enlace registrado gana (los títulos principales van antes que los sub-enlaces)
+            if (!linkByHash[hash]) linkByHash[hash] = a;
+          }
+        });
+
+        const spyTargets = Object.keys(linkByHash)
+          .map(function (hash) {
+            const el = document.getElementById(hash.slice(1));
+            return el ? { el: el, link: linkByHash[hash] } : null;
+          })
+          .filter(Boolean)
+          .sort(function (a, b) {
+            return a.el.offsetTop - b.el.offsetTop;
+          });
+
+        let spyTicking = false;
+
+        function spy() {
+          spyTicking = false;
+          const y = window.scrollY + 120;
+          let activeIndex = -1;
+          for (let i = 0; i < spyTargets.length; i++) {
+            if (spyTargets[i].el.offsetTop <= y) activeIndex = i;
+          }
+          spyTargets.forEach(function (t) {
+            t.link.classList.remove("is-active");
+          });
+          if (activeIndex >= 0)
+            spyTargets[activeIndex].link.classList.add("is-active");
+        }
+
+        window.addEventListener(
+          "scroll",
+          function () {
+            if (spyTicking) return;
+            spyTicking = true;
+            requestAnimationFrame(spy);
+          },
+          { passive: true },
+        );
+        spy();
+
+        /* ------------------------------------------------------------
+     6. Impresión
+     ------------------------------------------------------------ */
+        const printBtn = document.getElementById("btn-print");
+        if (printBtn)
+          printBtn.addEventListener("click", function () {
+            window.print();
+          });
+
+        document
+          .querySelectorAll("[data-sidebar-action]")
+          .forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              const action = btn.getAttribute("data-sidebar-action");
+              if (action === "print") {
+                window.print();
+                return;
+              }
+              const open = action === "expand";
+              document.querySelectorAll("details.acc").forEach(function (d) {
+                d.open = open;
+              });
+              toast(open ? "Detalles expandidos." : "Detalles contraídos.");
+            });
+          });
+
+        /* ------------------------------------------------------------
+     7. Toast de aviso (compartido con quiz.js mediante window.HW1)
+     ------------------------------------------------------------ */
+        const toastEl = document.getElementById("toast");
+        let toastTimer = null;
+
+        function toast(message) {
+          if (!toastEl) return;
+          toastEl.textContent = message;
+          toastEl.classList.add("is-visible");
+          window.clearTimeout(toastTimer);
+          toastTimer = window.setTimeout(function () {
+            toastEl.classList.remove("is-visible");
+          }, 3200);
+        }
+
+        /* ------------------------------------------------------------
+     8. Fecha de hoy por defecto en el formulario del alumno
+     ------------------------------------------------------------ */
+        const fechaInput = document.getElementById("f-fecha");
+        if (fechaInput && !fechaInput.value) {
+          const now = new Date();
+          const iso = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
+            .toISOString()
+            .slice(0, 10);
+          fechaInput.value = iso;
+        }
+
+        /* ------------------------------------------------------------
+     9. API mínima para quiz.js
+     ------------------------------------------------------------ */
+        window.HW1 = { toast: toast };
+      })();
+
+
+    </script>
+  </body>
+</html>

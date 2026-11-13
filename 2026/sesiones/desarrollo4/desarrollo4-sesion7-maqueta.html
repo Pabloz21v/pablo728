@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoStore - Catálogo</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <header>
+        <h1>TecnoStore</h1>
+    </header>
+
+    <!-- Barra de búsqueda y filtro: elementos que JS va a "escuchar" -->
+    <section class="barra-filtros">
+        <input type="text" id="buscador" placeholder="Buscar producto...">
+        <select id="filtro-categoria">
+            <option value="todas">Todas las categorías</option>
+            <option value="electronica">Electrónica</option>
+            <option value="accesorios">Accesorios</option>
+        </select>
+        <button id="btn-nuevo">+ Nuevo producto</button>
+    </section>
+
+    <!-- Formulario de alta/edición: oculto hasta que se necesite -->
+    <form id="form-producto" class="form-producto">
+        <h3 id="form-titulo">Nuevo producto</h3>
+        <label for="input-nombre">Nombre</label>
+        <input type="text" id="input-nombre" required>
+
+        <label for="input-descripcion">Descripción</label>
+        <textarea id="input-descripcion"></textarea>
+
+        <label for="input-precio">Precio</label>
+        <input type="number" id="input-precio" step="0.01" required>
+
+        <label for="input-stock">Stock</label>
+        <input type="number" id="input-stock" required>
+
+        <label for="input-categoria">Categoría</label>
+        <select id="input-categoria">
+            <option value="electronica">Electrónica</option>
+            <option value="accesorios">Accesorios</option>
+        </select>
+
+        <button type="submit">Guardar</button>
+        <button type="button" id="btn-cancelar">Cancelar</button>
+    </form>
+
+    <!-- GANCHO VACÍO: acá JS va a inyectar una <article> por cada producto -->
+    <main id="contenedor-productos" class="producto-grid"></main>
+
+    <script src="productos.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // ====== 1. DATOS: estado central de la aplicación ======
+let productos = [
+  { id: 1, nombre: 'Auriculares Bluetooth Pro', descripcion: 'Cancelación de ruido activa', precio: 79.99, stock: 25, imagen: 'auriculares.jpg', categoria: 'electronica' },
+  { id: 2, nombre: 'Teclado Mecánico RGB', descripcion: 'Switches mecánicos', precio: 129.99, stock: 12, imagen: 'teclado.jpg', categoria: 'electronica' },
+  { id: 3, nombre: 'Monitor 27" 4K', descripcion: 'UHD para diseño y gaming', precio: 449.99, stock: 8, imagen: 'monitor.jpg', categoria: 'electronica' }
+];
+
+// ====== 2. REFERENCIAS AL DOM (una sola vez, al inicio) ======
+const contenedor = document.querySelector('#contenedor-productos');
+const buscador = document.querySelector('#buscador');
+const filtroCategoria = document.querySelector('#filtro-categoria');
+const formulario = document.querySelector('#form-producto');
+const formTitulo = document.querySelector('#form-titulo');
+const btnNuevo = document.querySelector('#btn-nuevo');
+const btnCancelar = document.querySelector('#btn-cancelar');
+let editandoId = null;
+
+// ====== 3. RENDERIZADO: única función que toca el DOM ======
+function renderizarCatalogo(lista) {
+  contenedor.innerHTML = '';
+
+  if (lista.length === 0) {
+    contenedor.innerHTML = '<p class="empty-state">No hay productos para mostrar.</p>';
+    return;
+  }
+
+  lista.forEach((producto) => {
+    const tarjeta = document.createElement('article');
+    tarjeta.classList.add('producto-card'); // EL INSTRUCTOR APLICARÁ ESTILOS CSS AQUÍ
+    tarjeta.dataset.id = producto.id;
+
+    const imagen = document.createElement('img');
+    imagen.classList.add('producto-imagen');
+    imagen.setAttribute('src', producto.imagen);
+    imagen.setAttribute('alt', producto.nombre);
+
+    const nombre = document.createElement('h3');
+    nombre.classList.add('producto-nombre');
+    nombre.textContent = producto.nombre;
+
+    const descripcion = document.createElement('p');
+    descripcion.classList.add('producto-descripcion');
+    descripcion.textContent = producto.descripcion;
+
+    const precio = document.createElement('p');
+    precio.classList.add('producto-precio');
+    precio.textContent = `$${producto.precio.toFixed(2)}`;
+
+    const stock = document.createElement('p');
+    stock.classList.add('producto-stock');
+    stock.textContent = `Stock: ${producto.stock} u.`;
+
+    const btnEditar = document.createElement('button');
+    btnEditar.classList.add('btn-editar');
+    btnEditar.textContent = 'Editar';
+    btnEditar.addEventListener('click', () => abrirFormularioEdicion(producto.id));
+
+    const btnEliminar = document.createElement('button');
+    btnEliminar.classList.add('btn-eliminar');
+    btnEliminar.textContent = 'Eliminar';
+    btnEliminar.addEventListener('click', () => eliminarProducto(producto.id));
+
+    tarjeta.append(imagen, nombre, descripcion, precio, stock, btnEditar, btnEliminar);
+    contenedor.appendChild(tarjeta);
+  });
+}
+
+// ====== 4. LECTURA CON FILTROS (búsqueda + categoría combinadas) ======
+function aplicarFiltros() {
+  const texto = buscador.value.trim().toLowerCase();
+  const categoria = filtroCategoria.value;
+
+  const filtrados = productos.filter((p) => {
+    const coincideTexto = p.nombre.toLowerCase().includes(texto);
+    const coincideCategoria = categoria === 'todas' || p.categoria === categoria;
+    return coincideTexto && coincideCategoria;
+  });
+
+  renderizarCatalogo(filtrados);
+}
+
+// ====== 5. CREATE ======
+function agregarProducto(datos) {
+  if (!datos.nombre || isNaN(datos.precio) || isNaN(datos.stock)) {
+    alert('Completá todos los campos obligatorios');
+    return;
+  }
+  const nuevoProducto = { id: Date.now(), ...datos };
+  productos.push(nuevoProducto);
+  aplicarFiltros();
+}
+
+// ====== 6. UPDATE ======
+function editarProducto(id, datosActualizados) {
+  const index = productos.findIndex((p) => p.id === id);
+  if (index === -1) {
+    console.error('Producto no encontrado:', id);
+    return;
+  }
+  productos[index] = { ...productos[index], ...datosActualizados };
+  aplicarFiltros();
+}
+
+// ====== 7. DELETE ======
+function eliminarProducto(id) {
+  if (!confirm('¿Seguro que deseas eliminar este producto?')) return;
+  productos = productos.filter((p) => p.id !== id);
+  aplicarFiltros();
+}
+
+// ====== 8. FORMULARIO: abrir en modo Create o Update ======
+function abrirFormularioCreacion() {
+  editandoId = null;
+  formTitulo.textContent = 'Nuevo producto';
+  formulario.reset();
+  formulario.classList.add('open');
+}
+
+function abrirFormularioEdicion(id) {
+  const producto = productos.find((p) => p.id === id);
+  if (!producto) return;
+  editandoId = id;
+  formTitulo.textContent = `Editando: ${producto.nombre}`;
+  document.querySelector('#input-nombre').value = producto.nombre;
+  document.querySelector('#input-descripcion').value = producto.descripcion;
+  document.querySelector('#input-precio').value = producto.precio;
+  document.querySelector('#input-stock').value = producto.stock;
+  document.querySelector('#input-categoria').value = producto.categoria;
+  formulario.classList.add('open');
+}
+
+function cerrarFormulario() {
+  formulario.classList.remove('open');
+  formulario.reset();
+  editandoId = null;
+}
+
+// ====== 9. EVENTOS: conectan la interfaz con la lógica ======
+formulario.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const datos = {
+    nombre: document.querySelector('#input-nombre').value.trim(),
+    descripcion: document.querySelector('#input-descripcion').value.trim(),
+    precio: parseFloat(document.querySelector('#input-precio').value),
+    stock: parseInt(document.querySelector('#input-stock').value, 10),
+    categoria: document.querySelector('#input-categoria').value
+  };
+
+  if (editandoId === null) {
+    agregarProducto(datos);
+  } else {
+    editarProducto(editandoId, datos);
+  }
+  cerrarFormulario();
+});
+
+btnNuevo.addEventListener('click', abrirFormularioCreacion);
+btnCancelar.addEventListener('click', cerrarFormulario);
+buscador.addEventListener('input', aplicarFiltros);
+filtroCategoria.addEventListener('change', aplicarFiltros);
+
+// ====== 10. PRIMER RENDER AL CARGAR LA PÁGINA ======
+renderizarCatalogo(productos);
+    </script>
+</body>
+</html>
