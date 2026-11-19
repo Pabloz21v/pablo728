@@ -1,0 +1,291 @@
+/* FUENTES DE TEAM FORTRESS 2 */
+@font-face {
+    font-family: "TF2 Build";
+    src: url("fonts/tf2build.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "TF2 Secondary";
+    src: url("fonts/TF2secondary.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* CONFIGURACIÓN GENERAL */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "TF2 Secondary", Arial, sans-serif;
+    background-color: #25221f;
+    color: #f4e8d0;
+    line-height: 1.5;
+}
+
+/* ENCABEZADO */
+.encabezado {
+    background: linear-gradient(135deg, #8b3026, #51221e);
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 5px solid #c69b55;
+}
+
+.encabezado h1 {
+    font-family: "TF2 Build", Georgia, serif;
+    font-size: 42px;
+    letter-spacing: 5px;
+    color: #f4e8d0;
+    text-shadow: 3px 3px #33231c;
+}
+
+.encabezado p {
+    margin-top: 8px;
+    color: #e4d0b0;
+    font-size: 16px;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.contenedor {
+    width: 90%;
+    max-width: 1250px;
+    margin: 35px auto;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* PANEL DEL FORMULARIO */
+.panel {
+    background-color: #38312a;
+    padding: 22px;
+    border: 2px solid #806342;
+    border-radius: 8px;
+}
+
+.panel h2,
+.inventario h2 {
+    font-family: "TF2 Build", Georgia, serif;
+    color: #e9b96c;
+    margin-bottom: 20px;
+    font-size: 23px;
+}
+
+/* FORMULARIO */
+#formularioProducto {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+#formularioProducto label {
+    font-weight: bold;
+    color: #e8d8bd;
+    margin-top: 5px;
+}
+
+#formularioProducto input,
+#formularioProducto select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #8b765c;
+    border-radius: 5px;
+    background-color: #eee4d3;
+    color: #29231e;
+    font-family: "TF2 Secondary", Arial, sans-serif;
+    font-size: 14px;
+}
+
+#formularioProducto input:focus,
+#formularioProducto select:focus {
+    outline: 2px solid #c69b55;
+}
+
+button {
+    padding: 11px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "TF2 Build", Georgia, serif;
+    transition: 0.2s;
+}
+
+#botonGuardar {
+    margin-top: 12px;
+    background-color: #a43b2d;
+    color: white;
+}
+
+#botonGuardar:hover {
+    background-color: #c34c3c;
+}
+
+#botonCancelar {
+    background-color: #777064;
+    color: white;
+}
+
+#botonCancelar:hover {
+    background-color: #918777;
+}
+
+/* INVENTARIO */
+.inventario {
+    min-width: 0;
+}
+
+.filtros {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.filtros input,
+.filtros select {
+    padding: 11px;
+    border: 1px solid #806342;
+    border-radius: 5px;
+    background-color: #eee4d3;
+    color: #29231e;
+    font-family: "TF2 Secondary", Arial, sans-serif;
+    font-size: 14px;
+}
+
+.filtros input {
+    flex: 1;
+    min-width: 0;
+}
+
+.filtros select {
+    min-width: 190px;
+}
+
+/* TARJETAS DE PRODUCTOS */
+.productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 22px;
+}
+
+.tarjeta {
+    background-color: #38312a;
+    border: 2px solid #806342;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.tarjeta:hover {
+    transform: translateY(-5px);
+    border-color: #d1a45e;
+}
+
+/* IMÁGENES */
+.imagen-producto {
+    height: 190px;
+    background-color: #e4d8c4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    color: #554735;
+    text-align: center;
+    font-weight: bold;
+}
+
+.imagen-producto img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* INFORMACIÓN DEL PRODUCTO */
+.informacion-producto {
+    padding: 15px;
+}
+
+.informacion-producto h3 {
+    font-family: "TF2 Build", Georgia, serif;
+    color: #e9b96c;
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+
+.informacion-producto p {
+    color: #e2d5c2;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+/* BOTONES DE ACCIÓN */
+.acciones {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.acciones button {
+    flex: 1;
+    font-size: 13px;
+}
+
+.editar {
+    background-color: #416b87;
+    color: white;
+}
+
+.editar:hover {
+    background-color: #5487a8;
+}
+
+.eliminar {
+    background-color: #a43b2d;
+    color: white;
+}
+
+.eliminar:hover {
+    background-color: #c34c3c;
+}
+
+/* PIE DE PÁGINA */
+footer {
+    margin-top: 50px;
+    padding: 25px;
+    text-align: center;
+    background-color: #171513;
+    border-top: 3px solid #806342;
+    color: #b9a78d;
+    font-size: 13px;
+}
+
+/* DISEÑO PARA CELULARES */
+@media (max-width: 800px) {
+    .contenedor {
+        grid-template-columns: 1fr;
+    }
+
+    .productos {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .filtros {
+        flex-direction: column;
+    }
+
+    .filtros select {
+        width: 100%;
+    }
+
+    .encabezado h1 {
+        font-size: 32px;
+    }
+}

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Court Kicks | Zapatillas de básquet</title>
+
+  <style>
+    :root { 
+      --cancha: #aa18b8;   
+      --cancha-osc: #aa18b8;
+      --noche: #14171c;    
+      --panel: #1e232b;    
+      --borde: #2f3640;
+      --texto: #f1f3f5;
+      --suave: #9aa4b2;
+    }
+    * { box-sizing: border-box; }
+
+    body { font-family: Arial, sans-serif; margin: 0; background: var(--noche); color: var(--texto); }
+
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 24px; background: #0d0f12; border-bottom: 3px solid var(--cancha);
+    }
+    header h1 { font-size: 22px; margin: 0; letter-spacing: 1px; text-transform: uppercase; }
+    header h1 span { color: var(--cancha); }
+
+    
+    .hero { padding: 40px 24px; text-align: center; background: linear-gradient(135deg, #1e232b, #2b1a10); }
+    .hero h2 { font-size: 32px; margin: 0 0 8px; }
+    .hero p  { color: var(--suave); margin: 0; }
+
+    button {
+      cursor: pointer; padding: 8px 12px; border: none; border-radius: 4px;
+      background: var(--cancha); color: #fff; font-size: 14px; font-weight: bold;
+    }
+    button:hover         { background: var(--cancha-osc); }
+    button.peligro       { background: #c0392b; }
+    button.peligro:hover { background: #962d22; }
+    button.secundario    { background: #4f0152; }
+    button.secundario:hover { background:  #aa18b8; }
+
+    main { max-width: 1000px; margin: 24px auto; padding: 0 16px; display: flex; flex-direction: column; gap: 24px; }
+    section { background: var(--panel); padding: 16px; border-radius: 8px; border: 1px solid var(--borde); }
+    section h2 { margin-top: 0; }
+
+    
+    .barra { display: flex; gap: 8px; margin-bottom: 16px; }
+    .barra input { flex: 1; }
+
+    
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+
+    .card {
+      background: var(--noche); border: 1px solid var(--borde); border-radius: 8px;
+      padding: 10px; display: flex; flex-direction: column; gap: 6px;
+      transition: transform .15s, border-color .15s;
+    }
+    .card:hover { transform: translateY(-4px); border-color: var(--cancha); }
+    .card img     { width: 100%; height: 130px; object-fit: cover; border-radius: 6px; background: #2a3039; }
+    .card .marca  { color: var(--cancha); font-size: 12px; font-weight: bold; text-transform: uppercase; margin: 0; }
+    .card h3      { margin: 0; font-size: 16px; }
+    .card .precio { font-weight: bold; font-size: 18px; margin: 0; }
+    .card small   { color: var(--suave); }
+    .card .acciones { display: flex; gap: 4px; margin-top: 4px; }
+    .card .acciones button { flex: 1; font-size: 12px; padding: 6px; }
+
+    
+    form     { display: flex; flex-direction: column; gap: 10px; max-width: 400px; }
+    label    { display: flex; flex-direction: column; font-size: 14px; gap: 4px; color: var(--suave); }
+    input    { padding: 8px; border: 1px solid var(--borde); border-radius: 4px; background: var(--noche); color: var(--texto); }
+    .botones { display: flex; gap: 8px; }
+
+    footer { text-align: center; color: var(--suave); font-size: 13px; padding: 24px; }
+
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Orka <span>Kicks</span></h1>
+    <button id="btn-nuevo">Agregar zapatilla</button>
+  </header>
+
+  <div class="hero">
+    <h2>Zapatillas de básquet</h2>
+    <p>Comodidad, performance y aura.</p>
+  </div>
+
+  <main>
+
+    
+    <section>
+      <h2>Catálogo</h2>
+      <div class="barra">
+        <input id="buscador" placeholder="Buscar por nombre o marca...">
+      </div>
+      <div id="lista-productos" class="grid"></div>
+    </section>
+
+    
+    <section id="seccion-form" hidden>
+      <h2 id="titulo-form">Agregar zapatilla</h2>
+
+      <form id="form-producto">
+        <input type="hidden" id="producto-id">
+
+        <label>Modelo
+          <input id="nombre" required>
+        </label>
+
+        <label>Marca
+          <input id="marca" required>
+        </label>
+
+        <label>Precio (ARS)
+          <input id="precio" type="number" min="0" required>
+        </label>
+
+        <label>Imagen (URL, opcional)
+          <input id="imagen" placeholder="https://...">
+        </label>
+
+        <label>Stock
+          <input id="stock" type="number" min="0" value="1" required>
+        </label>
+
+        <div class="botones">
+          <button type="submit">Guardar</button>
+          <button type="button" id="btn-cancelar" class="secundario">Cancelar</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>Court Kicks · Proyecto de práctica: CRUD con JSON, JavaScript y DOM</footer>
+
+  <script>
+   
+    const productosJSON = [
+      { id: 1, nombre: "LeBron 21",      marca: "Nike",         precio: 189000, imagen: "", stock: 6 },
+      { id: 2, nombre: "Curry 11",       marca: "Under Armour", precio: 165000, imagen: "", stock: 4 },
+      { id: 3, nombre: "Harden Vol. 8",  marca: "Adidas",       precio: 142000, imagen: "", stock: 9 },
+      { id: 4, nombre: "KD 17",          marca: "Nike",         precio: 158000, imagen: "", stock: 5 },
+      { id: 5, nombre: "Air Jordan 39",  marca: "Jordan",       precio: 210000, imagen: "", stock: 3 },
+      { id: 6, nombre: "MB.04",          marca: "Puma",         precio: 150000, imagen: "", stock: 7 }
+    ];
+
+    
+    let productos = [...productosJSON];
+
+    
+    let proximoId = 7;
+
+    let textoBusqueda = "";
+
+    
+    const listaProductos = document.getElementById("lista-productos");
+    const seccionForm    = document.getElementById("seccion-form");
+    const formProducto   = document.getElementById("form-producto");
+    const inputId        = document.getElementById("producto-id");
+    const inputNombre    = document.getElementById("nombre");
+    const inputMarca     = document.getElementById("marca");
+    const inputPrecio    = document.getElementById("precio");
+    const inputImagen    = document.getElementById("imagen");
+    const inputStock     = document.getElementById("stock");
+    const tituloForm     = document.getElementById("titulo-form");
+    const btnNuevo       = document.getElementById("btn-nuevo");
+    const btnCancelar    = document.getElementById("btn-cancelar");
+    const buscador       = document.getElementById("buscador");
+
+    const IMAGEN_POR_DEFECTO = "data:image/svg+xml;utf8," + encodeURIComponent(
+      "<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'>" +
+      "<rect width='300' height='200' fill='#2a3039'/>" +
+      "<text x='150' y='125' font-size='90' text-anchor='middle'>👟</text></svg>"
+    );
+
+    
+    function buscarProductoPorId(id) {
+      return productos.find(function (p) { return p.id === id; });
+    }
+
+   
+    function buscarIndicePorId(id) {
+      return productos.findIndex(function (p) { return p.id === id; });
+    }
+
+    
+    function formatearPrecio(numero) {
+      return "$" + numero.toLocaleString("es-AR");
+    }
+
+    
+    function crearTarjetaProducto(producto) {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const img = document.createElement("img");
+      img.src = producto.imagen || IMAGEN_POR_DEFECTO;
+      img.alt = producto.nombre;
+      // Si la URL falla, se muestra la imagen por defecto
+      img.addEventListener("error", function () { img.src = IMAGEN_POR_DEFECTO; });
+
+      const marca = document.createElement("p");
+      marca.className = "marca";
+      marca.textContent = producto.marca;
+
+      const titulo = document.createElement("h3");
+      titulo.textContent = producto.nombre;
+
+      const precio = document.createElement("p");
+      precio.className = "precio";
+      precio.textContent = formatearPrecio(producto.precio);
+
+      const stock = document.createElement("small");
+      stock.textContent = producto.stock > 0 ? "Stock: " + producto.stock : "Sin stock";
+
+      const acciones = document.createElement("div");
+      acciones.className = "acciones";
+
+      const btnEditar = document.createElement("button");
+      btnEditar.textContent = "Editar";
+      btnEditar.className = "secundario";
+      btnEditar.addEventListener("click", function () {
+        mostrarFormularioEdicion(producto.id);
+      });
+
+      const btnEliminar = document.createElement("button");
+      btnEliminar.textContent = "X";
+      btnEliminar.className = "peligro";
+      btnEliminar.addEventListener("click", function () {
+        eliminarProducto(producto.id);
+      });
+
+      acciones.appendChild(btnEditar);
+      acciones.appendChild(btnEliminar);
+
+      card.appendChild(img);
+      card.appendChild(marca);
+      card.appendChild(titulo);
+      card.appendChild(precio);
+      card.appendChild(stock);
+      card.appendChild(acciones);
+
+      return card;
+    }
+
+  
+
+    function limpiarFormulario() {
+      formProducto.reset();
+      inputId.value = "";
+      tituloForm.textContent = "Agregar zapatilla";
+    }
+
+    function mostrarFormularioCreacion() {
+      limpiarFormulario();
+      seccionForm.hidden = false;
+      inputNombre.focus();
+      seccionForm.scrollIntoView({ behavior: "smooth" });
+    }
+
+    function mostrarFormularioEdicion(id) {
+      const producto = buscarProductoPorId(id);
+      if (!producto) return;
+
+      inputId.value     = producto.id;
+      inputNombre.value = producto.nombre;
+      inputMarca.value  = producto.marca;
+      inputPrecio.value = producto.precio;
+      inputImagen.value = producto.imagen || "";
+      inputStock.value  = producto.stock;
+
+      tituloForm.textContent = "Editar zapatilla";
+      seccionForm.hidden = false;
+      inputNombre.focus();
+      seccionForm.scrollIntoView({ behavior: "smooth" });
+    }
+
+    function ocultarFormulario() {
+      seccionForm.hidden = true;
+      limpiarFormulario();
+    }
+
+    
+    function crearProducto(datos) {
+      const nuevoProducto = {
+        id: proximoId,
+        nombre: datos.nombre,
+        marca:  datos.marca,
+        precio: datos.precio,
+        imagen: datos.imagen,
+        stock:  datos.stock
+      };
+
+      proximoId = proximoId + 1;
+      productos.push(nuevoProducto);
+
+      leerProductos();
+    }
+
+    
+    function leerProductos() {
+      listaProductos.innerHTML = "";
+
+      // filter deja solo los productos cuyo nombre o marca contienen el texto buscado
+      const visibles = productos.filter(function (p) {
+        const texto = (p.nombre + " " + p.marca).toLowerCase();
+        return texto.includes(textoBusqueda.toLowerCase());
+      });
+
+      if (visibles.length === 0) {
+        listaProductos.innerHTML = "<p>No se encontraron zapatillas.</p>";
+        return;
+      }
+
+      visibles.forEach(function (producto) {
+        listaProductos.appendChild(crearTarjetaProducto(producto));
+      });
+    }
+
+    function actualizarProducto(id, datos) {
+      const producto = buscarProductoPorId(id);
+      if (!producto) return;
+
+      producto.nombre = datos.nombre;
+      producto.marca  = datos.marca;
+      producto.precio = datos.precio;
+      producto.imagen = datos.imagen;
+      producto.stock  = datos.stock;
+
+      leerProductos();
+    }
+
+    function eliminarProducto(id) {
+      if (!confirm("¿Eliminar esta zapatilla?")) return;
+
+      const indice = buscarIndicePorId(id);
+      if (indice === -1) return;
+
+      productos.splice(indice, 1);
+      leerProductos();
+    }
+
+  
+
+    btnNuevo.addEventListener("click", mostrarFormularioCreacion);
+    btnCancelar.addEventListener("click", ocultarFormulario);
+
+
+    buscador.addEventListener("input", function () {
+      textoBusqueda = buscador.value.trim();
+      leerProductos();
+    });
+
+    
+    formProducto.addEventListener("submit", function (evento) {
+      evento.preventDefault();
+
+      const datos = {
+        nombre: inputNombre.value.trim(),
+        marca:  inputMarca.value.trim(),
+        precio: Number(inputPrecio.value),
+        imagen: inputImagen.value.trim(),
+        stock:  Number(inputStock.value)
+      };
+
+      if (inputId.value) {
+        actualizarProducto(Number(inputId.value), datos);  // UPDATE
+      } else {
+        crearProducto(datos);                              // CREATE
+      }
+
+      ocultarFormulario();
+    });
+
+   
+    leerProductos(); 
+  </script>
+</body>
+</html>

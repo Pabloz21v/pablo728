@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo Apple</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+  <header>
+    <h1>Catálogo Apple</h1>
+    <button id="btn-nuevo" class="azul">+ Agregar producto</button>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Productos</h2>
+      <p class="aviso">Datos y precios de ejemplo, en dólares.</p>
+      <div id="lista-productos" class="grilla"></div>
+    </section>
+
+    <section id="seccion-form" hidden>
+      <h2 id="titulo-form">Agregar producto</h2>
+
+      <form id="form-producto">
+        <input type="hidden" id="producto-id">
+
+        <label>Nombre
+          <input id="nombre" required>
+        </label>
+
+        <label>Categoría
+          <select id="categoria">
+            <option>iPhone</option>
+            <option>Mac</option>
+            <option>iPad</option>
+            <option>Watch</option>
+            <option>Audio</option>
+            <option>Accesorios</option>
+          </select>
+        </label>
+
+        <label>Descripción
+          <input id="descripcion">
+        </label>
+
+        <label>Imagen (ruta o URL)
+          <input id="imagen" placeholder="img/iphone-16.jpg">
+        </label>
+
+        <label>Precio (US$)
+          <input id="precio" type="number" min="0" required>
+        </label>
+
+        <label>Stock
+          <input id="stock" type="number" min="0" value="1" required>
+        </label>
+
+        <div class="botones">
+          <button type="submit">Guardar</button>
+          <button type="button" id="btn-cancelar" class="gris">Cancelar</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- El JSON vive acá, dentro de la misma página. No hay servidor ni fetch. -->
+  <script type="application/json" id="datos-json">
+  [
+    {
+      "id": 1,
+      "nombre": "iPhone 16 recontra pro",
+      "categoria": "iPhone",
+      "descripcion": "Pantalla de 6,1 pulgadas y chip A18.",
+      "imagen": "img/iphone16_PNG39.png",
+      "precio": 799,
+      "stock": 14
+    },
+    {
+      "id": 2,
+      "nombre": "iPhone 16 Pro",
+      "categoria": "iPhone",
+      "descripcion": "Marco de titanio y cámara de tres lentes.",
+      "imagen": "img/IPhone_16_Pro.png",
+      "precio": 999,
+      "stock": 9
+    },
+    {
+      "id": 3,
+      "nombre": "MacBook Air 13 pulgadas",
+      "categoria": "Mac",
+      "descripcion": "Liviana, con chip M3 y batería para todo el día.",
+      "imagen": "img/macbook-air.png",
+      "precio": 1099,
+      "stock": 7
+    },
+    {
+      "id": 4,
+      "nombre": "MacBook Pro 14 pulgadas",
+      "categoria": "Mac",
+      "descripcion": "Pantalla Liquid Retina XDR para trabajo pesado.",
+      "imagen": "img/macbook-pro.png",
+      "precio": 1599,
+      "stock": 4
+    },
+    {
+      "id": 5,
+      "nombre": "iPad Air",
+      "categoria": "iPad",
+      "descripcion": "Tablet liviana compatible con Apple Pencil.",
+      "imagen": "img/ipad-air.png",
+      "precio": 599,
+      "stock": 11
+    },
+    {
+      "id": 6,
+      "nombre": "iPad Pro",
+      "categoria": "iPad",
+      "descripcion": "La tablet más potente, con pantalla OLED.",
+      "imagen": "img/ipad-pro.png",
+      "precio": 999,
+      "stock": 0
+    },
+    {
+      "id": 7,
+      "nombre": "Apple Watch Series 10",
+      "categoria": "Watch",
+      "descripcion": "Reloj con medición de actividad y salud.",
+      "imagen": "img/apple-watch.png",
+      "precio": 399,
+      "stock": 16
+    },
+    {
+      "id": 8,
+      "nombre": "AirPods Pro 2",
+      "categoria": "Audio",
+      "descripcion": "Auriculares con cancelación activa de ruido.",
+      "imagen": "img/airpods-pro-2.png",
+      "precio": 249,
+      "stock": 20
+    },
+    {
+      "id": 9,
+      "nombre": "AirPods 4",
+      "categoria": "Audio",
+      "descripcion": "Auriculares inalámbricos de uso diario.",
+      "imagen": "img/airpods-4.png",
+      "precio": 129,
+      "stock": 18
+    },
+    {
+      "id": 10,
+      "nombre": "Apple Pencil Pro",
+      "categoria": "Accesorios",
+      "descripcion": "Lápiz para iPad con sensor de apretar.",
+      "imagen": "img/apple-pencil-pro.png",
+      "precio": 129,
+      "stock": 12
+    },
+    {
+      "id": 11,
+      "nombre": "AirTag",
+      "categoria": "Accesorios",
+      "descripcion": "Localizador para llaves, mochilas y valijas.",
+      "imagen": "img/airtag.png",
+      "precio": 29,
+      "stock": 30
+    }
+  ]
+  </script>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+/* ============================================= */
+/* RESET Y BASE                                   */
+/* Tamaño de fuente 16px y colores con buen       */
+/* contraste (criterios de accesibilidad, Ses. 3) */
+/* ============================================= */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: #fbf6ef;
+    color: #2b1d14;
+}
+
+h1, h2, h3 { line-height: 1.2; }
+
+/* ============================================= */
+/* ESTRUCTURA: header, main, footer               */
+/* ============================================= */
+.site-header {
+    display: flex;              /* Flexbox: logo y texto en fila */
+    flex-direction: row;
+    flex-wrap: wrap;            /* en pantallas muy chicas se apilan */
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    background-color: #3b2a20;
+    color: #fbf6ef;
+    text-align: center;
+    padding: 28px 16px;
+}
+
+.logo { width: 80px; height: 80px; }
+
+.site-header h1 { font-size: 2rem; margin-bottom: 6px; }
+
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 16px;
+    display: flex;              /* Flexbox: apila las secciones en columna */
+    flex-direction: column;
+    gap: 24px;
+}
+
+footer {
+    background-color: #3b2a20;
+    color: #fbf6ef;
+    text-align: center;
+    padding: 16px;
+}
+
+/* ============================================= */
+/* BARRA DE BÚSQUEDA Y FILTRO (Flexbox)           */
+/* ============================================= */
+.barra-filtros {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;            /* salta de línea en pantallas chicas */
+    align-items: flex-end;
+    gap: 16px;
+    background-color: #ffffff;
+    border: 1px solid #d9c9b8;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.barra-filtros h2 {
+    width: 100%;                /* el título ocupa toda la primera fila */
+    font-size: 1.25rem;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.barra-filtros .campo { flex-grow: 1; min-width: 200px; }
+
+label { font-weight: bold; }
+
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: 1rem;            /* campos cómodos de tocar en celulares */
+    padding: 10px;
+    border: 1px solid #6f4e37;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #2b1d14;
+}
+
+/* Foco visible para quien navega con teclado */
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: 3px solid #1a5fb4;
+    outline-offset: 2px;
+}
+
+/* ============================================= */
+/* BOTONES                                        */
+/* ============================================= */
+.btn {
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.btn:hover { filter: brightness(1.1); }
+
+.btn-primario  { background-color: #6f4e37; color: #ffffff; }
+.btn-secundario { background-color: #ffffff; color: #3b2a20; border-color: #6f4e37; }
+.btn-peligro   { background-color: #a12622; color: #ffffff; }
+
+/* ============================================= */
+/* FORMULARIO DE ALTA / EDICIÓN (Grid)            */
+/* ============================================= */
+.form-producto {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    background-color: #ffffff;
+    border: 1px solid #d9c9b8;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.campo-ancho { grid-column: 1 / 3; }   /* ocupa las dos columnas */
+
+.acciones-form {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+/* ============================================= */
+/* CATÁLOGO: GRILLA ADAPTATIVA SIN @media (Ses. 4) */
+/* ============================================= */
+.catalogo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    padding: 16px 0;
+}
+
+#contador { margin-top: 8px; }
+
+/* ============================================= */
+/* TARJETA DE PRODUCTO: Flexbox en columna        */
+/* ============================================= */
+.producto-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: #ffffff;
+    border: 1px solid #d9c9b8;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.producto-imagen {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 6px;
+}
+
+.producto-sin-imagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    background-color: #efe3d3;
+    color: #5a4636;
+    border-radius: 6px;
+}
+
+.producto-categoria { font-size: 0.875rem; color: #6f4e37; font-weight: bold; }
+.producto-nombre { font-size: 1.125rem; }
+.producto-precio { font-size: 1.25rem; font-weight: bold; color: #6f4e37; }
+
+/* El estado del stock se comunica con TEXTO y con color (no solo color) */
+.stock-bajo { font-weight: bold; color: #8a4b00; }
+.stock-agotado { font-weight: bold; color: #a12622; }
+
+.acciones {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin-top: auto;           /* empuja los botones al final de la tarjeta */
+}
+
+.mensaje-vacio {
+    padding: 16px;
+    background-color: #ffffff;
+    border: 1px dashed #6f4e37;
+    border-radius: 10px;
+}
+
+/* ============================================= */
+/* ESTADO OCULTO: lo activa y desactiva JavaScript */
+/* (va después de .form-producto para que gane     */
+/* por orden de aparición: misma especificidad)    */
+/* ============================================= */
+.oculto { display: none; }
+
+/* Único @media: en celulares el formulario pasa a una sola columna */
+@media (max-width: 600px) {
+    .form-producto { grid-template-columns: 1fr; }
+    .campo-ancho { grid-column: 1 / 2; }
+}

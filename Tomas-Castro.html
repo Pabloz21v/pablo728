@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda Beisa | GPU's OUTLET</title>
+
+  <style>
+    /* ESTILOS GENERALES */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f3f6;
+      color: #202733;
+    }
+
+    header {
+      background: #17212f;
+      color: white;
+      padding: 22px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 27px;
+    }
+
+    header p {
+      margin: 6px 0 0;
+      color: #cbd5e1;
+      font-size: 14px;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1100px;
+      margin: 28px auto;
+    }
+
+    section {
+      background: white;
+      padding: 22px;
+      border-radius: 10px;
+      margin-bottom: 22px;
+      box-shadow: 0 3px 12px #17212f12;
+    }
+
+    .presentacion {
+      border-left: 5px solid #e6a23c;
+    }
+
+    .presentacion h2 {
+      margin-top: 0;
+    }
+
+    .autores {
+      color: #596579;
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 21px;
+    }
+
+    button {
+      border: none;
+      border-radius: 6px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 14px;
+      background: #2563a6;
+      color: white;
+    }
+
+    button:hover {
+      background: #1d4e83;
+    }
+
+    .boton-nuevo {
+      background: #d99025;
+      color: #17212f;
+      font-weight: bold;
+    }
+
+    .boton-nuevo:hover {
+      background: #bd7715;
+    }
+
+    .boton-editar {
+      background: #64748b;
+    }
+
+    .boton-editar:hover {
+      background: #475569;
+    }
+
+    .boton-eliminar {
+      background: #c0392b;
+    }
+
+    .boton-eliminar:hover {
+      background: #962d22;
+    }
+
+    .boton-cancelar {
+      background: #94a3b8;
+      color: #17212f;
+    }
+
+    .productos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .producto-card {
+      border: 1px solid #e1e5eb;
+      border-radius: 9px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .producto-icono {
+      background: #edf1f6;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      font-size: 43px;
+    }
+
+    .etiqueta-outlet {
+      display: inline-block;
+      width: fit-content;
+      background: #fff1d6;
+      color: #8a5208;
+      border-radius: 4px;
+      padding: 4px 7px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .producto-card h3 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .detalle {
+      color: #596579;
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .precio {
+      color: #237547;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 2px 0;
+    }
+
+    .stock {
+      color: #64748b;
+      font-size: 13px;
+    }
+
+    .acciones {
+      display: flex;
+      gap: 8px;
+      margin-top: 5px;
+    }
+
+    .acciones button {
+      flex: 1;
+      padding: 8px;
+    }
+
+    form {
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font: inherit;
+    }
+
+    .botones-formulario {
+      display: flex;
+      gap: 9px;
+      margin-top: 4px;
+    }
+
+    .nota {
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      color: #64748b;
+      font-size: 13px;
+      padding: 8px 15px 25px;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 18px 5%;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      main {
+        width: 94%;
+        margin: 18px auto;
+      }
+
+      section {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <h1>🖥️ Tienda Beisa</h1>
+      <p>Venta de placas de video · GPU's OUTLET</p>
+    </div>
+    <button type="button" id="btn-nuevo" class="boton-nuevo">+ Agregar GPU</button>
+  </header>
+
+  <main>
+    <section class="presentacion">
+      <h2>Encontrá tu próxima placa de video</h2>
+      <p>Modelos NVIDIA y AMD a precios de outlet.</p>
+      <p class="autores">Autores: Tomas Castro y Danilo Pasian</p>
+    </section>
+
+    <section>
+      <h2>GPUs disponibles</h2>
+      <div id="lista-productos" class="productos-grid"></div>
+    </section>
+
+    <section id="seccion-formulario" hidden>
+      <h2 id="titulo-formulario">Agregar GPU</h2>
+
+      <form id="form-producto">
+        <input type="hidden" id="producto-id">
+
+        <label for="nombre">Modelo de la GPU</label>
+        <input type="text" id="nombre" placeholder="Ej.: GeForce RTX 3060" required>
+
+        <label for="marca">Marca</label>
+        <select id="marca" required>
+          <option value="">Seleccionar marca</option>
+          <option value="NVIDIA">NVIDIA</option>
+          <option value="AMD">AMD</option>
+        </select>
+
+        <label for="memoria">Memoria de video (GB)</label>
+        <input type="number" id="memoria" min="1" required>
+
+        <label for="precio">Precio (ARS)</label>
+        <input type="number" id="precio" min="1" required>
+
+        <label for="stock">Unidades disponibles</label>
+        <input type="number" id="stock" min="0" required>
+
+        <div class="botones-formulario">
+          <button type="submit">Guardar</button>
+          <button type="button" id="btn-cancelar" class="boton-cancelar">Cancelar</button>
+        </div>
+      </form>
+    </section>
+
+    <p class="nota">Proyecto educativo. Los precios son ficticios y se usan como ejemplo. Los cambios del CRUD se mantienen mientras la página está abierta; al actualizarla vuelven los datos iniciales.</p>
+  </main>
+
+  <footer>
+    Tienda Beisa · Trabajo Práctico Final Integrador · Tomas Castro y Danilo Pasian
+  </footer>
+
+  <script>
+    // 1. DATOS: nuestro JSON de GPUs.
+    // Cada objeto representa una placa de video de la tienda.
+    const productosJSON = [
+      {
+        "id": 1,
+        "nombre": "GeForce GTX 1660 SUPER",
+        "marca": "NVIDIA",
+        "memoria": 6,
+        "precio": 280000,
+        "stock": 2
+      },
+      {
+        "id": 2,
+        "nombre": "GeForce RTX 2060",
+        "marca": "NVIDIA",
+        "memoria": 6,
+        "precio": 350000,
+        "stock": 3
+      },
+      {
+        "id": 3,
+        "nombre": "Radeon RX 6600",
+        "marca": "AMD",
+        "memoria": 8,
+        "precio": 390000,
+        "stock": 4
+      },
+      {
+        "id": 4,
+        "nombre": "GeForce RTX 3060",
+        "marca": "NVIDIA",
+        "memoria": 12,
+        "precio": 480000,
+        "stock": 1
+      }
+    ];
+
+    // Copia de trabajo: esta lista es la que modificamos con el CRUD.
+    let productos = productosJSON.slice();
+    let proximoId = 5;
+
+    // 2. ELEMENTOS DEL HTML: los guardamos para usarlos desde JavaScript.
+    const listaProductos = document.getElementById("lista-productos");
+    const seccionFormulario = document.getElementById("seccion-formulario");
+    const formProducto = document.getElementById("form-producto");
+    const inputId = document.getElementById("producto-id");
+    const inputNombre = document.getElementById("nombre");
+    const inputMarca = document.getElementById("marca");
+    const inputMemoria = document.getElementById("memoria");
+    const inputPrecio = document.getElementById("precio");
+    const inputStock = document.getElementById("stock");
+    const tituloFormulario = document.getElementById("titulo-formulario");
+    const btnNuevo = document.getElementById("btn-nuevo");
+    const btnCancelar = document.getElementById("btn-cancelar");
+
+    // Busca un producto por su ID y lo devuelve.
+    function buscarProductoPorId(id) {
+      let encontrado = null;
+
+      productos.forEach(function (producto) {
+        if (producto.id === id) {
+          encontrado = producto;
+        }
+      });
+
+      return encontrado;
+    }
+
+    // Crea los elementos HTML que forman la tarjeta de una GPU.
+    function crearTarjetaProducto(producto) {
+      const tarjeta = document.createElement("article");
+      tarjeta.className = "producto-card";
+
+      const icono = document.createElement("div");
+      icono.className = "producto-icono";
+      icono.textContent = "🎮";
+
+      const etiqueta = document.createElement("span");
+      etiqueta.className = "etiqueta-outlet";
+      etiqueta.textContent = "OUTLET";
+
+      const nombre = document.createElement("h3");
+      nombre.textContent = producto.nombre;
+
+      const marca = document.createElement("p");
+      marca.className = "detalle";
+      marca.textContent = "Marca: " + producto.marca;
+
+      const memoria = document.createElement("p");
+      memoria.className = "detalle";
+      memoria.textContent = "Memoria: " + producto.memoria + " GB";
+
+      const precio = document.createElement("p");
+      precio.className = "precio";
+      precio.textContent = "ARS $ " + producto.precio.toLocaleString("es-AR");
+
+      const stock = document.createElement("small");
+      stock.className = "stock";
+      stock.textContent = "Stock: " + producto.stock;
+
+      const acciones = document.createElement("div");
+      acciones.className = "acciones";
+
+      const btnEditar = document.createElement("button");
+      btnEditar.type = "button";
+      btnEditar.textContent = "Editar";
+      btnEditar.className = "boton-editar";
+      btnEditar.addEventListener("click", function () {
+        mostrarFormularioEdicion(producto.id);
+      });
+
+      const btnEliminar = document.createElement("button");
+      btnEliminar.type = "button";
+      btnEliminar.textContent = "Eliminar";
+      btnEliminar.className = "boton-eliminar";
+      btnEliminar.addEventListener("click", function () {
+        eliminarProducto(producto.id);
+      });
+
+      acciones.appendChild(btnEditar);
+      acciones.appendChild(btnEliminar);
+
+      tarjeta.appendChild(icono);
+      tarjeta.appendChild(etiqueta);
+      tarjeta.appendChild(nombre);
+      tarjeta.appendChild(marca);
+      tarjeta.appendChild(memoria);
+      tarjeta.appendChild(precio);
+      tarjeta.appendChild(stock);
+      tarjeta.appendChild(acciones);
+
+      return tarjeta;
+    }
+
+    // READ: muestra todos los productos en la página.
+    function leerProductos() {
+      listaProductos.innerHTML = "";
+
+      if (productos.length === 0) {
+        const mensaje = document.createElement("p");
+        mensaje.textContent = "No hay GPUs cargadas.";
+        listaProductos.appendChild(mensaje);
+        return;
+      }
+
+      productos.forEach(function (producto) {
+        const tarjeta = crearTarjetaProducto(producto);
+        listaProductos.appendChild(tarjeta);
+      });
+    }
+
+    // CREATE: agrega una GPU nueva al array.
+    function crearProducto(datos) {
+      const nuevoProducto = {
+        id: proximoId,
+        nombre: datos.nombre,
+        marca: datos.marca,
+        memoria: datos.memoria,
+        precio: datos.precio,
+        stock: datos.stock
+      };
+
+      productos.push(nuevoProducto);
+      proximoId = proximoId + 1;
+      leerProductos();
+    }
+
+    // UPDATE: modifica los datos de una GPU que ya existe.
+    function actualizarProducto(id, datos) {
+      const producto = buscarProductoPorId(id);
+
+      if (producto === null) {
+        return;
+      }
+
+      producto.nombre = datos.nombre;
+      producto.marca = datos.marca;
+      producto.memoria = datos.memoria;
+      producto.precio = datos.precio;
+      producto.stock = datos.stock;
+
+      leerProductos();
+    }
+
+    // DELETE: elimina una GPU del array.
+    function eliminarProducto(id) {
+      const confirmar = confirm("¿Querés eliminar esta GPU?");
+
+      if (confirmar === false) {
+        return;
+      }
+
+      let indice = -1;
+
+      productos.forEach(function (producto, posicion) {
+        if (producto.id === id) {
+          indice = posicion;
+        }
+      });
+
+      if (indice !== -1) {
+        productos.splice(indice, 1);
+        leerProductos();
+      }
+    }
+
+    // Deja el formulario vacío para cargar una GPU nueva.
+    function limpiarFormulario() {
+      formProducto.reset();
+      inputId.value = "";
+      tituloFormulario.textContent = "Agregar GPU";
+    }
+
+    // Abre el formulario para CREAR.
+    function mostrarFormularioCreacion() {
+      limpiarFormulario();
+      seccionFormulario.hidden = false;
+      inputNombre.focus();
+      seccionFormulario.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Abre el formulario con los datos de la GPU elegida para EDITAR.
+    function mostrarFormularioEdicion(id) {
+      const producto = buscarProductoPorId(id);
+
+      if (producto === null) {
+        return;
+      }
+
+      inputId.value = producto.id;
+      inputNombre.value = producto.nombre;
+      inputMarca.value = producto.marca;
+      inputMemoria.value = producto.memoria;
+      inputPrecio.value = producto.precio;
+      inputStock.value = producto.stock;
+
+      tituloFormulario.textContent = "Editar GPU";
+      seccionFormulario.hidden = false;
+      inputNombre.focus();
+      seccionFormulario.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Cierra el formulario y borra los datos que tenía escritos.
+    function ocultarFormulario() {
+      seccionFormulario.hidden = true;
+      limpiarFormulario();
+    }
+
+    // 3. EVENTOS: conectan los botones y el formulario con el CRUD.
+    btnNuevo.addEventListener("click", function () {
+      mostrarFormularioCreacion();
+    });
+
+    btnCancelar.addEventListener("click", function () {
+      ocultarFormulario();
+    });
+
+    formProducto.addEventListener("submit", function (evento) {
+      evento.preventDefault();
+
+      const datos = {
+        nombre: inputNombre.value.trim(),
+        marca: inputMarca.value,
+        memoria: Number(inputMemoria.value),
+        precio: Number(inputPrecio.value),
+        stock: Number(inputStock.value)
+      };
+
+      if (inputId.value) {
+        actualizarProducto(Number(inputId.value), datos);
+      } else {
+        crearProducto(datos);
+      }
+
+      ocultarFormulario();
+    });
+
+    // 4. INICIO: muestra los productos iniciales del JSON.
+    leerProductos();
+  </script>
+</body>
+</html>

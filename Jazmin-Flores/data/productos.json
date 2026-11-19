@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "nombre": "Café Etiopía Yirgacheffe 250 g",
+    "descripcion": "Notas florales y cítricas, tostado medio",
+    "precio": 14.5,
+    "stock": 20,
+    "imagen": "img/cafe-etiopia.jpg",
+    "categoria": "granos"
+  },
+  {
+    "id": 2,
+    "nombre": "Café Colombia Huila 250 g",
+    "descripcion": "Dulce, con notas de chocolate y caramelo",
+    "precio": 12.9,
+    "stock": 35,
+    "imagen": "img/cafe-colombia.jpg",
+    "categoria": "granos"
+  },
+  {
+    "id": 3,
+    "nombre": "Café Brasil Cerrado 500 g",
+    "descripcion": "Cuerpo alto y baja acidez, ideal para espresso",
+    "precio": 18.0,
+    "stock": 3,
+    "imagen": "img/cafe-brasil.jpg",
+    "categoria": "granos"
+  },
+  {
+    "id": 4,
+    "nombre": "Blend de la Casa 1 kg",
+    "descripcion": "Mezcla equilibrada para uso diario",
+    "precio": 29.9,
+    "stock": 15,
+    "imagen": "img/blend-casa.jpg",
+    "categoria": "granos"
+  },
+  {
+    "id": 5,
+    "nombre": "Prensa Francesa 600 ml",
+    "descripcion": "Vidrio borosilicato con filtro de acero",
+    "precio": 24.0,
+    "stock": 12,
+    "imagen": "img/prensa-francesa.jpg",
+    "categoria": "accesorios"
+  },
+  {
+    "id": 6,
+    "nombre": "Molinillo Manual de Cerámica",
+    "descripcion": "Muelas de cerámica con molienda regulable",
+    "precio": 32.5,
+    "stock": 8,
+    "imagen": "img/molinillo.jpg",
+    "categoria": "accesorios"
+  },
+  {
+    "id": 7,
+    "nombre": "Filtros de Papel V60 x100",
+    "descripcion": "Papel sin blanquear, tamaño 02",
+    "precio": 6.75,
+    "stock": 40,
+    "imagen": "img/filtros-v60.jpg",
+    "categoria": "accesorios"
+  },
+  {
+    "id": 8,
+    "nombre": "Taza de Cerámica 300 ml",
+    "descripcion": "Esmaltada, apta para lavavajillas",
+    "precio": 9.9,
+    "stock": 0,
+    "imagen": "img/taza.jpg",
+    "categoria": "accesorios"
+  },
+  {
+    "id": 9,
+    "nombre": "Medialunas de Manteca x6",
+    "descripcion": "Horneadas en el día, con almíbar",
+    "precio": 7.5,
+    "stock": 25,
+    "imagen": "img/medialunas.jpg",
+    "categoria": "pasteleria"
+  },
+  {
+    "id": 10,
+    "nombre": "Brownie con Nueces",
+    "descripcion": "Chocolate semiamargo, porción individual",
+    "precio": 3.2,
+    "stock": 18,
+    "imagen": "img/brownie.jpg",
+    "categoria": "pasteleria"
+  }
+]

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Básquet Store</title>
+
+  <link rel="stylesheet" href="css/css.css">
+</head>
+<body>
+
+  <header>
+    <h1>🏀 Luche Bsq </h1>
+    <button id="btn-nuevo" class="exito">+ Agregar producto</button>
+  </header>
+
+  <main>
+
+    <!-- ============ LISTA DE PRODUCTOS ============ -->
+    <section>
+      <h2>Productos</h2>
+      <div id="lista-productos" class="grid"></div>
+    </section>
+
+    <!-- ============ FORMULARIO CRUD (oculto por defecto) ============ -->
+    <section id="seccion-form" hidden>
+      <h2 id="titulo-form">Agregar producto</h2>
+
+      <form id="form-producto">
+        <input type="hidden" id="producto-id">
+
+        <label>Nombre
+          <input id="nombre" required>
+        </label>
+
+        <label>Precio
+          <input id="precio" type="number" min="0" required>
+        </label>
+
+        <label>Imagen (URL)
+          <input id="imagen" placeholder="https://...">
+        </label>
+
+        <label>Stock
+          <input id="stock" type="number" min="0" value="1" required>
+        </label>
+
+        <div class="botones">
+          <button type="submit">Guardar</button>
+          <button type="button" id="btn-cancelar" class="secundario">Cancelar</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Pelotas y camisetas de básquet</p>
+  </footer>
+
+  <script type="module" src="ecommerce-codigo-ing-invertida.js"></script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+
+/* ESTILOS GENERALES */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f5f5f5;
+  color: #222;
+}
+
+.encabezado {
+  background-color: #171717;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  min-height: 70px;
+}
+
+.logo {
+  font-weight: 900;
+  color: #ffc107 !important;
+  font-size: 23px;
+}
+
+.nav-link {
+  color: white !important;
+  margin-left: 15px;
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  color: #ffc107 !important;
+}
+
+/* PORTADA */
+
+.portada {
+  min-height: 550px;
+  margin-top: 70px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: white;
+  background:
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+    url("https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1600")
+    center/cover;
+}
+
+.portada h1 {
+  font-size: clamp(32px, 6vw, 60px);
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.portada p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+/* SECCIONES */
+
+.titulo-seccion {
+  font-weight: 900;
+  color: #222;
+  margin-bottom: 15px;
+}
+
+.categoria {
+  color: #b17b00;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.precio {
+  color: #bd8500;
+  font-weight: 900;
+}
+
+/* TARJETAS */
+
+.tarjeta-producto {
+  height: 100%;
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.09);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tarjeta-producto:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.17);
+}
+
+.imagen-producto {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.tarjeta-producto h5 {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* DETALLE */
+
+.margen-superior {
+  margin-top: 80px;
+}
+
+.detalle-contenedor {
+  background: white;
+  padding: 35px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.detalle-imagen {
+  width: 100%;
+  max-height: 430px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* CARRITO */
+
+.producto-carrito {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: white;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.producto-carrito img {
+  width: 130px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.resumen-carrito,
+.datos-cliente {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+/* CONTACTO */
+
+.formulario-contacto {
+  max-width: 650px;
+  padding: 35px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.form-control,
+.form-select {
+  padding: 12px;
+}
+
+.error {
+  color: red;
+  display: block;
+  margin-top: 5px;
+}
+
+.confirmacion {
+  color: green;
+  font-weight: bold;
+}
+
+/* BOTONES */
+
+.btn-warning {
+  font-weight: bold;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btn-warning:hover {
+  background-color: #e5a900;
+  border-color: #e5a900;
+}
+
+/* NOTIFICACIONES */
+
+.toast-mensaje {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #222;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+  z-index: 9999;
+}
+
+.toast-mensaje.mostrar {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* PIE DE PÁGINA */
+
+.pie {
+  background: #171717;
+  color: white;
+  padding: 40px 15px;
+  margin-top: 50px;
+}
+
+.pie h3 {
+  color: #ffc107;
+  font-weight: 900;
+}
+
+.pie p {
+  margin-top: 10px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .portada {
+    min-height: 430px;
+  }
+
+  .portada p {
+    font-size: 16px;
+  }
+
+  .producto-carrito {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .producto-carrito img {
+    width: 100%;
+    height: 200px;
+  }
+
+  .detalle-contenedor {
+    padding: 15px;
+  }
+
+  .formulario-contacto {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 19px;
+  }
+
+  .portada h1 {
+    font-size: 32px;
+  }
+}

@@ -1,0 +1,29 @@
+body {
+    background: linear-gradient(#b9eaff, #eafff3);
+    color: #24566b;
+    min-height: 100vh;
+}
+
+header {
+    background: linear-gradient(#55c8ed, #168bbd);
+    color: white;
+    border-bottom: 6px solid #a6e5c5;
+    text-shadow: 1px 2px 3px #26728d;
+}
+
+header h1 {
+    font-size: 38px;
+}
+
+.card {
+    border: 1px solid #a9dce7;
+    border-radius: 14px;
+    box-shadow: 0 3px 8px #9dcbd4;
+}
+
+.producto-imagen {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}

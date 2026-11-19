@@ -1,0 +1,140 @@
+* { box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  background: #f5f5f7;
+  color: #1d1d1f;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid #d2d2d7;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+main {
+  max-width: 1100px;
+  margin: 24px auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+section {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 14px;
+}
+
+h2 { margin-top: 0; }
+
+.aviso {
+  margin: -8px 0 16px 0;
+  font-size: 14px;
+  color: #6e6e73;
+}
+
+/* botones */
+button {
+  cursor: pointer;
+  padding: 9px 16px;
+  border: none;
+  border-radius: 980px;
+  background: #0071e3;
+  color: #ffffff;
+  font-size: 14px;
+}
+button:hover { background: #0062c4; }
+
+button.azul  { background: #0071e3; }
+button.gris  { background: #e8e8ed; color: #1d1d1f; }
+button.gris:hover { background: #d2d2d7; }
+button.rojo  { background: #ffffff; color: #d70015; border: 1px solid #d70015; }
+button.rojo:hover { background: #d70015; color: #ffffff; }
+
+/* tarjetas */
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+.tarjeta {
+  background: #fbfbfd;
+  border: 1px solid #e5e5ea;
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* foto del producto (solo aparece si el producto tiene imagen) */
+.foto {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+.banda {
+  border-radius: 10px;
+  padding: 28px 12px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+.banda.chica { padding: 6px 12px; font-size: 13px; }
+.banda.iphone     { background: #e3edff; color: #1a56c4; }
+.banda.mac        { background: #e7eaee; color: #37474f; }
+.banda.ipad       { background: #fde6f2; color: #b0246f; }
+.banda.watch      { background: #e2f5ea; color: #1e7a46; }
+.banda.audio      { background: #fff0dc; color: #a65a00; }
+.banda.accesorios { background: #eee7fb; color: #5b3ab0; }
+
+.tarjeta h3 { margin: 4px 0 0 0; font-size: 17px; }
+.tarjeta .descripcion { margin: 0; font-size: 14px; color: #6e6e73; }
+.tarjeta .precio { margin: 0; font-size: 18px; font-weight: 600; }
+.tarjeta small { color: #6e6e73; }
+.tarjeta .sin-stock { color: #d70015; font-weight: 600; }
+
+.acciones { display: flex; gap: 8px; margin-top: 4px; }
+.acciones button { flex: 1; font-size: 13px; padding: 7px; }
+
+.mensaje { color: #6e6e73; }
+
+/* formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 420px;
+}
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+}
+input, select {
+  padding: 9px;
+  border: 1px solid #d2d2d7;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #ffffff;
+}
+.botones { display: flex; gap: 8px; }
+
+[hidden] { display: none !important; }

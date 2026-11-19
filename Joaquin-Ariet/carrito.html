@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito |Las Hamburguechas </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<header class="navbar navbar-expand-lg navbar-dark encabezado fixed-top">
+  <div class="container">
+    <a class="navbar-brand logo" href="index.html">🍔 BURGER HOUSE</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <nav class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="carrito.html">Carrito 🛒 <span id="contador">0</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="container py-5 margen-superior">
+  <h1 class="titulo-seccion text-center mb-5">MI CARRITO 🛒</h1>
+
+  <div id="productosCarrito"></div>
+
+  <div class="resumen-carrito mt-4">
+    <h4>Resumen de compra</h4>
+    <p>Productos: <span id="cantidadTotal">0</span></p>
+    <h3>Total: <span id="total">$0</span></h3>
+
+    <button onclick="vaciarCarrito()" class="btn btn-outline-danger mt-3">
+      Vaciar carrito
+    </button>
+  </div>
+
+  <section class="datos-cliente mt-5">
+    <h3>Datos para realizar tu pedido</h3>
+    <p>Completá tus datos para continuar por WhatsApp.</p>
+
+    <div class="mb-3">
+      <label for="nombreCliente" class="form-label">Nombre completo</label>
+      <input type="text" id="nombreCliente" class="form-control"
+             required minlength="3" placeholder="Tu nombre">
+    </div>
+
+    <div class="mb-3">
+      <label for="direccionCliente" class="form-label">Dirección o zona de entrega</label>
+      <input type="text" id="direccionCliente" class="form-control"
+             required minlength="3" placeholder="Tu dirección">
+    </div>
+
+    <div class="mb-3">
+      <label for="aclaraciones" class="form-label">Aclaraciones (opcional)</label>
+      <textarea id="aclaraciones" class="form-control"
+                rows="3" placeholder="Ejemplo: sin tomate..."></textarea>
+    </div>
+
+    <button onclick="enviarWhatsApp()" class="btn btn-warning btn-lg w-100">
+      ENVIAR PEDIDO POR WHATSAPP 📱
+    </button>
+  </section>
+</main>
+
+<footer class="pie text-center">
+  <h3>🍔 BURGER HOUSE</h3>
+  <p>Integrantes: Milena Pardo y Morena Gabarruz</p>
+  <p>Puerto Madryn, Chubut</p>
+</footer>
+
+<div id="toast" class="toast-mensaje"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="productos.js"></script>
+<script src="carrito.js"></script>
+<script src="main.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", mostrarCarrito);
+</script>
+</body>
+</html>

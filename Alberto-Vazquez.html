@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- configuración básica y adaptación a móviles -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafetería Artesanal - CRUD</title>
+
+  <style>
+    /* evita que los bordes alteren el tamaño de las cajas */
+    * { box-sizing: border-box; }
+
+    /* estilos generales del fondo y texto */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #faf7f2;
+      color: #3e2723;
+    }
+
+    /* barra superior con título a la izquierda y botón a la derecha */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #4e342e;
+      color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    header h1 { font-size: 22px; margin: 0; }
+
+    /* estilo base para todos los botones */
+    button {
+      cursor: pointer; /* Manito al pasar el mouse */
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      background: #6d4c41;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.2s; /* Cambio de color suave */
+    }
+    button:hover { background: #5d4037; }
+
+    /* colores según la acción del botón */
+    button.peligro { background: #d32f2f; }       /* Rojo: borrar */
+    button.peligro:hover { background: #c62828; }
+    button.secundario { background: #8d6e63; }    /* Marrón: editar/cancelar */
+    button.secundario:hover { background: #795548; }
+    button.exito { background: #388e3c; }         /* Verde: agregar/guardar */
+    button.exito:hover { background: #2e7d32; }
+
+    /* contenedor principal centrado */
+    main {
+      max-width: 1000px;
+      margin: 24px auto;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px; /* Espacio entre secciones */
+    }
+
+    /* cajas blancas para catálogo y formulario */
+    section {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    /* grilla automática para las tarjetas */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    /* diseño de cada tarjeta */
+    .card {
+      border: 1px solid #d7ccc8;
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: #fff;
+    }
+    /* ajusta la imagen sin deformarla */
+    .card img { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; }
+    .card h3 { margin: 0; font-size: 16px; color: #4e342e; }
+    .card .categoria { font-size: 12px; color: #8d6e63; text-transform: uppercase; font-weight: bold; margin: 0; }
+    .card .precio { font-weight: bold; color: #388e3c; margin: 0; font-size: 16px; }
+   
+    /* caja de botones dentro de la tarjeta */
+    .card .acciones { display: flex; gap: 6px; margin-top: 6px; }
+    .card .acciones button { flex: 1; font-size: 12px; padding: 6px; } /* Igual ancho para ambos */
+
+    /* estilos del formulario */
+    form { display: flex; flex-direction: column; gap: 12px; max-width: 450px; }
+    label { display: flex; flex-direction: column; font-size: 14px; gap: 4px; font-weight: 500; }
+    input { padding: 8px; border: 1px solid #bcaaa4; border-radius: 6px; font-size: 14px; }
+    .botones { display: flex; gap: 8px; margin-top: 8px; }
+
+    /* oculta elementos con el atributo "hidden" */
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <!-- barra superior -->
+  <header>
+    <h1>☕ Cafetería & Repostería Artesanal</h1>
+    <button id="btn-nuevo" class="exito">+ Agregar Producto</button>
+  </header>
+
+  <main>
+    <!-- sección donde se muestran los productos -->
+    <section>
+      <h2>Menú Disponible</h2>
+      <!-- contenedor vacío que llenará JavaScript -->
+      <div id="lista-productos" class="grid"></div>
+    </section>
+
+    <!-- formulario oculto por defecto -->
+    <section id="seccion-form" hidden>
+      <h2 id="titulo-form">Agregar Producto</h2>
+     
+      <form id="form-producto">
+        <!-- guarda el id al editar (vacío si es producto nuevo) -->
+        <input type="hidden" id="producto-id">
+       
+        <label>Nombre <input id="nombre" required></label>
+        <label>Categoría <input id="categoria" required></label>
+        <label>Precio ($) <input id="precio" type="number" min="0" required></label>
+        <label>Imagen (URL) <input id="imagen" placeholder="https://..."></label>
+        <label>Stock <input id="stock" type="number" min="0" value="1" required></label>
+       
+        <div class="botones">
+          <button type="submit" class="exito">Guardar</button>
+          <button type="button" id="btn-cancelar" class="secundario">Cancelar</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    // base de datos inicial (JSON)
+    const productosJSON = [
+      { id: 1, nombre: "Café Latte Vainilla", categoria: "Bebidas", precio: 3500, imagen: "https://picsum.photos/seed/latte/300/200", stock: 20 },
+      { id: 2, nombre: "Medialuna de Manteca", categoria: "Panadería", precio: 1200, imagen: "https://picsum.photos/seed/medialuna/300/200", stock: 35 },
+      { id: 3, nombre: "Torta Chajá (Porción)", categoria: "Postres", precio: 5500, imagen: "https://picsum.photos/seed/torta/300/200", stock: 10 }
+    ];
+
+    // copia para modificar sin alterar el original
+    let productos = [...productosJSON];
+   
+    // contador para nuevos IDs
+    let proximoId = 4;
+
+    // referencias a elementos del HTML
+    const listaProductos = document.getElementById("lista-productos");
+    const seccionForm    = document.getElementById("seccion-form");
+    const formProducto   = document.getElementById("form-producto");
+    const inputId        = document.getElementById("producto-id");
+    const inputNombre    = document.getElementById("nombre");
+    const inputCategoria = document.getElementById("categoria");
+    const inputPrecio    = document.getElementById("precio");
+    const inputImagen    = document.getElementById("imagen");
+    const inputStock     = document.getElementById("stock");
+    const tituloForm     = document.getElementById("titulo-form");
+    const btnNuevo       = document.getElementById("btn-nuevo");
+    const btnCancelar    = document.getElementById("btn-cancelar");
+   
+    // busca un producto por su ID
+    function buscarProductoPorId(id) {
+      return productos.find(p => p.id === id) || null;
+    }
+
+    // busca la posición del producto en el array
+    function buscarIndicePorId(id) {
+      return productos.findIndex(p => p.id === id);
+    }
+
+    // crea el HTML de una tarjeta de producto
+    function crearTarjetaProducto(producto) {
+      // Crea el contenedor de la tarjeta
+      const card = document.createElement("div");
+      card.className = "card";
+
+      // crea la imagen (o usa una por defecto)
+      const img = document.createElement("img");
+      img.src = producto.imagen || "https://via.placeholder.com/300x200";
+      img.alt = producto.nombre;
+
+      // crea el texto de categoría
+      const cat = document.createElement("p");
+      cat.className = "categoria";
+      cat.textContent = producto.categoria;
+
+      // crea el título
+      const titulo = document.createElement("h3");
+      titulo.textContent = producto.nombre;
+
+      // crea el precio
+      const precio = document.createElement("p");
+      precio.className = "precio";
+      precio.textContent = "$" + producto.precio;
+
+      // crea el texto de stock
+      const stock = document.createElement("small");
+      stock.textContent = "Stock disponible: " + producto.stock;
+
+      // crea el contenedor de botones
+      const acciones = document.createElement("div");
+      acciones.className = "acciones";
+
+      // botón para editar este producto
+      const btnEditar = document.createElement("button");
+      btnEditar.textContent = "Editar";
+      btnEditar.className = "secundario";
+      btnEditar.addEventListener("click", () => mostrarFormularioEdicion(producto.id));
+
+      // botón para eliminar este producto
+      const btnEliminar = document.createElement("button");
+      btnEliminar.textContent = "Eliminar";
+      btnEliminar.className = "peligro";
+      btnEliminar.addEventListener("click", () => eliminarProducto(producto.id));
+
+      // agrega los botones a su caja
+      acciones.appendChild(btnEditar);
+      acciones.appendChild(btnEliminar);
+
+      // agrega todos los elementos a la tarjeta
+      card.appendChild(img);
+      card.appendChild(cat);
+      card.appendChild(titulo);
+      card.appendChild(precio);
+      card.appendChild(stock);
+      card.appendChild(acciones);
+
+      // devuelve la tarjeta armada
+      return card;
+    }
+   
+    // limpia los campos del formulario
+    function limpiarFormulario() {
+      formProducto.reset();
+      inputId.value = "";
+      tituloForm.textContent = "Agregar Producto";
+    }
+
+    // muestra el formulario vacío para crear
+    function mostrarFormularioCreacion() {
+      limpiarFormulario();
+      seccionForm.hidden = false; // Muestra la sección
+      inputNombre.focus();        // Pone el cursor en Nombre
+      seccionForm.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // carga los datos del producto y muestra el formulario para editar
+    function mostrarFormularioEdicion(id) {
+      const producto = buscarProductoPorId(id);
+      if (!producto) return; // Sale si no existe
+
+      // rellena los campos con los datos actuales
+      inputId.value        = producto.id;
+      inputNombre.value    = producto.nombre;
+      inputCategoria.value = producto.categoria;
+      inputPrecio.value    = producto.precio;
+      inputImagen.value    = producto.imagen || "";
+      inputStock.value     = producto.stock;
+
+      tituloForm.textContent = "Editar Producto"; // Cambia el título
+      seccionForm.hidden = false;                 // Muestra el formulario
+      inputNombre.focus();
+      seccionForm.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // oculta y limpia el formulario
+    function ocultarFormulario() {
+      seccionForm.hidden = true;
+      limpiarFormulario();
+    }
+
+    // agrega un nuevo producto (Create)
+    function crearProducto(datos) {
+      // asigna ID, suma 1 al contador y guarda el producto
+      productos.push({ id: proximoId++, ...datos });
+     
+      // actualiza la lista en pantalla
+      leerProductos();
+    }
+
+    // muestra todos los productos en pantalla (Read)
+    function leerProductos() {
+      // limpia la lista anterior
+      listaProductos.innerHTML = "";
+     
+      // muestra aviso si no hay productos
+      if (productos.length === 0) {
+        listaProductos.innerHTML = "<p>No hay productos cargados en el menú.</p>";
+        return;
+      }
+     
+      // crea y agrega cada tarjeta al HTML
+      productos.forEach(p => listaProductos.appendChild(crearTarjetaProducto(p)));
+    }
+
+    // actualiza un producto existente (Update)
+    function actualizarProducto(id, datos) {
+      const producto = buscarProductoPorId(id);
+      if (!producto) return;
+     
+      // reemplaza los datos viejos por los nuevos
+      Object.assign(producto, datos);
+     
+      // actualiza la lista en pantalla
+      leerProductos();
+    }
+
+    // elimina un producto (Delete)
+    function eliminarProducto(id) {
+      // pide confirmación
+      if (!confirm("¿Deseas eliminar este producto del menú?")) return;
+     
+      // busca su posición en el array
+      const indice = buscarIndicePorId(id);
+      if (indice !== -1) {
+        // borra el producto de esa posición
+        productos.splice(indice, 1);
+       
+        // actualiza la lista en pantalla
+        leerProductos();
+      }
+    }
+   
+    // abre el formulario al hacer clic en "+ Agregar Producto"
+    btnNuevo.addEventListener("click", mostrarFormularioCreacion);
+   
+    // cierra el formulario al hacer clic en "Cancelar"
+    btnCancelar.addEventListener("click", ocultarFormulario);
+
+    // maneja el envío del formulario
+    formProducto.addEventListener("submit", (e) => {
+      // Evita que la página se recargue
+      e.preventDefault();
+     
+      // toma los valores escritos en los inputs
+      const datos = {
+        nombre:    inputNombre.value.trim(),       // Quita espacios extra
+        categoria: inputCategoria.value.trim(),
+        precio:    Number(inputPrecio.value),      // Convierte a número
+        imagen:    inputImagen.value.trim(),
+        stock:     Number(inputStock.value)
+      };
+
+      // si hay ID, edita el producto
+      if (inputId.value) {
+        actualizarProducto(Number(inputId.value), datos);
+      } else {
+        // si no hay ID, crea uno nuevo
+        crearProducto(datos);
+      }
+     
+      // cierra el formulario
+      ocultarFormulario();
+    });
+
+    // dibuja los productos iniciales al cargar la página
+    leerProductos();
+  </script>
+</body>
+</html>

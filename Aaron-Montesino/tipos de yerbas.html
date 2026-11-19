@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entre Bombillas</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+
+<body>
+    <header>
+        <h1>Entre Bombillas</h1>
+        
+    </header>
+
+    <main>
+        <section>
+            <p>La yerba mate se puede clasificar según su composición, proceso de elaboración y forma de consumo.
+            Cada tipo presenta características particulares de sabor, aroma e intensidad.
+            </p>
+            <img src="imagenes/15.webp">
+
+            <h2>Yerbas en stock</h2>
+            <div id="lista-productos" class="grilla"></div>
+        </section>
+
+        <!--titulo dinamico del campo que cambia segun si se edita o agrega un porducto en el Formulario-->
+        <h2 id="titulo-form">Agregar Nueva Yerba</h2>}
+
+        
+        <form id="form-yerba">
+
+            <!--Campo de texto oculto (type="hidden") que almacena el ID del producto cuando se esta editando-->
+            <input type="hidden" id="yerba-id">
+        
+            <!--etiqueta del campo nombre de la y marca de la yerba-->
+            <label>Nombre / Marca:</label>
+            <!--Se crea un campo para ingresar el nombre de la yerba de tipo texto, el cual es requerido y da un ejemplo con placeholder que aclara la letra-->
+            <input type="text" id="nombre" placeholder="Ej: Playadito" required>
+
+            <!-- campo del tipo de yerba-->
+            <label>Tipo:</label>
+            <!-- menu desplegable (<select>) con opciones predefinidas de tipos de yerba-->
+            <select id="tipo">
+                <option value="Con Palo">Con Palo</option>
+                <option value="Sin Palo">Sin Palo</option>
+                <option value="Compuesta">Compuesta</option>
+                <option value="Barbacua">Barbacua</option>
+            </select>
+
+            <label>Peso (klg/gr)</label>
+            <input type="text" id="peso" placeholder="Ej: 500gr"  required>
+
+            <!-- campo del valor de la yerba, establecido como tipo numerico, y requerido, da un ejemplo mas claro-->
+            <label>Precio ($):</label>
+            <input type="number" id="precio" placeholder="Ej: 4500" required>
+        
+            <!-- campo para agregar la cantidad de productos stock que quedan, de valor numerico y obligatorio numerar-->
+            <label>Stock:</label>
+            <input type="number" id="stock" placeholder="Ej: 15" required>
+
+            <!-- contenedor para agregar los botones que tendran acciones en el formulario-->
+            <div class="botones-form">
+                <!-- boton para guardar los cambios-->
+                <button type="submit" class="btn-verde">Guardar</button>
+                <!-- boton que ejecuta la limpieza del formulario al clickear en cancelar-->
+                <button type="button" onclick="limpiarFormulario()" class="btn-gris">Cancelar</button>
+            </div>
+        </form>
+    
+
+    </main>
+    <script src="tienda.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mann Co. | TF2 Store</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="app.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <header class="encabezado">
+        <h1>MANN CO.</h1>
+        <p>Armas, herramientas y artículos para mercenarios</p>
+    </header>
+
+    <main class="contenedor">
+
+        <section class="panel">
+            <h2>Administrar inventario</h2>
+
+            <form id="formularioProducto">
+                <input type="hidden" id="productoId">
+
+                <label for="nombre">Nombre del artículo</label>
+                <input type="text" id="nombre" placeholder="Ej: Scattergun" required>
+
+                <label for="precio">Precio</label>
+                <input type="number" id="precio" min="1" placeholder="Ej: 150" required>
+
+                <label for="imagen">URL de la imagen</label>
+                <input
+                    type="url"
+                    id="imagen"
+                    placeholder="https://ejemplo.com/imagen.png"
+                    required
+                >
+
+                <label for="stock">Stock disponible</label>
+                <input type="number" id="stock" min="0" placeholder="Ej: 10" required>
+
+                <label for="categoria">Categoría</label>
+                <select id="categoria" required>
+                    <option value="">Seleccionar categoría</option>
+                    <option value="Armas">Armas</option>
+                    <option value="Cosméticos">Cosméticos</option>
+                    <option value="Herramientas">Herramientas</option>
+                    <option value="Misceláneos">Misceláneos</option>
+                </select>
+
+                <button type="submit" id="botonGuardar">
+                    Agregar artículo
+                </button>
+
+                <button type="button" id="botonCancelar" hidden>
+                    Cancelar edición
+                </button>
+            </form>
+        </section>
+
+        <section class="inventario">
+            <h2>Inventario de Mann Co.</h2>
+
+            <div class="filtros">
+                <input
+                    type="search"
+                    id="buscador"
+                    placeholder="Buscar artículo..."
+                >
+
+                <select id="filtroCategoria">
+                    <option value="Todas">Todas las categorías</option>
+                    <option value="Armas">Armas</option>
+                    <option value="Cosméticos">Cosméticos</option>
+                    <option value="Herramientas">Herramientas</option>
+                    <option value="Misceláneos">Misceláneos</option>
+                </select>
+            </div>
+
+            <div id="contenedorProductos" class="productos">
+                <!-- Los artículos se cargan desde JavaScript -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>MANN CO. - Preparando mercenarios desde siempre.</p>
+        <p>Proyecto educativo inspirado en Team Fortress 2.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto | LAs Hamburguechas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<header class="navbar navbar-expand-lg navbar-dark encabezado fixed-top">
+  <div class="container">
+    <a class="navbar-brand logo" href="index.html">Las Hamburguechas</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <nav class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="carrito.html">Carrito 🛒 <span id="contador">0</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="container py-5 margen-superior">
+  <div class="formulario-contacto mx-auto">
+    <h1 class="titulo-seccion text-center">CONTACTANOS</h1>
+    <p class="text-center mb-4">
+      ¿Tenés alguna consulta? ¡Escribinos!
+    </p>
+
+    <form id="formContacto">
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre completo</label>
+        <input type="text" id="nombre" class="form-control"
+               required minlength="3" placeholder="Tu nombre">
+        <small id="errorNombre" class="error"></small>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo electrónico</label>
+        <input type="email" id="email" class="form-control"
+               required placeholder="ejemplo@gmail.com">
+        <small id="errorEmail" class="error"></small>
+      </div>
+
+      <div class="mb-3">
+        <label for="asunto" class="form-label">Asunto</label>
+        <input type="text" id="asunto" class="form-control"
+               required minlength="3" placeholder="Motivo de consulta">
+        <small id="errorAsunto" class="error"></small>
+      </div>
+
+      <div class="mb-3">
+        <label for="mensaje" class="form-label">Mensaje</label>
+        <textarea id="mensaje" class="form-control" rows="5"
+                  required minlength="10"
+                  placeholder="Escribí tu mensaje..."></textarea>
+        <small id="errorMensaje" class="error"></small>
+      </div>
+
+      <button type="submit" class="btn btn-warning w-100">
+        ENVIAR MENSAJE
+      </button>
+
+      <p id="confirmacion" class="confirmacion mt-3"></p>
+    </form>
+  </div>
+</main>
+
+<footer class="pie text-center">
+  <h3>Las Hamburguechas</h3>
+  <p>Integrantes: Milena Pardo y Morena Gabarruz</p>
+  <p>Puerto Madryn, Chubut</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="productos.js"></script>
+<script src="carrito.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

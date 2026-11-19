@@ -1,0 +1,43 @@
+
+[
+    {
+        "id": 1,
+        "nombre": "Auriculares Bluetooth",
+        "descripcion": "Auriculares inalámbricos con conexión Bluetooth.",
+        "categoria": "Tecnología",
+        "precio": 15000,
+        "stock": 10
+    },
+    {
+        "id": 2,
+        "nombre": "Remera deportiva",
+        "descripcion": "Remera cómoda para realizar actividades deportivas.",
+        "categoria": "Indumentaria",
+        "precio": 12000,
+        "stock": 15
+    },
+    {
+        "id": 3,
+        "nombre": "Mochila urbana",
+        "descripcion": "Mochila para transportar objetos personales.",
+        "categoria": "Accesorios",
+        "precio": 22000,
+        "stock": 8
+    },
+    {
+        "id": 4,
+        "nombre": "Mouse inalámbrico",
+        "descripcion": "Mouse óptico con conexión inalámbrica.",
+        "categoria": "Tecnología",
+        "precio": 9500,
+        "stock": 12
+    },
+    {
+        "id": 5,
+        "nombre": "Pelota de fútbol",
+        "descripcion": "Pelota para jugar al fútbol.",
+        "categoria": "Deportes",
+        "precio": 18000,
+        "stock": 6
+    }
+]

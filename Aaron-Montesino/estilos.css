@@ -1,0 +1,200 @@
+/* ============================================= */
+/* 1. RESET Y ESTILOS BASE (Accesibilidad)        */
+/* ============================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121614; /* Fondo general oscuro y elegante, inspirado en la naturaleza */
+    color: #e2e8f0;            /* Texto claro de alta legibilidad */
+    font-size: 16px; 
+    line-height: 1.5;
+    padding: 20px;
+}
+
+/* ============================================= */
+/* 2. ENCABEZADO Y CONTENEDORES GENERALES        */
+/* ============================================= */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    background-color: #1b241f; /* Verde oscuro sutil para la barra superior */
+    padding: 20px;
+    border-radius: 8px;
+    border-bottom: 3px solid #2f6b4f;
+}
+
+header h1 {
+    color: #4ade80; /* Verde mate brillante con excelente contraste */
+    font-size: 2.5rem;
+}
+
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+section p {
+    margin-bottom: 20px;
+    color: #cbd5e1; /* Gris suave para los párrafos descriptivos */
+}
+
+/* Imagen principal de la sección */
+section > img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #2f3e35;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #f8fafc;
+    border-bottom: 2px solid #2f3e35;
+    padding-bottom: 8px;
+}
+
+/* ============================================= */
+/* 3. FLEXBOX: GRILLA DE PRODUCTOS EN STOCK        */
+/* ============================================= */
+.grilla {
+    display: flex;              
+    flex-direction: row;        
+    flex-wrap: wrap;            
+    justify-content: center;    
+    align-items: stretch;       
+    gap: 20px;                  
+}
+
+/* Estilo para las tarjetas de productos generadas dinámicamente */
+.product-card {
+    background-color: #1a221d; /* Tono verde-grisáceo oscuro muy limpio para las tarjetas */
+    border: 1px solid #2f3e35;
+    border-radius: 10px;
+    padding: 16px;
+    width: 240px;               
+    display: flex;              
+    flex-direction: column;     
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.product-card img {
+    max-width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.product-card .price {
+    font-weight: bold;
+    color: #34d399;             /* Verde esmeralda claro destacado para el precio */
+}
+
+/* ============================================= */
+/* 4. FORMULARIO MODERNO Y ACCESIBLE             */
+/* ============================================= */
+#form-yerba {
+    background-color: #1a221d;
+    border: 1px solid #2f3e35;
+    border-radius: 10px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#form-yerba label {
+    font-weight: bold;
+    color: #34d399;
+    font-size: 0.95rem;
+}
+
+#form-yerba input,
+#form-yerba select {
+    background-color: #121614;
+    color: #f1f1f1;
+    border: 1px solid #2f3e35;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 1rem;            
+    width: 100%;
+}
+
+#form-yerba input:focus,
+#form-yerba select:focus {
+    outline: 2px solid #34d399;
+    border-color: transparent;
+}
+
+/* Contenedor de botones del formulario */
+.botones-form {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.btn-verde,
+.btn-gris {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.btn-verde {
+    background-color: #22c55e; /* Verde principal llamativo y contrastado */
+    color: #0f172a;            /* Texto oscuro para un contraste perfecto */
+}
+
+.btn-verde:hover {
+    background-color: #16a34a;
+}
+
+.btn-gris {
+    background-color: #334155; /* Gris azulado moderno */
+    color: #f1f1f1;
+}
+
+.btn-gris:hover {
+    background-color: #1e293b;
+}
+
+/* ============================================= */
+/* 5. DISEÑO RESPONSIVE (Media Queries)          */
+/* ============================================= */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .grilla {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .botones-form {
+        flex-direction: column;
+    }
+}
